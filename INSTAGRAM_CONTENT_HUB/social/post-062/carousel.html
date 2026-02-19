@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 062 — Candlestick Mastery | Carousel Preview</title>
+  <title>Post 062 — Candlestick Patterns | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-dark: #0a0a0f;
+      --bg-card: rgba(255,255,255,0.03);
       --text-primary: #ffffff;
       --text-secondary: rgba(255,255,255,0.7);
       --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
       --accent-gold: #c9a962;
+      --accent-gold-dim: rgba(201,169,98,0.3);
       --color-green: #4ade80;
       --color-red: #ef4444;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -31,7 +34,7 @@
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
     .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
     .page-title { text-align: center; margin-bottom: 2rem; }
     .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
     .page-title p { color: var(--text-muted); font-size: 0.875rem; }
@@ -43,32 +46,21 @@
     .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
     .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
 
+    /* ═══════════════════════════════════════════
+       NEUTRAL/EDUCATION THEME
+       ═══════════════════════════════════════════ */
     .slide-edu { background: linear-gradient(180deg, #0d0d10 0%, #0a0a0f 100%) !important; }
-    .slide-edu::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-edu::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(201,169,98,0.05) 0%, transparent 100%); pointer-events: none; z-index: 1; }
     .slide-edu .slide-content { z-index: 3; }
 
-    .brand-mark, .slide-logo {
-      position: absolute;
-      bottom: 5% !important;
-      left: 50% !important;
-      transform: translateX(-50%) !important;
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(16px, 4cqw, 24px) !important;
-      letter-spacing: 4px !important;
-      text-transform: uppercase;
-      color: #c9a962 !important;
-      z-index: 2;
-      white-space: nowrap;
-    }
-
-    /* ═══════════════════════════════════════════
-       SLIDE 1 — Hook with Learning Orb
-       ═══════════════════════════════════════════ */
     .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
 
-    .learning-orb {
-      width: clamp(100px, 20cqw, 200px);
-      height: clamp(100px, 20cqw, 200px);
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — Hook with Candlestick Orb
+       ═══════════════════════════════════════════ */
+    .hook-orb {
+      width: clamp(90px, 18cqw, 180px);
+      height: clamp(90px, 18cqw, 180px);
       border-radius: 50%;
       background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.35) 0%, rgba(201,169,98,0.12) 40%, rgba(74,222,128,0.06) 65%, transparent 100%);
       border: 2px solid rgba(201,169,98,0.3);
@@ -77,14 +69,14 @@
       position: relative;
       margin-bottom: 5%;
     }
-    .learning-orb::before {
+    .hook-orb::before {
       content: '';
       position: absolute;
       inset: 8px;
       border-radius: 50%;
       border: 1.5px solid rgba(201,169,98,0.18);
     }
-    .learning-orb::after {
+    .hook-orb::after {
       content: '';
       position: absolute;
       inset: 20px;
@@ -92,497 +84,200 @@
       border: 1px dashed rgba(201,169,98,0.15);
     }
 
-    .orb-candles {
+    .candle-viz {
       position: relative;
+      width: clamp(40px, 8cqw, 80px);
+      height: clamp(40px, 8cqw, 80px);
       display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: clamp(8px, 2cqw, 16px);
-      width: 100%;
-      height: 60px;
-    }
-    .orb-candle {
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 0;
+      justify-content: center;
+      gap: clamp(4px, 1cqw, 8px);
     }
-    .orb-wick {
-      width: 1.5px;
-      background: rgba(255,255,255,0.3);
+    .candle-body {
+      width: clamp(6px, 1.2cqw, 12px);
+      border-radius: 1px;
+      position: relative;
     }
-    .orb-body {
-      width: clamp(10px, 2cqw, 18px);
-      border-radius: 2px;
-    }
-    .orb-body.red { background: rgba(239,68,68,0.6); }
-    .orb-body.green { background: rgba(74,222,128,0.6); }
+    .candle-body.green { background: var(--color-green); height: clamp(24px, 5cqw, 48px); }
+    .candle-body.red { background: var(--color-red); height: clamp(18px, 4cqw, 36px); }
+    .candle-wick { position: absolute; width: 1px; left: 50%; }
+    .candle-body.green .candle-wick { background: var(--color-green); top: clamp(-8px, -1.5cqw, -16px); height: clamp(8px, 1.5cqw, 16px); }
+    .candle-body.red .candle-wick { background: var(--color-red); top: clamp(-6px, -1.2cqw, -12px); height: clamp(6px, 1.2cqw, 12px); }
 
-    .s1-label {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.2cqw, 12px);
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(201,169,98,0.7);
-      padding: clamp(3px, 0.6cqw, 7px) clamp(10px, 2cqw, 20px);
-      border: 1px solid rgba(201,169,98,0.2);
-      border-radius: clamp(3px, 0.6cqw, 6px);
-      background: rgba(201,169,98,0.04);
-      margin-bottom: 4%;
-    }
-    .s1-title {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.8cqw, 50px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.15;
-      margin-bottom: 3%;
-      max-width: 92%;
-    }
+    .s1-label { font-family: var(--font-mono); font-size: clamp(9px, 1.5cqw, 14px); letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,169,98,0.9); margin-bottom: 4%; }
+    .s1-title { font-family: var(--font-serif); font-size: clamp(22px, 5.5cqw, 48px); font-weight: 700; line-height: 1.15; color: rgba(255,255,255,0.95); margin-bottom: 4%; }
     .s1-title em { color: var(--accent-gold); font-style: normal; }
-    .s1-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(201,169,98,0.6), transparent);
-      margin-bottom: 4%;
-    }
-    .s1-subtitle {
-      font-family: var(--font-mono);
-      font-size: clamp(9px, 1.4cqw, 14px);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
+    .s1-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, rgba(201,169,98,0.6), transparent); margin-bottom: 4%; }
+    .s1-subtitle { font-family: var(--font-sans); font-size: clamp(10px, 1.8cqw, 18px); font-weight: 300; letter-spacing: 0.05em; color: rgba(201,169,98,0.4); line-height: 1.6; }
 
     /* ═══════════════════════════════════════════
-       SLIDE 2 — Core Patterns (3-card grid)
+       SLIDE 2 — Breadth: 12 Patterns Grid
        ═══════════════════════════════════════════ */
-    .slide-counter {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.3cqw, 12px);
-      color: var(--text-muted);
-      letter-spacing: 0.15em;
-      margin-bottom: 3%;
-    }
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.8cqw, 40px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 5%;
-    }
+    .section-tag { font-family: var(--font-mono); font-size: clamp(8px, 1.4cqw, 14px); letter-spacing: 0.25em; text-transform: uppercase; color: rgba(201,169,98,0.8); margin-bottom: 3%; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(20px, 4.5cqw, 42px); font-weight: 700; color: var(--text-primary); text-align: center; line-height: 1.15; margin-bottom: 5%; }
     .section-title em { color: var(--accent-gold); font-style: normal; }
 
     .pattern-grid {
-      width: 94%;
+      width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: clamp(6px, 1.2cqw, 14px);
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.5cqw, 12px);
+      margin-bottom: 3%;
     }
     .pattern-card {
-      padding: 5% 4%;
-      background: rgba(201,169,98,0.04);
-      border: 1px solid rgba(201,169,98,0.12);
-      border-radius: clamp(8px, 1.3cqw, 12px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(4px, 0.8cqw, 8px);
+      background: rgba(201,169,98,0.06);
+      border: 1px solid rgba(201,169,98,0.15);
+      border-radius: clamp(8px, 1.5cqw, 12px);
+      padding: clamp(8px, 1.5cqw, 12px);
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
-    .pattern-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, rgba(201,169,98,0.6), rgba(201,169,98,0.1));
-    }
+    .pattern-icon { font-size: clamp(16px, 3cqw, 28px); margin-bottom: clamp(2px, 0.4cqw, 4px); }
+    .pattern-name { font-family: var(--font-mono); font-size: clamp(7px, 1.2cqw, 11px); color: var(--accent-gold); letter-spacing: 0.1em; font-weight: 600; }
 
-    .pattern-icon {
-      width: clamp(32px, 6cqw, 54px);
-      height: clamp(32px, 6cqw, 54px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
-      border: 1.5px solid rgba(201,169,98,0.3);
-      box-shadow: 0 0 14px rgba(201,169,98,0.1);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      position: relative;
-    }
-    .pattern-icon::before {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,98,0.12);
-    }
-
-    .pattern-icon-symbol {
-      font-size: clamp(11px, 2cqw, 20px);
-      font-weight: 700;
-      position: relative;
-      z-index: 1;
-      color: rgba(201,169,98,0.9);
-    }
-
-    .pattern-name {
-      font-family: var(--font-sans);
-      font-size: clamp(9px, 1.5cqw, 14px);
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-    .pattern-desc {
+    .category-label {
       font-family: var(--font-mono);
-      font-size: clamp(7px, 1cqw, 10px);
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-    }
-    .pattern-bar {
-      width: 100%;
-      height: clamp(3px, 0.5cqw, 5px);
-      background: rgba(255,255,255,0.06);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .pattern-bar-fill {
-      height: 100%;
-      border-radius: 3px;
-      background: linear-gradient(90deg, rgba(201,169,98,0.3), rgba(201,169,98,0.8));
+      font-size: clamp(6px, 1cqw, 9px);
+      color: var(--accent-gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: clamp(6px, 1.2cqw, 10px);
+      margin-bottom: clamp(3px, 0.6cqw, 6px);
+      padding-top: clamp(4px, 0.8cqw, 8px);
+      border-top: 1px solid rgba(201,169,98,0.2);
     }
 
     /* ═══════════════════════════════════════════
-       SLIDE 3 — Pattern Mechanics (3-step flow)
+       SLIDE 3 — Mechanism: 3-Step Process
        ═══════════════════════════════════════════ */
-    .flow-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(5px, 1cqw, 12px);
-    }
-    .flow-step {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 4%;
-      padding: 3% 4%;
-      border-radius: clamp(8px, 1.5cqw, 14px);
+    .step-card {
+      width: 90%;
+      padding: clamp(10px, 2cqw, 16px);
       background: rgba(201,169,98,0.06);
-      border: 1px solid rgba(201,169,98,0.18);
-      position: relative;
-    }
-    .flow-ring {
-      width: clamp(38px, 7cqw, 62px);
-      height: clamp(38px, 7cqw, 62px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.35) 0%, rgba(201,169,98,0.1) 60%, transparent 100%);
-      border: 2px solid rgba(201,169,98,0.35);
-      box-shadow: 0 0 22px rgba(201,169,98,0.15);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      position: relative;
-    }
-    .flow-ring::before {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border-radius: 50%;
       border: 1px solid rgba(201,169,98,0.15);
-    }
-    .flow-num {
-      font-family: var(--font-mono);
-      font-size: clamp(14px, 2.5cqw, 26px);
-      font-weight: 700;
-      position: relative;
-      z-index: 1;
-      color: rgba(201,169,98,0.9);
-    }
-    .flow-text {
-      flex: 1;
-    }
-    .flow-label {
-      font-family: var(--font-mono);
-      font-size: clamp(7px, 1.1cqw, 11px);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 2%;
-      color: var(--accent-gold);
-    }
-    .flow-title {
-      font-family: var(--font-sans);
-      font-size: clamp(11px, 2cqw, 20px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 1%;
-    }
-    .flow-desc {
-      font-family: var(--font-sans);
-      font-size: clamp(8px, 1.2cqw, 12px);
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-    .flow-arrow {
-      font-size: clamp(14px, 2.5cqw, 26px);
-      color: var(--text-muted);
+      border-radius: clamp(8px, 1.5cqw, 12px);
+      margin-bottom: clamp(6px, 1.2cqw, 10px);
       text-align: center;
     }
+    .step-num { font-family: var(--font-serif); font-size: clamp(16px, 3.5cqw, 32px); font-weight: 700; color: var(--accent-gold); margin-bottom: clamp(2px, 0.4cqw, 4px); }
+    .step-name { font-family: var(--font-mono); font-size: clamp(8px, 1.4cqw, 12px); color: var(--accent-gold); letter-spacing: 0.1em; font-weight: 600; margin-bottom: clamp(2px, 0.4cqw, 4px); }
+    .step-desc { font-size: clamp(8px, 1.4cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
 
     /* ═══════════════════════════════════════════
        SLIDE 4 — Proof & Stats
        ═══════════════════════════════════════════ */
-    .stat-rings-row {
-      width: 90%;
+    .stat-rings {
       display: flex;
-      gap: clamp(8px, 1.5cqw, 16px);
       justify-content: center;
+      gap: clamp(10px, 2.5cqw, 18px);
       margin-bottom: 5%;
+      flex-wrap: wrap;
     }
     .stat-item {
+      text-align: center;
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: clamp(4px, 0.8cqw, 10px);
+      min-width: clamp(60px, 18cqw, 90px);
     }
     .stat-ring {
-      width: clamp(44px, 8.5cqw, 80px);
-      height: clamp(44px, 8.5cqw, 80px);
+      width: clamp(50px, 10cqw, 100px);
+      height: clamp(50px, 10cqw, 100px);
       border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
-      border: 2px solid rgba(201,169,98,0.3);
-      box-shadow: 0 0 20px rgba(201,169,98,0.12);
-      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.2) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.25);
+      box-shadow: 0 0 20px rgba(201,169,98,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto clamp(6px, 1.2cqw, 10px);
       position: relative;
     }
     .stat-ring::before {
       content: '';
       position: absolute;
-      inset: 4px;
+      inset: 5px;
       border-radius: 50%;
       border: 1px solid rgba(201,169,98,0.12);
     }
     .stat-val {
-      font-family: var(--font-mono);
-      font-size: clamp(14px, 2.5cqw, 26px);
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 4cqw, 32px);
       font-weight: 700;
+      color: var(--accent-gold);
       position: relative;
-      z-index: 1;
-      color: rgba(201,169,98,0.9);
+      z-index: 2;
     }
-    .stat-label {
-      font-family: var(--font-sans);
-      font-size: clamp(8px, 1.3cqw, 13px);
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-    .stat-sub {
-      font-family: var(--font-mono);
-      font-size: clamp(6px, 1cqw, 9px);
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-    }
+    .stat-label { font-family: var(--font-mono); font-size: clamp(7px, 1.2cqw, 11px); color: var(--text-primary); letter-spacing: 0.08em; margin-bottom: clamp(1px, 0.2cqw, 2px); }
+    .stat-sub { font-family: var(--font-mono); font-size: clamp(6px, 1cqw, 9px); color: rgba(201,169,98,0.7); letter-spacing: 0.08em; }
 
-    .pattern-benefits {
+    .benefit-grid {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: clamp(6px, 1.2cqw, 14px);
+      gap: clamp(6px, 1.2cqw, 10px);
     }
     .benefit-card {
-      display: flex;
-      align-items: center;
-      gap: 4%;
-      padding: 3% 4%;
-      background: rgba(201,169,98,0.04);
-      border: 1px solid rgba(201,169,98,0.12);
-      border-radius: clamp(8px, 1.5cqw, 14px);
-      position: relative;
+      background: rgba(201,169,98,0.06);
+      border: 1px solid rgba(201,169,98,0.15);
+      border-radius: clamp(8px, 1.5cqw, 12px);
+      padding: clamp(8px, 1.5cqw, 12px);
+      text-align: left;
     }
-    .benefit-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      border-radius: 4px 0 0 4px;
-      background: var(--accent-gold);
-    }
-    .benefit-icon {
-      width: clamp(34px, 6.5cqw, 56px);
-      height: clamp(34px, 6.5cqw, 56px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
-      border: 1.5px solid rgba(201,169,98,0.3);
-      box-shadow: 0 0 16px rgba(201,169,98,0.1);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      position: relative;
-    }
-    .benefit-icon::before {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,98,0.12);
-    }
-    .benefit-letter {
-      font-family: var(--font-mono);
-      font-size: clamp(12px, 2cqw, 22px);
-      font-weight: 700;
-      color: rgba(201,169,98,0.9);
-      position: relative;
-      z-index: 1;
-    }
-    .benefit-info { flex: 1; }
-    .benefit-title {
-      font-family: var(--font-sans);
-      font-size: clamp(11px, 2cqw, 20px);
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 2%;
-    }
-    .benefit-desc {
-      font-family: var(--font-sans);
-      font-size: clamp(8px, 1.2cqw, 12px);
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
+    .benefit-letter { font-family: var(--font-serif); font-size: clamp(10px, 2cqw, 18px); font-weight: 700; color: var(--accent-gold); margin-bottom: clamp(2px, 0.4cqw, 4px); }
+    .benefit-title { font-size: clamp(9px, 1.6cqw, 14px); color: var(--text-primary); font-weight: 600; margin-bottom: clamp(1px, 0.2cqw, 3px); }
+    .benefit-desc { font-size: clamp(8px, 1.4cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
 
     /* ═══════════════════════════════════════════
        SLIDE 5 — CTA
        ═══════════════════════════════════════════ */
-    .stat-recap {
-      width: 85%;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: clamp(8px, 1.5cqw, 14px);
-      margin-bottom: 6%;
-    }
-    .stat-recap-card {
-      padding: 5% 4%;
-      background: rgba(201,169,98,0.04);
-      border: 1px solid rgba(201,169,98,0.12);
-      border-radius: clamp(8px, 1.3cqw, 12px);
+    .cta-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
-    .stat-recap-ring {
-      width: clamp(30px, 5.5cqw, 48px);
-      height: clamp(30px, 5.5cqw, 48px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.25) 0%, rgba(201,169,98,0.06) 60%, transparent 100%);
-      border: 1.5px solid rgba(201,169,98,0.25);
-      box-shadow: 0 0 14px rgba(201,169,98,0.08);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 8%;
-      position: relative;
-    }
-    .stat-recap-ring::before {
-      content: '';
-      position: absolute;
-      inset: 3px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,98,0.1);
-    }
-    .stat-recap-num {
-      font-family: var(--font-mono);
-      font-size: clamp(10px, 1.8cqw, 18px);
-      font-weight: 700;
-      color: rgba(201,169,98,0.9);
-      position: relative;
-      z-index: 1;
-    }
-    .stat-recap-label {
-      font-family: var(--font-sans);
-      font-size: clamp(8px, 1.3cqw, 13px);
-      font-weight: 500;
-      color: var(--text-secondary);
-      margin-bottom: 2%;
-    }
-    .stat-recap-val {
-      font-family: var(--font-mono);
-      font-size: clamp(7px, 1.1cqw, 10px);
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-    }
-
-    .cta-glow {
-      width: clamp(60px, 12cqw, 120px);
-      height: clamp(60px, 12cqw, 120px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.25) 0%, rgba(201,169,98,0.06) 50%, transparent 100%);
-      border: 2px solid rgba(201,169,98,0.2);
-      box-shadow: 0 0 40px rgba(201,169,98,0.1), 0 0 80px rgba(201,169,98,0.04);
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-      margin-bottom: 5%;
-    }
-    .cta-glow::before {
-      content: '';
-      position: absolute;
-      inset: 5px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(201,169,98,0.12);
-    }
-    .cta-icon {
-      font-size: clamp(18px, 3.5cqw, 36px);
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 0 6px rgba(201,169,98,0.4));
-    }
-    .cta-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.8cqw, 40px);
-      font-weight: 600;
-      color: var(--text-primary);
-      line-height: 1.25;
-      margin-bottom: 3%;
-    }
+    .cta-label { font-family: var(--font-mono); font-size: clamp(8px, 1.4cqw, 12px); letter-spacing: 0.25em; text-transform: uppercase; color: rgba(201,169,98,0.8); margin-bottom: clamp(10px, 2.5cqw, 16px); }
+    .cta-title { font-family: var(--font-serif); font-size: clamp(20px, 5cqw, 42px); font-weight: 700; line-height: 1.2; color: var(--text-primary); margin-bottom: clamp(8px, 2cqw, 14px); }
     .cta-title em { color: var(--accent-gold); font-style: normal; }
-    .cta-desc {
-      font-family: var(--font-sans);
-      font-size: clamp(9px, 1.5cqw, 16px);
-      color: var(--text-secondary);
-      line-height: 1.5;
-      max-width: 82%;
-      margin-bottom: 5%;
-    }
+    .cta-desc { font-size: clamp(9px, 1.6cqw, 14px); color: var(--text-secondary); line-height: 1.5; max-width: 85%; margin: 0 auto clamp(10px, 2.5cqw, 16px); }
     .cta-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: clamp(4px, 0.8cqw, 8px);
       justify-content: center;
-      margin-bottom: 5%;
+      gap: clamp(4px, 0.8cqw, 8px);
+      margin-bottom: clamp(12px, 3cqw, 18px);
+      max-width: 90%;
     }
-    .cta-pill {
-      font-family: var(--font-mono);
-      font-size: clamp(7px, 1.1cqw, 11px);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: clamp(4px, 0.7cqw, 8px) clamp(8px, 1.5cqw, 16px);
+    .pill {
+      padding: clamp(4px, 0.8cqw, 6px) clamp(8px, 1.6cqw, 12px);
+      border: 1px solid rgba(201,169,98,0.25);
       border-radius: 20px;
-      border: 1px solid rgba(201,169,98,0.2);
-      background: rgba(201,169,98,0.05);
-      color: rgba(201,169,98,0.7);
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.2cqw, 10px);
+      color: rgba(201,169,98,0.9);
+      background: rgba(201,169,98,0.06);
     }
     .cta-box {
-      background: rgba(201,169,98,0.08);
+      background: linear-gradient(135deg, rgba(201,169,98,0.15) 0%, rgba(201,169,98,0.05) 100%);
       border: 2px solid var(--accent-gold);
-      border-radius: 14px;
-      padding: 3% 6%;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(201,169,98,0.08);
+      border-radius: clamp(10px, 2cqw, 16px);
+      padding: clamp(10px, 2cqw, 16px) clamp(14px, 3cqw, 20px);
     }
-    .cta-box-text {
-      font-size: clamp(11px, 2cqw, 22px);
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 1%;
-    }
-    .cta-link {
-      font-size: clamp(10px, 1.7cqw, 18px);
-      font-weight: 600;
-      color: var(--accent-gold);
+    .cta-box-label { font-size: clamp(9px, 1.4cqw, 12px); font-weight: 500; color: var(--text-primary); margin-bottom: clamp(2px, 0.4cqw, 4px); }
+    .cta-link { font-family: var(--font-mono); font-size: clamp(10px, 1.8cqw, 16px); font-weight: 600; color: var(--accent-gold); }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 4%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Gugi', sans-serif;
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(201,169,98,0.4);
+      z-index: 2;
+      white-space: nowrap;
     }
   </style>
 </head>
@@ -594,13 +289,13 @@
   </div>
 
   <div class="page-title">
-    <h1>Post 062 — Candlestick Mastery</h1>
-    <p>5 slides · Education</p>
+    <h1>Post 062 — Candlestick Patterns</h1>
+    <p>5 slides &middot; Education</p>
   </div>
 
   <div class="carousel-grid">
 
-    <!-- ══════ SLIDE 1: Hook ══════ -->
+    <!-- ══════ SLIDE 1: Hook with Candlestick Orb ══════ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Hook</span>
       <div class="slide slide-edu slide-1">
@@ -608,125 +303,84 @@
           <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
         <div class="slide-content">
-          <div class="learning-orb">
-            <div class="orb-candles">
-              <div class="orb-candle">
-                <div class="orb-wick" style="height: 6px;"></div>
-                <div class="orb-body red" style="height: 20px;"></div>
-                <div class="orb-wick" style="height: 10px;"></div>
-              </div>
-              <div class="orb-candle">
-                <div class="orb-wick" style="height: 4px;"></div>
-                <div class="orb-body green" style="height: 28px;"></div>
-                <div class="orb-wick" style="height: 4px;"></div>
-              </div>
-              <div class="orb-candle">
-                <div class="orb-wick" style="height: 8px;"></div>
-                <div class="orb-body red" style="height: 14px;"></div>
-                <div class="orb-wick" style="height: 30px;"></div>
-              </div>
+          <div class="hook-orb">
+            <div class="candle-viz">
+              <div class="candle-body green"><div class="candle-wick"></div></div>
+              <div class="candle-body red"><div class="candle-wick"></div></div>
+              <div class="candle-body green"><div class="candle-wick"></div></div>
             </div>
           </div>
           <div class="s1-label">EDUCATION</div>
-          <h1 class="s1-title">Candlestick Patterns:<br>Read the <em>Story</em>.</h1>
+          <div class="s1-title">Candlestick Patterns<br><em>Read the Story</em></div>
           <div class="s1-divider"></div>
-          <span class="s1-subtitle">Master the price language that reveals momentum shifts</span>
+          <p class="s1-subtitle">Master the price language that reveals momentum shifts</p>
           <div class="brand-mark">SIGNAL PILOT</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 2: Core Patterns ══════ -->
+    <!-- ══════ SLIDE 2: Breadth - 12 Patterns ══════ -->
     <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Core Patterns</span>
-      <div class="slide slide-edu slide-2">
+      <span class="slide-label">Slide 2 — 12 Essential Patterns</span>
+      <div class="slide slide-edu">
         <video class="video-bg" autoplay muted loop playsinline>
           <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
         <div class="slide-content">
-          <span class="slide-counter">02 / 05</span>
-          <h2 class="section-title"><em>12</em> Essential Patterns. 3 Categories.</h2>
+          <div class="section-tag">FOUNDATIONAL PATTERNS</div>
+          <div class="section-title"><em>12</em> Essential Patterns<br>3 Categories</div>
+
           <div class="pattern-grid">
-            <div class="pattern-card">
-              <div class="pattern-icon">
-                <span class="pattern-icon-symbol">▼</span>
-              </div>
-              <span class="pattern-name">Reversals</span>
-              <span class="pattern-desc">Trend Flips</span>
-              <div class="pattern-bar"><div class="pattern-bar-fill" style="width:94%"></div></div>
-            </div>
-
-            <div class="pattern-card">
-              <div class="pattern-icon">
-                <span class="pattern-icon-symbol">→</span>
-              </div>
-              <span class="pattern-name">Continuations</span>
-              <span class="pattern-desc">Trend Confirms</span>
-              <div class="pattern-bar"><div class="pattern-bar-fill" style="width:87%"></div></div>
-            </div>
-
-            <div class="pattern-card">
-              <div class="pattern-icon">
-                <span class="pattern-icon-symbol">⊙</span>
-              </div>
-              <span class="pattern-name">Indecision</span>
-              <span class="pattern-desc">Pause Signals</span>
-              <div class="pattern-bar"><div class="pattern-bar-fill" style="width:78%"></div></div>
-            </div>
+            <div class="pattern-card"><div class="pattern-icon">🔨</div><div class="pattern-name">Hammer</div></div>
+            <div class="pattern-card"><div class="pattern-icon">⭐</div><div class="pattern-name">Morning Star</div></div>
+            <div class="pattern-card"><div class="pattern-icon">📊</div><div class="pattern-name">Engulfing</div></div>
+            <div class="pattern-card"><div class="pattern-icon">⚡</div><div class="pattern-name">Harami</div></div>
+            <div class="pattern-card"><div class="pattern-icon">🔄</div><div class="pattern-name">Piercing</div></div>
+            <div class="pattern-card"><div class="pattern-icon">🌙</div><div class="pattern-name">Evening Star</div></div>
+            <div class="pattern-card"><div class="pattern-icon">⏸️</div><div class="pattern-name">Doji</div></div>
+            <div class="pattern-card"><div class="pattern-icon">❓</div><div class="pattern-name">Spinning Top</div></div>
+            <div class="pattern-card"><div class="pattern-icon">↗️</div><div class="pattern-name">Three White</div></div>
+            <div class="pattern-card"><div class="pattern-icon">↘️</div><div class="pattern-name">Three Black</div></div>
+            <div class="pattern-card"><div class="pattern-icon">🎯</div><div class="pattern-name">Rickshaw Man</div></div>
+            <div class="pattern-card"><div class="pattern-icon">💫</div><div class="pattern-name">Dragonfly</div></div>
           </div>
+
+          <div style="text-align:center; font-family:var(--font-mono); font-size:clamp(7px,1.2cqw,10px); color:rgba(201,169,98,0.7); margin-top:2%;">
+            Reversals • Continuations • Indecision
+          </div>
+
           <div class="brand-mark">SIGNAL PILOT</div>
         </div>
       </div>
     </div>
 
-    <!-- ══════ SLIDE 3: Pattern Mechanics ══════ -->
+    <!-- ══════ SLIDE 3: Mechanism - How to Read ══════ -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Pattern Mechanics</span>
-      <div class="slide slide-edu slide-3">
+      <span class="slide-label">Slide 3 — How to Read Patterns</span>
+      <div class="slide slide-edu">
         <video class="video-bg" autoplay muted loop playsinline>
           <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
         <div class="slide-content">
-          <span class="slide-counter">03 / 05</span>
-          <h2 class="section-title">How to <em>Read</em> Patterns</h2>
+          <div class="section-tag">3-STEP PROCESS</div>
+          <div class="section-title">How to <em>Read</em> Patterns</div>
 
-          <div class="flow-container">
-            <div class="flow-step">
-              <div class="flow-ring">
-                <span class="flow-num">1</span>
-              </div>
-              <div class="flow-text">
-                <div class="flow-label">FORM</div>
-                <div class="flow-title">Recognize Structure</div>
-                <div class="flow-desc">Body size, wick length, and color tell you who's winning the battle</div>
-              </div>
-            </div>
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-name">FORM</div>
+            <div class="step-desc">Recognize the structure. What shape do the candles make?</div>
+          </div>
 
-            <div class="flow-arrow">↓</div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-name">CONTEXT</div>
+            <div class="step-desc">Check location. Is it at support? After a downtrend? High or low volume?</div>
+          </div>
 
-            <div class="flow-step">
-              <div class="flow-ring">
-                <span class="flow-num">2</span>
-              </div>
-              <div class="flow-text">
-                <div class="flow-label">CONTEXT</div>
-                <div class="flow-title">Check Location</div>
-                <div class="flow-desc">Same pattern at support is different than at resistance—location matters</div>
-              </div>
-            </div>
-
-            <div class="flow-arrow">↓</div>
-
-            <div class="flow-step">
-              <div class="flow-ring">
-                <span class="flow-num">3</span>
-              </div>
-              <div class="flow-text">
-                <div class="flow-label">CONFIRMATION</div>
-                <div class="flow-title">Validate With Volume</div>
-                <div class="flow-desc">High volume confirms the pattern. Low volume = unreliable signal</div>
-              </div>
-            </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-name">CONFIRMATION</div>
+            <div class="step-desc">Validate with volume. Does the next candle confirm the pattern's thesis?</div>
           </div>
 
           <div class="brand-mark">SIGNAL PILOT</div>
@@ -734,70 +388,56 @@
       </div>
     </div>
 
-    <!-- ══════ SLIDE 4: Proof & Benefits ══════ -->
+    <!-- ══════ SLIDE 4: Proof & Stats ══════ -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Proof & Benefits</span>
-      <div class="slide slide-edu slide-4">
+      <span class="slide-label">Slide 4 — Built for Advantage</span>
+      <div class="slide slide-edu">
         <video class="video-bg" autoplay muted loop playsinline>
           <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
         <div class="slide-content">
-          <span class="slide-counter">04 / 05</span>
-          <h2 class="section-title">Built for <em>Advantage</em></h2>
+          <div class="section-tag">COMPLETE SYSTEM</div>
+          <div class="section-title">Built for <em>Advantage</em></div>
 
-          <div class="stat-rings-row">
+          <div class="stat-rings">
             <div class="stat-item">
               <div class="stat-ring">
                 <span class="stat-val">12</span>
               </div>
-              <span class="stat-label">Patterns</span>
-              <span class="stat-sub">DECODED</span>
+              <div class="stat-label">Patterns</div>
+              <div class="stat-sub">DECODED</div>
             </div>
             <div class="stat-item">
               <div class="stat-ring">
                 <span class="stat-val">85%</span>
               </div>
-              <span class="stat-label">Accuracy</span>
-              <span class="stat-sub">WITH CONTEXT</span>
+              <div class="stat-label">Recognition</div>
+              <div class="stat-sub">ACCURACY</div>
             </div>
             <div class="stat-item">
               <div class="stat-ring">
                 <span class="stat-val">3M+</span>
               </div>
-              <span class="stat-label">Traders</span>
-              <span class="stat-sub">USE THESE</span>
+              <div class="stat-label">Traders</div>
+              <div class="stat-sub">WORLDWIDE</div>
             </div>
           </div>
 
-          <div class="pattern-benefits">
+          <div class="benefit-grid">
             <div class="benefit-card">
-              <div class="benefit-icon">
-                <span class="benefit-letter">F</span>
-              </div>
-              <div class="benefit-info">
-                <div class="benefit-title">Faster Recognition</div>
-                <div class="benefit-desc">Spot momentum shifts before they happen — read the candles like a chart pro</div>
-              </div>
+              <div class="benefit-letter">F</div>
+              <div class="benefit-title">Faster Recognition</div>
+              <div class="benefit-desc">Spot patterns in real-time, before others see them</div>
             </div>
-
             <div class="benefit-card">
-              <div class="benefit-icon">
-                <span class="benefit-letter">E</span>
-              </div>
-              <div class="benefit-info">
-                <div class="benefit-title">Earlier Entries</div>
-                <div class="benefit-desc">Know exactly when price is about to reverse or continue—precision timing</div>
-              </div>
+              <div class="benefit-letter">E</div>
+              <div class="benefit-title">Earlier Entries</div>
+              <div class="benefit-desc">Enter on confirmation, not after price confirms elsewhere</div>
             </div>
-
             <div class="benefit-card">
-              <div class="benefit-icon">
-                <span class="benefit-letter">C</span>
-              </div>
-              <div class="benefit-info">
-                <div class="benefit-title">Confident Trading</div>
-                <div class="benefit-desc">Trade with conviction when patterns align with volume and confluence zones</div>
-              </div>
+              <div class="benefit-letter">C</div>
+              <div class="benefit-title">Confident Trading</div>
+              <div class="benefit-desc">Volume rules separate real patterns from noise</div>
             </div>
           </div>
 
@@ -809,49 +449,27 @@
     <!-- ══════ SLIDE 5: CTA ══════ -->
     <div class="slide-wrapper" data-slide="5">
       <span class="slide-label">Slide 5 — CTA</span>
-      <div class="slide slide-edu slide-5">
+      <div class="slide slide-edu">
         <video class="video-bg" autoplay muted loop playsinline>
           <source src="../../assets/starfield.mp4" type="video/mp4">
         </video>
         <div class="slide-content">
-          <span class="slide-counter">05 / 05</span>
-          <div class="stat-recap">
-            <div class="stat-recap-card">
-              <div class="stat-recap-ring">
-                <span class="stat-recap-num">12</span>
-              </div>
-              <div class="stat-recap-label">Patterns</div>
-              <div class="stat-recap-val">DECODED</div>
+          <div class="cta-container">
+            <div class="cta-label">12 PATTERNS DECODED</div>
+            <div class="cta-title">See What Price<br>Is <em>Telling</em></div>
+            <div class="cta-desc">Candlestick patterns are the market's vocabulary. Learn to read them, and price movements become clear.</div>
+
+            <div class="cta-pills">
+              <div class="pill">12 Patterns</div>
+              <div class="pill">Volume Rules</div>
+              <div class="pill">Trade Ready</div>
+              <div class="pill">Free Access</div>
             </div>
-            <div class="stat-recap-card">
-              <div class="stat-recap-ring">
-                <span class="stat-recap-num">85%</span>
-              </div>
-              <div class="stat-recap-label">Accuracy</div>
-              <div class="stat-recap-val">VALIDATED</div>
+
+            <div class="cta-box">
+              <div class="cta-box-label">Get the Complete Guide</div>
+              <div class="cta-link">signalpilot.io/patterns</div>
             </div>
-            <div class="stat-recap-card">
-              <div class="stat-recap-ring">
-                <span class="stat-recap-num">∞</span>
-              </div>
-              <div class="stat-recap-label">Trades</div>
-              <div class="stat-recap-val">AWAITS YOU</div>
-            </div>
-          </div>
-          <div class="cta-glow">
-            <span class="cta-icon">📊</span>
-          </div>
-          <h2 class="cta-title">See What Price Is <em>Telling</em>.</h2>
-          <p class="cta-desc">Master all 12 patterns with real chart examples, volume confirmation rules, and confluence integration.</p>
-          <div class="cta-pills">
-            <span class="cta-pill">12 Patterns</span>
-            <span class="cta-pill">Volume Rules</span>
-            <span class="cta-pill">Trade Ready</span>
-            <span class="cta-pill">Free Access</span>
-          </div>
-          <div class="cta-box">
-            <p class="cta-box-text">Get the Complete Guide</p>
-            <span class="cta-link">signalpilot.io/patterns</span>
           </div>
           <div class="brand-mark">SIGNAL PILOT</div>
         </div>
