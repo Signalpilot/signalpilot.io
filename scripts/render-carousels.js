@@ -113,29 +113,33 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
       }
 
-      /* Body text */
+      /* Body text — boosted for Instagram readability */
       .slide-body, .text {
-        font-size: clamp(24px, 6cqw, 36px) !important;
+        font-size: clamp(26px, 6.5cqw, 38px) !important;
         line-height: 1.65 !important;
         max-width: 95% !important;
         text-align: center !important;
+        color: rgba(255,255,255,0.85) !important;
       }
 
-      /* Subtitles */
+      /* Subtitles — boosted for Instagram readability */
       .slide-subtitle, .hook-sub {
-        font-size: clamp(20px, 5cqw, 30px) !important;
+        font-size: clamp(28px, 6.5cqw, 40px) !important;
         letter-spacing: 3px !important;
         text-align: center !important;
+        color: rgba(255,255,255,0.88) !important;
       }
 
       /* Paragraphs and lists inside slide-content */
       .slide-content p {
-        font-size: clamp(22px, 5.5cqw, 32px) !important;
+        font-size: clamp(24px, 5.5cqw, 34px) !important;
         text-align: center !important;
+        color: rgba(255,255,255,0.85) !important;
       }
       .slide-content ul, .slide-content ol {
-        font-size: clamp(22px, 5.5cqw, 32px) !important;
+        font-size: clamp(24px, 5.5cqw, 34px) !important;
         max-width: 95% !important;
+        color: rgba(255,255,255,0.85) !important;
       }
 
       /* Combo titles and descriptions */
@@ -144,8 +148,9 @@ async function renderCarousel(page, postDir, postNumber) {
         font-weight: 700 !important;
       }
       .combo-desc {
-        font-size: clamp(20px, 5cqw, 30px) !important;
+        font-size: clamp(22px, 5.5cqw, 32px) !important;
         line-height: 1.5 !important;
+        color: rgba(255,255,255,0.85) !important;
       }
       .combo-arrows, .combo-emojis {
         font-size: clamp(40px, 10cqw, 64px) !important;
@@ -205,13 +210,23 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
       }
 
-      /* Brand mark — Gugi font, centered at bottom */
-      .brand-mark, .logo, .cine-logo {
-        font-family: 'Gugi', sans-serif !important;
-        font-size: clamp(14px, 3.5cqw, 20px) !important;
-        letter-spacing: 4px !important;
+      /* Feature cards (grid items like "Wait for Confluence") */
+      .feature-text {
+        font-size: clamp(20px, 5cqw, 30px) !important;
+        color: rgba(255,255,255,0.9) !important;
       }
-      .brand-mark {
+      .feature-card {
+        border-color: rgba(255,255,255,0.15) !important;
+      }
+
+      /* Brand mark — Gugi font, centered at bottom, themed per column */
+      .brand-mark, .logo, .cine-logo, .slide-logo {
+        font-family: 'Gugi', sans-serif !important;
+        font-size: clamp(16px, 4cqw, 24px) !important;
+        letter-spacing: 4px !important;
+        text-transform: uppercase !important;
+      }
+      .brand-mark, .slide-logo {
         position: absolute !important;
         bottom: 5% !important;
         left: 50% !important;
@@ -219,7 +234,11 @@ async function renderCarousel(page, postDir, postNumber) {
         right: auto !important;
         text-align: center !important;
         width: auto !important;
+        color: #c9a962 !important;
       }
+      /* Theme-specific brand colors */
+      .slide-warm .brand-mark, .slide-warm .slide-logo { color: #f59e0b !important; }
+      .slide-teal .brand-mark, .slide-teal .slide-logo { color: #5eead4 !important; }
       .slide-1 .cine-logo {
         left: 50% !important;
         transform: translateX(-50%) !important;
@@ -1610,6 +1629,14 @@ async function renderCarousel(page, postDir, postNumber) {
       img.parentNode.replaceChild(span, img);
     });
 
+    // Convert .slide-logo → .brand-mark for consistent render styling (prevents duplicates)
+    document.querySelectorAll('.slide-logo').forEach(el => {
+      const span = document.createElement('span');
+      span.className = 'brand-mark';
+      span.textContent = 'SIGNAL PILOT';
+      el.parentNode.replaceChild(span, el);
+    });
+
     // Fix "SignalPilot" → "Signal Pilot" and "SIGNALPILOT" → "SIGNAL PILOT"
     document.querySelectorAll('.cine-logo, .brand-mark, .logo, .brand-footer, .cta-button').forEach(el => {
       el.textContent = el.textContent
@@ -1619,7 +1646,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
     // Inject "SIGNAL PILOT" branding on EVERY slide that doesn't already have it
     document.querySelectorAll('.slide-wrapper').forEach(w => {
-      if (!w.querySelector('.brand-mark, .cine-logo, .brand-footer, .slide-logo')) {
+      if (!w.querySelector('.brand-mark, .cine-logo, .brand-footer')) {
         const container = w.querySelector('.slide-content') || w;
         const brand = document.createElement('span');
         brand.className = 'brand-mark';
