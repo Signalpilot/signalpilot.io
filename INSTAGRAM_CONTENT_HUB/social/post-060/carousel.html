@@ -10,11 +10,15 @@
   <style>
     :root {
       --bg-dark: #0a0a0f;
+      --bg-card: rgba(255,255,255,0.03);
       --text-primary: #ffffff;
       --text-secondary: rgba(255,255,255,0.7);
       --text-muted: rgba(255,255,255,0.4);
       --border-subtle: rgba(255,255,255,0.1);
       --accent-teal: #5eead4;
+      --accent-teal-dim: rgba(94,234,212,0.3);
+      --accent-red: #f87171;
+      --accent-amber: #f59e0b;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -25,22 +29,579 @@
     body.export-mode { padding: 0; background: transparent; }
     body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
     body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; }
+    body.export-mode .slide-wrapper { display: none; margin: 0; }
     body.export-mode .slide-wrapper.active { display: block; }
     body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
 
     .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
+    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
+    .page-title { text-align: center; margin-bottom: 2rem; }
+    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
+
     .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
     .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
     .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-    .slide::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide::after { content: ''; position: absolute; top: 0; left: 15px; width: 50px; height: 100%; background: #5eead4; z-index: 5; opacity: 0.3; }
-    .slide-content { position: relative; z-index: 3; flex: 1; display: flex; flex-direction: column; padding: 5% 6%; gap: clamp(1rem, 3cqw, 2rem); }
+    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+    .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.06; z-index: 0; pointer-events: none; }
+    .slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
+
+    /* ═══════════════════════════════════════════
+       TEAL SLIDE BASE — left bar on S1 only
+       ═══════════════════════════════════════════ */
+    .slide-teal { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
+    .slide-teal::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(94,234,212,0.05) 0%, transparent 100%); pointer-events: none; z-index: 1; }
+    .slide-teal.slide-1::after { content: ''; position: absolute; top: 0; left: 15px; width: 50px; height: 100%; background: #5eead4; z-index: 5; }
+    .slide-teal .slide-content { z-index: 3; }
+
+    /* ── Per-slide alignments ── */
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-2 .slide-content { align-items: flex-start; }
+    .slide-3 .slide-content { align-items: center; }
+    .slide-4 .slide-content { align-items: flex-start; }
+    .slide-5 .slide-content { align-items: flex-start; }
+    .slide-6 .slide-content { align-items: center; text-align: center; justify-content: center; }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — Hook with glowing conviction orb
+       ═══════════════════════════════════════════ */
+    .conviction-orb {
+      width: clamp(70px, 14cqw, 140px);
+      height: clamp(70px, 14cqw, 140px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.35) 0%, rgba(94,234,212,0.12) 40%, rgba(94,234,212,0.08) 70%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.25);
+      box-shadow: 0 0 40px rgba(94,234,212,0.15), 0 0 80px rgba(94,234,212,0.06), inset 0 0 30px rgba(94,234,212,0.08);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: 5%;
+    }
+    .conviction-orb::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.15);
+    }
+    .conviction-orb::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(94,234,212,0.2);
+    }
+    .conviction-checkmark {
+      font-size: clamp(32px, 6cqw, 64px);
+      position: relative;
+      z-index: 1;
+      color: rgba(94,234,212,0.9);
+    }
+    .s1-blog-label {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.5cqw, 14px);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.9);
+      margin-bottom: 4%;
+    }
+    .s1-hook {
+      font-family: var(--font-sans);
+      font-size: clamp(18px, 4.5cqw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 4%;
+      max-width: 90%;
+    }
+    .s1-hook em { color: var(--accent-teal); font-style: normal; }
+    .s1-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      margin-bottom: 4%;
+    }
+    .s1-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.8cqw, 19px);
+      font-weight: 300;
+      color: rgba(94,234,212,0.4);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 2 — Problem zones (icon circles + danger bars)
+       ═══════════════════════════════════════════ */
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 12px);
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 3%;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.8cqw, 40px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 5%;
+    }
+    .problem-zones {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.5cqw, 16px);
+    }
+    .problem-item {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3.5% 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 4px 0 0 4px;
+      background: var(--accent-red);
+    }
+    .problem-icon-circle {
+      width: clamp(36px, 7cqw, 60px);
+      height: clamp(36px, 7cqw, 60px);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(248,113,113,0.3);
+      box-shadow: 0 0 18px rgba(248,113,113,0.12);
+    }
+    .problem-icon-circle::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(248,113,113,0.12);
+    }
+    .problem-icon-symbol {
+      font-size: clamp(12px, 2.2cqw, 22px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      color: rgba(248,113,113,0.9);
+    }
+    .problem-info { flex: 1; min-width: 0; }
+    .problem-title {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+    .problem-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 3%;
+    }
+    .danger-bar {
+      width: 100%;
+      height: clamp(4px, 0.7cqw, 7px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .danger-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, rgba(248,113,113,0.5), rgba(248,113,113,0.9));
+    }
+    .danger-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 9px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 1.5%;
+      color: rgba(248,113,113,0.7);
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 3 — Solution (conviction rings + glow cards)
+       ═══════════════════════════════════════════ */
+    .solution-flow {
+      width: 92%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(5px, 1cqw, 12px);
+      margin-bottom: 4%;
+    }
+    .solution-step {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3.5% 4%;
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      position: relative;
+      overflow: hidden;
+      background: rgba(94,234,212,0.06);
+      border: 1px solid rgba(94,234,212,0.18);
+      box-shadow: 0 0 20px rgba(94,234,212,0.04);
+    }
+    .conviction-ring {
+      width: clamp(38px, 7cqw, 62px);
+      height: clamp(38px, 7cqw, 62px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.35) 0%, rgba(94,234,212,0.1) 60%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.35);
+      box-shadow: 0 0 22px rgba(94,234,212,0.15);
+    }
+    .conviction-ring::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(94,234,212,0.15);
+    }
+    .conviction-num {
+      font-family: var(--font-mono);
+      font-size: clamp(14px, 2.5cqw, 26px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      color: rgba(94,234,212,0.9);
+    }
+    .step-info { flex: 1; min-width: 0; }
+    .conviction-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2%;
+      color: var(--accent-teal);
+    }
+    .conviction-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+    .conviction-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .flow-arrow {
+      font-size: clamp(14px, 2.5cqw, 26px);
+      color: var(--text-muted);
+    }
+    .conviction-highlight-box {
+      width: 85%;
+      padding: 3.5% 4%;
+      background: rgba(94,234,212,0.05);
+      border: 2px solid rgba(94,234,212,0.25);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+      margin-top: 2%;
+    }
+    .conviction-highlight {
+      font-family: var(--font-serif);
+      font-size: clamp(13px, 2.2cqw, 22px);
+      font-weight: 500;
+      font-style: italic;
+      color: rgba(94,234,212,0.7);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 4 — Trader Types (strategy cards with effectiveness bars)
+       ═══════════════════════════════════════════ */
+    .strategy-intro {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.4cqw, 14px);
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 5%;
+    }
+    .strategy-cards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.5cqw, 16px);
+    }
+    .strategy-card {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3.5% 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      position: relative;
+    }
+    .strategy-icon-circle {
+      width: clamp(38px, 7cqw, 62px);
+      height: clamp(38px, 7cqw, 62px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.3);
+      box-shadow: 0 0 20px rgba(94,234,212,0.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .strategy-icon-circle::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1px solid rgba(94,234,212,0.12);
+    }
+    .strategy-icon-letter {
+      font-family: var(--font-mono);
+      font-size: clamp(13px, 2.3cqw, 24px);
+      font-weight: 700;
+      color: rgba(94,234,212,0.9);
+      position: relative;
+      z-index: 1;
+    }
+    .strategy-card-info { flex: 1; min-width: 0; }
+    .strategy-card-title {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+    .strategy-card-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 3%;
+    }
+    .conviction-bar {
+      width: 100%;
+      height: clamp(4px, 0.7cqw, 7px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .conviction-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, rgba(94,234,212,0.3), rgba(94,234,212,0.8));
+    }
+    .conviction-bar-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 9px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.5);
+      margin-top: 1.5%;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 5 — Comparison Table with metrics
+       ═══════════════════════════════════════════ */
+    .comparison-intro {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.8cqw, 26px);
+      font-weight: 600;
+      margin-bottom: 3%;
+      color: var(--text-primary);
+    }
+    .comparison-table {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.2cqw, 10px);
+    }
+    .table-header {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 1.1fr 0.9fr;
+      gap: clamp(4px, 0.8cqw, 8px);
+      padding-bottom: clamp(6px, 1.2cqw, 10px);
+      border-bottom: 1px solid rgba(94,234,212,0.2);
+      font-size: clamp(8px, 1.3cqw, 12px);
+      font-weight: 700;
+      color: var(--accent-teal);
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+    .table-row {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 1.1fr 0.9fr;
+      gap: clamp(4px, 0.8cqw, 8px);
+      padding: clamp(6px, 1.2cqw, 10px) 0;
+      border-bottom: 1px solid rgba(94,234,212,0.1);
+      font-size: clamp(8px, 1.2cqw, 13px);
+      align-items: center;
+    }
+    .table-setting-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .table-metric {
+      color: var(--text-secondary);
+    }
+    .table-metric-num {
+      font-family: var(--font-mono);
+      color: rgba(94,234,212,0.8);
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 6 — Stat recap + CTA glow
+       ═══════════════════════════════════════════ */
+    .stat-recap {
+      width: 85%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.5cqw, 14px);
+      margin-bottom: 6%;
+    }
+    .stat-recap-card {
+      padding: 5% 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .stat-recap-ring {
+      width: clamp(30px, 5.5cqw, 48px);
+      height: clamp(30px, 5.5cqw, 48px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.25) 0%, rgba(94,234,212,0.06) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.25);
+      box-shadow: 0 0 14px rgba(94,234,212,0.08);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 8%;
+      position: relative;
+    }
+    .stat-recap-ring::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 1px solid rgba(94,234,212,0.1);
+    }
+    .stat-recap-num {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      font-weight: 700;
+      color: rgba(94,234,212,0.9);
+      position: relative;
+      z-index: 1;
+    }
+    .stat-recap-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 2%;
+    }
+    .stat-recap-val {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 10px);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .cta-glow {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.25) 0%, rgba(94,234,212,0.06) 50%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.2);
+      box-shadow: 0 0 40px rgba(94,234,212,0.1), 0 0 80px rgba(94,234,212,0.04);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      margin-bottom: 5%;
+    }
+    .cta-glow::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.12);
+    }
+    .cta-glow-icon {
+      font-size: clamp(18px, 3.5cqw, 36px);
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 6px rgba(94,234,212,0.4));
+    }
+    .cta-tagline {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.8cqw, 40px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 3%;
+    }
+    .cta-tagline em { color: var(--accent-teal); font-style: normal; }
+    .cta-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 82%;
+      margin-bottom: 5%;
+    }
+    .cta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(4px, 0.8cqw, 8px);
+      justify-content: center;
+      margin-bottom: 5%;
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: clamp(4px, 0.7cqw, 8px) clamp(8px, 1.5cqw, 16px);
+      border-radius: 20px;
+      border: 1px solid rgba(94,234,212,0.2);
+      background: rgba(94,234,212,0.05);
+      color: rgba(94,234,212,0.7);
+    }
+    .cta-box {
+      background: rgba(94,234,212,0.08);
+      border: 2px solid var(--accent-teal);
+      border-radius: 14px;
+      padding: 3% 6%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(94,234,212,0.08);
+    }
+    .cta-box-text {
+      font-size: clamp(11px, 2cqw, 22px);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+    .cta-link {
+      font-size: clamp(10px, 1.7cqw, 18px);
+      font-weight: 600;
+      color: var(--accent-teal);
+    }
 
     .slide-logo {
       position: absolute;
-      bottom: 3%;
+      bottom: 4%;
       left: 50%;
       transform: translateX(-50%);
       font-family: 'Gugi', sans-serif;
@@ -51,181 +612,231 @@
       z-index: 2;
       white-space: nowrap;
     }
-
-    /* ===== SLIDE 1 — Title ===== */
-    .slide-1 .slide-content { align-items: center; justify-content: center; text-align: center; }
-    .slide-1 .title-label { font-family: var(--font-mono); font-size: clamp(0.55rem, 1.4cqw, 0.75rem); color: rgba(94,234,212,0.9); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 2rem; }
-    .slide-1 .title-main { font-family: var(--font-serif); font-size: clamp(2.2rem, 5.5cqw, 3.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
-    .slide-1 .title-sub { font-size: clamp(0.95rem, 2.5cqw, 1.3rem); font-weight: 300; color: var(--text-secondary); line-height: 1.5; }
-    .slide-1 .orb { width: clamp(80px, 16cqw, 160px); height: clamp(80px, 16cqw, 160px); border-radius: 50%; border: 2px solid rgba(94,234,212,0.3); background: radial-gradient(circle at 35% 30%, rgba(94,234,212,0.2), transparent 70%); margin-bottom: 2rem; }
-
-    /* ===== SLIDE 2 — Problem (2-column) ===== */
-    .slide-2 .section-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .slide-2 .section-title { font-family: var(--font-serif); font-size: clamp(1.6rem, 4cqw, 2.4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
-    .slide-2 .problems-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.6rem, 1.5cqw, 1.2rem); flex: 1; }
-    .slide-2 .problem-item { background: rgba(94,234,212,0.05); border: 1px solid rgba(94,234,212,0.15); border-radius: clamp(6px, 1cqw, 10px); padding: clamp(0.6rem, 1.2cqw, 1rem); display: flex; flex-direction: column; justify-content: center; }
-    .slide-2 .problem-icon { font-size: clamp(1.4rem, 3cqw, 2.2rem); margin-bottom: 0.4rem; }
-    .slide-2 .problem-title { font-size: clamp(0.65rem, 1.5cqw, 0.95rem); font-weight: 700; color: var(--accent-teal); margin-bottom: 0.3rem; }
-    .slide-2 .problem-desc { font-size: clamp(0.55rem, 1.2cqw, 0.8rem); color: var(--text-secondary); line-height: 1.3; }
-
-    /* ===== SLIDE 3 — Solution (Highlight) ===== */
-    .slide-3 .section-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .slide-3 .section-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4.2cqw, 2.6rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
-    .slide-3 .solution-box { background: linear-gradient(135deg, rgba(94,234,212,0.1) 0%, rgba(94,234,212,0.03) 100%); border: 2px solid rgba(94,234,212,0.3); border-radius: clamp(8px, 1.5cqw, 12px); padding: clamp(1rem, 2.5cqw, 1.8rem); text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-    .slide-3 .solution-number { font-family: var(--font-serif); font-size: clamp(2.5rem, 6cqw, 4rem); font-weight: 700; color: var(--accent-teal); margin-bottom: 0.5rem; }
-    .slide-3 .solution-text { font-size: clamp(0.75rem, 1.8cqw, 1.1rem); color: var(--text-secondary); line-height: 1.4; }
-    .slide-3 .benefits { display: flex; flex-direction: column; gap: clamp(0.6rem, 1.2cqw, 1rem); margin-top: 1rem; }
-    .slide-3 .benefit { display: flex; align-items: center; gap: clamp(0.5rem, 1cqw, 0.8rem); font-size: clamp(0.55rem, 1.2cqw, 0.8rem); }
-    .slide-3 .benefit-dot { width: clamp(3px, 0.7cqw, 5px); height: clamp(3px, 0.7cqw, 5px); border-radius: 50%; background: var(--accent-teal); flex-shrink: 0; }
-
-    /* ===== SLIDE 4 — Trader Types (3-column) ===== */
-    .slide-4 .section-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .slide-4 .section-title { font-family: var(--font-serif); font-size: clamp(1.5rem, 3.8cqw, 2.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
-    .slide-4 .traders-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(0.6rem, 1.2cqw, 1rem); flex: 1; }
-    .slide-4 .trader-card { background: rgba(94,234,212,0.06); border: 1px solid rgba(94,234,212,0.2); border-radius: clamp(6px, 1cqw, 10px); padding: clamp(0.8rem, 1.5cqw, 1.2rem); display: flex; flex-direction: column; justify-content: space-between; }
-    .slide-4 .trader-name { font-size: clamp(0.7rem, 1.6cqw, 0.95rem); font-weight: 700; color: var(--accent-teal); margin-bottom: 0.5rem; text-transform: uppercase; }
-    .slide-4 .trader-mode { font-size: clamp(0.6rem, 1.4cqw, 0.9rem); color: var(--text-secondary); font-family: var(--font-mono); }
-
-    /* ===== SLIDE 5 — Comparison Table ===== */
-    .slide-5 .section-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .slide-5 .section-title { font-family: var(--font-serif); font-size: clamp(1.4rem, 3.5cqw, 2rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
-    .slide-5 .comparison-table { flex: 1; display: flex; flex-direction: column; gap: clamp(0.5rem, 1cqw, 0.8rem); }
-    .slide-5 .table-header { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr 1fr; gap: clamp(0.4rem, 0.8cqw, 0.6rem); font-size: clamp(0.55rem, 1.2cqw, 0.8rem); font-weight: 700; color: var(--accent-teal); padding-bottom: clamp(0.4rem, 0.8cqw, 0.6rem); border-bottom: 1px solid rgba(94,234,212,0.2); }
-    .slide-5 .table-row { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr 1fr; gap: clamp(0.4rem, 0.8cqw, 0.6rem); font-size: clamp(0.5rem, 1.1cqw, 0.75rem); padding: clamp(0.5rem, 1cqw, 0.8rem) 0; border-bottom: 1px solid rgba(94,234,212,0.1); }
-    .slide-5 .setting-name { font-weight: 600; color: var(--text-primary); }
-
-    /* ===== SLIDE 6 — CTA ===== */
-    .slide-6 .slide-content { align-items: center; justify-content: center; text-align: center; }
-    .slide-6 .cta-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.8rem); color: rgba(94,234,212,0.9); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1rem; }
-    .slide-6 .cta-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 4.5cqw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
-    .slide-6 .cta-subtitle { font-size: clamp(0.65rem, 1.5cqw, 0.95rem); color: var(--text-secondary); line-height: 1.4; margin-bottom: 1.5rem; }
-    .slide-6 .cta-button { background: linear-gradient(135deg, rgba(94,234,212,0.15) 0%, rgba(94,234,212,0.05) 100%); border: 2px solid var(--accent-teal); border-radius: clamp(6px, 1.2cqw, 10px); padding: clamp(0.8rem, 1.8cqw, 1.2rem) clamp(1.2rem, 2.5cqw, 1.8rem); }
-    .slide-6 .cta-button-label { font-family: var(--font-mono); font-size: clamp(0.6rem, 1.4cqw, 0.85rem); letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-teal); font-weight: 600; }
-    .slide-6 .cta-button-link { font-size: clamp(0.75rem, 1.8cqw, 1.1rem); color: var(--accent-teal); font-weight: 700; margin-top: clamp(0.3rem, 0.6cqw, 0.5rem); }
   </style>
 </head>
 <body>
+  <div class="controls">
+    <label>Background: <select id="bg-toggle"><option value="video">Starfield</option><option value="static">Static</option></select></label>
+    <label>Opacity: <select id="opacity-control"><option value="0.06">6%</option><option value="0.08">8%</option><option value="0.12">12%</option></select></label>
+    <button id="export-btn">Export Mode</button>
+  </div>
+
+  <div class="page-title">
+    <h1>Post 060 — High Conviction Trading</h1>
+    <p>6 slides · Trading</p>
+  </div>
+
   <div class="carousel-grid">
-    <!-- SLIDE 1 — Title -->
+
+    <!-- ══════ SLIDE 1: Hook ══════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Title</span>
-      <div class="slide slide-1">
+      <span class="slide-label">Slide 1 — Hook</span>
+      <div class="slide slide-teal slide-1">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="orb"></div>
-          <div class="title-label">Reference</div>
-          <div class="title-main">Seven Voices.<br>One Verdict.</div>
-          <div class="title-sub">Master high conviction trading with consensus signals</div>
-        </div>
-        <div class="slide-logo">Signal Pilot</div>
-      </div>
-    </div>
-
-    <!-- SLIDE 2 — Problem (2-column grid) -->
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — The Problem</span>
-      <div class="slide slide-2">
-        <div class="slide-content">
-          <div class="section-label">Why Traders Fail</div>
-          <div class="section-title">False Signals = Lost Money</div>
-          <div class="problems-grid">
-            <div class="problem-item">
-              <div class="problem-icon">⚡</div>
-              <div class="problem-title">Whipsawed</div>
-              <div class="problem-desc">Conflicting signals trap you</div>
-            </div>
-            <div class="problem-item">
-              <div class="problem-icon">📉</div>
-              <div class="problem-title">Over-Trading</div>
-              <div class="problem-desc">Weak setups for quick profit</div>
-            </div>
-            <div class="problem-item">
-              <div class="problem-icon">😰</div>
-              <div class="problem-title">No Conviction</div>
-              <div class="problem-desc">Panic exit winners early</div>
-            </div>
-            <div class="problem-item">
-              <div class="problem-icon">📊</div>
-              <div class="problem-title">Drawdowns</div>
-              <div class="problem-desc">Thesis collapse in losses</div>
-            </div>
+          <div class="conviction-orb">
+            <span class="conviction-checkmark">✓</span>
           </div>
+          <div class="s1-blog-label">REFERENCE</div>
+          <h1 class="s1-hook">Seven Voices.<br>One <em>Verdict</em>.</h1>
+          <div class="s1-divider"></div>
+          <p class="s1-sub">Master high conviction trading with consensus signals</p>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- SLIDE 3 — Solution (Highlight) -->
+    <!-- ══════ SLIDE 2: Problem Zones ══════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — Problem Zones</span>
+      <div class="slide slide-teal slide-2">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
+        <div class="slide-content">
+          <span class="slide-counter">02 / 06</span>
+          <h2 class="section-title">Why Traders Fail</h2>
+          <div class="problem-zones">
+
+            <div class="problem-item">
+              <div class="problem-icon-circle">
+                <span class="problem-icon-symbol">⚡</span>
+              </div>
+              <div class="problem-info">
+                <div class="problem-title">Whipsawed</div>
+                <div class="problem-desc">Conflicting signals trap you in both directions</div>
+                <div class="danger-bar"><div class="danger-fill" style="width:92%"></div></div>
+                <div class="danger-label">RISK — 92%</div>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="problem-icon-circle">
+                <span class="problem-icon-symbol">📉</span>
+              </div>
+              <div class="problem-info">
+                <div class="problem-title">Over-Trading</div>
+                <div class="problem-desc">Weak setups executed for easy, false profits</div>
+                <div class="danger-bar"><div class="danger-fill" style="width:85%"></div></div>
+                <div class="danger-label">RISK — 85%</div>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="problem-icon-circle">
+                <span class="problem-icon-symbol">😰</span>
+              </div>
+              <div class="problem-info">
+                <div class="problem-title">No Conviction</div>
+                <div class="problem-desc">Panic exiting winners too early from doubt</div>
+                <div class="danger-bar"><div class="danger-fill" style="width:78%"></div></div>
+                <div class="danger-label">RISK — 78%</div>
+              </div>
+            </div>
+
+            <div class="problem-item">
+              <div class="problem-icon-circle">
+                <span class="problem-icon-symbol">📊</span>
+              </div>
+              <div class="problem-info">
+                <div class="problem-title">Drawdowns</div>
+                <div class="problem-desc">Trading thesis collapses when signals conflict</div>
+                <div class="danger-bar"><div class="danger-fill" style="width:88%"></div></div>
+                <div class="danger-label">RISK — 88%</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SLIDE 3: The Solution ══════ -->
     <div class="slide-wrapper" data-slide="3">
       <span class="slide-label">Slide 3 — The Solution</span>
-      <div class="slide slide-3">
+      <div class="slide slide-teal slide-3">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="section-label">Max Conviction</div>
-          <div class="section-title">7/7 Alignment</div>
-          <div class="solution-box">
-            <div class="solution-number">7/7</div>
-            <div class="solution-text">When all components agree, trade with confidence</div>
-            <div class="benefits">
-              <div class="benefit">
-                <div class="benefit-dot"></div>
-                <span>No second-guessing — market is aligned</span>
+          <span class="slide-counter">03 / 06</span>
+          <h2 class="section-title">7/7 Alignment</h2>
+          <div class="solution-flow">
+
+            <div class="solution-step">
+              <div class="conviction-ring">
+                <span class="conviction-num">1</span>
               </div>
-              <div class="benefit">
-                <div class="benefit-dot"></div>
-                <span>Higher win rate on high conviction signals</span>
-              </div>
-              <div class="benefit">
-                <div class="benefit-dot"></div>
-                <span>Hold winners longer with conviction</span>
+              <div class="step-info">
+                <div class="conviction-label">SETUP</div>
+                <div class="conviction-text">Market Aligns</div>
+                <div class="conviction-desc">All 7 components vote the same direction</div>
               </div>
             </div>
+
+            <div class="flow-arrow">↓</div>
+
+            <div class="solution-step">
+              <div class="conviction-ring">
+                <span class="conviction-num">2</span>
+              </div>
+              <div class="step-info">
+                <div class="conviction-label">ENTRY</div>
+                <div class="conviction-text">High Probability</div>
+                <div class="conviction-desc">Zero conflicting signals = maximum confidence</div>
+              </div>
+            </div>
+
+            <div class="flow-arrow">↓</div>
+
+            <div class="solution-step">
+              <div class="conviction-ring">
+                <span class="conviction-num">3</span>
+              </div>
+              <div class="step-info">
+                <div class="conviction-label">RESULT</div>
+                <div class="conviction-text">Higher Win Rate</div>
+                <div class="conviction-desc">Hold winners longer with full thesis conviction</div>
+              </div>
+            </div>
+
           </div>
+          <div class="conviction-highlight-box">
+            <p class="conviction-highlight">7/7 alignment = market consensus confirmed</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- SLIDE 4 — Trader Types (3-column) -->
+    <!-- ══════ SLIDE 4: Strategy Modes ══════ -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Your Style</span>
-      <div class="slide slide-4">
+      <span class="slide-label">Slide 4 — Strategy Modes</span>
+      <div class="slide slide-teal slide-4">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="section-label">Choose Your Mode</div>
-          <div class="section-title">Match Your Strategy</div>
-          <div class="traders-grid">
-            <div class="trader-card">
-              <div>
-                <div class="trader-name">Conservative</div>
-                <div class="trader-mode">Wait for 7/7</div>
+          <span class="slide-counter">04 / 06</span>
+          <h2 class="section-title">Match Your Strategy</h2>
+          <p class="strategy-intro">Different conviction thresholds for different risk tolerance and trading style.</p>
+          <div class="strategy-cards">
+
+            <div class="strategy-card">
+              <div class="strategy-icon-circle">
+                <span class="strategy-icon-letter">C</span>
               </div>
-              <div style="font-size: clamp(0.55rem, 1.2cqw, 0.8rem); color: var(--text-secondary);">Max confidence, fewer trades</div>
-            </div>
-            <div class="trader-card">
-              <div>
-                <div class="trader-name">Balanced</div>
-                <div class="trader-mode">Trade 5/7+</div>
+              <div class="strategy-card-info">
+                <div class="strategy-card-title">Conservative</div>
+                <div class="strategy-card-desc">Wait for maximum 7/7 alignment only</div>
+                <div class="conviction-bar"><div class="conviction-fill" style="width:95%"></div></div>
+                <div class="conviction-bar-label">CONVICTION — 95%</div>
               </div>
-              <div style="font-size: clamp(0.55rem, 1.2cqw, 0.8rem); color: var(--text-secondary);">Good risk/reward mix</div>
             </div>
-            <div class="trader-card">
-              <div>
-                <div class="trader-name">Aggressive</div>
-                <div class="trader-mode">Fast Mode</div>
+
+            <div class="strategy-card">
+              <div class="strategy-icon-circle">
+                <span class="strategy-icon-letter">B</span>
               </div>
-              <div style="font-size: clamp(0.55rem, 1.2cqw, 0.8rem); color: var(--text-secondary);">More signals, higher risk</div>
+              <div class="strategy-card-info">
+                <div class="strategy-card-title">Balanced</div>
+                <div class="strategy-card-desc">Trade on 5/7 or higher alignment</div>
+                <div class="conviction-bar"><div class="conviction-fill" style="width:75%"></div></div>
+                <div class="conviction-bar-label">CONVICTION — 75%</div>
+              </div>
             </div>
+
+            <div class="strategy-card">
+              <div class="strategy-icon-circle">
+                <span class="strategy-icon-letter">A</span>
+              </div>
+              <div class="strategy-card-info">
+                <div class="strategy-card-title">Aggressive</div>
+                <div class="strategy-card-desc">Fast mode — scalp on momentum signals</div>
+                <div class="conviction-bar"><div class="conviction-fill" style="width:55%"></div></div>
+                <div class="conviction-bar-label">CONVICTION — 55%</div>
+              </div>
+            </div>
+
           </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- SLIDE 5 — Comparison -->
+    <!-- ══════ SLIDE 5: Comparison ══════ -->
     <div class="slide-wrapper" data-slide="5">
       <span class="slide-label">Slide 5 — Comparison</span>
-      <div class="slide slide-5">
+      <div class="slide slide-teal slide-5">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="section-label">At a Glance</div>
-          <div class="section-title">Find Your Match</div>
+          <span class="slide-counter">05 / 06</span>
+          <div class="comparison-intro">Match to Your Style</div>
           <div class="comparison-table">
             <div class="table-header">
               <span>Mode</span>
@@ -234,74 +845,114 @@
               <span>Risk</span>
             </div>
             <div class="table-row">
-              <span class="setting-name">Conservative</span>
-              <span>Rare</span>
-              <span>Swing Trading</span>
-              <span>Low</span>
+              <span class="table-setting-name">Conservative</span>
+              <span class="table-metric">Rare</span>
+              <span class="table-metric">Swing Trading</span>
+              <span class="table-metric-num">Low</span>
             </div>
             <div class="table-row">
-              <span class="setting-name">Balanced</span>
-              <span>Moderate</span>
-              <span>Day Trading</span>
-              <span>Medium</span>
+              <span class="table-setting-name">Balanced</span>
+              <span class="table-metric">Moderate</span>
+              <span class="table-metric">Day Trading</span>
+              <span class="table-metric-num">Med</span>
             </div>
             <div class="table-row">
-              <span class="setting-name">Aggressive</span>
-              <span>Frequent</span>
-              <span>Scalping</span>
-              <span>High</span>
+              <span class="table-setting-name">Aggressive</span>
+              <span class="table-metric">Frequent</span>
+              <span class="table-metric">Scalping</span>
+              <span class="table-metric-num">High</span>
             </div>
           </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
 
-    <!-- SLIDE 6 — CTA -->
+    <!-- ══════ SLIDE 6: CTA ══════ -->
     <div class="slide-wrapper" data-slide="6">
       <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide slide-6">
+      <div class="slide slide-teal slide-6">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="../../assets/starfield.mp4" type="video/mp4">
+        </video>
         <div class="slide-content">
-          <div class="cta-label">Full Docs</div>
-          <div class="cta-title">Complete Guide</div>
-          <div class="cta-subtitle">Detailed setup for every trading style with real examples</div>
-          <div class="cta-button">
-            <div class="cta-button-label">Read the Docs</div>
-            <div class="cta-button-link">docs.signalpilot.io</div>
+          <span class="slide-counter">06 / 06</span>
+          <div class="stat-recap">
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">7</span>
+              </div>
+              <div class="stat-recap-label">Components</div>
+              <div class="stat-recap-val">VOTING</div>
+            </div>
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">3</span>
+              </div>
+              <div class="stat-recap-label">Modes</div>
+              <div class="stat-recap-val">READY</div>
+            </div>
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">∞</span>
+              </div>
+              <div class="stat-recap-label">Confidence</div>
+              <div class="stat-recap-val">GAINED</div>
+            </div>
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">📈</span>
+              </div>
+              <div class="stat-recap-label">Win Rate</div>
+              <div class="stat-recap-val">HIGHER</div>
+            </div>
           </div>
+          <div class="cta-glow">
+            <span class="cta-glow-icon">✓</span>
+          </div>
+          <h2 class="cta-tagline">Trade With <em>Confidence</em>.</h2>
+          <p class="cta-desc">Master consensus-based trading with full conviction. Stop losing money to conflicting signals.</p>
+          <div class="cta-pills">
+            <span class="cta-pill">Consensus Trading</span>
+            <span class="cta-pill">High Conviction</span>
+            <span class="cta-pill">Conflict Resolution</span>
+          </div>
+          <div class="cta-box">
+            <p class="cta-box-text">Explore all strategies</p>
+            <span class="cta-link">docs.signalpilot.io</span>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <div class="slide-logo">Signal Pilot</div>
       </div>
     </div>
+
   </div>
 
   <script>
     (function() {
-      const exportBtn = document.querySelector('button') || document.createElement('button');
+      const bgToggle = document.getElementById('bg-toggle');
+      const opacityControl = document.getElementById('opacity-control');
+      const exportBtn = document.getElementById('export-btn');
       const videos = document.querySelectorAll('.video-bg');
       const slideWrappers = document.querySelectorAll('.slide-wrapper');
       let exportMode = false;
       let currentSlide = 0;
 
-      if (!document.querySelector('button')) {
-        const controlDiv = document.createElement('div');
-        controlDiv.className = 'controls';
-        controlDiv.innerHTML = '<button id="export-btn">Export Mode</button>';
-        document.body.insertBefore(controlDiv, document.querySelector('.carousel-grid'));
-        exportBtn.id = 'export-btn';
-      }
-
-      document.getElementById('export-btn').addEventListener('click', function() {
+      bgToggle.addEventListener('change', function() {
+        videos.forEach(v => { v.style.display = this.value === 'video' ? 'block' : 'none'; });
+      });
+      opacityControl.addEventListener('change', function() {
+        videos.forEach(v => { v.style.opacity = this.value; });
+      });
+      exportBtn.addEventListener('click', function() {
         exportMode = !exportMode;
         document.body.classList.toggle('export-mode', exportMode);
         this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
         if (exportMode) { currentSlide = 0; updateActiveSlide(); }
       });
-
       function updateActiveSlide() {
         slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
       }
-
       document.addEventListener('keydown', function(e) {
         if (!exportMode) return;
         if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
