@@ -200,9 +200,12 @@ export default async function handler(req, res) {
       log(`📊 CATCH-UP: ${dailyCount}/${expectedCount} posted today — triggering another invocation`);
       try {
         const catchupUrl = `https://www.signalpilot.io/api/social/post-instagram/?catchup=true`;
-        fetch(catchupUrl, {
+        const catchupResponse = await fetch(catchupUrl, {
           headers: { 'Authorization': `Bearer ${process.env.CRON_SECRET}` },
-        }).catch(() => {}); // fire and forget
+        });
+        if (!catchupResponse.ok) {
+          log(`⚠ Catch-up trigger returned ${catchupResponse.status}: ${catchupResponse.statusText}`);
+        }
       } catch (e) {
         log(`⚠ Catch-up trigger failed: ${e.message}`);
       }
