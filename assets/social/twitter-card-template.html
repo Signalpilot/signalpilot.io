@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 675px;
+      overflow: hidden;
+      background: #0a0a0f;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top accent bar — pillar color */
+    .accent-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--pillar-color);
+      flex-shrink: 0;
+    }
+
+    /* Main content area */
+    .card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 80px 36px;
+      position: relative;
+    }
+
+    /* Subtle radial glow behind text */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 400px;
+      background: radial-gradient(ellipse, var(--pillar-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Type tag */
+    .type-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--pillar-color);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hook text */
+    .hook {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.35;
+      color: #ffffff;
+      max-width: 960px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Size variants based on text length */
+    .hook.size-xl { font-size: 52px; }
+    .hook.size-lg { font-size: 42px; }
+    .hook.size-md { font-size: 34px; }
+    .hook.size-sm { font-size: 28px; }
+    .hook.size-xs { font-size: 23px; }
+
+    /* Accent divider */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--pillar-color);
+      margin-top: 28px;
+      opacity: 0.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Watermark */
+    .watermark {
+      position: absolute;
+      bottom: 24px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.18);
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="accent-bar"></div>
+  <div class="card">
+    <div class="type-tag" id="typeTag"></div>
+    <div class="hook" id="hookText"></div>
+    <div class="divider"></div>
+    <div class="watermark">Signal Pilot</div>
+  </div>
+
+  <script>
+    // Injected by render script via page.evaluate()
+    function render(hookText, typeTag, pillarColor, pillarGlow, sizeClass) {
+      document.documentElement.style.setProperty('--pillar-color', pillarColor);
+      document.documentElement.style.setProperty('--pillar-glow', pillarGlow);
+      document.getElementById('typeTag').textContent = typeTag;
+      const hookEl = document.getElementById('hookText');
+      hookEl.className = 'hook ' + sizeClass;
+      hookEl.innerHTML = hookText;
+    }
+  </script>
+</body>
+</html>
