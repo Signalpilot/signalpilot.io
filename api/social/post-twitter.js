@@ -16,8 +16,8 @@ import {
   getExpectedDailyCount,
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber } from '../../lib/social/posting-schedule.js';
-import { postThread, postTweet } from '../../lib/social/twitter-client.js';
-import { readFileSync } from 'fs';
+import { uploadMedia, postThread, postTweet } from '../../lib/social/twitter-client.js';
+import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 let contentCache = null;
@@ -79,12 +79,33 @@ async function postOne(log, startTime) {
     return null;
   }
 
-  log(`📤 Posting ${tweets.length} tweet(s) for post ${postNumber}... (${Date.now() - startTime}ms elapsed)`);
+  // Upload twitter card image — required for every post
+  let mediaId = null;
+  const padded = String(postNumber).padStart(3, '0');
+  const cardPath = join(process.cwd(), 'assets', 'social', `post-${padded}`, 'twitter-card.png');
+  if (!existsSync(cardPath)) {
+    await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: `Twitter card missing: ${cardPath}` });
+    await incrementRetryCount('twitter', postOrder);
+    log(`✗ Post ${postNumber} has no twitter card image — blocking post`);
+    return null;
+  }
+  try {
+    const imageBuffer = readFileSync(cardPath);
+    mediaId = await uploadMedia(imageBuffer, 'image/png');
+    log(`🖼 Uploaded twitter card for post ${postNumber} (mediaId=${mediaId})`);
+  } catch (imgErr) {
+    await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: `Image upload failed: ${imgErr.message}` });
+    await incrementRetryCount('twitter', postOrder);
+    log(`✗ Image upload failed for post ${postNumber}: ${imgErr.message} — blocking post`);
+    return null;
+  }
+
+  log(`📤 Posting ${tweets.length} tweet(s) for post ${postNumber}${mediaId ? ' + image' : ''}... (${Date.now() - startTime}ms elapsed)`);
   let result;
   if (tweets.length === 1) {
-    result = await postTweet(tweets[0]);
+    result = await postTweet(tweets[0], mediaId);
   } else {
-    result = await postThread(tweets);
+    result = await postThread(tweets, mediaId);
   }
   log(`✅ Thread posted! url=${result.threadUrl || result.url} (${Date.now() - startTime}ms elapsed)`);
 
