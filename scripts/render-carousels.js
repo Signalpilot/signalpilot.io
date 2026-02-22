@@ -608,6 +608,84 @@ async function renderCarousel(page, postDir, postNumber) {
         width: 60px !important;
       }
 
+      /* ===== Signal card overrides (dense slides with 3+ cards) ===== */
+      .signal-card {
+        padding: clamp(6px, 1.2cqw, 12px) !important;
+        margin-bottom: 1% !important;
+      }
+      .signal-card .signal-icon {
+        width: clamp(24px, 4.5cqw, 38px) !important;
+        height: clamp(24px, 4.5cqw, 38px) !important;
+        font-size: clamp(10px, 2cqw, 16px) !important;
+        margin: 0 auto clamp(2px, 0.5cqw, 6px) !important;
+      }
+      .signal-card .signal-name {
+        font-size: clamp(12px, 2.5cqw, 18px) !important;
+        margin-bottom: 0.5% !important;
+      }
+      .signal-card .signal-full {
+        font-size: clamp(14px, 2.8cqw, 20px) !important;
+        margin-bottom: 1% !important;
+      }
+      .signal-card .signal-desc {
+        font-size: clamp(11px, 2.2cqw, 16px) !important;
+        line-height: 1.35 !important;
+      }
+      .signal-card .signal-detail {
+        font-size: clamp(8px, 1.6cqw, 12px) !important;
+        margin-top: 0.5% !important;
+      }
+
+      /* Feature-benefit overrides (dense benefit lists) */
+      .feature-benefit {
+        padding: clamp(5px, 1cqw, 10px) !important;
+        margin-bottom: 1.5% !important;
+        gap: clamp(5px, 1cqw, 8px) !important;
+      }
+      .feature-benefit .benefit-icon {
+        width: clamp(16px, 3cqw, 24px) !important;
+        height: clamp(16px, 3cqw, 24px) !important;
+        font-size: clamp(10px, 2cqw, 16px) !important;
+      }
+      .feature-benefit .benefit-title {
+        font-size: clamp(11px, 2.2cqw, 16px) !important;
+        margin-bottom: 0.5% !important;
+      }
+      .feature-benefit .benefit-desc {
+        font-size: clamp(10px, 1.8cqw, 14px) !important;
+        line-height: 1.3 !important;
+      }
+
+      /* Premium feature overrides */
+      .premium-feature {
+        padding: clamp(6px, 1.2cqw, 12px) !important;
+        margin-bottom: 1% !important;
+      }
+      .premium-feature .premium-feature-title {
+        font-size: clamp(10px, 2cqw, 14px) !important;
+      }
+      .premium-feature .premium-feature-desc {
+        font-size: clamp(9px, 1.8cqw, 13px) !important;
+        line-height: 1.3 !important;
+      }
+
+      /* Cycle row overrides */
+      .cycle-row {
+        padding: clamp(5px, 1cqw, 10px) clamp(8px, 1.6cqw, 16px) !important;
+        margin-bottom: clamp(3px, 0.6cqw, 6px) !important;
+      }
+      .cycle-row .cycle-label {
+        font-size: clamp(11px, 2.2cqw, 16px) !important;
+      }
+      .cycle-row .cycle-meaning {
+        font-size: clamp(11px, 2.2cqw, 16px) !important;
+      }
+
+      /* Feat cards (post-065 slide 6 pattern) */
+      .feat-card {
+        padding: clamp(6px, 1.2cqw, 12px) !important;
+      }
+
       /* ===== Post-specific custom class upscaling ===== */
 
       /* --- Answer cards (post-033 pattern) --- */
