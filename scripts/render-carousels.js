@@ -115,7 +115,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* Body text — boosted for Instagram readability */
       .slide-body, .text {
-        font-size: clamp(26px, 6.5cqw, 38px) !important;
+        font-size: clamp(30px, 7.5cqw, 44px) !important;
         line-height: 1.65 !important;
         max-width: 95% !important;
         text-align: center !important;
@@ -124,7 +124,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* Subtitles — boosted for Instagram readability */
       .slide-subtitle, .hook-sub {
-        font-size: clamp(28px, 6.5cqw, 40px) !important;
+        font-size: clamp(32px, 7.5cqw, 46px) !important;
         letter-spacing: 3px !important;
         text-align: center !important;
         color: rgba(255,255,255,0.88) !important;
@@ -132,12 +132,12 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* Paragraphs and lists inside slide-content */
       .slide-content p {
-        font-size: clamp(24px, 5.5cqw, 34px) !important;
+        font-size: clamp(28px, 6.5cqw, 40px) !important;
         text-align: center !important;
         color: rgba(255,255,255,0.85) !important;
       }
       .slide-content ul, .slide-content ol {
-        font-size: clamp(24px, 5.5cqw, 34px) !important;
+        font-size: clamp(28px, 6.5cqw, 40px) !important;
         max-width: 95% !important;
         color: rgba(255,255,255,0.85) !important;
       }
@@ -148,7 +148,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-weight: 700 !important;
       }
       .combo-desc {
-        font-size: clamp(22px, 5.5cqw, 32px) !important;
+        font-size: clamp(26px, 6.5cqw, 38px) !important;
         line-height: 1.5 !important;
         color: rgba(255,255,255,0.85) !important;
       }
@@ -170,7 +170,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-weight: 700 !important;
       }
       .divergence-desc {
-        font-size: clamp(18px, 5cqw, 28px) !important;
+        font-size: clamp(20px, 5.5cqw, 32px) !important;
       }
 
       /* Icons */
@@ -181,7 +181,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* Checklists */
       .checklist {
-        font-size: clamp(22px, 5.5cqw, 32px) !important;
+        font-size: clamp(26px, 6.5cqw, 38px) !important;
         line-height: 1.8 !important;
         text-align: left !important;
         max-width: 95% !important;
@@ -212,7 +212,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* Feature cards (grid items like "Wait for Confluence") */
       .feature-text {
-        font-size: clamp(20px, 5cqw, 30px) !important;
+        font-size: clamp(24px, 6cqw, 36px) !important;
         color: rgba(255,255,255,0.9) !important;
       }
       .feature-card {
@@ -305,7 +305,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-weight: 600 !important;
       }
       .callout-box .callout-text {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(26px, 6.5cqw, 40px) !important;
         line-height: 1.6 !important;
       }
 
@@ -322,7 +322,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-weight: 600 !important;
       }
       .concept-card .card-desc {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(26px, 6.5cqw, 40px) !important;
         line-height: 1.5 !important;
       }
 
@@ -361,7 +361,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-weight: 600 !important;
       }
       .step-text {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(26px, 6.5cqw, 40px) !important;
         line-height: 1.5 !important;
       }
 
@@ -382,7 +382,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(16px, 4cqw, 24px) !important;
       }
       .compare-item .compare-text {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(26px, 6.5cqw, 40px) !important;
         line-height: 1.5 !important;
       }
 
@@ -415,7 +415,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .def-text {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.45 !important;
       }
 
@@ -424,7 +424,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .factor-card .fc-desc {
-        font-size: clamp(16px, 4cqw, 22px) !important;
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
         line-height: 1.45 !important;
       }
       .factor-card .fc-tag {
@@ -448,7 +448,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(22px, 5.5cqw, 32px) !important;
       }
       .compare-card .cc-desc {
-        font-size: clamp(16px, 4cqw, 24px) !important;
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
         line-height: 1.5 !important;
       }
 
@@ -457,7 +457,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(20px, 5cqw, 28px) !important;
       }
       .truth-card .tc-desc {
-        font-size: clamp(16px, 4cqw, 22px) !important;
+        font-size: clamp(18px, 4.5cqw, 26px) !important;
         line-height: 1.45 !important;
       }
       .truth-quote {
@@ -496,7 +496,7 @@ async function renderCarousel(page, postDir, postNumber) {
         letter-spacing: 2px !important;
       }
       .warn-text, .alert-text, .insight-text {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
 
@@ -513,7 +513,7 @@ async function renderCarousel(page, postDir, postNumber) {
         color: rgba(94,234,212,0.9) !important;
       }
       .info-text {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
         color: var(--txt) !important;
       }
@@ -533,7 +533,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* --- CTA slide elements --- */
       .cta-sub {
-        font-size: clamp(22px, 5.5cqw, 32px) !important;
+        font-size: clamp(26px, 6.5cqw, 38px) !important;
         line-height: 1.5 !important;
       }
       .stat-cell .sv {
@@ -697,7 +697,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(28px, 7cqw, 42px) !important;
       }
       .answer-desc {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
 
@@ -709,7 +709,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(20px, 5cqw, 30px) !important;
       }
       .risk-desc {
-        font-size: clamp(16px, 4cqw, 24px) !important;
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
         line-height: 1.5 !important;
       }
       .risk-label {
@@ -726,7 +726,7 @@ async function renderCarousel(page, postDir, postNumber) {
         letter-spacing: 2px !important;
       }
       .scenario-desc {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
         color: var(--txt2) !important;
       }
@@ -738,7 +738,7 @@ async function renderCarousel(page, postDir, postNumber) {
         padding: clamp(4px, 0.8cqw, 7px) clamp(8px, 1.6cqw, 14px) !important;
       }
       .scenario-insight-text {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
 
@@ -747,7 +747,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(18px, 4.5cqw, 26px) !important;
       }
       .excuse-text {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
       }
       .excuse-item {
         padding: clamp(12px, 2.5cqw, 20px) !important;
@@ -792,11 +792,11 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(14px, 3.5cqw, 20px) !important;
       }
       .zone-desc {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
       .zone-insight {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
       .zone-badge {
@@ -819,14 +819,14 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* --- Indicator cards (post-040/045/050/055 patterns) --- */
       .indicator-desc {
-        font-size: clamp(16px, 4cqw, 24px) !important;
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
         line-height: 1.5 !important;
       }
       .indicator-codename {
         font-size: clamp(12px, 3cqw, 18px) !important;
       }
       .section-sub {
-        font-size: clamp(22px, 5.5cqw, 34px) !important;
+        font-size: clamp(26px, 6.5cqw, 40px) !important;
         line-height: 1.5 !important;
       }
       .truth-card-title {
@@ -868,7 +868,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(14px, 3.5cqw, 20px) !important;
       }
       .winrate-insight {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
       .winrate-insight em {
@@ -941,7 +941,7 @@ async function renderCarousel(page, postDir, postNumber) {
         letter-spacing: 2px !important;
       }
       .align-desc {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
 
@@ -951,7 +951,7 @@ async function renderCarousel(page, postDir, postNumber) {
         line-height: 1.4 !important;
       }
       .phil-desc {
-        font-size: clamp(20px, 5cqw, 30px) !important;
+        font-size: clamp(24px, 6cqw, 36px) !important;
         line-height: 1.5 !important;
       }
 
@@ -967,7 +967,7 @@ async function renderCarousel(page, postDir, postNumber) {
         letter-spacing: 2px !important;
       }
       .truth-box .tb-text {
-        font-size: clamp(20px, 5cqw, 30px) !important;
+        font-size: clamp(24px, 6cqw, 36px) !important;
         line-height: 1.5 !important;
       }
 
@@ -981,7 +981,7 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* --- Concept description (post-047 pattern) --- */
       .cd-main {
-        font-size: clamp(20px, 5cqw, 30px) !important;
+        font-size: clamp(24px, 6cqw, 36px) !important;
         line-height: 1.5 !important;
       }
       .cd-note {
@@ -1012,13 +1012,13 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(28px, 7cqw, 42px) !important;
       }
       .zone-card .zc-desc {
-        font-size: clamp(18px, 4.5cqw, 26px) !important;
+        font-size: clamp(20px, 5cqw, 30px) !important;
         line-height: 1.5 !important;
       }
 
       /* --- Stop loss elements (post-046 pattern) --- */
       .stop-desc {
-        font-size: clamp(20px, 5cqw, 30px) !important;
+        font-size: clamp(24px, 6cqw, 36px) !important;
         line-height: 1.5 !important;
       }
       .stop-detail {
@@ -1094,7 +1094,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(12px, 3cqw, 18px) !important;
       }
       .sr-zone-desc {
-        font-size: clamp(16px, 4cqw, 24px) !important;
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
       }
       .sr-zone-arrows {
         font-size: clamp(24px, 6cqw, 36px) !important;
@@ -1114,7 +1114,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(12px, 3cqw, 18px) !important;
       }
       .fail-verdict-text {
-        font-size: clamp(16px, 4cqw, 24px) !important;
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
       }
       .fail-verdict-icon {
         font-size: clamp(28px, 7cqw, 42px) !important;
@@ -1129,7 +1129,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(16px, 4cqw, 24px) !important;
       }
       .fail-tl-text {
-        font-size: clamp(16px, 4cqw, 24px) !important;
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
       }
       .fail-tl-dot {
         width: clamp(16px, 3cqw, 24px) !important;
@@ -1147,7 +1147,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(24px, 6cqw, 36px) !important;
       }
       .cross-meaning-text {
-        font-size: clamp(16px, 4cqw, 24px) !important;
+        font-size: clamp(18px, 4.5cqw, 28px) !important;
       }
 
       /* --- Lag Timeline (post-059 pattern) --- */
@@ -1247,7 +1247,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(16px, 4cqw, 24px) !important;
       }
       .pillar-desc, .vision-desc {
-        font-size: clamp(13px, 3.2cqw, 18px) !important;
+        font-size: clamp(15px, 3.7cqw, 21px) !important;
         line-height: 1.4 !important;
       }
       .pillar-label, .vision-label {
@@ -1270,7 +1270,7 @@ async function renderCarousel(page, postDir, postNumber) {
         font-size: clamp(16px, 4cqw, 24px) !important;
       }
       .dive-desc, .power-desc {
-        font-size: clamp(13px, 3.2cqw, 18px) !important;
+        font-size: clamp(15px, 3.7cqw, 21px) !important;
         line-height: 1.35 !important;
       }
       .dive-label, .power-label {
