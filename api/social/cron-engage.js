@@ -1,19 +1,24 @@
 // POST /api/social/cron-engage
-// Automated engagement trigger (should be called via Vercel cron)
-// Runs engagement actions based on config
+// Automated engagement: likes, comments, replies
+// Runs every 4 hours via Vercel cron
 
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import {
   getEngagementCount,
   logEngagement,
+  markEngaged,
+  isEngaged,
+  incrementEngagementCounter,
 } from '../../lib/social/queue-manager.js';
 import {
   likePost,
+  commentOnPost,
   getAccountPosts,
 } from '../../lib/social/instagram-client.js';
 import {
   likeTweet,
+  replyToTweet,
   searchTweets,
 } from '../../lib/social/twitter-client.js';
 
@@ -28,16 +33,10 @@ function loadConfig() {
   }
 }
 
-/**
- * Pick random item from array
- */
 function randomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-/**
- * Check if current time is within active hours
- */
 function isActiveHour(config) {
   if (!config.scheduling?.activeHours) return true;
   const now = new Date();
@@ -49,7 +48,6 @@ export default async function handler(req, res) {
   try {
     const { token } = req.query;
 
-    // Verify token (can be from CRON_SECRET or ROBOT_TOKEN)
     const validToken = token === process.env.ROBOT_TOKEN ||
                        token === process.env.CRON_SECRET;
 
@@ -82,7 +80,6 @@ export default async function handler(req, res) {
       timestamp: new Date().toISOString(),
     };
 
-    // Handle Instagram engagement
     if (config.instagram?.enabled) {
       try {
         const igResult = await handleInstagramEngagement(config);
@@ -98,7 +95,6 @@ export default async function handler(req, res) {
       }
     }
 
-    // Handle Twitter engagement
     if (config.twitter?.enabled) {
       try {
         const twResult = await handleTwitterEngagement(config);
@@ -124,31 +120,33 @@ export default async function handler(req, res) {
   }
 }
 
-/**
- * Handle Instagram engagement via cron
- */
 async function handleInstagramEngagement(config) {
   const likeCount = await getEngagementCount('instagram', 'like');
+  const commentCount = await getEngagementCount('instagram', 'comment');
 
-  if (likeCount >= config.instagram.likeDaily) {
-    return {
-      action: 'like',
-      status: 'skipped',
-      reason: 'Daily limit reached',
-      currentCount: likeCount,
-      limit: config.instagram.likeDaily,
-    };
-  }
-
-  // Pick a random target (account or hashtag)
   const targets = config.instagram.targets || [];
   if (targets.length === 0) {
     return {
-      action: 'like',
       status: 'skipped',
       reason: 'No targets configured',
     };
   }
+
+  // Decide action: like or comment
+  const canLike = likeCount < config.instagram.likeDaily;
+  const canComment = commentCount < config.instagram.commentDaily;
+
+  if (!canLike && !canComment) {
+    return {
+      status: 'skipped',
+      reason: 'Daily limits reached',
+      likes: { count: likeCount, limit: config.instagram.likeDaily },
+      comments: { count: commentCount, limit: config.instagram.commentDaily },
+    };
+  }
+
+  // Randomly pick action (80% likes, 20% comments)
+  const action = (!canComment || (canLike && Math.random() < 0.8)) ? 'like' : 'comment';
 
   const target = randomItem(targets);
   let posts = [];
@@ -157,18 +155,16 @@ async function handleInstagramEngagement(config) {
     if (target.type === 'account') {
       const result = await getAccountPosts(target.value, 5);
       posts = result.posts || [];
-    } else if (target.type === 'hashtag') {
-      // For hashtags, would need to use searchPostsByHashtag
-      // For now, skip hashtags in cron (less reliable)
+    } else {
       return {
-        action: 'like',
+        action,
         status: 'skipped',
-        reason: 'Hashtag engagement not yet supported in cron',
+        reason: 'Hashtag engagement not supported in cron',
       };
     }
   } catch (error) {
     return {
-      action: 'like',
+      action,
       status: 'error',
       error: error.message,
     };
@@ -176,38 +172,82 @@ async function handleInstagramEngagement(config) {
 
   if (!posts || posts.length === 0) {
     return {
-      action: 'like',
+      action,
       status: 'skipped',
-      reason: `No posts found for ${target.type}: ${target.value}`,
+      reason: `No posts found for ${target.value}`,
     };
   }
 
-  // Like a random post from the selection
-  const post = randomItem(posts);
-  try {
-    await likePost(post.id);
+  // Filter unengaged posts
+  const unengagedPosts = [];
+  for (const post of posts) {
+    const engaged = await isEngaged('instagram', post.id, action);
+    if (!engaged) {
+      unengagedPosts.push(post);
+    }
+  }
 
-    await logEngagement({
-      platform: 'instagram',
-      action: 'like',
-      target: target.value,
-      mediaId: post.id,
-      caption: post.caption?.substring(0, 100),
-      triggerType: 'cron',
-    });
-
+  if (unengagedPosts.length === 0) {
     return {
-      action: 'like',
-      status: 'success',
-      target: target.value,
-      mediaId: post.id,
-      caption: post.caption,
-      newCount: likeCount + 1,
-      limit: config.instagram.likeDaily,
+      action,
+      status: 'skipped',
+      reason: `All posts from ${target.value} already engaged`,
     };
+  }
+
+  const post = randomItem(unengagedPosts);
+
+  try {
+    if (action === 'like') {
+      await likePost(post.id);
+      await markEngaged('instagram', post.id, 'like');
+      await incrementEngagementCounter('instagram', 'like');
+
+      await logEngagement({
+        platform: 'instagram',
+        action: 'like',
+        target: target.value,
+        mediaId: post.id,
+        triggerType: 'cron',
+      });
+
+      return {
+        action: 'like',
+        status: 'success',
+        target: target.value,
+        mediaId: post.id,
+        count: likeCount + 1,
+        limit: config.instagram.likeDaily,
+      };
+    } else {
+      // Comment
+      const template = randomItem(config.instagram.commentTemplates);
+      await commentOnPost(post.id, template);
+      await markEngaged('instagram', post.id, 'comment');
+      await incrementEngagementCounter('instagram', 'comment');
+
+      await logEngagement({
+        platform: 'instagram',
+        action: 'comment',
+        target: target.value,
+        mediaId: post.id,
+        text: template,
+        triggerType: 'cron',
+      });
+
+      return {
+        action: 'comment',
+        status: 'success',
+        target: target.value,
+        mediaId: post.id,
+        text: template,
+        count: commentCount + 1,
+        limit: config.instagram.commentDaily,
+      };
+    }
   } catch (error) {
     return {
-      action: 'like',
+      action,
       status: 'error',
       target: target.value,
       error: error.message,
@@ -215,31 +255,33 @@ async function handleInstagramEngagement(config) {
   }
 }
 
-/**
- * Handle Twitter engagement via cron
- */
 async function handleTwitterEngagement(config) {
   const likeCount = await getEngagementCount('twitter', 'like');
+  const replyCount = await getEngagementCount('twitter', 'reply');
 
-  if (likeCount >= config.twitter.likeDaily) {
-    return {
-      action: 'like',
-      status: 'skipped',
-      reason: 'Daily limit reached',
-      currentCount: likeCount,
-      limit: config.twitter.likeDaily,
-    };
-  }
-
-  // Pick a random search query
   const queries = config.twitter.searchQueries || [];
   if (queries.length === 0) {
     return {
-      action: 'like',
       status: 'skipped',
       reason: 'No search queries configured',
     };
   }
+
+  // Decide action: like or reply
+  const canLike = likeCount < config.twitter.likeDaily;
+  const canReply = replyCount < config.twitter.replyDaily;
+
+  if (!canLike && !canReply) {
+    return {
+      status: 'skipped',
+      reason: 'Daily limits reached',
+      likes: { count: likeCount, limit: config.twitter.likeDaily },
+      replies: { count: replyCount, limit: config.twitter.replyDaily },
+    };
+  }
+
+  // Randomly pick action (80% likes, 20% replies)
+  const action = (!canReply || (canLike && Math.random() < 0.8)) ? 'like' : 'reply';
 
   const query = randomItem(queries);
   let tweets = [];
@@ -249,7 +291,7 @@ async function handleTwitterEngagement(config) {
     tweets = result.tweets || [];
   } catch (error) {
     return {
-      action: 'like',
+      action,
       status: 'error',
       query,
       error: error.message,
@@ -258,41 +300,86 @@ async function handleTwitterEngagement(config) {
 
   if (!tweets || tweets.length === 0) {
     return {
-      action: 'like',
+      action,
       status: 'skipped',
       reason: `No tweets found for query: ${query}`,
     };
   }
 
-  // Like a random tweet from the selection
-  const tweet = randomItem(tweets);
-  try {
-    await likeTweet(tweet.id);
+  // Filter unengaged tweets
+  const unengagedTweets = [];
+  for (const tweet of tweets) {
+    const engaged = await isEngaged('twitter', tweet.id, action);
+    if (!engaged) {
+      unengagedTweets.push(tweet);
+    }
+  }
 
-    await logEngagement({
-      platform: 'twitter',
-      action: 'like',
-      query,
-      tweetId: tweet.id,
-      author: tweet.author_username,
-      text: tweet.text.substring(0, 100),
-      triggerType: 'cron',
-    });
-
+  if (unengagedTweets.length === 0) {
     return {
-      action: 'like',
-      status: 'success',
-      query,
-      tweetId: tweet.id,
-      author: tweet.author_username,
-      text: tweet.text,
-      newCount: likeCount + 1,
-      limit: config.twitter.likeDaily,
-      url: `https://x.com/${tweet.author_username}/status/${tweet.id}`,
+      action,
+      status: 'skipped',
+      reason: `All tweets from query already engaged`,
     };
+  }
+
+  const tweet = randomItem(unengagedTweets);
+
+  try {
+    if (action === 'like') {
+      await likeTweet(tweet.id);
+      await markEngaged('twitter', tweet.id, 'like');
+      await incrementEngagementCounter('twitter', 'like');
+
+      await logEngagement({
+        platform: 'twitter',
+        action: 'like',
+        query,
+        tweetId: tweet.id,
+        author: tweet.author_username,
+        triggerType: 'cron',
+      });
+
+      return {
+        action: 'like',
+        status: 'success',
+        query,
+        tweetId: tweet.id,
+        author: tweet.author_username,
+        count: likeCount + 1,
+        limit: config.twitter.likeDaily,
+      };
+    } else {
+      // Reply
+      const template = randomItem(config.twitter.replyTemplates);
+      await replyToTweet(tweet.id, template);
+      await markEngaged('twitter', tweet.id, 'reply');
+      await incrementEngagementCounter('twitter', 'reply');
+
+      await logEngagement({
+        platform: 'twitter',
+        action: 'reply',
+        query,
+        tweetId: tweet.id,
+        author: tweet.author_username,
+        text: template,
+        triggerType: 'cron',
+      });
+
+      return {
+        action: 'reply',
+        status: 'success',
+        query,
+        tweetId: tweet.id,
+        author: tweet.author_username,
+        text: template,
+        count: replyCount + 1,
+        limit: config.twitter.replyDaily,
+      };
+    }
   } catch (error) {
     return {
-      action: 'like',
+      action,
       status: 'error',
       query,
       error: error.message,
