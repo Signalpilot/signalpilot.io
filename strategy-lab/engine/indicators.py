@@ -269,3 +269,32 @@ def pivotlow(low: pd.Series, left: int, right: int) -> pd.Series:
         if left_ok and right_ok:
             result.iloc[i + right] = pivot
     return result
+
+
+# ─── Volume ────────────────────────────────────────────────────────────
+
+def obv(close: pd.Series, volume: pd.Series) -> pd.Series:
+    """On Balance Volume."""
+    direction = close.diff().apply(lambda x: 1 if x > 0 else (-1 if x < 0 else 0))
+    return (volume * direction).cumsum()
+
+
+# ─── Stochastic RSI ───────────────────────────────────────────────────
+
+def stoch_rsi(series: pd.Series, rsi_period: int = 14, stoch_period: int = 14,
+              k_smooth: int = 3, d_smooth: int = 3) -> tuple[pd.Series, pd.Series]:
+    """Stochastic RSI. Returns (%K, %D)."""
+    rsi_val = rsi(series, rsi_period)
+    lowest_rsi = rsi_val.rolling(window=stoch_period).min()
+    highest_rsi = rsi_val.rolling(window=stoch_period).max()
+    denom = (highest_rsi - lowest_rsi).replace(0, np.nan)
+    stoch_raw = 100 * (rsi_val - lowest_rsi) / denom
+    k = sma(stoch_raw, k_smooth)
+    d = sma(k, d_smooth)
+    return k, d
+
+
+def momentum(series: pd.Series, period: int = 10) -> pd.Series:
+    """Momentum (rate of change as percentage)."""
+    shifted = series.shift(period).replace(0, np.nan)
+    return (series / shifted) * 100 - 100
