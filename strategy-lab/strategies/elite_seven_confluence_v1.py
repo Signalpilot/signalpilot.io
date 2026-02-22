@@ -85,12 +85,12 @@ class EliteSevenConfluenceV1:
 
         # Stochastic(14) for momentum
         stoch_k, stoch_d = stochastic(high, low, close, 14, 3)
-        stoch_k_smooth = sma(stoch_k, 3)
-        stoch_rising = stoch_k_smooth > stoch_k_smooth.shift(1)
+        stoch_rising = (stoch_d > stoch_d.shift(1)).fillna(False)
+        stoch_falling = (stoch_d < stoch_d.shift(1)).fillna(False)
 
         signal = pd.Series(0, index=df.index)
         signal[regime_bull & stoch_rising] = 1
-        signal[regime_bear & ~stoch_rising] = -1
+        signal[regime_bear & stoch_falling] = -1
         return signal
 
     # ─────────────────────────────────────────────────────────────────────
@@ -107,9 +107,6 @@ class EliteSevenConfluenceV1:
         close = df["Close"]
         high = df["High"]
         low = df["Low"]
-
-        conf_bull = 0.0
-        conf_bear = 0.0
 
         # --- SuperTrend Consensus (WT=1.0): 2/3/4 ATR, 2-of-3 vote ---
         _, dir2 = supertrend(high, low, close, 10, 2.0)
@@ -183,12 +180,12 @@ class EliteSevenConfluenceV1:
         # 9-count = potential reversal
         td9_bull = (buy_setup >= 9).astype(float) * 1.5    # oversold → bullish
         td9_bear = (sell_setup >= 9).astype(float) * 1.5   # overbought → bearish
-        td8_bull = ((buy_setup == 8) & (buy_setup < 9)).astype(float) * 1.0
-        td8_bear = ((sell_setup == 8) & (sell_setup < 9)).astype(float) * 1.0
+        td8_bull = (buy_setup == 8).astype(float) * 1.0
+        td8_bear = (sell_setup == 8).astype(float) * 1.0
 
         # --- Squeeze Break (WT=1.5) ---
         sq_on, sq_mom = squeeze(high, low, close)
-        sq_releasing = sq_on.shift(1).fillna(False) & ~sq_on
+        sq_releasing = sq_on.shift(1).fillna(False).astype(bool) & ~sq_on
         sqz_bull = (sq_releasing & (sq_mom > 0)).astype(float) * 1.5
         sqz_bear = (sq_releasing & (sq_mom < 0)).astype(float) * 1.5
 
@@ -319,10 +316,6 @@ class EliteSevenConfluenceV1:
         signal[bull_sig] = 1
         signal[bear_sig] = -1
 
-        # Fallback: use regime alone as softer signal when no vol spike
-        signal[(signal == 0) & accumulation & trend_bull_soft & bull_flow_ok] = 1
-        signal[(signal == 0) & distribution & trend_bear_soft & bear_flow_ok] = -1
-
         return signal
 
     # ─────────────────────────────────────────────────────────────────────
@@ -375,17 +368,8 @@ class EliteSevenConfluenceV1:
                     signal.iloc[i] = -1
                     last_cross_dn_bar = i
 
-        # Fill between signals with bias from Z-score
-        signal_filled = pd.Series(0, index=df.index)
-        obv_above = obv_clipped > basis
-        z_positive = z_score > 0
-        signal_filled[obv_above & z_positive] = 1
-        signal_filled[~obv_above & ~z_positive] = -1
-
-        # Use cross signals where they fire, otherwise use bias
-        result = signal_filled.copy()
-        result[signal == 1] = 1
-        result[signal == -1] = -1
+        # Forward-fill: hold last cross direction until next cross (Pine Script behavior)
+        result = signal.replace(0, np.nan).ffill().fillna(0).astype(int)
 
         return result
 
@@ -521,17 +505,18 @@ class EliteSevenConfluenceV1:
         score_bear += (~extension).astype(float) * 10
         score_bear += ((minus_di > plus_di) & (adx_val > 15)).astype(float) * 15
 
-        # Hard filter gates (ALL must pass)
+        # Hard filter gates: trigger + key directional filters
+        # vol_spike and hist_rising/hist_falling kept as scoring factors only
+        # (hist_rising is tautological with hist_cross_up; vol_spike is too
+        #  restrictive as a hard gate since it rarely coincides with crossover)
         bull_gate = (
             hist_cross_up &
             trend_bull &
             ema200_bull &
             (adx_val >= 20) &
-            vol_spike &
             rsi_ok_bull &
             ~extension &
             mom_bull &
-            hist_rising &
             (score_bull >= 70)
         )
 
@@ -540,11 +525,9 @@ class EliteSevenConfluenceV1:
             trend_bear &
             ema200_bear &
             (adx_val >= 20) &
-            vol_spike &
             rsi_ok_bear &
             ~extension &
             mom_bear &
-            hist_falling &
             (score_bear >= 70)
         )
 
@@ -587,7 +570,7 @@ class EliteSevenConfluenceV1:
         hh_r = rsi_raw.rolling(14).max()
         denom = (hh_r - ll_r).replace(0, np.nan)
         k_raw = 100.0 * (rsi_raw - ll_r) / denom
-        k_sm = ema(k_raw.fillna(50), 3)
+        k_sm = ema(k_raw, 3)
         d_sm = ema(k_sm, 3)
         k_slope = ema(k_sm - k_sm.shift(1), 3)
         srsi_bull = ((k_sm > d_sm) & (k_slope > 0)) | ((k_sm < 30) & (k_slope > 0))
@@ -633,7 +616,7 @@ class EliteSevenConfluenceV1:
         rsi_n = robust_normalize(rsi_b, 200, 3.0)
         srsi_n = robust_normalize(k_sm, 200, 3.0)
         comp_raw = (rsi_n + srsi_n + macd_n) / 3.0
-        comp = ema(comp_raw.fillna(50), 7)
+        comp = ema(comp_raw, 7)
         comp_s = ema(comp, 3)
 
         # Signal: 5+ votes = strong, OR composite crossover
