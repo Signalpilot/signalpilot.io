@@ -1,9 +1,56 @@
 // POST /api/social/refresh-ig-token
 // Cron-triggered: Refreshes the Instagram/Facebook long-lived access token
-// Schedule: "0 6 * * 0" (Sundays at 6AM UTC)
+// Schedule: "0 3 * * *" (Daily at 3AM UTC)
+// Automatically updates Vercel environment variable with new token (if VERCEL_TOKEN configured)
 
 import { refreshLongLivedToken, verifyToken } from '../../lib/social/instagram-client.js';
 import { logPosting, logError, setTokenExpiresAt } from '../../lib/social/queue-manager.js';
+
+/**
+ * Update INSTAGRAM_ACCESS_TOKEN in Vercel environment variables
+ * Requires VERCEL_TOKEN, VERCEL_PROJECT_ID environment variables
+ */
+async function updateVercelEnvVar(newToken) {
+  const vercelToken = process.env.VERCEL_TOKEN;
+  const projectId = process.env.VERCEL_PROJECT_ID;
+  const teamId = process.env.VERCEL_TEAM_ID;
+
+  if (!vercelToken || !projectId) {
+    console.warn('⚠️ Vercel API credentials not configured (VERCEL_TOKEN, VERCEL_PROJECT_ID)');
+    return { success: false, reason: 'Vercel credentials missing' };
+  }
+
+  try {
+    const url = new URL('https://api.vercel.com/v10/projects/' + projectId + '/env');
+    if (teamId) url.searchParams.set('teamId', teamId);
+
+    // Create new env var or update existing
+    const response = await fetch(url.toString(), {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${vercelToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        key: 'INSTAGRAM_ACCESS_TOKEN',
+        value: newToken,
+        target: ['production', 'preview', 'development'],
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error('Vercel API error:', error);
+      return { success: false, reason: error.error?.message || 'Vercel API failed' };
+    }
+
+    console.log('✅ INSTAGRAM_ACCESS_TOKEN updated in Vercel');
+    return { success: true };
+  } catch (err) {
+    console.error('Failed to update Vercel env var:', err.message);
+    return { success: false, reason: err.message };
+  }
+}
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-cache');
@@ -37,22 +84,30 @@ export default async function handler(req, res) {
     // Store token expiration time for monitoring
     await setTokenExpiresAt(expiresAtIso);
 
+    // Attempt to automatically update Vercel environment variable
+    const updateResult = await updateVercelEnvVar(result.access_token);
+    let message = 'Token refreshed successfully';
+    if (updateResult.success) {
+      message = '✅ Token refreshed and auto-updated in Vercel';
+    } else {
+      message = `⚠️ Token refreshed but Vercel auto-update failed: ${updateResult.reason}. Manual update may be needed.`;
+    }
+
     // Log success
     await logPosting({
       platform: 'instagram',
       action: 'token_refresh',
       expiresIn: result.expires_in,
       expiresAt: expiresAtIso,
-      reason: 'Token refreshed successfully',
+      autoUpdateSuccess: updateResult.success,
+      reason: message,
     });
 
-    // Note: The new token needs to be manually updated in Vercel env vars
-    // The refresh extends the token for another 60 days
     return res.status(200).json({
       success: true,
-      message: 'Token refreshed. Update INSTAGRAM_ACCESS_TOKEN in Vercel env vars with the new token.',
+      message,
+      vercelAutoUpdateSuccess: updateResult.success,
       tokenType: result.token_type,
-      newToken: result.access_token,
       expiresInDays: Math.round(result.expires_in / 86400),
       expiresAt: expiresAtIso,
       currentTokenInfo: tokenInfo,

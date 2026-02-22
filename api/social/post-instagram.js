@@ -28,7 +28,7 @@ import {
   getExpectedDailyCount,
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber, getInstagramColumn } from '../../lib/social/posting-schedule.js';
-import { postCarousel, verifyToken } from '../../lib/social/instagram-client.js';
+import { postCarousel, verifyToken, refreshLongLivedToken } from '../../lib/social/instagram-client.js';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
@@ -40,6 +40,39 @@ function loadContent() {
     contentCache = JSON.parse(readFileSync(filePath, 'utf-8'));
   }
   return contentCache;
+}
+
+/**
+ * Attempt to auto-refresh the Instagram token on auth failure
+ * This prevents queue pause when token expires
+ */
+async function attemptAutoTokenRefresh(log) {
+  try {
+    log(`🔄 Attempting auto-refresh of Instagram token...`);
+    const result = await refreshLongLivedToken();
+
+    // Attempt to update Vercel env var via refresh endpoint
+    try {
+      const refreshUrl = `https://www.signalpilot.io/api/social/refresh-ig-token/?token=${process.env.SOCIAL_ADMIN_TOKEN}`;
+      const refreshResponse = await fetch(refreshUrl);
+      const refreshData = await refreshResponse.json();
+
+      if (refreshData.success || refreshData.vercelAutoUpdateSuccess) {
+        log(`✅ Token auto-refreshed and updated in environment`);
+        return true;
+      } else {
+        log(`⚠️ Token refreshed but may need manual Vercel update: ${refreshData.message}`);
+        // Token is still refreshed on Instagram's side, posting might work
+        return true;
+      }
+    } catch (updateErr) {
+      log(`⚠️ Token auto-refresh succeeded but environment update failed: ${updateErr.message}`);
+      return true; // Token is still refreshed
+    }
+  } catch (err) {
+    log(`✗ Token auto-refresh failed: ${err.message}`);
+    return false;
+  }
 }
 
 export default async function handler(req, res) {
@@ -240,12 +273,33 @@ export default async function handler(req, res) {
       log(`Error details: postOrder=${postOrder}, retryCount=${retryCount}, isAuthError=${isAuthError}`);
 
       if (isAuthError) {
-        const strikes = await incrementAuthStrikes('instagram');
-        log(`Auth strike ${strikes}/${AUTH_STRIKES_BEFORE_PAUSE} (from actual posting failure)`);
+        log(`🔐 Auth error detected — attempting auto-refresh before pausing...`);
+        const refreshSuccess = await attemptAutoTokenRefresh(log);
 
-        if (strikes >= AUTH_STRIKES_BEFORE_PAUSE) {
-          await setPlatformPaused('instagram', true);
-          log(`⛔ ${strikes} consecutive posting auth failures — Instagram paused (will auto-retry next cron)`);
+        if (refreshSuccess) {
+          // Token was refreshed; clear strikes and let next cron retry
+          await clearAuthStrikes('instagram');
+          log(`✅ Auth recovered via auto-refresh — queue ready for next invocation`);
+          await logError({
+            platform: 'instagram',
+            postOrder,
+            action: 'auth_recovered_by_refresh',
+            reason: 'Token auto-refreshed, will retry next cron',
+          });
+          return res.status(200).json({
+            success: true,
+            skipped: true,
+            reason: 'Auth token refreshed — will retry on next cron',
+          });
+        } else {
+          // Auto-refresh failed; apply auth strikes
+          const strikes = await incrementAuthStrikes('instagram');
+          log(`Auth strike ${strikes}/${AUTH_STRIKES_BEFORE_PAUSE} (auto-refresh failed)`);
+
+          if (strikes >= AUTH_STRIKES_BEFORE_PAUSE) {
+            await setPlatformPaused('instagram', true);
+            log(`⛔ ${strikes} consecutive auth failures and refresh failed — Instagram paused`);
+          }
         }
       }
 
