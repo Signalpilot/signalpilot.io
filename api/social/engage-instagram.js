@@ -2,6 +2,8 @@
 // Engagement endpoint for Instagram auto-like/comment actions
 // Actions: like, comment on posts from target accounts/hashtags
 
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import {
   markEngaged,
   isEngaged,
@@ -16,8 +18,15 @@ import {
   commentOnPost,
 } from '../../lib/social/instagram-client.js';
 
-const DAILY_LIKE_LIMIT = 50;
-const DAILY_COMMENT_LIMIT = 10;
+function loadConfig() {
+  try {
+    const configPath = join(process.cwd(), 'data', 'social', 'engagement-config.json');
+    return JSON.parse(readFileSync(configPath, 'utf-8'));
+  } catch (error) {
+    console.error('Failed to load engagement config:', error);
+    return { instagram: { likeDaily: 30, commentDaily: 5 } };
+  }
+}
 
 /**
  * Engage on Instagram (like/comment)
@@ -35,6 +44,7 @@ export default async function handler(req, res) {
 
   try {
     const { action, target, mediaId, text, token } = req.query;
+    const config = loadConfig();
 
     // Verify token
     if (token !== process.env.ROBOT_TOKEN) {
@@ -47,9 +57,9 @@ export default async function handler(req, res) {
     }
 
     if (action === 'like') {
-      return await handleLike(target, res);
+      return await handleLike(target, res, config);
     } else if (action === 'comment') {
-      return await handleComment(mediaId, text, res);
+      return await handleComment(mediaId, text, res, config);
     }
   } catch (error) {
     console.error('Instagram engagement error:', error);
@@ -66,10 +76,12 @@ export default async function handler(req, res) {
  * Handle like action
  * Target: 'username' or 'hashtag:HASHTAG'
  */
-async function handleLike(target, res) {
+async function handleLike(target, res, config) {
   if (!target) {
     return res.status(400).json({ error: 'target required for like action' });
   }
+
+  const DAILY_LIKE_LIMIT = config.instagram.likeDaily;
 
   // Check daily limit
   const likeCount = await getEngagementCount('instagram', 'like');
@@ -145,10 +157,12 @@ async function handleLike(target, res) {
 /**
  * Handle comment action
  */
-async function handleComment(mediaId, text, res) {
+async function handleComment(mediaId, text, res, config) {
   if (!mediaId || !text) {
     return res.status(400).json({ error: 'mediaId and text required for comment action' });
   }
+
+  const DAILY_COMMENT_LIMIT = config.instagram.commentDaily;
 
   // Check daily limit
   const commentCount = await getEngagementCount('instagram', 'comment');

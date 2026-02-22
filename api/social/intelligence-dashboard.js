@@ -103,30 +103,51 @@ function analyzeEngagementPatterns(log, days) {
 
   // Aggregate by platform and target
   for (const entry of recentLog) {
-    if (entry.action === 'engagement_error' || entry.action === 'cron_error') {
-      continue;
-    }
+    // Track failures and retry failures
+    const isFailed = entry.action === 'engagement_error' ||
+                     entry.action === 'cron_error' ||
+                     entry.action === 'engagement_retry_failed_attempt';
 
     const platform = entry.platform;
     const target = entry.target || entry.query || 'unknown';
 
     if (platform === 'instagram') {
-      if (entry.action === 'like') stats.byPlatform.instagram.likes++;
-      if (entry.action === 'comment') stats.byPlatform.instagram.comments++;
-      instagramTotal++;
-      instagramSuccesses++;
+      // Count actual engagement actions (not errors or retries)
+      if (entry.action === 'like') {
+        stats.byPlatform.instagram.likes++;
+        instagramTotal++;
+        if (!isFailed) instagramSuccesses++;
+      } else if (entry.action === 'comment') {
+        stats.byPlatform.instagram.comments++;
+        instagramTotal++;
+        if (!isFailed) instagramSuccesses++;
+      } else if (isFailed) {
+        // Count failed attempts
+        instagramTotal++;
+      }
     } else if (platform === 'twitter') {
-      if (entry.action === 'like') stats.byPlatform.twitter.likes++;
-      if (entry.action === 'reply') stats.byPlatform.twitter.replies++;
-      twitterTotal++;
-      twitterSuccesses++;
+      // Count actual engagement actions (not errors or retries)
+      if (entry.action === 'like') {
+        stats.byPlatform.twitter.likes++;
+        twitterTotal++;
+        if (!isFailed) twitterSuccesses++;
+      } else if (entry.action === 'reply') {
+        stats.byPlatform.twitter.replies++;
+        twitterTotal++;
+        if (!isFailed) twitterSuccesses++;
+      } else if (isFailed) {
+        // Count failed attempts
+        twitterTotal++;
+      }
     }
 
-    // Track by target
-    if (!stats.byTarget[target]) {
-      stats.byTarget[target] = { count: 0, platform };
+    // Track by target (excluding errors)
+    if (!isFailed && target !== 'unknown') {
+      if (!stats.byTarget[target]) {
+        stats.byTarget[target] = { count: 0, platform };
+      }
+      stats.byTarget[target].count++;
     }
-    stats.byTarget[target].count++;
   }
 
   // Calculate success rates
