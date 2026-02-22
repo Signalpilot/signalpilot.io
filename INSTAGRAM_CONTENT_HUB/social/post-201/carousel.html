@@ -32,8 +32,8 @@
     .page-title p { color: var(--text-dim); font-size: 14px; }
     .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
     .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
+    .slide-wrapper
+.slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
     .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
     .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
     .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
@@ -145,8 +145,7 @@
       background: linear-gradient(180deg, rgba(251,191,36,0.9) 0%, rgba(217,148,74,0.7) 100%);
       z-index: 5;
     }
-    .slide-1 .bg-video, .slide-1 video { display: none !important; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
+.slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
     .slide-1 .cine-label {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
@@ -192,9 +191,7 @@
 </head>
 <body>
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+<button onclick="toggleExportMode()">Export Mode</button>
   </div>
 
   <div class="page-title">
@@ -217,10 +214,7 @@
     </div>
 
     <div class="slide-wrapper" data-slide="2">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
+<div class="slide-content">
         <span class="slide-number">02 / 04</span>
         <div class="slide-subtitle">Why SignalPilot</div>
         <h2 class="slide-title">Psychology. Strategy. Indicators. Lore.</h2>
@@ -230,10 +224,7 @@
     </div>
 
     <div class="slide-wrapper" data-slide="3">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
+<div class="slide-content">
         <span class="slide-number">03 / 04</span>
         <div class="slide-subtitle">What You Get</div>
         <h2 class="slide-title">200 posts delivered:</h2>
@@ -243,10 +234,7 @@
     </div>
 
     <div class="slide-wrapper" data-slide="4">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
+<div class="slide-content">
         <span class="slide-number">04 / 04</span>
         <div class="slide-icon">🚀</div>
         <h2 class="slide-title">Get Started</h2>
@@ -264,14 +252,9 @@
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
     const slides = document.querySelectorAll('.slide-wrapper');
     let currentSlide = 0;
     let exportMode = false;
-    bgToggle.addEventListener('change', (e) => { videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'); });
-    opacitySlider.addEventListener('input', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value / 100); });
     function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
     function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
     function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
