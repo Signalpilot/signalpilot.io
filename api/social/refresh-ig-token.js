@@ -35,7 +35,7 @@ async function updateVercelEnvVar(newToken) {
         key: 'INSTAGRAM_ACCESS_TOKEN',
         value: newToken,
         target: ['production', 'preview', 'development'],
-        type: 'secret',
+        type: 'plaintext',
       }),
     });
 
