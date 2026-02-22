@@ -15,6 +15,7 @@ import {
   likePost,
   commentOnPost,
   getAccountPosts,
+  searchPostsByHashtag,
 } from '../../lib/social/instagram-client.js';
 import {
   likeTweet,
@@ -42,6 +43,65 @@ function isActiveHour(config) {
   const now = new Date();
   const hour = now.getUTCHours();
   return config.scheduling.activeHours.includes(hour);
+}
+
+/**
+ * Sleep with jitter to avoid detection (human-like behavior)
+ */
+function getRandomDelay(minSec, maxSec) {
+  const min = minSec * 1000;
+  const max = maxSec * 1000;
+  const jitter = Math.random() * (max - min) + min;
+  return Math.floor(jitter);
+}
+
+async function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
+ * Check if content contains spam patterns
+ */
+function isSpam(text, skipPatterns = []) {
+  if (!text) return false;
+  const lower = text.toLowerCase();
+  return skipPatterns.some(pattern => lower.includes(pattern.toLowerCase()));
+}
+
+/**
+ * Filter posts by quality criteria
+ */
+function filterQualityPosts(posts, config, platform) {
+  const skipPatterns = platform === 'instagram'
+    ? (config.instagram?.skipPatterns || [])
+    : (config.twitter?.skipPatterns || []);
+
+  const safety = config.safety || {};
+
+  return posts.filter(post => {
+    // Skip spam patterns
+    const caption = platform === 'instagram' ? post.caption : post.text;
+    if (isSpam(caption, skipPatterns)) {
+      return false;
+    }
+
+    // Skip suspicious accounts if enabled
+    if (safety.skipSuspiciousAccounts && post.is_verified === false) {
+      return false;
+    }
+
+    // Skip new accounts if enabled
+    if (safety.skipNewAccounts && post.account_age_days && post.account_age_days < 30) {
+      return false;
+    }
+
+    // Check minimum followers if set
+    if (safety.minFollowersThreshold && post.followers_count < safety.minFollowersThreshold) {
+      return false;
+    }
+
+    return true;
+  });
 }
 
 export default async function handler(req, res) {
@@ -80,10 +140,22 @@ export default async function handler(req, res) {
       timestamp: new Date().toISOString(),
     };
 
+    // Get rate limiting config
+    const rateLimits = config.rateLimiting || {
+      minDelayBetweenActionsSec: 5,
+      maxDelayBetweenActionsSec: 30,
+    };
+
     if (config.instagram?.enabled) {
       try {
         const igResult = await handleInstagramEngagement(config);
         results.instagram = igResult;
+
+        // Add delay between platforms to avoid detection
+        if (config.twitter?.enabled) {
+          const delay = getRandomDelay(rateLimits.minDelayBetweenActionsSec, rateLimits.maxDelayBetweenActionsSec);
+          await sleep(delay);
+        }
       } catch (error) {
         console.error('Instagram engagement error:', error);
         results.instagram = { error: error.message };
@@ -153,13 +225,16 @@ async function handleInstagramEngagement(config) {
 
   try {
     if (target.type === 'account') {
-      const result = await getAccountPosts(target.value, 5);
+      const result = await getAccountPosts(target.value, 10);
       posts = result.posts || [];
+    } else if (target.type === 'hashtag') {
+      const result = await searchPostsByHashtag(target.value, 10);
+      posts = result.data || [];
     } else {
       return {
         action,
         status: 'skipped',
-        reason: 'Hashtag engagement not supported in cron',
+        reason: `Unknown target type: ${target.type}`,
       };
     }
   } catch (error) {
@@ -178,12 +253,25 @@ async function handleInstagramEngagement(config) {
     };
   }
 
-  // Filter unengaged posts
+  // Filter by quality (skip spam, suspicious accounts, etc)
+  const qualityPosts = filterQualityPosts(posts, config, 'instagram');
+  if (qualityPosts.length === 0) {
+    return {
+      action,
+      status: 'skipped',
+      reason: `All posts from ${target.value} filtered by quality checks`,
+      filtered: posts.length,
+    };
+  }
+
+  // Filter unengaged posts and score by engagement metrics
   const unengagedPosts = [];
-  for (const post of posts) {
+  for (const post of qualityPosts) {
     const engaged = await isEngaged('instagram', post.id, action);
     if (!engaged) {
-      unengagedPosts.push(post);
+      // Score by engagement: likes + comments as proxy for quality
+      const engagementScore = (post.likes_count || 0) + (post.comments_count || 0) * 2;
+      unengagedPosts.push({ ...post, engagementScore });
     }
   }
 
@@ -195,7 +283,9 @@ async function handleInstagramEngagement(config) {
     };
   }
 
-  const post = randomItem(unengagedPosts);
+  // Sort by engagement score descending and pick best post
+  unengagedPosts.sort((a, b) => b.engagementScore - a.engagementScore);
+  const post = unengagedPosts[0];
 
   try {
     if (action === 'like') {
@@ -306,12 +396,26 @@ async function handleTwitterEngagement(config) {
     };
   }
 
-  // Filter unengaged tweets
+  // Filter by quality (skip spam patterns)
+  const qualityTweets = filterQualityPosts(tweets, config, 'twitter');
+  if (qualityTweets.length === 0) {
+    return {
+      action,
+      status: 'skipped',
+      reason: `All tweets for query filtered by quality checks`,
+      filtered: tweets.length,
+    };
+  }
+
+  // Filter unengaged tweets and score by engagement metrics
   const unengagedTweets = [];
-  for (const tweet of tweets) {
+  for (const tweet of qualityTweets) {
     const engaged = await isEngaged('twitter', tweet.id, action);
     if (!engaged) {
-      unengagedTweets.push(tweet);
+      // Score by engagement: likes + retweets as proxy for quality
+      const engagementScore = (tweet.public_metrics?.like_count || 0) +
+                             (tweet.public_metrics?.retweet_count || 0) * 1.5;
+      unengagedTweets.push({ ...tweet, engagementScore });
     }
   }
 
@@ -323,7 +427,9 @@ async function handleTwitterEngagement(config) {
     };
   }
 
-  const tweet = randomItem(unengagedTweets);
+  // Sort by engagement score descending and pick best tweet
+  unengagedTweets.sort((a, b) => b.engagementScore - a.engagementScore);
+  const tweet = unengagedTweets[0];
 
   try {
     if (action === 'like') {

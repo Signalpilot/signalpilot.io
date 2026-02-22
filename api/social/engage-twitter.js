@@ -2,6 +2,8 @@
 // Engagement endpoint for Twitter auto-like/reply actions
 // Actions: like, reply to tweets matching search queries or from target accounts
 
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import {
   markEngaged,
   isEngaged,
@@ -16,8 +18,15 @@ import {
   getUserTimeline,
 } from '../../lib/social/twitter-client.js';
 
-const DAILY_LIKE_LIMIT = 100;
-const DAILY_REPLY_LIMIT = 20;
+function loadConfig() {
+  try {
+    const configPath = join(process.cwd(), 'data', 'social', 'engagement-config.json');
+    return JSON.parse(readFileSync(configPath, 'utf-8'));
+  } catch (error) {
+    console.error('Failed to load engagement config:', error);
+    return { twitter: { likeDaily: 75, replyDaily: 15 } };
+  }
+}
 
 /**
  * Engage on Twitter (like/reply)
@@ -34,6 +43,7 @@ export default async function handler(req, res) {
 
   try {
     const { action, target, text, token } = req.query;
+    const config = loadConfig();
 
     // Verify token
     if (token !== process.env.ROBOT_TOKEN) {
@@ -50,9 +60,9 @@ export default async function handler(req, res) {
     }
 
     if (action === 'like') {
-      return await handleLike(target, res);
+      return await handleLike(target, res, config);
     } else if (action === 'reply') {
-      return await handleReply(target, text, res);
+      return await handleReply(target, text, res, config);
     }
   } catch (error) {
     console.error('Twitter engagement error:', error);
@@ -69,7 +79,9 @@ export default async function handler(req, res) {
  * Handle like action
  * Target: search query or 'user:USERNAME'
  */
-async function handleLike(target, res) {
+async function handleLike(target, res, config) {
+  const DAILY_LIKE_LIMIT = config.twitter.likeDaily;
+
   // Check daily limit
   const likeCount = await getEngagementCount('twitter', 'like');
   if (likeCount >= DAILY_LIKE_LIMIT) {
@@ -147,7 +159,7 @@ async function handleLike(target, res) {
 /**
  * Handle reply action
  */
-async function handleReply(target, text, res) {
+async function handleReply(target, text, res, config) {
   if (!text) {
     return res.status(400).json({ error: 'text required for reply action' });
   }
@@ -155,6 +167,8 @@ async function handleReply(target, text, res) {
   if (text.length > 280) {
     return res.status(400).json({ error: 'Reply text exceeds 280 character limit' });
   }
+
+  const DAILY_REPLY_LIMIT = config.twitter.replyDaily;
 
   // Check daily limit
   const replyCount = await getEngagementCount('twitter', 'reply');
