@@ -298,3 +298,40 @@ def momentum(series: pd.Series, period: int = 10) -> pd.Series:
     """Momentum (rate of change as percentage)."""
     shifted = series.shift(period).replace(0, np.nan)
     return (series / shifted) * 100 - 100
+
+
+def rma(series: pd.Series, period: int) -> pd.Series:
+    """Wilder's smoothing (RMA) — same as Pine Script ta.rma."""
+    return series.ewm(alpha=1/period, min_periods=period, adjust=False).mean()
+
+
+def roc(series: pd.Series, period: int = 5) -> pd.Series:
+    """Rate of Change (percentage)."""
+    shifted = series.shift(period).replace(0, np.nan)
+    return ((series - shifted) / shifted) * 100
+
+
+def linreg(series: pd.Series, period: int, offset: int = 0) -> pd.Series:
+    """Linear regression value (end-point of best-fit line over period)."""
+    def _lr(x):
+        n = len(x)
+        x_vals = np.arange(n)
+        slope = np.polyfit(x_vals, x, 1)[0] if n >= 2 else 0
+        return x[-1] + slope * offset if offset != 0 else np.polyfit(x_vals, x, 1)[0] * (n - 1) + np.polyfit(x_vals, x, 1)[1]
+    return series.rolling(window=period).apply(
+        lambda x: np.polyfit(np.arange(len(x)), x, 1)[0] * (len(x) - 1) + np.polyfit(np.arange(len(x)), x, 1)[1],
+        raw=True
+    )
+
+
+def robust_normalize(series: pd.Series, period: int = 200, winsor_k: float = 3.0) -> pd.Series:
+    """Robust normalization to 0-100 with winsorization (matches Harmonic Oscillator)."""
+    mu = series.rolling(window=period, min_periods=1).mean()
+    sd = series.rolling(window=period, min_periods=1).std().replace(0, 1e-10)
+    lo = mu - winsor_k * sd
+    hi = mu + winsor_k * sd
+    clipped = series.clip(lower=lo, upper=hi)
+    ll = clipped.rolling(window=period, min_periods=1).min()
+    hh = clipped.rolling(window=period, min_periods=1).max()
+    rng = (hh - ll).replace(0, 1e-10)
+    return 100.0 * (clipped - ll) / rng
