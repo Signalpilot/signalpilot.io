@@ -7,6 +7,12 @@ import {
   getTopTargets,
   getEngagementLog,
 } from '../../lib/social/queue-manager.js';
+import {
+  calculateEngagementVelocity,
+  calculateSuccessRateCI,
+  identifyEmergingTemplates,
+  calculateEngagementHealth,
+} from '../../lib/social/engagement-analytics.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -171,6 +177,25 @@ function analyzeEngagementPatterns(log, days) {
     .map(([target, data]) => ({ target, ...data }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 10);
+
+  // Advanced analytics
+  stats.velocity = calculateEngagementVelocity(recentLog);
+  stats.health = calculateEngagementHealth(stats);
+
+  // Calculate confidence intervals for success rates
+  const igTotal = stats.byPlatform.instagram.likes + stats.byPlatform.instagram.comments;
+  const twTotal = stats.byPlatform.twitter.likes + stats.byPlatform.twitter.replies;
+
+  stats.confidenceIntervals = {
+    instagram: calculateSuccessRateCI(
+      instagramSuccesses,
+      igTotal - instagramSuccesses
+    ),
+    twitter: calculateSuccessRateCI(
+      twitterSuccesses,
+      twTotal - twitterSuccesses
+    ),
+  };
 
   return stats;
 }
