@@ -16,11 +16,33 @@ DATA_DIR.mkdir(exist_ok=True)
 
 # Yahoo Finance ticker mapping
 SYMBOL_MAP = {
+    # Original
     "XAUUSD": "GC=F",       # Gold futures
     "NAS100": "NQ=F",       # Nasdaq 100 futures
     "USTEC":  "NQ=F",       # Alias
     "USDJPY": "USDJPY=X",   # USD/JPY forex
     "BTCUSD": "BTC-USD",    # Bitcoin
+    # Commodities
+    "XAGUSD": "SI=F",       # Silver futures
+    "WTIUSD": "CL=F",       # Crude Oil WTI
+    "NGUSD":  "NG=F",       # Natural Gas
+    "COPPUSD": "HG=F",      # Copper futures
+    # Indices
+    "SP500":  "ES=F",       # S&P 500 futures
+    "DOW30":  "YM=F",       # Dow Jones futures
+    "RUSS2K": "RTY=F",      # Russell 2000 futures
+    # Crypto
+    "ETHUSD": "ETH-USD",    # Ethereum
+    "SOLUSD": "SOL-USD",    # Solana
+    "BNBUSD": "BNB-USD",    # BNB
+    "XRPUSD": "XRP-USD",    # Ripple
+    # Forex
+    "EURUSD": "EURUSD=X",   # EUR/USD
+    "GBPUSD": "GBPUSD=X",   # GBP/USD
+    "AUDUSD": "AUDUSD=X",   # AUD/USD
+    "USDCAD": "USDCAD=X",   # USD/CAD
+    "GBPJPY": "GBPJPY=X",   # GBP/JPY
+    "EURJPY": "EURJPY=X",   # EUR/JPY
 }
 
 # Yahoo Finance interval values
