@@ -3,292 +3,942 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 119 — VOLUME SPREAD ANALYSIS (Lesson 31) | Carousel Preview</title>
+  <title>Post 119 — Volume Spread Analysis | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Gugi&display=swap" rel="stylesheet">
   <style>
-    
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
-      --accent-green: #4ad97a;
-      --accent-teal: #5eecd4;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+
+    /* ══════════════════════════════════════════════════════════════
+       RESET & BASE
+       ══════════════════════════════════════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper
-.slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    :root {
+      --bg: #0a0a0f;
+      --surface: rgba(255, 255, 255, 0.02);
+      --gold: #c9a962;
+      --gold-l: rgba(201, 169, 98, 0.12);
+      --gold-b: rgba(201, 169, 98, 0.25);
+      --teal: #5eead4;
+      --teal-l: rgba(94, 234, 212, 0.12);
+      --teal-b: rgba(94, 234, 212, 0.25);
+      --green: #4ade80;
+      --green-l: rgba(74, 222, 128, 0.12);
+      --green-b: rgba(74, 222, 128, 0.25);
+      --red: #f87171;
+      --red-l: rgba(248, 113, 113, 0.12);
+      --red-b: rgba(248, 113, 113, 0.25);
+      --blue: #60a5fa;
+      --blue-l: rgba(96, 165, 250, 0.12);
+      --blue-b: rgba(96, 165, 250, 0.25);
+      --purple: #a855f7;
+      --purple-l: rgba(168, 85, 247, 0.12);
+      --purple-b: rgba(168, 85, 247, 0.25);
+      --orange: #f59e0b;
+      --orange-l: rgba(245, 158, 11, 0.12);
+      --orange-b: rgba(245, 158, 11, 0.25);
+      --txt: #e4e4e7;
+      --txt2: #a1a1aa;
+      --txt3: #52525b;
+      --serif: 'Cormorant Garamond', serif;
+      --sans: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --brand: 'Gugi', sans-serif;
+    }
 
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
+    body {
+      background: var(--bg);
+      color: var(--txt);
+      font-family: var(--sans);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
 
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
+    /* ══════════════════════════════════════════════════════════════
+       CONTROLS
+       ══════════════════════════════════════════════════════════════ */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
 
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
+    .controls button {
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
 
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
+    /* ══════════════════════════════════════════════════════════════
+       PAGE LAYOUT
+       ══════════════════════════════════════════════════════════════ */
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
+    .page-title h1 {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      color: var(--txt);
+    }
 
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    .page-title p {
+      color: var(--txt3);
+      font-size: 14px;
+    }
 
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
+    /* ══════════════════════════════════════════════════════════════
+       SLIDE LABELS
+       ══════════════════════════════════════════════════════════════ */
+    .slide-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--txt3);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
 
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
+    /* ══════════════════════════════════════════════════════════════
+       SLIDE WRAPPER
+       ══════════════════════════════════════════════════════════════ */
+    .slide-wrapper {
+      aspect-ratio: 4 / 5;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      container-type: inline-size;
+    }
 
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0c0c0f 0%, #090910 100%) !important; }
-    .slide-1::before {
+    /* ══════════════════════════════════════════════════════════════
+       SLIDE CONTENT
+       ══════════════════════════════════════════════════════════════ */
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8%;
+      text-align: center;
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 4%;
+      left: 5%;
+      font-family: var(--mono);
+      font-size: clamp(7px, 1.4cqw, 10px);
+      color: var(--txt3);
+      letter-spacing: 0.12em;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 4%;
+      right: 5%;
+      font-family: var(--brand);
+      font-size: clamp(7px, 1.4cqw, 10px);
+      color: rgba(201, 169, 98, 0.25);
+      letter-spacing: 0.15em;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SLIDE BACKGROUNDS (per-slide radial glows)
+       ══════════════════════════════════════════════════════════════ */
+    .slide-wrapper::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(180,180,200,0.06) 0%, transparent 100%);
-      pointer-events: none;
       z-index: 1;
+      pointer-events: none;
     }
-.slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(180,180,200,0.9);
-      margin-bottom: 8%;
+
+    .s1::before { background: radial-gradient(ellipse at 50% 30%, rgba(201,169,98,0.06) 0%, transparent 70%); }
+    .s2::before { background: radial-gradient(ellipse at 30% 60%, rgba(74,222,128,0.04) 0%, transparent 65%); }
+    .s3::before { background: radial-gradient(ellipse at 70% 40%, rgba(248,113,113,0.04) 0%, transparent 65%); }
+    .s4::before { background: radial-gradient(ellipse at 50% 70%, rgba(96,165,250,0.04) 0%, transparent 65%); }
+    .s5::before { background: radial-gradient(ellipse at 40% 40%, rgba(168,85,247,0.04) 0%, transparent 65%); }
+    .s6::before { background: radial-gradient(ellipse at 60% 50%, rgba(245,158,11,0.04) 0%, transparent 65%); }
+    .s7::before { background: radial-gradient(ellipse at 50% 40%, rgba(94,234,212,0.04) 0%, transparent 65%); }
+    .s8::before { background: radial-gradient(ellipse at 50% 50%, rgba(201,169,98,0.04) 0%, transparent 60%); }
+
+    /* ══════════════════════════════════════════════════════════════
+       ORB — Volume Bars Visualization
+       ══════════════════════════════════════════════════════════════ */
+    .orb {
+      position: relative;
+      width: clamp(90px, 18cqw, 170px);
+      height: clamp(90px, 18cqw, 170px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.25) 0%, rgba(201,169,98,0.08) 40%, rgba(255,255,255,0.03) 70%, transparent 100%);
+      border: 2px solid rgba(201,169,98,0.2);
+      box-shadow: 0 0 50px rgba(201,169,98,0.1), 0 0 100px rgba(201,169,98,0.03), inset 0 0 30px rgba(201,169,98,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: clamp(12px, 3cqw, 24px);
+      flex-shrink: 0;
     }
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255,255,255,0.95);
-      margin-bottom: 4%;
-    }
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(180,180,200,0.6), transparent);
-      margin-bottom: 4%;
-    }
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(180,180,200,0.4);
-      line-height: 1.6;
-    }
-    .slide-1 .cine-logo {
+
+    .orb::before {
+      content: '';
       position: absolute;
-      bottom: 8%;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(201,169,98,0.12);
+    }
+
+    .orb::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(201,169,98,0.1);
+    }
+
+    .orb-sm {
+      position: relative;
+      width: clamp(50px, 10cqw, 90px);
+      height: clamp(50px, 10cqw, 90px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.25) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(201,169,98,0.2);
+      box-shadow: 0 0 30px rgba(201,169,98,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: clamp(8px, 2cqw, 16px);
+      flex-shrink: 0;
+    }
+
+    .orb-letter {
+      font-family: var(--serif);
+      font-size: clamp(28px, 7cqw, 56px);
+      font-weight: 600;
+      color: var(--gold);
+      position: relative;
+      z-index: 2;
+    }
+
+    .orb-sm .orb-letter { font-size: clamp(18px, 4cqw, 32px); }
+
+    .vol-wrap {
+      position: relative;
+      width: 60%;
+      height: 60%;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 8%;
+    }
+
+    .vol-bar {
+      width: 14%;
+      border-radius: 2px 2px 0 0;
+      position: relative;
+    }
+
+    .vb-1 { height: 35%; background: linear-gradient(to top, rgba(201,169,98,0.5), rgba(201,169,98,0.25)); }
+    .vb-2 { height: 70%; background: linear-gradient(to top, rgba(96,165,250,0.5), rgba(96,165,250,0.25)); }
+    .vb-3 { height: 100%; background: linear-gradient(to top, rgba(201,169,98,0.7), rgba(201,169,98,0.35)); }
+    .vb-4 { height: 50%; background: linear-gradient(to top, rgba(94,234,212,0.5), rgba(94,234,212,0.25)); }
+    .vb-5 { height: 25%; background: linear-gradient(to top, rgba(96,165,250,0.5), rgba(96,165,250,0.25)); }
+
+    .vb-3::after {
+      content: '';
+      position: absolute;
+      top: -5px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(180,180,200,0.4);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold), 0 0 16px rgba(201,169,98,0.4);
     }
-  
+
+    /* ══════════════════════════════════════════════════════════════
+       TYPOGRAPHY
+       ══════════════════════════════════════════════════════════════ */
+    .hook-tag { font-family: var(--mono); font-size: clamp(7px, 1.3cqw, 10px); letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: clamp(6px, 1.5cqw, 12px); }
+    .hook-title { font-family: var(--serif); font-size: clamp(22px, 5.5cqw, 42px); font-weight: 600; line-height: 1.15; color: var(--txt); margin-bottom: clamp(6px, 1.5cqw, 12px); }
+    .hook-title em { font-style: normal; color: var(--gold); }
+    .hook-sub { font-size: clamp(9px, 1.8cqw, 13px); color: var(--txt2); line-height: 1.5; max-width: 85%; }
+    .lesson-tag { display: inline-block; padding: clamp(3px, 0.6cqw, 5px) clamp(8px, 1.6cqw, 14px); border: 1px solid rgba(201,169,98,0.25); border-radius: 20px; font-family: var(--mono); font-size: clamp(6px, 1.1cqw, 9px); color: var(--gold); letter-spacing: 0.15em; margin-bottom: clamp(8px, 2cqw, 16px); }
+
+    .sec-tag { font-family: var(--mono); font-size: clamp(6px, 1.1cqw, 9px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: clamp(4px, 1cqw, 8px); }
+    .sec-title { font-family: var(--serif); font-size: clamp(16px, 3.8cqw, 28px); font-weight: 600; line-height: 1.2; color: var(--txt); margin-bottom: clamp(10px, 2.5cqw, 20px); }
+    .sec-title em { font-style: normal; color: var(--gold); }
+
+    /* ══════════════════════════════════════════════════════════════
+       ICON CIRCLES
+       ══════════════════════════════════════════════════════════════ */
+    .icon-circle { width: clamp(34px, 6.5cqw, 56px); height: clamp(34px, 6.5cqw, 56px); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+    .icon-circle::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; }
+    .icon-circle .ic-letter { font-family: var(--serif); font-size: clamp(13px, 2.8cqw, 22px); font-weight: 600; position: relative; z-index: 2; }
+
+    .ic-gold { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1.5px solid rgba(201,169,98,0.3); box-shadow: 0 0 18px rgba(201,169,98,0.1); }
+    .ic-gold::before { border: 1px solid rgba(201,169,98,0.12); }
+    .ic-gold .ic-letter { color: var(--gold); }
+
+    .ic-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.3); box-shadow: 0 0 18px rgba(96,165,250,0.1); }
+    .ic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .ic-blue .ic-letter { color: var(--blue); }
+
+    .ic-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.3); box-shadow: 0 0 18px rgba(168,85,247,0.1); }
+    .ic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .ic-purple .ic-letter { color: var(--purple); }
+
+    .ic-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.3); box-shadow: 0 0 18px rgba(74,222,128,0.1); }
+    .ic-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .ic-green .ic-letter { color: var(--green); }
+
+    .ic-red { background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%); border: 1.5px solid rgba(248,113,113,0.3); box-shadow: 0 0 18px rgba(248,113,113,0.1); }
+    .ic-red::before { border: 1px solid rgba(248,113,113,0.12); }
+    .ic-red .ic-letter { color: var(--red); }
+
+    .ic-orange { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1.5px solid rgba(245,158,11,0.3); box-shadow: 0 0 18px rgba(245,158,11,0.1); }
+    .ic-orange::before { border: 1px solid rgba(245,158,11,0.12); }
+    .ic-orange .ic-letter { color: var(--orange); }
+
+    /* ══════════════════════════════════════════════════════════════
+       DEFINITION CARDS
+       ══════════════════════════════════════════════════════════════ */
+    .def-row { width: 92%; display: flex; flex-direction: column; gap: clamp(6px, 1.4cqw, 12px); margin-bottom: clamp(10px, 2.5cqw, 20px); }
+    .def-card { display: flex; align-items: flex-start; gap: clamp(8px, 1.6cqw, 14px); padding: clamp(8px, 1.8cqw, 16px); border-radius: clamp(8px, 1.5cqw, 14px); background: var(--surface); border: 1px solid rgba(255,255,255,0.04); text-align: left; }
+    .def-body { flex: 1; min-width: 0; }
+    .def-label { font-family: var(--mono); font-size: clamp(6px, 1.1cqw, 9px); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: clamp(2px, 0.5cqw, 4px); }
+    .def-label.c-gold { color: var(--gold); }
+    .def-label.c-blue { color: var(--blue); }
+    .def-label.c-purple { color: var(--purple); }
+    .def-text { font-size: clamp(9px, 1.7cqw, 13px); color: var(--txt2); line-height: 1.5; }
+    .def-text em { font-style: normal; color: var(--txt); }
+
+    /* ══════════════════════════════════════════════════════════════
+       VSA COMBO CARDS (spread + volume matrix)
+       ══════════════════════════════════════════════════════════════ */
+    .vsa-grid { width: 92%; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(6px, 1.2cqw, 10px); margin-bottom: clamp(8px, 2cqw, 16px); }
+
+    .vsa-card { padding: clamp(10px, 2cqw, 18px); border-radius: clamp(8px, 1.5cqw, 14px); text-align: left; display: flex; flex-direction: column; gap: clamp(4px, 0.8cqw, 7px); }
+    .vsa-card.strong { background: var(--green-l); border: 1px solid var(--green-b); }
+    .vsa-card.weak { background: var(--red-l); border: 1px solid var(--red-b); }
+    .vsa-card.absorb { background: var(--purple-l); border: 1px solid var(--purple-b); }
+    .vsa-card.quiet { background: var(--blue-l); border: 1px solid var(--blue-b); }
+
+    .vsa-card .vc-spread { font-family: var(--mono); font-size: clamp(6px, 1cqw, 8px); letter-spacing: 0.15em; text-transform: uppercase; }
+    .vsa-card.strong .vc-spread { color: var(--green); }
+    .vsa-card.weak .vc-spread { color: var(--red); }
+    .vsa-card.absorb .vc-spread { color: var(--purple); }
+    .vsa-card.quiet .vc-spread { color: var(--blue); }
+
+    .vsa-card .vc-title { font-family: var(--serif); font-size: clamp(11px, 2.2cqw, 16px); font-weight: 600; color: var(--txt); }
+    .vsa-card .vc-desc { font-size: clamp(7px, 1.3cqw, 10px); color: var(--txt2); line-height: 1.45; }
+
+    .vsa-card .vc-signal { font-family: var(--mono); font-size: clamp(6px, 1cqw, 8px); letter-spacing: 0.1em; padding: clamp(2px, 0.4cqw, 4px) clamp(6px, 1.2cqw, 10px); border-radius: 10px; display: inline-block; margin-top: auto; }
+    .vsa-card.strong .vc-signal { background: rgba(74,222,128,0.15); color: var(--green); border: 1px solid rgba(74,222,128,0.3); }
+    .vsa-card.weak .vc-signal { background: rgba(248,113,113,0.15); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+    .vsa-card.absorb .vc-signal { background: rgba(168,85,247,0.15); color: var(--purple); border: 1px solid rgba(168,85,247,0.3); }
+    .vsa-card.quiet .vc-signal { background: rgba(96,165,250,0.15); color: var(--blue); border: 1px solid rgba(96,165,250,0.3); }
+
+    /* ══════════════════════════════════════════════════════════════
+       FACTOR CARDS (2x3 grid)
+       ══════════════════════════════════════════════════════════════ */
+    .factor-grid { width: 92%; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(6px, 1.2cqw, 10px); }
+    .factor-card { padding: clamp(8px, 1.6cqw, 14px); border-radius: clamp(8px, 1.5cqw, 14px); background: var(--surface); border: 1px solid rgba(255,255,255,0.04); text-align: left; display: flex; flex-direction: column; gap: clamp(4px, 0.8cqw, 7px); }
+    .factor-card .fc-top { display: flex; align-items: center; gap: clamp(5px, 1cqw, 9px); }
+    .factor-card .fc-icon { width: clamp(22px, 4.2cqw, 36px); height: clamp(22px, 4.2cqw, 36px); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+    .factor-card .fc-icon::before { content: ''; position: absolute; inset: 3px; border-radius: 50%; }
+    .factor-card .fc-icon .fc-let { font-family: var(--serif); font-size: clamp(10px, 2cqw, 16px); font-weight: 600; position: relative; z-index: 2; }
+
+    .fc-green .fc-icon { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1px solid rgba(74,222,128,0.25); }
+    .fc-green .fc-icon::before { border: 1px solid rgba(74,222,128,0.1); }
+    .fc-green .fc-let { color: var(--green); }
+
+    .fc-purple .fc-icon { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1px solid rgba(168,85,247,0.25); }
+    .fc-purple .fc-icon::before { border: 1px solid rgba(168,85,247,0.1); }
+    .fc-purple .fc-let { color: var(--purple); }
+
+    .fc-red .fc-icon { background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%); border: 1px solid rgba(248,113,113,0.25); }
+    .fc-red .fc-icon::before { border: 1px solid rgba(248,113,113,0.1); }
+    .fc-red .fc-let { color: var(--red); }
+
+    .fc-gold .fc-icon { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1px solid rgba(201,169,98,0.25); }
+    .fc-gold .fc-icon::before { border: 1px solid rgba(201,169,98,0.1); }
+    .fc-gold .fc-let { color: var(--gold); }
+
+    .fc-blue .fc-icon { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1px solid rgba(96,165,250,0.25); }
+    .fc-blue .fc-icon::before { border: 1px solid rgba(96,165,250,0.1); }
+    .fc-blue .fc-let { color: var(--blue); }
+
+    .fc-orange .fc-icon { background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%); border: 1px solid rgba(245,158,11,0.25); }
+    .fc-orange .fc-icon::before { border: 1px solid rgba(245,158,11,0.1); }
+    .fc-orange .fc-let { color: var(--orange); }
+
+    .factor-card .fc-name { font-family: var(--serif); font-size: clamp(9px, 1.8cqw, 14px); font-weight: 600; color: var(--txt); }
+    .factor-card .fc-desc { font-size: clamp(7px, 1.3cqw, 10px); color: var(--txt2); line-height: 1.45; }
+    .factor-card .fc-tag { display: inline-block; padding: clamp(2px, 0.3cqw, 3px) clamp(5px, 1cqw, 9px); border-radius: 10px; font-family: var(--mono); font-size: clamp(5px, 0.9cqw, 7px); letter-spacing: 0.1em; margin-top: auto; }
+
+    .fc-green .fc-tag { background: var(--green-l); color: var(--green); border: 1px solid var(--green-b); }
+    .fc-purple .fc-tag { background: var(--purple-l); color: var(--purple); border: 1px solid var(--purple-b); }
+    .fc-red .fc-tag { background: var(--red-l); color: var(--red); border: 1px solid var(--red-b); }
+    .fc-gold .fc-tag { background: var(--gold-l); color: var(--gold); border: 1px solid var(--gold-b); }
+    .fc-blue .fc-tag { background: var(--blue-l); color: var(--blue); border: 1px solid var(--blue-b); }
+    .fc-orange .fc-tag { background: var(--orange-l); color: var(--orange); border: 1px solid var(--orange-b); }
+
+    .prog-bar { width: 100%; height: clamp(3px, 0.5cqw, 5px); background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden; margin-top: auto; }
+    .prog-fill { height: 100%; border-radius: 4px; }
+    .pf-green { background: linear-gradient(90deg, rgba(74,222,128,0.5), var(--green)); }
+    .pf-purple { background: linear-gradient(90deg, rgba(168,85,247,0.5), var(--purple)); }
+    .pf-red { background: linear-gradient(90deg, rgba(248,113,113,0.5), var(--red)); }
+    .pf-gold { background: linear-gradient(90deg, rgba(201,169,98,0.5), var(--gold)); }
+    .pf-blue { background: linear-gradient(90deg, rgba(96,165,250,0.5), var(--blue)); }
+    .pf-orange { background: linear-gradient(90deg, rgba(245,158,11,0.5), var(--orange)); }
+
+    /* ══════════════════════════════════════════════════════════════
+       STEP FLOW
+       ══════════════════════════════════════════════════════════════ */
+    .step-flow { width: 92%; display: flex; flex-direction: column; gap: clamp(5px, 1.1cqw, 10px); }
+    .step-row { display: flex; align-items: flex-start; gap: clamp(8px, 1.5cqw, 14px); }
+    .step-ring { width: clamp(26px, 5cqw, 42px); height: clamp(26px, 5cqw, 42px); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; }
+    .step-ring::before { content: ''; position: absolute; inset: 3px; border-radius: 50%; }
+    .step-ring .s-num { font-family: var(--serif); font-size: clamp(11px, 2.2cqw, 18px); font-weight: 600; position: relative; z-index: 2; }
+
+    .sr-gold { background: radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%); border: 1.5px solid rgba(201,169,98,0.25); }
+    .sr-gold::before { border: 1px solid rgba(201,169,98,0.1); }
+    .sr-gold .s-num { color: var(--gold); }
+
+    .sr-blue { background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%); border: 1.5px solid rgba(96,165,250,0.25); }
+    .sr-blue::before { border: 1px solid rgba(96,165,250,0.1); }
+    .sr-blue .s-num { color: var(--blue); }
+
+    .sr-teal { background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%); border: 1.5px solid rgba(94,234,212,0.25); }
+    .sr-teal::before { border: 1px solid rgba(94,234,212,0.1); }
+    .sr-teal .s-num { color: var(--teal); }
+
+    .sr-purple { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%); border: 1.5px solid rgba(168,85,247,0.25); }
+    .sr-purple::before { border: 1px solid rgba(168,85,247,0.1); }
+    .sr-purple .s-num { color: var(--purple); }
+
+    .sr-green { background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%); border: 1.5px solid rgba(74,222,128,0.25); }
+    .sr-green::before { border: 1px solid rgba(74,222,128,0.1); }
+    .sr-green .s-num { color: var(--green); }
+
+    .step-body { text-align: left; flex: 1; min-width: 0; }
+    .step-name { font-family: var(--serif); font-size: clamp(10px, 2cqw, 15px); font-weight: 600; color: var(--txt); margin-bottom: clamp(1px, 0.3cqw, 3px); }
+    .step-desc { font-size: clamp(8px, 1.4cqw, 11px); color: var(--txt2); line-height: 1.45; }
+
+    /* ══════════════════════════════════════════════════════════════
+       CALLOUT BOXES
+       ══════════════════════════════════════════════════════════════ */
+    .warn-box { width: 92%; padding: clamp(10px, 2cqw, 18px); border-radius: clamp(8px, 1.5cqw, 14px); background: var(--red-l); border: 1px solid var(--red-b); text-align: left; margin-top: clamp(8px, 2cqw, 16px); }
+    .warn-label { font-family: var(--mono); font-size: clamp(6px, 1cqw, 8px); letter-spacing: 0.15em; color: var(--red); margin-bottom: clamp(3px, 0.6cqw, 6px); }
+    .warn-text { font-size: clamp(8px, 1.5cqw, 12px); color: var(--txt2); line-height: 1.5; }
+    .warn-text em { font-style: normal; color: var(--txt); }
+
+    /* ══════════════════════════════════════════════════════════════
+       STACK VISUALISATION
+       ══════════════════════════════════════════════════════════════ */
+    .stack-vis { width: 92%; display: flex; flex-direction: column; align-items: center; gap: clamp(4px, 0.8cqw, 7px); margin-top: clamp(6px, 1.5cqw, 12px); }
+    .stack-bar { width: 100%; padding: clamp(6px, 1.2cqw, 10px) clamp(8px, 1.6cqw, 14px); border-radius: clamp(6px, 1.2cqw, 10px); font-family: var(--mono); font-size: clamp(6px, 1.1cqw, 9px); letter-spacing: 0.08em; text-align: center; color: var(--txt); }
+    .stack-bar.sb-green { background: var(--green-l); border: 1px solid var(--green-b); }
+    .stack-bar.sb-orange { background: var(--orange-l); border: 1px solid var(--orange-b); }
+    .stack-bar.sb-blue { background: var(--blue-l); border: 1px solid var(--blue-b); }
+    .stack-arrow { color: var(--txt3); font-size: clamp(10px, 2cqw, 16px); }
+    .stack-result { font-family: var(--mono); font-size: clamp(7px, 1.3cqw, 10px); letter-spacing: 0.15em; color: var(--gold); padding: clamp(6px, 1.2cqw, 10px); background: var(--gold-l); border: 1px solid var(--gold-b); border-radius: clamp(6px, 1.2cqw, 10px); width: 100%; text-align: center; }
+
+    /* ══════════════════════════════════════════════════════════════
+       TRUTH GRID
+       ══════════════════════════════════════════════════════════════ */
+    .truth-grid { width: 92%; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(6px, 1.2cqw, 10px); margin-bottom: clamp(8px, 2cqw, 16px); }
+    .truth-card { padding: clamp(8px, 1.6cqw, 14px); border-radius: clamp(8px, 1.5cqw, 14px); background: var(--surface); border: 1px solid rgba(255,255,255,0.04); text-align: left; }
+    .truth-card .tc-title { font-family: var(--serif); font-size: clamp(9px, 1.8cqw, 14px); font-weight: 600; color: var(--txt); margin-bottom: clamp(3px, 0.6cqw, 6px); }
+    .truth-card .tc-desc { font-size: clamp(7px, 1.3cqw, 10px); color: var(--txt2); line-height: 1.45; }
+    .truth-quote { font-family: var(--serif); font-size: clamp(10px, 2.2cqw, 16px); font-style: italic; color: var(--txt2); line-height: 1.5; max-width: 88%; }
+    .truth-quote em { font-style: normal; color: var(--gold); }
+
+    /* ══════════════════════════════════════════════════════════════
+       CTA SLIDE
+       ══════════════════════════════════════════════════════════════ */
+    .cta-badge { font-family: var(--brand); font-size: clamp(8px, 1.6cqw, 12px); letter-spacing: 0.2em; color: var(--gold); margin-bottom: clamp(8px, 2cqw, 16px); }
+    .cta-title { font-family: var(--serif); font-size: clamp(20px, 4.5cqw, 36px); font-weight: 600; line-height: 1.15; color: var(--txt); margin-bottom: clamp(6px, 1.5cqw, 12px); }
+    .cta-title em { font-style: normal; color: var(--gold); }
+    .cta-sub { font-size: clamp(8px, 1.6cqw, 12px); color: var(--txt2); line-height: 1.6; max-width: 85%; margin-bottom: clamp(10px, 2.5cqw, 20px); }
+
+    .stat-grid { display: flex; gap: clamp(10px, 2.5cqw, 24px); margin-bottom: clamp(10px, 2.5cqw, 20px); }
+    .stat-cell { text-align: center; }
+    .stat-cell .sv { font-family: var(--serif); font-size: clamp(20px, 5cqw, 36px); font-weight: 600; color: var(--gold); line-height: 1; }
+    .stat-cell .sl { font-family: var(--mono); font-size: clamp(5px, 0.9cqw, 7px); letter-spacing: 0.15em; color: var(--txt3); margin-top: clamp(2px, 0.4cqw, 4px); }
+
+    .pill-row { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(4px, 0.8cqw, 7px); margin-bottom: clamp(10px, 2.5cqw, 20px); }
+    .pill { font-family: var(--mono); font-size: clamp(5px, 0.9cqw, 7px); letter-spacing: 0.1em; padding: clamp(3px, 0.5cqw, 5px) clamp(6px, 1.2cqw, 10px); border-radius: 20px; background: var(--surface); border: 1px solid rgba(255,255,255,0.06); color: var(--txt2); }
+
+    .cta-box { padding: clamp(10px, 2cqw, 18px) clamp(16px, 3.5cqw, 30px); border-radius: clamp(8px, 1.5cqw, 14px); background: var(--gold-l); border: 1px solid var(--gold-b); text-align: center; }
+    .cta-url { font-family: var(--mono); font-size: clamp(9px, 1.8cqw, 13px); color: var(--gold); letter-spacing: 0.05em; margin-bottom: clamp(2px, 0.4cqw, 4px); }
+    .cta-hint { font-size: clamp(7px, 1.2cqw, 10px); color: var(--txt3); }
+
+    /* ══════════════════════════════════════════════════════════════
+       EXPORT MODE
+       ══════════════════════════════════════════════════════════════ */
+    body.export-mode { padding: 0; background: #000; }
+    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; }
+    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
+    body.export-mode .slide-wrapper.active { display: block; }
+
+    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
+    body.export-mode .export-nav { display: flex; }
+    .export-nav button { background: var(--gold); color: var(--bg); border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
+    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
+
+    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
+
   </style>
 </head>
 <body>
-  <div class="controls">
-<button onclick="toggleExportMode()">Export Mode</button>
-  </div>
 
-  <div class="page-title">
-    <h1>Post 119 — VOLUME SPREAD ANALYSIS (Lesson 31)</h1>
-    <p>Education Carousel — 8 Slides</p>
-  </div>
+<div class="controls">
+  <button id="export-btn">Export Mode</button>
+</div>
 
-  <div class="carousel-grid">
+<div class="page-title">
+  <h1>Post 119 &mdash; Volume Spread Analysis</h1>
+  <p>Education Carousel &mdash; Lesson 31 &mdash; 8 Slides</p>
+</div>
 
-    <div class="slide-wrapper" data-slide="1">
-      <div class="slide slide-1">
-        <div class="slide-content">
-          <div class="cine-label">LEARN</div>
-          <div class="hook-main">90% of traders ignore volume. They lose because of it.</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Volume Spread Analysis: Reading the story of each bar.</p>
-          <div class="cine-logo">Signal Pilot</div>
+<div class="carousel-grid">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 1 — Hook (Volume Orb + Cinematic Title)
+       ══════════════════════════════════════════════════════════════ -->
+  <span class="slide-label">Slide 1 &mdash; Hook</span>
+  <div class="slide-wrapper s1" data-slide="1">
+    <div class="slide-content" style="justify-content:center;">
+      <div class="lesson-tag">LESSON 31</div>
+      <div class="orb">
+        <div class="vol-wrap">
+          <div class="vol-bar vb-1"></div>
+          <div class="vol-bar vb-2"></div>
+          <div class="vol-bar vb-3"></div>
+          <div class="vol-bar vb-4"></div>
+          <div class="vol-bar vb-5"></div>
         </div>
       </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="2">
-<div class="slide-content">
-        <span class="slide-number">02 / 08</span>
-        <div class="slide-subtitle">The Concept</div>
-        <h2 class="slide-title">KEY COMBINATIONS:</h2>
-        <div class="concept-card blue"><div class="card-label">Key Concept</div><div class="card-desc">KEY COMBINATIONS: ◾ Wide spread + High volume = Strong conviction, genuine move</div></div><div class="concept-card gold"><div class="card-label">Why It Matters</div><div class="card-desc">◾ Wide spread + Low volume = Weak conviction, possible trap ◾ Narrow spread + High volume = Absorption happening, big players positioning</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="3">
-<div class="slide-content">
-        <span class="slide-number">03 / 08</span>
-        <div class="slide-subtitle">Why It Matters</div>
-        <h2 class="slide-title">The candle is the headline. Volume is the truth.</h2>
-        <ul class="arrow-list"><li><span class="arrow">→</span> The candle is the headline. Volume is the truth.</li><li><span class="arrow">→</span> Volume reveals what price hides.</li><li><span class="arrow">→</span> Use the volume profile to set your target at the next LVN.</li></ul>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="4">
-<div class="slide-content">
-        <span class="slide-number">04 / 08</span>
-        <div class="slide-subtitle">How It Works</div>
-        <h2 class="slide-title">How to apply VSA</h2>
-        <p class="slide-body">How to apply VSA: when you see a narrow-range bar on unusually high volume at a support level, that's absorption. Big players are quietly buying while price barely moves. Watch for an expansion move to follow.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="5">
-<div class="slide-content">
-        <span class="slide-number">05 / 08</span>
-        <div class="slide-subtitle">The Application</div>
-        <h2 class="slide-title">Mistake: only looking at volume bars in isolation.</h2>
-        <div class="concept-card blue"><div class="card-label"></div><div class="card-desc">Mistake: only looking at volume bars in isolation. VSA requires you to compare each bar to its neighbors. A &quot;high volume&quot; bar only matters relative to what came before it. Always compare — never judge in isolation.</div></div><div class="concept-card gold"><div class="card-label"></div><div class="card-desc">Use the volume profile to set your target at the next LVN.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="6">
-<div class="slide-content">
-        <span class="slide-number">06 / 08</span>
-        <div class="slide-subtitle">Key Insight</div>
-        <h2 class="slide-title">Step-by-step VSA read: look at a bar at a key support level.</h2>
-        <div class="callout-box warning"><div class="callout-title">Important</div><div class="callout-text">Step-by-step VSA read: look at a bar at a key support level. Compare its spread and volume to the prior 20 bars. Narrow spread on high volume? That is absorption — institutions are accumulating. Expect an up move. Wide spread on low volume? That is a weak test — expect failure.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="7">
-<div class="slide-content">
-        <span class="slide-number">07 / 08</span>
-        <div class="slide-subtitle">The Framework</div>
-        <h2 class="slide-title">VSA connects directly to Wyckoff.</h2>
-        <div class="callout-box warning"><div class="callout-title">Important</div><div class="callout-text">VSA connects directly to Wyckoff. The Selling Climax is high volume, wide spread down. The Spring is a test on low volume. Absorption during the trading range is narrow spread, high volume. If you understand VSA, Wyckoff schematics become readable in real time.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="8">
-<div class="slide-content">
-        <span class="slide-number">08 / 08</span>
-        <div class="slide-icon">📚</div>
-        <h2 class="slide-title">Continue Learning</h2>
-        <p class="slide-body">Free education from beginner to professional.</p>
-        <a href="https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html" class="cta-link">Start Learning</a>
-        <span class="brand-mark">SIGNALPILOT</span>
-      </div>
+      <div class="hook-tag">EDUCATION</div>
+      <div class="hook-title">The Candle Is the Headline.<br><em>Volume</em> Is the Truth.</div>
+      <p class="hook-sub">Reading the story each bar is actually telling you.</p>
+      <span class="brand-mark">SIGNALPILOT</span>
     </div>
   </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
-    <button onclick="nextSlide()">Next →</button>
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 2 — The Concept (What is VSA)
+       ══════════════════════════════════════════════════════════════ -->
+  <span class="slide-label">Slide 2 &mdash; The Concept</span>
+  <div class="slide-wrapper s2" data-slide="2">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">02 / 08</span>
+      <div class="sec-tag">THE CONCEPT</div>
+      <div class="sec-title">Every Bar Has<br>Two <em>Dimensions</em></div>
+
+      <div class="def-row">
+        <div class="def-card">
+          <div class="icon-circle ic-gold"><span class="ic-letter">S</span></div>
+          <div class="def-body">
+            <div class="def-label c-gold">SPREAD (THE CANDLE)</div>
+            <div class="def-text">The range from high to low. Wide spread = large price movement. Narrow spread = small movement. This is the <em>headline</em> &mdash; what happened.</div>
+          </div>
+        </div>
+        <div class="def-card">
+          <div class="icon-circle ic-blue"><span class="ic-letter">V</span></div>
+          <div class="def-body">
+            <div class="def-label c-blue">VOLUME (THE TRUTH)</div>
+            <div class="def-text">How many participants were involved. High volume = conviction. Low volume = doubt. This is the <em>story</em> &mdash; whether the headline is real.</div>
+          </div>
+        </div>
+        <div class="def-card">
+          <div class="icon-circle ic-purple"><span class="ic-letter">=</span></div>
+          <div class="def-body">
+            <div class="def-label c-purple">VSA = SPREAD + VOLUME</div>
+            <div class="def-text">By analyzing the <em>relationship</em> between spread and volume, you see what the big players are really doing &mdash; not just what price shows.</div>
+          </div>
+        </div>
+      </div>
+
+      <span class="brand-mark">SIGNALPILOT</span>
+    </div>
   </div>
 
-  <script>
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 3 — The Four Combinations (VSA Matrix)
+       ══════════════════════════════════════════════════════════════ -->
+  <span class="slide-label">Slide 3 &mdash; The Four Combinations</span>
+  <div class="slide-wrapper s3" data-slide="3">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">03 / 08</span>
+      <div class="sec-tag">VSA MATRIX</div>
+      <div class="sec-title">The <em>4 Combinations</em><br>That Matter</div>
+
+      <div class="vsa-grid">
+        <div class="vsa-card strong">
+          <div class="vc-spread">WIDE + HIGH VOL</div>
+          <div class="vc-title">Strong Conviction</div>
+          <div class="vc-desc">Big move backed by big participation. The market is voting with real money. This move is likely genuine.</div>
+          <span class="vc-signal">TREND CONTINUATION</span>
+        </div>
+
+        <div class="vsa-card weak">
+          <div class="vc-spread">WIDE + LOW VOL</div>
+          <div class="vc-title">Weak Move</div>
+          <div class="vc-desc">Big move on thin participation. Fewer players = less conviction. Watch for a fakeout reversal.</div>
+          <span class="vc-signal">POSSIBLE TRAP</span>
+        </div>
+
+        <div class="vsa-card absorb">
+          <div class="vc-spread">NARROW + HIGH VOL</div>
+          <div class="vc-title">Absorption</div>
+          <div class="vc-desc">Huge participation, tiny movement. Big players are quietly building positions while price barely moves.</div>
+          <span class="vc-signal">REVERSAL SETUP</span>
+        </div>
+
+        <div class="vsa-card quiet">
+          <div class="vc-spread">NARROW + LOW VOL</div>
+          <div class="vc-title">No Interest</div>
+          <div class="vc-desc">Small move, few participants. The market is resting. No signal here &mdash; wait for volume to return.</div>
+          <span class="vc-signal">NO SIGNAL</span>
+        </div>
+      </div>
+
+      <span class="brand-mark">SIGNALPILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 4 — How to Read VSA (Step Flow)
+       ══════════════════════════════════════════════════════════════ -->
+  <span class="slide-label">Slide 4 &mdash; The Framework</span>
+  <div class="slide-wrapper s4" data-slide="4">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">04 / 08</span>
+      <div class="sec-tag">THE FRAMEWORK</div>
+      <div class="sec-title">Reading VSA<br>Step by <em>Step</em></div>
+
+      <div class="step-flow">
+        <div class="step-row">
+          <div class="step-ring sr-gold"><span class="s-num">1</span></div>
+          <div class="step-body">
+            <div class="step-name">Identify the Key Level</div>
+            <div class="step-desc">Is price at support, resistance, or a significant structure level? VSA signals mean different things at different locations.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-ring sr-blue"><span class="s-num">2</span></div>
+          <div class="step-body">
+            <div class="step-name">Measure the Spread</div>
+            <div class="step-desc">Compare the current bar's range to the prior 20 bars. Is it wide, narrow, or average? Relative comparison matters more than absolutes.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-ring sr-teal"><span class="s-num">3</span></div>
+          <div class="step-body">
+            <div class="step-name">Compare the Volume</div>
+            <div class="step-desc">Is volume above or below average? A "high volume" bar only matters relative to what came before. Always compare &mdash; never judge in isolation.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-ring sr-purple"><span class="s-num">4</span></div>
+          <div class="step-body">
+            <div class="step-name">Read the Combination</div>
+            <div class="step-desc">Match the spread + volume combination to the four patterns. This tells you whether the move is genuine, weak, absorptive, or meaningless.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-ring sr-green"><span class="s-num">5</span></div>
+          <div class="step-body">
+            <div class="step-name">Watch the Follow-Through</div>
+            <div class="step-desc">Does the next bar confirm? Absorption at support followed by an up bar = confirmation. No follow-through = the signal was noise.</div>
+          </div>
+        </div>
+      </div>
+
+      <span class="brand-mark">SIGNALPILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 5 — VSA Signals (Factor Grid)
+       ══════════════════════════════════════════════════════════════ -->
+  <span class="slide-label">Slide 5 &mdash; VSA Signals</span>
+  <div class="slide-wrapper s5" data-slide="5">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">05 / 08</span>
+      <div class="sec-tag">VSA SIGNALS</div>
+      <div class="sec-title">The <em>6 Patterns</em><br>Institutions Leave Behind</div>
+
+      <div class="factor-grid">
+        <div class="factor-card fc-green">
+          <div class="fc-top">
+            <div class="fc-icon"><span class="fc-let">S</span></div>
+            <span class="fc-name">Selling Climax</span>
+          </div>
+          <div class="fc-desc">Wide spread down on massive volume. Panic selling absorbed by smart money.</div>
+          <span class="fc-tag">REVERSAL</span>
+          <div class="prog-bar"><div class="prog-fill pf-green" style="width:92%;"></div></div>
+        </div>
+
+        <div class="factor-card fc-purple">
+          <div class="fc-top">
+            <div class="fc-icon"><span class="fc-let">A</span></div>
+            <span class="fc-name">Accumulation</span>
+          </div>
+          <div class="fc-desc">Narrow spread on high volume at support. Institutions quietly building long positions.</div>
+          <span class="fc-tag">BULLISH</span>
+          <div class="prog-bar"><div class="prog-fill pf-purple" style="width:88%;"></div></div>
+        </div>
+
+        <div class="factor-card fc-red">
+          <div class="fc-top">
+            <div class="fc-icon"><span class="fc-let">D</span></div>
+            <span class="fc-name">Distribution</span>
+          </div>
+          <div class="fc-desc">Narrow spread on high volume at resistance. Smart money offloading into retail buying.</div>
+          <span class="fc-tag">BEARISH</span>
+          <div class="prog-bar"><div class="prog-fill pf-red" style="width:88%;"></div></div>
+        </div>
+
+        <div class="factor-card fc-gold">
+          <div class="fc-top">
+            <div class="fc-icon"><span class="fc-let">T</span></div>
+            <span class="fc-name">Test</span>
+          </div>
+          <div class="fc-desc">Narrow spread dip on low volume into prior selling zone. No supply left. Bullish.</div>
+          <span class="fc-tag">CONFIRMATION</span>
+          <div class="prog-bar"><div class="prog-fill pf-gold" style="width:85%;"></div></div>
+        </div>
+
+        <div class="factor-card fc-blue">
+          <div class="fc-top">
+            <div class="fc-icon"><span class="fc-let">U</span></div>
+            <span class="fc-name">Upthrust</span>
+          </div>
+          <div class="fc-desc">Wide spread up on high volume, closes near the low. Trap to lure in buyers before dropping.</div>
+          <span class="fc-tag">TRAP</span>
+          <div class="prog-bar"><div class="prog-fill pf-blue" style="width:82%;"></div></div>
+        </div>
+
+        <div class="factor-card fc-orange">
+          <div class="fc-top">
+            <div class="fc-icon"><span class="fc-let">N</span></div>
+            <span class="fc-name">No Demand</span>
+          </div>
+          <div class="fc-desc">Narrow up bar on low volume during a downtrend. No buyers stepping in. Trend continues.</div>
+          <span class="fc-tag">WEAKNESS</span>
+          <div class="prog-bar"><div class="prog-fill pf-orange" style="width:78%;"></div></div>
+        </div>
+      </div>
+
+      <span class="brand-mark">SIGNALPILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 6 — Real Example (Absorption at Support)
+       ══════════════════════════════════════════════════════════════ -->
+  <span class="slide-label">Slide 6 &mdash; Real Example</span>
+  <div class="slide-wrapper s6" data-slide="6">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">06 / 08</span>
+
+      <div class="orb-sm"><span class="orb-letter">V</span></div>
+
+      <div class="sec-tag">REAL EXAMPLE</div>
+      <div class="sec-title">Absorption at <em>Support</em></div>
+
+      <div class="stack-vis">
+        <div class="stack-bar sb-blue">PRICE DROPS TO KEY SUPPORT LEVEL</div>
+        <div class="stack-arrow">&#9660;</div>
+        <div class="stack-bar sb-orange">NARROW SPREAD BAR ON UNUSUALLY HIGH VOLUME</div>
+        <div class="stack-arrow">&#9660;</div>
+        <div class="stack-bar sb-green">BIG PLAYERS QUIETLY BUYING &mdash; ABSORPTION</div>
+        <div class="stack-arrow">&#9660;</div>
+        <div class="stack-result">WATCH FOR EXPANSION MOVE UP</div>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-label">COMMON MISTAKE</div>
+        <div class="warn-text">Looking at volume bars in isolation. VSA requires you to <em>compare each bar to its neighbours</em>. A "high volume" bar only matters relative to the prior 20 bars. Context is everything.</div>
+      </div>
+
+      <span class="brand-mark">SIGNALPILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 7 — VSA + Wyckoff Connection (Truth Grid)
+       ══════════════════════════════════════════════════════════════ -->
+  <span class="slide-label">Slide 7 &mdash; The Wyckoff Connection</span>
+  <div class="slide-wrapper s7" data-slide="7">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">07 / 08</span>
+
+      <div class="orb-sm"><span class="orb-letter">W</span></div>
+
+      <div class="sec-tag">THE CONNECTION</div>
+      <div class="sec-title" style="font-size:clamp(14px,3.2cqw,24px);margin-bottom:clamp(8px,2cqw,16px);">VSA Makes <em>Wyckoff</em><br>Readable in Real Time</div>
+
+      <div class="truth-grid">
+        <div class="truth-card">
+          <div class="tc-title">Selling Climax</div>
+          <div class="tc-desc">High volume, wide spread down. The panic sell-off that marks the end of a downtrend and the start of accumulation.</div>
+        </div>
+        <div class="truth-card">
+          <div class="tc-title">The Spring</div>
+          <div class="tc-desc">A test on low volume below the trading range. No supply remaining. The last shakeout before markup begins.</div>
+        </div>
+        <div class="truth-card">
+          <div class="tc-title">Accumulation Range</div>
+          <div class="tc-desc">Narrow spread bars on high volume. Institutions quietly absorbing supply while price moves sideways.</div>
+        </div>
+        <div class="truth-card">
+          <div class="tc-title">Sign of Strength</div>
+          <div class="tc-desc">Wide spread up on increasing volume, breaking out of the range. Demand overwhelms supply. Markup begins.</div>
+        </div>
+      </div>
+
+      <p class="truth-quote">"Volume reveals what price hides. The story <em>always</em> reveals the truth."</p>
+      <span class="brand-mark">SIGNALPILOT</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       SLIDE 8 — CTA
+       ══════════════════════════════════════════════════════════════ -->
+  <span class="slide-label">Slide 8 &mdash; CTA</span>
+  <div class="slide-wrapper s8" data-slide="8">
+    <div class="slide-content" style="justify-content:center;">
+      <span class="slide-number">08 / 08</span>
+
+      <div class="cta-badge">SIGNAL PILOT</div>
+      <div class="cta-title">Learn to Read<br>the <em>Story</em></div>
+      <p class="cta-sub">Free education from beginner to professional. Master Volume Spread Analysis and see what the market is really telling you.</p>
+
+      <div class="stat-grid">
+        <div class="stat-cell"><div class="sv">4</div><div class="sl">COMBOS</div></div>
+        <div class="stat-cell"><div class="sv">6</div><div class="sl">SIGNALS</div></div>
+        <div class="stat-cell"><div class="sv">82</div><div class="sl">LESSONS</div></div>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill">ACCUMULATION</span>
+        <span class="pill">DISTRIBUTION</span>
+        <span class="pill">CLIMAX</span>
+        <span class="pill">ABSORPTION</span>
+        <span class="pill">TEST</span>
+        <span class="pill">UPTHRUST</span>
+        <span class="pill">WYCKOFF</span>
+      </div>
+
+      <div class="cta-box">
+        <div class="cta-url">education.signalpilot.io</div>
+        <div class="cta-hint">Free curriculum &mdash; beginner to professional</div>
+      </div>
+
+      <span class="brand-mark">SIGNALPILOT</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     EXPORT NAVIGATION
+     ══════════════════════════════════════════════════════════════ -->
+<div class="export-nav">
+  <button onclick="prevSlide()">&larr; Previous</button>
+  <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
+  <button onclick="nextSlide()">Next &rarr;</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SCRIPT — Export Mode
+     ══════════════════════════════════════════════════════════════ -->
+<script>
+  (function () {
+    const exportBtn = document.getElementById('export-btn');
     const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
     let exportMode = false;
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
-  </script>
+    let currentSlide = 0;
+
+    exportBtn.addEventListener('click', function () {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+      if (exportMode) {
+        currentSlide = 0;
+        updateActiveSlide();
+      }
+    });
+
+    function updateActiveSlide() {
+      slides.forEach(function (s, i) {
+        s.classList.toggle('active', i === currentSlide);
+      });
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    window.nextSlide = function () {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateActiveSlide();
+    };
+
+    window.prevSlide = function () {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateActiveSlide();
+    };
+
+    document.addEventListener('keydown', function (e) {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'Escape') {
+        exportMode = false;
+        document.body.classList.remove('export-mode');
+        exportBtn.textContent = 'Export Mode';
+      }
+    });
+  })();
+</script>
 </body>
 </html>
