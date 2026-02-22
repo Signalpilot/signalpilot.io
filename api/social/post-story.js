@@ -92,9 +92,15 @@ async function postOne(log, startTime) {
   const queue = readStoriesQueue();
   const stories = loadStories();
 
+  // Validation: ensure we have stories to post
   if (stories.length === 0) {
     log(`⏭ SKIP: No stories configured in data/social/stories.json`);
     return null;
+  }
+
+  if (stories.length < 5) {
+    log(`⚠️ WARNING: Only ${stories.length} stories available (need 5+ for daily rotation)`);
+    // Don't fail, just log warning - continue with rotation
   }
 
   // Cycle through stories
