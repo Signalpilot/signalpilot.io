@@ -127,7 +127,7 @@ export default async function handler(req, res) {
       });
     }
 
-    if (!isActiveHour(config)) {
+    if (!isActiveHour(config) && req.query.force !== 'true') {
       return res.status(200).json({
         success: true,
         message: 'Not within active hours',
