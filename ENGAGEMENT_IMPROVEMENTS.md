@@ -353,6 +353,55 @@ GET /api/social/optimize-engagement?token=TOKEN&action=restore&version=2026-02-2
 }
 ```
 
+### Advanced Optimization - All Analysis
+```bash
+GET /api/social/advanced-optimization?token=TOKEN&analysis_type=all
+
+# Returns:
+{
+  "data": {
+    "time_optimization": {
+      "best_hours": [14, 15, 16],
+      "peak_hour": 14,
+      "recommendation": "Best engagement at hours: 14, 15, 16 UTC"
+    },
+    "decay_analysis": {
+      "is_decaying": false,
+      "decline_percent": 0,
+      "recommendation": "✓ Target engagement stable"
+    },
+    "template_optimization": {
+      "instagram": {
+        "selected_template": { "template": "This is the move", "sample_value": 0.82 },
+        "recommendation": "Use 'This is the move' (82% estimated success rate)"
+      }
+    },
+    "seasonal_patterns": {
+      "best_day_of_week": "Tuesday",
+      "peak_weeks": [15, 16, 18]
+    }
+  },
+  "recommendations": [
+    { "category": "Timing", "priority": "high", "action": "Best engagement at hours: 14, 15, 16 UTC" },
+    { "category": "Instagram Template", "priority": "high", "estimated_success": "82.0" }
+  ]
+}
+```
+
+### Advanced Optimization - Time Analysis Only
+```bash
+GET /api/social/advanced-optimization?token=TOKEN&analysis_type=time&target=investopedia
+
+# Returns specific hours when 'investopedia' target is most responsive
+{
+  "statistics": [
+    { "hour": 14, "engagements": 8, "successRate": "87.5" },
+    { "hour": 15, "engagements": 6, "successRate": "83.3" },
+    { "hour": 16, "engagements": 5, "successRate": "80.0" }
+  ]
+}
+```
+
 ---
 
 ## ✅ Testing Checklist
@@ -370,16 +419,39 @@ GET /api/social/optimize-engagement?token=TOKEN&action=restore&version=2026-02-2
 
 ---
 
-## 🔮 Future Enhancements (Not Critical)
+## 🔮 ADVANCED FEATURES - NOW IMPLEMENTED! ✅
 
-1. **Multi-armed Bandit Algorithm**: Optimize template selection probabilistically
-2. **Time-of-Day Optimization**: Learn best posting times
-3. **Seasonal Pattern Analysis**: Adapt to content trends
-4. **Competitor Analysis**: Compare with similar accounts
-5. **Engagement Decay Detection**: Identify stale targets
-6. **A/B Testing Framework**: Formal experiment infrastructure
-7. **Causal Inference**: Track what leads to follows/DMs
-8. **Geographic Analysis**: Optimize by timezone/location
+### **1. Time-of-Day Optimization** ✅
+- Analyzes when targets are most active
+- Returns peak engagement hours per target
+- Recommends best time windows for engagement
+- **API**: `GET /api/social/advanced-optimization?analysis_type=time`
+
+### **2. Engagement Decay Detection** ✅
+- Identifies when targets stop responding
+- Alerts when success rate declines by 50%
+- Tracks decline percentage
+- **API**: `GET /api/social/advanced-optimization?analysis_type=decay`
+
+### **3. Thompson Sampling (Bandit)** ✅
+- Probabilistic template selection
+- Balances exploration vs exploitation
+- Confidence levels per template
+- **API**: `GET /api/social/advanced-optimization?analysis_type=bandit`
+
+### **4. Seasonal Pattern Detection** ✅
+- Analyzes engagement by day-of-week
+- Tracks week-of-year patterns
+- Identifies peak and off-season periods
+- **API**: `GET /api/social/advanced-optimization?analysis_type=seasonal`
+
+## 🔮 Future Enhancements (Not Yet Implemented)
+
+1. **Competitor Analysis**: Compare with similar accounts
+2. **A/B Testing Framework**: Formal experiment infrastructure
+3. **Causal Inference**: Track what leads to follows/DMs
+4. **Geographic Analysis**: Optimize by timezone/location
+5. **Multi-account Strategy**: Coordinate across multiple accounts
 
 ---
 
