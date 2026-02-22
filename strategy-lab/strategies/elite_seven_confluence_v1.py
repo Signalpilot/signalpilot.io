@@ -114,7 +114,7 @@ class EliteSevenConfluenceV1:
         _, dir4 = supertrend(high, low, close, 10, 4.0)
         up_count = (dir2 == 1).astype(int) + (dir3 == 1).astype(int) + (dir4 == 1).astype(int)
         st_bull = up_count >= 2
-        st_bear = up_count < 2
+        st_bear = up_count == 0  # all 3 bearish; up_count==1 is neutral
         st_bull_w = st_bull.astype(float) * 1.0
         st_bear_w = st_bear.astype(float) * 1.0
 
@@ -176,6 +176,9 @@ class EliteSevenConfluenceV1:
             elif close.iloc[i] > close_4.iloc[i]:
                 sell_setup.iloc[i] = sell_setup.iloc[i-1] + 1
                 buy_setup.iloc[i] = 0
+            else:  # equality: carry forward active counts
+                buy_setup.iloc[i] = buy_setup.iloc[i-1]
+                sell_setup.iloc[i] = sell_setup.iloc[i-1]
 
         # 9-count = potential reversal
         td9_bull = (buy_setup >= 9).astype(float) * 1.5    # oversold → bullish
@@ -292,7 +295,7 @@ class EliteSevenConfluenceV1:
         vol_mu = sma(log_vol, 100)
         vol_sd = log_vol.rolling(100).std().replace(0, 1e-10)
         vol_z = (log_vol - vol_mu) / vol_sd
-        vol_spike = vol_z >= 2.0
+        vol_spike = vol_z >= 1.5
 
         # Bull/bear flow ratio
         flow_ratio = 0.62
@@ -309,9 +312,9 @@ class EliteSevenConfluenceV1:
         bear_exhaustion = (vol_z > climax_threshold) & (close > op) & (close > (high + low) / 2)
 
         signal = pd.Series(0, index=df.index)
-        # Trend following mode signals
-        bull_sig = vol_spike & trend_bull & bull_flow_ok & accumulation & bar_delta_bull & ~bull_exhaustion
-        bear_sig = vol_spike & trend_bear & bear_flow_ok & distribution & bar_delta_bear & ~bear_exhaustion
+        # Trend following mode signals (relaxed: soft trend + no bar_delta gate)
+        bull_sig = vol_spike & trend_bull_soft & bull_flow_ok & accumulation & ~bull_exhaustion
+        bear_sig = vol_spike & trend_bear_soft & bear_flow_ok & distribution & ~bear_exhaustion
 
         signal[bull_sig] = 1
         signal[bear_sig] = -1
@@ -321,9 +324,8 @@ class EliteSevenConfluenceV1:
     # ─────────────────────────────────────────────────────────────────────
     #  4. PLUTUS FLOW — Statistical OBV Analysis (from Pine Script v6)
     #
-    #  Core: Spike-clipped OBV + SMA(20) basis + ±2σ bands + Z-score
-    #  Signal: OBV crosses above basis (with FlipGuard gate)
-    #  Bias: Z-score > 0 = bullish, Z-score < 0 = bearish
+    #  Core: Spike-clipped OBV + SMA(20) basis cross + FlipGuard gate
+    #  Signal: OBV crosses above/below basis (event-based, sparse)
     # ─────────────────────────────────────────────────────────────────────
     def _plutus_flow(self, df: pd.DataFrame) -> pd.Series:
         close = df["Close"]
@@ -338,15 +340,9 @@ class EliteSevenConfluenceV1:
         direction = close.diff().apply(lambda x: 1.0 if x > 0 else (-1.0 if x < 0 else 0.0))
         obv_clipped = (direction * vol_eff.fillna(0)).cumsum()
 
-        # Basis and bands
+        # Basis
         basis_len = 20
-        band_k = 2.0
         basis = sma(obv_clipped, basis_len)
-        resid = obv_clipped - basis
-        sigma = resid.rolling(basis_len).std().replace(0, 1e-10)
-
-        # Z-score
-        z_score = (obv_clipped - basis) / sigma
 
         # Cross signals
         cross_up = crossover(obv_clipped, basis)
@@ -368,10 +364,7 @@ class EliteSevenConfluenceV1:
                     signal.iloc[i] = -1
                     last_cross_dn_bar = i
 
-        # Forward-fill: hold last cross direction until next cross (Pine Script behavior)
-        result = signal.replace(0, np.nan).ffill().fillna(0).astype(int)
-
-        return result
+        return signal
 
     # ─────────────────────────────────────────────────────────────────────
     #  5. JANUS ATLAS — Market Structure (from Pine Script v6)
@@ -624,11 +617,14 @@ class EliteSevenConfluenceV1:
         signal[votes_long >= 5] = 1
         signal[votes_short >= 5] = -1
 
-        # Also catch composite crossovers in extreme zones
+        # Also catch composite crossovers in extreme zones (skip first 200 bars
+        # where robust_normalize is unstable due to narrow rolling window)
         bull_cross = crossover(comp, comp_s)
         bear_cross = crossunder(comp, comp_s)
-        signal[(signal == 0) & bull_cross & (comp < 30)] = 1
-        signal[(signal == 0) & bear_cross & (comp > 70)] = -1
+        warmup_ok = pd.Series(False, index=df.index)
+        warmup_ok.iloc[200:] = True
+        signal[(signal == 0) & bull_cross & (comp < 30) & warmup_ok] = 1
+        signal[(signal == 0) & bear_cross & (comp > 70) & warmup_ok] = -1
 
         return signal
 
@@ -651,19 +647,18 @@ class EliteSevenConfluenceV1:
         df["v_harmonic"] = self._harmonic_oscillator(df)
 
         # Count votes
-        vote_cols = [c for c in df.columns if c.startswith("v_")]
+        vote_cols = ["v_pentarch", "v_omnideck", "v_oracle", "v_plutus",
+                     "v_janus", "v_augury", "v_harmonic"]
         df["bull_votes"] = sum((df[c] == 1).astype(int) for c in vote_cols)
         df["bear_votes"] = sum((df[c] == -1).astype(int) for c in vote_cols)
 
-        # Confluence signals
+        # Confluence signals (conflict = both sides >= min_c stays 0)
         min_c = p["min_confluence"]
         df["signal"] = 0
-        df.loc[df["bull_votes"] >= min_c, "signal"] = 1
-        df.loc[df["bear_votes"] >= min_c, "signal"] = -1
-
-        # Prevent same-bar conflict
-        conflict = (df["bull_votes"] >= min_c) & (df["bear_votes"] >= min_c)
-        df.loc[conflict, "signal"] = 0
+        bull_only = (df["bull_votes"] >= min_c) & ~(df["bear_votes"] >= min_c)
+        bear_only = (df["bear_votes"] >= min_c) & ~(df["bull_votes"] >= min_c)
+        df.loc[bull_only, "signal"] = 1
+        df.loc[bear_only, "signal"] = -1
 
         # SL/TP
         df["stop_loss"] = np.nan
