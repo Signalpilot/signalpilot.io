@@ -59,6 +59,51 @@ async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * Check if content contains spam patterns
+ */
+function isSpam(text, skipPatterns = []) {
+  if (!text) return false;
+  const lower = text.toLowerCase();
+  return skipPatterns.some(pattern => lower.includes(pattern.toLowerCase()));
+}
+
+/**
+ * Filter posts by quality criteria
+ */
+function filterQualityPosts(posts, config, platform) {
+  const skipPatterns = platform === 'instagram'
+    ? (config.instagram?.skipPatterns || [])
+    : (config.twitter?.skipPatterns || []);
+
+  const safety = config.safety || {};
+
+  return posts.filter(post => {
+    // Skip spam patterns
+    const caption = platform === 'instagram' ? post.caption : post.text;
+    if (isSpam(caption, skipPatterns)) {
+      return false;
+    }
+
+    // Skip suspicious accounts if enabled
+    if (safety.skipSuspiciousAccounts && post.is_verified === false) {
+      return false;
+    }
+
+    // Skip new accounts if enabled
+    if (safety.skipNewAccounts && post.account_age_days && post.account_age_days < 30) {
+      return false;
+    }
+
+    // Check minimum followers if set
+    if (safety.minFollowersThreshold && post.followers_count < safety.minFollowersThreshold) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
 export default async function handler(req, res) {
   try {
     const { token } = req.query;
@@ -208,9 +253,20 @@ async function handleInstagramEngagement(config) {
     };
   }
 
+  // Filter by quality (skip spam, suspicious accounts, etc)
+  const qualityPosts = filterQualityPosts(posts, config, 'instagram');
+  if (qualityPosts.length === 0) {
+    return {
+      action,
+      status: 'skipped',
+      reason: `All posts from ${target.value} filtered by quality checks`,
+      filtered: posts.length,
+    };
+  }
+
   // Filter unengaged posts and score by engagement metrics
   const unengagedPosts = [];
-  for (const post of posts) {
+  for (const post of qualityPosts) {
     const engaged = await isEngaged('instagram', post.id, action);
     if (!engaged) {
       // Score by engagement: likes + comments as proxy for quality
@@ -340,9 +396,20 @@ async function handleTwitterEngagement(config) {
     };
   }
 
+  // Filter by quality (skip spam patterns)
+  const qualityTweets = filterQualityPosts(tweets, config, 'twitter');
+  if (qualityTweets.length === 0) {
+    return {
+      action,
+      status: 'skipped',
+      reason: `All tweets for query filtered by quality checks`,
+      filtered: tweets.length,
+    };
+  }
+
   // Filter unengaged tweets and score by engagement metrics
   const unengagedTweets = [];
-  for (const tweet of tweets) {
+  for (const tweet of qualityTweets) {
     const engaged = await isEngaged('twitter', tweet.id, action);
     if (!engaged) {
       // Score by engagement: likes + retweets as proxy for quality
