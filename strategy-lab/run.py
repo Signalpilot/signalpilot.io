@@ -89,18 +89,27 @@ def cmd_backtest(args):
     print(f"  Timeframes: {', '.join(timeframes)}")
     print(f"{'═' * 70}")
 
-    # Commission rates per instrument type
+    # Commission rates per instrument type (default 0.05 for crypto)
     commissions = {
         "XAUUSD": 0.01,   # Commodity
+        "XAGUSD": 0.01,   # Commodity
+        "WTIUSD": 0.01,   # Commodity
+        "NGUSD":  0.01,   # Commodity
+        "COPPUSD": 0.01,  # Commodity
         "NAS100": 0.02,   # Index
         "USTEC":  0.02,   # Index alias
+        "SP500":  0.02,   # Index
+        "DOW30":  0.02,   # Index
+        "RUSS2K": 0.02,   # Index
         "USDJPY": 0.01,   # Forex
-        "BTCUSD": 0.05,   # Crypto
-        "ETHUSD": 0.05,   # Crypto
-        "SOLUSD": 0.05,   # Crypto
-        "BNBUSD": 0.05,   # Crypto
-        "XRPUSD": 0.05,   # Crypto
+        "EURUSD": 0.01,   # Forex
+        "GBPUSD": 0.01,   # Forex
+        "AUDUSD": 0.01,   # Forex
+        "USDCAD": 0.01,   # Forex
+        "GBPJPY": 0.01,   # Forex
+        "EURJPY": 0.01,   # Forex
     }
+    # Default: 0.05 for all crypto
 
     print("\n  Fetching data...")
     all_results = {}
@@ -134,7 +143,7 @@ def cmd_backtest(args):
                         funding_rate_pct=0.01,
                     )
                 else:
-                    commission = commissions.get(symbol, 0.02)
+                    commission = commissions.get(symbol, 0.05)
                     bt = Backtester(
                         initial_capital=10000,
                         commission_pct=commission,
