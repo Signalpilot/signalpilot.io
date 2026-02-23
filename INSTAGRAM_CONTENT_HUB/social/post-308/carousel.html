@@ -3,283 +3,1106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 308 — Chronicle: The Seven United | Carousel Preview</title>
+  <title>Post 308 — EDU: BREAKER BLOCKS | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    
+    /* ── Design Tokens ── */
     :root {
       --bg-dark: #0a0a0f;
+      --bg-card: #0d0d14;
       --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
       --accent-red: #d94a4a;
       --accent-green: #4ad97a;
       --accent-teal: #5eecd4;
+      --accent-orange: #f59e0b;
       --text-primary: #e8e8e8;
       --text-secondary: #a0a0a0;
       --text-dim: #6a6a6a;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper
-.slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    /* ── Reset & Base ── */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
 
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
+    /* ── Preview Controls ── */
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .controls button {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
 
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
+    /* ── Page Title ── */
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .page-title h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .page-title p {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
 
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
+    /* ── Carousel Grid ── */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
-
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
-
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
-
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
-
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
-
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
-
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
-    .slide-1::before {
-      content: '';
+    /* ── Slide Container ── */
+    .slide-wrapper {
+      aspect-ratio: 4 / 5;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      container-type: inline-size;
+    }
+    .slide {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
     }
-    
-    .slide-1::after {
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8%;
+      text-align: center;
+    }
+
+    /* ── Slide Furniture ── */
+    .slide-number {
+      position: absolute;
+      top: 4%;
+      left: 4%;
+      font-size: clamp(9px, 3cqw, 11px);
+      color: var(--text-dim);
+      font-weight: 500;
+      letter-spacing: 1px;
+      z-index: 3;
+    }
+    .brand-mark {
+      position: absolute;
+      bottom: 4%;
+      right: 4%;
+      font-size: clamp(8px, 2.5cqw, 10px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      z-index: 3;
+    }
+    .slide-subtitle {
+      font-size: clamp(10px, 3.5cqw, 14px);
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 4%;
+      font-weight: 500;
+    }
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 7cqw, 28px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+      line-height: 1.2;
+    }
+    .slide-title.large {
+      font-size: clamp(22px, 8cqw, 32px);
+    }
+    .slide-body {
+      font-size: clamp(12px, 4cqw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 90%;
+    }
+    .cta-link {
+      display: inline-block;
+      margin-top: 5%;
+      padding: 3% 6%;
+      background: var(--accent-blue);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: clamp(11px, 3.5cqw, 14px);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Orb Container ── */
+    .orb-wrap {
+      position: relative;
+      width: clamp(80px, 26cqw, 130px);
+      height: clamp(80px, 26cqw, 130px);
+      margin-bottom: 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .orb-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -18%;
+      border-radius: 50%;
+      border: 1.5px solid rgba(74,144,217,0.15);
+      animation: orbPulse 3s ease-in-out infinite;
+    }
+    .orb-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -32%;
+      border-radius: 50%;
+      border: 1px solid rgba(74,144,217,0.07);
+      animation: orbPulse 3s ease-in-out infinite 1.5s;
+    }
+    @keyframes orbPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.08);
+        opacity: 0.6;
+      }
+    }
+    .orb-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 20px rgba(74,144,217,0.3));
+    }
+
+    /* ── Definition Box ── */
+    .def-box {
+      width: 100%;
+      max-width: 90%;
+      padding: 5%;
+      border-radius: 12px;
+      background: rgba(74,144,217,0.06);
+      border: 1.5px solid rgba(74,144,217,0.25);
+      text-align: left;
+      margin: 3% 0;
+    }
+    .def-box .db-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 5cqw, 20px);
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-bottom: 3%;
+    }
+    .def-box .db-text {
+      font-size: clamp(11px, 3.5cqw, 14px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .def-box .db-text strong {
+      color: var(--text-primary);
+    }
+
+    /* ── Formation Steps ── */
+    .formation-stack {
+      width: 100%;
+      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 3%;
+      margin: 3% 0;
+    }
+    .form-step {
+      display: flex;
+      gap: 4%;
+      padding: 4% 5%;
+      border-radius: 12px;
+      align-items: center;
+      text-align: left;
+    }
+    .form-step.phase1 {
+      background: rgba(74,144,217,0.04);
+      border: 1.5px solid rgba(74,144,217,0.15);
+    }
+    .form-step.phase2 {
+      background: rgba(217,74,74,0.04);
+      border: 1.5px solid rgba(217,74,74,0.15);
+    }
+    .form-step.phase3 {
+      background: rgba(74,217,122,0.04);
+      border: 1.5px solid rgba(74,217,122,0.15);
+    }
+    .form-step .fs-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 8cqw, 36px);
+      font-weight: 600;
+      min-width: 10%;
+      flex-shrink: 0;
+    }
+    .form-step.phase1 .fs-num {
+      color: var(--accent-blue);
+    }
+    .form-step.phase2 .fs-num {
+      color: var(--accent-red);
+    }
+    .form-step.phase3 .fs-num {
+      color: var(--accent-green);
+    }
+    .form-step .fs-body {
+      flex: 1;
+    }
+    .form-step .fs-title {
+      font-size: clamp(12px, 4cqw, 16px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+    .form-step .fs-desc {
+      font-size: clamp(9px, 2.8cqw, 11px);
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    /* ── Type Grid ── */
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3%;
+      width: 100%;
+      max-width: 92%;
+      margin: 3% 0;
+    }
+    .type-card {
+      padding: 5%;
+      border-radius: 12px;
+      text-align: left;
+    }
+    .type-card.bullish {
+      background: rgba(74,217,122,0.05);
+      border: 1.5px solid rgba(74,217,122,0.2);
+    }
+    .type-card.bearish {
+      background: rgba(217,74,74,0.05);
+      border: 1.5px solid rgba(217,74,74,0.2);
+    }
+    .type-card .tyc-label {
+      font-size: clamp(9px, 2.8cqw, 11px);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4%;
+      font-weight: 600;
+    }
+    .type-card.bullish .tyc-label {
+      color: var(--accent-green);
+    }
+    .type-card.bearish .tyc-label {
+      color: var(--accent-red);
+    }
+    .type-card .tyc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(13px, 4.5cqw, 18px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+    }
+    .type-card .tyc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 3%;
+      margin-bottom: 3%;
+      font-size: clamp(9px, 2.8cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .type-card .tyc-icon {
+      flex-shrink: 0;
+      font-weight: 600;
+    }
+    .type-card.bullish .tyc-icon {
+      color: var(--accent-green);
+    }
+    .type-card.bearish .tyc-icon {
+      color: var(--accent-red);
+    }
+
+    /* ── ID Rule Cards ── */
+    .id-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3%;
+      width: 100%;
+      max-width: 92%;
+      margin: 3% 0;
+    }
+    .id-card {
+      padding: 5%;
+      border-radius: 12px;
+      text-align: left;
+      background: rgba(74,144,217,0.04);
+      border: 1.5px solid rgba(74,144,217,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .id-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 18px;
+      width: 3px;
       height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
-      z-index: 5;
+      background: var(--accent-blue);
+      border-radius: 0 2px 2px 0;
     }
-.slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
-    .slide-1 .cine-label {
+    .id-card .idc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(9px, 2.8cqw, 11px);
+      color: var(--accent-blue);
+      margin-bottom: 2%;
+      font-weight: 600;
+    }
+    .id-card .idc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(12px, 4cqw, 16px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+    .id-card .idc-desc {
+      font-size: clamp(9px, 2.8cqw, 11px);
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    /* ── Trade Plan ── */
+    .trade-plan {
+      width: 100%;
+      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 3%;
+      margin: 3% 0;
+    }
+    .tp-row {
+      display: flex;
+      gap: 4%;
+      padding: 4% 5%;
+      border-radius: 10px;
+      align-items: center;
+      text-align: left;
+    }
+    .tp-row.entry {
+      background: rgba(74,144,217,0.04);
+      border: 1px solid rgba(74,144,217,0.15);
+    }
+    .tp-row.stop {
+      background: rgba(217,74,74,0.04);
+      border: 1px solid rgba(217,74,74,0.15);
+    }
+    .tp-row.target {
+      background: rgba(74,217,122,0.04);
+      border: 1px solid rgba(74,217,122,0.15);
+    }
+    .tp-row .tpr-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(10px, 3.2cqw, 13px);
+      font-weight: 600;
+      min-width: 15%;
+      flex-shrink: 0;
+    }
+    .tp-row.entry .tpr-label {
+      color: var(--accent-blue);
+    }
+    .tp-row.stop .tpr-label {
+      color: var(--accent-red);
+    }
+    .tp-row.target .tpr-label {
+      color: var(--accent-green);
+    }
+    .tp-row .tpr-desc {
+      font-size: clamp(10px, 3.2cqw, 13px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* ── Mistake Cards ── */
+    .mistake-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3%;
+      width: 100%;
+      max-width: 92%;
+      margin: 3% 0;
+    }
+    .mistake-card {
+      padding: 5%;
+      border-radius: 12px;
+      text-align: left;
+      background: rgba(201,169,98,0.04);
+      border: 1.5px solid rgba(201,169,98,0.15);
+    }
+    .mistake-card .mk-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(9px, 2.8cqw, 11px);
+      color: var(--accent-gold);
+      margin-bottom: 2%;
+      font-weight: 600;
+    }
+    .mistake-card .mk-title {
+      font-size: clamp(11px, 3.5cqw, 14px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+    .mistake-card .mk-desc {
+      font-size: clamp(9px, 2.8cqw, 11px);
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    /* ── Stats Bar ── */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 4%;
+      width: 100%;
+      max-width: 90%;
+      margin: 4% 0;
+      padding: 4% 0;
+      border-top: 1px solid rgba(74,144,217,0.12);
+      border-bottom: 1px solid rgba(74,144,217,0.12);
+    }
+    .sb-item {
+      text-align: center;
+      flex: 1;
+    }
+    .sb-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 8cqw, 32px);
+      font-weight: 600;
+      color: var(--accent-blue);
+    }
+    .sb-label {
+      font-size: clamp(8px, 2.5cqw, 10px);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2%;
+    }
+
+    /* ── Checklist ── */
+    .checklist {
+      list-style: none;
+      text-align: left;
+      width: 100%;
+      max-width: 90%;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 3%;
+      margin-bottom: 2.5%;
+      font-size: clamp(11px, 3.5cqw, 14px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .checklist .check {
+      color: var(--accent-blue);
+      flex-shrink: 0;
+      font-weight: 600;
+    }
+
+    /* ── Section Line ── */
+    .section-line {
+      width: 40%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(74,144,217,0.2), transparent);
+      margin: 3% 0;
+    }
+
+    /* ── Slide Backgrounds (EDU neutral — blue tints) ── */
+    .s1 {
+      background: linear-gradient(180deg, #0a0a10 0%, #08080d 100%);
+    }
+    .s1::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 30% 25%, rgba(74,144,217,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 70% 75%, rgba(74,144,217,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s2 {
+      background: linear-gradient(180deg, #090a0e 0%, #08080c 100%);
+    }
+    .s2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 65% 30%, rgba(74,144,217,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 25% 70%, rgba(74,144,217,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s3 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+    .s3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 55% at 40% 35%, rgba(74,144,217,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 70% 80%, rgba(74,144,217,0.04) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s4 {
+      background: linear-gradient(180deg, #090a0d 0%, #08080c 100%);
+    }
+    .s4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 50% at 55% 25%, rgba(74,144,217,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 45% at 35% 75%, rgba(74,144,217,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s5 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080c 100%);
+    }
+    .s5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 45% at 45% 40%, rgba(74,144,217,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 55% at 65% 70%, rgba(74,144,217,0.04) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s6 {
+      background: linear-gradient(180deg, #090a0e 0%, #08080d 100%);
+    }
+    .s6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 50% at 60% 30%, rgba(74,144,217,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 45% at 30% 75%, rgba(74,144,217,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s7 {
+      background: linear-gradient(180deg, #0a0a10 0%, #08080d 100%);
+    }
+    .s7::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 50% at 35% 35%, rgba(74,144,217,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 45% at 70% 70%, rgba(74,144,217,0.04) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s8 {
+      background: linear-gradient(180deg, #0a0a11 0%, #08080d 100%);
+    }
+    .s8::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 50% 30%, rgba(74,144,217,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 50% at 40% 80%, rgba(74,144,217,0.05) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Hook Slide (s1) Specifics ── */
+    .s1 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      z-index: 3;
+    }
+    .s1 .cine-label {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94,234,212,0.9);
-      margin-bottom: 8%;
+      color: rgba(74,144,217,0.9);
+      margin-bottom: 6%;
     }
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+    .s1 .hook-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 5.5cqw, 2.8rem);
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.15;
       color: rgba(255,255,255,0.95);
       margin-bottom: 4%;
+      max-width: 85%;
     }
-    .slide-1 .cine-divider {
+    .s1 .cine-divider {
       width: 60px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(74,144,217,0.6), transparent);
       margin-bottom: 4%;
     }
-    .slide-1 .hook-sub {
+    .s1 .hook-sub {
       font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-size: clamp(0.65rem, 2cqw, 1rem);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(94,234,212,0.4);
+      color: rgba(74,144,217,0.5);
       line-height: 1.6;
     }
-    .slide-1 .cine-logo {
+    .s1 .cine-logo {
       position: absolute;
-      bottom: 8%;
+      bottom: 6%;
       left: 50%;
       transform: translateX(-50%);
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
+      color: rgba(74,144,217,0.35);
     }
-  
+
+    /* ── Export Mode ── */
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+    body.export-mode .controls,
+    body.export-mode .page-title {
+      display: none;
+    }
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+    body.export-mode .slide-wrapper {
+      display: none;
+      width: 1080px;
+      height: 1350px;
+      border-radius: 0;
+      margin: 0;
+    }
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+    body.export-mode .export-nav {
+      display: flex;
+    }
+    .export-nav button {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .export-nav .slide-indicator {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="controls">
-<button onclick="toggleExportMode()">Export Mode</button>
+    <button onclick="toggleExportMode()">Export Mode</button>
   </div>
 
   <div class="page-title">
-    <h1>Post 308 — Chronicle: The Seven United</h1>
-    <p>Chronicle Carousel — 6 Slides</p>
+    <h1>Post 308 — EDU: BREAKER BLOCKS</h1>
+    <p>Education Carousel — 8 Slides</p>
   </div>
 
   <div class="carousel-grid">
 
+    <!-- ============ SLIDE 1 : Hook ============ -->
     <div class="slide-wrapper" data-slide="1">
-      <div class="slide slide-1">
+      <div class="slide s1">
         <div class="slide-content">
-          <div class="cine-label">CHRONICLE</div>
-          <div class="hook-main">The most overlooked edge? Self-awareness.</div>
+          <div class="cine-label">Education</div>
+          <div class="orb-wrap">
+            <svg class="orb-svg" viewBox="0 0 120 120" fill="none">
+              <circle cx="60" cy="60" r="52" stroke="rgba(74,144,217,0.15)" stroke-width="1"/>
+              <circle cx="60" cy="60" r="40" fill="rgba(74,144,217,0.06)"/>
+              <!-- Structural break: block with crack -->
+              <rect x="38" y="40" width="20" height="16" rx="2" fill="rgba(74,144,217,0.08)" stroke="rgba(74,144,217,0.4)" stroke-width="1.5"/>
+              <line x1="48" y1="40" x2="48" y2="56" stroke="rgba(217,74,74,0.4)" stroke-width="1" stroke-dasharray="2,2"/>
+              <!-- Arrow breaking through -->
+              <line x1="62" y1="48" x2="82" y2="48" stroke="rgba(74,217,122,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+              <polyline points="78,44 83,48 78,52" fill="none" stroke="rgba(74,217,122,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- New block formed below -->
+              <rect x="62" y="62" width="20" height="12" rx="2" fill="rgba(74,217,122,0.08)" stroke="rgba(74,217,122,0.3)" stroke-width="1"/>
+              <text x="72" y="70" font-size="6" fill="rgba(74,217,122,0.5)" text-anchor="middle" font-family="Inter">BRK</text>
+            </svg>
+          </div>
+          <div class="hook-main">Breaker Blocks:<br>When Order Blocks Fail</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">From the Signal Pilot Chronicle:</p>
+          <p class="hook-sub">The flip zone most traders miss</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ============ SLIDE 2 : Definition ============ -->
     <div class="slide-wrapper" data-slide="2">
-<div class="slide-content">
-        <span class="slide-number">02 / 06</span>
-        <div class="slide-subtitle">The Story</div>
-        <h2 class="slide-title">Pentarch reads the full cycle in 5 signals. No repainting.</h2>
-        <p class="slide-body" style="font-style:italic;">Pentarch reads the full cycle in 5 signals. No repainting.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide s2">
+        <div class="slide-content">
+          <span class="slide-number">02 / 08</span>
+          <div class="slide-subtitle">Definition</div>
+          <h2 class="slide-title">What Is a Breaker Block?</h2>
+
+          <div class="def-box">
+            <div class="db-title">Core Concept</div>
+            <div class="db-text">A breaker block is a <strong>failed order block</strong> that flips into a zone of the opposite bias. When price breaks through an order block instead of respecting it, <strong>that zone becomes a breaker</strong> &mdash; a high-probability reversal area on the retest.</div>
+          </div>
+
+          <div class="stats-bar">
+            <div class="sb-item">
+              <div class="sb-value">OB</div>
+              <div class="sb-label">Order Block</div>
+            </div>
+            <div class="sb-item">
+              <div class="sb-value">&rarr;</div>
+              <div class="sb-label">Fails</div>
+            </div>
+            <div class="sb-item">
+              <div class="sb-value">BRK</div>
+              <div class="sb-label">Breaker Block</div>
+            </div>
+          </div>
+
+          <p class="slide-body" style="font-style:italic; font-size:clamp(10px,3.2cqw,13px); color:var(--text-dim);">Think of it as support becoming resistance &mdash; but with institutional footprints as evidence.</p>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
+    <!-- ============ SLIDE 3 : How They Form ============ -->
     <div class="slide-wrapper" data-slide="3">
-<div class="slide-content">
-        <span class="slide-number">03 / 06</span>
-        <div class="slide-subtitle">The Philosophy</div>
-        <h2 class="slide-title">Seven indicators. Seven perspectives. One mission.</h2>
-        <div class="concept-card gold"><div class="card-label">Chronicle</div><div class="card-desc">Seven indicators. Seven perspectives. One mission. The Sovereign, Prophet, Cartographer, Scales, Arbiter, Watchman, and Commander. Alone, they see fragments. Together, they see everything. 🧵 Watch for the phase transition — that's where the edge lives.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide s3">
+        <div class="slide-content">
+          <span class="slide-number">03 / 08</span>
+          <div class="slide-subtitle">Formation</div>
+          <h2 class="slide-title">How Breaker Blocks Form</h2>
+
+          <div class="formation-stack">
+            <div class="form-step phase1">
+              <div class="fs-num">1</div>
+              <div class="fs-body">
+                <div class="fs-title">Order Block Establishes</div>
+                <div class="fs-desc">Price creates an order block &mdash; a zone of institutional buying or selling. Traders expect this zone to hold.</div>
+              </div>
+            </div>
+            <div class="form-step phase2">
+              <div class="fs-num">2</div>
+              <div class="fs-body">
+                <div class="fs-title">Price Breaks Through</div>
+                <div class="fs-desc">Instead of respecting the OB, price slices through it with momentum. The order block has failed. Stops are triggered.</div>
+              </div>
+            </div>
+            <div class="form-step phase3">
+              <div class="fs-num">3</div>
+              <div class="fs-body">
+                <div class="fs-title">Breaker Block Forms</div>
+                <div class="fs-desc">The failed OB zone flips. What was support becomes resistance (or vice versa). This is the breaker block &mdash; a high-probability retest zone.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="def-box" style="background:rgba(201,169,98,0.04); border-color:rgba(201,169,98,0.2);">
+            <div class="db-title" style="color:var(--accent-gold);">Why It Works</div>
+            <div class="db-text">Trapped traders from the original OB now need to exit. Their exits create the liquidity that fuels the reversal at the breaker level.</div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
+    <!-- ============ SLIDE 4 : Bullish vs Bearish ============ -->
     <div class="slide-wrapper" data-slide="4">
-<div class="slide-content">
-        <span class="slide-number">04 / 06</span>
-        <div class="slide-subtitle">The Method</div>
-        <h2 class="slide-title">👑 The Sovereign reads cycles </h2>
-        <div class="indicator-pill">PENTARCH</div><p class="slide-body">👑 The Sovereign reads cycles — knowing what season the market breathes. 🔮 The Prophet classifies regimes — sensing the environment before the move. 🗺️ The Cartographer maps structure — marking where battles were fought. Accumulation → Markup → Distribution → Markdown. Repeat.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide s4">
+        <div class="slide-content">
+          <span class="slide-number">04 / 08</span>
+          <div class="slide-subtitle">Types</div>
+          <h2 class="slide-title">Two Types of Breakers</h2>
+
+          <div class="type-grid">
+            <div class="type-card bullish">
+              <div class="tyc-label">Bullish Breaker</div>
+              <div class="tyc-title">Support Flip</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Bearish OB forms (selling zone)</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Price breaks above the OB</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Failed sellers become trapped</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Retest of zone = buying opportunity</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Old resistance becomes new support</div>
+            </div>
+            <div class="type-card bearish">
+              <div class="tyc-label">Bearish Breaker</div>
+              <div class="tyc-title">Resistance Flip</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Bullish OB forms (buying zone)</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Price breaks below the OB</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Failed buyers become trapped</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Retest of zone = selling opportunity</div>
+              <div class="tyc-item"><span class="tyc-icon">&#x2714;</span> Old support becomes new resistance</div>
+            </div>
+          </div>
+
+          <p class="slide-body" style="font-size:clamp(10px,3.2cqw,13px); color:var(--text-dim); margin-top:2%;">The key: breakers trade the <em>failure</em> of the original thesis, not the thesis itself.</p>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
+    <!-- ============ SLIDE 5 : Identification ============ -->
     <div class="slide-wrapper" data-slide="5">
-<div class="slide-content">
-        <span class="slide-number">05 / 06</span>
-        <div class="slide-subtitle">The Wisdom</div>
-        <h2 class="slide-title">⚖️ The Scales weigh conviction </h2>
-        <div class="indicator-pill">PENTARCH</div><p class="slide-body">⚖️ The Scales weigh conviction — measuring flow behind every candle. ⚔️ The Arbiter judges sustainability — separating momentum from exhaustion. 👁️ The Watchman scans all — ensuring no opportunity escapes. 🎯 The Commander unifies them — one view, complete clarity.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide s5">
+        <div class="slide-content">
+          <span class="slide-number">05 / 08</span>
+          <div class="slide-subtitle">Identification</div>
+          <h2 class="slide-title">How to Spot a Breaker</h2>
+
+          <div class="id-grid">
+            <div class="id-card">
+              <div class="idc-num">01</div>
+              <div class="idc-title">Find the Order Block</div>
+              <div class="idc-desc">Identify a clear OB where price previously reacted. The last up-candle before a drop, or last down-candle before a rally.</div>
+            </div>
+            <div class="id-card">
+              <div class="idc-num">02</div>
+              <div class="idc-title">Confirm the Break</div>
+              <div class="idc-desc">Price must close through the OB body &mdash; not just wick through it. A decisive break with strong candle close.</div>
+            </div>
+            <div class="id-card">
+              <div class="idc-num">03</div>
+              <div class="idc-title">Mark the Zone</div>
+              <div class="idc-desc">The body of the original OB candle is now your breaker zone. Draw it from the open to close of that candle.</div>
+            </div>
+            <div class="id-card">
+              <div class="idc-num">04</div>
+              <div class="idc-title">Wait for the Retest</div>
+              <div class="idc-desc">Price should return to the breaker zone. This retest is your trade opportunity &mdash; not the break itself.</div>
+            </div>
+          </div>
+
+          <div class="def-box">
+            <div class="db-title">Pro Tip</div>
+            <div class="db-text">The strongest breakers form on <strong>higher timeframes</strong> (4H, Daily) and align with a change of character (CHoCH) in market structure. If the breaker also coincides with a fair value gap, the probability increases.</div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
+    <!-- ============ SLIDE 6 : Trading the Breaker ============ -->
     <div class="slide-wrapper" data-slide="6">
-<div class="slide-content">
-        <span class="slide-number">06 / 06</span>
-        <div class="slide-icon">📜</div>
-        <h2 class="slide-title">Enter the Chronicle</h2>
-        <p class="slide-body">Discover the stories of the Elite Seven.</p>
-        <a href="https://signalpilot.io/chronicle/meet-the-sovereign/" class="cta-link">Read the Chronicle</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide s6">
+        <div class="slide-content">
+          <span class="slide-number">06 / 08</span>
+          <div class="slide-subtitle">Execution</div>
+          <h2 class="slide-title">Trading the Breaker Block</h2>
+
+          <div class="trade-plan">
+            <div class="tp-row entry">
+              <div class="tpr-label">ENTRY</div>
+              <div class="tpr-desc">Enter on the retest of the breaker zone. Look for a reaction candle (rejection wick, engulfing) for confirmation.</div>
+            </div>
+            <div class="tp-row stop">
+              <div class="tpr-label">STOP</div>
+              <div class="tpr-desc">Place stop beyond the breaker zone &mdash; below for bullish breakers, above for bearish. If the breaker fails too, the thesis is invalid.</div>
+            </div>
+            <div class="tp-row target">
+              <div class="tpr-label">TARGET</div>
+              <div class="tpr-desc">Aim for the next liquidity pool or opposing order block. Minimum 2:1 R:R. Let the trapped traders fuel your move.</div>
+            </div>
+          </div>
+
+          <ul class="checklist">
+            <li><span class="check">&#x2714;</span> Always wait for the retest &mdash; don&rsquo;t chase the break</li>
+            <li><span class="check">&#x2714;</span> Higher timeframe breakers have higher probability</li>
+            <li><span class="check">&#x2714;</span> Combine with CHoCH and fair value gaps for confluence</li>
+            <li><span class="check">&#x2714;</span> Volume confirmation strengthens the setup</li>
+            <li><span class="check">&#x2714;</span> First retest is the highest probability &mdash; second is weaker</li>
+          </ul>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
+
+    <!-- ============ SLIDE 7 : Common Mistakes ============ -->
+    <div class="slide-wrapper" data-slide="7">
+      <div class="slide s7">
+        <div class="slide-content">
+          <span class="slide-number">07 / 08</span>
+          <div class="slide-subtitle">Mistakes</div>
+          <h2 class="slide-title">What Traders Get Wrong</h2>
+
+          <div class="mistake-grid">
+            <div class="mistake-card">
+              <div class="mk-num">01</div>
+              <div class="mk-title">Trading the Break</div>
+              <div class="mk-desc">Entering on the break itself instead of the retest. The break confirms the zone; the retest is the trade.</div>
+            </div>
+            <div class="mistake-card">
+              <div class="mk-num">02</div>
+              <div class="mk-title">Ignoring Timeframe</div>
+              <div class="mk-desc">A breaker on the 1-minute chart has far less significance than one on the 4-hour. Context matters.</div>
+            </div>
+            <div class="mistake-card">
+              <div class="mk-num">03</div>
+              <div class="mk-title">No Confluence</div>
+              <div class="mk-desc">Using breakers in isolation without checking structure, trend, or liquidity targets. Breakers work best with supporting evidence.</div>
+            </div>
+            <div class="mistake-card">
+              <div class="mk-num">04</div>
+              <div class="mk-title">Stale Breakers</div>
+              <div class="mk-desc">Breakers lose potency after multiple retests. The first retest is the highest probability. After 2&ndash;3 touches, move on.</div>
+            </div>
+          </div>
+
+          <p class="slide-body" style="font-style:italic; font-size:clamp(10px,3.2cqw,13px); color:var(--text-dim); margin-top:2%;">The concept is simple. The discipline to wait for the retest is the hard part.</p>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SLIDE 8 : CTA ============ -->
+    <div class="slide-wrapper" data-slide="8">
+      <div class="slide s8">
+        <div class="slide-content">
+          <span class="slide-number">08 / 08</span>
+          <div class="orb-wrap" style="width:clamp(60px,20cqw,100px); height:clamp(60px,20cqw,100px);">
+            <svg class="orb-svg" viewBox="0 0 120 120" fill="none">
+              <circle cx="60" cy="60" r="52" stroke="rgba(74,144,217,0.15)" stroke-width="1"/>
+              <circle cx="60" cy="60" r="35" fill="rgba(74,144,217,0.06)"/>
+              <rect x="45" y="48" width="16" height="10" rx="2" fill="none" stroke="rgba(74,144,217,0.4)" stroke-width="1.5"/>
+              <polyline points="65,53 72,53 72,60" fill="none" stroke="rgba(74,217,122,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="slide-subtitle">Learn More</div>
+          <h2 class="slide-title large">Master Breaker Blocks</h2>
+          <p class="slide-body">Failed order blocks create some of the best trading opportunities. Learn to spot the flip, wait for the retest, and trade with trapped traders as your fuel.</p>
+          <div class="section-line"></div>
+          <ul class="checklist" style="margin: 3% 0;">
+            <li><span class="check">&#x2714;</span> Save this breaker block guide</li>
+            <li><span class="check">&#x2714;</span> Practice identifying breakers on your charts</li>
+            <li><span class="check">&#x2714;</span> Start free at education.signalpilot.io</li>
+          </ul>
+          <a href="https://education.signalpilot.io/" class="cta-link">Free Education Hub</a>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
+  <!-- Export Navigation -->
   <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-    <button onclick="nextSlide()">Next →</button>
+    <button onclick="prevSlide()">&#8592; Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
+    <button onclick="nextSlide()">Next &#8594;</button>
   </div>
 
   <script>
     const slides = document.querySelectorAll('.slide-wrapper');
     let currentSlide = 0;
     let exportMode = false;
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
+    function toggleExportMode() {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) { currentSlide = 0; updateExportView(); }
+    }
+    function updateExportView() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
     function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
     function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
+    });
   </script>
 </body>
 </html>
