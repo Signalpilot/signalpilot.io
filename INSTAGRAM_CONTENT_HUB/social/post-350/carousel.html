@@ -3,237 +3,1868 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 350 — Contact & Support | Carousel Preview</title>
+  <title>Post 350 — When Trading Becomes Gambling</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-red: #d94a4a; --accent-green: #4ad97a; --text-primary: #e8e8e8; --text-secondary: #a0a0a0; --text-dim: #6a6a6a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { container-type: inline-size; aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 2cqw, 11px); color: var(--text-dim); letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 1.8cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(32px, 8cqw, 56px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 5cqw, 32px); font-weight: 600; margin-bottom: 3%; line-height: 1.2; overflow-wrap: break-word; }
-    .slide-title.large { font-size: clamp(26px, 7cqw, 48px); }
-    .slide-subtitle { font-size: clamp(10px, 2.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; }
-    .slide-body { font-size: clamp(12px, 3cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .channel-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; background: rgba(74, 144, 217, 0.1); border: 2px solid rgba(74, 144, 217, 0.4); }
-    .channel-box.purple { background: rgba(114, 137, 218, 0.1); border-color: rgba(114, 137, 218, 0.4); }
-    .channel-box.gold { background: rgba(201, 169, 98, 0.1); border-color: rgba(201, 169, 98, 0.4); }
-    .channel-box.green { background: rgba(74, 217, 122, 0.1); border-color: rgba(74, 217, 122, 0.4); }
-    .channel-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--accent-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-    .channel-box.purple .channel-title { color: #7289da; }
-    .channel-box.gold .channel-title { color: var(--accent-gold); }
-    .channel-box.green .channel-title { color: var(--accent-green); }
-    .channel-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-    .channel-badge { display: inline-block; padding: 4px 10px; background: rgba(74, 217, 122, 0.2); color: var(--accent-green); font-size: 11px; border-radius: 4px; margin-left: 8px; }
-    .cta-link { display: inline-block; margin-top: 24px; padding: 14px 32px; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 14px; }
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
+
+    /* ═══════════════════════════════════════════════════════════
+       POST 350 — WHEN TRADING BECOMES GAMBLING
+       Column: NEUTRAL / EDU
+       No sidebar. Blue-tinted glows. Standard padding.
+       ═══════════════════════════════════════════════════════════ */
+
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255, 255, 255, 0.02);
+      --bg-card-hover: rgba(255, 255, 255, 0.04);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-glow: rgba(74, 144, 217, 0.3);
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-tertiary: rgba(255, 255, 255, 0.4);
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --accent-teal: #5eead4;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       BASE RESET
+       ═══════════════════════════════════════════════════════════ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body {
+      padding: 40px 20px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════════════════════ */
+
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 24px;
+      margin-bottom: 32px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-group label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .control-group select {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .control-group select:focus {
+      border-color: var(--border-glow);
+    }
+
+    .control-group input[type="range"] {
+      width: 100px;
+      cursor: pointer;
+      accent-color: var(--accent-blue);
+    }
+
+    #export-btn {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    #export-btn:hover {
+      opacity: 0.85;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       PAGE TITLE
+       ═══════════════════════════════════════════════════════════ */
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .page-title p {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CAROUSEL GRID LAYOUT
+       ═══════════════════════════════════════════════════════════ */
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+      gap: 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .slide-wrapper {
+      container-type: inline-size;
+      max-width: 540px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .slide-label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE BASE (4:5 aspect ratio)
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE INTERNALS
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: clamp(36px, 6.67cqw, 72px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide-number {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: clamp(16px, 3cqw, 32px);
+    }
+
+    .headline {
+      font-family: var(--font-serif);
+      font-size: clamp(41px, 7.59cqw, 82px);
+      font-weight: 600;
+      line-height: 1.0;
+      color: var(--text-primary);
+      margin-bottom: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .headline-large {
+      font-size: clamp(44px, 8.15cqw, 88px);
+    }
+
+    .headline-medium {
+      font-size: clamp(36px, 6.67cqw, 72px);
+    }
+
+    .headline-small {
+      font-size: clamp(28px, 5.19cqw, 56px);
+    }
+
+    .subheadline {
+      font-family: var(--font-sans);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .body-text {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: clamp(16px, 2.96cqw, 32px);
+      right: clamp(16px, 2.96cqw, 32px);
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       ACCENT COLOR UTILITIES
+       ═══════════════════════════════════════════════════════════ */
+
+    .accent-text {
+      color: var(--accent-blue);
+    }
+
+    .accent-gold {
+      color: var(--accent-gold);
+    }
+
+    .accent-green {
+      color: var(--accent-green);
+    }
+
+    .accent-red {
+      color: var(--accent-red);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (NEUTRAL / EDU)
+       No sidebar. Gray "LEARN" label. Neutral gray tones.
+       ═══════════════════════════════════════════════════════════ */
+
     .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
+      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
     }
 
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 60%
+      );
       pointer-events: none;
       z-index: 1;
     }
-    
 
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
+    /* NO ::after sidebar — neutral column */
 
     .slide-1 .slide-content {
       align-items: center;
       text-align: center;
       justify-content: center;
-      z-index: 3;
     }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+    .cine-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: rgba(163, 163, 163, 0.9);
       margin-bottom: 8%;
     }
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+    .hook-main {
+      font-family: var(--font-serif);
+      font-size: clamp(44px, 8.15cqw, 88px);
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.0;
       color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
     }
 
-    .slide-1 .cine-divider {
-      width: 60px;
+    .cine-divider {
+      width: clamp(40px, 7.41cqw, 80px);
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(163, 163, 163, 0.5),
+        transparent
+      );
       margin-bottom: 4%;
     }
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+    .hook-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(163, 163, 163, 0.4);
+      color: var(--text-tertiary);
       line-height: 1.6;
+      max-width: 80%;
     }
 
-    .slide-1 .cine-logo {
+    .cine-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.4);
+      color: var(--text-tertiary);
     }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDES 2-8 — BACKGROUNDS WITH BLUE GLOW
+       Dual radial gradients using blue tints
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide-2 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 50% at 20% 20%,
+          rgba(74, 144, 217, 0.08) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 80% 80%,
+          rgba(74, 144, 217, 0.05) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-3 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 45% at 75% 30%,
+          rgba(74, 144, 217, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 45% 35% at 25% 75%,
+          rgba(74, 144, 217, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-4 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 30% 40%,
+          rgba(74, 144, 217, 0.09) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 55% 40% at 70% 70%,
+          rgba(74, 144, 217, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-5 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 45% at 50% 25%,
+          rgba(74, 144, 217, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 50% 80%,
+          rgba(74, 144, 217, 0.05) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-6 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 65% 35%,
+          rgba(74, 144, 217, 0.08) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 55% 45% at 35% 65%,
+          rgba(74, 144, 217, 0.07) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-7 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-7::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 50% at 40% 30%,
+          rgba(74, 144, 217, 0.09) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 45% 40% at 60% 75%,
+          rgba(74, 144, 217, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-8 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-8::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 55% at 50% 40%,
+          rgba(74, 144, 217, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 50% 70%,
+          rgba(74, 144, 217, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       ORB CONTAINER — Dice / Warning Theme
+       Blue pulse rings with dice and warning SVG motif
+       ═══════════════════════════════════════════════════════════ */
+
+    .orb-container {
+      position: relative;
+      width: clamp(80px, 14.81cqw, 160px);
+      height: clamp(80px, 14.81cqw, 160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto clamp(16px, 2.96cqw, 32px) auto;
+    }
+
+    .orb-container svg {
+      width: clamp(40px, 7.41cqw, 80px);
+      height: clamp(40px, 7.41cqw, 80px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .orb-container::before,
+    .orb-container::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(74, 144, 217, 0.3);
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+
+    .orb-container::before {
+      width: 100%;
+      height: 100%;
+      animation-delay: 0s;
+    }
+
+    .orb-container::after {
+      width: 75%;
+      height: 75%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(0.85);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+      100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(0.85);
+      }
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SIGN STACK — Warning Signs (Red Flags)
+       Vertically stacked red-accented warning items
+       ═══════════════════════════════════════════════════════════ */
+
+    .sign-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+    }
+
+    .sign-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 1.85cqw, 20px);
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: rgba(217, 74, 74, 0.04);
+      border: 1px solid rgba(217, 74, 74, 0.2);
+      border-radius: 12px;
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+
+    .sign-item:hover {
+      background: rgba(217, 74, 74, 0.07);
+    }
+
+    .sign-icon {
+      flex-shrink: 0;
+      width: clamp(28px, 5.19cqw, 56px);
+      height: clamp(28px, 5.19cqw, 56px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(217, 74, 74, 0.12);
+      border: 1px solid rgba(217, 74, 74, 0.35);
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 700;
+      color: var(--accent-red);
+      line-height: 1;
+    }
+
+    .sign-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2px, 0.37cqw, 4px);
+    }
+
+    .sign-title {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 600;
+      color: var(--accent-red);
+    }
+
+    .sign-text {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       COMPARE GRID — Trading vs Gambling Comparison
+       Two-column side-by-side comparison layout
+       ═══════════════════════════════════════════════════════════ */
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(10px, 1.85cqw, 20px);
+      width: 100%;
+    }
+
+    .compare-col {
+      padding: clamp(14px, 2.59cqw, 28px);
+      border-radius: 14px;
+      text-align: left;
+    }
+
+    .compare-col.trading {
+      background: rgba(74, 217, 122, 0.04);
+      border: 1px solid rgba(74, 217, 122, 0.2);
+    }
+
+    .compare-col.gambling {
+      background: rgba(217, 74, 74, 0.04);
+      border: 1px solid rgba(217, 74, 74, 0.2);
+    }
+
+    .compare-header {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: clamp(10px, 1.85cqw, 20px);
+      padding-bottom: clamp(8px, 1.48cqw, 16px);
+      border-bottom: 1px solid;
+    }
+
+    .compare-col.trading .compare-header {
+      color: var(--accent-green);
+      border-bottom-color: rgba(74, 217, 122, 0.2);
+    }
+
+    .compare-col.gambling .compare-header {
+      color: var(--accent-red);
+      border-bottom-color: rgba(217, 74, 74, 0.2);
+    }
+
+    .compare-row {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(6px, 1.11cqw, 12px);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .compare-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .compare-marker {
+      flex-shrink: 0;
+      font-size: clamp(10px, 1.85cqw, 20px);
+      line-height: 1.4;
+    }
+
+    .compare-col.trading .compare-marker {
+      color: var(--accent-green);
+    }
+
+    .compare-col.gambling .compare-marker {
+      color: var(--accent-red);
+    }
+
+    .compare-label {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--text-secondary);
+    }
+
+    .compare-label strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(1px, 0.19cqw, 2px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SELF CHECK — Self-Assessment Checklist
+       Yes/No honest evaluation items
+       ═══════════════════════════════════════════════════════════ */
+
+    .self-check {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.11cqw, 12px);
+      width: 100%;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 1.85cqw, 20px);
+      padding: clamp(10px, 1.85cqw, 20px) clamp(12px, 2.22cqw, 24px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+
+    .check-item:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .check-bullet {
+      flex-shrink: 0;
+      width: clamp(20px, 3.7cqw, 40px);
+      height: clamp(20px, 3.7cqw, 40px);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(74, 144, 217, 0.10);
+      border: 1px solid rgba(74, 144, 217, 0.3);
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 700;
+      color: var(--accent-blue);
+      line-height: 1;
+    }
+
+    .check-question {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .check-question strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .check-note {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-tertiary);
+      margin-top: clamp(8px, 1.48cqw, 16px);
+      padding-top: clamp(8px, 1.48cqw, 16px);
+      border-top: 1px solid var(--border-subtle);
+      text-align: left;
+      width: 100%;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       RECOVERY STACK — Course Correction Steps
+       Numbered green-accented recovery action items
+       ═══════════════════════════════════════════════════════════ */
+
+    .recovery-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+    }
+
+    .recovery-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 1.85cqw, 20px);
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: rgba(74, 217, 122, 0.03);
+      border: 1px solid rgba(74, 217, 122, 0.15);
+      border-radius: 12px;
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+
+    .recovery-item:hover {
+      background: rgba(74, 217, 122, 0.06);
+    }
+
+    .recovery-num {
+      flex-shrink: 0;
+      width: clamp(28px, 5.19cqw, 56px);
+      height: clamp(28px, 5.19cqw, 56px);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(74, 217, 122, 0.12);
+      border: 1px solid rgba(74, 217, 122, 0.35);
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 600;
+      color: var(--accent-green);
+      line-height: 1;
+    }
+
+    .recovery-detail {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2px, 0.37cqw, 4px);
+    }
+
+    .recovery-title {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .recovery-text {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       WARNING BOX — Important Caveats
+       Red-accented left-border warning callout
+       ═══════════════════════════════════════════════════════════ */
+
+    .warning-box {
+      width: 100%;
+      border-radius: 12px;
+      padding: clamp(14px, 2.59cqw, 28px);
+      text-align: left;
+      background: rgba(217, 74, 74, 0.05);
+      border-left: 3px solid var(--accent-red);
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .warning-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-red);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .warning-text {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .warning-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       STAT ROW — Quick Statistics Display
+       Horizontal row of stat items with labels
+       ═══════════════════════════════════════════════════════════ */
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .stat-row.two-col {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-item {
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.07cqw, 44px);
+      font-weight: 600;
+      color: var(--accent-blue);
+      line-height: 1.1;
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .stat-value.red {
+      color: var(--accent-red);
+    }
+
+    .stat-value.green {
+      color: var(--accent-green);
+    }
+
+    .stat-value.gold {
+      color: var(--accent-gold);
+    }
+
+    .stat-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       HOMEWORK CARD — Practice Assignment
+       Blue-tinted card with assignment text
+       ═══════════════════════════════════════════════════════════ */
+
+    .homework-card {
+      background: rgba(74, 144, 217, 0.05);
+      border: 1px solid rgba(74, 144, 217, 0.2);
+      border-radius: 16px;
+      padding: clamp(16px, 2.96cqw, 32px);
+      text-align: left;
+      width: 100%;
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .homework-label {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-blue);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .homework-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .homework-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CALLOUT BOX — Key Insight or Quote
+       Gold-accented left border with italic text
+       ═══════════════════════════════════════════════════════════ */
+
+    .callout-box {
+      width: 100%;
+      border-radius: 12px;
+      padding: clamp(14px, 2.59cqw, 28px);
+      text-align: left;
+      background: rgba(201, 169, 98, 0.05);
+      border-left: 3px solid var(--accent-gold);
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .callout-box.blue {
+      background: rgba(74, 144, 217, 0.05);
+      border-left-color: var(--accent-blue);
+    }
+
+    .callout-text {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    .callout-attr {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      color: var(--accent-gold);
+      margin-top: clamp(6px, 1.11cqw, 12px);
+      letter-spacing: 1px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       TIP CARD — Quick Insight / Practical Tip
+       Subtle blue highlight with icon
+       ═══════════════════════════════════════════════════════════ */
+
+    .tip-card {
+      width: 100%;
+      padding: clamp(14px, 2.59cqw, 28px);
+      background: rgba(74, 144, 217, 0.04);
+      border: 1px solid rgba(74, 144, 217, 0.15);
+      border-radius: 12px;
+      text-align: left;
+      margin-top: clamp(10px, 1.85cqw, 20px);
+    }
+
+    .tip-card .tip-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-blue);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .tip-card .tip-text {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .tip-card .tip-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CONTEXT GRID — Intro Insight Cards
+       2-column key insight cards with icons
+       ═══════════════════════════════════════════════════════════ */
+
+    .context-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .context-item {
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .context-icon {
+      font-size: clamp(20px, 3.7cqw, 40px);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+      display: block;
+    }
+
+    .context-label {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .context-label strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.37cqw, 4px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CTA SLIDE (Slide 8)
+       ═══════════════════════════════════════════════════════════ */
+
+    .cta-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 6.67cqw, 72px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: clamp(10px, 1.85cqw, 20px);
+    }
+
+    .cta-subtext {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 80%;
+      margin-bottom: clamp(20px, 3.7cqw, 40px);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: clamp(12px, 2.22cqw, 24px) clamp(28px, 5.19cqw, 56px);
+      background: linear-gradient(135deg, var(--accent-blue) 0%, #3a7bc8 100%);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: opacity 0.2s ease;
+    }
+
+    .cta-button:hover {
+      opacity: 0.85;
+    }
+
+    .brand-tag {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: clamp(24px, 4.44cqw, 48px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       EXPORT MODE
+       ═══════════════════════════════════════════════════════════ */
+
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls-bar,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      aspect-ratio: auto;
+      border-radius: 0;
+    }
+
+
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+
+  <!-- ═══ Controls Bar ═══ -->
+
+  <div class="controls-bar">
+    <div class="control-group">
+      <label for="bg-select">Background</label>
+      <select id="bg-select">
+        <option value="dark">Dark</option>
+        <option value="black">Pure Black</option>
+        <option value="charcoal">Charcoal</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="opacity-range">Opacity</label>
+      <input type="range" id="opacity-range" min="0" max="100" value="100">
+    </div>
+    <button id="export-btn">Export Mode</button>
   </div>
+
+
+  <!-- ═══ Page Title ═══ -->
 
   <div class="page-title">
-    <h1>Post 350 — Contact & Support</h1>
-    <p>Documentation Carousel — 6 Slides</p>
+    <h1>Post 350 — 8 Slides</h1>
+    <p>Neutral / EDU — When Trading Becomes Gambling</p>
   </div>
 
+
+  <!-- ═══ Carousel Grid ═══ -->
+
   <div class="carousel-grid">
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 1 — CINEMATIC HOOK
+         "LEARN" label, neutral gray, no sidebar
+         ───────────────────────────────────────────────────── -->
+
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <div class="slide-label">Slide 1 — Hook</div>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">LEARN</div>
-          <div class="hook-main">NEED HELP?</div>
+          <div class="cine-label">Learn</div>
+          <div class="hook-main">When Trading<br>Becomes<br>Gambling</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">We're here.</p>
+          <p class="hook-sub">The line is thinner than you think. Learn to recognize the signs before discipline disappears and process gives way to impulse.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 06</span>
-        <div class="channel-box purple">
-          <div class="channel-title">💬 DISCORD<span class="channel-badge">FASTEST</span></div>
-          <div class="channel-list">Real-time community support<br><br>Active members helping each other<br><br>Direct access to team</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 2 — THE LINE IS THINNER THAN YOU THINK
+         Intro context: why this matters
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="2">
+      <div class="slide-label">Slide 2 — The Thin Line</div>
+      <div class="slide slide-2">
+        <div class="slide-content">
+          <div class="slide-number">02 / 08</div>
+
+          <div class="orb-container">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Dice face -->
+              <rect x="12" y="12" width="40" height="40" rx="6" stroke="rgba(74,144,217,0.6)" stroke-width="1.5" fill="none"/>
+              <circle cx="24" cy="24" r="2.5" fill="rgba(217,74,74,0.8)"/>
+              <circle cx="40" cy="24" r="2.5" fill="rgba(217,74,74,0.8)"/>
+              <circle cx="32" cy="32" r="2.5" fill="rgba(217,74,74,0.8)"/>
+              <circle cx="24" cy="40" r="2.5" fill="rgba(217,74,74,0.8)"/>
+              <circle cx="40" cy="40" r="2.5" fill="rgba(217,74,74,0.8)"/>
+            </svg>
+          </div>
+
+          <h2 class="headline headline-medium">The Line Is<br>Thinner Than<br>You Think</h2>
+
+          <p class="subheadline" style="margin-bottom: clamp(16px, 2.96cqw, 32px);">
+            Every trader is one bad streak away from crossing it. The shift from trading to gambling is subtle, gradual, and almost always invisible to the person experiencing it.
+          </p>
+
+          <div class="stat-row">
+            <div class="stat-item">
+              <div class="stat-value red">80%</div>
+              <div class="stat-label">of retail traders lose money</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value gold">3x</div>
+              <div class="stat-label">more risk after a losing streak</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">92%</div>
+              <div class="stat-label">never track their actual edge</div>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <p class="callout-text">"The market rewards discipline and punishes emotion. The moment you stop following rules, you stop trading and start hoping."</p>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 06</span>
-        <div class="channel-box">
-          <div class="channel-title">📧 EMAIL SUPPORT</div>
-          <div class="channel-list">support@signalpilot.io<br><br>24-48 hour response time<br><br>Detailed technical assistance</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 3 — WARNING SIGNS
+         5 red flags that you're gambling not trading
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="3">
+      <div class="slide-label">Slide 3 — Warning Signs</div>
+      <div class="slide slide-3">
+        <div class="slide-content">
+          <div class="slide-number">03 / 08</div>
+
+          <h2 class="headline headline-small" style="margin-bottom: clamp(6px, 1.11cqw, 12px);">5 Warning<br>Signs</h2>
+
+          <p class="body-text" style="margin-bottom: clamp(14px, 2.59cqw, 28px);">
+            If any of these feel familiar, it is time to pause and reassess your approach before real damage is done.
+          </p>
+
+          <div class="sign-stack">
+            <div class="sign-item">
+              <div class="sign-icon">1</div>
+              <div class="sign-content">
+                <div class="sign-title">No Written Plan</div>
+                <div class="sign-text">You enter trades without predefined entry, stop loss, and target levels. Every trade should be planned before you click the button, not after.</div>
+              </div>
+            </div>
+
+            <div class="sign-item">
+              <div class="sign-icon">2</div>
+              <div class="sign-content">
+                <div class="sign-title">Emotional Entries</div>
+                <div class="sign-text">You feel excitement, revenge, or fear before entering. The urge to trade is coming from emotion, not from your system generating a valid signal.</div>
+              </div>
+            </div>
+
+            <div class="sign-item">
+              <div class="sign-icon">3</div>
+              <div class="sign-content">
+                <div class="sign-title">Increasing Size After Losses</div>
+                <div class="sign-text">After a loss, you double down trying to recover quickly. This is the martingale trap and the fastest route to blowing an account.</div>
+              </div>
+            </div>
+
+            <div class="sign-item">
+              <div class="sign-icon">4</div>
+              <div class="sign-content">
+                <div class="sign-title">Chasing Moves</div>
+                <div class="sign-text">You jump into positions after a big move because you are afraid of missing out. FOMO is a gambler's instinct, not a trader's edge.</div>
+              </div>
+            </div>
+
+            <div class="sign-item">
+              <div class="sign-icon">5</div>
+              <div class="sign-content">
+                <div class="sign-title">No Proven Edge</div>
+                <div class="sign-text">You cannot articulate what your edge is. If you have never backtested your strategy or tracked your win rate, you are guessing, not trading.</div>
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 06</span>
-        <div class="channel-box gold">
-          <div class="channel-title">📚 DOCUMENTATION FAQ</div>
-          <div class="channel-list">Searchable knowledge base<br><br>Step-by-step guides<br><br>Common issues resolved</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 4 — TRADING VS GAMBLING COMPARISON
+         Process vs impulse, edge vs hope
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="4">
+      <div class="slide-label">Slide 4 — Trading vs Gambling</div>
+      <div class="slide slide-4">
+        <div class="slide-content">
+          <div class="slide-number">04 / 08</div>
+
+          <h2 class="headline headline-small" style="margin-bottom: clamp(6px, 1.11cqw, 12px);">Trading<br>vs Gambling</h2>
+
+          <p class="body-text" style="margin-bottom: clamp(14px, 2.59cqw, 28px);">
+            The difference is not what you trade or how much. It is <em>how</em> you approach every single decision.
+          </p>
+
+          <div class="compare-grid">
+            <div class="compare-col trading">
+              <div class="compare-header">Trading</div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10003;</span>
+                <div class="compare-label">
+                  <strong>Process-Driven</strong>
+                  Follows a tested, repeatable system
+                </div>
+              </div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10003;</span>
+                <div class="compare-label">
+                  <strong>Calculated Risk</strong>
+                  Position sized to survive drawdowns
+                </div>
+              </div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10003;</span>
+                <div class="compare-label">
+                  <strong>Defined Edge</strong>
+                  Knows win rate, expectancy, and R:R
+                </div>
+              </div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10003;</span>
+                <div class="compare-label">
+                  <strong>Accepts Losses</strong>
+                  Losses are cost of doing business
+                </div>
+              </div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10003;</span>
+                <div class="compare-label">
+                  <strong>Journaled</strong>
+                  Tracks every trade for review
+                </div>
+              </div>
+            </div>
+
+            <div class="compare-col gambling">
+              <div class="compare-header">Gambling</div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10007;</span>
+                <div class="compare-label">
+                  <strong>Impulse-Driven</strong>
+                  Enters based on feeling or tips
+                </div>
+              </div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10007;</span>
+                <div class="compare-label">
+                  <strong>Hope-Based Risk</strong>
+                  Bets big hoping for a recovery
+                </div>
+              </div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10007;</span>
+                <div class="compare-label">
+                  <strong>No Edge</strong>
+                  Cannot define why strategy works
+                </div>
+              </div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10007;</span>
+                <div class="compare-label">
+                  <strong>Chases Losses</strong>
+                  Doubles down to win it all back
+                </div>
+              </div>
+
+              <div class="compare-row">
+                <span class="compare-marker">&#10007;</span>
+                <div class="compare-label">
+                  <strong>No Records</strong>
+                  Avoids looking at actual results
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <div class="warning-label">Important</div>
+            <p class="warning-text">You can be a gambler using a legitimate strategy. The tool does not matter if the <strong>behavior</strong> behind it is undisciplined. A system only works when you follow it.</p>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 06</span>
-        <div class="channel-box green">
-          <div class="channel-title">✅ OUR PROMISE</div>
-          <div class="channel-list">We respond to every message<br><br>No question is too basic<br><br>We're here to help you succeed</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 5 — SELF-ASSESSMENT CHECKLIST
+         Honest yes/no questions
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="5">
+      <div class="slide-label">Slide 5 — Self-Assessment</div>
+      <div class="slide slide-5">
+        <div class="slide-content">
+          <div class="slide-number">05 / 08</div>
+
+          <h2 class="headline headline-medium" style="margin-bottom: clamp(8px, 1.48cqw, 16px);">Honest<br>Self-Check</h2>
+
+          <p class="subheadline" style="margin-bottom: clamp(16px, 2.96cqw, 32px);">
+            Answer honestly. No one sees this but you.
+          </p>
+
+          <div class="self-check">
+            <div class="check-item">
+              <div class="check-bullet">?</div>
+              <div class="check-question">Do you <strong>plan every trade in writing</strong> before you execute it, with entry, stop, and target defined?</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-bullet">?</div>
+              <div class="check-question">Can you <strong>walk away from the screen</strong> after placing a trade without checking it every few minutes?</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-bullet">?</div>
+              <div class="check-question">Do you <strong>keep position size consistent</strong> regardless of whether your last trade was a win or a loss?</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-bullet">?</div>
+              <div class="check-question">Can you <strong>describe your edge</strong> in one sentence, backed by data from at least 50 trades?</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-bullet">?</div>
+              <div class="check-question">Do you <strong>review your journal weekly</strong> to identify patterns in your behavior and execution?</div>
+            </div>
+
+            <div class="check-item">
+              <div class="check-bullet">?</div>
+              <div class="check-question">Are you comfortable <strong>sitting in cash</strong> for days when no valid setup appears?</div>
+            </div>
+          </div>
+
+          <p class="check-note">If you answered "no" to three or more, your trading likely has gambling characteristics. That is not a judgment. It is an invitation to rebuild.</p>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 06</span>
-        <div class="slide-icon">📖</div>
-        <h2 class="slide-title">Full Support Info</h2>
-        <a href="https://docs.signalpilot.io/about-support/" class="cta-link">docs.signalpilot.io/about-support/</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 6 — COURSE CORRECTION
+         How to get back on track
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="6">
+      <div class="slide-label">Slide 6 — Course Correction</div>
+      <div class="slide slide-6">
+        <div class="slide-content">
+          <div class="slide-number">06 / 08</div>
+
+          <h2 class="headline headline-small" style="margin-bottom: clamp(6px, 1.11cqw, 12px);">Course<br>Correction</h2>
+
+          <p class="body-text" style="margin-bottom: clamp(14px, 2.59cqw, 28px);">
+            Recognizing the problem is step one. Here is how to rebuild your process from the ground up.
+          </p>
+
+          <div class="recovery-stack">
+            <div class="recovery-item">
+              <div class="recovery-num">1</div>
+              <div class="recovery-detail">
+                <div class="recovery-title">Stop Trading Immediately</div>
+                <div class="recovery-text">Close all open positions. Step away for at least 48 hours. The market will still be there. Your account might not be if you continue in a gambling mindset.</div>
+              </div>
+            </div>
+
+            <div class="recovery-item">
+              <div class="recovery-num">2</div>
+              <div class="recovery-detail">
+                <div class="recovery-title">Write Your Rules</div>
+                <div class="recovery-text">Define your strategy on paper: entry criteria, exit criteria, position sizing, maximum daily loss. If it is not written, it does not exist.</div>
+              </div>
+            </div>
+
+            <div class="recovery-item">
+              <div class="recovery-num">3</div>
+              <div class="recovery-detail">
+                <div class="recovery-title">Cut Size by 50%</div>
+                <div class="recovery-text">When you return, trade at half your normal size. This removes the emotional weight and lets you focus on process over profit for at least 30 trades.</div>
+              </div>
+            </div>
+
+            <div class="recovery-item">
+              <div class="recovery-num">4</div>
+              <div class="recovery-detail">
+                <div class="recovery-title">Journal Every Trade</div>
+                <div class="recovery-text">Log the setup, your reasoning, your emotional state before entry, and the outcome. Patterns in your behavior will become undeniable within two weeks.</div>
+              </div>
+            </div>
+
+            <div class="recovery-item">
+              <div class="recovery-num">5</div>
+              <div class="recovery-detail">
+                <div class="recovery-title">Set Hard Limits</div>
+                <div class="recovery-text">Define a maximum daily loss and maximum number of trades per day. When either limit is hit, close the platform. No exceptions. No negotiations.</div>
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 7 — KEY INSIGHT + HOMEWORK
+         Core takeaway and practice assignment
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="7">
+      <div class="slide-label">Slide 7 — Key Insight + Homework</div>
+      <div class="slide slide-7">
+        <div class="slide-content">
+          <div class="slide-number">07 / 08</div>
+
+          <h2 class="headline headline-medium" style="margin-bottom: clamp(12px, 2.22cqw, 24px);">The Core<br>Insight</h2>
+
+          <div class="callout-box">
+            <p class="callout-text">"Trading is a business. Gambling is entertainment. The moment your account becomes a source of excitement rather than income, you have crossed the line."</p>
+            <div class="callout-attr">The Trader's Mindset</div>
+          </div>
+
+          <div class="context-grid">
+            <div class="context-item">
+              <span class="context-icon">&#9881;</span>
+              <div class="context-label">
+                <strong>Process Over Outcome</strong>
+                A losing trade taken with discipline is a good trade. A winning trade taken on impulse is still a bad trade.
+              </div>
+            </div>
+            <div class="context-item">
+              <span class="context-icon">&#9888;</span>
+              <div class="context-label">
+                <strong>Awareness Is Defense</strong>
+                You cannot fix what you do not notice. Self-awareness is the first line of defense against tilt.
+              </div>
+            </div>
+          </div>
+
+          <div class="homework-card">
+            <div class="homework-label">Homework</div>
+            <p class="homework-text">
+              Review your <strong>last 20 trades</strong>. For each trade, write down whether you had a written plan before entry. Calculate the win rate and average R:R for <strong>planned trades vs unplanned trades</strong>. The difference will tell you everything you need to know about where you stand.
+            </p>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-label">Remember</div>
+            <p class="tip-text">Every professional trader has crossed this line at some point. The difference between amateurs and professionals is that <strong>professionals recognize it faster and correct sooner</strong>. There is no shame in the slip. Only in refusing to acknowledge it.</p>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 8 — CTA
+         "Build Your Process" → education.signalpilot.io
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="8">
+      <div class="slide-label">Slide 8 — CTA</div>
+      <div class="slide slide-8">
+        <div class="slide-content" style="align-items: center; text-align: center;">
+          <div class="slide-number" style="text-align: center; width: 100%;">08 / 08</div>
+
+          <div class="orb-container">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Warning triangle with check -->
+              <polygon points="32,10 58,54 6,54" stroke="rgba(74,144,217,0.6)" stroke-width="1.5" fill="none"/>
+              <line x1="32" y1="26" x2="32" y2="40" stroke="rgba(74,144,217,0.7)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="32" cy="47" r="2" fill="rgba(74,144,217,0.9)"/>
+            </svg>
+          </div>
+
+          <h2 class="cta-headline">Build Your<br>Process</h2>
+
+          <p class="cta-subtext">
+            Discipline is a skill, not a trait. Learn how to build a trading system that keeps you accountable, consistent, and on the right side of the line.
+          </p>
+
+          <a href="https://education.signalpilot.io" class="cta-button">Start Learning</a>
+
+          <div class="brand-tag">Signal Pilot</div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
+      </div>
+    </div>
+
+
   </div>
+  <!-- end .carousel-grid -->
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-    <button onclick="nextSlide()">Next →</button>
-  </div>
+
+  <!-- ═══ Script ═══ -->
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0, exportMode = false;
-    bgToggle.addEventListener('change', (e) => videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'));
-    opacitySlider.addEventListener('input', (e) => document.documentElement.style.setProperty('--video-opacity', e.target.value / 100));
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function() {
+      var slides = document.querySelectorAll('.slide-wrapper');
+      var bgSelect = document.getElementById('bg-select');
+      var opacityRange = document.getElementById('opacity-range');
+      var exportBtn = document.getElementById('export-btn');
+      var currentSlide = 0;
+      var exportMode = false;
+
+      /**
+       * Update the page background color based on
+       * the background select dropdown value.
+       */
+      function updateBackground() {
+        var value = bgSelect.value;
+        var backgrounds = {
+          dark: '#0a0a0f',
+          black: '#000000',
+          charcoal: '#121218'
+        };
+        document.body.style.backgroundColor = backgrounds[value] || '#0a0a0f';
+      }
+
+      /**
+       * Update the opacity of all slides based on
+       * the opacity range input value.
+       */
+      function updateOpacity() {
+        var value = opacityRange.value / 100;
+        slides.forEach(function(slide) {
+          slide.style.opacity = value;
+        });
+      }
+
+      /**
+       * Show a specific slide by index when in export mode.
+       * Toggles the 'active' class on the matching wrapper.
+       */
+      function showSlide(index) {
+        slides.forEach(function(slide, i) {
+          slide.classList.toggle('active', i === index);
+        });
+      }
+
+      /**
+       * Toggle export mode on and off.
+       * In export mode, slides display one at a time
+       * at 1080x1350 for screenshot capture.
+       */
+      function toggleExportMode() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) {
+          currentSlide = 0;
+          showSlide(currentSlide);
+        }
+      }
+
+      /* ── Event Listeners ── */
+
+      bgSelect.addEventListener('change', updateBackground);
+
+      opacityRange.addEventListener('input', updateOpacity);
+
+      exportBtn.addEventListener('click', toggleExportMode);
+
+      /**
+       * Keyboard navigation for export mode:
+       * - ArrowRight / Space: next slide
+       * - ArrowLeft: previous slide
+       * - Escape: exit export mode
+       */
+      document.addEventListener('keydown', function(e) {
+        if (exportMode) {
+          if (e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+          } else if (e.key === 'Escape') {
+            toggleExportMode();
+          }
+        }
+      });
+
+    })();
   </script>
+
 </body>
 </html>

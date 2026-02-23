@@ -3,58 +3,243 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 346 — Candlestick Patterns Basics | Carousel Preview</title>
+  <title>Post 346 — Where It All Began | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-red: #d94a4a; --accent-green: #4ad97a; --text-primary: #e8e8e8; --text-secondary: #a0a0a0; --text-dim: #6a6a6a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { container-type: inline-size; aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 2cqw, 11px); color: var(--text-dim); letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 1.8cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(32px, 8cqw, 56px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 5cqw, 32px); font-weight: 600; margin-bottom: 3%; line-height: 1.2; overflow-wrap: break-word; }
-    .slide-title.large { font-size: clamp(26px, 7cqw, 48px); }
-    .slide-subtitle { font-size: clamp(10px, 2.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; }
-    .slide-body { font-size: clamp(12px, 3cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .pattern-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; background: rgba(74, 144, 217, 0.1); border: 2px solid rgba(74, 144, 217, 0.4); }
-    .pattern-box.green { background: rgba(74, 217, 122, 0.1); border-color: rgba(74, 217, 122, 0.4); }
-    .pattern-box.gold { background: rgba(201, 169, 98, 0.1); border-color: rgba(201, 169, 98, 0.4); }
-    .pattern-box.yellow { background: rgba(217, 201, 74, 0.1); border-color: rgba(217, 201, 74, 0.4); }
-    .pattern-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--accent-blue); margin-bottom: 12px; }
-    .pattern-box.green .pattern-title { color: var(--accent-green); }
-    .pattern-box.gold .pattern-title { color: var(--accent-gold); }
-    .pattern-box.yellow .pattern-title { color: #d9c94a; }
-    .pattern-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-    .ref-grid { width: 100%; max-width: 340px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .ref-item { padding: 16px; background: rgba(74, 144, 217, 0.08); border-radius: 10px; text-align: center; }
-    .ref-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--accent-gold); margin-bottom: 6px; }
-    .ref-meaning { font-size: 12px; color: var(--text-secondary); }
-    .cta-link { display: inline-block; margin-top: 24px; padding: 14px 32px; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 14px; }
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
+    /* ═══════════════════════════════════════════════════
+       ROOT VARIABLES
+       ═══════════════════════════════════════════════════ */
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: rgba(255, 255, 255, 0.4);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --accent-teal: #5eead4;
+      --accent-teal-bright: #7df3e1;
+      --accent-teal-dim: rgba(94, 234, 212, 0.4);
+      --accent-teal-glow: rgba(94, 234, 212, 0.15);
+      --accent-teal-deep: #2db4a0;
+      --accent-gold: #c9a962;
+      --accent-orange: #f59e0b;
+      --accent-red: #f87171;
+      --accent-green: #4ade80;
+      --accent-purple: #a855f7;
+      --accent-blue: #60a5fa;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-brand: 'Gugi', sans-serif;
+      --sidebar-width: clamp(4px, 0.9cqw, 5px);
+      --sidebar-gradient: linear-gradient(
+        180deg,
+        rgba(94, 234, 212, 0.95) 0%,
+        rgba(45, 180, 160, 0.75) 50%,
+        rgba(94, 234, 212, 0.5) 100%
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════
+       BASE RESET
+       ═══════════════════════════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      margin: 0;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      border-radius: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════════════ */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .controls button {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .controls button:hover {
+      background: rgba(94, 234, 212, 0.08);
+      border-color: rgba(94, 234, 212, 0.3);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       PAGE TITLE
+       ═══════════════════════════════════════════════════ */
+    .page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-title h1 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       LAYOUT — CAROUSEL GRID + SLIDE CONTAINERS
+       ═══════════════════════════════════════════════════ */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
+
+    .slide-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      background: var(--bg-dark);
+      border-radius: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE CONTENT BASE
+       ═══════════════════════════════════════════════════ */
+    .slide-content {
+      position: relative;
+      z-index: 3;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(20px, 5.5%, 74px);
+      padding-left: clamp(30px, 7%, 90px);
+      padding-bottom: clamp(40px, 10%, 135px);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       TEAL COLUMN SIDEBAR — ALL SLIDES
+       ═══════════════════════════════════════════════════ */
+    .slide-teal::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100%;
+      background: var(--sidebar-gradient);
+      z-index: 5;
+    }
+
+    .slide-teal {
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(94, 234, 212, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(94, 234, 212, 0.03) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
+    }
+
+    .slide-teal::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(94, 234, 212, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (TEAL)
+       ═══════════════════════════════════════════════════ */
+    .slide-1.slide-teal::after {
+      width: clamp(14px, 1.7cqw, 18px);
+      background: linear-gradient(
+        180deg,
+        rgba(94, 234, 212, 0.95) 0%,
+        rgba(45, 180, 160, 0.8) 40%,
+        rgba(94, 234, 212, 0.6) 100%
+      );
+    }
+
     .slide-1 {
       background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
     }
@@ -63,218 +248,1410 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(94, 234, 212, 0.08) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(94, 234, 212, 0.06) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
     }
-    
-    .slide-1::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
-      z-index: 5;
-    }
 
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
-
-    .slide-1 .slide-content {
+    .s1-content {
       align-items: center;
       text-align: center;
       justify-content: center;
-      z-index: 3;
+      padding-left: clamp(30px, 7%, 90px);
     }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
+    .cine-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.4cqw, 14px);
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       color: rgba(94, 234, 212, 0.9);
-      margin-bottom: 8%;
+      padding: clamp(3px, 0.6cqw, 7px) clamp(10px, 2cqw, 20px);
+      border: 1px solid rgba(94, 234, 212, 0.25);
+      border-radius: clamp(3px, 0.5cqw, 6px);
+      background: rgba(94, 234, 212, 0.06);
+      margin-bottom: clamp(10px, 3%, 40px);
     }
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
+    .hook-title {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.5cqw, 58px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.12;
+      margin-bottom: clamp(8px, 2%, 24px);
     }
 
-    .slide-1 .cine-divider {
-      width: 60px;
+    .hook-title em {
+      color: var(--accent-teal);
+      font-style: italic;
+    }
+
+    .hook-divider {
+      width: clamp(40px, 8cqw, 80px);
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
-      margin-bottom: 4%;
+      background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.6), transparent);
+      margin-bottom: clamp(8px, 2%, 24px);
     }
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(94, 234, 212, 0.4);
+    .hook-subtitle {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      color: var(--text-secondary);
       line-height: 1.6;
+      max-width: 85%;
+      font-weight: 300;
     }
 
-    .slide-1 .cine-logo {
+    /* ═══════════════════════════════════════════════════
+       ORB CONTAINER — SCROLL / ORIGIN THEME
+       ═══════════════════════════════════════════════════ */
+    .origin-orb {
+      width: clamp(80px, 16cqw, 160px);
+      height: clamp(80px, 16cqw, 160px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 40% 35%,
+        rgba(94, 234, 212, 0.25) 0%,
+        rgba(94, 234, 212, 0.08) 45%,
+        rgba(255, 255, 255, 0.02) 70%,
+        transparent 100%
+      );
+      border: 2px solid rgba(94, 234, 212, 0.2);
+      box-shadow:
+        0 0 50px rgba(94, 234, 212, 0.12),
+        0 0 100px rgba(94, 234, 212, 0.04),
+        inset 0 0 30px rgba(94, 234, 212, 0.05);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto clamp(10px, 2.5%, 28px);
+      animation: orbPulse 4s ease-in-out infinite;
+    }
+
+    .origin-orb::before {
+      content: '';
       position: absolute;
-      bottom: 8%;
+      inset: 6px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94, 234, 212, 0.12);
+    }
+
+    .origin-orb::after {
+      content: '';
+      position: absolute;
+      inset: 16px;
+      border-radius: 50%;
+      border: 1px dashed rgba(94, 234, 212, 0.1);
+    }
+
+    .orb-symbol {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 5cqw, 52px);
+      font-weight: 700;
+      color: rgba(94, 234, 212, 0.5);
+      line-height: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes orbPulse {
+      0%, 100% {
+        box-shadow:
+          0 0 50px rgba(94, 234, 212, 0.12),
+          0 0 100px rgba(94, 234, 212, 0.04),
+          inset 0 0 30px rgba(94, 234, 212, 0.05);
+      }
+      50% {
+        box-shadow:
+          0 0 60px rgba(94, 234, 212, 0.18),
+          0 0 120px rgba(94, 234, 212, 0.07),
+          inset 0 0 40px rgba(94, 234, 212, 0.08);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SHARED INNER HEADING
+       ═══════════════════════════════════════════════════ */
+    .inner-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 3.8cqw, 40px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: clamp(6px, 1.5%, 18px);
+    }
+
+    .inner-heading em {
+      color: var(--accent-teal);
+      font-style: italic;
+    }
+
+    .section-rule {
+      width: clamp(30px, 6cqw, 60px);
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.45), transparent);
+      margin-bottom: clamp(10px, 3%, 36px);
+    }
+
+    .body-text {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.7cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .body-text em {
+      color: var(--accent-teal);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .body-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       LORE CARD — NARRATIVE TEXT BLOCK
+       ═══════════════════════════════════════════════════ */
+    .lore-card {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(94, 234, 212, 0.15);
+      border-left: 3px solid rgba(94, 234, 212, 0.5);
+      background: rgba(94, 234, 212, 0.03);
+      padding: clamp(12px, 2.2cqw, 26px);
+      margin-bottom: clamp(8px, 1.8%, 22px);
+      width: 100%;
+    }
+
+    .lore-header {
+      font-family: var(--font-serif);
+      font-size: clamp(12px, 2cqw, 22px);
+      font-weight: 600;
+      color: var(--accent-teal);
+      margin-bottom: clamp(4px, 0.8cqw, 10px);
+      letter-spacing: 0.05em;
+    }
+
+    .lore-text {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.4cqw, 15px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .lore-text em {
+      color: var(--accent-teal);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .lore-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CHARACTER GRID — THE SEVEN
+       ═══════════════════════════════════════════════════ */
+    .character-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(5px, 1cqw, 12px);
+      margin-bottom: clamp(8px, 2%, 24px);
+      width: 100%;
+    }
+
+    .character-grid.three-col {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .character-card {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(94, 234, 212, 0.12);
+      background: rgba(94, 234, 212, 0.03);
+      padding: clamp(8px, 1.5cqw, 18px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: border-color 0.3s ease;
+    }
+
+    .character-card:hover {
+      border-color: rgba(94, 234, 212, 0.3);
+    }
+
+    .character-card.span-full {
+      grid-column: 1 / -1;
+    }
+
+    .character-icon {
+      width: clamp(28px, 5cqw, 44px);
+      height: clamp(28px, 5cqw, 44px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 40% 35%,
+        rgba(94, 234, 212, 0.3) 0%,
+        rgba(94, 234, 212, 0.08) 60%,
+        transparent 100%
+      );
+      border: 1.5px solid rgba(94, 234, 212, 0.25);
+      box-shadow: 0 0 14px rgba(94, 234, 212, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: clamp(4px, 0.8cqw, 10px);
+      position: relative;
+    }
+
+    .character-icon::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 1px solid rgba(94, 234, 212, 0.1);
+    }
+
+    .character-icon .icon-glyph {
+      font-size: clamp(12px, 2.2cqw, 20px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .character-name {
+      font-family: var(--font-serif);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(1px, 0.3cqw, 3px);
+      letter-spacing: 0.03em;
+    }
+
+    .character-role {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      color: var(--accent-teal-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.3;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CHARACTER CARD COLOR VARIANTS
+       ═══════════════════════════════════════════════════ */
+    .char-teal {
+      border-color: rgba(94, 234, 212, 0.2);
+      background: rgba(94, 234, 212, 0.04);
+    }
+
+    .char-teal .character-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(94, 234, 212, 0.35) 0%, transparent 70%);
+      border-color: rgba(94, 234, 212, 0.3);
+    }
+
+    .char-purple {
+      border-color: rgba(168, 85, 247, 0.2);
+      background: rgba(168, 85, 247, 0.04);
+    }
+
+    .char-purple .character-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(168, 85, 247, 0.35) 0%, transparent 70%);
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+
+    .char-gold {
+      border-color: rgba(201, 169, 98, 0.2);
+      background: rgba(201, 169, 98, 0.04);
+    }
+
+    .char-gold .character-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(201, 169, 98, 0.35) 0%, transparent 70%);
+      border-color: rgba(201, 169, 98, 0.3);
+    }
+
+    .char-blue {
+      border-color: rgba(96, 165, 250, 0.2);
+      background: rgba(96, 165, 250, 0.04);
+    }
+
+    .char-blue .character-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(96, 165, 250, 0.35) 0%, transparent 70%);
+      border-color: rgba(96, 165, 250, 0.3);
+    }
+
+    .char-orange {
+      border-color: rgba(245, 158, 11, 0.2);
+      background: rgba(245, 158, 11, 0.04);
+    }
+
+    .char-orange .character-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(245, 158, 11, 0.35) 0%, transparent 70%);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .char-red {
+      border-color: rgba(248, 113, 113, 0.2);
+      background: rgba(248, 113, 113, 0.04);
+    }
+
+    .char-red .character-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(248, 113, 113, 0.35) 0%, transparent 70%);
+      border-color: rgba(248, 113, 113, 0.3);
+    }
+
+    .char-green {
+      border-color: rgba(74, 222, 128, 0.2);
+      background: rgba(74, 222, 128, 0.04);
+    }
+
+    .char-green .character-icon {
+      background: radial-gradient(circle at 40% 35%, rgba(74, 222, 128, 0.35) 0%, transparent 70%);
+      border-color: rgba(74, 222, 128, 0.3);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CHRONICLE QUOTE
+       ═══════════════════════════════════════════════════ */
+    .chronicle-quote {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(94, 234, 212, 0.18);
+      background: rgba(94, 234, 212, 0.04);
+      padding: clamp(14px, 2.5cqw, 30px);
+      text-align: center;
+      width: 100%;
+      margin-bottom: clamp(8px, 2%, 24px);
+      position: relative;
+    }
+
+    .chronicle-quote::before {
+      content: '\201C';
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 7cqw, 72px);
+      font-weight: 700;
+      color: rgba(94, 234, 212, 0.12);
+      position: absolute;
+      top: clamp(-4px, -0.8cqw, -8px);
+      left: clamp(10px, 2cqw, 22px);
+      line-height: 1;
+    }
+
+    .chronicle-quote-text {
+      font-family: var(--font-serif);
+      font-size: clamp(12px, 2cqw, 22px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+      max-width: 92%;
+      margin: 0 auto;
+    }
+
+    .chronicle-quote-text em {
+      color: var(--accent-teal);
+      font-style: italic;
+    }
+
+    .chronicle-quote-attr {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      color: var(--accent-teal-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-top: clamp(6px, 1.2cqw, 14px);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       WISDOM BOX
+       ═══════════════════════════════════════════════════ */
+    .wisdom-box {
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      background: linear-gradient(
+        135deg,
+        rgba(94, 234, 212, 0.06) 0%,
+        rgba(94, 234, 212, 0.02) 100%
+      );
+      padding: clamp(10px, 2cqw, 24px);
+      width: 100%;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+
+    .wisdom-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: clamp(4px, 0.8cqw, 10px);
+    }
+
+    .wisdom-text {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 19px);
+      font-weight: 500;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.5;
+    }
+
+    .wisdom-text em {
+      color: var(--accent-teal);
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       ARBITER SEAL — DECORATIVE CIRCULAR ELEMENT
+       ═══════════════════════════════════════════════════ */
+    .arbiter-seal {
+      width: clamp(44px, 8.5cqw, 72px);
+      height: clamp(44px, 8.5cqw, 72px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgba(94, 234, 212, 0.15) 0%,
+        rgba(94, 234, 212, 0.05) 40%,
+        transparent 70%
+      );
+      border: 2px solid rgba(94, 234, 212, 0.2);
+      box-shadow:
+        0 0 25px rgba(94, 234, 212, 0.08),
+        inset 0 0 15px rgba(94, 234, 212, 0.04);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto clamp(6px, 1.5%, 18px);
+    }
+
+    .arbiter-seal::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94, 234, 212, 0.1);
+    }
+
+    .arbiter-seal::after {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      border: 1px dashed rgba(94, 234, 212, 0.08);
+    }
+
+    .seal-glyph {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3cqw, 28px);
+      font-weight: 700;
+      color: rgba(94, 234, 212, 0.45);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       TIMELINE STACK — ORIGIN TIMELINE
+       ═══════════════════════════════════════════════════ */
+    .timeline-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(5px, 1cqw, 12px);
+      width: 100%;
+      margin-bottom: clamp(8px, 2%, 24px);
+      position: relative;
+      padding-left: clamp(18px, 3.5cqw, 36px);
+    }
+
+    .timeline-stack::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: clamp(6px, 1.2cqw, 12px);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(94, 234, 212, 0.4) 0%,
+        rgba(94, 234, 212, 0.15) 50%,
+        rgba(94, 234, 212, 0.05) 100%
+      );
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(6px, 1.2cqw, 14px);
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94, 234, 212, 0.1);
+      background: rgba(94, 234, 212, 0.02);
+      padding: clamp(7px, 1.3cqw, 16px) clamp(8px, 1.5cqw, 18px);
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: clamp(-15px, -2.8cqw, -28px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(8px, 1.5cqw, 14px);
+      height: clamp(8px, 1.5cqw, 14px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(94, 234, 212, 0.6) 0%,
+        rgba(94, 234, 212, 0.2) 70%,
+        transparent 100%
+      );
+      border: 1.5px solid rgba(94, 234, 212, 0.3);
+    }
+
+    .timeline-era {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.9cqw, 10px);
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+      min-width: clamp(40px, 8cqw, 70px);
+      padding-top: clamp(1px, 0.2cqw, 3px);
+    }
+
+    .timeline-info {
+      flex: 1;
+    }
+
+    .timeline-title {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.4cqw, 15px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(1px, 0.2cqw, 3px);
+    }
+
+    .timeline-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.05cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       DOMAIN LIST — CHARACTER DOMAINS
+       ═══════════════════════════════════════════════════ */
+    .domain-list {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.8cqw, 10px);
+      width: 100%;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+
+    .domain-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.5cqw, 16px);
+      border-radius: clamp(8px, 1.2cqw, 14px);
+      border: 1px solid rgba(94, 234, 212, 0.1);
+      background: rgba(94, 234, 212, 0.02);
+      padding: clamp(6px, 1.2cqw, 14px) clamp(8px, 1.5cqw, 18px);
+    }
+
+    .domain-dot {
+      width: clamp(24px, 4.5cqw, 38px);
+      height: clamp(24px, 4.5cqw, 38px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .domain-dot-inner {
+      width: clamp(5px, 0.8cqw, 8px);
+      height: clamp(5px, 0.8cqw, 8px);
+      border-radius: 50%;
+    }
+
+    .dd-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94, 234, 212, 0.3) 0%, transparent 70%);
+      border: 1px solid rgba(94, 234, 212, 0.25);
+    }
+
+    .dd-teal .domain-dot-inner {
+      background: var(--accent-teal);
+      box-shadow: 0 0 6px rgba(94, 234, 212, 0.5);
+    }
+
+    .dd-purple {
+      background: radial-gradient(circle at 40% 35%, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+    }
+
+    .dd-purple .domain-dot-inner {
+      background: var(--accent-purple);
+      box-shadow: 0 0 6px rgba(168, 85, 247, 0.5);
+    }
+
+    .dd-gold {
+      background: radial-gradient(circle at 40% 35%, rgba(201, 169, 98, 0.3) 0%, transparent 70%);
+      border: 1px solid rgba(201, 169, 98, 0.25);
+    }
+
+    .dd-gold .domain-dot-inner {
+      background: var(--accent-gold);
+      box-shadow: 0 0 6px rgba(201, 169, 98, 0.5);
+    }
+
+    .dd-blue {
+      background: radial-gradient(circle at 40% 35%, rgba(96, 165, 250, 0.3) 0%, transparent 70%);
+      border: 1px solid rgba(96, 165, 250, 0.25);
+    }
+
+    .dd-blue .domain-dot-inner {
+      background: var(--accent-blue);
+      box-shadow: 0 0 6px rgba(96, 165, 250, 0.5);
+    }
+
+    .dd-orange {
+      background: radial-gradient(circle at 40% 35%, rgba(245, 158, 11, 0.3) 0%, transparent 70%);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .dd-orange .domain-dot-inner {
+      background: var(--accent-orange);
+      box-shadow: 0 0 6px rgba(245, 158, 11, 0.5);
+    }
+
+    .dd-red {
+      background: radial-gradient(circle at 40% 35%, rgba(248, 113, 113, 0.3) 0%, transparent 70%);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+    }
+
+    .dd-red .domain-dot-inner {
+      background: var(--accent-red);
+      box-shadow: 0 0 6px rgba(248, 113, 113, 0.5);
+    }
+
+    .dd-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74, 222, 128, 0.3) 0%, transparent 70%);
+      border: 1px solid rgba(74, 222, 128, 0.25);
+    }
+
+    .dd-green .domain-dot-inner {
+      background: var(--accent-green);
+      box-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
+    }
+
+    .domain-info {
+      flex: 1;
+    }
+
+    .domain-name {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.4cqw, 15px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(1px, 0.2cqw, 3px);
+    }
+
+    .domain-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.05cqw, 11px);
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .domain-indicator {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.85cqw, 9px);
+      color: var(--accent-teal-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CTA COMPONENTS
+       ═══════════════════════════════════════════════════ */
+    .cta-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .cta-badge {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(94, 234, 212, 0.7);
+      margin-bottom: clamp(6px, 1.5%, 18px);
+    }
+
+    .cta-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5cqw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+
+    .cta-title em {
+      color: var(--accent-teal);
+      font-style: italic;
+    }
+
+    .cta-box {
+      padding: clamp(8px, 1.5cqw, 16px) clamp(16px, 3cqw, 36px);
+      border: 1px solid rgba(94, 234, 212, 0.3);
+      border-radius: clamp(6px, 1cqw, 10px);
+      background: rgba(94, 234, 212, 0.06);
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+
+    .cta-url {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.6cqw, 17px);
+      letter-spacing: 0.1em;
+      color: var(--accent-teal);
+    }
+
+    .cta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(4px, 0.7cqw, 8px);
+      justify-content: center;
+      margin-bottom: clamp(10px, 2.5%, 28px);
+    }
+
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1cqw, 11px);
+      color: var(--text-muted);
+      padding: clamp(2px, 0.4cqw, 5px) clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94, 234, 212, 0.12);
+      border-radius: clamp(3px, 0.5cqw, 6px);
+      background: rgba(94, 234, 212, 0.03);
+    }
+
+    .cta-hint {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 13px);
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE LOGO
+       ═══════════════════════════════════════════════════ */
+    .slide-logo {
+      position: absolute;
+      bottom: 4%;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      font-family: var(--font-brand);
+      font-size: clamp(6px, 1.1cqw, 11px);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.4);
+      color: rgba(94, 234, 212, 0.3);
+      z-index: 4;
+      white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       SLIDE NUMBER
+       ═══════════════════════════════════════════════════ */
+    .slide-number {
+      position: absolute;
+      bottom: clamp(14px, 2.6cqw, 28px);
+      right: clamp(18px, 3.2cqw, 36px);
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 12px);
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      z-index: 4;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CONNECTOR ARROW — VISUAL LINK
+       ═══════════════════════════════════════════════════ */
+    .connector-arrow {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 14px);
+      color: rgba(94, 234, 212, 0.3);
+      text-align: center;
+      margin: clamp(2px, 0.5cqw, 6px) 0;
+      letter-spacing: 0.3em;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       TRAIT TAGS — SMALL INLINE PILLS
+       ═══════════════════════════════════════════════════ */
+    .trait-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(3px, 0.5cqw, 6px);
+      margin-top: clamp(4px, 0.8cqw, 10px);
+    }
+
+    .trait-tag {
+      font-family: var(--font-mono);
+      font-size: clamp(5px, 0.75cqw, 8px);
+      color: var(--accent-teal-dim);
+      padding: clamp(1px, 0.2cqw, 3px) clamp(4px, 0.7cqw, 8px);
+      border: 1px solid rgba(94, 234, 212, 0.12);
+      border-radius: 99px;
+      background: rgba(94, 234, 212, 0.04);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       LEGACY BRIDGE — CONNECTING LORE TO PRODUCT
+       ═══════════════════════════════════════════════════ */
+    .legacy-bridge {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: clamp(4px, 0.8cqw, 10px);
+      align-items: center;
+      width: 100%;
+      margin-bottom: clamp(8px, 2%, 24px);
+    }
+
+    .legacy-side {
+      border-radius: clamp(6px, 1cqw, 12px);
+      border: 1px solid rgba(94, 234, 212, 0.12);
+      background: rgba(94, 234, 212, 0.03);
+      padding: clamp(8px, 1.5cqw, 18px);
+      text-align: center;
+    }
+
+    .legacy-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 0.85cqw, 9px);
+      color: var(--accent-teal-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: clamp(2px, 0.4cqw, 5px);
+    }
+
+    .legacy-value {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 19px);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .legacy-connector {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.5cqw, 26px);
+      color: rgba(94, 234, 212, 0.35);
     }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+    <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
-    <h1>Post 346 — Candlestick Patterns Basics</h1>
-    <p>Education Carousel — 8 Slides</p>
+    <h1>Post 346 — Where It All Began</h1>
+    <p>8 slides · Chronicle / Lore</p>
   </div>
 
   <div class="carousel-grid">
+
+    <!-- ══════════════════════════════════════════════
+         SLIDE 1 — CINEMATIC HOOK
+         ══════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-1">
-        <div class="slide-content">
+      <div class="slide slide-1 slide-teal">
+        <div class="slide-content s1-content">
           <div class="cine-label">CHRONICLE</div>
-          <div class="hook-main">CANDLESTICK PATTERNS</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Visual clues from price.</p>
-          <div class="cine-logo">Signal Pilot</div>
+
+          <div class="origin-orb">
+            <span class="orb-symbol">VII</span>
+          </div>
+
+          <h2 class="hook-title">Where It All <em>Began</em></h2>
+          <div class="hook-divider"></div>
+          <p class="hook-subtitle">The origin of the Seven. The birth of the indicators. The story that started everything.</p>
+
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 08</span>
-        <div class="pattern-box">
-          <div class="pattern-title">✦ DOJI</div>
-          <div class="pattern-list">Open and close nearly equal<br><br>Market undecided<br><br>Potential reversal or continuation</div>
+    <!-- ══════════════════════════════════════════════
+         SLIDE 2 — THE QUESTION
+         ══════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Question</span>
+      <div class="slide slide-teal">
+        <div class="slide-content">
+          <div class="arbiter-seal">
+            <span class="seal-glyph">?</span>
+          </div>
+
+          <h3 class="inner-heading">Before the <em>Indicators</em></h3>
+          <div class="section-rule"></div>
+
+          <p class="body-text" style="margin-bottom: clamp(10px, 2.5%, 28px);">
+            Before the indicators, before the education, before the chronicle itself &mdash;
+            there was a <em>question</em>.
+          </p>
+
+          <div class="lore-card">
+            <div class="lore-header">The Founding Question</div>
+            <div class="lore-text">
+              Why do traders keep losing to the <em>same patterns</em>, the same psychology,
+              the same traps &mdash; generation after generation?
+            </div>
+          </div>
+
+          <div class="wisdom-box">
+            <div class="wisdom-label">Observation</div>
+            <div class="wisdom-text">
+              Markets change form. <em>Human nature</em> does not.
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+          <div class="slide-number">02 / 08</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 08</span>
-        <div class="pattern-box green">
-          <div class="pattern-title">✦ HAMMER / HANGING MAN</div>
-          <div class="pattern-list">Long lower wick, small body<br><br>Rejection of lower prices<br><br>Bullish at support, bearish at resistance</div>
+    <!-- ══════════════════════════════════════════════
+         SLIDE 3 — THE PATTERN
+         ══════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — The Pattern</span>
+      <div class="slide slide-teal">
+        <div class="slide-content">
+          <h3 class="inner-heading">The <em>Same</em> Traps</h3>
+          <div class="section-rule"></div>
+
+          <div class="timeline-stack">
+            <div class="timeline-item">
+              <span class="timeline-era">Trap I</span>
+              <div class="timeline-info">
+                <div class="timeline-title">Chasing the Move</div>
+                <div class="timeline-desc">Entering after the move already happened. Buying tops, selling bottoms. Reacting instead of positioning.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-era">Trap II</span>
+              <div class="timeline-info">
+                <div class="timeline-title">Ignoring Volume</div>
+                <div class="timeline-desc">Price without volume is a lie. Most traders never learn to read the conviction behind the candle.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-era">Trap III</span>
+              <div class="timeline-info">
+                <div class="timeline-title">Fighting the Cycle</div>
+                <div class="timeline-desc">Markets breathe in phases. Trading against the current phase is like swimming against the tide.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-era">Trap IV</span>
+              <div class="timeline-info">
+                <div class="timeline-title">Emotional Execution</div>
+                <div class="timeline-desc">Fear and greed replace logic. The plan dissolves the moment the chart moves against you.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lore-card">
+            <div class="lore-header">The Realisation</div>
+            <div class="lore-text">
+              The traps are not random. They are <em>structural</em>. They repeat because
+              <strong>human psychology</strong> repeats. And if they repeat &mdash; they can be mapped.
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+          <div class="slide-number">03 / 08</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 08</span>
-        <div class="pattern-box gold">
-          <div class="pattern-title">✦ ENGULFING</div>
-          <div class="pattern-list">Current candle engulfs previous<br><br>Bullish engulfing = buyers took control<br><br>Bearish engulfing = sellers took control</div>
+    <!-- ══════════════════════════════════════════════
+         SLIDE 4 — THE SEVEN EMERGE
+         ══════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — The Seven Emerge</span>
+      <div class="slide slide-teal">
+        <div class="slide-content">
+          <h3 class="inner-heading">The Seven <em>Emerge</em></h3>
+          <div class="section-rule"></div>
+
+          <p class="body-text" style="margin-bottom: clamp(8px, 2%, 20px);">
+            Seven archetypes. Seven disciplines. Each one forged to guard against a different weakness in the trader&rsquo;s path.
+          </p>
+
+          <div class="character-grid">
+            <div class="character-card char-teal">
+              <div class="character-icon">
+                <span class="icon-glyph">&#x1F451;</span>
+              </div>
+              <div class="character-name">The Sovereign</div>
+              <div class="character-role">Cycle Mastery</div>
+            </div>
+
+            <div class="character-card char-purple">
+              <div class="character-icon">
+                <span class="icon-glyph">&#x1F52E;</span>
+              </div>
+              <div class="character-name">The Oracle</div>
+              <div class="character-role">Volume Truth</div>
+            </div>
+
+            <div class="character-card char-gold">
+              <div class="character-icon">
+                <span class="icon-glyph">&#x1F5FA;</span>
+              </div>
+              <div class="character-name">The Cartographer</div>
+              <div class="character-role">Structure Mapping</div>
+            </div>
+
+            <div class="character-card char-blue">
+              <div class="character-icon">
+                <span class="icon-glyph">&#x2696;</span>
+              </div>
+              <div class="character-name">The Arbiter</div>
+              <div class="character-role">Balance &amp; Confluence</div>
+            </div>
+
+            <div class="character-card char-orange">
+              <div class="character-icon">
+                <span class="icon-glyph">&#x2694;</span>
+              </div>
+              <div class="character-name">The Warden</div>
+              <div class="character-role">Risk &amp; Discipline</div>
+            </div>
+
+            <div class="character-card char-red">
+              <div class="character-icon">
+                <span class="icon-glyph">&#x1F441;</span>
+              </div>
+              <div class="character-name">The Sentinel</div>
+              <div class="character-role">Momentum Watch</div>
+            </div>
+
+            <div class="character-card char-green span-full">
+              <div class="character-icon">
+                <span class="icon-glyph">&#x1F396;</span>
+              </div>
+              <div class="character-name">The Architect</div>
+              <div class="character-role">Harmonic Design</div>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+          <div class="slide-number">04 / 08</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 08</span>
-        <div class="pattern-box">
-          <div class="pattern-title">✦ MORNING / EVENING STAR</div>
-          <div class="pattern-list">Three-candle pattern<br><br>Reversal at key levels<br><br>Strong directional signal</div>
+    <!-- ══════════════════════════════════════════════
+         SLIDE 5 — EACH CHARACTER'S DOMAIN
+         ══════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — Character Domains</span>
+      <div class="slide slide-teal">
+        <div class="slide-content">
+          <h3 class="inner-heading">Their <em>Domains</em></h3>
+          <div class="section-rule"></div>
+
+          <div class="domain-list">
+            <div class="domain-item">
+              <div class="domain-dot dd-teal">
+                <div class="domain-dot-inner"></div>
+              </div>
+              <div class="domain-info">
+                <div class="domain-name">The Sovereign</div>
+                <div class="domain-desc">Reads the phase of the cycle. Knows when to act and when to wait.</div>
+              </div>
+              <div class="domain-indicator">Pentarch</div>
+            </div>
+
+            <div class="domain-item">
+              <div class="domain-dot dd-purple">
+                <div class="domain-dot-inner"></div>
+              </div>
+              <div class="domain-info">
+                <div class="domain-name">The Oracle</div>
+                <div class="domain-desc">Sees the truth behind price through volume and conviction.</div>
+              </div>
+              <div class="domain-indicator">Vol. Oracle</div>
+            </div>
+
+            <div class="domain-item">
+              <div class="domain-dot dd-gold">
+                <div class="domain-dot-inner"></div>
+              </div>
+              <div class="domain-info">
+                <div class="domain-name">The Cartographer</div>
+                <div class="domain-desc">Maps structure, zones, and the terrain of market geography.</div>
+              </div>
+              <div class="domain-indicator">Mapper</div>
+            </div>
+
+            <div class="domain-item">
+              <div class="domain-dot dd-blue">
+                <div class="domain-dot-inner"></div>
+              </div>
+              <div class="domain-info">
+                <div class="domain-name">The Arbiter</div>
+                <div class="domain-desc">Weighs confluence, resolves conflict between signals.</div>
+              </div>
+              <div class="domain-indicator">Arbiter</div>
+            </div>
+
+            <div class="domain-item">
+              <div class="domain-dot dd-orange">
+                <div class="domain-dot-inner"></div>
+              </div>
+              <div class="domain-info">
+                <div class="domain-name">The Warden</div>
+                <div class="domain-desc">Guards the gates of risk. Enforces discipline at every entry.</div>
+              </div>
+              <div class="domain-indicator">Warden</div>
+            </div>
+
+            <div class="domain-item">
+              <div class="domain-dot dd-red">
+                <div class="domain-dot-inner"></div>
+              </div>
+              <div class="domain-info">
+                <div class="domain-name">The Sentinel</div>
+                <div class="domain-desc">Watches momentum shifts, warns of reversals before they strike.</div>
+              </div>
+              <div class="domain-indicator">Sentinel</div>
+            </div>
+
+            <div class="domain-item">
+              <div class="domain-dot dd-green">
+                <div class="domain-dot-inner"></div>
+              </div>
+              <div class="domain-info">
+                <div class="domain-name">The Architect</div>
+                <div class="domain-desc">Designs harmonic patterns, finds symmetry in chaos.</div>
+              </div>
+              <div class="domain-indicator">Harmonic</div>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+          <div class="slide-number">05 / 08</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 08</span>
-        <div class="pattern-box yellow">
-          <div class="pattern-title">⚠️ IMPORTANT</div>
-          <div class="pattern-list">Context matters (where on chart?)<br><br>Volume confirms<br><br>Higher TF = more reliable<br><br>Pattern ≠ guarantee</div>
+    <!-- ══════════════════════════════════════════════
+         SLIDE 6 — THE WISDOM THEY CARRY
+         ══════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — The Wisdom</span>
+      <div class="slide slide-teal">
+        <div class="slide-content" style="align-items: center;">
+          <div class="origin-orb" style="width: clamp(60px, 12cqw, 120px); height: clamp(60px, 12cqw, 120px);">
+            <span class="orb-symbol" style="font-size: clamp(18px, 3.5cqw, 36px);">W</span>
+          </div>
+
+          <h3 class="inner-heading" style="text-align: center;">The Wisdom They <em>Carry</em></h3>
+          <div class="section-rule"></div>
+
+          <div class="chronicle-quote">
+            <div class="chronicle-quote-text">
+              They were not built to <em>predict</em>.<br>
+              They were built to <em>protect</em> &mdash;<br>
+              to give the trader eyes where there was blindness,<br>
+              structure where there was chaos,<br>
+              and patience where there was impulse.
+            </div>
+            <div class="chronicle-quote-attr">From the Signal Pilot Chronicle</div>
+          </div>
+
+          <div class="lore-card">
+            <div class="lore-header">Their Oath</div>
+            <div class="lore-text">
+              Each of the Seven carries a single truth. Together, they form a <em>complete framework</em> &mdash;
+              not a shortcut, but a discipline. Not a system of prediction, but a system of <strong>awareness</strong>.
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+          <div class="slide-number">06 / 08</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">07 / 08</span>
-        <div class="slide-subtitle">Quick Reference</div>
-        <div class="ref-grid">
-          <div class="ref-item"><div class="ref-name">Doji</div><div class="ref-meaning">Indecision</div></div>
-          <div class="ref-item"><div class="ref-name">Hammer</div><div class="ref-meaning">Rejection</div></div>
-          <div class="ref-item"><div class="ref-name">Engulfing</div><div class="ref-meaning">Momentum shift</div></div>
-          <div class="ref-item"><div class="ref-name">Star</div><div class="ref-meaning">Reversal</div></div>
+    <!-- ══════════════════════════════════════════════
+         SLIDE 7 — THE LEGACY CONTINUES
+         ══════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — The Legacy</span>
+      <div class="slide slide-teal">
+        <div class="slide-content">
+          <h3 class="inner-heading">The Legacy <em>Continues</em></h3>
+          <div class="section-rule"></div>
+
+          <div class="legacy-bridge">
+            <div class="legacy-side">
+              <div class="legacy-label">Lore</div>
+              <div class="legacy-value">The Seven</div>
+            </div>
+            <div class="legacy-connector">&rarr;</div>
+            <div class="legacy-side">
+              <div class="legacy-label">Product</div>
+              <div class="legacy-value">7 Indicators</div>
+            </div>
+          </div>
+
+          <div class="wisdom-box">
+            <div class="wisdom-label">The Connection</div>
+            <div class="wisdom-text">
+              Every indicator in the Signal Pilot suite is named after one of the Seven.
+              Each tool carries the <em>philosophy</em> of its archetype &mdash;
+              built not to replace your judgement, but to <em>sharpen</em> it.
+            </div>
+          </div>
+
+          <div class="timeline-stack">
+            <div class="timeline-item">
+              <span class="timeline-era">Origin</span>
+              <div class="timeline-info">
+                <div class="timeline-title">The Question Was Asked</div>
+                <div class="timeline-desc">Why do traders repeat the same mistakes?</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-era">Birth</span>
+              <div class="timeline-info">
+                <div class="timeline-title">The Seven Were Forged</div>
+                <div class="timeline-desc">Seven archetypes to guard against seven weaknesses.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-era">Now</span>
+              <div class="timeline-info">
+                <div class="timeline-title">The Tools Carry Their Wisdom</div>
+                <div class="timeline-desc">Indicators built on lore, education built on truth.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+          <div class="slide-number">07 / 08</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">08 / 08</span>
-        <div class="slide-icon">📊</div>
-        <h2 class="slide-title">Free Pattern Guide</h2>
-        <p class="slide-body">Complete breakdown in bio.</p>
-        <a href="https://education.signalpilot.io" class="cta-link">Get Free Guide</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+    <!-- ══════════════════════════════════════════════
+         SLIDE 8 — CTA
+         ══════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 — CTA</span>
+      <div class="slide slide-teal">
+        <div class="slide-content cta-content">
+          <div class="origin-orb" style="width: clamp(50px, 10cqw, 100px); height: clamp(50px, 10cqw, 100px);">
+            <span class="orb-symbol" style="font-size: clamp(16px, 3cqw, 34px);">VII</span>
+          </div>
+
+          <div class="cta-badge">Chronicle &middot; Origin</div>
+
+          <h2 class="cta-title">Enter the<br><em>Chronicle</em></h2>
+
+          <p class="body-text" style="text-align: center; margin-bottom: clamp(10px, 2.5%, 28px); max-width: 85%;">
+            Read the full origin story. Meet the Seven. Understand the philosophy behind every indicator.
+          </p>
+
+          <div class="cta-pills">
+            <span class="cta-pill">Lore</span>
+            <span class="cta-pill">The Seven</span>
+            <span class="cta-pill">Origin</span>
+            <span class="cta-pill">Philosophy</span>
+            <span class="cta-pill">Indicators</span>
+          </div>
+
+          <div class="cta-box">
+            <span class="cta-url">signalpilot.io/chronicle</span>
+          </div>
+
+          <p class="cta-hint">Link in bio</p>
+
+          <div class="slide-logo">Signal Pilot</div>
+          <div class="slide-number">08 / 08</div>
+        </div>
       </div>
     </div>
+
   </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
-    <button onclick="nextSlide()">Next →</button>
-  </div>
-
+  <!-- ══════════════════════════════════════════════════
+       EXPORT MODE + KEYBOARD NAV SCRIPT
+       ══════════════════════════════════════════════════ -->
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0, exportMode = false;
-    bgToggle.addEventListener('change', (e) => videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'));
-    opacitySlider.addEventListener('input', (e) => document.documentElement.style.setProperty('--video-opacity', e.target.value / 100));
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function () {
+      const exportBtn = document.getElementById('export-btn');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      const totalSlides = slideWrappers.length;
+      let exportMode = false;
+      let currentSlide = 0;
+
+      function updateActiveSlide() {
+        slideWrappers.forEach(function (wrapper, index) {
+          wrapper.classList.toggle('active', index === currentSlide);
+        });
+      }
+
+      exportBtn.addEventListener('click', function () {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) {
+          currentSlide = 0;
+          updateActiveSlide();
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (!exportMode) return;
+
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
+          currentSlide = (currentSlide + 1) % totalSlides;
+          updateActiveSlide();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+          updateActiveSlide();
+        } else if (e.key === 'Escape') {
+          exportMode = false;
+          document.body.classList.remove('export-mode');
+          exportBtn.textContent = 'Export Mode';
+        }
+      });
+    })();
   </script>
 </body>
 </html>

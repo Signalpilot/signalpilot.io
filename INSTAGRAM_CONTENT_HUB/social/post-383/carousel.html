@@ -6,70 +6,407 @@
   <title>Post 383 — The Myth of the Perfect Entry | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-red: #d94a4a; --accent-green: #4ad97a; --text-primary: #e8e8e8; --text-secondary: #a0a0a0; --text-dim: #6a6a6a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 2cqw, 11px); color: var(--text-dim); letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 1.8cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(32px, 8cqw, 56px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 5cqw, 32px); font-weight: 600; margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(26px, 7cqw, 48px); }
-    .slide-body { font-size: clamp(12px, 3cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .content-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; }
-    .content-box.blue { background: rgba(74, 144, 217, 0.1); border: 2px solid rgba(74, 144, 217, 0.4); }
-    .content-box.gold { background: rgba(201, 169, 98, 0.1); border: 2px solid rgba(201, 169, 98, 0.4); }
-    .content-box.green { background: rgba(74, 217, 122, 0.1); border: 2px solid rgba(74, 217, 122, 0.4); }
-    .content-box.red { background: rgba(217, 74, 74, 0.1); border: 2px solid rgba(217, 74, 74, 0.4); }
-    .box-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; margin-bottom: 12px; }
-    .content-box.blue .box-title { color: var(--accent-blue); }
-    .content-box.gold .box-title { color: var(--accent-gold); }
-    .content-box.green .box-title { color: var(--accent-green); }
-    .content-box.red .box-title { color: var(--accent-red); }
-    .box-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
+    /* ═══════════════════════════════════════════════════════════
+       ROOT VARIABLES
+       ═══════════════════════════════════════════════════════════ */
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255,255,255,0.02);
+      --bg-surface: rgba(255,255,255,0.03);
+      --border-subtle: rgba(255,255,255,0.06);
+      --border-medium: rgba(255,255,255,0.10);
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-tertiary: rgba(255,255,255,0.4);
+      --text-dim: rgba(255,255,255,0.25);
+      --accent-gold: #c9a962;
+      --accent-blue: #4a90d9;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --accent-orange: #f59e0b;
+      --accent-orange-dim: rgba(245,158,11,0.3);
+      --accent-orange-glow: rgba(217,148,74,0.12);
+      --accent-teal: #5eead4;
+      --accent-purple: #a855f7;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-logo: 'Gugi', sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       BASE RESET
+       ═══════════════════════════════════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════════════════════ */
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .control-group label {
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    #export-btn {
+      background: linear-gradient(
+        135deg,
+        rgba(217,148,74,0.25) 0%,
+        rgba(217,148,74,0.10) 100%
+      );
+      border: 1px solid rgba(217,148,74,0.35);
+      color: var(--text-primary);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    #export-btn:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(217,148,74,0.35) 0%,
+        rgba(217,148,74,0.18) 100%
+      );
+      border-color: rgba(217,148,74,0.5);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PAGE TITLE
+       ═══════════════════════════════════════════════════════════ */
+    .page-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .page-title h1 {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    .page-title p {
+      color: var(--text-tertiary);
+      font-size: 0.875rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CAROUSEL GRID
+       ═══════════════════════════════════════════════════════════ */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE WRAPPER & FRAME
+       ═══════════════════════════════════════════════════════════ */
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .slide-label {
+      font-size: 0.6875rem;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-family: var(--font-mono);
+    }
+
+    .slide {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-dark);
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.5),
+        0 1px 0 rgba(255,255,255,0.03) inset;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE BACKGROUND & CONTENT LAYERS
+       ═══════════════════════════════════════════════════════════ */
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(36px, 6.67cqw, 72px);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY — SLIDE NUMBER
+       ═══════════════════════════════════════════════════════════ */
+    .slide-number {
+      position: absolute;
+      top: 4%;
+      left: 5%;
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      color: var(--text-tertiary);
+      letter-spacing: 0.15em;
+      font-weight: 400;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY — HEADLINE (SERIF)
+       ═══════════════════════════════════════════════════════════ */
+    .headline {
+      font-family: var(--font-serif);
+      font-size: clamp(41px, 7.59cqw, 82px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 4%;
+    }
+
+    .headline em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .headline-medium {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 6.67cqw, 72px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      margin-bottom: 4%;
+    }
+
+    .headline-medium em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .headline-small {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.19cqw, 56px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 4%;
+    }
+
+    .headline-small em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY — SUBHEADLINE (SANS)
+       ═══════════════════════════════════════════════════════════ */
+    .subheadline {
+      font-family: var(--font-sans);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+
+    .subheadline em {
+      color: rgba(217,148,74,0.9);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .body-text {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .body-text em {
+      color: rgba(217,148,74,0.85);
+      font-style: normal;
+    }
+
+    .caption-text {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       ACCENT CLASSES
+       ═══════════════════════════════════════════════════════════ */
+    .accent-orange {
+      color: rgba(217,148,74,0.95);
+    }
+
+    .accent-gold {
+      color: var(--accent-gold);
+    }
+
+    .accent-green {
+      color: var(--accent-green);
+    }
+
+    .accent-red {
+      color: var(--accent-red);
+    }
+
+    .accent-blue {
+      color: var(--accent-blue);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE LOGO (ALL SLIDES)
+       ═══════════════════════════════════════════════════════════ */
+    .slide-logo {
+      position: absolute;
+      bottom: 4%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-logo);
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(217,148,74,0.35);
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 4%;
+      right: 5%;
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (ORANGE COLUMN)
+       No sidebar. Orange-tinted glow. "MINDSET" label.
+       ═══════════════════════════════════════════════════════════ */
     .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
+      background: linear-gradient(
+        180deg,
+        #0f0c0a 0%,
+        #0a0908 50%,
+        #080706 100%
+      ) !important;
     }
 
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(217,148,74,0.10) 0%,
+        rgba(217,148,74,0.04) 40%,
+        transparent 70%
+      );
       pointer-events: none;
       z-index: 1;
     }
-    
 
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
+    .slide-1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 40%;
+      background: radial-gradient(
+        ellipse 70% 60% at 50% 100%,
+        rgba(217,148,74,0.06) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 1;
     }
 
     .slide-1 .slide-content {
@@ -79,162 +416,1831 @@
       z-index: 3;
     }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
+    /* ── Cinematic Label ── */
+    .cine-label {
+      font-family: var(--font-sans);
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
+      color: rgba(251, 191, 36, 0.9);
       margin-bottom: 8%;
+      font-weight: 500;
     }
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+    /* ── Hook Main Title ── */
+    .hook-main {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 7cqw, 76px);
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.05;
       color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
+      margin-bottom: 5%;
+      letter-spacing: -0.02em;
     }
 
-    .slide-1 .cine-divider {
-      width: 60px;
+    .hook-main em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    /* ── Cinematic Divider ── */
+    .cine-divider {
+      width: clamp(40px, 11.11cqw, 80px);
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.6),
+        transparent
+      );
+      margin-bottom: 5%;
     }
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
+    /* ── Hook Subtitle ── */
+    .hook-sub {
+      font-family: var(--font-sans);
       font-size: clamp(0.65rem, 2cqw, 1.1rem);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(163, 163, 163, 0.4);
+      color: rgba(251, 191, 36, 0.4);
       line-height: 1.6;
+      max-width: 85%;
     }
 
-    .slide-1 .cine-logo {
+    /* ── Cinematic Logo ── */
+    .cine-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
+      font-family: var(--font-logo);
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.4);
+      color: rgba(251, 191, 36, 0.35);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       ORANGE WARM BASE — Slides 2-7
+       ═══════════════════════════════════════════════════════════ */
+    .slide-warm {
+      background: linear-gradient(
+        180deg,
+        #0f0c0a 0%,
+        #0a0908 100%
+      ) !important;
+    }
+
+    .slide-warm .slide-content {
+      z-index: 3;
+    }
+
+    /* ── Slide 2 Background ── */
+    .slide-2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 50% at 50% 35%,
+          rgba(217,148,74,0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 50% 65%,
+          rgba(217,74,74,0.06) 0%,
+          transparent 60%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-2::after {
+      content: '';
+      position: absolute;
+      top: 10%;
+      right: -5%;
+      width: 40%;
+      height: 40%;
+      background: radial-gradient(
+        circle,
+        rgba(217,74,74,0.05) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 3 Background ── */
+    .slide-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 45% at 30% 40%,
+          rgba(217,148,74,0.08) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 70% 60%,
+          rgba(74,144,217,0.06) 0%,
+          transparent 60%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-3::after {
+      content: '';
+      position: absolute;
+      bottom: 5%;
+      left: 10%;
+      width: 35%;
+      height: 35%;
+      background: radial-gradient(
+        circle,
+        rgba(217,148,74,0.04) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 4 Background ── */
+    .slide-4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 50% 30%,
+          rgba(217,148,74,0.09) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 45% 40% at 40% 70%,
+          rgba(74,217,122,0.05) 0%,
+          transparent 55%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-4::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: 5%;
+      width: 30%;
+      height: 30%;
+      background: radial-gradient(
+        circle,
+        rgba(217,148,74,0.05) 0%,
+        transparent 65%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 5 Background ── */
+    .slide-5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 45% at 55% 35%,
+          rgba(217,148,74,0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 35% 65%,
+          rgba(201,169,98,0.06) 0%,
+          transparent 55%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-5::after {
+      content: '';
+      position: absolute;
+      bottom: 10%;
+      right: 10%;
+      width: 35%;
+      height: 35%;
+      background: radial-gradient(
+        circle,
+        rgba(217,148,74,0.04) 0%,
+        transparent 65%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 6 Background ── */
+    .slide-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 50% at 45% 40%,
+          rgba(217,148,74,0.08) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 45% 40% at 60% 65%,
+          rgba(217,148,74,0.06) 0%,
+          transparent 60%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-6::after {
+      content: '';
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;
+      height: 30%;
+      background: radial-gradient(
+        circle,
+        rgba(217,148,74,0.06) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 7 Background ── */
+    .slide-7::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 65% 55% at 50% 40%,
+          rgba(217,148,74,0.12) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 50% 75%,
+          rgba(217,148,74,0.06) 0%,
+          transparent 55%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-7::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 40%;
+      background: radial-gradient(
+        ellipse 60% 50% at 50% 100%,
+        rgba(217,148,74,0.08) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       MYTH BUSTER ORB — Crosshair / Target theme
+       ═══════════════════════════════════════════════════════════ */
+    .myth-orb {
+      position: relative;
+      width: clamp(100px, 22cqw, 200px);
+      height: clamp(100px, 22cqw, 200px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 45% 40%,
+        rgba(217,74,74,0.20) 0%,
+        rgba(217,74,74,0.06) 40%,
+        rgba(255,255,255,0.02) 70%,
+        transparent 100%
+      );
+      border: 1.5px solid rgba(217,74,74,0.25);
+      box-shadow:
+        0 0 60px rgba(217,74,74,0.10),
+        0 0 120px rgba(217,74,74,0.04),
+        inset 0 0 40px rgba(217,74,74,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6%;
+      z-index: 2;
+    }
+
+    .myth-orb::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(217,74,74,0.15);
+    }
+
+    .myth-orb::after {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 1px dashed rgba(217,74,74,0.10);
+    }
+
+    .myth-orb .orb-symbol {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 6.5cqw, 56px);
+      font-weight: 600;
+      color: rgba(217,74,74,0.6);
+      z-index: 2;
+      line-height: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TRAP CARD — Myth / trap display
+       ═══════════════════════════════════════════════════════════ */
+    .trap-card {
+      width: 100%;
+      max-width: 90%;
+      padding: clamp(18px, 4cqw, 40px);
+      background: rgba(217,74,74,0.04);
+      border: 1px solid rgba(217,74,74,0.15);
+      border-radius: var(--radius-lg);
+      margin-bottom: 4%;
+      text-align: left;
+    }
+
+    .trap-card .trap-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.5cqw, 14px);
+      margin-bottom: clamp(12px, 2.5cqw, 24px);
+      padding-bottom: clamp(10px, 2cqw, 18px);
+      border-bottom: 1px solid rgba(217,74,74,0.10);
+    }
+
+    .trap-card .trap-icon {
+      font-size: clamp(16px, 3.5cqw, 28px);
+      color: rgba(217,74,74,0.7);
+    }
+
+    .trap-card .trap-title {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.7cqw, 16px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(217,74,74,0.8);
+      font-weight: 500;
+    }
+
+    .trap-items {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 2.2cqw, 22px);
+    }
+
+    .trap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px, 1.8cqw, 16px);
+    }
+
+    .trap-item .trap-x {
+      font-family: var(--font-mono);
+      font-size: clamp(12px, 2.4cqw, 20px);
+      color: rgba(217,74,74,0.7);
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .trap-item .trap-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 20px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .trap-item .trap-text em {
+      color: rgba(217,74,74,0.85);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       REALITY PANEL — Truth / insight display
+       ═══════════════════════════════════════════════════════════ */
+    .reality-panel {
+      width: 100%;
+      max-width: 90%;
+      padding: clamp(18px, 4cqw, 40px);
+      background: rgba(74,144,217,0.04);
+      border: 1px solid rgba(74,144,217,0.15);
+      border-radius: var(--radius-lg);
+      margin-bottom: 4%;
+      text-align: left;
+      position: relative;
+    }
+
+    .reality-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(74,144,217,0.5) 0%,
+        rgba(74,144,217,0.15) 100%
+      );
+      border-radius: 3px 0 0 3px;
+    }
+
+    .reality-panel .reality-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.5cqw, 14px);
+      margin-bottom: clamp(12px, 2.5cqw, 24px);
+      padding-bottom: clamp(10px, 2cqw, 18px);
+      border-bottom: 1px solid rgba(74,144,217,0.10);
+    }
+
+    .reality-panel .reality-icon {
+      font-size: clamp(16px, 3.5cqw, 28px);
+      color: rgba(74,144,217,0.7);
+    }
+
+    .reality-panel .reality-title {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.7cqw, 16px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(74,144,217,0.8);
+      font-weight: 500;
+    }
+
+    .reality-items {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 2.2cqw, 22px);
+    }
+
+    .reality-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px, 1.8cqw, 16px);
+    }
+
+    .reality-item .reality-dot {
+      font-family: var(--font-mono);
+      font-size: clamp(12px, 2.4cqw, 20px);
+      color: rgba(74,144,217,0.7);
+      font-weight: 600;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .reality-item .reality-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 20px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .reality-item .reality-text em {
+      color: rgba(74,144,217,0.90);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       COMPARISON BOX — Myth vs Reality side-by-side
+       ═══════════════════════════════════════════════════════════ */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 2cqw, 20px);
+      width: 100%;
+      max-width: 92%;
+      margin-bottom: 4%;
+    }
+
+    .comparison-card {
+      padding: clamp(14px, 3cqw, 28px);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.3cqw, 14px);
+    }
+
+    .comparison-card.myth-side {
+      background: rgba(217,74,74,0.06);
+      border: 1px solid rgba(217,74,74,0.18);
+    }
+
+    .comparison-card.reality-side {
+      background: rgba(74,217,122,0.06);
+      border: 1px solid rgba(74,217,122,0.20);
+    }
+
+    .comparison-card .comp-header {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.5cqw, 14px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .comparison-card.myth-side .comp-header {
+      color: rgba(217,74,74,0.8);
+    }
+
+    .comparison-card.reality-side .comp-header {
+      color: rgba(74,217,122,0.9);
+    }
+
+    .comparison-card .comp-icon {
+      font-size: clamp(20px, 4.5cqw, 40px);
+      line-height: 1;
+      margin-bottom: clamp(2px, 0.5cqw, 6px);
+    }
+
+    .comp-item {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 2cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.45;
+      padding-left: clamp(8px, 1.5cqw, 14px);
+      border-left: 2px solid rgba(255,255,255,0.06);
+    }
+
+    .comparison-card.myth-side .comp-item {
+      border-left-color: rgba(217,74,74,0.25);
+    }
+
+    .comparison-card.reality-side .comp-item {
+      border-left-color: rgba(74,217,122,0.30);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PRIORITY STACK — What actually matters
+       ═══════════════════════════════════════════════════════════ */
+    .priority-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.85cqw, 18px);
+      width: 100%;
+      max-width: 90%;
+      margin-bottom: 4%;
+    }
+
+    .priority-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 2.2cqw, 22px);
+      padding: clamp(12px, 2.6cqw, 26px);
+      background: rgba(74,217,122,0.04);
+      border: 1px solid rgba(74,217,122,0.12);
+      border-radius: var(--radius-md);
+      transition: border-color 0.2s ease;
+    }
+
+    .priority-item:hover {
+      border-color: rgba(74,217,122,0.25);
+    }
+
+    .priority-icon {
+      width: clamp(32px, 7cqw, 56px);
+      height: clamp(32px, 7cqw, 56px);
+      border-radius: 50%;
+      background: rgba(74,217,122,0.08);
+      border: 1px solid rgba(74,217,122,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .priority-icon span {
+      font-size: clamp(14px, 3cqw, 24px);
+      color: rgba(74,217,122,0.8);
+    }
+
+    .priority-info {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2px, 0.4cqw, 4px);
+      text-align: left;
+    }
+
+    .priority-title {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.4cqw, 22px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .priority-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.85cqw, 16px);
+      color: var(--text-tertiary);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       EQUATION DISPLAY — The math card
+       ═══════════════════════════════════════════════════════════ */
+    .equation-display {
+      width: 100%;
+      max-width: 90%;
+      margin-bottom: 5%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(12px, 2.5cqw, 24px);
+    }
+
+    .equation-row {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.5cqw, 16px);
+      padding: clamp(14px, 3cqw, 30px);
+      border-radius: var(--radius-md);
+      position: relative;
+    }
+
+    .equation-row.winning {
+      background: rgba(74,217,122,0.05);
+      border: 1px solid rgba(74,217,122,0.18);
+    }
+
+    .equation-row.losing {
+      background: rgba(217,74,74,0.05);
+      border: 1px solid rgba(217,74,74,0.18);
+    }
+
+    .equation-row .eq-icon {
+      font-size: clamp(18px, 4cqw, 36px);
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .equation-row .eq-content {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2px, 0.5cqw, 6px);
+      text-align: left;
+    }
+
+    .equation-row .eq-formula {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 2cqw, 18px);
+      color: var(--text-primary);
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+    }
+
+    .equation-row.winning .eq-formula em {
+      color: rgba(74,217,122,0.9);
+      font-style: normal;
+    }
+
+    .equation-row.losing .eq-formula em {
+      color: rgba(217,74,74,0.9);
+      font-style: normal;
+    }
+
+    .equation-row .eq-result {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.7cqw, 15px);
+      color: var(--text-tertiary);
+      line-height: 1.3;
+    }
+
+    .equation-row.winning .eq-result {
+      color: rgba(74,217,122,0.6);
+    }
+
+    .equation-row.losing .eq-result {
+      color: rgba(217,74,74,0.6);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       REFLECTION DISPLAY — Insight / truth block
+       ═══════════════════════════════════════════════════════════ */
+    .reflection-display {
+      width: 100%;
+      max-width: 88%;
+      padding: clamp(20px, 4.5cqw, 48px);
+      background: rgba(217,148,74,0.04);
+      border: 1px solid rgba(217,148,74,0.12);
+      border-radius: var(--radius-lg);
+      margin-bottom: 5%;
+      position: relative;
+    }
+
+    .reflection-display::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.4),
+        transparent
+      );
+    }
+
+    .reflection-display .reflection-label {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.5cqw, 13px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(217,148,74,0.7);
+      margin-bottom: clamp(10px, 2cqw, 20px);
+      text-align: center;
+    }
+
+    .reflection-display .reflection-text {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 5cqw, 48px);
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .reflection-display .reflection-text em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .reflection-display .reflection-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 2cqw, 18px);
+      color: var(--text-tertiary);
+      line-height: 1.5;
+      text-align: center;
+      margin-top: clamp(10px, 2cqw, 20px);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       STAT ROW — Percentage breakdowns
+       ═══════════════════════════════════════════════════════════ */
+    .stat-row {
+      display: flex;
+      gap: clamp(8px, 1.85cqw, 18px);
+      width: 100%;
+      max-width: 92%;
+      margin-bottom: 4%;
+      justify-content: center;
+    }
+
+    .stat-item {
+      flex: 1;
+      padding: clamp(12px, 2.6cqw, 26px) clamp(8px, 1.5cqw, 14px);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.8cqw, 8px);
+    }
+
+    .stat-item .stat-value {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 4.5cqw, 40px);
+      font-weight: 600;
+      color: rgba(217,148,74,0.9);
+      line-height: 1;
+    }
+
+    .stat-item .stat-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.3cqw, 12px);
+      color: var(--text-tertiary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       WISDOM CARD — Key insight
+       ═══════════════════════════════════════════════════════════ */
+    .wisdom-card {
+      width: 100%;
+      max-width: 90%;
+      padding: clamp(16px, 3.5cqw, 36px);
+      background: rgba(217,148,74,0.05);
+      border: 1px solid rgba(217,148,74,0.15);
+      border-left: 3px solid rgba(217,148,74,0.45);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-bottom: 4%;
+      text-align: left;
+    }
+
+    .wisdom-card .wisdom-label {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.5cqw, 13px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(217,148,74,0.7);
+      margin-bottom: clamp(8px, 1.8cqw, 16px);
+    }
+
+    .wisdom-card .wisdom-text {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.7cqw, 36px);
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: clamp(8px, 1.8cqw, 16px);
+    }
+
+    .wisdom-card .wisdom-text em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .wisdom-card .wisdom-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 2cqw, 18px);
+      color: var(--text-tertiary);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CALLOUT BOX
+       ═══════════════════════════════════════════════════════════ */
+    .callout-box {
+      width: 100%;
+      max-width: 90%;
+      padding: clamp(14px, 3cqw, 28px);
+      background: rgba(217,148,74,0.06);
+      border: 1px solid rgba(217,148,74,0.18);
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin-bottom: 4%;
+    }
+
+    .callout-box .callout-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 20px);
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .callout-box .callout-text em {
+      color: rgba(217,148,74,0.9);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PROGRESS BAR — Visual percentage bar
+       ═══════════════════════════════════════════════════════════ */
+    .progress-display {
+      width: 100%;
+      max-width: 90%;
+      margin-bottom: 5%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(12px, 2.5cqw, 24px);
+    }
+
+    .progress-row {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.8cqw, 8px);
+    }
+
+    .progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .progress-name {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 20px);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .progress-pct {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 2cqw, 18px);
+      font-weight: 600;
+      color: rgba(217,148,74,0.9);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: clamp(6px, 1.3cqw, 12px);
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 6px;
+      background: linear-gradient(
+        90deg,
+        rgba(217,148,74,0.6) 0%,
+        rgba(217,148,74,0.3) 100%
+      );
+      transition: width 0.4s ease;
+    }
+
+    .progress-fill.low {
+      background: linear-gradient(
+        90deg,
+        rgba(217,74,74,0.6) 0%,
+        rgba(217,74,74,0.3) 100%
+      );
+    }
+
+    .progress-fill.high {
+      background: linear-gradient(
+        90deg,
+        rgba(74,217,122,0.6) 0%,
+        rgba(74,217,122,0.3) 100%
+      );
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CTA SLIDE — Slide 7
+       ═══════════════════════════════════════════════════════════ */
+    .cta-glow {
+      width: clamp(60px, 14cqw, 120px);
+      height: clamp(60px, 14cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(217,148,74,0.20) 0%,
+        rgba(217,148,74,0.06) 50%,
+        transparent 70%
+      );
+      border: 1.5px solid rgba(217,148,74,0.20);
+      box-shadow:
+        0 0 40px rgba(217,148,74,0.10),
+        0 0 80px rgba(217,148,74,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6%;
+    }
+
+    .cta-glow .cta-glow-icon {
+      font-size: clamp(24px, 5.5cqw, 48px);
+      color: rgba(217,148,74,0.7);
+    }
+
+    .cta-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.56cqw, 56px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.12;
+      margin-bottom: 4%;
+      text-align: center;
+    }
+
+    .cta-headline em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .cta-subtext {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 22px);
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 5%;
+      text-align: center;
+      max-width: 85%;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(10px, 2.2cqw, 22px) clamp(24px, 5.5cqw, 56px);
+      background: linear-gradient(
+        135deg,
+        rgba(217,148,74,0.30) 0%,
+        rgba(217,148,74,0.15) 100%
+      );
+      border: 1.5px solid rgba(217,148,74,0.40);
+      border-radius: var(--radius-xl);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.4cqw, 22px);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      margin-bottom: 4%;
+      box-shadow:
+        0 4px 20px rgba(217,148,74,0.12),
+        0 0 40px rgba(217,148,74,0.06);
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.5cqw, 14px);
+      color: var(--text-tertiary);
+      letter-spacing: 0.15em;
+      margin-top: 2%;
+    }
+
+    .brand-tag em {
+      color: rgba(217,148,74,0.7);
+      font-style: normal;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       EXPORT MODE
+       ═══════════════════════════════════════════════════════════ */
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls-bar,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none !important;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      aspect-ratio: auto;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* ── Export Mode — Fixed Pixel Overrides ── */
+    body.export-mode .slide-number {
+      font-size: 12px;
+      top: 48px;
+      left: 54px;
+    }
+
+    body.export-mode .brand-mark {
+      font-size: 11px;
+      bottom: 48px;
+      right: 54px;
+    }
+
+    body.export-mode .slide-logo {
+      font-size: 10px;
+      bottom: 54px;
+    }
+
+    body.export-mode .cine-logo {
+      font-size: 10px;
+      bottom: 80px;
+    }
+
+    body.export-mode .slide-content {
+      padding: 72px;
+    }
+
+    body.export-mode .cine-label {
+      font-size: 14px;
+      letter-spacing: 0.35em;
+      margin-bottom: 60px;
+    }
+
+    body.export-mode .hook-main {
+      font-size: 72px;
+      margin-bottom: 40px;
+    }
+
+    body.export-mode .cine-divider {
+      width: 80px;
+      margin-bottom: 40px;
+    }
+
+    body.export-mode .hook-sub {
+      font-size: 18px;
+    }
+
+    body.export-mode .headline {
+      font-size: 72px;
+    }
+
+    body.export-mode .headline-medium {
+      font-size: 62px;
+    }
+
+    body.export-mode .headline-small {
+      font-size: 48px;
+    }
+
+    body.export-mode .subheadline {
+      font-size: 24px;
+    }
+
+    body.export-mode .body-text {
+      font-size: 20px;
+    }
+
+    body.export-mode .caption-text {
+      font-size: 14px;
+    }
+
+    body.export-mode .reflection-display {
+      padding: 44px;
+    }
+
+    body.export-mode .reflection-display .reflection-text {
+      font-size: 44px;
+    }
+
+    body.export-mode .reflection-display .reflection-label {
+      font-size: 12px;
+    }
+
+    body.export-mode .reflection-display .reflection-sub {
+      font-size: 16px;
+    }
+
+    body.export-mode .trap-card {
+      padding: 36px;
+    }
+
+    body.export-mode .trap-card .trap-icon {
+      font-size: 26px;
+    }
+
+    body.export-mode .trap-card .trap-title {
+      font-size: 14px;
+    }
+
+    body.export-mode .trap-item .trap-x {
+      font-size: 18px;
+    }
+
+    body.export-mode .trap-item .trap-text {
+      font-size: 18px;
+    }
+
+    body.export-mode .reality-panel {
+      padding: 36px;
+    }
+
+    body.export-mode .reality-panel .reality-icon {
+      font-size: 26px;
+    }
+
+    body.export-mode .reality-panel .reality-title {
+      font-size: 14px;
+    }
+
+    body.export-mode .reality-item .reality-dot {
+      font-size: 18px;
+    }
+
+    body.export-mode .reality-item .reality-text {
+      font-size: 18px;
+    }
+
+    body.export-mode .comparison-card {
+      padding: 24px;
+    }
+
+    body.export-mode .comparison-card .comp-header {
+      font-size: 12px;
+    }
+
+    body.export-mode .comparison-card .comp-icon {
+      font-size: 36px;
+    }
+
+    body.export-mode .comp-item {
+      font-size: 16px;
+      padding-left: 12px;
+    }
+
+    body.export-mode .priority-item {
+      padding: 22px;
+    }
+
+    body.export-mode .priority-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    body.export-mode .priority-icon span {
+      font-size: 22px;
+    }
+
+    body.export-mode .priority-title {
+      font-size: 20px;
+    }
+
+    body.export-mode .priority-desc {
+      font-size: 14px;
+    }
+
+    body.export-mode .equation-row {
+      padding: 26px;
+    }
+
+    body.export-mode .equation-row .eq-icon {
+      font-size: 32px;
+    }
+
+    body.export-mode .equation-row .eq-formula {
+      font-size: 16px;
+    }
+
+    body.export-mode .equation-row .eq-result {
+      font-size: 14px;
+    }
+
+    body.export-mode .stat-item {
+      padding: 22px 12px;
+    }
+
+    body.export-mode .stat-item .stat-value {
+      font-size: 36px;
+    }
+
+    body.export-mode .stat-item .stat-label {
+      font-size: 11px;
+    }
+
+    body.export-mode .progress-name {
+      font-size: 18px;
+    }
+
+    body.export-mode .progress-pct {
+      font-size: 16px;
+    }
+
+    body.export-mode .progress-track {
+      height: 10px;
+    }
+
+    body.export-mode .wisdom-card {
+      padding: 32px;
+    }
+
+    body.export-mode .wisdom-card .wisdom-label {
+      font-size: 12px;
+    }
+
+    body.export-mode .wisdom-card .wisdom-text {
+      font-size: 32px;
+    }
+
+    body.export-mode .wisdom-card .wisdom-sub {
+      font-size: 16px;
+    }
+
+    body.export-mode .callout-box {
+      padding: 24px;
+    }
+
+    body.export-mode .callout-box .callout-text {
+      font-size: 18px;
+    }
+
+    body.export-mode .cta-glow {
+      width: 110px;
+      height: 110px;
+    }
+
+    body.export-mode .cta-glow .cta-glow-icon {
+      font-size: 44px;
+    }
+
+    body.export-mode .cta-headline {
+      font-size: 52px;
+    }
+
+    body.export-mode .cta-subtext {
+      font-size: 20px;
+    }
+
+    body.export-mode .cta-button {
+      padding: 20px 52px;
+      font-size: 20px;
+    }
+
+    body.export-mode .brand-tag {
+      font-size: 13px;
+    }
+
+    body.export-mode .myth-orb {
+      width: 180px;
+      height: 180px;
+    }
+
+    body.export-mode .myth-orb .orb-symbol {
+      font-size: 50px;
     }
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+  <!-- ═══════════════════════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="controls-bar">
+    <div class="control-group">
+      <label>Post 383</label>
+    </div>
+    <div class="control-group">
+      <button id="export-btn">Export Mode</button>
+    </div>
   </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE TITLE
+       ═══════════════════════════════════════════════════════════ -->
   <div class="page-title">
     <h1>Post 383 — The Myth of the Perfect Entry</h1>
-    <p>Psychology Carousel — 7 Slides</p>
+    <p>Orange Column &middot; Mindset &middot; 7 Slides</p>
   </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CAROUSEL GRID
+       ═══════════════════════════════════════════════════════════ -->
   <div class="carousel-grid">
+
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 1 — CINEMATIC HOOK: "MINDSET"
+         Orange column: NO sidebar. Orange ::before glow.
+         ══════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
       <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
+        <div class="slide-bg"></div>
         <div class="slide-content">
-          <div class="cine-label">LEARN</div>
-          <div class="hook-main">THE MYTH OF THE PERFECT ENTRY</div>
+          <div class="cine-label">MINDSET</div>
+          <div class="hook-main">The Myth of the<br><em>Perfect Entry</em></div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">Stop chasing what doesn't exist</p>
+          <p class="hook-sub">Stop chasing what doesn't exist.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 07</span>
-        <div class="content-box red">
-          <div class="box-title">❌ THE PERFECT ENTRY TRAP</div>
-          <div class="box-list">→ Waiting for everything to align<br><br>→ Missing trade after trade<br><br>→ "I should have entered there"<br><br>→ Paralysis by analysis</div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 2 — THE PERFECT ENTRY TRAP
+         Myth-busting card with red accent trap items.
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 — The Perfect Entry Trap</span>
+      <div class="slide slide-warm slide-2">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">02 / 07</span>
+
+          <div class="myth-orb">
+            <span class="orb-symbol">&#10005;</span>
+          </div>
+
+          <h2 class="headline-small">
+            The <em>Perfect Entry</em><br>Trap
+          </h2>
+
+          <div class="trap-card">
+            <div class="trap-header">
+              <span class="trap-icon">&#9888;</span>
+              <span class="trap-title">Warning Signs</span>
+            </div>
+
+            <div class="trap-items">
+              <div class="trap-item">
+                <span class="trap-x">&#10005;</span>
+                <p class="trap-text">Waiting for <em>everything</em> to align perfectly</p>
+              </div>
+
+              <div class="trap-item">
+                <span class="trap-x">&#10005;</span>
+                <p class="trap-text">Missing trade after trade while <em>hesitating</em></p>
+              </div>
+
+              <div class="trap-item">
+                <span class="trap-x">&#10005;</span>
+                <p class="trap-text">Telling yourself <em>"I should have entered there"</em></p>
+              </div>
+
+              <div class="trap-item">
+                <span class="trap-x">&#10005;</span>
+                <p class="trap-text"><em>Paralysis by analysis</em> — frozen by indicators</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 07</span>
-        <div class="content-box blue">
-          <div class="box-title">📊 THE REALITY</div>
-          <div class="box-list">✦ Even the best entries have drawdown<br><br>✦ Good entries still get stopped<br><br>✦ "Perfect" is only visible in hindsight</div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 3 — THE REALITY
+         Reality panel with blue accent. Truth about entries.
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 — The Reality</span>
+      <div class="slide slide-warm slide-3">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">03 / 07</span>
+
+          <h2 class="headline-medium">
+            The <em>Reality</em>
+          </h2>
+
+          <div class="reality-panel">
+            <div class="reality-header">
+              <span class="reality-icon">&#9670;</span>
+              <span class="reality-title">What They Don't Tell You</span>
+            </div>
+
+            <div class="reality-items">
+              <div class="reality-item">
+                <span class="reality-dot">&#9672;</span>
+                <p class="reality-text">Even the <em>best entries</em> experience drawdown before profit</p>
+              </div>
+
+              <div class="reality-item">
+                <span class="reality-dot">&#9672;</span>
+                <p class="reality-text">Good entries still get <em>stopped out</em> — that's part of the game</p>
+              </div>
+
+              <div class="reality-item">
+                <span class="reality-dot">&#9672;</span>
+                <p class="reality-text"><em>"Perfect"</em> is only visible in hindsight — never in real time</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <p class="callout-text">
+              The entry you <em>agonize</em> over is often the least<br>
+              important part of the trade.
+            </p>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 07</span>
-        <div class="content-box green">
-          <div class="box-title">✅ WHAT ACTUALLY MATTERS</div>
-          <div class="box-list">→ GOOD ENOUGH entry<br><br>→ EXCELLENT management<br><br>→ PROPER position sizing<br><br>→ DISCIPLINED execution</div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 4 — WHAT ACTUALLY MATTERS
+         Priority stack with green accent.
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 — What Actually Matters</span>
+      <div class="slide slide-warm slide-4">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">04 / 07</span>
+
+          <h2 class="headline-small">
+            What <em>Actually</em><br>Matters
+          </h2>
+
+          <p class="subheadline" style="margin-bottom: 5%;">
+            Shift your focus to <em>these</em> instead.
+          </p>
+
+          <div class="priority-stack">
+            <div class="priority-item">
+              <div class="priority-icon">
+                <span>&#10003;</span>
+              </div>
+              <div class="priority-info">
+                <span class="priority-title">Good Enough Entry</span>
+                <span class="priority-desc">Not perfect — just within your zone. That's all you need.</span>
+              </div>
+            </div>
+
+            <div class="priority-item">
+              <div class="priority-icon">
+                <span>&#9733;</span>
+              </div>
+              <div class="priority-info">
+                <span class="priority-title">Excellent Management</span>
+                <span class="priority-desc">How you manage the trade after entry defines your P&amp;L.</span>
+              </div>
+            </div>
+
+            <div class="priority-item">
+              <div class="priority-icon">
+                <span>&#9670;</span>
+              </div>
+              <div class="priority-info">
+                <span class="priority-title">Proper Position Sizing</span>
+                <span class="priority-desc">Size correctly and no single trade can destroy you.</span>
+              </div>
+            </div>
+
+            <div class="priority-item">
+              <div class="priority-icon">
+                <span>&#9679;</span>
+              </div>
+              <div class="priority-info">
+                <span class="priority-title">Disciplined Execution</span>
+                <span class="priority-desc">Follow the plan. Every time. Without exception.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 07</span>
-        <div class="content-box gold">
-          <div class="box-title">🧮 THE MATH</div>
-          <div class="box-list">Mediocre entry + great management<br>= Profitable<br><br>Perfect entry + poor management<br>= Losses</div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 5 — THE MATH
+         Equation display: winning vs losing formula.
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 — The Math</span>
+      <div class="slide slide-warm slide-5">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">05 / 07</span>
+
+          <h2 class="headline-medium">
+            The <em>Math</em>
+          </h2>
+
+          <p class="body-text" style="margin-bottom: 5%; max-width: 85%;">
+            The numbers tell the real story.<br>
+            Entry quality matters far less than you think.
+          </p>
+
+          <div class="equation-display">
+            <div class="equation-row winning">
+              <span class="eq-icon">&#10003;</span>
+              <div class="eq-content">
+                <p class="eq-formula">Mediocre entry + <em>great management</em></p>
+                <p class="eq-result">= Consistently profitable over time</p>
+              </div>
+            </div>
+
+            <div class="equation-row losing">
+              <span class="eq-icon">&#10005;</span>
+              <div class="eq-content">
+                <p class="eq-formula">Perfect entry + <em>poor management</em></p>
+                <p class="eq-result">= Inevitable losses and blown accounts</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reflection-display">
+            <div class="reflection-label">The Truth</div>
+            <p class="reflection-text">
+              <em>Management</em> is the multiplier.<br>Entry is the footnote.
+            </p>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 07</span>
-        <div class="content-box blue">
-          <div class="box-title">📐 THE TRUTH</div>
-          <div class="box-list">Entry is 10% of the equation<br><br>Management is 90%<br><br>Stop obsessing. Start executing.</div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 6 — THE BREAKDOWN
+         Progress bars: Entry vs Management percentage.
+         Comparison grid: Myth side vs Reality side.
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 — The Breakdown</span>
+      <div class="slide slide-warm slide-6">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">06 / 07</span>
+
+          <h2 class="headline-small">
+            The <em>Breakdown</em>
+          </h2>
+
+          <div class="progress-display">
+            <div class="progress-row">
+              <div class="progress-label-row">
+                <span class="progress-name">Entry Quality</span>
+                <span class="progress-pct">10%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill low" style="width: 10%;"></div>
+              </div>
+            </div>
+
+            <div class="progress-row">
+              <div class="progress-label-row">
+                <span class="progress-name">Trade Management</span>
+                <span class="progress-pct">40%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill high" style="width: 40%;"></div>
+              </div>
+            </div>
+
+            <div class="progress-row">
+              <div class="progress-label-row">
+                <span class="progress-name">Position Sizing</span>
+                <span class="progress-pct">30%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill high" style="width: 30%;"></div>
+              </div>
+            </div>
+
+            <div class="progress-row">
+              <div class="progress-label-row">
+                <span class="progress-name">Psychology &amp; Discipline</span>
+                <span class="progress-pct">20%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" style="width: 20%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="comparison-grid">
+            <div class="comparison-card myth-side">
+              <div class="comp-header">Obsessing Over</div>
+              <div class="comp-icon">&#9888;</div>
+              <div class="comp-item">The exact tick of entry</div>
+              <div class="comp-item">Indicator confluence</div>
+            </div>
+            <div class="comparison-card reality-side">
+              <div class="comp-header">Focus On Instead</div>
+              <div class="comp-icon">&#9733;</div>
+              <div class="comp-item">Risk per trade</div>
+              <div class="comp-item">Exit strategy execution</div>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <p class="callout-text">
+              Stop obsessing. <em>Start executing.</em>
+            </p>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">07 / 07</span>
-        <div class="slide-icon">✅</div>
-        <h2 class="slide-title">GOOD ENOUGH + GREAT MANAGEMENT = SUCCESS</h2>
-        <p class="slide-body">Follow @signalpilot</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 7 — CTA: "Execute, Don't Hesitate"
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — CTA</span>
+      <div class="slide slide-warm slide-7">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">07 / 07</span>
+
+          <div class="cta-glow">
+            <span class="cta-glow-icon">&#9733;</span>
+          </div>
+
+          <h2 class="cta-headline">
+            Good Enough +<br>
+            Great Management<br>
+            <em>= Success</em>
+          </h2>
+
+          <p class="cta-subtext">
+            Signal Pilot teaches you to focus on what actually moves the needle: trade management, position sizing, and disciplined execution — not chasing the mythical perfect entry.
+          </p>
+
+          <a href="https://education.signalpilot.io" class="cta-button">
+            Start Executing
+          </a>
+
+          <p class="brand-tag">
+            <em>education.signalpilot.io</em>
+          </p>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
+
   </div>
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 7</span>
-    <button onclick="nextSlide()">Next →</button>
-  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       EXPORT MODE SCRIPT + KEYBOARD NAVIGATION
+       ═══════════════════════════════════════════════════════════ -->
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0, exportMode = false;
-    bgToggle.addEventListener('change', (e) => videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'));
-    opacitySlider.addEventListener('input', (e) => document.documentElement.style.setProperty('--video-opacity', e.target.value / 100));
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function () {
+      'use strict';
+
+      /* ── DOM References ── */
+      var exportBtn = document.getElementById('export-btn');
+      var slideWrappers = document.querySelectorAll('.slide-wrapper');
+      var totalSlides = slideWrappers.length;
+
+      /* ── State ── */
+      var exportMode = false;
+      var currentSlide = 0;
+
+      /* ── Toggle Export Mode ── */
+      exportBtn.addEventListener('click', function () {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+
+        if (exportMode) {
+          currentSlide = 0;
+          updateActiveSlide();
+        }
+      });
+
+      /* ── Update Active Slide ── */
+      function updateActiveSlide() {
+        for (var i = 0; i < slideWrappers.length; i++) {
+          if (i === currentSlide) {
+            slideWrappers[i].classList.add('active');
+          } else {
+            slideWrappers[i].classList.remove('active');
+          }
+        }
+      }
+
+      /* ── Navigate Next ── */
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateActiveSlide();
+      }
+
+      /* ── Navigate Previous ── */
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateActiveSlide();
+      }
+
+      /* ── Keyboard Navigation ── */
+      document.addEventListener('keydown', function (e) {
+        if (!exportMode) {
+          return;
+        }
+
+        switch (e.key) {
+          case 'ArrowRight':
+          case ' ':
+            e.preventDefault();
+            nextSlide();
+            break;
+
+          case 'ArrowLeft':
+            e.preventDefault();
+            prevSlide();
+            break;
+
+          case 'Escape':
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            exportBtn.textContent = 'Export Mode';
+            break;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
