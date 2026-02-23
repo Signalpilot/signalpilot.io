@@ -47,8 +47,9 @@ function getOutputPath(storyNumber) {
 }
 
 /**
- * Create SVG for the story image
+ * Create premium SVG for the story image
  * Instagram Story dimensions: 1080x1920
+ * Uses Signal Pilot brand colors and modern design principles
  */
 function createStorySVG(text) {
   // Escape special XML characters
@@ -57,15 +58,15 @@ function createStorySVG(text) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
-  // Measure text (rough estimate for fitting)
+  // Smart word wrapping for better typography
   const lines = [];
   let currentLine = '';
   const words = escapedText.split(' ');
-  const maxCharsPerLine = 20; // Average chars per line
+  const maxCharsPerLine = 22;
 
   for (const word of words) {
-    if ((currentLine + word).length > maxCharsPerLine) {
-      if (currentLine) lines.push(currentLine.trim());
+    if ((currentLine + word).length > maxCharsPerLine && currentLine) {
+      lines.push(currentLine.trim());
       currentLine = word + ' ';
     } else {
       currentLine += word + ' ';
@@ -73,61 +74,168 @@ function createStorySVG(text) {
   }
   if (currentLine) lines.push(currentLine.trim());
 
-  // Build text elements (centered)
-  const lineHeight = 90;
-  const totalHeight = lines.length * lineHeight;
-  const startY = Math.max(400, 960 - totalHeight / 2);
+  // Calculate optimal positioning for 1-4 lines
+  let startY, lineHeight, fontSize;
+  if (lines.length === 1) {
+    fontSize = 76;
+    lineHeight = 100;
+    startY = 920;
+  } else if (lines.length === 2) {
+    fontSize = 68;
+    lineHeight = 100;
+    startY = 850;
+  } else if (lines.length === 3) {
+    fontSize = 58;
+    lineHeight = 95;
+    startY = 800;
+  } else {
+    fontSize = 52;
+    lineHeight = 90;
+    startY = 760;
+  }
 
+  // Build text elements with premium styling
   let textElements = '';
   lines.forEach((line, idx) => {
     const y = startY + idx * lineHeight;
-    textElements += `
-      <text
-        x="540"
-        y="${y}"
-        text-anchor="middle"
-        font-family="system-ui, -apple-system, sans-serif"
-        font-size="60"
-        font-weight="bold"
-        fill="white"
-        text-shadow="0 2px 10px rgba(0,0,0,0.8)"
-      >
-        ${line}
-      </text>
-    `;
+
+    // Alternate text effects for visual interest
+    const useGradient = idx % 2 === 0;
+    const shadowIntensity = idx === 0 ? '0 8px 24px rgba(91, 138, 255, 0.4)' : '0 4px 12px rgba(0,0,0,0.6)';
+
+    if (useGradient) {
+      // Gradient text effect for primary lines
+      textElements += `
+        <defs>
+          <linearGradient id="textGrad${idx}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#5b8aff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#76ddff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#7ccaff;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+      `;
+      textElements += `
+        <text
+          x="540"
+          y="${y}"
+          text-anchor="middle"
+          font-family="system-ui, -apple-system, sans-serif"
+          font-size="${fontSize}"
+          font-weight="900"
+          fill="url(#textGrad${idx})"
+          style="letter-spacing: -1px; text-shadow: ${shadowIntensity}"
+          opacity="0.95"
+        >
+          ${line}
+        </text>
+      `;
+    } else {
+      // White text with enhanced shadow for supporting lines
+      textElements += `
+        <text
+          x="540"
+          y="${y}"
+          text-anchor="middle"
+          font-family="system-ui, -apple-system, sans-serif"
+          font-size="${fontSize}"
+          font-weight="700"
+          fill="white"
+          style="letter-spacing: -0.5px; text-shadow: ${shadowIntensity}"
+          opacity="0.95"
+        >
+          ${line}
+        </text>
+      `;
+    }
   });
 
+  // Create SVG with brand styling
   return `
     <svg width="1080" height="1920" xmlns="http://www.w3.org/2000/svg">
-      <!-- Background -->
-      <rect width="1080" height="1920" fill="#0a0e27"/>
-
-      <!-- Gradient overlay -->
       <defs>
-        <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:rgba(0,0,0,0.3);stop-opacity:1" />
-          <stop offset="50%" style="stop-color:rgba(0,0,0,0);stop-opacity:1" />
-          <stop offset="100%" style="stop-color:rgba(0,0,0,0.6);stop-opacity:1" />
+        <!-- Signal Pilot brand gradient background -->
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#05070d;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#0c111c;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#101626;stop-opacity:1" />
+        </linearGradient>
+
+        <!-- Accent border gradient -->
+        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#5b8aff;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#76ddff;stop-opacity:1" />
+        </linearGradient>
+
+        <!-- Top-to-bottom overlay for depth -->
+        <linearGradient id="overlay" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:rgba(91, 138, 255, 0.15);stop-opacity:1" />
+          <stop offset="40%" style="stop-color:rgba(0,0,0,0.05);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgba(0,0,0,0.4);stop-opacity:1" />
         </linearGradient>
       </defs>
-      <rect width="1080" height="1920" fill="url(#grad)"/>
 
-      <!-- Text -->
+      <!-- Dark navy background with gradient -->
+      <rect width="1080" height="1920" fill="url(#bgGrad)"/>
+
+      <!-- Subtle grid pattern for tech vibe -->
+      <g stroke="#5b8aff" stroke-width="0.5" opacity="0.08">
+        <line x1="0" y1="0" x2="1080" y2="0" />
+        <line x1="0" y1="60" x2="1080" y2="60" />
+        <line x1="0" y1="120" x2="1080" y2="120" />
+        <line x1="0" y1="180" x2="1080" y2="180" />
+        <line x1="0" y1="240" x2="1080" y2="240" />
+      </g>
+
+      <!-- Top accent bar -->
+      <rect x="0" y="0" width="1080" height="4" fill="url(#accentGrad)" opacity="0.6"/>
+
+      <!-- Depth overlay -->
+      <rect width="1080" height="1920" fill="url(#overlay)"/>
+
+      <!-- Main text content -->
       ${textElements}
 
-      <!-- Branding footer -->
-      <text
-        x="540"
-        y="1820"
-        text-anchor="middle"
-        font-family="system-ui, -apple-system, sans-serif"
-        font-size="16"
-        font-weight="600"
-        fill="#00d9ff"
-        opacity="0.8"
-      >
-        🔗 LINK IN BIO
-      </text>
+      <!-- Bottom accent card -->
+      <g>
+        <!-- Card background with subtle border -->
+        <rect x="40" y="1760" width="1000" height="140" rx="16" fill="#0c111c" stroke="url(#accentGrad)" stroke-width="2" opacity="0.9"/>
+
+        <!-- Branding text -->
+        <text
+          x="540"
+          y="1810"
+          text-anchor="middle"
+          font-family="system-ui, -apple-system, sans-serif"
+          font-size="18"
+          font-weight="700"
+          fill="#76ddff"
+          letter-spacing="1"
+        >
+          SIGNAL PILOT
+        </text>
+
+        <!-- CTA text -->
+        <text
+          x="540"
+          y="1850"
+          text-anchor="middle"
+          font-family="system-ui, -apple-system, sans-serif"
+          font-size="14"
+          font-weight="500"
+          fill="#ffffff"
+          opacity="0.8"
+        >
+          TAP BIO FOR EDGE
+        </text>
+      </g>
+
+      <!-- Decorative corner accents (top-right) -->
+      <circle cx="1040" cy="40" r="8" fill="#76ddff" opacity="0.6"/>
+      <circle cx="1000" cy="40" r="4" fill="#76ddff" opacity="0.4"/>
+
+      <!-- Decorative corner accents (bottom-left) -->
+      <circle cx="40" cy="1880" r="6" fill="#3ed598" opacity="0.4"/>
+      <circle cx="70" cy="1880" r="3" fill="#3ed598" opacity="0.3"/>
     </svg>
   `;
 }
