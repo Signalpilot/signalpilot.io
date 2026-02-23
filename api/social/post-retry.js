@@ -11,7 +11,7 @@
 import {
   getNextPostOrder,
   getRetryCount,
-  getRetryMeta,
+  getRetryWaitTime,
   shouldSkipPost,
   clearRetryCount,
   incrementRetryCount,
