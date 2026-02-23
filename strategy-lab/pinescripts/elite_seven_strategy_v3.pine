@@ -1,0 +1,199 @@
+//@version=6
+strategy("Signal Pilot — Elite Seven v3", overlay=true,
+     default_qty_type=strategy.percent_of_equity, default_qty_value=5,
+     commission_type=strategy.commission.percent, commission_value=0.055,
+     slippage=2, initial_capital=500, margin_long=0, margin_short=0)
+
+// ══════════════════════════════════════════════════════════════════════
+// ELITE SEVEN v3 — SIGNAL + FILTER ARCHITECTURE
+//
+// Audit of v1/v2 found:
+//   1. Voting system has no clear trigger — score oscillation = whipsaw
+//   2. Votes 3 & 4 (Volume Oracle/Plutus) are correlated (~80% agree)
+//   3. Late entry: by the time 6/7 agree, the move is underway
+//   4. Fixed SL/TP caps winners in strong trends
+//
+// v3 redesign:
+//   TRIGGER: SuperTrend consensus flip (OmniDeck) — clear timing event
+//   FILTERS: Regime + Volume + Strength — quality gates
+//   EXIT:    Trailing stop via widest SuperTrend — let winners run
+//
+// This separates WHEN to enter (trigger) from SHOULD we enter (filters)
+// ══════════════════════════════════════════════════════════════════════
+
+// ── Inputs ────────────────────────────────────────────────────────────
+int   COOLDOWN  = input.int(12, "Min bars between entries", minval=1, group="Strategy")
+float ATR_SL    = input.float(2.0, "Initial ATR Stop Multiplier", step=0.1, group="Risk")
+float ATR_TP    = input.float(5.0, "ATR Take-Profit (safety cap)", step=0.5, group="Risk")
+int   ATR_LEN   = input.int(14, "ATR Period", group="Risk")
+bool  SHOW_ST   = input.bool(true, "Show SuperTrend lines", group="Display")
+
+// ── Shared ────────────────────────────────────────────────────────────
+float atrVal = ta.atr(ATR_LEN)
+
+// ══════════════════════════════════════════════════════════════════════
+// TRIGGER: OMNIDECK — SuperTrend consensus flip
+// 3 SuperTrend levels (2.0/3.0/4.0 ATR × 10-bar). When 2+ flip
+// direction, that's a genuine trend change — not score oscillation.
+// Fires ~30-50 times/year, each one a potential regime shift.
+// ══════════════════════════════════════════════════════════════════════
+[st1, d1] = ta.supertrend(2.0, 10)
+[st2, d2] = ta.supertrend(3.0, 10)
+[st3, d3] = ta.supertrend(4.0, 10)
+int  stBulls    = (d1 == -1 ? 1 : 0) + (d2 == -1 ? 1 : 0) + (d3 == -1 ? 1 : 0)
+bool stFlipBull = stBulls >= 2 and stBulls[1] < 2
+bool stFlipBear = stBulls <= 1 and stBulls[1] > 1
+
+// ══════════════════════════════════════════════════════════════════════
+// FILTER A: PENTARCH — Regime direction
+// Must be in a confirmed regime before entering. Prevents
+// counter-trend trades. 2 of 3 sub-factors must agree.
+// ══════════════════════════════════════════════════════════════════════
+float ema34   = ta.ema(close, 34)
+float ema55   = ta.ema(close, 55)
+float pilot   = ta.ema(ema34, 3)
+float plSlope = pilot - pilot[1]
+float eps     = atrVal * 0.02
+int   pUp     = (ema34 > ema55 ? 1 : 0) + (close > pilot ? 1 : 0) + (plSlope > eps ? 1 : 0)
+int   pDn     = (ema34 < ema55 ? 1 : 0) + (close < pilot ? 1 : 0) + (plSlope < -eps ? 1 : 0)
+bool  regBull = pUp >= 2
+bool  regBear = pDn >= 2
+
+// ══════════════════════════════════════════════════════════════════════
+// FILTER B: PLUTUS FLOW — Volume conviction
+// OBV above/below its basis confirms money is flowing with the trade.
+// Single vote merging the essence of both Volume Oracle & Plutus Flow.
+// ══════════════════════════════════════════════════════════════════════
+float obvVal   = ta.obv
+float obvBasis = ta.sma(obvVal, 20)
+bool  volBull  = obvVal > obvBasis
+bool  volBear  = obvVal < obvBasis
+
+// ══════════════════════════════════════════════════════════════════════
+// FILTER C: AUGURY GRID — Trend strength
+// ADX > 20 confirms this is a trending market, not chop.
+// ══════════════════════════════════════════════════════════════════════
+[diP, diM, adx] = ta.dmi(14, 14)
+bool trending    = adx > 20
+
+// ══════════════════════════════════════════════════════════════════════
+// BOOSTERS (displayed in panel, not required for entry)
+// ══════════════════════════════════════════════════════════════════════
+// Janus Atlas — market structure
+float hiNow  = ta.highest(high, 10)
+float hiPrev = ta.highest(high[10], 10)
+float loNow  = ta.lowest(low, 10)
+float loPrev = ta.lowest(low[10], 10)
+bool  structBull = hiNow > hiPrev and loNow > loPrev
+bool  structBear = hiNow < hiPrev and loNow < loPrev
+
+// Harmonic Oscillator — momentum direction
+float rsiVal  = ta.rsi(close, 14)
+float srsiK   = ta.sma(ta.stoch(rsiVal, rsiVal, rsiVal, 14), 3)
+float comp    = (rsiVal + srsiK) / 2.0
+float compEma = ta.ema(comp, 7)
+float compSig = ta.ema(compEma, 3)
+bool  momBull = compEma > compSig and compEma > 50
+bool  momBear = compEma < compSig and compEma < 50
+
+// ══════════════════════════════════════════════════════════════════════
+// ENTRY LOGIC
+// ══════════════════════════════════════════════════════════════════════
+var int lastEntryBar = 0
+bool cooldownOK = bar_index - lastEntryBar >= COOLDOWN or lastEntryBar == 0
+
+// Trigger + all 3 filters + cooldown + flat
+bool longEntry  = stFlipBull and regBull and volBull and trending and cooldownOK and strategy.position_size == 0
+bool shortEntry = stFlipBear and regBear and volBear and trending and cooldownOK and strategy.position_size == 0
+
+// Persistent state for exit management
+var float entryPrice = na
+var float initialStop = na
+
+if longEntry
+    lastEntryBar := bar_index
+    entryPrice := close
+    initialStop := close - ATR_SL * atrVal
+    strategy.entry("Long", strategy.long)
+
+if shortEntry
+    lastEntryBar := bar_index
+    entryPrice := close
+    initialStop := close + ATR_SL * atrVal
+    strategy.entry("Short", strategy.short)
+
+// ══════════════════════════════════════════════════════════════════════
+// EXIT LOGIC — Trailing stop via widest SuperTrend
+// The widest SuperTrend (4.0 ATR) provides a natural trailing level
+// that adapts to volatility. In strong trends it stays below price
+// and lets the trade run. On reversals it catches the turn.
+// ══════════════════════════════════════════════════════════════════════
+if strategy.position_size > 0
+    if stBulls <= 1  // SuperTrend consensus flipped bearish
+        strategy.close("Long", comment="ST consensus flip")
+    else
+        float trail = d3 == -1 ? st3 : initialStop  // Use widest ST when bullish
+        float stopLevel = math.max(initialStop, trail)
+        strategy.exit("Long X", "Long", stop=stopLevel, limit=entryPrice + ATR_TP * atrVal)
+
+if strategy.position_size < 0
+    if stBulls >= 2  // SuperTrend consensus flipped bullish
+        strategy.close("Short", comment="ST consensus flip")
+    else
+        float trail = d3 == 1 ? st3 : initialStop  // Use widest ST when bearish
+        float stopLevel = math.min(initialStop, trail)
+        strategy.exit("Short X", "Short", stop=stopLevel, limit=entryPrice - ATR_TP * atrVal)
+
+// ══════════════════════════════════════════════════════════════════════
+// VISUAL OUTPUT
+// ══════════════════════════════════════════════════════════════════════
+plot(pilot, "Pilot Line", color=regBull ? color.green : regBear ? color.red : color.gray, linewidth=2)
+plot(SHOW_ST ? st1 : na, "ST Tight", color=d1 == -1 ? color.new(color.green, 70) : color.new(color.red, 70), linewidth=1)
+plot(SHOW_ST ? st2 : na, "ST Med", color=d2 == -1 ? color.new(color.green, 60) : color.new(color.red, 60), linewidth=1)
+plot(SHOW_ST ? st3 : na, "ST Wide", color=d3 == -1 ? color.new(color.green, 40) : color.new(color.red, 40), linewidth=2)
+
+plotshape(longEntry, "Long", shape.triangleup, location.belowbar, color.green, size=size.normal)
+plotshape(shortEntry, "Short", shape.triangledown, location.abovebar, color.red, size=size.normal)
+
+// ── Status panel ─────────────────────────────────────────────────────
+var table panel = table.new(position.top_right, 3, 8, bgcolor=color.new(color.black, 85), border_width=1, border_color=color.gray)
+if barstate.islast
+    table.cell(panel, 0, 0, "ELITE 7 v3", text_color=color.white, text_size=size.small, bgcolor=color.new(color.blue, 60))
+    table.cell(panel, 1, 0, "STATUS", text_color=color.white, text_size=size.tiny, bgcolor=color.new(color.blue, 60))
+    table.cell(panel, 2, 0, "ROLE", text_color=color.white, text_size=size.tiny, bgcolor=color.new(color.blue, 60))
+
+    // Trigger
+    string stDir = stBulls >= 2 ? "BULL" : "BEAR"
+    color  stClr = stBulls >= 2 ? color.green : color.red
+    table.cell(panel, 0, 1, "OmniDeck ST", text_color=color.white, text_size=size.tiny)
+    table.cell(panel, 1, 1, stDir + " (" + str.tostring(stBulls) + "/3)", text_color=stClr, text_size=size.tiny)
+    table.cell(panel, 2, 1, "TRIGGER", text_color=color.yellow, text_size=size.tiny)
+
+    // Filters
+    table.cell(panel, 0, 2, "Pentarch", text_color=color.gray, text_size=size.tiny)
+    table.cell(panel, 1, 2, regBull ? "BULL" : regBear ? "BEAR" : "FLAT", text_color=regBull ? color.green : regBear ? color.red : color.gray, text_size=size.tiny)
+    table.cell(panel, 2, 2, "FILTER", text_color=color.orange, text_size=size.tiny)
+
+    table.cell(panel, 0, 3, "Plutus OBV", text_color=color.gray, text_size=size.tiny)
+    table.cell(panel, 1, 3, volBull ? "ACCUM" : volBear ? "DISTRIB" : "FLAT", text_color=volBull ? color.green : volBear ? color.red : color.gray, text_size=size.tiny)
+    table.cell(panel, 2, 3, "FILTER", text_color=color.orange, text_size=size.tiny)
+
+    table.cell(panel, 0, 4, "Augury ADX", text_color=color.gray, text_size=size.tiny)
+    table.cell(panel, 1, 4, trending ? "TREND " + str.tostring(adx, "#") : "CHOP " + str.tostring(adx, "#"), text_color=trending ? color.green : color.gray, text_size=size.tiny)
+    table.cell(panel, 2, 4, "FILTER", text_color=color.orange, text_size=size.tiny)
+
+    // Boosters
+    table.cell(panel, 0, 5, "Janus Struct", text_color=color.gray, text_size=size.tiny)
+    table.cell(panel, 1, 5, structBull ? "HH/HL" : structBear ? "LH/LL" : "MIXED", text_color=structBull ? color.green : structBear ? color.red : color.gray, text_size=size.tiny)
+    table.cell(panel, 2, 5, "BOOST", text_color=color.teal, text_size=size.tiny)
+
+    table.cell(panel, 0, 6, "Harmonic", text_color=color.gray, text_size=size.tiny)
+    table.cell(panel, 1, 6, momBull ? "BULL" : momBear ? "BEAR" : "FLAT", text_color=momBull ? color.green : momBear ? color.red : color.gray, text_size=size.tiny)
+    table.cell(panel, 2, 6, "BOOST", text_color=color.teal, text_size=size.tiny)
+
+    // Position status
+    string posStr = strategy.position_size > 0 ? "LONG" : strategy.position_size < 0 ? "SHORT" : "FLAT"
+    color  posClr = strategy.position_size > 0 ? color.green : strategy.position_size < 0 ? color.red : color.gray
+    table.cell(panel, 0, 7, "Position", text_color=color.white, text_size=size.tiny, bgcolor=color.new(color.gray, 70))
+    table.cell(panel, 1, 7, posStr, text_color=posClr, text_size=size.small, bgcolor=color.new(color.gray, 70))
+    table.cell(panel, 2, 7, "", bgcolor=color.new(color.gray, 70))
