@@ -3,1035 +3,206 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 066 — Fibonacci Retracements | Carousel Preview</title>
+  <title>Post 066 — Fibonacci Retracements</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Gugi&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.4);
-      --border-subtle: rgba(255,255,255,0.1);
-      --accent-gold: #c9a962;
-      --accent-gold-dim: rgba(201,169,98,0.3);
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--font-sans); background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; padding: 2rem; }
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
-
-    .controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .controls label { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.875rem; }
-    .controls select, .controls button { background: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer; }
-    .page-title { text-align: center; margin-bottom: 2rem; }
-    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
-
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; background: var(--bg-dark); border-radius: 0.5rem; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-.slide-content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 5.5% 5.5% 10% 5.5%; }
-
-    /* EDU slide base — no bar */
-    .slide-edu { background: linear-gradient(180deg, #0d0d10 0%, #0a0a0f 100%) !important; }
-    .slide-edu::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(201,169,98,0.04) 0%, transparent 100%); pointer-events: none; z-index: 1; }
-    .slide-edu .slide-content { z-index: 3; }
-
-    /* Logo */
-    .slide-logo {
-      position: absolute;
-      bottom: 4%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      z-index: 2;
-      white-space: nowrap;
-    }
-
-    /* Slides 7-10 shared styles */
-    .slide-counter {
-      font-family: var(--font-mono);
-      font-size: clamp(9px, 1.4cqw, 14px);
-      color: var(--text-muted);
-      letter-spacing: 0.15em;
-      margin-bottom: 2%;
-    }
-    .section-sub {
-      font-family: var(--font-sans);
-      font-size: clamp(8px, 1.3cqw, 14px);
-      color: var(--text-muted);
-      line-height: 1.35;
-      margin-bottom: 3%;
-      max-width: 90%;
-    }
-    .fail-locations { display: flex; flex-direction: column; gap: clamp(3px, 0.5cqw, 6px); }
-    .fail-item { display: flex; align-items: center; gap: 4%; padding: 2% 4%; border-radius: clamp(6px, 1cqw, 12px); }
-    .fail-icon-circle { width: clamp(28px, 5cqw, 44px); height: clamp(28px, 5cqw, 44px); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .fail-icon-symbol { font-family: var(--font-serif); font-size: clamp(14px, 2.5cqw, 24px); font-weight: 700; }
-    .fail-info { flex: 1; }
-    .fail-title { font-family: var(--font-sans); font-size: clamp(9px, 1.5cqw, 16px); font-weight: 600; color: var(--text-primary); margin-bottom: 1%; }
-    .fail-desc { font-family: var(--font-sans); font-size: clamp(7px, 1.05cqw, 11px); color: var(--text-secondary); line-height: 1.3; }
-
-    .indicator-grid { width: 92%; display: flex; flex-direction: column; gap: clamp(3px, 0.5cqw, 6px); margin-bottom: 2%; }
-    .indicator-card { display: flex; align-items: center; gap: 4%; border-radius: clamp(6px, 1cqw, 12px); padding: clamp(4px, 0.8cqw, 10px) 4%; }
-    .icon-circle { width: clamp(28px, 5cqw, 44px); height: clamp(28px, 5cqw, 44px); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .indicator-info { flex: 1; }
-    .indicator-name { font-family: var(--font-sans); font-size: clamp(9px, 1.5cqw, 16px); font-weight: 600; color: var(--text-primary); margin-bottom: 0; }
-    .indicator-codename { font-family: var(--font-mono); font-size: clamp(6px, 0.9cqw, 10px); letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 1%; }
-    .indicator-desc { font-family: var(--font-sans); font-size: clamp(7px, 1.05cqw, 11px); color: var(--text-secondary); line-height: 1.3; }
-
-    .feature-grid { width: 92%; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(4px, 0.8cqw, 8px); margin-bottom: 3%; }
-    .feature-card { border-radius: clamp(6px, 1cqw, 12px); padding: 4% 5%; display: flex; align-items: center; gap: 8%; }
-    .feature-ic { width: clamp(22px, 4cqw, 34px); height: clamp(22px, 4cqw, 34px); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .feature-text { font-family: var(--font-sans); font-size: clamp(8px, 1.2cqw, 13px); font-weight: 500; color: var(--text-primary); }
-
-    .truth-grid { width: 92%; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(4px, 0.8cqw, 10px); margin-bottom: 3%; }
-    .truth-card { border-radius: clamp(6px, 1cqw, 12px); padding: 4% 5%; }
-
-    .philosophy-box { width: 92%; border-radius: clamp(6px, 1cqw, 12px); border: 1px solid rgba(201,169,98,0.15); background: rgba(201,169,98,0.03); padding: 3% 4%; text-align: center; }
-    .philosophy-text { font-family: var(--font-serif); font-size: clamp(9px, 1.5cqw, 15px); font-weight: 500; font-style: italic; color: var(--text-secondary); line-height: 1.4; }
-
-    /* LEARN label — gold, slide 1 only */
-    .learn-label {
-      display: inline-block;
-      font-family: var(--font-sans);
-      font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(201,169,98,0.9);
-      margin-bottom: clamp(0.75rem, 2cqw, 1.25rem);
-    }
-
-    /* Gold divider */
-    .gold-divider {
-      width: clamp(2rem, 8cqw, 4rem);
-      height: 1px;
-      background: rgba(201,169,98,0.6);
-      margin: clamp(0.75rem, 2cqw, 1.25rem) 0;
-    }
-
-    /* ============================================
-       SLIDE 1 — Hook
-       ============================================ */
-    .slide-1 .hook-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .slide-1 .hook-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 6cqw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-    .slide-1 .hook-title .gold { color: var(--accent-gold); }
-    .slide-1 .hook-subtitle {
-      font-family: var(--font-serif);
-      font-size: clamp(0.8rem, 2.2cqw, 1.15rem);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      max-width: 85%;
-    }
-
-    /* Fib spiral visual */
-    .fib-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(4px, 0.8cqw, 8px);
-      margin: clamp(1rem, 3cqw, 2rem) 0;
-    }
-    .fib-num {
-      font-family: var(--font-mono);
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--accent-gold);
-      opacity: 0.6;
-    }
-    .fib-num.active { opacity: 1; font-weight: 700; font-size: clamp(14px, 2.5cqw, 26px); }
-    .fib-sep { color: var(--text-muted); font-size: clamp(8px, 1.2cqw, 14px); }
-
-    /* ============================================
-       SHARED — Layout
-       ============================================ */
-    .edu-layout {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .section-tag {
-      font-family: var(--font-mono);
-      font-size: clamp(8px, 1.4cqw, 14px);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(201,169,98,0.8);
-      margin-bottom: 3%;
-    }
-
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(22px, 4.5cqw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      text-align: center;
-      line-height: 1.15;
-      margin-bottom: 5%;
-    }
-
-    /* ============================================
-       SLIDE 2 — Key Levels
-       ============================================ */
-    .fib-levels {
-      width: 88%;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1.2cqw, 12px);
-    }
-
-    .fib-level {
-      display: flex;
-      align-items: center;
-      gap: clamp(8px, 1.5cqw, 14px);
-      padding: clamp(8px, 1.6cqw, 16px) clamp(10px, 2cqw, 20px);
-      border-radius: 10px;
-      background: rgba(201,169,98,0.03);
-      border: 1px solid rgba(201,169,98,0.1);
-    }
-
-    .fib-pct {
-      font-family: var(--font-mono);
-      font-size: clamp(12px, 2.2cqw, 22px);
-      font-weight: 700;
-      color: var(--accent-gold);
-      min-width: clamp(50px, 9cqw, 90px);
-    }
-
-    .fib-dash {
-      width: clamp(16px, 3cqw, 30px);
-      height: 1px;
-      background: rgba(201,169,98,0.3);
-      flex-shrink: 0;
-    }
-
-    .fib-meaning {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    .fib-level.golden {
-      background: rgba(201,169,98,0.06);
-      border-color: rgba(201,169,98,0.25);
-      box-shadow: 0 0 20px rgba(201,169,98,0.05);
-    }
-
-    /* ============================================
-       SLIDE 3 — Why They Work
-       ============================================ */
-    .reason-card {
-      width: 88%;
-      padding: clamp(14px, 3.5cqw, 36px);
-      border-radius: 14px;
-      background: rgba(201,169,98,0.04);
-      border: 1px solid rgba(201,169,98,0.15);
-      text-align: center;
-      margin-bottom: 4%;
-    }
-
-    .reason-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.5cqw, 36px);
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
-    .reason-title .gold { color: var(--accent-gold); }
-
-    .reason-desc {
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .watchers-row {
-      display: flex;
-      justify-content: center;
-      gap: clamp(8px, 2cqw, 20px);
-      margin-top: 5%;
-    }
-
-    .watcher-stat {
-      text-align: center;
-    }
-
-    .watcher-value {
-      font-family: var(--font-serif);
-      font-size: clamp(20px, 4cqw, 42px);
-      font-weight: 700;
-      color: var(--accent-gold);
-      line-height: 1;
-    }
-
-    .watcher-label {
-      font-size: clamp(8px, 1.3cqw, 13px);
-      color: var(--text-muted);
-      margin-top: clamp(2px, 0.4cqw, 4px);
-    }
-
-    /* ============================================
-       SLIDE 4 — How to Draw
-       ============================================ */
-    .draw-cards {
-      width: 88%;
-      display: flex;
-      flex-direction: column;
-      gap: clamp(10px, 2cqw, 20px);
-    }
-
-    .draw-card {
-      padding: clamp(12px, 3cqw, 30px);
-      border-radius: 12px;
-      background: rgba(201,169,98,0.03);
-      border: 1px solid rgba(201,169,98,0.1);
-    }
-
-    .draw-label {
-      font-family: var(--font-mono);
-      font-size: clamp(9px, 1.5cqw, 15px);
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      margin-bottom: 3%;
-    }
-
-    .draw-steps {
-      display: flex;
-      align-items: center;
-      gap: clamp(6px, 1.2cqw, 12px);
-      font-size: clamp(11px, 2cqw, 20px);
-      color: var(--text-secondary);
-    }
-
-    .draw-from {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .draw-arrow {
-      color: var(--accent-gold);
-      font-size: clamp(14px, 2.5cqw, 26px);
-    }
-
-    .draw-to {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .draw-note {
-      font-size: clamp(9px, 1.5cqw, 15px);
-      color: var(--text-muted);
-      margin-top: 3%;
-      font-style: italic;
-    }
-
-    /* ============================================
-       SLIDE 5 — Pro Tip
-       ============================================ */
-    .tip-card {
-      width: 88%;
-      padding: clamp(14px, 3.5cqw, 36px);
-      border-radius: 14px;
-      background: rgba(201,169,98,0.04);
-      border: 1px solid rgba(201,169,98,0.15);
-      text-align: center;
-      margin-bottom: 4%;
-    }
-
-    .tip-title {
-      font-family: var(--font-serif);
-      font-size: clamp(18px, 3.5cqw, 36px);
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4%;
-    }
-
-    .tip-title .gold { color: var(--accent-gold); }
-
-    .tip-points {
-      display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1.4cqw, 14px);
-      text-align: left;
-    }
-
-    .tip-point {
-      display: flex;
-      align-items: flex-start;
-      gap: clamp(6px, 1.2cqw, 12px);
-      font-size: clamp(10px, 1.8cqw, 18px);
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    .tip-icon {
-      color: var(--accent-gold);
-      font-size: clamp(12px, 2cqw, 20px);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .tip-quote {
-      font-family: var(--font-serif);
-      font-size: clamp(14px, 2.8cqw, 30px);
-      font-weight: 600;
-      font-style: italic;
-      color: var(--accent-gold);
-      text-align: center;
-      margin-top: 4%;
-    }
-
-    /* ============================================
-       SLIDE 6 — CTA
-       ============================================ */
-    .cta-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .cta-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 5cqw, 2.6rem);
-      font-weight: 600;
-      line-height: 1.15;
-      margin-bottom: clamp(0.5rem, 1.5cqw, 1rem);
-    }
-
-    .cta-title .gold { color: var(--accent-gold); }
-
-    .cta-subtitle {
-      font-size: clamp(0.6rem, 1.6cqw, 0.85rem);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 80%;
-      margin-bottom: clamp(1rem, 3cqw, 2rem);
-    }
-
-    .cta-box {
-      display: inline-flex;
-      align-items: center;
-      gap: clamp(0.4rem, 1cqw, 0.75rem);
-      padding: clamp(0.6rem, 1.8cqw, 1.1rem) clamp(1.2rem, 3.5cqw, 2rem);
-      border: 1px solid rgba(201,169,98,0.5);
-      border-radius: clamp(0.3rem, 0.8cqw, 0.5rem);
-      background: rgba(201,169,98,0.05);
-    }
-
-    .cta-box-text {
-      font-family: var(--font-mono);
-      font-size: clamp(0.55rem, 1.5cqw, 0.75rem);
-      font-weight: 500;
-      color: var(--accent-gold);
-      letter-spacing: 0.05em;
-    }
-
-    .cta-arrow {
-      color: var(--accent-gold);
-      font-size: clamp(0.7rem, 1.8cqw, 0.9rem);
-    }
-
-    /* ═══════════════════════════════════════════
-       FIBONACCI ANIMATION & ENHANCEMENTS
-       ═══════════════════════════════════════════ */
-    @keyframes fib-glow {
-      0%, 100% { box-shadow: 0 0 30px rgba(251,191,36,0.15), inset 0 0 20px rgba(251,191,36,0.05); }
-      50% { box-shadow: 0 0 50px rgba(251,191,36,0.25), inset 0 0 30px rgba(251,191,36,0.1); }
-    }
-
-    @keyframes level-float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-4px); }
-    }
-
-    .fib-card {
-      animation: fib-glow 2.8s ease-in-out infinite;
-    }
-
-    .level-item {
-      animation: level-float 2.4s ease-in-out infinite;
-    }
-
-    /* ═══════════════════════════════════════════
-       ENHANCED CONTENT CARDS
-       ═══════════════════════════════════════════ */
-    .lesson-content {
-      background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(251,191,36,0.02) 100%);
-      border: 1px solid rgba(251,191,36,0.2);
-      border-left: 3px solid rgba(251,191,36,0.6);
-      padding: clamp(8px, 1.6cqw, 14px);
-      border-radius: 6px;
-      margin-bottom: 2%;
-    }
-
-    .content-highlight {
-      color: var(--accent-gold);
-      font-weight: 700;
-      background: rgba(251,191,36,0.1);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: clamp(10px, 1.6cqw, 14px);
-    }
-
-    .advanced-note {
-      background: rgba(251,191,36,0.04);
-      border-left: 2px solid rgba(251,191,36,0.3);
-      padding: clamp(6px, 1.2cqw, 12px);
-      margin-top: 2%;
-      font-size: clamp(9px, 1.5cqw, 13px);
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    /* ═══════════════════════════════════════════
-       RESPONSIVE & ACCESSIBILITY
-       ═══════════════════════════════════════════ */
-    @media (prefers-reduced-motion: reduce) {
-      .fib-card, .level-item {
-        animation: none;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .carousel-grid {
-        grid-template-columns: 1fr !important;
-      }
-    }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--surface:rgba(255,255,255,0.02);--gold:#c9a962;--gold-d:rgba(201,169,98,0.08);--txt:#e4e4e7;--txt2:#a1a1aa;--txt3:#52525b;--serif:'Cormorant Garamond',serif;--sans:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;--brand:'Gugi',sans-serif}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);min-height:100vh;padding:40px 20px}
+.controls{position:fixed;top:20px;right:20px;z-index:100;display:flex;gap:12px}
+.controls button{background:var(--gold);color:var(--bg);border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.page-title{text-align:center;margin-bottom:40px}
+.page-title h1{font-family:var(--serif);font-size:28px;font-weight:400;margin-bottom:8px}
+.page-title p{color:var(--txt3);font-size:14px}
+.carousel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1400px;margin:0 auto}
+.slide-wrapper{aspect-ratio:4/5;position:relative;border-radius:12px;overflow:hidden;background:var(--bg);box-shadow:0 4px 24px rgba(0,0,0,0.4);container-type:inline-size}
+.slide-content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;padding:6%;text-align:center;justify-content:space-between}
+.slide-number{font-family:var(--mono);font-size:clamp(7px,1.4cqw,10px);color:var(--txt3);letter-spacing:0.12em}
+.brand-mark{font-family:var(--brand);font-size:clamp(7px,1.4cqw,10px);color:rgba(201,169,98,0.25);letter-spacing:0.15em}
+.slide-wrapper::before{content:'';position:absolute;inset:0;z-index:1}
+.s1::before{background:radial-gradient(ellipse at 50% 40%,rgba(201,169,98,0.08) 0%,transparent 65%)}
+.s2::before{background:radial-gradient(ellipse at 30% 60%,rgba(201,169,98,0.06) 0%,transparent 65%)}
+.s3::before{background:radial-gradient(ellipse at 70% 50%,rgba(201,169,98,0.06) 0%,transparent 65%)}
+.s4::before{background:radial-gradient(ellipse at 50% 60%,rgba(201,169,98,0.06) 0%,transparent 65%)}
+.s5::before{background:radial-gradient(ellipse at 40% 50%,rgba(201,169,98,0.06) 0%,transparent 65%)}
+.s6::before{background:radial-gradient(ellipse at 50% 50%,rgba(201,169,98,0.05) 0%,transparent 60%)}
+.mid-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
+.hook-tag{font-family:var(--mono);font-size:clamp(7px,1.3cqw,10px);letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:clamp(8px,1.5cqw,12px)}
+.hook-title{font-family:var(--serif);font-size:clamp(26px,6cqw,48px);font-weight:700;line-height:1.1;color:var(--txt);margin-bottom:clamp(10px,2cqw,16px)}
+.hook-title em{color:var(--gold);font-style:normal}
+.hook-sub{font-size:clamp(10px,2cqw,15px);color:var(--txt2);line-height:1.6;max-width:90%}
+.sec-tag{font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:clamp(6px,1.2cqw,10px)}
+.sec-title{font-family:var(--serif);font-size:clamp(20px,4.5cqw,36px);font-weight:700;line-height:1.15;color:var(--txt);margin-bottom:clamp(12px,2.5cqw,20px)}
+.sec-title em{color:var(--gold);font-style:normal}
+.orb{position:relative;width:clamp(110px,22cqw,200px);height:clamp(110px,22cqw,200px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(201,169,98,0.4) 0%,rgba(201,169,98,0.15) 40%,rgba(255,255,255,0.02) 70%,transparent 100%);border:2px solid rgba(201,169,98,0.3);box-shadow:0 0 60px rgba(201,169,98,0.15),0 0 120px rgba(201,169,98,0.05),inset 0 0 40px rgba(201,169,98,0.08);display:flex;align-items:center;justify-content:center;margin-bottom:clamp(10px,2cqw,16px);flex-shrink:0}
+.orb::before{content:'';position:absolute;inset:8px;border-radius:50%;border:1.5px solid rgba(201,169,98,0.2);background:radial-gradient(circle at 35% 35%,rgba(201,169,98,0.1) 0%,transparent 70%)}
+.orb::after{content:'';position:absolute;inset:22px;border-radius:50%;border:1px dashed rgba(201,169,98,0.15)}
+.orb-icon{font-size:clamp(2rem,5cqw,3.5rem);position:relative;z-index:2}
+.grid-2x2{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,1.2cqw,10px);margin-bottom:clamp(8px,1.6cqw,12px)}
+.card{padding:clamp(8px,1.6cqw,14px);border-radius:clamp(8px,1.5cqw,12px);background:var(--surface);border:1px solid rgba(255,255,255,0.04);display:flex;flex-direction:column;gap:clamp(4px,0.8cqw,6px);text-align:left;position:relative;overflow:hidden}
+.card.hl-gold{background:var(--gold-d);border-color:var(--gold);box-shadow:0 0 12px rgba(201,169,98,0.05)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,currentColor,transparent);opacity:0.3}
+.label{font-family:var(--mono);font-size:clamp(6px,1cqw,8px);letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:clamp(1px,0.2cqw,2px)}
+.title{font-family:var(--serif);font-size:clamp(10px,2cqw,15px);font-weight:600;color:var(--txt);margin-bottom:clamp(1px,0.2cqw,3px)}
+.desc{font-size:clamp(8px,1.5cqw,11px);color:var(--txt2);line-height:1.5}
+.stat-bar{width:100%;height:clamp(3px,0.5cqw,4px);border-radius:3px;background:rgba(255,255,255,0.04);margin-top:clamp(3px,0.6cqw,5px);overflow:hidden}
+.stat-fill{height:100%;background:linear-gradient(90deg,var(--gold),rgba(201,169,98,0.3));border-radius:3px}
+.cta-badge{display:inline-block;padding:clamp(3px,0.6cqw,5px) clamp(10px,2cqw,16px);border:1px solid rgba(201,169,98,0.3);border-radius:18px;font-family:var(--mono);font-size:clamp(6px,1.1cqw,9px);color:var(--gold);letter-spacing:0.2em;margin-bottom:clamp(8px,1.6cqw,14px)}
+.cta-title{font-family:var(--serif);font-size:clamp(22px,5cqw,40px);font-weight:700;line-height:1.15;margin-bottom:clamp(6px,1.2cqw,10px)}
+.cta-title em{color:var(--gold);font-style:normal}
+.cta-sub{font-size:clamp(9px,1.8cqw,13px);color:var(--txt2);line-height:1.6;max-width:88%;margin-bottom:clamp(8px,1.6cqw,12px)}
+body.export-mode{padding:0;background:#000}
+body.export-mode .controls,body.export-mode .page-title{display:none}
+body.export-mode .carousel-grid{display:block}
+body.export-mode .slide-wrapper{display:none;width:1080px;height:1350px;border-radius:0}
+body.export-mode .slide-wrapper.active{display:block}
   </style>
 </head>
 <body>
+<div class="controls">
+  <button onclick="toggleExport()">Export Mode</button>
+</div>
 
-  <div class="controls">
-<button id="export-btn">Export Mode</button>
-  </div>
+<div class="page-title">
+  <h1>Post 066 — Fibonacci Retracements</h1>
+  <p>6 slides · Technical Education</p>
+</div>
 
-  <div class="page-title">
-    <h1>Post 066 &mdash; Fibonacci Retracements</h1>
-    <p>10 slides &middot; EDU &middot; Complete System</p>
-  </div>
+<div class="carousel-grid">
 
-  <div class="carousel-grid">
-
-    <!-- ══════ SLIDE 1: Hook ══════ -->
-    <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Hook</span>
-      <div class="slide slide-edu slide-1">
+<!-- SLIDE 1: COVER -->
+<div class="slide-wrapper s1" data-slide="1">
 <div class="slide-content">
-          <div class="hook-content">
-            <span class="learn-label ig-label-text">Learn</span>
-            <div class="gold-divider"></div>
-            <h1 class="hook-title">Fibonacci<br>Retracements</h1>
-            <div class="fib-visual">
-              <span class="fib-num">23.6</span>
-              <span class="fib-sep">&middot;</span>
-              <span class="fib-num">38.2</span>
-              <span class="fib-sep">&middot;</span>
-              <span class="fib-num active">50</span>
-              <span class="fib-sep">&middot;</span>
-              <span class="fib-num active">61.8</span>
-              <span class="fib-sep">&middot;</span>
-              <span class="fib-num">78.6</span>
-            </div>
-            <p class="hook-subtitle">The <span class="gold">self-fulfilling prophecy</span> that moves markets.</p>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
+<div class="slide-number">01 / 06</div>
+<div class="mid-content">
+<div class="hook-tag">LESSON 15</div>
+<div class="hook-title">Fibonacci<br><em>Retracements</em></div>
+<div class="orb"><span class="orb-icon">🌀</span></div>
+<p class="hook-sub">The self-fulfilling prophecy that moves markets</p>
+</div>
+<div class="brand-mark">SIGNAL PILOT</div>
+</div>
+</div>
 
-    <!-- ══════ SLIDE 2: Key Levels ══════ -->
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Key Levels</span>
-      <div class="slide slide-edu slide-2">
+<!-- SLIDE 2: KEY LEVELS -->
+<div class="slide-wrapper s2" data-slide="2">
 <div class="slide-content">
-          <div class="edu-layout">
-            <div class="section-tag">KEY LEVELS</div>
-            <h2 class="section-title combo-title">The Five Levels</h2>
-            <div class="fib-levels">
-              <div class="fib-level">
-                <span class="fib-pct">23.6%</span>
-                <span class="fib-dash"></span>
-                <span class="fib-meaning">Shallow pullback</span>
-              </div>
-              <div class="fib-level">
-                <span class="fib-pct">38.2%</span>
-                <span class="fib-dash"></span>
-                <span class="fib-meaning">Common retracement</span>
-              </div>
-              <div class="fib-level">
-                <span class="fib-pct">50.0%</span>
-                <span class="fib-dash"></span>
-                <span class="fib-meaning">Halfway &mdash; not technically Fib</span>
-              </div>
-              <div class="fib-level golden">
-                <span class="fib-pct">61.8%</span>
-                <span class="fib-dash"></span>
-                <span class="fib-meaning">Golden ratio &mdash; deep pullback</span>
-              </div>
-              <div class="fib-level">
-                <span class="fib-pct">78.6%</span>
-                <span class="fib-dash"></span>
-                <span class="fib-meaning">Very deep &mdash; trend may be weakening</span>
-              </div>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
+<div class="slide-number">02 / 06</div>
+<div class="mid-content">
+<div class="sec-tag">STRUCTURE</div>
+<div class="sec-title">The <em>Five</em> Levels</div>
+<div class="grid-2x2">
+<div class="card">
+<div class="label">23.6%</div>
+<div class="title">Shallow Pullback</div>
+<div class="desc">Early retracement, weak support</div>
+<div class="stat-bar"><div class="stat-fill" style="width:40%"></div></div>
+</div>
+<div class="card">
+<div class="label">38.2%</div>
+<div class="title">Common Support</div>
+<div class="desc">High probability bounce zone</div>
+<div class="stat-bar"><div class="stat-fill" style="width:65%"></div></div>
+</div>
+<div class="card">
+<div class="label">50%</div>
+<div class="title">Halfway Point</div>
+<div class="desc">Not Fib, but often respected</div>
+<div class="stat-bar"><div class="stat-fill" style="width:70%"></div></div>
+</div>
+<div class="card hl-gold">
+<div class="label">61.8%</div>
+<div class="title">Golden Ratio</div>
+<div class="desc">Strongest retracement level</div>
+<div class="stat-bar"><div class="stat-fill" style="width:85%"></div></div>
+</div>
+</div>
+</div>
+<div class="brand-mark">SIGNAL PILOT</div>
+</div>
+</div>
 
-    <!-- ══════ SLIDE 3: Why They Work ══════ -->
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Why They Work</span>
-      <div class="slide slide-edu slide-3">
+<!-- SLIDE 3: WHY THEY WORK -->
+<div class="slide-wrapper s3" data-slide="3">
 <div class="slide-content">
-          <div class="edu-layout">
-            <div class="section-tag">WHY THEY WORK</div>
-            <div class="reason-card">
-              <div class="reason-title">The <span class="gold">Self-Fulfilling</span> Prophecy</div>
-              <p class="reason-desc ig-body-text">Fibonacci levels aren&rsquo;t magic &mdash; they&rsquo;re self-fulfilling. Enough traders watch the same levels that they often matter. When millions place orders at the same zones, price reacts.</p>
-              <div class="watchers-row">
-                <div class="watcher-stat">
-                  <div class="watcher-value">M+</div>
-                  <div class="watcher-label ig-label-text">Traders watching</div>
-                </div>
-                <div class="watcher-stat">
-                  <div class="watcher-value">5</div>
-                  <div class="watcher-label ig-label-text">Key levels</div>
-                </div>
-                <div class="watcher-stat">
-                  <div class="watcher-value">1</div>
-                  <div class="watcher-label ig-label-text">Golden ratio</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
+<div class="slide-number">03 / 06</div>
+<div class="mid-content">
+<div class="sec-tag">PSYCHOLOGY</div>
+<div class="sec-title">Why Traders <em>Watch</em> Them</div>
+<p class="hook-sub" style="margin-top:1rem">Millions of traders place orders at the same levels<br><br>This creates self-fulfilling zones where price often respects these invisible lines</p>
+</div>
+<div class="brand-mark">SIGNAL PILOT</div>
+</div>
+</div>
 
-    <!-- ══════ SLIDE 4: How to Draw ══════ -->
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — How to Draw</span>
-      <div class="slide slide-edu slide-4">
+<!-- SLIDE 4: HOW TO DRAW -->
+<div class="slide-wrapper s4" data-slide="4">
 <div class="slide-content">
-          <div class="edu-layout">
-            <div class="section-tag">HOW TO DRAW</div>
-            <h2 class="section-title combo-title">Anchor Points</h2>
-            <div class="draw-cards">
-              <div class="draw-card">
-                <div class="draw-label ig-label-text">UPTREND</div>
-                <div class="draw-steps">
-                  <span class="draw-from">Swing Low</span>
-                  <span class="draw-arrow">&rarr;</span>
-                  <span class="draw-to">Swing High</span>
-                </div>
-                <p class="draw-note">Draw from the bottom to the top of the move</p>
-              </div>
-              <div class="draw-card">
-                <div class="draw-label ig-label-text">DOWNTREND</div>
-                <div class="draw-steps">
-                  <span class="draw-from">Swing High</span>
-                  <span class="draw-arrow">&rarr;</span>
-                  <span class="draw-to">Swing Low</span>
-                </div>
-                <p class="draw-note">Draw from the top to the bottom of the move</p>
-              </div>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
+<div class="slide-number">04 / 06</div>
+<div class="mid-content">
+<div class="sec-tag">APPLICATION</div>
+<div class="sec-title">How to <em>Draw</em> Them</div>
+<div style="width:100%;margin-top:clamp(1rem,3cqw,2rem)">
+<div class="card" style="margin-bottom:1rem">
+<div class="label">UPTREND</div>
+<div class="desc">Draw from swing LOW to swing HIGH, look for pullbacks</div>
+</div>
+<div class="card">
+<div class="label">DOWNTREND</div>
+<div class="desc">Draw from swing HIGH to swing LOW, look for bounces</div>
+</div>
+</div>
+</div>
+<div class="brand-mark">SIGNAL PILOT</div>
+</div>
+</div>
 
-    <!-- ══════ SLIDE 5: Pro Tip ══════ -->
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Pro Tip</span>
-      <div class="slide slide-edu slide-5">
+<!-- SLIDE 5: PRO TIPS -->
+<div class="slide-wrapper s5" data-slide="5">
 <div class="slide-content">
-          <div class="edu-layout">
-            <div class="section-tag">PRO TIP</div>
-            <div class="tip-card">
-              <div class="tip-title"><span class="gold">Zones,</span> Not Lines</div>
-              <div class="tip-points">
-                <div class="tip-point">
-                  <span class="tip-icon">&#9670;</span>
-                  Look for <strong style="color:var(--text-primary);">confluence</strong> &mdash; where Fib levels align with support, resistance, or moving averages
-                </div>
-                <div class="tip-point">
-                  <span class="tip-icon">&#9670;</span>
-                  Treat levels as <strong style="color:var(--text-primary);">zones of interest</strong>, not guaranteed reversals
-                </div>
-                <div class="tip-point">
-                  <span class="tip-icon">&#9670;</span>
-                  The more tools that agree on a level, the <strong style="color:var(--text-primary);">stronger the zone</strong>
-                </div>
-              </div>
-            </div>
-            <p class="tip-quote">&ldquo;Confluence is the edge.&rdquo;</p>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
+<div class="slide-number">05 / 06</div>
+<div class="mid-content">
+<div class="sec-tag">PRO TIPS</div>
+<div class="sec-title">Maximize <em>Confluence</em></div>
+<div style="width:100%;margin-top:clamp(1rem,3cqw,2rem);text-align:left">
+<div class="card" style="margin-bottom:clamp(0.5rem,1.5cqw,1rem)">
+<div class="label">💡 CONFLUENCE</div>
+<div class="desc">Fib levels work best when they align with prior support, resistance, or chart patterns</div>
+</div>
+<div class="card" style="margin-bottom:clamp(0.5rem,1.5cqw,1rem)">
+<div class="label">📊 THINK ZONES</div>
+<div class="desc">Don't expect exact reversals. Allow 10-20 pips variance</div>
+</div>
+<div class="card">
+<div class="label">🔍 CONFIRM TREND</div>
+<div class="desc">Fib levels work in trending markets, skip in choppy action</div>
+</div>
+</div>
+</div>
+<div class="brand-mark">SIGNAL PILOT</div>
+</div>
+</div>
 
-    <!-- ══════ SLIDE 6: CTA ══════ -->
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide slide-edu slide-6">
+<!-- SLIDE 6: CTA -->
+<div class="slide-wrapper s6" data-slide="6">
 <div class="slide-content">
-          <div class="cta-content">
-            <h2 class="cta-title combo-title">Master the<br><span class="gold">Golden Ratio.</span></h2>
-            <div class="gold-divider"></div>
-            <p class="cta-subtitle">Full Fibonacci lesson with examples, practice setups, and a downloadable PDF cheat sheet. Free in bio.</p>
-            <div class="cta-box">
-              <span class="cta-box-text">Free lesson &mdash; signalpilot.io</span>
-              <span class="cta-arrow">&#8594;</span>
-            </div>
-          </div>
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
+<div class="slide-number">06 / 06</div>
+<div class="mid-content">
+<div class="cta-badge">NEXT STEP</div>
+<div class="cta-title">Master <em>Fibonacci</em></div>
+<p class="cta-sub">Complete lesson with live charts, real examples, and PDF guide in bio</p>
+</div>
+<div class="brand-mark">SIGNAL PILOT</div>
+</div>
+</div>
 
-    <!-- ══════ SLIDE 7: Common Mistakes ══════ -->
-    <div class="slide-wrapper" data-slide="7">
-      <span class="slide-label">Slide 7 — Common Mistakes</span>
-      <div class="slide slide-edu">
-<div class="slide-content">
-          <span class="slide-counter">07 / 09</span>
-          <h2 class="section-title combo-title">Fibonacci <em>Mistakes</em></h2>
+</div>
 
-          <div class="fail-locations" style="width:100%;">
-            <div class="fail-item" style="background:rgba(201,169,98,0.04);border:1px solid rgba(201,169,98,0.12);">
-              <div class="fail-icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span class="fail-icon-symbol" style="color:rgba(201,169,98,0.9);">1</span>
-              </div>
-              <div class="fail-info">
-                <div class="fail-title combo-title">Over-Drawing Levels</div>
-                <div class="fail-desc combo-desc ig-body-text">Too many Fib lines = noise. Pick 1-2 key swings only.</div>
-              </div>
-            </div>
-
-            <div class="fail-item" style="background:rgba(201,169,98,0.04);border:1px solid rgba(201,169,98,0.12);">
-              <div class="fail-icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span class="fail-icon-symbol" style="color:rgba(201,169,98,0.9);">2</span>
-              </div>
-              <div class="fail-info">
-                <div class="fail-title combo-title">Trading Without Context</div>
-                <div class="fail-desc combo-desc ig-body-text">61.8% means nothing alone. Check trend, S/R, and volume.</div>
-              </div>
-            </div>
-
-            <div class="fail-item" style="background:rgba(201,169,98,0.04);border:1px solid rgba(201,169,98,0.12);">
-              <div class="fail-icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span class="fail-icon-symbol" style="color:rgba(201,169,98,0.9);">3</span>
-              </div>
-              <div class="fail-info">
-                <div class="fail-title combo-title">Ignoring Timeframes</div>
-                <div class="fail-desc combo-desc ig-body-text">4H Fib fails if 1D trend disagrees. Respect higher timeframes.</div>
-              </div>
-            </div>
-
-            <div class="fail-item" style="background:rgba(201,169,98,0.04);border:1px solid rgba(201,169,98,0.12);">
-              <div class="fail-icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span class="fail-icon-symbol" style="color:rgba(201,169,98,0.9);">4</span>
-              </div>
-              <div class="fail-info">
-                <div class="fail-title combo-title">No Risk Management</div>
-                <div class="fail-desc combo-desc ig-body-text">Always use stops.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 8: Real Trading Example ══════ -->
-    <div class="slide-wrapper" data-slide="8">
-      <span class="slide-label">Slide 8 — Live Example</span>
-      <div class="slide slide-edu">
-<div class="slide-content">
-          <span class="slide-counter">08 / 09</span>
-          <h2 class="section-title combo-title">The <em>Perfect</em> Setup</h2>
-          <p class="section-sub">Real BTC example: Trend + Fib + Support = Conviction.</p>
-
-          <div class="indicator-grid" style="width:100%;">
-            <div class="indicator-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(14px,2.5cqw,24px);font-weight:700;color:rgba(201,169,98,0.9);">1</span>
-              </div>
-              <div class="indicator-info">
-                <div class="indicator-name combo-title">BTC in Uptrend</div>
-                <div class="indicator-codename">HIGHER HIGHS & LOWS</div>
-                <div class="indicator-desc combo-desc ig-body-text">$42k → $50k rally. All moving averages golden-cross bullish.</div>
-              </div>
-            </div>
-
-            <div class="indicator-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(14px,2.5cqw,24px);font-weight:700;color:rgba(201,169,98,0.9);">2</span>
-              </div>
-              <div class="indicator-info">
-                <div class="indicator-name combo-title">Pullback to 50% Fib</div>
-                <div class="indicator-codename">AT $46,000</div>
-                <div class="indicator-desc combo-desc ig-body-text">Price bounces off 50% level. Volume spikes on bounce confirmation.</div>
-              </div>
-            </div>
-
-            <div class="indicator-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(14px,2.5cqw,24px);font-weight:700;color:rgba(201,169,98,0.9);">3</span>
-              </div>
-              <div class="indicator-info">
-                <div class="indicator-name combo-title">Align With Support</div>
-                <div class="indicator-codename">CONFLUENCE</div>
-                <div class="indicator-desc combo-desc ig-body-text">$46k is also the 200 EMA. Double confirmation = high probability.</div>
-              </div>
-            </div>
-
-            <div class="indicator-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(14px,2.5cqw,24px);font-weight:700;color:rgba(201,169,98,0.9);">4</span>
-              </div>
-              <div class="indicator-info">
-                <div class="indicator-name combo-title">Execute the Trade</div>
-                <div class="indicator-codename">LONG @ $46,050</div>
-                <div class="indicator-desc combo-desc ig-body-text">Stop below $45,500. Target $50k resistance. Risk 0.5% = $500.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 9: Key Takeaways ══════ -->
-    <div class="slide-wrapper" data-slide="9">
-      <span class="slide-label">Slide 9 — Key Takeaways</span>
-      <div class="slide slide-edu">
-<div class="slide-content">
-          <span class="slide-counter">09 / 09</span>
-          <h2 class="section-title combo-title">Master <em>Fibonacci</em></h2>
-
-          <div class="feature-grid" style="width:100%;">
-            <div class="feature-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="feature-ic" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(11px,1.8cqw,18px);font-weight:700;color:rgba(201,169,98,0.9);">✓</span>
-              </div>
-              <span class="feature-text combo-title" style="color:var(--text-primary);">Key swings only</span>
-            </div>
-            <div class="feature-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="feature-ic" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(11px,1.8cqw,18px);font-weight:700;color:rgba(201,169,98,0.9);">✓</span>
-              </div>
-              <span class="feature-text combo-title" style="color:var(--text-primary);">Combine indicators</span>
-            </div>
-            <div class="feature-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="feature-ic" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(11px,1.8cqw,18px);font-weight:700;color:rgba(201,169,98,0.9);">✓</span>
-              </div>
-              <span class="feature-text combo-title" style="color:var(--text-primary);">Respect trends</span>
-            </div>
-            <div class="feature-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="feature-ic" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(11px,1.8cqw,18px);font-weight:700;color:rgba(201,169,98,0.9);">✓</span>
-              </div>
-              <span class="feature-text combo-title" style="color:var(--text-primary);">Always use stops</span>
-            </div>
-            <div class="feature-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="feature-ic" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(11px,1.8cqw,18px);font-weight:700;color:rgba(201,169,98,0.9);">✓</span>
-              </div>
-              <span class="feature-text combo-title" style="color:var(--text-primary);">Volume confirms</span>
-            </div>
-          </div>
-
-          <div class="philosophy-box">
-            <p class="philosophy-text">&ldquo;Fibonacci is not destiny. It's confirmation. Use it as one tool in a complete trading system.&rdquo;</p>
-          </div>
-
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══════ SLIDE 10: Advanced Strategy ══════ -->
-    <div class="slide-wrapper" data-slide="10">
-      <span class="slide-label">Slide 10 — Advanced Strategy</span>
-      <div class="slide slide-edu">
-<div class="slide-content">
-          <span class="slide-counter">10 / 10</span>
-          <h2 class="section-title combo-title">Multi-Level <em>Fibonacci</em></h2>
-          <p class="section-sub">Stack retracements across timeframes for maximum confluence.</p>
-
-          <div class="indicator-grid" style="width:100%;">
-            <div class="indicator-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(14px,2.5cqw,24px);font-weight:700;color:rgba(201,169,98,0.9);">D</span>
-              </div>
-              <div class="indicator-info">
-                <div class="indicator-name combo-title">Daily Fib (Macro)</div>
-                <div class="indicator-codename">$42K - $50K SWING</div>
-                <div class="indicator-desc combo-desc ig-body-text">50% daily fib at $46k sets the foundation. This is your macro support zone.</div>
-              </div>
-            </div>
-
-            <div class="indicator-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(14px,2.5cqw,24px);font-weight:700;color:rgba(201,169,98,0.9);">4</span>
-              </div>
-              <div class="indicator-info">
-                <div class="indicator-name combo-title">4H Fib (Micro)</div>
-                <div class="indicator-codename">$48.5K - $49.5K PULL</div>
-                <div class="indicator-desc combo-desc ig-body-text">4H fib within the daily zone pinpoints exact entry. Tighter precision for micro moves.</div>
-              </div>
-            </div>
-
-            <div class="indicator-card" style="background:rgba(201,169,98,0.03);border:1px solid rgba(201,169,98,0.12);">
-              <div class="icon-circle" style="background:radial-gradient(circle at 40% 35%, rgba(201,169,98,0.3) 0%, rgba(201,169,98,0.08) 60%, transparent 100%);border:1.5px solid rgba(201,169,98,0.3);">
-                <span style="font-family:var(--font-serif);font-size:clamp(14px,2.5cqw,24px);font-weight:700;color:rgba(201,169,98,0.9);">✓</span>
-              </div>
-              <div class="indicator-info">
-                <div class="indicator-name combo-title">Nested Fibs = Edge</div>
-                <div class="indicator-codename">CONVERGENCE POINT</div>
-                <div class="indicator-desc combo-desc ig-body-text">When multiple timeframe fibs align, that's your high-conviction entry. That's scalable trading.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="philosophy-box">
-            <p class="philosophy-text">&ldquo;Fibonacci works because traders believe in it. That belief creates confluence. That confluence creates edge.&rdquo;</p>
-          </div>
-
-          <div class="slide-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    (function() {
-      const exportBtn = document.getElementById('export-btn');
-      const slideWrappers = document.querySelectorAll('.slide-wrapper');
-      let exportMode = false;
-      let currentSlide = 0;
-
-      });
-      });
-      exportBtn.addEventListener('click', function() {
-        exportMode = !exportMode;
-        document.body.classList.toggle('export-mode', exportMode);
-        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
-        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
-      });
-      function updateActiveSlide() {
-        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
-      }
-      document.addEventListener('keydown', function(e) {
-        if (!exportMode) return;
-        if (e.key === 'ArrowRight' || e.key === ' ') { currentSlide = (currentSlide + 1) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length; updateActiveSlide(); }
-        else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; }
-      });
-    })();
-  </script>
-
-  <!-- FIBONACCI MASTERY GUIDE METADATA
-  ════════════════════════════════════════════════════════════════
-  Trading with Fibonacci Retracements - Complete Educational Series
-
-  CURRICULUM OUTLINE:
-  • Slide 1: Hook - Introduction to Fibonacci patterns and their market relevance
-  • Slide 2: Key Levels - Understanding 23.6%, 38.2%, 50%, 61.8%, 78.6% retracements
-  • Slide 3: Why They Work - Psychology, collective behavior, and market mechanics
-  • Slide 4: How to Draw - Correct methodology for identifying market swings
-  • Slide 5: Pro Tip - Combining Fibonacci levels with support/resistance zones
-  • Slide 6: CTA - Free lesson introduction and resource availability
-  • Slide 7: Common Mistakes - Avoiding 4 critical errors that trap traders
-  • Slide 8: Live Example - Real BTC trading scenario with Fibonacci application
-  • Slide 9: Key Takeaways - 5 essential rules for successful Fibonacci trading
-  • Slide 10: Advanced Strategy - Multi-level Fibonacci confluence techniques
-
-  TRADING PRINCIPLES COVERED:
-  - Trend identification and contextual analysis
-  - Support and resistance zone alignment
-  - Volume confirmation strategies for confirmation
-  - Stop loss placement and risk management
-  - Multi-timeframe confluence analysis
-  - Confluence-based entry point identification
-  - Position sizing and risk-per-trade guidelines
-  - Exit strategy planning and profit target methodology
-  - Psychological aspects of trading with technical levels
-  - Real-world application in volatile market conditions
-
-  KEY TAKEAWAYS FOR TRADERS:
-  1. Only draw Fibonacci on major swings (not minor noise or wicks)
-  2. The 61.8% golden ratio level is statistically the most reliable retracement
-  3. Always combine Fibonacci with at least 2 other technical confirmation tools
-  4. Always use stops - Fibonacci levels are NOT guaranteed reversals
-  5. Volume confirmation on the bounce is critical for trade entry conviction
-  6. Always respect higher timeframe trends over lower timeframe levels
-  7. Practice extensively on historical charts before any live trading
-  8. Risk only 0.5-1% maximum per individual trade for long-term sustainability
-  9. Multiple timeframe Fibonacci alignment creates the highest probability setups
-  10. Treat Fibonacci as ONE tool in a complete trading system, never in isolation
-
-  This comprehensive 10-slide carousel covers foundational to advanced
-  Fibonacci retracement trading concepts, suitable for beginner to intermediate
-  traders seeking to add confluence-based, systematic entry strategies to their
-  existing trading toolkit. Each slide builds on the previous, creating a
-  complete progression from basic concepts to professional-level trading setups.
-
-  ADDITIONAL RESOURCES REFERENCED:
-  - TradingView for live charting with Fibonacci tools
-  - Risk management calculators for position sizing
-  - Video walkthroughs for each trading scenario
-  - Community forum for strategy discussion and questions
-  - Expert-curated PDF cheat sheet with key levels
-  ═══════════════════════════════════════════════════════════════ -->
+<script>
+function toggleExport(){document.body.classList.toggle('export-mode');const slides=document.querySelectorAll('.slide-wrapper');if(document.body.classList.contains('export-mode')){slides[0].classList.add('active')}else{slides.forEach(s=>s.classList.remove('active'))}}
+document.addEventListener('keydown',e=>{if(!document.body.classList.contains('export-mode'))return;const slides=document.querySelectorAll('.slide-wrapper');let active=Array.from(slides).findIndex(s=>s.classList.contains('active'));if(e.key==='ArrowRight'||e.key===' '){active=(active+1)%slides.length}else if(e.key==='ArrowLeft'){active=(active-1+slides.length)%slides.length}else if(e.key==='Escape'){document.body.classList.remove('export-mode');slides.forEach(s=>s.classList.remove('active'));return}slides.forEach((s,i)=>s.classList.toggle('active',i===active))});
+</script>
 </body>
 </html>
