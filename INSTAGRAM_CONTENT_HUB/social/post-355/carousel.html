@@ -6,240 +6,1978 @@
   <title>Post 355 — Plutus Flow: Accumulation vs Distribution | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-red: #d94a4a; --accent-green: #4ad97a; --text-primary: #e8e8e8; --text-secondary: #a0a0a0; --text-dim: #6a6a6a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { container-type: inline-size; aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
-    .slide-wrapper
-.slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 2cqw, 11px); color: var(--text-dim); letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 1.8cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(32px, 8cqw, 56px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 5cqw, 32px); font-weight: 600; margin-bottom: 3%; line-height: 1.2; overflow-wrap: break-word; }
-    .slide-title.large { font-size: clamp(26px, 7cqw, 48px); }
-    .slide-subtitle { font-size: clamp(10px, 2.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; }
-    .slide-body { font-size: clamp(12px, 3cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .phase-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; }
-    .phase-box.green { background: rgba(74, 217, 122, 0.1); border: 2px solid rgba(74, 217, 122, 0.4); }
-    .phase-box.red { background: rgba(217, 74, 74, 0.1); border: 2px solid rgba(217, 74, 74, 0.4); }
-    .phase-box.gold { background: rgba(201, 169, 98, 0.1); border: 2px solid rgba(201, 169, 98, 0.4); }
-    .phase-box.blue { background: rgba(74, 144, 217, 0.1); border: 2px solid rgba(74, 144, 217, 0.4); }
-    .phase-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 12px; }
-    .phase-box.green .phase-title { color: var(--accent-green); }
-    .phase-box.red .phase-title { color: var(--accent-red); }
-    .phase-box.gold .phase-title { color: var(--accent-gold); }
-    .phase-box.blue .phase-title { color: var(--accent-blue); }
-    .phase-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-    .question-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: center; background: rgba(74, 144, 217, 0.1); border: 2px solid rgba(74, 144, 217, 0.4); }
-    .question-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--accent-blue); line-height: 1.5; }
-    .cta-link { display: inline-block; margin-top: 24px; padding: 14px 32px; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 14px; }
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
+
+    /* ═══════════════════════════════════════════════════════════
+       POST 355 — PLUTUS FLOW: ACCUMULATION VS DISTRIBUTION
+       Column: PRODUCT / EDU
+       Teal sidebar. Teal-purple glows. Flow/wave orb theme.
+       ═══════════════════════════════════════════════════════════ */
+
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255, 255, 255, 0.02);
+      --bg-card-hover: rgba(255, 255, 255, 0.04);
+      --bg-surface: rgba(255, 255, 255, 0.03);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-medium: rgba(255, 255, 255, 0.10);
+      --border-glow: rgba(94, 234, 212, 0.3);
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-tertiary: rgba(255, 255, 255, 0.4);
+      --text-dim: rgba(255, 255, 255, 0.25);
+      --accent-teal: #5eead4;
+      --accent-teal-dim: rgba(94, 234, 212, 0.3);
+      --accent-teal-glow: rgba(94, 234, 212, 0.12);
+      --accent-purple: #a855f7;
+      --accent-purple-dim: rgba(168, 85, 247, 0.3);
+      --accent-purple-glow: rgba(168, 85, 247, 0.12);
+      --accent-blue: #4a90d9;
+      --accent-gold: #c9a962;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --accent-orange: #f59e0b;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-logo: 'Gugi', sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       BASE RESET
+       ═══════════════════════════════════════════════════════════ */
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      line-height: 1.5;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════════════════════ */
+
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 24px;
+      margin-bottom: 32px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .control-group label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .control-group select {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .control-group select:focus {
+      border-color: var(--border-glow);
+    }
+
+    .control-group input[type="range"] {
+      width: 100px;
+      cursor: pointer;
+      accent-color: var(--accent-teal);
+    }
+
+    #export-btn {
+      background: var(--accent-teal);
+      color: #0a0a0f;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    #export-btn:hover {
+      opacity: 0.85;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       PAGE TITLE
+       ═══════════════════════════════════════════════════════════ */
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .page-title p {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CAROUSEL GRID LAYOUT
+       ═══════════════════════════════════════════════════════════ */
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+      gap: 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .slide-wrapper {
+      container-type: inline-size;
+      max-width: 540px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .slide-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE BASE (4:5 aspect ratio)
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: var(--bg-dark);
+      box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.4),
+        0 1px 0 rgba(255, 255, 255, 0.03) inset;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE INTERNALS
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: clamp(36px, 6.67cqw, 72px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide-number {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: clamp(16px, 3cqw, 32px);
+    }
+
+    .headline {
+      font-family: var(--font-serif);
+      font-size: clamp(41px, 7.59cqw, 82px);
+      font-weight: 600;
+      line-height: 1.0;
+      color: var(--text-primary);
+      margin-bottom: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .headline-large {
+      font-size: clamp(44px, 8.15cqw, 88px);
+    }
+
+    .headline-medium {
+      font-size: clamp(36px, 6.67cqw, 72px);
+    }
+
+    .headline-small {
+      font-size: clamp(28px, 5.19cqw, 56px);
+    }
+
+    .subheadline {
+      font-family: var(--font-sans);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .body-text {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: clamp(16px, 2.96cqw, 32px);
+      right: clamp(16px, 2.96cqw, 32px);
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       ACCENT COLOR UTILITIES
+       ═══════════════════════════════════════════════════════════ */
+
+    .accent-text {
+      color: var(--accent-teal);
+    }
+
+    .accent-purple {
+      color: var(--accent-purple);
+    }
+
+    .accent-gold {
+      color: var(--accent-gold);
+    }
+
+    .accent-green {
+      color: var(--accent-green);
+    }
+
+    .accent-red {
+      color: var(--accent-red);
+    }
+
+    .accent-blue {
+      color: var(--accent-blue);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (PRODUCT / TEAL SIDEBAR)
+       Teal sidebar left. Teal label. Product-feature reveal.
+       ═══════════════════════════════════════════════════════════ */
+
     .slide-1 {
-      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
+      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%);
     }
 
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(94, 234, 212, 0.06) 0%,
+        transparent 60%
+      );
       pointer-events: none;
       z-index: 1;
     }
-    
+
+    /* Teal sidebar — Product column indicator */
     .slide-1::after {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 18px;
+      width: clamp(10px, 1.85cqw, 20px);
       height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(94, 234, 212, 0.9) 0%,
+        rgba(45, 180, 160, 0.7) 50%,
+        rgba(94, 234, 212, 0.5) 100%
+      );
       z-index: 5;
     }
 
-    .slide-1 .slide-bg,
-.slide-1 .slide-content {
+    .slide-1 .slide-content {
       align-items: center;
       text-align: center;
       justify-content: center;
-      z-index: 3;
     }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+    .cine-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: rgba(94, 234, 212, 0.9);
       margin-bottom: 8%;
     }
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+    .hook-main {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 7.41cqw, 80px);
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.0;
       color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
     }
 
-    .slide-1 .cine-divider {
-      width: 60px;
+    .hook-main .teal {
+      color: var(--accent-teal);
+    }
+
+    .cine-divider {
+      width: clamp(40px, 7.41cqw, 80px);
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(94, 234, 212, 0.6),
+        transparent
+      );
       margin-bottom: 4%;
     }
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+    .hook-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(94, 234, 212, 0.4);
+      color: rgba(94, 234, 212, 0.45);
       line-height: 1.6;
+      max-width: 80%;
     }
 
-    .slide-1 .cine-logo {
+    .cine-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      font-family: var(--font-logo);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: rgba(94, 234, 212, 0.4);
     }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDES 2-7 — BACKGROUNDS WITH TEAL/PURPLE GLOW
+       Dual radial gradients using teal + purple
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide-2 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 50% at 20% 20%,
+          rgba(94, 234, 212, 0.08) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 80% 80%,
+          rgba(168, 85, 247, 0.05) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-3 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 45% at 75% 30%,
+          rgba(74, 217, 122, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 45% 35% at 25% 75%,
+          rgba(94, 234, 212, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-4 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 30% 40%,
+          rgba(217, 74, 74, 0.09) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 55% 40% at 70% 70%,
+          rgba(94, 234, 212, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-5 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 45% at 50% 25%,
+          rgba(94, 234, 212, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 50% 80%,
+          rgba(168, 85, 247, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-6 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 65% 35%,
+          rgba(168, 85, 247, 0.08) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 55% 45% at 35% 65%,
+          rgba(94, 234, 212, 0.07) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-7 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-7::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 55% at 50% 40%,
+          rgba(94, 234, 212, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 50% 70%,
+          rgba(168, 85, 247, 0.07) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       ORB CONTAINER — Flow / Wave Theme
+       Teal pulse rings with flow-wave SVG motif
+       ═══════════════════════════════════════════════════════════ */
+
+    .orb-container {
+      position: relative;
+      width: clamp(80px, 14.81cqw, 160px);
+      height: clamp(80px, 14.81cqw, 160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto clamp(16px, 2.96cqw, 32px) auto;
+    }
+
+    .orb-container svg {
+      width: clamp(40px, 7.41cqw, 80px);
+      height: clamp(40px, 7.41cqw, 80px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .orb-container::before,
+    .orb-container::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(94, 234, 212, 0.3);
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+
+    .orb-container::before {
+      width: 100%;
+      height: 100%;
+      animation-delay: 0s;
+    }
+
+    .orb-container::after {
+      width: 75%;
+      height: 75%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(0.85);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+      100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(0.85);
+      }
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       FEATURE GRID — 2-column grid of feature / concept cards
+       Color-coded cards for Plutus Flow concepts
+       ═══════════════════════════════════════════════════════════ */
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+    }
+
+    .feature-grid.single-col {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-grid.three-col {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       FEATURE CARD — Individual concept / metric card
+       Teal-tinted with icon, title, description
+       ═══════════════════════════════════════════════════════════ */
+
+    .feature-card {
+      padding: clamp(14px, 2.59cqw, 28px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+
+    .feature-card:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .feature-card .card-icon {
+      font-size: clamp(20px, 3.7cqw, 40px);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+      display: block;
+      line-height: 1;
+    }
+
+    .feature-card .card-title {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .feature-card .card-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .feature-card .card-label {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    /* Teal feature card variant */
+
+    .feature-card.teal {
+      border-color: rgba(94, 234, 212, 0.25);
+      background: rgba(94, 234, 212, 0.04);
+    }
+
+    .feature-card.teal:hover {
+      background: rgba(94, 234, 212, 0.07);
+    }
+
+    .feature-card.teal .card-title {
+      color: var(--accent-teal);
+    }
+
+    .feature-card.teal .card-label {
+      color: var(--accent-teal);
+    }
+
+    /* Green feature card variant */
+
+    .feature-card.green {
+      border-color: rgba(74, 217, 122, 0.25);
+      background: rgba(74, 217, 122, 0.04);
+    }
+
+    .feature-card.green:hover {
+      background: rgba(74, 217, 122, 0.07);
+    }
+
+    .feature-card.green .card-title {
+      color: var(--accent-green);
+    }
+
+    .feature-card.green .card-label {
+      color: var(--accent-green);
+    }
+
+    /* Red feature card variant */
+
+    .feature-card.red {
+      border-color: rgba(217, 74, 74, 0.25);
+      background: rgba(217, 74, 74, 0.04);
+    }
+
+    .feature-card.red:hover {
+      background: rgba(217, 74, 74, 0.07);
+    }
+
+    .feature-card.red .card-title {
+      color: var(--accent-red);
+    }
+
+    .feature-card.red .card-label {
+      color: var(--accent-red);
+    }
+
+    /* Gold feature card variant */
+
+    .feature-card.gold {
+      border-color: rgba(201, 169, 98, 0.25);
+      background: rgba(201, 169, 98, 0.04);
+    }
+
+    .feature-card.gold:hover {
+      background: rgba(201, 169, 98, 0.07);
+    }
+
+    .feature-card.gold .card-title {
+      color: var(--accent-gold);
+    }
+
+    .feature-card.gold .card-label {
+      color: var(--accent-gold);
+    }
+
+    /* Purple feature card variant */
+
+    .feature-card.purple {
+      border-color: rgba(168, 85, 247, 0.25);
+      background: rgba(168, 85, 247, 0.04);
+    }
+
+    .feature-card.purple:hover {
+      background: rgba(168, 85, 247, 0.07);
+    }
+
+    .feature-card.purple .card-title {
+      color: var(--accent-purple);
+    }
+
+    .feature-card.purple .card-label {
+      color: var(--accent-purple);
+    }
+
+    /* Blue feature card variant */
+
+    .feature-card.blue {
+      border-color: rgba(74, 144, 217, 0.25);
+      background: rgba(74, 144, 217, 0.04);
+    }
+
+    .feature-card.blue:hover {
+      background: rgba(74, 144, 217, 0.07);
+    }
+
+    .feature-card.blue .card-title {
+      color: var(--accent-blue);
+    }
+
+    .feature-card.blue .card-label {
+      color: var(--accent-blue);
+    }
+
+    /* Full-width feature card spanning grid */
+
+    .feature-card.full-width {
+      grid-column: 1 / -1;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CONCEPT STACK — Vertical list of concept items
+       Stacked items with colored indicators (phase markers)
+       ═══════════════════════════════════════════════════════════ */
+
+    .concept-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+    }
+
+    .concept-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 1.85cqw, 20px);
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+
+    .concept-item:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .concept-icon {
+      flex-shrink: 0;
+      width: clamp(28px, 5.19cqw, 56px);
+      height: clamp(28px, 5.19cqw, 56px);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .concept-icon.teal {
+      background: rgba(94, 234, 212, 0.15);
+      border: 1px solid rgba(94, 234, 212, 0.4);
+      color: var(--accent-teal);
+    }
+
+    .concept-icon.green {
+      background: rgba(74, 217, 122, 0.15);
+      border: 1px solid rgba(74, 217, 122, 0.4);
+      color: var(--accent-green);
+    }
+
+    .concept-icon.red {
+      background: rgba(217, 74, 74, 0.15);
+      border: 1px solid rgba(217, 74, 74, 0.4);
+      color: var(--accent-red);
+    }
+
+    .concept-icon.gold {
+      background: rgba(201, 169, 98, 0.15);
+      border: 1px solid rgba(201, 169, 98, 0.4);
+      color: var(--accent-gold);
+    }
+
+    .concept-icon.purple {
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: var(--accent-purple);
+    }
+
+    .concept-icon.blue {
+      background: rgba(74, 144, 217, 0.15);
+      border: 1px solid rgba(74, 144, 217, 0.4);
+      color: var(--accent-blue);
+    }
+
+    .concept-detail {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2px, 0.37cqw, 4px);
+    }
+
+    .concept-detail .concept-title {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .concept-detail .concept-text {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       DIVERGENCE TREE — Signal / Interpretation flow
+       Branching layout with connectors
+       ═══════════════════════════════════════════════════════════ */
+
+    .divergence-tree {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.11cqw, 12px);
+      width: 100%;
+    }
+
+    .divergence-node {
+      display: flex;
+      align-items: stretch;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+    }
+
+    .divergence-signal {
+      flex: 1;
+      padding: clamp(10px, 1.85cqw, 20px);
+      background: rgba(94, 234, 212, 0.06);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      border-radius: var(--radius-md);
+      text-align: left;
+    }
+
+    .divergence-signal .signal-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-teal);
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .divergence-signal .signal-text {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .divergence-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: clamp(20px, 3.7cqw, 40px);
+      color: var(--text-tertiary);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 300;
+    }
+
+    .divergence-meaning {
+      flex: 1;
+      padding: clamp(10px, 1.85cqw, 20px);
+      border-radius: var(--radius-md);
+      text-align: left;
+    }
+
+    .divergence-meaning .meaning-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .divergence-meaning .meaning-text {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .divergence-meaning.warning {
+      background: rgba(201, 169, 98, 0.06);
+      border: 1px solid rgba(201, 169, 98, 0.2);
+    }
+
+    .divergence-meaning.warning .meaning-label {
+      color: var(--accent-gold);
+    }
+
+    .divergence-meaning.bullish {
+      background: rgba(74, 217, 122, 0.06);
+      border: 1px solid rgba(74, 217, 122, 0.2);
+    }
+
+    .divergence-meaning.bullish .meaning-label {
+      color: var(--accent-green);
+    }
+
+    .divergence-meaning.insight {
+      background: rgba(168, 85, 247, 0.06);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+    }
+
+    .divergence-meaning.insight .meaning-label {
+      color: var(--accent-purple);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       METRIC BOX — Stat / data comparison row
+       Side-by-side metric comparison
+       ═══════════════════════════════════════════════════════════ */
+
+    .metric-row {
+      display: flex;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .metric-box {
+      flex: 1;
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .metric-value {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 4.44cqw, 48px);
+      font-weight: 600;
+      color: var(--accent-teal);
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .metric-value.green {
+      color: var(--accent-green);
+    }
+
+    .metric-value.red {
+      color: var(--accent-red);
+    }
+
+    .metric-value.gold {
+      color: var(--accent-gold);
+    }
+
+    .metric-value.purple {
+      color: var(--accent-purple);
+    }
+
+    .metric-label {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       PROGRESS BAR — Visual percentage indicator
+       Used inside feature cards for emphasis
+       ═══════════════════════════════════════════════════════════ */
+
+    .progress-bar {
+      width: 100%;
+      height: clamp(6px, 1.11cqw, 12px);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-fill.teal {
+      background: linear-gradient(90deg, rgba(94, 234, 212, 0.4), rgba(94, 234, 212, 0.8));
+    }
+
+    .progress-fill.green {
+      background: linear-gradient(90deg, rgba(74, 217, 122, 0.4), rgba(74, 217, 122, 0.8));
+    }
+
+    .progress-fill.red {
+      background: linear-gradient(90deg, rgba(217, 74, 74, 0.4), rgba(217, 74, 74, 0.8));
+    }
+
+    .progress-fill.gold {
+      background: linear-gradient(90deg, rgba(201, 169, 98, 0.4), rgba(201, 169, 98, 0.8));
+    }
+
+    .progress-fill.purple {
+      background: linear-gradient(90deg, rgba(168, 85, 247, 0.4), rgba(168, 85, 247, 0.8));
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CALLOUT BOX — Key insight or quote
+       Teal-accented left border with italic text
+       ═══════════════════════════════════════════════════════════ */
+
+    .callout-box {
+      width: 100%;
+      border-radius: var(--radius-md);
+      padding: clamp(14px, 2.59cqw, 28px);
+      text-align: left;
+      background: rgba(94, 234, 212, 0.05);
+      border-left: 3px solid var(--accent-teal);
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .callout-box.gold {
+      background: rgba(201, 169, 98, 0.05);
+      border-left-color: var(--accent-gold);
+    }
+
+    .callout-box.purple {
+      background: rgba(168, 85, 247, 0.05);
+      border-left-color: var(--accent-purple);
+    }
+
+    .callout-text {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    .callout-attr {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      color: var(--accent-teal);
+      margin-top: clamp(6px, 1.11cqw, 12px);
+      letter-spacing: 1px;
+    }
+
+    .callout-box.gold .callout-attr {
+      color: var(--accent-gold);
+    }
+
+    .callout-box.purple .callout-attr {
+      color: var(--accent-purple);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       PHASE CARD — Accumulation / Distribution phase card
+       Full-width phase breakdown with indicator bar
+       ═══════════════════════════════════════════════════════════ */
+
+    .phase-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: clamp(16px, 2.96cqw, 32px);
+      text-align: left;
+      width: 100%;
+    }
+
+    .phase-card.accumulation {
+      border-color: rgba(74, 217, 122, 0.25);
+      background: rgba(74, 217, 122, 0.03);
+    }
+
+    .phase-card.distribution {
+      border-color: rgba(217, 74, 74, 0.25);
+      background: rgba(217, 74, 74, 0.03);
+    }
+
+    .phase-header {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: clamp(10px, 1.85cqw, 20px);
+    }
+
+    .phase-card.accumulation .phase-header {
+      color: var(--accent-green);
+    }
+
+    .phase-card.distribution .phase-header {
+      color: var(--accent-red);
+    }
+
+    .phase-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px, 1.48cqw, 16px);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .phase-bullet:last-child {
+      margin-bottom: 0;
+    }
+
+    .phase-marker {
+      flex-shrink: 0;
+      width: clamp(6px, 1.11cqw, 12px);
+      height: clamp(6px, 1.11cqw, 12px);
+      border-radius: 50%;
+      margin-top: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .phase-marker.green {
+      background: var(--accent-green);
+      box-shadow: 0 0 8px rgba(74, 217, 122, 0.4);
+    }
+
+    .phase-marker.red {
+      background: var(--accent-red);
+      box-shadow: 0 0 8px rgba(217, 74, 74, 0.4);
+    }
+
+    .phase-bullet-text {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .phase-bullet-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SIGNAL INDICATOR — Inline flow direction indicator
+       Used in Plutus Flow readout cards
+       ═══════════════════════════════════════════════════════════ */
+
+    .signal-row {
+      display: flex;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+      margin-top: clamp(10px, 1.85cqw, 20px);
+    }
+
+    .signal-card {
+      flex: 1;
+      padding: clamp(12px, 2.22cqw, 24px) clamp(10px, 1.85cqw, 20px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .signal-card .signal-indicator {
+      width: clamp(32px, 5.93cqw, 64px);
+      height: clamp(32px, 5.93cqw, 64px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto clamp(8px, 1.48cqw, 16px) auto;
+      font-size: clamp(14px, 2.59cqw, 28px);
+    }
+
+    .signal-card .signal-indicator.positive {
+      background: rgba(74, 217, 122, 0.12);
+      border: 1px solid rgba(74, 217, 122, 0.35);
+      color: var(--accent-green);
+    }
+
+    .signal-card .signal-indicator.negative {
+      background: rgba(217, 74, 74, 0.12);
+      border: 1px solid rgba(217, 74, 74, 0.35);
+      color: var(--accent-red);
+    }
+
+    .signal-card .signal-indicator.neutral {
+      background: rgba(201, 169, 98, 0.12);
+      border: 1px solid rgba(201, 169, 98, 0.35);
+      color: var(--accent-gold);
+    }
+
+    .signal-card .signal-name {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.37cqw, 4px);
+    }
+
+    .signal-card .signal-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       PRODUCT HIGHLIGHT — Feature CTA strip
+       Teal-accented product feature callout
+       ═══════════════════════════════════════════════════════════ */
+
+    .product-highlight {
+      background: rgba(94, 234, 212, 0.05);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      border-radius: var(--radius-lg);
+      padding: clamp(16px, 2.96cqw, 32px);
+      text-align: left;
+      width: 100%;
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .product-label {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-teal);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .product-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .product-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CTA SLIDE (Slide 7)
+       ═══════════════════════════════════════════════════════════ */
+
+    .cta-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 6.67cqw, 72px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: clamp(10px, 1.85cqw, 20px);
+    }
+
+    .cta-subtext {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 80%;
+      margin-bottom: clamp(20px, 3.7cqw, 40px);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: clamp(12px, 2.22cqw, 24px) clamp(28px, 5.19cqw, 56px);
+      background: linear-gradient(135deg, var(--accent-teal) 0%, #2dd4bf 100%);
+      color: #0a0a0f;
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      transition: opacity 0.2s ease;
+    }
+
+    .cta-button:hover {
+      opacity: 0.85;
+    }
+
+    .brand-tag {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: clamp(24px, 4.44cqw, 48px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       EXPORT MODE
+       ═══════════════════════════════════════════════════════════ */
+
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls-bar,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      aspect-ratio: auto;
+      border-radius: 0;
+    }
+
+
   </style>
 </head>
 <body>
-  <div class="controls">
-<button onclick="toggleExportMode()">Export Mode</button>
+
+  <!-- ═══ Controls Bar ═══ -->
+
+  <div class="controls-bar">
+    <div class="control-group">
+      <label for="bg-select">Background</label>
+      <select id="bg-select">
+        <option value="dark">Dark</option>
+        <option value="black">Pure Black</option>
+        <option value="charcoal">Charcoal</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="opacity-range">Opacity</label>
+      <input type="range" id="opacity-range" min="0" max="100" value="100">
+    </div>
+    <button id="export-btn">Export Mode</button>
   </div>
+
+
+  <!-- ═══ Page Title ═══ -->
 
   <div class="page-title">
-    <h1>Post 355 — Plutus Flow: Accumulation vs Distribution</h1>
-    <p>Product Carousel — 7 Slides</p>
+    <h1>Post 355 &mdash; 7 Slides</h1>
+    <p>Product / EDU &mdash; Plutus Flow: Accumulation vs Distribution</p>
   </div>
 
+
+  <!-- ═══ Carousel Grid ═══ -->
+
   <div class="carousel-grid">
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 1 — CINEMATIC HOOK
+         "CHRONICLE" label, teal sidebar, product-feature reveal
+         ───────────────────────────────────────────────────── -->
+
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <div class="slide-label">Slide 1 &mdash; Cinematic Hook</div>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">CHRONICLE</div>
-          <div class="hook-main">ACCUMULATION VS DISTRIBUTION</div>
+          <div class="cine-label">Chronicle</div>
+          <div class="hook-main">Accumulation<br><span class="teal">vs Distribution</span></div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">Where is value flowing?</p>
+          <p class="hook-sub">Where is value flowing? Plutus Flow reveals what price alone cannot.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-<div class="slide-content">
-        <span class="slide-number">02 / 07</span>
-        <div class="question-box">
-          <div class="question-text">Where is value flowing?<br><br>Are buyers accumulating?<br>Are sellers distributing?<br>What phase are we in?</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 2 — THE CORE QUESTION
+         Where is value flowing? Framing the problem.
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="2">
+      <div class="slide-label">Slide 2 &mdash; The Core Question</div>
+      <div class="slide slide-2">
+        <div class="slide-content">
+          <div class="slide-number">02 / 07</div>
+
+          <div class="orb-container">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Flow wave motif -->
+              <path d="M8,32 Q16,20 24,32 Q32,44 40,32 Q48,20 56,32" stroke="rgba(94,234,212,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M8,38 Q16,26 24,38 Q32,50 40,38 Q48,26 56,38" stroke="rgba(94,234,212,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <circle cx="32" cy="32" r="4" fill="rgba(94,234,212,0.8)"/>
+              <circle cx="32" cy="32" r="2" fill="rgba(94,234,212,1)"/>
+            </svg>
+          </div>
+
+          <h2 class="headline headline-medium">Where Is<br><span class="accent-text">Value Flowing?</span></h2>
+
+          <p class="subheadline" style="margin-bottom: clamp(16px, 2.96cqw, 32px);">
+            Price tells you <em>what</em> happened. Plutus Flow tells you <em>why</em>. Are buyers accumulating? Are sellers distributing? What phase are we in?
+          </p>
+
+          <div class="feature-grid">
+            <div class="feature-card teal">
+              <span class="card-icon">&#9650;</span>
+              <div class="card-label">Buyers</div>
+              <div class="card-title">Are They Accumulating?</div>
+              <p class="card-desc">Smart money quietly building positions before markup. Flow turns positive as conviction builds beneath the surface.</p>
+            </div>
+
+            <div class="feature-card red">
+              <span class="card-icon">&#9660;</span>
+              <div class="card-label">Sellers</div>
+              <div class="card-title">Are They Distributing?</div>
+              <p class="card-desc">Institutional players offloading into retail strength. Flow turns negative while price may still look healthy.</p>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <p class="callout-text">&ldquo;Price is the last thing to move. Flow is the first thing to shift.&rdquo;</p>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-<div class="slide-content">
-        <span class="slide-number">03 / 07</span>
-        <div class="phase-box green">
-          <div class="phase-title">📦 ACCUMULATION PHASE</div>
-          <div class="phase-list">Flow building (positive)<br><br>Smart money buying<br><br>Often occurs in ranges<br><br>Precedes markup (potentially)</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 3 — ACCUMULATION PHASE
+         What accumulation looks like via Plutus Flow
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="3">
+      <div class="slide-label">Slide 3 &mdash; Accumulation Phase</div>
+      <div class="slide slide-3">
+        <div class="slide-content">
+          <div class="slide-number">03 / 07</div>
+
+          <h2 class="headline headline-small" style="margin-bottom: clamp(6px, 1.11cqw, 12px);">Accumulation<br><span class="accent-green">Phase</span></h2>
+
+          <p class="body-text" style="margin-bottom: clamp(14px, 2.59cqw, 28px);">
+            Accumulation is where smart money quietly builds positions. Plutus Flow detects this shift before price confirms it.
+          </p>
+
+          <div class="phase-card accumulation">
+            <div class="phase-header">Accumulation Signals</div>
+
+            <div class="phase-bullet">
+              <div class="phase-marker green"></div>
+              <div class="phase-bullet-text"><strong>Flow building positive</strong> &mdash; sustained buying pressure underneath seemingly range-bound price action.</div>
+            </div>
+
+            <div class="phase-bullet">
+              <div class="phase-marker green"></div>
+              <div class="phase-bullet-text"><strong>Smart money buying</strong> &mdash; institutional-level order flow detected through volume-weighted analysis.</div>
+            </div>
+
+            <div class="phase-bullet">
+              <div class="phase-marker green"></div>
+              <div class="phase-bullet-text"><strong>Often occurs in ranges</strong> &mdash; sideways price action while flow quietly strengthens beneath the surface.</div>
+            </div>
+
+            <div class="phase-bullet">
+              <div class="phase-marker green"></div>
+              <div class="phase-bullet-text"><strong>Precedes markup</strong> &mdash; once accumulation completes, price typically breaks higher with conviction.</div>
+            </div>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-box">
+              <div class="metric-value green">+</div>
+              <div class="metric-label">Flow<br>Direction</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-value" style="color: var(--accent-teal);">&#8593;</div>
+              <div class="metric-label">Conviction<br>Rising</div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-<div class="slide-content">
-        <span class="slide-number">04 / 07</span>
-        <div class="phase-box red">
-          <div class="phase-title">📤 DISTRIBUTION PHASE</div>
-          <div class="phase-list">Flow declining (negative)<br><br>Smart money selling<br><br>Often occurs at tops<br><br>Precedes markdown (potentially)</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 4 — DISTRIBUTION PHASE
+         What distribution looks like via Plutus Flow
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="4">
+      <div class="slide-label">Slide 4 &mdash; Distribution Phase</div>
+      <div class="slide slide-4">
+        <div class="slide-content">
+          <div class="slide-number">04 / 07</div>
+
+          <h2 class="headline headline-small" style="margin-bottom: clamp(6px, 1.11cqw, 12px);">Distribution<br><span class="accent-red">Phase</span></h2>
+
+          <p class="body-text" style="margin-bottom: clamp(14px, 2.59cqw, 28px);">
+            Distribution is when large players sell into strength. Plutus Flow catches the divergence between price optimism and flow deterioration.
+          </p>
+
+          <div class="phase-card distribution">
+            <div class="phase-header">Distribution Signals</div>
+
+            <div class="phase-bullet">
+              <div class="phase-marker red"></div>
+              <div class="phase-bullet-text"><strong>Flow declining negative</strong> &mdash; selling pressure increasing even as price holds or makes new highs.</div>
+            </div>
+
+            <div class="phase-bullet">
+              <div class="phase-marker red"></div>
+              <div class="phase-bullet-text"><strong>Smart money selling</strong> &mdash; institutional players offloading positions into retail demand.</div>
+            </div>
+
+            <div class="phase-bullet">
+              <div class="phase-marker red"></div>
+              <div class="phase-bullet-text"><strong>Often occurs at tops</strong> &mdash; price appears strong but underlying flow tells a different story.</div>
+            </div>
+
+            <div class="phase-bullet">
+              <div class="phase-marker red"></div>
+              <div class="phase-bullet-text"><strong>Precedes markdown</strong> &mdash; once distribution completes, price typically drops with momentum.</div>
+            </div>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-box">
+              <div class="metric-value red">&minus;</div>
+              <div class="metric-label">Flow<br>Direction</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-value red">&#8595;</div>
+              <div class="metric-label">Conviction<br>Fading</div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-<div class="slide-content">
-        <span class="slide-number">05 / 07</span>
-        <div class="phase-box gold">
-          <div class="phase-title">⚖️ WHAT PLUTUS FLOW SHOWS</div>
-          <div class="phase-list">✦ FLOW DIRECTION<br>Green = accumulation<br>Red = distribution<br><br>✦ FLOW STRENGTH<br>Intensity of conviction</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 5 — WHAT PLUTUS FLOW SHOWS
+         Product feature breakdown: direction + strength
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="5">
+      <div class="slide-label">Slide 5 &mdash; What Plutus Flow Shows</div>
+      <div class="slide slide-5">
+        <div class="slide-content">
+          <div class="slide-number">05 / 07</div>
+
+          <h2 class="headline headline-small" style="margin-bottom: clamp(6px, 1.11cqw, 12px);">What Plutus Flow<br><span class="accent-text">Shows You</span></h2>
+
+          <p class="body-text" style="margin-bottom: clamp(14px, 2.59cqw, 28px);">
+            Plutus Flow distills complex order flow data into two actionable dimensions: <em>direction</em> and <em>strength</em>.
+          </p>
+
+          <div class="concept-stack">
+            <div class="concept-item">
+              <div class="concept-icon green">&#8593;</div>
+              <div class="concept-detail">
+                <div class="concept-title">Flow Direction</div>
+                <div class="concept-text"><strong style="color: var(--accent-green);">Green = accumulation.</strong> Buyers are in control. Flow is building positive. Smart money is positioning for upside.</div>
+              </div>
+            </div>
+
+            <div class="concept-item">
+              <div class="concept-icon red">&#8595;</div>
+              <div class="concept-detail">
+                <div class="concept-title">Flow Direction</div>
+                <div class="concept-text"><strong style="color: var(--accent-red);">Red = distribution.</strong> Sellers are in control. Flow is draining negative. Smart money is exiting before markdown.</div>
+              </div>
+            </div>
+
+            <div class="concept-item">
+              <div class="concept-icon teal">&#9632;</div>
+              <div class="concept-detail">
+                <div class="concept-title">Flow Strength</div>
+                <div class="concept-text">Intensity of conviction behind the flow. Stronger flow = higher confidence that the current phase will resolve in the expected direction.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="signal-row">
+            <div class="signal-card">
+              <div class="signal-indicator positive">&#8593;</div>
+              <div class="signal-name">Positive Flow</div>
+              <div class="signal-desc">Accumulation active</div>
+            </div>
+            <div class="signal-card">
+              <div class="signal-indicator negative">&#8595;</div>
+              <div class="signal-name">Negative Flow</div>
+              <div class="signal-desc">Distribution active</div>
+            </div>
+            <div class="signal-card">
+              <div class="signal-indicator neutral">&#8596;</div>
+              <div class="signal-name">Neutral Flow</div>
+              <div class="signal-desc">Phase transition</div>
+            </div>
+          </div>
+
+          <div class="product-highlight">
+            <div class="product-label">Plutus Flow Feature</div>
+            <p class="product-text">
+              Real-time flow visualization on your chart. <strong>Green bars</strong> for accumulation, <strong>red bars</strong> for distribution, with intensity mapping to show conviction strength at every candle.
+            </p>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-<div class="slide-content">
-        <span class="slide-number">06 / 07</span>
-        <div class="phase-box blue">
-          <div class="phase-title">🔀 DIVERGENCES</div>
-          <div class="phase-list">Price up, flow down = warning<br><br>Price down, flow up = potential reversal<br><br>Divergence = smart money disagreeing with price</div>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 6 — DIVERGENCES
+         Flow vs price divergence analysis
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="6">
+      <div class="slide-label">Slide 6 &mdash; Divergences</div>
+      <div class="slide slide-6">
+        <div class="slide-content">
+          <div class="slide-number">06 / 07</div>
+
+          <h2 class="headline headline-small" style="margin-bottom: clamp(6px, 1.11cqw, 12px);">Flow &times; Price<br><span class="accent-purple">Divergences</span></h2>
+
+          <p class="body-text" style="margin-bottom: clamp(14px, 2.59cqw, 28px);">
+            The most powerful Plutus Flow signals come when price and flow disagree. Divergence means smart money is voting against the visible trend.
+          </p>
+
+          <div class="divergence-tree">
+            <div class="divergence-node">
+              <div class="divergence-signal">
+                <div class="signal-label">Signal</div>
+                <div class="signal-text">Price <strong>rising</strong>, flow <strong>declining</strong></div>
+              </div>
+              <div class="divergence-arrow">&#8594;</div>
+              <div class="divergence-meaning warning">
+                <div class="meaning-label">Warning</div>
+                <div class="meaning-text"><strong>Distribution in progress.</strong> Smart money selling into retail optimism.</div>
+              </div>
+            </div>
+
+            <div class="divergence-node">
+              <div class="divergence-signal">
+                <div class="signal-label">Signal</div>
+                <div class="signal-text">Price <strong>falling</strong>, flow <strong>rising</strong></div>
+              </div>
+              <div class="divergence-arrow">&#8594;</div>
+              <div class="divergence-meaning bullish">
+                <div class="meaning-label">Opportunity</div>
+                <div class="meaning-text"><strong>Accumulation in progress.</strong> Smart money buying the dip before markup begins.</div>
+              </div>
+            </div>
+
+            <div class="divergence-node">
+              <div class="divergence-signal">
+                <div class="signal-label">Signal</div>
+                <div class="signal-text">Price <strong>flat</strong>, flow <strong>surging</strong></div>
+              </div>
+              <div class="divergence-arrow">&#8594;</div>
+              <div class="divergence-meaning insight">
+                <div class="meaning-label">Insight</div>
+                <div class="meaning-text"><strong>Breakout imminent.</strong> Pressure building under the surface. Direction of flow predicts direction of break.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout-box purple">
+            <p class="callout-text">&ldquo;Divergence is smart money disagreeing with price. When they diverge, always trust the flow.&rdquo;</p>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-<div class="slide-content">
-        <span class="slide-number">07 / 07</span>
-        <div class="slide-icon">⚖️</div>
-        <h2 class="slide-title">Try Plutus Flow Free</h2>
-        <p class="slide-body">7-day trial. Link in bio.</p>
-        <a href="https://signalpilot.io" class="cta-link">Start Free Trial</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 7 — CTA
+         "Try Plutus Flow Free" → free trial
+         ───────────────────────────────────────────────────── -->
+
+    <div class="slide-wrapper" data-slide="7">
+      <div class="slide-label">Slide 7 &mdash; CTA</div>
+      <div class="slide slide-7">
+        <div class="slide-content" style="align-items: center; text-align: center;">
+          <div class="slide-number" style="text-align: center; width: 100%;">07 / 07</div>
+
+          <div class="orb-container">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Flow wave motif — CTA version -->
+              <path d="M8,32 Q16,18 24,32 Q32,46 40,32 Q48,18 56,32" stroke="rgba(94,234,212,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <path d="M8,40 Q16,28 24,40 Q32,52 40,40 Q48,28 56,40" stroke="rgba(168,85,247,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M8,24 Q16,12 24,24 Q32,36 40,24 Q48,12 56,24" stroke="rgba(94,234,212,0.25)" stroke-width="1" fill="none" stroke-linecap="round"/>
+              <circle cx="32" cy="32" r="5" fill="rgba(94,234,212,0.15)" stroke="rgba(94,234,212,0.6)" stroke-width="1"/>
+              <circle cx="32" cy="32" r="2" fill="rgba(94,234,212,1)"/>
+            </svg>
+          </div>
+
+          <h2 class="cta-headline">Try Plutus Flow<br><span class="accent-text">Free</span></h2>
+
+          <p class="cta-subtext">
+            See accumulation and distribution in real time on your charts. Understand where value is flowing before price moves. 7-day free trial. Link in bio.
+          </p>
+
+          <a href="https://signalpilot.io" class="cta-button">Start Free Trial</a>
+
+          <div class="brand-tag">Signal Pilot</div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
+
+
   </div>
+  <!-- end .carousel-grid -->
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 7</span>
-    <button onclick="nextSlide()">Next →</button>
-  </div>
+
+  <!-- ═══ Script ═══ -->
 
   <script>
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0, exportMode = false;
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function() {
+      var slides = document.querySelectorAll('.slide-wrapper');
+      var bgSelect = document.getElementById('bg-select');
+      var opacityRange = document.getElementById('opacity-range');
+      var exportBtn = document.getElementById('export-btn');
+      var currentSlide = 0;
+      var exportMode = false;
+
+      /**
+       * Update the page background color based on
+       * the background select dropdown value.
+       */
+      function updateBackground() {
+        var value = bgSelect.value;
+        var backgrounds = {
+          dark: '#0a0a0f',
+          black: '#000000',
+          charcoal: '#121218'
+        };
+        document.body.style.backgroundColor = backgrounds[value] || '#0a0a0f';
+      }
+
+      /**
+       * Update the opacity of all slides based on
+       * the opacity range input value.
+       */
+      function updateOpacity() {
+        var value = opacityRange.value / 100;
+        slides.forEach(function(slide) {
+          slide.style.opacity = value;
+        });
+      }
+
+      /**
+       * Show a specific slide by index when in export mode.
+       * Toggles the 'active' class on the matching wrapper.
+       */
+      function showSlide(index) {
+        slides.forEach(function(slide, i) {
+          slide.classList.toggle('active', i === index);
+        });
+      }
+
+      /**
+       * Toggle export mode on and off.
+       * In export mode, slides display one at a time
+       * at 1080x1350 for screenshot capture.
+       */
+      function toggleExportMode() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) {
+          currentSlide = 0;
+          showSlide(currentSlide);
+        }
+      }
+
+      /* ── Event Listeners ── */
+
+      bgSelect.addEventListener('change', updateBackground);
+
+      opacityRange.addEventListener('input', updateOpacity);
+
+      exportBtn.addEventListener('click', toggleExportMode);
+
+      /**
+       * Keyboard navigation for export mode:
+       * - ArrowRight / Space: next slide
+       * - ArrowLeft: previous slide
+       * - Escape: exit export mode
+       */
+      document.addEventListener('keydown', function(e) {
+        if (exportMode) {
+          if (e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+          } else if (e.key === 'Escape') {
+            toggleExportMode();
+          }
+        }
+      });
+
+    })();
   </script>
+
 </body>
 </html>

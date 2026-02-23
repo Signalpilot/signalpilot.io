@@ -6,280 +6,2059 @@
   <title>Post 364 — TRADE THE CHART IN FRONT OF YOU | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    
+    /* ═══════════════════════════════════════════════════════════
+       ROOT VARIABLES
+       ═══════════════════════════════════════════════════════════ */
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
+      --bg-card: rgba(255,255,255,0.02);
+      --bg-surface: rgba(255,255,255,0.03);
+      --border-subtle: rgba(255,255,255,0.06);
+      --border-medium: rgba(255,255,255,0.10);
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-tertiary: rgba(255,255,255,0.4);
+      --text-dim: rgba(255,255,255,0.25);
       --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
+      --accent-blue: #4a90d9;
       --accent-green: #4ad97a;
-      --accent-teal: #5eecd4;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+      --accent-red: #d94a4a;
+      --accent-orange: #f59e0b;
+      --accent-orange-dim: rgba(245,158,11,0.3);
+      --accent-orange-glow: rgba(217,148,74,0.12);
+      --accent-teal: #5eead4;
+      --accent-purple: #a855f7;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-logo: 'Gugi', sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper
-.slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    /* ═══════════════════════════════════════════════════════════
+       BASE RESET
+       ═══════════════════════════════════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      line-height: 1.5;
+    }
 
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
+    /* ═══════════════════════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════════════════════ */
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
 
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
+    .control-group label {
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
 
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    #export-btn {
+      background: linear-gradient(
+        135deg,
+        rgba(217,148,74,0.25) 0%,
+        rgba(217,148,74,0.10) 100%
+      );
+      border: 1px solid rgba(217,148,74,0.35);
+      color: var(--text-primary);
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+    }
 
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
+    #export-btn:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(217,148,74,0.35) 0%,
+        rgba(217,148,74,0.18) 100%
+      );
+      border-color: rgba(217,148,74,0.5);
+    }
 
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
+    /* ═══════════════════════════════════════════════════════════
+       PAGE TITLE
+       ═══════════════════════════════════════════════════════════ */
+    .page-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
 
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
+    .page-title h1 {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.01em;
+    }
 
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
+    .page-title p {
+      color: var(--text-tertiary);
+      font-size: 0.875rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CAROUSEL GRID
+       ═══════════════════════════════════════════════════════════ */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE WRAPPER & FRAME
+       ═══════════════════════════════════════════════════════════ */
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .slide-label {
+      font-size: 0.6875rem;
+      color: var(--text-tertiary);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-family: var(--font-mono);
+    }
+
+    .slide {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-dark);
+      box-shadow:
+        0 4px 24px rgba(0,0,0,0.5),
+        0 1px 0 rgba(255,255,255,0.03) inset;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE BACKGROUND & CONTENT LAYERS
+       ═══════════════════════════════════════════════════════════ */
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(36px, 6.67cqw, 72px);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY — SLIDE NUMBER
+       ═══════════════════════════════════════════════════════════ */
+    .slide-number {
+      position: absolute;
+      top: 4%;
+      left: 5%;
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      color: var(--text-tertiary);
+      letter-spacing: 0.15em;
+      font-weight: 400;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY — HEADLINE (SERIF)
+       ═══════════════════════════════════════════════════════════ */
+    .headline {
+      font-family: var(--font-serif);
+      font-size: clamp(41px, 7.59cqw, 82px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 4%;
+    }
+
+    .headline em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .headline-medium {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 6.67cqw, 72px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      margin-bottom: 4%;
+    }
+
+    .headline-medium em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .headline-small {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.19cqw, 56px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 4%;
+    }
+
+    .headline-small em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TYPOGRAPHY — SUBHEADLINE (SANS)
+       ═══════════════════════════════════════════════════════════ */
+    .subheadline {
+      font-family: var(--font-sans);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+
+    .subheadline em {
+      color: rgba(217,148,74,0.9);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .body-text {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .body-text em {
+      color: rgba(217,148,74,0.85);
+      font-style: normal;
+    }
+
+    .caption-text {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       ACCENT CLASSES
+       ═══════════════════════════════════════════════════════════ */
+    .accent-orange {
+      color: rgba(217,148,74,0.95);
+    }
+
+    .accent-gold {
+      color: var(--accent-gold);
+    }
+
+    .accent-green {
+      color: var(--accent-green);
+    }
+
+    .accent-red {
+      color: var(--accent-red);
+    }
+
+    .accent-blue {
+      color: var(--accent-blue);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE LOGO (ALL SLIDES)
+       ═══════════════════════════════════════════════════════════ */
+    .slide-logo {
+      position: absolute;
+      bottom: 4%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-logo);
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(217,148,74,0.35);
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 4%;
+      right: 5%;
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 3;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (ORANGE COLUMN)
+       No sidebar. Orange-tinted glow. "REFLECT" label.
+       ═══════════════════════════════════════════════════════════ */
+    .slide-1 {
+      background: linear-gradient(
+        180deg,
+        #0f0c0a 0%,
+        #0a0908 50%,
+        #080706 100%
+      ) !important;
+    }
+
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(217,148,74,0.08) 0%, transparent 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(217,148,74,0.10) 0%,
+        rgba(217,148,74,0.04) 40%,
+        transparent 70%
+      );
       pointer-events: none;
       z-index: 1;
     }
-    
+
     .slide-1::after {
       content: '';
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(251,191,36,0.9) 0%, rgba(217,148,74,0.7) 100%);
-      z-index: 5;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.25),
+        transparent
+      );
+      z-index: 2;
     }
-.slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    /* ── Cinematic Label ── */
+    .cine-label {
+      font-family: var(--font-sans);
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(251,191,36,0.9);
+      color: rgba(251, 191, 36, 0.9);
       margin-bottom: 8%;
+      font-weight: 500;
     }
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+
+    /* ── Hook Main Title ── */
+    .hook-main {
+      font-family: var(--font-serif);
+      font-size: clamp(38px, 7.59cqw, 82px);
       font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255,255,255,0.95);
-      margin-bottom: 4%;
+      line-height: 1.05;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 5%;
+      letter-spacing: -0.02em;
     }
-    .slide-1 .cine-divider {
-      width: 60px;
+
+    .hook-main em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    /* ── Cinematic Divider ── */
+    .cine-divider {
+      width: clamp(40px, 11.11cqw, 80px);
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(251,191,36,0.6), transparent);
-      margin-bottom: 4%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.6),
+        transparent
+      );
+      margin-bottom: 5%;
     }
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
+
+    /* ── Hook Subtitle ── */
+    .hook-sub {
+      font-family: var(--font-sans);
       font-size: clamp(0.65rem, 2cqw, 1.1rem);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(251,191,36,0.4);
+      color: rgba(251, 191, 36, 0.4);
       line-height: 1.6;
+      max-width: 85%;
     }
-    .slide-1 .cine-logo {
+
+    /* ── Cinematic Logo ── */
+    .cine-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
       transform: translateX(-50%);
+      font-family: var(--font-logo);
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(251,191,36,0.4);
+      color: rgba(251, 191, 36, 0.35);
     }
-  
+
+    /* ═══════════════════════════════════════════════════════════
+       ORANGE WARM BASE — Slides 2-6
+       ═══════════════════════════════════════════════════════════ */
+    .slide-warm {
+      background: linear-gradient(
+        180deg,
+        #0f0c0a 0%,
+        #0a0908 100%
+      ) !important;
+    }
+
+    .slide-warm .slide-content {
+      z-index: 3;
+    }
+
+    /* ── Slide 2 Background ── */
+    .slide-2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 50% at 50% 35%,
+          rgba(217,148,74,0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 50% 65%,
+          rgba(217,148,74,0.06) 0%,
+          transparent 60%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-2::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 70%;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(217,148,74,0.04) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 3 Background ── */
+    .slide-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 45% at 30% 40%,
+          rgba(217,148,74,0.08) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 70% 60%,
+          rgba(217,148,74,0.06) 0%,
+          transparent 60%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 10%,
+        rgba(217,148,74,0.15) 50%,
+        transparent 90%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 4 Background ── */
+    .slide-4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 50% 30%,
+          rgba(217,148,74,0.09) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 45% 40% at 40% 70%,
+          rgba(217,148,74,0.05) 0%,
+          transparent 55%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-4::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      right: 8%;
+      width: clamp(30px, 8cqw, 60px);
+      height: clamp(30px, 8cqw, 60px);
+      border: 1px solid rgba(217,148,74,0.08);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 5 Background ── */
+    .slide-5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 45% at 55% 35%,
+          rgba(217,148,74,0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 35% 65%,
+          rgba(217,148,74,0.05) 0%,
+          transparent 55%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-5::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 15%,
+        rgba(217,148,74,0.12) 50%,
+        transparent 85%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Slide 6 Background ── */
+    .slide-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 65% 55% at 50% 40%,
+          rgba(217,148,74,0.12) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 50% 75%,
+          rgba(217,148,74,0.06) 0%,
+          transparent 55%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-6::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(217,148,74,0.05) 0%,
+        transparent 60%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CHART ORB — Cinematic visual element
+       ═══════════════════════════════════════════════════════════ */
+    .chart-orb {
+      position: relative;
+      width: clamp(100px, 22cqw, 200px);
+      height: clamp(100px, 22cqw, 200px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 45% 40%,
+        rgba(217,148,74,0.22) 0%,
+        rgba(217,148,74,0.07) 40%,
+        rgba(255,255,255,0.02) 70%,
+        transparent 100%
+      );
+      border: 1.5px solid rgba(217,148,74,0.22);
+      box-shadow:
+        0 0 60px rgba(217,148,74,0.10),
+        0 0 120px rgba(217,148,74,0.04),
+        inset 0 0 40px rgba(217,148,74,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6%;
+      z-index: 2;
+    }
+
+    .chart-orb::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(217,148,74,0.12);
+    }
+
+    .chart-orb::after {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 1px dashed rgba(217,148,74,0.08);
+    }
+
+    .chart-orb .orb-symbol {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 6.5cqw, 56px);
+      font-weight: 600;
+      color: rgba(217,148,74,0.55);
+      z-index: 2;
+      line-height: 1;
+    }
+
+    /* ── Pulse Rings Animation ── */
+    .pulse-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(217,148,74,0.15);
+      animation: pulse-ring 3s ease-out infinite;
+    }
+
+    .pulse-ring:nth-child(1) {
+      width: 120%;
+      height: 120%;
+      animation-delay: 0s;
+    }
+
+    .pulse-ring:nth-child(2) {
+      width: 140%;
+      height: 140%;
+      animation-delay: 1s;
+    }
+
+    .pulse-ring:nth-child(3) {
+      width: 160%;
+      height: 160%;
+      animation-delay: 2s;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        opacity: 0.6;
+        transform: scale(0.85);
+      }
+      50% {
+        opacity: 0.2;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.15);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       QUOTE DISPLAY — Large centered quote block
+       ═══════════════════════════════════════════════════════════ */
+    .quote-display {
+      width: 100%;
+      max-width: 88%;
+      padding: clamp(20px, 4.5cqw, 48px);
+      background: rgba(217,148,74,0.04);
+      border: 1px solid rgba(217,148,74,0.12);
+      border-radius: var(--radius-lg);
+      margin-bottom: 5%;
+      position: relative;
+    }
+
+    .quote-display::before {
+      content: '\201C';
+      position: absolute;
+      top: clamp(8px, 2cqw, 20px);
+      left: clamp(12px, 2.8cqw, 28px);
+      font-family: var(--font-serif);
+      font-size: clamp(48px, 11cqw, 96px);
+      color: rgba(217,148,74,0.20);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .quote-display::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.15),
+        transparent
+      );
+    }
+
+    .quote-display .quote-text {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 5cqw, 48px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.3;
+      text-align: center;
+      padding-top: clamp(12px, 2.5cqw, 24px);
+    }
+
+    .quote-display .quote-text em {
+      color: rgba(217,148,74,0.95);
+      font-style: italic;
+    }
+
+    /* ── Quote Attribution ── */
+    .quote-attr {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.67cqw, 16px);
+      color: var(--text-tertiary);
+      letter-spacing: 0.1em;
+      margin-top: 4%;
+      text-align: center;
+    }
+
+    .quote-attr span {
+      color: rgba(217,148,74,0.7);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       VERSUS GRID — What traders do wrong vs right
+       ═══════════════════════════════════════════════════════════ */
+    .versus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 2cqw, 20px);
+      width: 100%;
+      max-width: 92%;
+      margin-bottom: 4%;
+    }
+
+    .versus-card {
+      padding: clamp(14px, 3cqw, 28px);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.3cqw, 14px);
+    }
+
+    .versus-card.wrong-way {
+      background: rgba(217,74,74,0.06);
+      border: 1px solid rgba(217,74,74,0.18);
+    }
+
+    .versus-card.right-way {
+      background: rgba(217,148,74,0.06);
+      border: 1px solid rgba(217,148,74,0.20);
+    }
+
+    .versus-card .versus-header {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.5cqw, 14px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .versus-card.wrong-way .versus-header {
+      color: rgba(217,74,74,0.8);
+    }
+
+    .versus-card.right-way .versus-header {
+      color: rgba(217,148,74,0.9);
+    }
+
+    .versus-card .versus-icon {
+      font-size: clamp(20px, 4.5cqw, 40px);
+      line-height: 1;
+      margin-bottom: clamp(2px, 0.5cqw, 6px);
+    }
+
+    .versus-item {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 2cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.45;
+      padding-left: clamp(8px, 1.5cqw, 14px);
+      border-left: 2px solid rgba(255,255,255,0.06);
+    }
+
+    .versus-card.wrong-way .versus-item {
+      border-left-color: rgba(217,74,74,0.25);
+    }
+
+    .versus-card.right-way .versus-item {
+      border-left-color: rgba(217,148,74,0.30);
+    }
+
+    .versus-label {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 22px);
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 2%;
+      line-height: 1.5;
+    }
+
+    .versus-label em {
+      color: rgba(217,148,74,0.9);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       REFLECTION CARD — Observation exercise prompt
+       ═══════════════════════════════════════════════════════════ */
+    .reflection-card {
+      width: 100%;
+      max-width: 90%;
+      padding: clamp(18px, 4cqw, 40px);
+      background: rgba(217,148,74,0.04);
+      border: 1px solid rgba(217,148,74,0.15);
+      border-radius: var(--radius-lg);
+      margin-bottom: 4%;
+      text-align: left;
+      position: relative;
+    }
+
+    .reflection-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: clamp(18px, 4cqw, 40px);
+      right: clamp(18px, 4cqw, 40px);
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.20),
+        transparent
+      );
+    }
+
+    .reflection-card .reflection-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.5cqw, 14px);
+      margin-bottom: clamp(12px, 2.5cqw, 24px);
+      padding-bottom: clamp(10px, 2cqw, 18px);
+      border-bottom: 1px solid rgba(217,148,74,0.10);
+    }
+
+    .reflection-card .reflection-icon {
+      font-size: clamp(16px, 3.5cqw, 28px);
+      color: rgba(217,148,74,0.7);
+    }
+
+    .reflection-card .reflection-title {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.7cqw, 16px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(217,148,74,0.8);
+      font-weight: 500;
+    }
+
+    .reflection-prompts {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 2.2cqw, 22px);
+    }
+
+    .reflection-prompt {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px, 1.8cqw, 16px);
+    }
+
+    .reflection-prompt .prompt-num {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.7cqw, 15px);
+      color: rgba(217,148,74,0.6);
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .reflection-prompt .prompt-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 20px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .reflection-prompt .prompt-text em {
+      color: rgba(217,148,74,0.85);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       WISDOM CARD — Key insight
+       ═══════════════════════════════════════════════════════════ */
+    .wisdom-card {
+      width: 100%;
+      max-width: 90%;
+      padding: clamp(16px, 3.5cqw, 36px);
+      background: rgba(217,148,74,0.05);
+      border: 1px solid rgba(217,148,74,0.15);
+      border-left: 3px solid rgba(217,148,74,0.45);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-bottom: 4%;
+      text-align: left;
+    }
+
+    .wisdom-card .wisdom-label {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.5cqw, 13px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(217,148,74,0.7);
+      margin-bottom: clamp(8px, 1.8cqw, 16px);
+    }
+
+    .wisdom-card .wisdom-text {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.7cqw, 36px);
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: clamp(8px, 1.8cqw, 16px);
+    }
+
+    .wisdom-card .wisdom-text em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .wisdom-card .wisdom-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 2cqw, 18px);
+      color: var(--text-tertiary);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CALLOUT BOX
+       ═══════════════════════════════════════════════════════════ */
+    .callout-box {
+      width: 100%;
+      max-width: 90%;
+      padding: clamp(14px, 3cqw, 28px);
+      background: rgba(217,148,74,0.06);
+      border: 1px solid rgba(217,148,74,0.18);
+      border-radius: var(--radius-md);
+      text-align: center;
+      margin-bottom: 4%;
+    }
+
+    .callout-box .callout-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 20px);
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .callout-box .callout-text em {
+      color: rgba(217,148,74,0.9);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       ACCENT DIVIDER — Decorative horizontal rule
+       ═══════════════════════════════════════════════════════════ */
+    .accent-divider {
+      width: clamp(40px, 11cqw, 80px);
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.5),
+        transparent
+      );
+      margin: 3% auto;
+      border: none;
+    }
+
+    .accent-divider-wide {
+      width: clamp(80px, 22cqw, 160px);
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.30),
+        transparent
+      );
+      margin: 4% auto;
+      border: none;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       STEP STACK — Numbered instruction items
+       ═══════════════════════════════════════════════════════════ */
+    .step-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.85cqw, 18px);
+      width: 100%;
+      max-width: 90%;
+      margin-bottom: 4%;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 2.2cqw, 22px);
+      padding: clamp(12px, 2.6cqw, 26px);
+      background: rgba(217,148,74,0.04);
+      border: 1px solid rgba(217,148,74,0.12);
+      border-radius: var(--radius-md);
+      text-align: left;
+      transition: border-color 0.2s ease;
+    }
+
+    .step-item:hover {
+      border-color: rgba(217,148,74,0.25);
+    }
+
+    .step-item .step-num {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 5cqw, 42px);
+      font-weight: 600;
+      color: rgba(217,148,74,0.5);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: clamp(28px, 6cqw, 48px);
+      text-align: center;
+    }
+
+    .step-item .step-info {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2px, 0.4cqw, 6px);
+    }
+
+    .step-item .step-title {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.4cqw, 22px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .step-item .step-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.85cqw, 16px);
+      color: var(--text-tertiary);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CTA SLIDE — Slide 6
+       ═══════════════════════════════════════════════════════════ */
+    .cta-glow {
+      width: clamp(60px, 14cqw, 120px);
+      height: clamp(60px, 14cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(217,148,74,0.20) 0%,
+        rgba(217,148,74,0.06) 50%,
+        transparent 70%
+      );
+      border: 1.5px solid rgba(217,148,74,0.20);
+      box-shadow:
+        0 0 40px rgba(217,148,74,0.10),
+        0 0 80px rgba(217,148,74,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6%;
+    }
+
+    .cta-glow .cta-glow-icon {
+      font-size: clamp(24px, 5.5cqw, 48px);
+      color: rgba(217,148,74,0.7);
+    }
+
+    .cta-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5.56cqw, 56px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.12;
+      margin-bottom: 4%;
+      text-align: center;
+    }
+
+    .cta-headline em {
+      color: rgba(217,148,74,0.95);
+      font-style: normal;
+    }
+
+    .cta-subtext {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.2cqw, 22px);
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 5%;
+      text-align: center;
+      max-width: 85%;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(10px, 2.2cqw, 22px) clamp(24px, 5.5cqw, 56px);
+      background: linear-gradient(
+        135deg,
+        rgba(217,148,74,0.30) 0%,
+        rgba(217,148,74,0.15) 100%
+      );
+      border: 1.5px solid rgba(217,148,74,0.40);
+      border-radius: var(--radius-xl);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.4cqw, 22px);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      margin-bottom: 4%;
+      box-shadow:
+        0 4px 20px rgba(217,148,74,0.12),
+        0 0 40px rgba(217,148,74,0.06);
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.5cqw, 14px);
+      color: var(--text-tertiary);
+      letter-spacing: 0.15em;
+      margin-top: 2%;
+    }
+
+    .brand-tag em {
+      color: rgba(217,148,74,0.7);
+      font-style: normal;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       QUOTE PANEL — Smaller inline quote styling
+       ═══════════════════════════════════════════════════════════ */
+    .quote-panel {
+      width: 100%;
+      max-width: 88%;
+      padding: clamp(16px, 3.5cqw, 36px);
+      background: rgba(217,148,74,0.03);
+      border: 1px solid rgba(217,148,74,0.10);
+      border-left: 3px solid rgba(217,148,74,0.35);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-bottom: 4%;
+      text-align: left;
+      position: relative;
+    }
+
+    .quote-panel .quote-panel-text {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 3.5cqw, 32px);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    .quote-panel .quote-panel-text em {
+      color: rgba(217,148,74,0.95);
+      font-style: italic;
+    }
+
+    .quote-panel .quote-panel-attr {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.5cqw, 14px);
+      color: rgba(217,148,74,0.6);
+      letter-spacing: 0.12em;
+      margin-top: clamp(8px, 1.8cqw, 16px);
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       OBSERVATION BOX — Chart reading exercise
+       ═══════════════════════════════════════════════════════════ */
+    .observation-box {
+      width: 100%;
+      max-width: 90%;
+      padding: clamp(16px, 3.5cqw, 36px);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 4%;
+      text-align: left;
+      position: relative;
+    }
+
+    .observation-box::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 20%;
+      right: 20%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(217,148,74,0.25),
+        transparent
+      );
+      border-radius: 1px;
+    }
+
+    .observation-box .observation-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(8px, 1.5cqw, 14px);
+      margin-bottom: clamp(10px, 2.2cqw, 20px);
+    }
+
+    .observation-box .observation-icon {
+      font-size: clamp(14px, 3cqw, 24px);
+      color: rgba(217,148,74,0.7);
+    }
+
+    .observation-box .observation-title {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.7cqw, 15px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .observation-steps {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.8cqw, 16px);
+    }
+
+    .observation-step {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px, 1.5cqw, 14px);
+    }
+
+    .observation-step .obs-check {
+      width: clamp(16px, 3cqw, 24px);
+      height: clamp(16px, 3cqw, 24px);
+      border-radius: 4px;
+      border: 1.5px solid rgba(217,148,74,0.30);
+      background: rgba(217,148,74,0.05);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .observation-step .obs-text {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 2cqw, 18px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .observation-step .obs-text em {
+      color: rgba(217,148,74,0.85);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       EXPORT MODE
+       ═══════════════════════════════════════════════════════════ */
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls-bar,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none !important;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      aspect-ratio: auto;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* ── Export Mode — Fixed Pixel Overrides ── */
+    body.export-mode .slide-number {
+      font-size: 12px;
+      top: 48px;
+      left: 54px;
+    }
+
+    body.export-mode .brand-mark {
+      font-size: 11px;
+      bottom: 48px;
+      right: 54px;
+    }
+
+    body.export-mode .slide-logo {
+      font-size: 10px;
+      bottom: 54px;
+    }
+
+    body.export-mode .cine-logo {
+      font-size: 10px;
+      bottom: 80px;
+    }
+
+    body.export-mode .slide-content {
+      padding: 72px;
+    }
+
+    body.export-mode .cine-label {
+      font-size: 14px;
+      letter-spacing: 0.35em;
+      margin-bottom: 60px;
+    }
+
+    body.export-mode .hook-main {
+      font-size: 76px;
+      margin-bottom: 40px;
+    }
+
+    body.export-mode .cine-divider {
+      width: 80px;
+      margin-bottom: 40px;
+    }
+
+    body.export-mode .hook-sub {
+      font-size: 18px;
+    }
+
+    body.export-mode .headline {
+      font-size: 72px;
+    }
+
+    body.export-mode .headline-medium {
+      font-size: 62px;
+    }
+
+    body.export-mode .headline-small {
+      font-size: 48px;
+    }
+
+    body.export-mode .subheadline {
+      font-size: 24px;
+    }
+
+    body.export-mode .body-text {
+      font-size: 20px;
+    }
+
+    body.export-mode .caption-text {
+      font-size: 14px;
+    }
+
+    body.export-mode .quote-display {
+      padding: 44px;
+    }
+
+    body.export-mode .quote-display .quote-text {
+      font-size: 44px;
+    }
+
+    body.export-mode .quote-display::before {
+      font-size: 88px;
+      top: 16px;
+      left: 24px;
+    }
+
+    body.export-mode .quote-attr {
+      font-size: 14px;
+    }
+
+    body.export-mode .versus-card {
+      padding: 24px;
+    }
+
+    body.export-mode .versus-card .versus-header {
+      font-size: 12px;
+    }
+
+    body.export-mode .versus-card .versus-icon {
+      font-size: 36px;
+    }
+
+    body.export-mode .versus-item {
+      font-size: 16px;
+      padding-left: 12px;
+    }
+
+    body.export-mode .versus-label {
+      font-size: 18px;
+    }
+
+    body.export-mode .step-item {
+      padding: 22px;
+    }
+
+    body.export-mode .step-item .step-num {
+      font-size: 36px;
+      min-width: 44px;
+    }
+
+    body.export-mode .step-item .step-title {
+      font-size: 20px;
+    }
+
+    body.export-mode .step-item .step-desc {
+      font-size: 14px;
+    }
+
+    body.export-mode .reflection-card {
+      padding: 36px;
+    }
+
+    body.export-mode .reflection-card .reflection-icon {
+      font-size: 26px;
+    }
+
+    body.export-mode .reflection-card .reflection-title {
+      font-size: 14px;
+    }
+
+    body.export-mode .reflection-prompt .prompt-num {
+      font-size: 13px;
+    }
+
+    body.export-mode .reflection-prompt .prompt-text {
+      font-size: 18px;
+    }
+
+    body.export-mode .wisdom-card {
+      padding: 32px;
+    }
+
+    body.export-mode .wisdom-card .wisdom-label {
+      font-size: 12px;
+    }
+
+    body.export-mode .wisdom-card .wisdom-text {
+      font-size: 32px;
+    }
+
+    body.export-mode .wisdom-card .wisdom-sub {
+      font-size: 16px;
+    }
+
+    body.export-mode .callout-box {
+      padding: 24px;
+    }
+
+    body.export-mode .callout-box .callout-text {
+      font-size: 18px;
+    }
+
+    body.export-mode .accent-divider {
+      width: 80px;
+    }
+
+    body.export-mode .accent-divider-wide {
+      width: 160px;
+    }
+
+    body.export-mode .quote-panel {
+      padding: 32px;
+    }
+
+    body.export-mode .quote-panel .quote-panel-text {
+      font-size: 28px;
+    }
+
+    body.export-mode .quote-panel .quote-panel-attr {
+      font-size: 12px;
+    }
+
+    body.export-mode .observation-box {
+      padding: 32px;
+    }
+
+    body.export-mode .observation-box .observation-icon {
+      font-size: 22px;
+    }
+
+    body.export-mode .observation-box .observation-title {
+      font-size: 13px;
+    }
+
+    body.export-mode .observation-step .obs-check {
+      width: 22px;
+      height: 22px;
+    }
+
+    body.export-mode .observation-step .obs-text {
+      font-size: 16px;
+    }
+
+    body.export-mode .cta-glow {
+      width: 110px;
+      height: 110px;
+    }
+
+    body.export-mode .cta-glow .cta-glow-icon {
+      font-size: 44px;
+    }
+
+    body.export-mode .cta-headline {
+      font-size: 52px;
+    }
+
+    body.export-mode .cta-subtext {
+      font-size: 20px;
+    }
+
+    body.export-mode .cta-button {
+      padding: 20px 52px;
+      font-size: 20px;
+    }
+
+    body.export-mode .brand-tag {
+      font-size: 13px;
+    }
+
+    body.export-mode .chart-orb {
+      width: 180px;
+      height: 180px;
+    }
+
+    body.export-mode .chart-orb .orb-symbol {
+      font-size: 50px;
+    }
   </style>
 </head>
 <body>
-  <div class="controls">
-<button onclick="toggleExportMode()">Export Mode</button>
+  <!-- ═══════════════════════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="controls-bar">
+    <div class="control-group">
+      <label>Post 364</label>
+    </div>
+    <div class="control-group">
+      <button id="export-btn">Export Mode</button>
+    </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE TITLE
+       ═══════════════════════════════════════════════════════════ -->
   <div class="page-title">
-    <h1>Post 364 — TRADE THE CHART IN FRONT OF YOU</h1>
-    <p>Quote Carousel — 6 Slides</p>
+    <h1>Post 364 — Trade the Chart in Front of You</h1>
+    <p>Orange Column &middot; Quote &middot; 6 Slides</p>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════════
+       CAROUSEL GRID
+       ═══════════════════════════════════════════════════════════ -->
   <div class="carousel-grid">
 
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 1 — CINEMATIC HOOK: "REFLECT"
+         Orange column: NO sidebar. Orange ::before glow.
+         Big serif title with dramatic reveal.
+         ══════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
+        <div class="slide-bg"></div>
         <div class="slide-content">
           <div class="cine-label">REFLECT</div>
-          <div class="hook-main">THE MARKET'S MEMORY — From the Signal Pilot Chronicle</div>
+          <div class="hook-main">Trade the Chart<br><em>in Front of You</em></div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">&quot;Trade the chart in front of you.</p>
+          <p class="hook-sub">Not yesterday's chart. Not someone else's setup. Yours.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 2 — THE CORE QUOTE
+         Large centered quote block with orb visual and attribution.
+         Dramatic serif typography with glowing accent.
+         ══════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="2">
-<div class="slide-content">
-        <span class="slide-number">02 / 06</span>
-        
-        
-        <p class="slide-body">This concept clicked and everything else fell into place. &quot;Trade the chart in front of you. Not the chart you wish you had.&quot; Track this for 30 days. The pattern will emerge.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 2 — The Quote</span>
+      <div class="slide slide-warm slide-2">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">02 / 06</span>
+
+          <div class="chart-orb">
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <div class="pulse-ring"></div>
+            <span class="orb-symbol">&#9670;</span>
+          </div>
+
+          <div class="quote-display">
+            <p class="quote-text">
+              Trade the chart <em>in front of you</em>.
+              Not the chart you wish you had.
+            </p>
+          </div>
+
+          <p class="quote-attr">
+            <span>&#9670;</span> From the Signal Pilot Chronicle <span>&#9670;</span>
+          </p>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 3 — THE CONTEXT: WHAT TRADERS GET WRONG
+         Versus grid comparing wrong approach vs right approach.
+         Visual contrast between prediction and observation.
+         ══════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="3">
-<div class="slide-content">
-        <span class="slide-number">03 / 06</span>
-        <div class="slide-subtitle">The Context</div>
-        
-        <p class="slide-body">Not the chart from yesterday. Not the setup from Twitter. The one on YOUR screen, right now. React to what IS, not what you hope will happen. That's the entire game. Watch for this setup on the 4H chart this week.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 3 — The Context</span>
+      <div class="slide slide-warm slide-3">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">03 / 06</span>
+
+          <h2 class="headline-medium">
+            Two <em>Mindsets</em>
+          </h2>
+
+          <div class="versus-grid">
+            <div class="versus-card wrong-way">
+              <div class="versus-header">Prediction</div>
+              <div class="versus-icon">&#9888;</div>
+              <div class="versus-item">Trading yesterday's chart</div>
+              <div class="versus-item">Copying setups from Twitter</div>
+              <div class="versus-item">Hoping for what should happen</div>
+            </div>
+            <div class="versus-card right-way">
+              <div class="versus-header">Observation</div>
+              <div class="versus-icon">&#9733;</div>
+              <div class="versus-item">Reading what is on YOUR screen</div>
+              <div class="versus-item">Reacting to what IS</div>
+              <div class="versus-item">Letting price tell the story</div>
+            </div>
+          </div>
+
+          <p class="versus-label">
+            One mindset traps you in the past.<br>
+            The other <em>keeps you in the present</em>.
+          </p>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 4 — THE INSIGHT: THE ONE-SENTENCE EXERCISE
+         Practical technique with reflection card and quote panel.
+         Step-by-step observation framework.
+         ══════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="4">
-<div class="slide-content">
-        <span class="slide-number">04 / 06</span>
-        <div class="slide-subtitle">The Insight</div>
-        
-        <div class="quote-block">“Try this: before every trade, describe what the chart is actually doing in one sentence. No predictions, no bias. Just Price is consolidating below resistance with declining volume. If you can't describe it clearly, don't trade it.”</div><div class="quote-attr">— Signal Pilot</div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 4 — The Insight</span>
+      <div class="slide slide-warm slide-4">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">04 / 06</span>
+
+          <h2 class="headline-small">
+            The One-Sentence<br><em>Exercise</em>
+          </h2>
+
+          <p class="body-text" style="margin-bottom: 5%; max-width: 85%;">
+            Before every trade, describe what the chart is actually doing
+            in <em>one sentence</em>. No predictions. No bias.
+          </p>
+
+          <div class="accent-divider"></div>
+
+          <div class="quote-panel">
+            <p class="quote-panel-text">
+              "Price is <em>consolidating below resistance</em>
+              with declining volume."
+            </p>
+            <p class="quote-panel-attr">&#9670; Example observation</p>
+          </div>
+
+          <div class="callout-box">
+            <p class="callout-text">
+              If you can't describe it clearly,<br>
+              <em>don't trade it</em>.
+            </p>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 5 — WHY IT MATTERS: THE 30-DAY CHALLENGE
+         Reflection card with journaling prompts and observation box
+         with actionable checklist items.
+         ══════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="5">
-<div class="slide-content">
-        <span class="slide-number">05 / 06</span>
-        <div class="slide-subtitle">Why It Matters</div>
-        
-        <p class="slide-body">Try this: before every trade, describe what the chart is actually doing in one sentence. No predictions, no bias. Just &quot;Price is consolidating below resistance with declining volume.&quot; If you can't describe it clearly, don't trade it.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 5 — Why It Matters</span>
+      <div class="slide slide-warm slide-5">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">05 / 06</span>
+
+          <h2 class="headline-small">
+            Track This for<br><em>30 Days</em>
+          </h2>
+
+          <p class="subheadline" style="margin-bottom: 5%;">
+            The pattern <em>will</em> emerge.
+          </p>
+
+          <div class="reflection-card">
+            <div class="reflection-header">
+              <span class="reflection-icon">&#9998;</span>
+              <span class="reflection-title">Pre-Trade Journal</span>
+            </div>
+
+            <div class="reflection-prompts">
+              <div class="reflection-prompt">
+                <span class="prompt-num">01</span>
+                <p class="prompt-text">What is the chart <em>actually doing</em> right now?</p>
+              </div>
+
+              <div class="reflection-prompt">
+                <span class="prompt-num">02</span>
+                <p class="prompt-text">Am I reacting to <em>price</em> or to my expectations?</p>
+              </div>
+
+              <div class="reflection-prompt">
+                <span class="prompt-num">03</span>
+                <p class="prompt-text">Can I describe this setup in <em>one sentence</em>?</p>
+              </div>
+
+              <div class="reflection-prompt">
+                <span class="prompt-num">04</span>
+                <p class="prompt-text">Is this <em>my</em> chart or someone else's idea?</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wisdom-card">
+            <div class="wisdom-label">Key Insight</div>
+            <p class="wisdom-text">
+              This concept <em>clicked</em> and everything else fell into place.
+            </p>
+            <p class="wisdom-sub">
+              When you stop trading fantasies and start trading reality,
+              your edge compounds.
+            </p>
+          </div>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 6 — CTA: "Trade What's Real"
+         Glowing CTA orb with action button and brand tag.
+         Final motivational push with observation box.
+         ══════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="6">
-<div class="slide-content">
-        <span class="slide-number">06 / 06</span>
-        <div class="slide-icon">✨</div>
-        <h2 class="slide-title">Follow for More</h2>
-        <p class="slide-body">Daily trading wisdom and insights.</p>
-        <a href="https://signalpilot.io/" class="cta-link">Follow SignalPilot</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 6 — CTA</span>
+      <div class="slide slide-warm slide-6">
+        <div class="slide-bg"></div>
+        <div class="slide-content">
+          <span class="slide-number">06 / 06</span>
+
+          <div class="cta-glow">
+            <span class="cta-glow-icon">&#9733;</span>
+          </div>
+
+          <h2 class="cta-headline">
+            Stop Predicting.<br>
+            <em>Trade What's Real.</em>
+          </h2>
+
+          <p class="cta-subtext">
+            Signal Pilot gives you the framework to observe clearly,
+            react to what is, and trade the chart that's actually
+            in front of you &mdash; every single session.
+          </p>
+
+          <div class="observation-box">
+            <div class="observation-header">
+              <span class="observation-icon">&#9745;</span>
+              <span class="observation-title">This Week's Practice</span>
+            </div>
+
+            <div class="observation-steps">
+              <div class="observation-step">
+                <div class="obs-check"></div>
+                <p class="obs-text">Write <em>one sentence</em> describing each chart before you trade</p>
+              </div>
+
+              <div class="observation-step">
+                <div class="obs-check"></div>
+                <p class="obs-text">Delete setups saved from <em>other people's</em> feeds</p>
+              </div>
+
+              <div class="observation-step">
+                <div class="obs-check"></div>
+                <p class="obs-text">Watch the <em>4H chart</em> for this setup this week</p>
+              </div>
+
+              <div class="observation-step">
+                <div class="obs-check"></div>
+                <p class="obs-text">Track your <em>observation accuracy</em> for 30 days</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accent-divider-wide"></div>
+
+          <a href="https://education.signalpilot.io" class="cta-button">
+            Trade What's Real
+          </a>
+
+          <p class="brand-tag">
+            <em>education.signalpilot.io</em>
+          </p>
+
+          <div class="slide-logo">Signal Pilot</div>
+        </div>
       </div>
     </div>
+
   </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-    <button onclick="nextSlide()">Next →</button>
-  </div>
-
+  <!-- ═══════════════════════════════════════════════════════════
+       EXPORT MODE SCRIPT + KEYBOARD NAVIGATION
+       ═══════════════════════════════════════════════════════════ -->
   <script>
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function () {
+      'use strict';
+
+      /* ── DOM References ── */
+      var exportBtn = document.getElementById('export-btn');
+      var slideWrappers = document.querySelectorAll('.slide-wrapper');
+      var totalSlides = slideWrappers.length;
+
+      /* ── State ── */
+      var exportMode = false;
+      var currentSlide = 0;
+
+      /* ── Toggle Export Mode ── */
+      exportBtn.addEventListener('click', function () {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+
+        if (exportMode) {
+          currentSlide = 0;
+          updateActiveSlide();
+        }
+      });
+
+      /* ── Update Active Slide ── */
+      function updateActiveSlide() {
+        for (var i = 0; i < slideWrappers.length; i++) {
+          if (i === currentSlide) {
+            slideWrappers[i].classList.add('active');
+          } else {
+            slideWrappers[i].classList.remove('active');
+          }
+        }
+      }
+
+      /* ── Navigate Next ── */
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateActiveSlide();
+      }
+
+      /* ── Navigate Previous ── */
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateActiveSlide();
+      }
+
+      /* ── Keyboard Navigation ── */
+      document.addEventListener('keydown', function (e) {
+        if (!exportMode) {
+          return;
+        }
+
+        switch (e.key) {
+          case 'ArrowRight':
+          case ' ':
+            e.preventDefault();
+            nextSlide();
+            break;
+
+          case 'ArrowLeft':
+            e.preventDefault();
+            prevSlide();
+            break;
+
+          case 'Escape':
+            exportMode = false;
+            document.body.classList.remove('export-mode');
+            exportBtn.textContent = 'Export Mode';
+            break;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
