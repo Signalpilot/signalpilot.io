@@ -1,0 +1,113 @@
+//@version=5
+strategy("Meta Confluence v1 — BONK H4", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=5, commission_type=strategy.commission.percent, commission_value=0.055, slippage=2, initial_capital=500)
+
+// ══════════════════════════════════════════════════════════════════════
+// Meta Confluence v1: 6 independent systems score, need 4+ to agree
+// Apply to BONKUSDT.P on 4H timeframe
+// ══════════════════════════════════════════════════════════════════════
+
+// ── Inputs ────────────────────────────────────────────────────────────
+min_score    = input.int(4, "Min Score (of 6)", minval=2, maxval=6, group="Core")
+atr_period   = input.int(14, "ATR Period", group="Risk")
+atr_sl_mult  = input.float(1.2, "ATR SL Mult", group="Risk")
+atr_tp_mult  = input.float(3.0, "ATR TP Mult", group="Risk")
+vol_lookback = input.int(100, "Vol Lookback", group="Filter")
+
+// ── Hull MA function ──────────────────────────────────────────────────
+hma(src, len) =>
+    half = math.floor(len / 2)
+    sqrtLen = math.floor(math.sqrt(len))
+    ta.wma(2 * ta.wma(src, half) - ta.wma(src, len), sqrtLen)
+
+// ══════════════════════════════════════════════════════════════════════
+// SYSTEM 1: EMA Ribbon (9/21)
+// ══════════════════════════════════════════════════════════════════════
+ema_f = ta.ema(close, 9)
+ema_s = ta.ema(close, 21)
+score_ema_bull = ema_f > ema_s ? 1 : 0
+score_ema_bear = ema_f < ema_s ? 1 : 0
+
+// ══════════════════════════════════════════════════════════════════════
+// SYSTEM 2: Hull MA (16/48)
+// ══════════════════════════════════════════════════════════════════════
+hull_f = hma(close, 16)
+hull_s = hma(close, 48)
+score_hull_bull = hull_f > hull_s ? 1 : 0
+score_hull_bear = hull_f < hull_s ? 1 : 0
+
+// ══════════════════════════════════════════════════════════════════════
+// SYSTEM 3: MACD Histogram
+// ══════════════════════════════════════════════════════════════════════
+[macd_line, signal_line, hist] = ta.macd(close, 12, 26, 9)
+score_macd_bull = hist > 0 and hist > hist[1] ? 1 : 0
+score_macd_bear = hist < 0 and hist < hist[1] ? 1 : 0
+
+// ══════════════════════════════════════════════════════════════════════
+// SYSTEM 4: SuperTrend
+// ══════════════════════════════════════════════════════════════════════
+[st_line, st_dir] = ta.supertrend(3.0, 10)
+score_st_bull = st_dir == -1 ? 1 : 0
+score_st_bear = st_dir == 1 ? 1 : 0
+
+// ══════════════════════════════════════════════════════════════════════
+// SYSTEM 5: StochRSI
+// ══════════════════════════════════════════════════════════════════════
+rsi_val = ta.rsi(close, 14)
+stoch_k = ta.sma(ta.stoch(rsi_val, rsi_val, rsi_val, 14), 3)
+stoch_d = ta.sma(stoch_k, 3)
+score_srsi_bull = stoch_k > stoch_d and stoch_k[1] < 80 ? 1 : 0
+score_srsi_bear = stoch_k < stoch_d and stoch_k[1] > 20 ? 1 : 0
+
+// ══════════════════════════════════════════════════════════════════════
+// SYSTEM 6: ADX + DI
+// ══════════════════════════════════════════════════════════════════════
+[diplus, diminus, adx_val] = ta.dmi(14, 14)
+score_adx_bull = adx_val > 20 and diplus > diminus ? 1 : 0
+score_adx_bear = adx_val > 20 and diminus > diplus ? 1 : 0
+
+// ══════════════════════════════════════════════════════════════════════
+// COMPOSITE SCORE
+// ══════════════════════════════════════════════════════════════════════
+bull_score = score_ema_bull + score_hull_bull + score_macd_bull + score_st_bull + score_srsi_bull + score_adx_bull
+bear_score = score_ema_bear + score_hull_bear + score_macd_bear + score_st_bear + score_srsi_bear + score_adx_bear
+
+// RSI filter
+rsi_h = ta.rsi(close, 14)
+
+// ATR
+atr_val = ta.atr(atr_period)
+
+// Volatility filter
+atr_rank = ta.percentrank(atr_val, vol_lookback)
+vol_ok = atr_rank >= 10 and atr_rank <= 95
+
+// ── Signals ───────────────────────────────────────────────────────────
+long_cond  = bull_score >= min_score and rsi_h > 35 and rsi_h < 75 and vol_ok
+short_cond = bear_score >= min_score and rsi_h > 25 and rsi_h < 65 and vol_ok
+
+if long_cond and strategy.position_size == 0
+    sl = close - atr_sl_mult * atr_val
+    tp = close + atr_tp_mult * atr_val
+    strategy.entry("Long", strategy.long)
+    strategy.exit("Long Exit", "Long", stop=sl, limit=tp)
+
+if short_cond and strategy.position_size == 0
+    sl = close + atr_sl_mult * atr_val
+    tp = close - atr_tp_mult * atr_val
+    strategy.entry("Short", strategy.short)
+    strategy.exit("Short Exit", "Short", stop=sl, limit=tp)
+
+// ── Plots ─────────────────────────────────────────────────────────────
+plot(ema_f, "EMA 9", color.new(color.green, 60))
+plot(ema_s, "EMA 21", color.new(color.red, 60))
+plot(hull_f, "Hull 16", color.new(color.teal, 40), linewidth=2)
+plot(hull_s, "Hull 48", color.new(color.orange, 40), linewidth=2)
+
+// Score display
+plotchar(bull_score >= min_score, "Bull Signal", "▲", location.belowbar, color.green, size=size.tiny)
+plotchar(bear_score >= min_score, "Bear Signal", "▼", location.abovebar, color.red, size=size.tiny)
+
+// Score label
+var label scoreLabel = na
+label.delete(scoreLabel)
+scoreLabel := label.new(bar_index, high, "B:" + str.tostring(bull_score) + " S:" + str.tostring(bear_score), style=label.style_none, textcolor=color.gray, size=size.tiny)

@@ -1,0 +1,134 @@
+//@version=5
+strategy("MTF Trend v2 — ADA H1", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=5, commission_type=strategy.commission.percent, commission_value=0.055, slippage=2, initial_capital=500)
+
+// ══════════════════════════════════════════════════════════════════════
+// MTF Trend v2: Hull MA H4 trend + StochRSI H1 timing + MACD confirm
+// Apply to ADAUSDT.P on 1H timeframe
+// ══════════════════════════════════════════════════════════════════════
+
+// ── Inputs ────────────────────────────────────────────────────────────
+// H4 Trend
+h4_hull_fast = input.int(16, "H4 Hull Fast", group="H4 Trend")
+h4_hull_slow = input.int(48, "H4 Hull Slow", group="H4 Trend")
+h4_st_period = input.int(10, "H4 SuperTrend Period", group="H4 Trend")
+h4_st_mult   = input.float(3.0, "H4 SuperTrend Mult", group="H4 Trend")
+
+// H1 Entry
+h1_ema_fast  = input.int(9, "H1 EMA Fast", group="H1 Entry")
+h1_ema_slow  = input.int(21, "H1 EMA Slow", group="H1 Entry")
+srsi_rsi     = input.int(14, "StochRSI RSI Period", group="H1 Entry")
+srsi_stoch   = input.int(14, "StochRSI Stoch Period", group="H1 Entry")
+srsi_k       = input.int(3, "StochRSI K Smooth", group="H1 Entry")
+srsi_d       = input.int(3, "StochRSI D Smooth", group="H1 Entry")
+srsi_os      = input.int(20, "StochRSI Oversold", group="H1 Entry")
+srsi_ob      = input.int(80, "StochRSI Overbought", group="H1 Entry")
+
+// MACD
+macd_fast    = input.int(12, "MACD Fast", group="MACD")
+macd_slow    = input.int(26, "MACD Slow", group="MACD")
+macd_signal  = input.int(9, "MACD Signal", group="MACD")
+
+// Risk
+atr_period   = input.int(14, "ATR Period", group="Risk")
+atr_sl_mult  = input.float(1.0, "ATR SL Multiplier", group="Risk")
+atr_tp_mult  = input.float(3.0, "ATR TP Multiplier", group="Risk")
+
+// Volatility Filter
+vol_lookback   = input.int(100, "Vol Lookback", group="Filter")
+vol_min_pctile = input.int(10, "Vol Min Percentile", group="Filter")
+vol_max_pctile = input.int(95, "Vol Max Percentile", group="Filter")
+
+// ── Hull Moving Average function ──────────────────────────────────────
+hma(src, len) =>
+    half = math.floor(len / 2)
+    sqrtLen = math.floor(math.sqrt(len))
+    wma1 = ta.wma(src, half)
+    wma2 = ta.wma(src, len)
+    ta.wma(2 * wma1 - wma2, sqrtLen)
+
+// ── H4 Data via request.security ──────────────────────────────────────
+h4_close = request.security(syminfo.tickerid, "240", close)
+h4_high  = request.security(syminfo.tickerid, "240", high)
+h4_low   = request.security(syminfo.tickerid, "240", low)
+
+// H4 Hull MA trend
+h4_hull_f = request.security(syminfo.tickerid, "240", hma(close, h4_hull_fast))
+h4_hull_s = request.security(syminfo.tickerid, "240", hma(close, h4_hull_slow))
+h4_trend_up   = h4_hull_f > h4_hull_s
+h4_trend_down = h4_hull_f < h4_hull_s
+
+// H4 SuperTrend
+[h4_st_line, h4_st_dir] = request.security(syminfo.tickerid, "240", ta.supertrend(h4_st_mult, h4_st_period))
+h4_st_bull = h4_st_dir == -1  // TradingView: -1 = bullish, 1 = bearish (opposite of our Python)
+
+// H4 ADX + DI
+[h4_diplus, h4_diminus, h4_adx_val] = request.security(syminfo.tickerid, "240", ta.dmi(14, 14))
+h4_adx_ok     = h4_adx_val > 20
+h4_di_bull    = h4_diplus > h4_diminus
+h4_di_bear    = h4_diminus > h4_diplus
+
+// ── H1 Entry Indicators ──────────────────────────────────────────────
+// EMA trend
+h1_fast = ta.ema(close, h1_ema_fast)
+h1_slow = ta.ema(close, h1_ema_slow)
+h1_trend_up   = h1_fast > h1_slow
+h1_trend_down = h1_fast < h1_slow
+
+// StochRSI
+rsi_val    = ta.rsi(close, srsi_rsi)
+stoch_k_raw = ta.stoch(rsi_val, rsi_val, rsi_val, srsi_stoch)
+srsi_k_val = ta.sma(stoch_k_raw, srsi_k)
+srsi_d_val = ta.sma(srsi_k_val, srsi_d)
+
+srsi_bull_cross = ta.crossover(srsi_k_val, srsi_d_val) and srsi_k_val[1] < (srsi_os + 15)
+srsi_bear_cross = ta.crossunder(srsi_k_val, srsi_d_val) and srsi_k_val[1] > (srsi_ob - 15)
+
+// MACD
+[macd_line, signal_line, hist] = ta.macd(close, macd_fast, macd_slow, macd_signal)
+macd_bull      = hist > 0
+macd_bear      = hist < 0
+macd_accel_up  = hist > hist[1]
+macd_accel_dn  = hist < hist[1]
+
+// RSI
+rsi_h1 = ta.rsi(close, 14)
+
+// ATR
+atr_val = ta.atr(atr_period)
+
+// Volatility percentile filter
+atr_rank = ta.percentrank(atr_val, vol_lookback)
+vol_ok = atr_rank >= vol_min_pctile and atr_rank <= vol_max_pctile
+
+// ── Signal Conditions ─────────────────────────────────────────────────
+long_cond = h4_trend_up and h4_st_bull and h4_adx_ok and h4_di_bull and h1_trend_up and srsi_bull_cross and (macd_bull or macd_accel_up) and rsi_h1 > 35 and rsi_h1 < 70 and vol_ok
+
+short_cond = h4_trend_down and not h4_st_bull and h4_adx_ok and h4_di_bear and h1_trend_down and srsi_bear_cross and (macd_bear or macd_accel_dn) and rsi_h1 > 30 and rsi_h1 < 65 and vol_ok
+
+// ── Execute Trades ────────────────────────────────────────────────────
+if long_cond and strategy.position_size == 0
+    sl = close - atr_sl_mult * atr_val
+    tp = close + atr_tp_mult * atr_val
+    strategy.entry("Long", strategy.long)
+    strategy.exit("Long Exit", "Long", stop=sl, limit=tp)
+
+if short_cond and strategy.position_size == 0
+    sl = close + atr_sl_mult * atr_val
+    tp = close - atr_tp_mult * atr_val
+    strategy.entry("Short", strategy.short)
+    strategy.exit("Short Exit", "Short", stop=sl, limit=tp)
+
+// ── Plots ─────────────────────────────────────────────────────────────
+plot(h1_fast, "EMA Fast", color=color.new(color.green, 50))
+plot(h1_slow, "EMA Slow", color=color.new(color.red, 50))
+
+// H4 Hull on H1 chart
+plot(h4_hull_f, "H4 Hull Fast", color=color.new(color.teal, 30), linewidth=2)
+plot(h4_hull_s, "H4 Hull Slow", color=color.new(color.orange, 30), linewidth=2)
+
+// Background color for H4 trend
+bgcolor(h4_trend_up ? color.new(color.green, 93) : h4_trend_down ? color.new(color.red, 93) : na)
+
+// Signal markers
+plotshape(long_cond, "Long", shape.triangleup, location.belowbar, color.green, size=size.small)
+plotshape(short_cond, "Short", shape.triangledown, location.abovebar, color.red, size=size.small)
