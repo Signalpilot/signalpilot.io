@@ -1,706 +1,1152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 066 — Fibonacci Retracements | Carousel Preview</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-green: #4ad97a;
-      --accent-red: #d94a4a;
-      --text-primary: #e8e6e3;
-      --text-secondary: rgba(255, 255, 255, 0.7);
-      --text-muted: #6b6965;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: #111;
-      font-family: 'Inter', sans-serif;
-      color: var(--text-primary);
-      padding: 2rem;
-      min-height: 100vh;
-    }
-
-    .controls {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 1000;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-    }
-
-    .controls label {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .controls select, .controls button {
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .page-title h1 {
-      font-size: 2rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-
-    .page-title p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
-
-    .carousel-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 2rem;
-      max-width: 1800px;
-      margin: 0 auto;
-      padding-bottom: 4rem;
-    }
-
-    .slide-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      container-type: inline-size;
-    }
-
-    .slide-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-gold);
-      margin-bottom: 0.75rem;
-    }
-
-    .slide {
-      width: 100%;
-      max-width: 540px;
-      aspect-ratio: 4 / 5;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-dark);
-      border-radius: 4px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .slide-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .slide-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.08;
-    }
-
-    .slide.bg-black .slide-bg video {
-      opacity: 0;
-    }
-
-    .slide-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      padding: 8%;
-    }
-
-    .slide-number {
-      font-size: 0.6rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      letter-spacing: 0.15em;
-      margin-bottom: auto;
-    }
-
-    .brand-tag {
-      font-size: 0.55rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      color: var(--text-muted);
-      margin-top: auto;
-      text-align: center;
-    }
-
-    .center-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    /* Cover slide */
-    .cover-badge {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.45rem, 1.3cqw, 0.6rem);
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      padding: 2% 4%;
-      border: 1px solid rgba(201, 169, 98, 0.3);
-      border-radius: 6px;
-      margin-bottom: 4%;
-      background: rgba(201, 169, 98, 0.05);
-    }
-
-    .cover-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.4rem, 5cqw, 2.4rem);
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-    }
-
-    .cover-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2.2cqw, 1rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-    }
-
-    .fib-icon {
-      margin-top: 4%;
-      font-size: clamp(1.8rem, 6cqw, 3rem);
-    }
-
-    /* Content slides */
-    .headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 4.2cqw, 2rem);
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-    }
-
-    .accent-gold { color: var(--accent-gold); }
-    .accent-blue { color: var(--accent-blue); }
-    .accent-green { color: var(--accent-green); }
-
-    /* Levels grid */
-    .levels-section {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .levels-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5%;
-    }
-
-    .level-card {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-      padding: 2% 3%;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 8px;
-    }
-
-    .level-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.9rem, 3cqw, 1.4rem);
-      font-weight: 600;
-      color: var(--accent-gold);
-      min-width: 20%;
-    }
-
-    .level-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.75rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-    }
-
-    /* Why card */
-    .why-card {
-      padding: 4%;
-      background: rgba(201, 169, 98, 0.08);
-      border: 1px solid rgba(201, 169, 98, 0.25);
-      border-radius: 16px;
-    }
-
-    .why-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      margin-bottom: 2%;
-    }
-
-    .why-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.5cqw, 1.6rem);
-      font-weight: 600;
-      line-height: 1.3;
-      color: var(--text-primary);
-    }
-
-    .why-subtext {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.55rem, 1.8cqw, 0.8rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-      margin-top: 2%;
-    }
-
-    /* Draw section */
-    .draw-section {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .draw-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3%;
-    }
-
-    .draw-card {
-      padding: 4%;
-      border-radius: 12px;
-    }
-
-    .draw-card.uptrend {
-      background: rgba(74, 217, 122, 0.08);
-      border: 1px solid rgba(74, 217, 122, 0.25);
-    }
-
-    .draw-card.downtrend {
-      background: rgba(217, 74, 74, 0.08);
-      border: 1px solid rgba(217, 74, 74, 0.25);
-    }
-
-    .draw-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.45rem, 1.4cqw, 0.65rem);
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 2%;
-    }
-
-    .draw-card.uptrend .draw-label { color: var(--accent-green); }
-    .draw-card.downtrend .draw-label { color: var(--accent-red); }
-
-    .draw-icon {
-      font-size: clamp(1rem, 3.2cqw, 1.5rem);
-      margin-bottom: 2%;
-    }
-
-    .draw-text {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.75rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    /* Tip card */
-    .tip-card {
-      padding: 4%;
-      background: rgba(74, 144, 217, 0.08);
-      border: 1px solid rgba(74, 144, 217, 0.25);
-      border-radius: 12px;
-    }
-
-    .tip-header {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-      margin-bottom: 3%;
-    }
-
-    .tip-icon {
-      font-size: clamp(0.85rem, 2.8cqw, 1.25rem);
-    }
-
-    .tip-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.75rem);
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent-blue);
-    }
-
-    .tip-content {
-      display: flex;
-      flex-direction: column;
-      gap: 2%;
-    }
-
-    .tip-item {
-      display: flex;
-      align-items: center;
-      gap: 2%;
-      padding: 2.5%;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-    }
-
-    .tip-bullet {
-      width: 6px;
-      height: 6px;
-      background: var(--accent-blue);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .tip-text {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.55rem, 1.8cqw, 0.8rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-    }
-
-    /* CTA slide */
-    .cta-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.3rem, 4.5cqw, 2.2rem);
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--text-primary);
-      margin-bottom: 3%;
-    }
-
-    .cta-subtext {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.6rem, 2cqw, 0.9rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-      margin-bottom: 4%;
-      line-height: 1.5;
-    }
-
-    .cta-button {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--bg-dark);
-      background: linear-gradient(135deg, var(--accent-gold), #b8963a);
-      padding: 3% 6%;
-      border-radius: 6px;
-      text-decoration: none;
-    }
-
-    /* Export mode */
-    body.export-mode {
-      padding: 0;
-      background: transparent;
-    }
-
-    body.export-mode .controls,
-    body.export-mode .page-title,
-    body.export-mode .slide-label {
-      display: none;
-    }
-
-    body.export-mode .carousel-grid {
-      display: block;
-      padding: 0;
-    }
-
-    body.export-mode .slide-wrapper {
-      display: none;
-    }
-
-    body.export-mode .slide-wrapper.active {
-      display: flex;
-    }
-
-    body.export-mode .slide {
-      width: 1080px;
-      height: 1350px;
-      max-width: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    @media (max-width: 900px) {
-      .carousel-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .controls {
-        position: static;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 066 — Fibonacci Retracements | Carousel Preview</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: rgba(20, 20, 30, 0.85);
+            --text-primary: #e8e6e3;
+            --text-secondary: #a9a6a2;
+            --text-muted: #6b6965;
+            --accent-blue: #4a90d9;
+            --accent-gold: #c9a962;
+            --accent-gold-glow: rgba(201, 169, 98, 0.3);
+            --accent-green: #4ad97a;
+            --accent-red: #d94a4a;
+            --accent-purple: #9b4ad9;
+            --accent-teal: #4ad9d9;
+            --accent-orange: #d9884a;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --video-opacity: 0.08;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: #050507;
+            min-height: 100vh;
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            padding: 2rem;
+        }
+
+        /* Controls Section */
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .controls select {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        #export-btn {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #export-btn:hover {
+            filter: brightness(1.1);
+        }
+
+        /* Page Title Section */
+        .page-title {
+            text-align: center;
+            margin: 5rem auto 3rem;
+        }
+
+        .page-title h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4cqw, 3rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Carousel Grid Layout */
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            max-width: 1800px;
+            margin: 0 auto;
+            justify-items: center;
+            padding-bottom: 4rem;
+        }
+
+        .slide-wrapper {
+            container-type: inline-size;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slide-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Slide Base Styles */
+        .slide {
+            width: 100%;
+            max-width: 540px;
+            aspect-ratio: 4 / 5;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Video Background */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: var(--video-opacity);
+        }
+
+        /* Slide Content Container */
+        .slide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            padding: 8%;
+            justify-content: space-between;
+        }
+
+        /* Slide Number */
+        .slide-number {
+            font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Brand Tag */
+        .brand-tag {
+            font-size: clamp(0.45rem, 1.2cqw, 0.6rem);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Center Content */
+        .center-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 2%;
+        }
+
+        /* Cover Slide */
+        .cover-badge {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: clamp(0.45rem, 1.3cqw, 0.6rem);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            padding: 2% 4%;
+            border: 1px solid var(--accent-gold-glow);
+            border-radius: 6px;
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .cover-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.4rem, 5cqw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(0.65rem, 2.2cqw, 1rem);
+            font-weight: 300;
+            color: var(--text-secondary);
+        }
+
+        .cover-icon {
+            font-size: clamp(2rem, 6cqw, 3.2rem);
+            margin-top: 2%;
+        }
+
+        /* Content Headline */
+        .headline {
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 4.2cqw, 2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+
+        /* Accent Colors */
+        .accent-gold { color: var(--accent-gold); }
+        .accent-blue { color: var(--accent-blue); }
+        .accent-green { color: var(--accent-green); }
+        .accent-teal { color: var(--accent-teal); }
+        .accent-orange { color: var(--accent-orange); }
+        .accent-red { color: var(--accent-red); }
+
+        /* Levels Grid */
+        .levels-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2%;
+        }
+
+        .levels-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5%;
+        }
+
+        .level-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1%;
+            padding: 2.5% 3%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            backdrop-filter: blur(8px);
+        }
+
+        .level-number {
+            font-family: var(--font-serif);
+            font-size: clamp(0.9rem, 3cqw, 1.3rem);
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .level-desc {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.6cqw, 0.75rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        /* Info Card */
+        .info-card {
+            padding: 3% 3.5%;
+            background: rgba(201, 169, 98, 0.08);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-label {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.5cqw, 0.65rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 2%;
+        }
+
+        .info-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1rem, 3.5cqw, 1.6rem);
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .info-text {
+            font-family: var(--font-sans);
+            font-size: clamp(0.55rem, 1.8cqw, 0.8rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-top: 2%;
+        }
+
+        /* Two-Column Grid */
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2%;
+            width: 100%;
+        }
+
+        .column-card {
+            padding: 3%;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .column-card.uptrend {
+            background: rgba(74, 217, 122, 0.08);
+            border-color: rgba(74, 217, 122, 0.3);
+        }
+
+        .column-card.downtrend {
+            background: rgba(217, 74, 74, 0.08);
+            border-color: rgba(217, 74, 74, 0.3);
+        }
+
+        .column-icon {
+            font-size: clamp(1.2rem, 3.5cqw, 1.8rem);
+            margin-bottom: 1.5%;
+        }
+
+        .column-label {
+            font-family: var(--font-sans);
+            font-size: clamp(0.45rem, 1.4cqw, 0.65rem);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1%;
+        }
+
+        .column-card.uptrend .column-label { color: var(--accent-green); }
+        .column-card.downtrend .column-label { color: var(--accent-red); }
+
+        .column-text {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        /* Pro Tips Section */
+        .tips-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5%;
+        }
+
+        .tip-card {
+            padding: 2.5% 3%;
+            background: rgba(74, 144, 217, 0.08);
+            border: 1px solid rgba(74, 144, 217, 0.25);
+            border-radius: 10px;
+        }
+
+        .tip-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5%;
+            margin-bottom: 1.5%;
+        }
+
+        .tip-icon {
+            font-size: clamp(1rem, 3cqw, 1.4rem);
+        }
+
+        .tip-title {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+
+        .tip-text {
+            font-family: var(--font-sans);
+            font-size: clamp(0.55rem, 1.7cqw, 0.8rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* CTA Slide */
+        .cta-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(1.3rem, 4.5cqw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 2%;
+        }
+
+        .cta-subtext {
+            font-family: var(--font-sans);
+            font-size: clamp(0.6rem, 2cqw, 0.9rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 3%;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--bg-dark);
+            background: linear-gradient(135deg, var(--accent-gold), #b8963a);
+            padding: 3% 6%;
+            border-radius: 6px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cta-button:hover {
+            filter: brightness(1.1);
+        }
+
+        /* Export Mode */
+        body.export-mode {
+            padding: 0;
+            background: none;
+        }
+
+        body.export-mode .slide {
+            width: 1080px;
+            height: 1350px;
+            max-width: none;
+            border-radius: 0;
+            border: none;
+        }
+
+        body.export-mode .carousel-grid {
+            display: block;
+        }
+
+        body.export-mode .slide-wrapper {
+            display: none;
+        }
+
+        body.export-mode .slide-wrapper.exporting {
+            display: flex;
+        }
+
+        body.export-mode .slide-label {
+            display: none;
+        }
+
+        body.export-mode .page-title,
+        body.export-mode .controls {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .carousel-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                position: static;
+                transform: none;
+                margin-bottom: 1.5rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .page-title {
+                margin-top: 2rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .gap-sm { gap: 0.5rem; }
+        .gap-md { gap: 1rem; }
+        .gap-lg { gap: 1.5rem; }
+
+        /* Advanced Design System */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Decorative Elements */
+        .accent-line {
+            width: 3px;
+            height: 30px;
+            background: var(--accent-gold);
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        .divider-text {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .divider-text::before,
+        .divider-text::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Card Variations */
+        .stat-card {
+            padding: 2.5% 3%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 3.5cqw, 1.8rem);
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 0.5%;
+        }
+
+        .stat-label {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.5cqw, 0.7rem);
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Badge Styles */
+        .badge {
+            display: inline-block;
+            padding: 1.5% 3%;
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid rgba(201, 169, 98, 0.25);
+            border-radius: 20px;
+            font-size: clamp(0.45rem, 1.2cqw, 0.6rem);
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .badge.blue {
+            background: rgba(74, 144, 217, 0.1);
+            border-color: rgba(74, 144, 217, 0.25);
+            color: var(--accent-blue);
+        }
+
+        .badge.green {
+            background: rgba(74, 217, 122, 0.1);
+            border-color: rgba(74, 217, 122, 0.25);
+            color: var(--accent-green);
+        }
+
+        /* List Styles */
+        .bullet-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5%;
+        }
+
+        .bullet-item {
+            display: flex;
+            gap: 2%;
+            align-items: flex-start;
+        }
+
+        .bullet-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .bullet-text {
+            font-family: var(--font-sans);
+            font-size: clamp(0.55rem, 1.7cqw, 0.8rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            padding: 2.5% 3%;
+            background: rgba(201, 169, 98, 0.05);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 4px;
+        }
+
+        .highlight-label {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.5cqw, 0.65rem);
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1%;
+        }
+
+        .highlight-text {
+            font-family: var(--font-serif);
+            font-size: clamp(0.9rem, 3cqw, 1.3rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        /* Timeline/Flow Elements */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5%;
+        }
+
+        .flow-step {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            gap: 2%;
+            align-items: flex-start;
+        }
+
+        .flow-number {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(201, 169, 98, 0.15);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 50%;
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+
+        .flow-content {
+            padding-top: 0.5%;
+        }
+
+        .flow-title {
+            font-family: var(--font-sans);
+            font-size: clamp(0.55rem, 1.6cqw, 0.8rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5%;
+        }
+
+        .flow-desc {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        /* Comparison Table */
+        .compare-table {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1%;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2%;
+            padding: 1.5% 2%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+        }
+
+        .table-label {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.5cqw, 0.75rem);
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .table-value {
+            font-family: var(--font-serif);
+            font-size: clamp(0.6rem, 1.8cqw, 0.9rem);
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-align: right;
+        }
+
+        /* Feature Card */
+        .feature-card {
+            padding: 2% 3%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 1%;
+        }
+
+        .feature-icon {
+            font-size: clamp(1.2rem, 3cqw, 1.6rem);
+        }
+
+        .feature-title {
+            font-family: var(--font-sans);
+            font-size: clamp(0.55rem, 1.6cqw, 0.8rem);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .feature-desc {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        /* Quote Block */
+        .quote-block {
+            padding: 3% 4%;
+            background: rgba(201, 169, 98, 0.08);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: clamp(0.85rem, 3cqw, 1.3rem);
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: 1%;
+        }
+
+        .quote-author {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.4cqw, 0.7rem);
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* Risk/Reward Meter */
+        .meter-container {
+            padding: 2% 3%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+
+        .meter-label {
+            font-family: var(--font-sans);
+            font-size: clamp(0.5rem, 1.5cqw, 0.65rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 1%;
+        }
+
+        .meter-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 1%;
+        }
+
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), #b8963a);
+            border-radius: 3px;
+        }
+
+        .meter-value {
+            font-family: var(--font-serif);
+            font-size: clamp(0.55rem, 1.6cqw, 0.8rem);
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        /* Animations & Transitions */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide-content {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* Advanced Responsive Grid */
+        @media (max-width: 1024px) {
+            .two-column-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* High DPI Support */
+        @media (-webkit-min-device-pixel-ratio: 2),
+               (min-resolution: 192dpi) {
+            body {
+                -webkit-font-smoothing: subpixel-antialiased;
+                font-rendering: optimizeLegibility;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .controls,
+            .page-title {
+                display: none;
+            }
+
+            .slide {
+                page-break-after: always;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
-    <button id="export-btn">Export Mode</button>
-  </div>
-
-  <div class="page-title">
-    <h1>Post 066 — Fibonacci Retracements</h1>
-    <p>Instagram Carousel • 6 Slides • 1080×1350px</p>
-  </div>
-
-  <div class="carousel-grid">
-
-    <!-- Slide 1: Cover -->
-    <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cover</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <div class="center-content">
-            <div class="cover-badge">Lesson 15</div>
-            <h1 class="cover-title">Fibonacci<br>Retracements</h1>
-            <p class="cover-subtitle">The self-fulfilling prophecy</p>
-            <div class="fib-icon">🌀</div>
-          </div>
-          <span class="brand-tag">SIGNALPILOT</span>
-        </div>
-      </div>
+    <div class="controls">
+        <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
+        <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
+        <button id="export-btn">Export Mode</button>
     </div>
 
-    <!-- Slide 2: Key Levels -->
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Key Levels</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">SLIDE 02</span>
-          <h2 class="headline">Key<br><span class="accent-gold">Levels</span></h2>
-          <div class="levels-section">
-            <div class="levels-grid">
-              <div class="level-card">
-                <span class="level-number">23.6%</span>
-                <span class="level-desc">Shallow pullback</span>
-              </div>
-              <div class="level-card">
-                <span class="level-number">38.2%</span>
-                <span class="level-desc">Common retracement</span>
-              </div>
-              <div class="level-card">
-                <span class="level-number">50%</span>
-                <span class="level-desc">Halfway (not technically Fib)</span>
-              </div>
-              <div class="level-card">
-                <span class="level-number">61.8%</span>
-                <span class="level-desc">Golden ratio, deep pullback</span>
-              </div>
-              <div class="level-card">
-                <span class="level-number">78.6%</span>
-                <span class="level-desc">Very deep, trend may be weakening</span>
-              </div>
-            </div>
-          </div>
-          <span class="brand-tag">SIGNALPILOT</span>
-        </div>
-      </div>
+    <div class="page-title">
+        <h1>Post 066 — Fibonacci Retracements</h1>
+        <p>Instagram Carousel • 6 Slides • 1080×1350px • Premium Design</p>
     </div>
 
-    <!-- Slide 3: Why They Work -->
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Why They Work</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">SLIDE 03</span>
-          <h2 class="headline">Why They<br><span class="accent-gold">Work</span></h2>
-          <div class="center-content">
-            <div class="why-card">
-              <div class="why-title">The Secret</div>
-              <p class="why-text">Self-fulfilling prophecy</p>
-              <p class="why-subtext">Millions of traders watch the same levels</p>
-            </div>
-          </div>
-          <span class="brand-tag">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
+    <div class="carousel-grid">
 
-    <!-- Slide 4: How to Draw -->
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — How to Draw</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">SLIDE 04</span>
-          <h2 class="headline">How to<br><span class="accent-blue">Draw</span></h2>
-          <div class="draw-section">
-            <div class="draw-grid">
-              <div class="draw-card uptrend">
-                <div class="draw-label">Uptrend</div>
-                <div class="draw-icon">📈</div>
-                <div class="draw-text">Draw from swing <strong>low</strong> to swing <strong>high</strong></div>
-              </div>
-              <div class="draw-card downtrend">
-                <div class="draw-label">Downtrend</div>
-                <div class="draw-icon">📉</div>
-                <div class="draw-text">Draw from swing <strong>high</strong> to swing <strong>low</strong></div>
-              </div>
-            </div>
-          </div>
-          <span class="brand-tag">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 5: Pro Tip -->
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — Pro Tip</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">SLIDE 05</span>
-          <h2 class="headline">Pro<br><span class="accent-blue">Tip</span></h2>
-          <div class="center-content">
-            <div class="tip-card">
-              <div class="tip-header">
-                <span class="tip-icon">💡</span>
-                <span class="tip-title">Key Insights</span>
-              </div>
-              <div class="tip-content">
-                <div class="tip-item">
-                  <span class="tip-bullet"></span>
-                  <span class="tip-text">Look for confluence with other levels</span>
+        <!-- Slide 1: Cover -->
+        <div class="slide-wrapper" data-slide="1">
+            <span class="slide-label">Slide 1 — Cover</span>
+            <div class="slide">
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="slide-number">Lesson 15</div>
+                    <div class="center-content">
+                        <div class="cover-badge">Fibonacci Series</div>
+                        <h1 class="cover-title">Fibonacci<br>Retracements</h1>
+                        <p class="cover-subtitle">The self-fulfilling prophecy that moves markets</p>
+                        <div class="cover-icon">🌀</div>
+                    </div>
+                    <span class="brand-tag">SIGNALPILOT</span>
                 </div>
-                <div class="tip-item">
-                  <span class="tip-bullet"></span>
-                  <span class="tip-text">Think zones, not exact lines</span>
-                </div>
-              </div>
             </div>
-          </div>
-          <span class="brand-tag">SIGNALPILOT</span>
         </div>
-      </div>
+
+        <!-- Slide 2: Key Levels -->
+        <div class="slide-wrapper" data-slide="2">
+            <span class="slide-label">Slide 2 — Key Levels</span>
+            <div class="slide">
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 02</div>
+                    <h2 class="headline">Key<br><span class="accent-gold">Levels</span></h2>
+                    <div class="levels-section">
+                        <div class="levels-grid">
+                            <div class="level-card">
+                                <span class="level-number">23.6%</span>
+                                <span class="level-desc">Shallow pullback, early retracement</span>
+                            </div>
+                            <div class="level-card">
+                                <span class="level-number">38.2%</span>
+                                <span class="level-desc">Common retracement, high probability</span>
+                            </div>
+                            <div class="level-card">
+                                <span class="level-number">50%</span>
+                                <span class="level-desc">Halfway point (not technically Fib)</span>
+                            </div>
+                            <div class="level-card">
+                                <span class="level-number">61.8%</span>
+                                <span class="level-desc">Golden ratio, deepest pullback signal</span>
+                            </div>
+                            <div class="level-card">
+                                <span class="level-number">78.6%</span>
+                                <span class="level-desc">Deep retracement, trend weakening</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-tag">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Why They Work -->
+        <div class="slide-wrapper" data-slide="3">
+            <span class="slide-label">Slide 3 — Why They Work</span>
+            <div class="slide">
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 03</div>
+                    <h2 class="headline">Why They<br><span class="accent-gold">Actually Work</span></h2>
+                    <div class="center-content">
+                        <div class="info-card">
+                            <div class="info-label">The Psychology</div>
+                            <p class="info-title">Self-Fulfilling Prophecy</p>
+                            <p class="info-text">Millions of traders watch the exact same Fibonacci levels at the exact same time. When enough people place orders there, price respects the zone. It works because everyone believes it works.</p>
+                        </div>
+                    </div>
+                    <span class="brand-tag">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: How to Draw -->
+        <div class="slide-wrapper" data-slide="4">
+            <span class="slide-label">Slide 4 — How to Draw</span>
+            <div class="slide">
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 04</div>
+                    <h2 class="headline">How to<br><span class="accent-blue">Draw Them</span></h2>
+                    <div class="levels-section">
+                        <div class="two-column-grid">
+                            <div class="column-card uptrend">
+                                <div class="column-icon">📈</div>
+                                <div class="column-label">Uptrend</div>
+                                <div class="column-text">Draw from swing <strong>LOW</strong> to swing <strong>HIGH</strong></div>
+                            </div>
+                            <div class="column-card downtrend">
+                                <div class="column-icon">📉</div>
+                                <div class="column-label">Downtrend</div>
+                                <div class="column-text">Draw from swing <strong>HIGH</strong> to swing <strong>LOW</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="brand-tag">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Pro Tips -->
+        <div class="slide-wrapper" data-slide="5">
+            <span class="slide-label">Slide 5 — Pro Tips</span>
+            <div class="slide">
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="slide-number">Slide 05</div>
+                    <h2 class="headline">Pro<br><span class="accent-blue">Tips</span></h2>
+                    <div class="tips-container">
+                        <div class="tip-card">
+                            <div class="tip-header">
+                                <span class="tip-icon">💡</span>
+                                <span class="tip-title">Key Insights</span>
+                            </div>
+                            <div class="tip-text"><strong>Confluence:</strong> Best trades happen when Fib levels align with other support/resistance zones. Multiple confirmations = higher probability.</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-header">
+                                <span class="tip-icon">🎯</span>
+                                <span class="tip-title">Think Zones</span>
+                            </div>
+                            <div class="tip-text"><strong>Not lines:</strong> Price rarely bounces at exact numbers. Watch 10-20 pips around each level as a trading zone.</div>
+                        </div>
+                        <div class="tip-card">
+                            <div class="tip-header">
+                                <span class="tip-icon">📊</span>
+                                <span class="tip-title">Volume Check</span>
+                            </div>
+                            <div class="tip-text"><strong>Confirm strength:</strong> Look for decreased volume on the pullback. Fib levels work best in trending, not choppy, markets.</div>
+                        </div>
+                    </div>
+                    <span class="brand-tag">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: CTA -->
+        <div class="slide-wrapper" data-slide="6">
+            <span class="slide-label">Slide 6 — CTA</span>
+            <div class="slide">
+                <div class="video-background"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
+                <div class="slide-content">
+                    <div class="slide-number">Final Slide</div>
+                    <div class="center-content">
+                        <h2 class="cta-headline">Master<br><span class="accent-gold">Fibonacci</span></h2>
+                        <p class="cta-subtext">Complete lesson with live examples, charts, and PDF trading guide — all available in bio.</p>
+                        <button class="cta-button">Get Free Lesson</button>
+                    </div>
+                    <span class="brand-tag">SIGNALPILOT</span>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Slide 6: CTA -->
-    <div class="slide-wrapper" data-slide="6">
-      <span class="slide-label">Slide 6 — CTA</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <div class="center-content">
-            <h2 class="cta-headline">Master<br><span class="accent-gold">Fibonacci</span></h2>
-            <p class="cta-subtext">Full lesson + PDF guide available in bio.</p>
-            <a href="#" class="cta-button">Get Free Lesson</a>
-          </div>
-          <span class="brand-tag">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
+    <script>
+        const bgToggle = document.getElementById('bg-toggle');
+        const opacityControl = document.getElementById('opacity-control');
+        const slides = document.querySelectorAll('.slide');
+        const videos = document.querySelectorAll('.video-background video');
+        const exportBtn = document.getElementById('export-btn');
+        const slideWrappers = document.querySelectorAll('.slide-wrapper');
 
-  </div>
+        let exportMode = false;
+        let currentExportSlide = 0;
 
-  <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
+        // Background toggle
+        bgToggle.addEventListener('change', (e) => {
+            const isBlack = e.target.value === 'black';
+            slides.forEach(slide => {
+                slide.style.background = isBlack ? '#000000' : 'var(--bg-dark)';
+            });
+        });
 
-    bgToggle.addEventListener('change', (e) => {
-      slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black'));
-    });
+        // Opacity control
+        opacityControl.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--video-opacity', e.target.value);
+        });
 
-    opacityControl.addEventListener('change', (e) => {
-      videos.forEach(video => video.style.opacity = e.target.value);
-    });
+        // Export mode toggle
+        exportBtn.addEventListener('click', () => {
+            exportMode = !exportMode;
+            document.body.classList.toggle('export-mode', exportMode);
 
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false;
-    let currentExportSlide = 0;
+            if (exportMode) {
+                exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+                currentExportSlide = 0;
+                updateExportSlide();
+            } else {
+                exportBtn.textContent = 'Export Mode';
+                slideWrappers.forEach(w => w.classList.remove('exporting'));
+            }
+        });
 
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) {
-        exportBtn.textContent = 'Exit Export (←/→ to navigate)';
-        currentExportSlide = 0;
-        updateExportSlide();
-      } else {
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
+        function updateExportSlide() {
+            slideWrappers.forEach((w, i) => {
+                w.classList.toggle('exporting', i === currentExportSlide);
+            });
+        }
 
-    function updateExportSlide() {
-      slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
-    }
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!exportMode) return;
 
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'ArrowLeft') {
-        currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
-        updateExportSlide();
-      } else if (e.key === 'Escape') {
-        exportMode = false;
-        document.body.classList.remove('export-mode');
-        exportBtn.textContent = 'Export Mode';
-        slideWrappers.forEach(w => w.classList.remove('active'));
-      }
-    });
-  </script>
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+                updateExportSlide();
+            } else if (e.key === 'ArrowLeft') {
+                currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+                updateExportSlide();
+            } else if (e.key === 'Escape') {
+                exportMode = false;
+                document.body.classList.remove('export-mode');
+                exportBtn.textContent = 'Export Mode';
+                slideWrappers.forEach(w => w.classList.remove('exporting'));
+            }
+        });
+    </script>
 </body>
 </html>
