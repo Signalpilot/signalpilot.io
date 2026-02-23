@@ -3,179 +3,316 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 331 — Free vs Paid Comparison | Carousel Preview</title>
+  <title>Post 331 — Mobile App Usage</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    
+
+    /* ═══════════════════════════════════════════
+       ROOT VARIABLES
+       ═══════════════════════════════════════════ */
+
     :root {
       --bg-dark: #0a0a0f;
       --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
       --accent-red: #d94a4a;
       --accent-green: #4ad97a;
-      --accent-teal: #5eecd4;
+      --accent-teal: #5eead4;
       --text-primary: #e8e8e8;
       --text-secondary: #a0a0a0;
       --text-dim: #6a6a6a;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper
-.slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    /* ═══════════════════════════════════════════
+       BASE RESET
+       ═══════════════════════════════════════════ */
 
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
 
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
+    /* ═══════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════ */
 
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
 
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    .control-group label {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
 
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
+    .control-group select,
+    .control-group input[type="range"] {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background: #1a1a24;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
 
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
+    .control-group input[type="range"] {
+      width: 100px;
+    }
 
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
+    #export-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background: var(--accent-teal);
+      color: var(--bg-dark);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
 
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
+    #export-btn:hover {
+      background: #6ef4de;
+    }
+
+    /* ═══════════════════════════════════════════
+       PAGE TITLE
+       ═══════════════════════════════════════════ */
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3.7cqw, 40px);
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    /* ═══════════════════════════════════════════
+       CAROUSEL GRID LAYOUT
+       ═══════════════════════════════════════════ */
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+      gap: 32px;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
+
+    .slide-label {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE BASE (4:5 aspect ratio)
+       ═══════════════════════════════════════════ */
+
+    .slide {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE CONTENT (base)
+       ═══════════════════════════════════════════ */
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8% 8% 8% 10%;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE NUMBER & BRAND MARK
+       ═══════════════════════════════════════════ */
+
+    .slide-number {
+      position: absolute;
+      top: clamp(12px, 2.22cqw, 24px);
+      left: clamp(16px, 2.96cqw, 32px);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: clamp(12px, 2.22cqw, 24px);
+      right: clamp(12px, 2.22cqw, 24px);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    /* ═══════════════════════════════════════════
+       TYPOGRAPHY (clamp + cqw)
+       ═══════════════════════════════════════════ */
+
+    .slide-icon {
+      font-size: clamp(36px, 6.67cqw, 72px);
+      margin-bottom: clamp(14px, 2.59cqw, 28px);
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4.44cqw, 48px);
+      font-weight: 600;
+      margin-bottom: clamp(12px, 2.22cqw, 24px);
+      line-height: 1.2;
+    }
+
+    .slide-title.large {
+      font-size: clamp(29px, 5.37cqw, 58px);
+    }
+
+    .slide-subtitle {
+      font-size: clamp(11px, 2.04cqw, 22px);
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: clamp(2px, 0.37cqw, 4px);
+      margin-bottom: clamp(14px, 2.59cqw, 28px);
+    }
+
+    .slide-body {
+      font-size: clamp(12px, 2.22cqw, 24px);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: clamp(240px, 44.44cqw, 480px);
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (TEAL THEME)
+       ═══════════════════════════════════════════ */
+
+    .slide-1 {
+      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
+    }
+
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(217,148,74,0.08) 0%, transparent 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(94, 234, 212, 0.06) 0%,
+        transparent 100%
+      );
       pointer-events: none;
       z-index: 1;
     }
-    
+
     .slide-1::after {
       content: '';
       position: absolute;
       top: 0;
-      right: 0;
+      left: 0;
       width: 18px;
       height: 100%;
-      background: linear-gradient(180deg, rgba(251,191,36,0.9) 0%, rgba(217,148,74,0.7) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(94, 234, 212, 0.9) 0%,
+        rgba(45, 180, 160, 0.7) 100%
+      );
       z-index: 5;
     }
-.slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
+
+    .slide-1 .slide-bg,
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
     .slide-1 .cine-label {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(251,191,36,0.9);
+      color: rgba(94, 234, 212, 0.9);
       margin-bottom: 8%;
     }
+
     .slide-1 .hook-main {
       font-family: 'Inter', sans-serif;
       font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
       font-weight: 600;
       line-height: 1.2;
-      color: rgba(255,255,255,0.95);
+      color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
+      text-transform: none;
+      letter-spacing: 0;
     }
+
     .slide-1 .cine-divider {
       width: 60px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(251,191,36,0.6), transparent);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(94, 234, 212, 0.6),
+        transparent
+      );
       margin-bottom: 4%;
     }
+
     .slide-1 .hook-sub {
       font-family: 'Inter', sans-serif;
       font-size: clamp(0.65rem, 2cqw, 1.1rem);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(251,191,36,0.4);
+      color: rgba(94, 234, 212, 0.4);
       line-height: 1.6;
     }
+
     .slide-1 .cine-logo {
       position: absolute;
       bottom: 8%;
@@ -184,102 +321,1427 @@
       font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(251,191,36,0.4);
+      color: rgba(94, 234, 212, 0.4);
     }
-  
+
+    /* ═══════════════════════════════════════════
+       SLIDES 2-8 — BACKGROUNDS (dual radial gradients)
+       ═══════════════════════════════════════════ */
+
+    .slide-2 {
+      background: var(--bg-dark);
+    }
+
+    .slide-2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(94, 234, 212, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(94, 234, 212, 0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-3 {
+      background: var(--bg-dark);
+    }
+
+    .slide-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(94, 234, 212, 0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 70%, rgba(94, 234, 212, 0.04) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-4 {
+      background: var(--bg-dark);
+    }
+
+    .slide-4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(94, 234, 212, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(94, 234, 212, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-5 {
+      background: var(--bg-dark);
+    }
+
+    .slide-5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 75% 35%, rgba(94, 234, 212, 0.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 25% 65%, rgba(94, 234, 212, 0.05) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-6 {
+      background: var(--bg-dark);
+    }
+
+    .slide-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 40% 60%, rgba(94, 234, 212, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 85% 30%, rgba(94, 234, 212, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-7 {
+      background: var(--bg-dark);
+    }
+
+    .slide-7::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(94, 234, 212, 0.09) 0%, transparent 55%),
+        radial-gradient(ellipse at 60% 75%, rgba(94, 234, 212, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-8 {
+      background: var(--bg-dark);
+    }
+
+    .slide-8::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 35% 45%, rgba(94, 234, 212, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(94, 234, 212, 0.05) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════
+       TEAL SIDEBAR — LEFT SIDE (5px, all slides)
+       ═══════════════════════════════════════════ */
+
+    .slide-2::after,
+    .slide-3::after,
+    .slide-4::after,
+    .slide-5::after,
+    .slide-6::after,
+    .slide-7::after,
+    .slide-8::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(94, 234, 212, 0.8) 0%,
+        rgba(45, 180, 160, 0.6) 100%
+      );
+      z-index: 5;
+    }
+
+    /* ═══════════════════════════════════════════
+       ORB CONTAINER (mobile/phone icon theme)
+       ═══════════════════════════════════════════ */
+
+    .orb-container {
+      position: relative;
+      width: clamp(80px, 14.8cqw, 160px);
+      height: clamp(80px, 14.8cqw, 160px);
+      margin: 0 auto clamp(16px, 2.96cqw, 32px);
+    }
+
+    .orb-container svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .orb-container::before,
+    .orb-container::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(94, 234, 212, 0.3);
+    }
+
+    .orb-container::before {
+      width: 120%;
+      height: 120%;
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+
+    .orb-container::after {
+      width: 140%;
+      height: 140%;
+      animation: pulse-ring 3s ease-in-out infinite 1.5s;
+      border-color: rgba(94, 234, 212, 0.15);
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.2;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       STEP CARD (numbered setup steps)
+       ═══════════════════════════════════════════ */
+
+    .step-card {
+      width: 100%;
+      max-width: clamp(255px, 47.22cqw, 510px);
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 1.85cqw, 20px);
+      padding: clamp(14px, 2.59cqw, 28px);
+      background: rgba(94, 234, 212, 0.04);
+      border: 1px solid rgba(94, 234, 212, 0.15);
+      border-radius: clamp(10px, 1.85cqw, 20px);
+      margin: clamp(6px, 1.11cqw, 12px) 0;
+      text-align: left;
+    }
+
+    .step-card .step-number {
+      position: static;
+      flex-shrink: 0;
+      width: clamp(32px, 5.93cqw, 64px);
+      height: clamp(32px, 5.93cqw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(94, 234, 212, 0.12);
+      border: 1.5px solid rgba(94, 234, 212, 0.35);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2.96cqw, 32px);
+      font-weight: 600;
+      color: var(--accent-teal);
+    }
+
+    .step-card .step-body {
+      flex: 1;
+    }
+
+    .step-card .step-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .step-card .step-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       FEATURE GRID / FEATURE CARD
+       ═══════════════════════════════════════════ */
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+      max-width: clamp(255px, 47.22cqw, 510px);
+    }
+
+    .feature-card {
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: rgba(94, 234, 212, 0.05);
+      border: 1px solid rgba(94, 234, 212, 0.18);
+      border-radius: clamp(10px, 1.85cqw, 20px);
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(94, 234, 212, 0.4);
+    }
+
+    .feature-card .feature-icon {
+      font-size: clamp(24px, 4.44cqw, 48px);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .feature-card .feature-name {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .feature-card .feature-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════
+       TIP STACK / TIP ITEM
+       ═══════════════════════════════════════════ */
+
+    .tip-stack {
+      width: 100%;
+      max-width: clamp(255px, 47.22cqw, 510px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .tip-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 1.85cqw, 20px);
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: rgba(94, 234, 212, 0.04);
+      border-left: 3px solid rgba(94, 234, 212, 0.5);
+      border-radius: 0 clamp(8px, 1.48cqw, 16px) clamp(8px, 1.48cqw, 16px) 0;
+      text-align: left;
+    }
+
+    .tip-item .tip-icon {
+      flex-shrink: 0;
+      font-size: clamp(18px, 3.33cqw, 36px);
+    }
+
+    .tip-item .tip-content {
+      flex: 1;
+    }
+
+    .tip-item .tip-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: clamp(3px, 0.56cqw, 6px);
+    }
+
+    .tip-item .tip-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCREENSHOT FRAME (placeholder)
+       ═══════════════════════════════════════════ */
+
+    .screenshot-frame {
+      width: clamp(120px, 22.22cqw, 240px);
+      height: clamp(200px, 37.04cqw, 400px);
+      border-radius: clamp(16px, 2.96cqw, 32px);
+      background: rgba(94, 234, 212, 0.03);
+      border: 2px solid rgba(94, 234, 212, 0.2);
+      margin: clamp(12px, 2.22cqw, 24px) auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot-frame .frame-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: clamp(10px, 1.85cqw, 20px);
+      background: rgba(94, 234, 212, 0.1);
+      border-radius: 0 0 clamp(6px, 1.11cqw, 12px) clamp(6px, 1.11cqw, 12px);
+    }
+
+    .screenshot-frame .frame-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .screenshot-frame .frame-icon {
+      font-size: clamp(28px, 5.19cqw, 56px);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+      opacity: 0.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       SETTINGS TABLE
+       ═══════════════════════════════════════════ */
+
+    .settings-table {
+      width: 100%;
+      max-width: clamp(255px, 47.22cqw, 510px);
+      border-collapse: separate;
+      border-spacing: 0 clamp(4px, 0.74cqw, 8px);
+    }
+
+    .settings-table .table-header {
+      display: flex;
+      justify-content: space-between;
+      padding: clamp(8px, 1.48cqw, 16px) clamp(12px, 2.22cqw, 24px);
+      background: rgba(94, 234, 212, 0.08);
+      border-radius: clamp(8px, 1.48cqw, 16px);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .settings-table .table-header span {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+    }
+
+    .settings-table .table-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(10px, 1.85cqw, 20px) clamp(12px, 2.22cqw, 24px);
+      background: rgba(94, 234, 212, 0.03);
+      border: 1px solid rgba(94, 234, 212, 0.1);
+      border-radius: clamp(8px, 1.48cqw, 16px);
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .settings-table .table-row .setting-name {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    .settings-table .table-row .setting-value {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 500;
+      color: var(--accent-teal);
+    }
+
+    /* ═══════════════════════════════════════════
+       WARNING BOX (limitations / caveats)
+       ═══════════════════════════════════════════ */
+
+    .warning-box {
+      width: 100%;
+      max-width: clamp(255px, 47.22cqw, 510px);
+      padding: clamp(16px, 2.96cqw, 32px);
+      background: rgba(217, 74, 74, 0.06);
+      border: 1.5px solid rgba(217, 74, 74, 0.3);
+      border-radius: clamp(12px, 2.22cqw, 24px);
+      margin: clamp(8px, 1.48cqw, 16px) 0;
+      text-align: left;
+    }
+
+    .warning-box .warning-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1.11cqw, 12px);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .warning-box .warning-icon {
+      font-size: clamp(16px, 2.96cqw, 32px);
+    }
+
+    .warning-box .warning-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 600;
+      color: var(--accent-red);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .warning-box .warning-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════
+       WORKAROUND BOX (green solution)
+       ═══════════════════════════════════════════ */
+
+    .workaround-box {
+      width: 100%;
+      max-width: clamp(255px, 47.22cqw, 510px);
+      padding: clamp(16px, 2.96cqw, 32px);
+      background: rgba(74, 217, 122, 0.06);
+      border: 1.5px solid rgba(74, 217, 122, 0.3);
+      border-radius: clamp(12px, 2.22cqw, 24px);
+      margin: clamp(8px, 1.48cqw, 16px) 0;
+      text-align: left;
+    }
+
+    .workaround-box .workaround-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1.11cqw, 12px);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .workaround-box .workaround-icon {
+      font-size: clamp(16px, 2.96cqw, 32px);
+    }
+
+    .workaround-box .workaround-title {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 600;
+      color: var(--accent-green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .workaround-box .workaround-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════
+       TEAL STAT PILL
+       ═══════════════════════════════════════════ */
+
+    .teal-stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: clamp(6px, 1.11cqw, 12px);
+      padding: clamp(8px, 1.48cqw, 16px) clamp(14px, 2.59cqw, 28px);
+      background: rgba(94, 234, 212, 0.08);
+      border: 1px solid rgba(94, 234, 212, 0.25);
+      border-radius: 100px;
+      margin: clamp(6px, 1.11cqw, 12px) clamp(3px, 0.56cqw, 6px);
+    }
+
+    .teal-stat-pill .pill-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2.96cqw, 32px);
+      font-weight: 600;
+      color: rgba(94, 234, 212, 0.9);
+    }
+
+    .teal-stat-pill .pill-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    /* ═══════════════════════════════════════════
+       CTA LINK
+       ═══════════════════════════════════════════ */
+
+    .cta-link {
+      display: inline-block;
+      margin-top: clamp(18px, 3.33cqw, 36px);
+      padding: clamp(11px, 2.04cqw, 22px) clamp(24px, 4.44cqw, 48px);
+      background: var(--accent-teal);
+      color: var(--bg-dark);
+      text-decoration: none;
+      border-radius: clamp(6px, 1.11cqw, 12px);
+      font-weight: 500;
+      font-size: clamp(11px, 2.04cqw, 22px);
+      transition: background 0.2s;
+    }
+
+    .cta-link:hover {
+      background: #6ef4de;
+    }
+
+    /* ═══════════════════════════════════════════
+       INSIGHT BOX (teal info callout)
+       ═══════════════════════════════════════════ */
+
+    .insight-box {
+      width: 100%;
+      max-width: clamp(255px, 47.22cqw, 510px);
+      padding: clamp(16px, 2.96cqw, 32px);
+      background: rgba(94, 234, 212, 0.06);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      border-radius: clamp(12px, 2.22cqw, 24px);
+      margin: clamp(10px, 1.85cqw, 20px) 0;
+      text-align: left;
+    }
+
+    .insight-box .insight-label {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(94, 234, 212, 0.8);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .insight-box .insight-text {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════
+       EXPORT MODE
+       ═══════════════════════════════════════════ */
+
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls-bar,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+      padding: 0;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      aspect-ratio: auto;
+      border-radius: 0;
+    }
+
+    body.export-mode .slide-content {
+      padding: 64px 64px 64px 80px;
+    }
+
+    body.export-mode .slide-number {
+      top: 24px;
+      left: 32px;
+      font-size: 18px;
+    }
+
+    body.export-mode .brand-mark {
+      bottom: 24px;
+      right: 24px;
+      font-size: 16px;
+    }
+
+    body.export-mode .slide-icon {
+      font-size: 72px;
+      margin-bottom: 28px;
+    }
+
+    body.export-mode .slide-title {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+
+    body.export-mode .slide-title.large {
+      font-size: 58px;
+    }
+
+    body.export-mode .slide-subtitle {
+      font-size: 22px;
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+    }
+
+    body.export-mode .slide-body {
+      font-size: 24px;
+      max-width: 480px;
+    }
+
+    body.export-mode .step-card {
+      max-width: 510px;
+      gap: 20px;
+      padding: 28px;
+      border-radius: 20px;
+      margin: 12px 0;
+    }
+
+    body.export-mode .step-card .step-number {
+      width: 64px;
+      height: 64px;
+      font-size: 32px;
+    }
+
+    body.export-mode .step-card .step-title {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    body.export-mode .step-card .step-desc {
+      font-size: 20px;
+    }
+
+    body.export-mode .feature-grid {
+      max-width: 510px;
+      gap: 16px;
+    }
+
+    body.export-mode .feature-card {
+      padding: 24px;
+      border-radius: 20px;
+    }
+
+    body.export-mode .feature-card .feature-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    body.export-mode .feature-card .feature-name {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    body.export-mode .feature-card .feature-desc {
+      font-size: 16px;
+    }
+
+    body.export-mode .tip-stack {
+      max-width: 510px;
+      gap: 16px;
+    }
+
+    body.export-mode .tip-item {
+      gap: 20px;
+      padding: 24px;
+      border-radius: 0 16px 16px 0;
+    }
+
+    body.export-mode .tip-item .tip-icon {
+      font-size: 36px;
+    }
+
+    body.export-mode .tip-item .tip-label {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    body.export-mode .tip-item .tip-text {
+      font-size: 18px;
+    }
+
+    body.export-mode .screenshot-frame {
+      width: 240px;
+      height: 400px;
+      border-radius: 32px;
+      margin: 24px auto;
+    }
+
+    body.export-mode .screenshot-frame .frame-notch {
+      height: 20px;
+      border-radius: 0 0 12px 12px;
+    }
+
+    body.export-mode .screenshot-frame .frame-label {
+      font-size: 18px;
+    }
+
+    body.export-mode .screenshot-frame .frame-icon {
+      font-size: 56px;
+      margin-bottom: 16px;
+    }
+
+    body.export-mode .settings-table {
+      max-width: 510px;
+    }
+
+    body.export-mode .settings-table .table-header {
+      padding: 16px 24px;
+      border-radius: 16px;
+      margin-bottom: 12px;
+    }
+
+    body.export-mode .settings-table .table-header span {
+      font-size: 18px;
+    }
+
+    body.export-mode .settings-table .table-row {
+      padding: 20px 24px;
+      border-radius: 16px;
+      margin-bottom: 8px;
+    }
+
+    body.export-mode .settings-table .table-row .setting-name {
+      font-size: 20px;
+    }
+
+    body.export-mode .settings-table .table-row .setting-value {
+      font-size: 20px;
+    }
+
+    body.export-mode .warning-box {
+      max-width: 510px;
+      padding: 32px;
+      border-radius: 24px;
+      margin: 16px 0;
+    }
+
+    body.export-mode .warning-box .warning-icon {
+      font-size: 32px;
+    }
+
+    body.export-mode .warning-box .warning-title {
+      font-size: 22px;
+    }
+
+    body.export-mode .warning-box .warning-text {
+      font-size: 20px;
+    }
+
+    body.export-mode .workaround-box {
+      max-width: 510px;
+      padding: 32px;
+      border-radius: 24px;
+      margin: 16px 0;
+    }
+
+    body.export-mode .workaround-box .workaround-icon {
+      font-size: 32px;
+    }
+
+    body.export-mode .workaround-box .workaround-title {
+      font-size: 22px;
+    }
+
+    body.export-mode .workaround-box .workaround-text {
+      font-size: 20px;
+    }
+
+    body.export-mode .teal-stat-pill {
+      gap: 12px;
+      padding: 16px 28px;
+      margin: 12px 6px;
+    }
+
+    body.export-mode .teal-stat-pill .pill-value {
+      font-size: 32px;
+    }
+
+    body.export-mode .teal-stat-pill .pill-label {
+      font-size: 18px;
+    }
+
+    body.export-mode .insight-box {
+      max-width: 510px;
+      padding: 32px;
+      border-radius: 24px;
+      margin: 20px 0;
+    }
+
+    body.export-mode .insight-box .insight-label {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    body.export-mode .insight-box .insight-text {
+      font-size: 22px;
+    }
+
+    body.export-mode .cta-link {
+      margin-top: 36px;
+      padding: 22px 48px;
+      border-radius: 12px;
+      font-size: 22px;
+    }
+
+    body.export-mode .orb-container {
+      width: 160px;
+      height: 160px;
+      margin-bottom: 32px;
+    }
+
+    /* ═══════════════════════════════════════════
+       EXPORT NAV
+       ═══════════════════════════════════════════ */
+
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+    }
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-teal);
+      color: var(--bg-dark);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════ */
+
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+
   </style>
 </head>
 <body>
-  <div class="controls">
-<button onclick="toggleExportMode()">Export Mode</button>
+
+  <!-- ═══════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════ -->
+
+  <div class="controls-bar">
+    <div class="control-group">
+      <label for="bg-select">Background</label>
+      <select id="bg-select">
+        <option value="none">None</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="opacity-slider">Opacity</label>
+      <input type="range" id="opacity-slider" min="0" max="30" value="8">
+    </div>
+    <button id="export-btn">Export Mode</button>
   </div>
 
-  <div class="page-title">
-    <h1>Post 331 — Free vs Paid Comparison</h1>
-    <p>Marketing Carousel — 6 Slides</p>
-  </div>
+  <div class="page-title">Post 331 — 8 Slides</div>
+
+  <!-- ═══════════════════════════════════════════
+       CAROUSEL GRID
+       ═══════════════════════════════════════════ -->
 
   <div class="carousel-grid">
 
+    <!-- ═══════════════════════════════════════════
+         SLIDE 1 — CINEMATIC HOOK
+         ═══════════════════════════════════════════ -->
+
     <div class="slide-wrapper" data-slide="1">
+      <span class="slide-label">Slide 1 — Cinematic Hook</span>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">DISCOVER</div>
-          <div class="hook-main">MOBILE TRADING — Charts Anywhere</div>
+          <div class="cine-label">DOCS</div>
+          <div class="hook-main">MOBILE APP USAGE</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">What's free vs what's paid at Signal Pilot? Full transparency.</p>
+          <p class="hook-sub">Your indicators, anywhere you go.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════
+         SLIDE 2 — WHY MOBILE?
+         ═══════════════════════════════════════════ -->
+
     <div class="slide-wrapper" data-slide="2">
-<div class="slide-content">
-        <span class="slide-number">02 / 06</span>
-        <div class="slide-subtitle">Setup</div>
-        <h2 class="slide-title">MOBILE SETUP </h2>
-        <div class="stat-row"><div class="stat-item"><div class="stat-value">7</div><div class="stat-label">Indicators</div></div><div class="stat-item"><div class="stat-value">82</div><div class="stat-label">Free Lessons</div></div><div class="stat-item"><div class="stat-value">0</div><div class="stat-label">Repainting</div></div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 2 — Why Mobile?</span>
+      <div class="slide slide-2">
+        <div class="slide-content">
+          <span class="slide-number">02 / 08</span>
+
+          <div class="orb-container">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="35" y="15" width="50" height="90" rx="8" stroke="rgba(94,234,212,0.6)" stroke-width="2" fill="rgba(94,234,212,0.04)"/>
+              <rect x="42" y="28" width="36" height="55" rx="2" fill="rgba(94,234,212,0.08)" stroke="rgba(94,234,212,0.3)" stroke-width="1"/>
+              <circle cx="60" cy="95" r="4" fill="rgba(94,234,212,0.3)"/>
+              <line x1="50" y1="22" x2="70" y2="22" stroke="rgba(94,234,212,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+              <polyline points="48,50 54,58 60,45 66,55 72,42" fill="none" stroke="rgba(94,234,212,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="slide-subtitle">Why Mobile?</div>
+          <h2 class="slide-title">Trade From Anywhere</h2>
+          <p class="slide-body">
+            TradingView's mobile app gives you full access
+            to Signal Pilot indicators on iOS and Android.
+            Monitor alerts, check charts, and stay connected
+            to the market from any location.
+          </p>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 3 — SETUP STEPS
+         ═══════════════════════════════════════════ -->
 
     <div class="slide-wrapper" data-slide="3">
-<div class="slide-content">
-        <span class="slide-number">03 / 06</span>
-        <div class="slide-subtitle">Best Practices</div>
-        <h2 class="slide-title">BEST PRACTICES </h2>
-        <p class="slide-body">The free tier isn't a teaser — it's a full education. 82 lessons covering market structure, psychology, risk management, and smart money concepts. The paid tier adds professional tools for those who want them. Check your risk before every trade — make it automatic.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 3 — Setup Steps</span>
+      <div class="slide slide-3">
+        <div class="slide-content">
+          <span class="slide-number">03 / 08</span>
+
+          <div class="slide-subtitle">Getting Started</div>
+          <h2 class="slide-title">Setup in 3 Steps</h2>
+
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-body">
+              <div class="step-title">Download TradingView</div>
+              <div class="step-desc">
+                Get the free app from the App Store or Google Play.
+                Sign in with your existing TradingView account.
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-body">
+              <div class="step-title">Open a Chart</div>
+              <div class="step-desc">
+                Search for any ticker. Tap the indicators icon (fx)
+                at the top of the chart screen.
+              </div>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-body">
+              <div class="step-title">Add Signal Pilot</div>
+              <div class="step-desc">
+                Search "Signal Pilot" under Invite-Only scripts.
+                Tap to add any of the 7 indicators to your chart.
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 4 — MOBILE FEATURES GRID
+         ═══════════════════════════════════════════ -->
 
     <div class="slide-wrapper" data-slide="4">
-<div class="slide-content">
-        <span class="slide-number">04 / 06</span>
-        <div class="slide-subtitle">What Works</div>
-        <h2 class="slide-title">MOBILE IS GOOD FOR </h2>
-        <p class="slide-body">The free tier isn't a teaser — it's a full education. 82 lessons covering market structure, psychology, risk management, and smart money concepts. The paid tier adds professional tools for those who want them. Check your risk before every trade — make it automatic.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 4 — Mobile Features</span>
+      <div class="slide slide-4">
+        <div class="slide-content">
+          <span class="slide-number">04 / 08</span>
+
+          <div class="slide-subtitle">What You Get</div>
+          <h2 class="slide-title">Mobile Features</h2>
+
+          <div class="feature-grid">
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 6L18 14M18 14L22 10M18 14L14 10" stroke="rgba(94,234,212,0.8)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M6 22C6 22 10 18 18 18C26 18 30 22 30 22" stroke="rgba(94,234,212,0.5)" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="18" cy="27" r="3" fill="rgba(94,234,212,0.6)"/>
+                </svg>
+              </div>
+              <div class="feature-name">Push Alerts</div>
+              <div class="feature-desc">
+                Real-time notifications straight to your lock screen
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="8" width="28" height="20" rx="3" stroke="rgba(94,234,212,0.8)" stroke-width="2" fill="none"/>
+                  <polyline points="8,22 14,16 18,20 24,13 28,17" fill="none" stroke="rgba(94,234,212,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="feature-name">All Chart Types</div>
+              <div class="feature-desc">
+                Candles, lines, Heikin Ashi &mdash; all available on mobile
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="18" cy="18" r="12" stroke="rgba(94,234,212,0.8)" stroke-width="2" fill="none"/>
+                  <circle cx="18" cy="18" r="6" stroke="rgba(94,234,212,0.5)" stroke-width="1.5" fill="rgba(94,234,212,0.1)"/>
+                  <circle cx="18" cy="18" r="2" fill="rgba(94,234,212,0.7)"/>
+                </svg>
+              </div>
+              <div class="feature-name">Overlays</div>
+              <div class="feature-desc">
+                All 7 Signal Pilot indicators render on mobile
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 4V10M18 26V32M4 18H10M26 18H32" stroke="rgba(94,234,212,0.6)" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="18" cy="18" r="8" stroke="rgba(94,234,212,0.8)" stroke-width="2" fill="none"/>
+                </svg>
+              </div>
+              <div class="feature-name">Multi-Timeframe</div>
+              <div class="feature-desc">
+                Switch timeframes with a single tap
+              </div>
+            </div>
+
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 5 — BEST PRACTICES
+         ═══════════════════════════════════════════ -->
 
     <div class="slide-wrapper" data-slide="5">
-<div class="slide-content">
-        <span class="slide-number">05 / 06</span>
-        <div class="slide-subtitle">What Doesn't</div>
-        <h2 class="slide-title">MOBILE IS NOT GREAT FOR </h2>
-        <p class="slide-body">The free tier isn't a teaser — it's a full education. 82 lessons covering market structure, psychology, risk management, and smart money concepts. The paid tier adds professional tools for those who want them. Check your risk before every trade — make it automatic.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 5 — Best Practices</span>
+      <div class="slide slide-5">
+        <div class="slide-content">
+          <span class="slide-number">05 / 08</span>
+
+          <div class="slide-subtitle">Best Practices</div>
+          <h2 class="slide-title">Smart Mobile Habits</h2>
+
+          <div class="tip-stack">
+
+            <div class="tip-item">
+              <div class="tip-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="14" cy="14" r="10" stroke="rgba(94,234,212,0.7)" stroke-width="1.5" fill="none"/>
+                  <path d="M14 8V14L18 16" stroke="rgba(94,234,212,0.8)" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="tip-content">
+                <div class="tip-label">Use Larger Timeframes</div>
+                <div class="tip-text">
+                  Stick to 1H, 4H, or Daily charts on mobile.
+                  Lower timeframes are hard to read on small screens.
+                </div>
+              </div>
+            </div>
+
+            <div class="tip-item">
+              <div class="tip-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 4L14 10M14 10L18 6M14 10L10 6" stroke="rgba(94,234,212,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+                  <rect x="6" y="14" width="16" height="10" rx="2" stroke="rgba(94,234,212,0.7)" stroke-width="1.5" fill="none"/>
+                </svg>
+              </div>
+              <div class="tip-content">
+                <div class="tip-label">Set Alerts, Not Trades</div>
+                <div class="tip-text">
+                  Use mobile for monitoring and alerts. Execute
+                  trades from desktop when possible for precision.
+                </div>
+              </div>
+            </div>
+
+            <div class="tip-item">
+              <div class="tip-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="6" width="20" height="16" rx="3" stroke="rgba(94,234,212,0.7)" stroke-width="1.5" fill="none"/>
+                  <line x1="4" y1="11" x2="24" y2="11" stroke="rgba(94,234,212,0.4)" stroke-width="1"/>
+                  <circle cx="14" cy="18" r="2" fill="rgba(94,234,212,0.5)"/>
+                </svg>
+              </div>
+              <div class="tip-content">
+                <div class="tip-label">Landscape Mode</div>
+                <div class="tip-text">
+                  Rotate your phone for a wider view. TradingView
+                  supports full-screen landscape charting.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 6 — CONFIGURATION TIPS
+         ═══════════════════════════════════════════ -->
 
     <div class="slide-wrapper" data-slide="6">
-<div class="slide-content">
-        <span class="slide-number">06 / 06</span>
-        <div class="slide-icon">🚀</div>
-        <h2 class="slide-title">Get Started</h2>
-        <p class="slide-body">7 indicators. 82 free lessons. Education first.</p>
-        <a href="https://signalpilot.io/#pricing" class="cta-link">Visit SignalPilot</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <span class="slide-label">Slide 6 — Configuration Tips</span>
+      <div class="slide slide-6">
+        <div class="slide-content">
+          <span class="slide-number">06 / 08</span>
+
+          <div class="slide-subtitle">Configuration</div>
+          <h2 class="slide-title">Settings for Mobile</h2>
+
+          <div class="settings-table">
+            <div class="table-header">
+              <span>Setting</span>
+              <span>Recommended</span>
+            </div>
+            <div class="table-row">
+              <span class="setting-name">Chart Type</span>
+              <span class="setting-value">Candles</span>
+            </div>
+            <div class="table-row">
+              <span class="setting-name">Timeframe</span>
+              <span class="setting-value">1H or higher</span>
+            </div>
+            <div class="table-row">
+              <span class="setting-name">Indicators</span>
+              <span class="setting-value">1-2 max</span>
+            </div>
+            <div class="table-row">
+              <span class="setting-name">Labels</span>
+              <span class="setting-value">Off / Minimal</span>
+            </div>
+            <div class="table-row">
+              <span class="setting-name">Alerts</span>
+              <span class="setting-value">Push enabled</span>
+            </div>
+          </div>
+
+          <div class="insight-box">
+            <div class="insight-label">Pro Tip</div>
+            <div class="insight-text">
+              Keep your mobile layout clean. Use 1-2 indicators
+              at most &mdash; save complex multi-indicator setups
+              for your desktop workspace.
+            </div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 7 — LIMITATIONS & WORKAROUNDS
+         ═══════════════════════════════════════════ -->
+
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 — Limitations &amp; Workarounds</span>
+      <div class="slide slide-7">
+        <div class="slide-content">
+          <span class="slide-number">07 / 08</span>
+
+          <div class="slide-subtitle">Know the Limits</div>
+          <h2 class="slide-title">Mobile Caveats</h2>
+
+          <div class="warning-box">
+            <div class="warning-header">
+              <div class="warning-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 22H22L12 2Z" stroke="rgba(217,74,74,0.8)" stroke-width="2" fill="rgba(217,74,74,0.1)" stroke-linejoin="round"/>
+                  <line x1="12" y1="9" x2="12" y2="15" stroke="rgba(217,74,74,0.8)" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="12" cy="18" r="1" fill="rgba(217,74,74,0.8)"/>
+                </svg>
+              </div>
+              <div class="warning-title">Limitations</div>
+            </div>
+            <div class="warning-text">
+              Smaller screen means less context. Drawing tools
+              are harder to use. Pine Script editing is not
+              available on mobile. Multi-monitor layouts
+              don't translate to phone screens.
+            </div>
+          </div>
+
+          <div class="workaround-box">
+            <div class="workaround-header">
+              <div class="workaround-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="10" stroke="rgba(74,217,122,0.8)" stroke-width="2" fill="rgba(74,217,122,0.1)"/>
+                  <path d="M8 12L11 15L16 9" stroke="rgba(74,217,122,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="workaround-title">Workarounds</div>
+            </div>
+            <div class="workaround-text">
+              Focus on key levels only. Use alerts to track
+              price action instead of watching charts. Save
+              complex analysis for desktop &mdash; use mobile
+              for monitoring and quick checks.
+            </div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         SLIDE 8 — CTA
+         ═══════════════════════════════════════════ -->
+
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 — CTA</span>
+      <div class="slide slide-8">
+        <div class="slide-content">
+          <span class="slide-number">08 / 08</span>
+
+          <div class="orb-container">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="35" y="15" width="50" height="90" rx="8" stroke="rgba(94,234,212,0.6)" stroke-width="2" fill="rgba(94,234,212,0.04)"/>
+              <rect x="42" y="28" width="36" height="55" rx="2" fill="rgba(94,234,212,0.08)" stroke="rgba(94,234,212,0.3)" stroke-width="1"/>
+              <circle cx="60" cy="95" r="4" fill="rgba(94,234,212,0.3)"/>
+              <line x1="50" y1="22" x2="70" y2="22" stroke="rgba(94,234,212,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M48 55L54 48L60 52L66 44L72 50" stroke="rgba(94,234,212,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M48 62L54 58L60 61L66 55L72 59" stroke="rgba(94,234,212,0.4)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <h2 class="slide-title large">Full Mobile Guide</h2>
+          <p class="slide-body">
+            Step-by-step walkthrough with screenshots,
+            recommended layouts, and advanced alert
+            configuration for mobile trading.
+          </p>
+
+          <a href="https://docs.signalpilot.io" class="cta-link">
+            docs.signalpilot.io
+          </a>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <!-- ═══════════════════════════════════════════
+       EXPORT NAV
+       ═══════════════════════════════════════════ -->
 
   <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 6</span>
-    <button onclick="nextSlide()">Next →</button>
+    <button onclick="prevSlide()">&#8592; Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
+    <button onclick="nextSlide()">Next &#8594;</button>
   </div>
 
+  <!-- ═══════════════════════════════════════════
+       SCRIPT — Export Mode + Keyboard Navigation
+       ═══════════════════════════════════════════ -->
+
   <script>
-    const slides = document.querySelectorAll('.slide-wrapper');
+    const bgSelect = document.getElementById('bg-select');
+    const exportBtn = document.getElementById('export-btn');
+    const slideWrappers = document.querySelectorAll('.slide-wrapper');
     let currentSlide = 0;
     let exportMode = false;
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+
+    bgSelect.addEventListener('change', (e) => {
+      /* reserved for future background options */
+    });
+
+    exportBtn.addEventListener('click', toggleExportMode);
+
+    function toggleExportMode() {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        currentSlide = 0;
+        updateExportView();
+      }
+    }
+
+    function updateExportView() {
+      slideWrappers.forEach((wrapper, i) => {
+        wrapper.classList.toggle('active', i === currentSlide);
+      });
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideWrappers.length;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+      updateExportView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
+    });
   </script>
+
 </body>
 </html>
