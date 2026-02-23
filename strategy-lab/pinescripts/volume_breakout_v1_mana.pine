@@ -1,0 +1,88 @@
+//@version=5
+strategy("Volume Breakout v1 — MANA H4", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=5, commission_type=strategy.commission.percent, commission_value=0.055, slippage=2, initial_capital=500)
+
+// ══════════════════════════════════════════════════════════════════════
+// Volume Breakout v1: Volume spike + price breakout entries
+// Apply to MANAUSDT.P on 4H timeframe
+// ══════════════════════════════════════════════════════════════════════
+
+// ── Inputs ────────────────────────────────────────────────────────────
+breakout_period = input.int(20, "Breakout Period", group="Breakout")
+vol_sma_period  = input.int(20, "Volume SMA Period", group="Volume")
+vol_spike_mult  = input.float(1.8, "Volume Spike Mult", group="Volume")
+obv_ema_period  = input.int(21, "OBV EMA Period", group="Volume")
+
+atr_period  = input.int(14, "ATR Period", group="Risk")
+atr_sl_mult = input.float(1.5, "ATR SL Mult", group="Risk")
+atr_tp_mult = input.float(3.0, "ATR TP Mult", group="Risk")
+
+// ── Breakout Levels ───────────────────────────────────────────────────
+resistance = ta.highest(high, breakout_period)[1]
+support    = ta.lowest(low, breakout_period)[1]
+
+break_up   = close > resistance
+break_down = close < support
+
+// ── Volume Analysis ───────────────────────────────────────────────────
+vol_sma   = ta.sma(volume, vol_sma_period)
+vol_spike = volume > (vol_sma * vol_spike_mult)
+
+// OBV
+obv_val = ta.obv
+obv_ema = ta.ema(obv_val, obv_ema_period)
+obv_bull = obv_val > obv_ema
+obv_bear = obv_val < obv_ema
+
+// ── Trend Filter ──────────────────────────────────────────────────────
+ema_f = ta.ema(close, 9)
+ema_s = ta.ema(close, 21)
+ema_t = ta.ema(close, 50)
+trend_up   = ema_f > ema_s and close > ema_t
+trend_down = ema_f < ema_s and close < ema_t
+
+// ── ADX ───────────────────────────────────────────────────────────────
+[diplus, diminus, adx_val] = ta.dmi(14, 14)
+adx_ok = adx_val > 18
+
+// ── MACD ──────────────────────────────────────────────────────────────
+[macd_line, signal_line, hist] = ta.macd(close, 12, 26, 9)
+macd_bull = hist > 0
+macd_bear = hist < 0
+
+// ── RSI ───────────────────────────────────────────────────────────────
+rsi_val = ta.rsi(close, 14)
+
+// ── ATR ───────────────────────────────────────────────────────────────
+atr_val = ta.atr(atr_period)
+
+// Volatility filter
+atr_rank = ta.percentrank(atr_val, 100)
+vol_ok = atr_rank >= 10 and atr_rank <= 95
+
+// ── Signals ───────────────────────────────────────────────────────────
+long_cond = break_up and vol_spike and obv_bull and trend_up and adx_ok and diplus > diminus and macd_bull and rsi_val > 45 and rsi_val < 80 and vol_ok
+
+short_cond = break_down and vol_spike and obv_bear and trend_down and adx_ok and diminus > diplus and macd_bear and rsi_val > 20 and rsi_val < 55 and vol_ok
+
+if long_cond and strategy.position_size == 0
+    sl = close - atr_sl_mult * atr_val
+    tp = close + atr_tp_mult * atr_val
+    strategy.entry("Long", strategy.long)
+    strategy.exit("Long Exit", "Long", stop=sl, limit=tp)
+
+if short_cond and strategy.position_size == 0
+    sl = close + atr_sl_mult * atr_val
+    tp = close - atr_tp_mult * atr_val
+    strategy.entry("Short", strategy.short)
+    strategy.exit("Short Exit", "Short", stop=sl, limit=tp)
+
+// ── Plots ─────────────────────────────────────────────────────────────
+plot(resistance, "Resistance", color.new(color.red, 60), linewidth=1, style=plot.style_stepline)
+plot(support, "Support", color.new(color.green, 60), linewidth=1, style=plot.style_stepline)
+plot(ema_t, "EMA 50", color.new(color.blue, 50), linewidth=2)
+
+// Volume spike background
+bgcolor(vol_spike ? color.new(color.yellow, 90) : na)
+
+plotshape(long_cond, "Long", shape.triangleup, location.belowbar, color.green, size=size.small)
+plotshape(short_cond, "Short", shape.triangledown, location.abovebar, color.red, size=size.small)
