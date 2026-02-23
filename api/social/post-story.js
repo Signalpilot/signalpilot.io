@@ -54,12 +54,20 @@ function loadStories() {
 }
 
 /**
- * Check if Story video exists
+ * Check if Story video/image exists (MP4 or PNG)
  */
 function storyExists(storyNumber) {
   const padded = String(storyNumber).padStart(3, '0');
-  const storyPath = join(process.cwd(), 'assets', 'social', 'stories', `story-${padded}.mp4`);
-  return existsSync(storyPath);
+  const storiesDir = join(process.cwd(), 'assets', 'social', 'stories');
+
+  // Check for MP4 first (video), then PNG (image)
+  const mp4Path = join(storiesDir, `story-${padded}.mp4`);
+  if (existsSync(mp4Path)) {
+    return true;
+  }
+
+  const pngPath = join(storiesDir, `story-${padded}.png`);
+  return existsSync(pngPath);
 }
 
 /**
