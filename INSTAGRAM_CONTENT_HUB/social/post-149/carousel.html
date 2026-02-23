@@ -1,300 +1,1551 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 149 — Three Timeframe Charts | Carousel Preview</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post 149 — MTF CONFLUENCE | Carousel Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Gugi&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   POST 149 — MTF CONFLUENCE
+   "One timeframe is a guess. Three agreeing is a trade."
+   Gold-standard design system — full visual richness
+   ══════════════════════════════════════════════════════════════ */
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+/* ── Design Tokens ────────────────────────────────────────── */
+:root {
+  /* Background system */
+  --bg:        #0a0a0f;
+  --bg-card:   #0e0e16;
+  --surf:      #12121a;
+  --surf-2:    #16161f;
+  --line:      rgba(255,255,255,.06);
+  --line-2:    rgba(255,255,255,.10);
 
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-green: #4ad97a;
-      --accent-red: #d94a4a;
-      --accent-purple: #9b4ad9;
-      --text-primary: #e8e6e3;
-      --text-secondary: rgba(255, 255, 255, 0.7);
-      --text-muted: #6b6965;
-    }
+  /* Accent palette */
+  --gold:    #c9a962;
+  --gold-l:  rgba(201,169,98,.10);
+  --gold-b:  rgba(201,169,98,.30);
+  --gold-g:  rgba(201,169,98,.06);
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  --teal:    #5eecd4;
+  --teal-l:  rgba(94,236,212,.10);
+  --teal-b:  rgba(94,236,212,.30);
+  --teal-g:  rgba(94,236,212,.06);
 
-    body { background: #111; font-family: 'Inter', sans-serif; color: var(--text-primary); padding: 2rem; min-height: 100vh; }
+  --blue:    #4a90d9;
+  --blue-l:  rgba(74,144,217,.10);
+  --blue-b:  rgba(74,144,217,.30);
+  --blue-g:  rgba(74,144,217,.06);
 
-    .controls { position: fixed; top: 1rem; right: 1rem; z-index: 1000; display: flex; gap: 1rem; align-items: center; background: rgba(0, 0, 0, 0.8); padding: 1rem 1.5rem; border-radius: 8px; backdrop-filter: blur(10px); }
-    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
-    .controls select, .controls button { background: var(--bg-dark); color: var(--text-primary); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-family: inherit; }
+  --green:   #4ad97a;
+  --green-l: rgba(74,217,122,.10);
+  --green-b: rgba(74,217,122,.30);
+  --green-g: rgba(74,217,122,.06);
 
-    .page-title { text-align: center; margin-bottom: 2rem; font-family: 'Cormorant Garamond', serif; }
-    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
+  --red:     #d94a4a;
+  --red-l:   rgba(217,74,74,.10);
+  --red-b:   rgba(217,74,74,.30);
+  --red-g:   rgba(217,74,74,.06);
 
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; padding-bottom: 4rem; }
+  --purple:  #9a6dd7;
+  --purple-l: rgba(154,109,215,.10);
+  --purple-b: rgba(154,109,215,.30);
+  --purple-g: rgba(154,109,215,.06);
 
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); margin-bottom: 0.75rem; }
+  --orange:  #d9896a;
+  --orange-l: rgba(217,137,106,.10);
+  --orange-b: rgba(217,137,106,.30);
+  --orange-g: rgba(217,137,106,.06);
 
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; position: relative; overflow: hidden; background: var(--bg-dark); border-radius: 4px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); }
-    .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-    .slide-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.08; }
-    .slide.bg-black .slide-bg video { opacity: 0; }
+  /* Text hierarchy */
+  --t1: #e8e8e8;
+  --t2: #a0a0a0;
+  --t3: #6a6a6a;
+  --t4: #484848;
 
-    .slide-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; display: flex; flex-direction: column; padding: 8%; }
-    .slide-number { font-size: clamp(0.45rem, 1.8cqw, 0.6rem); font-weight: 500; color: var(--text-muted); letter-spacing: 0.15em; margin-bottom: auto; }
-    .brand-mark { font-size: clamp(0.4rem, 1.7cqw, 0.55rem); font-weight: 600; letter-spacing: 0.2em; color: var(--text-muted); margin-top: auto; text-align: center; }
-    .center-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  /* Typography stacks */
+  --serif:  'Cormorant Garamond', serif;
+  --sans:   'Inter', sans-serif;
+  --mono:   'JetBrains Mono', monospace;
+  --brand:  'Gugi', sans-serif;
+}
 
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 6cqw, 28px); font-weight: 600; line-height: 1.1; color: var(--text-primary); margin-bottom: 3%; overflow-wrap: break-word; }
-    .slide-title .highlight { color: var(--accent-blue); }
-    .subtitle { font-size: clamp(0.65rem, 3cqw, 1rem); font-weight: 400; color: var(--text-secondary); }
 
-    .tf-card { background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%); border: 1px solid rgba(74, 144, 217, 0.3); border-radius: 12px; padding: 4%; width: 100%; }
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    .tf-card.higher { background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%); border-color: rgba(201, 169, 98, 0.3); }
-    .tf-card.higher h3 { color: var(--accent-gold); }
-    .tf-card.higher .tf-badge { background: var(--accent-gold); }
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: var(--sans);
+  min-height: 100vh;
+  padding: 40px 20px;
+  -webkit-font-smoothing: antialiased;
+}
 
-    .tf-card.medium { background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%); border-color: rgba(155, 74, 217, 0.3); }
-    .tf-card.medium h3 { color: var(--accent-purple); }
-    .tf-card.medium .tf-badge { background: var(--accent-purple); }
 
-    .tf-card.lower { background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%); border-color: rgba(74, 217, 122, 0.3); }
-    .tf-card.lower h3 { color: var(--accent-green); }
-    .tf-card.lower .tf-badge { background: var(--accent-green); }
+/* ── Page Chrome ──────────────────────────────────────────── */
+.controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
 
-    .tf-card h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(0.9rem, 4.2cqw, 1.4rem); font-weight: 600; margin-bottom: 2%; color: var(--accent-blue); }
-    .tf-badge { display: inline-block; background: var(--accent-blue); color: var(--bg-dark); padding: 1% 2%; border-radius: 6px; font-size: clamp(0.5rem, 2.1cqw, 0.7rem); font-weight: 600; margin-bottom: 2%; }
-    .tf-purpose { font-size: clamp(0.55rem, 2.5cqw, 0.8rem); color: var(--text-primary); margin-bottom: 1.5%; line-height: 1.4; }
-    .tf-examples { font-size: clamp(0.5rem, 2.2cqw, 0.75rem); color: var(--text-secondary); font-style: italic; }
+.controls button {
+  background: var(--gold);
+  color: #0a0a0f;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background .2s;
+}
 
-    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 6cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; line-height: 1.2; }
-    .cta-title .emphasis { color: var(--accent-blue); }
-    .cta-text { font-size: clamp(0.6rem, 2.8cqw, 0.9rem); color: var(--text-secondary); margin-bottom: 1%; }
+.controls button:hover {
+  background: #d9b972;
+}
 
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; padding: 0; }
-    body.export-mode .slide-wrapper { display: none; }
-    body.export-mode .slide-wrapper.active { display: flex; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; box-shadow: none; }
+.page-title {
+  text-align: center;
+  margin-bottom: 48px;
+}
 
-    @media (max-width: 900px) { .carousel-grid { grid-template-columns: 1fr; } .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; } }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (NEUTRAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%) !important;
-    }
+.page-title h1 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--t1);
+  margin-bottom: 8px;
+}
 
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
+.page-title p {
+  font-size: 14px;
+  color: var(--t3);
+}
 
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
 
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
-    }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.9);
-      margin-bottom: 8%;
-    }
+/* ── Slide Wrapper ────────────────────────────────────────── */
+.slide-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  container-type: inline-size;
+}
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
-    }
+.slide-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--gold);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
 
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(163,163,163,0.6), transparent);
-      margin-bottom: 4%;
-    }
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(163, 163, 163, 0.4);
-      line-height: 1.6;
-    }
+/* ── Slide Frame ──────────────────────────────────────────── */
+.slide {
+  width: 100%;
+  max-width: 540px;
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  border-radius: 4px;
+  box-shadow:
+    0 4px 24px rgba(0,0,0,.4),
+    0 0 0 1px var(--line);
+}
 
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(163, 163, 163, 0.4);
-    }
-  </style>
+.slide-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 8%;
+}
+
+.slide-number {
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 1.6cqw, 0.55rem);
+  font-weight: 500;
+  color: var(--t4);
+  letter-spacing: .15em;
+}
+
+.brand-mark {
+  font-family: var(--brand);
+  font-size: clamp(0.35rem, 1.4cqw, 0.5rem);
+  letter-spacing: .25em;
+  color: var(--t4);
+  text-align: center;
+  margin-top: auto;
+}
+
+
+/* ── Shared Content Components ────────────────────────────── */
+.section-tag {
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 1.8cqw, 0.6rem);
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 3%;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 4.5cqw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--t1);
+  margin-bottom: 4%;
+}
+
+.section-desc {
+  font-size: clamp(0.5rem, 2.2cqw, 0.75rem);
+  color: var(--t2);
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+.accent-line {
+  width: 40px;
+  height: 2px;
+  border-radius: 1px;
+  margin-bottom: 4%;
+}
+
+
+/* ── Three-Ring Orb ───────────────────────────────────────── */
+.orb-wrap {
+  position: relative;
+  width: clamp(90px, 24cqw, 150px);
+  height: clamp(90px, 24cqw, 150px);
+  margin: 0 auto 6%;
+}
+
+.orb-ring-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-b);
+  animation: orb-spin 12s linear infinite;
+}
+
+.orb-ring-mid {
+  position: absolute;
+  inset: 15%;
+  border-radius: 50%;
+  border: 1.5px solid var(--purple-b);
+  animation: orb-spin 8s linear infinite reverse;
+}
+
+.orb-ring-inner {
+  position: absolute;
+  inset: 30%;
+  border-radius: 50%;
+  border: 1.5px solid var(--green-b);
+  animation: orb-pulse 3s ease-in-out infinite;
+}
+
+@keyframes orb-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orb-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: .7; }
+}
+
+/* Ring labels */
+.orb-label {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: clamp(0.28rem, 1.1cqw, 0.38rem);
+  letter-spacing: .1em;
+  font-weight: 600;
+}
+
+.orb-label.lbl-outer {
+  top: -12%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold);
+}
+
+.orb-label.lbl-mid {
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--purple);
+}
+
+.orb-label.lbl-inner {
+  bottom: -12%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--green);
+}
+
+/* Center crosshair */
+.orb-center {
+  position: absolute;
+  inset: 42%;
+  z-index: 3;
+}
+
+.orb-center svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ── Hook Elements ────────────────────────────────────────── */
+.hook-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 3;
+}
+
+.hook-label {
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 1.6cqw, 0.6rem);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--t3);
+  margin-bottom: 6%;
+}
+
+.hook-title {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 6.5cqw, 2.4rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.1;
+  margin-bottom: 3%;
+}
+
+.hook-title .em {
+  color: var(--gold);
+}
+
+.hook-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-b), transparent);
+  margin-bottom: 3%;
+}
+
+.hook-sub {
+  font-size: clamp(0.5rem, 2.2cqw, 0.8rem);
+  color: var(--t3);
+  font-weight: 300;
+  letter-spacing: .04em;
+}
+
+.hook-logo {
+  font-family: var(--brand);
+  font-size: clamp(0.35rem, 1.3cqw, 0.5rem);
+  letter-spacing: .3em;
+  color: var(--t4);
+  margin-top: auto;
+  text-align: center;
+}
+
+
+/* ── TF Card (expanded) ───────────────────────────────────── */
+.tf-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 5%;
+  width: 100%;
+  transition: border-color .3s, box-shadow .3s;
+}
+
+.tf-card:hover {
+  border-color: var(--line-2);
+  box-shadow: 0 4px 20px rgba(0,0,0,.3);
+}
+
+.tf-card .tf-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: clamp(0.32rem, 1.3cqw, 0.44rem);
+  font-weight: 600;
+  letter-spacing: .15em;
+  padding: 1.5% 3%;
+  border-radius: 4px;
+  margin-bottom: 3%;
+}
+
+.tf-card .tf-title {
+  font-family: var(--serif);
+  font-size: clamp(0.85rem, 3.8cqw, 1.3rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.15;
+  margin-bottom: 2%;
+}
+
+.tf-card .tf-purpose {
+  font-size: clamp(0.45rem, 2cqw, 0.7rem);
+  color: var(--t2);
+  line-height: 1.55;
+  margin-bottom: 3%;
+}
+
+.tf-card .tf-examples {
+  font-family: var(--mono);
+  font-size: clamp(0.35rem, 1.5cqw, 0.5rem);
+  color: var(--t3);
+  letter-spacing: .04em;
+}
+
+
+/* ── TF Mini Chart ────────────────────────────────────────── */
+.tf-chart {
+  width: 100%;
+  margin: 3% 0;
+  position: relative;
+}
+
+.tf-chart svg {
+  width: 100%;
+  height: auto;
+}
+
+.tf-chart .chart-label {
+  font-family: var(--mono);
+  font-size: clamp(0.3rem, 1.2cqw, 0.4rem);
+  letter-spacing: .06em;
+}
+
+
+/* ── Cascade Flow (3 TF visual) ───────────────────────────── */
+.cascade-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
+
+.cascade-tf {
+  display: flex;
+  align-items: center;
+  gap: 3%;
+  padding: 3% 4%;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: border-color .3s, box-shadow .3s;
+}
+
+.cascade-tf:hover {
+  border-color: var(--line-2);
+  box-shadow: 0 3px 14px rgba(0,0,0,.25);
+}
+
+.cascade-tf .ct-icon {
+  width: clamp(28px, 8cqw, 44px);
+  height: clamp(28px, 8cqw, 44px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cascade-tf .ct-icon svg {
+  width: 60%;
+  height: 60%;
+}
+
+.cascade-tf .ct-content {
+  flex: 1;
+}
+
+.cascade-tf .ct-name {
+  font-family: var(--mono);
+  font-size: clamp(0.35rem, 1.5cqw, 0.5rem);
+  font-weight: 600;
+  letter-spacing: .12em;
+  margin-bottom: 1%;
+}
+
+.cascade-tf .ct-role {
+  font-family: var(--serif);
+  font-size: clamp(0.55rem, 2.4cqw, 0.82rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.2;
+  margin-bottom: 1%;
+}
+
+.cascade-tf .ct-desc {
+  font-size: clamp(0.38rem, 1.7cqw, 0.58rem);
+  color: var(--t2);
+  line-height: 1.5;
+}
+
+.cascade-tf .ct-signal {
+  font-family: var(--mono);
+  font-size: clamp(0.32rem, 1.3cqw, 0.44rem);
+  font-weight: 600;
+  letter-spacing: .08em;
+  padding: 2% 3%;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Cascade connectors */
+.cascade-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--t4);
+  font-size: clamp(0.5rem, 2cqw, 0.7rem);
+}
+
+
+/* ── Confluence Zone Visual ───────────────────────────────── */
+.conf-zone {
+  width: 100%;
+  padding: 4%;
+  background: var(--bg-card);
+  border: 1px solid var(--green-b);
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.conf-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: radial-gradient(ellipse at center, var(--green-g) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.conf-zone .cz-title {
+  font-family: var(--serif);
+  font-size: clamp(0.7rem, 3cqw, 1.1rem);
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 2%;
+  position: relative;
+  z-index: 1;
+}
+
+.conf-zone .cz-desc {
+  font-size: clamp(0.4rem, 1.8cqw, 0.6rem);
+  color: var(--t2);
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+
+.conf-zone .cz-stats {
+  display: flex;
+  justify-content: center;
+  gap: 6%;
+  margin-top: 3%;
+  position: relative;
+  z-index: 1;
+}
+
+.conf-zone .cz-stat {
+  text-align: center;
+}
+
+.conf-zone .cz-stat .cs-val {
+  font-family: var(--mono);
+  font-size: clamp(0.5rem, 2.2cqw, 0.78rem);
+  font-weight: 700;
+}
+
+.conf-zone .cz-stat .cs-label {
+  font-size: clamp(0.3rem, 1.2cqw, 0.4rem);
+  color: var(--t3);
+  letter-spacing: .06em;
+}
+
+
+/* ── Mistake Cards ────────────────────────────────────────── */
+.mistake-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 3%;
+  padding: 3.5% 4%;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-bottom: 2.5%;
+  transition: border-color .3s;
+}
+
+.mistake-card:hover {
+  border-color: var(--line-2);
+}
+
+.mistake-card:last-child {
+  margin-bottom: 0;
+}
+
+.mistake-card .mc-x {
+  width: clamp(16px, 4.5cqw, 24px);
+  height: clamp(16px, 4.5cqw, 24px);
+  border-radius: 50%;
+  background: var(--red-l);
+  border: 1px solid var(--red-b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: clamp(0.35rem, 1.4cqw, 0.48rem);
+  font-weight: 700;
+  color: var(--red);
+}
+
+.mistake-card .mc-content {
+  flex: 1;
+}
+
+.mistake-card .mc-title {
+  font-family: var(--serif);
+  font-size: clamp(0.55rem, 2.4cqw, 0.82rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.2;
+  margin-bottom: 1%;
+}
+
+.mistake-card .mc-body {
+  font-size: clamp(0.38rem, 1.7cqw, 0.58rem);
+  color: var(--t2);
+  line-height: 1.5;
+}
+
+
+/* ── Warning Box ──────────────────────────────────────────── */
+.warn-box {
+  background: var(--red-l);
+  border: 1px solid var(--red-b);
+  border-radius: 10px;
+  padding: 4% 5%;
+  margin-top: 3%;
+}
+
+.warn-box .wb-tag {
+  font-family: var(--mono);
+  font-size: clamp(0.35rem, 1.4cqw, 0.48rem);
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--red);
+  margin-bottom: 2%;
+}
+
+.warn-box .wb-text {
+  font-size: clamp(0.42rem, 1.9cqw, 0.65rem);
+  color: var(--t2);
+  line-height: 1.55;
+}
+
+
+/* ── Insight Box ──────────────────────────────────────────── */
+.insight-box {
+  background: var(--teal-l);
+  border: 1px solid var(--teal-b);
+  border-radius: 10px;
+  padding: 4% 5%;
+  margin-top: 3%;
+}
+
+.insight-box .ib-tag {
+  font-family: var(--mono);
+  font-size: clamp(0.35rem, 1.4cqw, 0.48rem);
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--teal);
+  margin-bottom: 2%;
+}
+
+.insight-box .ib-text {
+  font-size: clamp(0.42rem, 1.9cqw, 0.65rem);
+  color: var(--t2);
+  line-height: 1.55;
+}
+
+
+/* ── Pill Row ─────────────────────────────────────────────── */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+  margin-top: 3%;
+}
+
+.pill {
+  font-family: var(--mono);
+  font-size: clamp(0.32rem, 1.3cqw, 0.44rem);
+  font-weight: 500;
+  letter-spacing: .08em;
+  padding: 1.5% 3%;
+  border-radius: 20px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.pill.gold {
+  color: var(--gold);
+  border-color: var(--gold-b);
+  background: var(--gold-l);
+}
+
+.pill.purple {
+  color: var(--purple);
+  border-color: var(--purple-b);
+  background: var(--purple-l);
+}
+
+.pill.green {
+  color: var(--green);
+  border-color: var(--green-b);
+  background: var(--green-l);
+}
+
+.pill.blue {
+  color: var(--blue);
+  border-color: var(--blue-b);
+  background: var(--blue-l);
+}
+
+.pill.teal {
+  color: var(--teal);
+  border-color: var(--teal-b);
+  background: var(--teal-l);
+}
+
+.pill.red {
+  color: var(--red);
+  border-color: var(--red-b);
+  background: var(--red-l);
+}
+
+
+/* ── CTA Box ──────────────────────────────────────────────── */
+.cta-box {
+  text-align: center;
+  padding: 6% 8%;
+}
+
+.cta-box .cta-title {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 5cqw, 1.8rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.15;
+  margin-bottom: 3%;
+}
+
+.cta-box .cta-title .em {
+  color: var(--gold);
+}
+
+.cta-box .cta-sub {
+  font-size: clamp(0.5rem, 2.2cqw, 0.78rem);
+  color: var(--t2);
+  line-height: 1.5;
+  margin-bottom: 4%;
+}
+
+.cta-box .cta-btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 1.7cqw, 0.58rem);
+  font-weight: 600;
+  letter-spacing: .12em;
+  padding: 2.5% 6%;
+  border-radius: 6px;
+  background: var(--gold);
+  color: #0a0a0f;
+  border: none;
+  transition: background .2s, box-shadow .2s;
+}
+
+.cta-box .cta-btn:hover {
+  background: #d9b972;
+  box-shadow: 0 4px 20px var(--gold-g);
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 1 — CINEMATIC HOOK
+   ══════════════════════════════════════════════════════════════ */
+.s1 {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(201,169,98,.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 70%, rgba(154,109,215,.04) 0%, transparent 50%),
+    var(--bg);
+}
+
+.s1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(201,169,98,.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 65%, rgba(74,217,122,.05) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 2 — THE CONCEPT
+   ══════════════════════════════════════════════════════════════ */
+.s2 {
+  background:
+    radial-gradient(ellipse at 40% 30%, rgba(74,144,217,.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 60% 75%, rgba(201,169,98,.04) 0%, transparent 45%),
+    var(--bg);
+}
+
+.s2::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 55% 40%, rgba(74,144,217,.06) 0%, transparent 45%),
+    radial-gradient(ellipse at 35% 80%, rgba(201,169,98,.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s2 .slide-content { z-index: 2; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 3 — HIGHER TF: DIRECTION
+   ══════════════════════════════════════════════════════════════ */
+.s3 {
+  background:
+    radial-gradient(ellipse at 45% 35%, rgba(201,169,98,.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 55% 70%, rgba(74,144,217,.04) 0%, transparent 45%),
+    var(--bg);
+}
+
+.s3::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(201,169,98,.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 75%, rgba(74,144,217,.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s3 .slide-content { z-index: 2; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 4 — MEDIUM TF: STRUCTURE
+   ══════════════════════════════════════════════════════════════ */
+.s4 {
+  background:
+    radial-gradient(ellipse at 45% 35%, rgba(154,109,215,.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 55% 70%, rgba(201,169,98,.04) 0%, transparent 45%),
+    var(--bg);
+}
+
+.s4::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(154,109,215,.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 75%, rgba(201,169,98,.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s4 .slide-content { z-index: 2; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 5 — LOWER TF: ENTRY
+   ══════════════════════════════════════════════════════════════ */
+.s5 {
+  background:
+    radial-gradient(ellipse at 45% 35%, rgba(74,217,122,.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 55% 70%, rgba(154,109,215,.04) 0%, transparent 45%),
+    var(--bg);
+}
+
+.s5::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(74,217,122,.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 40% 75%, rgba(154,109,215,.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s5 .slide-content { z-index: 2; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 6 — PRACTICAL EXAMPLE
+   ══════════════════════════════════════════════════════════════ */
+.s6 {
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(74,217,122,.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 40% 70%, rgba(74,144,217,.05) 0%, transparent 45%),
+    var(--bg);
+}
+
+.s6::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 45% 35%, rgba(74,217,122,.06) 0%, transparent 45%),
+    radial-gradient(ellipse at 55% 75%, rgba(74,144,217,.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s6 .slide-content { z-index: 2; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 7 — COMMON MISTAKES
+   ══════════════════════════════════════════════════════════════ */
+.s7 {
+  background:
+    radial-gradient(ellipse at 45% 30%, rgba(217,74,74,.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 55% 70%, rgba(217,137,106,.04) 0%, transparent 45%),
+    var(--bg);
+}
+
+.s7::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(217,74,74,.05) 0%, transparent 45%),
+    radial-gradient(ellipse at 40% 75%, rgba(217,137,106,.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s7 .slide-content { z-index: 2; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 8 — CTA
+   ══════════════════════════════════════════════════════════════ */
+.s8 {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(201,169,98,.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(94,236,212,.04) 0%, transparent 45%),
+    var(--bg);
+}
+
+.s8::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(201,169,98,.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, rgba(94,236,212,.04) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s8 .slide-content { z-index: 2; }
+
+
+/* ── Export Mode ───────────────────────────────────────────── */
+body.export-mode {
+  padding: 0;
+  background: transparent;
+}
+
+body.export-mode .controls,
+body.export-mode .page-title,
+body.export-mode .slide-label {
+  display: none;
+}
+
+body.export-mode .carousel-grid {
+  display: block;
+  padding: 0;
+}
+
+body.export-mode .slide-wrapper {
+  display: none;
+}
+
+body.export-mode .slide-wrapper.active {
+  display: flex;
+}
+
+body.export-mode .slide {
+  width: 1080px;
+  height: 1350px;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .carousel-grid {
+    grid-template-columns: 1fr;
+  }
+  .controls {
+    position: static;
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+}
+</style>
 </head>
 <body>
-  <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
-    <button id="export-btn">Export Mode</button>
-  </div>
 
-  <div class="page-title">
-    <h1>Post 149 — Three Timeframe Charts</h1>
-    <p>Instagram Carousel • 5 Slides • 1080×1350px</p>
-  </div>
+<div class="controls">
+  <button id="export-btn">Export Mode</button>
+</div>
 
-  <div class="carousel-grid">
+<div class="page-title">
+  <h1>Post 149 — MTF Confluence</h1>
+  <p>Instagram Carousel &bull; 8 Slides &bull; 1080&times;1350px</p>
+</div>
 
-    <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-1">
-        <div class="slide-content">
-          <div class="cine-label">LEARN</div>
-          <div class="hook-main">MTF Confluence</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub"></p>
-          <div class="cine-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
+<div class="carousel-grid">
 
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Higher TF</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">02 / 05</span>
-          <div class="center-content">
-            <div class="tf-card higher">
-              <span class="tf-badge">HIGHER TIMEFRAME</span>
-              <h3>THE TREND</h3>
-              <p class="tf-purpose">Determines overall market direction and major support/resistance levels. This is your bias.</p>
-              <p class="tf-examples">Daily, 4H for day traders • Weekly, Daily for swing traders</p>
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper" data-slide="1">
+    <span class="slide-label">Slide 1 &mdash; Cinematic Hook</span>
+    <div class="slide s1">
+      <div class="slide-content">
+        <div class="hook-center">
+          <div class="hook-label">Learn</div>
+
+          <!-- Orb: three concentric rings (Daily/4H/1H) -->
+          <div class="orb-wrap">
+            <div class="orb-ring-outer"></div>
+            <div class="orb-ring-mid"></div>
+            <div class="orb-ring-inner"></div>
+            <span class="orb-label lbl-outer">DAILY</span>
+            <span class="orb-label lbl-mid">4H</span>
+            <span class="orb-label lbl-inner">1H</span>
+            <div class="orb-center">
+              <svg viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="4" fill="rgba(74,217,122,.6)"/>
+                <circle cx="10" cy="10" r="2" fill="#4ad97a"/>
+              </svg>
             </div>
           </div>
-          <span class="brand-mark">SIGNALPILOT</span>
+
+          <h1 class="hook-title">Multi-Timeframe<br><span class="em">Confluence</span></h1>
+          <div class="hook-divider"></div>
+          <p class="hook-sub">One timeframe is a guess. Three agreeing is a trade.</p>
         </div>
+        <div class="hook-logo">Signal Pilot</div>
       </div>
     </div>
-
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Medium TF</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">03 / 05</span>
-          <div class="center-content">
-            <div class="tf-card medium">
-              <span class="tf-badge">MEDIUM TIMEFRAME</span>
-              <h3>THE STRUCTURE</h3>
-              <p class="tf-purpose">Identifies market structure, FVGs, order blocks, and potential trade setups. This is your roadmap.</p>
-              <p class="tf-examples">1H, 4H for day traders • Daily, 4H for swing traders</p>
-            </div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Lower TF</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">04 / 05</span>
-          <div class="center-content">
-            <div class="tf-card lower">
-              <span class="tf-badge">LOWER TIMEFRAME</span>
-              <h3>THE ENTRY</h3>
-              <p class="tf-purpose">Fine-tunes entry timing and stop placement. Find the optimal risk:reward here.</p>
-              <p class="tf-examples">5m, 15m for day traders • 1H, 4H for swing traders</p>
-            </div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — CTA</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">05 / 05</span>
-          <div class="center-content">
-            <h2 class="cta-title">Align Your<br><span class="emphasis">Timeframes</span></h2>
-            <p class="cta-text">Confluence across frames = high probability.</p>
-            <p class="cta-text">Link in bio</p>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
 
-    bgToggle.addEventListener('change', (e) => { slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black')); });
-    opacityControl.addEventListener('change', (e) => { videos.forEach(video => video.style.opacity = e.target.value); });
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDE 2 — THE CONCEPT
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper" data-slide="2">
+    <span class="slide-label">Slide 2 &mdash; The Concept</span>
+    <div class="slide s2">
+      <div class="slide-content">
+        <span class="slide-number">02 / 08</span>
 
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false, currentExportSlide = 0;
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:4%;">
+          <div class="section-tag" style="color:var(--blue);">CONCEPT</div>
+          <div class="accent-line" style="background:var(--blue);"></div>
 
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) { exportBtn.textContent = 'Exit Export (←/→ to navigate)'; currentExportSlide = 0; updateExportSlide(); }
-      else { exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
-    });
+          <h2 class="section-title">Top-Down<br>Analysis</h2>
 
-    function updateExportSlide() { slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide)); }
+          <p class="section-desc" style="margin-bottom:3%;">Multiple timeframes pointing to the same zone. The higher timeframe defines direction. The lower timeframe refines the entry.</p>
 
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight' || e.key === ' ') { currentExportSlide = (currentExportSlide + 1) % slideWrappers.length; updateExportSlide(); }
-      else if (e.key === 'ArrowLeft') { currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length; updateExportSlide(); }
-      else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
-    });
-  </script>
+          <!-- Cascade flow -->
+          <div class="cascade-wrap">
+            <div class="cascade-tf">
+              <div class="ct-icon" style="background:var(--gold-l); border:1px solid var(--gold-b);">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M4,14 L10,6 L16,10" stroke="#c9a962" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="ct-content">
+                <div class="ct-name" style="color:var(--gold);">HIGHER TF</div>
+                <div class="ct-role">Direction</div>
+                <div class="ct-desc">What is the trend? Where are the major levels?</div>
+              </div>
+              <span class="ct-signal" style="color:var(--gold); background:var(--gold-l);">BIAS</span>
+            </div>
+
+            <div class="cascade-arrow">&darr;</div>
+
+            <div class="cascade-tf">
+              <div class="ct-icon" style="background:var(--purple-l); border:1px solid var(--purple-b);">
+                <svg viewBox="0 0 20 20" fill="none"><rect x="4" y="6" width="12" height="8" rx="2" stroke="#9a6dd7" stroke-width="1.5" fill="none"/><line x1="8" y1="6" x2="8" y2="14" stroke="#9a6dd7" stroke-width="1" opacity=".5"/><line x1="12" y1="6" x2="12" y2="14" stroke="#9a6dd7" stroke-width="1" opacity=".5"/></svg>
+              </div>
+              <div class="ct-content">
+                <div class="ct-name" style="color:var(--purple);">MEDIUM TF</div>
+                <div class="ct-role">Structure</div>
+                <div class="ct-desc">Is structure confirming? Higher lows forming?</div>
+              </div>
+              <span class="ct-signal" style="color:var(--purple); background:var(--purple-l);">SETUP</span>
+            </div>
+
+            <div class="cascade-arrow">&darr;</div>
+
+            <div class="cascade-tf">
+              <div class="ct-icon" style="background:var(--green-l); border:1px solid var(--green-b);">
+                <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="5" stroke="#4ad97a" stroke-width="1.5" fill="none"/><line x1="10" y1="7" x2="10" y2="13" stroke="#4ad97a" stroke-width="1.5"/><line x1="7" y1="10" x2="13" y2="10" stroke="#4ad97a" stroke-width="1.5"/></svg>
+              </div>
+              <div class="ct-content">
+                <div class="ct-name" style="color:var(--green);">LOWER TF</div>
+                <div class="ct-role">Entry</div>
+                <div class="ct-desc">Where is the precise trigger? What pattern confirms?</div>
+              </div>
+              <span class="ct-signal" style="color:var(--green); background:var(--green-l);">TRIGGER</span>
+            </div>
+          </div>
+
+          <div class="insight-box" style="background:var(--blue-l); border-color:var(--blue-b);">
+            <div class="ib-tag" style="color:var(--blue);">RULE</div>
+            <div class="ib-text"><strong style="color:var(--t1);">Always top-down. Never bottom-up.</strong> Direction first, entry last.</div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDE 3 — HIGHER TF: DIRECTION
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper" data-slide="3">
+    <span class="slide-label">Slide 3 &mdash; Higher TF</span>
+    <div class="slide s3">
+      <div class="slide-content">
+        <span class="slide-number">03 / 08</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--gold);">HIGHER TIMEFRAME</div>
+          <div class="accent-line" style="background:var(--gold);"></div>
+
+          <div class="tf-card" style="border-color:var(--gold-b);">
+            <span class="tf-badge" style="background:var(--gold); color:#0a0a0f;">DAILY CHART</span>
+            <div class="tf-title">Your Direction</div>
+            <div class="tf-purpose">Determines the overall market bias and identifies major support &amp; resistance zones. This is the <strong style="color:var(--t1);">big picture</strong> &mdash; the current that either carries your trade or drowns it.</div>
+            <div class="tf-examples">Day traders: Daily / 4H &bull; Swing traders: Weekly / Daily</div>
+
+            <!-- Mini chart visual -->
+            <div class="tf-chart">
+              <svg viewBox="0 0 400 80" preserveAspectRatio="xMidYMid meet">
+                <!-- Support zone -->
+                <rect x="0" y="55" width="400" height="15" fill="rgba(201,169,98,.08)" rx="2"/>
+                <line x1="0" y1="55" x2="400" y2="55" stroke="rgba(201,169,98,.3)" stroke-width="1" stroke-dasharray="4 3"/>
+                <text x="390" y="67" fill="#c9a962" font-size="7" text-anchor="end" font-family="monospace" class="chart-label">SUPPORT $100</text>
+
+                <!-- Price action: uptrend with higher lows -->
+                <path d="M20,65 C50,60 70,40 100,35 C130,30 150,45 180,38 C210,30 230,20 260,22 C290,25 310,15 340,12 C360,10 380,8 395,6"
+                      fill="none" stroke="#c9a962" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- Higher low dots -->
+                <circle cx="80" cy="42" r="3" fill="#c9a962" opacity=".7"/>
+                <circle cx="175" cy="40" r="3" fill="#c9a962" opacity=".7"/>
+                <circle cx="260" cy="24" r="3" fill="#c9a962" opacity=".7"/>
+
+                <text x="80" y="54" fill="#c9a962" font-size="6" text-anchor="middle" font-family="monospace" class="chart-label">HL</text>
+                <text x="175" y="52" fill="#c9a962" font-size="6" text-anchor="middle" font-family="monospace" class="chart-label">HL</text>
+                <text x="260" y="36" fill="#c9a962" font-size="6" text-anchor="middle" font-family="monospace" class="chart-label">HL</text>
+
+                <text x="12" y="10" fill="rgba(201,169,98,.5)" font-size="7" font-family="monospace" class="chart-label">DAILY</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="insight-box" style="background:var(--gold-l); border-color:var(--gold-b);">
+            <div class="ib-tag" style="color:var(--gold);">RESULT</div>
+            <div class="ib-text">Daily shows <strong style="color:var(--t1);">bullish trend</strong> with higher lows. Major support at $100. <strong style="color:var(--gold);">Bias: LONG.</strong></div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDE 4 — MEDIUM TF: STRUCTURE
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper" data-slide="4">
+    <span class="slide-label">Slide 4 &mdash; Medium TF</span>
+    <div class="slide s4">
+      <div class="slide-content">
+        <span class="slide-number">04 / 08</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--purple);">MEDIUM TIMEFRAME</div>
+          <div class="accent-line" style="background:var(--purple);"></div>
+
+          <div class="tf-card" style="border-color:var(--purple-b);">
+            <span class="tf-badge" style="background:var(--purple); color:#fff;">4H CHART</span>
+            <div class="tf-title">Your Structure</div>
+            <div class="tf-purpose">Identifies market structure, order blocks, FVGs, and potential trade setups. This is your <strong style="color:var(--t1);">roadmap</strong> &mdash; where the trade should develop.</div>
+            <div class="tf-examples">Day traders: 1H / 4H &bull; Swing traders: Daily / 4H</div>
+
+            <!-- Mini chart visual -->
+            <div class="tf-chart">
+              <svg viewBox="0 0 400 80" preserveAspectRatio="xMidYMid meet">
+                <!-- Demand zone -->
+                <rect x="140" y="48" width="120" height="20" fill="rgba(154,109,215,.1)" rx="2"/>
+                <line x1="140" y1="48" x2="260" y2="48" stroke="rgba(154,109,215,.3)" stroke-width="1" stroke-dasharray="4 3"/>
+                <text x="200" y="64" fill="#9a6dd7" font-size="6" text-anchor="middle" font-family="monospace" class="chart-label">DEMAND ZONE</text>
+
+                <!-- Price: pullback into zone -->
+                <path d="M20,50 C50,45 80,25 110,20 C140,15 160,18 180,30 C200,42 210,50 220,48 C240,42 260,35 280,28 C310,18 340,12 380,8"
+                      fill="none" stroke="#9a6dd7" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- Higher low forming -->
+                <circle cx="218" cy="50" r="3.5" fill="#9a6dd7" opacity=".8"/>
+                <text x="218" y="45" fill="#9a6dd7" font-size="6" text-anchor="middle" font-family="monospace" class="chart-label">HIGHER LOW</text>
+
+                <text x="12" y="10" fill="rgba(154,109,215,.5)" font-size="7" font-family="monospace" class="chart-label">4H</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="insight-box" style="background:var(--purple-l); border-color:var(--purple-b);">
+            <div class="ib-tag" style="color:var(--purple);">RESULT</div>
+            <div class="ib-text">4H confirms <strong style="color:var(--t1);">higher low forming</strong> inside the $100&ndash;102 demand zone. Structure aligns with Daily bias. <strong style="color:var(--purple);">Setup: VALID.</strong></div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDE 5 — LOWER TF: ENTRY
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper" data-slide="5">
+    <span class="slide-label">Slide 5 &mdash; Lower TF</span>
+    <div class="slide s5">
+      <div class="slide-content">
+        <span class="slide-number">05 / 08</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--green);">LOWER TIMEFRAME</div>
+          <div class="accent-line" style="background:var(--green);"></div>
+
+          <div class="tf-card" style="border-color:var(--green-b);">
+            <span class="tf-badge" style="background:var(--green); color:#0a0a0f;">1H CHART</span>
+            <div class="tf-title">Your Entry</div>
+            <div class="tf-purpose">Fine-tunes entry timing and stop placement. Find the precise trigger pattern that gives you the <strong style="color:var(--t1);">optimal risk:reward</strong>.</div>
+            <div class="tf-examples">Day traders: 5m / 15m &bull; Swing traders: 1H / 4H</div>
+
+            <!-- Mini chart visual -->
+            <div class="tf-chart">
+              <svg viewBox="0 0 400 80" preserveAspectRatio="xMidYMid meet">
+                <!-- Stop level -->
+                <line x1="100" y1="65" x2="400" y2="65" stroke="rgba(217,74,74,.3)" stroke-width="1" stroke-dasharray="4 3"/>
+                <text x="390" y="75" fill="#d94a4a" font-size="6" text-anchor="end" font-family="monospace" class="chart-label">STOP $99.50</text>
+
+                <!-- Entry zone -->
+                <rect x="200" y="42" width="60" height="8" fill="rgba(74,217,122,.15)" rx="2"/>
+
+                <!-- Price: bullish engulfing -->
+                <path d="M20,35 C50,40 80,55 110,60 C140,65 160,58 180,52 C200,46 210,42 220,44"
+                      fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+                <!-- Engulfing candle -->
+                <rect x="225" y="30" width="12" height="20" fill="rgba(74,217,122,.3)" stroke="#4ad97a" stroke-width="1" rx="1"/>
+                <line x1="231" y1="25" x2="231" y2="30" stroke="#4ad97a" stroke-width="1"/>
+                <line x1="231" y1="50" x2="231" y2="55" stroke="#4ad97a" stroke-width="1"/>
+                <!-- Breakout continuation -->
+                <path d="M240,35 C260,28 280,20 310,15 C340,10 370,8 395,6"
+                      fill="none" stroke="#4ad97a" stroke-width="2" stroke-linecap="round"/>
+
+                <text x="231" y="22" fill="#4ad97a" font-size="6" text-anchor="middle" font-family="monospace" class="chart-label">ENTRY $101</text>
+                <text x="12" y="10" fill="rgba(74,217,122,.5)" font-size="7" font-family="monospace" class="chart-label">1H</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="insight-box" style="background:var(--green-l); border-color:var(--green-b);">
+            <div class="ib-tag" style="color:var(--green);">RESULT</div>
+            <div class="ib-text">1H prints <strong style="color:var(--t1);">bullish engulfing at $101</strong>. Entry trigger appears. Stop below $99.50. <strong style="color:var(--green);">Trigger: CONFIRMED.</strong></div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDE 6 — PRACTICAL EXAMPLE: CONFLUENCE ZONE
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper" data-slide="6">
+    <span class="slide-label">Slide 6 &mdash; Confluence Zone</span>
+    <div class="slide s6">
+      <div class="slide-content">
+        <span class="slide-number">06 / 08</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--green);">ALL THREE AGREE</div>
+          <div class="accent-line" style="background:var(--green);"></div>
+
+          <h2 class="section-title">The<br>Confluence Zone</h2>
+
+          <!-- Three TF summary -->
+          <div class="cascade-wrap">
+            <div class="cascade-tf">
+              <div class="ct-icon" style="background:var(--gold-l); border:1px solid var(--gold-b);">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M5,13 L10,7 L15,10" stroke="#c9a962" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="ct-content">
+                <div class="ct-name" style="color:var(--gold);">DAILY</div>
+                <div class="ct-desc">Bullish trend, support at $100</div>
+              </div>
+              <span class="ct-signal" style="color:#0a0a0f; background:var(--gold);">&#10003;</span>
+            </div>
+
+            <div class="cascade-tf">
+              <div class="ct-icon" style="background:var(--purple-l); border:1px solid var(--purple-b);">
+                <svg viewBox="0 0 20 20" fill="none"><rect x="5" y="7" width="10" height="6" rx="1" stroke="#9a6dd7" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="ct-content">
+                <div class="ct-name" style="color:var(--purple);">4H</div>
+                <div class="ct-desc">Higher low forming at $100&ndash;102</div>
+              </div>
+              <span class="ct-signal" style="color:#fff; background:var(--purple);">&#10003;</span>
+            </div>
+
+            <div class="cascade-tf">
+              <div class="ct-icon" style="background:var(--green-l); border:1px solid var(--green-b);">
+                <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="4" stroke="#4ad97a" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="ct-content">
+                <div class="ct-name" style="color:var(--green);">1H</div>
+                <div class="ct-desc">Bullish engulfing at $101</div>
+              </div>
+              <span class="ct-signal" style="color:#0a0a0f; background:var(--green);">&#10003;</span>
+            </div>
+          </div>
+
+          <!-- Confluence zone box -->
+          <div class="conf-zone">
+            <div class="cz-title">HIGH PROBABILITY ZONE</div>
+            <div class="cz-desc">Three timeframes agree. Clear invalidation below $100. Trade with confidence.</div>
+            <div class="cz-stats">
+              <div class="cz-stat">
+                <div class="cs-val" style="color:var(--green);">$101</div>
+                <div class="cs-label">ENTRY</div>
+              </div>
+              <div class="cz-stat">
+                <div class="cs-val" style="color:var(--red);">$99.50</div>
+                <div class="cs-label">STOP</div>
+              </div>
+              <div class="cz-stat">
+                <div class="cs-val" style="color:var(--gold);">3.3:1</div>
+                <div class="cs-label">R:R</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDE 7 — COMMON MISTAKES
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper" data-slide="7">
+    <span class="slide-label">Slide 7 &mdash; Mistakes</span>
+    <div class="slide s7">
+      <div class="slide-content">
+        <span class="slide-number">07 / 08</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--red);">COMMON MISTAKES</div>
+          <div class="accent-line" style="background:var(--red);"></div>
+
+          <h2 class="section-title">What Goes<br>Wrong</h2>
+
+          <div class="mistake-card">
+            <div class="mc-x">&times;</div>
+            <div class="mc-content">
+              <div class="mc-title">Bottom-Up Analysis</div>
+              <div class="mc-body">Starting on the 5-minute chart and trying to find direction. If the daily is bearish, that 5m long setup is <strong style="color:var(--t1);">fighting the current</strong>.</div>
+            </div>
+          </div>
+
+          <div class="mistake-card">
+            <div class="mc-x">&times;</div>
+            <div class="mc-content">
+              <div class="mc-title">Forcing Confluence</div>
+              <div class="mc-body">When only 1 of 3 timeframes agrees, skipping the other two and taking the trade anyway. <strong style="color:var(--t1);">No confluence = no trade.</strong></div>
+            </div>
+          </div>
+
+          <div class="mistake-card">
+            <div class="mc-x">&times;</div>
+            <div class="mc-content">
+              <div class="mc-title">Too Many Timeframes</div>
+              <div class="mc-body">Analyzing 7 timeframes creates <strong style="color:var(--t1);">analysis paralysis</strong>. Stick to exactly 3: direction, structure, entry.</div>
+            </div>
+          </div>
+
+          <div class="mistake-card">
+            <div class="mc-x">&times;</div>
+            <div class="mc-content">
+              <div class="mc-title">Ignoring the Higher TF</div>
+              <div class="mc-body">The higher timeframe defines your stop level. Better entries from lower TFs mean <strong style="color:var(--t1);">tighter stops and bigger R multiples</strong>.</div>
+            </div>
+          </div>
+
+          <div class="warn-box">
+            <div class="wb-tag">REMEMBER</div>
+            <div class="wb-text">The higher timeframe <strong style="color:var(--t1);">always wins</strong>. A perfect 5-minute setup inside a daily downtrend is a losing trade waiting to happen.</div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDE 8 — CTA
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="slide-wrapper" data-slide="8">
+    <span class="slide-label">Slide 8 &mdash; CTA</span>
+    <div class="slide s8">
+      <div class="slide-content">
+        <span class="slide-number">08 / 08</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <div class="cta-box">
+            <h2 class="cta-title">Align Your<br><span class="em">Timeframes.</span></h2>
+            <p class="cta-sub">Three timeframes agreeing. High probability zones. Clear invalidation. Trade with confidence.</p>
+
+            <div class="pill-row" style="justify-content:center; margin-bottom:5%;">
+              <span class="pill gold">DAILY</span>
+              <span class="pill purple">4H</span>
+              <span class="pill green">1H</span>
+              <span class="pill blue">TOP-DOWN</span>
+              <span class="pill teal">CONFLUENCE</span>
+            </div>
+
+            <div class="cta-btn">SAVE THIS POST</div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.carousel-grid -->
+
+<script>
+/* ── Export Mode ───────────────────────────────────────────── */
+const exportBtn = document.getElementById('export-btn');
+const slideWrappers = document.querySelectorAll('.slide-wrapper');
+let exportMode = false;
+let currentExportSlide = 0;
+
+exportBtn.addEventListener('click', () => {
+  exportMode = !exportMode;
+  document.body.classList.toggle('export-mode', exportMode);
+  if (exportMode) {
+    exportBtn.textContent = 'Exit Export (←/→ to navigate)';
+    currentExportSlide = 0;
+    updateExportSlide();
+  } else {
+    exportBtn.textContent = 'Export Mode';
+    slideWrappers.forEach(w => w.classList.remove('active'));
+  }
+});
+
+function updateExportSlide() {
+  slideWrappers.forEach((w, i) =>
+    w.classList.toggle('active', i === currentExportSlide)
+  );
+}
+
+document.addEventListener('keydown', (e) => {
+  if (!exportMode) return;
+  if (e.key === 'ArrowRight' || e.key === ' ') {
+    currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+    updateExportSlide();
+  } else if (e.key === 'ArrowLeft') {
+    currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+    updateExportSlide();
+  } else if (e.key === 'Escape') {
+    exportMode = false;
+    document.body.classList.remove('export-mode');
+    exportBtn.textContent = 'Export Mode';
+    slideWrappers.forEach(w => w.classList.remove('active'));
+  }
+});
+</script>
 </body>
 </html>
