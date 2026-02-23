@@ -1,6 +1,7 @@
 // POST /api/social/cron-engage
 // Automated engagement: likes, comments, replies
 // Runs every 4 hours via Vercel cron
+// Pulls posts from cached queue (populated by cron-queue-posts)
 
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -192,17 +193,19 @@ export default async function handler(req, res) {
   }
 }
 
+function loadPostQueue() {
+  try {
+    const queuePath = join(process.cwd(), 'data', 'social', 'post-queue.json');
+    return JSON.parse(readFileSync(queuePath, 'utf-8'));
+  } catch (error) {
+    console.error('Failed to load post queue:', error);
+    return { tradingview: [], investopedia: [], other_accounts: [] };
+  }
+}
+
 async function handleInstagramEngagement(config) {
   const likeCount = await getEngagementCount('instagram', 'like');
   const commentCount = await getEngagementCount('instagram', 'comment');
-
-  const targets = config.instagram.targets || [];
-  if (targets.length === 0) {
-    return {
-      status: 'skipped',
-      reason: 'No targets configured',
-    };
-  }
 
   // Decide action: like or comment
   const canLike = likeCount < config.instagram.likeDaily;
@@ -220,28 +223,25 @@ async function handleInstagramEngagement(config) {
   // Randomly pick action (80% likes, 20% comments)
   const action = (!canComment || (canLike && Math.random() < 0.8)) ? 'like' : 'comment';
 
-  const target = randomItem(targets);
+  // Load cached posts from queue (filled by cron-queue-posts)
+  const queue = loadPostQueue();
   let posts = [];
 
-  try {
-    if (target.type === 'account') {
-      const result = await getAccountPosts(target.value, 10);
-      posts = result.posts || [];
-    } else if (target.type === 'hashtag') {
-      const result = await searchPostsByHashtag(target.value, 10);
-      posts = result.data || [];
-    } else {
-      return {
-        action,
-        status: 'skipped',
-        reason: `Unknown target type: ${target.type}`,
-      };
-    }
-  } catch (error) {
+  // Try sources in order: tradingview, investopedia, other
+  if (queue.tradingview && queue.tradingview.length > 0) {
+    posts = queue.tradingview;
+  } else if (queue.investopedia && queue.investopedia.length > 0) {
+    posts = queue.investopedia;
+  } else if (queue.other_accounts && queue.other_accounts.length > 0) {
+    posts = queue.other_accounts;
+  }
+
+  if (!posts || posts.length === 0) {
     return {
       action,
-      status: 'error',
-      error: error.message,
+      status: 'skipped',
+      reason: 'No posts in queue (run cron-queue-posts first)',
+      hint: 'POST /api/social/cron-queue-posts to populate queue',
     };
   }
 
@@ -279,7 +279,9 @@ async function handleInstagramEngagement(config) {
     return {
       action,
       status: 'skipped',
-      reason: `All posts from ${target.value} already engaged`,
+      reason: 'All posts in queue already engaged',
+      posts_in_queue: posts.length,
+      posts_available: qualityPosts.length,
     };
   }
 
@@ -296,7 +298,7 @@ async function handleInstagramEngagement(config) {
       await logEngagement({
         platform: 'instagram',
         action: 'like',
-        target: target.value,
+        source: 'queue',
         mediaId: post.id,
         triggerType: 'cron',
       });
@@ -304,7 +306,7 @@ async function handleInstagramEngagement(config) {
       return {
         action: 'like',
         status: 'success',
-        target: target.value,
+        source: 'post_queue',
         mediaId: post.id,
         count: likeCount + 1,
         limit: config.instagram.likeDaily,
@@ -319,7 +321,7 @@ async function handleInstagramEngagement(config) {
       await logEngagement({
         platform: 'instagram',
         action: 'comment',
-        target: target.value,
+        source: 'queue',
         mediaId: post.id,
         text: template,
         triggerType: 'cron',
@@ -328,7 +330,7 @@ async function handleInstagramEngagement(config) {
       return {
         action: 'comment',
         status: 'success',
-        target: target.value,
+        source: 'post_queue',
         mediaId: post.id,
         text: template,
         count: commentCount + 1,
@@ -339,7 +341,6 @@ async function handleInstagramEngagement(config) {
     return {
       action,
       status: 'error',
-      target: target.value,
       error: error.message,
     };
   }
