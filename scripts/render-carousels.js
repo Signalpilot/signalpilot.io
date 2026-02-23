@@ -158,19 +158,19 @@ async function renderCarousel(page, postDir, postNumber) {
 
       /* Signal items */
       .signal-item .label, .signal-item .name {
-        font-size: clamp(21px, 5.2cqw, 32px) !important;
+        font-size: clamp(28px, 6.9cqw, 41px) !important;
       }
       .signal-item .arrow, .signal-item .icon {
-        font-size: clamp(37px, 9.2cqw, 55px) !important;
+        font-size: clamp(46px, 11.5cqw, 70px) !important;
       }
 
       /* Divergence boxes */
       .divergence-title, .divergence-label {
-        font-size: clamp(28px, 6.9cqw, 41px) !important;
+        font-size: clamp(32px, 8cqw, 51px) !important;
         font-weight: 700 !important;
       }
       .divergence-desc {
-        font-size: clamp(23px, 6.3cqw, 37px) !important;
+        font-size: clamp(28px, 6.9cqw, 41px) !important;
       }
 
       /* Icons */
