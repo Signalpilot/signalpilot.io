@@ -389,6 +389,15 @@ async function handleTwitterEngagement(config) {
   }
 
   if (!tweets || tweets.length === 0) {
+    // Check if rate limited
+    if (result?.rate_limited) {
+      return {
+        action,
+        status: 'skipped',
+        reason: `Twitter rate limited for query: ${query}`,
+        rate_limited: true,
+      };
+    }
     return {
       action,
       status: 'skipped',
