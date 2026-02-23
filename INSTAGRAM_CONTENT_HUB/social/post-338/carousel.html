@@ -3,332 +3,1567 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 338 — Chronicle: The Gathering Storm | Carousel Preview</title>
+  <title>Post 338 — Entry Techniques</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    
+
+    /* ═══════════════════════════════════════════════════════════
+       POST 338 — ENTRY TECHNIQUES
+       Column: NEUTRAL / EDU
+       No sidebar. Blue-tinted glows. Standard 8% padding.
+       ═══════════════════════════════════════════════════════════ */
+
     :root {
       --bg-dark: #0a0a0f;
+      --bg-card: rgba(255, 255, 255, 0.02);
+      --bg-card-hover: rgba(255, 255, 255, 0.04);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-glow: rgba(74, 144, 217, 0.3);
+      --text-primary: #e8e6e3;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-tertiary: rgba(255, 255, 255, 0.4);
       --accent-blue: #4a90d9;
       --accent-gold: #c9a962;
-      --accent-red: #d94a4a;
       --accent-green: #4ad97a;
-      --accent-teal: #5eecd4;
-      --text-primary: #e8e8e8;
-      --text-secondary: #a0a0a0;
-      --text-dim: #6a6a6a;
+      --accent-red: #d94a4a;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
 
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
+    /* ── Reset ── */
 
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
+    html,
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
 
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
+    body {
+      padding: 40px 20px;
+    }
 
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
 
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    /* ── Controls Bar ── */
 
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
+    .controls-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 24px;
+      margin-bottom: 32px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
+    .control-group label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
 
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important; }
+    .control-group select {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .control-group select:focus {
+      border-color: var(--border-glow);
+    }
+
+    .control-group input[type="range"] {
+      width: 100px;
+      cursor: pointer;
+      accent-color: var(--accent-blue);
+    }
+
+    #export-btn {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    #export-btn:hover {
+      opacity: 0.85;
+    }
+
+
+    /* ── Layout ── */
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .page-title p {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr));
+      gap: 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .slide-wrapper {
+      container-type: inline-size;
+      max-width: 540px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .slide-label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+    .slide {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+
+    /* ── Slide Internals ── */
+
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: clamp(36px, 6.67cqw, 72px);
+    }
+
+
+    /* ── Typography ── */
+
+    .slide-number {
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: clamp(16px, 3cqw, 32px);
+    }
+
+    .headline {
+      font-family: var(--font-serif);
+      font-size: clamp(41px, 7.59cqw, 82px);
+      font-weight: 600;
+      line-height: 1.0;
+      color: var(--text-primary);
+      margin-bottom: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .headline-large {
+      font-size: clamp(44px, 8.15cqw, 88px);
+    }
+
+    .headline-medium {
+      font-size: clamp(36px, 6.67cqw, 72px);
+    }
+
+    .subheadline {
+      font-family: var(--font-sans);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .body-text {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: clamp(16px, 2.96cqw, 32px);
+      right: clamp(16px, 2.96cqw, 32px);
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+
+    /* ── Accent Colors ── */
+
+    .accent-text {
+      color: var(--accent-blue);
+    }
+
+    .accent-gold {
+      color: var(--accent-gold);
+    }
+
+    .accent-green {
+      color: var(--accent-green);
+    }
+
+    .accent-red {
+      color: var(--accent-red);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (NEUTRAL / EDU)
+       No sidebar. Gray label. Blue-tinted glow.
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide-1 {
+      background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
+    }
+
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 60%
+      );
       pointer-events: none;
       z-index: 1;
     }
-    
-    .slide-1::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
-      z-index: 5;
+
+    /* NO ::after sidebar — neutral column */
+
+    .slide-1 .slide-content {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
     }
-    .slide-1 .bg-video, .slide-1 video { display: none !important; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+
+    .cine-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94,234,212,0.9);
+      color: rgba(163, 163, 163, 0.9);
       margin-bottom: 8%;
     }
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+
+    .hook-main {
+      font-family: var(--font-serif);
+      font-size: clamp(44px, 8.15cqw, 88px);
       font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255,255,255,0.95);
+      line-height: 1.0;
+      color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
     }
-    .slide-1 .cine-divider {
-      width: 60px;
+
+    .cine-divider {
+      width: clamp(40px, 7.41cqw, 80px);
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(163, 163, 163, 0.5),
+        transparent
+      );
       margin-bottom: 4%;
     }
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+
+    .hook-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(94,234,212,0.4);
+      color: var(--text-tertiary);
       line-height: 1.6;
+      max-width: 80%;
     }
-    .slide-1 .cine-logo {
+
+    .cine-logo {
       position: absolute;
       bottom: 8%;
       left: 50%;
       transform: translateX(-50%);
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
+      font-family: var(--font-sans);
+      font-size: clamp(7px, 1.3cqw, 14px);
+      font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94,234,212,0.4);
+      color: var(--text-tertiary);
     }
-  
+
+
+    /* ═══════════════════════════════════════════════════════════
+       SLIDES 2–8 — BACKGROUNDS WITH BLUE GLOW
+       Dual radial gradients using blue tints
+       ═══════════════════════════════════════════════════════════ */
+
+    .slide-2 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-2::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 50% at 20% 20%,
+          rgba(74, 144, 217, 0.08) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 80% 80%,
+          rgba(74, 144, 217, 0.05) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-3 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-3::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 45% at 75% 30%,
+          rgba(74, 144, 217, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 45% 35% at 25% 75%,
+          rgba(74, 144, 217, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-4 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 30% 40%,
+          rgba(74, 144, 217, 0.09) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 55% 40% at 70% 70%,
+          rgba(74, 144, 217, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-5 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 45% at 50% 25%,
+          rgba(74, 144, 217, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 40% 35% at 50% 80%,
+          rgba(74, 144, 217, 0.05) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-6 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 65% 35%,
+          rgba(74, 144, 217, 0.08) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 55% 45% at 35% 65%,
+          rgba(74, 144, 217, 0.07) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-7 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-7::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 50% at 40% 30%,
+          rgba(74, 144, 217, 0.09) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 45% 40% at 60% 75%,
+          rgba(74, 144, 217, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-8 {
+      background: linear-gradient(180deg, #0a0a0f 0%, #08080d 100%);
+    }
+
+    .slide-8::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse 60% 55% at 50% 40%,
+          rgba(74, 144, 217, 0.10) 0%,
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 50% 70%,
+          rgba(74, 144, 217, 0.06) 0%,
+          transparent 70%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       ORB CONTAINER — Entry Point Target / Crosshair
+       Blue pulse rings with crosshair SVG
+       ═══════════════════════════════════════════════════════════ */
+
+    .orb-container {
+      position: relative;
+      width: clamp(80px, 14.81cqw, 160px);
+      height: clamp(80px, 14.81cqw, 160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto clamp(16px, 2.96cqw, 32px) auto;
+    }
+
+    .orb-container svg {
+      width: clamp(40px, 7.41cqw, 80px);
+      height: clamp(40px, 7.41cqw, 80px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .orb-container::before,
+    .orb-container::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(74, 144, 217, 0.3);
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+
+    .orb-container::before {
+      width: 100%;
+      height: 100%;
+      animation-delay: 0s;
+    }
+
+    .orb-container::after {
+      width: 75%;
+      height: 75%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(0.85);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+      100% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(0.85);
+      }
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       ENTRY TECHNIQUE COMPONENTS
+       Cards, grids, pros/cons, confirmation signals
+       ═══════════════════════════════════════════════════════════ */
+
+    /* ── Entry Grid ── */
+
+    .entry-grid {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 1.85cqw, 20px);
+      width: 100%;
+    }
+
+    /* ── Entry Card ── */
+
+    .entry-card {
+      padding: clamp(16px, 2.96cqw, 32px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+
+    .entry-card:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .entry-card.breakout {
+      border-color: rgba(74, 144, 217, 0.25);
+      background: rgba(74, 144, 217, 0.04);
+    }
+
+    .entry-card.breakout:hover {
+      background: rgba(74, 144, 217, 0.07);
+    }
+
+    .entry-card.pullback {
+      border-color: rgba(201, 169, 98, 0.25);
+      background: rgba(201, 169, 98, 0.04);
+    }
+
+    .entry-card.pullback:hover {
+      background: rgba(201, 169, 98, 0.07);
+    }
+
+    .entry-card.retest {
+      border-color: rgba(74, 217, 122, 0.25);
+      background: rgba(74, 217, 122, 0.04);
+    }
+
+    .entry-card.retest:hover {
+      background: rgba(74, 217, 122, 0.07);
+    }
+
+    /* ── Entry Icon ── */
+
+    .entry-icon {
+      font-size: clamp(24px, 4.44cqw, 48px);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+      display: block;
+    }
+
+    /* ── Entry Title ── */
+
+    .entry-title {
+      font-family: var(--font-sans);
+      font-size: clamp(13px, 2.41cqw, 26px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .entry-card.breakout .entry-title {
+      color: var(--accent-blue);
+    }
+
+    .entry-card.pullback .entry-title {
+      color: var(--accent-gold);
+    }
+
+    .entry-card.retest .entry-title {
+      color: var(--accent-green);
+    }
+
+    /* ── Entry Description ── */
+
+    .entry-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ── Pro / Con Grid ── */
+
+    .pro-con-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .pro-box {
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: rgba(74, 217, 122, 0.04);
+      border: 1px solid rgba(74, 217, 122, 0.2);
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    .con-box {
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: rgba(217, 74, 74, 0.04);
+      border: 1px solid rgba(217, 74, 74, 0.2);
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    .pro-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-green);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .con-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.48cqw, 16px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-red);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .pro-list,
+    .con-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .pro-list li,
+    .con-list li {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      padding-left: clamp(10px, 1.85cqw, 20px);
+      position: relative;
+    }
+
+    .pro-list li::before {
+      content: '+';
+      position: absolute;
+      left: 0;
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    .con-list li::before {
+      content: '-';
+      position: absolute;
+      left: 0;
+      color: var(--accent-red);
+      font-weight: 600;
+    }
+
+
+    /* ── Confirmation Stack ── */
+
+    .confirm-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 1.85cqw, 20px);
+      width: 100%;
+    }
+
+    .confirm-item {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: clamp(10px, 1.85cqw, 20px);
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+
+    .confirm-icon {
+      font-size: clamp(18px, 3.33cqw, 36px);
+      color: var(--accent-blue);
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: clamp(2px, 0.37cqw, 4px);
+    }
+
+    .confirm-content {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(3px, 0.56cqw, 6px);
+    }
+
+    .confirm-title {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .confirm-text {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+
+    /* ── Scenario Card ── */
+
+    .scenario-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: clamp(16px, 2.96cqw, 32px);
+      text-align: left;
+      width: 100%;
+    }
+
+    .scenario-header {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-blue);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .scenario-body {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .scenario-body strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .scenario-step {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px, 1.48cqw, 16px);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .scenario-num {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.33cqw, 36px);
+      font-weight: 600;
+      color: var(--accent-blue);
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .scenario-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      padding-top: clamp(2px, 0.37cqw, 4px);
+    }
+
+
+    /* ── Homework Card ── */
+
+    .homework-card {
+      background: rgba(74, 144, 217, 0.05);
+      border: 1px solid rgba(74, 144, 217, 0.2);
+      border-radius: 16px;
+      padding: clamp(16px, 2.96cqw, 32px);
+      text-align: left;
+      width: 100%;
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .homework-label {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-blue);
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+    }
+
+    .homework-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2.04cqw, 22px);
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .homework-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+
+    /* ── Callout Box ── */
+
+    .callout-box {
+      width: 100%;
+      border-radius: 12px;
+      padding: clamp(14px, 2.59cqw, 28px);
+      text-align: left;
+      background: rgba(201, 169, 98, 0.05);
+      border-left: 3px solid var(--accent-gold);
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .callout-text {
+      font-family: var(--font-serif);
+      font-size: clamp(14px, 2.59cqw, 28px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    .callout-attr {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      color: var(--accent-gold);
+      margin-top: clamp(6px, 1.11cqw, 12px);
+      letter-spacing: 1px;
+    }
+
+
+    /* ── Intro Problem Card ── */
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.48cqw, 16px);
+      width: 100%;
+      margin-top: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .problem-item {
+      padding: clamp(12px, 2.22cqw, 24px);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .problem-icon {
+      font-size: clamp(20px, 3.7cqw, 40px);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+      display: block;
+    }
+
+    .problem-label {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.85cqw, 20px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .problem-label strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(2px, 0.37cqw, 4px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CTA SLIDE (Slide 8)
+       ═══════════════════════════════════════════════════════════ */
+
+    .cta-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(36px, 6.67cqw, 72px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: clamp(10px, 1.85cqw, 20px);
+    }
+
+    .cta-subtext {
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 80%;
+      margin-bottom: clamp(20px, 3.7cqw, 40px);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: clamp(12px, 2.22cqw, 24px) clamp(28px, 5.19cqw, 56px);
+      background: linear-gradient(135deg, var(--accent-blue) 0%, #3a7bc8 100%);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 2.22cqw, 24px);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: opacity 0.2s ease;
+    }
+
+    .cta-button:hover {
+      opacity: 0.85;
+    }
+
+    .brand-tag {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.67cqw, 18px);
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: clamp(24px, 4.44cqw, 48px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       EXPORT MODE
+       ═══════════════════════════════════════════════════════════ */
+
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls-bar,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      max-width: none;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      aspect-ratio: auto;
+      border-radius: 0;
+    }
+
+
   </style>
 </head>
 <body>
-  <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+
+  <!-- ═══ Controls Bar ═══ -->
+
+  <div class="controls-bar">
+    <div class="control-group">
+      <label for="bg-select">Background</label>
+      <select id="bg-select">
+        <option value="dark">Dark</option>
+        <option value="black">Pure Black</option>
+        <option value="charcoal">Charcoal</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="opacity-range">Opacity</label>
+      <input type="range" id="opacity-range" min="0" max="100" value="100">
+    </div>
+    <button id="export-btn">Export Mode</button>
   </div>
 
+
+  <!-- ═══ Page Title ═══ -->
+
   <div class="page-title">
-    <h1>Post 338 — Chronicle: The Gathering Storm</h1>
-    <p>Chronicle Carousel — 8 Slides</p>
+    <h1>Post 338 — 8 Slides</h1>
+    <p>Neutral / EDU — Entry Techniques</p>
   </div>
+
+
+  <!-- ═══ Carousel Grid ═══ -->
 
   <div class="carousel-grid">
 
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 1 — CINEMATIC HOOK
+         "LEARN" label, neutral gray, no sidebar
+         ───────────────────────────────────────────────────── -->
+
     <div class="slide-wrapper" data-slide="1">
+      <div class="slide-label">Slide 1 — Hook</div>
       <div class="slide slide-1">
         <div class="slide-content">
-          <div class="cine-label">CHRONICLE</div>
-          <div class="hook-main">ENTRY TECHNIQUES — How You Enter Matters</div>
+          <div class="cine-label">Learn</div>
+          <div class="hook-main">Entry<br>Techniques</div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">From the Signal Pilot Chronicle:</p>
+          <p class="hook-sub">The setup is only half the equation. How you enter determines your risk, your reward, and your conviction.</p>
           <div class="cine-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 2 — THE ENTRY PROBLEM
+         Most traders focus on what, not when
+         ───────────────────────────────────────────────────── -->
+
     <div class="slide-wrapper" data-slide="2">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 08</span>
-        <div class="slide-subtitle">Market Order</div>
-        <h2 class="slide-title">MARKET ORDER — Immediate execution; Current price; Guarantee</h2>
-        <p class="slide-body" style="font-style:italic;">I wrote this parable after my worst trading month.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide-label">Slide 2 — The Entry Problem</div>
+      <div class="slide slide-2">
+        <div class="slide-content">
+          <div class="slide-number">02 / 08</div>
+
+          <div class="orb-container">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="22" stroke="rgba(74,144,217,0.5)" stroke-width="1.5"/>
+              <circle cx="32" cy="32" r="12" stroke="rgba(74,144,217,0.7)" stroke-width="1.5"/>
+              <circle cx="32" cy="32" r="3" fill="rgba(74,144,217,0.9)"/>
+              <line x1="32" y1="4" x2="32" y2="16" stroke="rgba(74,144,217,0.4)" stroke-width="1"/>
+              <line x1="32" y1="48" x2="32" y2="60" stroke="rgba(74,144,217,0.4)" stroke-width="1"/>
+              <line x1="4" y1="32" x2="16" y2="32" stroke="rgba(74,144,217,0.4)" stroke-width="1"/>
+              <line x1="48" y1="32" x2="60" y2="32" stroke="rgba(74,144,217,0.4)" stroke-width="1"/>
+            </svg>
+          </div>
+
+          <h2 class="headline headline-medium">The Entry Problem</h2>
+
+          <p class="subheadline" style="margin-bottom: clamp(16px, 2.96cqw, 32px);">
+            Most traders obsess over <em>what</em> to trade. The edge is in <em>when</em> and <em>how</em> you enter.
+          </p>
+
+          <div class="problem-grid">
+            <div class="problem-item">
+              <span class="problem-icon">&#9673;</span>
+              <div class="problem-label">
+                <strong>Same Setup</strong>
+                Two traders see the same chart
+              </div>
+            </div>
+            <div class="problem-item">
+              <span class="problem-icon">&#8800;</span>
+              <div class="problem-label">
+                <strong>Different Results</strong>
+                Their entries decide the outcome
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 3 — BREAKOUT ENTRY
+         Entering on the break of a key level
+         ───────────────────────────────────────────────────── -->
 
     <div class="slide-wrapper" data-slide="3">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 08</span>
-        <div class="slide-subtitle">Limit Order</div>
-        <h2 class="slide-title">LIMIT ORDER — Specify your price; Better entry if filled; Mi</h2>
-        <div class="concept-card gold"><div class="card-label">Chronicle</div><div class="card-desc">Volume had contracted to a whisper. Volatility compressed to a coil. Every other trader had walked away. &quot;The storm gathers before it breaks,&quot; he said. 🧵 Check volume on the breakout bar — above average confirms conviction.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide-label">Slide 3 — Breakout Entry</div>
+      <div class="slide slide-3">
+        <div class="slide-content">
+          <div class="slide-number">03 / 08</div>
+
+          <div class="entry-grid">
+            <div class="entry-card breakout">
+              <span class="entry-icon">&#9650;</span>
+              <div class="entry-title">Breakout Entry</div>
+              <p class="entry-desc">
+                Enter the moment price breaks through a key resistance or support level. You are trading the momentum of the move as it happens.
+              </p>
+            </div>
+
+            <div class="pro-con-grid">
+              <div class="pro-box">
+                <div class="pro-label">Pros</div>
+                <ul class="pro-list">
+                  <li>Catches strong moves early</li>
+                  <li>Clear invalidation point</li>
+                  <li>Momentum on your side</li>
+                </ul>
+              </div>
+              <div class="con-box">
+                <div class="con-label">Cons</div>
+                <ul class="con-list">
+                  <li>False breakouts are common</li>
+                  <li>Wider stop placement</li>
+                  <li>Requires fast execution</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 4 — PULLBACK ENTRY
+         Waiting for a retracement into the move
+         ───────────────────────────────────────────────────── -->
 
     <div class="slide-wrapper" data-slide="4">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 08</span>
-        <div class="slide-subtitle">Stop Order</div>
-        <h2 class="slide-title">STOP ORDER — Enter on confirmation; Wait for breakout; Worse</h2>
-        <div class="concept-card gold"><div class="card-label">Chronicle</div><div class="card-desc">Below the tower, traders grew bored. They closed positions. Left their screens. Moved on to other assets. &quot;Nothing is happening,&quot; they said. The Watchman smiled. &quot;Everything is happening. You just can't hear it yet.&quot; Wait for a close above the level before entering.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide-label">Slide 4 — Pullback Entry</div>
+      <div class="slide slide-4">
+        <div class="slide-content">
+          <div class="slide-number">04 / 08</div>
+
+          <div class="entry-grid">
+            <div class="entry-card pullback">
+              <span class="entry-icon">&#8634;</span>
+              <div class="entry-title">Pullback Entry</div>
+              <p class="entry-desc">
+                Wait for price to retrace after an initial move, then enter at a better price within the trend. You trade the continuation, not the initiation.
+              </p>
+            </div>
+
+            <div class="pro-con-grid">
+              <div class="pro-box">
+                <div class="pro-label">Pros</div>
+                <ul class="pro-list">
+                  <li>Better risk-to-reward</li>
+                  <li>Tighter stop loss</li>
+                  <li>Trend already confirmed</li>
+                </ul>
+              </div>
+              <div class="con-box">
+                <div class="con-label">Cons</div>
+                <ul class="con-list">
+                  <li>May miss the move entirely</li>
+                  <li>Pullback might not come</li>
+                  <li>Requires patience</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 5 — RETEST ENTRY
+         Waiting for price to retest a broken level
+         ───────────────────────────────────────────────────── -->
 
     <div class="slide-wrapper" data-slide="5">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 08</span>
-        <div class="slide-subtitle">Choosing</div>
-        <h2 class="slide-title">CHOOSING YOUR ENTRY — Conviction trade = Market; Want better</h2>
-        <div class="concept-card gold"><div class="card-label">Chronicle</div><div class="card-desc">He checked the signs: ◾ Volume Oracle showed compression — energy coiling. ◾ Plutus Flow showed quiet accumulation — hands were building. ◾ Pentarch showed a cycle turning — the phase was shifting. ◾ Price coiled tighter and tighter. The calm IS the signal.</div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide-label">Slide 5 — Retest Entry</div>
+      <div class="slide slide-5">
+        <div class="slide-content">
+          <div class="slide-number">05 / 08</div>
+
+          <div class="entry-grid">
+            <div class="entry-card retest">
+              <span class="entry-icon">&#8631;</span>
+              <div class="entry-title">Retest Entry</div>
+              <p class="entry-desc">
+                After price breaks a level, wait for it to come back and test that level as new support or resistance. The retest confirms the break was genuine.
+              </p>
+            </div>
+
+            <div class="pro-con-grid">
+              <div class="pro-box">
+                <div class="pro-label">Pros</div>
+                <ul class="pro-list">
+                  <li>Highest probability setup</li>
+                  <li>Tight, defined stop</li>
+                  <li>Confirms structural change</li>
+                </ul>
+              </div>
+              <div class="con-box">
+                <div class="con-label">Cons</div>
+                <ul class="con-list">
+                  <li>Not all levels get retested</li>
+                  <li>Slow to develop</li>
+                  <li>Can miss extended moves</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 6 — CONFIRMATION SIGNALS
+         Volume, candle close, momentum, timeframe
+         ───────────────────────────────────────────────────── -->
 
     <div class="slide-wrapper" data-slide="6">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 08</span>
-        <div class="slide-subtitle">The Tradeoffs</div>
-        <h2 class="slide-title">THE TRADEOFFS — Speed vs Price vs Confirmation; You can't op</h2>
-        <div class="indicator-pill">VOLUME ORACLE</div><p class="slide-body">&quot;When the boredom becomes unbearable,&quot; the Watchman said, &quot;that is when the move begins. Patience in the quiet. Readiness for the storm. The best setups form when nobody is watching.&quot; The best traders spend 80% of their time waiting.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide-label">Slide 6 — Confirmation Signals</div>
+      <div class="slide slide-6">
+        <div class="slide-content">
+          <div class="slide-number">06 / 08</div>
+
+          <h2 class="headline headline-medium" style="margin-bottom: clamp(8px, 1.48cqw, 16px);">Confirmation<br>Signals</h2>
+          <p class="subheadline" style="margin-bottom: clamp(16px, 2.96cqw, 32px);">
+            Never enter blind. Stack these filters to validate your entry.
+          </p>
+
+          <div class="confirm-stack">
+            <div class="confirm-item">
+              <span class="confirm-icon">&#9608;</span>
+              <div class="confirm-content">
+                <div class="confirm-title">Volume Spike</div>
+                <div class="confirm-text">Above-average volume on the breakout bar confirms participation and conviction behind the move.</div>
+              </div>
+            </div>
+
+            <div class="confirm-item">
+              <span class="confirm-icon" style="color: var(--accent-gold);">&#9679;</span>
+              <div class="confirm-content">
+                <div class="confirm-title">Candle Close</div>
+                <div class="confirm-text">Wait for the candle to close beyond the level. Wicks lie. Bodies confirm.</div>
+              </div>
+            </div>
+
+            <div class="confirm-item">
+              <span class="confirm-icon" style="color: var(--accent-green);">&#9650;</span>
+              <div class="confirm-content">
+                <div class="confirm-title">Momentum Shift</div>
+                <div class="confirm-text">Check if momentum indicators align with the direction of your entry. Divergence is a warning.</div>
+              </div>
+            </div>
+
+            <div class="confirm-item">
+              <span class="confirm-icon" style="color: var(--accent-red);">&#9670;</span>
+              <div class="confirm-content">
+                <div class="confirm-title">Timeframe Alignment</div>
+                <div class="confirm-text">Your entry timeframe and your bias timeframe should agree. If the daily is bearish, think twice about a 5-min long.</div>
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 7 — SCENARIO + HOMEWORK
+         Trade scenario walkthrough and practice task
+         ───────────────────────────────────────────────────── -->
 
     <div class="slide-wrapper" data-slide="7">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">07 / 08</span>
-        <div class="slide-subtitle">Key Principle</div>
-        <h2 class="slide-title">KEY PRINCIPLE — Entry is only 10-20% of the trade; Managemen</h2>
-        <div class="indicator-pill">VOLUME ORACLE</div><p class="slide-body">&quot;When the boredom becomes unbearable,&quot; the Watchman said, &quot;that is when the move begins. Patience in the quiet. Readiness for the storm. The best setups form when nobody is watching.&quot; The best traders spend 80% of their time waiting.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide-label">Slide 7 — Scenario + Homework</div>
+      <div class="slide slide-7">
+        <div class="slide-content">
+          <div class="slide-number">07 / 08</div>
+
+          <h2 class="headline headline-medium" style="margin-bottom: clamp(12px, 2.22cqw, 24px);">Putting It<br>Together</h2>
+
+          <div class="scenario-card">
+            <div class="scenario-header">Trade Scenario</div>
+            <div class="scenario-step">
+              <span class="scenario-num">1</span>
+              <span class="scenario-text">Price consolidates below resistance at $42,000 for three days.</span>
+            </div>
+            <div class="scenario-step">
+              <span class="scenario-num">2</span>
+              <span class="scenario-text">A breakout candle closes above the level on 2x average volume.</span>
+            </div>
+            <div class="scenario-step">
+              <span class="scenario-num">3</span>
+              <span class="scenario-text">Price pulls back to $42,000 and holds it as support with a bullish engulfing candle.</span>
+            </div>
+            <div class="scenario-step" style="margin-bottom: 0;">
+              <span class="scenario-num">4</span>
+              <span class="scenario-text"><strong>Retest entry</strong> triggered. Stop below the retest low. Target: next structure level.</span>
+            </div>
+          </div>
+
+          <div class="homework-card">
+            <div class="homework-label">Homework</div>
+            <p class="homework-text">
+              Open your last <strong>5 trades</strong>. For each one, identify which entry type you used: breakout, pullback, or retest. Would a different entry have improved your risk-to-reward?
+            </p>
+          </div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
+
+
+    <!-- ─────────────────────────────────────────────────────
+         SLIDE 8 — CTA
+         "Master Your Entries" → education hub
+         ───────────────────────────────────────────────────── -->
 
     <div class="slide-wrapper" data-slide="8">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">08 / 08</span>
-        <div class="slide-icon">📜</div>
-        <h2 class="slide-title">Enter the Chronicle</h2>
-        <p class="slide-body">Discover the stories of the Elite Seven.</p>
-        <a href="https://signalpilot.io/chronicle/" class="cta-link">Read the Chronicle</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="slide-label">Slide 8 — CTA</div>
+      <div class="slide slide-8">
+        <div class="slide-content" style="align-items: center; text-align: center;">
+          <div class="slide-number" style="text-align: center; width: 100;">08 / 08</div>
+
+          <div class="orb-container">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="22" stroke="rgba(74,144,217,0.5)" stroke-width="1.5"/>
+              <circle cx="32" cy="32" r="12" stroke="rgba(74,144,217,0.7)" stroke-width="1.5"/>
+              <circle cx="32" cy="32" r="3" fill="rgba(74,144,217,0.9)"/>
+              <line x1="32" y1="4" x2="32" y2="16" stroke="rgba(74,144,217,0.4)" stroke-width="1"/>
+              <line x1="32" y1="48" x2="32" y2="60" stroke="rgba(74,144,217,0.4)" stroke-width="1"/>
+              <line x1="4" y1="32" x2="16" y2="32" stroke="rgba(74,144,217,0.4)" stroke-width="1"/>
+              <line x1="48" y1="32" x2="60" y2="32" stroke="rgba(74,144,217,0.4)" stroke-width="1"/>
+            </svg>
+          </div>
+
+          <h2 class="cta-headline">Master Your<br>Entries</h2>
+
+          <p class="cta-subtext">
+            The right entry transforms a good setup into a great trade. Learn more frameworks like this in the education hub.
+          </p>
+
+          <a href="https://signalpilot.io/education/" class="cta-button">Explore the Hub</a>
+
+          <div class="brand-tag">Signal Pilot</div>
+
+          <span class="brand-mark">SignalPilot</span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
-    <button onclick="nextSlide()">Next →</button>
+
   </div>
+  <!-- end .carousel-grid -->
+
+
+  <!-- ═══ Script ═══ -->
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0;
-    let exportMode = false;
-    bgToggle.addEventListener('change', (e) => { videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'); });
-    opacitySlider.addEventListener('input', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value / 100); });
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function() {
+      const slides = document.querySelectorAll('.slide-wrapper');
+      const bgSelect = document.getElementById('bg-select');
+      const opacityRange = document.getElementById('opacity-range');
+      const exportBtn = document.getElementById('export-btn');
+      let currentSlide = 0;
+      let exportMode = false;
+
+      /**
+       * Update the page background color based on the
+       * background select dropdown value.
+       */
+      function updateBackground() {
+        const value = bgSelect.value;
+        const backgrounds = {
+          dark: '#0a0a0f',
+          black: '#000000',
+          charcoal: '#121218'
+        };
+        document.body.style.backgroundColor = backgrounds[value] || '#0a0a0f';
+      }
+
+      /**
+       * Update the opacity of all slides based on the
+       * opacity range input value.
+       */
+      function updateOpacity() {
+        const value = opacityRange.value / 100;
+        slides.forEach(function(slide) {
+          slide.style.opacity = value;
+        });
+      }
+
+      /**
+       * Show a specific slide by index when in export mode.
+       * Toggles the 'active' class on the matching wrapper.
+       */
+      function showSlide(index) {
+        slides.forEach(function(slide, i) {
+          slide.classList.toggle('active', i === index);
+        });
+      }
+
+      /**
+       * Toggle export mode on and off.
+       * In export mode, slides display one at a time at
+       * 1080x1350 for screenshot capture.
+       */
+      function toggleExportMode() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        exportBtn.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) {
+          currentSlide = 0;
+          showSlide(currentSlide);
+        }
+      }
+
+      /* ── Event Listeners ── */
+
+      bgSelect.addEventListener('change', updateBackground);
+
+      opacityRange.addEventListener('input', updateOpacity);
+
+      exportBtn.addEventListener('click', toggleExportMode);
+
+      /**
+       * Keyboard navigation for export mode:
+       * - ArrowRight / Space: next slide
+       * - ArrowLeft: previous slide
+       * - Escape: exit export mode
+       */
+      document.addEventListener('keydown', function(e) {
+        if (exportMode) {
+          if (e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+          } else if (e.key === 'Escape') {
+            toggleExportMode();
+          }
+        }
+      });
+
+    })();
   </script>
+
 </body>
 </html>

@@ -6,277 +6,1132 @@
   <title>Post 321 — Yearly Plan Value | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
+      --accent-orange: #d9944a;
       --accent-gold: #c9a962;
       --accent-red: #d94a4a;
       --accent-green: #4ad97a;
-      --accent-teal: #5eecd4;
+      --accent-blue: #4a90d9;
       --text-primary: #e8e8e8;
       --text-secondary: #a0a0a0;
       --text-dim: #6a6a6a;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls input[type="checkbox"] { cursor: pointer; }
-    .controls input[type="range"] { width: 80px; cursor: pointer; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 500; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); container-type: inline-size; }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); font-weight: 500; letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 2.5cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(28px, 10cqw, 48px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 3%; line-height: 1.2; }
-    .slide-title.large { font-size: clamp(22px, 8cqw, 32px); }
-    .slide-subtitle { font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; font-weight: 500; }
-    .slide-body { font-size: clamp(12px, 4cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .cta-link { display: inline-block; margin-top: 5%; padding: 3% 6%; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: clamp(11px, 3.5cqw, 14px); letter-spacing: 0.5px; }
 
-    /* ── Visual Components ── */
-    .concept-card { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 2% 0; text-align: left; }
-    .concept-card.green { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.35); }
-    .concept-card.red { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.35); }
-    .concept-card.blue { background: rgba(74,144,217,0.08); border: 1.5px solid rgba(74,144,217,0.35); }
-    .concept-card.gold { background: rgba(201,169,98,0.08); border: 1.5px solid rgba(201,169,98,0.35); }
-    .concept-card .card-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2%; font-weight: 500; }
-    .concept-card.green .card-label { color: var(--accent-green); }
-    .concept-card.red .card-label { color: var(--accent-red); }
-    .concept-card.blue .card-label { color: var(--accent-blue); }
-    .concept-card.gold .card-label { color: var(--accent-gold); }
-    .concept-card .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
-    .concept-card .card-desc { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .data-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .data-item.up { background: rgba(74,217,122,0.1); border: 1px solid rgba(74,217,122,0.3); }
-    .data-item.down { background: rgba(217,74,74,0.1); border: 1px solid rgba(217,74,74,0.3); }
-    .data-item.info { background: rgba(74,144,217,0.1); border: 1px solid rgba(74,144,217,0.3); }
-    .data-item.warn { background: rgba(201,169,98,0.1); border: 1px solid rgba(201,169,98,0.3); }
-    .data-item .item-icon { font-size: clamp(20px, 7cqw, 32px); margin-bottom: 3%; }
-    .data-item .item-label { font-size: clamp(9px, 3cqw, 12px); color: var(--text-secondary); line-height: 1.4; }
-    .data-item .item-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
 
-    .arrow-list { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .arrow-list li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .arrow-list .arrow { color: var(--accent-blue); font-weight: 600; flex-shrink: 0; }
+    /* ── Controls ── */
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
 
-    .checklist { list-style: none; text-align: left; width: 100%; max-width: 90%; padding: 0; }
-    .checklist li { display: flex; align-items: flex-start; gap: 3%; margin-bottom: 3%; font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; }
-    .checklist .check { color: var(--accent-green); flex-shrink: 0; }
-    .checklist .cross { color: var(--accent-red); flex-shrink: 0; }
+    .controls button {
+      background: var(--accent-orange);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+    }
 
-    .callout-box { width: 100%; max-width: 90%; border-radius: 12px; padding: 5%; margin: 3% 0; text-align: left; }
-    .callout-box.warning { background: rgba(217,74,74,0.08); border-left: 4px solid var(--accent-red); }
-    .callout-box.insight { background: rgba(201,169,98,0.08); border-left: 4px solid var(--accent-gold); }
-    .callout-box.success { background: rgba(74,217,122,0.08); border-left: 4px solid var(--accent-green); }
-    .callout-box.info { background: rgba(74,144,217,0.08); border-left: 4px solid var(--accent-blue); }
-    .callout-box .callout-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 5cqw, 20px); font-weight: 600; margin-bottom: 2%; }
-    .callout-box.warning .callout-title { color: var(--accent-red); }
-    .callout-box.insight .callout-title { color: var(--accent-gold); }
-    .callout-box.success .callout-title { color: var(--accent-green); }
-    .callout-box.info .callout-title { color: var(--accent-blue); }
-    .callout-box .callout-text { font-size: clamp(11px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.6; }
+    /* ── Page Title ── */
+    .page-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
-    .stat-row { display: flex; justify-content: center; gap: 4%; width: 100%; max-width: 90%; margin: 3% 0; }
-    .stat-item { text-align: center; flex: 1; }
-    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 8cqw, 32px); font-weight: 600; color: var(--accent-gold); }
-    .stat-label { font-size: clamp(9px, 3cqw, 11px); color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2%; }
+    .page-title h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
 
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3%; width: 100%; max-width: 90%; }
-    .compare-item { padding: 5%; border-radius: 10px; text-align: center; }
-    .compare-item.before { background: rgba(217,74,74,0.08); border: 1.5px solid rgba(217,74,74,0.3); }
-    .compare-item.after { background: rgba(74,217,122,0.08); border: 1.5px solid rgba(74,217,122,0.3); }
-    .compare-item .compare-label { font-size: clamp(9px, 3cqw, 11px); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3%; font-weight: 500; }
-    .compare-item.before .compare-label { color: var(--accent-red); }
-    .compare-item.after .compare-label { color: var(--accent-green); }
-    .compare-item .compare-text { font-size: clamp(10px, 3.5cqw, 14px); color: var(--text-secondary); line-height: 1.5; }
+    .page-title p {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
 
-    .quote-block { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 6cqw, 26px); font-style: italic; color: var(--text-primary); line-height: 1.5; max-width: 85%; margin: 4% 0; }
-    .quote-attr { font-family: 'Inter', sans-serif; font-size: clamp(10px, 3cqw, 12px); color: var(--accent-gold); letter-spacing: 1px; margin-top: 3%; }
+    /* ── Carousel Grid ── */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-    .step-flow { width: 100%; max-width: 90%; text-align: left; }
-    .step-item { display: flex; gap: 4%; margin-bottom: 4%; align-items: flex-start; }
-    .step-num { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 7cqw, 28px); font-weight: 600; color: var(--accent-gold); min-width: 8%; }
-    .step-text { font-size: clamp(11px, 3.5cqw, 15px); color: var(--text-secondary); line-height: 1.5; padding-top: 1%; }
+    .slide-wrapper {
+      aspect-ratio: 4 / 5;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      container-type: inline-size;
+    }
 
-    .indicator-pill { display: inline-block; padding: 2% 5%; background: rgba(201,169,98,0.15); border: 1px solid var(--accent-gold); border-radius: 20px; font-size: clamp(10px, 3.5cqw, 14px); color: var(--accent-gold); letter-spacing: 1px; font-weight: 500; margin: 3% 0; }
+    .slide-wrapper .slide-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8%;
+      text-align: center;
+    }
 
-    /* Export mode */
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; }
-    @media (max-width: 768px) { .carousel-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  
-    
-    .slide-1 { background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important; }
-    .slide-1::before {
+    /* ── Common Slide Elements ── */
+    .slide-number {
+      position: absolute;
+      top: 4%;
+      left: 4%;
+      font-size: clamp(9px, 3cqw, 11px);
+      color: var(--text-dim);
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    .brand-mark {
+      position: absolute;
+      bottom: 4%;
+      right: 4%;
+      font-size: clamp(8px, 2.5cqw, 10px);
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .slide-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 7cqw, 28px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3%;
+      line-height: 1.2;
+    }
+
+    .slide-title.large {
+      font-size: clamp(22px, 8cqw, 32px);
+    }
+
+    .slide-subtitle {
+      font-size: clamp(10px, 3.5cqw, 14px);
+      color: var(--accent-orange);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 4%;
+      font-weight: 500;
+    }
+
+    .slide-body {
+      font-size: clamp(12px, 4cqw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 90%;
+    }
+
+    .cta-link {
+      display: inline-block;
+      margin-top: 5%;
+      padding: 3% 6%;
+      background: var(--accent-orange);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: clamp(11px, 3.5cqw, 14px);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Orb SVG ── */
+    .orb-wrap {
+      position: relative;
+      width: clamp(60px, 20cqw, 100px);
+      height: clamp(60px, 20cqw, 100px);
+      margin: 0 auto 5%;
+    }
+
+    .orb-wrap svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .orb-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -18%;
+      border-radius: 50%;
+      border: 1.5px solid rgba(217, 148, 74, 0.25);
+      animation: orbPulse 3s ease-in-out infinite;
+    }
+
+    .orb-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -32%;
+      border-radius: 50%;
+      border: 1px solid rgba(217, 148, 74, 0.12);
+      animation: orbPulse 3s ease-in-out infinite 0.6s;
+    }
+
+    @keyframes orbPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.08);
+        opacity: 0.5;
+      }
+    }
+
+    /* ── Price Comparison Cards ── */
+    .price-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3%;
+      width: 100%;
+      max-width: 90%;
+    }
+
+    .price-card {
+      border-radius: 12px;
+      padding: 6% 5%;
+      text-align: center;
+      position: relative;
+    }
+
+    .price-card.monthly {
+      background: rgba(217, 148, 74, 0.06);
+      border: 1.5px solid rgba(217, 148, 74, 0.25);
+    }
+
+    .price-card.yearly {
+      background: rgba(74, 217, 122, 0.06);
+      border: 1.5px solid rgba(74, 217, 122, 0.3);
+    }
+
+    .price-card.yearly .best-value {
+      position: absolute;
+      top: -4%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-green);
+      color: var(--bg-dark);
+      font-size: clamp(8px, 2.5cqw, 10px);
+      font-weight: 600;
+      padding: 1% 4%;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .price-card .pc-label {
+      font-size: clamp(9px, 3cqw, 11px);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 4%;
+      font-weight: 500;
+    }
+
+    .price-card.monthly .pc-label {
+      color: var(--accent-orange);
+    }
+
+    .price-card.yearly .pc-label {
+      color: var(--accent-green);
+    }
+
+    .price-card .pc-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 10cqw, 44px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 2%;
+    }
+
+    .price-card .pc-period {
+      font-size: clamp(10px, 3cqw, 12px);
+      color: var(--text-dim);
+      margin-bottom: 4%;
+    }
+
+    .price-card .pc-annual {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(11px, 3.5cqw, 14px);
+      font-weight: 500;
+      padding: 2% 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 2%;
+    }
+
+    .price-card.monthly .pc-annual {
+      color: var(--accent-red);
+    }
+
+    .price-card.yearly .pc-annual {
+      color: var(--accent-green);
+    }
+
+    /* ── Savings Highlight ── */
+    .savings-box {
+      width: 100%;
+      max-width: 90%;
+      border-radius: 12px;
+      padding: 5%;
+      background: rgba(74, 217, 122, 0.06);
+      border: 1.5px solid rgba(74, 217, 122, 0.25);
+      text-align: center;
+      margin-top: 4%;
+    }
+
+    .savings-box .save-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 10cqw, 44px);
+      font-weight: 600;
+      color: var(--accent-green);
+      line-height: 1;
+    }
+
+    .savings-box .save-label {
+      font-size: clamp(10px, 3.2cqw, 13px);
+      color: var(--text-secondary);
+      margin-top: 2%;
+    }
+
+    .savings-box .save-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(12px, 4cqw, 16px);
+      color: var(--accent-green);
+      font-weight: 500;
+      margin-top: 2%;
+    }
+
+    /* ── Feature Checklist ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5%;
+      width: 100%;
+      max-width: 90%;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 3%;
+      padding: 3% 4%;
+      border-radius: 8px;
+      background: rgba(217, 148, 74, 0.04);
+      border: 1px solid rgba(217, 148, 74, 0.12);
+    }
+
+    .feature-item .fi-check {
+      font-size: clamp(12px, 4cqw, 16px);
+      color: var(--accent-green);
+      flex-shrink: 0;
+    }
+
+    .feature-item .fi-text {
+      font-size: clamp(10px, 3cqw, 12px);
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    /* ── Math Breakdown ── */
+    .math-box {
+      width: 100%;
+      max-width: 90%;
+      border-radius: 12px;
+      padding: 5%;
+      background: rgba(217, 148, 74, 0.06);
+      border: 1.5px solid rgba(217, 148, 74, 0.25);
+      text-align: left;
+    }
+
+    .math-box .mb-label {
+      font-size: clamp(9px, 3cqw, 11px);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-orange);
+      margin-bottom: 3%;
+      font-weight: 500;
+    }
+
+    .math-box .mb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px, 5.5cqw, 22px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4%;
+    }
+
+    .math-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.5% 0;
+      border-bottom: 1px solid rgba(217, 148, 74, 0.12);
+    }
+
+    .math-row:last-child {
+      border-bottom: none;
+    }
+
+    .math-row .mr-label {
+      font-size: clamp(10px, 3.2cqw, 13px);
+      color: var(--text-secondary);
+    }
+
+    .math-row .mr-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(12px, 4cqw, 16px);
+      font-weight: 500;
+    }
+
+    .math-row .mr-value.cost {
+      color: var(--accent-red);
+    }
+
+    .math-row .mr-value.save {
+      color: var(--accent-green);
+    }
+
+    .math-row .mr-value.neutral {
+      color: var(--accent-orange);
+    }
+
+    .math-row.highlight {
+      background: rgba(74, 217, 122, 0.06);
+      border-radius: 8px;
+      padding: 3% 3%;
+      margin-top: 2%;
+    }
+
+    /* ── Guarantee Badge ── */
+    .guarantee-badge {
+      width: 100%;
+      max-width: 90%;
+      border-radius: 12px;
+      padding: 5%;
+      background: rgba(74, 217, 122, 0.06);
+      border: 1.5px solid rgba(74, 217, 122, 0.25);
+      text-align: center;
+      margin-top: 4%;
+    }
+
+    .guarantee-badge .gb-icon {
+      font-size: clamp(24px, 8cqw, 36px);
+      margin-bottom: 2%;
+    }
+
+    .guarantee-badge .gb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px, 5.5cqw, 22px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+
+    .guarantee-badge .gb-text {
+      font-size: clamp(10px, 3.2cqw, 13px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── Stat Row ── */
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 4%;
+      width: 100%;
+      max-width: 90%;
+      margin: 3% 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 8cqw, 32px);
+      font-weight: 600;
+      color: var(--accent-orange);
+    }
+
+    .stat-label {
+      font-size: clamp(9px, 3cqw, 11px);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2%;
+    }
+
+    /* ── Lock-In Bar ── */
+    .lockin-bar {
+      width: 100%;
+      max-width: 90%;
+      border-radius: 10px;
+      padding: 4% 5%;
+      background: rgba(217, 148, 74, 0.08);
+      border: 1.5px solid rgba(217, 148, 74, 0.3);
+      text-align: center;
+      margin-top: 4%;
+    }
+
+    .lockin-bar .lb-title {
+      font-size: clamp(11px, 3.5cqw, 14px);
+      color: var(--accent-orange);
+      font-weight: 500;
+      margin-bottom: 2%;
+    }
+
+    .lockin-bar .lb-text {
+      font-size: clamp(10px, 3.2cqw, 13px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── Indicator List ── */
+    .indicator-list {
+      width: 100%;
+      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 2%;
+    }
+
+    .ind-item {
+      display: flex;
+      align-items: center;
+      gap: 3%;
+      padding: 2.5% 4%;
+      border-radius: 8px;
+      background: rgba(217, 148, 74, 0.04);
+      border: 1px solid rgba(217, 148, 74, 0.12);
+    }
+
+    .ind-item .ii-dot {
+      width: clamp(6px, 2cqw, 8px);
+      height: clamp(6px, 2cqw, 8px);
+      border-radius: 50%;
+      background: var(--accent-orange);
+      flex-shrink: 0;
+    }
+
+    .ind-item .ii-name {
+      font-size: clamp(11px, 3.5cqw, 14px);
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .ind-item .ii-desc {
+      font-size: clamp(9px, 2.8cqw, 11px);
+      color: var(--text-dim);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── Slide Backgrounds (orange-tinted, no sidebar) ── */
+    .s1 {
+      background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%);
+    }
+
+    .s1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(217,148,74,0.08) 0%, transparent 100%);
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 20%, rgba(217, 148, 74, 0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 70% 80%, rgba(217, 148, 74, 0.06) 0%, transparent 70%);
       pointer-events: none;
       z-index: 1;
     }
-    
-    .slide-1::after {
+
+    .s2 {
+      background: linear-gradient(180deg, #0e0b09 0%, #0a0908 100%);
+    }
+
+    .s2::before {
       content: '';
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(251,191,36,0.9) 0%, rgba(217,148,74,0.7) 100%);
-      z-index: 5;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 65% 30%, rgba(217, 148, 74, 0.09) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 50% at 35% 75%, rgba(217, 148, 74, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
     }
-    .slide-1 .bg-video, .slide-1 video { display: none !important; }
-    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; z-index: 3; }
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(251,191,36,0.9);
-      margin-bottom: 8%;
+
+    .s3 {
+      background: linear-gradient(180deg, #0f0c0a 0%, #090808 100%);
     }
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255,255,255,0.95);
-      margin-bottom: 4%;
-    }
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(251,191,36,0.6), transparent);
-      margin-bottom: 4%;
-    }
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(251,191,36,0.4);
-      line-height: 1.6;
-    }
-    .slide-1 .cine-logo {
+
+    .s3::before {
+      content: '';
       position: absolute;
-      bottom: 8%;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 50% at 50% 30%, rgba(217, 148, 74, 0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 70%, rgba(217, 148, 74, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s4 {
+      background: linear-gradient(180deg, #0e0b09 0%, #0a0908 100%);
+    }
+
+    .s4::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 35% 30%, rgba(217, 148, 74, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 65% 70%, rgba(217, 148, 74, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s5 {
+      background: linear-gradient(180deg, #0f0b09 0%, #090808 100%);
+    }
+
+    .s5::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 45% at 60% 25%, rgba(217, 148, 74, 0.09) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 55% at 40% 80%, rgba(217, 148, 74, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s6 {
+      background: linear-gradient(180deg, #0e0c0a 0%, #0a0908 100%);
+    }
+
+    .s6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 50% at 40% 30%, rgba(217, 148, 74, 0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 40% at 60% 75%, rgba(217, 148, 74, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s7 {
+      background: linear-gradient(180deg, #0f0b09 0%, #090808 100%);
+    }
+
+    .s7::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 50% at 75% 40%, rgba(217, 148, 74, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 45% at 25% 65%, rgba(217, 148, 74, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s8 {
+      background: linear-gradient(180deg, #0e0c0a 0%, #0a0908 100%);
+    }
+
+    .s8::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(217, 148, 74, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 45% at 50% 70%, rgba(217, 148, 74, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .s9 {
+      background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%);
+    }
+
+    .s9::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 50% at 50% 35%, rgba(217, 148, 74, 0.10) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 50% 75%, rgba(217, 148, 74, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Export Mode ── */
+    body.export-mode {
+      padding: 0;
+      background: #000;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      width: 1080px;
+      height: 1350px;
+      border-radius: 0;
+      margin: 0;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(251,191,36,0.4);
+      gap: 12px;
+      z-index: 1000;
     }
-  
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-orange);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
     <button onclick="toggleExportMode()">Export Mode</button>
   </div>
 
   <div class="page-title">
     <h1>Post 321 — Yearly Plan Value</h1>
-    <p>Marketing Carousel — 4 Slides</p>
+    <p>Marketing Carousel — 9 Slides</p>
   </div>
 
   <div class="carousel-grid">
 
+    <!-- SLIDE 1 — Hook -->
     <div class="slide-wrapper" data-slide="1">
-      <div class="slide slide-1">
+      <div class="s1">
         <div class="slide-content">
-          <div class="cine-label">DISCOVER</div>
-          <div class="hook-main">I tested this for 8 months. Results below.</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub">Let's break it down:</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="orb-wrap">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="40" stroke="rgba(217,148,74,0.3)" stroke-width="1.5" fill="rgba(217,148,74,0.04)"/>
+              <circle cx="50" cy="50" r="28" stroke="rgba(217,148,74,0.2)" stroke-width="1" fill="none"/>
+              <!-- dollar/savings symbol -->
+              <text x="50" y="56" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="28" font-weight="600" fill="rgba(74,217,122,0.6)">$</text>
+              <path d="M38 35 L62 35" stroke="rgba(217,148,74,0.4)" stroke-width="1" stroke-linecap="round"/>
+              <path d="M38 65 L62 65" stroke="rgba(217,148,74,0.4)" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="slide-subtitle">SIGNAL PILOT</div>
+          <h2 class="slide-title large">The Math on Yearly vs. Monthly</h2>
+          <p class="slide-body">Same tools. Same education. Same everything. The only difference is how much you save.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
         </div>
       </div>
     </div>
 
+    <!-- SLIDE 2 — Price Comparison -->
     <div class="slide-wrapper" data-slide="2">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 04</span>
-        <div class="slide-subtitle">Why SignalPilot</div>
-        <h2 class="slide-title">Monthly: $69 × 12 = $828/year. Yearly: $399/year. You save $</h2>
-        <div class="stat-row"><div class="stat-item"><div class="stat-value">7</div><div class="stat-label">Indicators</div></div><div class="stat-item"><div class="stat-value">82</div><div class="stat-label">Free Lessons</div></div><div class="stat-item"><div class="stat-value">0</div><div class="stat-label">Repainting</div></div></div>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="s2">
+        <div class="slide-content">
+          <span class="slide-number">02 / 09</span>
+          <div class="slide-subtitle">THE PLANS</div>
+          <h2 class="slide-title">Side by Side</h2>
+          <div class="price-compare">
+            <div class="price-card monthly">
+              <div class="pc-label">Monthly</div>
+              <div class="pc-price">$69</div>
+              <div class="pc-period">per month</div>
+              <div class="pc-annual">$828 / year</div>
+            </div>
+            <div class="price-card yearly">
+              <span class="best-value">Best Value</span>
+              <div class="pc-label">Yearly</div>
+              <div class="pc-price">$399</div>
+              <div class="pc-period">per year</div>
+              <div class="pc-annual">$33 / month</div>
+            </div>
+          </div>
+          <div class="savings-box">
+            <div class="save-amount">$429</div>
+            <div class="save-label">saved per year with the annual plan</div>
+            <div class="save-pct">52% OFF</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
+    <!-- SLIDE 3 — The Math -->
     <div class="slide-wrapper" data-slide="3">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 04</span>
-        <div class="slide-subtitle">What You Get</div>
-        <h2 class="slide-title">Same 7 indicators. Same education hub. Same community access</h2>
-        <p class="slide-body">Same 7 indicators. Same education hub. Same community access. Same everything. The only difference: annual subscribers save more than half. The math speaks for itself. I tested this across 500 bars on the 4H chart.</p>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="s3">
+        <div class="slide-content">
+          <span class="slide-number">03 / 09</span>
+          <div class="slide-subtitle">THE MATH</div>
+          <h2 class="slide-title">Let the Numbers Speak</h2>
+          <div class="math-box">
+            <div class="mb-label">Annual Cost Comparison</div>
+            <div class="mb-title">Monthly vs. Yearly Plan</div>
+            <div class="math-row">
+              <span class="mr-label">Monthly plan (12 months)</span>
+              <span class="mr-value cost">$69 x 12 = $828</span>
+            </div>
+            <div class="math-row">
+              <span class="mr-label">Yearly plan (1 year)</span>
+              <span class="mr-value save">$399</span>
+            </div>
+            <div class="math-row">
+              <span class="mr-label">Your savings</span>
+              <span class="mr-value save">$429 / year</span>
+            </div>
+            <div class="math-row">
+              <span class="mr-label">Effective monthly rate</span>
+              <span class="mr-value save">$33.25 / mo</span>
+            </div>
+            <div class="math-row highlight">
+              <span class="mr-label">That's money back in your trading account</span>
+              <span class="mr-value save">+$429</span>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
+    <!-- SLIDE 4 — What's Included (Same Everything) -->
     <div class="slide-wrapper" data-slide="4">
-      <video class="bg-video" autoplay muted loop playsinline>
-        <source src="../../video/starfield.mp4" type="video/mp4">
-      </video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 04</span>
-        <div class="slide-icon">🚀</div>
-        <h2 class="slide-title">Get Started</h2>
-        <p class="slide-body">7 indicators. 82 free lessons. Education first.</p>
-        <a href="https://signalpilot.io/#pricing" class="cta-link">Visit SignalPilot</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+      <div class="s4">
+        <div class="slide-content">
+          <span class="slide-number">04 / 09</span>
+          <div class="slide-subtitle">WHAT YOU GET</div>
+          <h2 class="slide-title">Same Everything. Both Plans.</h2>
+          <div class="feature-grid">
+            <div class="feature-item">
+              <span class="fi-check">&#10003;</span>
+              <span class="fi-text">7 Premium Indicators</span>
+            </div>
+            <div class="feature-item">
+              <span class="fi-check">&#10003;</span>
+              <span class="fi-text">82 Free Lessons</span>
+            </div>
+            <div class="feature-item">
+              <span class="fi-check">&#10003;</span>
+              <span class="fi-text">Zero Repainting</span>
+            </div>
+            <div class="feature-item">
+              <span class="fi-check">&#10003;</span>
+              <span class="fi-text">TradingView Native</span>
+            </div>
+            <div class="feature-item">
+              <span class="fi-check">&#10003;</span>
+              <span class="fi-text">Education Hub Access</span>
+            </div>
+            <div class="feature-item">
+              <span class="fi-check">&#10003;</span>
+              <span class="fi-text">All Future Updates</span>
+            </div>
+            <div class="feature-item">
+              <span class="fi-check">&#10003;</span>
+              <span class="fi-text">Community Access</span>
+            </div>
+            <div class="feature-item">
+              <span class="fi-check">&#10003;</span>
+              <span class="fi-text">Locked-In Pricing</span>
+            </div>
+          </div>
+          <p class="slide-body" style="margin-top: 4%;">Nothing is held back from any tier. The only difference is the billing cycle — and the savings.</p>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
+
+    <!-- SLIDE 5 — The 7 Indicators -->
+    <div class="slide-wrapper" data-slide="5">
+      <div class="s5">
+        <div class="slide-content">
+          <span class="slide-number">05 / 09</span>
+          <div class="slide-subtitle">YOUR TOOLKIT</div>
+          <h2 class="slide-title">7 Indicators Included</h2>
+          <div class="indicator-list">
+            <div class="ind-item">
+              <span class="ii-dot"></span>
+              <span class="ii-name">Pentarch</span>
+              <span class="ii-desc">Multi-TF trend</span>
+            </div>
+            <div class="ind-item">
+              <span class="ii-dot"></span>
+              <span class="ii-name">Janus</span>
+              <span class="ii-desc">Dual momentum</span>
+            </div>
+            <div class="ind-item">
+              <span class="ii-dot"></span>
+              <span class="ii-name">Harmonic Oscillator</span>
+              <span class="ii-desc">Cycle detection</span>
+            </div>
+            <div class="ind-item">
+              <span class="ii-dot"></span>
+              <span class="ii-name">Plutus</span>
+              <span class="ii-desc">Statistical OBV</span>
+            </div>
+            <div class="ind-item">
+              <span class="ii-dot"></span>
+              <span class="ii-name">Kronos</span>
+              <span class="ii-desc">Time-based analysis</span>
+            </div>
+            <div class="ind-item">
+              <span class="ii-dot"></span>
+              <span class="ii-name">OmniDeck</span>
+              <span class="ii-desc">Dashboard overlay</span>
+            </div>
+            <div class="ind-item">
+              <span class="ii-dot"></span>
+              <span class="ii-name">Augury Grid</span>
+              <span class="ii-desc">Confluence scoring</span>
+            </div>
+          </div>
+          <div class="stat-row" style="margin-top: 4%;">
+            <div class="stat-item">
+              <div class="stat-value">7</div>
+              <div class="stat-label">Indicators</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Repainting</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">82</div>
+              <div class="stat-label">Free Lessons</div>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 — Locked-In Pricing -->
+    <div class="slide-wrapper" data-slide="6">
+      <div class="s6">
+        <div class="slide-content">
+          <span class="slide-number">06 / 09</span>
+          <div class="slide-subtitle">LOCKED IN</div>
+          <h2 class="slide-title">Your Price Never Goes Up</h2>
+          <p class="slide-body" style="margin-bottom: 5%;">As we add new indicators, lessons, and features — your price stays the same. Early subscribers get the best deal, permanently.</p>
+          <div class="lockin-bar">
+            <div class="lb-title">Locked-In Pricing Guarantee</div>
+            <div class="lb-text">Subscribe today at $399/year. As we add new indicators and expand the education hub, your renewal price stays at $399. No surprises. No hidden increases.</div>
+          </div>
+          <div class="guarantee-badge">
+            <div class="gb-icon">&#x1F6E1;</div>
+            <div class="gb-title">7-Day Money-Back Guarantee</div>
+            <div class="gb-text">Full access for 7 days. If it's not for you, we refund 100%. No questions. No fine print.</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 — Lifetime Option -->
+    <div class="slide-wrapper" data-slide="7">
+      <div class="s7">
+        <div class="slide-content">
+          <span class="slide-number">07 / 09</span>
+          <div class="slide-subtitle">ALSO AVAILABLE</div>
+          <h2 class="slide-title">The Lifetime Option</h2>
+          <div class="math-box">
+            <div class="mb-label">For the Committed Trader</div>
+            <div class="mb-title">One Payment. Forever Access.</div>
+            <div class="math-row">
+              <span class="mr-label">Lifetime plan</span>
+              <span class="mr-value neutral">$999 one-time</span>
+            </div>
+            <div class="math-row">
+              <span class="mr-label">Break-even vs. yearly</span>
+              <span class="mr-value save">~2.5 years</span>
+            </div>
+            <div class="math-row">
+              <span class="mr-label">After break-even</span>
+              <span class="mr-value save">$0 / year forever</span>
+            </div>
+            <div class="math-row">
+              <span class="mr-label">5-year savings vs. monthly</span>
+              <span class="mr-value save">$3,141</span>
+            </div>
+            <div class="math-row highlight">
+              <span class="mr-label">Never think about renewals again</span>
+              <span class="mr-value save">&#10003;</span>
+            </div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 — At-a-Glance Summary -->
+    <div class="slide-wrapper" data-slide="8">
+      <div class="s8">
+        <div class="slide-content">
+          <span class="slide-number">08 / 09</span>
+          <div class="slide-subtitle">AT A GLANCE</div>
+          <h2 class="slide-title">All Three Plans</h2>
+          <div class="math-box">
+            <div class="mb-label">Plan Comparison</div>
+            <div class="mb-title">Choose What Fits</div>
+            <div class="math-row">
+              <span class="mr-label">Monthly</span>
+              <span class="mr-value neutral">$69/mo ($828/yr)</span>
+            </div>
+            <div class="math-row">
+              <span class="mr-label">Yearly</span>
+              <span class="mr-value save">$399/yr (save $429)</span>
+            </div>
+            <div class="math-row">
+              <span class="mr-label">Lifetime</span>
+              <span class="mr-value save">$999 once (forever)</span>
+            </div>
+          </div>
+          <div class="lockin-bar">
+            <div class="lb-title">Every plan includes the same full access</div>
+            <div class="lb-text">7 indicators. 82 lessons. Zero repainting. Locked-in pricing. 7-day guarantee. No features held back from any tier.</div>
+          </div>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 — CTA -->
+    <div class="slide-wrapper" data-slide="9">
+      <div class="s9">
+        <div class="slide-content">
+          <span class="slide-number">09 / 09</span>
+          <div class="orb-wrap">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="40" stroke="rgba(217,148,74,0.3)" stroke-width="1.5" fill="rgba(217,148,74,0.04)"/>
+              <circle cx="50" cy="50" r="28" stroke="rgba(217,148,74,0.2)" stroke-width="1" fill="none"/>
+              <text x="50" y="56" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="28" font-weight="600" fill="rgba(74,217,122,0.6)">$</text>
+              <path d="M38 35 L62 35" stroke="rgba(217,148,74,0.4)" stroke-width="1" stroke-linecap="round"/>
+              <path d="M38 65 L62 65" stroke="rgba(217,148,74,0.4)" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="slide-subtitle">START TODAY</div>
+          <h2 class="slide-title large">Save $429 with Yearly</h2>
+          <p class="slide-body">Same tools. Same education. Same everything. Just smarter math. Keep more money in your trading account.</p>
+          <a href="https://signalpilot.io/#pricing" class="cta-link">View Plans</a>
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 4</span>
-    <button onclick="nextSlide()">Next →</button>
+    <button onclick="prevSlide()">&#8592; Previous</button>
+    <span class="slide-indicator"><span id="currentSlide">1</span> / 9</span>
+    <button onclick="nextSlide()">Next &#8594;</button>
   </div>
 
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
     const slides = document.querySelectorAll('.slide-wrapper');
     let currentSlide = 0;
     let exportMode = false;
-    bgToggle.addEventListener('change', (e) => { videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'); });
-    opacitySlider.addEventListener('input', (e) => { document.documentElement.style.setProperty('--video-opacity', e.target.value / 100); });
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+
+    function toggleExportMode() {
+      exportMode = !exportMode;
+      document.body.classList.toggle('export-mode', exportMode);
+      if (exportMode) {
+        currentSlide = 0;
+        updateExportView();
+      }
+    }
+
+    function updateExportView() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateExportView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateExportView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!exportMode) return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'Escape') toggleExportMode();
+    });
   </script>
 </body>
 </html>

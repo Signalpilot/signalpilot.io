@@ -1,321 +1,1271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 145 — Pentarch IGN Signal | Carousel Preview</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post 145 — PRODUCT: PENTARCH IGN SIGNAL DEEP DIVE | Carousel Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Gugi&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   POST 145 — PRODUCT: PENTARCH IGN SIGNAL DEEP DIVE
+   "When Pentarch fires IGN — breakout with conviction detected."
+   Gold-standard design · Orange Product column
+   ══════════════════════════════════════════════════════════════ */
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+/* ── Design Tokens ────────────────────────────────────────── */
+:root {
+  --bg:        #0a0a0f;
+  --bg-card:   #0e0e16;
+  --surf:      #12121a;
+  --surf-2:    #16161f;
+  --line:      rgba(255,255,255,.06);
+  --line-2:    rgba(255,255,255,.10);
 
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-green: #4ad97a;
-      --accent-red: #d94a4a;
-      --accent-purple: #9b4ad9;
-      --text-primary: #e8e6e3;
-      --text-secondary: rgba(255, 255, 255, 0.7);
-      --text-muted: #6b6965;
-    }
+  --gold:    #c9a962;
+  --gold-l:  rgba(201,169,98,.10);
+  --gold-b:  rgba(201,169,98,.30);
+  --gold-g:  rgba(201,169,98,.06);
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  --teal:    #5eecd4;
+  --teal-l:  rgba(94,236,212,.10);
+  --teal-b:  rgba(94,236,212,.30);
+  --teal-g:  rgba(94,236,212,.06);
 
-    body { background: #111; font-family: 'Inter', sans-serif; color: var(--text-primary); padding: 2rem; min-height: 100vh; }
+  --blue:    #4a90d9;
+  --blue-l:  rgba(74,144,217,.10);
+  --blue-b:  rgba(74,144,217,.30);
+  --blue-g:  rgba(74,144,217,.06);
 
-    .controls { position: fixed; top: 1rem; right: 1rem; z-index: 1000; display: flex; gap: 1rem; align-items: center; background: rgba(0, 0, 0, 0.8); padding: 1rem 1.5rem; border-radius: 8px; backdrop-filter: blur(10px); }
-    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
-    .controls select, .controls button { background: var(--bg-dark); color: var(--text-primary); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-family: inherit; }
+  --green:   #4ad97a;
+  --green-l: rgba(74,217,122,.10);
+  --green-b: rgba(74,217,122,.30);
+  --green-g: rgba(74,217,122,.06);
 
-    .page-title { text-align: center; margin-bottom: 2rem; font-family: 'Cormorant Garamond', serif; }
-    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
+  --red:     #d94a4a;
+  --red-l:   rgba(217,74,74,.10);
+  --red-b:   rgba(217,74,74,.30);
+  --red-g:   rgba(217,74,74,.06);
 
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; padding-bottom: 4rem; }
+  --purple:  #9a6dd7;
+  --purple-l: rgba(154,109,215,.10);
+  --purple-b: rgba(154,109,215,.30);
+  --purple-g: rgba(154,109,215,.06);
 
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); margin-bottom: 0.75rem; }
+  --orange:  #d9896a;
+  --orange-l: rgba(217,137,106,.10);
+  --orange-b: rgba(217,137,106,.30);
+  --orange-g: rgba(217,137,106,.06);
 
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; position: relative; overflow: hidden; background: var(--bg-dark); border-radius: 4px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); }
-    .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-    .slide-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.08; }
-    .slide.bg-black .slide-bg video { opacity: 0; }
+  --t1: #e8e8e8;
+  --t2: #a0a0a0;
+  --t3: #6a6a6a;
+  --t4: #484848;
 
-    .slide-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; display: flex; flex-direction: column; padding: 8%; }
-    .slide-number { font-size: clamp(0.45rem, 1.8cqw, 0.6rem); font-weight: 500; color: var(--text-muted); letter-spacing: 0.15em; margin-bottom: auto; }
-    .brand-mark { font-size: clamp(0.4rem, 1.7cqw, 0.55rem); font-weight: 600; letter-spacing: 0.2em; color: var(--text-muted); margin-top: auto; text-align: center; }
-    .center-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  --serif:  'Cormorant Garamond', serif;
+  --sans:   'Inter', sans-serif;
+  --mono:   'JetBrains Mono', monospace;
+  --brand:  'Gugi', sans-serif;
+}
 
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 6cqw, 28px); font-weight: 600; line-height: 1.1; color: var(--text-primary); margin-bottom: 3%; overflow-wrap: break-word; }
-    .slide-title .highlight { color: var(--accent-purple); }
-    .subtitle { font-size: clamp(0.65rem, 3cqw, 1rem); font-weight: 400; color: var(--text-secondary); }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .signal-card { background: linear-gradient(135deg, rgba(155, 74, 217, 0.15) 0%, rgba(155, 74, 217, 0.05) 100%); border: 1px solid rgba(155, 74, 217, 0.3); border-radius: 12px; padding: 4%; width: 100%; }
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: var(--sans);
+  min-height: 100vh;
+  padding: 40px 20px;
+  -webkit-font-smoothing: antialiased;
+}
 
-    .signal-card.meaning { background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%); border-color: rgba(74, 144, 217, 0.3); }
-    .signal-card.meaning h3 { color: var(--accent-blue); }
-    .signal-card.meaning .feature-list li::before { color: var(--accent-blue); }
+.controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
 
-    .signal-card.trading { background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%); border-color: rgba(74, 217, 122, 0.3); }
-    .signal-card.trading h3 { color: var(--accent-green); }
-    .signal-card.trading .feature-list li::before { color: var(--accent-green); }
+.controls button {
+  background: var(--orange);
+  color: #0a0a0f;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background .2s;
+}
 
-    .signal-card.caution { background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(201, 169, 98, 0.05) 100%); border-color: rgba(201, 169, 98, 0.3); }
-    .signal-card.caution h3 { color: var(--accent-gold); }
-    .signal-card.caution .feature-list li::before { color: var(--accent-gold); }
+.controls button:hover { background: #e5a07e; }
 
-    .signal-card h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(0.9rem, 4.2cqw, 1.4rem); font-weight: 600; margin-bottom: 3%; color: var(--accent-purple); }
-    .signal-badge { display: inline-block; background: var(--accent-purple); color: var(--bg-dark); padding: 1.5% 3%; border-radius: 6px; font-size: clamp(0.6rem, 2.8cqw, 0.9rem); font-weight: 700; letter-spacing: 0.15em; margin-bottom: 2%; }
-    .feature-list { list-style: none; text-align: left; }
-    .feature-list li { font-size: clamp(0.55rem, 2.5cqw, 0.8rem); color: var(--text-primary); padding: 1.5% 0; padding-left: 4%; position: relative; line-height: 1.4; }
-    .feature-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent-purple); }
+.page-title {
+  text-align: center;
+  margin-bottom: 48px;
+}
 
-    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 6cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; line-height: 1.2; }
-    .cta-title .emphasis { color: var(--accent-purple); }
-    .cta-text { font-size: clamp(0.6rem, 2.8cqw, 0.9rem); color: var(--text-secondary); margin-bottom: 1%; }
+.page-title h1 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--t1);
+  margin-bottom: 8px;
+}
 
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; padding: 0; }
-    body.export-mode .slide-wrapper { display: none; }
-    body.export-mode .slide-wrapper.active { display: flex; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; box-shadow: none; }
+.page-title p { font-size: 14px; color: var(--t3); }
 
-    @media (max-width: 900px) { .carousel-grid { grid-template-columns: 1fr; } .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; } }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (ORANGE) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0f0c0a 0%, #0a0908 100%) !important;
-    }
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
 
-    .slide-1::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(217,148,74,0.08) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    .slide-1::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(251,191,36,0.9) 0%, rgba(217,148,74,0.7) 100%);
-      z-index: 5;
-    }
+.slide-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  container-type: inline-size;
+}
 
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
-    }
+.slide-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--orange);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
 
-    .slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
-    }
+.slide {
+  width: 100%;
+  max-width: 540px;
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+  border-radius: 4px;
+  box-shadow:
+    0 4px 24px rgba(0,0,0,.4),
+    0 0 0 1px var(--line);
+}
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(251, 191, 36, 0.9);
-      margin-bottom: 8%;
-    }
+.slide-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 8%;
+}
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
-    }
+.slide-number {
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 1.6cqw, 0.55rem);
+  font-weight: 500;
+  color: var(--t4);
+  letter-spacing: .15em;
+}
 
-    .slide-1 .cine-divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(251,191,36,0.6), transparent);
-      margin-bottom: 4%;
-    }
+.brand-mark {
+  font-family: var(--brand);
+  font-size: clamp(0.35rem, 1.4cqw, 0.5rem);
+  letter-spacing: .25em;
+  color: var(--t4);
+  text-align: center;
+  margin-top: auto;
+}
 
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(251, 191, 36, 0.4);
-      line-height: 1.6;
-    }
+.section-tag {
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 1.8cqw, 0.6rem);
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 3%;
+}
 
-    .slide-1 .cine-logo {
-      position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(251, 191, 36, 0.4);
-    }
-  </style>
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 4.5cqw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--t1);
+  margin-bottom: 4%;
+}
+
+.accent-line {
+  width: 40px;
+  height: 2px;
+  border-radius: 1px;
+  margin-bottom: 4%;
+}
+
+
+/* ── Orb: Ignition Spark ─────────────────────────────────── */
+.orb-wrap {
+  position: relative;
+  width: clamp(80px, 22cqw, 140px);
+  height: clamp(80px, 22cqw, 140px);
+  margin: 0 auto 6%;
+}
+
+.orb-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--orange-b);
+  animation: orb-pulse 3s ease-in-out infinite;
+}
+
+.orb-ring::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(217,137,106,.12);
+  animation: orb-pulse 3s ease-in-out infinite .5s;
+}
+
+@keyframes orb-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: .7; }
+}
+
+.orb-svg {
+  position: absolute;
+  inset: 12%;
+  z-index: 2;
+}
+
+
+/* ── Hook ─────────────────────────────────────────────────── */
+.hook-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 3;
+}
+
+.hook-label {
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 1.6cqw, 0.6rem);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 6%;
+}
+
+.hook-title {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 5.5cqw, 2rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.15;
+  margin-bottom: 3%;
+}
+
+.hook-title .em { color: var(--orange); }
+
+.hook-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--orange-b), transparent);
+  margin-bottom: 3%;
+}
+
+.hook-sub {
+  font-size: clamp(0.5rem, 2.2cqw, 0.8rem);
+  color: var(--t3);
+  font-weight: 300;
+  letter-spacing: .04em;
+}
+
+.hook-logo {
+  font-family: var(--brand);
+  font-size: clamp(0.35rem, 1.3cqw, 0.5rem);
+  letter-spacing: .3em;
+  color: var(--t4);
+  margin-top: auto;
+  text-align: center;
+}
+
+
+/* ── Signal Badge ────────────────────────────────────────── */
+.sig-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2%;
+  padding: 1.5% 4%;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: clamp(0.45rem, 2cqw, 0.7rem);
+  font-weight: 700;
+  letter-spacing: .15em;
+  margin-bottom: 4%;
+}
+
+.sig-badge.ign {
+  background: var(--orange-l);
+  color: var(--orange);
+  border: 1px solid var(--orange-b);
+}
+
+.sig-badge .badge-dot {
+  width: clamp(6px, 1.8cqw, 10px);
+  height: clamp(6px, 1.8cqw, 10px);
+  border-radius: 50%;
+  background: var(--orange);
+  animation: badge-blink 2s ease-in-out infinite;
+}
+
+@keyframes badge-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+
+
+/* ── Condition Cards ─────────────────────────────────────── */
+.cond-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5%;
+}
+
+.cond-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 4%;
+  padding: 3.5% 4%;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: border-color .3s;
+}
+
+.cond-card:hover { border-color: var(--line-2); }
+
+.cond-icon {
+  width: clamp(24px, 7cqw, 40px);
+  height: clamp(24px, 7cqw, 40px);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cond-icon svg {
+  width: 55%;
+  height: 55%;
+}
+
+.cond-body {
+  flex: 1;
+}
+
+.cond-body .cb-title {
+  font-family: var(--serif);
+  font-size: clamp(0.55rem, 2.4cqw, 0.85rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.2;
+  margin-bottom: 1.5%;
+}
+
+.cond-body .cb-desc {
+  font-size: clamp(0.38rem, 1.6cqw, 0.55rem);
+  color: var(--t2);
+  line-height: 1.5;
+}
+
+
+/* ── Myth Buster Cards ───────────────────────────────────── */
+.myth-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5%;
+}
+
+.myth-card {
+  padding: 3.5% 4%;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.myth-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 2px 0 0 2px;
+}
+
+.myth-card.wrong::before { background: var(--red); }
+.myth-card.right::before { background: var(--green); }
+
+.myth-card .mc-wrong,
+.myth-card .mc-right {
+  display: flex;
+  align-items: center;
+  gap: 2%;
+  margin-bottom: 1.5%;
+}
+
+.myth-card .mc-wrong .mc-icon {
+  font-family: var(--mono);
+  font-size: clamp(0.5rem, 2.2cqw, 0.78rem);
+  font-weight: 700;
+  color: var(--red);
+}
+
+.myth-card .mc-right .mc-icon {
+  font-family: var(--mono);
+  font-size: clamp(0.5rem, 2.2cqw, 0.78rem);
+  font-weight: 700;
+  color: var(--green);
+}
+
+.myth-card .mc-label {
+  font-family: var(--mono);
+  font-size: clamp(0.32rem, 1.3cqw, 0.44rem);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.myth-card .mc-wrong .mc-label { color: var(--red); }
+.myth-card .mc-right .mc-label { color: var(--green); }
+
+.myth-card .mc-text {
+  font-size: clamp(0.42rem, 1.9cqw, 0.65rem);
+  color: var(--t2);
+  line-height: 1.5;
+  padding-left: 3%;
+}
+
+.myth-card .mc-correction {
+  font-size: clamp(0.38rem, 1.6cqw, 0.55rem);
+  color: var(--t3);
+  line-height: 1.5;
+  padding-left: 3%;
+  margin-top: 1.5%;
+  border-top: 1px solid var(--line);
+  padding-top: 1.5%;
+  font-style: italic;
+}
+
+
+/* ── Usage Pattern Cards ─────────────────────────────────── */
+.usage-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
+
+.usage-card {
+  padding: 4% 5%;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: border-color .3s;
+}
+
+.usage-card:hover { border-color: var(--line-2); }
+
+.usage-card .uc-header {
+  display: flex;
+  align-items: center;
+  gap: 3%;
+  margin-bottom: 2.5%;
+}
+
+.usage-card .uc-num {
+  font-family: var(--mono);
+  font-size: clamp(0.8rem, 3.5cqw, 1.2rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.usage-card .uc-title {
+  font-family: var(--serif);
+  font-size: clamp(0.6rem, 2.6cqw, 0.9rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.2;
+}
+
+.usage-card .uc-desc {
+  font-size: clamp(0.38rem, 1.6cqw, 0.55rem);
+  color: var(--t2);
+  line-height: 1.5;
+  margin-bottom: 2%;
+}
+
+.usage-card .uc-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: clamp(0.28rem, 1.1cqw, 0.38rem);
+  font-weight: 600;
+  letter-spacing: .1em;
+  padding: 1% 2.5%;
+  border-radius: 4px;
+}
+
+
+/* ── Combo Section ───────────────────────────────────────── */
+.combo-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3%;
+}
+
+.combo-card {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.combo-half {
+  flex: 1;
+  padding: 4% 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2%;
+}
+
+.combo-half:first-child {
+  border-right: 1px solid var(--line);
+}
+
+.combo-half .ch-icon {
+  width: clamp(28px, 8cqw, 44px);
+  height: clamp(28px, 8cqw, 44px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.combo-half .ch-icon svg {
+  width: 55%;
+  height: 55%;
+}
+
+.combo-half .ch-name {
+  font-family: var(--serif);
+  font-size: clamp(0.5rem, 2.2cqw, 0.78rem);
+  font-weight: 600;
+  color: var(--t1);
+}
+
+.combo-half .ch-role {
+  font-size: clamp(0.35rem, 1.5cqw, 0.5rem);
+  color: var(--t3);
+  line-height: 1.4;
+}
+
+.combo-plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(20px, 5cqw, 32px);
+  font-family: var(--mono);
+  font-size: clamp(0.6rem, 2.5cqw, 0.9rem);
+  font-weight: 700;
+  color: var(--t4);
+  flex-shrink: 0;
+}
+
+.combo-result {
+  padding: 3.5% 4%;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.combo-result .cr-tag {
+  font-family: var(--mono);
+  font-size: clamp(0.32rem, 1.3cqw, 0.44rem);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2%;
+}
+
+.combo-result .cr-title {
+  font-family: var(--serif);
+  font-size: clamp(0.55rem, 2.4cqw, 0.85rem);
+  font-weight: 600;
+  color: var(--t1);
+  margin-bottom: 1.5%;
+}
+
+.combo-result .cr-desc {
+  font-size: clamp(0.38rem, 1.6cqw, 0.55rem);
+  color: var(--t2);
+  line-height: 1.5;
+}
+
+
+/* ── Checklist ───────────────────────────────────────────── */
+.check-list {
+  width: 100%;
+  list-style: none;
+}
+
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 3%;
+  padding: 2% 0;
+  font-size: clamp(0.42rem, 1.9cqw, 0.65rem);
+  color: var(--t2);
+  line-height: 1.5;
+}
+
+.check-list li .cl-mark {
+  font-family: var(--mono);
+  font-size: clamp(0.45rem, 2cqw, 0.68rem);
+  font-weight: 700;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+
+
+/* ── Insight / Key-point Boxes ─────────────────────────── */
+.insight-box {
+  background: var(--orange-l);
+  border: 1px solid var(--orange-b);
+  border-radius: 10px;
+  padding: 4% 5%;
+  margin-top: 3%;
+}
+
+.insight-box .ib-tag {
+  font-family: var(--mono);
+  font-size: clamp(0.35rem, 1.4cqw, 0.48rem);
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--orange);
+  margin-bottom: 2%;
+}
+
+.insight-box .ib-text {
+  font-size: clamp(0.42rem, 1.9cqw, 0.65rem);
+  color: var(--t2);
+  line-height: 1.55;
+}
+
+.key-box {
+  background: var(--teal-l);
+  border: 1px solid var(--teal-b);
+  border-radius: 10px;
+  padding: 4% 5%;
+  margin-top: 3%;
+}
+
+.key-box .kb-tag {
+  font-family: var(--mono);
+  font-size: clamp(0.35rem, 1.4cqw, 0.48rem);
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--teal);
+  margin-bottom: 2%;
+}
+
+.key-box .kb-text {
+  font-size: clamp(0.42rem, 1.9cqw, 0.65rem);
+  color: var(--t2);
+  line-height: 1.55;
+}
+
+
+/* ── Pill Row / CTA ───────────────────────────────────────── */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+  margin-top: 3%;
+}
+
+.pill {
+  font-family: var(--mono);
+  font-size: clamp(0.32rem, 1.3cqw, 0.44rem);
+  font-weight: 500;
+  letter-spacing: .08em;
+  padding: 1.5% 3%;
+  border-radius: 20px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.pill.orange { color: var(--orange); border-color: var(--orange-b); background: var(--orange-l); }
+.pill.gold { color: var(--gold); border-color: var(--gold-b); background: var(--gold-l); }
+.pill.teal { color: var(--teal); border-color: var(--teal-b); background: var(--teal-l); }
+.pill.blue { color: var(--blue); border-color: var(--blue-b); background: var(--blue-l); }
+.pill.green { color: var(--green); border-color: var(--green-b); background: var(--green-l); }
+.pill.purple { color: var(--purple); border-color: var(--purple-b); background: var(--purple-l); }
+
+.cta-box {
+  text-align: center;
+  padding: 6% 8%;
+}
+
+.cta-box .cta-title {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 5cqw, 1.8rem);
+  font-weight: 600;
+  color: var(--t1);
+  line-height: 1.15;
+  margin-bottom: 3%;
+}
+
+.cta-box .cta-title .em { color: var(--orange); }
+
+.cta-box .cta-sub {
+  font-size: clamp(0.5rem, 2.2cqw, 0.78rem);
+  color: var(--t2);
+  line-height: 1.5;
+  margin-bottom: 4%;
+}
+
+.cta-box .cta-btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: clamp(0.4rem, 1.7cqw, 0.58rem);
+  font-weight: 600;
+  letter-spacing: .12em;
+  padding: 2.5% 6%;
+  border-radius: 6px;
+  background: var(--orange);
+  color: #0a0a0f;
+  border: none;
+  transition: background .2s, box-shadow .2s;
+}
+
+.cta-box .cta-btn:hover {
+  background: #e5a07e;
+  box-shadow: 0 4px 20px var(--orange-g);
+}
+
+
+/* ── Pentarch 5-Component Visual ─────────────────────────── */
+.pent-visual {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3%;
+}
+
+.pent-ring {
+  position: relative;
+  width: clamp(120px, 32cqw, 200px);
+  height: clamp(120px, 32cqw, 200px);
+}
+
+.pent-ring svg { width: 100%; height: 100%; }
+
+.pent-labels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2%;
+  width: 100%;
+}
+
+.pent-labels .pl-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5%;
+  font-family: var(--mono);
+  font-size: clamp(0.3rem, 1.2cqw, 0.42rem);
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--t3);
+}
+
+.pent-labels .pl-item .pl-dot {
+  width: clamp(5px, 1.4cqw, 8px);
+  height: clamp(5px, 1.4cqw, 8px);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE BACKGROUNDS
+   ══════════════════════════════════════════════════════════════ */
+.s1 {
+  background: radial-gradient(ellipse at 50% 40%, rgba(217,137,106,.08) 0%, transparent 60%), radial-gradient(ellipse at 30% 70%, rgba(201,169,98,.04) 0%, transparent 50%), var(--bg);
+}
+.s1::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 35%, rgba(217,137,106,.09) 0%, transparent 50%), radial-gradient(ellipse at 70% 65%, rgba(201,169,98,.05) 0%, transparent 40%); pointer-events: none; z-index: 1; }
+
+.s2 {
+  background: radial-gradient(ellipse at 40% 30%, rgba(201,169,98,.07) 0%, transparent 55%), radial-gradient(ellipse at 60% 75%, rgba(217,137,106,.04) 0%, transparent 45%), var(--bg);
+}
+.s2::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 55% 40%, rgba(201,169,98,.06) 0%, transparent 45%), radial-gradient(ellipse at 35% 80%, rgba(217,137,106,.04) 0%, transparent 40%); pointer-events: none; z-index: 1; }
+
+.s3 {
+  background: radial-gradient(ellipse at 45% 35%, rgba(217,137,106,.07) 0%, transparent 55%), radial-gradient(ellipse at 55% 70%, rgba(74,144,217,.04) 0%, transparent 45%), var(--bg);
+}
+.s3::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(217,137,106,.06) 0%, transparent 50%), radial-gradient(ellipse at 40% 75%, rgba(74,144,217,.04) 0%, transparent 40%); pointer-events: none; z-index: 1; }
+
+.s4 {
+  background: radial-gradient(ellipse at 45% 35%, rgba(217,74,74,.06) 0%, transparent 55%), radial-gradient(ellipse at 55% 70%, rgba(217,137,106,.04) 0%, transparent 45%), var(--bg);
+}
+.s4::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(217,74,74,.05) 0%, transparent 50%), radial-gradient(ellipse at 40% 75%, rgba(217,137,106,.04) 0%, transparent 40%); pointer-events: none; z-index: 1; }
+
+.s5 {
+  background: radial-gradient(ellipse at 50% 35%, rgba(74,217,122,.06) 0%, transparent 55%), radial-gradient(ellipse at 40% 70%, rgba(201,169,98,.04) 0%, transparent 45%), var(--bg);
+}
+.s5::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 55% 40%, rgba(74,217,122,.05) 0%, transparent 45%), radial-gradient(ellipse at 35% 75%, rgba(201,169,98,.04) 0%, transparent 40%); pointer-events: none; z-index: 1; }
+
+.s6 {
+  background: radial-gradient(ellipse at 45% 30%, rgba(154,109,215,.06) 0%, transparent 55%), radial-gradient(ellipse at 55% 70%, rgba(74,144,217,.04) 0%, transparent 45%), var(--bg);
+}
+.s6::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 35%, rgba(154,109,215,.05) 0%, transparent 45%), radial-gradient(ellipse at 40% 75%, rgba(74,144,217,.04) 0%, transparent 40%); pointer-events: none; z-index: 1; }
+
+.s7 {
+  background: radial-gradient(ellipse at 50% 45%, rgba(217,137,106,.09) 0%, transparent 55%), radial-gradient(ellipse at 50% 50%, rgba(201,169,98,.05) 0%, transparent 45%), var(--bg);
+}
+.s7::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(217,137,106,.07) 0%, transparent 50%), radial-gradient(ellipse at 50% 60%, rgba(201,169,98,.04) 0%, transparent 40%); pointer-events: none; z-index: 1; }
+
+
+/* ── Export Mode ───────────────────────────────────────────── */
+body.export-mode { padding: 0; background: transparent; }
+body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
+body.export-mode .carousel-grid { display: block; padding: 0; }
+body.export-mode .slide-wrapper { display: none; }
+body.export-mode .slide-wrapper.active { display: flex; }
+body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; box-shadow: none; }
+
+@media (max-width: 900px) {
+  .carousel-grid { grid-template-columns: 1fr; }
+  .controls { position: static; margin-bottom: 24px; justify-content: center; }
+}
+</style>
 </head>
 <body>
-  <div class="controls">
-    <label>Background: <select id="bg-toggle"><option value="starfield">Starfield</option><option value="black">Pure Black</option></select></label>
-    <label>Opacity: <select id="opacity-control"><option value="0.03">3%</option><option value="0.05">5%</option><option value="0.08" selected>8%</option><option value="0.12">12%</option><option value="0.15">15%</option></select></label>
-    <button id="export-btn">Export Mode</button>
+
+<div class="controls">
+  <button id="export-btn">Export Mode</button>
+</div>
+
+<div class="page-title">
+  <h1>Post 145 &mdash; Product: Pentarch IGN Signal Deep Dive</h1>
+  <p>Instagram Carousel &bull; 7 Slides &bull; 1080&times;1350px &bull; Product</p>
+</div>
+
+<div class="carousel-grid">
+
+  <!-- SLIDE 1 — HOOK -->
+  <div class="slide-wrapper" data-slide="1">
+    <span class="slide-label">Slide 1 &mdash; Hook</span>
+    <div class="slide s1">
+      <div class="slide-content">
+        <div class="hook-center">
+          <div class="hook-label">Product &middot; Deep Dive</div>
+
+          <div class="orb-wrap">
+            <div class="orb-ring"></div>
+            <svg class="orb-svg" viewBox="0 0 100 100" fill="none">
+              <!-- ignition spark -->
+              <circle cx="50" cy="50" r="28" stroke="rgba(217,137,106,.3)" stroke-width="1.5" fill="none"/>
+              <circle cx="50" cy="50" r="18" stroke="rgba(217,137,106,.15)" stroke-width="1" fill="none" stroke-dasharray="3 3"/>
+              <!-- lightning bolt / spark shape -->
+              <polygon points="52,20 42,48 50,48 46,80 60,44 52,44" fill="rgba(217,137,106,.55)" stroke="rgba(217,137,106,.7)" stroke-width="0.5"/>
+              <!-- spark rays -->
+              <line x1="50" y1="14" x2="50" y2="20" stroke="rgba(217,137,106,.4)" stroke-width="1"/>
+              <line x1="50" y1="80" x2="50" y2="86" stroke="rgba(217,137,106,.2)" stroke-width="1"/>
+              <line x1="14" y1="50" x2="22" y2="50" stroke="rgba(217,137,106,.3)" stroke-width="1"/>
+              <line x1="78" y1="50" x2="86" y2="50" stroke="rgba(217,137,106,.3)" stroke-width="1"/>
+              <line x1="24" y1="24" x2="30" y2="30" stroke="rgba(217,137,106,.2)" stroke-width="1"/>
+              <line x1="70" y1="70" x2="76" y2="76" stroke="rgba(217,137,106,.2)" stroke-width="1"/>
+              <line x1="76" y1="24" x2="70" y2="30" stroke="rgba(217,137,106,.2)" stroke-width="1"/>
+              <line x1="30" y1="70" x2="24" y2="76" stroke="rgba(217,137,106,.2)" stroke-width="1"/>
+              <!-- center glow -->
+              <circle cx="50" cy="50" r="32" fill="url(#ignGlow)" opacity=".15"/>
+              <defs><radialGradient id="ignGlow"><stop offset="0%" stop-color="#d9896a"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+            </svg>
+          </div>
+
+          <h1 class="hook-title">Pentarch<br><span class="em">IGN Signal</span></h1>
+          <div class="hook-divider"></div>
+          <p class="hook-sub">Breakout with conviction &mdash; detected.</p>
+        </div>
+        <div class="hook-logo">Signal Pilot</div>
+      </div>
+    </div>
   </div>
 
-  <div class="page-title">
-    <h1>Post 145 — Pentarch IGN Signal</h1>
-    <p>Instagram Carousel • 5 Slides • 1080×1350px</p>
+
+  <!-- SLIDE 2 — WHAT IS IGN? -->
+  <div class="slide-wrapper" data-slide="2">
+    <span class="slide-label">Slide 2 &mdash; What Is IGN?</span>
+    <div class="slide s2">
+      <div class="slide-content">
+        <span class="slide-number">02 / 07</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--gold);">DEFINITION</div>
+          <div class="accent-line" style="background:var(--gold);"></div>
+
+          <h2 class="section-title">What Is<br><span style="color:var(--orange);">IGN?</span></h2>
+
+          <div class="sig-badge ign"><span class="badge-dot"></span> IGN &mdash; IGNITION</div>
+
+          <div class="cond-grid">
+            <div class="cond-card">
+              <div class="cond-icon" style="background:var(--orange-l);">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#d9896a" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="cond-body">
+                <div class="cb-title">Breakout Confirmation</div>
+                <div class="cb-desc">IGN fires when Pentarch detects a breakout backed by genuine conviction across all five components.</div>
+              </div>
+            </div>
+            <div class="cond-card">
+              <div class="cond-icon" style="background:var(--teal-l);">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#5eecd4" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="#5eecd4" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div class="cond-body">
+                <div class="cb-title">Early Momentum Detection</div>
+                <div class="cb-desc">Catches the shift from accumulation to markup &mdash; before price fully extends.</div>
+              </div>
+            </div>
+            <div class="cond-card">
+              <div class="cond-icon" style="background:var(--gold-l);">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M3 17l6-6 4 4 8-8" stroke="#c9a962" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h6v6" stroke="#c9a962" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="cond-body">
+                <div class="cb-title">Directional Bias</div>
+                <div class="cb-desc">Tells you <em>which way</em> the market is leaning with multi-factor consensus.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="insight-box">
+            <div class="ib-tag">KEY INSIGHT</div>
+            <div class="ib-text">IGN is not a simple moving average crossover. It requires consensus across five independent components before firing.</div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
   </div>
 
-  <div class="carousel-grid">
 
-    <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-1">
-        <div class="slide-content">
-          <div class="cine-label">INDICATOR</div>
-          <div class="hook-main">Pentarch IGN Signal Deep Dive</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub"></p>
-          <div class="cine-logo">Signal Pilot</div>
-        </div>
-      </div>
-    </div>
+  <!-- SLIDE 3 — WHEN DOES IGN FIRE? -->
+  <div class="slide-wrapper" data-slide="3">
+    <span class="slide-label">Slide 3 &mdash; When Does IGN Fire?</span>
+    <div class="slide s3">
+      <div class="slide-content">
+        <span class="slide-number">03 / 07</span>
 
-    <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Definition</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">02 / 05</span>
-          <div class="center-content">
-            <div class="signal-card">
-              <span class="signal-badge">IGN</span>
-              <h3>IGNITION SIGNAL</h3>
-              <ul class="feature-list">
-                <li>Early momentum detection</li>
-                <li>Trend initiation marker</li>
-                <li>First sign of directional bias</li>
-                <li>Precedes larger moves</li>
-              </ul>
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--orange);">CONDITIONS</div>
+          <div class="accent-line" style="background:var(--orange);"></div>
+
+          <h2 class="section-title">When Does<br><span style="color:var(--orange);">IGN Fire?</span></h2>
+
+          <div class="pent-visual">
+            <div class="pent-ring">
+              <svg viewBox="0 0 200 200" fill="none">
+                <!-- pentagon outline -->
+                <polygon points="100,20 185,78 153,170 47,170 15,78" stroke="rgba(217,137,106,.3)" stroke-width="1.5" fill="none"/>
+                <polygon points="100,45 160,85 140,150 60,150 40,85" stroke="rgba(217,137,106,.12)" stroke-width="1" fill="none" stroke-dasharray="3 3"/>
+                <!-- 5 component nodes -->
+                <circle cx="100" cy="20" r="6" fill="#d9896a" opacity=".8"/>
+                <circle cx="185" cy="78" r="6" fill="#5eecd4" opacity=".8"/>
+                <circle cx="153" cy="170" r="6" fill="#c9a962" opacity=".8"/>
+                <circle cx="47" cy="170" r="6" fill="#4a90d9" opacity=".8"/>
+                <circle cx="15" cy="78" r="6" fill="#4ad97a" opacity=".8"/>
+                <!-- center IGN glow -->
+                <circle cx="100" cy="100" r="18" fill="url(#pentGlow)" opacity=".5"/>
+                <text x="100" y="104" fill="#d9896a" font-size="12" font-weight="bold" text-anchor="middle" font-family="monospace">IGN</text>
+                <!-- connecting lines to center -->
+                <line x1="100" y1="20" x2="100" y2="82" stroke="rgba(217,137,106,.2)" stroke-width="1"/>
+                <line x1="185" y1="78" x2="118" y2="100" stroke="rgba(94,236,212,.15)" stroke-width="1"/>
+                <line x1="153" y1="170" x2="112" y2="118" stroke="rgba(201,169,98,.15)" stroke-width="1"/>
+                <line x1="47" y1="170" x2="88" y2="118" stroke="rgba(74,144,217,.15)" stroke-width="1"/>
+                <line x1="15" y1="78" x2="82" y2="100" stroke="rgba(74,217,122,.15)" stroke-width="1"/>
+                <defs><radialGradient id="pentGlow"><stop offset="0%" stop-color="#d9896a"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+              </svg>
+            </div>
+
+            <div class="pent-labels">
+              <span class="pl-item"><span class="pl-dot" style="background:var(--orange);"></span> Momentum</span>
+              <span class="pl-item"><span class="pl-dot" style="background:var(--teal);"></span> Volume</span>
+              <span class="pl-item"><span class="pl-dot" style="background:var(--gold);"></span> Trend</span>
+              <span class="pl-item"><span class="pl-dot" style="background:var(--blue);"></span> Cycle</span>
+              <span class="pl-item"><span class="pl-dot" style="background:var(--green);"></span> Volatility</span>
             </div>
           </div>
-          <span class="brand-mark">SIGNALPILOT</span>
+
+          <ul class="check-list">
+            <li><span class="cl-mark" style="color:var(--green);">&check;</span> Volume confirms the move</li>
+            <li><span class="cl-mark" style="color:var(--green);">&check;</span> Cycle shifting from accumulation to markup</li>
+            <li><span class="cl-mark" style="color:var(--green);">&check;</span> Momentum building in one direction</li>
+            <li><span class="cl-mark" style="color:var(--green);">&check;</span> Trend structure aligning</li>
+            <li><span class="cl-mark" style="color:var(--green);">&check;</span> Volatility expanding into the breakout</li>
+          </ul>
         </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
       </div>
     </div>
-
-    <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Meaning</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">03 / 05</span>
-          <div class="center-content">
-            <div class="signal-card meaning">
-              <h3>WHAT IGN TELLS YOU</h3>
-              <ul class="feature-list">
-                <li>Momentum is building in one direction</li>
-                <li>Smart money may be accumulating</li>
-                <li>Prepare for potential breakout</li>
-                <li>Watch for confirmation signals</li>
-              </ul>
-            </div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Trading</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">04 / 05</span>
-          <div class="center-content">
-            <div class="signal-card trading">
-              <h3>HOW TO TRADE IGN</h3>
-              <ul class="feature-list">
-                <li>Wait for price structure confirmation</li>
-                <li>Look for FVG or OB entry points</li>
-                <li>Use tight stops below structure</li>
-                <li>Scale in as trend confirms</li>
-              </ul>
-            </div>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — CTA</span>
-      <div class="slide">
-        <div class="slide-bg"><video autoplay loop muted playsinline><source src="../../videos/starfield-bg.mp4" type="video/mp4"></video></div>
-        <div class="slide-content">
-          <span class="slide-number">05 / 05</span>
-          <div class="center-content">
-            <h2 class="cta-title">Catch the<br><span class="emphasis">Ignition</span></h2>
-            <p class="cta-text">Be early, not late.</p>
-            <p class="cta-text">Link in bio</p>
-          </div>
-          <span class="brand-mark">SIGNALPILOT</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <script>
-    const bgToggle = document.getElementById('bg-toggle');
-    const opacityControl = document.getElementById('opacity-control');
-    const slides = document.querySelectorAll('.slide');
-    const videos = document.querySelectorAll('.slide-bg video');
 
-    bgToggle.addEventListener('change', (e) => { slides.forEach(slide => slide.classList.toggle('bg-black', e.target.value === 'black')); });
-    opacityControl.addEventListener('change', (e) => { videos.forEach(video => video.style.opacity = e.target.value); });
+  <!-- SLIDE 4 — WHAT IGN IS NOT -->
+  <div class="slide-wrapper" data-slide="4">
+    <span class="slide-label">Slide 4 &mdash; What IGN Is NOT</span>
+    <div class="slide s4">
+      <div class="slide-content">
+        <span class="slide-number">04 / 07</span>
 
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false, currentExportSlide = 0;
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--red);">MISCONCEPTIONS</div>
+          <div class="accent-line" style="background:var(--red);"></div>
 
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) { exportBtn.textContent = 'Exit Export (←/→ to navigate)'; currentExportSlide = 0; updateExportSlide(); }
-      else { exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
-    });
+          <h2 class="section-title">What IGN<br><span style="color:var(--red);">Is NOT</span></h2>
 
-    function updateExportSlide() { slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide)); }
+          <div class="myth-grid">
+            <div class="myth-card wrong">
+              <div class="mc-wrong"><span class="mc-icon">&times;</span><span class="mc-label">NOT AN ENTRY SIGNAL</span></div>
+              <div class="mc-text">IGN does not tell you to buy or sell right now. It tells you momentum is igniting.</div>
+              <div class="mc-correction">Use IGN as context, not as a trigger. Pair it with structure for entries.</div>
+            </div>
+            <div class="myth-card wrong">
+              <div class="mc-wrong"><span class="mc-icon">&times;</span><span class="mc-label">NOT A GUARANTEE</span></div>
+              <div class="mc-text">Breakouts can fail. IGN detects conviction, not certainty.</div>
+              <div class="mc-correction">Always use stops. IGN improves odds, it doesn&rsquo;t eliminate risk.</div>
+            </div>
+            <div class="myth-card wrong">
+              <div class="mc-wrong"><span class="mc-icon">&times;</span><span class="mc-label">NOT A SIMPLE CROSSOVER</span></div>
+              <div class="mc-text">Unlike MA crossovers, IGN requires five independent factors to align simultaneously.</div>
+              <div class="mc-correction">This is why IGN fires less often &mdash; but when it does, it means something.</div>
+            </div>
+          </div>
 
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight' || e.key === ' ') { currentExportSlide = (currentExportSlide + 1) % slideWrappers.length; updateExportSlide(); }
-      else if (e.key === 'ArrowLeft') { currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length; updateExportSlide(); }
-      else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
-    });
-  </script>
+          <div class="key-box">
+            <div class="kb-tag">REMEMBER</div>
+            <div class="kb-text">Fewer signals, higher quality. That&rsquo;s the Pentarch philosophy.</div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SLIDE 5 — HOW TO USE IGN -->
+  <div class="slide-wrapper" data-slide="5">
+    <span class="slide-label">Slide 5 &mdash; How To Use IGN</span>
+    <div class="slide s5">
+      <div class="slide-content">
+        <span class="slide-number">05 / 07</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--green);">PRACTICAL USE</div>
+          <div class="accent-line" style="background:var(--green);"></div>
+
+          <h2 class="section-title">How To<br><span style="color:var(--green);">Use IGN</span></h2>
+
+          <div class="usage-grid">
+            <div class="usage-card">
+              <div class="uc-header">
+                <div class="uc-num" style="color:var(--green);">01</div>
+                <div class="uc-title">IGN + Structure Break</div>
+              </div>
+              <div class="uc-desc">Wait for IGN to fire, then look for a clean break of market structure on your entry timeframe. The IGN gives you direction &mdash; structure gives you the entry.</div>
+              <span class="uc-tag" style="background:var(--green-l); color:var(--green); border:1px solid var(--green-b);">HIGH CONVICTION</span>
+            </div>
+            <div class="usage-card">
+              <div class="uc-header">
+                <div class="uc-num" style="color:var(--gold);">02</div>
+                <div class="uc-title">IGN + Key Level</div>
+              </div>
+              <div class="uc-desc">IGN fires near a major support/resistance zone. The level provides the stop, the IGN provides the direction. Look for pullback to the breakout zone on 4H.</div>
+              <span class="uc-tag" style="background:var(--gold-l); color:var(--gold); border:1px solid var(--gold-b);">PRECISION</span>
+            </div>
+            <div class="usage-card">
+              <div class="uc-header">
+                <div class="uc-num" style="color:var(--orange);">03</div>
+                <div class="uc-title">IGN as Bias Filter</div>
+              </div>
+              <div class="uc-desc">Use daily IGN to establish directional bias, then only take trades in that direction on lower timeframes. Reduces counter-trend mistakes.</div>
+              <span class="uc-tag" style="background:var(--orange-l); color:var(--orange); border:1px solid var(--orange-b);">FILTERED</span>
+            </div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SLIDE 6 — POWER COMBO: IGN + VOLUME ORACLE -->
+  <div class="slide-wrapper" data-slide="6">
+    <span class="slide-label">Slide 6 &mdash; Power Combo</span>
+    <div class="slide s6">
+      <div class="slide-content">
+        <span class="slide-number">06 / 07</span>
+
+        <div style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:3%;">
+          <div class="section-tag" style="color:var(--purple);">POWER COMBO</div>
+          <div class="accent-line" style="background:var(--purple);"></div>
+
+          <h2 class="section-title">IGN +<br><span style="color:var(--purple);">Volume Oracle</span></h2>
+
+          <div class="combo-wrap">
+            <div class="combo-card">
+              <div class="combo-half">
+                <div class="ch-icon" style="background:var(--orange-l);">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#d9896a" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="ch-name">Pentarch IGN</div>
+                <div class="ch-role">Detects breakout conviction across five factors</div>
+              </div>
+              <div class="combo-plus">+</div>
+              <div class="combo-half">
+                <div class="ch-icon" style="background:var(--purple-l);">
+                  <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="12" width="4" height="9" rx="1" stroke="#9a6dd7" stroke-width="1.2"/><rect x="10" y="7" width="4" height="14" rx="1" stroke="#9a6dd7" stroke-width="1.2"/><rect x="17" y="3" width="4" height="18" rx="1" stroke="#9a6dd7" stroke-width="1.2"/></svg>
+                </div>
+                <div class="ch-name">Volume Oracle</div>
+                <div class="ch-role">Confirms real accumulation behind the move</div>
+              </div>
+            </div>
+
+            <div class="combo-result">
+              <div class="cr-tag">COMBINED RESULT</div>
+              <div class="cr-title">Double Confirmation Filter</div>
+              <div class="cr-desc">When IGN fires and Volume Oracle shows accumulation, you have two independent systems agreeing. This filters out false breakouts where price moves but volume doesn&rsquo;t support the move.</div>
+            </div>
+
+            <ul class="check-list">
+              <li><span class="cl-mark" style="color:var(--green);">&check;</span> IGN fires on daily &mdash; direction confirmed</li>
+              <li><span class="cl-mark" style="color:var(--green);">&check;</span> Volume Oracle shows accumulation &mdash; smart money agrees</li>
+              <li><span class="cl-mark" style="color:var(--green);">&check;</span> Wait for pullback to breakout zone on 4H</li>
+              <li><span class="cl-mark" style="color:var(--green);">&check;</span> Enter with structure &mdash; stop below breakout level</li>
+            </ul>
+          </div>
+
+          <div class="insight-box" style="background:var(--purple-l); border-color:var(--purple-b);">
+            <div class="ib-tag" style="color:var(--purple);">PRO TIP</div>
+            <div class="ib-text">IGN without Volume Oracle support? Be cautious. The breakout may lack institutional backing. Scale down your position size.</div>
+          </div>
+        </div>
+
+        <span class="brand-mark">SIGNALPILOT</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SLIDE 7 — CTA -->
+  <div class="slide-wrapper" data-slide="7">
+    <span class="slide-label">Slide 7 &mdash; CTA</span>
+    <div class="slide s7">
+      <div class="slide-content">
+        <div class="cta-box" style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+
+          <div class="orb-wrap" style="margin-bottom:8%;">
+            <div class="orb-ring"></div>
+            <svg class="orb-svg" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="28" stroke="rgba(217,137,106,.3)" stroke-width="1.5" fill="none"/>
+              <polygon points="52,25 44,48 50,48 47,75 58,46 52,46" fill="rgba(217,137,106,.5)" stroke="rgba(217,137,106,.6)" stroke-width="0.5"/>
+              <circle cx="50" cy="50" r="30" fill="url(#ctaGlow)" opacity=".12"/>
+              <defs><radialGradient id="ctaGlow"><stop offset="0%" stop-color="#d9896a"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+            </svg>
+          </div>
+
+          <h2 class="cta-title">Catch the<br><span class="em">Ignition</span></h2>
+          <p class="cta-sub">See Pentarch IGN in action on your charts.<br>Start your free trial today.</p>
+          <div class="cta-btn">LINK IN BIO</div>
+
+          <div class="pill-row" style="margin-top:5%; justify-content:center;">
+            <span class="pill orange">Pentarch</span>
+            <span class="pill gold">IGN Signal</span>
+            <span class="pill teal">Free Trial</span>
+          </div>
+        </div>
+        <div class="hook-logo">Signal Pilot</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const exportBtn = document.getElementById('export-btn');
+const slideWrappers = document.querySelectorAll('.slide-wrapper');
+let exportMode = false, currentExportSlide = 0;
+
+exportBtn.addEventListener('click', () => {
+  exportMode = !exportMode;
+  document.body.classList.toggle('export-mode', exportMode);
+  if (exportMode) {
+    exportBtn.textContent = 'Exit Export (\u2190/\u2192 to navigate)';
+    currentExportSlide = 0;
+    updateExportSlide();
+  } else {
+    exportBtn.textContent = 'Export Mode';
+    slideWrappers.forEach(w => w.classList.remove('active'));
+  }
+});
+
+function updateExportSlide() {
+  slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide));
+}
+
+document.addEventListener('keydown', (e) => {
+  if (!exportMode) return;
+  if (e.key === 'ArrowRight' || e.key === ' ') {
+    currentExportSlide = (currentExportSlide + 1) % slideWrappers.length;
+    updateExportSlide();
+  } else if (e.key === 'ArrowLeft') {
+    currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length;
+    updateExportSlide();
+  } else if (e.key === 'Escape') {
+    exportMode = false;
+    document.body.classList.remove('export-mode');
+    exportBtn.textContent = 'Export Mode';
+    slideWrappers.forEach(w => w.classList.remove('active'));
+  }
+});
+</script>
 </body>
 </html>

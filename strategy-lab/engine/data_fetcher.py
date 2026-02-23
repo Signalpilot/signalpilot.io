@@ -16,11 +16,112 @@ DATA_DIR.mkdir(exist_ok=True)
 
 # Yahoo Finance ticker mapping
 SYMBOL_MAP = {
+    # Original
     "XAUUSD": "GC=F",       # Gold futures
     "NAS100": "NQ=F",       # Nasdaq 100 futures
     "USTEC":  "NQ=F",       # Alias
     "USDJPY": "USDJPY=X",   # USD/JPY forex
     "BTCUSD": "BTC-USD",    # Bitcoin
+    # Commodities
+    "XAGUSD": "SI=F",       # Silver futures
+    "WTIUSD": "CL=F",       # Crude Oil WTI
+    "NGUSD":  "NG=F",       # Natural Gas
+    "COPPUSD": "HG=F",      # Copper futures
+    # Indices
+    "SP500":  "ES=F",       # S&P 500 futures
+    "DOW30":  "YM=F",       # Dow Jones futures
+    "RUSS2K": "RTY=F",      # Russell 2000 futures
+    # Crypto — Top Bybit Perpetual Contracts
+    "ETHUSD":   "ETH-USD",      # Ethereum
+    "SOLUSD":   "SOL-USD",      # Solana
+    "BNBUSD":   "BNB-USD",      # BNB
+    "XRPUSD":   "XRP-USD",      # Ripple
+    "DOGEUSD":  "DOGE-USD",     # Dogecoin
+    "ADAUSD":   "ADA-USD",      # Cardano
+    "AVAXUSD":  "AVAX-USD",     # Avalanche
+    "LINKUSD":  "LINK-USD",     # Chainlink
+    "DOTUSD":   "DOT-USD",      # Polkadot
+    "MATICUSD": "MATIC-USD",    # Polygon
+    "SHIBUSD":  "SHIB-USD",     # Shiba Inu
+    "UNIUSD":   "UNI-USD",     # Uniswap
+    "LTCUSD":   "LTC-USD",      # Litecoin
+    "BCHUSD":   "BCH-USD",      # Bitcoin Cash
+    "NEARUSD":  "NEAR-USD",     # NEAR Protocol
+    "APTUSD":   "APT-USD",      # Aptos
+    "ARBUSD":   "ARB11841-USD", # Arbitrum
+    "OPUSD":    "OP-USD",       # Optimism
+    "SUIUSD":   "SUI20947-USD", # Sui
+    "FILUSD":   "FIL-USD",      # Filecoin
+    "ATOMUSD":  "ATOM-USD",     # Cosmos
+    "ICPUSD":   "ICP-USD",      # Internet Computer
+    "INJUSD":   "INJ-USD",      # Injective
+    "FETUSD":   "FET-USD",      # Fetch.ai
+    "RNDRUSD":  "RNDR-USD",     # Render
+    "PEPEUSD":  "PEPE24478-USD",# PEPE
+    "STXUSD":   "STX4847-USD",  # Stacks
+    "TRXUSD":   "TRX-USD",     # TRON
+    "AABORUSD": "AAVE-USD",     # Aave (mapped as AAVEUSD below)
+    "AAVEUSD":  "AAVE-USD",     # Aave
+    "MKRUSD":   "MKR-USD",      # Maker
+    "CRVUSD":   "CRV-USD",      # Curve
+    "WLDUSD":   "WLD-USD",      # Worldcoin
+    "ALGOUSD":  "ALGO-USD",     # Algorand
+    "FTMUSD":   "FTM-USD",      # Fantom
+    "SANDUSD":  "SAND-USD",     # The Sandbox
+    "MANAUSD":  "MANA-USD",     # Decentraland
+    "AXSUSD":   "AXS-USD",      # Axie Infinity
+    "GALAUSD":  "GALA-USD",     # Gala
+    "EOSUSD":   "EOS-USD",      # EOS
+    "XLMUSD":   "XLM-USD",      # Stellar
+    "XTZUSD":   "XTZ-USD",      # Tezos
+    "THETAUSD": "THETA-USD",    # Theta Network
+    "VETUSD":   "VET-USD",      # VeChain
+    "ETCUSD":   "ETC-USD",      # Ethereum Classic
+    "FLOWUSD":  "FLOW-USD",     # Flow
+    "GMTUSD":   "GMT-USD",      # GMT
+    "APEUSD":   "APE-USD",      # ApeCoin
+    "LDOUSD":   "LDO-USD",      # Lido DAO
+    "CHZUSD":   "CHZ-USD",      # Chiliz
+    "GRTUSD":   "GRT-USD",      # The Graph
+    "ENSUSD":   "ENS-USD",      # ENS
+    "SNXUSD":   "SNX-USD",      # Synthetix
+    "COMPUSD":  "COMP-USD",     # Compound
+    "IMXUSD":   "IMX-USD",      # Immutable X
+    "RUNEUSD":  "RUNE-USD",     # THORChain
+    "ZECUSD":   "ZEC-USD",      # Zcash
+    "DASHUSD":  "DASH-USD",     # Dash
+    "KAVAUSD":  "KAVA-USD",     # Kava
+    "MINAUSD":  "MINA-USD",     # Mina Protocol
+    "CELOUSD":  "CELO-USD",     # Celo
+    "1INCHUSD": "1INCH-USD",    # 1inch
+    "SUSHIUSD": "SUSHI-USD",    # SushiSwap
+    "YFIUSD":   "YFI-USD",      # Yearn Finance
+    "BATUSD":   "BAT-USD",      # Basic Attention Token
+    "ZILUSD":   "ZIL-USD",      # Zilliqa
+    "ROSEUSD":  "ROSE-USD",     # Oasis Network
+    "KSMUSD":   "KSM-USD",      # Kusama
+    "ONEUSD":   "ONE-USD",      # Harmony
+    "ANKRUSD":  "ANKR-USD",     # Ankr
+    "SKLUSD":   "SKL-USD",      # SKALE
+    "WOOUSD":   "WOO-USD",      # WOO Network
+    "MAGICUSD": "MAGIC-USD",    # Magic
+    "GMXUSD":   "GMX-USD",      # GMX
+    "SSVUSD":   "SSV-USD",      # SSV Network
+    "PENDLEUSD":"PENDLE-USD",   # Pendle
+    "TIAUSD":   "TIA22861-USD", # Celestia
+    "SEIUSD":   "SEI-USD",      # Sei
+    "JUPUSD":   "JUP29210-USD", # Jupiter
+    "ONDOUSD":  "ONDO-USD",     # Ondo Finance
+    "TONUSD":   "TON11419-USD", # Toncoin
+    "BONKUSD":  "BONK-USD",     # Bonk
+    "FLOKIUSD": "FLOKI-USD",    # Floki
+    # Forex
+    "EURUSD": "EURUSD=X",   # EUR/USD
+    "GBPUSD": "GBPUSD=X",   # GBP/USD
+    "AUDUSD": "AUDUSD=X",   # AUD/USD
+    "USDCAD": "USDCAD=X",   # USD/CAD
+    "GBPJPY": "GBPJPY=X",   # GBP/JPY
+    "EURJPY": "EURJPY=X",   # EUR/JPY
 }
 
 # Yahoo Finance interval values

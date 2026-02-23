@@ -3,281 +3,1672 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 352 — Fibonacci Retracements | Carousel Preview</title>
+  <title>Post 352 — The Power of "I Don't Know" | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --bg-dark: #0a0a0f; --accent-blue: #4a90d9; --accent-gold: #c9a962; --accent-red: #d94a4a; --accent-green: #4ad97a; --text-primary: #e8e8e8; --text-secondary: #a0a0a0; --text-dim: #6a6a6a; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg-dark); color: var(--text-primary); font-family: 'Inter', sans-serif; min-height: 100vh; padding: 40px 20px; }
-    .controls { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 12px; align-items: center; }
-    .controls label { color: var(--text-secondary); font-size: 12px; display: flex; align-items: center; gap: 6px; }
-    .controls button { background: var(--accent-blue); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-    .page-title { text-align: center; margin-bottom: 40px; }
-    .page-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
-    .page-title p { color: var(--text-dim); font-size: 14px; }
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1400px; margin: 0 auto; }
-    .slide-wrapper { container-type: inline-size; aspect-ratio: 4 / 5; position: relative; border-radius: 12px; overflow: hidden; background: var(--bg-dark); box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
-    .slide-wrapper .bg-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: var(--video-opacity, 0.08); pointer-events: none; }
-    .slide-wrapper .slide-content { position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8%; text-align: center; }
-    .slide-number { position: absolute; top: 4%; left: 4%; font-size: clamp(9px, 2cqw, 11px); color: var(--text-dim); letter-spacing: 1px; }
-    .brand-mark { position: absolute; bottom: 4%; right: 4%; font-size: clamp(8px, 1.8cqw, 10px); color: var(--text-dim); letter-spacing: 1px; }
-    .slide-icon { font-size: clamp(32px, 8cqw, 56px); margin-bottom: 4%; }
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 5cqw, 32px); font-weight: 600; margin-bottom: 3%; line-height: 1.2; overflow-wrap: break-word; }
-    .slide-title.large { font-size: clamp(26px, 7cqw, 48px); }
-    .slide-subtitle { font-size: clamp(10px, 2.5cqw, 14px); color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4%; }
-    .slide-body { font-size: clamp(12px, 3cqw, 16px); color: var(--text-secondary); line-height: 1.7; max-width: 90%; }
-    .fib-box { width: 100%; max-width: 340px; border-radius: 16px; padding: 28px; margin: 16px 0; text-align: left; background: rgba(74, 144, 217, 0.1); border: 2px solid rgba(74, 144, 217, 0.4); }
-    .fib-box.gold { background: rgba(201, 169, 98, 0.1); border-color: rgba(201, 169, 98, 0.4); }
-    .fib-box.green { background: rgba(74, 217, 122, 0.1); border-color: rgba(74, 217, 122, 0.4); }
-    .fib-box.yellow { background: rgba(217, 201, 74, 0.1); border-color: rgba(217, 201, 74, 0.4); }
-    .fib-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--accent-blue); margin-bottom: 16px; }
-    .fib-box.gold .fib-title { color: var(--accent-gold); }
-    .fib-box.green .fib-title { color: var(--accent-green); }
-    .fib-box.yellow .fib-title { color: #d9c94a; }
-    .fib-list { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-    .fib-levels { width: 100%; max-width: 340px; }
-    .fib-level { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(74, 144, 217, 0.08); border-radius: 8px; margin-bottom: 8px; }
-    .fib-level.golden { background: rgba(201, 169, 98, 0.15); border: 1px solid rgba(201, 169, 98, 0.4); }
-    .fib-percent { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--accent-blue); }
-    .fib-level.golden .fib-percent { color: var(--accent-gold); }
-    .fib-desc { font-size: 12px; color: var(--text-secondary); }
-    .cta-link { display: inline-block; margin-top: 24px; padding: 14px 32px; background: var(--accent-gold); color: var(--bg-dark); text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 14px; }
-    body.export-mode { padding: 0; background: #000; }
-    body.export-mode .controls, body.export-mode .page-title { display: none; }
-    body.export-mode .carousel-grid { display: block; }
-    body.export-mode .slide-wrapper { display: none; width: 1080px; height: 1350px; border-radius: 0; margin: 0; }
-    body.export-mode .slide-wrapper.active { display: block; }
-    .export-nav { display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); gap: 12px; z-index: 1000; }
-    body.export-mode .export-nav { display: flex; }
-    .export-nav button { background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-    .export-nav .slide-indicator { background: rgba(255,255,255,0.1); color: white; padding: 12px 24px; border-radius: 8px; }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
+    /* ════════════════════════════════════════════════════════════════
+       ROOT VARIABLES & DESIGN TOKENS
+       ════════════════════════════════════════════════════════════════ */
+    :root {
+      /* Backgrounds */
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(20, 20, 30, 0.85);
+      --bg-card-alt: rgba(15, 18, 22, 0.9);
+      --bg-surface: rgba(12, 14, 18, 0.95);
+
+      /* Accent Colors */
+      --accent-teal: #5eead4;
+      --accent-teal-bright: #7af5e2;
+      --accent-teal-dim: rgba(94, 234, 212, 0.4);
+      --accent-teal-glow: rgba(94, 234, 212, 0.15);
+      --accent-teal-subtle: rgba(94, 234, 212, 0.08);
+      --accent-gold: #c9a962;
+      --accent-blue: #4a90d9;
+      --accent-green: #4ad97a;
+      --accent-red: #d94a4a;
+      --accent-amber: #e8a838;
+      --accent-purple: #9b6dd7;
+
+      /* Text Colors */
+      --text-primary: #e8e6e3;
+      --text-secondary: #a9a6a2;
+      --text-muted: #6b6965;
+      --text-dim: #4a4845;
+
+      /* Borders */
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-teal: rgba(94, 234, 212, 0.2);
+      --border-teal-strong: rgba(94, 234, 212, 0.4);
+
+      /* Sidebar */
+      --sidebar-width: 5px;
+      --sidebar-gradient: linear-gradient(180deg, rgba(94, 234, 212, 0.9) 0%, rgba(45, 180, 160, 0.7) 100%);
+
+      /* Spacing */
+      --slide-padding: clamp(36px, 6.67cqw, 72px);
+      --slide-padding-left: clamp(43px, 7.96cqw, 86px);
+
+      /* Typography Scale */
+      --fs-xs: clamp(9px, 1.3cqw, 12px);
+      --fs-sm: clamp(10px, 1.67cqw, 14px);
+      --fs-base: clamp(12px, 2.22cqw, 18px);
+      --fs-md: clamp(14px, 2.59cqw, 22px);
+      --fs-lg: clamp(18px, 3.33cqw, 28px);
+      --fs-xl: clamp(22px, 4.07cqw, 36px);
+      --fs-2xl: clamp(28px, 5.19cqw, 44px);
+      --fs-3xl: clamp(32px, 5.93cqw, 52px);
+      --fs-4xl: clamp(38px, 7.04cqw, 60px);
+
+      /* Transitions */
+      --transition-fast: 0.15s ease;
+      --transition-smooth: 0.3s ease;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       BASE RESET & GLOBAL STYLES
+       ════════════════════════════════════════════════════════════════ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #050507;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-primary);
+      padding: clamp(16px, 4cqw, 40px) clamp(12px, 3cqw, 20px);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       CONTROLS BAR
+       ════════════════════════════════════════════════════════════════ */
+    .controls {
+      max-width: 1800px;
+      margin: 0 auto clamp(16px, 3cqw, 32px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .controls .toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .controls .toggle-label input {
+      cursor: pointer;
+      accent-color: var(--accent-teal);
+    }
+
+    .controls .export-btn {
+      padding: 8px 20px;
+      background: var(--accent-teal);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--transition-fast);
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    .controls .export-btn:hover {
+      opacity: 0.88;
+    }
+
+    .controls .export-btn.active {
+      background: var(--accent-red);
+      color: #fff;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       PAGE TITLE
+       ════════════════════════════════════════════════════════════════ */
+    .page-title {
+      text-align: center;
+      max-width: 1800px;
+      margin: 0 auto clamp(24px, 4cqw, 48px);
+    }
+
+    .page-title h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 4cqw, 36px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .page-title p {
+      font-size: clamp(12px, 2cqw, 14px);
+      color: var(--text-muted);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       CAROUSEL GRID LAYOUT
+       ════════════════════════════════════════════════════════════════ */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr));
+      gap: clamp(24px, 4cqw, 48px);
+      max-width: 1800px;
+      margin: 0 auto;
+      justify-items: center;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(8px, 2cqw, 16px);
+      width: 100%;
+      max-width: 1080px;
+      container-type: inline-size;
+    }
+
+    .slide-label {
+      font-size: clamp(10px, 1.5cqw, 14px);
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       SLIDE BASE — 4:5 ASPECT RATIO
+       ════════════════════════════════════════════════════════════════ */
+    .slide {
+      width: 100%;
+      max-width: 1080px;
+      aspect-ratio: 4 / 5;
+      background-color: var(--bg-dark);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: var(--slide-padding) var(--slide-padding) var(--slide-padding) var(--slide-padding-left);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-number {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 3px;
+      margin-bottom: auto;
+    }
+
+    .brand-mark {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(10px, 1.2cqw, 13px);
+      font-weight: 600;
+      letter-spacing: 4px;
+      color: var(--text-muted);
+      margin-top: auto;
+      text-align: center;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       TEAL LEFT SIDEBAR — APPLIED TO ALL SLIDES (::after)
+       ════════════════════════════════════════════════════════════════ */
+    .slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100%;
+      background: var(--sidebar-gradient);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       ORB CONTAINER — TEAL PULSE (QUESTION MARK THEME)
+       ════════════════════════════════════════════════════════════════ */
+    .orb-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+    }
+
+    .orb-teal-primary {
+      width: 45%;
+      height: 45%;
+      top: -10%;
+      right: -10%;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.12) 0%, transparent 70%);
+    }
+
+    .orb-teal-secondary {
+      width: 35%;
+      height: 35%;
+      bottom: 5%;
+      left: -5%;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.08) 0%, transparent 70%);
+    }
+
+    .orb-teal-accent {
+      width: 25%;
+      height: 25%;
+      top: 40%;
+      left: 30%;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.06) 0%, transparent 60%);
+    }
+
+    .orb-question {
+      width: 50%;
+      height: 50%;
+      top: 15%;
+      right: -15%;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.1) 0%, rgba(45, 180, 160, 0.04) 50%, transparent 70%);
+      filter: blur(100px);
+    }
+
+    .orb-uncertainty {
+      width: 60%;
+      height: 40%;
+      bottom: -10%;
+      left: 10%;
+      background: radial-gradient(ellipse, rgba(94, 234, 212, 0.07) 0%, transparent 65%);
+      filter: blur(90px);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       SLIDE BACKGROUNDS — DUAL RADIAL GRADIENTS WITH TEAL TINTS
+       ════════════════════════════════════════════════════════════════ */
+    .slide-2,
+    .slide-3,
+    .slide-4,
+    .slide-5,
+    .slide-6,
+    .slide-7,
+    .slide-8 {
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(94, 234, 212, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(94, 234, 212, 0.04) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%);
+    }
+
+    .slide-2::before,
+    .slide-3::before,
+    .slide-4::before,
+    .slide-5::before,
+    .slide-6::before,
+    .slide-7::before,
+    .slide-8::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(94, 234, 212, 0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       SLIDE 1 — CINEMATIC HOOK (TEAL BLOG)
+       ════════════════════════════════════════════════════════════════ */
     .slide-1 {
-      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
+      background: linear-gradient(180deg, #0a0c0f 0%, #070809 100%);
     }
 
     .slide-1::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(94, 234, 212, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(94, 234, 212, 0.05) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
-    }
-    
-    .slide-1::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
-      height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
-      z-index: 5;
-    }
-
-    .slide-1 .slide-bg,
-    .slide-1 .bg-video,
-    .slide-1 .video-bg,
-    .slide-1 video {
-      display: none !important;
     }
 
     .slide-1 .slide-content {
       align-items: center;
       text-align: center;
       justify-content: center;
-      z-index: 3;
+      padding: var(--slide-padding) var(--slide-padding) var(--slide-padding) var(--slide-padding-left);
     }
 
     .slide-1 .cine-label {
       font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+      font-size: clamp(10px, 1.6cqw, 14px);
+      font-weight: 500;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: rgba(94, 234, 212, 0.9);
-      margin-bottom: 8%;
+      margin-bottom: 6%;
+      position: relative;
+    }
+
+    .slide-1 .cine-label::before,
+    .slide-1 .cine-label::after {
+      content: '';
+      display: inline-block;
+      width: clamp(20px, 3.7cqw, 40px);
+      height: 1px;
+      background: rgba(94, 234, 212, 0.3);
+      vertical-align: middle;
+      margin: 0 clamp(8px, 1.5cqw, 16px);
     }
 
     .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 5.56cqw, 52px);
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.15;
       color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .slide-1 .hook-main em {
+      font-style: italic;
+      color: var(--accent-teal);
     }
 
     .slide-1 .cine-divider {
-      width: 60px;
+      width: clamp(40px, 7.4cqw, 80px);
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.6), transparent);
       margin-bottom: 4%;
     }
 
     .slide-1 .hook-sub {
       font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+      font-size: clamp(11px, 2cqw, 18px);
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: rgba(94, 234, 212, 0.4);
+      color: rgba(94, 234, 212, 0.45);
       line-height: 1.6;
+      max-width: 80%;
     }
 
     .slide-1 .cine-logo {
       position: absolute;
-      bottom: 8%;
+      bottom: 6%;
       left: 50%;
       transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(8px, 1.2cqw, 11px);
+      font-weight: 600;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.4);
+      color: rgba(94, 234, 212, 0.35);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       GLOBAL TYPOGRAPHY HELPERS
+       ════════════════════════════════════════════════════════════════ */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--fs-3xl);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: clamp(8px, 1.85cqw, 16px);
+    }
+
+    .section-title .teal {
+      color: var(--accent-teal);
+    }
+
+    .section-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-base);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: clamp(16px, 2.96cqw, 32px);
+    }
+
+    .teal-tag {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      background: rgba(94, 234, 212, 0.08);
+      border: 1px solid rgba(94, 234, 212, 0.15);
+      padding: clamp(4px, 0.74cqw, 8px) clamp(10px, 1.85cqw, 20px);
+      border-radius: 100px;
+      margin-bottom: clamp(12px, 2.22cqw, 24px);
+    }
+
+    .divider-line {
+      width: clamp(30px, 5.56cqw, 60px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-teal), transparent);
+      margin: clamp(12px, 2.22cqw, 24px) 0;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: CERTAINTY GRID / CERTAINTY CARDS
+       (Overconfidence vs. Humble Uncertainty comparison)
+       ════════════════════════════════════════════════════════════════ */
+    .certainty-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.48cqw, 14px);
+      width: 100%;
+      max-width: 95%;
+    }
+
+    .certainty-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: clamp(8px, 1.48cqw, 14px);
+      padding: clamp(14px, 2.59cqw, 26px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.11cqw, 12px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .certainty-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+    }
+
+    .certainty-card.certain::before {
+      background: linear-gradient(90deg, var(--accent-red), transparent);
+    }
+
+    .certainty-card.uncertain::before {
+      background: linear-gradient(90deg, var(--accent-teal), transparent);
+    }
+
+    .certainty-card .card-icon {
+      font-size: clamp(20px, 3.7cqw, 36px);
+      line-height: 1;
+    }
+
+    .certainty-card .card-label {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .certainty-card.certain .card-label {
+      color: var(--accent-red);
+    }
+
+    .certainty-card.uncertain .card-label {
+      color: var(--accent-teal);
+    }
+
+    .certainty-card .card-text {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .certainty-card .card-detail {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: POWER STACK / POWER ITEMS
+       (Benefits of saying "I don't know")
+       ════════════════════════════════════════════════════════════════ */
+    .power-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.48cqw, 14px);
+      width: 100%;
+      max-width: 90%;
+    }
+
+    .power-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 1.85cqw, 18px);
+      background: rgba(94, 234, 212, 0.04);
+      border: 1px solid rgba(94, 234, 212, 0.1);
+      border-radius: clamp(8px, 1.48cqw, 14px);
+      padding: clamp(12px, 2.22cqw, 22px) clamp(14px, 2.59cqw, 26px);
+      transition: border-color var(--transition-smooth);
+    }
+
+    .power-item:hover {
+      border-color: rgba(94, 234, 212, 0.25);
+    }
+
+    .power-item .item-icon {
+      width: clamp(28px, 5.19cqw, 44px);
+      height: clamp(28px, 5.19cqw, 44px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94, 234, 212, 0.18) 0%, rgba(94, 234, 212, 0.04) 60%, transparent 100%);
+      border: 1.5px solid rgba(94, 234, 212, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: clamp(12px, 2.22cqw, 20px);
+      box-shadow: 0 0 14px rgba(94, 234, 212, 0.06);
+    }
+
+    .power-item .item-body {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2px, 0.37cqw, 4px);
+    }
+
+    .power-item .item-title {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .power-item .item-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: QUOTE BLOCK
+       ════════════════════════════════════════════════════════════════ */
+    .quote-block {
+      background: rgba(94, 234, 212, 0.04);
+      border-left: 3px solid var(--accent-teal);
+      border-radius: 0 clamp(8px, 1.48cqw, 12px) clamp(8px, 1.48cqw, 12px) 0;
+      padding: clamp(14px, 2.59cqw, 28px) clamp(16px, 2.96cqw, 32px);
+      width: 100%;
+      max-width: 90%;
+      margin: clamp(8px, 1.48cqw, 16px) 0;
+      position: relative;
+    }
+
+    .quote-block::before {
+      content: '\201C';
+      position: absolute;
+      top: clamp(6px, 1.11cqw, 12px);
+      left: clamp(10px, 1.85cqw, 20px);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 6.67cqw, 60px);
+      color: rgba(94, 234, 212, 0.12);
+      line-height: 1;
+    }
+
+    .quote-block .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--fs-lg);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.5;
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .quote-attr {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--accent-teal-dim);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: SCENARIO CARD
+       (Trading scenarios where "I don't know" is the right answer)
+       ════════════════════════════════════════════════════════════════ */
+    .scenario-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.11cqw, 12px);
+      width: 100%;
+      max-width: 90%;
+    }
+
+    .scenario-card {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 1.85cqw, 18px);
+      padding: clamp(10px, 1.85cqw, 20px) clamp(12px, 2.22cqw, 24px);
+      background: var(--bg-card);
+      border-radius: clamp(8px, 1.48cqw, 12px);
+      border: 1px solid var(--border-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scenario-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent-teal), transparent);
+      border-radius: 2px;
+    }
+
+    .scenario-number {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--accent-teal);
+      background: rgba(94, 234, 212, 0.12);
+      width: clamp(24px, 4.44cqw, 40px);
+      height: clamp(24px, 4.44cqw, 40px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .scenario-body {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2px, 0.37cqw, 4px);
+    }
+
+    .scenario-body .scenario-title {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .scenario-body .scenario-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: PRACTICE STACK / PRACTICE ITEMS
+       ════════════════════════════════════════════════════════════════ */
+    .practice-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.48cqw, 14px);
+      width: 100%;
+      max-width: 90%;
+    }
+
+    .practice-item {
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 1.85cqw, 18px);
+      padding: clamp(10px, 1.85cqw, 18px) clamp(12px, 2.22cqw, 22px);
+      background: rgba(94, 234, 212, 0.03);
+      border: 1px solid rgba(94, 234, 212, 0.08);
+      border-radius: clamp(8px, 1.48cqw, 12px);
+      transition: border-color var(--transition-smooth), background var(--transition-smooth);
+    }
+
+    .practice-item:hover {
+      border-color: rgba(94, 234, 212, 0.2);
+      background: rgba(94, 234, 212, 0.06);
+    }
+
+    .practice-check {
+      width: clamp(20px, 3.7cqw, 32px);
+      height: clamp(20px, 3.7cqw, 32px);
+      border-radius: 50%;
+      background: rgba(94, 234, 212, 0.1);
+      border: 1.5px solid rgba(94, 234, 212, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent-teal);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+    }
+
+    .practice-text {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1px, 0.19cqw, 3px);
+    }
+
+    .practice-text strong {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .practice-text span {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: HOMEWORK CARD
+       ════════════════════════════════════════════════════════════════ */
+    .homework-card {
+      width: 100%;
+      max-width: 90%;
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.06) 0%, rgba(94, 234, 212, 0.02) 100%);
+      border: 1px solid rgba(94, 234, 212, 0.2);
+      border-radius: clamp(10px, 1.85cqw, 16px);
+      padding: clamp(16px, 2.96cqw, 32px);
+      margin: clamp(8px, 1.48cqw, 16px) 0;
+    }
+
+    .homework-card .hw-label {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: clamp(8px, 1.48cqw, 14px);
+      display: flex;
+      align-items: center;
+      gap: clamp(6px, 1.11cqw, 10px);
+    }
+
+    .homework-card .hw-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--fs-lg);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(8px, 1.48cqw, 14px);
+      line-height: 1.3;
+    }
+
+    .homework-card .hw-list {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .homework-card .hw-item {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px, 1.48cqw, 14px);
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .homework-card .hw-item .hw-bullet {
+      color: var(--accent-teal);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: var(--fs-sm);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: CALLOUT BOX
+       ════════════════════════════════════════════════════════════════ */
+    .callout-box {
+      width: 100%;
+      max-width: 90%;
+      background: rgba(94, 234, 212, 0.04);
+      border-left: 3px solid var(--accent-teal);
+      border-radius: 0 clamp(8px, 1.48cqw, 12px) clamp(8px, 1.48cqw, 12px) 0;
+      padding: clamp(12px, 2.22cqw, 24px) clamp(14px, 2.59cqw, 28px);
+      margin: clamp(6px, 1.11cqw, 12px) 0;
+    }
+
+    .callout-box .callout-label {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: clamp(6px, 1.11cqw, 10px);
+    }
+
+    .callout-box .callout-text {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      font-weight: 400;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .callout-box .callout-text em {
+      font-style: normal;
+      color: var(--accent-teal);
+      font-weight: 500;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: CTA SLIDE ELEMENTS
+       ════════════════════════════════════════════════════════════════ */
+    .cta-glow {
+      width: clamp(60px, 11.11cqw, 100px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.15) 0%, transparent 70%);
+      border: 1.5px solid rgba(94, 234, 212, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: clamp(12px, 2.22cqw, 24px);
+      position: relative;
+    }
+
+    .cta-glow::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(94, 234, 212, 0.08);
+      animation: cta-pulse 3s ease-in-out infinite;
+    }
+
+    .cta-glow::after {
+      content: '';
+      position: absolute;
+      inset: -16px;
+      border-radius: 50%;
+      border: 1px dashed rgba(94, 234, 212, 0.05);
+    }
+
+    .cta-glow-icon {
+      font-size: clamp(24px, 4.44cqw, 42px);
+      color: var(--accent-teal);
+    }
+
+    .cta-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--fs-2xl);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: clamp(8px, 1.48cqw, 16px);
+      text-align: center;
+    }
+
+    .cta-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-base);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 80%;
+      margin-bottom: clamp(16px, 2.96cqw, 32px);
+      text-align: center;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.12) 0%, rgba(94, 234, 212, 0.04) 100%);
+      border: 2px solid var(--accent-teal);
+      border-radius: 14px;
+      padding: clamp(12px, 2.22cqw, 24px) clamp(20px, 3.7cqw, 40px);
+      text-align: center;
+    }
+
+    .cta-box-text {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: clamp(4px, 0.74cqw, 8px);
+    }
+
+    .cta-link {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--accent-teal);
+      letter-spacing: 0.05em;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: WISDOM HIGHLIGHT BOX
+       ════════════════════════════════════════════════════════════════ */
+    .wisdom-highlight {
+      width: 100%;
+      max-width: 90%;
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.08) 0%, rgba(94, 234, 212, 0.02) 100%);
+      border: 1px solid var(--border-teal-strong);
+      border-radius: clamp(10px, 1.85cqw, 16px);
+      padding: clamp(16px, 2.96cqw, 28px);
+      text-align: center;
+      margin: clamp(8px, 1.48cqw, 16px) 0;
+    }
+
+    .wisdom-highlight .wisdom-icon {
+      font-size: clamp(28px, 5.19cqw, 48px);
+      margin-bottom: clamp(6px, 1.11cqw, 12px);
+    }
+
+    .wisdom-highlight .wisdom-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: var(--fs-xl);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    .wisdom-highlight .wisdom-text .teal {
+      color: var(--accent-teal);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       COMPONENT: IMPROVEMENT GRID
+       ════════════════════════════════════════════════════════════════ */
+    .improvement-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(8px, 1.48cqw, 14px);
+      width: 100%;
+      max-width: 95%;
+    }
+
+    .improvement-card {
+      background: rgba(94, 234, 212, 0.04);
+      border: 1px solid rgba(94, 234, 212, 0.1);
+      border-radius: clamp(8px, 1.48cqw, 12px);
+      padding: clamp(12px, 2.22cqw, 22px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 0.74cqw, 8px);
+      text-align: center;
+      transition: border-color var(--transition-smooth);
+    }
+
+    .improvement-card:hover {
+      border-color: rgba(94, 234, 212, 0.25);
+    }
+
+    .improvement-card .imp-icon {
+      font-size: clamp(22px, 4.07cqw, 36px);
+      line-height: 1;
+    }
+
+    .improvement-card .imp-title {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .improvement-card .imp-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--fs-xs);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       ANIMATIONS & KEYFRAMES
+       ════════════════════════════════════════════════════════════════ */
+    @keyframes cta-pulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    @keyframes subtle-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes teal-glow-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(94, 234, 212, 0.08); }
+      50% { box-shadow: 0 0 40px rgba(94, 234, 212, 0.16); }
+    }
+
+    @keyframes content-reveal {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes question-mark-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      25% { transform: translateY(-6px) rotate(3deg); opacity: 1; }
+      50% { transform: translateY(-2px) rotate(-2deg); opacity: 0.85; }
+      75% { transform: translateY(-8px) rotate(1deg); opacity: 0.95; }
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       EXPORT MODE OVERRIDES
+       ════════════════════════════════════════════════════════════════ */
+    body.export-mode {
+      padding: 0;
+      background: transparent;
+    }
+
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label {
+      display: none;
+    }
+
+    body.export-mode .carousel-grid {
+      display: block;
+    }
+
+    body.export-mode .slide-wrapper {
+      display: none;
+      margin: 0;
+    }
+
+    body.export-mode .slide-wrapper.active {
+      display: block;
+    }
+
+    body.export-mode .slide {
+      width: 1080px;
+      height: 1350px;
+      max-width: none;
+      border-radius: 0;
+      border: none;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       EXPORT NAVIGATION BAR
+       ════════════════════════════════════════════════════════════════ */
+    .export-nav {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 12px;
+      z-index: 1000;
+      align-items: center;
+    }
+
+    body.export-mode .export-nav {
+      display: flex;
+    }
+
+    .export-nav button {
+      background: var(--accent-teal);
+      color: var(--bg-dark);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      transition: opacity var(--transition-fast);
+    }
+
+    .export-nav button:hover {
+      opacity: 0.88;
+    }
+
+    .export-nav .slide-indicator {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       RESPONSIVE ADJUSTMENTS
+       ════════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .carousel-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .certainty-grid,
+      .improvement-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- ════════════════════════════════════════════════════════════════
+       CONTROLS BAR
+       ════════════════════════════════════════════════════════════════ -->
   <div class="controls">
-    <label><input type="checkbox" id="bgToggle" checked> Background</label>
-    <label>Opacity <input type="range" id="opacitySlider" min="0" max="30" value="8"></label>
-    <button onclick="toggleExportMode()">Export Mode</button>
+    <button class="export-btn" id="export-btn">Export Mode</button>
   </div>
 
+  <!-- ════════════════════════════════════════════════════════════════
+       PAGE TITLE
+       ════════════════════════════════════════════════════════════════ -->
   <div class="page-title">
-    <h1>Post 352 — Fibonacci Retracements</h1>
-    <p>Education Carousel — 8 Slides</p>
+    <h1>Post 352 &mdash; The Power of &ldquo;I Don&rsquo;t Know&rdquo;</h1>
+    <p>Blog Carousel &mdash; 8 Slides</p>
   </div>
 
+  <!-- ════════════════════════════════════════════════════════════════
+       CAROUSEL GRID
+       ════════════════════════════════════════════════════════════════ -->
   <div class="carousel-grid">
+
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 1 — CINEMATIC HOOK
+         ══════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
+      <span class="slide-label">Slide 1 &mdash; Hook</span>
       <div class="slide slide-1">
+        <div class="orb-container">
+          <div class="orb orb-teal-primary"></div>
+          <div class="orb orb-question"></div>
+          <div class="orb orb-uncertainty"></div>
+        </div>
         <div class="slide-content">
-          <div class="cine-label">INSIGHT</div>
-          <div class="hook-main">FIBONACCI RETRACEMENTS</div>
+          <div class="cine-label">BLOG</div>
+          <div class="hook-main">The Power of<br><em>&ldquo;I Don&rsquo;t Know&rdquo;</em></div>
           <div class="cine-divider"></div>
-          <p class="hook-sub">Measuring pullbacks in trends.</p>
-          <div class="cine-logo">Signal Pilot</div>
+          <p class="hook-sub">Why the strongest traders embrace uncertainty.</p>
+          <div class="cine-logo">SIGNAL PILOT</div>
         </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">02 / 08</span>
-        <div class="slide-subtitle">Key Fib Levels</div>
-        <div class="fib-levels">
-          <div class="fib-level"><span class="fib-percent">23.6%</span><span class="fib-desc">Shallow retracement</span></div>
-          <div class="fib-level"><span class="fib-percent">38.2%</span><span class="fib-desc">Moderate retracement</span></div>
-          <div class="fib-level"><span class="fib-percent">50%</span><span class="fib-desc">Half the move</span></div>
-          <div class="fib-level golden"><span class="fib-percent">61.8%</span><span class="fib-desc">Golden ratio (most watched)</span></div>
-          <div class="fib-level"><span class="fib-percent">78.6%</span><span class="fib-desc">Deep retracement</span></div>
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 2 — THE MOST POWERFUL WORDS
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="2">
+      <span class="slide-label">Slide 2 &mdash; The Most Powerful Words</span>
+      <div class="slide slide-2">
+        <div class="orb-container">
+          <div class="orb orb-teal-primary"></div>
+          <div class="orb orb-teal-secondary"></div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
+        <div class="slide-content">
+          <span class="slide-number">02 / 08</span>
+
+          <div class="teal-tag">Mindset Shift</div>
+          <h2 class="section-title">The Most <span class="teal">Powerful</span> Words</h2>
+          <p class="section-subtitle">
+            Markets are inherently uncertain. No indicator, system, or guru
+            can predict the future with certainty. The sooner you accept this,
+            the sooner you start protecting your capital.
+          </p>
+
+          <div class="quote-block">
+            <p class="quote-text">
+              Admitting uncertainty isn&rsquo;t weakness &mdash; it&rsquo;s the
+              foundation of intelligent risk management.
+            </p>
+            <span class="quote-attr">&mdash; Trading Principle</span>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">03 / 08</span>
-        <div class="fib-box">
-          <div class="fib-title">🎯 HOW TO DRAW</div>
-          <div class="fib-list"><strong>UPTREND:</strong><br>Draw from swing LOW to swing HIGH<br><br><strong>DOWNTREND:</strong><br>Draw from swing HIGH to swing LOW</div>
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 3 — THE OVERCONFIDENCE TRAP
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="3">
+      <span class="slide-label">Slide 3 &mdash; Overconfidence Trap</span>
+      <div class="slide slide-3">
+        <div class="orb-container">
+          <div class="orb orb-teal-primary"></div>
+          <div class="orb orb-teal-accent"></div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
+        <div class="slide-content">
+          <span class="slide-number">03 / 08</span>
+
+          <div class="teal-tag">The Trap</div>
+          <h2 class="section-title">Overconfidence<br>vs. <span class="teal">Humility</span></h2>
+          <div class="divider-line"></div>
+
+          <div class="certainty-grid">
+            <div class="certainty-card certain">
+              <span class="card-icon">&#9888;</span>
+              <span class="card-label">Overconfident</span>
+              <p class="card-text">&ldquo;I know exactly where this is going.&rdquo;</p>
+              <p class="card-detail">Oversized positions, no stop-loss, revenge trades after losses.</p>
+            </div>
+            <div class="certainty-card uncertain">
+              <span class="card-icon">&#9733;</span>
+              <span class="card-label">Humble</span>
+              <p class="card-text">&ldquo;I have an edge, but I could be wrong.&rdquo;</p>
+              <p class="card-detail">Proper sizing, defined risk, accepts outcomes gracefully.</p>
+            </div>
+            <div class="certainty-card certain">
+              <span class="card-icon">&#9888;</span>
+              <span class="card-label">Result</span>
+              <p class="card-text">Account blowups</p>
+              <p class="card-detail">One bad trade can wipe months of gains.</p>
+            </div>
+            <div class="certainty-card uncertain">
+              <span class="card-icon">&#9733;</span>
+              <span class="card-label">Result</span>
+              <p class="card-text">Consistent growth</p>
+              <p class="card-detail">Small, controlled losses compound into longevity.</p>
+            </div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">04 / 08</span>
-        <div class="fib-box green">
-          <div class="fib-title">✦ WHY FIB LEVELS WORK</div>
-          <div class="fib-list">Self-fulfilling prophecy<br><br>Many traders watch same levels<br><br>Confluence with other factors<br><br>Psychological round numbers</div>
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 4 — WHAT "I DON'T KNOW" UNLOCKS
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="4">
+      <span class="slide-label">Slide 4 &mdash; What It Unlocks</span>
+      <div class="slide slide-4">
+        <div class="orb-container">
+          <div class="orb orb-teal-secondary"></div>
+          <div class="orb orb-question"></div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
+        <div class="slide-content">
+          <span class="slide-number">04 / 08</span>
+
+          <div class="teal-tag">Benefits</div>
+          <h2 class="section-title">What <span class="teal">&ldquo;I Don&rsquo;t Know&rdquo;</span> Unlocks</h2>
+          <div class="divider-line"></div>
+
+          <div class="power-stack">
+            <div class="power-item">
+              <span class="item-icon">&#9881;</span>
+              <div class="item-body">
+                <span class="item-title">Better Risk Management</span>
+                <span class="item-desc">You size positions based on what you could lose, not what you hope to gain.</span>
+              </div>
+            </div>
+            <div class="power-item">
+              <span class="item-icon">&#9878;</span>
+              <div class="item-body">
+                <span class="item-title">Emotional Neutrality</span>
+                <span class="item-desc">No outcome shocks you. Every trade is just one in a series of probabilities.</span>
+              </div>
+            </div>
+            <div class="power-item">
+              <span class="item-icon">&#10003;</span>
+              <div class="item-body">
+                <span class="item-title">Rule-Based Decisions</span>
+                <span class="item-desc">Without ego, you follow your system. The plan decides &mdash; not your feelings.</span>
+              </div>
+            </div>
+            <div class="power-item">
+              <span class="item-icon">&#9830;</span>
+              <div class="item-body">
+                <span class="item-title">Capital Preservation</span>
+                <span class="item-desc">Uncertainty means you always protect downside first. Survival is the priority.</span>
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">05 / 08</span>
-        <div class="fib-box gold">
-          <div class="fib-title">⭐ THE GOLDEN RATIO (61.8%)</div>
-          <div class="fib-list">Most watched Fib level<br><br>Strong pullback zone<br><br>Often where trend resumes<br><br>High confluence area</div>
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 5 — 5 SITUATIONS TO SAY IT
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="5">
+      <span class="slide-label">Slide 5 &mdash; 5 Situations</span>
+      <div class="slide slide-5">
+        <div class="orb-container">
+          <div class="orb orb-teal-primary"></div>
+          <div class="orb orb-uncertainty"></div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
+        <div class="slide-content">
+          <span class="slide-number">05 / 08</span>
+
+          <div class="teal-tag">When To Say It</div>
+          <h2 class="section-title">5 Situations to Say<br><span class="teal">&ldquo;I Don&rsquo;t Know&rdquo;</span></h2>
+          <div class="divider-line"></div>
+
+          <div class="scenario-stack">
+            <div class="scenario-card">
+              <span class="scenario-number">1</span>
+              <div class="scenario-body">
+                <span class="scenario-title">Before a News Event</span>
+                <span class="scenario-desc">FOMC, NFP, CPI &mdash; nobody knows the number or the reaction. Step aside or reduce size.</span>
+              </div>
+            </div>
+            <div class="scenario-card">
+              <span class="scenario-number">2</span>
+              <div class="scenario-body">
+                <span class="scenario-title">Conflicting Signals</span>
+                <span class="scenario-desc">When your indicators disagree, the honest answer is &ldquo;I don&rsquo;t know&rdquo; &mdash; and that means no trade.</span>
+              </div>
+            </div>
+            <div class="scenario-card">
+              <span class="scenario-number">3</span>
+              <div class="scenario-body">
+                <span class="scenario-title">After a Winning Streak</span>
+                <span class="scenario-desc">Feeling invincible? That is exactly when &ldquo;I don&rsquo;t know&rdquo; protects you from oversizing.</span>
+              </div>
+            </div>
+            <div class="scenario-card">
+              <span class="scenario-number">4</span>
+              <div class="scenario-body">
+                <span class="scenario-title">On an Unfamiliar Asset</span>
+                <span class="scenario-desc">New market, new rules. Admit you are learning before committing real capital.</span>
+              </div>
+            </div>
+            <div class="scenario-card">
+              <span class="scenario-number">5</span>
+              <div class="scenario-body">
+                <span class="scenario-title">When Someone Asks Your Bias</span>
+                <span class="scenario-desc">&ldquo;I don&rsquo;t have one yet&rdquo; is more valuable than guessing for clout.</span>
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">06 / 08</span>
-        <div class="fib-box">
-          <div class="fib-title">🎯 HOW TO USE</div>
-          <div class="fib-list">1. Identify clear impulse move<br><br>2. Draw Fib tool<br><br>3. Watch for reactions at levels<br><br>4. Combine with other analysis</div>
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 6 — HOW IT IMPROVES YOUR TRADING
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="6">
+      <span class="slide-label">Slide 6 &mdash; Improvement</span>
+      <div class="slide slide-6">
+        <div class="orb-container">
+          <div class="orb orb-teal-accent"></div>
+          <div class="orb orb-teal-secondary"></div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
+        <div class="slide-content">
+          <span class="slide-number">06 / 08</span>
+
+          <div class="teal-tag">Impact</div>
+          <h2 class="section-title">How It <span class="teal">Improves</span><br>Your Trading</h2>
+          <div class="divider-line"></div>
+
+          <div class="improvement-grid">
+            <div class="improvement-card">
+              <span class="imp-icon">&#128202;</span>
+              <span class="imp-title">Fewer Trades</span>
+              <span class="imp-desc">You only take setups with clear edges &mdash; quality over quantity.</span>
+            </div>
+            <div class="improvement-card">
+              <span class="imp-icon">&#128170;</span>
+              <span class="imp-title">Smaller Losses</span>
+              <span class="imp-desc">You size for the unknown. When wrong, the damage is contained.</span>
+            </div>
+            <div class="improvement-card">
+              <span class="imp-icon">&#128161;</span>
+              <span class="imp-title">Better Journaling</span>
+              <span class="imp-desc">Writing &ldquo;I didn&rsquo;t know&rdquo; reveals patterns in your decision-making.</span>
+            </div>
+            <div class="improvement-card">
+              <span class="imp-icon">&#9889;</span>
+              <span class="imp-title">Faster Growth</span>
+              <span class="imp-desc">Honest self-assessment accelerates the learning curve dramatically.</span>
+            </div>
+          </div>
+
+          <div class="callout-box">
+            <span class="callout-label">Key Insight</span>
+            <p class="callout-text">
+              The traders who compound <em>year after year</em> are not the ones
+              who predict the most &mdash; they are the ones who <em>manage uncertainty</em>
+              the best.
+            </p>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">07 / 08</span>
-        <div class="fib-box yellow">
-          <div class="fib-title">⚠️ IMPORTANT</div>
-          <div class="fib-list">Fib levels aren't magic<br><br>They're AREAS of interest<br><br>Combine with structure<br><br>Volume confirms</div>
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 7 — KEY WISDOM + HOMEWORK
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="7">
+      <span class="slide-label">Slide 7 &mdash; Wisdom &amp; Homework</span>
+      <div class="slide slide-7">
+        <div class="orb-container">
+          <div class="orb orb-teal-primary"></div>
+          <div class="orb orb-question"></div>
         </div>
-        <span class="brand-mark">SIGNALPILOT</span>
+        <div class="slide-content">
+          <span class="slide-number">07 / 08</span>
+
+          <div class="teal-tag">Takeaway</div>
+
+          <div class="wisdom-highlight">
+            <span class="wisdom-icon">&#10024;</span>
+            <p class="wisdom-text">
+              The market rewards <span class="teal">humility</span>.<br>
+              Certainty is a luxury traders <span class="teal">cannot afford</span>.
+            </p>
+          </div>
+
+          <div class="practice-stack">
+            <div class="practice-item">
+              <span class="practice-check">&#10003;</span>
+              <div class="practice-text">
+                <strong>Default to uncertainty</strong>
+                <span>If you are unsure, sit on your hands. That IS the trade.</span>
+              </div>
+            </div>
+            <div class="practice-item">
+              <span class="practice-check">&#10003;</span>
+              <div class="practice-text">
+                <strong>Shrink your position</strong>
+                <span>Low conviction = low size. Let your account thank you later.</span>
+              </div>
+            </div>
+            <div class="practice-item">
+              <span class="practice-check">&#10003;</span>
+              <div class="practice-text">
+                <strong>Journal your doubts</strong>
+                <span>Write down every moment you felt unsure. Review weekly for patterns.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="homework-card">
+            <span class="hw-label">&#128218; This Week&rsquo;s Homework</span>
+            <h3 class="hw-title">The Uncertainty Audit</h3>
+            <div class="hw-list">
+              <div class="hw-item">
+                <span class="hw-bullet">01</span>
+                Review your last 10 trades &mdash; mark which ones you took with genuine uncertainty.
+              </div>
+              <div class="hw-item">
+                <span class="hw-bullet">02</span>
+                Compare win rates: confident trades vs. uncertain trades. The results may surprise you.
+              </div>
+              <div class="hw-item">
+                <span class="hw-bullet">03</span>
+                Add a &ldquo;confidence level&rdquo; column to your journal and score each trade 1-5.
+              </div>
+            </div>
+          </div>
+
+          <span class="brand-mark">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
 
-    <div class="slide-wrapper">
-      <video class="bg-video" autoplay muted loop playsinline><source src="../../video/starfield.mp4" type="video/mp4"></video>
-      <div class="slide-content">
-        <span class="slide-number">08 / 08</span>
-        <div class="slide-icon">📊</div>
-        <h2 class="slide-title">Free Fibonacci Guide</h2>
-        <p class="slide-body">Complete breakdown in bio.</p>
-        <a href="https://education.signalpilot.io" class="cta-link">Get Free Guide</a>
-        <span class="brand-mark">SIGNALPILOT</span>
+    <!-- ══════════════════════════════════════════════════════════
+         SLIDE 8 — CTA: READ FULL ARTICLE
+         ══════════════════════════════════════════════════════════ -->
+    <div class="slide-wrapper" data-slide="8">
+      <span class="slide-label">Slide 8 &mdash; CTA</span>
+      <div class="slide slide-8">
+        <div class="orb-container">
+          <div class="orb orb-teal-primary"></div>
+          <div class="orb orb-teal-secondary"></div>
+          <div class="orb orb-question"></div>
+        </div>
+        <div class="slide-content" style="align-items: center; text-align: center; justify-content: center;">
+          <span class="slide-number" style="position: absolute; top: 5.5%; left: 7.96%;">08 / 08</span>
+
+          <div class="cta-glow">
+            <span class="cta-glow-icon">&#10067;</span>
+          </div>
+
+          <div class="teal-tag">Full Article</div>
+
+          <h2 class="cta-headline">Read the<br><span style="color: var(--accent-teal);">Full Article</span></h2>
+
+          <p class="cta-sub">
+            Dive deeper into why admitting uncertainty is the ultimate
+            superpower in trading. Practical frameworks, case studies,
+            and journaling templates inside.
+          </p>
+
+          <div class="cta-box">
+            <p class="cta-box-text">Read Full Article</p>
+            <span class="cta-link">blog.signalpilot.io</span>
+          </div>
+
+          <span class="brand-mark" style="position: absolute; bottom: 5.5%; left: 50%; transform: translateX(-50%);">SIGNALPILOT</span>
+        </div>
       </div>
     </div>
+
   </div>
 
+  <!-- ════════════════════════════════════════════════════════════════
+       EXPORT NAVIGATION
+       ════════════════════════════════════════════════════════════════ -->
   <div class="export-nav">
-    <button onclick="prevSlide()">← Previous</button>
-    <span class="slide-indicator"><span id="currentSlide">1</span> / 8</span>
-    <button onclick="nextSlide()">Next →</button>
+    <button onclick="prevSlide()">&#8592; Previous</button>
+    <span class="slide-indicator"><span id="currentSlideNum">1</span> / 8</span>
+    <button onclick="nextSlide()">Next &#8594;</button>
   </div>
 
+  <!-- ════════════════════════════════════════════════════════════════
+       SCRIPT — EXPORT MODE + KEYBOARD NAVIGATION
+       ════════════════════════════════════════════════════════════════ -->
   <script>
-    const bgToggle = document.getElementById('bgToggle');
-    const opacitySlider = document.getElementById('opacitySlider');
-    const videos = document.querySelectorAll('.bg-video');
-    const slides = document.querySelectorAll('.slide-wrapper');
-    let currentSlide = 0, exportMode = false;
-    bgToggle.addEventListener('change', (e) => videos.forEach(v => v.style.display = e.target.checked ? 'block' : 'none'));
-    opacitySlider.addEventListener('input', (e) => document.documentElement.style.setProperty('--video-opacity', e.target.value / 100));
-    function toggleExportMode() { exportMode = !exportMode; document.body.classList.toggle('export-mode', exportMode); if (exportMode) { currentSlide = 0; updateExportView(); } }
-    function updateExportView() { slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide)); document.getElementById('currentSlide').textContent = currentSlide + 1; }
-    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; updateExportView(); }
-    function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateExportView(); }
-    document.addEventListener('keydown', (e) => { if (!exportMode) return; if (e.key === 'ArrowRight') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); if (e.key === 'Escape') toggleExportMode(); });
+    (function () {
+      const exportBtn = document.getElementById('export-btn');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      const slideIndicator = document.getElementById('currentSlideNum');
+      let exportMode = false;
+      let currentSlide = 0;
+
+      /* Toggle export mode */
+      exportBtn.addEventListener('click', function () {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        this.classList.toggle('active', exportMode);
+        if (exportMode) {
+          currentSlide = 0;
+          updateActiveSlide();
+        }
+      });
+
+      /* Update visible slide in export mode */
+      function updateActiveSlide() {
+        slideWrappers.forEach(function (wrapper, index) {
+          wrapper.classList.toggle('active', index === currentSlide);
+        });
+        if (slideIndicator) {
+          slideIndicator.textContent = currentSlide + 1;
+        }
+      }
+
+      /* Navigate slides */
+      window.prevSlide = function () {
+        currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+        updateActiveSlide();
+      };
+
+      window.nextSlide = function () {
+        currentSlide = (currentSlide + 1) % slideWrappers.length;
+        updateActiveSlide();
+      };
+
+      /* Keyboard navigation */
+      document.addEventListener('keydown', function (e) {
+        if (!exportMode) return;
+
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          e.preventDefault();
+          currentSlide = (currentSlide + 1) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'Escape') {
+          exportMode = false;
+          document.body.classList.remove('export-mode');
+          exportBtn.textContent = 'Export Mode';
+          exportBtn.classList.remove('active');
+        }
+      });
+    })();
   </script>
 </body>
 </html>
