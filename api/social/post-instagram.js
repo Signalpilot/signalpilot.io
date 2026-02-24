@@ -265,10 +265,18 @@ export default async function handler(req, res) {
     try {
       const postOrder = await getNextPostOrder('instagram');
       const retryCount = await incrementRetryCount('instagram', postOrder);
-      const isAuthError = error.message.includes('OAuthException') ||
+      // Only treat REAL auth/permission errors as auth failures.
+      // Meta error code 2 ("An unexpected error") is transient — NOT an auth issue.
+      // OAuthException is Meta's generic error type for ALL API errors, so we
+      // must check for specific auth-related messages, not the type.
+      const isAuthError = error.message.includes('Invalid OAuth access token') ||
+                          error.message.includes('Session has expired') ||
+                          error.message.includes('has not been granted') ||
+                          error.message.includes('token has expired') ||
+                          error.message.includes('Error validating access token') ||
                           error.message.includes('Unauthorized') ||
                           error.message.includes('blocked') ||
-                          error.message.includes('Invalid');
+                          (error.message.includes('Invalid') && !error.message.includes('An unexpected error'));
 
       log(`Error details: postOrder=${postOrder}, retryCount=${retryCount}, isAuthError=${isAuthError}`);
 
@@ -277,9 +285,60 @@ export default async function handler(req, res) {
         const refreshSuccess = await attemptAutoTokenRefresh(log);
 
         if (refreshSuccess) {
-          // Token was refreshed; clear strikes and let next cron retry
+          // Token was refreshed; clear strikes AND retry count so next attempt starts fresh
           await clearAuthStrikes('instagram');
-          log(`✅ Auth recovered via auto-refresh — queue ready for next invocation`);
+          await clearRetryCount('instagram', postOrder);
+          log(`✅ Auth recovered via auto-refresh — retrying post immediately`);
+
+          // Retry posting right now instead of waiting for next cron
+          try {
+            const posts = loadContent();
+            const retryPost = posts.find(p => p.postNumber === getPostNumber('instagram', postOrder));
+            if (retryPost && retryPost.instagram?.caption) {
+              const retrySlideCount = retryPost.instagram?.slideCount || 0;
+              if (retrySlideCount >= 2) {
+                log(`📤 RETRY after refresh: post ${retryPost.postNumber || getPostNumber('instagram', postOrder)}, ${retrySlideCount} slides...`);
+                const retryResult = await postCarousel(
+                  retryPost.postNumber || getPostNumber('instagram', postOrder),
+                  retrySlideCount,
+                  retryPost.instagram.caption
+                );
+                // Success! Update state
+                await setLastPosted('instagram', postOrder);
+                await clearAuthStrikes('instagram');
+                const column = getInstagramColumn(postOrder);
+                await logPosting({
+                  platform: 'instagram',
+                  postOrder,
+                  postNumber: retryPost.postNumber,
+                  column,
+                  title: retryPost.title,
+                  type: retryPost.type,
+                  slideCount: retryResult.slideCount,
+                  mediaId: retryResult.mediaId,
+                  action: 'posted_after_refresh',
+                });
+                const dailyCount = await incrementDailyPostCount('instagram');
+                log(`✅ RETRY SUCCESS after refresh: mediaId=${retryResult.mediaId}`);
+                return res.status(200).json({
+                  success: true,
+                  posted: {
+                    postOrder,
+                    postNumber: retryPost.postNumber,
+                    column,
+                    title: retryPost.title,
+                    slideCount: retryResult.slideCount,
+                    mediaId: retryResult.mediaId,
+                  },
+                  dailyCount,
+                  retriedAfterRefresh: true,
+                });
+              }
+            }
+          } catch (retryErr) {
+            log(`⚠ Retry after refresh failed: ${retryErr.message} — will try on next cron`);
+          }
+
           await logError({
             platform: 'instagram',
             postOrder,
