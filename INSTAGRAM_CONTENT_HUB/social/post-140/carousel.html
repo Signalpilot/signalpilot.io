@@ -3,300 +3,1298 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post 140 — Troubleshooting Flowchart | Carousel Preview</title>
-
+  <title>Post 140 — Troubleshooting Guide | Carousel Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Gugi&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
+    /* ══════════════════════════════════════════════════════════════
+       POST 140 — TROUBLESHOOTING GUIDE
+       Type: Docs · Accent: Teal (#5eead4) · 5 Slides
+       ══════════════════════════════════════════════════════════════ */
+
     :root {
       --bg-dark: #0a0a0f;
-      --accent-blue: #4a90d9;
-      --accent-gold: #c9a962;
-      --accent-green: #4ad97a;
-      --accent-red: #d94a4a;
-      --accent-teal: #4ad9d9;
-      --accent-purple: #9b4ad9;
-      --text-primary: #e8e6e3;
-      --text-secondary: rgba(255, 255, 255, 0.7);
-      --text-muted: #6b6965;
+      --bg-card: rgba(255,255,255,0.03);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.7);
+      --text-muted: rgba(255,255,255,0.4);
+      --border-subtle: rgba(255,255,255,0.1);
+      --accent-teal: #5eead4;
+      --accent-teal-dim: rgba(94,234,212,0.3);
+      --accent-teal-lo: rgba(94,234,212,0.12);
+      --accent-teal-bd: rgba(94,234,212,0.25);
+      --accent-red: #f87171;
+      --accent-red-lo: rgba(248,113,113,0.12);
+      --accent-red-bd: rgba(248,113,113,0.25);
+      --accent-amber: #f59e0b;
+      --accent-amber-lo: rgba(245,158,11,0.12);
+      --accent-amber-bd: rgba(245,158,11,0.25);
+      --accent-purple: #a855f7;
+      --accent-purple-lo: rgba(168,85,247,0.12);
+      --accent-purple-bd: rgba(168,85,247,0.25);
+      --accent-blue: #60a5fa;
+      --accent-blue-lo: rgba(96,165,250,0.12);
+      --accent-blue-bd: rgba(96,165,250,0.25);
+      --accent-green: #4ade80;
+      --accent-green-lo: rgba(74,222,128,0.12);
+      --accent-green-bd: rgba(74,222,128,0.25);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-brand: 'Gugi', sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body { background: #111; font-family: 'Inter', sans-serif; color: var(--text-primary); padding: 2rem; min-height: 100vh; }
-
-    .controls { position: fixed; top: 1rem; right: 1rem; z-index: 1000; display: flex; gap: 1rem; align-items: center; background: rgba(0, 0, 0, 0.8); padding: 1rem 1.5rem; border-radius: 8px; backdrop-filter: blur(10px); }
-    .controls label { font-size: 0.875rem; color: var(--text-secondary); }
-    .controls select, .controls button { background: var(--bg-dark); color: var(--text-primary); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-family: inherit; }
-
-    .page-title { text-align: center; margin-bottom: 2rem; font-family: 'Cormorant Garamond', serif; }
-    .page-title h1 { font-size: 2rem; font-weight: 500; margin-bottom: 0.5rem; }
-    .page-title p { color: var(--text-secondary); font-size: 0.875rem; }
-
-    .carousel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; padding-bottom: 4rem; }
-
-    .slide-wrapper { display: flex; flex-direction: column; align-items: center; container-type: inline-size; }
-    .slide-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-gold); margin-bottom: 0.75rem; }
-
-    .slide { width: 100%; max-width: 540px; aspect-ratio: 4 / 5; position: relative; overflow: hidden; background: var(--bg-dark); border-radius: 4px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); }
-    .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-    .slide-bg video { width: 100%; height: 100%; object-fit: cover; opacity: 0.08; }
-    .slide.bg-black .slide-bg video { opacity: 0; }
-
-    .slide-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; display: flex; flex-direction: column; padding: 8%; }
-    .slide-number { font-size: clamp(0.45rem, 1.8cqw, 0.6rem); font-weight: 500; color: var(--text-muted); letter-spacing: 0.15em; margin-bottom: auto; }
-    .brand-mark { font-size: clamp(0.4rem, 1.7cqw, 0.55rem); font-weight: 600; letter-spacing: 0.2em; color: var(--text-muted); margin-top: auto; text-align: center; }
-    .center-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-
-    .slide-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 6cqw, 28px); font-weight: 600; line-height: 1.1; color: var(--text-primary); margin-bottom: 3%; overflow-wrap: break-word; }
-    .slide-title .highlight { color: var(--accent-teal); }
-    .subtitle { font-size: clamp(0.65rem, 3cqw, 1rem); font-weight: 400; color: var(--text-secondary); }
-
-    .flow-card { background: linear-gradient(135deg, rgba(217, 74, 74, 0.15) 0%, rgba(217, 74, 74, 0.05) 100%); border: 1px solid rgba(217, 74, 74, 0.3); border-radius: 12px; padding: 4%; width: 100%; }
-
-    .flow-card.check { background: linear-gradient(135deg, rgba(74, 144, 217, 0.15) 0%, rgba(74, 144, 217, 0.05) 100%); border-color: rgba(74, 144, 217, 0.3); }
-    .flow-card.check h3 { color: var(--accent-blue); }
-    .flow-card.check .flow-arrow { color: var(--accent-blue); }
-
-    .flow-card.solution { background: linear-gradient(135deg, rgba(74, 217, 122, 0.15) 0%, rgba(74, 217, 122, 0.05) 100%); border-color: rgba(74, 217, 122, 0.3); }
-    .flow-card.solution h3 { color: var(--accent-green); }
-    .flow-card.solution .flow-arrow { color: var(--accent-green); }
-
-    .flow-card h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(0.85rem, 3.9cqw, 1.3rem); font-weight: 600; margin-bottom: 3%; color: var(--accent-red); }
-    .flow-step { display: flex; align-items: center; gap: 2%; margin-bottom: 2%; text-align: left; }
-    .flow-step:last-child { margin-bottom: 0; }
-    .flow-arrow { font-size: clamp(0.65rem, 3cqw, 1rem); color: var(--accent-red); flex-shrink: 0; }
-    .flow-text { font-size: clamp(0.55rem, 2.5cqw, 0.8rem); color: var(--text-primary); line-height: 1.4; }
-    .flow-text strong { color: var(--text-primary); font-weight: 600; }
-
-    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 6cqw, 28px); font-weight: 600; color: var(--text-primary); margin-bottom: 2%; line-height: 1.2; }
-    .cta-title .emphasis { color: var(--accent-teal); }
-    .cta-text { font-size: clamp(0.6rem, 2.8cqw, 0.9rem); color: var(--text-secondary); margin-bottom: 1%; }
-
-    body.export-mode { padding: 0; background: transparent; }
-    body.export-mode .controls, body.export-mode .page-title, body.export-mode .slide-label { display: none; }
-    body.export-mode .carousel-grid { display: block; padding: 0; }
-    body.export-mode .slide-wrapper { display: none; }
-    body.export-mode .slide-wrapper.active { display: flex; }
-    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; box-shadow: none; }
-
-    @media (max-width: 900px) { .carousel-grid { grid-template-columns: 1fr; } .controls { position: static; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; } }
-  
-    
-    
-    /* ═══ Slide 1 - Cinematic Hook (TEAL) ═══ */
-    .slide-1 {
-      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem;
     }
 
-    .slide-1::before {
+    /* ── Export Mode ── */
+    body.export-mode { padding: 0; background: transparent; }
+    body.export-mode .controls,
+    body.export-mode .page-title,
+    body.export-mode .slide-label { display: none; }
+    body.export-mode .carousel-grid { display: block; }
+    body.export-mode .slide-wrapper { display: none; margin: 0; }
+    body.export-mode .slide-wrapper.active { display: block; }
+    body.export-mode .slide { width: 1080px; height: 1350px; max-width: none; border-radius: 0; }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .controls button {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    /* ── Page Chrome ── */
+    .page-title { text-align: center; margin-bottom: 2rem; }
+    .page-title h1 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .page-title p { color: var(--text-muted); font-size: 0.875rem; }
+
+    /* ── Grid ── */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      container-type: inline-size;
+    }
+    .slide-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Slide Base ── */
+    .slide {
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4 / 5;
+      background: var(--bg-dark);
+      border-radius: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide-content {
+      position: relative;
+      z-index: 3;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 5.5% 5.5% 10% 5.5%;
+    }
+
+    /* ═══════════════════════════════════════════
+       TEAL SLIDE SYSTEM — slide-teal base
+       ═══════════════════════════════════════════ */
+    .slide-teal {
+      background: linear-gradient(180deg, #0a0c0f 0%, #080a0c 100%) !important;
+    }
+    .slide-teal::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(94,234,212,0.06) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(94,234,212,0.05) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
     }
-    
-    .slide-1::after {
+    /* Teal left bar on slide 1 only */
+    .slide-teal.slide-1::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 18px;
+      top: 0; left: 15px;
+      width: 50px;
       height: 100%;
-      background: linear-gradient(180deg, rgba(94,234,212,0.9) 0%, rgba(45,180,160,0.7) 100%);
+      background: #5eead4;
       z-index: 5;
     }
+    .slide-teal .slide-content { z-index: 3; }
 
-    .slide-1 .slide-bg,
-.slide-1 .slide-content {
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      z-index: 3;
+    /* ── Per-slide layout classes ── */
+    .slide-1 .slide-content { align-items: center; text-align: center; justify-content: center; }
+    .slide-2 .slide-content { align-items: flex-start; }
+    .slide-3 .slide-content { align-items: center; }
+    .slide-4 .slide-content { align-items: flex-start; }
+    .slide-5 .slide-content { align-items: center; text-align: center; justify-content: center; }
+
+    /* ── Per-slide radial ambience ── */
+    .slide-1 .slide-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 35%, rgba(94,234,212,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .slide-2 .slide-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(94,234,212,0.04) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .slide-3 .slide-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 40%, rgba(94,234,212,0.05) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .slide-4 .slide-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 40% 55%, rgba(94,234,212,0.04) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .slide-5 .slide-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(94,234,212,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: -1;
     }
 
-    .slide-1 .cine-label {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.5rem, 1.6cqw, 0.875rem);
+    /* ── Shared Logo ── */
+    .slide-logo {
+      position: absolute;
+      bottom: 4%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-brand);
+      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.9);
-      margin-bottom: 8%;
+      color: rgba(94,234,212,0.4);
+      z-index: 2;
+      white-space: nowrap;
     }
 
-    .slide-1 .hook-main {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1.4rem, 4.5cqw, 2.5rem);
-      font-weight: 600;
-      line-height: 1.2;
-      color: rgba(255, 255, 255, 0.95);
+    /* ── Slide Counter ── */
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: clamp(8px, 1.3cqw, 12px);
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 3%;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 1 — Wrench/Gear Orb + Hook
+       ═══════════════════════════════════════════ */
+    .tool-orb {
+      width: clamp(90px, 18cqw, 180px);
+      height: clamp(90px, 18cqw, 180px);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 40% 35%,
+        rgba(94,234,212,0.35) 0%,
+        rgba(94,234,212,0.12) 40%,
+        rgba(255,255,255,0.03) 70%,
+        transparent 100%
+      );
+      border: 2px solid rgba(94,234,212,0.25);
+      box-shadow:
+        0 0 50px rgba(94,234,212,0.15),
+        0 0 100px rgba(94,234,212,0.06),
+        inset 0 0 30px rgba(94,234,212,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 5%;
+    }
+    .tool-orb::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.15);
+    }
+    .tool-orb::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px dashed rgba(94,234,212,0.2);
+    }
+
+    /* Inner gear shape — CSS-only */
+    .gear-shape {
+      position: relative;
+      width: 45%;
+      height: 45%;
+      z-index: 2;
+    }
+    .gear-core {
+      position: absolute;
+      inset: 20%;
+      border-radius: 50%;
+      background: rgba(94,234,212,0.2);
+      border: 2px solid rgba(94,234,212,0.5);
+      box-shadow: 0 0 12px rgba(94,234,212,0.3);
+    }
+    .gear-core::before {
+      content: '';
+      position: absolute;
+      inset: 25%;
+      border-radius: 50%;
+      background: rgba(94,234,212,0.15);
+      border: 1.5px solid rgba(94,234,212,0.35);
+    }
+    /* Gear teeth — 4 bars crossing the core */
+    .gear-tooth {
+      position: absolute;
+      background: rgba(94,234,212,0.4);
+      border-radius: 2px;
+    }
+    .gear-tooth:nth-child(1) {
+      width: 100%; height: 16%;
+      top: 42%; left: 0;
+    }
+    .gear-tooth:nth-child(2) {
+      width: 16%; height: 100%;
+      top: 0; left: 42%;
+    }
+    .gear-tooth:nth-child(3) {
+      width: 85%; height: 14%;
+      top: 43%; left: 7.5%;
+      transform: rotate(45deg);
+      transform-origin: center;
+    }
+    .gear-tooth:nth-child(4) {
+      width: 85%; height: 14%;
+      top: 43%; left: 7.5%;
+      transform: rotate(-45deg);
+      transform-origin: center;
+    }
+    /* Wrench overlay — small angled handle */
+    .wrench-handle {
+      position: absolute;
+      bottom: -8%;
+      right: -8%;
+      width: 55%;
+      height: 12%;
+      background: linear-gradient(90deg, rgba(94,234,212,0.5), rgba(94,234,212,0.2));
+      border-radius: 3px;
+      transform: rotate(-45deg);
+      transform-origin: left center;
+      box-shadow: 0 0 8px rgba(94,234,212,0.2);
+    }
+    .wrench-handle::before {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: -40%;
+      width: 28%;
+      height: 180%;
+      border: 2px solid rgba(94,234,212,0.45);
+      border-radius: 2px;
+      background: transparent;
+    }
+
+    .s1-ref-label {
+      font-family: var(--font-mono);
+      font-size: clamp(9px, 1.5cqw, 14px);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(94,234,212,0.9);
       margin-bottom: 4%;
-      text-transform: none;
-      letter-spacing: 0;
     }
-
-    .slide-1 .cine-divider {
+    .s1-hook {
+      font-family: var(--font-sans);
+      font-size: clamp(18px, 4.5cqw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 4%;
+      max-width: 90%;
+    }
+    .s1-hook em { color: var(--accent-teal); font-style: normal; }
+    .s1-divider {
       width: 60px;
       height: 2px;
       background: linear-gradient(90deg, transparent, rgba(94,234,212,0.6), transparent);
       margin-bottom: 4%;
     }
-
-    .slide-1 .hook-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(0.65rem, 2cqw, 1.1rem);
+    .s1-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(10px, 1.8cqw, 19px);
       font-weight: 300;
-      letter-spacing: 0.05em;
-      color: rgba(94, 234, 212, 0.4);
-      line-height: 1.6;
+      color: rgba(94,234,212,0.4);
+      line-height: 1.5;
     }
 
-    .slide-1 .cine-logo {
+    /* ═══════════════════════════════════════════
+       SLIDE 2 — Common Issues (vertical list)
+       ═══════════════════════════════════════════ */
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.8cqw, 40px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 5%;
+    }
+    .section-title em { color: var(--accent-teal); font-style: normal; }
+
+    .issue-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.5cqw, 16px);
+    }
+    .issue-item {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3.5% 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .issue-item::before {
+      content: '';
       position: absolute;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Gugi', sans-serif;
-      font-size: clamp(0.4rem, 1.2cqw, 0.625rem);
-      letter-spacing: 0.3em;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 4px 0 0 4px;
+    }
+    .issue-item.issue-red::before { background: var(--accent-red); }
+    .issue-item.issue-amber::before { background: var(--accent-amber); }
+    .issue-item.issue-purple::before { background: var(--accent-purple); }
+    .issue-item.issue-blue::before { background: var(--accent-blue); }
+
+    /* Issue icon circles */
+    .issue-icon {
+      width: clamp(36px, 7cqw, 60px);
+      height: clamp(36px, 7cqw, 60px);
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .issue-icon::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+    }
+    .issue-icon .issue-sym {
+      font-size: clamp(14px, 2.5cqw, 24px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Red icon circle */
+    .issue-icon.ic-red {
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.3) 0%, rgba(248,113,113,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(248,113,113,0.3);
+      box-shadow: 0 0 18px rgba(248,113,113,0.12);
+    }
+    .issue-icon.ic-red::before { border: 1px solid rgba(248,113,113,0.12); }
+    .issue-icon.ic-red .issue-sym { color: rgba(248,113,113,0.9); }
+
+    /* Amber icon circle */
+    .issue-icon.ic-amber {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.3);
+      box-shadow: 0 0 18px rgba(245,158,11,0.12);
+    }
+    .issue-icon.ic-amber::before { border: 1px solid rgba(245,158,11,0.12); }
+    .issue-icon.ic-amber .issue-sym { color: rgba(245,158,11,0.9); }
+
+    /* Purple icon circle */
+    .issue-icon.ic-purple {
+      background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(168,85,247,0.3);
+      box-shadow: 0 0 18px rgba(168,85,247,0.12);
+    }
+    .issue-icon.ic-purple::before { border: 1px solid rgba(168,85,247,0.12); }
+    .issue-icon.ic-purple .issue-sym { color: rgba(168,85,247,0.9); }
+
+    /* Blue icon circle */
+    .issue-icon.ic-blue {
+      background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(96,165,250,0.3);
+      box-shadow: 0 0 18px rgba(96,165,250,0.12);
+    }
+    .issue-icon.ic-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .issue-icon.ic-blue .issue-sym { color: rgba(96,165,250,0.9); }
+
+    .issue-info { flex: 1; min-width: 0; }
+    .issue-name {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+    .issue-fix {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 3%;
+    }
+    .issue-fix em { color: var(--accent-teal); font-style: normal; }
+
+    /* Severity bars */
+    .severity-bar {
+      width: 100%;
+      height: clamp(4px, 0.7cqw, 7px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .severity-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+    .severity-fill.sev-red { background: linear-gradient(90deg, rgba(248,113,113,0.5), rgba(248,113,113,0.9)); }
+    .severity-fill.sev-amber { background: linear-gradient(90deg, rgba(245,158,11,0.5), rgba(245,158,11,0.9)); }
+    .severity-fill.sev-purple { background: linear-gradient(90deg, rgba(168,85,247,0.5), rgba(168,85,247,0.9)); }
+    .severity-fill.sev-blue { background: linear-gradient(90deg, rgba(96,165,250,0.4), rgba(96,165,250,0.8)); }
+    .severity-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 9px);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(94, 234, 212, 0.4);
+      margin-top: 1.5%;
+    }
+    .severity-label.sl-red { color: rgba(248,113,113,0.7); }
+    .severity-label.sl-amber { color: rgba(245,158,11,0.7); }
+    .severity-label.sl-purple { color: rgba(168,85,247,0.7); }
+    .severity-label.sl-blue { color: rgba(96,165,250,0.6); }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 3 — 60-Second Reset (step flow)
+       ═══════════════════════════════════════════ */
+    .reset-flow {
+      width: 92%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(5px, 1cqw, 12px);
+      margin-bottom: 4%;
+    }
+    .reset-step {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3.5% 4%;
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      position: relative;
+      overflow: hidden;
+    }
+    .reset-step.rs-red {
+      background: rgba(248,113,113,0.06);
+      border: 1px solid rgba(248,113,113,0.18);
+      box-shadow: 0 0 20px rgba(248,113,113,0.04);
+    }
+    .reset-step.rs-amber {
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.18);
+      box-shadow: 0 0 20px rgba(245,158,11,0.04);
+    }
+    .reset-step.rs-blue {
+      background: rgba(96,165,250,0.06);
+      border: 1px solid rgba(96,165,250,0.18);
+      box-shadow: 0 0 20px rgba(96,165,250,0.04);
+    }
+    .reset-step.rs-teal {
+      background: rgba(94,234,212,0.06);
+      border: 1px solid rgba(94,234,212,0.18);
+      box-shadow: 0 0 20px rgba(94,234,212,0.04);
+    }
+
+    .reset-ring {
+      width: clamp(38px, 7cqw, 62px);
+      height: clamp(38px, 7cqw, 62px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .reset-ring::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+    }
+
+    .rs-red .reset-ring {
+      background: radial-gradient(circle at 40% 35%, rgba(248,113,113,0.35) 0%, rgba(248,113,113,0.1) 60%, transparent 100%);
+      border: 2px solid rgba(248,113,113,0.35);
+      box-shadow: 0 0 22px rgba(248,113,113,0.15);
+    }
+    .rs-red .reset-ring::before { border: 1px solid rgba(248,113,113,0.15); }
+    .rs-red .reset-num { color: rgba(248,113,113,0.9); }
+    .rs-red .reset-label { color: var(--accent-red); }
+
+    .rs-amber .reset-ring {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.35) 0%, rgba(245,158,11,0.1) 60%, transparent 100%);
+      border: 2px solid rgba(245,158,11,0.35);
+      box-shadow: 0 0 22px rgba(245,158,11,0.15);
+    }
+    .rs-amber .reset-ring::before { border: 1px solid rgba(245,158,11,0.15); }
+    .rs-amber .reset-num { color: rgba(245,158,11,0.9); }
+    .rs-amber .reset-label { color: var(--accent-amber); }
+
+    .rs-blue .reset-ring {
+      background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.35) 0%, rgba(96,165,250,0.1) 60%, transparent 100%);
+      border: 2px solid rgba(96,165,250,0.35);
+      box-shadow: 0 0 22px rgba(96,165,250,0.15);
+    }
+    .rs-blue .reset-ring::before { border: 1px solid rgba(96,165,250,0.15); }
+    .rs-blue .reset-num { color: rgba(96,165,250,0.9); }
+    .rs-blue .reset-label { color: var(--accent-blue); }
+
+    .rs-teal .reset-ring {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.35) 0%, rgba(94,234,212,0.1) 60%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.35);
+      box-shadow: 0 0 22px rgba(94,234,212,0.15);
+    }
+    .rs-teal .reset-ring::before { border: 1px solid rgba(94,234,212,0.15); }
+    .rs-teal .reset-num { color: rgba(94,234,212,0.9); }
+    .rs-teal .reset-label { color: var(--accent-teal); }
+
+    .reset-num {
+      font-family: var(--font-mono);
+      font-size: clamp(14px, 2.5cqw, 26px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+    .reset-info { flex: 1; min-width: 0; }
+    .reset-label {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2%;
+    }
+    .reset-text {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+    .reset-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .flow-arrow {
+      font-size: clamp(14px, 2.5cqw, 26px);
+      color: var(--text-muted);
+    }
+    .success-box {
+      width: 80%;
+      padding: 3% 4%;
+      background: rgba(94,234,212,0.05);
+      border: 1px solid rgba(94,234,212,0.15);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .success-text {
+      font-family: var(--font-serif);
+      font-size: clamp(13px, 2.2cqw, 22px);
+      font-weight: 500;
+      font-style: italic;
+      color: rgba(94,234,212,0.6);
+      line-height: 1.4;
+    }
+    .success-text em { color: var(--accent-teal); font-style: normal; }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 4 — Pro Tips (cards + effectiveness bars)
+       ═══════════════════════════════════════════ */
+    .tips-header {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.5cqw, 38px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+    .tips-header em { color: var(--accent-teal); font-style: normal; }
+    .tips-intro {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.4cqw, 14px);
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 5%;
+    }
+    .tip-strategies {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1.5cqw, 16px);
+    }
+    .tip-card {
+      display: flex;
+      align-items: center;
+      gap: 4%;
+      padding: 3.5% 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+      border-radius: clamp(8px, 1.5cqw, 14px);
+      position: relative;
+    }
+    .tip-icon-circle {
+      width: clamp(38px, 7cqw, 62px);
+      height: clamp(38px, 7cqw, 62px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .tip-icon-circle::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+    }
+    .tip-icon-letter {
+      font-family: var(--font-mono);
+      font-size: clamp(13px, 2.3cqw, 24px);
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Tip colors — teal, amber, blue, green */
+    .tip-icon-circle.tip-teal {
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.3) 0%, rgba(94,234,212,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.3);
+      box-shadow: 0 0 20px rgba(94,234,212,0.1);
+    }
+    .tip-icon-circle.tip-teal::before { border: 1px solid rgba(94,234,212,0.12); }
+    .tip-icon-circle.tip-teal .tip-icon-letter { color: rgba(94,234,212,0.9); }
+
+    .tip-icon-circle.tip-amber {
+      background: radial-gradient(circle at 40% 35%, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(245,158,11,0.3);
+      box-shadow: 0 0 20px rgba(245,158,11,0.1);
+    }
+    .tip-icon-circle.tip-amber::before { border: 1px solid rgba(245,158,11,0.12); }
+    .tip-icon-circle.tip-amber .tip-icon-letter { color: rgba(245,158,11,0.9); }
+
+    .tip-icon-circle.tip-blue {
+      background: radial-gradient(circle at 40% 35%, rgba(96,165,250,0.3) 0%, rgba(96,165,250,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(96,165,250,0.3);
+      box-shadow: 0 0 20px rgba(96,165,250,0.1);
+    }
+    .tip-icon-circle.tip-blue::before { border: 1px solid rgba(96,165,250,0.12); }
+    .tip-icon-circle.tip-blue .tip-icon-letter { color: rgba(96,165,250,0.9); }
+
+    .tip-icon-circle.tip-green {
+      background: radial-gradient(circle at 40% 35%, rgba(74,222,128,0.3) 0%, rgba(74,222,128,0.08) 60%, transparent 100%);
+      border: 1.5px solid rgba(74,222,128,0.3);
+      box-shadow: 0 0 20px rgba(74,222,128,0.1);
+    }
+    .tip-icon-circle.tip-green::before { border: 1px solid rgba(74,222,128,0.12); }
+    .tip-icon-circle.tip-green .tip-icon-letter { color: rgba(74,222,128,0.9); }
+
+    .tip-card-info { flex: 1; min-width: 0; }
+    .tip-card-title {
+      font-family: var(--font-sans);
+      font-size: clamp(11px, 2cqw, 20px);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2%;
+    }
+    .tip-card-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.2cqw, 12px);
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 3%;
+    }
+    .eff-bar {
+      width: 100%;
+      height: clamp(4px, 0.7cqw, 7px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .eff-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+    .eff-fill.eff-teal { background: linear-gradient(90deg, rgba(94,234,212,0.3), rgba(94,234,212,0.8)); }
+    .eff-fill.eff-amber { background: linear-gradient(90deg, rgba(245,158,11,0.3), rgba(245,158,11,0.8)); }
+    .eff-fill.eff-blue { background: linear-gradient(90deg, rgba(96,165,250,0.3), rgba(96,165,250,0.8)); }
+    .eff-fill.eff-green { background: linear-gradient(90deg, rgba(74,222,128,0.3), rgba(74,222,128,0.8)); }
+    .eff-label {
+      font-family: var(--font-mono);
+      font-size: clamp(6px, 1cqw, 9px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 1.5%;
+    }
+    .eff-label.el-teal { color: rgba(94,234,212,0.5); }
+    .eff-label.el-amber { color: rgba(245,158,11,0.5); }
+    .eff-label.el-blue { color: rgba(96,165,250,0.5); }
+    .eff-label.el-green { color: rgba(74,222,128,0.5); }
+
+    .tip-result-box {
+      width: 100%;
+      margin-top: 4%;
+      padding: 3% 4%;
+      background: rgba(94,234,212,0.05);
+      border: 1px solid rgba(94,234,212,0.15);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .tip-result-text {
+      font-family: var(--font-serif);
+      font-size: clamp(11px, 1.8cqw, 18px);
+      font-weight: 500;
+      font-style: italic;
+      color: rgba(94,234,212,0.6);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLIDE 5 — CTA + Stat Recap
+       ═══════════════════════════════════════════ */
+    .stat-recap {
+      width: 85%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(8px, 1.5cqw, 14px);
+      margin-bottom: 6%;
+    }
+    .stat-recap-card {
+      padding: 5% 4%;
+      background: rgba(94,234,212,0.04);
+      border: 1px solid rgba(94,234,212,0.12);
+      border-radius: clamp(8px, 1.3cqw, 12px);
+      text-align: center;
+    }
+    .stat-recap-ring {
+      width: clamp(30px, 5.5cqw, 48px);
+      height: clamp(30px, 5.5cqw, 48px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.25) 0%, rgba(94,234,212,0.06) 60%, transparent 100%);
+      border: 1.5px solid rgba(94,234,212,0.25);
+      box-shadow: 0 0 14px rgba(94,234,212,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8%;
+      position: relative;
+    }
+    .stat-recap-ring::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      border: 1px solid rgba(94,234,212,0.1);
+    }
+    .stat-recap-num {
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.8cqw, 18px);
+      font-weight: 700;
+      color: rgba(94,234,212,0.9);
+      position: relative;
+      z-index: 1;
+    }
+    .stat-recap-label {
+      font-family: var(--font-sans);
+      font-size: clamp(8px, 1.3cqw, 13px);
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 2%;
+    }
+    .stat-recap-val {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 10px);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* CTA glow orb */
+    .cta-glow {
+      width: clamp(60px, 12cqw, 120px);
+      height: clamp(60px, 12cqw, 120px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(94,234,212,0.25) 0%, rgba(94,234,212,0.06) 50%, transparent 100%);
+      border: 2px solid rgba(94,234,212,0.2);
+      box-shadow: 0 0 40px rgba(94,234,212,0.1), 0 0 80px rgba(94,234,212,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 5%;
+    }
+    .cta-glow::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(94,234,212,0.12);
+    }
+    .cta-glow-icon {
+      font-size: clamp(18px, 3.5cqw, 36px);
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 6px rgba(94,234,212,0.4));
+    }
+
+    .cta-tagline {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 3.8cqw, 40px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 3%;
+    }
+    .cta-tagline em { color: var(--accent-teal); font-style: normal; }
+    .cta-desc {
+      font-family: var(--font-sans);
+      font-size: clamp(9px, 1.5cqw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 82%;
+      margin-bottom: 5%;
+    }
+    .cta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(4px, 0.8cqw, 8px);
+      justify-content: center;
+      margin-bottom: 5%;
+    }
+    .cta-pill {
+      font-family: var(--font-mono);
+      font-size: clamp(7px, 1.1cqw, 11px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: clamp(4px, 0.7cqw, 8px) clamp(8px, 1.5cqw, 16px);
+      border-radius: 20px;
+      border: 1px solid rgba(94,234,212,0.2);
+      background: rgba(94,234,212,0.05);
+      color: rgba(94,234,212,0.7);
+    }
+    .cta-box {
+      background: rgba(94,234,212,0.08);
+      border: 2px solid var(--accent-teal);
+      border-radius: 14px;
+      padding: 3% 6%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(94,234,212,0.08);
+    }
+    .cta-box-text {
+      font-size: clamp(11px, 2cqw, 22px);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 1%;
+    }
+    .cta-link {
+      font-size: clamp(10px, 1.7cqw, 18px);
+      font-weight: 600;
+      color: var(--accent-teal);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .carousel-grid { grid-template-columns: 1fr; max-width: 420px; }
     }
   </style>
 </head>
 <body>
   <div class="controls">
-<button id="export-btn">Export Mode</button>
+    <button id="export-btn">Export Mode</button>
   </div>
 
   <div class="page-title">
-    <h1>Post 140 — Troubleshooting Flowchart</h1>
-    <p>Instagram Carousel • 5 Slides • 1080×1350px</p>
+    <h1>Post 140 &mdash; Troubleshooting Guide</h1>
+    <p>5 slides &middot; Docs &middot; Teal</p>
   </div>
 
   <div class="carousel-grid">
 
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 1 — Cinematic Hook: Tool Orb + REFERENCE label
+         ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="1">
-      <span class="slide-label">Slide 1 — Cinematic Hook</span>
-      <div class="slide slide-1">
+      <span class="slide-label">Slide 1 &mdash; Hook</span>
+      <div class="slide slide-teal slide-1">
         <div class="slide-content">
-          <div class="cine-label">REFERENCE</div>
-          <div class="hook-main">Troubleshooting Guide</div>
-          <div class="cine-divider"></div>
-          <p class="hook-sub"></p>
-          <div class="cine-logo">Signal Pilot</div>
+          <div class="tool-orb">
+            <div class="gear-shape">
+              <div class="gear-tooth"></div>
+              <div class="gear-tooth"></div>
+              <div class="gear-tooth"></div>
+              <div class="gear-tooth"></div>
+              <div class="gear-core"></div>
+              <div class="wrench-handle"></div>
+            </div>
+          </div>
+          <div class="s1-ref-label">REFERENCE</div>
+          <h1 class="s1-hook">Quick Fixes for<br>Every <em>Common Issue</em></h1>
+          <div class="s1-divider"></div>
+          <p class="s1-sub">Signal Pilot Troubleshooting Guide</p>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 2 — Common Issues: 4 issue cards with severity bars
+         ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="2">
-      <span class="slide-label">Slide 2 — Not Loading</span>
-      <div class="slide">
-        <div class="slide-bg">
-</div>
+      <span class="slide-label">Slide 2 &mdash; Common Issues</span>
+      <div class="slide slide-teal slide-2">
         <div class="slide-content">
-          <span class="slide-number">02 / 05</span>
-          <div class="center-content">
-            <div class="flow-card">
-              <h3>INDICATOR NOT LOADING?</h3>
-              <div class="flow-step"><span class="flow-arrow">→</span><span class="flow-text"><strong>Step 1:</strong> Refresh your browser page</span></div>
-              <div class="flow-step"><span class="flow-arrow">→</span><span class="flow-text"><strong>Step 2:</strong> Check your internet connection</span></div>
-              <div class="flow-step"><span class="flow-arrow">→</span><span class="flow-text"><strong>Step 3:</strong> Clear TradingView cache</span></div>
-              <div class="flow-step"><span class="flow-arrow">→</span><span class="flow-text"><strong>Step 4:</strong> Re-add indicator from favorites</span></div>
+          <span class="slide-counter">02 / 05</span>
+          <h2 class="section-title">Common Issues</h2>
+          <div class="issue-list">
+
+            <div class="issue-item issue-red">
+              <div class="issue-icon ic-red">
+                <span class="issue-sym">&#10005;</span>
+              </div>
+              <div class="issue-info">
+                <div class="issue-name">Indicator Not Loading</div>
+                <div class="issue-fix">Refresh TradingView, then <em>re-add the indicator</em> from your favorites list</div>
+                <div class="severity-bar"><div class="severity-fill sev-red" style="width:90%"></div></div>
+                <div class="severity-label sl-red">FREQUENCY &mdash; HIGH</div>
+              </div>
             </div>
+
+            <div class="issue-item issue-amber">
+              <div class="issue-icon ic-amber">
+                <span class="issue-sym">&#9202;</span>
+              </div>
+              <div class="issue-info">
+                <div class="issue-name">Signals Delayed</div>
+                <div class="issue-fix">Check your <em>data subscription</em> &mdash; delayed feeds cause late signals on all indicators</div>
+                <div class="severity-bar"><div class="severity-fill sev-amber" style="width:78%"></div></div>
+                <div class="severity-label sl-amber">FREQUENCY &mdash; MEDIUM</div>
+              </div>
+            </div>
+
+            <div class="issue-item issue-purple">
+              <div class="issue-icon ic-purple">
+                <span class="issue-sym">&#8634;</span>
+              </div>
+              <div class="issue-info">
+                <div class="issue-name">Settings Resetting</div>
+                <div class="issue-fix"><em>Save as template</em> in TradingView to persist your custom configuration permanently</div>
+                <div class="severity-bar"><div class="severity-fill sev-purple" style="width:65%"></div></div>
+                <div class="severity-label sl-purple">FREQUENCY &mdash; MODERATE</div>
+              </div>
+            </div>
+
+            <div class="issue-item issue-blue">
+              <div class="issue-icon ic-blue">
+                <span class="issue-sym">&#9638;</span>
+              </div>
+              <div class="issue-info">
+                <div class="issue-name">Display Glitches</div>
+                <div class="issue-fix"><em>Clear browser cache</em> and disable conflicting extensions for clean rendering</div>
+                <div class="severity-bar"><div class="severity-fill sev-blue" style="width:55%"></div></div>
+                <div class="severity-label sl-blue">FREQUENCY &mdash; LOW</div>
+              </div>
+            </div>
+
           </div>
-          <span class="brand-mark">SIGNALPILOT</span>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 3 — The 60-Second Reset (4-step flow)
+         ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="3">
-      <span class="slide-label">Slide 3 — Data Issues</span>
-      <div class="slide">
-        <div class="slide-bg">
-</div>
+      <span class="slide-label">Slide 3 &mdash; 60-Second Reset</span>
+      <div class="slide slide-teal slide-3">
         <div class="slide-content">
-          <span class="slide-number">03 / 05</span>
-          <div class="center-content">
-            <div class="flow-card check">
-              <h3>MISSING OR WRONG DATA?</h3>
-              <div class="flow-step"><span class="flow-arrow">→</span><span class="flow-text"><strong>Check 1:</strong> Is the timeframe supported?</span></div>
-              <div class="flow-step"><span class="flow-arrow">→</span><span class="flow-text"><strong>Check 2:</strong> Does the symbol have enough history?</span></div>
-              <div class="flow-step"><span class="flow-arrow">→</span><span class="flow-text"><strong>Check 3:</strong> Are settings configured correctly?</span></div>
-              <div class="flow-step"><span class="flow-arrow">→</span><span class="flow-text"><strong>Check 4:</strong> Try a different data provider</span></div>
+          <span class="slide-counter">03 / 05</span>
+          <h2 class="section-title">The <em>60-Second</em> Reset</h2>
+          <div class="reset-flow">
+
+            <div class="reset-step rs-red">
+              <div class="reset-ring">
+                <span class="reset-num">1</span>
+              </div>
+              <div class="reset-info">
+                <div class="reset-label">CLOSE</div>
+                <div class="reset-text">Close All Tabs</div>
+                <div class="reset-desc">Shut down every TradingView tab and window completely</div>
+              </div>
             </div>
+
+            <div class="flow-arrow">&#8595;</div>
+
+            <div class="reset-step rs-amber">
+              <div class="reset-ring">
+                <span class="reset-num">2</span>
+              </div>
+              <div class="reset-info">
+                <div class="reset-label">CLEAR</div>
+                <div class="reset-text">Clear Browser Cache</div>
+                <div class="reset-desc">Remove cached scripts and stored session data from your browser</div>
+              </div>
+            </div>
+
+            <div class="flow-arrow">&#8595;</div>
+
+            <div class="reset-step rs-blue">
+              <div class="reset-ring">
+                <span class="reset-num">3</span>
+              </div>
+              <div class="reset-info">
+                <div class="reset-label">REOPEN</div>
+                <div class="reset-text">Open Single Chart</div>
+                <div class="reset-desc">Launch one clean TradingView chart &mdash; no layouts, no splits</div>
+              </div>
+            </div>
+
+            <div class="flow-arrow">&#8595;</div>
+
+            <div class="reset-step rs-teal">
+              <div class="reset-ring">
+                <span class="reset-num">4</span>
+              </div>
+              <div class="reset-info">
+                <div class="reset-label">RE-ADD</div>
+                <div class="reset-text">Add Indicator Fresh</div>
+                <div class="reset-desc">Re-apply Signal Pilot from scratch with default settings</div>
+              </div>
+            </div>
+
           </div>
-          <span class="brand-mark">SIGNALPILOT</span>
+          <div class="success-box">
+            <p class="success-text">This resolves <em>90%</em> of all reported issues.</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 4 — Pro Tips (4 cards + effectiveness bars)
+         ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="4">
-      <span class="slide-label">Slide 4 — Quick Fixes</span>
-      <div class="slide">
-        <div class="slide-bg">
-</div>
+      <span class="slide-label">Slide 4 &mdash; Pro Tips</span>
+      <div class="slide slide-teal slide-4">
         <div class="slide-content">
-          <span class="slide-number">04 / 05</span>
-          <div class="center-content">
-            <div class="flow-card solution">
-              <h3>QUICK FIX SOLUTIONS</h3>
-              <div class="flow-step"><span class="flow-arrow">✓</span><span class="flow-text">Reset indicator to default settings</span></div>
-              <div class="flow-step"><span class="flow-arrow">✓</span><span class="flow-text">Remove and re-add the indicator</span></div>
-              <div class="flow-step"><span class="flow-arrow">✓</span><span class="flow-text">Check for platform updates</span></div>
-              <div class="flow-step"><span class="flow-arrow">✓</span><span class="flow-text">Contact support with screenshots</span></div>
+          <span class="slide-counter">04 / 05</span>
+          <h2 class="tips-header"><em>Pro</em> Troubleshooting Tips</h2>
+          <p class="tips-intro">Advanced steps for persistent issues. Save time before contacting support.</p>
+          <div class="tip-strategies">
+
+            <div class="tip-card">
+              <div class="tip-icon-circle tip-teal">
+                <span class="tip-icon-letter">S</span>
+              </div>
+              <div class="tip-card-info">
+                <div class="tip-card-title">Save Settings as Default</div>
+                <div class="tip-card-desc">Save indicator settings as a TradingView template before troubleshooting to prevent config loss</div>
+                <div class="eff-bar"><div class="eff-fill eff-teal" style="width:92%"></div></div>
+                <div class="eff-label el-teal">EFFECTIVENESS &mdash; 92%</div>
+              </div>
             </div>
+
+            <div class="tip-card">
+              <div class="tip-icon-circle tip-amber">
+                <span class="tip-icon-letter">D</span>
+              </div>
+              <div class="tip-card-info">
+                <div class="tip-card-title">Check Data Subscription</div>
+                <div class="tip-card-desc">Verify real-time vs delayed data &mdash; delayed feeds introduce lag that mimics broken signals</div>
+                <div class="eff-bar"><div class="eff-fill eff-amber" style="width:85%"></div></div>
+                <div class="eff-label el-amber">EFFECTIVENESS &mdash; 85%</div>
+              </div>
+            </div>
+
+            <div class="tip-card">
+              <div class="tip-icon-circle tip-blue">
+                <span class="tip-icon-letter">C</span>
+              </div>
+              <div class="tip-card-info">
+                <div class="tip-card-title">Use Chrome Browser</div>
+                <div class="tip-card-desc">TradingView runs best on Chrome &mdash; Safari and Firefox can cause rendering and WebSocket issues</div>
+                <div class="eff-bar"><div class="eff-fill eff-blue" style="width:78%"></div></div>
+                <div class="eff-label el-blue">EFFECTIVENESS &mdash; 78%</div>
+              </div>
+            </div>
+
+            <div class="tip-card">
+              <div class="tip-icon-circle tip-green">
+                <span class="tip-icon-letter">&#9993;</span>
+              </div>
+              <div class="tip-card-info">
+                <div class="tip-card-title">Contact Support with Screenshots</div>
+                <div class="tip-card-desc">Include chart screenshots, browser version, and indicator settings when reaching out for help</div>
+                <div class="eff-bar"><div class="eff-fill eff-green" style="width:70%"></div></div>
+                <div class="eff-label el-green">RESOLUTION &mdash; 70% FASTER</div>
+              </div>
+            </div>
+
           </div>
-          <span class="brand-mark">SIGNALPILOT</span>
+          <div class="tip-result-box">
+            <p class="tip-result-text">Our support team responds to every message.</p>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════════════════════
+         SLIDE 5 — CTA: Stat recap + glow orb + pills + CTA box
+         ══════════════════════════════════════════════════════════════ -->
     <div class="slide-wrapper" data-slide="5">
-      <span class="slide-label">Slide 5 — CTA</span>
-      <div class="slide">
-        <div class="slide-bg">
-</div>
+      <span class="slide-label">Slide 5 &mdash; CTA</span>
+      <div class="slide slide-teal slide-5">
         <div class="slide-content">
-          <span class="slide-number">05 / 05</span>
-          <div class="center-content">
-            <h2 class="cta-title">Still<br><span class="emphasis">Stuck?</span></h2>
-            <p class="cta-text">Our support team is here to help.</p>
-            <p class="cta-text">Link in bio</p>
+          <span class="slide-counter">05 / 05</span>
+          <div class="stat-recap">
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">4</span>
+              </div>
+              <div class="stat-recap-label">Issues Covered</div>
+              <div class="stat-recap-val">DIAGNOSED</div>
+            </div>
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">4</span>
+              </div>
+              <div class="stat-recap-label">Reset Steps</div>
+              <div class="stat-recap-val">60 SECONDS</div>
+            </div>
+            <div class="stat-recap-card">
+              <div class="stat-recap-ring">
+                <span class="stat-recap-num">4</span>
+              </div>
+              <div class="stat-recap-label">Pro Tips</div>
+              <div class="stat-recap-val">PROVEN</div>
+            </div>
           </div>
-          <span class="brand-mark">SIGNALPILOT</span>
+          <div class="cta-glow">
+            <span class="cta-glow-icon">&#9874;</span>
+          </div>
+          <h2 class="cta-tagline"><em>Fix It</em> Fast.</h2>
+          <p class="cta-desc">Complete troubleshooting reference for Signal Pilot on TradingView. Most issues resolve in under 60 seconds.</p>
+          <div class="cta-pills">
+            <span class="cta-pill">Troubleshooting</span>
+            <span class="cta-pill">Quick Fix</span>
+            <span class="cta-pill">TradingView</span>
+          </div>
+          <div class="cta-box">
+            <p class="cta-box-text">Full troubleshooting reference</p>
+            <span class="cta-link">docs.signalpilot.io</span>
+          </div>
+          <div class="slide-logo">Signal Pilot</div>
         </div>
       </div>
     </div>
 
   </div>
 
+  <!-- ── Export Script ── -->
   <script>
-    const slides = document.querySelectorAll('.slide');
+    (function() {
+      const exportBtn = document.getElementById('export-btn');
+      const slideWrappers = document.querySelectorAll('.slide-wrapper');
+      let exportMode = false;
+      let currentSlide = 0;
 
-    const exportBtn = document.getElementById('export-btn');
-    const slideWrappers = document.querySelectorAll('.slide-wrapper');
-    let exportMode = false, currentExportSlide = 0;
+      exportBtn.addEventListener('click', function() {
+        exportMode = !exportMode;
+        document.body.classList.toggle('export-mode', exportMode);
+        this.textContent = exportMode ? 'Exit Export' : 'Export Mode';
+        if (exportMode) { currentSlide = 0; updateActiveSlide(); }
+      });
 
-    exportBtn.addEventListener('click', () => {
-      exportMode = !exportMode;
-      document.body.classList.toggle('export-mode', exportMode);
-      if (exportMode) { exportBtn.textContent = 'Exit Export (←/→ to navigate)'; currentExportSlide = 0; updateExportSlide(); }
-      else { exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
-    });
+      function updateActiveSlide() {
+        slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentSlide));
+      }
 
-    function updateExportSlide() { slideWrappers.forEach((w, i) => w.classList.toggle('active', i === currentExportSlide)); }
-
-    document.addEventListener('keydown', (e) => {
-      if (!exportMode) return;
-      if (e.key === 'ArrowRight' || e.key === ' ') { currentExportSlide = (currentExportSlide + 1) % slideWrappers.length; updateExportSlide(); }
-      else if (e.key === 'ArrowLeft') { currentExportSlide = (currentExportSlide - 1 + slideWrappers.length) % slideWrappers.length; updateExportSlide(); }
-      else if (e.key === 'Escape') { exportMode = false; document.body.classList.remove('export-mode'); exportBtn.textContent = 'Export Mode'; slideWrappers.forEach(w => w.classList.remove('active')); }
-    });
+      document.addEventListener('keydown', function(e) {
+        if (!exportMode) return;
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          currentSlide = (currentSlide + 1) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'ArrowLeft') {
+          currentSlide = (currentSlide - 1 + slideWrappers.length) % slideWrappers.length;
+          updateActiveSlide();
+        } else if (e.key === 'Escape') {
+          exportMode = false;
+          document.body.classList.remove('export-mode');
+          exportBtn.textContent = 'Export Mode';
+        }
+      });
+    })();
   </script>
 </body>
 </html>
