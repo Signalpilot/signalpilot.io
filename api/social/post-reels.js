@@ -49,7 +49,7 @@ function loadContent() {
  */
 function reelExists(postNumber) {
   const padded = String(postNumber).padStart(3, '0');
-  const reelPath = join(process.cwd(), 'assets', 'social', 'reels', `post-${padded}.mp4`);
+  const reelPath = join(process.cwd(), 'data', 'social', 'reels', `reel-${padded}.mp4`);
   return existsSync(reelPath);
 }
 
@@ -96,7 +96,7 @@ async function postOne(log, startTime) {
       postOrder,
       postNumber,
       action: 'error',
-      reason: `Reel video missing: /assets/social/reels/post-${String(postNumber).padStart(3, '0')}.mp4 (generate locally with Remotion first)`,
+      reason: `Reel video missing: /data/social/reels/reel-${String(postNumber).padStart(3, '0')}.mp4 (generate locally with Remotion first)`,
     });
     await setLastPosted('reels', postOrder);
     log(`✗ Post ${postNumber} has no Reel video — advancing queue`);

@@ -57,8 +57,8 @@ function loadStories() {
  * Check if Story video exists
  */
 function storyExists(storyNumber) {
-  const padded = String(storyNumber).padStart(3, '0');
-  const storyPath = join(process.cwd(), 'assets', 'social', 'stories', `story-${padded}.mp4`);
+  const padded = String(storyNumber).padStart(4, '0');
+  const storyPath = join(process.cwd(), 'data', 'social', 'stories', `story-${padded}.mp4`);
   return existsSync(storyPath);
 }
 
@@ -115,7 +115,7 @@ async function postOne(log, startTime) {
       platform: 'stories',
       storyNumber,
       action: 'error',
-      reason: `Story video missing: /assets/social/stories/story-${String(storyNumber).padStart(3, '0')}.mp4 (generate locally with Remotion first)`,
+      reason: `Story video missing: /data/social/stories/story-${String(storyNumber).padStart(4, '0')}.mp4 (generate locally with Remotion first)`,
     });
 
     // Advance to next story
