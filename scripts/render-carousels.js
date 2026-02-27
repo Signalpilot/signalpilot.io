@@ -89,7 +89,7 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
         width: 100% !important;
         height: 100% !important;
-        padding: 5% 6% !important;
+        padding: 5% 6% 9% 6% !important;
         box-sizing: border-box !important;
       }
 
@@ -292,6 +292,40 @@ async function renderCarousel(page, postDir, postNumber) {
       }
       .system-list {
         gap: clamp(8px, 1.5cqw, 16px) !important;
+      }
+
+      /* Instagram readability utility classes (used across many carousels) */
+      .ig-body-text {
+        font-size: clamp(18px, 4.2cqw, 26px) !important;
+        color: rgba(255,255,255,0.85) !important;
+      }
+      .ig-label-text {
+        font-size: clamp(14px, 3.4cqw, 21px) !important;
+        color: rgba(255,255,255,0.8) !important;
+        letter-spacing: 1px !important;
+      }
+
+      /* Liquidity zone descriptions (post-070 slide 2) */
+      .liq-why {
+        font-size: clamp(16px, 3.4cqw, 22px) !important;
+        color: rgba(255,255,255,0.7) !important;
+      }
+
+      /* Fix card descriptions (post-070 slide 4) */
+      .fix-card-desc {
+        font-size: clamp(16px, 3.4cqw, 22px) !important;
+        color: rgba(255,255,255,0.7) !important;
+      }
+
+      /* Sweep descriptions (post-070 slide 3) */
+      .sweep-desc {
+        font-size: clamp(16px, 3.4cqw, 22px) !important;
+        color: rgba(255,255,255,0.7) !important;
+      }
+
+      /* Fix result quote (post-070 slide 4) */
+      .fix-result-text {
+        font-size: clamp(21px, 5.2cqw, 32px) !important;
       }
 
       /* Arrow lists */
@@ -1182,7 +1216,7 @@ async function renderCarousel(page, postDir, postNumber) {
       .slide-teal .slide-content,
       .slide-warm .slide-content {
         justify-content: center !important;
-        padding: 2% 5% 2% 5% !important;
+        padding: 2% 5% 8% 5% !important;
         gap: 1.2cqw !important;
       }
       /* Keep slide-1 centered (hook) */
