@@ -29,21 +29,29 @@ import { join } from 'path';
 // Stories use a simple counter (0-N cycling)
 // Read/write from a JSON file
 
-function getStoriesQueuePath() {
+// On Vercel, filesystem is read-only except /tmp/
+// Use /tmp/ for queue state with bundled file as seed
+const TMP_QUEUE_PATH = '/tmp/stories-queue.json';
+
+function getSourceQueuePath() {
   return join(process.cwd(), 'data', 'social', 'stories-queue.json');
 }
 
 function readStoriesQueue() {
-  const path = getStoriesQueuePath();
-  if (!existsSync(path)) {
-    return { currentStoryNumber: 0, totalStories: 0 };
+  // Try /tmp/ first (persists within warm container)
+  if (existsSync(TMP_QUEUE_PATH)) {
+    return JSON.parse(readFileSync(TMP_QUEUE_PATH, 'utf-8'));
   }
-  return JSON.parse(readFileSync(path, 'utf-8'));
+  // Fall back to bundled file (initial state)
+  const sourcePath = getSourceQueuePath();
+  if (existsSync(sourcePath)) {
+    return JSON.parse(readFileSync(sourcePath, 'utf-8'));
+  }
+  return { currentStoryNumber: 0, totalStories: 0 };
 }
 
 function writeStoriesQueue(data) {
-  const path = getStoriesQueuePath();
-  writeFileSync(path, JSON.stringify(data, null, 2));
+  writeFileSync(TMP_QUEUE_PATH, JSON.stringify(data, null, 2));
 }
 
 function loadStories() {
