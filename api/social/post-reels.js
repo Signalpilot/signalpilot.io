@@ -224,10 +224,11 @@ export default async function handler(request, response) {
   try {
     log('=== Reels Posting Cron ===');
 
-    const paused = await isPlatformPaused('reels');
+    const { paused, reason: pauseReason } = await isPlatformPaused('reels');
+    log(`isPlatformPaused('reels') → ${paused} (reason: ${pauseReason})`);
     if (paused) {
       log('⏸ Platform paused. Skipping.');
-      return response.status(200).json({ status: 'paused', logs });
+      return response.status(200).json({ status: 'paused', reason: pauseReason, logs });
     }
 
     const dailyCount = await getExpectedDailyCount('reels');
