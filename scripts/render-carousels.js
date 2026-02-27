@@ -89,7 +89,7 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
         width: 100% !important;
         height: 100% !important;
-        padding: 5% 6% !important;
+        padding: 5% 6% 9% 6% !important;
         box-sizing: border-box !important;
       }
 
@@ -292,6 +292,40 @@ async function renderCarousel(page, postDir, postNumber) {
       }
       .system-list {
         gap: clamp(8px, 1.5cqw, 16px) !important;
+      }
+
+      /* Instagram readability utility classes (used across many carousels) */
+      .ig-body-text {
+        font-size: clamp(18px, 4.2cqw, 26px) !important;
+        color: rgba(255,255,255,0.85) !important;
+      }
+      .ig-label-text {
+        font-size: clamp(14px, 3.4cqw, 21px) !important;
+        color: rgba(255,255,255,0.8) !important;
+        letter-spacing: 1px !important;
+      }
+
+      /* Liquidity zone descriptions (post-070 slide 2) */
+      .liq-why {
+        font-size: clamp(16px, 3.4cqw, 22px) !important;
+        color: rgba(255,255,255,0.7) !important;
+      }
+
+      /* Fix card descriptions (post-070 slide 4) */
+      .fix-card-desc {
+        font-size: clamp(16px, 3.4cqw, 22px) !important;
+        color: rgba(255,255,255,0.7) !important;
+      }
+
+      /* Sweep descriptions (post-070 slide 3) */
+      .sweep-desc {
+        font-size: clamp(16px, 3.4cqw, 22px) !important;
+        color: rgba(255,255,255,0.7) !important;
+      }
+
+      /* Fix result quote (post-070 slide 4) */
+      .fix-result-text {
+        font-size: clamp(21px, 5.2cqw, 32px) !important;
       }
 
       /* Arrow lists */
@@ -1182,7 +1216,7 @@ async function renderCarousel(page, postDir, postNumber) {
       .slide-teal .slide-content,
       .slide-warm .slide-content {
         justify-content: center !important;
-        padding: 2% 5% 2% 5% !important;
+        padding: 2% 5% 8% 5% !important;
         gap: 1.2cqw !important;
       }
       /* Keep slide-1 centered (hook) */
@@ -1696,6 +1730,72 @@ async function renderCarousel(page, postDir, postNumber) {
       .cta-stat-label {
         font-size: clamp(15px, 3.7cqw, 21px) !important;
       }
+
+      /* ===== GLOBAL GREY TEXT FLOOR =====
+         Catch-all: attribute selectors for description-pattern class suffixes.
+         Ensures readable minimum on phone screens (~21-32px at 1080px). */
+      [class*="-desc"],
+      [class*="-detail"],
+      [class*="-story"],
+      [class*="-insight"],
+      [class*="-meaning"],
+      [class*="-body"]:not(body):not([class*="body-wrap"]),
+      [class*="-info"]:not([class*="info-box"]):not([class*="info-card"]),
+      .ig-body-text, .system-detail, .regime-desc, .body-text,
+      .def-text, .formula-exp, .sd, .fd, .tl-desc,
+      .warn-text, .alert-text, .insight-text, .info-text {
+        font-size: clamp(21px, 5.2cqw, 32px) !important;
+        line-height: 1.45 !important;
+      }
+
+      /* Step descriptions — slightly smaller for 5-step layouts */
+      .step-desc, .tl-desc {
+        font-size: clamp(18px, 4.2cqw, 26px) !important;
+        line-height: 1.35 !important;
+      }
+
+      /* Dense multi-item layouts (6+ items) — compact but still readable */
+      .signal-card .signal-desc, .signal-card .signal-detail,
+      .feature-benefit .benefit-desc, .feature-benefit .benefit-title,
+      .premium-feature .premium-feature-desc, .premium-feature .premium-feature-title,
+      .cycle-row .cycle-label, .cycle-row .cycle-meaning,
+      .cycle-desc, .reading-desc, .cycle-text, .reading-text,
+      .lag-tl-desc, .lag-tl-label {
+        font-size: clamp(18px, 4.2cqw, 26px) !important;
+        line-height: 1.35 !important;
+      }
+
+      /* Emotion card slides — expand card to fill slide */
+      .emotion-card {
+        width: 85% !important;
+        max-width: 800px !important;
+        padding: 6% 8% !important;
+        border-radius: 24px !important;
+      }
+      .center-content .emotion-card {
+        align-self: center !important;
+      }
+      .emotion-card h3 {
+        font-size: clamp(36px, 8cqw, 56px) !important;
+        margin-bottom: 4% !important;
+      }
+      .emotion-icon {
+        font-size: clamp(48px, 10cqw, 72px) !important;
+        margin-bottom: 3% !important;
+      }
+      .emotion-list li {
+        font-size: clamp(22px, 5cqw, 34px) !important;
+        line-height: 1.5 !important;
+        padding: 2% 0 !important;
+        padding-left: 5% !important;
+      }
+
+      /* Combo / category / insight-box classes (post-130 etc.) */
+      .ib-text, .cc-label, .cmb-result, .cmb-ind, .cmb-title,
+      .wb-text, .tr-desc, .cc-item {
+        font-size: clamp(16px, 3.8cqw, 24px) !important;
+        line-height: 1.35 !important;
+      }
     </style>
   `;
   html = html.replace('</head>', renderStyles + '</head>');
@@ -1749,7 +1849,7 @@ async function renderCarousel(page, postDir, postNumber) {
     });
 
     const wrappers = document.querySelectorAll('.slide-wrapper');
-    wrappers.forEach(w => w.classList.remove('active'));
+    wrappers.forEach(w => { w.classList.remove('active'); w.classList.remove('exporting'); });
     return wrappers.length;
   });
 
@@ -1776,7 +1876,10 @@ async function renderCarousel(page, postDir, postNumber) {
   for (let i = 0; i < slideCount; i++) {
     await page.evaluate((index) => {
       const wrappers = document.querySelectorAll('.slide-wrapper');
-      wrappers.forEach((w, j) => w.classList.toggle('active', j === index));
+      wrappers.forEach((w, j) => {
+        w.classList.toggle('active', j === index);
+        w.classList.toggle('exporting', j === index);
+      });
     }, i);
 
     await page.evaluate(() => new Promise(r => setTimeout(r, 50)));
