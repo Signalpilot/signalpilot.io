@@ -4,10 +4,11 @@
 //
 // How it works:
 // 1. Reads stories queue (simple counter-based system)
-// 2. Gets story content from data/social/stories.json
-// 3. Checks if story video exists at /assets/social/stories/story-XXX.mp4
-// 4. Instagram client uploads, creates Story, publishes
-// 5. Advances to next story
+// 2. Uses story-playlist.json for batch-aware ordering (no arc splits at day boundaries)
+// 3. Gets story content from data/social/stories.json
+// 4. Checks if story video exists at /data/social/stories/story-XXXX.mp4
+// 5. Instagram client uploads, creates Story, publishes
+// 6. Advances to next story
 
 import {
   isPlatformPaused,
@@ -53,6 +54,14 @@ function loadStories() {
   return JSON.parse(readFileSync(filePath, 'utf-8'));
 }
 
+function loadPlaylist() {
+  const filePath = join(process.cwd(), 'data', 'social', 'story-playlist.json');
+  if (!existsSync(filePath)) {
+    return null; // fallback to sequential order
+  }
+  return JSON.parse(readFileSync(filePath, 'utf-8'));
+}
+
 /**
  * Check if Story video exists
  */
@@ -91,6 +100,7 @@ async function attemptAutoTokenRefresh(log) {
 async function postOne(log, startTime) {
   const queue = readStoriesQueue();
   const stories = loadStories();
+  const playlist = loadPlaylist();
 
   // Validation: ensure we have stories to post
   if (stories.length === 0) {
@@ -103,9 +113,13 @@ async function postOne(log, startTime) {
     // Don't fail, just log warning - continue with rotation
   }
 
-  // Cycle through stories
-  const storyNumber = queue.currentStoryNumber % stories.length;
+  // Resolve story number: playlist (batch-aware) or sequential fallback
+  const playlistLength = playlist ? playlist.length : stories.length;
+  const playlistIndex = queue.currentStoryNumber % playlistLength;
+  const storyNumber = playlist ? playlist[playlistIndex] : playlistIndex;
   const story = stories[storyNumber];
+
+  log(`Playlist: ${playlist ? 'active (' + playlist.length + ' entries)' : 'none (sequential fallback)'}`);
 
   log(`Queue state: currentStoryNumber=${queue.currentStoryNumber}, storyNumber=${storyNumber}, total=${stories.length}`);
 
