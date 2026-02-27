@@ -63,12 +63,19 @@ function loadPlaylist() {
 }
 
 /**
- * Check if Story video exists
+ * Check if Story video exists via HTTP HEAD to the public URL
+ * (avoids bundling 3GB+ of MP4s into the serverless function)
  */
-function storyExists(storyNumber) {
+const SITE_URL = 'https://www.signalpilot.io';
+async function storyExists(storyNumber) {
   const padded = String(storyNumber).padStart(4, '0');
-  const storyPath = join(process.cwd(), 'data', 'social', 'stories', `story-${padded}.mp4`);
-  return existsSync(storyPath);
+  const url = `${SITE_URL}/data/social/stories/story-${padded}.mp4`;
+  try {
+    const res = await fetch(url, { method: 'HEAD' });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -124,7 +131,7 @@ async function postOne(log, startTime) {
   log(`Queue state: currentStoryNumber=${queue.currentStoryNumber}, storyNumber=${storyNumber}, total=${stories.length}`);
 
   // Check if video exists
-  if (!storyExists(storyNumber)) {
+  if (!(await storyExists(storyNumber))) {
     await logError({
       platform: 'stories',
       storyNumber,

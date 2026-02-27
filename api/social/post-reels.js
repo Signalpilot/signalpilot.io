@@ -31,7 +31,7 @@ import {
 } from '../../lib/social/queue-manager.js';
 import { getPostNumber } from '../../lib/social/posting-schedule.js';
 import { postReel } from '../../lib/social/instagram-reels-client.js';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync } from 'fs';
 import { join } from 'path';
 
 let contentCache = null;
@@ -45,12 +45,19 @@ function loadContent() {
 }
 
 /**
- * Check if Reel video exists for this post
+ * Check if Reel video exists via HTTP HEAD to the public URL
+ * (avoids bundling MP4s into the serverless function)
  */
-function reelExists(postNumber) {
+const SITE_URL = 'https://www.signalpilot.io';
+async function reelExists(postNumber) {
   const padded = String(postNumber).padStart(3, '0');
-  const reelPath = join(process.cwd(), 'data', 'social', 'reels', `reel-${padded}.mp4`);
-  return existsSync(reelPath);
+  const url = `${SITE_URL}/data/social/reels/reel-${padded}.mp4`;
+  try {
+    const res = await fetch(url, { method: 'HEAD' });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -90,7 +97,7 @@ async function postOne(log, startTime) {
   }
 
   // Check if video exists
-  if (!reelExists(postNumber)) {
+  if (!(await reelExists(postNumber))) {
     await logError({
       platform: 'reels',
       postOrder,
