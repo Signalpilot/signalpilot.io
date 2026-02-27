@@ -1,11 +1,11 @@
 // POST /api/social/post-reels
 // Cron-triggered: Posts the next Instagram Reel
-// Schedule: 2x daily at 12PM, 6PM UTC (7AM, 1PM EST)
+// Schedule: 3x daily at 10AM, 3PM, 8PM UTC (5AM, 10AM, 3PM EST)
 //
 // How it works:
 // 1. Queue manager says "next post order is 37" → posting schedule says "that's post #035"
 // 2. Load content-queue.json → get caption + hashtags for post #035
-// 3. Check if video exists at /assets/social/reels/post-035.mp4
+// 3. Check if video exists at /data/social/reels/reel-035.mp4
 // 4. Instagram client uploads video, creates Reel, publishes
 // 5. Queue advances to next post order
 //
