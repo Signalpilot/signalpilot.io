@@ -279,6 +279,21 @@ async function renderCarousel(page, postDir, postNumber) {
         text-align: center !important;
       }
 
+      /* System items (Five Systems slide etc.) */
+      .system-name {
+        font-size: clamp(18px, 4.2cqw, 26px) !important;
+      }
+      .system-detail {
+        font-size: clamp(16px, 3.4cqw, 22px) !important;
+        color: rgba(255,255,255,0.75) !important;
+      }
+      .system-item {
+        padding: 2.5% 3.5% !important;
+      }
+      .system-list {
+        gap: clamp(8px, 1.5cqw, 16px) !important;
+      }
+
       /* Arrow lists */
       .arrow-list {
         font-size: clamp(28px, 6.9cqw, 41px) !important;
