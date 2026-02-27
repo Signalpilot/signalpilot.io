@@ -1730,6 +1730,71 @@ async function renderCarousel(page, postDir, postNumber) {
       .cta-stat-label {
         font-size: clamp(15px, 3.7cqw, 21px) !important;
       }
+
+      /* ===== GLOBAL GREY TEXT FLOOR =====
+         Catch-all: any class containing -desc, -detail, -text (description
+         patterns) gets a readable minimum. Attribute selectors ensure we
+         never miss a custom class name again. */
+      [class*="-desc"],
+      [class*="-detail"],
+      [class*="-story"],
+      [class*="-insight"],
+      [class*="-meaning"],
+      .ig-body-text, .system-detail, .regime-desc,
+      .def-text, .formula-exp, .sd, .fd, .tl-desc,
+      .warn-text, .alert-text, .insight-text, .info-text {
+        font-size: clamp(21px, 5.2cqw, 32px) !important;
+        line-height: 1.45 !important;
+      }
+
+      /* Step descriptions — slightly smaller for 5-step layouts */
+      .step-desc, .tl-desc {
+        font-size: clamp(18px, 4.2cqw, 26px) !important;
+        line-height: 1.35 !important;
+      }
+
+      /* Dense multi-item layouts (6+ items) — compact but still readable */
+      .signal-card .signal-desc, .signal-card .signal-detail,
+      .feature-benefit .benefit-desc, .feature-benefit .benefit-title,
+      .premium-feature .premium-feature-desc, .premium-feature .premium-feature-title,
+      .cycle-row .cycle-label, .cycle-row .cycle-meaning,
+      .cycle-desc, .reading-desc, .cycle-text, .reading-text,
+      .lag-tl-desc, .lag-tl-label {
+        font-size: clamp(18px, 4.2cqw, 26px) !important;
+        line-height: 1.35 !important;
+      }
+
+      /* Emotion card slides — expand card to fill slide */
+      .emotion-card {
+        width: 85% !important;
+        max-width: 800px !important;
+        padding: 6% 8% !important;
+        border-radius: 24px !important;
+      }
+      .center-content .emotion-card {
+        align-self: center !important;
+      }
+      .emotion-card h3 {
+        font-size: clamp(36px, 8cqw, 56px) !important;
+        margin-bottom: 4% !important;
+      }
+      .emotion-icon {
+        font-size: clamp(48px, 10cqw, 72px) !important;
+        margin-bottom: 3% !important;
+      }
+      .emotion-list li {
+        font-size: clamp(22px, 5cqw, 34px) !important;
+        line-height: 1.5 !important;
+        padding: 2% 0 !important;
+        padding-left: 5% !important;
+      }
+
+      /* Combo / category / insight-box classes (post-130 etc.) */
+      .ib-text, .cc-label, .cmb-result, .cmb-ind, .cmb-title,
+      .wb-text, .tr-desc, .cc-item {
+        font-size: clamp(16px, 3.8cqw, 24px) !important;
+        line-height: 1.35 !important;
+      }
     </style>
   `;
   html = html.replace('</head>', renderStyles + '</head>');
