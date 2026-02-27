@@ -22,8 +22,8 @@ export default async function handler(req, res) {
   try {
     const { platform, action, position } = req.body || {};
 
-    if (!platform || !['twitter', 'instagram'].includes(platform)) {
-      return res.status(400).json({ error: 'Invalid platform. Use "twitter" or "instagram"' });
+    if (!platform || !['twitter', 'instagram', 'stories', 'reels'].includes(platform)) {
+      return res.status(400).json({ error: 'Invalid platform. Use "twitter", "instagram", "stories", or "reels"' });
     }
 
     if (!action || !['skip', 'reset'].includes(action)) {
