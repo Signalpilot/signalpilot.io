@@ -21,37 +21,23 @@ import {
   logError,
   incrementRetryCount,
   clearRetryCount,
+  getLastPosted,
+  setLastPosted,
 } from '../../lib/social/queue-manager.js';
 import { postStory } from '../../lib/social/instagram-stories-client.js';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
-// Stories use a simple counter (0-N cycling)
-// Read/write from a JSON file
+// Stories use a simple counter persisted in Upstash Redis
+// (previously used /tmp/ which resets on Vercel cold starts)
 
-// On Vercel, filesystem is read-only except /tmp/
-// Use /tmp/ for queue state with bundled file as seed
-const TMP_QUEUE_PATH = '/tmp/stories-queue.json';
-
-function getSourceQueuePath() {
-  return join(process.cwd(), 'data', 'social', 'stories-queue.json');
+async function readStoriesQueue() {
+  const { postOrder } = await getLastPosted('stories');
+  return { currentStoryNumber: postOrder || 0 };
 }
 
-function readStoriesQueue() {
-  // Try /tmp/ first (persists within warm container)
-  if (existsSync(TMP_QUEUE_PATH)) {
-    return JSON.parse(readFileSync(TMP_QUEUE_PATH, 'utf-8'));
-  }
-  // Fall back to bundled file (initial state)
-  const sourcePath = getSourceQueuePath();
-  if (existsSync(sourcePath)) {
-    return JSON.parse(readFileSync(sourcePath, 'utf-8'));
-  }
-  return { currentStoryNumber: 0, totalStories: 0 };
-}
-
-function writeStoriesQueue(data) {
-  writeFileSync(TMP_QUEUE_PATH, JSON.stringify(data, null, 2));
+async function advanceStoriesQueue(currentStoryNumber) {
+  await setLastPosted('stories', currentStoryNumber + 1);
 }
 
 function loadStories() {
@@ -113,7 +99,7 @@ async function attemptAutoTokenRefresh(log) {
  * Post one Story. Returns the result or null if skipped/failed.
  */
 async function postOne(log, startTime) {
-  const queue = readStoriesQueue();
+  const queue = await readStoriesQueue();
   const stories = loadStories();
   const playlist = loadPlaylist();
 
@@ -148,10 +134,7 @@ async function postOne(log, startTime) {
     });
 
     // Advance to next story
-    writeStoriesQueue({
-      currentStoryNumber: queue.currentStoryNumber + 1,
-      totalStories: stories.length,
-    });
+    await advanceStoriesQueue(queue.currentStoryNumber);
 
     log(`✗ Story ${storyNumber} has no video — advancing to next`);
     return null;
@@ -175,10 +158,7 @@ async function postOne(log, startTime) {
     });
 
     // Advance to next story
-    writeStoriesQueue({
-      currentStoryNumber: queue.currentStoryNumber + 1,
-      totalStories: stories.length,
-    });
+    await advanceStoriesQueue(queue.currentStoryNumber);
 
     log(`✅ Posted Story ${storyNumber}: ${result.mediaId}`);
     return result;
