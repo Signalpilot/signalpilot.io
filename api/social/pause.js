@@ -1,8 +1,16 @@
 // POST /api/social/pause
 // Toggle pause/resume for the posting queue
-// Body: { paused: true|false }
+// Body: { paused: true|false }                     — global pause
+// Body: { paused: true|false, platform: 'stories' } — platform-specific pause
 
-import { setPaused, isPaused, logPosting } from '../../lib/social/queue-manager.js';
+import {
+  setPaused,
+  isPaused,
+  isPlatformPaused,
+  setPlatformPaused,
+  clearAuthStrikes,
+  logPosting,
+} from '../../lib/social/queue-manager.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,6 +27,11 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
+    const platform = req.query.platform;
+    if (platform) {
+      const status = await isPlatformPaused(platform);
+      return res.status(200).json({ success: true, ...status });
+    }
     const paused = await isPaused();
     return res.status(200).json({ success: true, paused });
   }
@@ -28,12 +41,28 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { paused } = req.body || {};
+    const { paused, platform } = req.body || {};
 
     if (typeof paused !== 'boolean') {
       return res.status(400).json({ error: 'Body must include { paused: true|false }' });
     }
 
+    // Platform-specific pause/unpause
+    if (platform) {
+      await setPlatformPaused(platform, paused);
+      if (!paused) {
+        // Also clear auth strikes when unpausing a platform
+        await clearAuthStrikes(platform);
+      }
+      await logPosting({
+        platform,
+        action: paused ? 'paused' : 'resumed',
+        reason: 'Admin toggled platform pause state',
+      });
+      return res.status(200).json({ success: true, platform, paused });
+    }
+
+    // Global pause/unpause
     await setPaused(paused);
     await logPosting({
       platform: 'all',

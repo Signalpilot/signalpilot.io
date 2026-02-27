@@ -220,10 +220,11 @@ export default async function handler(request, response) {
   try {
     log('=== Stories Posting Cron ===');
 
-    const paused = await isPlatformPaused('stories');
+    const { paused, reason: pauseReason } = await isPlatformPaused('stories');
+    log(`isPlatformPaused('stories') → ${paused} (reason: ${pauseReason})`);
     if (paused) {
       log('⏸ Platform paused. Skipping.');
-      return response.status(200).json({ status: 'paused', logs });
+      return response.status(200).json({ status: 'paused', reason: pauseReason, logs });
     }
 
     const result = await postOne(log, start);
