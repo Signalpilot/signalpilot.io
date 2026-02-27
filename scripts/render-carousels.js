@@ -1732,15 +1732,16 @@ async function renderCarousel(page, postDir, postNumber) {
       }
 
       /* ===== GLOBAL GREY TEXT FLOOR =====
-         Catch-all: any class containing -desc, -detail, -text (description
-         patterns) gets a readable minimum. Attribute selectors ensure we
-         never miss a custom class name again. */
+         Catch-all: attribute selectors for description-pattern class suffixes.
+         Ensures readable minimum on phone screens (~21-32px at 1080px). */
       [class*="-desc"],
       [class*="-detail"],
       [class*="-story"],
       [class*="-insight"],
       [class*="-meaning"],
-      .ig-body-text, .system-detail, .regime-desc,
+      [class*="-body"]:not(body):not([class*="body-wrap"]),
+      [class*="-info"]:not([class*="info-box"]):not([class*="info-card"]),
+      .ig-body-text, .system-detail, .regime-desc, .body-text,
       .def-text, .formula-exp, .sd, .fd, .tl-desc,
       .warn-text, .alert-text, .insight-text, .info-text {
         font-size: clamp(21px, 5.2cqw, 32px) !important;
@@ -1848,7 +1849,7 @@ async function renderCarousel(page, postDir, postNumber) {
     });
 
     const wrappers = document.querySelectorAll('.slide-wrapper');
-    wrappers.forEach(w => w.classList.remove('active'));
+    wrappers.forEach(w => { w.classList.remove('active'); w.classList.remove('exporting'); });
     return wrappers.length;
   });
 
@@ -1875,7 +1876,10 @@ async function renderCarousel(page, postDir, postNumber) {
   for (let i = 0; i < slideCount; i++) {
     await page.evaluate((index) => {
       const wrappers = document.querySelectorAll('.slide-wrapper');
-      wrappers.forEach((w, j) => w.classList.toggle('active', j === index));
+      wrappers.forEach((w, j) => {
+        w.classList.toggle('active', j === index);
+        w.classList.toggle('exporting', j === index);
+      });
     }, i);
 
     await page.evaluate(() => new Promise(r => setTimeout(r, 50)));
