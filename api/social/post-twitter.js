@@ -80,17 +80,19 @@ async function postOne(log, startTime) {
   }
 
   // Upload twitter card image — required for every post
+  // Cards are served from Cloudflare R2 via Vercel rewrite
   let mediaId = null;
   const padded = String(postNumber).padStart(3, '0');
-  const cardPath = join(process.cwd(), 'assets', 'social', `post-${padded}`, 'twitter-card.png');
-  if (!existsSync(cardPath)) {
-    await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: `Twitter card missing: ${cardPath}` });
-    await incrementRetryCount('twitter', postOrder);
-    log(`✗ Post ${postNumber} has no twitter card image — blocking post`);
-    return null;
-  }
+  const cardUrl = `https://www.signalpilot.io/assets/social/post-${padded}/twitter-card.png`;
   try {
-    const imageBuffer = readFileSync(cardPath);
+    const res = await fetch(cardUrl);
+    if (!res.ok) {
+      await logError({ platform: 'twitter', postOrder, postNumber, action: 'error', reason: `Twitter card missing: ${cardUrl} (HTTP ${res.status})` });
+      await incrementRetryCount('twitter', postOrder);
+      log(`✗ Post ${postNumber} has no twitter card image — blocking post`);
+      return null;
+    }
+    const imageBuffer = Buffer.from(await res.arrayBuffer());
     mediaId = await uploadMedia(imageBuffer, 'image/png');
     log(`🖼 Uploaded twitter card for post ${postNumber} (mediaId=${mediaId})`);
   } catch (imgErr) {
