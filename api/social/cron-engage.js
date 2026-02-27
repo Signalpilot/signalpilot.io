@@ -1,7 +1,7 @@
 // POST /api/social/cron-engage
 // Automated engagement: likes, comments, replies
 // Runs every 4 hours via Vercel cron
-// Pulls posts from cached queue (populated by cron-queue-posts)
+// Fetches posts from target accounts via business_discovery API
 
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -16,7 +16,6 @@ import {
   likePost,
   commentOnPost,
   getAccountPosts,
-  searchPostsByHashtag,
 } from '../../lib/social/instagram-client.js';
 import {
   likeTweet,
@@ -107,10 +106,14 @@ function filterQualityPosts(posts, config, platform) {
 
 export default async function handler(req, res) {
   try {
-    const { token } = req.query;
-
-    const validToken = token === process.env.ROBOT_TOKEN ||
-                       token === process.env.CRON_SECRET;
+    // Accept token from query param (manual) or Authorization header (Vercel cron)
+    const queryToken = req.query.token;
+    const headerToken = req.headers['authorization']?.replace('Bearer ', '');
+    const validToken = [queryToken, headerToken].some(t =>
+      t && (t === process.env.ROBOT_TOKEN ||
+            t === process.env.CRON_SECRET ||
+            t === process.env.SOCIAL_ADMIN_TOKEN)
+    );
 
     if (!validToken) {
       return res.status(401).json({ error: 'Invalid token' });
@@ -193,16 +196,6 @@ export default async function handler(req, res) {
   }
 }
 
-function loadPostQueue() {
-  try {
-    const queuePath = join(process.cwd(), 'data', 'social', 'post-queue.json');
-    return JSON.parse(readFileSync(queuePath, 'utf-8'));
-  } catch (error) {
-    console.error('Failed to load post queue:', error);
-    return { tradingview: [], investopedia: [], other_accounts: [] };
-  }
-}
-
 async function handleInstagramEngagement(config) {
   const likeCount = await getEngagementCount('instagram', 'like');
   const commentCount = await getEngagementCount('instagram', 'comment');
@@ -223,34 +216,25 @@ async function handleInstagramEngagement(config) {
   // Randomly pick action (80% likes, 20% comments)
   const action = (!canComment || (canLike && Math.random() < 0.8)) ? 'like' : 'comment';
 
-  // Load cached posts from queue (filled by cron-queue-posts)
-  const queue = loadPostQueue();
+  // Pick a random account target from config (fetch posts directly via API)
+  const accountTargets = (config.instagram.targets || []).filter(t => t.type === 'account');
+  if (accountTargets.length === 0) {
+    return { action, status: 'skipped', reason: 'No account targets configured' };
+  }
+
+  const target = randomItem(accountTargets);
   let posts = [];
 
-  // Try sources in order: tradingview, investopedia, other
-  if (queue.tradingview && queue.tradingview.length > 0) {
-    posts = queue.tradingview;
-  } else if (queue.investopedia && queue.investopedia.length > 0) {
-    posts = queue.investopedia;
-  } else if (queue.other_accounts && queue.other_accounts.length > 0) {
-    posts = queue.other_accounts;
+  try {
+    const result = await getAccountPosts(target.value, 20);
+    posts = result.posts || [];
+  } catch (error) {
+    console.error(`Failed to fetch posts from @${target.value}:`, error.message);
+    return { action, status: 'error', target: target.value, error: error.message };
   }
 
-  if (!posts || posts.length === 0) {
-    return {
-      action,
-      status: 'skipped',
-      reason: 'No posts in queue (run cron-queue-posts first)',
-      hint: 'POST /api/social/cron-queue-posts to populate queue',
-    };
-  }
-
-  if (!posts || posts.length === 0) {
-    return {
-      action,
-      status: 'skipped',
-      reason: `No posts found for ${target.value}`,
-    };
+  if (posts.length === 0) {
+    return { action, status: 'skipped', reason: `No posts found for @${target.value}` };
   }
 
   // Filter by quality (skip spam, suspicious accounts, etc)
@@ -259,7 +243,7 @@ async function handleInstagramEngagement(config) {
     return {
       action,
       status: 'skipped',
-      reason: `All posts from ${target.value} filtered by quality checks`,
+      reason: `All posts from @${target.value} filtered by quality checks`,
       filtered: posts.length,
     };
   }
@@ -269,8 +253,7 @@ async function handleInstagramEngagement(config) {
   for (const post of qualityPosts) {
     const engaged = await isEngaged('instagram', post.id, action);
     if (!engaged) {
-      // Score by engagement: likes + comments as proxy for quality
-      const engagementScore = (post.likes_count || 0) + (post.comments_count || 0) * 2;
+      const engagementScore = (post.like_count || 0) + (post.comments_count || 0) * 2;
       unengagedPosts.push({ ...post, engagementScore });
     }
   }
@@ -279,9 +262,8 @@ async function handleInstagramEngagement(config) {
     return {
       action,
       status: 'skipped',
-      reason: 'All posts in queue already engaged',
-      posts_in_queue: posts.length,
-      posts_available: qualityPosts.length,
+      reason: `All posts from @${target.value} already engaged`,
+      posts_checked: qualityPosts.length,
     };
   }
 
@@ -298,7 +280,7 @@ async function handleInstagramEngagement(config) {
       await logEngagement({
         platform: 'instagram',
         action: 'like',
-        source: 'queue',
+        source: target.value,
         mediaId: post.id,
         triggerType: 'cron',
       });
@@ -306,7 +288,7 @@ async function handleInstagramEngagement(config) {
       return {
         action: 'like',
         status: 'success',
-        source: 'post_queue',
+        source: target.value,
         mediaId: post.id,
         count: likeCount + 1,
         limit: config.instagram.likeDaily,
@@ -321,7 +303,7 @@ async function handleInstagramEngagement(config) {
       await logEngagement({
         platform: 'instagram',
         action: 'comment',
-        source: 'queue',
+        source: target.value,
         mediaId: post.id,
         text: template,
         triggerType: 'cron',
@@ -330,7 +312,7 @@ async function handleInstagramEngagement(config) {
       return {
         action: 'comment',
         status: 'success',
-        source: 'post_queue',
+        source: target.value,
         mediaId: post.id,
         text: template,
         count: commentCount + 1,
@@ -338,11 +320,7 @@ async function handleInstagramEngagement(config) {
       };
     }
   } catch (error) {
-    return {
-      action,
-      status: 'error',
-      error: error.message,
-    };
+    return { action, status: 'error', target: target.value, error: error.message };
   }
 }
 
@@ -376,10 +354,12 @@ async function handleTwitterEngagement(config) {
 
   const query = randomItem(queries);
   let tweets = [];
+  let rateLimited = false;
 
   try {
     const result = await searchTweets(query, 15);
     tweets = result.tweets || [];
+    rateLimited = result.rate_limited || false;
   } catch (error) {
     return {
       action,
@@ -390,8 +370,7 @@ async function handleTwitterEngagement(config) {
   }
 
   if (!tweets || tweets.length === 0) {
-    // Check if rate limited
-    if (result?.rate_limited) {
+    if (rateLimited) {
       return {
         action,
         status: 'skipped',

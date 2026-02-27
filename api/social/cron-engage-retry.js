@@ -19,11 +19,14 @@ import {
 
 export default async function handler(req, res) {
   try {
-    const { token } = req.query;
-
-    // Verify token
-    const validToken = token === process.env.ROBOT_TOKEN ||
-                       token === process.env.CRON_SECRET;
+    // Accept token from query param (manual) or Authorization header (Vercel cron)
+    const queryToken = req.query.token;
+    const headerToken = req.headers['authorization']?.replace('Bearer ', '');
+    const validToken = [queryToken, headerToken].some(t =>
+      t && (t === process.env.ROBOT_TOKEN ||
+            t === process.env.CRON_SECRET ||
+            t === process.env.SOCIAL_ADMIN_TOKEN)
+    );
 
     if (!validToken) {
       return res.status(401).json({ error: 'Invalid token' });
