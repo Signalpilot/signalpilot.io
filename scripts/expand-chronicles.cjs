@@ -13,7 +13,7 @@ const QUEUE_PATH = path.join(__dirname, '..', 'data', 'social', 'content-queue.j
 const site = 'https://signalpilot.io';
 const edu = 'https://education.signalpilot.io';
 const tv = {
-  pentarch: 'https://www.tradingview.com/script/S8LniK8O-Pentarch-Cycle-Phase-Detection/',
+  pentarch: 'https://www.tradingview.com/script/NZt2MVbj-Pentarch-Cycle-Phase-Detection/',
   volumeOracle: 'https://www.tradingview.com/script/L9AQHzjY-Volume-Oracle-Regime-Detection/',
   janusAtlas: 'https://www.tradingview.com/script/28diwImS-Janus-Atlas-Multi-Timeframe-Auto-Levels/',
   plutusFlow: 'https://www.tradingview.com/script/uoZjVlZA-Plutus-Flow-Statistical-OBV-Analysis/',
