@@ -89,12 +89,12 @@ export default async function handler(req, res) {
 }
 
 async function handleSale(sale, saleId, req, res) {
-  // Parse price
+  // Parse price — Gumroad sends price in cents (2900 = $29.00)
   let priceInCents = 0;
   if (typeof sale.price === 'number') {
     priceInCents = sale.price;
   } else if (typeof sale.price === 'string') {
-    priceInCents = Math.round(parseFloat(sale.price.replace(/[^0-9.]/g, '')) * 100);
+    priceInCents = Math.round(parseFloat(sale.price.replace(/[^0-9.]/g, '')));
   }
   const priceValue = priceInCents / 100;
 
