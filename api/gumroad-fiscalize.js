@@ -127,22 +127,16 @@ export default async function handler(req, res) {
       };
     }
 
-    // Add buyer info if available
+    // Add buyer info — EasyPOS requires address fields when buyer is present
     if (sale.full_name || sale.email) {
       invoice.buyer = {
         buyerIDType: 'PASS',
         buyerIDNum: sale.email,
         buyerName: sale.full_name || sale.email,
+        buyerAddress: sale.street || 'N/A',
+        buyerTown: sale.city || 'N/A',
+        buyerCountry: sale.country || 'ALB',
       };
-      if (sale.country) {
-        invoice.buyer.buyerCountry = sale.country;
-      }
-      if (sale.city) {
-        invoice.buyer.buyerTown = sale.city;
-      }
-      if (sale.street) {
-        invoice.buyer.buyerAddress = sale.street;
-      }
     }
 
     console.log(`[fiscalize] Sending to EasyPOS:`, JSON.stringify(invoice));
