@@ -118,12 +118,13 @@ export default async function handler(req, res) {
       ],
     };
 
-    // Add currency if not ALL (Albanian Lek)
+    // Add currency with live exchange rate if not ALL (Albanian Lek)
     const currency = (sale.currency || 'USD').toUpperCase();
     if (currency !== 'ALL') {
+      const exRate = await fetchExchangeRate(currency);
       invoice.currency = {
         code: currency,
-        exRate: 1, // You may want to set a real exchange rate or let EasyPOS handle it
+        exRate,
       };
     }
 
@@ -197,4 +198,25 @@ async function forwardToMake(payload) {
 
   console.log('[fiscalize] Forwarded to Make.com successfully');
   return true;
+}
+
+/**
+ * Fetch live exchange rate from free ExchangeRate-API.
+ * Returns how many ALL (Lek) per 1 unit of the given currency.
+ * Falls back to ~83 ALL/USD if the API is unavailable.
+ */
+async function fetchExchangeRate(currencyCode) {
+  try {
+    const response = await fetch(`https://open.er-api.com/v6/latest/${currencyCode}`);
+    const data = await response.json();
+    if (data.result === 'success' && data.rates?.ALL) {
+      console.log(`[fiscalize] Exchange rate: 1 ${currencyCode} = ${data.rates.ALL} ALL`);
+      return data.rates.ALL;
+    }
+  } catch (err) {
+    console.error(`[fiscalize] Exchange rate fetch failed: ${err.message}`);
+  }
+  // Fallback rate
+  console.log(`[fiscalize] Using fallback exchange rate for ${currencyCode}`);
+  return currencyCode === 'EUR' ? 98 : 83;
 }
