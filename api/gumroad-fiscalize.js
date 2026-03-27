@@ -1,10 +1,14 @@
-// Vercel Serverless Function: Gumroad Webhook → EasyPOS Fiscalization
+// Vercel Serverless Function: Gumroad Webhook → EasyPOS Fiscalization + Make.com forwarding
 // Endpoint: POST /api/gumroad-fiscalize
+//
+// This endpoint replaces the direct Gumroad → Make.com ping. It:
+//   1. Receives the Gumroad sale webhook
+//   2. Fiscalizes the invoice via EasyPOS
+//   3. Forwards the original payload to Make.com so the existing scenario still works
 //
 // Setup:
 //   1. In Gumroad → Settings → Ping, set URL to: https://www.signalpilot.io/api/gumroad-fiscalize
-//   2. Set env vars in Vercel: EASYPOS_API_URL, EASYPOS_API_KEY
-//   3. Optional: GUMROAD_WEBHOOK_SECRET for extra security
+//   2. Set env vars in Vercel: EASYPOS_API_URL, EASYPOS_API_KEY, MAKE_GUMROAD_WEBHOOK_URL
 
 import { registerInvoice } from '../lib/easypos-client.js';
 
@@ -135,33 +139,71 @@ export default async function handler(req, res) {
 
     console.log(`[fiscalize] Sending to EasyPOS:`, JSON.stringify(invoice));
 
-    // Register with EasyPOS
-    const result = await registerInvoice(invoice);
+    // Run fiscalization and Make.com forwarding in parallel
+    const [fiscalResult, makeResult] = await Promise.allSettled([
+      // 1. Register invoice with EasyPOS
+      registerInvoice(invoice),
+      // 2. Forward original payload to Make.com for existing scenario
+      forwardToMake(req.body),
+    ]);
+
+    const result = fiscalResult.status === 'fulfilled' ? fiscalResult.value : { success: false, error: fiscalResult.reason?.message };
+    const makeForwarded = makeResult.status === 'fulfilled' && makeResult.value;
 
     if (result.success) {
-      console.log(`[fiscalize] Invoice registered — NSLF: ${result.nslf}, NIVF: ${result.nivf}`);
+      console.log(`[fiscalize] Invoice registered — NSLF: ${result.nslf}, NIVF: ${result.nivf}, Make.com forwarded: ${makeForwarded}`);
       return res.status(200).json({
         success: true,
         order_number: sale.order_number || sale.sale_id,
         nslf: result.nslf,
         nivf: result.nivf,
         verification_link: result.link,
+        make_forwarded: makeForwarded,
       });
     }
 
-    console.error(`[fiscalize] EasyPOS error:`, JSON.stringify(result.error));
-    return res.status(502).json({
+    console.error(`[fiscalize] EasyPOS error:`, JSON.stringify(result.error), `Make.com forwarded: ${makeForwarded}`);
+    return res.status(200).json({
       success: false,
       error: 'Fiscalization failed',
       details: result.error,
       order_number: sale.order_number || sale.sale_id,
+      make_forwarded: makeForwarded,
     });
 
   } catch (error) {
     console.error('[fiscalize] Unexpected error:', error.message);
+    // Even on error, try to forward to Make.com so the email flow isn't broken
+    await forwardToMake(req.body).catch(() => {});
     return res.status(500).json({
       success: false,
       error: error.message,
     });
   }
+}
+
+/**
+ * Forward the original Gumroad payload to Make.com webhook
+ * so the existing "Code Generation & Welcome Email" scenario keeps working.
+ */
+async function forwardToMake(payload) {
+  const makeUrl = process.env.MAKE_GUMROAD_WEBHOOK_URL;
+  if (!makeUrl) {
+    console.log('[fiscalize] MAKE_GUMROAD_WEBHOOK_URL not set — skipping Make.com forwarding');
+    return false;
+  }
+
+  const response = await fetch(makeUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    console.error(`[fiscalize] Make.com forwarding failed: ${response.status}`);
+    return false;
+  }
+
+  console.log('[fiscalize] Forwarded to Make.com successfully');
+  return true;
 }
