@@ -128,10 +128,12 @@ export default async function handler(req, res) {
     }
 
     // Add buyer info — EasyPOS requires address fields when buyer is present
+    // CIS enforces max 20 chars on buyerIDNum, so use sale_id or truncate email
     if (sale.full_name || sale.email) {
+      const buyerId = (sale.sale_id || sale.order_number || sale.email || '').slice(0, 20);
       invoice.buyer = {
         buyerIDType: 'PASS',
-        buyerIDNum: sale.email,
+        buyerIDNum: buyerId,
         buyerName: sale.full_name || sale.email,
         buyerAddress: sale.street || 'N/A',
         buyerTown: sale.city || 'N/A',
