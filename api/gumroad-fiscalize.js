@@ -82,6 +82,8 @@ export default async function handler(req, res) {
 
     if (priceValue <= 0) {
       console.log(`[fiscalize] Skipping zero-price sale (free/refund): ${sale.order_number}`);
+      // Still forward to Make.com for free trials
+      await forwardToMake(req.body).catch(() => {});
       return res.status(200).json({ success: true, skipped: true, reason: 'Zero price — no invoice needed' });
     }
 
@@ -93,6 +95,9 @@ export default async function handler(req, res) {
       name: sale.product_name || DEFAULT_PRODUCT.name,
     };
 
+    const quantity = parseInt(sale.quantity, 10) || 1;
+    const totalAmount = priceValue * quantity;
+
     // Build EasyPOS invoice
     const invoice = {
       articles: [
@@ -102,12 +107,15 @@ export default async function handler(req, res) {
           name: product.name,
           soldIn: product.soldIn,
           price: priceValue,
-          units: parseInt(sale.quantity, 10) || 1,
+          units: quantity,
         },
       ],
-      payment: {
-        type: 'CARD', // Gumroad payments are card-based
-      },
+      payment: [
+        {
+          type: 'CARD', // Gumroad payments are card-based
+          amount: totalAmount,
+        },
+      ],
     };
 
     // Add currency if not ALL (Albanian Lek)
@@ -141,9 +149,7 @@ export default async function handler(req, res) {
 
     // Run fiscalization and Make.com forwarding in parallel
     const [fiscalResult, makeResult] = await Promise.allSettled([
-      // 1. Register invoice with EasyPOS
       registerInvoice(invoice),
-      // 2. Forward original payload to Make.com for existing scenario
       forwardToMake(req.body),
     ]);
 
@@ -151,12 +157,13 @@ export default async function handler(req, res) {
     const makeForwarded = makeResult.status === 'fulfilled' && makeResult.value;
 
     if (result.success) {
-      console.log(`[fiscalize] Invoice registered — NSLF: ${result.nslf}, NIVF: ${result.nivf}, Make.com forwarded: ${makeForwarded}`);
+      console.log(`[fiscalize] Invoice registered — FIC: ${result.fic}, IIC: ${result.iic}, Make.com forwarded: ${makeForwarded}`);
       return res.status(200).json({
         success: true,
         order_number: sale.order_number || sale.sale_id,
-        nslf: result.nslf,
-        nivf: result.nivf,
+        fic: result.fic,
+        iic: result.iic,
+        invoice_number: result.invoiceNumber,
         verification_link: result.link,
         make_forwarded: makeForwarded,
       });
