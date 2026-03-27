@@ -18,25 +18,25 @@ const PRODUCT_MAP = {
     articleId: 'SP-MONTHLY',
     name: 'SignalPilot Monthly Subscription',
     vatCode: 'B', // 20% VAT
-    soldIn: 'cope',
+    soldIn: 'XPP',
   },
   'yearly': {
     articleId: 'SP-YEARLY',
     name: 'SignalPilot Yearly Subscription',
     vatCode: 'B',
-    soldIn: 'cope',
+    soldIn: 'XPP',
   },
   'lifetime': {
     articleId: 'SP-LIFETIME',
     name: 'SignalPilot Lifetime License',
     vatCode: 'B',
-    soldIn: 'cope',
+    soldIn: 'XPP',
   },
   'pentarch-solo': {
     articleId: 'SP-PENTARCH',
     name: 'Pentarch Solo License',
     vatCode: 'B',
-    soldIn: 'cope',
+    soldIn: 'XPP',
   },
 };
 
