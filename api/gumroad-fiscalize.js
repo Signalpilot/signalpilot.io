@@ -138,6 +138,20 @@ async function handleSale(sale, saleId, req, res) {
     invoice.currency = { code: currency, exRate };
   }
 
+  // Duplicate protection — skip if already fiscalized
+  const existingIic = await redis.get(`fiscal:${saleId}`).catch(() => null);
+  if (existingIic) {
+    console.log(`[fiscalize] Sale ${saleId} already fiscalized (IIC: ${existingIic}) — skipping`);
+    const makeForwarded = await forwardToMake(req.body).catch(() => false);
+    return res.status(200).json({
+      success: true,
+      duplicate: true,
+      order_number: saleId,
+      iic: existingIic,
+      make_forwarded: makeForwarded,
+    });
+  }
+
   console.log(`[fiscalize] Sending to EasyPOS:`, JSON.stringify(invoice));
 
   // Run fiscalization and Make.com forwarding in parallel
