@@ -41,7 +41,7 @@ const PRODUCT_MAP = {
   },
   'pentarch-solo': {
     articleId: 'SP-PENTARCH',
-    name: 'Pentarch Solo License',
+    name: 'Pentarch Solo Subscription',
     vatCode: 'B',
     soldIn: 'XPP',
   },
