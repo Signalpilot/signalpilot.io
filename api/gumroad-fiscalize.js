@@ -167,10 +167,15 @@ async function handleSale(sale, saleId, req, res) {
     });
   }
 
-  console.error(`[fiscalize] EasyPOS error:`, JSON.stringify(result.error), `Make.com: ${makeForwarded}`);
+  // All retries failed — store in Redis for manual retry later
+  console.error(`[fiscalize] EasyPOS error after retries:`, JSON.stringify(result.error), `Make.com: ${makeForwarded}`);
+  await redis.lpush('fiscal:failed', JSON.stringify({ saleId, invoice, error: result.error, timestamp: new Date().toISOString() })).catch(err =>
+    console.error(`[fiscalize] Failed to store for retry: ${err.message}`)
+  );
+
   return res.status(200).json({
     success: false,
-    error: 'Fiscalization failed',
+    error: 'Fiscalization failed after retries',
     details: result.error,
     order_number: saleId,
     make_forwarded: makeForwarded,
