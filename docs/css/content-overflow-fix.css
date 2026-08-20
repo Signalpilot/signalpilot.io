@@ -1,0 +1,109 @@
+/**
+ * COMPREHENSIVE OVERFLOW PREVENTION - ALL PAGES
+ * Applies to both mobile and desktop
+ * Prevents horizontal scroll and overflow issues site-wide
+ * CRITICAL: Never use overflow-x on html/body - breaks position: sticky!
+ */
+
+/* ============================================
+   ALL DEVICES - PREVENT OVERFLOW
+   ============================================ */
+
+/* Fix grid layouts with auto-fit that can overflow */
+[style*="grid-template-columns"][style*="auto-fit"] {
+  min-width: 0 !important;
+}
+
+/* All grid items need min-width: 0 to prevent overflow */
+.md-content [class*="grid"] > *,
+.md-content [style*="display: grid"] > *,
+article [class*="grid"] > *,
+article [style*="display: grid"] > * {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Break long words and URLs everywhere */
+.md-content,
+article {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.md-content a[href^="http"],
+article a[href^="http"],
+.md-content code,
+article code {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Code blocks get horizontal scroll (all devices) */
+.md-content pre,
+article pre,
+.md-content pre code,
+article pre code {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Tables get horizontal scroll (all devices) */
+.md-content table,
+article table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Images never exceed container width */
+.md-content img:not([class*="logo"]):not([class*="icon"]),
+article img:not([class*="logo"]):not([class*="icon"]) {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================
+   MOBILE SPECIFIC - ADDITIONAL CONSTRAINTS
+   ============================================ */
+
+@media screen and (max-width: 768px) {
+
+  /* Use width constraint instead of overflow-x to prevent horizontal scroll */
+  .md-container,
+  .md-main,
+  .md-content {
+    max-width: 100vw;
+  }
+
+}
+
+/* ============================================
+   DESKTOP - ENSURE GRID LAYOUTS DON'T OVERFLOW
+   ============================================ */
+
+@media screen and (min-width: 769px) {
+
+  /* Fix any inline grid styles with auto-fit */
+  .md-content [style*="repeat(auto-fit"],
+  article [style*="repeat(auto-fit"] {
+    min-width: 0;
+  }
+
+  /* Ensure all divs with inline grid styles wrap properly */
+  .md-content div[style*="display: grid"],
+  article div[style*="display: grid"] {
+    overflow: hidden;
+  }
+
+  .md-content div[style*="display: grid"] > div,
+  article div[style*="display: grid"] > div {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+}
+
+/* That's it - comprehensive overflow prevention across all pages. */

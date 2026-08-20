@@ -1,0 +1,455 @@
+/**
+ * CUSTOM BOTTOM SHEET NAVIGATION - BUILT FROM SCRATCH
+ * Modern, fire navigation that replaces mkdocs sidebar
+ */
+
+/* ============================================
+   FLOATING NAV BUTTON - MOBILE ONLY
+   MATCHES CHATBOT BUTTON EXACTLY
+   ============================================ */
+
+.custom-nav-button {
+  position: fixed;
+  bottom: 100px; /* Positioned ABOVE chatbot button */
+  right: 20px; /* Same horizontal position as chatbot */
+
+  /* EXACT MATCH TO CHATBOT: Size, gradient, shadow, border radius */
+  width: 60px;           /* ← Same as chatbot (60px) */
+  height: 60px;          /* ← Same as chatbot (60px) */
+  background: linear-gradient(135deg, #29B6F6 0%, #0288D1 100%); /* ← Same gradient as chatbot */
+  border-radius: 50%;    /* ← Same border radius as chatbot */
+  box-shadow: 0 4px 12px rgba(41, 182, 246, 0.4); /* ← Same shadow as chatbot */
+
+  border: none;
+  cursor: pointer;
+  z-index: 1002; /* ABOVE overlay (1000) and sheet (1001) so button stays visible */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* ← Same transition as chatbot */
+}
+
+.custom-nav-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(41, 182, 246, 0.6); /* Match chatbot hover shadow */
+}
+
+.custom-nav-button:active {
+  transform: scale(0.95);
+}
+
+/* Hamburger icon - EXACT MATCH to chatbot icon size */
+.custom-nav-button svg {
+  width: 32px;  /* ← Same as chatbot icon (32px) */
+  height: 32px; /* ← Same as chatbot icon (32px) */
+  fill: white;
+}
+
+/* DESKTOP: Hide nav button completely */
+@media screen and (min-width: 76.25em) {
+  .custom-nav-button {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   BACKDROP OVERLAY
+   ============================================ */
+
+.custom-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.custom-nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============================================
+   CUSTOM BOTTOM SHEET
+   ============================================ */
+
+.custom-bottom-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 85vh;
+  max-height: 85vh;
+  background: var(--md-default-bg-color, #ffffff);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+
+  /* Hidden by default - slides up from bottom */
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Enable GPU acceleration */
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.custom-bottom-sheet.active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   DRAG HANDLE
+   ============================================ */
+
+.custom-sheet-handle {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  background: var(--md-default-bg-color, #ffffff);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  z-index: 10;
+}
+
+.custom-sheet-handle:active {
+  cursor: grabbing;
+}
+
+.custom-sheet-handle-bar {
+  width: 40px;
+  height: 4px;
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 2px;
+  transition: background 0.2s ease;
+}
+
+.custom-sheet-handle:hover .custom-sheet-handle-bar {
+  background: rgba(148, 163, 184, 0.6);
+}
+
+/* ============================================
+   SHEET HEADER
+   ============================================ */
+
+.custom-sheet-header {
+  padding: 0 1.5rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--md-default-bg-color, #ffffff);
+  position: sticky;
+  top: 32px;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-sheet-header-content {
+  flex: 1;
+}
+
+.custom-sheet-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--md-default-fg-color, #000);
+  margin: 0;
+}
+
+.custom-sheet-subtitle {
+  font-size: 0.9rem;
+  color: var(--md-default-fg-color--light, #666);
+  margin: 0.25rem 0 0;
+}
+
+/* Close button in header */
+.custom-sheet-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.custom-sheet-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.custom-sheet-close:active {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
+}
+
+.custom-sheet-close svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--md-default-fg-color--light, #666);
+}
+
+/* ============================================
+   SCROLLABLE CONTENT
+   ============================================ */
+
+.custom-sheet-content {
+  height: calc(85vh - 32px - 80px); /* Total height - handle - header */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.5rem;
+}
+
+/* Custom scrollbar */
+.custom-sheet-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-sheet-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-sheet-content::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 3px;
+}
+
+.custom-sheet-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* ============================================
+   NAVIGATION ITEMS
+   ============================================ */
+
+.custom-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-nav-item {
+  margin: 0.25rem 0;
+}
+
+.custom-nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 1.2rem;
+  min-height: 52px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--md-default-fg-color, #000);
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.custom-nav-link:hover {
+  background: rgba(102, 126, 234, 0.08);
+  color: var(--md-accent-fg-color, #667eea);
+}
+
+.custom-nav-link:active {
+  background: rgba(102, 126, 234, 0.15);
+  transform: scale(0.98);
+}
+
+/* Active/current page */
+.custom-nav-link.active {
+  background: rgba(102, 126, 234, 0.12);
+  color: var(--md-accent-fg-color, #667eea);
+  font-weight: 600;
+}
+
+.custom-nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: var(--md-accent-fg-color, #667eea);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Navigation icons */
+.custom-nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 0.75rem;
+  opacity: 0.7;
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.custom-nav-link:hover .custom-nav-icon,
+.custom-nav-link.active .custom-nav-icon {
+  opacity: 1;
+}
+
+/* Navigation text */
+.custom-nav-text {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* ============================================
+   SECTION HEADERS
+   ============================================ */
+
+.custom-nav-section {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-default-fg-color--light, #666);
+  padding: 1rem 1.2rem 0.5rem;
+  margin-top: 1rem;
+}
+
+.custom-nav-section:first-child {
+  margin-top: 0;
+}
+
+/* ============================================
+   NESTED/EXPANDABLE ITEMS
+   ============================================ */
+
+.custom-nav-item.has-children {
+  position: relative;
+}
+
+.custom-nav-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.custom-nav-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.custom-nav-toggle svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.custom-nav-item.expanded .custom-nav-toggle svg {
+  transform: rotate(180deg);
+}
+
+.custom-nav-children {
+  display: none;
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  padding: 0.5rem 0;
+}
+
+.custom-nav-item.expanded .custom-nav-children {
+  display: block;
+}
+
+.custom-nav-children .custom-nav-link {
+  font-size: 0.9rem;
+  min-height: 44px;
+  padding-left: 2rem;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+[data-md-color-scheme="slate"] .custom-bottom-sheet {
+  background: #1e1e1e;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+}
+
+[data-md-color-scheme="slate"] .custom-sheet-handle {
+  background: #1e1e1e;
+}
+
+[data-md-color-scheme="slate"] .custom-sheet-header {
+  background: #1e1e1e;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-md-color-scheme="slate"] .custom-nav-children {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-md-color-scheme="slate"] .custom-sheet-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-md-color-scheme="slate"] .custom-sheet-close:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ============================================
+   DESKTOP: Hide bottom sheet completely
+   ============================================ */
+
+@media screen and (min-width: 76.25em) {
+  /* Desktop uses normal mkdocs sidebar - hide bottom sheet */
+  .custom-bottom-sheet,
+  .custom-nav-overlay {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   ============================================ */
+
+@media screen and (max-width: 768px) {
+  .custom-bottom-sheet {
+    height: 90vh;
+    max-height: 90vh;
+  }
+
+  .custom-nav-button {
+    bottom: 90px; /* Above chatbot on mobile (chatbot is at 16px) */
+    right: 16px; /* Match chatbot position on mobile */
+    width: 56px;  /* ← ALWAYS equal to chatbot on mobile (56px) */
+    height: 56px; /* ← ALWAYS equal to chatbot on mobile (56px) */
+  }
+}

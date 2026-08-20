@@ -1,0 +1,2144 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17835897996"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-440EJBMYST');
+  gtag('config', 'AW-17835897996');
+</script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover"/>
+  <meta name="robots" content="index,follow"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>My Library — Signal Pilot Education</title>
+  <meta name="description" content="Your personal learning library: downloaded resources, bookmarked lessons, notes, and achievements.">
+  <link rel="canonical" href="https://www.signalpilot.io/education/my-library.html">
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.signalpilot.io/education/my-library.html">
+  <meta property="og:title" content="My Library — Signal Pilot Education">
+  <meta property="og:description" content="Your personal learning library: downloaded resources, bookmarked lessons, notes, and achievements.">
+  <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Signal Pilot Education">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.signalpilot.io/education/my-library.html">
+  <meta name="twitter:title" content="My Library — Signal Pilot Education">
+  <meta name="twitter:description" content="Your personal learning library: downloaded resources, bookmarked lessons, notes, and achievements.">
+  <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
+  <meta name="theme-color" content="#05070d">
+  <link rel="manifest" href="/education/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/education/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/education/assets/icons/icon-180x180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gugi&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/education/assets/signalpilot-theme.css">
+  <link rel="stylesheet" href="/education/assets/edu.css">
+  <link rel="stylesheet" href="/education/assets/chatbot.css">
+  <link rel="stylesheet" href="/education/assets/lang-switcher.css?v=7">
+  <link rel="stylesheet" href="/education/assets/auth-ui.css">
+  <link rel="stylesheet" href="/education/assets/progress-viz.css">
+
+  <!-- html2canvas for certificate image generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Chart.js for skills radar chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Logger must load first -->
+  <script src="/education/assets/logger.js"></script>
+  <script src="/education/assets/dev-utils.js" defer></script>
+  <script src="/education/assets/structured-data.js" defer></script>
+  <script src="/education/assets/lazy-load.js" defer></script>
+
+  <style>
+    .library-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .library-section {
+      background: var(--bg-2);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .library-section h3 {
+      margin: 0 0 1rem 0;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .library-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .library-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(91, 138, 255, 0.3);
+      transform: translateX(4px);
+    }
+
+    .library-item-info {
+      flex: 1;
+    }
+
+    .library-item-title {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .library-item-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .library-item-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(91, 138, 255, 0.1), rgba(118, 221, 255, 0.1));
+      border: 1px solid rgba(91, 138, 255, 0.2);
+      border-radius: 12px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #5b8aff, #76ddff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--muted);
+    }
+
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    #achievements-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .achievement-badge {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .achievement-badge:hover {
+      background: rgba(139, 92, 246, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .achievement-badge .badge-icon {
+      font-size: 1.75rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .achievement-badge .badge-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .achievement-badge .badge-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      line-height: 1.2;
+    }
+
+    .achievement-badge .badge-desc {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      line-height: 1.3;
+    }
+
+    .achievement-badge .badge-checkmark,
+    .achievement-badge .badge-lock {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.85rem;
+      line-height: 1;
+    }
+
+    .achievement-badge.locked {
+      opacity: 0.4;
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .achievement-badge.earned {
+      background: rgba(255, 215, 0, 0.12);
+      border-color: rgba(255, 215, 0, 0.35);
+    }
+
+    .achievement-badge.locked:hover {
+      opacity: 0.6;
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Enhanced tooltips for badges */
+    .achievement-badge[title]:hover::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      padding: 0.5rem 0.75rem;
+      background: rgba(0, 0, 0, 0.95);
+      color: #fff;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      border-radius: 6px;
+      z-index: 1000;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(139, 92, 246, 0.5);
+      animation: tooltipFadeIn 0.2s ease;
+    }
+
+    .achievement-badge[title]:hover::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-2px);
+      border: 6px solid transparent;
+      border-top-color: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      pointer-events: none;
+      animation: tooltipFadeIn 0.2s ease;
+    }
+
+    @keyframes tooltipFadeIn {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-8px);
+      }
+    }
+
+    /* Progress bar styling */
+    .badge-progress {
+      animation: progressFadeIn 0.3s ease;
+    }
+
+    @keyframes progressFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Badge Unlock Notification */
+    .badge-unlock-notification {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 10000;
+      transform: translateX(120%);
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      max-width: 350px;
+    }
+
+    .badge-unlock-notification.show {
+      transform: translateX(0);
+    }
+
+    .badge-unlock-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.95), rgba(168, 85, 247, 0.95));
+      border: 2px solid rgba(255, 215, 0, 0.5);
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(139, 92, 246, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+      color: #fff;
+    }
+
+    .badge-unlock-content .badge-icon {
+      font-size: 3rem;
+      line-height: 1;
+      flex-shrink: 0;
+      animation: badgeBounce 0.6s ease;
+    }
+
+    @keyframes badgeBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .badge-unlock-content .badge-info {
+      flex: 1;
+    }
+
+    .badge-unlock-content .badge-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.9;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #ffd700;
+    }
+
+    .badge-unlock-content .badge-name {
+      font-size: 1.1rem;
+      font-weight: 900;
+      margin-bottom: 0.25rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .badge-unlock-content .badge-desc {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 480px) {
+      .badge-unlock-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+      }
+
+      .badge-unlock-content {
+        padding: 1rem;
+      }
+
+      .badge-unlock-content .badge-icon {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Study Calendar */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      gap: 4px;
+      margin: 1rem 0;
+    }
+
+    .calendar-day {
+      width: 100%;
+      aspect-ratio: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .calendar-day.active-1 { background: rgba(91, 138, 255, 0.3); }
+    .calendar-day.active-2 { background: rgba(91, 138, 255, 0.5); }
+    .calendar-day.active-3 { background: rgba(91, 138, 255, 0.7); }
+    .calendar-day.active-4 { background: rgba(91, 138, 255, 0.9); }
+    .calendar-day.active-5 { background: rgba(91, 138, 255, 1); }
+
+    .calendar-day:hover {
+      transform: scale(1.2);
+      z-index: 10;
+    }
+
+    .calendar-day:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      margin-bottom: 0.5rem;
+      z-index: 100;
+    }
+
+    /* Streak Calendar */
+    .streak-day {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.2s ease;
+    }
+
+    .streak-day.completed {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+      border-color: #ff6b35;
+      transform: scale(1.1);
+    }
+
+    .streak-day.today {
+      border-color: #5b8aff;
+      border-width: 3px;
+      box-shadow: 0 0 12px rgba(91, 138, 255, 0.5);
+    }
+
+    /* Progress Chart */
+    .progress-bar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .progress-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .progress-bar-label {
+      min-width: 80px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .progress-bar-track {
+      flex: 1;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(135deg, #5b8aff, #76ddff);
+      border-radius: 6px;
+      transition: width 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 0.5rem;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Certificate Cards */
+    .certificate-card {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .certificate-card.unlocked {
+      background: linear-gradient(135deg, rgba(91, 138, 255, 0.1), rgba(118, 221, 255, 0.1));
+      border-color: rgba(91, 138, 255, 0.3);
+    }
+
+    .certificate-card.unlocked:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(91, 138, 255, 0.2);
+    }
+
+    .certificate-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .certificate-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .certificate-progress {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .certificate-card .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Mobile responsive for skills radar */
+    @media (max-width: 768px) {
+      .skills-radar-container > div > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+      }
+
+      .library-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-stars" aria-hidden="true"></div>
+  <canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
+  <div class="bg-aurora" aria-hidden="true"></div>
+
+<header class="sp-header">
+  <div class="wrap">
+    <a href="https://www.signalpilot.io" class="brand">
+      <span>Signal Pilot</span>
+    </a>
+    <nav id="mainnav" aria-label="Main">
+      <ul>
+        <li><a href="/education/">Education</a></li>
+        <li><a aria-current="page" href="/education/my-library.html">My Library</a></li>
+        <li><a href="/education/challenges.html">Challenges</a></li>
+        <li><a href="/education/search.html">Search</a></li>
+        <li><a href="/education/calculators.html">Calculators</a></li>
+        <li><a href="https://www.signalpilot.io/blog" target="_blank" rel="noopener">Blog</a></li>
+      </ul>
+    </nav>
+    <div class="header-ctls">
+      <div id="google_translate_element"></div>
+      <button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Toggle theme">
+        <span id="theme-icon">☽</span>
+      </button>
+      <button id="menuToggle" class="menu-toggle" aria-expanded="false"><span class="menu-toggle-text">Menu </span>☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero Section -->
+  <section class="hero" style="padding: 2rem 0 1rem;">
+    <div class="wrap" style="text-align: center;">
+      <h1 class="headline xl">My Library</h1>
+      <p class="lead">Your personal learning hub - all your progress in one place</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap;">
+        <a href="/education/learning-path.html" class="btn btn-primary">
+          🗺️ View Learning Path
+        </a>
+        <a href="/education/challenges.html" class="btn btn-primary">
+          🎯 Practice Challenges
+        </a>
+        <button id="refresh-library" class="btn btn-ghost btn-sm" onclick="location.reload()">
+          🔄 Refresh Data
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Overview -->
+  <section class="wrap" style="margin: 2rem auto;">
+    <div class="library-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="stat-completed">0</div>
+        <div class="stat-label">Lessons Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-time-invested">0m</div>
+        <div class="stat-label">Time Invested ⏱️</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-downloads">0</div>
+        <div class="stat-label">Resources Downloaded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-bookmarks">0</div>
+        <div class="stat-label">Bookmarked Lessons</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-streak">0</div>
+        <div class="stat-label">Day Streak 🔥</div>
+      </div>
+      <div class="stat-card" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3);">
+        <div class="stat-number" id="stat-level" style="background: linear-gradient(135deg, #8b5cf6, #3b82f6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">1</div>
+        <div class="stat-label">Level ⭐</div>
+      </div>
+    </div>
+    <div id="percentile-display" style="text-align: center; margin-top: 1.5rem;"></div>
+    <p style="text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 1rem;">
+      <strong>Earn XP:</strong> Complete lessons (+100), pass quizzes (+50), maintain streaks (+25/day), unlock achievements (+50-200)
+    </p>
+  </section>
+
+  <!-- Study Calendar -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="library-section">
+      <h3>📅 Study Calendar</h3>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem;">Your activity over the last 90 days</p>
+      <div id="study-calendar"></div>
+    </div>
+  </section>
+
+  <!-- Streak Tracker -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="library-section">
+      <h3>🔥 Streak Tracker - Don't Break the Chain!</h3>
+      <div id="streak-tracker">
+        <div style="text-align: center; margin: 2rem 0;">
+          <div style="font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #ff6b35, #f7931e); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+            <span id="streak-days">0</span> Days
+          </div>
+          <p style="color: var(--muted); margin-top: 0.5rem;">Keep learning every day to maintain your streak!</p>
+        </div>
+        <div id="streak-calendar" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress Chart -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="library-section">
+      <h3>📈 Progress Over Time</h3>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem;">Lessons completed each week</p>
+      <div id="progress-chart"></div>
+    </div>
+  </section>
+
+  <!-- Downloaded Resources -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="library-section">
+      <h3>📥 Downloaded Resources</h3>
+      <div id="downloads-list">
+        <div class="empty-state">
+          <div class="empty-state-icon">📥</div>
+          <p>No resources downloaded yet.</p>
+          <p style="font-size: 0.9rem;">Download checklists from lessons to see them here!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bookmarked Lessons -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="library-section">
+      <h3>🔖 Bookmarked Lessons</h3>
+      <div id="bookmarks-list">
+        <div class="empty-state">
+          <div class="empty-state-icon">🔖</div>
+          <p>No bookmarked lessons yet.</p>
+          <p style="font-size: 0.9rem;">Bookmark lessons to save them for later!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Your Notes -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="library-section">
+      <h3>📝 Your Notes</h3>
+      <div id="notes-list">
+        <div class="empty-state">
+          <div class="empty-state-icon">📝</div>
+          <p>No notes yet.</p>
+          <p style="font-size: 0.9rem;">Take notes while studying to see them here!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="library-section">
+      <h3>🎓 Certificates</h3>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem;">Download completion certificates to showcase your achievements</p>
+      <div id="certificates-list">
+        <div class="library-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+          <div class="certificate-card" data-tier="beginner">
+            <div class="certificate-icon">🟢</div>
+            <div class="certificate-title">Beginner Tier</div>
+            <div class="certificate-progress" id="cert-beginner-progress">0/20 lessons</div>
+            <button class="btn btn-primary btn-sm" id="cert-beginner-btn" disabled>Download Certificate</button>
+            <button class="btn btn-ghost btn-sm" id="share-beginner-btn" disabled style="margin-left:0.5rem">📤 Share</button>
+          </div>
+          <div class="certificate-card" data-tier="intermediate">
+            <div class="certificate-icon">🟡</div>
+            <div class="certificate-title">Intermediate Tier</div>
+            <div class="certificate-progress" id="cert-intermediate-progress">0/27 lessons</div>
+            <button class="btn btn-primary btn-sm" id="cert-intermediate-btn" disabled>Download Certificate</button>
+            <button class="btn btn-ghost btn-sm" id="share-intermediate-btn" disabled style="margin-left:0.5rem">📤 Share</button>
+          </div>
+          <div class="certificate-card" data-tier="advanced">
+            <div class="certificate-icon">🔴</div>
+            <div class="certificate-title">Advanced Tier</div>
+            <div class="certificate-progress" id="cert-advanced-progress">0/27 lessons</div>
+            <button class="btn btn-primary btn-sm" id="cert-advanced-btn" disabled>Download Certificate</button>
+            <button class="btn btn-ghost btn-sm" id="share-advanced-btn" disabled style="margin-left:0.5rem">📤 Share</button>
+          </div>
+          <div class="certificate-card" data-tier="master">
+            <div class="certificate-icon">🏆</div>
+            <div class="certificate-title">Master Trader</div>
+            <div class="certificate-progress" id="cert-master-progress">0/82 lessons</div>
+            <button class="btn btn-primary btn-sm" id="cert-master-btn" disabled>Download Certificate</button>
+            <button class="btn btn-ghost btn-sm" id="share-master-btn" disabled style="margin-left:0.5rem">📤 Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Radar Chart -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="skills-radar-container">
+      <div class="skills-radar-header">
+        <h2 class="skills-radar-title">
+          <span>📊</span>
+          <span>Your Trading Skills</span>
+        </h2>
+      </div>
+      <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem;">Track your progress across 4 core trading skill areas</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+        <div style="max-width: 400px; margin: 0 auto;">
+          <canvas id="skillsRadarChart"></canvas>
+        </div>
+        <div id="skillsBreakdown"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Learning Path -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="learning-path-container">
+      <div class="learning-path-header">
+        <h2 class="learning-path-title">
+          <span>🗺️</span>
+          <span>Your Learning Journey</span>
+        </h2>
+        <p class="learning-path-subtitle">
+          Click any unlocked lesson to jump directly to it
+        </p>
+      </div>
+      <div id="learningPathMap"></div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section class="wrap" style="margin: 3rem auto;">
+    <div class="library-section">
+      <h3>🏆 Achievements</h3>
+      <div id="achievements-list">
+        <div class="empty-state">
+          <div class="empty-state-icon">🏆</div>
+          <p>No achievements unlocked yet.</p>
+          <p style="font-size: 0.9rem;">Complete lessons to earn achievements!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sp-footer">
+  <div class="wrap">
+    <div>© <span id="year"></span> Signal Pilot Labs, Inc.</div>
+    <div class="links">
+      <a href="https://www.signalpilot.io/affiliates.html">Affiliates</a><a href="https://www.signalpilot.io/privacy.html">Privacy</a>
+      <a href="https://www.signalpilot.io/terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/education/assets/signalpilot-theme.js"></script>
+<script src="/education/assets/edu.js" defer></script>
+<script src="/education/assets/sp-bg.js"></script>
+<script src="/education/assets/analytics.js"></script>
+<script src="/education/assets/pwa-init.js"></script>
+<script src="/education/assets/config.js"></script>
+<script src="/education/assets/supabase-client.js"></script>
+<script src="/education/assets/auth-ui.js"></script>
+<script src="/education/assets/gamification.js"></script>
+<script src="/education/assets/badges.js"></script>
+<script src="/education/assets/progress-viz.js"></script>
+<script src="/education/assets/learning-path-map.js"></script>
+<script src="/education/assets/library.js"></script>
+
+<script>
+// My Library functionality
+(function() {
+  'use strict';
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Load library data
+  function loadLibraryData() {
+    // Migrate existing progress (runs once)
+    migrateExistingProgress();
+
+    // Track activity for today
+    trackActivity();
+
+    // Get downloads
+    const downloads = JSON.parse(localStorage.getItem('sp_downloads') || '[]');
+    document.getElementById('stat-downloads').textContent = downloads.length;
+
+    if (downloads.length > 0) {
+      renderDownloads(downloads);
+    }
+
+    // Get bookmarks
+    const bookmarks = JSON.parse(localStorage.getItem('sp_bookmarks') || '[]');
+    document.getElementById('stat-bookmarks').textContent = bookmarks.length;
+
+    if (bookmarks.length > 0) {
+      renderBookmarks(bookmarks);
+    }
+
+    // Get completed lessons (using correct key pattern: sp_edu_*_completed)
+    const completedCount = Object.keys(localStorage).filter(k => k.includes('sp_edu_') && k.includes('_completed')).length;
+    document.getElementById('stat-completed').textContent = completedCount;
+
+    // Get and update streak
+    const streak = updateStreak();
+    document.getElementById('stat-streak').textContent = streak.current || 0;
+    document.getElementById('streak-days').textContent = streak.current || 0;
+
+    // Get and update level (from XP)
+    const totalXP = parseInt(localStorage.getItem('sp_total_xp') || '0');
+    const level = Math.floor(totalXP / 500) + 1; // 500 XP per level
+    document.getElementById('stat-level').textContent = level;
+
+    // Update time invested stat
+    if (window.ProgressViz && window.ProgressViz.TimeTracker) {
+      const tracker = new window.ProgressViz.TimeTracker();
+      const formattedTime = tracker.getFormattedTotalTime();
+      document.getElementById('stat-time-invested').textContent = formattedTime;
+    }
+
+    // Update percentile display (async)
+    if (window.ProgressViz && window.ProgressViz.calculatePercentile) {
+      window.ProgressViz.calculatePercentile().then(percentile => {
+        if (percentile !== null && percentile > 0) {
+          const container = document.getElementById('percentile-display');
+          container.innerHTML = `
+            <div class="percentile-display">
+              <span class="percentile-icon">📈</span>
+              You're ahead of ${percentile}% of learners!
+            </div>
+          `;
+        }
+      }).catch(err => {
+        console.log('Percentile calculation not available:', err);
+      });
+    }
+
+    // Render visualizations
+    renderStudyCalendar();
+    renderStreakCalendar(streak);
+    renderProgressChart();
+    renderAchievements(completedCount);
+    renderCertificates(completedCount);
+
+    // Render Phase 2 visualizations (with small delay to ensure modules are loaded)
+    setTimeout(() => {
+      if (window.ProgressViz && typeof window.ProgressViz.createRadarChart === 'function') {
+        console.log('[My Library] Rendering skills radar chart...');
+        window.ProgressViz.createRadarChart('skillsRadarChart');
+      } else {
+        console.warn('[My Library] ProgressViz module not loaded');
+      }
+
+      if (window.ProgressViz && typeof window.ProgressViz.displaySkillsBreakdown === 'function') {
+        console.log('[My Library] Rendering skills breakdown...');
+        window.ProgressViz.displaySkillsBreakdown('skillsBreakdown');
+      }
+
+      if (window.LearningPathMap && typeof window.LearningPathMap.render === 'function') {
+        console.log('[My Library] Rendering learning path map...');
+        window.LearningPathMap.render('learningPathMap');
+      } else {
+        console.warn('[My Library] LearningPathMap module not loaded');
+      }
+    }, 100);
+
+    // Display notes (if displayNotes function is available from library.js)
+    if (window.library && typeof window.library.displayNotes === 'function') {
+      window.library.displayNotes();
+    }
+  }
+
+  // Track daily activity
+  function trackActivity() {
+    const today = new Date().toISOString().split('T')[0];
+    const activity = JSON.parse(localStorage.getItem('sp_activity') || '{}');
+
+    if (!activity[today]) {
+      activity[today] = { visits: 1, lessonsCompleted: 0 };
+    } else {
+      activity[today].visits++;
+    }
+
+    localStorage.setItem('sp_activity', JSON.stringify(activity));
+
+    // Debug: Log what we're tracking
+    logger.log('[My Library] Tracking activity for:', today);
+    logger.log('[My Library] Total visits today:', activity[today].visits);
+  }
+
+  // Migrate existing completed lessons to activity data (runs once)
+  function migrateExistingProgress() {
+    const migrationKey = 'sp_activity_migrated_v2'; // v2 to reset old fake backdated data
+
+    // Check if already migrated
+    if (localStorage.getItem(migrationKey)) {
+      return;
+    }
+
+    logger.log('[My Library] Resetting activity tracking to start fresh...');
+
+    // Clear old fake backdated data
+    localStorage.removeItem('sp_activity');
+    localStorage.removeItem('sp_learning_streak');
+
+    // Initialize fresh activity for today only
+    const today = new Date().toISOString().split('T')[0];
+    const activity = { [today]: { visits: 1, lessonsCompleted: 0 } };
+    localStorage.setItem('sp_activity', JSON.stringify(activity));
+
+    // Mark migration as complete with new version
+    localStorage.setItem(migrationKey, 'true');
+    logger.log('[My Library] Activity tracking reset. Streak will build from real usage going forward.');
+  }
+
+  // Debug helper - show what's in localStorage
+  function debugLibraryData() {
+    const completed = Object.keys(localStorage).filter(k => k.includes('sp_edu_') && k.includes('_completed'));
+    const downloads = JSON.parse(localStorage.getItem('sp_downloads') || '[]');
+    const bookmarks = JSON.parse(localStorage.getItem('sp_bookmarks') || '[]');
+    const activity = JSON.parse(localStorage.getItem('sp_activity') || '{}');
+    const migrated = localStorage.getItem('sp_activity_migrated');
+
+    logger.log('[My Library] DEBUG DATA:');
+    logger.log('  - Completed lessons:', completed.length, completed);
+    logger.log('  - Downloads:', downloads.length);
+    logger.log('  - Bookmarks:', bookmarks.length);
+    logger.log('  - Activity days:', Object.keys(activity).length);
+    logger.log('  - Migration status:', migrated ? 'Completed' : 'Not run');
+    logger.log('  - Activity data:', activity);
+  }
+
+  // Force re-migration (for debugging/fixing issues)
+  function forceMigration() {
+    logger.log('[My Library] Forcing migration...');
+    localStorage.removeItem('sp_activity_migrated'); // old key
+    localStorage.removeItem('sp_activity_migrated_v2'); // new key
+    localStorage.removeItem('sp_activity');
+    localStorage.removeItem('sp_learning_streak');
+    migrateExistingProgress();
+    location.reload();
+  }
+
+  // Update streak based on activity
+  function updateStreak() {
+    const activity = JSON.parse(localStorage.getItem('sp_activity') || '{}');
+    const dates = Object.keys(activity).sort();
+
+    if (dates.length === 0) {
+      return { current: 0, longest: 0, lastActivity: null };
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+    let currentStreak = 0;
+    let longestStreak = 0;
+    let tempStreak = 0;
+
+    // Calculate streak
+    for (let i = 0; i < dates.length; i++) {
+      if (i === 0) {
+        tempStreak = 1;
+      } else {
+        const prevDate = new Date(dates[i - 1]);
+        const currDate = new Date(dates[i]);
+        const diffDays = Math.floor((currDate - prevDate) / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 1) {
+          tempStreak++;
+        } else {
+          tempStreak = 1;
+        }
+      }
+
+      longestStreak = Math.max(longestStreak, tempStreak);
+
+      // If this date chain includes today, it's current streak
+      if (dates[i] === today) {
+        currentStreak = tempStreak;
+      }
+    }
+
+    const streak = { current: currentStreak, longest: longestStreak, lastActivity: dates[dates.length - 1] };
+    localStorage.setItem('sp_learning_streak', JSON.stringify(streak));
+    return streak;
+  }
+
+  function renderDownloads(downloads) {
+    const container = document.getElementById('downloads-list');
+    container.innerHTML = downloads.map(download => `
+      <div class="library-item">
+        <div class="library-item-info">
+          <div class="library-item-title">📄 ${download.title}</div>
+          <div class="library-item-meta">Downloaded ${new Date(download.date).toLocaleDateString()}</div>
+        </div>
+        <div class="library-item-actions">
+          <a href="${download.url}" download class="btn btn-sm btn-primary">Re-download</a>
+          <a href="${download.lessonUrl}" class="btn btn-sm btn-ghost">View Lesson</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderBookmarks(bookmarks) {
+    const container = document.getElementById('bookmarks-list');
+    container.innerHTML = bookmarks.map(bookmark => `
+      <div class="library-item">
+        <div class="library-item-info">
+          <div class="library-item-title">🔖 ${bookmark.title}</div>
+          <div class="library-item-meta">${bookmark.tier} • ${bookmark.readTime || '15 min read'}</div>
+        </div>
+        <div class="library-item-actions">
+          <a href="${bookmark.url}" class="btn btn-sm btn-primary">Read Now</a>
+          <button onclick="window.library.removeBookmark('${bookmark.id}')" class="btn btn-sm btn-ghost">Remove</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderAchievements(completedCount) {
+    const container = document.getElementById('achievements-list');
+
+    // Wait for BadgeSystem to be available
+    if (!window.BadgeSystem) {
+      setTimeout(() => renderAchievements(completedCount), 100);
+      return;
+    }
+
+    // Get all badges from BadgeSystem
+    const badgeSystem = window.BadgeSystem;
+    const earnedBadges = JSON.parse(localStorage.getItem('sp_earned_badges') || '[]');
+    const allBadges = badgeSystem.getAllBadges();
+
+    // Sort: earned first, then by category
+    const sortedBadges = Object.values(allBadges).sort((a, b) => {
+      const aEarned = earnedBadges.includes(a.id);
+      const bEarned = earnedBadges.includes(b.id);
+      if (aEarned !== bEarned) return bEarned ? 1 : -1;
+      return a.category.localeCompare(b.category);
+    });
+
+    // Render badges
+    container.innerHTML = sortedBadges.map(badge => {
+      const isEarned = earnedBadges.includes(badge.id);
+      const earnedDate = isEarned ?
+        (JSON.parse(localStorage.getItem('sp_badge_' + badge.id) || '{}').earnedAt || '') : '';
+
+      // Get progress for locked badges
+      const progress = !isEarned ? badgeSystem.getProgress(badge) : null;
+
+      return `
+        <div class="achievement-badge ${isEarned ? 'earned' : 'locked'}"
+             data-badge-id="${badge.id}"
+             title="${isEarned ? badge.description : (progress ? progress.message : badge.description)}">
+          <span class="badge-icon">${badge.emoji}</span>
+          <div class="badge-info">
+            <span class="badge-name">${badge.name}</span>
+            <span class="badge-desc">${badge.description}</span>
+            ${isEarned && earnedDate ? `<span class="badge-date" style="font-size:0.7rem;opacity:0.6;margin-top:0.25rem">Earned ${new Date(earnedDate).toLocaleDateString()}</span>` : ''}
+            ${!isEarned && progress ? `
+              <div class="badge-progress" style="margin-top:0.5rem">
+                <div class="badge-progress-bar" style="width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden">
+                  <div style="width:${progress.percent}%;height:100%;background:linear-gradient(90deg,rgba(139,92,246,0.8),rgba(59,130,246,0.8));transition:width 0.3s ease"></div>
+                </div>
+                <span class="badge-progress-text" style="font-size:0.65rem;opacity:0.7;margin-top:0.25rem;display:block">${progress.current}/${progress.needed} • ${progress.percent}%</span>
+              </div>
+            ` : ''}
+          </div>
+          ${isEarned ? '<span class="badge-checkmark">✓</span>' : '<span class="badge-lock">🔒</span>'}
+        </div>
+      `;
+    }).join('');
+
+    // Add progress hint for locked badges
+    const lockedBadges = sortedBadges.filter(b => !earnedBadges.includes(b.id));
+    if (lockedBadges.length > 0) {
+      container.insertAdjacentHTML('beforeend', `
+        <div style="margin-top:1.5rem;padding:1rem;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:8px;text-align:center">
+          <p style="margin:0;font-size:0.9rem;color:var(--muted)">
+            ${earnedBadges.length} of ${sortedBadges.length} badges earned • Keep learning to unlock more!
+          </p>
+        </div>
+      `);
+    }
+  }
+
+  // Render Study Calendar (90-day heatmap)
+  function renderStudyCalendar() {
+    const container = document.getElementById('study-calendar');
+    const activity = JSON.parse(localStorage.getItem('sp_activity') || '{}');
+    const today = new Date();
+    const days = [];
+
+    // Generate last 90 days
+    for (let i = 89; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
+      const activityLevel = activity[dateStr] ? Math.min(activity[dateStr].visits, 5) : 0;
+
+      days.push({
+        date: dateStr,
+        level: activityLevel,
+        tooltip: `${dateStr}: ${activityLevel > 0 ? activityLevel + ' visits' : 'No activity'}`
+      });
+    }
+
+    container.innerHTML = `
+      <div class="calendar-grid">
+        ${days.map(day => `
+          <div class="calendar-day ${day.level > 0 ? 'active-' + day.level : ''}"
+               data-tooltip="${day.tooltip}"></div>
+        `).join('')}
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem;">
+        <span>Less</span>
+        <div class="calendar-day" style="width: 12px; height: 12px;"></div>
+        <div class="calendar-day active-1" style="width: 12px; height: 12px;"></div>
+        <div class="calendar-day active-2" style="width: 12px; height: 12px;"></div>
+        <div class="calendar-day active-3" style="width: 12px; height: 12px;"></div>
+        <div class="calendar-day active-4" style="width: 12px; height: 12px;"></div>
+        <div class="calendar-day active-5" style="width: 12px; height: 12px;"></div>
+        <span>More</span>
+      </div>
+    `;
+  }
+
+  // Render Streak Calendar (last 30 days)
+  function renderStreakCalendar(streak) {
+    const container = document.getElementById('streak-calendar');
+    const activity = JSON.parse(localStorage.getItem('sp_activity') || '{}');
+    const today = new Date();
+    const days = [];
+
+    // Generate last 30 days
+    for (let i = 29; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
+      const hasActivity = !!activity[dateStr];
+      const isToday = i === 0;
+
+      days.push({
+        date: dateStr,
+        hasActivity: hasActivity,
+        isToday: isToday,
+        dayName: date.toLocaleDateString('en-US', { weekday: 'short' }).substring(0, 1)
+      });
+    }
+
+    container.innerHTML = days.map(day => `
+      <div class="streak-day ${day.hasActivity ? 'completed' : ''} ${day.isToday ? 'today' : ''}"
+           title="${day.date}">
+        ${day.hasActivity ? '✓' : ''}
+      </div>
+    `).join('');
+  }
+
+  // Render Progress Chart
+  function renderProgressChart() {
+    const container = document.getElementById('progress-chart');
+    const activity = JSON.parse(localStorage.getItem('sp_activity') || '{}');
+    const today = new Date();
+    const weeks = [];
+
+    // Generate last 8 weeks
+    for (let i = 7; i >= 0; i--) {
+      const weekStart = new Date(today);
+      weekStart.setDate(weekStart.getDate() - (i * 7));
+      const weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekEnd.getDate() + 6);
+
+      let weekActivity = 0;
+      for (let d = 0; d < 7; d++) {
+        const checkDate = new Date(weekStart);
+        checkDate.setDate(checkDate.getDate() + d);
+        const dateStr = checkDate.toISOString().split('T')[0];
+        if (activity[dateStr]) {
+          weekActivity += activity[dateStr].visits || 0;
+        }
+      }
+
+      weeks.push({
+        label: i === 0 ? 'This week' : `${i} ${i === 1 ? 'week' : 'weeks'} ago`,
+        value: weekActivity,
+        max: 20 // Max expected visits per week for scaling
+      });
+    }
+
+    const maxValue = Math.max(...weeks.map(w => w.value), 1);
+
+    container.innerHTML = `
+      <div class="progress-bar-container">
+        ${weeks.map(week => `
+          <div class="progress-bar-item">
+            <div class="progress-bar-label">${week.label}</div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width: ${(week.value / maxValue) * 100}%">
+                ${week.value > 0 ? week.value : ''}
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  // Render Certificates
+  function renderCertificates(completedCount) {
+    const tiers = {
+      beginner: { completed: 0, total: 20 },
+      intermediate: { completed: 0, total: 27 },
+      advanced: { completed: 0, total: 27 },
+      master: { completed: completedCount, total: 82 }
+    };
+
+    // Count completed by tier (simplified - you can enhance this)
+    // For now, assume sequential completion
+    if (completedCount >= 20) tiers.beginner.completed = 20;
+    else tiers.beginner.completed = Math.min(completedCount, 20);
+
+    if (completedCount > 20) tiers.intermediate.completed = Math.min(completedCount - 20, 27);
+    if (completedCount > 47) tiers.advanced.completed = Math.min(completedCount - 47, 27);
+
+    // Update progress displays
+    document.getElementById('cert-beginner-progress').textContent = `${tiers.beginner.completed}/${tiers.beginner.total} lessons`;
+    document.getElementById('cert-intermediate-progress').textContent = `${tiers.intermediate.completed}/${tiers.intermediate.total} lessons`;
+    document.getElementById('cert-advanced-progress').textContent = `${tiers.advanced.completed}/${tiers.advanced.total} lessons`;
+    document.getElementById('cert-master-progress').textContent = `${tiers.master.completed}/${tiers.master.total} lessons`;
+
+    // Enable/unlock certificates
+    if (tiers.beginner.completed >= tiers.beginner.total) {
+      const card = document.querySelector('[data-tier="beginner"]');
+      const btn = document.getElementById('cert-beginner-btn');
+      const shareBtn = document.getElementById('share-beginner-btn');
+      card.classList.add('unlocked');
+      btn.disabled = false;
+      shareBtn.disabled = false;
+      btn.onclick = () => generateCertificate('Beginner');
+      shareBtn.onclick = () => shareCertificate('Beginner');
+    }
+
+    if (tiers.intermediate.completed >= tiers.intermediate.total) {
+      const card = document.querySelector('[data-tier="intermediate"]');
+      const btn = document.getElementById('cert-intermediate-btn');
+      const shareBtn = document.getElementById('share-intermediate-btn');
+      card.classList.add('unlocked');
+      btn.disabled = false;
+      shareBtn.disabled = false;
+      btn.onclick = () => generateCertificate('Intermediate');
+      shareBtn.onclick = () => shareCertificate('Intermediate');
+    }
+
+    if (tiers.advanced.completed >= tiers.advanced.total) {
+      const card = document.querySelector('[data-tier="advanced"]');
+      const btn = document.getElementById('cert-advanced-btn');
+      const shareBtn = document.getElementById('share-advanced-btn');
+      card.classList.add('unlocked');
+      btn.disabled = false;
+      shareBtn.disabled = false;
+      btn.onclick = () => generateCertificate('Advanced');
+      shareBtn.onclick = () => shareCertificate('Advanced');
+    }
+
+    if (tiers.master.completed >= tiers.master.total) {
+      const card = document.querySelector('[data-tier="master"]');
+      const btn = document.getElementById('cert-master-btn');
+      const shareBtn = document.getElementById('share-master-btn');
+      card.classList.add('unlocked');
+      btn.disabled = false;
+      shareBtn.disabled = false;
+      btn.onclick = () => generateCertificate('Master Trader');
+      shareBtn.onclick = () => shareCertificate('Master Trader');
+    }
+  }
+
+  // Share Certificate on Social Media
+  async function shareCertificate(tier) {
+    // Get user name
+    let userName = 'Trading Professional';
+    if (window.supabaseAuth && window.supabaseAuth.getCurrentUser) {
+      const user = window.supabaseAuth.getCurrentUser();
+      if (user) {
+        userName = user.user_metadata?.user_name ||
+                   user.email?.split('@')[0] ||
+                   userName;
+      }
+    } else {
+      userName = localStorage.getItem('sp_user_name') || userName;
+    }
+
+    const shareText = `🎓 Just completed the ${tier} Tier at Signal Pilot Education! Professional trading education that actually works. #TradingEducation #SignalPilot`;
+
+    // Show loading indicator
+    const shareButton = event?.target;
+    const originalText = shareButton?.textContent;
+    if (shareButton) {
+      shareButton.disabled = true;
+      shareButton.textContent = '⏳ Generating...';
+    }
+
+    try {
+      // Generate certificate image
+      const certificateBlob = await generateCertificateImage(tier, userName);
+
+      // Try Web Share API with image file (works on mobile)
+      if (navigator.canShare && navigator.canShare({ files: [new File([certificateBlob], 'certificate.png', { type: 'image/png' })] })) {
+        const file = new File([certificateBlob], `signal-pilot-${tier.toLowerCase().replace(/\s+/g, '-')}-certificate.png`, { type: 'image/png' });
+        await navigator.share({
+          title: `${tier} Trading Certification`,
+          text: shareText,
+          files: [file]
+        });
+      } else {
+        // Fallback: Show share options modal with download
+        showShareModal(tier, userName, shareText, certificateBlob);
+      }
+    } catch (error) {
+      console.error('Error generating certificate:', error);
+      alert('Error generating certificate image. Please try the Download Certificate button instead.');
+    } finally {
+      // Reset button
+      if (shareButton) {
+        shareButton.disabled = false;
+        shareButton.textContent = originalText;
+      }
+    }
+  }
+
+  // Generate Certificate as Image Blob
+  async function generateCertificateImage(tier, userName) {
+    const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Create temporary container
+    const container = document.createElement('div');
+    container.style.cssText = 'position: fixed; left: -9999px; top: 0; width: 1200px; height: 800px;';
+    document.body.appendChild(container);
+
+    // Certificate HTML (simplified for image generation)
+    container.innerHTML = `
+      <div class="certificate" style="
+        font-family: 'DM Sans', sans-serif;
+        background: linear-gradient(135deg, rgba(15,20,32,0.95) 0%, rgba(26,40,69,0.95) 100%);
+        border: 10px double #5b8aff;
+        border-radius: 20px;
+        padding: 3rem;
+        width: 1200px;
+        height: 800px;
+        text-align: center;
+        box-shadow: 0 0 60px rgba(91,138,255,0.3), 0 20px 80px rgba(0,0,0,0.6);
+        position: relative;
+        color: white;
+        box-sizing: border-box;
+      ">
+        <div style="
+          font-family: 'Gugi', cursive;
+          font-size: 3rem;
+          margin-bottom: 0.5rem;
+          background: linear-gradient(135deg, #5b8aff 0%, #76ddff 50%, #00d4aa 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          letter-spacing: 2px;
+        ">SIGNAL PILOT</div>
+
+        <div style="
+          font-family: 'Space Grotesk', monospace;
+          font-size: 0.9rem;
+          color: rgba(118,221,255,0.7);
+          text-transform: uppercase;
+          letter-spacing: 3px;
+          margin-bottom: 2rem;
+        ">Institutional Trading Education</div>
+
+        <h1 style="
+          font-family: 'Space Grotesk', monospace;
+          font-size: 3rem;
+          margin: 2rem 0 1rem;
+          letter-spacing: 2px;
+          font-weight: 700;
+          text-transform: uppercase;
+        ">Certificate of Completion</h1>
+
+        <div style="
+          width: 250px;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #5b8aff, #76ddff, #5b8aff, transparent);
+          margin: 1.5rem auto;
+        "></div>
+
+        <div style="font-size: 1.1rem; margin: 1.5rem 0; opacity: 0.8;">This certifies that</div>
+
+        <div style="
+          font-family: 'Space Grotesk', monospace;
+          font-size: 3rem;
+          margin: 1.5rem 0;
+          padding: 1.5rem 3rem;
+          background: linear-gradient(135deg, rgba(91,138,255,0.15), rgba(118,221,255,0.15));
+          border: 2px solid rgba(91,138,255,0.4);
+          border-radius: 12px;
+          display: inline-block;
+          font-weight: 700;
+        ">${userName}</div>
+
+        <div style="font-size: 1.2rem; margin: 1.5rem 0; opacity: 0.9;">has successfully completed the</div>
+
+        <div style="
+          font-family: 'Gugi', cursive;
+          font-size: 2.5rem;
+          background: linear-gradient(135deg, #76ddff 0%, #00d4aa 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin: 1rem 0;
+          letter-spacing: 2px;
+        ">${tier} Tier</div>
+
+        <div style="
+          font-family: 'Space Grotesk', monospace;
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin: 1rem 0 2rem;
+        ">Signal Pilot Trading Education Program</div>
+
+        <div style="margin-top: 3rem; font-size: 1rem; opacity: 0.6;">Awarded ${today}</div>
+
+        <div style="
+          position: absolute;
+          bottom: 40px;
+          right: 50px;
+          width: 110px;
+          height: 110px;
+          border: 4px double rgba(0,212,170,0.6);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Gugi', cursive;
+          font-size: 0.9rem;
+          color: rgba(0,212,170,0.8);
+          text-align: center;
+          line-height: 1.3;
+        ">VERIFIED<br/>${new Date().getFullYear()}</div>
+
+        <div style="
+          position: absolute;
+          bottom: 40px;
+          left: 40px;
+          width: 150px;
+          height: 150px;
+          border: 5px solid rgba(91,138,255,0.3);
+          border-radius: 50%;
+          transform: rotate(-15deg);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        ">
+          <div style="
+            font-family: 'Gugi', cursive;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #5b8aff, #76ddff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+          ">SIGNAL<br/>PILOT</div>
+          <div style="
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.65rem;
+            color: rgba(91,138,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+          ">Official</div>
+          <div style="
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.85rem;
+            color: rgba(91,138,255,0.6);
+            font-weight: 700;
+          ">${new Date().getFullYear()}</div>
+        </div>
+      </div>
+    `;
+
+    // Wait for fonts to load
+    await document.fonts.ready;
+
+    // Generate image using html2canvas
+    const canvas = await html2canvas(container.firstElementChild, {
+      backgroundColor: '#05070d',
+      scale: 2, // Higher quality
+      logging: false,
+      width: 1200,
+      height: 800
+    });
+
+    // Remove temporary container
+    document.body.removeChild(container);
+
+    // Convert to blob
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        resolve(blob);
+      }, 'image/png', 1.0);
+    });
+  }
+
+  function showShareModal(tier, userName, shareText, certificateBlob) {
+    // Create modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    `;
+
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+      background: var(--bg-2);
+      border: 1px solid rgba(91,138,255,0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 550px;
+      width: 90%;
+    `;
+
+    // Create download URL for certificate
+    const certificateUrl = URL.createObjectURL(certificateBlob);
+    const fileName = `signal-pilot-${tier.toLowerCase().replace(/\s+/g, '-')}-certificate.png`;
+
+    // For social sharing, we'll provide instructions since we can't directly upload
+    const shareUrl = 'https://www.signalpilot.io/education';
+    const encodedText = encodeURIComponent(shareText);
+    const encodedUrl = encodeURIComponent(shareUrl);
+
+    modalContent.innerHTML = `
+      <h3 style="margin:0 0 1rem 0;color:var(--primary)">📤 Share Your Achievement</h3>
+      <p style="margin-bottom:1.5rem;opacity:0.8">Congratulations on completing the ${tier} Tier!</p>
+
+      <div style="display:flex;flex-direction:column;gap:0.75rem">
+        <button class="btn btn-primary" id="download-cert-btn" style="display:block;width:100%">
+          ⬇️ Download Certificate Image
+        </button>
+
+        <div style="
+          background: rgba(91,138,255,0.1);
+          border: 1px solid rgba(91,138,255,0.2);
+          border-radius: 8px;
+          padding: 1rem;
+          margin: 0.5rem 0;
+        ">
+          <div style="font-size:0.9rem;opacity:0.8;margin-bottom:0.5rem">
+            <strong>How to share:</strong>
+          </div>
+          <div style="font-size:0.85rem;opacity:0.7;line-height:1.5">
+            1. Download the certificate image above<br/>
+            2. Click a social platform below<br/>
+            3. Upload the downloaded image to your post
+          </div>
+        </div>
+
+        <a href="https://twitter.com/intent/tweet?text=${encodedText}"
+           target="_blank"
+           class="btn btn-ghost"
+           style="text-decoration:none;text-align:center;display:block">
+          🐦 Post on Twitter/X
+        </a>
+        <a href="https://www.linkedin.com/feed/"
+           target="_blank"
+           class="btn btn-ghost"
+           style="text-decoration:none;text-align:center;display:block">
+          💼 Post on LinkedIn
+        </a>
+        <a href="https://www.facebook.com/"
+           target="_blank"
+           class="btn btn-ghost"
+           style="text-decoration:none;text-align:center;display:block">
+          📘 Post on Facebook
+        </a>
+
+        <button class="btn btn-ghost" onclick="this.closest('[style*=fixed]').remove()" style="margin-top:0.5rem">
+          Close
+        </button>
+      </div>
+    `;
+
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Add download functionality
+    document.getElementById('download-cert-btn').addEventListener('click', () => {
+      const a = document.createElement('a');
+      a.href = certificateUrl;
+      a.download = fileName;
+      a.click();
+
+      // Show success message
+      const btn = document.getElementById('download-cert-btn');
+      const originalText = btn.textContent;
+      btn.textContent = '✅ Downloaded!';
+      btn.style.background = 'rgba(0,212,170,0.2)';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+      }, 2000);
+    });
+
+    // Close modal on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.remove();
+        URL.revokeObjectURL(certificateUrl);
+      }
+    });
+
+    // Cleanup when modal is removed
+    const observer = new MutationObserver(() => {
+      if (!document.body.contains(modal)) {
+        URL.revokeObjectURL(certificateUrl);
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  // Generate Certificate
+  function generateCertificate(tier) {
+    const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Get user name from Supabase auth or localStorage
+    let userName = 'Trading Professional';
+    if (window.supabaseAuth && window.supabaseAuth.getCurrentUser) {
+      const user = window.supabaseAuth.getCurrentUser();
+      if (user) {
+        userName = user.user_metadata?.user_name ||
+                   user.email?.split('@')[0] ||
+                   userName;
+      }
+    } else {
+      userName = localStorage.getItem('sp_user_name') || userName;
+    }
+
+    const certificateHTML = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Certificate of Completion - ${tier}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gugi&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+        <style>
+          @page { size: landscape; margin: 0; }
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+
+          body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #05070d 0%, #0a0e1a 50%, #1a2332 100%);
+            background-size: 400% 400%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+          }
+
+          /* Animated background stars */
+          body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+              radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+              radial-gradient(2px 2px at 60px 70px, rgba(91,138,255,0.4), transparent),
+              radial-gradient(1px 1px at 50px 50px, rgba(118,221,255,0.3), transparent),
+              radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.2), transparent),
+              radial-gradient(2px 2px at 90px 10px, rgba(91,138,255,0.3), transparent);
+            background-size: 200px 200px;
+            background-position: 0 0, 40px 60px, 130px 270px, 70px 100px, 150px 50px;
+            opacity: 0.4;
+            z-index: 0;
+          }
+
+          .certificate {
+            position: relative;
+            background: linear-gradient(135deg, rgba(15,20,32,0.95) 0%, rgba(26,40,69,0.95) 100%);
+            border: 10px double #5b8aff;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            box-shadow:
+              0 0 60px rgba(91,138,255,0.3),
+              0 20px 80px rgba(0,0,0,0.6),
+              inset 0 0 80px rgba(91,138,255,0.05);
+            z-index: 1;
+          }
+
+          .certificate::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            background: linear-gradient(45deg, #5b8aff, #76ddff, #00d4aa, #76ddff, #5b8aff);
+            background-size: 400% 400%;
+            border-radius: 28px;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0.4;
+          }
+
+          .corner-ornament {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(91,138,255,0.4);
+          }
+          .corner-ornament.top-left { top: 20px; left: 20px; border-right: none; border-bottom: none; border-radius: 12px 0 0 0; }
+          .corner-ornament.top-right { top: 20px; right: 20px; border-left: none; border-bottom: none; border-radius: 0 12px 0 0; }
+          .corner-ornament.bottom-left { bottom: 20px; left: 20px; border-right: none; border-top: none; border-radius: 0 0 0 12px; }
+          .corner-ornament.bottom-right { bottom: 20px; right: 20px; border-left: none; border-top: none; border-radius: 0 0 12px 0; }
+
+          .logo {
+            font-family: 'Gugi', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 0.25rem;
+            font-weight: 400;
+            background: linear-gradient(135deg, #5b8aff 0%, #76ddff 50%, #00d4aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(91,138,255,0.5);
+            letter-spacing: 2px;
+          }
+
+          .tagline {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.75rem;
+            color: rgba(118,221,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+          }
+
+          h1 {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2.5rem;
+            margin: 1rem 0 0.5rem;
+            letter-spacing: 2px;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(91,138,255,0.6);
+          }
+
+          .divider {
+            width: 250px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #5b8aff, #76ddff, #5b8aff, transparent);
+            margin: 1rem auto;
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(91,138,255,0.5);
+          }
+
+          .awarded {
+            font-size: 0.95rem;
+            margin: 1.25rem 0 0.75rem;
+            opacity: 0.8;
+            font-weight: 300;
+            letter-spacing: 1px;
+          }
+
+          .name {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2.5rem;
+            margin: 1rem 0;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, rgba(91,138,255,0.15), rgba(118,221,255,0.15));
+            border: 2px solid rgba(91,138,255,0.4);
+            border-radius: 12px;
+            display: inline-block;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(91,138,255,0.4);
+            box-shadow: 0 8px 32px rgba(91,138,255,0.2);
+          }
+
+          .achievement {
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            font-weight: 300;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+          }
+
+          .tier {
+            font-family: 'Gugi', cursive;
+            font-size: 2.25rem;
+            background: linear-gradient(135deg, #76ddff 0%, #00d4aa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0.75rem 0;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-shadow: 0 0 40px rgba(118,221,255,0.6);
+          }
+
+          .program-name {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            margin: 0.75rem 0 1.5rem;
+            letter-spacing: 1px;
+          }
+
+          .date {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            font-weight: 400;
+            letter-spacing: 1px;
+          }
+
+          .signature {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(91,138,255,0.2);
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+          }
+
+          .signature-block {
+            text-align: center;
+          }
+
+          .signature-line {
+            width: 240px;
+            border-top: 2px solid rgba(91,138,255,0.5);
+            margin: 0 auto 0.75rem;
+          }
+
+          .signature-name {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 1px;
+          }
+
+          .seal {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            width: 100px;
+            height: 100px;
+            border: 4px double rgba(0,212,170,0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Gugi', cursive;
+            font-size: 0.8rem;
+            color: rgba(0,212,170,0.8);
+            text-align: center;
+            line-height: 1.2;
+            background: radial-gradient(circle, rgba(0,212,170,0.05) 0%, transparent 70%);
+            box-shadow: 0 0 20px rgba(0,212,170,0.3);
+          }
+
+          .stamp {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 140px;
+            height: 140px;
+            border: 5px solid rgba(91,138,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-15deg);
+            background: radial-gradient(circle at 30% 30%, rgba(91,138,255,0.08) 0%, rgba(15,20,32,0.4) 100%);
+            box-shadow:
+              inset 0 0 30px rgba(91,138,255,0.1),
+              0 0 30px rgba(91,138,255,0.2);
+          }
+
+          .stamp-inner {
+            width: 115px;
+            height: 115px;
+            border: 3px solid rgba(91,138,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+          }
+
+          .stamp-logo {
+            font-family: 'Gugi', cursive;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #5b8aff, #76ddff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3px;
+            letter-spacing: 1px;
+          }
+
+          .stamp-text {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.55rem;
+            color: rgba(91,138,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 2px;
+          }
+
+          .stamp-year {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.75rem;
+            color: rgba(91,138,255,0.6);
+            font-weight: 700;
+          }
+
+          .stamp-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+          }
+
+          .stamp-star {
+            position: absolute;
+            color: rgba(91,138,255,0.3);
+            font-size: 0.8rem;
+          }
+
+          .stamp-star:nth-child(1) { top: 10%; left: 50%; transform: translateX(-50%); }
+          .stamp-star:nth-child(2) { bottom: 10%; left: 50%; transform: translateX(-50%); }
+          .stamp-star:nth-child(3) { top: 30%; left: 15%; }
+          .stamp-star:nth-child(4) { top: 30%; right: 15%; }
+
+          @media print {
+            body { padding: 0; background: #05070d; }
+            .certificate { box-shadow: none; }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="certificate">
+          <div class="corner-ornament top-left"></div>
+          <div class="corner-ornament top-right"></div>
+          <div class="corner-ornament bottom-left"></div>
+          <div class="corner-ornament bottom-right"></div>
+
+          <div class="logo">SIGNAL PILOT</div>
+          <div class="tagline">Institutional Trading Education</div>
+
+          <h1>Certificate of Completion</h1>
+          <div class="divider"></div>
+
+          <div class="awarded">This certifies that</div>
+          <div class="name">${userName}</div>
+
+          <div class="achievement">has successfully completed the</div>
+          <div class="tier">${tier} Tier</div>
+          <div class="program-name">Signal Pilot Trading Education Program</div>
+
+          <div class="date">Awarded ${today}</div>
+
+          <div class="signature">
+            <div class="signature-block">
+              <div class="signature-line"></div>
+              <div class="signature-name">Signal Pilot Labs, Inc.</div>
+            </div>
+          </div>
+
+          <div class="seal">
+            VERIFIED<br/>
+            ${new Date().getFullYear()}
+          </div>
+
+          <div class="stamp">
+            <div class="stamp-inner">
+              <div class="stamp-stars">
+                <div class="stamp-star">★</div>
+                <div class="stamp-star">★</div>
+                <div class="stamp-star">★</div>
+                <div class="stamp-star">★</div>
+              </div>
+              <div class="stamp-logo">SIGNAL<br/>PILOT</div>
+              <div class="stamp-text">Official</div>
+              <div class="stamp-year">${new Date().getFullYear()}</div>
+            </div>
+          </div>
+        </div>
+        <script` + `>
+          window.onload = () => {
+            setTimeout(() => window.print(), 500);
+          };
+        </scr` + `ipt>
+      </body>
+      </html>
+    `;
+
+    // Open certificate in new window for printing/download
+    const certWindow = window.open('', '_blank');
+    certWindow.document.write(certificateHTML);
+    certWindow.document.close();
+  }
+
+  // Public API
+  window.library = {
+    removeBookmark: function(id) {
+      const bookmarks = JSON.parse(localStorage.getItem('sp_bookmarks') || '[]');
+      const filtered = bookmarks.filter(b => b.id !== id);
+      localStorage.setItem('sp_bookmarks', JSON.stringify(filtered));
+      loadLibraryData();
+    }
+  };
+
+  // Load on page load
+  loadLibraryData();
+
+  // Listen for localStorage changes (cross-tab sync and real-time updates)
+  window.addEventListener('storage', function(e) {
+    if (e.key && (e.key.startsWith('sp_') || e.key === null)) {
+      logger.log('[My Library] Data changed, reloading...');
+      loadLibraryData();
+    }
+  });
+
+  // Also listen for changes in the same tab (not triggered by storage event)
+  setInterval(function() {
+    // Check if bookmark count changed
+    const currentBookmarks = JSON.parse(localStorage.getItem('sp_bookmarks') || '[]').length;
+    const currentCompleted = Object.keys(localStorage).filter(k => k.includes('sp_edu_') && k.includes('_completed')).length;
+
+    const displayedBookmarks = parseInt(document.getElementById('stat-bookmarks')?.textContent || '0');
+    const displayedCompleted = parseInt(document.getElementById('stat-completed')?.textContent || '0');
+
+    if (currentBookmarks !== displayedBookmarks || currentCompleted !== displayedCompleted) {
+      logger.log('[My Library] Data mismatch detected, reloading...');
+      loadLibraryData();
+    }
+  }, 2000); // Check every 2 seconds
+
+  // Run debug on page load (can be disabled in production)
+  if (localStorage.getItem('sp_debug_mode') === 'true') {
+    debugLibraryData();
+  }
+
+  // Expose debug functions globally for console access
+  window.debugLibrary = debugLibraryData;
+  window.forceMigration = forceMigration;
+
+})();
+
+// Auto-enable debug on first load to help user
+if (!localStorage.getItem('sp_library_initialized')) {
+  localStorage.setItem('sp_library_initialized', 'true');
+  localStorage.setItem('sp_debug_mode', 'true');
+  console.log('%c📚 My Library Debug Mode Enabled', 'color: #5b8aff; font-size: 14px; font-weight: bold;');
+  console.log('%cType debugLibrary() in console to see your data', 'color: #76ddff;');
+  console.log('%cType forceMigration() to re-sync your progress data', 'color: #76ddff;');
+}
+</script>
+  <!-- Google Translate -->
+  <script src="/education/assets/lang-switcher.js?v=9"></script>
+</body>
+</html>

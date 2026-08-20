@@ -1,0 +1,140 @@
+/* ==================================================
+   BACKGROUND MODULE
+   Background effects (stars, aurora, gradients)
+   ================================================== */
+
+/* Stars/constellations disabled */
+.bg-stars{display:none}
+.sp-constellations{display:none}
+
+/* Soft gradient background - no orbs */
+.bg-aurora{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(180deg, rgba(91,138,255,0.12) 0%, rgba(60,100,180,0.06) 25%, transparent 50%);
+}
+
+html[data-theme="light"] .bg-aurora{
+  background:linear-gradient(180deg, rgba(91,138,255,0.06) 0%, rgba(60,100,180,0.03) 25%, transparent 50%);
+}
+
+/* Enhanced Hero Section with Gradient */
+.hero{
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:-50%;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(91,138,255,.4), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(118,221,255,.35), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(123,155,255,.3), transparent 50%);
+  animation:hero-gradient-rotate 20s linear infinite;
+  z-index:0;
+  filter:blur(60px);
+  will-change:transform;
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+
+@keyframes hero-gradient-rotate{
+  0%{transform:rotate(0deg) scale(1);}
+  50%{transform:rotate(180deg) scale(1.1);}
+  100%{transform:rotate(360deg) scale(1);}
+}
+
+  /* Module cards mobile */
+  .module-card .module-header{
+    flex-direction:column;
+    gap:.5rem;
+  }
+
+  .module-card .module-number{
+    font-size:1.5rem;
+    min-width:auto;
+  }
+}
+
+@media (max-width:480px){
+  body{font-size:15px;line-height:1.65}
+
+  /* Hero mobile optimization */
+  .hero{
+    padding:1.5rem 0 1rem;
+  }
+
+  .hero::before{
+    filter:blur(30px);
+    inset:-40%;
+  }
+}
+
+/* Tablet-specific optimizations (portrait) */
+@media (min-width:768px) and (max-width:1024px){
+  .module-card{
+    padding:1.75rem;
+  }
+
+  .progress-stats{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .hero{
+    padding:2.5rem 0 2rem;
+  }
+}
+
+/* Landscape phone optimization */
+@media (max-height:450px) and (orientation:landscape){
+  .hero{
+    min-height:auto;
+    padding:1rem 0 .75rem;
+  }
+
+  .hero::before{
+    transform:none;
+  }
+
+  *{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+}
+
+/* Dark Mode Preference (System) */
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]){
+    color-scheme:dark;
+  }
+}
+
+/* Light Mode Preference (System) */
+@media (prefers-color-scheme: light){
+  html:not([data-theme]){
+    color-scheme:light;
+  }
+}
+
+/* Low Bandwidth / Save Data Mode */
+@media (prefers-reduced-data: reduce){
+  /* Disable background animations */
+  .bg-stars,.bg-aurora,.hero::before{
+    display:none !important;
+  }
+
+  /* Reduce image quality needs to be handled by img srcset */
+
+  /* Disable non-essential animations */
+  .card,.module-card,.progress-card{
+    animation:none !important;
+  }
+}
+
+/* Print Optimization */
+@media print{
