@@ -1310,6 +1310,26 @@
         load(next);
       }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
+      // Soro injects its own <link rel="canonical" data-soro> on article views
+      // and removes it again on the list view, but it never touches ours. Left
+      // alone that puts two conflicting canonicals on the page at once, which
+      // search engines treat as unreliable. Mirror Soro's: ours is pulled while
+      // its article canonical is up, and restored when it goes away.
+      (function () {
+        var ours = document.querySelector('link[rel="canonical"]:not([data-soro])');
+        if (!ours) return;
+        function sync() {
+          var soroCanonical = document.querySelector('link[rel="canonical"][data-soro]');
+          if (soroCanonical) {
+            if (ours.parentNode) ours.parentNode.removeChild(ours);
+          } else if (!ours.parentNode) {
+            document.head.appendChild(ours);
+          }
+        }
+        new MutationObserver(sync).observe(document.head, { childList: true });
+        sync();
+      })();
+
       // If nothing rendered after 8s, surface the fallback link.
       setTimeout(function () {
         if (fallback && !mount.children.length) fallback.hidden = false;
