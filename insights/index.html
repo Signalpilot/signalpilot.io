@@ -1274,9 +1274,23 @@
         return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
       }
 
+      // Forward the page's own query string to the embed so article deep links
+      // (?post=..., ?slug=..., whatever Soro routes on) still resolve. We only
+      // own "theme", so that one is replaced rather than duplicated.
+      function embedUrl(theme) {
+        var params;
+        try {
+          params = new URLSearchParams(window.location.search);
+        } catch (e) {
+          params = new URLSearchParams();
+        }
+        params.set('theme', theme);
+        return 'https://app.trysoro.com/api/embed/' + EMBED_ID + '?' + params.toString();
+      }
+
       function load(theme) {
         var s = document.createElement('script');
-        s.src = 'https://app.trysoro.com/api/embed/' + EMBED_ID + '?theme=' + theme;
+        s.src = embedUrl(theme);
         s.defer = true;
         s.setAttribute('data-soro', '1');
         s.onerror = function () { if (fallback) fallback.hidden = false; };
