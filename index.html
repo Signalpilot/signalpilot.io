@@ -7179,7 +7179,7 @@
         const colors = tagColors[tag] || tagColors['indicators'];
         // Use article's hero image (each article has hero.png in its directory)
         const articleUrl = article.url || `https://www.signalpilot.io/blog/articles/${article.slug}/`;
-        const imageUrl = article.image || (articleUrl.endsWith('/') ? articleUrl + 'hero.png' : articleUrl + '/hero.png');
+        const imageUrl = article.image || (articleUrl.endsWith('/') ? articleUrl + 'hero.webp' : articleUrl + '/hero.webp');
         const a = document.createElement('a');
         a.href = article.url || `https://www.signalpilot.io/blog/articles/${article.slug}/`;
         a.target = '_blank';
@@ -7197,13 +7197,45 @@
         return a;
       }
 
-      fetch('https://www.signalpilot.io/blog/api/articles.json')
-        .then(r => r.json())
-        .then(data => {
-          const articles = Array.isArray(data) ? data : (data.articles || []);
+      // Newest posts come from the Soro widget's payload, which is the only
+      // machine-readable source it exposes (no JSON feed endpoint exists).
+      // Any failure here degrades to the static library below.
+      const SORO_EMBED = 'https://app.trysoro.com/api/embed/73a35a9b-8411-466a-b8d7-3de77cf0b535?theme=dark';
+
+      function loadSoroArticles() {
+        return fetch(SORO_EMBED)
+          .then(r => r.ok ? r.text() : Promise.reject(r.status))
+          .then(t => {
+            const m = t.match(/var SORO_ARTICLES = (\[[\s\S]*?\]);\s*\n/);
+            if (!m) return [];
+            const arr = JSON.parse(m[1]);
+            return arr.map(a => ({
+              title: a.title,
+              description: a.excerpt || '',
+              url: 'https://www.signalpilot.io/blog/?post=' + encodeURIComponent(a.slug),
+              image: a.image,
+              tags: ['indicators']
+            }));
+          })
+          .catch(() => []);
+      }
+
+      function loadLibrary() {
+        return fetch('https://www.signalpilot.io/blog/api/articles.json')
+          .then(r => r.json())
+          .then(data => {
+            const arr = Array.isArray(data) ? data : (data.articles || []);
+            return arr.filter(a => a.featured);
+          })
+          .catch(() => []);
+      }
+
+      Promise.all([loadSoroArticles(), loadLibrary()])
+        .then(([fresh, library]) => {
+          const articles = fresh.concat(library).slice(0, 6);
           if (articles.length === 0) return;
           carousel.innerHTML = '';
-          articles.filter(a => a.featured).slice(0, 6).forEach(article => {
+          articles.forEach(article => {
             carousel.appendChild(createArticleCard(article));
           });
         })
@@ -7211,7 +7243,7 @@
           // Fallback to static content on error
           carousel.innerHTML = `
             <a href="https://www.signalpilot.io/blog/articles/why-your-indicators-keep-failing/" target="_blank" rel="noopener" class="article-card" style="flex:0 0 300px;scroll-snap-align:start;border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:transform .2s,box-shadow .2s;overflow:hidden">
-              <div class="article-card-image" style="background-image:url('https://www.signalpilot.io/blog/articles/why-your-indicators-keep-failing/hero.png')"></div>
+              <div class="article-card-image" style="background-image:url('https://www.signalpilot.io/blog/articles/why-your-indicators-keep-failing/hero.webp')"></div>
               <div class="article-card-content">
                 <span style="display:inline-block;padding:.25rem .5rem;background:rgba(91,138,255,.15);color:var(--brand);border-radius:4px;font-size:.75rem;font-weight:600;margin-bottom:.75rem">INDICATORS</span>
                 <h3 style="font-size:1.1rem;font-weight:600;color:var(--text);margin:0 0 .5rem 0;line-height:1.3">Why Your Indicators Keep Failing</h3>
@@ -7219,7 +7251,7 @@
               </div>
             </a>
             <a href="https://www.signalpilot.io/blog/articles/the-repainting-problem/" target="_blank" rel="noopener" class="article-card" style="flex:0 0 300px;scroll-snap-align:start;border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:transform .2s,box-shadow .2s;overflow:hidden">
-              <div class="article-card-image" style="background-image:url('https://www.signalpilot.io/blog/articles/the-repainting-problem/hero.png')"></div>
+              <div class="article-card-image" style="background-image:url('https://www.signalpilot.io/blog/articles/the-repainting-problem/hero.webp')"></div>
               <div class="article-card-content">
                 <span style="display:inline-block;padding:.25rem .5rem;background:rgba(91,138,255,.15);color:var(--brand);border-radius:4px;font-size:.75rem;font-weight:600;margin-bottom:.75rem">INDICATORS</span>
                 <h3 style="font-size:1.1rem;font-weight:600;color:var(--text);margin:0 0 .5rem 0;line-height:1.3">The Repainting Problem</h3>
@@ -7227,7 +7259,7 @@
               </div>
             </a>
             <a href="https://www.signalpilot.io/blog/articles/how-smart-money-moves/" target="_blank" rel="noopener" class="article-card" style="flex:0 0 300px;scroll-snap-align:start;border:1px solid var(--border);border-radius:12px;text-decoration:none;transition:transform .2s,box-shadow .2s;overflow:hidden">
-              <div class="article-card-image" style="background-image:url('https://www.signalpilot.io/blog/articles/how-smart-money-moves/hero.png')"></div>
+              <div class="article-card-image" style="background-image:url('https://www.signalpilot.io/blog/articles/how-smart-money-moves/hero.webp')"></div>
               <div class="article-card-content">
                 <span style="display:inline-block;padding:.25rem .5rem;background:rgba(52,211,153,.15);color:#34d399;border-radius:4px;font-size:.75rem;font-weight:600;margin-bottom:.75rem">MARKET CYCLES</span>
                 <h3 style="font-size:1.1rem;font-weight:600;color:var(--text);margin:0 0 .5rem 0;line-height:1.3">How Volume Flow Actually Moves</h3>
