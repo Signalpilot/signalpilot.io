@@ -10,7 +10,9 @@ import re, json, sys, hashlib
 
 TAG = re.compile(r'(<[^>]*>)')
 ATTR = re.compile(r'\b(title|alt|aria-label|placeholder)="([^"]*)"')
-HAS_WORDS = re.compile(r'[A-Za-z]{3}')
+# Two letters is enough: a lone "or" between two <strong> tags is a
+# segment like any other, and a 3-letter floor silently left it in English.
+HAS_WORDS = re.compile(r'[A-Za-z]{2}')
 SKIP_EXACT = {'Signal Pilot', 'Discord', 'TradingView'}
 
 
