@@ -38,8 +38,15 @@ def verify(src_html, out_html, lang, rel):
         # match inside a longer English word.
         pat = (r'(?<![A-Za-z0-9])' + re.escape(term) + r'(?![A-Za-z0-9])'
                if term in WORD_BOUNDED else re.escape(term))
-        n_src = len(re.findall(pat, s_txt))
-        n_out = len(re.findall(pat, o_txt))
+        # Terms written lowercase in the glossary are ordinary trade vocabulary
+        # ("order flow", "dark pool"). German capitalises nouns and Turkish
+        # recases them, so match those case-insensitively — what matters is that
+        # the term survived, not its capitalisation. Codes and product names
+        # carry uppercase and stay case-sensitive, so "CAP" is never matched by
+        # the word "cap".
+        flags = re.IGNORECASE if term.islower() else 0
+        n_src = len(re.findall(pat, s_txt, flags))
+        n_out = len(re.findall(pat, o_txt, flags))
         if n_src and n_out < n_src:
             errs.append(f'locked term lost: "{term}" {n_src} -> {n_out}')
 
