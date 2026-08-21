@@ -8,7 +8,9 @@ translation file stays valid as long as the English page does not change.
 """
 import re, json, sys, hashlib
 
-TAG = re.compile(r'(<[^>]*>)')
+# A tag name must start with a letter (or !, /, ?), so "<10% DD" is text, not a
+# tag -- and a '>' inside a quoted attribute value does not end the tag.
+TAG = re.compile(r'''(<[a-zA-Z!/?][^>"']*(?:"[^"]*"[^>"']*|'[^']*'[^>"']*)*>)''')
 ATTR = re.compile(r'\b(title|alt|aria-label|placeholder)="([^"]*)"')
 # Two letters is enough: a lone "or" between two <strong> tags is a
 # segment like any other, and a 3-letter floor silently left it in English.
