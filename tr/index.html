@@ -3851,6 +3851,13 @@
       line-height:1.2;
     }
 
+    /* Keep each sentence of the hero headline on its own line group, so a
+       break never strands the opening words of one sentence beside the tail
+       of the previous one. text-wrap:balance equalises line widths but does
+       not prevent that. */
+    .headline.xl .hl-s{ display:inline-block; margin-right:.28em }
+    .headline.xl .hl-s:last-child{ margin-right:0 }
+
     .headline.lg{
       font-size:clamp(1.7rem,5vw,2.7rem);
       font-family:'EB Garamond',serif;
@@ -5311,7 +5318,7 @@
 
           <h1 class="headline xl">
             <span style="font-size:0.5em;display:block;margin-bottom:0.5rem;color:#9ca3af !important;-webkit-text-fill-color:#9ca3af !important;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Yeniden Çizmeyen TradingView Göstergeleri</span>
-            <span class="shimmer-text">Avantaj daha fazla görmek değil. Önemli olanı görmektir.</span>
+            <span class="shimmer-text"><span class="hl-s">Avantaj daha fazla görmek değil.</span><span class="hl-s">Önemli olanı görmektir.</span></span>
           </h1>
 
           <p id="hero-description" style="color:var(--muted);font-size:1.15rem;line-height:1.6;max-width:700px;margin:1.5rem auto 0;white-space:normal">
@@ -5809,17 +5816,167 @@
           <h2 class="headline lg"><span class="shimmer-text">Yatırımcılar Signal Pilot'u Seviyor</span></h2>
           <p style="color:var(--muted);margin-top:1rem;font-size:1.05rem">Trustpilot'ta gerçek yatırımcılardan gerçek yorumlar</p>
         </div>
+        <style>
+        .testimonials-marquee {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          touch-action: pan-y;
+          -webkit-overflow-scrolling: auto;
+        }
+
+        .testimonials-track {
+          display: flex;
+          gap: 1.5rem;
+          animation: testimonials-scroll 40s linear infinite;
+          width: fit-content;
+        }
+
+        .testimonials-marquee:hover .testimonials-track {
+          animation-play-state: paused;
+        }
+
+        @keyframes testimonials-scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-50% - 0.75rem));
+          }
+        }
+
+        .testimonial-card {
+          flex: 0 0 380px;
+          display: flex;
+          flex-direction: column;
+          background: linear-gradient(135deg, rgba(91,138,255,.08), rgba(91,138,255,.02));
+          border: 1px solid rgba(91,138,255,.2);
+          border-radius: 16px;
+          padding: 1.75rem;
+          transition: all .3s ease;
+        }
+
+        .testimonial-card:hover {
+          border-color: rgba(91,138,255,.4);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 40px rgba(91,138,255,.15);
+        }
+
+        .testimonial-stars {
+          color: #ffd700;
+          font-size: 1.25rem;
+          letter-spacing: 2px;
+          margin-bottom: .75rem;
+        }
+
+        .testimonial-title {
+          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: var(--text);
+          margin: 0 0 .75rem 0;
+          line-height: 1.3;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+          overflow: hidden;
+          min-height: calc(1.2rem * 1.3 * 2);
+        }
+
+        .testimonial-text {
+          color: var(--muted);
+          font-size: .95rem;
+          line-height: 1.6;
+          margin: 0 0 .75rem 0;
+          min-height: calc(.95rem * 1.6 * 5);
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 5;
+          line-clamp: 5;
+          overflow: hidden;
+        }
+
+        /* Reviews are shown verbatim; longer ones are clipped here and
+           linked in full on Trustpilot rather than edited down. */
+        .testimonial-more {
+          display: inline-block;
+          margin: 0 0 1.25rem 0;
+          font-size: .82rem;
+          font-weight: 600;
+          color: var(--brand);
+          text-decoration: none;
+          opacity: .85;
+          transition: opacity .2s ease;
+        }
+
+        .testimonial-more:hover { opacity: 1; text-decoration: underline; }
+
+        .testimonial-author {
+          margin-top: auto;
+        }
+
+        .testimonial-author {
+          display: flex;
+          align-items: center;
+          gap: .75rem;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(91,138,255,.15);
+        }
+
+        .testimonial-avatar {
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--brand), var(--brand-2));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: .85rem;
+          color: #fff;
+        }
+
+        .testimonial-author strong {
+          display: block;
+          color: var(--text);
+          font-size: .95rem;
+        }
+
+        .testimonial-author span {
+          font-size: .8rem;
+          color: var(--muted-2);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+          .testimonial-card {
+            flex: 0 0 320px;
+            padding: 1.5rem;
+          }
+
+          .testimonials-track {
+            animation-duration: 30s;
+          }
+        }
+      </style>
         <div class="testimonials-marquee" data-reveal="fade-up" data-reveal-delay="200">
           <div class="testimonials-track">
-            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"So far enjoying the trial"</h4><p class="testimonial-text">The Plutus flow upgraded OBV indicator's accuracy with bull/bear divisions on weekly charts is impressive. The "chronicle" feature is something I've never encountered in my years of trading experience.</p><div class="testimonial-author"><div class="testimonial-avatar">AR</div><div><strong>Alueta Ruli</strong><span>Doğrulanmış Alıcı</span></div></div></div>
-            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Quick update from beta testing"</h4><p class="testimonial-text">After 3 years of trading, I feel like I've struck gold with this platform. Janus Atlas for entry planning and Pentarch as the flagship product are game-changers.</p><div class="testimonial-author"><div class="testimonial-avatar">XL</div><div><strong>Xhesika Lushaj</strong><span>Doğrulanmış Alıcı</span></div></div></div>
-            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Gonna be honest"</h4><p class="testimonial-text">Initially overwhelmed by the platform's complexity, the education hub and documentation helped me focus systematically. I reported a bug—fixed within a day. You can feel the team's passion.</p><div class="testimonial-author"><div class="testimonial-avatar">AF</div><div><strong>Axl F.</strong><span>Doğrulanmış Alıcı</span></div></div></div>
-            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Day 7 of beta testing the Elite Seven…"</h4><p class="testimonial-text">Identified a TD accumulation zone using the Pentarch indicator with great success. The comprehensive documentation and audio lore component is mesmerizing.</p><div class="testimonial-author"><div class="testimonial-avatar">AL</div><div><strong>Arber Leka</strong><span>Doğrulanmış Alıcı</span></div></div></div>
-
+            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"So far enjoying the trial"</h4><p class="testimonial-text">The Plutus flow upgraded OBV indicator's accuracy with bull/bear divisions on weekly charts is impressive. The "chronicle" feature is something I've never encountered in my years of trading experience.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a><div class="testimonial-author"><div class="testimonial-avatar">AR</div><div><strong>Alueta Ruli</strong><span>Doğrulanmış Alıcı</span></div></div></div>
+            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Quick update from beta testing"</h4><p class="testimonial-text">After 3 years of trading, I feel like I've struck gold with this platform. Janus Atlas for entry planning and Pentarch as the flagship product are game-changers.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a><div class="testimonial-author"><div class="testimonial-avatar">XL</div><div><strong>Xhesika Lushaj</strong><span>Doğrulanmış Alıcı</span></div></div></div>
+            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Gonna be honest"</h4><p class="testimonial-text">Initially overwhelmed by the platform's complexity, the education hub and documentation helped me focus systematically. I reported a bug—fixed within a day. You can feel the team's passion.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a><div class="testimonial-author"><div class="testimonial-avatar">AF</div><div><strong>Axl F.</strong><span>Doğrulanmış Alıcı</span></div></div></div>
+            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Day 7 of beta testing the Elite Seven…"</h4><p class="testimonial-text">Identified a TD accumulation zone using the Pentarch indicator with great success. The comprehensive documentation and audio lore component is mesmerizing.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a><div class="testimonial-author"><div class="testimonial-avatar">AL</div><div><strong>Arber Leka</strong><span>Doğrulanmış Alıcı</span></div></div></div>
             <div class="testimonial-card">
               <div class="testimonial-stars">★★★★★</div>
               <h4 class="testimonial-title">"Honestly"</h4>
               <p class="testimonial-text">After two weeks of beta testing, I'm obsessed with the Pentarch indicator. The education and docs are highly valuable and well structured. The chronicle lore with its wizard voice audio versions is unlike anything I've seen.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">KL</div>
                 <div>
@@ -5828,11 +5985,11 @@
                 </div>
               </div>
             </div>
-
             <div class="testimonial-card">
               <div class="testimonial-stars">★★★★★</div>
               <h4 class="testimonial-title">"I have enjoyed my experience"</h4>
               <p class="testimonial-text">Beta testing The Elite Seven was well-supported with responsive bug reports. Signal Pilot Education offers true honest words about important lessons. The website design is so good I use it as a screensaver. Dedicated team!</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">AY</div>
                 <div>
@@ -5841,24 +5998,11 @@
                 </div>
               </div>
             </div>
-
-            <div class="testimonial-card">
-              <div class="testimonial-stars">★★★★★</div>
-              <h4 class="testimonial-title">"Rare to find a trading tool that doesn't overpromise"</h4>
-              <p class="testimonial-text">No '10x your account' garbage. No fake P&amp;L screenshots. Their site literally says 'not financial advice' and the education teaches risk management before anything else. In an industry full of scams and hype, SignalPilot feels like it was built by people who actually trade. The Plutus Flow divergence detection alone has kept me out of at least 3 bad entries this month.</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">CA</div>
-                <div>
-                  <strong>cailin</strong>
-                  <span>Verified Buyer</span>
-                </div>
-              </div>
-            </div>
-
             <div class="testimonial-card">
               <div class="testimonial-stars">★★★★★</div>
               <h4 class="testimonial-title">"Shocked at how good it really is"</h4>
               <p class="testimonial-text">Been using Signal Pilot Labs for a while now, and I'm shocked at how good it really is. The education hub really helps me understand what's actually going on in the market, as opposed to just using signals, and Pentarch has been really good so far. There's a small learning curve in the beginning, but once you get used to it, it makes total sense.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">RM</div>
                 <div>
@@ -5867,11 +6011,11 @@
                 </div>
               </div>
             </div>
-
             <div class="testimonial-card">
               <div class="testimonial-stars">★★★★★</div>
               <h4 class="testimonial-title">"The free education hub changed my trading"</h4>
               <p class="testimonial-text">I subscribed for the Elite Seven but honestly the free education hub is what changed my trading. 82 lessons, structured from beginner to advanced, and it actually teaches you WHY the indicators work. Not just "buy when green, sell when red." The chronicle lore stuff with the wizard narrator is weird but somehow it makes the concepts stick. My girlfriend thinks I've joined a cult.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">KP</div>
                 <div>
@@ -5880,67 +6024,11 @@
                 </div>
               </div>
             </div>
-            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"So far enjoying the trial"</h4><p class="testimonial-text">The Plutus flow upgraded OBV indicator's accuracy with bull/bear divisions on weekly charts is impressive. The "chronicle" feature is something I've never encountered in my years of trading experience.</p><div class="testimonial-author"><div class="testimonial-avatar">AR</div><div><strong>Alueta Ruli</strong><span>Doğrulanmış Alıcı</span></div></div></div>
-
-            <div class="testimonial-card">
-              <div class="testimonial-stars">★★★★★</div>
-              <h4 class="testimonial-title">"Honestly"</h4>
-              <p class="testimonial-text">After two weeks of beta testing, I'm obsessed with the Pentarch indicator. The education and docs are highly valuable and well structured. The chronicle lore with its wizard voice audio versions is unlike anything I've seen.</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">KL</div>
-                <div>
-                  <strong>Klaus Leskaj</strong>
-                  <span>Verified Buyer</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="testimonial-stars">★★★★★</div>
-              <h4 class="testimonial-title">"I have enjoyed my experience"</h4>
-              <p class="testimonial-text">Beta testing The Elite Seven was well-supported with responsive bug reports. Signal Pilot Education offers true honest words about important lessons. The website design is so good I use it as a screensaver. Dedicated team!</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">AY</div>
-                <div>
-                  <strong>Artur Ymeri</strong>
-                  <span>Verified Buyer</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Quick update from beta testing"</h4><p class="testimonial-text">After 3 years of trading, I feel like I've struck gold with this platform. Janus Atlas for entry planning and Pentarch as the flagship product are game-changers.</p><div class="testimonial-author"><div class="testimonial-avatar">XL</div><div><strong>Xhesika Lushaj</strong><span>Doğrulanmış Alıcı</span></div></div></div>
-            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Gonna be honest"</h4><p class="testimonial-text">Initially overwhelmed by the platform's complexity, the education hub and documentation helped me focus systematically. I reported a bug—fixed within a day. You can feel the team's passion.</p><div class="testimonial-author"><div class="testimonial-avatar">AF</div><div><strong>Axl F.</strong><span>Doğrulanmış Alıcı</span></div></div></div>
-            <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Day 7 of beta testing the Elite Seven…"</h4><p class="testimonial-text">Identified a TD accumulation zone using the Pentarch indicator with great success. The comprehensive documentation and audio lore component is mesmerizing.</p><div class="testimonial-author"><div class="testimonial-avatar">AL</div><div><strong>Arber Leka</strong><span>Doğrulanmış Alıcı</span></div></div></div>
-
-            <div class="testimonial-card">
-              <div class="testimonial-stars">★★★★★</div>
-              <h4 class="testimonial-title">"Honestly"</h4>
-              <p class="testimonial-text">After two weeks of beta testing, I'm obsessed with the Pentarch indicator. The education and docs are highly valuable and well structured. The chronicle lore with its wizard voice audio versions is unlike anything I've seen.</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">KL</div>
-                <div>
-                  <strong>Klaus Leskaj</strong>
-                  <span>Verified Buyer</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card">
-              <div class="testimonial-stars">★★★★★</div>
-              <h4 class="testimonial-title">"I have enjoyed my experience"</h4>
-              <p class="testimonial-text">Beta testing The Elite Seven was well-supported with responsive bug reports. Signal Pilot Education offers true honest words about important lessons. The website design is so good I use it as a screensaver. Dedicated team!</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">AY</div>
-                <div>
-                  <strong>Artur Ymeri</strong>
-                  <span>Verified Buyer</span>
-                </div>
-              </div>
-            </div>
-
             <div class="testimonial-card">
               <div class="testimonial-stars">★★★★★</div>
               <h4 class="testimonial-title">"Rare to find a trading tool that doesn't overpromise"</h4>
               <p class="testimonial-text">No '10x your account' garbage. No fake P&amp;L screenshots. Their site literally says 'not financial advice' and the education teaches risk management before anything else. In an industry full of scams and hype, SignalPilot feels like it was built by people who actually trade. The Plutus Flow divergence detection alone has kept me out of at least 3 bad entries this month.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">CA</div>
                 <div>
@@ -5949,11 +6037,84 @@
                 </div>
               </div>
             </div>
-
             <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★</div>
+              <h4 class="testimonial-title">"The branding is unique"</h4>
+              <p class="testimonial-text">The branding is unique I'll give them that. But underneath the aesthetic, these are serious tools.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">DP</div>
+                <div>
+                  <strong>Damien Parkin</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <h4 class="testimonial-title">"Solution in just three hours"</h4>
+              <p class="testimonial-text">A solution was provided in just three hours. This is the type of development staff you want supporting a product.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">BT</div>
+                <div>
+                  <strong>Benno Thies</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <h4 class="testimonial-title">"Built for traders, not marketing"</h4>
+              <p class="testimonial-text">Signal Pilot is the first time I have felt like the tools were built for the trader rather than for the marketing.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">FB</div>
+                <div>
+                  <strong>Farhan Butt</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card" aria-hidden="true"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"So far enjoying the trial"</h4><p class="testimonial-text">The Plutus flow upgraded OBV indicator's accuracy with bull/bear divisions on weekly charts is impressive. The "chronicle" feature is something I've never encountered in my years of trading experience.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a><div class="testimonial-author"><div class="testimonial-avatar">AR</div><div><strong>Alueta Ruli</strong><span>Doğrulanmış Alıcı</span></div></div></div>
+            <div class="testimonial-card" aria-hidden="true"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Quick update from beta testing"</h4><p class="testimonial-text">After 3 years of trading, I feel like I've struck gold with this platform. Janus Atlas for entry planning and Pentarch as the flagship product are game-changers.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a><div class="testimonial-author"><div class="testimonial-avatar">XL</div><div><strong>Xhesika Lushaj</strong><span>Doğrulanmış Alıcı</span></div></div></div>
+            <div class="testimonial-card" aria-hidden="true"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Gonna be honest"</h4><p class="testimonial-text">Initially overwhelmed by the platform's complexity, the education hub and documentation helped me focus systematically. I reported a bug—fixed within a day. You can feel the team's passion.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a><div class="testimonial-author"><div class="testimonial-avatar">AF</div><div><strong>Axl F.</strong><span>Doğrulanmış Alıcı</span></div></div></div>
+            <div class="testimonial-card" aria-hidden="true"><div class="testimonial-stars">★★★★★</div><h4 class="testimonial-title">"Day 7 of beta testing the Elite Seven…"</h4><p class="testimonial-text">Identified a TD accumulation zone using the Pentarch indicator with great success. The comprehensive documentation and audio lore component is mesmerizing.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a><div class="testimonial-author"><div class="testimonial-avatar">AL</div><div><strong>Arber Leka</strong><span>Doğrulanmış Alıcı</span></div></div></div>
+            <div class="testimonial-card" aria-hidden="true">
+              <div class="testimonial-stars">★★★★★</div>
+              <h4 class="testimonial-title">"Honestly"</h4>
+              <p class="testimonial-text">After two weeks of beta testing, I'm obsessed with the Pentarch indicator. The education and docs are highly valuable and well structured. The chronicle lore with its wizard voice audio versions is unlike anything I've seen.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">KL</div>
+                <div>
+                  <strong>Klaus Leskaj</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card" aria-hidden="true">
+              <div class="testimonial-stars">★★★★★</div>
+              <h4 class="testimonial-title">"I have enjoyed my experience"</h4>
+              <p class="testimonial-text">Beta testing The Elite Seven was well-supported with responsive bug reports. Signal Pilot Education offers true honest words about important lessons. The website design is so good I use it as a screensaver. Dedicated team!</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">AY</div>
+                <div>
+                  <strong>Artur Ymeri</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card" aria-hidden="true">
               <div class="testimonial-stars">★★★★★</div>
               <h4 class="testimonial-title">"Shocked at how good it really is"</h4>
               <p class="testimonial-text">Been using Signal Pilot Labs for a while now, and I'm shocked at how good it really is. The education hub really helps me understand what's actually going on in the market, as opposed to just using signals, and Pentarch has been really good so far. There's a small learning curve in the beginning, but once you get used to it, it makes total sense.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">RM</div>
                 <div>
@@ -5962,15 +6123,67 @@
                 </div>
               </div>
             </div>
-
-            <div class="testimonial-card">
+            <div class="testimonial-card" aria-hidden="true">
               <div class="testimonial-stars">★★★★★</div>
               <h4 class="testimonial-title">"The free education hub changed my trading"</h4>
               <p class="testimonial-text">I subscribed for the Elite Seven but honestly the free education hub is what changed my trading. 82 lessons, structured from beginner to advanced, and it actually teaches you WHY the indicators work. Not just "buy when green, sell when red." The chronicle lore stuff with the wizard narrator is weird but somehow it makes the concepts stick. My girlfriend thinks I've joined a cult.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">KP</div>
                 <div>
                   <strong>K. Pepi</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card" aria-hidden="true">
+              <div class="testimonial-stars">★★★★★</div>
+              <h4 class="testimonial-title">"Rare to find a trading tool that doesn't overpromise"</h4>
+              <p class="testimonial-text">No '10x your account' garbage. No fake P&amp;L screenshots. Their site literally says 'not financial advice' and the education teaches risk management before anything else. In an industry full of scams and hype, SignalPilot feels like it was built by people who actually trade. The Plutus Flow divergence detection alone has kept me out of at least 3 bad entries this month.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">CA</div>
+                <div>
+                  <strong>cailin</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card" aria-hidden="true">
+              <div class="testimonial-stars">★★★★</div>
+              <h4 class="testimonial-title">"The branding is unique"</h4>
+              <p class="testimonial-text">The branding is unique I'll give them that. But underneath the aesthetic, these are serious tools.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">DP</div>
+                <div>
+                  <strong>Damien Parkin</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card" aria-hidden="true">
+              <div class="testimonial-stars">★★★★★</div>
+              <h4 class="testimonial-title">"Solution in just three hours"</h4>
+              <p class="testimonial-text">A solution was provided in just three hours. This is the type of development staff you want supporting a product.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">BT</div>
+                <div>
+                  <strong>Benno Thies</strong>
+                  <span>Verified Buyer</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card" aria-hidden="true">
+              <div class="testimonial-stars">★★★★★</div>
+              <h4 class="testimonial-title">"Built for traders, not marketing"</h4>
+              <p class="testimonial-text">Signal Pilot is the first time I have felt like the tools were built for the trader rather than for the marketing.</p>
+              <a class="testimonial-more" href="https://www.trustpilot.com/review/signalpilot.io" target="_blank" rel="noopener">Trustpilot'ta oku →</a>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">FB</div>
+                <div>
+                  <strong>Farhan Butt</strong>
                   <span>Verified Buyer</span>
                 </div>
               </div>
@@ -7031,44 +7244,11 @@
               </svg>
               <span>Vercel</span>
             </a>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">★★★★</div>
-              <h4 class="testimonial-title">"The branding is unique"</h4>
-              <p class="testimonial-text">The branding is unique I'll give them that. But underneath the aesthetic, these are serious tools.</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">DP</div>
-                <div>
-                  <strong>Damien Parkin</strong>
-                  <span>Verified Buyer</span>
-                </div>
-              </div>
-            </div>
+            
 
-            <div class="testimonial-card">
-              <div class="testimonial-stars">★★★★★</div>
-              <h4 class="testimonial-title">"Solution in just three hours"</h4>
-              <p class="testimonial-text">A solution was provided in just three hours. This is the type of development staff you want supporting a product.</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">BT</div>
-                <div>
-                  <strong>Benno Thies</strong>
-                  <span>Verified Buyer</span>
-                </div>
-              </div>
-            </div>
+            
 
-            <div class="testimonial-card">
-              <div class="testimonial-stars">★★★★★</div>
-              <h4 class="testimonial-title">"Built for traders, not marketing"</h4>
-              <p class="testimonial-text">Signal Pilot is the first time I have felt like the tools were built for the trader rather than for the marketing.</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">FB</div>
-                <div>
-                  <strong>Farhan Butt</strong>
-                  <span>Verified Buyer</span>
-                </div>
-              </div>
-            </div>
+            
 
             <!-- Duplicate set for seamless loop -->
             <a href="https://www.tradingview.com/" target="_blank" rel="noopener" class="partner-logo" aria-hidden="true">
