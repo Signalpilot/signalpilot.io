@@ -38,10 +38,13 @@ def verify(src_html, out_html, lang, rel):
         if n_src and n_out < n_src:
             errs.append(f'locked term lost: "{term}" {n_src} -> {n_out}')
 
-    low = o_txt.lower()
+    # A banned phrase is a problem when the translation introduces it. The
+    # English lessons legitimately use "risk-free" to describe HFT arbitrage
+    # and paper trading, and a faithful translation of that is not a defect.
+    low_o, low_s = o_txt.lower(), s_txt.lower()
     for bad in BANNED_SUBSTRINGS:
-        if bad in low:
-            errs.append(f'banned phrase present: "{bad}"')
+        if low_o.count(bad) > low_s.count(bad):
+            errs.append(f'translation introduced banned phrase: "{bad}"')
 
     e, openn = _tag_errors(out_html)
     se, sopen = _tag_errors(src_html)
