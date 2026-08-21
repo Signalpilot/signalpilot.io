@@ -201,6 +201,72 @@ tense only:
 Primary read on 4h or 1D, with the higher timeframe state noted. Always say
 which timeframe an observation came from.
 
+### Paste-ready spec
+
+```
+CONTEXT
+I publish educational chart analysis on TradingView Ideas, my blog, and
+Instagram, for Signal Pilot (non-repainting TradingView indicators). This is
+education and marketing. It is NOT trading guidance and NOT a track record.
+A separate Claude turns your output into the published posts.
+
+SCOPE — WHAT TO CHART
+Primary symbol: whichever I name. If I don't name one, choose from:
+  crypto      BTCUSD, ETHUSD
+  metals/FX   XAUUSD, EURUSD
+  indices     SPX, ES1!
+  equities    NVDA, TSLA
+Prefer high-audience symbols over thin ones, even if a thin one looks better.
+Ideas are browsed per symbol — the symbol IS the distribution decision.
+
+CROSS-MARKET CONTEXT — always include
+  charting crypto     -> DXY, TOTAL, TOTAL2, USDT.D, OTHERS.D
+  charting FX/metals  -> DXY, US10Y
+  charting indices    -> VIX, DXY
+  charting equities   -> SPX, the stock's sector ETF
+Report what those showed during the same window.
+
+TIMEFRAME
+Primary read on 4h or 1D. Note the higher timeframe state (D or W).
+Say which timeframe every observation comes from.
+
+OUTPUT FORMAT — factual reading of what ALREADY PRINTED, past tense only
+1. Symbol, timeframe, date range shown
+2. Indicators visible on the chart
+3. Cycle events printed: code (TD/IGN/WRN/CAP/BDN) | price | date |
+   which layers confirmed it
+4. What price did after each: direction, % move, bars/days elapsed
+5. Structure notes: divergences, regime state, level interactions,
+   volume regime
+6. Cross-market context for the same window
+7. Real-time vs hindsight: confirm each mark sits where it printed live and
+   has not moved. This is the non-repainting point and it is the whole story.
+8. One sentence: why THIS chart is worth a stranger's attention
+
+HARD CONSTRAINTS — violating these kills the post
+- No R:R, expectancy, win rate, P&L, "would have returned", or any
+  performance figure, even internally framed
+- No entries, exits, stops, targets, or position sizing
+- No predictions or forward-looking statements of any kind
+- No "setup", "signal to take", or anything reading as a trade call
+- Describe what the indicator SHOWED. Never what anyone should DO.
+
+TRANSLATION RULE
+  "R:R 6.61:1, expectancy -0.442R, VETOED"
+    -> "the stop sat inside the measured noise range"
+  "73% of filled setups stopped at 0.3-0.6 ATR"
+    -> "stops in that band sat inside typical noise for this symbol"
+Same insight, no number implying profit or loss.
+
+TONE
+Direct, technical, anti-hype. No emoji, no excitement. Structure over signals.
+If a sentence could appear in a signal-seller's post, rewrite it.
+
+IF NOTHING INTERESTING PRINTED
+Say so plainly. A boring chart is not worth publishing and I would rather
+skip a day than post filler.
+```
+
 **If nothing interesting printed, say so.** A boring chart is not worth
 publishing, and skipping a day beats posting filler. This is the guard against
 the pattern that produced 200 deleted Instagram posts.
