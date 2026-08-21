@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17835897996"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-440EJBMYST');
+  gtag('config', 'AW-17835897996');
+</script>
+  <link rel="manifest" href="/education/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/education/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/education/assets/icons/icon-180x180.png">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover"/>
+  <meta name="robots" content="index,follow"/>
+  <!-- AGGRESSIVE CACHE PREVENTION: Forces fresh load every time -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Os teus indicadores estão a mentir-te (o problema do repaint) — Signal Pilot Education</title>
+  <meta name="description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta name="theme-color" content="#05070d">
+  <link rel="canonical" href="https://www.signalpilot.io/pt/education/curriculum/beginner/04-repaint-problem.html">
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.signalpilot.io/education/curriculum/beginner/04-repaint-problem.html">
+  <meta property="og:title" content="Your Indicators Are Lying to You (The Repaint Problem) — Signal Pilot Education">
+  <meta property="og:description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Signal Pilot Education">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.signalpilot.io/education/curriculum/beginner/04-repaint-problem.html">
+  <meta name="twitter:title" content="Your Indicators Are Lying to You (The Repaint Problem) — Signal Pilot Education">
+  <meta name="twitter:description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
+  <link rel="prev" href="https://www.signalpilot.io/education/curriculum/beginner/03-price-action-is-dead.html"/>
+  <link rel="next" href="https://www.signalpilot.io/education/curriculum/beginner/05-rsi-extremes.html"/>
+  <meta name="sp-level" content="Beginner">
+  <meta name="sp-order" content="4">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gugi&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <!-- SignalPilot Theme System -->
+  <link rel="stylesheet" href="/education/assets/signalpilot-theme.css">
+  <link rel="stylesheet" href="/education/assets/edu.css">
+  <link rel="stylesheet" href="/education/assets/chatbot.css">
+  <link rel="stylesheet" href="/education/assets/lang-switcher.css">
+  <link rel="stylesheet" href="/education/assets/notes.css">
+  <link rel="stylesheet" href="/education/assets/auth-ui.css">
+  <link rel="stylesheet" href="/education/assets/trial-cta.css">
+  <link rel="stylesheet" href="/education/assets/blog-links.css">
+  <link rel="stylesheet" href="/education/assets/discussions.css">
+  <!-- Logger must load first, before other scripts that use it -->
+  <script src="/education/assets/logger.js"></script>
+  <script src="/education/assets/dev-utils.js" defer></script>
+<script src="/education/assets/structured-data.js" defer></script>
+<script src="/education/assets/lazy-load.js" defer></script>
+<script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
+  <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="de" href="https://www.signalpilot.io/de/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="fr" href="https://www.signalpilot.io/fr/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="it" href="https://www.signalpilot.io/it/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="pt" href="https://www.signalpilot.io/pt/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="nl" href="https://www.signalpilot.io/nl/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="ru" href="https://www.signalpilot.io/ru/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="ja" href="https://www.signalpilot.io/ja/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="tr" href="https://www.signalpilot.io/tr/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="hu" href="https://www.signalpilot.io/hu/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="ar" href="https://www.signalpilot.io/ar/education/curriculum/beginner/04-repaint-problem.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/curriculum/beginner/04-repaint-problem.html">
+</head>
+<body class="table-accordions-mobile">
+  <div class="bg-stars" aria-hidden="true"></div>
+  <div class="bg-aurora" aria-hidden="true"></div>
+  <canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
+
+<header class="sp-header">
+  <div class="wrap">
+    <a href="https://www.signalpilot.io" class="brand">
+      <span>Signal Pilot</span>
+    </a>
+    <nav id="mainnav" aria-label="Conteúdo principal"><ul>
+      <li><a href="/education/">Educação</a></li>
+      <li><a href="/education/search.html">Pesquisar</a></li>
+      <li><a href="/education/my-library.html">Minha biblioteca</a></li>
+      <li><a href="https://www.signalpilot.io/blog" target="_blank" rel="noopener">Blog</a></li>
+    </ul></nav>
+    <div class="header-ctls">
+      <div id="google_translate_element"></div><button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Alternar tema"><span id="theme-icon">☽</span></button><button id="menuToggle" class="menu-toggle" aria-expanded="false"><span class="menu-toggle-text">Menu </span>☰</button></div>
+  </div>
+</header>
+
+<article class="article">
+  <!-- Article Header -->
+  <header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Trilho de navegação">
+        <a href="/education/">Início</a> › <a href="/education/beginner.html">Currículo para iniciantes</a> › <span>O problema do repaint</span>
+      </nav>
+      <span class="badge">🟢 Iniciante • Lição 4 de 82</span>
+      <h1 class="headline xl">Os teus indicadores estão a mentir-te (o problema do repaint)</h1>
+      <div class="meta">Tempo de leitura ~12 min • A verdade sobre os indicadores e como a verificar</div>
+      <!-- Author Byline -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(118,221,255,0.2); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-2);">
+        <div>
+          <div style="font-weight: 600; color: var(--text-1);">Signal Pilot</div>
+          <div>Formação profissional em trading</div>
+        </div>
+      </div>
+
+      <!-- Article Progress Indicator -->
+      <div class="article-progress" style="--progress:0%">
+        <div class="progress-circle"><span>0%</span></div>
+        <div class="progress-text">
+          <strong>Estás a progredir!</strong>
+          <div style="font-size:.85rem;color:var(--muted)">Continua a ler para concluir esta aula</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="wrap article-grid">
+    <div class="prose">
+
+      
+      <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
+        <h3 style="margin:0 0 1rem 0">🎯 O que vais aprender</h3>
+        <p style="margin:0 0 0.75rem 0">No final desta aula vais saber:</p>
+        <ul style="line-height:1.8;margin:0 0 0 1.5rem">
+          <li>Testar se um indicador faz repaint (captura do sinal antes do fecho da vela, verificação depois)</li>
+          <li>Identificar que indicadores do TradingView fazem repaint (mais de 80 % dos indicadores de retalho fazem)</li>
+          <li>Usar apenas ferramentas que não fazem repaint (nenhum indicador SignalPilot faz)</li>
+          <li>Fazer um teste walk-forward com dados reais durante duas a quatro semanas antes de confiar num indicador</li>
+        </ul>
+      </div>
+
+      <div class="section-break"><span>Parte 1: o pesadelo do repaint</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/the-repainting-problem/">
+          Aprofundar: o problema do repaint — como a maioria dos indicadores do TradingView faz batota →
+        </a>
+      </div>
+
+<div class="callout callout-danger">
+  <h4>📉 ESTUDO DE CASO: o desastre de 14.700 $ de Jake com um indicador que fazia repaint</h4>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 140px),1fr));gap:0.75rem;margin:1rem 0 1.5rem 0">
+    <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
+      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">-$14,700</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Perda total</div>
+    </div>
+    <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
+      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">91.5%</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Taxa de repaint</div>
+    </div>
+    <div style="background:rgba(255,107,107,0.12);padding:0.75rem;border-radius:8px;text-align:center">
+      <div style="font-size:1.5rem;font-weight:700;color:#ff6b6b">71% → 34%</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Queda da taxa de acerto</div>
+    </div>
+    <div style="background:rgba(0,212,170,0.12);padding:0.75rem;border-radius:8px;text-align:center">
+      <div style="font-size:1.5rem;font-weight:700;color:#00d4aa">+74%</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Recuperação depois da correção</div>
+    </div>
+  </div>
+
+  <p><strong>Trader:</strong> Jake Morrison (exemplo compósito), 26 anos, ex-analista de marketing (conta de 32.000 $)</p>
+  <p><strong>Estratégia:</strong> Indicador do TradingView «Ultimate Reversal Pro» (47.000 transferências, 4,8 ★)</p>
+  <p><strong>Falha fatal:</strong> O indicador fazia repaint: os sinais mudavam ou desapareciam depois do fecho da vela</p>
+
+  <details style="margin:1rem 0;background:rgba(0,0,0,0.2);border-radius:8px">
+    <summary style="padding:1rem;cursor:pointer;font-weight:600">📊 O backtest «perfeito» contra a realidade (clica para abrir)</summary>
+    <div style="padding:0 1rem 1rem 1rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.5rem">
+        <div style="background:rgba(139,92,246,0.1);padding:1rem;border-radius:8px">
+          <div style="font-weight:600;margin-bottom:0.5rem;color:#a78bfa">Backtest (janeiro de 2024)</div>
+          <div style="font-size:0.9rem">71,4 % de acerto</div>
+          <div style="font-size:0.9rem">fator de lucro 3,2</div>
+          <div style="font-size:0.9rem">3.8:1 R:R</div>
+          <div style="font-size:0.9rem">+247 % de retorno</div>
+        </div>
+        <div style="background:rgba(255,82,82,0.1);padding:1rem;border-radius:8px">
+          <div style="font-weight:600;margin-bottom:0.5rem;color:#ff5252">Em real (fevereiro-abril de 2024)</div>
+          <div style="font-size:0.9rem">34,2 % de acerto</div>
+          <div style="font-size:0.9rem">fator de lucro 0,58</div>
+          <div style="font-size:0.9rem">0.92:1 R:R</div>
+          <div style="font-size:0.9rem">-45,9 % de retorno</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <p><strong>O ponto de rutura (8 de abril de 2024):</strong> Jake capturou os sinais em direto e comparou-os depois do fecho da vela:</p>
+  <ul style="margin:.75rem 0 0 1.5rem">
+    <li><strong>9:38 COMPRA:</strong> Sinal em 5.186 → depois do fecho: passou para 5.179 (sete pontos abaixo!) • perdeu 680 $</li>
+    <li><strong>10:52 VENDA:</strong> Sinal em 5.194 → depois do fecho: <strong>desapareceu por completo!</strong> • perdeu 520 $</li>
+    <li><strong>13:15 COMPRA:</strong> Sinal em 5.201 → depois do fecho: passou para 5.196 (cinco pontos abaixo) • perdeu 440 $</li>
+    <li><strong>14:43 VENDA:</strong> Sinal em 5.209 → depois do fecho: passou para 5.213 (quatro pontos acima) • perdeu 380 $</li>
+  </ul>
+
+  <p><strong>A investigação:</strong> 43 de 47 sinais tinham mudado (taxa de repaint de 91,5 %). A auditoria ao código encontrou <code>request.security()</code> sem <code>lookahead=barmerge.lookahead_off</code>.</p>
+
+  <p><strong>Recuperação (maio-agosto de 2024):</strong> Passou para indicadores determinísticos. 90 operações, 58,9 % de acerto, +12.820 $ de lucro. Conta: 17.300 $ → 30.100 $ (+74,1 %).</p>
+
+  <p style="margin-top:1rem;padding:1rem;background:rgba(139,92,246,.08);border-radius:8px;border-left:4px solid #8b5cf6">
+    <strong>O conselho de Jake:</strong> «Perdi 14.700 $ a negociar fantasmas: sinais que MUDAVAM depois do fecho da vela. Testa TODOS os indicadores: captura em direto, comparação depois do fecho. Se um backtest parecer DEMASIADO perfeito (mais de 70 % de acerto, <10% DD), it's probably repainting. Real edges are 55-65% win rates. NEVER trust, ALWAYS verify."
+  </p>
+</div>
+
+      <div class="quiz-question" style="margin-top:2rem">
+        <p><strong>Questionário do caso: Jake fez o backtest do indicador «Ultimate Reversal Pro» e obteve resultados espantosos: 71,4 % de acerto, fator de lucro 3,2, +247 % de retorno. Passou a real com 32.000 $ e perdeu 14.700 $ (-45,9 %) em dez semanas, com apenas 34,2 % de acerto. Qual foi o erro fatal?</strong></p>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false">
+            A) Devia ter usado posições mais pequenas para reduzir o risco
+          </div>
+          <div class="quiz-option" data-correct="false">
+            B) O indicador deixou de funcionar porque as condições de mercado mudaram
+          </div>
+          <div class="quiz-option" data-correct="true">
+            C) O indicador fazia repaint: os sinais que via em direto MUDAVAM ou DESAPARECIAM depois do fecho da vela, por isso os sinais «perfeitos» do backtest nunca existiram em tempo real (91,5 % de repaint)
+          </div>
+          <div class="quiz-option" data-correct="false">
+            D) Negociava demasiadas vezes; devia ter sido mais seletivo nas entradas
+          </div>
+        </div>
+        <div class="quiz-explanation">
+          <p><strong>Correta: C.</strong> O indicador de Jake mostrava 71,4 % de acerto no backtest, mas 91,5 % dos sinais mudavam ou desapareciam depois do fecho da vela. Estava a «negociar fantasmas»: entradas que só pareciam perfeitas porque faziam repaint. Solução: testar os sinais em direto com capturas. Se um backtest parece demasiado perfeito (mais de 70 % de acerto), o mais provável é que faça repaint. As vantagens reais dão taxas de acerto entre 55 % e 65 %.</p>
+        </div>
+      </div>
+
+      <div class="section-break"><span>Parte 2: indicadores determinísticos</span></div>
+
+<h2 id="what-deterministic-means-and-why-it-matters">O que significa «determinístico» (e porque importa)</h2>
+
+      <p>A questão é esta: a maioria dos indicadores é feita por amadores que não sabem nada sobre repaint. Ou pior, por burlões que até <em>sabem</em> e não querem saber.</p>
+
+      <p>A SignalPilot aborda isto de outra forma.</p>
+
+      <div class="callout-key">
+        <h4>💡 O compromisso da Signal Pilot</h4>
+        <p><strong>Todos os indicadores SignalPilot seguem regras determinísticas estritas:</strong></p>
+        <ul style="margin:.5rem 0">
+          <li><strong>Nada de dados do futuro:</strong> Todos os pedidos HTF usam <code>lookahead_off</code> e <code>[1]</code> desfasamentos</li>
+          <li><strong>Sinais fixos:</strong> Assim que um sinal é impresso, <em>nunca</em> se move nem desaparece</li>
+          <li><strong>Só velas confirmadas:</strong> Os sinais esperam pelo fecho da vela (nada de magia dentro da vela)</li>
+          <li><strong>Auditável em código aberto:</strong> O código está disponível para revisão independente</li>
+        </ul>
+        <p style="margin-top:1rem"><strong>Traduzindo:</strong> O que vês em direto é o que vais ver no histórico. Sem truques. Sem mentiras.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1.5rem;margin:2rem 0">
+        <div style="padding:1.5rem;background:rgba(255,107,107,.1);border:2px solid rgba(255,107,107,.3);border-radius:12px">
+<h3 style="margin:0 0 1rem 0" id="-repainting-indicator">❌ Indicador que faz repaint</h3>
+          <p><strong>Backtest:</strong> expectativa 3,2R, fator de lucro 2,8</p>
+          <p><strong>Em negociação real:</strong> expectativa -0,8R, fator de lucro 0,6</p>
+          <p><strong>Problema:</strong> os sinais mudam depois do fecho da vela</p>
+          <p><strong>Resultado:</strong> meses desperdiçados, conta rebentada</p>
+        </div>
+        <div style="padding:1.5rem;background:rgba(0,212,170,.1);border:2px solid rgba(0,212,170,.3);border-radius:12px">
+          <h3 style="margin:0 0 1rem 0" id="-deterministic-indicator">✓ Indicador determinístico</h3>
+          <p><strong>Backtest:</strong> expectativa 1,8R, fator de lucro 1,6</p>
+          <p><strong>Em negociação real:</strong> expectativa 1,7R, fator de lucro 1,5</p>
+          <p><strong>Integridade:</strong> os sinais nunca mudam</p>
+          <p><strong>Resultado:</strong> Uma vantagem constante e rentável</p>
+        </div>
+      </div>
+
+      <p>Repara: o indicador determinístico tem uma expectativa <em>mais baixa</em> no backtest. Precisamente por ser honesto. Não faz batota com dados do futuro.</p>
+
+      <p>Mas em direto? Aí <strong>funciona mesmo</strong>.</p>
+
+<h3 id="visual-repaint-examples">Exemplos visuais de repaint: antes e depois</h3>
+
+      <p>É assim que o repaint se apresenta quando o apanhas:</p>
+
+      <p><strong>Exemplo 1: indicador «SuperTrend Reversal» (TradingView, 120.000 transferências)</strong></p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.5rem 0">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr style="background:rgba(255,255,255,.05)">
+            <th style="padding:.75rem;text-align:left">Hora</th>
+            <th style="padding:.75rem;text-align:left">O que vês EM DIRETO (durante a vela)</th>
+            <th style="padding:.75rem;text-align:left">O que aparece no HISTÓRICO (depois do fecho)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+            <td style="padding:.75rem">10:45</td>
+            <td style="padding:.75rem;color:var(--primary)">Sinal de COMPRA em 5.186 $ (seta verde)</td>
+            <td style="padding:.75rem;color:var(--danger)">Sinal passou para 5.179 $ (sete pontos!)</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+            <td style="padding:.75rem">11:22</td>
+            <td style="padding:.75rem;color:var(--danger)">Sinal de VENDA em 5.194 $ (seta vermelha)</td>
+            <td style="padding:.75rem;color:var(--muted)">O sinal desapareceu por completo!</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem">14:15</td>
+            <td style="padding:.75rem;color:var(--primary)">Sinal de COMPRA em 5.201 $</td>
+            <td style="padding:.75rem;color:var(--danger)">Sinal passou para 5.196 $ (menos cinco pontos)</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p><strong>Exemplo 2: indicador «AI Prediction Zones» (TradingView, 85.000 transferências)</strong></p>
+
+      <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code><strong>12:04 (durante a vela):</strong>
+Mostra uma «zona de suporte» no SPY em 519,00-519,50 $ (caixa verde sombreada)
+Etiqueta do indicador: «zona de ressalto de alta probabilidade — 78 % de fiabilidade»
+
+<strong>12:05 (depois do fecho da vela):</strong>
+A zona de suporte PASSOU para 518,20-518,70 $ (80 cêntimos abaixo!)
+Agora fica exatamente sobre o mínimo real
+→ Isto é repaint. A zona «previu» o mínimo DEPOIS de ele ter acontecido.
+
+<strong>Efeito em tempo real:</strong>
+Compraste a 519,00 $ a pensar que era suporte → o preço caiu para 518,20 $
+Perdeste 0,80 $ por ação em 500 ações = -400 $
+Agora o indicador põe o suporte em 518,20 $, onde «devia ter estado»
+→ Isso faz o indicador parecer perfeito no histórico e inútil em direto</code></pre>
+
+      <p><strong>Exemplo 3: indicador «Smart Money Divergence» (pago, 199 $)</strong></p>
+
+      <div style="padding:1rem;background:rgba(255,82,82,0.08);border-radius:8px;border-left:4px solid #ff5252;margin:1.5rem 0">
+        <p><strong>Sinal em direto (13:30):</strong> «DIVERGÊNCIA DE ALTA DETETADA — mínimo mais baixo no preço, mínimo mais alto no indicador»</p>
+        <p style="margin-top:0.5rem"><strong>Depois do fecho da vela (13:31):</strong> A linha de divergência recuou três velas e mostra agora outro ângulo</p>
+        <p style="margin-top:0.5rem"><strong>Efeito:</strong> Entraste comprado às 13:30 por causa da divergência → o preço continuou a cair → 620 $ de perda</p>
+        <p style="margin-top:0.5rem"><strong>O histórico do gráfico mostra agora:</strong> Uma divergência começada três velas antes (com timing perfeito visto de trás)</p>
+      </div>
+
+      <div class="section-break"><span>Parte 3: enquadramento de auditoria</span></div>
+<h2 id="never-trust-always-verify">Nunca confies, verifica sempre</h2>
+<p>Este é o teu enquadramento passo a passo para auditar QUALQUER indicador antes de arriscares dinheiro real:</p>
+
+      <div class="callout-tip">
+        <h4>✅ Lista de auditoria de indicadores</h4>
+        <p><strong>Antes de negociar com QUALQUER indicador:</strong></p>
+        <ol>
+          <li><strong>Teste visual:</strong> Observa três a cinco sinais em direto e vê se se movem depois do fecho da vela</li>
+          <li><strong>Teste em repetição:</strong> Usa o Bar Replay para comparar os sinais em direto com os do histórico</li>
+          <li><strong>Teste de alertas:</strong> Define alertas, regista mais de 20 casos e compara com o histórico</li>
+          <li><strong>Auditoria ao código (se possível):</strong> Procura <code>request.security()</code> sinais de alarme</li>
+        </ol>
+        <p style="margin-top:1rem"><strong>Critério de aprovação:</strong> TODOS os testes têm de mostrar sinais coerentes.</p>
+        <p><strong>Se QUALQUER teste falhar → NÃO USAR → procura outro indicador</strong></p>
+      </div>
+
+<h3 id="common-repainting-indicators">Indicadores que costumam fazer repaint e convém evitar</h3>
+
+      <p>Aqui fica uma lista de tipos de indicador e de indicadores concretos que costumam fazer repaint. Se usas algum, testa-o já:</p>
+
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.5rem 0">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr style="background:rgba(255,255,255,.05)">
+            <th style="padding:.75rem;text-align:left">Tipo ou nome do indicador</th>
+            <th style="padding:.75rem;text-align:left">Porque faz repaint</th>
+            <th style="padding:.75rem;text-align:left">Como detetar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+            <td style="padding:.75rem">Indicadores zigzag</td>
+            <td style="padding:.75rem">Recalculam os pivôs à medida que o preço se move: deteção «perfeita» dos giros no histórico</td>
+            <td style="padding:.75rem">Verifica se os pivôs se movem depois do fecho da vela</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+            <td style="padding:.75rem">Pedidos a um período superior (HTF) sem <code>lookahead_off</code></td>
+            <td style="padding:.75rem">Usa dados HTF do futuro, que em tempo real não existem</td>
+            <td style="padding:.75rem">Auditoria ao código: procura <code>request.security()</code> sem <code>lookahead=barmerge.lookahead_off</code></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+            <td style="padding:.75rem">Indicadores de «previsão com IA ou aprendizagem automática»</td>
+            <td style="padding:.75rem">Muitos usam dados de dentro da vela ou espreitam o futuro para mostrar «previsões»</td>
+            <td style="padding:.75rem">Teste com Bar Replay: as previsões aparecem antes ou depois do movimento?</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+            <td style="padding:.75rem">Indicadores de divergência (quase todos)</td>
+            <td style="padding:.75rem">Voltam a desenhar as linhas de divergência à medida que se formam velas novas</td>
+            <td style="padding:.75rem">Captura a linha de divergência e verifica se muda de ângulo ou de posição</td>
+          </tr>
+          <tr>
+            <td style="padding:.75rem">Zonas dinâmicas de suporte e resistência</td>
+            <td style="padding:.75rem">As zonas ajustam-se para encaixar na perfeição no movimento recente</td>
+            <td style="padding:.75rem">Teste de alertas: põe alertas nos limites da zona e confirma que não se movem</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p style="padding:1rem;background:rgba(255,82,82,0.08);border-radius:8px;border-left:4px solid #ff5252;margin:1.5rem 0">
+        <strong>Sinal de alarme:</strong> Se o backtest de um indicador mostrar mais de 75 % de acerto com <10% drawdown, it's almost certainly repainting. Real, honest edges produce 55-65% win rates with realistic drawdowns (15-30%). Perfection in backtests = fraud in live trading.
+      </p>
+
+<h3 id="bar-replay-walkthrough">Detetar repaint com o Bar Replay, passo a passo</h3>
+
+      <p>A função Bar Replay do TradingView é uma das melhores ferramentas para apanhar indicadores que fazem repaint. É assim que se usa:</p>
+
+      <p><strong>O teste com Bar Replay passo a passo:</strong></p>
+
+      <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+        <li><strong>Carrega o teu indicador num gráfico:</strong> Usa um instrumento líquido (SPY, ES, AAPL) em 5 ou 15 minutos</li>
+        <li><strong>Entra no modo Bar Replay:</strong> Clica no botão Bar Replay (parece um botão de reprodução com um gráfico de barras)</li>
+        <li><strong>Recua três dias:</strong> Assim tens histórico suficiente para testar 20 a 30 sinais</li>
+        <li><strong>Avança vela a vela:</strong> Repara em quando os sinais aparecem enquanto a vela se forma</li>
+        <li><strong>Regista o momento de cada sinal:</strong> O sinal de COMPRA aparece ANTES de o preço subir, ou DEPOIS?</li>
+        <li><strong>Compara com o histórico do gráfico:</strong> Sai do modo de repetição e olha para o mesmo período</li>
+        <li><strong>Procura discrepâncias:</strong> Os sinais estão no mesmo sítio? Ou mudaram?</li>
+      </ol>
+
+      <p><strong>Exemplo de resultados (Bar Replay em «Ultimate Reversal Pro»):</strong></p>
+
+      <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code><strong>Modo de repetição (a avançar vela a vela):</strong>
+10:15: nenhum sinal
+10:30: nenhum sinal
+10:45: o preço cai de 520 $ → 518 $ → aparece um sinal de COMPRA em 519 $
+11:00: o preço sobe para 522 $ (o sinal funcionou!)
+
+<strong>Vista do histórico (mesmo período):</strong>
+10:15: sinal de COMPRA em 520 $ (o sinal MUDOU!)
+Sinal original: 519 $ durante a repetição
+Sinal no histórico: 520 $ na vista do gráfico
+→ Diferença: o sinal mudou um ponto para «prever» o mínimo na perfeição
+
+<strong>Veredicto:</strong> REPAINT CONFIRMADO
+O sinal apareceu em 519 $ enquanto a vela se formava
+No gráfico histórico passou para 520 $ (aparece mais cedo, com melhor entrada)
+Isto é espreitar o futuro: o indicador ajusta os sinais depois de conhecer o desfecho</code></pre>
+
+      <div class="callout-warning">
+        <h4>🚨 Falando a sério</h4>
+        <p>Isto parece trabalho a mais. E é. Mas olha para a alternativa:</p>
+        <p>Duas horas a testar → poupas meses de perdas e de desgaste psicológico.</p>
+        <p>Saltar os testes → rebentar a conta → perguntar porque é que negociar é «impossível».</p>
+        <p><strong>A escolha é tua.</strong></p>
+      </div>
+
+<h3 id="code-audit-deep-dive">Auditoria ao código a fundo: sinais de alarme em Pine Script</h3>
+
+      <p>Se um indicador disponibiliza o código-fonte (aberto no TradingView), podes auditá-lo. Estes são os padrões exatos a procurar:</p>
+
+      <p><strong>Sinal de alarme n.º 1: <code>request.security()</code> sem <code>lookahead_off</code></strong></p>
+
+      <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code>// ❌ CÓDIGO QUE FAZ REPAINT (usa dados HTF do futuro)
+htf_close = request.security(syminfo.tickerid, "60", close)
+
+// ✅ CÓDIGO SEM REPAINT (espera pelo fecho da vela HTF)
+htf_close = request.security(syminfo.tickerid, "60", close, lookahead=barmerge.lookahead_off)
+
+// Melhor ainda: acrescenta o desfasamento [1] para usar a vela HTF CONFIRMADA
+htf_close = request.security(syminfo.tickerid, "60", close[1], lookahead=barmerge.lookahead_off)</code></pre>
+
+      <p><strong>Sinal de alarme n.º 2: cálculos com dados da vela atual sem <code>barstate.isconfirmed</code></strong></p>
+
+      <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code>// ❌ CÓDIGO QUE FAZ REPAINT (o sinal pode mudar durante a vela)
+signal = close > ema_20 and rsi > 50
+plotshape(signal, style=shape.triangleup, color=color.green)
+
+// ✅ CÓDIGO SEM REPAINT (só desenha no fecho confirmado da vela)
+signal = close > ema_20 and rsi > 50
+plotshape(barstate.isconfirmed and signal, style=shape.triangleup, color=color.green)</code></pre>
+
+      <p><strong>Sinal de alarme n.º 3: cálculos de pivôs que se recalculam</strong></p>
+
+      <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code>// ❌ CÓDIGO QUE FAZ REPAINT (a posição do pivô muda à medida que se formam velas novas)
+pivot_high = ta.pivothigh(high, 5, 5)  // olha cinco velas para trás e cinco para a frente
+// Problema: precisa de cinco velas FUTURAS para confirmar o pivô → faz repaint por definição
+
+// ✅ MELHOR ABORDAGEM (deteção fixa de giros, com velas confirmadas)
+// Abordagem da Signal Pilot: detetar o giro só depois de cinco velas terem FECHADO
+// Sem espreitar o futuro; os sinais chegam mais tarde, mas são honestos</code></pre>
+
+      <p style="padding:1rem;background:rgba(0,212,170,0.08);border-radius:8px;border-left:4px solid #00d4aa;margin:1.5rem 0">
+        <strong>Dica profissional:</strong> Se não sabes ler Pine Script, usa antes os testes visual e de repetição. Apanham mais de 95 % dos indicadores que fazem repaint sem precisares de perceber o código. Mas se souberes ler código, este é o método mais rápido: detetas o repaint em 30 segundos à procura destes padrões.
+      </p>
+
+      <div class="key-takeaway">
+        <h4>🎓 Pontos essenciais</h4>
+        <ul>
+          <li><strong>Entre 60 % e 90 % dos indicadores fazem repaint</strong> — testa tudo antes de negociar com isso</li>
+          <li><strong>Repaint = vantagem falsa</strong> — backtests perfeitos, resultados desastrosos em direto</li>
+          <li><strong>Usa quatro métodos de deteção</strong> — visual, repetição, alertas e auditoria ao código</li>
+          <li><strong>Código determinístico importa</strong> — por regra, os sinais deixam de mudar depois do fecho da vela</li>
+          <li><strong>A SignalPilot garante-o</strong> — sem dados do futuro, sem truques, sem mentiras</li>
+          <li><strong>Audita antes de negociar</strong> — duas horas de testes poupam-te meses de perdas</li>
+        </ul>
+      </div>
+
+      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Ganhos rápidos para amanhã (clica para abrir)</summary>
+        <div style="margin-top:1rem">
+
+        <p>Não te sobrecarregues. Começa por estas três ações:</p>
+        <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+          <li><strong>Testa um indicador com capturas</strong> — tira três capturas de sinais em direto e confere dez minutos depois</li>
+          <li><strong>Define um alerta</strong> — escolhe o teu indicador principal, define um alerta e confirma que bate certo depois do fecho da vela</li>
+          <li><strong>Regista-o</strong> — «Indicador: [nome]. Teste: captura. Resultado: os sinais mudaram / não mudaram.»</li>
+        </ol>
+        <p style="margin-top:1rem;font-size:0.9rem;color:var(--muted)">
+          Depois de testares três indicadores assim, vais saber quais é que mentem. Tira os mentirosos imediatamente.
+        </p>
+      
+        </div>
+      </details>
+
+<div class="section-break"><span>Exercício prático</span></div>
+
+      <div class="callout-key">
+        <h4>🎯 Prática de deteção de repaint</h4>
+        <p><strong>Exercício: audita os indicadores que usas agora</strong></p>
+        <p>Testa o repaint em todos os indicadores que usas antes de arriscares dinheiro real:</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>Teste visual:</strong> Captura três sinais. Espera dez minutos. Recarrega. Mudaram ou desapareceram?</li>
+          <li><strong>Teste em repetição:</strong> Usa o modo de repetição do TradingView. Avança. Os sinais aparecem ANTES ou DEPOIS do movimento?</li>
+          <li><strong>Teste de alertas:</strong> Põe alertas em sinais em direto. Uma hora depois, vê o gráfico. Ainda são válidos?</li>
+          <li><strong>Backtest contra real:</strong> Faz 20 operações em simulado. Compara a expectativa com a do backtest. Diferença grande = provável repaint</li>
+          <li>Regista o que encontrares: que indicadores passaram? Quais falharam?</li>
+          <li>Tira já dos teus gráficos TODOS os indicadores que fazem repaint</li>
+        </ol>
+        <p style="margin-top:1rem"><strong>Objetivo:</strong> Confirma que todos os indicadores com que negoceias são determinísticos. Se não consegues provar que não faz repaint, parte do princípio que faz.</p>
+      </div>
+
+      
+
+<div class="section-break"><span>Testa o que sabes</span></div>
+
+      <!-- Quiz -->
+      <div class="quiz">
+        <h4>🎮 Verificação rápida (sem pressão)</h4>
+
+        <div class="quiz-question">
+          <p><strong>Fazes o backtest de um indicador: expectativa 2,8R. Negoceias em direto: expectativa -0,5R. Qual é a causa mais provável?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">A) As condições de mercado mudaram</div>
+            <div class="quiz-option" data-correct="true">B) O indicador faz repaint (os sinais mudaram depois do fecho da vela)</div>
+            <div class="quiz-option" data-correct="false">C) Precisas de mais dados para o backtesting</div>
+            <div class="quiz-option" data-correct="false">D) A tua execução foi má</div>
+          </div>
+          <div class="quiz-feedback">
+            <strong>Certo!</strong> Uma diferença enorme entre o backtest e o real (de rentável a perdedor) aponta com força para repaint. O indicador mostrava no histórico sinais perfeitos que nunca existiram em direto.
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p><strong>Como se testa se um indicador faz repaint?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">A) Basta ver os resultados do backtest</div>
+            <div class="quiz-option" data-correct="true">B) Capturar os sinais em direto, esperar pelo fecho da vela e confirmar que não mudaram</div>
+            <div class="quiz-option" data-correct="false">C) Ler a descrição do indicador</div>
+            <div class="quiz-option" data-correct="false">D) Ver o número de transferências</div>
+          </div>
+          <div class="quiz-feedback">
+            <strong>Certo!</strong> O teste visual é o mais fiável: captura os sinais durante a vela e confere depois do fecho. Se mudaram ou desapareceram, o indicador faz repaint.
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p><strong>Qual foi o erro principal de Jake?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">A) Não fez backtests suficientes</div>
+            <div class="quiz-option" data-correct="true">B) Confiou num indicador que fazia repaint: 91,5 % dos sinais mudaram depois do fecho da vela</div>
+            <div class="quiz-option" data-correct="false">C) Negociou com posições demasiado grandes</div>
+            <div class="quiz-option" data-correct="false">D) Usou o período errado</div>
+          </div>
+          <div class="quiz-feedback">
+            <strong>Certo!</strong> O indicador de Jake mostrava no backtest sinais perfeitos que nunca existiram em direto. 91,5 % mudavam depois do fecho da vela: os 71 % de acerto no backtest passaram a 34 % em real.
+          </div>
+        </div>
+
+        <button class="btn btn-primary quiz-submit">Ver resposta</button>
+      </div>
+
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
+        Se chegaste até aqui, acabaste de te poupar meses, talvez anos, de sofrimento. A maioria dos traders nunca aprende isto. Tu acabaste de aprender.
+      </p>
+
+<div class="section-break"><span>Aulas relacionadas</span></div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 250px),1fr));gap:1rem;margin:1.5rem 0">
+        <div class="card" style="padding:1rem">
+          <span class="badge">Intermédio n.º 32</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">O backtesting na realidade</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Evita o repaint nos backtests: procura o viés de antecipação e o sobreajuste</p>
+          <a href="/education/curriculum/intermediate/32-backtesting-reality.html" class="btn btn-sm btn-ghost">Ler a aula &rarr;</a>
+        </div>
+        <div class="card" style="padding:1rem">
+          <span class="badge">Iniciante n.º 3</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">A price action morreu</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Usa order flow que não faz repaint em vez de sinais de price action atrasados</p>
+          <a href="/education/curriculum/beginner/03-price-action-is-dead.html" class="btn btn-sm btn-ghost">Ler a aula &rarr;</a>
+        </div>
+        <div class="card" style="padding:1rem">
+          <span class="badge">Iniciante n.º 5</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Extremos do RSI</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Aprende como o RSI funciona de verdade — e porque «sobrecomprado» não quer dizer vender</p>
+          <a href="/education/curriculum/beginner/05-rsi-extremes.html" class="btn btn-sm btn-ghost">Ler a aula &rarr;</a>
+        </div>
+      </div>
+
+      <div class="callout-info">
+        <h4>⏭️ A seguir</h4>
+        <p><strong>Lição 5: os extremos do RSI não são sinais de inversão</strong></p>
+        <p>Descobre porque é que um RSI acima de 70 numa tendência de alta é muitas vezes um possível sinal de COMPRA, e porque é que o regime determina tudo.</p>
+      </div>
+
+      <blockquote><strong>Apenas para fins educativos.</strong> Negociar envolve risco substancial de perda. Resultados passados não garantem resultados futuros.</blockquote>
+
+<!-- Discussion Section -->
+<div class="discussion-section" id="discussion-section">
+  <!-- Mobile Toggle (hidden on desktop) -->
+  <button class="discussion-toggle" id="discussion-toggle" style="display:none">
+    <span>💬 Discussão (<span id="discussion-count-mobile">0</span>)</span>
+    <span class="discussion-toggle-icon">+</span>
+  </button>
+
+  <div class="discussion-content">
+    <div class="discussion-header">
+      <h2 class="discussion-title">
+        💬 Discussão <span class="discussion-count" id="discussion-count">(0 comentários)</span>
+      </h2>
+      <div class="discussion-sort">
+        <label for="discussion-sort">Ordenar por:</label>
+        <select id="discussion-sort">
+          <option value="recent">Mais recentes</option>
+          <option value="top">Mais votados</option>
+          <option value="oldest">Mais antigos</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Comment Composer -->
+    <div class="comment-composer" id="comment-composer">
+      <textarea id="comment-input" placeholder="Partilha as tuas ideias, faz perguntas ou comenta esta aula…" maxlength="1000"></textarea>
+      <div class="comment-composer-actions">
+        <span class="comment-char-count" id="comment-char-count">0/1000</span>
+        <button class="btn btn-primary" id="post-comment-btn">Publicar comentário</button>
+      </div>
+    </div>
+
+    <!-- Comments List -->
+    <div class="comments-list" id="comments-list">
+      <!-- Comments will be rendered here by JavaScript -->
+      <div class="comments-loading">
+        <div class="comments-loading-spinner"></div>
+        <p>A carregar comentários…</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="nav-article">
+        <a class="btn btn-ghost" href="/education/curriculum/beginner/03-price-action-is-dead.html">&larr; Aula anterior</a>
+        <a class="btn btn-primary" href="/education/curriculum/beginner/05-rsi-extremes.html">Aula seguinte &rarr;</a>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <div class="lesson-actions">
+        <button id="bookmark-btn" class="btn btn-secondary btn-sm btn-block" onclick="window.library?.isBookmarked() ? window.library.removeBookmark() : window.library.addBookmark({title:document.title})">🔖 Guardar</button>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm btn-block">📄 Guardar em PDF</button>
+      </div>
+
+      <div class="sidebar-links" style="margin-top:1.5rem">
+        <a href="https://www.signalpilot.io" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          ⚡ Suite Signal Pilot
+        </a>
+        <a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💬 Falar no Discord
+        </a>
+        <a href="https://www.signalpilot.io/affiliates.html" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💰 Ganha 15-30 % como afiliado
+        </a>
+      </div>
+    </aside>
+
+    <!-- Back to Signal Pilot CTA -->
+    <div class="wrap" style="margin: 3rem auto 0;">
+      <div style="background: linear-gradient(135deg, rgba(153,102,255,0.15), rgba(138,91,255,0.1)); border: 1px solid rgba(153,102,255,0.3); border-radius: 8px; padding: 2rem; text-align: center;">
+        <h3 style="margin: 0 0 0.75rem 0; font-size: 1.25rem;">Pronto para operar com a Signal Pilot?</h3>
+        <p style="margin: 0 0 1.25rem 0; color: var(--muted);">Põe a tua formação em prática com indicadores profissionais e ferramentas de análise de mercado em tempo real.</p>
+        <a href="https://www.signalpilot.io" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+          Voltar à Signal Pilot →
+        </a>
+      </div>
+    </div>
+  </div>
+  <blockquote class="sp-disclaimer"><strong>Apenas para fins educativos.</strong> Negociar envolve risco substancial de perda. Não é aconselhamento financeiro. Resultados passados não garantem resultados futuros.</blockquote>
+</article>
+
+<footer class="sp-footer">
+  <div class="wrap">
+    <div>© <span id="year"></span> Signal Pilot Labs, Inc. Todos os direitos reservados.</div>
+    <div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Falar no Discord</a><a href="https://www.signalpilot.io/affiliates.html">Afiliados</a><a href="https://www.signalpilot.io/privacy.html">Privacidade</a><a href="https://www.signalpilot.io/terms.html">Termos</a></div>
+  </div>
+</footer>
+
+<script src="/education/assets/edu.js"></script>
+<script src="/education/assets/edu-enhanced.js"></script>
+<script src="/education/assets/aurora.js" defer></script>
+<script>
+  window.addEventListener('scroll', () => {
+    const winHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    const scrolled = window.scrollY;
+    const percent = Math.min(Math.round((scrolled / (docHeight - winHeight)) * 100), 100);
+
+    const circle = document.querySelector('.progress-circle');
+    if (circle) {
+      circle.style.setProperty('--progress', percent + '%');
+      circle.querySelector('span').textContent = percent + '%';
+    }
+  }, { passive: true });
+
+  localStorage.setItem('sp_edu_last_article', JSON.stringify({
+    title: 'The Repaint Problem',
+    level: 'Beginner',
+    order: '4',
+    url: window.location.pathname,
+    progress: 0
+  }));
+</script>
+<!-- SignalPilot Theme Switcher -->
+<script src="/education/assets/signalpilot-theme.js"></script>
+<script src="/education/assets/spaced-repetition.js" defer></script>
+<script src="/education/assets/chatbot.js" defer></script>
+<script src="/education/assets/notes.js" defer></script>
+<script src="/education/assets/analytics.js"></script>
+<script src="/education/assets/quiz-enhanced.js"></script>
+<script src="/education/assets/social-share.js"></script>
+<script src="/education/assets/pwa-init.js"></script>
+<script src="/education/assets/config.js"></script>
+<script src="/education/assets/supabase-client.js"></script>
+<script src="/education/assets/auth-ui.js"></script>
+  <script src="/education/assets/library.js"></script>
+  <script>window.addEventListener('load',function(){if(window.library?.isBookmarked()){var b=document.getElementById('bookmark-btn');if(b)b.innerHTML='⭐ Bookmarked'}})</script>
+    <!-- Enhanced Analytics & A/B Testing -->
+  <script src="/education/assets/enhanced-analytics.js" defer></script>
+  <script src="/education/assets/ab-test-tldr.js" defer></script>
+  <!-- Google Translate -->
+  <script src="/education/assets/lang-switcher.js"></script>
+  <!-- Discussion System -->
+    <script src="/education/assets/trial-cta.js"></script>
+  <script src="/education/assets/blog-links.js"></script>
+  <script src="/education/assets/discussions.js"></script>
+  <script>
+    // Initialize discussion system for this lesson
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.DiscussionSystem) {
+        window.DiscussionSystem.init('beginner-04-repaint-problem');
+      }
+    });
+  </script>
+</body>
+</html>
