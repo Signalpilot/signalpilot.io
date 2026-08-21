@@ -32,7 +32,12 @@ def verify(src_html, out_html, lang, rel):
     s_txt, o_txt = _strip(src_html), _strip(out_html)
 
     for term in LOCKED:
-        pat = r'\b' + re.escape(term) + r'\b' if term in WORD_BOUNDED else re.escape(term)
+        # Python's \b sits between a word and a non-word character, and Japanese
+        # kana count as word characters — so \bATR\b never matches "ATRの".
+        # Bound on Latin letters and digits instead, which still prevents a
+        # match inside a longer English word.
+        pat = (r'(?<![A-Za-z0-9])' + re.escape(term) + r'(?![A-Za-z0-9])'
+               if term in WORD_BOUNDED else re.escape(term))
         n_src = len(re.findall(pat, s_txt))
         n_out = len(re.findall(pat, o_txt))
         if n_src and n_out < n_src:
