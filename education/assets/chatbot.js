@@ -306,26 +306,33 @@ Type **"help"** to see all available topics!
     }
 
     initPatterns() {
+        // Matched in order, first hit wins -- so the specific keys must come
+        // before the broad tier patterns, and no broad pattern may contain a
+        // word that a specific one owns. Short codes and common substrings are
+        // bounded so they cannot match inside an unrelated word.
         return [
-            // Help/Meta
+            // Help / meta. "about" alone is far too broad: it swallowed every
+            // "tell me about X" question, so ask for an explicit self-reference.
             { regex: /^(help|what can you do|commands|menu)$/i, key: 'help' },
-            { regex: /(about|chatbot|how.*work|what are you)/i, key: 'chatbot' },
+            { regex: /(what are you|who are you|are you (a |an )?(bot|ai|human)|how (do|does) (you|this chat) work|about (you|this bot|the bot|this chatbot))/i, key: 'chatbot' },
 
-            // Lesson tiers
-            { regex: /(beginner|foundation|start|tier 1|tier 2|basic)/i, key: 'beginner' },
-            { regex: /(intermediate|order flow|microstructure|tier 3|tier 4)/i, key: 'intermediate' },
-            { regex: /(advanced|automation|professional|tier 5|tier 6|tier 7)/i, key: 'advanced' },
-            { regex: /(curriculum|all lessons|lesson list|tiers|structure)/i, key: 'curriculum' },
-            { regex: /(lesson|lessons|course|content|what.*learn)/i, key: 'lessons' },
-
-            // Specific concepts
-            { regex: /(rsi|relative strength|overbought|oversold|70|30)/i, key: 'rsi' },
+            // Specific concepts, before the tiers that mention the same words
+            { regex: /\b(rsi|relative strength|overbought|oversold)\b/i, key: 'rsi' },
             { regex: /(spread|bid.ask|bid ask|market maker|liquidity cost)/i, key: 'spread' },
-            { regex: /(automation|bot|api|kill switch|paper trad|backtest)/i, key: 'automation' },
+            { regex: /\b(automation|automate|api|apis|kill switch|paper trad\w*|backtest\w*|webhook\w*|\bbots?\b)/i, key: 'automation' },
+            { regex: /(progress|track my|completion|streak|badge)/i, key: 'progress' },
 
-            // Getting started
-            { regex: /(start|begin|new|first|how do i|learning path|where.*start)/i, key: 'start' },
-            { regex: /(progress|track|completion|streak|badge)/i, key: 'progress' },
+            // Getting started, before 'beginner' (which used to own "start")
+            { regex: /(where (do|should) i (start|begin)|how do i start|getting started|get started|learning path|study plan|first lesson)/i, key: 'start' },
+
+            // Curriculum shape
+            { regex: /(curriculum|all lessons|lesson list|tiers|structure|syllabus)/i, key: 'curriculum' },
+
+            // Tiers
+            { regex: /(beginner|foundation|tier 1|tier 2|basics?)/i, key: 'beginner' },
+            { regex: /(intermediate|order flow|microstructure|tier 3|tier 4)/i, key: 'intermediate' },
+            { regex: /(advanced|professional|tier 5|tier 6|tier 7)/i, key: 'advanced' },
+            { regex: /(lesson|lessons|course|content|what.*learn)/i, key: 'lessons' },
 
             // Fallback
             { regex: /.*/, key: 'default' }

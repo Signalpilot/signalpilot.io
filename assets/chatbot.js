@@ -338,12 +338,18 @@ I can answer quick questions, but for detailed information check our comprehensi
     // Greetings
     { regex: /^(hi|hello|hey|sup|yo|greetings)/i, key: 'greetings' },
 
-    // Pricing
-    { regex: /(how much|price|cost|pricing|plans|subscription)/i, key: 'pricing.overview' },
+    // Billing intent first: "cancel my subscription" is not a pricing question,
+    // and the generic pricing pattern below used to swallow it.
+    { regex: /(manage.*subscription|pause.*subscription|cancel|unsubscribe|stop.*billing)/i, key: 'faqs.manage' },
+    { regex: /(refund|money.?back)/i, key: 'faqs.refund' },
+
+    // Pricing: specific plans before the generic overview, otherwise
+    // "how much is lifetime" matches "how much" and never reaches the plan.
     { regex: /(pentarch solo|\$29|29.?month|solo plan)/i, key: 'pricing.pentarch' },
     { regex: /(monthly|per month|month to month|\$69|69.?month)/i, key: 'pricing.monthly' },
     { regex: /(yearly|annual|per year|\$399|399.?year)/i, key: 'pricing.yearly' },
     { regex: /(lifetime|one.?time|forever|\$999)/i, key: 'pricing.lifetime' },
+    { regex: /(how much|price|cost|pricing|plans|subscription)/i, key: 'pricing.overview' },
     { regex: /(difference|compare|which plan)/i, key: 'pricing.overview' },
 
     // Products
@@ -358,15 +364,13 @@ I can answer quick questions, but for detailed information check our comprehensi
 
     // FAQs
     { regex: /(repaint|repainting|does it repaint|lookahead)/i, key: 'faqs.repaint' },
-    { regex: /(free trial|trial|demo|test|try)/i, key: 'faqs.trial' },
+    { regex: /(free trial|trial|demo|\btest\b|\btry\b)/i, key: 'faqs.trial' },
     { regex: /(how (fast|quick|long)|activation|access|when.*get)/i, key: 'faqs.activation' },
     { regex: /(markets?|timeframes?|what.*work|forex|stocks|crypto)/i, key: 'faqs.markets' },
     { regex: /(tradingview|free account|indicator slots)/i, key: 'faqs.tradingview' },
     { regex: /(update|future|new indicators)/i, key: 'faqs.updates' },
     { regex: /(support|help|contact)/i, key: 'faqs.support' },
     { regex: /(financial advice|guarantee|profits|returns)/i, key: 'faqs.educational' },
-    { regex: /(manage.*subscription|pause.*subscription|cancel|unsubscribe|stop.*billing)/i, key: 'faqs.manage' },
-    { regex: /(refund|money.?back|return)/i, key: 'faqs.refund' },
     { regex: /(more (info|faq|questions)|all.*faq|detailed|complete.*faq|full.*faq)/i, key: 'faqs.allfaqs' },
 
     // Features

@@ -495,16 +495,16 @@ Type **"help"** to see all available topics!
             { regex: /^(help|what can you do|commands|menu)$/i, key: 'help' },
 
             // Products (specific patterns first)
-            { regex: /(pentarch|touchdown|ignition|td|ign|wrn|cap|bdn|reversal event)/i, key: 'pentarch' },
+            { regex: /(pentarch|touchdown|ignition|reversal event|\b(?:td|ign|wrn|cap|bdn)\b)/i, key: 'pentarch' },
             { regex: /(omnideck|everything indicator|all.in.one)/i, key: 'omnideck' },
-            { regex: /(janus|atlas|levels|vwap|poc|pivot|session|fibonacci|fib|killzone|opening range)/i, key: 'janus' },
+            { regex: /(janus|atlas|levels|vwap|poc|pivot|session|fibonacci|\bfib\b|killzone|opening range)/i, key: 'janus' },
             { regex: /(augury|grid|screener|multi.symbol|watchlist|40 symbols)/i, key: 'augury' },
             { regex: /(volume oracle|minimal flow|volume flow|volume zone)/i, key: 'oracle' },
             { regex: /(harmonic|oscillator|nanoflow|kflow|enhanced rsi)/i, key: 'harmonic' },
-            { regex: /(plutus|obv|on.balance.volume)/i, key: 'plutus' },
+            { regex: /(plutus|\bobv\b|on.balance.volume)/i, key: 'plutus' },
 
             // Getting started
-            { regex: /(quick start|get started|beginner|new|how do i start|first time)/i, key: 'quickStart' },
+            { regex: /(quick start|get started|beginner|\bnew\b|how do i start|first time)/i, key: 'quickStart' },
             { regex: /(onboarding|7.day|learning path|checklist)/i, key: 'onboarding' },
             { regex: /(prerequisite|requirement|what do i need|before i start)/i, key: 'prerequisites' },
             { regex: /(alert|notification|how to set|alarm|how do i get notified)/i, key: 'alerts' },
@@ -522,7 +522,7 @@ Type **"help"** to see all available topics!
             { regex: /(troubleshoot|problem|issue|not working|error|broken)/i, key: 'troubleshooting' },
             { regex: /(best practice|tip|recommend|advice|how to use)/i, key: 'bestPractices' },
             { regex: /(compare|comparison|which|difference|vs|versus|better)/i, key: 'comparison' },
-            { regex: /(glossary|term|definition|what does.*mean|what is)/i, key: 'glossary' },
+            { regex: /(glossary|\bterms?\b|definition|what does.*mean|what is)/i, key: 'glossary' },
             { regex: /(workflow|process|how to trade|strategy|step by step)/i, key: 'workflow' },
 
             // Fallback
