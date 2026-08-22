@@ -7,6 +7,11 @@
 (function() {
   'use strict';
 
+  // These urls are written relative to the docs root; the site serves it
+  // under /docs/, so every url is resolved against BASE before use.
+  const BASE = '/docs';
+  const resolve = (url) => BASE + url;
+
   // Navigation structure - customize this to match your docs
   const navigationData = {
     sections: [
@@ -16,7 +21,10 @@
           { text: 'Install & Configure', url: '/start-quick/', icon: '⚡' },
           { text: 'Compare Indicators', url: '/ref-comparison/', icon: '🔍' },
           { text: 'Prerequisites', url: '/start-prerequisites/', icon: '📋' },
-          { text: 'Onboarding', url: '/start-onboarding/', icon: '👋' }
+          { text: 'System Requirements', url: '/about-system-requirements/', icon: '🖥️' },
+          { text: 'Onboarding', url: '/start-onboarding/', icon: '👋' },
+          { text: 'Learning Paths', url: '/start-learning-path/', icon: '🎓' },
+          { text: 'Configuration Wizard', url: '/configuration-wizard/', icon: '🧭' }
         ]
       },
       {
@@ -48,15 +56,28 @@
           { text: 'Glossary', url: '/ref-glossary/', icon: '📖' },
           { text: 'Non-Repaint Guide', url: '/ref-non-repaint/', icon: '🛡️' },
           { text: 'Troubleshooting', url: '/ref-troubleshooting/', icon: '🔧' },
-          { text: 'Workflow Guide', url: '/ref-workflow/', icon: '🔄' }
+          { text: 'Installation Troubleshooting', url: '/troubleshooting-installation/', icon: '🛠️' },
+          { text: 'Workflow Guide', url: '/ref-workflow/', icon: '🔄' },
+          { text: 'Search Guide', url: '/search-guide/', icon: '🔎' }
         ]
       },
       {
-        title: 'Settings & Compliance',
+        title: 'Cheat Sheets',
         items: [
-          { text: 'Alert Settings', url: '/_settings-alerts/', icon: '⚙️' },
-          { text: 'Compliance Language', url: '/compliance-language-guide/', icon: '📜' },
-          { text: 'Code Examples', url: '/_code-examples-guide/', icon: '💻' }
+          { text: 'All Indicators At-a-Glance', url: '/ref-cheatsheets-at-a-glance/', icon: '🗂️' },
+          { text: 'Pentarch', url: '/ref-cheatsheets-pentarch/', icon: '🎯' },
+          { text: 'Janus Atlas Level Types', url: '/ref-cheatsheets-janus/', icon: '🗺️' },
+          { text: 'OmniDeck', url: '/ref-cheatsheets-omnideck/', icon: '⚙️' },
+          { text: 'Augury Grid', url: '/ref-cheatsheets-augury-grid/', icon: '🔍' },
+          { text: 'Volume Oracle', url: '/ref-cheatsheets-volume-oracle/', icon: '💧' },
+          { text: 'Harmonic Oscillator', url: '/ref-cheatsheets-harmonic/', icon: '〰️' },
+          { text: 'Plutus Flow', url: '/ref-cheatsheets-plutus/', icon: '📈' }
+        ]
+      },
+      {
+        title: 'Settings',
+        items: [
+          { text: 'Alert Settings', url: '/_settings-alerts/', icon: '⚙️' }
         ]
       },
       {
@@ -156,12 +177,13 @@
         html += '<ul class="custom-nav-list">';
 
         section.items.forEach(item => {
-          const isActive = this.isCurrentPage(item.url);
+          const href = resolve(item.url);
+          const isActive = this.isCurrentPage(href);
           const activeClass = isActive ? 'active' : '';
 
           html += `
             <li class="custom-nav-item">
-              <a href="${item.url}" class="custom-nav-link ${activeClass}">
+              <a href="${href}" class="custom-nav-link ${activeClass}">
                 <span class="custom-nav-icon">${item.icon}</span>
                 <span class="custom-nav-text">${item.text}</span>
               </a>

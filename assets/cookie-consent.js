@@ -214,3 +214,28 @@
   }
 
 })();
+
+/* ---------------------------------------------------------------------------
+ * Copyright year
+ * The footer notice is baked into ~200 static pages, so it goes stale every
+ * January. Rewrite the year in place on load; if the markup ever changes this
+ * simply matches nothing and leaves the page alone.
+ * ------------------------------------------------------------------------- */
+(function () {
+  function refreshCopyrightYear() {
+    var year = String(new Date().getFullYear());
+    var pattern = /((?:©|&copy;)\s*)(\d{4})(\s+Signal Pilot Labs)/;
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      if (pattern.test(node.nodeValue)) {
+        node.nodeValue = node.nodeValue.replace(pattern, '$1' + year + '$3');
+      }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', refreshCopyrightYear);
+  } else {
+    refreshCopyrightYear();
+  }
+})();

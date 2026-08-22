@@ -20,7 +20,7 @@ class SignalPilotChatbot {
             // Product documentation
             pentarch: `**Pentarch v1.0** is a reversal event detector that displays 5 cycle events (TD, IGN, WRN, CAP, BDN) on your chart.
 
-📄 [Read Full Documentation](../pentarch-v10/)
+📄 [Read Full Documentation](/docs/pentarch-v10/)
 
 **Key Features:**
 • 5 distinct cycle events
@@ -38,7 +38,7 @@ class SignalPilotChatbot {
 
             omnideck: `**Omnideck v1.0** is the "everything indicator" that combines 10+ detection systems in one.
 
-📄 [Read Full Documentation](../omnideck-v10/)
+📄 [Read Full Documentation](/docs/omnideck-v10/)
 
 **Includes:**
 • Pentarch reversal signals
@@ -53,7 +53,7 @@ Choose which systems to display based on your needs.`,
 
             janus: `**Janus Atlas v1.0** displays 50+ different level types across your chart.
 
-📄 [Read Full Documentation](../janus-atlas-v10/)
+📄 [Read Full Documentation](/docs/janus-atlas-v10/)
 
 **Level Categories:**
 • **VWAP** - Daily, weekly, monthly, custom
@@ -70,7 +70,7 @@ Choose which systems to display based on your needs.`,
 
             augury: `**Augury Grid v1.0** is a professional multi-timeframe signal scanner.
 
-📄 [Read Full Documentation](../augury-grid-v10/)
+📄 [Read Full Documentation](/docs/augury-grid-v10/)
 
 **How it works:**
 • **7 symbols × 3 timeframes = 21 simultaneous scans**
@@ -87,7 +87,7 @@ Choose which systems to display based on your needs.`,
 
             oracle: `**Volume Oracle v1.0** (formerly Minimal Flow) is a volume spike detector with built-in position management.
 
-📄 [Read Full Documentation](../volume-oracle-v10/)
+📄 [Read Full Documentation](/docs/volume-oracle-v10/)
 
 **How it works:**
 • Detects volume spikes using Z-score method (statistically significant)
@@ -103,7 +103,7 @@ Choose which systems to display based on your needs.`,
 
             harmonic: `**Harmonic Oscillator v1.0** is a 7-component momentum consensus system.
 
-📄 [Read Full Documentation](../harmonic-oscillator-v10/)
+📄 [Read Full Documentation](/docs/harmonic-oscillator-v10/)
 
 **The Seven Voters:**
 • RSI | Stochastic RSI | MACD | EMA Trend | Momentum | Volume | Divergence
@@ -122,7 +122,7 @@ Choose which systems to display based on your needs.`,
 
             plutus: `**Plutus Flow v1.0** is a statistical OBV analysis indicator with trend ribbons and divergence detection.
 
-📄 [Read Full Documentation](../plutus-flow-v10/)
+📄 [Read Full Documentation](/docs/plutus-flow-v10/)
 
 **What it shows:**
 • **OBV Line** - Cumulative volume showing accumulation/distribution
@@ -142,9 +142,9 @@ Choose which systems to display based on your needs.`,
 4️⃣ **See first signal** when conditions align
 5️⃣ **Set alerts** for automated notifications
 
-📄 [Full Quick Start Guide](../start-quick/)
+📄 [Full Quick Start Guide](/docs/start-quick/)
 
-**Need help?** Check [Prerequisites](../start-prerequisites/) first!`,
+**Need help?** Check [Prerequisites](/docs/start-prerequisites/) first!`,
 
             alerts: `**Setting Up Alerts:**
 
@@ -155,7 +155,7 @@ Choose which systems to display based on your needs.`,
 4. Set **"Once Per Bar Close"** to avoid repaints
 5. Configure notifications (app, email, SMS, webhook)
 
-📄 [Detailed Alert Guide](../how-to-alerts/)
+📄 [Detailed Alert Guide](/docs/how-to-alerts/)
 
 **Pro tip:** Use "Once Per Bar Close" to ensure signals don't disappear!
 
@@ -171,7 +171,7 @@ Webhooks let you send alerts to external services automatically.
 3. Paste webhook URL in "Webhook URL" field
 4. Customize message payload (JSON supported)
 
-📄 [Full Webhook Guide](../how-to-webhooks/)
+📄 [Full Webhook Guide](/docs/how-to-webhooks/)
 
 **Supported Platforms:**
 • Discord
@@ -192,7 +192,7 @@ All SignalPilot indicators are **non-repainting** - signals finalize at bar clos
 ✅ Backtesting = live performance
 ✅ No "magic disappearing signals"
 
-📄 [Full Non-Repaint Policy](../ref-non-repaint/)
+📄 [Full Non-Repaint Policy](/docs/ref-non-repaint/)
 
 **Technical:** Indicators use \`request.security()\` with \`lookahead=barmerge.lookahead_off\`
 
@@ -221,15 +221,15 @@ Visit **https://www.signalpilot.io/#pricing** for current pricing.
 📧 **Email:** support@signalpilot.io
 💬 **Discord:** Available to customers (link in purchase email)
 📚 **Docs:** https://www.signalpilot.io/docs
-📝 **FAQ:** [Read FAQ](../about-faq/)
+📝 **FAQ:** [Read FAQ](/docs/about-faq/)
 
 **Response time:** Usually within 24 hours
 
-📄 [Full Support Info](../about-support/)
+📄 [Full Support Info](/docs/about-support/)
 
 **Before contacting:**
-1. Check [Troubleshooting Guide](../ref-troubleshooting/)
-2. Review [FAQ](../about-faq/)
+1. Check [Troubleshooting Guide](/docs/ref-troubleshooting/)
+2. Review [FAQ](/docs/about-faq/)
 3. Search these docs (search bar at top)`,
 
             troubleshooting: `**Common Issues & Solutions:**
@@ -251,7 +251,7 @@ Visit **https://www.signalpilot.io/#pricing** for current pricing.
 • Verify notification settings
 • Test with "Test" button in alert dialog
 
-📄 [Full Troubleshooting Guide](../ref-troubleshooting/)`,
+📄 [Full Troubleshooting Guide](/docs/ref-troubleshooting/)`,
 
             bestPractices: `**Best Practices:**
 
@@ -277,7 +277,7 @@ Visit **https://www.signalpilot.io/#pricing** for current pricing.
 ✅ Review historical signals before live trading
 ✅ Understand signal frequency on your timeframe
 
-📄 [Full Best Practices](../ref-best-practices/)`,
+📄 [Full Best Practices](/docs/ref-best-practices/)`,
 
             comparison: `**Which Indicator Should I Use?**
 
@@ -289,8 +289,8 @@ Visit **https://www.signalpilot.io/#pricing** for current pricing.
 **For momentum:** → **Harmonic Oscillator** (composite)
 **For OBV:** → **Plutus Flow** (divergences)
 
-📄 [Full Comparison Guide](../ref-comparison/)
-📄 [Suite Overview](../suite-index/)
+📄 [Full Comparison Guide](/docs/ref-comparison/)
+📄 [Suite Overview](/docs/suite-index/)
 
 **Most popular combo:** Pentarch + Janus Atlas
 
@@ -319,7 +319,7 @@ Visit **https://www.signalpilot.io/#pricing** for current pricing.
 • **BOS** - Break of Structure
 • **CHoCH** - Change of Character
 
-📄 [Full Glossary](../ref-glossary/)`,
+📄 [Full Glossary](/docs/ref-glossary/)`,
 
             workflow: `**Trading Workflow:**
 
@@ -343,7 +343,7 @@ Visit **https://www.signalpilot.io/#pricing** for current pricing.
 • Adjust stops as needed
 • Take profits systematically
 
-📄 [Full Workflow Guide](../ref-workflow/)`,
+📄 [Full Workflow Guide](/docs/ref-workflow/)`,
 
             screener: `**Using the Screener (Augury Grid):**
 
@@ -362,7 +362,7 @@ Augury Grid v1.0 monitors up to 40 symbols simultaneously on your chart.
 • Signal age (how fresh)
 • P&L tracking
 
-📄 [Full Screener Guide](../how-to-screener/)
+📄 [Full Screener Guide](/docs/how-to-screener/)
 
 **Pro tip:** Start with 8-10 symbols max until you understand the signals.`,
 
@@ -380,7 +380,7 @@ Transform from beginner to confident user in one week:
 
 Each day: 15-30 minutes of focused learning.
 
-📄 [Full Onboarding Checklist](../start-onboarding/)
+📄 [Full Onboarding Checklist](/docs/start-onboarding/)
 
 **Why this works:** Progressive learning, hands-on practice, builds muscle memory.`,
 
@@ -407,7 +407,7 @@ Before you start, you need:
 
 **Not required but helpful:** Experience with TradingView platform
 
-📄 [Full Prerequisites Guide](../start-prerequisites/)`,
+📄 [Full Prerequisites Guide](/docs/start-prerequisites/)`,
 
             suite: `**Suite Overview:**
 
@@ -429,7 +429,7 @@ The SignalPilot Suite includes 7 professional indicators:
 • Omnideck (all-in-one solution)
 • Pentarch + Volume Oracle (reversals + volume confirmation)
 
-📄 [Full Suite Overview](../suite-index/)
+📄 [Full Suite Overview](/docs/suite-index/)
 
 **Quick selector available** on the suite page to help choose!`,
 
@@ -452,7 +452,7 @@ SignalPilot indicators are continuously improved based on user feedback and mark
 ✅ New features
 ✅ Enhanced documentation
 
-📄 [Full Changelog](../about-changelog/)
+📄 [Full Changelog](/docs/about-changelog/)
 
 **Note:** Lifetime access includes all future updates at no additional cost.`,
 

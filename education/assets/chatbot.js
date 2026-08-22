@@ -20,7 +20,7 @@ class SignalPilotChatbot {
             // Lesson tiers
             beginner: `**Beginner Tier** (20 lessons) - Essential foundations for trading
 
-📚 [View All Beginner Lessons](/beginner.html)
+📚 [View All Beginner Lessons](/education/beginner.html)
 
 **What you'll learn:**
 • Why RSI >70 isn't always overbought
@@ -40,7 +40,7 @@ class SignalPilotChatbot {
 
             intermediate: `**Intermediate Tier** (27 lessons) - Market microstructure & order flow
 
-📚 [View All Intermediate Lessons](/intermediate.html)
+📚 [View All Intermediate Lessons](/education/intermediate.html)
 
 **What you'll learn:**
 • Bid-ask spread dynamics as a leading indicator
@@ -60,7 +60,7 @@ class SignalPilotChatbot {
 
             advanced: `**Advanced Tier** (27 lessons) - Implementation & automation
 
-📚 [View All Advanced Lessons](/advanced.html)
+📚 [View All Advanced Lessons](/education/advanced.html)
 
 **What you'll learn:**
 • Trading automation (APIs, bots, execution)
@@ -125,7 +125,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             rsi: `**RSI Lessons:**
 
-**Main Lesson:** [Lesson 5: RSI >70 Is Often a BUY Signal](/curriculum/beginner/05-rsi-extremes.html)
+**Main Lesson:** [Lesson 5: RSI >70 Is Often a BUY Signal](/education/curriculum/beginner/05-rsi-extremes.html)
 
 **Key Concepts:**
 • RSI >70 in uptrends = continuation (not reversal)
@@ -144,7 +144,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             spread: `**Bid-Ask Spread Lessons:**
 
-**Main Lesson:** [Lesson 21: Bid-Ask Spread Dynamics](/curriculum/intermediate/21-bid-ask-spread-dynamics.html)
+**Main Lesson:** [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/intermediate/21-bid-ask-spread-dynamics.html)
 
 **Key Concepts:**
 • Spread is a tax on impatience (not a fixed cost)
@@ -164,7 +164,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             automation: `**Trading Automation:**
 
-**Main Lesson:** [Lesson 57: Trading Automation & APIs](/curriculum/advanced/57-trading-automation-apis.html)
+**Main Lesson:** [Lesson 57: Trading Automation & APIs](/education/curriculum/advanced/57-trading-automation-apis.html)
 
 **Key Concepts:**
 • Automation amplifies mistakes (1 bug = 47 orders in 90 sec)
@@ -214,11 +214,11 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 **Recommended Learning Path:**
 
 **Week 1-3: Beginner Foundations** (20 lessons)
-→ Start: [Lesson 1: The Liquidity Lie](/curriculum/beginner/01-the-liquidity-lie.html)
+→ Start: [Lesson 1: The Liquidity Lie](/education/curriculum/beginner/01-the-liquidity-lie.html)
 → Focus: Debunking retail myths, understanding liquidity engineering
 
 **Week 4-7: Intermediate Microstructure** (27 lessons)
-→ [Lesson 21: Bid-Ask Spread Dynamics](/curriculum/intermediate/21-bid-ask-spread-dynamics.html)
+→ [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/intermediate/21-bid-ask-spread-dynamics.html)
 → Order flow, order books, footprint charts, institutional flow
 
 **Week 8-11: Advanced Implementation** (27 lessons)
@@ -232,7 +232,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 
 **Quick actions:**
 • [Browse All Lessons](/)
-• [Search Lessons](/search.html)
+• [Search Lessons](/education/search.html)
 • [View Progress](/) (homepage shows completion %)`,
 
             lessons: `**About Our Lessons:**
@@ -298,10 +298,10 @@ Type **"help"** to see all available topics!
 💡 **Tip:** Use the search bar at the top to search all 82 lessons, or browse by tier on the homepage.
 
 **Quick links:**
-• [Beginner Lessons](/beginner.html)
-• [Intermediate Lessons](/intermediate.html)
-• [Advanced Lessons](/advanced.html)
-• [Search All Lessons](/search.html)`
+• [Beginner Lessons](/education/beginner.html)
+• [Intermediate Lessons](/education/intermediate.html)
+• [Advanced Lessons](/education/advanced.html)
+• [Search All Lessons](/education/search.html)`
         };
     }
 
