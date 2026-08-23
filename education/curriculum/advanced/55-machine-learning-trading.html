@@ -119,14 +119,14 @@
           <p>Don't overwhelm yourself. Start with these 3 actions:</p>
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Start with Simple Feature Engineering (No ML Yet)</strong> — Before neural networks, identify 3-5 simple features that might improve your strategy. Features = measurable inputs. Examples: (1) ATR ratio (current ATR ÷ 20-day avg) = volatility context, (2) Volume ratio (current ÷ 20-day avg) = participation, (3) Time of day = session effects, (4) RSI divergence = momentum weakening, (5) Distance from MA (price ÷ 20 EMA - 1) = trend strength. Tonight pick 3 features. For next 10 trades, record these at entry. After 10 trades analyze: "Did winners have different feature values than losers?" Example: 8/10 wins had ATR ratio >1.2, 7/10 losses <0.9. You discovered filter without ML: "Only take breakouts when ATR >1.2." Feature engineering = 80% of ML success. Manual testing first builds intuition, avoids overfitting later.</li>
-            <li><strong>Learn to Spot Overfitting in Backtests</strong> — Overfitting = model memorized history instead of learning patterns. Test: (1) Backtest all historical data → record win rate/profit, (2) Backtest first 60% (train period), (3) Test remaining 40% (test period). If train: 75% win rate +$50K, test: 52% win rate -$8K = overfitting (learned noise that didn't repeat). Nina Patel lost <span style="color:#ff5252;font-weight:700">$47,300</span> deploying overfitted ML strategy—backtest 84% win rate, live 41% (memorized random patterns). Good strategies show <10% performance drop between train and test. Tonight split historical data 60/40. Compare results. If test drops >15%, rules too fitted to history. Simplify (fewer parameters, looser filters).</li>
+            <li><strong>Learn to Spot Overfitting in Backtests</strong> — Overfitting = model memorized history instead of learning patterns. Test: (1) Backtest all historical data → record win rate/profit, (2) Backtest first 60% (train period), (3) Test remaining 40% (test period). If train: 75% win rate +$50K, test: 52% win rate -$8K = overfitting (learned noise that didn't repeat). Nina Patel lost <span style="color:#ff5252;font-weight:700">$47,300</span> deploying overfitted ML strategy—backtest 87% win rate, live 41% (memorized random patterns). Good strategies show <10% performance drop between train and test. Tonight split historical data 60/40. Compare results. If test drops >15%, rules too fitted to history. Simplify (fewer parameters, looser filters).</li>
             <li><strong>Use Walk-Forward Testing Before Going Live</strong> — Walk-forward = rolling train/test split forward through time. Approach: (1) Train Jan-Jun (6 months), (2) Test Jul (1 month), (3) Move forward: train Feb-Jul, test Aug, (4) Repeat for all data. Strategy should be profitable in MOST test periods (70%+). Example: test 12 periods, profitable 9/12 months (75% consistency) = good. 5/12 months (42%) = unstable edge got lucky in one period. Calculate: "# profitable test periods ÷ total." If <60%, edge unstable or overfitted. Walk-forward simulates live trading better than single backtests. Markets change. Strategies working across multiple time periods survive regime changes. Catches overfitting single backtests miss.</li>
           </ol>
         </div>
       </details>
 
       <p><b>"Feed price data into a neural network → profit."</b></p>
-      <p>If only. Here's reality: 90% of ML trading strategies fail live. Not because ML doesn't work—because traders misuse it.</p>
+      <p>If only. Here's reality: most retail ML trading strategies fail live. Not because ML doesn't work—because traders misuse it.</p>
       <p>Markets are non-stationary. Low signal-to-noise. ML overfits spectacularly if you're not careful.</p>
       <div class="callout-warning"><h4>🚨 Real Talk</h4><p>ML isn't a magic money printer. It's pattern recognition on steroids. Use it wrong (data leakage, overfitting, insufficient data) and you'll backtest a 90% probability that goes 40% live. Use it right? It's a powerful filter for high-probability setups.</p></div>
 <h2 id="ninas-47300-ml-overfitting-disaster-and-how-she-fixed-it">Nina's $47,300 ML Overfitting Disaster (And How She Fixed It)</h2>
@@ -168,8 +168,8 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Monthly Return</strong></td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+18.3%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-21.5%</span></td>
-            <td style="padding:0.75rem;"><span style="color:#ff5252">-39.8% gap!!!</span></td>
+            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-7.2%</span></td>
+            <td style="padding:0.75rem;"><span style="color:#ff5252">-25.5% gap!!!</span></td>
           </tr>
           <tr style="background:rgba(255,82,82,0.12)">
             <td style="padding:0.75rem;"><strong>P&L (3 months)</strong></td>
@@ -304,8 +304,8 @@
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Model</strong></td>
-            <td style="padding:0.75rem;"><span style="color:#ff5252">Neural network: 5 layers, 128 neurons (1,000+ parameters on 180 trades!)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 trees (~200 parameters on 240 trades)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#ff5252">Neural network: 5 layers, 128 neurons (~50,000 weights on 180 trades!)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 trees (~450 split rules on 240 trades)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Optimization Target</strong></td>
@@ -487,8 +487,8 @@
             <td style="padding:0.75rem;"><strong>No Filter (All Signals)</strong></td>
             <td style="padding:0.75rem;text-align:right;">210</td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">54.7%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">0.8R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">+$32,100</span></td>
+            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">0.5R</span></td>
+            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">+$34,100</span></td>
             <td style="padding:0.75rem;">Baseline: Mediocre edge, lots of noise trades</td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
@@ -497,11 +497,11 @@
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;"><strong>ML added +$23,300 (+72.6% improvement!)</strong></td>
+            <td style="padding:0.75rem;"><strong>ML added +$21,300 (+62.5% improvement!)</strong></td>
           </tr>
           <tr style="background:rgba(255,255,255,0.08)">
             <td colspan="5" style="padding:0.75rem;text-align:right;font-weight:bold;">ML FILTER VALUE-ADD:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">+$23,300 (72.6% boost)</span></td>
+            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">+$21,300 (62.5% boost)</span></td>
           </tr>
         </tbody>
       </table>
@@ -510,8 +510,8 @@
       <ul style="margin:.5rem 0">
         <li><strong>ML filtered out 42% of signals</strong> → Skipped low-confidence setups</li>
         <li><strong>Filtered trades: 68.2% win rate</strong> vs. 54.7% baseline → +13.5% improvement</li>
-        <li><strong>Better R multiples:</strong> 1.4R avg vs. 0.8R baseline → ML selected better R:R setups</li>
-        <li><strong>72.6% P&L improvement:</strong> +$55.4K vs. +$32.1K baseline = +$23,300 added value</li>
+        <li><strong>Better R multiples:</strong> 1.4R avg vs. 0.5R baseline → ML selected better R:R setups</li>
+        <li><strong>62.5% P&L improvement:</strong> +$55.4K vs. +$34.1K baseline = +$21,300 added value</li>
         <li><strong>Realistic performance:</strong> 68% live matched 67% walk-forward test → no overfitting!</li>
       </ul>
 
@@ -562,11 +562,11 @@
         <br>
         • Zero look-ahead features (only data available at signal time)<br>
         • Walk-forward validation (train on past, test on future, 4 rolling windows)<br>
-        • Simpler model (Random Forest beats neural networks 90% of the time)<br>
+        • Simpler model (Random Forest usually beats neural networks on small trade datasets)<br>
         • Optimize for expectancy, not accuracy (68% at 1.4R > 87% at -0.4R)<br>
         • Paper trade 20 signals before risking capital
         <br><br>
-        My V2 model doesn't predict the future. It filters my setups: 68% win rate vs. 55% baseline. That +13% edge added $23,300 in 5 months.
+        My V2 model doesn't predict the future. It filters my setups: 68% win rate vs. 55% baseline. That +13% edge added $21,300 in 5 months.
         <br><br>
         ML isn't a strategy. It's a filter. Use it to skip low-probability trades, not to generate them. That's the secret."
         <br><br>
@@ -580,11 +580,11 @@
         <li><strong>Total investment:</strong> -$57,300</li>
         <li><strong>5-month recovery:</strong> +$55,400 (June-Oct)</li>
         <li><strong>Net position:</strong> -$1,900 (nearly break-even)</li>
-        <li><strong>Future value:</strong> ML filter now adds ~$4.7K/month (+$56K/year) vs. no-filter baseline</li>
+        <li><strong>Future value:</strong> ML filter now adds ~$4.3K/month (+$51K/year) vs. no-filter baseline</li>
         <li><strong>ROI timeline:</strong> Investment pays back in full by end of November, then pure profit</li>
       </ul>
       <div class="callout-tip"><h4>🎯 What You'll Gain</h4><p>After this lesson, you'll be able to:</p><ul><li>Build ML trade filters (predict which setups likely to win)</li><li>Engineer features properly (stationary, no look-ahead bias)</li><li>Use walk-forward cross-validation to avoid overfitting</li><li>Choose models wisely (Random Forest > Neural Networks for most cases)</li></ul></div>
-      <div class="callout-key"><h4>💡 The Aha Moment</h4><p>ML isn't a standalone strategy. It's a FILTER. You already have setups (Janus sweeps). ML predicts which ones have 75% vs 50% probability. Trade the 75% ones, skip the 50%. That's the edge.</p></div>
+      <div class="callout-key"><h4>💡 The Aha Moment</h4><p>ML isn't a standalone strategy. It's a FILTER. You already have setups (Janus sweeps). ML predicts which ones have 68% vs 55% probability. Trade the 68% ones, skip the 55%. That's the edge.</p></div>
 
       <div class="key-takeaway">
         <h4>🎓 Key Takeaways</h4>
@@ -608,8 +608,8 @@
 PRICE FEATURES:
 1. Distance from VWAP (%): (Price - VWAP) / VWAP
 2. Distance from 50 EMA (%): (Price - EMA50) / EMA50
-3. Distance from daily high (%): (High - Price) / High
-4. Distance from daily low (%): (Price - Low) / Low
+3. Distance from PRIOR day's high (%): (PrevHigh - Price) / PrevHigh
+4. Distance from PRIOR day's low (%): (Price - PrevLow) / PrevLow
 
 MOMENTUM FEATURES:
 5. RSI (14): Value 0-100
@@ -736,7 +736,7 @@ Probability 0.45-0.65 = Neutral (skip trade)
 Probability < 0.45 = Low confidence (skip or inverse)
 
 Backtest Results by Threshold:
-All Trades (no filter): 55% expectancy, 1.8R avg
+All Trades (no filter): 55% win rate, 0.5R avg
 Confidence > 0.60: ___% expectancy, ___R avg
 Confidence > 0.65: ___% expectancy, ___R avg
 Confidence > 0.70: ___% expectancy, ___R avg (fewer trades)
@@ -771,7 +771,7 @@ Retrain Process:
 - Compare new model to old model on same test set
 - Deploy only if new model outperforms by 3%+</code></pre>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Implementation Goal:</strong> Build ML filter over 4-6 weeks using your last 50-100 trades. Deploy in paper trading for 20 signals. Example target: Improve expectancy by 10%+ through selective filtering. If successful, ML just added 15-20% to your annual returns by helping you skip low-probability setups. This is how professionals use ML—not as magic, but as systematic edge enhancement.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Implementation Goal:</strong> Build ML filter over 4-6 weeks using your last 50-100 trades. Deploy in paper trading for 20 signals. Example target: Improve expectancy by 10%+ through selective filtering. If successful, ML has measurably lifted your expectancy by helping you skip low-probability setups. This is how professionals use ML—not as magic, but as systematic edge enhancement.</p>
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">You just learned what most ML traders discover after blowing up an account: feature engineering > model choice, walk-forward testing is mandatory, and optimize for expectancy (not accuracy). Now you can use ML as a tool, not a gamble.</p>
@@ -797,7 +797,7 @@ Retrain Process:
           <a href="/education/curriculum/advanced/49-market-regime-recognition.html" class="btn btn-sm btn-ghost">Read Lesson &rarr;</a>
         </div>
       </div>
-      <div class="callout-info"><h4>⏭️ Coming Up Next</h4><p><strong>Article #36: High-Frequency Concepts</strong> — HFT isn't accessible to retail, but understanding latency arbitrage and order flow toxicity helps you avoid being the exit liquidity.</p></div>
+      <div class="callout-info"><h4>⏭️ Coming Up Next</h4><p><strong>Article #56: High-Frequency Concepts</strong> — HFT isn't accessible to retail, but understanding latency arbitrage and order flow toxicity helps you avoid being the exit liquidity.</p></div>
 
       <!-- Discussion Section -->
       <div class="discussion-section" id="discussion-section">
