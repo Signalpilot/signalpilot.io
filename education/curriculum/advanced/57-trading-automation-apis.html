@@ -128,23 +128,23 @@
       </div>
 
 <div class="callout callout-danger">
-  <h4>📉 CASE STUDY: Mike's $97,000 Automation Disaster</h4>
+  <h4>📉 CASE STUDY: Mike's $19,000 Margin Call</h4>
   <p><strong>Setup:</strong> Mike Sullivan (composite example), Python dev, $200K account. Alpaca API bot (buy SPY @ RSI<30). Backtested 2020-2023: 67% WR, +$140K. Deployed with ZERO safety controls.</p>
-  <p><strong>The disaster (April 19, 2024):</strong> Bot worked 8 weeks (+$14K, 71% WR). CPI shock: SPY gapped down -2.8% to $510. Bot saw RSI 22, kept buying: $200K @ $510, $505, $495, $490 = $800K position (4× leverage). By 3 PM: SPY @ $488, -$97K, margin call. Mike at work, couldn't stop it.</p>
-  <p><strong>Recovery:</strong> Rebuilt with 5 controls: max $50K position, VIX>25=disable, max 3 trades/day, alert @-5% DD, shutdown @-10% DD. Result: $103K → $151K (+47%), zero failures.</p>
+  <p><strong>The disaster (a CPI-shock morning):</strong> Bot worked 8 weeks (+$14K, 71% WR). SPY gapped down -2.8% to $510. Bot saw RSI 22, kept buying: $200K @ $510, $505, $495, $490 = $800K position (4× leverage, average cost $499.87). By 3 PM: SPY @ $488 — 7% below the prior close — the position was worth $781K, down $19,005, and the maintenance call landed. Mike was at work and couldn't stop it.</p>
+  <p><strong>Recovery:</strong> Account after the blow-up: $195K. Rebuilt with 5 controls: max $50K position, VIX>25=disable, max 3 trades/day, alert at -5% peak-to-trough, full shutdown at -10%. Result over the next 8 months: $195K → $218K (+12%), and no control ever failed to fire.</p>
   <p><strong>Lesson:</strong> Code safety controls FIRST: (1) Position limits, (2) Volatility filters, (3) Max DD shutoff, (4) Kill switch. Backtests lie—they skip black swans.</p>
 </div>
 
 <div class="quiz-question" style="margin-top:2rem">
-  <p><strong>Quiz: Mike lost $97K in ONE DAY with his bot. What caused the failure?</strong></p>
+  <p><strong>Quiz: Mike's bot took a maintenance call in ONE MORNING. What caused the failure?</strong></p>
   <div class="quiz-options">
     <div class="quiz-option" data-correct="false">A) Execution slippage and latency issues</div>
     <div class="quiz-option" data-correct="false">B) API connection failed during crash</div>
-    <div class="quiz-option" data-correct="true">C) ZERO safety controls—bot averaged down 4× during -5% crash, hitting $800K position (4× leverage) on $200K account</div>
+    <div class="quiz-option" data-correct="true">C) ZERO safety controls—bot averaged down 4× during a 7% single-day drop, hitting an $800K position (4× leverage) on a $200K account</div>
     <div class="quiz-option" data-correct="false">D) Coding bug caused duplicate orders</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Correct: C.</strong> Mike programmed "buy @ RSI oversold" but never programmed position limits, volatility filters, or kill switches. Bot built 4× leveraged position during crash. Recovery: added 5 safety controls, turned $103K → $151K. Code safety controls FIRST.
+    <strong>Correct: C.</strong> Mike programmed "buy @ RSI oversold" but never programmed position limits, volatility filters, or kill switches. Bot built a 4× leveraged position during the crash — $19,005 down and a maintenance call before he could reach a keyboard. Recovery: added 5 safety controls, took $195K → $218K over 8 months. Code safety controls FIRST.
   </div>
 </div>
 
@@ -152,8 +152,8 @@
   <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
   <div style="margin-top:1rem">
     <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-      <li><strong>Paper trade first</strong> — Test any automation in paper mode for 2+ weeks before live capital.</li>
-      <li><strong>Add position limits</strong> — Hard-code maximum position size (never exceed 2% account risk per trade).</li>
+      <li><strong>Paper trade first</strong> — Never put live capital behind untested automation. Paper mode first, and per Part 2 that means months, not weeks.</li>
+      <li><strong>Add position limits</strong> — Hard-code maximum position size: 2% account risk per trade AND a notional cap, because 2% risk is not 2% exposure.</li>
       <li><strong>Build a kill switch</strong> — Create manual shutdown that disables all bot activity with one click/command.</li>
     </ol>
   </div>
@@ -271,11 +271,13 @@
   </tbody>
 </table>
 
-<p><strong>Example:</strong> A manual trader watches ES (S&P futures) on the 15-minute chart. Catches ~8 setups per week. Makes $3,200/month average.</p>
+<p><strong>Example:</strong> A manual trader watches ES (S&P futures) on the 15-minute chart. Catches ~8 setups per week. Makes $3,200/month average — about $92 per setup.</p>
 
-<p><strong>Same trader, automated:</strong> Bot scans ES, NQ, YM, RTY (4 futures) + SPY, QQQ, IWM (3 ETFs) on 5m, 15m, 1h. Catches ~45 setups per week. Makes $14,800/month average (same risk per trade, just more opportunities).</p>
+<p><strong>Same trader, automated:</strong> Bot scans ES, NQ and RTY (index futures) plus GC and CL (metals and energy) on 5m, 15m and 1h. Catches ~24 setups per week. At the same $92 per setup, that is $9,600/month.</p>
 
 <p><strong>The unlock:</strong> You're not trading better. You're trading MORE—without burning out.</p>
+
+<p><strong>And the ceiling:</strong> ES, MES, SPY and QQQ are largely the same trade. Adding correlated symbols multiplies your signal count without multiplying your edge — and it multiplies your risk when four of them fire at once. Count uncorrelated opportunities, not tickers.</p>
 
 <h3>When Automation Makes Sense (And When It Doesn't)</h3>
 
@@ -335,23 +337,23 @@
     </tr>
     <tr>
       <td><strong>Binance</strong></td>
-      <td>Crypto (600+ pairs)</td>
+      <td>Crypto (600+ pairs; the main exchange is closed to US residents — Binance.US is a separate, much smaller venue)</td>
       <td>⭐⭐⭐⭐⭐ Excellent (REST + WebSocket, high throughput)</td>
       <td>0.1% spot, 0.02-0.04% futures (with BNB discount)</td>
       <td>Crypto algo traders (24/7 markets, high liquidity)</td>
     </tr>
     <tr>
-      <td><strong>TDAmeritrade (thinkorswim)</strong></td>
+      <td><strong>Schwab (formerly TD Ameritrade / thinkorswim)</strong></td>
       <td>Stocks, Options, Futures</td>
-      <td>⭐⭐⭐ Fair (API exists but clunky, limited documentation)</td>
+      <td>⭐⭐⭐ Fair (the legacy TD Ameritrade API was retired in 2024; the Schwab Trader API replaced it and is still maturing)</td>
       <td>$0 stocks, $0.65/contract options</td>
-      <td>Existing TD users (already have account, want to automate)</td>
+      <td>Existing Schwab users (already have the account, want to automate)</td>
     </tr>
     <tr>
       <td><strong>TradeStation</strong></td>
       <td>Stocks, Options, Futures</td>
       <td>⭐⭐⭐⭐ Good (EasyLanguage coding, built-in backtesting)</td>
-      <td>$0 stocks (if 50+ trades/quarter), $0.60/contract options</td>
+      <td>$0 stocks, $0.60/contract options</td>
       <td>Active traders (want integrated platform, no external coding)</td>
     </tr>
   </tbody>
@@ -372,7 +374,7 @@
     <li><strong>Month 4+:</strong> If profitable for 3 consecutive months in paper, go live with 10% of capital</li>
     <li><strong>Month 6+:</strong> If still profitable, scale to full allocation</li>
   </ol>
-  <p><strong>Never skip paper trading.</strong> Mike (case study above) skipped it and lost $97K in one day.</p>
+  <p><strong>Never skip paper trading.</strong> Mike (case study above) skipped it and took a maintenance call in one morning.</p>
 </div>
 
 <div class="section-break"><span>Part 3: Building Your First Automated Strategy</span></div>
@@ -427,7 +429,13 @@ stop_distance = entry_price - stop_loss
 position_size = risk_amount / stop_distance  # Shares to buy
 
 # Example: Entry $520, Stop $518, Distance $2
-# Position size = $2,000 / $2 = 1,000 shares</code></pre>
+# Position size = $2,000 / $2 = 1,000 shares
+# ...which is $520,000 of SPY on a $100K account. A 2% risk rule
+# says nothing about notional: a tight stop quietly buys leverage.
+max_notional = account_equity * 1.5   # hard cap at 1.5x equity
+position_size = min(position_size, max_notional / entry_price)
+# Capped: 288 shares. Real risk is now $576, not $2,000 - that is
+# the trade-off, and it is the one that keeps you in business.</code></pre>
 
 <p><strong>Step 4: Define Trade Management (Optional)</strong></p>
 
@@ -484,6 +492,7 @@ if current_bar.low < swing_low * 0.997:  # Sweep
 <h3>Complete Bot Implementation (Sweep Reversal Strategy)</h3>
 
       <pre style="overflow-x:auto"><code>import alpaca_trade_api as tradeapi
+from alpaca_trade_api.rest import TimeFrame
 import os, time
 
 # Setup
@@ -491,8 +500,13 @@ API_KEY = os.getenv('ALPACA_API_KEY')  # NEVER hardcode!
 API_SECRET = os.getenv('ALPACA_API_SECRET')
 api = tradeapi.REST(API_KEY, API_SECRET, 'https://paper-api.alpaca.markets')
 
+MAX_NOTIONAL_MULT = 1.5   # never hold more than 1.5x equity
+MAX_DAILY_LOSS = 0.03     # kill switch: stand down for the day at -3%
+
 def get_swing_low(bars, lookback=20):
-    lows = [bar.l for bar in bars[-lookback:]]
+    # Exclude the current bar. Include it and the swing low IS the current
+    # low, so the sweep test below can never be true and the bot never fires.
+    lows = [bar.l for bar in bars[-(lookback + 1):-1]]
     return min(lows)
 
 def check_sweep(current_price, current_low, swing_low):
@@ -503,8 +517,24 @@ def check_sweep(current_price, current_low, swing_low):
 
 def calculate_position_size(api, entry, stop):
     equity = float(api.get_account().equity)
-    risk_amount = equity * 0.02  # 2% risk
-    return int(risk_amount / abs(entry - stop))
+    risk_amount = equity * 0.02                        # 2% risk
+    by_risk = risk_amount / (entry - stop)
+    by_notional = (equity * MAX_NOTIONAL_MULT) / entry  # the control Mike skipped
+    return int(min(by_risk, by_notional))
+
+def kill_switch_tripped(api):
+    acct = api.get_account()
+    move = (float(acct.equity) - float(acct.last_equity)) / float(acct.last_equity)
+    return move <= -MAX_DAILY_LOSS
+
+def in_position(api, symbol):
+    # Ask the broker; don't trust a local variable. A bracket that filled and
+    # closed overnight must not block tomorrow's setup.
+    try:
+        api.get_position(symbol)
+        return True
+    except Exception:
+        return False
 
 def place_bracket_order(api, symbol, size, entry, stop, target):
     try:
@@ -521,33 +551,40 @@ def place_bracket_order(api, symbol, size, entry, stop, target):
         print(f"✗ Order failed: {e}")
         return None
 
-def run_bot():
-    position = None
-    print("Bot started. Watching SPY for sweep setups...")
+def run_bot(symbol='SPY'):
+    print(f"Bot started. Watching {symbol} for sweep setups...")
 
     while True:
         try:
-            bars = api.get_barset('SPY', 'minute', limit=50)['SPY']
+            if not api.get_clock().is_open:      # control 1: market hours
+                time.sleep(60)
+                continue
+            if kill_switch_tripped(api):         # control 2: daily loss limit
+                print("🛑 Daily loss limit hit. Standing down.")
+                break
+
+            bars = api.get_bars(symbol, TimeFrame.Minute, limit=50)
             current_price = bars[-1].c
             current_low = bars[-1].l
             swing_low = get_swing_low(bars)
 
-            if position is None and check_sweep(current_price, current_low, swing_low):
+            if not in_position(api, symbol) and check_sweep(current_price, current_low, swing_low):
                 print(f"🎯 Sweep detected @ ${current_price}")
                 entry = current_price
                 stop = swing_low * 0.995
                 target = entry + (entry - stop) * 3  # 3R
-                size = calculate_position_size(api, entry, stop)
-                position = place_bracket_order(api, 'SPY', size, entry, stop, target)
+                size = calculate_position_size(api, entry, stop)   # control 3: notional cap
+                if size > 0:
+                    place_bracket_order(api, symbol, size, entry, stop, target)
 
             time.sleep(60)  # Check every minute
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(60)
 
-run_bot()  # 60 lines. Your bot now trades 24/7.</code></pre>
+run_bot()  # ~75 lines - and the three that matter most are the controls.</code></pre>
 
-      <p><strong>What this does:</strong> Connects to Alpaca, fetches SPY 1-min bars, detects sweep reversals (low sweeps below swing low, then reclaims), calculates 2% risk position size, places bracket order (entry + stop + 3R target), repeats every 60 seconds. Perfect discipline, zero emotion.</p>
+      <p><strong>What this does:</strong> Connects to Alpaca, fetches SPY 1-min bars, detects sweep reversals (low sweeps below swing low, then reclaims), sizes on 2% risk <em>capped by notional</em>, places a bracket order (entry + stop + 3R target), and repeats every 60 seconds — but only while the market is open, only when the broker says it holds no position, and never after the day is down 3%. Perfect discipline, zero emotion, and three brakes.</p>
 
       <div class="callout-key">
         <h4>💡 The Aha Moment</h4>
@@ -567,9 +604,16 @@ run_bot()  # 60 lines. Your bot now trades 24/7.</code></pre>
       <p><strong>Common errors:</strong> Connection timeout, order rejected, partial fills, rate limits, market closed. <strong>Fixes:</strong> Retry logic (3× exponential backoff), pre-trade checks (funds, hours, price), partial fill handling, rate limiting (200 req/min), market hours check (9:30-4 ET). Professional bots handle errors gracefully.</p>
 <h3>Retry Logic (Essential)</h3>
 
-      <pre style="overflow-x:auto"><code>def place_order_with_retry(api, **order_params):
+      <pre style="overflow-x:auto"><code>import uuid
+
+def place_order_with_retry(api, **order_params):
     """Retry order placement up to 3 times"""
     max_retries = 3
+
+    # Same id on every attempt. If the first request actually reached the
+    # broker and only the reply was lost, the retry is rejected as a
+    # duplicate instead of doubling your position.
+    order_params.setdefault('client_order_id', f"bot-{uuid.uuid4()}")
 
     for attempt in range(max_retries):
         try:
@@ -578,7 +622,7 @@ run_bot()  # 60 lines. Your bot now trades 24/7.</code></pre>
 
         except Exception as e:
             if attempt < max_retries - 1:
-                wait = 2 ** attempt  # 1s, 2s, 4s (exponential backoff)
+                wait = 2 ** attempt  # 1s then 2s (exponential backoff)
                 print(f"Order failed: {e}. Retry in {wait}s...")
                 time.sleep(wait)
             else:
@@ -609,7 +653,8 @@ def send_alert(subject, message):
     msg['From'] = 'bot@yourbot.com'
     msg['To'] = 'you@gmail.com'
 
-    # Send via Gmail SMTP
+    # Send via Gmail SMTP - this needs a Gmail App Password,
+    # not your account password; basic auth was switched off in 2022.
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
         server.starttls()
         server.login('bot@yourbot.com', os.getenv('EMAIL_PASSWORD'))
@@ -630,8 +675,8 @@ except Exception as e:
 
       <div class="callout-warning">
         <h4>🚨 Kill Switch (Non-Negotiable)</h4>
-        <p>Your bot often automatically stop trading if:</p><ul style="margin:.5rem 0">
-          <li>Daily drawdown exceeds -3%</li>
+        <p>Your bot must automatically stop trading if:</p><ul style="margin:.5rem 0">
+          <li>Daily drawdown exceeds -3% (Mike's rebuild also shut down for good at -10% peak-to-trough)</li>
           <li>5 consecutive losses</li>
           <li>API errors > 10 per hour</li>
           <li>Unexpected behavior detected</li>
