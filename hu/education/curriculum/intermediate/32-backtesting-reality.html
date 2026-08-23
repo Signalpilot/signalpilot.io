@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17835897996"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-440EJBMYST');
+  gtag('config', 'AW-17835897996');
+</script>
+  <link rel="manifest" href="/education/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/education/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/education/assets/icons/icon-180x180.png">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover"/>
+  <meta name="robots" content="index,follow"/>
+  <!-- AGGRESSIVE CACHE PREVENTION: Forces fresh load every time -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Backtesting és valóság: az a tökéletes várható érték hazudik neked — Signal Pilot Education</title>
+  <meta name="description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta name="sp-level" content="Intermediate"><meta name="sp-order" content="32">
+  <meta name="theme-color" content="#05070d">
+  <link rel="canonical" href="https://www.signalpilot.io/hu/education/curriculum/intermediate/32-backtesting-reality.html">
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.signalpilot.io/education/curriculum/intermediate/32-backtesting-reality.html">
+  <meta property="og:title" content="Backtesting Reality: That Perfect Expectancy Is Lying to You — Signal Pilot Education">
+  <meta property="og:description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Signal Pilot Education">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.signalpilot.io/education/curriculum/intermediate/32-backtesting-reality.html">
+  <meta name="twitter:title" content="Backtesting Reality: That Perfect Expectancy Is Lying to You — Signal Pilot Education">
+  <meta name="twitter:description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
+  <link rel="prev" href="https://www.signalpilot.io/education/curriculum/intermediate/31-portfolio-construction.html"/>
+  <link rel="next" href="https://www.signalpilot.io/education/curriculum/intermediate/33-advanced-risk-management.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gugi&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <!-- SignalPilot Theme System -->
+  <link rel="stylesheet" href="/education/assets/signalpilot-theme.css">
+  <link rel="stylesheet" href="/education/assets/edu.css">
+  <link rel="stylesheet" href="/education/assets/chatbot.css">
+  <link rel="stylesheet" href="/education/assets/lang-switcher.css">
+  <link rel="stylesheet" href="/education/assets/notes.css">
+  <link rel="stylesheet" href="/education/assets/auth-ui.css">
+  <link rel="stylesheet" href="/education/assets/trial-cta.css">
+  <link rel="stylesheet" href="/education/assets/blog-links.css">
+  <link rel="stylesheet" href="/education/assets/discussions.css">
+  <!-- Logger must load first, before other scripts that use it -->
+  <script src="/education/assets/logger.js"></script>
+  <script src="/education/assets/dev-utils.js" defer></script>
+<script src="/education/assets/structured-data.js" defer></script>
+<script src="/education/assets/lazy-load.js" defer></script>
+<script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
+  <style>
+    /* Mobile-friendly code blocks and tables - prevent horizontal scroll */
+    @media (max-width: 768px) {
+      .prose pre {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        white-space: pre;
+        max-width: 100%;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        padding: 0.75rem;
+      }
+      .prose pre code {
+        white-space: pre;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+      /* Tabs content code blocks */
+      .tab-panel pre {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        white-space: pre;
+        max-width: 100%;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        padding: 0.75rem !important;
+      }
+      .tab-panel pre code {
+        white-space: pre;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+      .prose table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+        font-size: 0.8rem;
+      }
+      .prose table th,
+      .prose table td {
+        padding: 0.5rem !important;
+        min-width: 80px;
+      }
+    }
+  </style>
+  <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="de" href="https://www.signalpilot.io/de/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="fr" href="https://www.signalpilot.io/fr/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="it" href="https://www.signalpilot.io/it/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="pt" href="https://www.signalpilot.io/pt/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="nl" href="https://www.signalpilot.io/nl/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="ru" href="https://www.signalpilot.io/ru/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="ja" href="https://www.signalpilot.io/ja/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="tr" href="https://www.signalpilot.io/tr/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="hu" href="https://www.signalpilot.io/hu/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="ar" href="https://www.signalpilot.io/ar/education/curriculum/intermediate/32-backtesting-reality.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/curriculum/intermediate/32-backtesting-reality.html">
+</head>
+<body class="table-accordions-mobile">
+  <div class="bg-stars" aria-hidden="true"></div>
+  <canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
+  <div class="bg-aurora" aria-hidden="true"></div>
+
+<header class="sp-header">
+  <div class="wrap">
+    <a href="https://www.signalpilot.io" class="brand">
+      <span>Signal Pilot</span>
+    </a>
+    <nav id="mainnav" aria-label="Fő tartalom"><ul>
+      <li><a href="/education/">Oktatás</a></li>
+      <li><a href="/education/search.html">Keresés</a></li>
+      <li><a href="/education/my-library.html">Könyvtáram</a></li>
+      <li><a href="https://www.signalpilot.io/blog" target="_blank" rel="noopener">Blog</a></li>
+    </ul></nav>
+    <div class="header-ctls">
+      <div id="google_translate_element"></div><button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Téma váltása">
+        <span id="theme-icon">☽</span>
+      </button><button id="menuToggle" class="menu-toggle" aria-expanded="false"><span class="menu-toggle-text">Menü </span>☰</button></div>
+  </div>
+</header>
+
+<article class="article">
+  <header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Morzsamenü">
+        <a href="/education/">Kezdőlap</a> › <a href="/education/intermediate.html">Haladó tananyag</a> › <span>A backtesting valósága</span>
+      </nav>
+      <span class="badge">🟡 Haladó alap • 32. lecke a 82-ből</span>
+      <h1 class="headline xl">Backtesting és valóság: az a tökéletes várható érték hazudik neked</h1>
+      <div class="meta">16 perc olvasás • Stratégiaellenőrzés<span class="view-count" data-view-count style="display:none"> • <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> <span data-view-num></span></span></div>
+
+      <!-- Author Byline -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(118,221,255,0.2); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-2);">
+        <div>
+          <div style="font-weight: 600; color: var(--text-1);">Signal Pilot</div>
+          <div>Professzionális kereskedési képzés</div>
+        </div>
+      </div>
+
+      <!-- Article Progress Indicator -->
+      <div class="article-progress" style="--progress:0%">
+        <div class="progress-circle"><span>0%</span></div>
+        <div class="progress-text">
+          <strong>Haladsz!</strong>
+          <div style="font-size:.85rem;color:var(--muted)">Olvass tovább a lecke befejezéséhez</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap article-grid">
+    <div class="prose">
+      <p><b>A backtested: 8R várható érték. Profitfaktor 3,5. 50 000 $ nyereség egy 10 000 dolláros számlán.</b></p>
+
+      <p>Élesben indulsz. Első hét: -2R várható érték. Profitfaktor 0,4. A számla 12 %-kal lejjebb.</p>
+
+      <p>Mi történt? A backtested hazudott.</p>
+
+      <div class="callout-warning">
+        <h4>🚨 Őszintén</h4>
+        <p>A backtestek többsége puszta ábránd. Tökéletes teljesüléseket, nulla slippage-et, spread nélküli világot és olyan varázslatos belépőket feltételeznek, amelyek élő piacon nem léteznek.</p>
+        <p>Ha a backtested túl szép ahhoz, hogy igaz legyen, akkor nem is igaz. A zajra illesztettél, nem a jelre.</p>
+      </div>
+
+      <p><strong>Ebben a leckében megtanulod:</strong></p>
+      <ul>
+        <li>Miért bukik el a backtestek 90 %-a, amint élesbe kerül</li>
+        <li>A 4 főbűn: túlillesztés, előretekintési torzítás, irreális költségek, túlélési torzítás</li>
+        <li>Hogyan modellezd a slippage-et és a spreadeket úgy, hogy tényleg a valóságot tükrözzék</li>
+        <li>Mintán belül és mintán kívül (az egyetlen ellenőrzés, ami számít)</li>
+      </ul>
+
+      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gyors eredmények holnapra (kattints a kinyitáshoz)</summary>
+        <div style="margin-top:1rem">
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>Tegyél reális költségeket a backtestedbe</strong> — Számolj ügyletenként 0,03-0,05 % slippage-et, plusz a tényleges spreadet. Ha az eredmény összeomlik, az előnyöd hamis volt.</li>
+            <li><strong>Oszd fel az adataidat 70/30 arányban</strong> — Optimalizálj az adatok 70 %-án, és ellenőrizz azon a 30 %-on, amelyet soha nem láttál. Ha a mintán kívüli rész elbukik, ráillesztettél a görbére.</li>
+            <li><strong>Kereskedj 30 napig papíron, mielőtt élesbe mennél</strong> — Ha a papíreredmények lényegesen eltérnek a backtesttől, valami nem stimmel. Ne menj élesbe, amíg nem fedik egymást.</li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="example-block">
+        <h4>Valódi példa: hogyan lett egy 1,3R várható értékű „tökéletes” backtestből élesben -0,45R-es katasztrófa</h4>
+
+        <p><strong>Háttér:</strong> 2024 márciusában Chris (összetett példa) hat hónapnyi optimalizálás után kitörési stratégiát épített. A backtest hihetetlenül festett: 1,3R várható érték, 4,9-es profitfaktor, 67 % találati arány, 2 év SPY-adaton (2022-2023) tesztelve. 2024 áprilisában 50 000 $ került bevetésre. 2024 júniusára a számla 8 400 $-t bukott (-16,8 %). Íme a teljes boncolás.</p>
+
+        <h5>A „tökéletes” backtest (2022-2023-as adatok)</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">A backtest eredményei (2022. jan. - 2023. dec., 2 év)</caption>
+          <tr style="background:rgba(34,197,94,0.15);border-bottom:2px solid rgba(34,197,94,0.3)">
+            <th style="padding:0.75rem;text-align:left">Mutató</th>
+            <th style="padding:0.75rem;text-align:right">Érték</th>
+            <th style="padding:0.75rem;text-align:left">Amit Chris gondolt</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Összes ügylet</td>
+            <td style="padding:0.75rem;text-align:right">156</td>
+            <td style="padding:0.75rem">Rendes mintaméret</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Találati arány</td>
+            <td style="padding:0.75rem;text-align:right">67.3% (105W / 51L)</td>
+            <td style="padding:0.75rem">„Hihetetlen! Jóval az átlag fölött.”</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Átl. nyereség / átl. veszteség</td>
+            <td style="padding:0.75rem;text-align:right">+2.4R / -1R</td>
+            <td style="padding:0.75rem">„Kiváló R:R, a nyertesek 2,4-szeresei a veszteseknek.”</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Profitfaktor</td>
+            <td style="padding:0.75rem;text-align:right">4.9</td>
+            <td style="padding:0.75rem">„Profi szintű szám.”</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Várható érték</td>
+            <td style="padding:0.75rem;text-align:right">Ügyletenként +1,3R</td>
+            <td style="padding:0.75rem">„Ez maga a Szent Grál.”</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Legnagyobb drawdown</td>
+            <td style="padding:0.75rem;text-align:right">-8.2%</td>
+            <td style="padding:0.75rem">„Parányi drawdown. Rendkívül biztonságos.”</td>
+          </tr>
+          <tr style="background:rgba(34,197,94,0.2)">
+            <td style="padding:0.75rem">Teljes hozam (2 év)</td>
+            <td style="padding:0.75rem;text-align:right"><strong>+$40,600 (+406%)</strong></td>
+            <td style="padding:0.75rem"><strong>„Ez az. Felmondok a munkahelyemen.”</strong></td>
+          </tr>
+        </table>
+        </div>
+
+        <p><strong>Chris optimalizálási folyamata:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>Kipróbált 50 különböző EMA-periódust (az EMA(34) bizonyult „tökéletesnek”)</li>
+          <li>Kipróbált 20 ATR-szorzót a stopokhoz (az 1,47× ATR bizonyult „optimálisnak”)</li>
+          <li>Kipróbált 15 célszintet (a 2,8R bizonyult „a legjobbnak”)</li>
+          <li>A végleges stratégia: EMA(34)-keresztezés + 1,47× ATR stop + 2,8R cél</li>
+          <li><strong>Összesen kipróbált kombináció:</strong> 50 × 20 × 15 = 15 000 változat</li>
+        </ul>
+
+        <p><strong>Amit Chris nem tett bele a backtestbe:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>A slippage-et (tökéletes teljesüléseket feltételezett pontos árakon)</li>
+          <li>A vételi-eladási különbözetet (nulla spreadet feltételezett)</li>
+          <li>A jutalékokat (elfelejtette modellezni)</li>
+          <li>A megbízások visszautasítását (100 %-os teljesülést feltételezett)</li>
+          <li>A mintán kívüli tesztet (soha nem próbálta ki nem látott adaton)</li>
+        </ul>
+
+        <h5>Az éles kereskedés valósága (2024. április-június, 10 hét)</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">Éles eredmények (10 hét, 50 000 dolláros számla)</caption>
+          <tr style="background:rgba(255,82,82,0.15);border-bottom:2px solid rgba(255,82,82,0.3)">
+            <th style="padding:0.75rem;text-align:left">Mutató</th>
+            <th style="padding:0.75rem;text-align:right">Backtest</th>
+            <th style="padding:0.75rem;text-align:right">Az éles valóság</th>
+            <th style="padding:0.75rem;text-align:right">Eltérés</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Találati arány</td>
+            <td style="padding:0.75rem;text-align:right">67.3%</td>
+            <td style="padding:0.75rem;text-align:right">51.4% (19W / 18L)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">15,9 ponttal rosszabb</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Átl. nyereség</td>
+            <td style="padding:0.75rem;text-align:right">+2.4R (+$1,200)</td>
+            <td style="padding:0.75rem;text-align:right">+1.8R (+$900)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">25 %-kal kisebb</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Átl. veszteség</td>
+            <td style="padding:0.75rem;text-align:right">-1R (-$500)</td>
+            <td style="padding:0.75rem;text-align:right">-1.3R (-$650)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">30 %-kal nagyobb</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Profitfaktor</td>
+            <td style="padding:0.75rem;text-align:right">4.9</td>
+            <td style="padding:0.75rem;text-align:right">1.46</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">70 %-os összeomlás</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Várható érték</td>
+            <td style="padding:0.75rem;text-align:right">+1.3R</td>
+            <td style="padding:0.75rem;text-align:right">költségek után -0,45R</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-1,75R NEGATÍV</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Legnagyobb drawdown</td>
+            <td style="padding:0.75rem;text-align:right">-8.2%</td>
+            <td style="padding:0.75rem;text-align:right">-21.4%</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">2,6-szor rosszabb</span></td>
+          </tr>
+          <tr style="background:rgba(255,82,82,0.25)">
+            <td style="padding:0.75rem">Teljes hozam (10 hét)</td>
+            <td style="padding:0.75rem;text-align:right">+9 600 $ előrejelzett</td>
+            <td style="padding:0.75rem;text-align:right"><strong>-$8,400 (-16.8%)</strong></td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252;font-weight:bold">18 000 $ szakadék</span></td>
+          </tr>
+        </table>
+        </div>
+
+        <h5>A teljes költségelszámolás: hová tűnt az a 18 000 $</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">A teljesítménykülönbség anatómiája (37 ügylet, 10 hét)</caption>
+          <tr style="background:rgba(118,221,255,0.15);border-bottom:2px solid rgba(118,221,255,0.3)">
+            <th style="padding:0.75rem;text-align:left">Költségtétel</th>
+            <th style="padding:0.75rem;text-align:left">Leírás</th>
+            <th style="padding:0.75rem;text-align:right">Hatás</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>1. Túlillesztés (görbeillesztés)</strong></td>
+            <td style="padding:0.75rem">Az EMA(34) + 1,47× ATR tökéletesen működött a 2022-2023-as adatokon, de a történelmi zajra volt optimalizálva. A 2024-es piaci körülmények = másfajta zaj.</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$6,200</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>2. Slippage (nem volt modellezve)</strong></td>
+            <td style="padding:0.75rem">Ügyletenként átlagosan 0,08 % slippage × 25 000 $ átlagos pozíció × 37 ügylet oda-vissza = 1 480 $ slippage-költség</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$1,480</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>3. Vételi-eladási különbözet</strong></td>
+            <td style="padding:0.75rem">SPY-spread 0,01 $ × átlagosan 500 részvény × 37 ügylet = 185 $. Opciók (a tőkeáttétel miatt): spread = 0,03 $ részvényenként × 100 részvény kontraktusonként × 20 kontraktus × 37 ügylet = 2 220 $ teljes spreadköltség</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$2,405</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>4. Jutalékok</strong></td>
+            <td style="padding:0.75rem">Opciók: 0,65 $ kontraktusonként × 20 kontraktus × 37 ügylet × 2 (oda-vissza) = 962 $</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$962</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>5. Visszautasított megbízások</strong></td>
+            <td style="padding:0.75rem">8 ügyletnél a limitáras megbízások sosem teljesültek (5 nyertes és 3 vesztes maradt ki). Nettó elmaradt haszon: 5 kimaradt nyertes egyenként +1,8R (-9R), mínusz 3 elkerült vesztes egyenként -1,3R (+3,9R) = -5,1R = 2 550 $</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$2,550</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>6. Előretekintési torzítás</strong></td>
+            <td style="padding:0.75rem">A backtest kódja close[0]-val számolta a belépőt, és ugyanannak a gyertyának a záróárán lépett be (élesben lehetetlen). Élesben a belépő a következő gyertya nyitóára. Átlagosan 0,3 %-kal rosszabb belépő = 2 775 $ romlás</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$2,775</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>7. Végrehajtási késés</strong></td>
+            <td style="padding:0.75rem">A platform késleltetése + a megbízás átnézésének ideje = 2-8 másodperc csúszás. A gyors kitörések átlagosan 0,15 %-ot elszaladtak a teljesülésig = 1 387 $ slippage a késésekből</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$1,387</span></td>
+          </tr>
+          <tr style="background:rgba(255,82,82,0.2)">
+            <td colspan="2" style="padding:0.75rem;text-align:right;font-weight:bold">TELJES ROMLÁS A BACKTESTHEZ KÉPEST:</td>
+            <td style="padding:0.75rem;text-align:right;font-weight:bold"><span style="color:#ff5252;font-size:1.1rem">-$17,759</span></td>
+          </tr>
+        </table>
+        </div>
+
+        <p><strong>A matek:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>A backtest által előrejelzett nyereség (10 hét): +9 600 $</li>
+          <li>Mínusz a romlási költségek: -17 759 $</li>
+          <li>Várható éles eredmény: -8 159 $</li>
+          <li>Tényleges éles eredmény: -8 400 $ — az elszámolás 250 dolláron belül eltalálja, ami valóban történt</li>
+        </ul>
+
+        <h5>Mit kellett volna tenni: az ellenőrzés rendesen</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <tr style="background:rgba(34,197,94,0.15);border-bottom:2px solid rgba(34,197,94,0.3)">
+            <th style="padding:0.75rem;text-align:left">Lépés</th>
+            <th style="padding:0.75rem;text-align:left">Amit Chris tett (rosszul)</th>
+            <th style="padding:0.75rem;text-align:left">Amit tenni kellene (jól)</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>1. Az adatok felosztása</strong></td>
+            <td style="padding:0.75rem">A 2022-2023-as adatok mindegyikét optimalizálásra használta</td>
+            <td style="padding:0.75rem">2022-n optimalizálj, 2023-at tartsd félre a mintán kívüli teszthez</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>2. Optimalizálás</strong></td>
+            <td style="padding:0.75rem">15 000 paraméterkombinációt próbált ki</td>
+            <td style="padding:0.75rem">Használj szokásos paramétereket (EMA 20/50, 2× ATR stopok). A próbálkozást tartsd 10 változat alatt</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>3. Költségmodellezés</strong></td>
+            <td style="padding:0.75rem">Nulla költséget feltételezett</td>
+            <td style="padding:0.75rem">Számolj ügyletenként 0,10 % slippage-et + 0,01 $ spreadet + 2 $ jutalékot = legalább -30 $ ügyletenként</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>4. Előretekintés ellenőrzése</strong></td>
+            <td style="padding:0.75rem">Ugyanannak a gyertyának a záróárát használta a jelhez és a végrehajtáshoz is</td>
+            <td style="padding:0.75rem">Jel close[0]-nál, végrehajtás open[1]-nél (a következő gyertyán). Reális időzítés.</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>5. Mintán kívüli teszt</strong></td>
+            <td style="padding:0.75rem">Soha nem próbálta ki nem látott adaton</td>
+            <td style="padding:0.75rem">Teszteld a 2023-as adaton (érintetlenül). Ha a teljesítmény több mint 30 %-ot romlik, a stratégia túlillesztett</td>
+          </tr>
+          <tr>
+            <td style="padding:0.75rem"><strong>6. Walk-forward</strong></td>
+            <td style="padding:0.75rem">Egyetlen backtest-időszak</td>
+            <td style="padding:0.75rem">6 hónapos optimalizálási ablakok, teszt a következő 3 hónapon. Előregörgetve ismételd. Nézd a következetességet.</td>
+          </tr>
+        </table>
+        </div>
+
+        <h5>A mintán kívüli teszt, amelyet Chrisnek el kellett volna végeznie</h5>
+
+        <p><strong>A helyes módszer:</strong></p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>Mintán belüli időszak:</strong> Csak a 2022-es adaton optimalizálj (2023-hoz ne nyúlj)</li>
+          <li><strong>Keresd meg a paramétereket:</strong> EMA(34) + 1,47× ATR (ugyanaz az eredmény, de csak 2022-ből)</li>
+          <li><strong>Rögzítsd a paramétereket:</strong> TÖBB VÁLTOZTATÁS NINCS. A paraméterek befagyasztva.</li>
+          <li><strong>Mintán kívüli teszt:</strong> Futtasd pontosan ugyanezeket a paramétereket a 2023-as adaton</li>
+          <li><strong>Hasonlítsd össze az eredményeket:</strong> Ha a 2023-as teljesítmény a 2022-es 70 %-a alá esik, a stratégia túlillesztett</li>
+        </ol><p><strong>Mi történt volna:</strong></p>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <tr style="background:rgba(255,193,7,0.15);border-bottom:2px solid rgba(255,193,7,0.3)">
+            <th style="padding:0.75rem;text-align:left">Időszak</th>
+            <th style="padding:0.75rem;text-align:right">Várható érték</th>
+            <th style="padding:0.75rem;text-align:right">Profitfaktor</th>
+            <th style="padding:0.75rem;text-align:left">Ítélet</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,193,7,0.1)">
+            <td style="padding:0.75rem">2022 (mintán belül)</td>
+            <td style="padding:0.75rem;text-align:right">+1.4R</td>
+            <td style="padding:0.75rem;text-align:right">3.1</td>
+            <td style="padding:0.75rem">Optimalizált teljesítmény</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,193,7,0.1)">
+            <td style="padding:0.75rem">2023 (mintán kívül)</td>
+            <td style="padding:0.75rem;text-align:right">+0.4R</td>
+            <td style="padding:0.75rem;text-align:right">1.4</td>
+            <td style="padding:0.75rem"><span style="color:#fbbf24">⚠️ 71 %-os romlás</span></td>
+          </tr>
+          <tr style="background:rgba(255,193,7,0.2)">
+            <td colspan="4" style="padding:0.75rem;font-weight:bold">
+              <strong>Következtetés:</strong> A stratégia súlyosan túlillesztett. A 2023-as várható érték a 2022-esnek a 29 %-a. Reális költségekkel (ügyletenként -30 $ = -0,15R) a nettó várható érték +0,25R marad (épp csak nulla fölött). <span style="color:#ff5252">NE INDÍTSD EL.</span>
+            </td>
+          </tr>
+        </table>
+        </div>
+
+        <p><b>A tanulság: Chris backtestje ábránd volt. Ha 15 000 paraméterkombinációt próbálsz ki, garantáltan találsz egyet, amely tökéletesen ráfekszik a történelmi zajra. Az a „tökéletes” 1,3R várható érték görbére illesztett szemét volt. Egy mintán kívüli teszt ezt megmutatta volna, mielőtt elúszott az a 8 400 $. A backtesting nem arról szól, hogy megtaláld a legjobb múltbeli teljesítményt, hanem hogy megtaláld, ami ezután fog működni. Ehhez pedig nem látott adat, reális költségek és nulla előretekintési torzítás kell.</b></p>
+      </div>
+
+      <div class="section-break"><span>1. rész: a négy mód, ahogy a backtestek hazudnak</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          Mélyebben: miért nem érnek semmit a backtesting eredményei (és mit csinálj helyette) →
+        </a>
+      </div>
+
+<h2 id="why-your-perfect-strategy-will-fail-live">Miért fog elbukni élesben a tökéletes stratégiád</h2>
+
+      <p>Kezdjük a kényelmetlen igazsággal: ha úgy optimalizáltál egy stratégiát, hogy illeszkedjen a történelmi adatokhoz, akkor nem előnyt találtál. Zajt találtál.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">1. probléma: túlillesztés</button>
+          <button>2. probléma: előretekintési torzítás</button>
+          <button>3. probléma: végrehajtási ábránd</button>
+          <button>4. probléma: túlélési torzítás</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">A görbe ráillesztése véletlen zajra</h3>
+            <p><strong>Mi ez:</strong> Addig csavarni a paramétereket, amíg a backtest tökéletesen nem fest</p>
+            <p><strong>Példa:</strong></p>
+            <ul>
+              <li>Kipróbálsz 100 különböző EMA-periódust (10, 11, 12… 110)</li>
+              <li>Az EMA(47) 4,2R várható értéket ad a backtestben</li>
+              <li>Azt hiszed, megtaláltad a „bűvös számot”</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Az EMA(47) pusztán véletlenül illeszkedett arra a konkrét adathalmazra. És előretesztelve? -0,8R várható érték. A zajt tanultad meg, nem a jelet.</p>
+            <p><strong>Jobb:</strong> Fogd vissza az optimalizálást. Használj szokásos paramétereket. Tesztelj nem látott adaton.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">Jövőbeli adatok használata (élesben lehetetlen)</h3>
+            <p><strong>Mi ez:</strong> Kód, amely a jövőbeli gyertyákba „kukucskál”, hogy most döntsön</p>
+            <p><strong>Példa:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # a JÖVŐBELI 5 gyertyát használja
+    enter_long()</code></pre>
+            <p><strong>A probléma:</strong> A backtestingben megvannak a jövőbeli adatok. Élesben nincsenek.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Ez a kód élesben egyszerűen nem tud lefutni. A backtested olyan stratégiát tesztel, amely nem létezik.</p>
+            <p><strong>Jobb:</strong> Csak azokat az adatokat használd, amelyek a döntés pillanatában elérhetők.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">Tökéletes teljesüléseket feltételezni tökéletes árakon</h3>
+<p><strong>A backtest feltevése:</strong> „Pontosan 100,00 dolláron veszek”</p>
+            <p><strong>A valóság:</strong> A piaci megbízás 100,12 dolláron teljesül (spread + slippage)</p>
+            <p><strong>Hatás 100 ügyleten:</strong></p>
+            <ul>
+              <li>A backtest nyeresége: 5 000 $</li>
+              <li>Spreadköltség (0,10 $ ügyletenként): -1 000 $</li>
+              <li>slippage (0,05 $ ügyletenként): -500 $</li>
+              <li>Jutalékok (2 $ ügyletenként): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Valódi nyereség = 3 300 $ (34 %-kal kevesebb, mint a backtestben)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">Csak a túlélőkön tesztelni</h3>
+            <p><strong>Mi ez:</strong> Backtestinget csak a mai S&P 500-részvényeken végezni</p>
+            <p><strong>A probléma:</strong> Kihagysz több mint 200 részvényt, amelyet kivezettek vagy csődbe ment</p>
+            <p><strong>Példa:</strong></p>
+            <ul>
+              <li>Backtest a 2024-es S&P 500-listán: 1,8R várható érték, 2,1-es profitfaktor</li>
+              <li>De ebben az időszakban long lettél volna a Hertzben (2020-ban csődbe ment), az SVB Financialben (2023-ban összeomlott) és minden más névben, amely nullára futott.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> A várható értéked kihagyja a kivezetésekből eredő katasztrofális veszteségeket. A valódi várható érték: -0,2R (veszteséges rendszer).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 az aha-pillanat</h4>
+        <p>A backtest nem a valóság. Szimuláció. És ha a szimulációdban lehetetlen feltevések vannak, az éles eredményeid is ugyanolyan lehetetlenek lesznek.</p>
+      </div>
+
+      <div class="section-break"><span>2. rész: reális költségek modellezése</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">A rejtett költségek, amelyek megölik a stratégiákat</h2>
+
+      <p>Ezt hagyja figyelmen kívül a legtöbb backtest — és ezért a tiéd is alighanem 20-40 %-kal derűlátóbb a kelleténél:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">1. lépés: modellezd a vételi-eladási különbözetet</summary>
+          <div class="accordion-content">
+            <p><strong>Mi ez:</strong> A vételi és az eladási ár közti különbség</p>
+            <p><strong>Példa:</strong></p>
+            <ul>
+              <li>SPY vétel: 450,00 $ / eladás: 450,01 $ → spread = 0,01 $</li>
+              <li>Veszel: 450,01 dollárt fizetsz (fél spread = 0,005 $)</li>
+              <li>Eladsz: 450,00 dollárt kapsz (fél spread = 0,005 $)</li>
+            </ul>
+            <p><strong>Költség oda-vissza:</strong> $0.01</p>
+            <p><strong>1 000 részvényre:</strong> 0,01 $ × 1 000 = 10 $ ügyletenként</p>
+            <p><strong>100 ügylet:</strong> 1 000 $ spreadköltség</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">2. lépés: modellezd a slippage-et</summary>
+          <div class="accordion-content">
+            <p><strong>Mi ez:</strong> A szándékolt ár és a tényleges teljesülés közti különbség</p>
+            <p><strong>Reális slippage a körülmények szerint:</strong></p>
+            <ul>
+              <li><strong>Normál likviditás:</strong> 0.01-0.02%</li>
+              <li><strong>Volatilis piacok:</strong> 0.05-0.10%</li>
+              <li><strong>Vékony likviditás:</strong> 0.10-0.30%</li>
+              <li><strong>Nagy pozícióméret:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>Óvatos feltevés:</strong> 0,05 % ügyletenként</p>
+            <p>10 000 dolláros pozíció × 0,05 % = 5 $ slippage oldalanként = 10 $ oda-vissza</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">3. lépés: modellezd a jutalékokat</summary>
+          <div class="accordion-content">
+            <p><strong>Példa: Interactive Brokers</strong></p>
+            <ul>
+              <li>0,005 $ részvényenként, minimum 1 $</li>
+              <li>200 részvény × 0,005 $ = 1 $ oldalanként</li>
+              <li>Oda-vissza = 2 $</li>
+            </ul>
+            <p><strong>100 ügylet:</strong> 200 $ jutalék</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">4. lépés: a teljes reális költség</summary>
+          <div class="accordion-content">
+            <p><strong>Ügyletenként (oda-vissza):</strong></p>
+            <ul>
+              <li>Spread: 10 $</li>
+              <li>slippage: 10 $</li>
+              <li>Jutalék: 2 $</li>
+            </ul>
+            <p><strong>Összesen: 22 $ ügyletenként</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Ha a stratégiád ügyletenként 50 $ bruttót hoz → 28 $ nettó (44 %-kal kevesebb!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">Példa a backtest kiigazítására</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>Reális költségek előtt és után</h4>
+        <p><strong>Stratégia: 100 ügylet, ügyletenként átlagosan 50 $ nyereség</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Backtest (ábránd):</strong></p>
+        <p>100 ügylet × 50 $ = 5 000 $ nyereség</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Reális költségek után:</strong></p>
+        <ul>
+          <li>Bruttó: 5 000 $</li>
+          <li>Spread: -1 000 $</li>
+          <li>slippage: -1 000 $</li>
+          <li>Jutalékok: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Nettó nyereség: 2 800 $ (44 %-kal kevesebb)</p>
+      </div>
+
+      <div class="section-break"><span>3. rész: mintán belül és mintán kívül</span></div>
+<h2 id="the-only-validation-that-matters">Az egyetlen ellenőrzés, ami számít</h2>
+
+      <p>Így ellenőriznek a profik egy stratégiát:</p>
+
+      <p><strong>Oszd az adataidat két időszakra.</strong></p>
+
+      <ol>
+        <li><strong>Mintán belül (60-70 %):</strong> Itt fejleszted és optimalizálod a stratégiádat</li>
+        <li><strong>Mintán kívül (30-40 %):</strong> Ellenőrzés NEM LÁTOTT adaton</li>
+      </ol>
+
+      <div class="callout-tip">
+        <h4>🎯 Példa: 6 év adat (2018-2024)</h4>
+        <p><strong>Mintán belül:</strong> 2018-2022 (itt optimalizálj)</p>
+        <ul>
+          <li>Próbálj ki különböző paramétereket</li>
+          <li>Keresd meg a legjobban teljesítő szabályokat</li>
+          <li>Csiszold a belépési és kilépési logikát</li>
+        </ul>
+        <p style="margin-top:1rem"><strong>Mintán kívül:</strong> 2023-2024 (itt ellenőrizz)</p>
+        <ul>
+          <li>Futtasd a stratégiát BÁRMIFÉLE változtatás nélkül</li>
+          <li>Vesd össze a teljesítményt a mintán belülivel</li>
+          <li>Ha hasonló → nincs túlillesztve!</li>
+          <li>Ha jóval rosszabb → a mintán belüli zajra illesztetted</li>
+        </ul>
+      </div>
+<h3 id="red-flags-of-overfitting">A túlillesztés vészjelzései</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(255,107,107,.12);border-radius:12px">
+        <h4>🚩 Jelek, hogy a stratégiád görbére van illesztve</h4>
+        <ul>
+          <li><strong>3,0 fölötti Sharpe:</strong> Túl szép, hogy igaz legyen</li>
+          <li><strong>5R fölötti várható érték:</strong> Rendkívül ritka (ellenőrizd a végrehajtási feltevéseidet)</li>
+          <li><strong>Csak 20-30 ügylet:</strong> Túl kicsi minta (statisztikailag értelmetlen)</li>
+          <li><strong>Tökéletes tőkegörbe:</strong> Sima vonal drawdown nélkül (lehetetlen)</li>
+          <li><strong>Egyetlen eszközön tesztelve:</strong> Alighanem arra a konkrét rezsimre illesztve</li>
+          <li><strong>10 vagy több optimalizált paraméter:</strong> A zajt illesztetted, nem a jelet</li>
+        </ul>
+      </div>
+
+      <div class="section-break"><span>4. rész: walk-forward elemzés</span></div>
+<h2 id="the-professional-validation-method">A profi ellenőrzési módszer</h2>
+
+      <p>A mintán belül és kívül jó. A walk-forward jobb.</p>
+
+      <p><strong>Hogyan működik:</strong></p>
+
+      <div style="margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg, rgba(91,138,255,.12), rgba(118,221,255,.08));border-radius:16px">
+        <h4 style="margin-top:0">📊 A walk-forward keret</h4>
+        <p><strong>1. időszak:</strong> Tanítás 2018-2019-en → teszt 2020-on</p>
+        <p><strong>2. időszak:</strong> Tanítás 2019-2020-on → teszt 2021-en</p>
+        <p><strong>3. időszak:</strong> Tanítás 2020-2021-en → teszt 2022-n</p>
+        <p><strong>4. időszak:</strong> Tanítás 2021-2022-n → teszt 2023-on</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Ha minden időszakon következetes:</strong> Robusztus stratégia</p>
+        <p><strong>Ha a teljesítmény romlik:</strong> Túlillesztett vagy rezsimfüggő</p>
+      </div>
+
+      <div class="key-takeaway">
+        <h4>🎓 A lényeg</h4>
+        <ul>
+          <li><strong>Modellezz reális költségeket:</strong> Spread, slippage, jutalékok (20-40 %-kal kevesebb nyereség)</li>
+          <li><strong>Kerüld a túlillesztést:</strong> Fogd vissza a paramétereket, tesztelj több piacon</li>
+          <li><strong>Mintán belül és mintán kívül:</strong> Fejlessz a 60-70 %-on, ellenőrizz a 30-40 %-on</li>
+          <li><strong>Walk-forward teszt:</strong> Ellenőrizd a következetességet az időben</li>
+          <li><strong>Vészjelzések:</strong> 3,0 fölötti Sharpe, 5R fölötti várható érték, 30-nál kevesebb ügylet</li>
+          <li><strong>Előreteszt az éles indulás előtt:</strong> Legalább 3-6 hónap papíron</li>
+        </ul>
+      </div>
+<div class="section-break"><span>Gyakorlat</span></div>
+
+      <div class="callout-key">
+        <h4>🎯 Backtest-ellenőrzési gyakorlat</h4>
+        <p><strong>Gyakorlat: ellenőrizd a stratégiádat a vészjelzés-detektorral</strong></p>
+        <p>Vedd a jelenlegi stratégiádat (vagy egyet, amelyen gondolkodsz), és futtasd át az ellenőrzésen:</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>Backtesteld az adataid 60 %-án (mintán belül). Jegyezd fel: ügyletszám, várható érték, Sharpe, legnagyobb DD</li>
+          <li>Írd össze a használt paramétereket (EMA-k, küszöbök stb.). Több érték kipróbálásával optimalizáltad őket?</li>
+          <li>Teszteld a maradék 40 %-on (mintán kívül). Vesd össze a mintán belüli eredménnyel.</li>
+          <li>Használd a sablon ellenőrzési pontkártyáját (8 kategória, maximum 60 pont)</li>
+          <li>Számold ki a pontszámod: 50-60 = mehet, 40-49 = át kell dolgozni, 40 alatt = kukázd</li>
+          <li>Ha a pontszám eléri az 50-et: kereskedj 30-60 ügyletet papíron, mielőtt élesbe mennél</li>
+        </ol>
+        <p style="margin-top:1rem"><strong>Cél:</strong> Kapd el a görbeillesztést, az előretekintési torzítást és az irreális feltevéseket, MIELŐTT szétverik az éles számládat. Jobb egy rossz stratégiát a backtesting szakaszában kidobni, mint valódi pénzt veszíteni.</p>
+      </div>
+
+      <div class="section-break"><span>Ellenőrizd, mit értettél meg</span></div>
+
+      <div class="quiz">
+        <h4>🎮 Gyors ellenőrzés</h4>
+
+        <div class="quiz-question">
+          <p><strong>K: Backtestelsz egy stratégiát: 5,2R várható érték, 4,2-es Sharpe-mutató, 25 ügyleten tesztelve, EMA(47)-tel, mert az adta a legjobb eredményt 100 különböző periódus kipróbálása után. Mi a baj vele?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">A) Semmi — remek stratégia!</div>
+            <div class="quiz-option" data-correct="true">B) Minden: túl kicsi a minta, túl magas a Sharpe és a várható érték, az EMA(47) pedig görbére illesztett</div>
+            <div class="quiz-option" data-correct="false">C) Csak a várható érték túl magas</div>
+            <div class="quiz-option" data-correct="false">D) Csak a minta túl kicsi</div>
+          </div>
+          <div class="quiz-feedback">
+            <strong>Helyes!</strong> Három komoly vészjelzés: (1) mindössze 25 ügylet = statisztikailag jelentéktelen, (2) 4,2-es Sharpe = gyanúsan magas (valószínűleg túlillesztett), (3) a 100 periódus kipróbálásával talált EMA(47) = a zajra illesztve. Ez a stratégia élesben elbukik. Kell hozzá: több mint 100 ügylet, reális Sharpe (1,5-2,5) és szokásos paraméterek.
+          </div>
+        </div>
+
+        <div class="quiz-question" style="margin-top:2rem">
+          <p><strong>Backtestelsz egy átlaghoz visszatérő stratégiát az SPY-on 2010-től 2024-ig. Eredmények: 2,8R várható érték, 68 % találati arány, 120 000 $ nyereség. Az adatok csak az S&P 500 mai összetevőit tartalmazzák (a ma az indexben lévő részvényeket). 2025-ben élesbe mész — és elbukik. Mi ment félre?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">A) Semmi: a 2025-ös piaci körülmények megváltoztak, ez előre nem látható</div>
+            <div class="quiz-option" data-correct="true">B) Túlélési torzítás: a backtest kihagyta azoknak a részvényeknek a 30-40 %-át, amelyeket 2010 és 2024 között kivezettek vagy csődbe mentek</div>
+            <div class="quiz-option" data-correct="false">C) Túl kicsi a minta: 14 évnél több adat kell</div>
+            <div class="quiz-option" data-correct="false">D) Túl magas a várható érték: átlaghoz visszatérésnél a 2,8R irreális</div>
+          </div>
+          <div class="quiz-feedback">
+            <strong>Helyes!</strong> A túlélési torzítás klasszikus csapdája. Az „S&P 500 mai összetevőin” tesztelni azt jelenti, hogy csak a NYERTESEKET tesztelted: olyan részvényeket, amelyek túléltek 14 évet, és bekerültek a mai indexbe. Kihagytad a csődbe ment cégeket, a kivezetett részvényeket és a megbukott vállalkozásokat (az összes 30-40 %-át). Éppen ezek a halott részvények indították volna el az átlaghoz visszatérő belépőidet, és soha nem álltak volna talpra. Pontosan ez az, ami a fenti példa 1,8R-es várható értékét a valóságban -0,2R-ré teszi. Megoldás: használj point-in-time adatot, amely MINDEN egyes dátumon létező részvényt tartalmaz, a később kivezetetteket is. A túlélési torzítás 20-50 %-kal felfújja a backtest eredményeit.
+          </div>
+        </div>
+
+        <div class="quiz-question" style="margin-top:2rem">
+          <p><strong>Walk-forward teszteled a stratégiádat: tanítás 2018-2020, teszt 2021-en (átment). Tanítás 2018-2021, teszt 2022-n (átment). Tanítás 2018-2022, teszt 2023-on (átment). Sem a slippage-et, sem a jutalékokat nem modellezted. Kereskedd ezt a stratégiát élesben?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">A) Igen — minden walk-forward teszten átment, robusztus stratégia</div>
+            <div class="quiz-option" data-correct="true">B) Nem — előbb reális költségeket kell hozzáadni (0,2-0,4 % slippage plusz jutalékok), és újratesztelni. Ha akkor is nyereséges, akkor igen.</div>
+            <div class="quiz-option" data-correct="false">C) Igen — a walk-forward ellenőrzés elég, a költségek alig számítanak</div>
+            <div class="quiz-option" data-correct="false">D) Nem — az ellenőrzéshez legalább 10 walk-forward időszak kell</div>
+          </div>
+          <div class="quiz-feedback">
+            <strong>Helyes!</strong> A walk-forward tesztek a robusztusságot igazolják (vagyis hogy nem egyetlen időszakra van illesztve), de élesbe menés előtt KÖTELEZŐ reális költségeket modellezned. A slippage (oldalanként 0,1-0,2 % = oda-vissza 0,2-0,4 %) plusz a jutalékok (ügyletenként 2-5 $) 30-60 %-kal is levághatják a várható értéket. Egy költségek nélkül 2,5R várható értékű stratégia költségekkel akár 1,2R-re is eshet — még nyereséges, de éppen csak. A fenti Chris-eset pontosan ez a bukás: egy 1,3R-es backtest, amely élesben -0,45R lett, amint a költségek valódivá váltak. A költségeket UTOLJÁRA add hozzá (a walk-forward után); ha a várható érték 1,5R fölött, a találati arány pedig 45 % fölött marad, mehet élesben. Soha ne hagyd ki a költségmodellezést — ez választja el a nyereséget a fájdalomtól.
+          </div>
+        </div>
+
+        <button class="btn btn-primary quiz-submit">Válaszok megtekintése</button>
+      </div>
+
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">A backtestingben a tökéletesség gyanús. Az előnyt a valósághűség adja. Modellezd a költségeket, kerüld a túlillesztést, tesztelj előre — vagy bukj élesben.</p>
+
+      <h3 style="margin-bottom:1.5rem">Kapcsolódó leckék</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
+        <div class="card" style="padding:1rem">
+          <span class="badge">Haladó alap #34</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">A kereskedési napló mesterfoka</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Kövesd az éles teljesítményt, és vesd össze a backtest eredményeivel.</p>
+          <a href="/education/curriculum/intermediate/34-trade-journal-mastery.html" class="btn btn-sm btn-ghost">Lecke elolvasása &rarr;</a>
+        </div>
+        <div class="card" style="padding:1rem">
+          <span class="badge">Kezdő #9</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Pozícióméretezés</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Használj helyes pozícióméretezést a backtestekben is, hogy reálisak legyenek az eredmények.</p>
+          <a href="/education/curriculum/beginner/09-position-sizing.html" class="btn btn-sm btn-ghost">Lecke elolvasása &rarr;</a>
+        </div>
+        <div class="card" style="padding:1rem">
+          <span class="badge">Középhaladó #30</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Rezsimfelismerés</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Teszteld a stratégiádat minden rezsimben, hogy lásd, mennyire robusztus.</p>
+          <a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" class="btn btn-sm btn-ghost">Lecke elolvasása &rarr;</a>
+        </div>
+      </div>
+
+      <div class="callout-info">
+        <h4>⏭️ Következik</h4>
+        <p><strong>33. lecke: haladó kockázatkezelés — a profi keretek</strong> — Ismerd meg a Kelly-kritériumot, a dinamikus pozícióméretezést és a drawdown-eljárásokat.</p>
+      </div>
+
+      <blockquote><strong>Kizárólag oktatási célra.</strong> A kereskedés jelentős veszteségkockázattal jár. A múltbeli teljesítmény nem garantálja a jövőbeli eredményeket.</blockquote>
+
+      <!-- Discussion Section -->
+      <div class="discussion-section" id="discussion-section">
+        <button class="discussion-toggle" id="discussion-toggle" style="display:none">
+          <span>💬 Beszélgetés (<span id="discussion-count-mobile">0</span>)</span>
+          <span class="discussion-toggle-icon">+</span>
+        </button>
+        <div class="discussion-content">
+          <div class="discussion-header">
+            <h2 class="discussion-title">💬 Beszélgetés <span class="discussion-count" id="discussion-count">(0 hozzászólás)</span></h2>
+            <div class="discussion-sort">
+              <label for="discussion-sort">Rendezés:</label>
+              <select id="discussion-sort">
+                <option value="recent">Legújabb</option>
+                <option value="top">Legjobbra értékelt</option>
+                <option value="oldest">Legrégebbi</option>
+              </select>
+            </div>
+          </div>
+          <div class="comment-composer" id="comment-composer">
+            <textarea id="comment-input" placeholder="Oszd meg a gondolataidat, tegyél fel kérdést vagy beszélgess a leckéről…" maxlength="1000"></textarea>
+            <div class="comment-composer-actions">
+              <span class="comment-char-count" id="comment-char-count">0/1000</span>
+              <button class="btn btn-primary" id="post-comment-btn">Hozzászólás küldése</button>
+            </div>
+          </div>
+          <div class="comments-list" id="comments-list">
+            <div class="comments-loading">
+              <div class="comments-loading-spinner"></div>
+              <p>Hozzászólások betöltése…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-article">
+        <a class="btn btn-ghost" href="/education/curriculum/intermediate/31-portfolio-construction.html">← Előző lecke</a>
+        <a class="btn btn-primary" href="/education/curriculum/intermediate/33-advanced-risk-management.html">Következő lecke →</a>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <div class="lesson-actions">
+        <button id="bookmark-btn" class="btn btn-secondary btn-sm btn-block" onclick="window.library?.isBookmarked() ? window.library.removeBookmark() : window.library.addBookmark({title:document.title})">🔖 Mentés</button>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm btn-block">📄 Mentés PDF-be</button>
+      </div>
+
+      <div class="sidebar-links" style="margin-top:1.5rem">
+        <a href="https://www.signalpilot.io" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          ⚡ Signal Pilot csomag
+        </a>
+        <a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💬 Beszéljük meg a Discordon
+        </a>
+        <a href="https://www.signalpilot.io/affiliates.html" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💰 Keress 15-30 %-ot partnerként
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Back to Signal Pilot CTA -->
+  <div class="wrap" style="margin: 3rem auto 0;">
+    <div style="background: linear-gradient(135deg, rgba(153,102,255,0.15), rgba(138,91,255,0.1)); border: 1px solid rgba(153,102,255,0.3); border-radius: 8px; padding: 2rem; text-align: center;">
+      <h3 style="margin: 0 0 0.75rem 0; font-size: 1.25rem;">Készen állsz a Signal Pilottal kereskedni?</h3>
+      <p style="margin: 0 0 1.25rem 0; color: var(--muted);">Váltsd gyakorlatra a tanultakat professzionális indikátorokkal és valós idejű piacelemző eszközökkel.</p>
+      <a href="https://www.signalpilot.io" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        Vissza a Signal Pilothoz →
+      </a>
+    </div>
+  </div>
+  <blockquote class="sp-disclaimer"><strong>Kizárólag oktatási célra.</strong> A kereskedés jelentős veszteségkockázattal jár. Ez nem pénzügyi tanácsadás. A múltbeli teljesítmény nem garantálja a jövőbeli eredményeket.</blockquote>
+</article>
+
+<footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Beszéljük meg a Discordon</a><a href="https://www.signalpilot.io/affiliates.html">Partnerprogram</a><a href="https://www.signalpilot.io/privacy.html">Adatvédelem</a><a href="https://www.signalpilot.io/terms.html">Feltételek</a></div></div></footer>
+
+<script src="/education/assets/edu.js"></script>
+<script src="/education/assets/edu-enhanced.js"></script>
+<script src="/education/assets/sp-bg.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<!-- SignalPilot Theme Switcher -->
+<script src="/education/assets/signalpilot-theme.js"></script>
+<script src="/education/assets/spaced-repetition.js" defer></script>
+<script src="/education/assets/chatbot.js" defer></script>
+<script src="/education/assets/notes.js" defer></script>
+<script src="/education/assets/analytics.js"></script>
+<script src="/education/assets/quiz-enhanced.js"></script>
+<script src="/education/assets/social-share.js"></script>
+<script src="/education/assets/pwa-init.js"></script>
+<script src="/education/assets/config.js"></script>
+<script src="/education/assets/supabase-client.js"></script>
+<script src="/education/assets/auth-ui.js"></script>
+  <script src="/education/assets/library.js"></script>
+  <script>window.addEventListener('load',function(){if(window.library?.isBookmarked()){var b=document.getElementById('bookmark-btn');if(b)b.innerHTML='⭐ Bookmarked'}})</script>
+    <!-- Enhanced Analytics & A/B Testing -->
+  <script src="/education/assets/enhanced-analytics.js" defer></script>
+  <script src="/education/assets/ab-test-tldr.js" defer></script>
+  <!-- Google Translate -->
+  <script src="/education/assets/lang-switcher.js"></script>
+  <!-- Discussion System -->
+    <script src="/education/assets/trial-cta.js"></script>
+  <script src="/education/assets/blog-links.js"></script>
+  <script src="/education/assets/discussions.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.DiscussionSystem) {
+        window.DiscussionSystem.init('intermediate-32-backtesting-reality');
+      }
+    });
+  </script>
+  <script defer src="/assets/js/view-counter.js"></script>
+</body>
+</html>
