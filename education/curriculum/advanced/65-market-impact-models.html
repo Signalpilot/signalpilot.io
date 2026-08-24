@@ -117,7 +117,7 @@
 
       <div class="callout callout-danger">
         <h4>💰 The $1 Million Mistake</h4>
-        <p>A hedge fund decides to buy $100M of NVDA (approximately 800K shares @ $125). They submit a market order, thinking the spread ($0.01) is the only cost. Within minutes, their order exhausts the order book, pushing price from $125.00 → $126.25.</p>
+        <p>A hedge fund decides to buy $100M of NVDA (approximately 800K shares @ $125). They submit a market order, thinking the spread ($0.01) is the only cost. Within minutes, their order exhausts the order book, pushing price from $125.00 to $127.50 before the last child order fills. The average fill comes in at $126.25 — $1.25 above the price they saw when they hit send.</p>
         <p><strong>Cost breakdown:</strong> Commission: $0. Spread: $8,000 (800K × $0.01). Market impact: $1,000,000 (800K × $1.25 average slippage).</p>
         <p><strong>Lesson:</strong> Market impact exceeds spread by 125× for large orders. Institutions that ignore impact models burn millions.</p>
       </div>
@@ -129,7 +129,7 @@
           <li>Market impact: Large orders move price against you</li>
           <li>Square root law: 2x order size = 1.41x impact (not 2x)</li>
           <li>Minimize impact: Break into smaller orders, use limit orders, trade liquid hours</li>
-          <li>Framework: Calculate impact = k × √(shares/ADV) where k=0.1-0.5 → If >0.5%, split order</li>
+          <li>Framework: Calculate impact = k × σ × √(shares/ADV), where σ is the stock's daily volatility and k ≈ 0.5-1 → If the answer is above 0.5%, split the order</li>
         </ul>
       </div>
 
@@ -137,8 +137,8 @@
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Calculate Market Impact Before Every $50K+ Trade</strong> — Formula: Impact = k × √(Your Shares / ADV). If <0.1% ADV = execute normally. If 0.1-0.5% = use limit orders, slice into 3-5 orders. If >0.5% = reduce position or use TWAP/VWAP algo.</li>
-            <li><strong>Build Your Order Slicing Playbook</strong> — <0.1% ADV: single order. 0.1-0.25% ADV: slice 3-5 orders over 30-60 min. 0.25-0.5% ADV: slice 8-12 orders over 2-4 hours (TWAP). >0.5% ADV: reduce size or full-day VWAP.</li>
+            <li><strong>Calculate Market Impact Before Every $50K+ Trade</strong> — Formula: Impact = k × σ × √(Your Shares / ADV). If &lt;0.1% ADV = execute normally. If 0.1-0.5% = use limit orders, slice into 3-5 orders. If >0.5% = reduce position or use TWAP/VWAP algo.</li>
+            <li><strong>Build Your Order Slicing Playbook</strong> — &lt;0.1% ADV: single order. 0.1-0.25% ADV: slice 3-5 orders over 30-60 min. 0.25-0.5% ADV: slice 8-12 orders over 2-4 hours (TWAP). >0.5% ADV: reduce size or full-day VWAP.</li>
             <li><strong>Enable Level 2 Order Book Monitoring</strong> — Check depth ratio (ask depth > 50% of your order), detect spoofing (flickering large orders), watch for spread widening (algos pulling liquidity). Slice orders when depth is thin.</li>
           </ol>
         </div>
@@ -178,7 +178,7 @@
   </table>
 
   <div class="callout callout-info">
-    <p><strong>💡 Key Insight:</strong> For institutional traders, market impact often exceeds spread + commission by 10-100×. A $50M order might cause 0.5-2% slippage = $250K-$1M cost.</p>
+    <p><strong>💡 Key Insight:</strong> For institutional traders, market impact often exceeds spread + commission by 10-100×. A $50M order might cause 0.5-2% slippage = $250K-$1M cost — but only in a stock where $50M is a meaningful share of the day's volume. The same $50M in a megacap is a rounding error on the tape and costs a few basis points. Impact is never a function of the dollar size of your order; it is a function of that size relative to what the stock trades.</p>
   </div>
 <h3>Temporary vs Permanent Impact</h3>
 
@@ -187,8 +187,8 @@
   <p><strong>Permanent impact:</strong> Price movement that <strong>persists</strong> after execution. Market interprets your order as containing information (informed trading), so fair value reprices.</p>
 
   <div class="example-block">
-    <h4>Real-World Example: Large AAPL Purchase</h4>
-    <p><strong>Scenario:</strong> Fidelity buys 500K shares of AAPL over 1 hour (average daily volume = 50M shares, so 1% of ADV).</p>
+    <h4>Worked Example (constructed): Large AAPL Purchase</h4>
+    <p><strong>Scenario:</strong> A large asset manager buys 500K shares of AAPL over 1 hour (average daily volume = 50M shares, so 1% of ADV). One percent of a day's volume compressed into one hour is roughly a 6-7% participation rate — aggressive, and the impact figures below reflect that.</p>
 
     <p><strong>Timeline:</strong></p>
     <table style="width:100%">
@@ -207,23 +207,23 @@
         </tr>
         <tr>
           <td>10:15 AM</td>
-          <td>$150.30</td>
+          <td>$150.50</td>
           <td>First 125K shares filled, price rising</td>
         </tr>
         <tr>
           <td>10:30 AM</td>
-          <td>$150.60</td>
+          <td>$150.85</td>
           <td>250K shares filled (halfway), temporary impact building</td>
         </tr>
         <tr>
           <td>10:45 AM</td>
-          <td>$150.75</td>
+          <td>$151.05</td>
           <td>375K shares filled, peak impact (exhausting nearby liquidity)</td>
         </tr>
         <tr>
           <td>11:00 AM (Done)</td>
-          <td>$150.70</td>
-          <td>All 500K shares filled, execution complete</td>
+          <td>$151.00</td>
+          <td>All 500K shares filled; volume-weighted average fill across the hour = $150.70</td>
         </tr>
         <tr>
           <td>11:30 AM (After)</td>
@@ -235,7 +235,7 @@
 
     <p><strong>Impact Decomposition:</strong></p>
     <ul>
-      <li><strong>Total impact during execution:</strong> $150.70 (avg fill) - $150.00 (decision price) = $0.70 per share</li>
+      <li><strong>Total impact during execution:</strong> $150.70 (volume-weighted average fill, not the last print) - $150.00 (decision price) = $0.70 per share</li>
       <li><strong>Permanent impact:</strong> $150.40 (settlement price) - $150.00 (decision price) = $0.40 per share</li>
       <li><strong>Temporary impact (reverted):</strong> $0.70 - $0.40 = $0.30 per share</li>
     </ul>
@@ -246,7 +246,9 @@
       <li>Of which $150,000 was temporary (reverted after), $200,000 was permanent</li>
     </ul>
 
-    <p><strong>Why Permanent Impact Occurred:</strong> Market saw large sustained buying (1% of ADV in 1 hour = significant). Other participants inferred Fidelity might have positive information (earnings, upgrade, etc.), so fair value repriced upward.</p>
+    <p><strong>Why Permanent Impact Occurred:</strong> The market saw large sustained buying (1% of ADV in 1 hour is significant). Other participants inferred the buyer might have positive information (earnings, an upgrade), so fair value repriced upward.</p>
+
+    <p><strong>Hold this number against Part 2.</strong> The square-root law, applied to the same 500K shares of the same stock, gives 0.15% — about $0.225 per share. This execution cost $0.70. The law is calibrated to orders worked across a full session; this one was crammed into an hour at roughly six times that participation rate, and the realized cost came in roughly three times the estimate. The formula gives you a floor for patient execution, not a forecast for impatient execution.</p>
   </div>
 
   <div class="callout callout-warning">
@@ -254,7 +256,7 @@
     <p>When you execute large orders, the market reverse-engineers your intent. If market thinks you're informed (hedge fund buying on insider info), permanent impact skyrockets. If market thinks you're uninformed (index fund rebalancing), permanent impact is minimal.</p>
     <p><strong>Defense:</strong> Disguise your orders using randomized timing, splitting across venues (dark pools + lit exchanges), and varying order sizes to look like noise rather than signal.</p>
   </div>
-<h2 id="part-15-the-427000-lessonmichaels-market-order-disaster">Part 1.5: Michael's $427,000 Market Order Disaster</h2>
+<h2 id="part-15-the-427000-lessonmichaels-market-order-disaster">Part 1.5: Michael's $47,500 Market Order Disaster</h2>
 
   <div class="callout callout-danger">
     <h4>💀 The Setup</h4>
@@ -266,8 +268,9 @@
     <h4>What Happened</h4>
     <p><strong>First order (10:30 AM):</strong> Market order for 38,461 shares. Exhausted order book $130.01 → $130.70 in 60 seconds. Impact: $11K slippage.</p>
     <p><strong>The cascade:</strong> NVDA rallied to $131.80 (other algos detected institutional flow). Michael thought "going higher, buy more!" Added 15,174 more shares at $132.40 avg. Then NVDA reverted to $130.25 (temporary impact unwound).</p>
-    <p><strong>Same day on AMD:</strong> Repeated the same mistake. AMD is less liquid → $294K loss on $3M position.</p>
-    <p><strong>Total damage: $427,000 in one day</strong> (market impact + adverse selection + chasing own impact)</p>
+    <p><strong>Same day on AMD:</strong> Repeated the same mistake on a $3M AMD position (16,216 shares). AMD is thinner: at 10:45 AM it was printing about 40K shares a minute, so his order was roughly 40% of a minute's volume. The sweep ran $185.10 → $187.30, average fill $186.00 — $14,600 of impact. AMD settled back to $185.20, leaving him $13,000 underwater on the position.</p>
+    <p><strong>Total damage: about $47,500 in one morning</strong> — $34,500 on NVDA (mostly the chase, not the first order) and $13,000 on AMD. On $10M deployed that is 0.47%, roughly ten times what the same two positions should have cost, and it came out of a $50M fund in under two hours.</p>
+    <p><strong>Why the headline number is not bigger:</strong> market impact in megacap names is measured in tens of basis points, not percent. If you see an execution-cost story quoted in hundreds of thousands on a $10M ticket, the loss is coming from direction, not from impact. Michael's error was expensive because it was needless, not because it was enormous.</p>
   </div>
 
   <div class="callout callout-info">
@@ -287,11 +290,11 @@
     <p><strong>Example: $5M TSLA position (Sept 2024)</strong></p>
     <ul>
       <li>Pre-trade: Calculate intraday volume pattern, estimate impact using square-root law</li>
-      <li>Strategy: VWAP algo over 2.5 hours, 10-15% participation rate</li>
+      <li>Strategy: VWAP algo over 2.5 hours, participation capped at 3% (a $5M ticket in TSLA never comes close to the cap — the cap is there for the minutes when volume dries up)</li>
       <li>Pause during lunch (low volume), resume at 2 PM</li>
       <li>Result: $2,111 impact cost (vs $11K+ with old method)</li>
     </ul>
-    <p style="margin-top:1rem"><strong>6-Month Results:</strong> 24 positions, $84M deployed, avg $1,971/trade impact (0.056%). Saved $802K vs old method—more than recovered original $427K loss.</p>
+    <p style="margin-top:1rem"><strong>6-Month Results:</strong> 24 positions, $84M deployed, avg $1,971/trade impact (0.056%), $47,300 in total. At the 0.47% cost rate of his March morning, the same $84M would have cost about $395,000. The difference is roughly $348,000 — many times the $47,500 he burned in one session.</p>
     <p style="margin-top:1rem"><em>"I used to treat execution as a race. Now I treat it as a puzzle. The market tells you when it has liquidity. Listen to it, blend in, and you pay minimal impact."</em> — Michael Rodriguez</p>
   </div>
 <h2 id="part-2-market-impact-models">Part 2: Market Impact Models</h2>
@@ -339,8 +342,10 @@
   <ul>
     <li><strong>Temporary Impact:</strong> θ × (Q / T) where θ is impact coefficient, Q is order size, T is time horizon</li>
     <li><strong>Permanent Impact:</strong> η × Q (linear in order size)</li>
-    <li><strong>Execution Risk:</strong> σ × √T × Q (volatility × time × size)</li>
+    <li><strong>Execution Risk:</strong> σ × √T × Q (volatility × the <em>square root</em> of time × size — risk grows with √T, not with T)</li>
   </ul>
+
+  <p>One caveat on the temporary-impact term: the original Almgren-Chriss paper makes it linear in the trading rate, as written above. The worked example below instead uses the square-root scaling from Model #1, which is what execution desks actually calibrate against. The shape of the trade-off — and where the minimum sits — is the same either way; only the numbers shift.</p>
 
   <p><strong>Trade-off (The Central Dilemma):</strong></p>
   <ul>
@@ -356,27 +361,31 @@
     <ul>
       <li><strong>Temporary impact:</strong> High (1M shares / 30 min = 33K/min, market can't absorb that fast)</li>
       <li>Estimated impact: 0.8% × $200 = $1.60/share → <strong>$1.6M impact cost</strong></li>
-      <li><strong>Execution risk:</strong> Low (only 30 min for price to drift, σ × √0.5hr = minimal)</li>
-      <li>Estimated risk cost: $200K</li>
-      <li><strong>Total cost: $1.8M</strong></li>
+      <li><strong>Execution risk:</strong> Low — 3% daily volatility over half an hour of a 6.5-hour session is 3% × √(0.5/6.5) = 0.83%</li>
+      <li>Estimated risk cost: $530K</li>
+      <li><strong>Total cost: $2.13M</strong></li>
     </ul>
 
     <p><strong>Option 2: Patient (Execute over 4 hours)</strong></p>
     <ul>
       <li><strong>Temporary impact:</strong> Low (1M shares / 240 min = 4.2K/min, manageable rate)</li>
       <li>Estimated impact: 0.25% × $200 = $0.50/share → <strong>$500K impact cost</strong></li>
-      <li><strong>Execution risk:</strong> High (4 hours for TSLA to move 3% × √4 = 6%)</li>
-      <li>Estimated risk cost (adverse movement): $1.5M (if unlucky, TSLA rallies during execution)</li>
-      <li><strong>Total cost: $2M</strong></li>
+      <li><strong>Execution risk:</strong> High — 3% × √(4/6.5) = 2.35% over the four hours. Note the scaling: four hours is not four days, so the daily 3% shrinks by the square root of the fraction of the session used, it does not multiply by four</li>
+      <li>Estimated risk cost (adverse movement): $1.5M (if unlucky, the stock rallies during execution)</li>
+      <li><strong>Total cost: $2.0M</strong></li>
     </ul>
 
     <p><strong>Option 3: Optimal (Almgren-Chriss Solution: 90 minutes)</strong></p>    <ul>
       <li><strong>Temporary impact:</strong> Moderate (1M / 90 min = 11K/min)</li>
       <li>Estimated impact: 0.45% × $200 = $0.90/share → <strong>$900K impact cost</strong></li>
-      <li><strong>Execution risk:</strong> Moderate (1.5 hours, σ × √1.5hr)</li>
-      <li>Estimated risk cost: $600K</li>
-      <li><strong>Total cost: $1.5M (BEST)</strong></li>
+      <li><strong>Execution risk:</strong> Moderate — 3% × √(1.5/6.5) = 1.44% over the ninety minutes</li>
+      <li>Estimated risk cost: $920K</li>
+      <li><strong>Total cost: $1.82M (BEST)</strong></li>
     </ul>
+
+    <p><strong>Check the shape yourself.</strong> Impact falls as 1/√T ($1.6M, $900K, $500K at 0.5, 1.5 and 4 hours — each is the previous one divided by the square root of the time ratio). Risk rises as √T ($530K, $920K, $1.5M on the same grid). One curve falls, the other rises, and the sum has a single minimum. Here it sits at ninety minutes.</p>
+
+    <p><strong>What the model does not give you:</strong> the absolute level of the risk term depends on how much variance the manager is willing to carry — Almgren-Chriss has a risk-aversion parameter, and moving it slides the optimum earlier or later. The √T shape is model-determined. The dollar figures on the risk line are a choice, not a measurement.</p>
 
     <p><strong>Lesson:</strong> There's an <strong>optimal execution speed</strong> that minimizes total cost. Too fast = high impact. Too slow = high risk. Almgren-Chriss finds the balance.</p>
   </div>
@@ -400,8 +409,10 @@
     <li><strong>&lt; 1% of daily volume:</strong> Minimal impact (0.05-0.1%)</li>
     <li><strong>1-5% of daily volume:</strong> Moderate impact (0.1-0.5%)</li>
     <li><strong>5-10% of daily volume:</strong> High impact (0.5-2%)</li>
-    <li><strong>&gt; 10% of daily volume:</strong> Extreme impact (2-10%+)</li>
+    <li><strong>&gt; 10% of daily volume:</strong> Extreme impact — well above 1%, and no longer predictable. At this size the square-root law's assumption of a deep, replenishing book stops holding, and realized cost depends more on who else is in the name that week than on any formula.</li>
   </ul>
+
+  <p>These bands are realized costs from working orders across a full session. Compare them against Model #1 and they run high at the top end and low at the bottom: the square-root law with a 1.5% daily volatility puts 1% of ADV at 0.15% and 10% of ADV at 0.47%. The bands are wider because they absorb the things the formula leaves out — spread crossing, adverse selection, and the days when the book is thin. Use the formula for the estimate and the bands for the sanity check.</p>
 
   <div class="callout">
     <p><strong>⚠️ Professional Limit:</strong> Most institutions avoid exceeding 5-10% of daily volume in single stock to minimize footprint. Larger orders split across multiple days.</p>
@@ -414,6 +425,7 @@
       <tr>
         <th>Time (ET)</th>
         <th>% of Daily Volume</th>
+        <th>Per hour</th>
         <th>Market Impact</th>
       </tr>
     </thead>
@@ -421,32 +433,39 @@
       <tr>
         <td>9:30-10:00 AM</td>
         <td>~15%</td>
-        <td>Moderate (high vol, but also high volatility)</td>
+        <td>~30%</td>
+        <td>Moderate (deepest liquidity of the day, but also the widest spreads and the fastest price moves)</td>
       </tr>
       <tr>
         <td>10:00 AM-12:00 PM</td>
         <td>~20%</td>
-        <td>Low (steady institutional flow)</td>
+        <td>~10%</td>
+        <td>Low (steady institutional flow, calm prices)</td>
       </tr>
       <tr>
         <td>12:00-2:00 PM</td>
         <td>~15%</td>
-        <td>High (lowest volume, lunch hour)</td>
+        <td>~7.5%</td>
+        <td>High (thinnest liquidity per unit time in the session)</td>
       </tr>
       <tr>
         <td>2:00-3:00 PM</td>
         <td>~20%</td>
-        <td>Low-Moderate (volume picking up)</td>
+        <td>~20%</td>
+        <td>Low-Moderate (volume picking up, prices still orderly)</td>
       </tr>
       <tr>
         <td>3:00-4:00 PM</td>
         <td>~30%</td>
-        <td>Moderate (closing auction absorbs flow)</td>
+        <td>~30%</td>
+        <td>Moderate (closing auction absorbs flow, but everyone else is working orders too)</td>
       </tr>
     </tbody>
   </table>
 
-  <p><strong>Trading implication:</strong> Execute large orders during 10 AM-12 PM or 2-3 PM (minimize impact). Avoid lunch hour (12-2 PM) unless urgent.</p>
+  <p><strong>Read the third column, not the second.</strong> What sets your participation rate is volume per unit time, and by that measure the two deepest windows in the session are the first half hour and the last hour, both around 30% of the day's volume per hour. That is not the same as saying they are the cheapest windows to trade: the open carries the widest spreads and the sharpest repricing of the day, and the close is where every other institutional order is also trying to finish. You get liquidity and you pay for it in volatility and adverse selection.</p>
+
+  <p><strong>Trading implication:</strong> 10:00 AM-12:00 PM and 2:00-3:00 PM are the practical windows — enough volume to absorb a working order, calm enough that you are not paying for it in price movement. 12:00-2:00 PM is the one window to avoid outright: at roughly 7.5% of the day's volume per hour it is the thinnest stretch of the session, so the same order size becomes a much larger share of what is trading.</p>
 
   <h2 id="part-4-execution-strategies-to-minimize-impact">Part 4: Execution Strategies to Minimize Impact</h2>
 
@@ -479,7 +498,9 @@
         <li>Total impact: Lower (trades more when liquidity is high)</li>
       </ul>
 
-      <p><strong>Result:</strong> VWAP typically achieves 10-30% better execution price than TWAP for large orders</p>
+      <p><strong>Result:</strong> For large orders VWAP typically comes in 10-30% <em>cheaper on impact</em> than TWAP — that is 10-30% off the slippage, not off the price. On a 0.20% TWAP cost that means landing around 0.14-0.18% instead. Worth having; not the difference between a good trade and a bad one.</p>
+
+      <p>The 30/50/20 split above is this stock's profile for this particular morning. Real VWAP algos re-forecast the curve intraday rather than trusting a fixed template, because the day a stock reports or gets added to an index is exactly the day the template is wrong.</p>
     </div>
   </details>
 
@@ -495,7 +516,7 @@
 
   <h3>Strategy #5: Dark Pool Routing (Advanced)</h3>
   <p><strong>What are dark pools?</strong> Private exchanges where large orders trade without displaying quotes publicly</p>
-  <p><strong>Major dark pools:</strong> Credit Suisse CrossFinder, Goldman Sachs Sigma X, JPMorgan JPM-X, UBS PIN, Barclays LX</p>
+  <p><strong>Major dark pools:</strong> UBS ATS, Goldman Sachs Sigma X2, JPMorgan JPM-X, Barclays LX, Instinet CBX. Treat any such list as perishable — Credit Suisse's CrossFinder was for years one of the largest, and it went away with the firm's 2023 absorption into UBS.</p>
 
   <details class="accordion">
     <summary>Dark Pool vs Lit Exchange Comparison</summary>
@@ -508,11 +529,11 @@
       </ul>
       <p style="margin-top:1rem"><strong>Dark Pool:</strong></p>
       <ul>
-        <li><strong>Visibility:</strong> Orders hidden, only executions reported (with 10-minute delay)</li>
+        <li><strong>Visibility:</strong> Resting orders are hidden. Executions are not: off-exchange prints go to the tape through a FINRA trade reporting facility within seconds, so the market learns that size traded almost immediately — it just does not learn how much more of it is still sitting in the pool</li>
         <li><strong>Pros:</strong> Large orders can trade without tipping off market → lower impact</li>
         <li><strong>Cons:</strong> No guarantee of execution, potential for information leakage to pool operator</li>
       </ul>
-      <p style="margin-top:1rem"><strong>Example: $10M AAPL Purchase</strong></p>
+      <p style="margin-top:1rem"><strong>Example: $500M AAPL Purchase</strong> — 3.33M shares against a 50M-share ADV, so 6.7% of a day's volume. The numbers below only make sense at that scale; a $10M ticket in AAPL is 0.13% of ADV and costs single-digit basis points on any of these routes.</p>
       <table style="width:100%">
         <thead>
           <tr>
@@ -556,21 +577,21 @@
   <p><strong>When to use:</strong> Building very large positions (>10% ADV) where single-day execution would cause excessive impact</p>
 
   <div class="example-block">
-    <h4>Real Example: Building $50M Position Over 5 Days</h4>
-    <p><strong>Scenario:</strong> Hedge fund wants $50M in TSLA (200K shares @ $250). Daily volume = 120M shares.</p>
+    <h4>Worked Example (constructed): Building a $50M Position Over 5 Days</h4>
+    <p><strong>Scenario:</strong> A fund wants $50M of a mid-cap at $250 a share — 200K shares. The stock's daily volume is 1.5M shares and its daily volatility is 3%. Note the pairing: this section is about orders above 10% of ADV, so the example has to be a stock where $50M actually is that. In TSLA, $50M is under two tenths of one percent of a day and none of this applies.</p>
     <p><strong>Single-day approach:</strong></p>
     <ul>
-      <li>200K / 120M = 0.17% of ADV (seems low)</li>
-      <li>Expected impact (square-root): 0.32% × $250 = $0.80/share</li>
-      <li>Total cost: 200K × $0.80 = $160,000</li>
+      <li>200K / 1.5M = 13.3% of ADV</li>
+      <li>Expected impact (square-root): 3% × √0.133 = 1.1% → 1.1% × $250 = $2.75/share</li>
+      <li>Total cost: 200K × $2.75 = $550,000</li>
     </ul>
     <p style="margin-top:1rem"><strong>5-day approach (40K shares/day):</strong></p>
     <ul>
-      <li>Day 1: Buy 40K shares, impact = 0.15% = $0.375/share = $15,000</li>
-      <li>Day 2: Buy 40K shares, impact = 0.15% = $15,000</li>
-      <li>Day 3-5: Same</li>
-      <li><strong>Total impact: 5 × $15,000 = $75,000</strong></li>
-      <li><strong>Savings vs 1-day: $85,000 (53% reduction!)</strong></li>
+      <li>Day 1: buy 40K shares — 2.7% of ADV, so 3% × √0.0267 = 0.49% = $1.23/share = $49,000</li>
+      <li>Days 2-5: same size, same estimate, $49,000 a day</li>
+      <li><strong>Total impact: 5 × $49,000 = $245,000</strong></li>
+      <li><strong>Savings vs 1-day: $305,000 (55% reduction)</strong></li>
+      <li>The 55% is not a coincidence and it is not specific to these numbers: splitting an order into <em>n</em> equal days cuts square-root-law impact by 1 - 1/&radic;<em>n</em>. For five days that is 1 - 0.447 = 55%. For ten days it is 68%. The gains flatten fast, which is why nobody spreads a position over forty sessions.</li>
     </ul>
     <p style="margin-top:1rem"><strong>Trade-off:</strong> Higher execution risk (price might rally during 5 days), but much lower market impact. Use when conviction is high and time horizon is long.</p>
   </div>
@@ -593,7 +614,8 @@
     <p><strong>Step 2:</strong> HFT buys 10,000 shares @ $100.01-$100.05 (front-runs you)</p>
     <p><strong>Step 3:</strong> Price rises to $100.15 due to HFT buying</p>
     <p><strong>Step 4:</strong> Your next fill: $100.15 (instead of $100.00)</p>
-    <p><strong>Step 5:</strong> HFT sells 10,000 shares @ $100.15 to you → $1,500 profit (stolen from you)</p>
+    <p><strong>Step 5:</strong> HFT sells 10,000 shares @ $100.15 to you. It paid an average of about $100.03 on the way in, so the round trip nets roughly $1,200 — twelve cents a share, taken out of your fill.</p>
+    <p style="margin-top:0.5rem">Keep the size of that number in mind. Twelve cents on a $100 stock is 12 basis points, and it is the reason this whole section exists — not because any single interaction is large, but because it happens on clip after clip for as long as your pattern stays readable.</p>
     <p style="margin-top:1rem"><strong>Defense:</strong> Randomize timing, vary order sizes, split across multiple venues/algos, use dark pools for larger clips</p>
   </div>
 <h3>Anti-Gaming Execution Tactics</h3>
@@ -607,6 +629,7 @@
         <li>Time interval: Randomize between 3-8 minutes (not fixed 5 min)</li>
         <li>Order size: Randomize between 750-1,250 shares (not fixed 1,000)</li>
         <li>Result: HFTs can't predict next order → harder to front-run</li>
+        <li>One practical catch: randomizing the interval around 5 minutes means you fire roughly 22 clips in two hours rather than 24, so the schedule has to true up against the target or you finish short. Every production randomizer carries a catch-up term for exactly this reason.</li>
       </ul>
       <p style="margin-top:1rem"><strong>Example:</strong></p>
       <pre style="overflow-x:auto"><code>9:30 AM: 890 shares @ $100.00
@@ -614,7 +637,9 @@
 9:41 AM: 780 shares @ $100.01 (7 min gap)
 9:47 AM: 1,050 shares @ $99.98 (6 min gap)
 ...
-Result: 10-20% lower impact vs standard TWAP
+Impact comes in lower than a fixed-interval TWAP, because the pattern is no longer readable.
+How much lower depends entirely on how much predatory flow was reading you in the first place,
+which is not something you can measure from your own fills.
       </code></pre>
     </div>
   </details>
@@ -627,8 +652,8 @@ Result: 10-20% lower impact vs standard TWAP
       <ul>
         <li>NYSE: 15K shares (15%)</li>
         <li>NASDAQ: 18K shares (18%)</li>
-        <li>BATS: 12K shares (12%)</li>
-        <li>EDGX: 10K shares (10%)</li>
+        <li>Cboe BZX: 12K shares (12%)</li>
+        <li>Cboe EDGX: 10K shares (10%)</li>
         <li>IEX: 8K shares (8%) — Speed bump protects from HFTs!</li>
         <li>Dark pools (5 pools): 37K shares (37%)</li>
       </ul>
@@ -649,10 +674,11 @@ Result: 10-20% lower impact vs standard TWAP
         <li><strong>BUT:</strong> HFT's front-run order ALSO delayed 350μs</li>
         <li><strong>Result:</strong> HFT can't beat you to IEX → no front-running!</li>
       </ul>
-      <p style="margin-top:1rem"><strong>Real-world results:</strong></p>
+      <p style="margin-top:1rem"><strong>What the evidence actually shows:</strong></p>
       <ul>
-        <li>Institutional study (2019): IEX execution 0.05-0.15% better than NYSE/NASDAQ for large orders</li>
-        <li>Savings on $10M order: $5,000-$15,000 vs lit exchanges</li>
+        <li>The mechanism is real and easy to verify: the 350μs delay applies to everyone, so a latency advantage elsewhere cannot be converted into a queue advantage here.</li>
+        <li>The size of the benefit is much harder to pin down. Published venue-quality comparisons put the difference in fill quality somewhere between a fraction of a basis point and a few basis points, depending on order type, urgency and how the broker routed the control group. Claims of 5-15 basis points do circulate; they do not survive contact with the methodology.</li>
+        <li>Every study on this question is produced either by a venue with an interest in the answer or by a broker whose own routing decisions are part of what is being measured. Trust the direction of the effect more than any specific number attached to it, including this one.</li>
       </ul>
       <p style="margin-top:1rem"><strong>Trade-off:</strong> Lower fill rates (IEX has ~2% market share), but fills are higher quality (no toxic flow)</p>
     </div>
@@ -662,7 +688,7 @@ Result: 10-20% lower impact vs standard TWAP
 
   <h3>Volume Oracle: Large Print Detection</h3>
   <p><strong>Feature:</strong> Highlight prints &gt;10K shares (institutional orders)</p>
-  <p><strong>Signal:</strong> If 50K share buy print appears, expect temporary impact (0.1-0.3% move up in next few minutes)</p>
+  <p><strong>Signal:</strong> A 50K-share buy print is worth watching in a stock that trades a few million shares a day, where it is one to two percent of the session. In a name trading 50M shares it is noise. Size the expected move the same way you would size your own: as a share of what the stock trades, not in shares.</p>
   <p><strong>Trade:</strong> Scalp in direction of large print (institutions likely have more to buy → momentum continues)</p>
 
   <h3>Pentarch Pilot Line: Cumulative Impact Tracking</h3>
@@ -686,7 +712,7 @@ Result: 10-20% lower impact vs standard TWAP
       <p><strong>Q2:</strong> You see a 100K share buy print in TSLA (avg volume = 50M/day). What's your expectation for temporary impact?</p>
       <details>
         <summary>Show Answer</summary>
-        <p><strong>Answer:</strong> Participation rate = 100K / 50M = 0.2% (very low). Expect minimal impact (0.05-0.1%). However, if print is first of many (institution starting accumulation), permanent impact could develop as more orders arrive.</p>
+        <p><strong>Answer:</strong> Participation rate = 100K / 50M = 0.2% (very low). The square-root law with TSLA's roughly 3% daily volatility gives 0.03 × √0.002 = 0.13% — call it a tenth of a percent, and treat that as an upper bound for a print that was worked rather than swept. However, if the print is the first of many (an institution starting accumulation), permanent impact can develop as more orders arrive, and that is the part the formula does not see.</p>
       </details>
     </div>
 
@@ -694,7 +720,7 @@ Result: 10-20% lower impact vs standard TWAP
       <p><strong>Q3:</strong> When is market impact HIGHEST during the trading day?</p>
       <details>
         <summary>Show Answer</summary>
-        <p><strong>Answer:</strong> 12:00-2:00 PM ET (lunch hour). Volume is lowest (~15% of daily), so same order size represents higher participation rate → higher impact. Avoid executing large orders during lunch unless necessary.</p>
+        <p><strong>Answer:</strong> 12:00-2:00 PM ET. Careful with how you state the reason: that window carries about 15% of the day's volume, the same share as the opening half hour. What makes it the thinnest stretch is that the 15% is spread over two hours — roughly 7.5% of the day's volume per hour, against 30% per hour at the open and at the close. Participation rate is a rate, so it is volume per unit time that decides your impact, not the share of the day a window happens to contain.</p>
       </details>
     </div>
   </div>
@@ -706,7 +732,7 @@ Result: 10-20% lower impact vs standard TWAP
       <li>Calculate participation rate: Order size / ADV (target &lt;5%)</li>
       <li>Estimate impact using square-root law: σ × √(Q/V)</li>
       <li>If participation &gt;5%, split order across multiple days or use algo (VWAP/TWAP)</li>
-      <li>Avoid lunch hour (12-2 PM) for large orders (low volume = high impact)</li>
+      <li>Avoid lunch hour (12-2 PM) for large orders (thinnest volume per hour in the session = highest participation rate)</li>
       <li>Use iceberg orders to hide full size (but beware HFT detection)</li>
     </ul>
     <h4>While Executing:</h4>
@@ -729,8 +755,8 @@ Result: 10-20% lower impact vs standard TWAP
       <li><strong>Market impact = hidden cost</strong> of large orders (often exceeds spread 10-100×)</li>
       <li><strong>Square-root law:</strong> Impact ∝ σ × √(Q/V) (simple estimator)</li>
       <li><strong>Participation rate &gt;5%</strong> of daily volume = high impact (split order)</li>
-      <li><strong>VWAP &gt; TWAP</strong> for minimizing impact (trades more during high-volume periods)</li>
-      <li><strong>Avoid lunch hour</strong> (12-2 PM) for large orders (lowest volume = highest impact)</li>
+      <li><strong>VWAP &gt; TWAP</strong> for minimizing impact (trades more during high-volume periods) — typically 10-30% off the slippage, not off the price</li>
+      <li><strong>Avoid lunch hour</strong> (12-2 PM) for large orders (thinnest volume per hour = highest participation rate)</li>
     </ul>
   </div>
 
