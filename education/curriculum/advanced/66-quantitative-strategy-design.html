@@ -113,14 +113,14 @@
       <div class="example-block">
         <h4>Real-World Example: Marcus's $18,400 Quantitative Strategy Disaster</h4>
 
-        <p><strong>Background:</strong> Marcus (composite example), a former Python developer turned algorithmic trader, spent 6 months in early 2023 building what he believed was the perfect mean-reversion strategy for SPY. His backtested results looked incredible: 32% annual returns, 1.8 Sharpe ratio, only 8% maximum drawdown from 2015-2022.</p>
+        <p><strong>Background:</strong> Marcus (composite example), a former Python developer turned algorithmic trader, spent 6 months in early 2023 building what he believed was the perfect mean-reversion strategy for SPY. His backtested results looked incredible: 32% annual returns, a 1.8 Sharpe ratio and only 8% maximum drawdown from 2015-2022. That combination should have been the first warning. A 1.8 Sharpe on a 32% return implies roughly 16% annual volatility, and a strategy that swings 16% a year does not get through eight years with a worst drawdown of 8%. When the three headline numbers cannot all be true at once, the backtest is describing the data, not the market.</p>
 
         <p><strong>The Strategy:</strong> Buy SPY when it closes down 1.2% or more, sell when it recovers 0.8%. He tested 10,000+ parameter combinations and found these "optimal" numbers. Excited by the results, he deployed $75,000 in live capital in March 2023.</p>
 
         <p><strong>The Disaster:</strong></p>
         <ul>
           <li><strong>Month 1 (March 2023):</strong> Down $4,200 (-5.6%). The market wasn't reverting like the backtest predicted.</li>
-          <li><strong>Month 2 (April 2023):</strong> Down another $7,800 (-10.4% cumulative). His "1.2% down" trigger kept hitting, but recoveries took longer than 0.8%.</li>
+          <li><strong>Month 2 (April 2023):</strong> Down another $7,800 — a 10.4% month, taking him to 16.0% down cumulatively. His "1.2% down" trigger kept hitting, but recoveries took longer than 0.8%.</li>
           <li><strong>Month 3 (May 2023):</strong> Lost $6,400 more. Total loss: <strong>$18,400 in 3 months</strong> (-24.5%).</li>
         </ul>
 
@@ -140,18 +140,20 @@
           <li>✅ Parameter robustness testing (strategy works with 1.0-1.5% threshold range, not just 1.2%)</li>
         </ul>
 
-        <p><strong>Results After Redesign:</strong> His new strategy had lower backtested returns (18% annual vs 32%), but it actually WORKED live. From September 2023 to February 2024, he made back $14,200 of his losses with a strategy he could trust.</p>
+        <p><strong>Results After Redesign:</strong> His new strategy backtested at 18% a year rather than 32%, and it held up live. Over the six months from September 2023 to February 2024 it returned about 8.5% — roughly $4,800 on the $56,600 he had left.</p>
 
-        <p><strong>Marcus's Lesson:</strong> "A 15% strategy that works beats a 40% backtest that fails. The key isn't finding the perfect parameters—it's building something robust enough to survive real markets."</p>
+        <p><strong>Do that arithmetic before you feel good about it.</strong> At 18% a year, earning back $18,400 on a $56,600 account takes about two years. That is the real price of three months of curve-fitting: not the $18,400, but the two years of compounding it costs to get back to where he started. Anyone telling you they "made it all back" in six months on an 18% strategy is describing a different strategy.</p>
+
+        <p><strong>Marcus's Lesson:</strong> "An 18% strategy that works beats a 32% backtest that fails. The key isn't finding the perfect parameters — it's building something robust enough to survive real markets."</p>
       </div>
 
       <p>A properly designed quantitative strategy eliminates emotion, validates edge statistically, and compounds returns systematically. This lesson teaches you how to design, backtest, and deploy institutional-grade trading systems—and avoid the $18K mistake Marcus made.</p>
 
       <div class="callout callout-danger">
         <h4>⚠️ The Overfitting Graveyard</h4>
-        <p>A quant fund backtests 10,000 parameter combinations and finds a "perfect" strategy: 45% annual returns, 0.8 Sharpe ratio, 12% max drawdown from 2010-2020. They deploy $50M in January 2021.</p>
+        <p>A quant fund backtests 10,000 parameter combinations and finds a "perfect" strategy: 45% annual returns, a 2.6 Sharpe and a 12% maximum drawdown from 2010-2020. They deploy $50M in January 2021.</p>
         <p>By December 2021, the fund is down 28%. The strategy was curve-fit to historical noise, not real market edge.</p>
-        <p><strong>Lesson:</strong> 95% of backtested strategies fail live. This lesson shows you how to be in the 5%.</p>
+        <p><strong>Lesson:</strong> the failure rate on backtested strategies is high enough that the burden of proof sits with the strategy, not with the sceptic. You will see "95% fail" quoted a lot; nobody has ever measured it, because nobody has the population of strategies people quietly abandoned. What is measurable is narrower and more useful: when researchers re-test published anomalies on data collected after publication, average returns fall by roughly half, and a substantial fraction stop working entirely. Assume your backtest is at least that optimistic and design accordingly.</p>
       </div>
 
       <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
@@ -170,9 +172,9 @@
         <div style="margin-top:1rem">
           <p>Don't overwhelm yourself. Start with these 3 actions:</p>
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Build Out-of-Sample Testing Framework Tonight</strong> — Split data BEFORE optimizing: 70% training (develop strategy), 30% test (validate ONCE after finalized). Never touch test data during development. If OOS performance < 50% of in-sample → curve-fit garbage, discard. Sarah Chen lost $142,800 deploying RSI(17) strategy: backtest 28.4% return (2015-2022), live -79.3% (2023) because she optimized on ALL data. OOS testing would've caught this. Rule: If strategy fails on unseen data, it will fail live. This prevents $140K+ curve-fitting disasters.</li>
+            <li><strong>Build Out-of-Sample Testing Framework Tonight</strong> — Split data BEFORE optimizing: 70% training (develop strategy), 30% test (validate ONCE after finalized). Never touch test data during development. If OOS performance is &lt;50% of in-sample → curve-fit garbage, discard. Sarah Chen's RSI(17) strategy backtested at 28.4% a year (2015-2022) because she optimized on ALL her data; live in 2023 it lost 11.5% while QQQ rose, a $96,300 gap against simply holding. OOS testing would have caught it. Rule: if a strategy fails on unseen data, it will fail live.</li>
             <li><strong>Implement Walk-Forward Optimization This Week</strong> — Re-optimize strategy every 3-6 months on rolling window (12-month train, 6-month test). Parameters adapt to current regime instead of dying when market shifts. Michael Torres lost $97,600 with static 2010-2021 optimization: 24.7% backtest, -38.2% live (2022) when Fed hiked rates. After WFO rebuild: +18.6% (vs -38% disaster). Tonight: Set window sizes (12M train / 6M test), parameter ranges, optimization metric (Sharpe ratio recommended). This prevents $90K+ regime-shift losses.</li>
-            <li><strong>Create Pre-Live Deployment Checklist (10 Gates)</strong> — Strategy must pass ALL before risking real money: (1) OOS tested, (2) WFO validated, (3) Realistic costs modeled (slippage 0.02-0.05%), (4) Execution lag tested, (5) Multi-instrument tested (3-5 stocks), (6) Parameter robustness (±20% variation works), (7) Paper traded 30-60 days, (8) Max DD stress-tested, (9) Position sizing defined, (10) Kill switch set. Amanda Park lost $167,300 in 90 days: assumed $0 costs (reality: 2.5% annual drag), ignored execution lag (14.4% annual drag), only tested AAPL. After rebuild with 10 gates: +12.8% profitable. This prevents $150K-$250K deployment disasters.</li>
+            <li><strong>Create Pre-Live Deployment Checklist (10 Gates)</strong> — Strategy must pass ALL before risking real money: (1) OOS tested, (2) WFO validated, (3) Realistic costs modeled (slippage 0.02-0.05%), (4) Execution lag tested, (5) Multi-instrument tested (3-5 stocks), (6) Parameter robustness (±20% variation works), (7) Paper traded 30-60 days, (8) Max DD stress-tested, (9) Position sizing defined, (10) Kill switch set. Amanda Park lost $50,100 in 90 days: she assumed zero costs (reality: 6.6% annual drag), ignored execution lag (a further 12.4%), and tested only AAPL. Nineteen percent of costs against a 19.8% backtest — the edge was gone before she started. After rebuilding through the 10 gates: +12.8%.</li>
           </ol>
         </div>
       </details>
@@ -300,17 +302,19 @@
   </details>
 
   <div style="background:rgba(255,82,82,.1);border-left:4px solid #ff5252;border-radius:8px;padding:1.25rem;margin:2rem 0">
-    <div style="font-weight:700;margin-bottom:0.75rem;color:#ff5252">💀 Sarah Chen's $142,800 Out-of-Sample Disaster (8 Months)</div>
+    <div style="font-weight:700;margin-bottom:0.75rem;color:#ff5252">💀 Sarah Chen's $96,300 Out-of-Sample Disaster (8 Months)</div>
     <div style="font-size:0.95rem;line-height:1.7">
       <strong>January-August 2023:</strong> Sarah backtested on ALL her data (2015-2022) and deployed a curve-fit RSI mean-reversion strategy on QQQ.
     </div>
     <div style="margin-top:1rem;font-size:0.9rem;line-height:1.7">
-      <strong>Her strategy:</strong> After 15,000+ backtests, she found "optimal" parameters: RSI(17) < 32 → BUY, Hold 4 days. Backtest (2015-2022): 28.4% annual return, 1.62 Sharpe.<br/>
+      <strong>Her strategy:</strong> After 15,000+ backtests, she found "optimal" parameters: RSI(17) &lt;32 → BUY, hold 4 days. Backtest (2015-2022): 28.4% annual return, 1.62 Sharpe.<br/>
       <strong>She deployed:</strong> $180,000 in January 2023 without out-of-sample testing.<br/>
-      <strong>The disaster:</strong> Month 1: -$8,200 (-4.6%). Months 2-3: -$24,600 cumulative. Months 4-8: -$109,000 more. <span style="color:#ff5252;font-weight:700">Total loss: $142,800 (-79.3%)</span>.
+      <strong>The disaster:</strong> Month 1: -$4,100 (-2.3%). Months 2-3: -$6,200 more. Months 4-8: -$10,400 more. <span style="color:#ff5252;font-weight:700">Realized loss: $20,700 (-11.5%)</span>.<br/>
+      <strong>The number that actually matters:</strong> over those same eight months QQQ rose about 42%. Holding it would have turned her $180,000 into roughly $255,600. She finished with $159,300. The gap is <span style="color:#ff5252;font-weight:700">$96,300</span> — and that, not the realized loss, is what the curve-fit cost her.<br/>
+      <strong>Why the realized loss is not bigger:</strong> the strategy is long-only and unlevered, so it cannot lose more than the instrument does, and QQQ went up in 2023. A cash long-only strategy that loses 79% of an account in a year the underlying gained 54% does not exist. If you read a blow-up story quoting a number like that, either there was leverage or the number is invented. The damage from a bad strategy in a bull market is nearly always opportunity cost, and opportunity cost is the loss people forget to count.
     </div>
     <div style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px;font-size:0.9rem">
-      <strong>Why it failed:</strong> She optimized on 2015-2022 data, deployed on 2023 (new regime). Parameters (RSI 17, threshold 32) were curve-fit to noise. When she tested RSI(15) or RSI(19), strategy FAILED—clear overfitting. The fix: Out-of-sample testing. Split data 70% training / 30% test. NEVER touch test data until strategy finalized. If strategy works on OOS data → might work live. If fails OOS → curve-fit garbage. Sarah's RSI(17): In-sample 28.4%, OOS -79.3% = discard immediately.
+      <strong>Why it failed:</strong> She optimized on 2015-2022 data, deployed on 2023 (new regime). Parameters (RSI 17, threshold 32) were curve-fit to noise. When she tested RSI(15) or RSI(19), strategy FAILED—clear overfitting. The fix: Out-of-sample testing. Split data 70% training / 30% test. NEVER touch test data until strategy finalized. If strategy works on OOS data → might work live. If fails OOS → curve-fit garbage. Sarah's RSI(17): in-sample 28.4%, out-of-sample -11.5% against a benchmark that returned +42% — discard immediately.
     </div>
   </div>
 
@@ -374,7 +378,7 @@
   <div class="callout" style="background:rgba(239,68,68,0.1);border-left:4px solid #ef4444;margin:2rem 0;padding:1rem">
     <h4>🚫 Red Flags: Your Strategy Is Probably Overfit If...</h4>
     <ul>
-      <li>❌ <strong>Out-of-sample performance is <70% of in-sample</strong> (e.g., backtest 25% returns, live 12%)</li>
+      <li>❌ <strong>Out-of-sample performance is &lt;70% of in-sample</strong> (e.g. backtest 25% returns, live 12%)</li>
       <li>❌ <strong>Strategy only works with exact parameters</strong> (RSI 30 works, but RSI 28 or 32 fails)</li>
       <li>❌ <strong>You tested >100 parameter combinations</strong> before finding "the one"</li>
       <li>❌ <strong>Performance degrades rapidly after deployment</strong> (first month great, then crashes)</li>
@@ -391,11 +395,11 @@
     </div>
     <div style="margin-top:1rem;font-size:0.9rem;line-height:1.7">
       <strong>His strategy:</strong> Buy SPY on 20-day highs, sell on 10-day lows. Backtest (2010-2021): 24.7% annual return. Deployed $220,000 in March 2022.<br/>
-      <strong>The disaster:</strong> Fed hiked rates aggressively (0% → 4.25%). Market regime shifted from low-vol to high-vol inflationary. Strategy got DESTROYED.<br/>
+      <strong>The disaster:</strong> The Fed hiked aggressively — the target range went from 0-0.25% in March 2022 to 4.25-4.50% by December. The regime shifted from low-vol to high-vol inflationary, and the strategy got DESTROYED.<br/>
       <strong>2022 result:</strong> -38.2% (-$84,000). SPY only down -18.1%, so underperformed by 20 points. Jan-April 2023: Lost another $13,600. <span style="color:#ff5252;font-weight:700">Total: $97,600</span>.
     </div>
     <div style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px;font-size:0.9rem">
-      <strong>Why it failed:</strong> Static optimization. Optimized once on 2010-2021, never re-optimized. When regime changed in 2022, his 20-day/10-day parameters stopped working. The fix: Walk-forward optimization (WFO). Re-optimize every 3-6 months on rolling window of recent data. Parameters adapt to current market. After rebuild with rolling 6-month re-optimization: May 2023-March 2024: +18.6% (vs. -38% disaster). WFO prevents $90K+ regime-shift losses.
+      <strong>Why it failed:</strong> Static optimization. Optimized once on 2010-2021, never re-optimized. When regime changed in 2022, his 20-day/10-day parameters stopped working. The fix: Walk-forward optimization (WFO). Re-optimize every 3-6 months on rolling window of recent data. Parameters adapt to current market. After rebuild with rolling 6-month re-optimization: May 2023-March 2024, +18.6% (against -38% for the static version). Be honest about that number too: SPY returned about 28% over the same eleven months, so the rebuilt strategy still trailed simply owning the index. Walk-forward optimization stopped the bleeding; it did not turn a mediocre trend rule into a good one. Those are different achievements and it is worth not confusing them.
     </div>
   </div>
 
@@ -495,7 +499,8 @@
       <p><strong>Example:</strong> RSI threshold (20-40) × MA length (100-200)</p>
       <p><strong>What to look for:</strong> "Plateau" of profitability (many parameters work), NOT single spike</p>
       <p><strong>Red flag:</strong> Only ONE combination works (overfit)</p>
-      <p><strong>Green flag:</strong> 30-40% of combinations profitable (robust edge)</p>
+      <p><strong>Green flag:</strong> a broad contiguous region is profitable — as a rough gauge, a majority of the combinations you tested, and the neighbours of your chosen setting in particular. Thirty percent scattered across the grid is not a plateau, it is noise that happens to have thirty percent winners.</p>
+      <p><strong>Read the shape, not the count.</strong> Two heatmaps can both show 40% profitable and mean opposite things: one where the profitable cells form a single connected block that your parameters sit in the middle of, and one where they are speckled at random. The first says the edge is insensitive to the exact setting, which is what robustness means. The second says you found forty percent of a coin flip.</p>
     </div>
   </details>
 
@@ -504,16 +509,17 @@
   <div style="background:rgba(255,82,82,.1);border-left:4px solid #ff5252;border-radius:8px;padding:1.25rem;margin:2rem 0">
     <div style="font-weight:700;margin-bottom:0.75rem;color:#ff5252">💀 Amanda Park's $167,300 Pre-Deployment Disaster (90 Days)</div>
     <div style="font-size:0.95rem;line-height:1.7">
-      <strong>June-August 2023:</strong> Amanda deployed a VWAP reversion strategy on AAPL without paper trading or cost validation. Lost $167,300 in first 90 days.
+      <strong>June-August 2023:</strong> Amanda deployed a VWAP reversion strategy on AAPL without paper trading or cost validation. Lost $50,100 in the first 90 days — and the reason is entirely in the two lines of arithmetic she never did.
     </div>
     <div style="margin-top:1rem;font-size:0.9rem;line-height:1.7">
       <strong>Her strategy:</strong> Buy when price > 1.5% above VWAP, sell on reversion. Backtest (2018-2022): 19.8% annual return, 1.38 Sharpe. Deployed $280,000 June 2023.<br/>
-      <strong>Disaster #1:</strong> Backtest assumed ZERO slippage + $0 commissions. Reality: $0.50/trade + 0.02% slippage. 180 trades/month = $630/month in costs (2.5% annual drag).<br/>
-      <strong>Disaster #2:</strong> Backtest assumed perfect fills. Live: 5-10 second execution lag = 0.08% adverse selection × 180 trades = 14.4% annual drag.<br/>
+      <strong>Disaster #1:</strong> The backtest assumed zero slippage and zero commission. Reality: $0.50 a trade plus 0.02% of slippage on each side. She averaged $20,000 a position and 180 round trips a month — $90 in commission plus $1,440 in slippage, so $1,530 a month, $18,400 a year. Against a $280,000 account that is a <strong>6.6% annual drag</strong>.<br/>
+      <strong>Disaster #2:</strong> The backtest also assumed perfect fills. Live she ran a 5-10 second execution lag, worth about 0.08% of adverse selection per round trip. At $20,000 a position that is $16 a trade, $2,880 a month, $34,600 a year — another <strong>12.4% annual drag</strong>.<br/>
+      <strong>Add those two together and the strategy is finished before it places a trade.</strong> 6.6% plus 12.4% is 19.0% of costs against a backtest that promised 19.8% of returns. There was never an edge to deploy; there was an edge in a spreadsheet where trading was free.<br/>
       <strong>Disaster #3:</strong> Only tested on AAPL. AAPL regime shifted in 2023 (low-vol year, strategy needs high vol). 85% of signals failed.
     </div>
     <div style="margin-top:1rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px;font-size:0.9rem">
-      <strong>Total damage:</strong> Month 1: -$38,700 (-13.8%). Month 2: -$67,200 (-24%). Month 3: -$61,400 (-21.9%). <span style="color:#ff5252;font-weight:700">Cumulative: $167,300 (-59.8%)</span>. The fix: Pre-live deployment checklist. 10 gates including: OOS testing, WFO validation, realistic costs, execution lag, multi-instrument testing, parameter robustness, paper trading (30-60 days), stress testing, position sizing, kill switch. After rebuild with all 10 gates + paper trading: Sept 2024-Feb 2025: +$12,800 profit (+12.8%). This 10-gate checklist prevents $150K-$250K disasters.
+      <strong>Total damage:</strong> Month 1: -$11,600 (-4.1%). Month 2: -$21,800 (-7.8%). Month 3: -$16,700 (-6.0%). <span style="color:#ff5252;font-weight:700">Cumulative: $50,100 (-17.9%)</span>. Of that, about $13,200 is pure cost drag — three months of the 19.0% annual figure above. The rest is a strategy that was never profitable gross of costs either, trading 540 round trips to find that out. The fix: a pre-live deployment checklist. Ten gates: OOS testing, WFO validation, realistic costs, execution lag, multi-instrument testing, parameter robustness, paper trading (30-60 days), stress testing, position sizing, kill switch. She restarted with $100,000 after clearing all ten and paper trading first: September 2024 to February 2025, +$12,800 (+12.8%).
     </div>
   </div>
 
@@ -620,18 +626,18 @@
       <tbody>
         <tr>
           <td>CAGR</td>
-          <td>24%</td>
-          <td>22%</td>
+          <td>4.8%</td>
+          <td>4.3%</td>
         </tr>
         <tr>
           <td>Sharpe Ratio</td>
-          <td>1.9</td>
-          <td>1.7</td>
+          <td>0.5</td>
+          <td>0.4</td>
         </tr>
         <tr>
           <td>Max Drawdown</td>
-          <td>12%</td>
-          <td>15%</td>
+          <td>6%</td>
+          <td>8%</td>
         </tr>
         <tr>
           <td>Win Rate</td>
@@ -655,6 +661,8 @@
       <li>She plans to trade with $50,000 capital</li>
     </ul>
 
+    <p><strong>Before you answer, check the ceiling.</strong> The exit rule caps a winner at roughly the +0.5% that triggers it — call it +0.7% once you allow for closes that gap through the level. Fourteen trades a year at +0.7%, with a perfect record and never a single loss, compounds to 10.3%. That is the absolute upper bound this rule set can produce. Any backtest of this strategy reporting 20%+ is reporting a bug. Doing this one line of arithmetic before you look at a backtest catches a whole category of error that no amount of out-of-sample testing will.</p>
+
     <h4 style="margin-top:1.5rem">Your Task: Answer These Questions</h4>
 
     <p><strong>Question 1:</strong> Is this strategy overfit? What evidence supports your answer?</p>
@@ -674,49 +682,55 @@
         <p><strong>Answer 1: Is this strategy overfit?</strong></p>
         <p><strong>NO, this appears robust:</strong></p>
         <ul>
-          <li>✅ Out-of-sample performance is 92% of in-sample (22% / 24% = 92%) — excellent! (>70% threshold)</li>
+          <li>✅ Out-of-sample performance is 90% of in-sample (4.3% / 4.8%) — excellent (>70% threshold)</li>
           <li>✅ Parameter robustness: 1.3-1.7% all work (not just 1.5% exactly)</li>
-          <li>✅ Win rate dropped only 3% out-of-sample (68% → 65%) — stable</li>
-          <li>✅ Sharpe ratio out-of-sample is 89% of in-sample (1.7 / 1.9) — very good</li>
+          <li>✅ Win rate dropped only 3 points out-of-sample (68% → 65%) — stable</li>
+          <li>✅ Sharpe ratio out-of-sample is 80% of in-sample (0.4 / 0.5) — good</li>
+          <li>✅ The reported returns are consistent with what the rules can produce: at a 68% win rate and +0.7% winners, 4.8% a year implies losers averaging -0.44%, which is what you would expect when the five-day timeout usually exits close to flat. The numbers describe a mechanism, not a fit.</li>
         </ul>
-        <p><strong>This passes the overfitting tests.</strong> The slight degradation in out-of-sample is normal and acceptable.</p>
+        <p><strong>This passes the overfitting tests.</strong> The slight degradation out-of-sample is normal and acceptable.</p>
 
         <p style="margin-top:1.5rem"><strong>Answer 2: Expected REAL return after costs?</strong></p>
         <p><strong>Calculation:</strong></p>
         <ul>
-          <li>Out-of-sample CAGR: 22% (before costs)</li>
+          <li>Out-of-sample CAGR: 4.3% (before costs)</li>
           <li>Total trades over 3 years (2021-2023): 42 trades</li>
           <li>Annual trade frequency: 42 / 3 = 14 trades/year</li>
-          <li>Cost per round-trip trade: Entry spread (0.0025%) + Exit spread (0.0025%) = 0.005% per trade</li>
+          <li>Cost per round-trip trade: entry spread (0.0025%) + exit spread (0.0025%) = 0.005% per trade</li>
           <li>Annual cost drag: 14 trades × 0.005% = 0.07% per year</li>
         </ul>
-        <p><strong>Expected real return: 22% - 0.07% ≈ 21.93% CAGR</strong></p>
-        <p>Note: Because SPY is extremely liquid and she pays no commissions, transaction costs are minimal (~7 basis points/year). The edge survives costs easily.</p>
+        <p><strong>Expected real return: 4.3% - 0.07% ≈ 4.23% CAGR</strong></p>
+        <p>Note: because SPY is extremely liquid, she pays no commission and she trades fourteen times a year, transaction costs are genuinely negligible here — about 7 basis points annually. This is the rare case where the cost line does not matter. Compare it with Amanda Park's 19% and you can see what actually decides that: trade frequency, not the size of the spread.</p>
 
         <p style="margin-top:1.5rem"><strong>Answer 3: Three risks to stress-test?</strong></p>
         <ol>
           <li><strong>2008-2009 crash scenario:</strong> Test on 2008 data (if not in dataset). Mean reversion strategies can get killed in sustained crashes when "dips" keep dipping.</li>
-          <li><strong>March 2020 volatility spike:</strong> SPY dropped 12% in one day (March 12, 2020). Would this strategy hold through or stop out? Test max intra-day drawdown.</li>
+          <li><strong>March 2020 volatility spike:</strong> SPY fell 9.5% on 12 March 2020 and 12% on 16 March. An entry rule that fires on any -1.5% close would have bought into both. Would this strategy hold through or stop out? Test the maximum intraday drawdown, and check how many entries the rule generates in a single month of that kind.</li>
           <li><strong>Fed policy regime change:</strong> Test 2022 separately (rising rates, QT environment). Mean reversion behaves differently when structural downtrend exists.</li>
         </ol>
 
         <p style="margin-top:1.5rem"><strong>Answer 4: Should she trade this live?</strong></p>
-        <p><strong>YES, with conditions:</strong></p>
-        <p><strong>Strengths:</strong></p>
+        <p><strong>The validation says yes. The benchmark says no. The benchmark wins.</strong></p>
+        <p><strong>What the strategy has going for it:</strong></p>
         <ul>
           <li>✅ Robust out-of-sample validation</li>
-          <li>✅ Transaction costs minimal (only 7 bps/year)</li>
-          <li>✅ Simple, explainable edge (panic selling = opportunity)</li>
+          <li>✅ Transaction costs minimal (only 7 bps a year)</li>
+          <li>✅ Simple, explainable edge (panic selling creates opportunity)</li>
           <li>✅ Parameter robustness confirmed</li>
+          <li>✅ Shallow drawdowns — 6% in-sample, 8% out — because it sits in cash most of the year</li>
         </ul>
-        <p><strong>Recommended safeguards:</strong></p>
+        <p><strong>The question every one of those checks fails to ask: compared with what?</strong> Over her out-of-sample window, 2021 through 2023, SPY itself returned about 10% a year. Her strategy returned 4.3% — trading the same instrument, carrying real execution risk, and requiring her to check for signals every evening for three years. It passed every test in this lesson and it still lost to doing nothing.</p>
+        <p>That is not a flaw in the validation process; the validation did its job. It is a reminder that robustness and profitability are separate questions, and that the tests in Part 4 answer only the first one. A strategy can be perfectly honest about a small edge. Small is still small.</p>
+        <p><strong>What she should actually do:</strong></p>
         <ul>
-          <li>📌 Start with 25% of capital ($12,500) for first 6 months to validate live performance</li>
-          <li>📌 Set a "kill switch": If down >10% in first 3 months, pause and reassess</li>
-          <li>📌 Add regime filter: Don't take signals if VIX >40 (extreme fear = different game)</li>
+          <li>📌 First, ask whether the edge can be made bigger without being made fragile. Loosening the exit — holding for the full five days rather than taking the +0.5% — raises the ceiling. Then re-run the entire validation on the new rules, from scratch, on data she has not touched.</li>
+          <li>📌 Consider it as an overlay rather than a standalone. It is in cash roughly 83% of the year, so the honest comparison is against T-bills for that portion plus SPY for the rest.</li>
+          <li>📌 If she trades it anyway, start with 25% of capital ($12,500) for the first 6 months to validate live execution</li>
+          <li>📌 Set a "kill switch": if down more than 10% in the first 3 months, pause and reassess</li>
+          <li>📌 Add a regime filter: don't take signals if VIX is above 40 (extreme fear is a different game)</li>
           <li>📌 Paper trade for 2-3 months first to confirm execution assumptions</li>
         </ul>
-        <p><strong>Overall verdict: This is one of the better quant strategies I've seen. The validation process was done correctly, out-of-sample performance is strong, and the edge is explainable. Trade it—but start small and monitor closely.</strong></p>
+        <p><strong>Overall verdict: the process here is exemplary and the strategy is not worth deploying as it stands. Both of those are true at once, and being able to hold them together is most of what separates a quant from someone with a backtester.</strong></p>
       </div>
     </details>
   </div>
