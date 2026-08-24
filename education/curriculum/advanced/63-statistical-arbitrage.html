@@ -147,9 +147,9 @@
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Test Your First Pair for Cointegration Tonight</strong> — Use Python: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. If p-value < 0.05 = cointegrated (tradeable). If > 0.05 = NOT cointegrated (don't trade). High correlation ≠ cointegration.</li>
+            <li><strong>Test Your First Pair for Cointegration Tonight</strong> — Use Python: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. p-value below 0.05 means you can reject the "no cointegration" null at the 5% level; above 0.05 means you can't, so don't trade it. High correlation ≠ cointegration. One caveat that matters more than it sounds: if you screen 100 pairs at the 5% level, roughly 5 will pass by pure chance. Test a shortlist you have an economic reason for, not the whole market.</li>
             <li><strong>Build Your Z-Score Spreadsheet</strong> — Z = (Current Spread - Avg Spread) / StdDev. Entry: |z| > 2.0 (2 standard deviations from mean). Exit: z returns to 0. Stop: |z| > 3.0 (diverging too far). Position size: 2% per pair.</li>
-            <li><strong>Paper Trade ONE Pair for 30 Days</strong> — Pick one cointegrated pair (SPY-IWM, KO-PEP). Enter at z ≥ 2.0, exit at z ≤ 0.5. Track 10-15 trades. Target: >65% win rate, >1.5% avg profit. Validate execution before live money.</li>
+            <li><strong>Paper Trade ONE Pair for 30 Days</strong> — Pick one cointegrated pair (SPY-IWM, KO-PEP). Enter at z ≥ 2.0, exit at z ≤ 0.5. Track 10-15 trades. Be honest about what that sample can tell you: 12 trades cannot establish a win rate — the margin of error on 12 coin flips is about ±14 points. What it CAN validate is execution: did you get filled on both legs, what did the round trip actually cost, did the spread behave the way the model said?</li>
           </ol>
         </div>
       </details>
@@ -179,7 +179,7 @@
               <li>Stock A: $100 → $150 (+50%)</li>
               <li>Stock B: $50 → $75 (+50%)</li>
               <li><strong>Correlation:</strong> Perfect 1.0</li>
-              <li><strong>Spread:</strong> $50 throughout (no reversion)</li>
+              <li><strong>Spread:</strong> $50 → $75. It widened by half and never came back.</li>
             </ul>
             <p style="margin-top:1rem;color:var(--warning)"><strong>Danger:</strong> You can't trade a spread that doesn't revert. This is why pure correlation-based pairs fail.</p>
           </div>
@@ -247,13 +247,19 @@
 
       <h3 id="the-three-disasters">The Three Disasters</h3>
 
-      <p><strong>Trade #1 (Feb 12-Mar 8):</strong> Bought ARKK thinking "cheap vs QQQ." Spread widened instead of reverting. Loss: <strong>-$6,600</strong>.</p>
+      <p><strong>Trade #1 (Feb 12-Mar 8):</strong> Bought ARKK thinking "cheap vs QQQ." Spread widened instead of reverting. Loss: <strong>-$7,800</strong>.</p>
 
       <p><strong>Trade #2 (Mar 15-Apr 19):</strong> Shorted ARKK "overextended." ARKK exploded +13.5% on genomics hype. Margin call. Loss: <strong>-$15,200</strong>.</p>
 
-      <p><strong>Trade #3 (Apr 25-May 10):</strong> Revenge trade. Initially up $26,831, then short squeezed +10.5%. Held hoping for recovery. Loss: <strong>-$8,400</strong>.</p>
+      <p><strong>Trade #3 (Apr 25-May 10):</strong> Revenge trade. Up $3,900 at one point, then short squeezed +10.5%. Held hoping for recovery. Loss: <strong>-$8,400</strong>. Three trades, -$7,800 -$15,200 -$8,400 = <strong>-$31,400</strong>.</p>
 
-      <h3 id="the-rebuild-feb-nov-2025">The Rebuild: February-November 2025</h3>
+      <div class="callout-warning">
+        <h4>🚨 Look at the Position Sizes Before You Look at the Analysis</h4>
+        <p>A 12.4-point divergence between ARKK and QQQ producing a $15,200 loss means Derek had roughly <strong>$123,000</strong> working in one pair — 56% of a $220K account. This lesson's own rule is 2-5% per pair. Even with a correct cointegration test, that size turns a normal spread excursion into a margin call.</p>
+        <p>Two separate failures compounded here: he traded a pair that had no statistical basis, <em>and</em> he sized it as if it could not lose. Fixing only the first one still leaves you exposed.</p>
+      </div>
+
+      <h3 id="the-rebuild-feb-nov-2025">The Rebuild: February-October 2025</h3>
 
       <p><strong>New Process:</strong></p>
       <ol>
@@ -282,7 +288,7 @@
           </div>
         </div>
         <div class="key-insight">
-          <strong>The Transformation:</strong> Account: $188.6K → $211.7K (+12.2%). Sharpe 1.94. Only trades pairs where ADF p-value &lt;0.05. Best trade: +$4,120 JPM/BAC (z-score 2.8 entry).
+          <strong>The Transformation:</strong> Account: $188.6K → $211.7K (+$23,094, +12.2%). Win rate 69.6% (16 of 23 trades). Sharpe roughly 1.9 — on nine months and 23 trades, treat that as a rough read, not a measured constant. Only trades pairs where ADF p-value &lt;0.05. Best trade: +$4,120 JPM/BAC (z-score 2.8 entry).
         </div>
       </div>
 
@@ -298,7 +304,7 @@
       </div>
 
 <div class="quiz-question" style="margin-top:2rem">
-  <p><strong>Case Study Quiz: Derek lost $31,400 (-14.3%) in 3 months trading ARKK/QQQ pairs. He was confident because they showed 0.89 correlation—they moved together historically. Trade #2 destroyed him: he shorted ARKK thinking it was "overextended vs. QQQ," but ARKK exploded +13.5% while QQQ only +1.1%, causing a margin call and -$15,200 loss. He also missed a $26,831 profit opportunity when the spread reversed but he held too long. What was Derek's fatal mistake?</strong></p>
+  <p><strong>Case Study Quiz: Derek lost $31,400 (-14.3%) in 3 months trading ARKK/QQQ pairs. He was confident because they showed 0.89 correlation—they moved together historically. Trade #2 destroyed him: he shorted ARKK thinking it was "overextended vs. QQQ," but ARKK exploded +13.5% while QQQ only +1.1%, causing a margin call and -$15,200 loss. He was also up $3,900 on his third trade before the spread ran away from him and he held on. What was Derek's fatal mistake?</strong></p>
   <div class="quiz-options">
     <div class="quiz-option" data-correct="false">
       <strong>A)</strong> He used too much leverage on the pairs trade, causing margin calls when spreads widened temporarily
@@ -339,7 +345,14 @@
 
       <h3 id="interpreting-adf-test-results">Interpreting ADF Test Results</h3>
 
-      <p>The ADF test outputs a <strong>p-value</strong> that tells you the probability that the spread is non-stationary (random walk).</p>
+      <p>The ADF test outputs a <strong>p-value</strong>. Read it carefully, because almost every trading blog gets this backwards.</p>
+
+      <div class="callout-danger">
+        <h4>🚨 What a p-value Is — and Isn't</h4>
+        <p>The p-value is <strong>the probability of seeing a test statistic at least this extreme if the spread really were a random walk</strong>. It is NOT "the probability that the spread is non-stationary", and 1 minus the p-value is NOT "the probability the pair is cointegrated".</p>
+        <p>That distinction is not pedantry. A p-value of 0.02 does not mean you have a 98% chance of being right about this pair. It means that if the spread had no mean reversion at all, data this convincing would still turn up about 2% of the time — which is exactly why screening 100 pairs at the 5% level hands you roughly 5 false positives for free.</p>
+        <p><strong>The working rule stays the same</strong> (reject the unit root below 0.05, don't trade above it). What changes is how much confidence you attach to a single passing test.</p>
+      </div>
 
       <div style="overflow-x:auto;margin:1.5rem 0">
       <table style="width:100%;border-collapse:collapse">
@@ -353,17 +366,17 @@
         <tbody>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem"><strong>&lt; 0.01</strong></td>
-            <td style="padding:0.75rem">Highly stationary (99% confidence)</td>
+            <td style="padding:0.75rem">Unit root rejected at the 1% level</td>
             <td style="padding:0.75rem;font-weight:600;color:#22c55e">✅ TRADEABLE (strong cointegration)</td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
             <td style="padding:0.75rem"><strong>0.01 - 0.05</strong></td>
-            <td style="padding:0.75rem">Stationary (95% confidence)</td>
+            <td style="padding:0.75rem">Unit root rejected at the 5% level</td>
             <td style="padding:0.75rem;font-weight:600;color:#22c55e">✅ TRADEABLE (acceptable cointegration)</td>
           </tr>
           <tr style="background:rgba(255,193,7,0.08)">
             <td style="padding:0.75rem"><strong>0.05 - 0.10</strong></td>
-            <td style="padding:0.75rem">Weakly stationary (90% confidence)</td>
+            <td style="padding:0.75rem">Rejected only at the 10% level</td>
             <td style="padding:0.75rem;font-weight:600;color:#ffc107">⚠️ MARGINAL (risky, watch closely)</td>
           </tr>
           <tr style="background:rgba(239,68,68,0.08)">
@@ -377,7 +390,7 @@
 
       <div class="callout-success" style="background:rgba(34,197,94,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #22c55e">
         <h4>✅ Rule of Thumb</h4>
-        <p><strong>Only trade pairs with ADF p-value &lt; 0.05.</strong> This gives you 95% statistical confidence that the spread will mean-revert.</p>
+        <p><strong>Only trade pairs with ADF p-value &lt; 0.05.</strong> That is the conventional threshold for rejecting the random-walk null — not a 95% guarantee that this particular spread will revert.</p>
         <p style="margin-top:0.75rem">If p-value &gt; 0.05, you're trading correlation, not cointegration—and that's gambling.</p>
       </div>
 
@@ -401,22 +414,31 @@ PEP (PepsiCo): Last 252 days of closing prices
 
 <strong>Step 2: Run OLS Regression (KO = β × PEP)</strong>
 Using Python statsmodels or Excel LINEST function
-Result: β = 1.12
+Result: β = 0.30
 
 <strong>Interpretation:</strong>
-For every $1 of PEP, you need $1.12 of KO to create a hedged pair.
+One share of KO is hedged with 0.30 shares of PEP. Note that β
+comes from the PRICE regression, so it reflects the price ratio
+(PEP trades near 3x KO), not a 1:1 dollar rule of thumb.
 
 <strong>Step 3: Calculate Spread</strong>
-Spread = KO - (1.12 × PEP)
+Spread = KO - (0.30 × PEP)
 
 Example values:
 - KO = $60.50
 - PEP = $180.20
-- Spread = $60.50 - (1.12 × $180.20) = $60.50 - $201.82 = -$141.32
+- Spread = $60.50 - (0.30 × $180.20) = $60.50 - $54.06 = $6.44
+
+That is roughly dollar-neutral: $60.50 of KO against $54.06 of
+PEP. If your hedge ratio produces a spread of -$141, you have
+mismatched the legs and you are long or short the market, not
+the spread.
 
 <strong>Step 4: Run ADF Test on Spread</strong>
 ADF Test Result: p-value = 0.018 ✅
-Interpretation: Spread is stationary (cointegrated at 98% confidence)
+Interpretation: unit root rejected at the 5% level - the spread
+                behaves like a mean-reverting series over this
+                sample. (NOT "98% confident"; see the box above.)
 Conclusion: KO/PEP is a tradeable pair
       </pre>
 
@@ -478,6 +500,7 @@ Conclusion: KO/PEP is a tradeable pair
           <li><strong>Not recalculating β regularly:</strong> Hedge ratios drift over time. Recalculate monthly or you'll trade the wrong spread.</li>
           <li><strong>Ignoring p-value drift:</strong> A pair cointegrated in January may decointegrate by June. Re-test monthly.</li>
           <li><strong>Testing only once:</strong> Cointegration is dynamic, not static. Rolling window tests (6-month rolling) are essential.</li>
+          <li><strong>Screening thousands of pairs and keeping the winners:</strong> the S&amp;P 500 alone offers 124,750 possible pairs. At the 5% level you would expect around 6,000 of them to "pass" on noise alone. Start from pairs with an economic reason to be linked (same sector, same input costs, same customers), then test — not the other way round.</li>
         </ul>
       </div>
 
@@ -517,7 +540,7 @@ Conclusion: KO/PEP is a tradeable pair
             </ul>
             <p style="margin-top:1rem"><strong>Why Conservative:</strong></p>
             <ul>
-              <li>Z > 2 means 95% confidence the spread is abnormal</li>
+              <li>Under a normal distribution only ~5% of observations sit beyond ±2σ. Spread distributions have fatter tails than normal, so treat ±2 as a threshold that filters noise, not as a 95% probability of reversion</li>
               <li>Fewer false signals, higher win rate</li>
               <li>Lower frequency (fewer trades)</li>
             </ul>
@@ -553,8 +576,8 @@ Conclusion: KO/PEP is a tradeable pair
 
       <p>The half-life tells you how many periods it takes for the spread to revert halfway back to the mean. This informs your holding period.</p>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
-  <p>You're now at the halfway point. You've learned the key strategies.</p>
-  <p style="margin-top:0.5rem;font-size:0.9rem">Great progress! Take a quick stretch break if needed, then we'll dive into the advanced concepts ahead.</p>
+  <p>That's the identification half of the job: which pairs are tradeable, and what the signal looks like.</p>
+  <p style="margin-top:0.5rem;font-size:0.9rem">The rest of the lesson is the part that decides whether you keep the edge — sizing, stops, portfolio construction, and what it actually costs to execute.</p>
 </div>
 
       <div class="callout-info">
@@ -614,7 +637,9 @@ Conclusion: KO/PEP is a tradeable pair
 
       <div class="callout-warning">
         <h4>🚨 LTCM Collapse (1998)</h4>
-        <p>Nobel Prize-winning stat arb fund lost $4.6B when Russian debt crisis caused spreads to widen beyond historical norms (z-score hit 10+). <strong>Lesson:</strong> Models assume normal distributions. Black swan events break assumptions. Always have stop losses.</p>
+        <p>Long-Term Capital Management — a relative-value fund with two Nobel laureates in economics among its principals — lost about $4.6 billion in four months in 1998 after Russia defaulted on its domestic debt. Its trades were mostly fixed-income convergence rather than equity pairs, but the failure mode is the one that kills stat arb books.</p>
+        <p><strong>What actually broke:</strong> not that one spread moved further than expected, but that spreads the fund had modelled as independent all moved the same way at the same time. Diversification across 20 pairs is worth nothing if a liquidity shock correlates all 20. The models were also calibrated on a sample that contained no sovereign default — they could not price an event they had never seen.</p>
+        <p><strong>Lesson:</strong> size for the correlation you get in a crisis, not the one in your backtest, and always have stop losses.</p>
       </div>
 <h3 id="stop-loss-rules-for-stat-arb">Stop Loss Rules for Stat Arb</h3>
 
@@ -633,7 +658,7 @@ Conclusion: KO/PEP is a tradeable pair
       <div class="callout-info">
         <p><strong>Step 1 - Discovery:</strong> Screen same-sector stocks with similar market cap and >0.7 correlation.</p>
         <p><strong>Step 2 - Test:</strong> ADF test on spread (6-12 months data). p<0.05 = pass, p>0.05 = reject.</p>
-        <p><strong>Step 3 - Backtest:</strong> Entry |Z|>2, exit Z=0. Target: Sharpe >1.5, win rate >60%, half-life 5-30 days.</p>
+        <p><strong>Step 3 - Backtest:</strong> Entry |Z|>2, exit Z=0. Target: win rate >55%, profit factor >1.5, Sharpe >1.2, half-life 5-30 days — the same thresholds used in Part 9. Net of commission and slippage, not gross.</p>
         <p><strong>Step 4 - Monitor:</strong> Daily z-score, spread volatility, correlation. Re-run ADF monthly.</p>
       </div>
 
@@ -661,8 +686,21 @@ Conclusion: KO/PEP is a tradeable pair
           <div class="accordion-content">
             <p><strong>Setup:</strong> SPY/IWM, correlation 0.92 (5-min), ADF p=0.009✅, half-life 12 bars (60 min)</p>
             <p><strong>Rules:</strong> Entry |Z| > 1.8, exit when Z crosses 0 OR 90 min elapsed</p>
-            <p><strong>Example (Nov 15, 2024):</strong> 10:35 AM z=-1.95 → Long 200 SPY, Short 530 IWM → 11:20 AM z=+0.12 → Exit +$142 (45 min, 0.12%)</p>
-            <p style="color:var(--success)"><strong>Scalability:</strong> 8-12× per day, $50-200 each. Monthly: ~3-5% with minimal overnight risk.</p>
+            <p><strong>Example (Nov 15, 2024):</strong> 10:35 AM z=-1.95 → Long 200 SPY, Short 530 IWM (about $116K a side, roughly dollar-neutral at a 2.68 hedge ratio) → 11:20 AM z=+0.12 → Exit +$142 in 45 minutes, or 0.12% of the SPY leg.</p>
+            <p><strong>Now price the friction, because it decides everything:</strong></p>
+            <pre style="overflow-x:auto"><code>Shares per round trip: (200 + 530) x 2 legs = 1,460
+Commission at $0.005/share:                     $7.30
+Slippage at $0.01/share:                       $14.60
+Round-trip friction:                          ~$21.90
+
+...against a $142 winner. That is 15% of the gross.
+And it is right at the "&lt;0.02% per trade" ceiling
+above: 0.02% of $116,000 is $23.20.</code></pre>
+            <p><strong>Then price the losers.</strong> The risks panel below puts intraday false signals at 40-50%. Assume 55% of trades win $142 and 45% hit the 90-minute time stop for -$120:</p>
+            <pre style="overflow-x:auto"><code>Gross expectancy: 0.55(142) - 0.45(120) = +$24.10
+Less friction:                            -$21.90
+NET per trade:                             +$2.20</code></pre>
+            <p style="color:var(--warning)"><strong>That is the honest answer.</strong> At retail commission and slippage, intraday stat arb on this pair is roughly a break-even business — the edge is real but the costs eat it. Halve the slippage with professional routing and the same trade nets about $9; that is the entire reason this is a professional game and not a retail one. Any source quoting you 3-5% a month from intraday pairs is quoting gross, before the two lines above.</p>
           </div>
         </details>
 
@@ -693,20 +731,26 @@ Conclusion: KO/PEP is a tradeable pair
           <div class="tab-panel">
             <h3 id="conservative-stat-arb-portfolio-100k-account">Conservative ($100K)</h3>
             <p><strong>5 pairs, 2% each:</strong> KO/PEP, JPM/BAC, XOM/CVX, UNH/CVS, WMT/TGT</p>
-            <p><strong>Total Risk:</strong> 10% | <strong>Sharpe:</strong> 1.5-2.0 | <strong>Return:</strong> 12-18% | <strong>Max DD:</strong> -8% to -12%</p>
+            <p><strong>Total Risk:</strong> 10% | <strong>Sharpe:</strong> 0.8-1.2 | <strong>Return:</strong> 6-10% a year | <strong>Max DD:</strong> -8% to -12%</p>
           </div>
           <div class="tab-panel">
             <h3 id="moderate-stat-arb-portfolio-100k-account">Moderate ($100K)</h3>
             <p><strong>10 pairs, 1.5% each:</strong> Daily (6): Conservative + MA/V, DIS/CMCSA | Intraday (4): SPY/IWM, QQQ/DIA, XLF/XLK, XLE/XLU</p>
-            <p><strong>Total Risk:</strong> 15% | <strong>Sharpe:</strong> 2.0-2.5 | <strong>Return:</strong> 20-30% | <strong>Max DD:</strong> -12% to -18%</p>
+            <p><strong>Total Risk:</strong> 15% | <strong>Sharpe:</strong> 1.0-1.5 | <strong>Return:</strong> 10-18% a year | <strong>Max DD:</strong> -12% to -18%</p>
           </div>
           <div class="tab-panel">
             <h3 id="aggressive-stat-arb-portfolio-100k-account">Aggressive ($100K)</h3>
             <p><strong>20+ pairs, 1% each:</strong> 8 daily blue-chips + 12 intraday ETFs | 1.5× leverage</p>
-            <p><strong>Total Risk:</strong> 20-30% | <strong>Sharpe:</strong> 2.5-3.5 | <strong>Return:</strong> 35-50% | <strong>Max DD:</strong> -20% to -30%</p>
+            <p><strong>Total Risk:</strong> 20-30% | <strong>Sharpe:</strong> 1.2-1.8 | <strong>Return:</strong> 18-30% a year | <strong>Max DD:</strong> -20% to -30%</p>
             <p style="color:var(--warning)"><strong>Warning:</strong> Requires full-time monitoring and professional execution</p>
           </div>
         </div>
+      </div>
+
+      <div class="callout-info">
+        <h4>📐 A Note on Those Sharpe Numbers</h4>
+        <p>All three figures are annual, net of costs, and deliberately lower than what you will see quoted elsewhere. Sustained Sharpe above 2 is a documented characteristic of a handful of firms with co-located infrastructure, borrow desks and execution costs you cannot access. A retail stat arb book that genuinely delivers Sharpe 1.0-1.5 over several years is doing well.</p>
+        <p>Also check the ratio: a strategy claiming 40% returns against a 30% drawdown is not a Sharpe 3 strategy, whatever the marketing says. Return divided by max drawdown here sits around 0.8-1.0 in every tier, which is what these risk levels actually support.</p>
       </div>
 
       <div class="callout-warning">
@@ -729,7 +773,7 @@ Conclusion: KO/PEP is a tradeable pair
       <div style="background:rgba(118,221,255,.08);border-left:4px solid var(--accent);border-radius:8px;padding:1.5rem;margin:1.5rem 0">
         <h4 style="margin-top:0">Step 1: Testing for Cointegration</h4>
         <p><strong>Process:</strong> (1) Run OLS regression to find hedge ratio β (e.g., KO = β × PEP), (2) Calculate spread (KO - β × PEP), (3) Run Augmented Dickey-Fuller (ADF) test on spread. If p-value < 0.05 = cointegrated. (4) Calculate half-life (mean reversion speed) using spread lag regression.</p>
-        <p><strong>Example:</strong> KO/PEP β = 0.92, spread p-value = 0.018 (✅ cointegrated), half-life = 12.3 days (mean reversion completes in ~12 days).</p>
+        <p><strong>Example:</strong> KO/PEP β = 0.30 (same figure as Part 2 — one pair, one hedge ratio), spread p-value = 0.018 (✅ unit root rejected), half-life = 12.3 days, meaning the spread closes half its gap to the mean in about 12 days.</p>
       </div>
 
       <div style="background:rgba(139,92,246,.08);border-left:4px solid #8b5cf6;border-radius:8px;padding:1.5rem;margin:1.5rem 0">
