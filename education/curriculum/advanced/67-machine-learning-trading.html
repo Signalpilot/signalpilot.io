@@ -115,10 +115,16 @@
       <p>Every quant fund claims to use "AI" and "machine learning." Most fail. Why? ML is powerful for finding patterns, but financial markets are low signal-to-noise with non-stationary distributions. This lesson teaches you when ML works (and when it's snake oil).</p>
 
       <div class="callout callout-danger">
-        <h4>💸 The $450 Million ML Failure</h4>
-        <p>In 2007, a well-funded quant hedge fund deployed a "state-of-the-art" neural network trained on 15 years of data. The model had 95% backtest accuracy predicting next-day S&P direction.</p>
-        <p><strong>August 2007:</strong> The fund lost $450M in 3 days during the quant crisis. Why? The model was trained exclusively on low-volatility bull market data (1992-2007). When volatility spiked and correlations changed, the model's predictions became worthless.</p>
-        <p><strong>Lesson:</strong> ML models trained on one regime fail catastrophically when regimes shift. This lesson shows you how to build robust models that survive.</p>
+        <h4>💸 The August 2007 Quant Quake</h4>
+        <p>In the second week of August 2007, a cluster of well-funded quantitative funds — all running statistical models fitted on roughly fifteen years of data, all holding broadly the same factor exposures — lost billions of dollars in three trading days. Goldman Sachs' Global Equity Opportunities fund, one of the few whose numbers became public, fell about 30% in that week.</p>
+        <p><strong>6-9 August 2007:</strong> Nothing about the companies in those portfolios changed. One large fund began liquidating, the liquidation pushed the shared factors against everyone holding them, the resulting losses forced the next fund to liquidate, and the loop ran for three days until it exhausted itself. Every model involved had been validated. What none of them had modelled was the behaviour of the other models.</p>
+        <p><strong>Lesson:</strong> ML models fail in two ways, and only one of them is in your backtest. They fail when the regime shifts out from under the training data, and they fail when everyone else has found the same pattern and reaches for the exit at the same moment. A backtest sees your positions. It cannot see the crowd standing in the trade beside you.</p>
+      </div>
+
+      <div class="callout callout-warning">
+        <h4>⚠️ Before anything else: what an accuracy number can be</h4>
+        <p>Nothing predicts next-day index direction at 95%. Or at 80%. Or at 70%. Daily equity index direction is close to a coin flip with a small upward drift, and honest published work — along with every practitioner willing to show their out-of-sample numbers — lands in the 52-57% band. A model at 56% is doing real work.</p>
+        <p>So when a backtest hands you 85% or 94%, you have not found an edge. You have found a bug, and it is almost always one of three: your features were computed across the whole series before you split it, so tomorrow's data is inside today's inputs; your test set leaked into training; or you are scoring the model on the same rows you fitted it to. Read a high accuracy number as a diagnostic, never as a result. The rest of this lesson is largely about the discipline that keeps that number honest.</p>
       </div>
 
       <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
@@ -137,9 +143,9 @@
         <div style="margin-top:1rem">
           <p>Don't overwhelm yourself. Start with these 3 actions:</p>
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Start Simple: Feature Engineering BEFORE Neural Networks</strong> — Derek Chen (composite example) lost <span style="color:#ff5252;font-weight:700">$218,000</span> (-73%) in 6 months building complex 200-layer LSTM neural network without feature engineering—94% backtest accuracy, catastrophic live failure. Start simple: Engineer 10-20 basic features (RSI divergence, volume spikes, VIX relationships), test with random forest FIRST. Tonight: Create spreadsheet with 5 features (14-day RSI, 20-day price change %, volume vs 20-day avg, VIX level, put/call ratio). Calculate for SPY past year. Use Excel regression or Python sklearn to predict next-day return. Accuracy >55% = signal. <53% = needs work.</li>
-            <li><strong>Implement K-Fold Cross-Validation (Stop Training on 100% of Data)</strong> — Amanda Torres (composite example) lost <span style="color:#ff5252;font-weight:700">$156,400</span> (-56%) in 4 months training random forest on 100% of data (2015-2023)—model memorized historical noise vs learning real patterns. Fix: Split data into 5 folds, train on 4, test on 1, rotate 5 times. Tonight: Split 2015-2024 data into 5 periods. Train on first 4, test on 5th. Repeat 5 times. Average test accuracy >55% AND consistent across folds = robust. Wildly varying (60%, 48%, 62%) = unstable, needs simplification.</li>
-            <li><strong>Track Feature Importance (Drop Noise Features)</strong> — Michael Park (composite example) lost <span style="color:#ff5252;font-weight:700">$97,200</span> in 8 months using 87 features without knowing which mattered—model overfitted to noise (e.g., "day of week"). When noise patterns changed, model collapsed. Tonight: Train random forest, extract feature importance scores. Drop features with importance <0.02 (noise). Re-train with top 10-15 features. Performance IMPROVES = you were overfitting. Michael found top 5 features (VIX, put/call ratio, 20-day momentum, volume, yield curve) = 78% importance. Rebuilt with 12 features, gained +14.3% in 6 months.</li>
+            <li><strong>Start Simple: Feature Engineering BEFORE Neural Networks</strong> — Derek Chen (composite example) lost <span style="color:#ff5252;font-weight:700">$19,700</span> (-6.6%) in 6 months on a $298,000 account, building a deep LSTM with no feature engineering at all—94% backtest accuracy, 48% live. The 94% was the tell: he computed his indicators across the whole series before splitting it, so tomorrow's data was sitting inside today's inputs. Note the size of the loss as well as its cause. An unlevered daily model that is slightly worse than a coin flip bleeds slowly, through costs and a small negative edge; it does not take 70% of an account. If you read a blow-up story that does, there was leverage. Start simple: engineer 10-20 basic features (RSI divergence, volume spikes, VIX relationships), test with a random forest FIRST. Tonight: build a spreadsheet with 5 features (14-day RSI, 20-day price change %, volume vs 20-day avg, VIX level, put/call ratio). Calculate them for SPY over the past year, splitting the data before you compute anything. Use Excel regression or Python sklearn to predict next-day return. Accuracy >55% = signal. &lt;53% = needs work.</li>
+            <li><strong>Implement K-Fold Cross-Validation (Stop Training on 100% of Data)</strong> — Amanda Torres (composite example) lost <span style="color:#ff5252;font-weight:700">$23,800</span> (-8.5%) in 4 months on a $279,000 account, training a random forest on 100% of her data (2015-2023)—the model memorized historical noise instead of learning a pattern, scoring 71% on the very rows it had been fitted to against 49% live. Fix: Split data into 5 folds, train on 4, test on 1, rotate 5 times. Tonight: Split 2015-2024 data into 5 periods. Train on first 4, test on 5th. Repeat 5 times. Average test accuracy >55% AND consistent across folds = robust. Wildly varying (60%, 48%, 62%) = unstable, needs simplification.</li>
+            <li><strong>Track Feature Importance (Drop Noise Features)</strong> — Michael Park (composite example) lost <span style="color:#ff5252;font-weight:700">$31,500</span> (-9.8%) in 8 months on a $320,000 account, using 87 features on about 2,000 daily bars without knowing which of them mattered—23 samples per feature, so the model fitted noise such as "day of week". When the noise changed, the model collapsed. Tonight: Train random forest, extract feature importance scores. Drop features with importance &lt;0.02 (noise). Re-train with top 10-15 features. Performance IMPROVES = you were overfitting. Michael found his top 5 features (VIX, put/call ratio, 20-day momentum, volume, yield curve) carried 78% of the importance. Rebuilt with 12 features, he made +5.4% over the following 6 months — against about +8% for simply holding SPY across the same stretch. The rebuild stopped the bleeding; it did not beat the index, and it is worth being clear about which of those two you have achieved.</li>
           </ol>
         </div>
       </details>
@@ -166,7 +172,7 @@
 
   <div class="example-block">
     <h3>Real-World Success Story: Renaissance Technologies</h3>
-    <p><strong>The Fund:</strong> Renaissance Medallion Fund (Jim Simons), arguably the most successful quant fund in history. 66% average annual returns (after fees) from 1988-2018.</p>
+    <p><strong>The Fund:</strong> Renaissance Medallion Fund (Jim Simons), arguably the most successful quant fund in history. Roughly 66% average annual returns <em>before</em> fees from 1988 to 2018 — about 39% a year after the fund's 5% management and 44% performance fees. The gross number is the one that gets quoted; the net number is the one investors actually received, and it is still the best long-run record anybody has documented.</p>
 
     <p><strong>What They Do Differently:</strong></p>
     <ul>
@@ -180,12 +186,12 @@
     <p>You CAN'T replicate Renaissance. They have:</p>
     <ul>
       <li>100+ PhD researchers</li>
-      <li>$100M+ annual technology budget</li>
+      <li>A technology and market-data budget no individual can approach</li>
       <li>Proprietary HFT infrastructure</li>
       <li>30+ years of cleaned, survivorship-bias-free data</li>
     </ul>
 
-    <p><strong>What YOU can do:</strong> Focus on simpler ML (random forest, XGBoost) with 10-20 well-engineered features on daily/4H data. Don't try to build neural networks with 100 features and 5,000 samples—that's guaranteed overfitting.</p>
+    <p><strong>What YOU can do:</strong> Focus on simpler ML (random forest, XGBoost) with 10-20 well-engineered features on daily/4H data. Don't try to build a neural network with tens of thousands of parameters on 5,000 daily bars—that is guaranteed overfitting. For a neural network the ratio that binds is parameters to samples, not features to samples, and a three-layer net crosses ten thousand parameters long before you notice.</p>
   </div>
 <h2 id="part-2-ml-model-types-for-trading">Part 2: ML Model Types for Trading</h2>
 
@@ -296,8 +302,8 @@
 
     <p><strong>Interpretation:</strong></p>
     <ul>
-      <li><strong>Validation vs Training:</strong> 58% vs 62% = 93% retention (good, not overfit)</li>
-      <li><strong>Test performance:</strong> 56% accuracy = edge exists but modest (better than coin flip)</li>
+      <li><strong>Validation vs training:</strong> 58% against 62% reads as 94% retention, and that reading is wrong. Accuracy on a binary target has a floor of 50%, not zero, so the thing that degraded is the edge over the coin flip: 12 points in training, 8 in validation, 6 in the test set. The model kept two-thirds of its edge into validation and half of it into the test set. Always measure the distance above 50%, never the ratio of the raw accuracies — the raw ratio flatters every model ever built and will tell you a 55%/51% collapse is "93% retention".</li>
+      <li><strong>Test performance:</strong> 56% accuracy is 6 points of edge over a coin flip. That is real, it is publishable, and it is small. Treat it as small.</li>
       <li><strong>Trading strategy:</strong> Only trade when model confidence &gt;70% (reduces trades but improves win rate to 61%)</li>
     </ul>
 
@@ -318,7 +324,7 @@
     <li>Computationally expensive (training can take days/weeks)</li>
   </ul>
 
-  <p><strong>Best use case:</strong> Only if you have 100K+ labeled samples (e.g., tick-level HFT data)</p>
+  <p><strong>Best use case:</strong> Only if you have 50,000+ labelled samples, and comfortably 100,000+ (e.g., tick-level HFT data)</p>
 
   <div class="callout">
     <p><strong>📊 Reality Check:</strong> Most retail traders have &lt;5,000 training samples (daily bars). Neural networks need 50K+ to avoid overfitting. Use simpler models (random forest, logistic regression) instead.</p>
@@ -401,7 +407,7 @@
     <p><strong>Step 1: Data Collection</strong></p>
     <ul>
       <li>Download 10 years of daily SPY data (2014-2023)</li>
-      <li>Calculate technical indicators: RSI(14), MACD, 20-day MA, 50-day MA, ATR(14)</li>
+      <li>Calculate technical indicators: RSI(14), MACD, 20-day MA, 50-day MA, 200-day MA, ATR(14) — compute each one <em>after</em> you have split the data, never across the full series</li>
       <li>Add VIX daily close as feature</li>
       <li>Create target variable: 1 if tomorrow's close &gt; today's close, 0 otherwise</li>
     </ul>
@@ -441,7 +447,7 @@
     <ul>
       <li><strong>Validation accuracy:</strong> ≥ 55%</li>
       <li><strong>Test accuracy:</strong> ≥ 53% (some degradation expected)</li>
-      <li><strong>Test vs Validation:</strong> Ratio ≥ 0.9 (not overfit)</li>
+      <li><strong>Edge retention:</strong> (test − 50%) ÷ (validation − 50%) ≥ 0.6. At 55% validation and 53% test that is 3 points against 5, or 0.6 — the floor of what is acceptable. Do not use the ratio of the raw accuracies here; 53/55 is 96% and tells you nothing.</li>
       <li><strong>Feature importance:</strong> Top 3 features should be logically explainable</li>
     </ul>
 
@@ -486,7 +492,7 @@
   </ul>
 
   <div class="callout">
-    <p><strong>🔥 The Curse:</strong> More parameters than samples = guaranteed overfitting. If you have 2,500 samples, use MAX 25-50 features (10-100× ratio rule).</p>
+    <p><strong>🔥 The Curse:</strong> More parameters than samples = guaranteed overfitting. Budget at least 50 samples per feature and prefer 100. With 2,500 daily bars that is 25 features comfortably and 50 at the absolute outside — not 200. This one ratio is the single most useful number in the lesson, so carry it: <strong>samples ÷ features ≥ 50</strong>.</p>
   </div>
 <h3>Detecting Overfitting</h3>
   <table style="width:100%">
@@ -557,7 +563,7 @@
   <ul>
     <li>Retrain every month on past 2 years, predict next month</li>
     <li>Track out-of-sample performance over time</li>
-    <li>If performance degrades &gt; 30%, stop trading (regime shifted)</li>
+    <li>If the live edge over 50% falls below half the validated edge, stop trading (the regime has shifted). Stated in accuracy terms this trips far later than it should: a model validated at 58% that is running at 54% live has lost half its edge while its raw accuracy has barely moved.</li>
   </ul>
 
   <h2 id="part-6-using-signal-pilot-with-ml-models">Part 6: Using Signal Pilot with ML Models</h2>
@@ -584,7 +590,7 @@
       <p><strong>Q1:</strong> You have 2,000 daily bars. How many features should you use maximum?</p>
       <details>
         <summary>Show Answer</summary>
-        <p><strong>Answer:</strong> 20-200 features max (10-100× ratio rule). Using 2,000 features would guarantee overfitting (1:1 ratio). Start with 10-20 most important features, expand only if validation performance improves.</p>
+        <p><strong>Answer:</strong> 20-40 features maximum. At the floor of 50 samples per feature, 2,000 bars supports 40 features; at the safer 100 samples per feature, 20. Jason's model in the case study above ran 200 features on 1,700 bars — 8.5 samples per feature — and it memorised the training set rather than learning anything. Start with 10-20 of the most important features and expand only if validation performance actually improves, not merely because you have more features available.</p>
       </details>
     </div>
 
@@ -623,10 +629,10 @@
     </ul>
     <h4>After Training:</h4>
     <ul>
-      <li>Test on held-out data (final accuracy should be ≥ 80% of validation accuracy)</li>
+      <li>Test on held-out data — the test <em>edge over 50%</em> should be at least 60% of the validation edge over 50% (not 80% of the raw accuracy, which is a meaningless bar)</li>
       <li>Run walk-forward analysis (retrain every month, test next month)</li>
       <li>Paper trade for 3-6 months before live deployment</li>
-      <li>Monitor live performance monthly (if degrades &gt;30%, stop and retrain)</li>
+      <li>Monitor live performance monthly (if the live edge over 50% falls below half the validated edge, stop and retrain)</li>
     </ul>
   </div>
 
@@ -637,33 +643,35 @@
     <p><strong>Trader:</strong> Jason Wu (composite example), 31, quant developer ($250K account), CS/ML background</p>
     <p><strong>Strategy:</strong> Random Forest algo trained on 2015-2021 SPY data, 83% backtest win rate</p>
     <p><strong>Fatal flaw:</strong> Overfit model to historical data, never validated on out-of-sample or live data</p>
-    <p><strong>Result:</strong> Lost $145,400 (-54.2%) in 10 months when model failed in live markets</p>
+    <p><strong>Result:</strong> Lost $145,400 (-54.2% from the peak) across the eight months from January to August 2022, eleven months after going live</p>
 
-    <p><strong>The "perfect" backtest (Summer 2021):</strong> Trained Random Forest on 2015-2021 SPY (1,700 bars, 200+ features). Results: 83% win rate, Sharpe 2.4, +42% annual return. Fatal flaws: (1) No train/test split—backtested on SAME data used for training (memorization), (2) 200 features with 1,700 samples (1:8.5 ratio, should be 1:50+), (3) Trained only on QE data (2015-2021 Fed printing), never saw QT, (4) No walk-forward validation, (5) No crisis testing (2008, 2020).</p>
+    <p><strong>The "perfect" backtest (Summer 2021):</strong> Trained Random Forest on 2015-2021 SPY (1,700 bars, 200+ features). Results: 83% win rate, Sharpe 2.4, +42% annual return. Fatal flaws: (1) No train/test split—backtested on the SAME data used for training, which is memorization, not measurement, (2) 200 features with 1,700 samples: 8.5 samples per feature against the 50 you need, (3) A training window in which buying the dip had never once failed. Be precise about this, because "he only trained on QE" is the lazy version and it is not true: the Fed hiked nine times between December 2015 and December 2018 and ran balance-sheet runoff from October 2017 to August 2019, so 2015-2021 contained a full tightening cycle. What it did not contain was a dip that failed to recover. December 2018 recovered in four months. March 2020 recovered in five. The model did not learn "QE"; it learned "dips recover", which was true of every single dip it was shown, (4) No walk-forward validation, (5) No crisis testing (2008, 2020).</p>
 
     <p><strong>The honeymoon (Oct-Dec 2021):</strong> Deployed live with $250K (no paper trading). Results: 79% win rate, +$18,400. "Backtests were CONSERVATIVE!" But he was lucky—market still in QE regime matching training data.</p>
 
-    <p><strong>The disaster (Jan-Aug 2022):</strong> Fed shifted QE → QT. Model kept "buying every dip" (only learned QE). Every dip kept dipping:</p>
+    <p><strong>The disaster (Jan-Aug 2022):</strong> The Fed moved its target range from 0-0.25% in March 2022 to 4.25-4.50% by December and began balance-sheet runoff in June. The model kept buying every dip, because in seven years of training data every dip had recovered. This one did not: SPY would not regain its January 2022 high until January 2024, two years later.</p>
     <ul style="margin:.75rem 0 0 1.5rem">
       <li><strong>Jan:</strong> 39% win rate, -$14.2K ("Volatility spike. Temporary.")</li>
-      <li><strong>Feb:</strong> 30% win rate, -$18.6K (Russia invaded Ukraine, VIX spiked to 38)</li>
+      <li><strong>Feb:</strong> 30% win rate, -$18.6K (Russia invaded Ukraine on 24 February; the VIX touched 37.8 intraday that day and finished the month above 30)</li>
       <li><strong>Mar-Aug:</strong> 32-38% win rate, -$112.6K (6 losing months straight)</li>
-      <li><strong>Total damage:</strong> Account $268K → $123K (-$145,400, -54.2% drawdown)</li>
+      <li><strong>Total damage:</strong> Account $268K → $123K (-$145,400, -54.2% drawdown) — eight losing months in a row, January through August</li>
     </ul>
 
-    <p><strong>The breaking point:</strong> "My model had 83% backtest win rate but 34% live win rate. I checked for bugs—NONE. Then I realized: I trained on 2015-2021 QE data (Fed printing = buy every dip works). 2022 was QT (Fed tightening = dips keep dipping). My model MEMORIZED the QE regime. It never saw QT. When the regime shifted, my model became WORSE than random."</p>
+    <p><strong>The breaking point:</strong> "My model had an 83% backtest win rate and a 34% live win rate. I checked for bugs—NONE. Then I understood what I had actually built. I had told myself I trained on seven years including a hiking cycle, so I was covered. I wasn't. Seven years is a lot of bars and only one lesson if every one of them says the same thing, and every one of mine said dips recover. My model never saw a dip that didn't. When it finally met one, it wasn't just wrong — it was reliably wrong, which is worse than random, because random doesn't keep doubling down."</p>
 
-    <p><strong>Recovery (Sep 2022 - Mar 2024):</strong> Rebuilt with proper ML practices: (1) Train/validate/test split (60/20/20, NEVER touch test set), (2) Reduced features 200 → 25 (better ratio), (3) 3 regime-specific models (QE/QT/volatile) with regime classifier, (4) Walk-forward validation (train on rolling 3-year window), (5) 6-month paper trading before live (64% win rate → PASS), (6) Crisis testing on 2008 data. New model: 68% validation, 68% live (MATCH = working). Old model: 83% backtest, 34% live (MISMATCH = broken). Result: $123K → $196K (+$73.2K, +59.5% from trough) over 12 months.</p>
+    <p><strong>Recovery (Sep 2022 - Mar 2024):</strong> Rebuilt with proper ML practice: (1) Train/validate/test split (60/20/20, NEVER touch the test set), (2) Reduced features 200 → 25, taking him from 8.5 samples per feature to 68, (3) Three regime-specific models with a regime classifier in front of them, (4) Walk-forward validation on a rolling three-year window, (5) Six months of paper trading before a dollar went live (62% win rate → PASS), (6) Crisis testing on 2008 and 2020 data. Six months rebuilding and on paper, September 2022 to February 2023, then twelve months live from March 2023. New model: 61% validation, 60% live. Old model: 83% backtest, 34% live. The number that matters is not 61 — it is the two-point gap between validation and live, against the old model's forty-nine-point gap. Result over those twelve live months: $123K → $156K (+$33K, +26.8%).</p>
 
-    <p><strong>Final results:</strong> Started $250K → Peak $268K (lucky) → Trough $123K (overfit) → Final $196K (validated). Net: -$54K (-21.5%) but learned $100K+ lesson.</p>
+    <p><strong>Be honest about that recovery too.</strong> SPY returned roughly 30% between March 2023 and March 2024. Jason's validated, regime-aware, properly cross-validated model made 26.8% and slightly trailed the index he was trading, while carrying model risk, execution risk and a monitoring burden that holding SPY does not have. That is not a failure of the method. The method did exactly what it promised: it predicted its own live performance to within two points, which is the entire point of validation and something the old model could not do at any price. But "my model is honest" and "my model is worth running" are separate claims, and the first does not deliver the second.</p>
+
+    <p><strong>Final results:</strong> Started $250K → Peak $268K (lucky) → Trough $123K (overfit) → Final $156K (validated). Net: -$94K (-37.6%). The recovery did not get him back. That is the ordinary shape of a deep drawdown, and it is why the twenty minutes of validation work he skipped in Summer 2021 was the most expensive twenty minutes of his career.</p>
 
     <p style="margin-top:1rem;padding:1rem;background:rgba(139,92,246,.08);border-radius:8px;border-left:4px solid #8b5cf6">
-      <strong>Jason's advice:</strong> "I lost $145K because I overfit my ML model to 2015-2021 bull market data and deployed it with ZERO validation. Backtest showed 83% win rate. Live: 34%. Why? My model never saw QT (Fed tightening). It was trained to 'buy every dip' during QE. When the regime changed in 2022, it failed catastrophically. ML models are regime-specific. You MUST: (1) Train/test/validate on different time periods (NEVER backtest on training data), (2) Test on crisis data (2008, 2020), (3) Paper trade 6+ months, (4) Build regime detection, (5) Keep features <50 (I use 25 now, more = overfitting), (6) Walk-forward validation—train on Period A, test on Period B (if performance drops >30%, model is overfit). Backtests lie—they show what worked in the PAST, not what will work in DIFFERENT conditions. Don't deploy ML models without out-of-sample validation. It's financial suicide."
+      <strong>Jason's advice:</strong> "I lost $145K because I overfit my ML model to 2015-2021 data and deployed it with ZERO validation. Backtest showed 83% win rate. Live: 34%. Why? Because my seven years of training data never contained a dip that failed to recover, so 'buy every dip' looked like a law of nature rather than a feature of one stretch of history. When 2022 produced one that didn't recover, the model failed catastrophically. ML models learn the range of conditions you show them and nothing outside it. You MUST: (1) Train/test/validate on different time periods (NEVER backtest on training data), (2) Test on crisis data (2008, 2020), (3) Paper trade 6+ months, (4) Build regime detection, (5) Keep samples-per-feature above 50—I run 25 features on 1,700 bars now, not 200, (6) Walk-forward validation—train on Period A, test on Period B, and measure the drop in edge over 50%, not in raw accuracy, because raw accuracy hides half a collapse. Backtests lie—they show what worked in the PAST, not what will work in DIFFERENT conditions. Don't deploy ML models without out-of-sample validation. It's financial suicide."
     </p>
   </div>
 
   <div class="quiz-question" style="margin-top:2rem">
-    <p><strong>Case Study Quiz: Jason lost $145,400 (-54.2%) in 10 months after deploying his machine learning model live with a $250K account. His Random Forest backtest showed 83% win rate, Sharpe 2.4, and +42% annual returns on 2015-2021 SPY data. First 3 months live: 79% win rate, +$18,400—he thought "backtests were CONSERVATIVE!" Then Jan-Aug 2022: win rate collapsed to 34%, losing 6 months straight (-$145.4K). What was Jason's fatal mistake?</strong></p>
+    <p><strong>Case Study Quiz: Jason lost $145,400 (-54.2% from the peak) over the eight months from January to August 2022, eleven months after deploying his machine learning model live with a $250K account. His Random Forest backtest showed an 83% win rate, Sharpe 2.4 and +42% annual returns on 2015-2021 SPY data. First 3 months live: 79% win rate, +$18,400—he thought "backtests were CONSERVATIVE!" Then Jan-Aug 2022: the win rate collapsed to 34% and he lost money in all eight months (-$145.4K). What was Jason's fatal mistake?</strong></p>
     <div class="quiz-options">
       <div class="quiz-option" data-correct="false">
         <strong>A)</strong> He used too many machine learning algorithms (ensemble models) that conflicted with each other during volatile markets
@@ -672,14 +680,14 @@
         <strong>B)</strong> He sized positions too large relative to his account, causing excessive drawdowns when wrong
       </div>
       <div class="quiz-option" data-correct="true">
-        <strong>C)</strong> He overfit his model to 2015-2021 QE (Fed printing) data with ZERO validation—backtested on SAME data used for training, never tested on QT (Fed tightening) or crises. Model MEMORIZED "buy every dip" pattern that only worked during QE. When regime shifted to QT in 2022, model failed catastrophically
+        <strong>C)</strong> He overfit his model to 2015-2021 data with ZERO validation—backtested on the SAME data used for training, and never tested on a crisis. His seven-year training window contained no dip that failed to recover, so the model learned "buy every dip" as if it were a law rather than a property of that stretch of history. When 2022 produced a dip that did not recover, the model failed catastrophically
       </div>
       <div class="quiz-option" data-correct="false">
-        <strong>D)</strong> He used too few features (under 25) which prevented the model from capturing complex market patterns
+        <strong>D)</strong> He used too few features (under 25), which prevented the model from capturing complex market patterns
       </div>
     </div>
     <div class="quiz-explanation">
-      <p><strong>Correct: C.</strong> Jason's disaster came from overfitting to a single regime—he trained his Random Forest on 2015-2021 SPY data (1,700 bars, 200+ features) showing 83% backtest win rate. Five fatal flaws: (1) No train/test split—backtested on SAME data used for training (model MEMORIZED patterns), (2) 200 features with 1,700 samples (1:8.5 ratio, should be 1:50+ for generalization), (3) Trained ONLY on QE data (Fed printing = buy every dip works), never saw QT (Fed tightening = dips keep dipping), (4) No walk-forward validation, (5) No crisis testing (2008, 2020). Oct-Dec 2021: deployed live, 79% win rate, +$18,400—he got lucky because market was still in QE regime matching his training data. Jan 2022: Fed shifted QE → QT. Model kept buying dips, but dips kept dipping. Jan-Aug 2022: win rate collapsed to 34%, losing 6 months straight (Jan: -$14.2K, Feb: -$18.6K during Ukraine invasion, Mar-Aug: -$112.6K). Total damage: $268K → $123K (-$145.4K, -54.2%). His recovery: rebuilt with proper ML—(1) 60/20/20 train/validate/test split, (2) reduced 200 → 25 features, (3) built 3 regime-specific models with regime classifier, (4) walk-forward validation, (5) 6-month paper trading showing 64% WR before deploying, (6) crisis testing on 2008/2020 data. New model: 68% validation WR = 68% live WR (match = working). Old model: 83% backtest = 34% live (mismatch = broken). Result: $123K → $196K (+59.5%) in 12 months. ML models are regime-specific—validate on out-of-sample data or fail.</p>
+      <p><strong>Correct: C.</strong> Jason's disaster came from fitting a model to a stretch of history that only ever told it one thing—he trained his Random Forest on 2015-2021 SPY data (1,700 bars, 200+ features) for an 83% backtest win rate. Five fatal flaws: (1) No train/test split—he backtested on the SAME data used for training, so the model was graded on rows it had memorized, (2) 200 features with 1,700 samples: 8.5 samples per feature against the 50 you need, (3) A training window with no failed dip in it. Note that this is <em>not</em> "he only saw QE": the Fed hiked nine times from December 2015 to December 2018 and shrank its balance sheet from October 2017 to August 2019, so a full tightening cycle was in there. What was not in there was a drawdown that failed to recover—December 2018 took four months, March 2020 took five, (4) No walk-forward validation, (5) No crisis testing (2008, 2020). Oct-Dec 2021: deployed live, 79% win rate, +$18,400—luck, because the market was still doing the one thing his data had shown him. Jan 2022 onward: the Fed took its target range from 0-0.25% to 4.25-4.50% inside the year, the model kept buying dips, and SPY did not see its January 2022 high again until January 2024. Jan-Aug 2022: the win rate collapsed to 34% and every one of those eight months lost money (Jan: -$14.2K, Feb: -$18.6K during the Ukraine invasion, Mar-Aug: -$112.6K). Total damage: $268K → $123K (-$145.4K, -54.2%). His recovery: rebuilt with proper ML—(1) 60/20/20 train/validate/test split, (2) reduced 200 → 25 features, taking him from 8.5 samples per feature to 68, (3) three regime-specific models behind a regime classifier, (4) walk-forward validation, (5) six months of paper trading at a 62% win rate before deploying, (6) crisis testing on 2008 and 2020 data. New model: 61% validation, 60% live. Old model: 83% backtest, 34% live. The forty-nine-point gap is what a broken model looks like; the two-point gap is what a working one looks like, and the working one is not required to be the more impressive number. Result over twelve live months from March 2023: $123K → $156K (+26.8%)—against roughly 30% for SPY over the same window, so the honest summary is that the validated model predicted itself accurately and matched the index it was trading. Validate on out-of-sample data, and then ask separately whether the thing you validated is worth running.</p>
     </div>
   </div>
 
