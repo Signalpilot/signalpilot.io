@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="it">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17835897996"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-440EJBMYST');
+  gtag('config', 'AW-17835897996');
+</script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover"/>
+  <meta name="robots" content="index,follow"/>
+  <title>Algoritmi di esecuzione: TWAP, VWAP, POV, Implementation Shortfall — Signal Pilot Education</title>
+  <meta name="theme-color" content="#05070d">
+  <link rel="canonical" href="https://www.signalpilot.io/it/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.signalpilot.io/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <meta property="og:title" content="Execution Algorithms: TWAP, VWAP, POV, Implementation Shortfall — Signal Pilot Education">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Signal Pilot Education">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.signalpilot.io/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <meta name="twitter:title" content="Execution Algorithms: TWAP, VWAP, POV, Implementation Shortfall — Signal Pilot Education">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
+  <link rel="prev" href="https://www.signalpilot.io/education/curriculum/advanced/69-institutional-order-types.html"/>
+  <link rel="next" href="https://www.signalpilot.io/education/curriculum/advanced/71-multi-timeframe-confluence.html"/>
+  <meta name="sp-level" content="Advanced"><meta name="sp-order" content="70">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Gugi&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/education/assets/signalpilot-theme.css">
+  <link rel="stylesheet" href="/education/assets/edu.css">
+  <link rel="stylesheet" href="/education/assets/notes.css">
+  <link rel="stylesheet" href="/education/assets/auth-ui.css">
+  <link rel="stylesheet" href="/education/assets/trial-cta.css">
+  <link rel="stylesheet" href="/education/assets/blog-links.css">
+  <link rel="stylesheet" href="/education/assets/discussions.css">
+  <link rel="stylesheet" href="/education/assets/chatbot.css">
+  <link rel="stylesheet" href="/education/assets/lang-switcher.css">
+  <!-- Logger must load first, before other scripts that use it -->
+  <script src="/education/assets/logger.js"></script>
+  <script src="/education/assets/dev-utils.js" defer></script>
+  <script src="/education/assets/notes.js" defer></script>
+  <script src="/education/assets/library.js"></script>
+  <script>window.addEventListener('load',function(){if(window.library?.isBookmarked()){var b=document.getElementById('bookmark-btn');if(b)b.innerHTML='⭐ Bookmarked'}})</script>
+    <script src="/education/assets/quiz-enhanced.js" defer></script>
+  <script src="/education/assets/social-share.js" defer></script>
+  <script src="/education/assets/pwa-init.js"></script>
+  <link rel="manifest" href="/education/manifest.json">
+  <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="de" href="https://www.signalpilot.io/de/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="fr" href="https://www.signalpilot.io/fr/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="it" href="https://www.signalpilot.io/it/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="pt" href="https://www.signalpilot.io/pt/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="nl" href="https://www.signalpilot.io/nl/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="ru" href="https://www.signalpilot.io/ru/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="ja" href="https://www.signalpilot.io/ja/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="tr" href="https://www.signalpilot.io/tr/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="hu" href="https://www.signalpilot.io/hu/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="ar" href="https://www.signalpilot.io/ar/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/curriculum/advanced/70-execution-algorithms-twap-vwap.html">
+</head>
+<body class="table-accordions-mobile">
+<div class="bg-stars" aria-hidden="true"></div>
+<canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
+<div class="bg-aurora" aria-hidden="true"></div>
+<header class="sp-header">
+  <div class="wrap">
+    <a href="https://www.signalpilot.io" class="brand">
+      <span>Signal Pilot</span>
+    </a>
+    <nav id="mainnav" aria-label="Contenuto principale"><ul>
+      <li><a href="/education/">Formazione</a></li>
+      <li><a href="/education/search.html">Cerca</a></li>
+      <li><a href="/education/my-library.html">La mia libreria</a></li>
+      <li><a href="https://www.signalpilot.io/blog" target="_blank" rel="noopener">Blog</a></li>
+    </ul></nav>
+    <div class="header-ctls">
+      <div id="google_translate_element"></div><button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Cambia tema">
+        <span id="theme-icon">☽</span>
+      </button><button id="menuToggle" class="menu-toggle" aria-expanded="false"><span class="menu-toggle-text">Menu </span>☰</button></div>
+  </div>
+</header>
+<article class="article">
+  <header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Percorso di navigazione">
+        <a href="/education/">Home</a> › <a href="/education/advanced.html">Programma avanzato</a> › <span>Algoritmi di esecuzione TWAP VWAP</span>
+      </nav>
+      <span class="badge">🔴 Avanzato • Lezione 70 di 82</span>
+      <h1 class="headline xl">Algoritmi di esecuzione: minimizzare lo slippage sui grandi ordini</h1>
+      <div class="meta">Tempo di lettura ~40-45 min • Strategie di esecuzione algoritmica<span class="view-count" data-view-count style="display:none"> • <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> <span data-view-num></span></span></div>
+
+      <!-- Author Byline -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(118,221,255,0.2); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-2);">
+        <div>
+          <div style="font-weight: 600; color: var(--text-1);">Signal Pilot</div>
+          <div>Formazione professionale sul trading</div>
+        </div>
+      </div>
+
+      <!-- Article Progress Indicator -->
+      <div class="article-progress" style="--progress:0%">
+        <div class="progress-circle"><span>0%</span></div>
+        <div class="progress-text">
+          <strong>Stai facendo progressi!</strong>
+          <div style="font-size:.85rem;color:var(--muted)">Continua a leggere per completare questa lezione</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="wrap article-grid">
+    <div class="prose">
+
+      <p>Gli algoritmi di esecuzione (gli algo) sono l'arma segreta degli operatori istituzionali. Spezzettano i grandi ordini in migliaia di pezzi, temporizzano le esecuzioni per minimizzare l'impatto e si adattano alle condizioni di mercato in tempo reale. Questa lezione ti insegna come funzionano — e come sfruttarne gli schemi.</p>
+
+      <div class="callout callout-danger">
+        <h4>💸 Il disastro da 710.000 $ di slippage</h4>
+        <p>Nel 2018 il gestore di un hedge fund di medie dimensioni voleva comprare 1,2 milioni di azioni di una mid cap che quotava 38 $ (ADV = 3 milioni di azioni). È il 40 % del volume di una giornata normale: un ordine da 45,6 milioni di dollari. Invece di lavorarlo su più giorni, ha inviato un <strong>unico ordine a mercato da 1,2 milioni di azioni</strong> alle 9:35.</p>
+        <p><strong>Risultato:</strong> L'ordine ha spazzato il book. Il prezzo è salito del 6,2 % in circa 90 secondi, ha toccato la banda LULD superiore e ha fatto scattare una sospensione di cinque minuti. Sono state eseguite solo <strong>640.000 azioni</strong>, a una media di 39,11 $: 1,11 $ (il 2,9 %) sopra il prezzo di decisione di 38,00 $. <strong>Costo totale dello slippage: 710.400 $</strong>, e 560.000 azioni non sono mai state eseguite. Dopo la sospensione il titolo si è riassestato a 37,60 $.</p>
+        <p><strong>Che cosa avrebbe dovuto fare:</strong> Capire che al 10 % di partecipazione un titolo con 3 milioni di ADV assorbe circa 300.000 azioni al giorno, quindi questo era fin dall'inizio un <strong>ordine da quattro giorni</strong> e non da quattro ore. Quattro sedute con un tetto del 10 % costano di norma lo 0,15-0,30 % del nozionale: circa 68.000-137.000 $, cioè 5-10× meglio di quello che ha pagato.</p>
+      </div>
+
+      <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
+        <h3 style="margin:0 0 1rem 0">🎯 Cosa imparerai</h3>
+        <p style="margin:0 0 0.75rem 0">Alla fine di questa lezione saprai:</p>
+        <ul style="line-height:1.8;margin:0 0 0 1.5rem">
+          <li>TWAP (ponderato sul tempo): distribuire l'ordine in modo uniforme nel tempo</li>
+          <li>VWAP (ponderato sul volume): seguire il profilo di volume del mercato</li>
+          <li>POV (% del volume): trattare una percentuale fissa del volume di mercato</li>
+          <li>Schema: VWAP per gli ordini grandi (più difficili da individuare) → TWAP per quelli più piccoli</li>
+        </ul>
+      </div>
+
+      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Risultati rapidi per domani (clicca per aprire)</summary>
+        <div style="margin-top:1rem">
+          <p>Non caricarti troppo. Comincia da queste tre azioni:</p>
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>Usa un algo VWAP non appena un ordine supera circa l'1 % dell'ADV</strong> — VWAP (Volume-Weighted Average Price) spezza i grandi ordini in piccole fette eseguite lungo tutta la giornata, seguendo gli schemi di volume del mercato. Riduce lo slippage dall'1,5 % allo 0,2 % (7-8× meglio). Amanda Park (esempio composito) ha perso <span style="color:#ff5252;font-weight:700">$127,300</span> in 7 mesi su dieci ordini da 1.000.000 $ medi ciascuno, tutti inviati come singoli ordini a mercato: in media l'1,27 % per operazione. Dopo il passaggio agli algo VWAP lo slippage è sceso allo 0,1-0,3 %, con un risparmio di 50.000-150.000 $ sulle posizioni grandi. Chiama il broker stasera (Interactive Brokers, TradeStation e Fidelity offrono il VWAP). Domani: calcola l'ADV prima di inviare. Una cifra in dollari da sola non dice nulla: 250.000 $ sono invisibili su una mega cap e sono l'intera seduta su un titolo sottile.</li>
+            <li><strong>Usa il TWAP per le uscite urgenti (evita lo slippage da vendita in preda al panico)</strong> — TWAP (Time-Weighted Average Price) distribuisce gli ordini in modo uniforme su un periodo fisso (per es. vendere 70.000 azioni in 2 ore = 583 azioni/min). Evita di travolgere il denaro-lettera e di scendere lungo il book. Derek Chen (esempio composito) ha perso <span style="color:#ff5252;font-weight:700">$78,400</span> vendendo nel panico 70.000 azioni di una mid cap da 40 $ (ADV 1,75 milioni) con un ordine a mercato durante un calo del 5 %: un ordine da 2,8 milioni di dollari, circa il 4 % di una seduta, e il 2,8 % di slippage in più. Un TWAP di due ore sarebbe costato lo 0,3-0,5 % (circa 11.200 $), risparmiando all'incirca 67.200 $. Nota la prova del volume: le stesse 70.000 azioni su una mega cap sarebbero un errore di arrotondamento e non gli sarebbero costate nulla. Impara il TWAP stasera sulla piattaforma del tuo broker. Domani: devi uscire da una posizione che vale più di circa l'1 % dell'ADV del titolo? Usa un TWAP su 1-4 ore invece di scaricare a mercato.</li>
+            <li><strong>Monitora la qualità delle esecuzioni VWAP rispetto al benchmark (per scoprire gli algo scadenti)</strong> — Dopo ogni operazione con VWAP confronta il tuo prezzo medio con il VWAP ufficiale della giornata (TradingView/Yahoo Finance). Obiettivo: entro ±10 pb. Sistematicamente peggio di ±20 pb = algo configurato male o broker scadente. Michael Torres (esempio composito) ha usato il VWAP per 6 mesi senza mai misurare i risultati: l'algo del suo broker era troppo aggressivo e gli è costato in più <span style="color:#ff5252;font-weight:700">$42,600</span> su 14,2 milioni di dollari di nozionale rispetto al vero VWAP di riferimento. Sono 30 pb: il triplo del suo obiettivo di ±10 pb e ben oltre la soglia dei ±20 pb. Crea stasera un foglio di calcolo: data, ticker, il tuo prezzo, VWAP ufficiale, scarto (pb). Registra ogni operazione. Risultati scadenti? Cambia broker o abbassa il tasso di partecipazione.</li>
+          </ol>
+        </div>
+      </details>
+
+<h2 id="part-1-why-execution-algos-exist">Parte 1: perché esistono gli algoritmi di esecuzione</h2>
+
+  <h3>Il problema del grande ordine</h3>
+  <p><strong>Scenario:</strong> Un hedge fund vuole comprare 500.000 azioni AAPL a 220 $ (ADV = 55 milioni di azioni). È lo 0,9 % di una seduta e un ordine da 110 milioni di dollari.</p>
+  <p><strong>Approccio ingenuo:</strong> Inviare un unico ordine a mercato da 500.000 azioni → circa 10 pb di impatto su un titolo così liquido → costo dello slippage ≈ 110.000 $</p>
+  <p><strong>Approccio intelligente:</strong> Usare un algo VWAP su 4 ore a circa il 4 % di partecipazione → 2-4 pb → costo di 22.000-44.000 $, con un risparmio di 70.000-90.000 $</p>
+
+  <div class="callout">
+    <p><strong>📊 Ordine di grandezza:</strong> Le mega cap sono il caso facile. Porta lo stesso ordine da 75 milioni di dollari su un titolo dove pesa il 20 % di una seduta e lo 0,5 % di impatto — 375.000 $ — diventa ottimistico, non pessimistico. Le cifre che tolgono il fiato arrivano dai titoli sottili, ed è per questo che le istituzioni investono milioni in tecnologia di esecuzione.</p>
+  </div>
+<h3>Il compromesso: velocità contro impatto</h3>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Velocità di esecuzione</th>
+        <th>Impatto di mercato</th>
+        <th>Rischio di esecuzione</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Immediata (ordine a mercato)</td>
+        <td>Alto (1-5 %, cresce con il peso dell'ordine sul volume giornaliero)</td>
+        <td>Basso (nessuna deriva)</td>
+      </tr>
+      <tr>
+        <td>Veloce (1 ora)</td>
+        <td>Medio (0,2-0,5 %)</td>
+        <td>Medio (un po' di deriva)</td>
+      </tr>
+      <tr>
+        <td>Lenta (intera seduta)</td>
+        <td>Basso (0,05-0,1 %)</td>
+        <td>Alto (il prezzo può scappare)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="part-2-twap-time-weighted-average-price">Parte 2: TWAP (Time-Weighted Average Price)</h2>
+
+  <h3>Come funziona il TWAP</h3>
+  <p><strong>Concetto:</strong> Dividere l'ordine in modo uniforme nel tempo (ritmo costante)</p>
+  <p><strong>Formula:</strong> Dimensione per fetta = ordine totale / numero di intervalli</p>
+
+  <p><strong>Esempio:</strong></p>
+  <ul>
+    <li>Ordine: comprare 120.000 azioni</li>
+    <li>Durata: dalle 9:30 alle 15:30 (6 ore = 360 minuti)</li>
+    <li>Ritmo TWAP: 120.000 / 360 = 333 azioni/minuto</li>
+  </ul>
+
+  <p><strong>Schema di esecuzione:</strong> Ogni minuto l'algo invia un ordine limitato da 333 azioni al prezzo corrente o vicino a esso</p>
+
+  <h3>Vantaggi del TWAP</h3>
+  <ul>
+    <li><strong>Semplice:</strong> Facile da spiegare alla compliance e ai clienti («abbiamo trattato in modo uniforme per tutta la giornata»)</li>
+    <li><strong>Prevedibile:</strong> Il ritmo di esecuzione è costante</li>
+    <li><strong>Impronta ridotta:</strong> Le fette piccole non muovono il mercato</li>
+  </ul>
+
+  <h3>Svantaggi del TWAP</h3>
+  <ul>
+    <li><strong>Ignora il volume:</strong> Tratta la stessa quantità a metà giornata (poco volume) e in apertura (molto volume)</li>
+    <li><strong>Subottimale:</strong> Impatto alto nei periodi di poco volume</li>
+    <li><strong>Individuabile:</strong> Gli HFT sanno riconoscere gli schemi TWAP e mettersi davanti</li>
+  </ul>
+
+  <div class="example-block">
+    <h4>Esempio reale: un'esecuzione TWAP passo per passo</h4>
+    <p><strong>Scenario:</strong> Un fondo comune vende 360.000 azioni MSFT (volume medio giornaliero 20 milioni) tramite TWAP su 6 ore a un ritmo costante di 1.000 azioni/min. Prezzo medio: 379,93 $. Si tratta di una <em>vendita</em>, quindi un prezzo più basso è peggiore: è uscito 0,07 $ <strong>sotto</strong> il prezzo di decisione di 380,00 $ e 0,15 $ sotto il VWAP di giornata, pari a 380,08 $.</p>
+
+    <p><strong>Il problema del TWAP:</strong> Durante la pausa pranzo (dalle 11:30 alle 13:30) l'algo ha continuato a macinare 1.000 azioni al minuto: 120.000 azioni in una finestra di due ore che ha portato solo 1,5-1,8 milioni di azioni. Vale a dire il <strong>6,7-8 % della seduta</strong>, e nell'ora meno liquida della giornata. Ha depresso il prezzo ed è costato circa 25.000 $. Un algo VWAP, dimensionato sulla curva dei volumi, avrebbe trattato circa <strong>30.000 azioni</strong> in quella finestra (la pausa pranzo pesa circa l'8,25 % del volume di giornata), risparmiando 15.000-20.000 $.</p>
+
+    <p><strong>Quando il TWAP ha ancora senso:</strong> Titoli molto liquidi (SPY, AAPL) dove l'1 % di partecipazione ha impatto minimo, requisiti di compliance semplici oppure ordini &lt;0,5 % del volume giornaliero.</p>
+  </div>
+<h2 id="part-3-vwap-volume-weighted-average-price">Parte 3: VWAP (Volume-Weighted Average Price)</h2>
+
+  <h3>Come funziona il VWAP</h3>
+  <p><strong>Concetto:</strong> Trattare in proporzione al volume di mercato (di più quando il volume è alto, di meno quando è basso)</p>
+  <p><strong>Obiettivo:</strong> Riprodurre la distribuzione dei volumi del mercato → ottenere un prezzo medio di esecuzione vicino al VWAP</p>
+
+  <h3>Calcolo del VWAP</h3>
+  <p><strong>VWAP di mercato = Σ (prezzo × volume) / Σ volume</strong></p>
+
+  <p><strong>Esempio:</strong></p>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Ora</th>
+        <th>Prezzo</th>
+        <th>Volume</th>
+        <th>Prezzo × volume</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>9:30-10:00</td>
+        <td>$150.00</td>
+        <td>5M</td>
+        <td>$750M</td>
+      </tr>
+      <tr>
+        <td>10:00-11:00</td>
+        <td>$150.20</td>
+        <td>8M</td>
+        <td>$1,201.6M</td>
+      </tr>
+      <tr>
+        <td>11:00-12:00</td>
+        <td>$150.10</td>
+        <td>4M</td>
+        <td>$600.4M</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>VWAP = (750 mln $ + 1.201,6 mln $ + 600,4 mln $) / (5 mln + 8 mln + 4 mln) = 2.552 mln $ / 17 mln = 150,12 $</strong></p>
+
+  <h3>Strategia di esecuzione dell'algo VWAP</h3>
+
+  <details class="accordion">
+    <summary>L'esecuzione VWAP passo per passo</summary>
+    <div class="accordion-content">
+      <p><strong>Passo 1: prevedere la distribuzione dei volumi</strong></p>
+      <ul>
+        <li>Analizzare gli schemi storici di volume (per es. 9:30-10:00 = 15 % del volume giornaliero)</li>
+        <li>Adattare alle condizioni attuali (giorno di trimestrale = più volume)</li>
+      </ul>
+
+      <p><strong>Passo 2: assegnare l'ordine alle fasce orarie</strong></p>
+      <ul>
+        <li>Ordine: 100.000 azioni</li>
+        <li>Previsione 9:30-10:00: 15 % del volume → trattare 15.000 azioni (15 % dell'ordine)</li>
+        <li>Previsione 10:00-11:00: 20 % del volume → trattare 20.000 azioni</li>
+        <li>E così via...</li>
+      </ul>
+
+      <p><strong>Passo 3: eseguire dentro ogni fascia</strong></p>
+      <ul>
+        <li>Tra le 9:30 e le 10:00 trattare 15.000 azioni a ritmo costante (500 azioni/minuto)</li>
+        <li>OPPURE adattarsi in tempo reale (se il volume esplode, trattare più in fretta; se si prosciuga, rallentare)</li>
+      </ul>
+
+      <p><strong>Passo 4: misurare la qualità dell'esecuzione</strong></p>
+      <ul>
+        <li>Se il tuo prezzo medio è 150,10 $ e il VWAP di mercato è 150,12 $ → hai battuto il VWAP di 0,02 $ (buona esecuzione)</li>
+        <li>Se il tuo prezzo medio è 150,20 $ → sei rimasto indietro di 0,08 $ rispetto al VWAP (esecuzione scadente, algo troppo aggressivo)</li>
+        <li>Questi segni valgono in acquisto. In vendita si invertono: un prezzo di esecuzione <em>sopra</em> il VWAP è il buon risultato</li>
+      </ul>
+    </div>
+  </details>
+
+  <h3>VWAP e TWAP a confronto</h3>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Caratteristica</th>
+        <th>TWAP</th>
+        <th>VWAP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ritmo di esecuzione</td>
+        <td>Costante</td>
+        <td>Varia con il volume</td>
+      </tr>
+      <tr>
+        <td>Complessità</td>
+        <td>Semplice</td>
+        <td>Richiede una previsione dei volumi</td>
+      </tr>
+      <tr>
+        <td>Impatto di mercato</td>
+        <td>Maggiore (tratta anche nei periodi di poco volume)</td>
+        <td>Minore (tratta di più quando la liquidità è alta)</td>
+      </tr>
+      <tr>
+        <td>Caso d'uso</td>
+        <td>Ordini piccoli, esecuzione semplice</td>
+        <td>Ordini grandi, minimizzare lo slippage</td>
+      </tr>
+      <tr>
+        <td>Benchmark</td>
+        <td>Prezzo medio ponderato sul tempo</td>
+        <td>Prezzo medio ponderato sul volume</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="part-4-pov-percentage-of-volume">Parte 4: POV (Percentage of Volume)</h2>
+
+  <h3>Come funziona il POV</h3>
+  <p><strong>Concetto:</strong> Trattare una percentuale fissa del volume di mercato (tasso di partecipazione)</p>
+
+
+
+  <h3>Il comportamento di esecuzione del POV</h3>
+  <p><strong>Periodo di volume alto:</strong> Il mercato tratta 5.000 azioni/min → il POV tratta 500 azioni/min</p>
+  <p><strong>Periodo di volume basso:</strong> Il mercato tratta 500 azioni/min → il POV tratta 50 azioni/min</p>
+  <p><strong>Risultato:</strong> L'algo rallenta automaticamente nei periodi illiquidi e accelera in quelli liquidi</p><h3>Impostazioni del POV</h3>
+  <ul>
+    <li><strong>POV prudente (5-10 %):</strong> Impatto di mercato basso, esecuzione lenta</li>
+    <li><strong>POV moderato (10-20 %):</strong> Equilibrato</li>
+    <li><strong>POV aggressivo (20-30 %):</strong> Esecuzione veloce, impatto più alto (rischio di essere individuati)</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>⚠️ Rischio del POV:</strong> Sui titoli poco trattati il POV può non completare l'ordine se il volume si prosciuga. Imposta una durata massima (per es. «POV al 10 %, ma finito in 4 ore in ogni caso»).</p>
+  </div>
+<h2 id="part-5-implementation-shortfall-is">Parte 5: Implementation Shortfall (IS)</h2>
+
+  <h3>Il problema che risolve l'IS</h3>
+  <p><strong>Scenario:</strong> Il gestore decide di comprare AAPL alle 10:00 (prezzo di decisione = 150,00 $)</p>
+  <p><strong>L'esecuzione si completa alle 14:00 (prezzo medio = 150,40 $)</strong></p>
+  <p><strong>Implementation shortfall = 0,40 $ per azione = costo del ritardo di esecuzione</strong></p>
+
+  <h3>La strategia dell'algo IS</h3>
+  <p><strong>Obiettivo:</strong> Minimizzare la distanza tra prezzo di decisione e prezzo finale di esecuzione</p>
+  <p><strong>Approccio:</strong></p>
+  <ul>
+    <li><strong>Fase 1 (primo 20 %):</strong> Trattare in modo aggressivo (bloccare il prezzo attuale, urgenza alta)</li>
+    <li><strong>Fase 2 (successivo 60 %):</strong> Trattare con pazienza (ridurre l'impatto di mercato, in stile VWAP)</li>
+    <li><strong>Fase 3 (ultimo 20 %):</strong> Aumentare l'urgenza se si è in ritardo (garantire il completamento)</li>
+  </ul>
+
+  <div class="example-block">
+    <h4>Esempio reale: Implementation Shortfall contro VWAP</h4>
+    <p><strong>Scenario:</strong> Il gestore di un hedge fund vede un setup rialzista su AMD alle 14:00. Prezzo di decisione: 145,00 $. Ordine: comprare 200.000 azioni.</p>
+
+<div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
+  <p>Sei arrivato a metà percorso. Hai imparato le strategie chiave.</p>
+  <p style="margin-top:0.5rem;font-size:0.9rem">Ottimi progressi! Se serve, fai una breve pausa per sgranchirti, poi entreremo nei concetti avanzati che seguono.</p>
+</div>
+
+    <p><strong>Risultato con il VWAP:</strong> Prezzo medio 145,72 $ (distribuito uniformemente su 2 ore). Implementation shortfall = 0,72 $ per azione = <strong>144.000 $ di slippage</strong>. Esecuzione paziente, ma è corso dietro al rally.</p>
+
+    <p><strong>Risultato con l'algo IS:</strong> Prezzo medio 145,28 $ (40 % eseguito in modo aggressivo nei primi 15 minuti a 145,08 $, poi rallentando). Implementation shortfall = 0,28 $ per azione = <strong>56.000 $ di slippage</strong>. Sono stati risparmiati <strong>$88K</strong> bloccando presto il prezzo.</p>
+
+    <p><strong>Perché l'IS ha fatto meglio:</strong> (1) La forte convinzione era corretta: AMD ha guadagnato l'1 % fino alla chiusura; (2) l'aggressività iniziale ha bloccato il 40 % a 145,08 $ ed evitato di rincorrere prezzi sopra i 146 $; (3) il ritmo adattivo ha ridotto l'impatto una volta costruita presto la posizione.</p>
+
+    <p><strong>Quando l'IS fallisce:</strong> Se AMD si fosse girato verso 144 $, la partenza aggressiva avrebbe pagato troppo. L'IS richiede una convinzione direzionale. Direzione sbagliata = perdite. I mercati laterali premiano l'approccio paziente del VWAP.</p>
+
+    <p><strong>Usa l'IS quando:</strong> hai un'operazione direzionale ad alta convinzione (catalizzatore, rottura, notizia), il momentum sta accelerando oppure c'è urgenza di tempo (devi essere eseguito prima della chiusura o di un evento).</p>
+
+    <p><strong>Leggi bene il numero:</strong> 200.000 azioni AMD sono ben meno di mezzo punto percentuale di una seduta normale. Gli 0,72 $ lasciati sul piatto dall'algo VWAP erano quasi interamente <em>deriva</em>—il titolo che si allontanava dal prezzo di decisione—e non impatto di mercato. È esattamente il caso per cui l'IS è stato costruito. Su un ordine che vale il 20 % di una seduta, la stessa aggressività creerebbe l'impatto da cui cercava di scappare.</p>
+  </div>
+<h3>IS contro VWAP</h3>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Algo</th>
+        <th>Benchmark</th>
+        <th>Ideale per</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>VWAP</td>
+        <td>Replicare il prezzo ponderato sul volume del mercato</td>
+        <td>Esecuzione passiva (nessuna vista direzionale)</td>
+      </tr>
+      <tr>
+        <td>IS</td>
+        <td>Minimizzare lo slippage rispetto al prezzo di decisione</td>
+        <td>Convinzione attiva (non vuoi che il prezzo scappi)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="part-6-adaptive-algos-next-generation">Parte 6: algo adattivi (la generazione successiva)</h2>
+
+  <h3>Smart Order Routing (SOR)</h3>
+  <p><strong>Problema:</strong> Un'azione statunitense si tratta su 16 borse registrate (NYSE, Nasdaq, i quattro book Cboe — BZX, BYX, EDGA, EDGX —, IEX, MEMX e gli altri) più decine di sedi fuori borsa</p>
+  <p><strong>Soluzione:</strong> L'algo SOR instrada ogni fetta verso la sede con il prezzo migliore e le commissioni più basse</p>
+  <p><strong>Esempio:</strong> Denaro NYSE = 100,00 $, denaro IEX = 100,01 $ → il SOR vende su IEX (0,01 $ in più per azione)</p>
+
+  <h3>Algo di machine learning</h3>
+  <p><strong>Concetto:</strong> Usare il ML per prevedere movimento di prezzo e volume a breve termine e adattare l'esecuzione in tempo reale</p>
+  <p><strong>Esempio:</strong> Il ML rileva un'accelerazione del momentum → l'algo accelera l'esecuzione per portarsi avanti sul movimento</p>
+  <p><strong>Rischio:</strong> Overfitting (l'algo funziona in backtest e fallisce dal vivo)</p>
+
+  <h2 id="part-7-detecting-algos-with-signal-pilot">Parte 7: individuare gli algo con Signal Pilot</h2>
+
+  <h3>Pentarch Pilot Line: la firma del VWAP</h3>
+  <p><strong>Schema:</strong> Acquisti regolari e costanti per 2-4 ore (senza scatti improvvisi)</p>
+  <p><strong>Proporzionalità al volume:</strong> Più acquisti nei periodi di volume alto (9:30-11:00, 14:00-16:00)</p>
+  <p><strong>Segnale:</strong> Un algo VWAP sta lavorando → ordine istituzionale pianificato (non un'operazione discrezionale di convinzione)</p>
+
+  <h3>Volume Oracle: la firma del TWAP</h3>
+  <p><strong>Schema:</strong> Esecuzioni della stessa dimensione a intervalli regolari (per es. 300 azioni ogni 2 minuti)</p>
+  <p><strong>Precisione da orologio:</strong> Esecuzioni a :02, :04, :06, :08 (ogni 2 minuti)</p>
+  <p><strong>Segnale:</strong> Algo TWAP → esecuzione meno sofisticata (algo datato o istituzione piccola)</p>
+
+  <h3>Harmonic Oscillator: individuare la stanchezza dell'algo</h3>
+  <p><strong>Schema:</strong> Acquisti VWAP per 3 ore, poi stop improvviso</p>
+  <p><strong>Implicazione:</strong> L'algo ha finito, quindi una fonte stabile di domanda ha lasciato il book. Questo toglie sostegno, ma da solo non annuncia un'inversione. E la lettura conta qualcosa solo se l'algo pesava davvero sulla seduta: calcola il suo tasso di partecipazione prima di operare contro di lui.</p>
+
+  <h2 id="quiz-test-your-understanding">Quiz: metti alla prova la tua comprensione</h2>
+  <div class="quiz">
+    <div class="quiz-question">
+      <p><strong>Q1:</strong> Devi comprare 100.000 azioni. Previsione del VWAP di mercato: 9:30-10:00 = 20 % del volume. Quante azioni dovresti puntare in quel periodo?</p>
+      <details>
+        <summary>Mostra la risposta</summary>
+        <p><strong>Risposta:</strong> 20.000 azioni (il 20 % di 100.000). L'algo VWAP ripartisce l'ordine in proporzione al volume previsto. Se il 20 % del volume giornaliero passa tra le 9:30 e le 10:00, tratta il 20 % del tuo ordine in quella fascia.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q2:</strong> TWAP contro VWAP: quale ha l'impatto di mercato più basso e perché?</p>
+      <details>
+        <summary>Mostra la risposta</summary>
+        <p><strong>Risposta:</strong> Il VWAP ha l'impatto più basso. Il TWAP tratta a ritmo costante (la stessa quantità nella pausa pranzo povera di volume e nell'apertura ricca di volume → impatto più alto a metà giornata). Il VWAP si adatta al volume (tratta di più quando la liquidità è alta → impatto medio più basso).</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q3:</strong> Individui uno schema di acquisto VWAP su AAPL per 3 ore. Alle 13:00 gli acquisti si fermano. Qual è la tua operazione?</p>
+      <details>
+        <summary>Mostra la risposta</summary>
+        <p><strong>Risposta:</strong> L'algo ha finito, quindi una domanda stabile ha lasciato il book. Se il prezzo saliva grazie a quegli acquisti, ora si fermerà o rifluirà, venuto meno il sostegno — ma solo se l'algo pesava davvero sulla seduta. Calcola prima il suo tasso di partecipazione: qualche centinaio di azioni al minuto su AAPL è rumore. Prendere profitto sulle posizioni lunghe è la mossa ragionevole; andare corti qui significa scommettere sull'assenza di un compratore, non sulla presenza di un venditore, ed è un segnale molto più debole.</p>
+      </details>
+    </div>
+  </div>
+<h2 id="practice-exercise-algo-selection-detection">Esercizio pratico: scelta e individuazione degli algo</h2>
+
+  <div class="practice-section">
+    <h3>Esercizio 1: scegli l'algo giusto</h3>
+    <p><strong>Obiettivo:</strong> Dati alcuni scenari di mercato, scegli l'algoritmo di esecuzione ottimale e i suoi parametri.</p>
+
+    <p><strong>Scenario A:</strong> Devi comprare 450.000 azioni COST (Costco). Prezzo attuale: 520 $. Volume medio giornaliero: 2,5 milioni di azioni. Nessuna fretta, vuoi il miglior prezzo di esecuzione. Quale algo?</p>
+    <details>
+      <summary>Mostra la risposta</summary>
+      <p><strong>Risposta: algo VWAP con un tetto di partecipazione del 10 %, lavorato su due sedute.</strong></p>
+      <p><strong>Il ragionamento:</strong></p>
+      <ul>
+        <li>450.000 azioni = 18 % del volume giornaliero (ordine grande)</li>
+        <li>Il VWAP si adatta agli schemi di volume → impatto minore del TWAP</li>
+        <li>Il 10 % di un ADV da 2,5 milioni fa 250.000 azioni al giorno, quindi 450.000 azioni sono un <strong>ordine da due giorni</strong> e conviene dirlo subito invece di promettere un'esecuzione in giornata</li>
+        <li>Il 10 % di partecipazione evita di dominare la seduta nei periodi di poco volume</li>
+        <li>Slippage atteso secondo la legge della radice quadrata della lezione 65: volatilità giornaliera intorno all'1,3 % × √0,18 ≈ 0,55 %, quindi metti a budget lo <strong>0.3-0.6%</strong> — all'incirca 1,56-3,12 $ per azione, ovvero <strong>$700K-$1.4M</strong> su un ordine da 234 milioni di dollari. Un ordine di questa taglia su un titolo così spesso non è un problema da 5 pb.</li>
+      </ul>
+      <p><strong>Perché non le alternative?</strong></p>
+      <ul>
+        <li><strong>TWAP:</strong> Un ritmo piatto continua a spingere la stessa quantità nella pausa pranzo, quando la seduta è più sottile: alza l'impatto senza alcun beneficio</li>
+        <li><strong>Algo IS:</strong> Nessuna urgenza né convinzione direzionale (non serve)</li>
+        <li><strong>POV al 5 %:</strong> 125.000 azioni al giorno significano quasi quattro sedute: più rischio di esecuzione di quanto valga il risparmio sull'impatto</li>
+      </ul>
+    </details>
+
+    <p><strong>Scenario B:</strong> Sono appena usciti risultati rialzisti per NVDA alle 16:05. Vuoi comprare 150.000 azioni all'apertura di domani (operazione di convinzione, ti aspetti un gap al rialzo). Quale algo?</p>    <details>
+      <summary>Mostra la risposta</summary>
+      <p><strong>Risposta: algo Implementation Shortfall (IS), 50 % nei primi 30 minuti, completato entro 2 ore.</strong></p>
+      <p><strong>Il ragionamento:</strong></p>
+      <ul>
+        <li>150.000 azioni sono circa lo 0,06 % del volume giornaliero di NVDA: qui l'impatto di mercato semplicemente non è il problema. Tutta la ragione per usare l'IS è il <strong>rischio di tempistica</strong>: il prezzo che ti scappa.</li>
+        <li>Alta convinzione + catalizzatore = è probabile che il prezzo scappi</li>
+        <li>L'IS blocca in fretta il prezzo di decisione (partenza aggressiva)</li>
+        <li>Primi 30 min: eseguire 75.000 azioni (il 50 %) vicino al prezzo di apertura</li>
+        <li>Successivi 90 min: eseguire le restanti 75.000 con più pazienza</li>
+        <li>Rischio: se sbagli, la partenza aggressiva significa aver pagato troppo. Ma la convinzione giustifica il rischio.</li>
+      </ul>
+      <p><strong>Perché non il VWAP?</strong> Il VWAP distribuisce l'ordine in modo uniforme → se il titolo apre in gap del 3-5 %, lo rincorrerai tutto il giorno e pagherai in media 4-8 $ in più.</p>
+    </details>
+
+    <p><strong>Scenario C:</strong> Individui acquisti TWAP su una mid cap da 60 $ (ADV 1,2 milioni): 400 azioni ogni 90 secondi da 2 ore. Qual è la tua operazione?</p>
+    <details>
+      <summary>Mostra la risposta</summary>
+      <p><strong>Risposta: comprare ora, tenere finché l'algo TWAP non ha finito, poi uscire.</strong></p>
+      <p><strong>Il ragionamento:</strong></p>
+      <ul>
+        <li>TWAP = ordine istituzionale pianificato (ribilanciamento, flusso passivo)</li>
+        <li>400 azioni ogni 90 secondi = 16.000 azioni all'ora, contro una seduta che gira intorno alle 185.000 azioni all'ora: vale a dire circa l' <strong>8,6 % di partecipazione</strong>. Fai questo conto prima di agire: le stesse 16.000 all'ora su una mega cap non sostengono proprio nulla.</li>
+        <li>2 ore trascorse = 32.000 azioni. Un'altra ora o due portano l'ordine completo a <strong>50-65K</strong></li>
+        <li>Quando l'algo si ferma (niente più esecuzioni da 400 azioni), la pressione in acquisto sparisce → aspettati un ritracciamento</li>
+      </ul>
+      <p><strong>Ingresso:</strong> Comprare al prezzo attuale. <strong>Uscita:</strong> Quando lo schema TWAP si rompe (nessuna esecuzione da 400 azioni per 5+ minuti).</p>
+    </details>
+  </div>
+
+  <div class="practice-section">
+    <h3>Esercizio 2: calcola la qualità dell'esecuzione</h3>
+    <p><strong>Scenario:</strong> Hai eseguito un ordine di acquisto da 200.000 azioni con un algo VWAP. Calcola la qualità rispetto al benchmark.</p>
+
+    <p><strong>La tua esecuzione:</strong></p>
+    <ul>
+      <li>9:30-10:30: comprate 40.000 azioni a 100,15 $ medi</li>
+      <li>10:30-12:00: comprate 60.000 azioni a 100,25 $ medi</li>
+      <li>12:00-14:00: comprate 50.000 azioni a 100,10 $ medi</li>
+      <li>14:00-16:00: comprate 50.000 azioni a 100,30 $ medi</li>
+    </ul>
+
+    <p><strong>VWAP di mercato della giornata: 100,22 $</strong></p>
+
+    <p><strong>Domande:</strong></p>
+    <ol>
+      <li>Qual è stato il tuo prezzo medio di esecuzione ponderato sul volume?</li>
+      <li>Hai battuto il VWAP o sei rimasto indietro? Di quanto?</li>
+      <li>Risparmio o costo totale rispetto al benchmark VWAP?</li>
+    </ol>
+
+    <details>
+      <summary>Mostra la risposta</summary>
+      <p><strong>1. Il tuo calcolo del VWAP:</strong></p>
+      <ul>
+        <li>(40.000 × 100,15 $) + (60.000 × 100,25 $) + (50.000 × 100,10 $) + (50.000 × 100,30 $) = totale dei dollari impiegati</li>
+        <li>= $4,006K + $6,015K + $5,005K + $5,015K = $20,041K</li>
+        <li>Il tuo prezzo medio = 20,041 milioni di dollari / 200.000 azioni = <strong>$100.205</strong></li>
+      </ul>
+      <p><strong>2. Qualità rispetto al VWAP:</strong></p>
+      <ul>
+        <li>VWAP di mercato = 100,22 $</li>
+        <li>La tua media = 100,205 $</li>
+        <li><strong>VWAP battuto di 0,015 $ (1,5 centesimi)</strong></li>
+      </ul>
+      <p><strong>3. Risparmio totale:</strong></p>
+      <ul>
+        <li>0,015 $ × 200.000 azioni = <strong>3.000 $ risparmiati</strong></li>
+      </ul>
+      <p><strong>Lettura:</strong> Buona esecuzione. Hai battuto il VWAP caricando le esecuzioni sulle fasce a prezzo più basso (12:00-14:00 a 100,10 $). È il comportamento ottimale di un algo.</p>
+    </details>
+  </div>
+<h2 id="practical-checklist">Checklist pratica</h2>
+  <div class="checklist">
+    <h4>Scegliere l'algo di esecuzione:</h4>
+    <ul>
+      <li>Ordine &lt; 1 % dell'ADV: usa semplici ordini limitati (non serve un algo)</li>
+      <li>Ordine dell'1-5 % dell'ADV: usa il VWAP (minimizza l'impatto, esegui su 2-4 ore)</li>
+      <li>Ordine &gt; 5 % dell'ADV: usa un POV al 5-10 % (molto paziente, distribuito su tutti i giorni che il tetto richiede)</li>
+      <li>Operazione ad alta convinzione: usa un algo IS (blocca in fretta il prezzo di decisione)</li>
+      <li>Titolo illiquido: usa il POV con un tetto di durata massima (per non restare incastrato)</li>
+    </ul>
+    <h4>Individuare gli algo istituzionali:</h4>
+    <ul>
+      <li>Usa la Pentarch Pilot Line di Signal Pilot per riconoscere gli schemi VWAP (flusso costante di 2-4 ore)</li>
+      <li>Usa Volume Oracle per individuare il TWAP (esecuzioni identiche a intervalli regolari)</li>
+      <li>Quando l'algo si ferma (il flusso sparisce), aspettati un ritorno del prezzo o una fase di consolidamento</li>
+      <li>Se gli acquisti dell'algo accelerano (POV in aumento), il trend si sta rafforzando</li>
+    </ul>
+  </div>
+
+  <div class="key-takeaway">
+    <h4>Punti chiave</h4>
+    <ul>
+      <li><strong>TWAP = esecuzione a ritmo costante</strong> (semplice ma ignora il volume)</li>
+      <li><strong>VWAP = esecuzione proporzionale al volume</strong> (impatto minore, standard istituzionale)</li>
+      <li><strong>POV = % del volume di mercato</strong> (si adatta alle condizioni di liquidità)</li>
+      <li><strong>IS = minimizzare lo slippage rispetto al prezzo di decisione</strong> (operazioni ad alta convinzione)</li>
+      <li><strong>Individua gli algo con Signal Pilot:</strong> VWAP = flusso costante, TWAP = esecuzioni da orologio</li>
+    </ul>
+  </div>
+
+  <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Gli algoritmi di esecuzione minimizzano l'impatto di mercato e lo slippage sui grandi ordini. Le strategie TWAP, VWAP e POV sono strumenti professionali che fanno risparmiare migliaia in costi di esecuzione.</p>
+
+  <h3 style="margin:3rem 0 1.5rem 0">Lezioni correlate</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
+    <div class="card" style="padding:1rem">
+      <span class="badge">Avanzato #65</span>
+      <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Modelli di impatto di mercato</h4>
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Modella l'impatto di mercato per scegliere gli algoritmi di esecuzione ottimali.</p>
+      <a href="/education/curriculum/advanced/65-market-impact-models.html" class="btn btn-sm btn-ghost">Leggi la lezione &rarr;</a>
+    </div>
+    <div class="card" style="padding:1rem">
+      <span class="badge">Avanzato n. 69</span>
+      <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Tipi di ordine istituzionali</h4>
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Combina gli algoritmi con i tipi di ordine istituzionali per un'esecuzione ottimale.</p>
+      <a href="/education/curriculum/advanced/69-institutional-order-types.html" class="btn btn-sm btn-ghost">Leggi la lezione &rarr;</a>
+    </div>
+    <div class="card" style="padding:1rem">
+      <span class="badge">Intermedio #45</span>
+      <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Teoria delle aste e squilibri di mercato</h4>
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Comprendi le dinamiche delle aste per temporizzare meglio gli algoritmi.</p>
+      <a href="/education/curriculum/intermediate/45-auction-theory-imbalances.html" class="btn btn-sm btn-ghost">Leggi la lezione &rarr;</a>
+    </div>
+  </div>
+
+  <div class="callout-info">
+    <h4>⏭️ Prossimamente</h4>
+    <p><strong>Lezione #71: confluenza tra più orizzonti temporali</strong> — Allinea più orizzonti temporali per individuare setup ad alta probabilità in confluenza.</p>
+  </div>
+
+  <!-- Discussion Section -->
+  <div class="discussion-section" id="discussion-section">
+    <button class="discussion-toggle" id="discussion-toggle" style="display:none">
+      <span>💬 Discussione (<span id="discussion-count-mobile">0</span>)</span>
+      <span class="discussion-toggle-icon">+</span>
+    </button>
+    <div class="discussion-content">
+      <div class="discussion-header">
+        <h2 class="discussion-title">💬 Discussione <span class="discussion-count" id="discussion-count">(0 commenti)</span></h2>
+        <div class="discussion-sort">
+          <label for="discussion-sort">Ordina per:</label>
+          <select id="discussion-sort">
+            <option value="recent">Più recenti</option>
+            <option value="top">Più votati</option>
+            <option value="oldest">Più vecchi</option>
+          </select>
+        </div>
+      </div>
+      <div class="comment-composer" id="comment-composer">
+        <textarea id="comment-input" placeholder="Condividi le tue riflessioni, fai domande o commenta questa lezione…" maxlength="1000"></textarea>
+        <div class="comment-composer-actions">
+          <span class="comment-char-count" id="comment-char-count">0/1000</span>
+          <button class="btn btn-primary" id="post-comment-btn">Pubblica il commento</button>
+        </div>
+      </div>
+      <div class="comments-list" id="comments-list">
+        <div class="comments-loading">
+          <div class="comments-loading-spinner"></div>
+          <p>Caricamento dei commenti…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="downloads">
+    <h4>Download</h4>
+    <ul>
+      <li><a href="/education/resources/checklists/algorithmic-execution-checklist.pdf" download>Guida alla scelta degli algo di esecuzione (PDF)</a></li>
+      <li><a href="/education/resources/checklists/volume-analysis-checklist.pdf" download>Guida all'analisi dei volumi e al VWAP (PDF)</a></li>
+    </ul>
+  </div>
+
+      <div class="nav-article">
+        <a class="btn btn-ghost" href="/education/curriculum/advanced/69-institutional-order-types.html">← Lezione precedente</a>
+        <a class="btn btn-primary" href="/education/curriculum/advanced/71-multi-timeframe-confluence.html">Lezione successiva →</a>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <div class="lesson-actions">
+        <button id="bookmark-btn" class="btn btn-secondary btn-sm btn-block" onclick="window.library?.isBookmarked() ? window.library.removeBookmark() : window.library.addBookmark({title:document.title})">🔖 Salva</button>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm btn-block">📄 Salva in PDF</button>
+      </div>
+
+      <div class="sidebar-links" style="margin-top:1.5rem">
+        <a href="https://www.signalpilot.io" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          ⚡ Suite Signal Pilot
+        </a>
+        <a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💬 Discutine su Discord
+        </a>
+        <a href="https://www.signalpilot.io/affiliates.html" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💰 Guadagna il 15-30 % come affiliato
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Back to Signal Pilot CTA -->
+  <div class="wrap" style="margin: 3rem auto 0;">
+    <div style="background: linear-gradient(135deg, rgba(153,102,255,0.15), rgba(138,91,255,0.1)); border: 1px solid rgba(153,102,255,0.3); border-radius: 8px; padding: 2rem; text-align: center;">
+      <h3 style="margin: 0 0 0.75rem 0; font-size: 1.25rem;">Pronto a operare con Signal Pilot?</h3>
+      <p style="margin: 0 0 1.25rem 0; color: var(--muted);">Metti in pratica la tua formazione con indicatori professionali e strumenti di analisi di mercato in tempo reale.</p>
+      <a href="https://www.signalpilot.io" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        Torna a Signal Pilot →
+      </a>
+    </div>
+  </div>
+  <blockquote class="sp-disclaimer"><strong>Solo a scopo educativo.</strong> Il trading comporta un rischio sostanziale di perdita. Non è una consulenza finanziaria. I risultati passati non garantiscono risultati futuri.</blockquote>
+</article>
+<footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Discutine su Discord</a><a href="https://www.signalpilot.io/affiliates.html">Affiliazione</a><a href="https://www.signalpilot.io/privacy.html">Privacy</a><a href="https://www.signalpilot.io/terms.html">Termini</a></div></div></footer>
+<script src="/education/assets/edu.js"></script>
+<script src="/education/assets/edu-enhanced.js"></script>
+<script src="/education/assets/signalpilot-theme.js"></script>
+<script>
+document.getElementById('theme-toggle')?.addEventListener('click', () => {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+});
+const canvas = document.getElementById('constellations');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const stars = Array.from({ length: 80 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.2,
+    vy: (Math.random() - 0.5) * 0.2
+  }));
+  function drawConstellations() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(139, 92, 246, 0.15)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < stars.length; i++) {
+      for (let j = i + 1; j < stars.length; j++) {
+        const dx = stars[i].x - stars[j].x;
+        const dy = stars[i].y - stars[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.moveTo(stars[i].x, stars[i].y);
+          ctx.lineTo(stars[j].x, stars[j].y);
+          ctx.stroke();
+        }
+      }
+      stars[i].x += stars[i].vx;
+      stars[i].y += stars[i].vy;
+      if (stars[i].x < 0 || stars[i].x > canvas.width) stars[i].vx *= -1;
+      if (stars[i].y < 0 || stars[i].y > canvas.height) stars[i].vy *= -1;
+    }
+    requestAnimationFrame(drawConstellations);
+  }
+  drawConstellations();
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+</script>
+<script src="/education/assets/config.js"></script>
+<script src="/education/assets/supabase-client.js"></script>
+<script src="/education/assets/auth-ui.js"></script>
+  <script src="/education/assets/chatbot.js" defer></script>
+  <!-- Enhanced Analytics & A/B Testing -->
+  <script src="/education/assets/enhanced-analytics.js" defer></script>
+  <script src="/education/assets/ab-test-tldr.js" defer></script>
+  <!-- Google Translate -->
+  <script src="/education/assets/lang-switcher.js"></script>
+  <!-- Discussion System -->
+    <script src="/education/assets/trial-cta.js"></script>
+  <script src="/education/assets/blog-links.js"></script>
+  <script src="/education/assets/discussions.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.DiscussionSystem) {
+        window.DiscussionSystem.init('advanced-70-execution-algorithms-twap-vwap');
+      }
+    });
+  </script>
+  <script defer src="/assets/js/view-counter.js"></script>
+</body>
+</html>
