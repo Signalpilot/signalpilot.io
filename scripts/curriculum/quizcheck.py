@@ -68,8 +68,13 @@ def check(path):
         # 4/5/6
         if 'data-explanation' in block:
             issues.append((qi, 'ATTR', 'data-explanation present (not translatable)'))
-        b = BANNED.search(text)
-        if b:
+        for b in BANNED.finditer(text):
+            # "average R-multiple" is banned only as a SUBSTITUTE for payoff ratio.
+            # Stating that it IS expectancy in R is the curriculum's own
+            # clarification, so allow it when expectancy is named alongside.
+            if b.group().lower() == 'average r-multiple' and re.search(
+                    r'(?i)expectancy', text[max(0, b.start() - 90):b.end() + 90]):
+                continue
             issues.append((qi, 'HOUSE', f'banned phrasing: "{b.group()}"'))
         if re.search(r'(?<![=\w"])[<>](?![/a-zA-Z!])', body):
             issues.append((qi, 'RAW-ANGLE', 'raw < or > in prose'))
