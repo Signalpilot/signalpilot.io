@@ -194,6 +194,172 @@
         <li>داخل العيّنة مقابل خارج العيّنة (التحقّق الوحيد الذي له معنى)</li>
       </ul>
 
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; المتطلبات المسبقة</h4>
+        <p>يبني هذا الدرس على مفاهيم من:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">الدرس 30: Volume Oracle</a> &mdash; إتقان Signal Pilot</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">الدرس 31: بناء المحفظة</a> &mdash; إتقان Signal Pilot</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; إذا أنهيت هذه الدروس فأنت جاهز. وإن لم تكن، فابدأ بالدروس التأسيسية أولاً.</p>
+      </div>
+
+      <div class="section-break"><span>الجزء 1: الطرق الأربع التي يكذب بها الـbacktest</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          للتعمّق: لماذا لا تساوي نتائج الـbacktesting شيئًا (وماذا تفعل بدلًا منها) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">لماذا ستفشل استراتيجيتك المثالية في الحيّ</h2>
+
+      <p>لنبدأ بالحقيقة المزعجة: إن كنت قد حسّنت استراتيجية لتنطبق على بيانات الماضي، فأنت لم تجد أفضلية. وجدت ضجيجًا.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">المشكلة 1: الإفراط في المواءمة</button>
+          <button>المشكلة 2: النظر إلى المستقبل</button>
+          <button>المشكلة 3: أوهام التنفيذ</button>
+          <button>المشكلة 4: انحياز الناجين</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">مواءمة المنحنى مع ضجيج عشوائي</h3>
+            <p><strong>ما هي:</strong> تعديل الوسائط إلى أن يبدو الـbacktest مثاليًا</p>
+            <p><strong>مثال:</strong></p>
+            <ul>
+              <li>تجرّب 100 فترة مختلفة لـEMA (10، 11، 12… 110)</li>
+              <li>تعطي EMA(47) توقّعًا قدره 4.2R في الـbacktest</li>
+              <li>تظن أنك عثرت على «الرقم السحري»</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> لم تكن EMA(47) سوى مصادفة انطبقت على تلك البيانات بالذات. وفي الاختبار الأمامي؟ توقّع -0.8R. تعلّمت الضجيج لا الإشارة.</p>
+            <p><strong>الأفضل:</strong> احصر التحسين. استخدم وسائط قياسية. اختبر على بيانات لم ترها.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">استخدام بيانات المستقبل (مستحيل في التداول الحيّ)</h3>
+            <p><strong>ما هي:</strong> كود «يختلس النظر» إلى الشموع المقبلة ليقرّر الآن</p>
+            <p><strong>مثال:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # يستخدم الشموع الخمس القادمة
+    enter_long()</code></pre>
+            <p><strong>المشكلة:</strong> في الـbacktesting تكون بيانات المستقبل بين يديك. أما في التداول الحيّ فلا.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> هذا الكود لا يمكن أن يُنفَّذ في الحيّ أصلًا. الـbacktest عندك يختبر استراتيجية لا وجود لها.</p>
+            <p><strong>الأفضل:</strong> لا تستخدم إلا البيانات المتاحة لحظة اتخاذ القرار.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">افتراض تنفيذ مثالي عند أسعار مثالية</h3>
+<p><strong>افتراض الـbacktest:</strong> «أشتري عند 100.00 $ بالضبط»</p>
+            <p><strong>الواقع:</strong> يُنفَّذ الأمر السوقي عند 100.12 $ (الفارق + الـslippage)</p>
+            <p><strong>الأثر على 100 صفقة:</strong></p>
+            <ul>
+              <li>ربح الـbacktest: 5,000 $</li>
+              <li>تكلفة الفارق (0.10 $ للصفقة): -1,000 $</li>
+              <li>الـslippage (0.05 $ للصفقة): -500 $</li>
+              <li>العمولات (2 $ للصفقة): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> الربح الحقيقي = 3,300 $ (أقل بنسبة 34 % من الـbacktest)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">الاختبار على الناجين وحدهم</h3>
+            <p><strong>ما هي:</strong> إجراء backtesting على أسهم S&P 500 الحالية فقط</p>
+            <p><strong>المشكلة:</strong> أنت تستبعد أكثر من 200 سهم شُطبت من الإدراج أو أفلست</p>
+            <p><strong>مثال:</strong></p>
+            <ul>
+              <li>backtest على قائمة S&P 500 لعام 2024: توقّع 1.8R، وعامل ربح 2.1</li>
+              <li>لكنك عبر تلك الفترة كنت ستكون شاريًا لـHertz (أفلست 2020) ولـSVB Financial (انهارت 2023) ولكل اسم آخر ذهب إلى الصفر.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> توقّعك يستبعد الخسائر الكارثية الناتجة عن الشطب من الإدراج. التوقّع الحقيقي: -0.2R (نظام خاسر).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 لحظة الإدراك</h4>
+        <p>الـbacktest ليس الواقع. إنه محاكاة. وإذا احتوت محاكاتك على افتراضات مستحيلة، فستكون نتائجك في الحيّ مستحيلة بالقدر نفسه.</p>
+      </div>
+
+      <div class="section-break"><span>الجزء 2: نمذجة تكاليف واقعية</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">التكاليف الخفية التي تقتل الاستراتيجيات</h2>
+
+      <p>هذا ما تتجاهله معظم اختبارات backtest — ولهذا فاختبارك على الأرجح متفائل أكثر من اللازم بنسبة 20-40 %:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">الخطوة 1: نمذج الفارق بين العرض والطلب</summary>
+          <div class="accordion-content">
+            <p><strong>ما هي:</strong> الفرق بين سعر الشراء وسعر البيع</p>
+            <p><strong>مثال:</strong></p>
+            <ul>
+              <li>SPY طلب: 450.00 $ / عرض: 450.01 $ ← الفارق = 0.01 $</li>
+              <li>تشتري: تدفع 450.01 $ (نصف الفارق = 0.005 $)</li>
+              <li>تبيع: تحصل على 450.00 $ (نصف الفارق = 0.005 $)</li>
+            </ul>
+            <p><strong>التكلفة لكل دورة كاملة:</strong> $0.01</p>
+            <p><strong>لألف سهم:</strong> 0.01 $ × 1,000 = 10 $ للصفقة</p>
+            <p><strong>100 صفقة:</strong> 1,000 $ تكاليف فارق</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">الخطوة 2: نمذج الـslippage</summary>
+          <div class="accordion-content">
+            <p><strong>ما هي:</strong> الفرق بين السعر المقصود والتنفيذ الفعلي</p>
+            <p><strong>slippage واقعي بحسب الظروف:</strong></p>
+            <ul>
+              <li><strong>سيولة عادية:</strong> 0.01-0.02%</li>
+              <li><strong>أسواق متقلّبة:</strong> 0.05-0.10%</li>
+              <li><strong>سيولة ضحلة:</strong> 0.10-0.30%</li>
+              <li><strong>مركز كبير الحجم:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>افتراض متحفّظ:</strong> 0.05 % لكل صفقة</p>
+            <p>مركز بـ10,000 $ × 0.05 % = 5 $ slippage لكل جهة = 10 $ للدورة الكاملة</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">الخطوة 3: نمذج العمولات</summary>
+          <div class="accordion-content">
+            <p><strong>مثال: Interactive Brokers</strong></p>
+            <ul>
+              <li>0.005 $ للسهم، بحدّ أدنى 1 $</li>
+              <li>200 سهم × 0.005 $ = 1 $ لكل جهة</li>
+              <li>الدورة الكاملة = 2 $</li>
+            </ul>
+            <p><strong>100 صفقة:</strong> 200 $ عمولات</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">الخطوة 4: إجمالي التكلفة الواقعية</summary>
+          <div class="accordion-content">
+            <p><strong>لكل صفقة (دورة كاملة):</strong></p>
+            <ul>
+              <li>الفارق: 10 $</li>
+              <li>الـslippage: 10 $</li>
+              <li>العمولة: 2 $</li>
+            </ul>
+            <p><strong>الإجمالي: 22 $ للصفقة</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">إن كانت استراتيجيتك تدرّ 50 $ إجماليًا للصفقة ← 28 $ صافيًا (انخفاض 44 %!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">مثال على تصحيح الـbacktest</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>قبل التكاليف الواقعية وبعدها</h4>
+        <p><strong>الاستراتيجية: 100 صفقة، بمتوسط ربح 50 $ للصفقة</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>backtest (خيال):</strong></p>
+        <p>100 صفقة × 50 $ = 5,000 $ ربحًا</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>بعد التكاليف الواقعية:</strong></p>
+        <ul>
+          <li>الإجمالي: 5,000 $</li>
+          <li>الفارق: -1,000 $</li>
+          <li>الـslippage: -1,000 $</li>
+          <li>العمولات: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">صافي الربح: 2,800 $ (انخفاض 44 %)</p>
+      </div>
+
 <div class="example-block">
         <h4>مثال مركّب: كيف تحوّل backtest «مثالي» بتوقّع 1.3R إلى ‏-0.45R في التداول الحقيقي</h4>
 
@@ -463,172 +629,6 @@
         </div>
 
         <p><b>الدرس: كان backtest كريس خيالًا. تجريب 15,000 توليفة من الوسائط يضمن أن تجد واحدة تنطبق على ضجيج الماضي انطباقًا تامًا. ذلك التوقّع «المثالي» البالغ 1.3R لم يكن سوى نفاية مواءَمة على المنحنى. واختبار خارج العيّنة كان سيكشف ذلك قبل خسارة 8,400 $. الـbacktesting ليس بحثًا عن أفضل أداء في الماضي، بل بحثًا عمّا سينجح فيما بعد. وهذا يقتضي بيانات لم تُرَ من قبل، وتكاليف واقعية، وصفرًا من النظر إلى المستقبل.</b></p>
-      </div>
-
-      <div class="section-break"><span>الجزء 1: الطرق الأربع التي يكذب بها الـbacktest</span></div>
-
-      <div class="blog-callout">
-        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
-          للتعمّق: لماذا لا تساوي نتائج الـbacktesting شيئًا (وماذا تفعل بدلًا منها) →
-        </a>
-      </div>
-      <!-- Prerequisites -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>&#128203; المتطلبات المسبقة</h4>
-        <p>يبني هذا الدرس على مفاهيم من:</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">الدرس 30: Volume Oracle</a> &mdash; إتقان Signal Pilot</li>
-            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">الدرس 31: بناء المحفظة</a> &mdash; إتقان Signal Pilot</li>
-        </ul>
-        <p style="margin-top:0.75rem">&#9989; إذا أنهيت هذه الدروس فأنت جاهز. وإن لم تكن، فابدأ بالدروس التأسيسية أولاً.</p>
-      </div>
-
-<h2 id="why-your-perfect-strategy-will-fail-live">لماذا ستفشل استراتيجيتك المثالية في الحيّ</h2>
-
-      <p>لنبدأ بالحقيقة المزعجة: إن كنت قد حسّنت استراتيجية لتنطبق على بيانات الماضي، فأنت لم تجد أفضلية. وجدت ضجيجًا.</p>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">المشكلة 1: الإفراط في المواءمة</button>
-          <button>المشكلة 2: النظر إلى المستقبل</button>
-          <button>المشكلة 3: أوهام التنفيذ</button>
-          <button>المشكلة 4: انحياز الناجين</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="curve-fitting-to-random-noise">مواءمة المنحنى مع ضجيج عشوائي</h3>
-            <p><strong>ما هي:</strong> تعديل الوسائط إلى أن يبدو الـbacktest مثاليًا</p>
-            <p><strong>مثال:</strong></p>
-            <ul>
-              <li>تجرّب 100 فترة مختلفة لـEMA (10، 11، 12… 110)</li>
-              <li>تعطي EMA(47) توقّعًا قدره 4.2R في الـbacktest</li>
-              <li>تظن أنك عثرت على «الرقم السحري»</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> لم تكن EMA(47) سوى مصادفة انطبقت على تلك البيانات بالذات. وفي الاختبار الأمامي؟ توقّع -0.8R. تعلّمت الضجيج لا الإشارة.</p>
-            <p><strong>الأفضل:</strong> احصر التحسين. استخدم وسائط قياسية. اختبر على بيانات لم ترها.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="using-future-data-impossible-in-live-trading">استخدام بيانات المستقبل (مستحيل في التداول الحيّ)</h3>
-            <p><strong>ما هي:</strong> كود «يختلس النظر» إلى الشموع المقبلة ليقرّر الآن</p>
-            <p><strong>مثال:</strong></p>
-            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # يستخدم الشموع الخمس القادمة
-    enter_long()</code></pre>
-            <p><strong>المشكلة:</strong> في الـbacktesting تكون بيانات المستقبل بين يديك. أما في التداول الحيّ فلا.</p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> هذا الكود لا يمكن أن يُنفَّذ في الحيّ أصلًا. الـbacktest عندك يختبر استراتيجية لا وجود لها.</p>
-            <p><strong>الأفضل:</strong> لا تستخدم إلا البيانات المتاحة لحظة اتخاذ القرار.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="assuming-perfect-fills-at-perfect-prices">افتراض تنفيذ مثالي عند أسعار مثالية</h3>
-<p><strong>افتراض الـbacktest:</strong> «أشتري عند 100.00 $ بالضبط»</p>
-            <p><strong>الواقع:</strong> يُنفَّذ الأمر السوقي عند 100.12 $ (الفارق + الـslippage)</p>
-            <p><strong>الأثر على 100 صفقة:</strong></p>
-            <ul>
-              <li>ربح الـbacktest: 5,000 $</li>
-              <li>تكلفة الفارق (0.10 $ للصفقة): -1,000 $</li>
-              <li>الـslippage (0.05 $ للصفقة): -500 $</li>
-              <li>العمولات (2 $ للصفقة): -200 $</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> الربح الحقيقي = 3,300 $ (أقل بنسبة 34 % من الـbacktest)</p>
-          </div>
-          <div class="tab-panel"><h3 id="testing-only-on-survivors">الاختبار على الناجين وحدهم</h3>
-            <p><strong>ما هي:</strong> إجراء backtesting على أسهم S&P 500 الحالية فقط</p>
-            <p><strong>المشكلة:</strong> أنت تستبعد أكثر من 200 سهم شُطبت من الإدراج أو أفلست</p>
-            <p><strong>مثال:</strong></p>
-            <ul>
-              <li>backtest على قائمة S&P 500 لعام 2024: توقّع 1.8R، وعامل ربح 2.1</li>
-              <li>لكنك عبر تلك الفترة كنت ستكون شاريًا لـHertz (أفلست 2020) ولـSVB Financial (انهارت 2023) ولكل اسم آخر ذهب إلى الصفر.</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> توقّعك يستبعد الخسائر الكارثية الناتجة عن الشطب من الإدراج. التوقّع الحقيقي: -0.2R (نظام خاسر).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout-key">
-        <h4>💡 لحظة الإدراك</h4>
-        <p>الـbacktest ليس الواقع. إنه محاكاة. وإذا احتوت محاكاتك على افتراضات مستحيلة، فستكون نتائجك في الحيّ مستحيلة بالقدر نفسه.</p>
-      </div>
-
-      <div class="section-break"><span>الجزء 2: نمذجة تكاليف واقعية</span></div>
-<h2 id="the-hidden-costs-that-kill-strategies">التكاليف الخفية التي تقتل الاستراتيجيات</h2>
-
-      <p>هذا ما تتجاهله معظم اختبارات backtest — ولهذا فاختبارك على الأرجح متفائل أكثر من اللازم بنسبة 20-40 %:</p>
-
-      <div class="accordion">
-        <details class="accordion-item">
-          <summary class="accordion-header">الخطوة 1: نمذج الفارق بين العرض والطلب</summary>
-          <div class="accordion-content">
-            <p><strong>ما هي:</strong> الفرق بين سعر الشراء وسعر البيع</p>
-            <p><strong>مثال:</strong></p>
-            <ul>
-              <li>SPY طلب: 450.00 $ / عرض: 450.01 $ ← الفارق = 0.01 $</li>
-              <li>تشتري: تدفع 450.01 $ (نصف الفارق = 0.005 $)</li>
-              <li>تبيع: تحصل على 450.00 $ (نصف الفارق = 0.005 $)</li>
-            </ul>
-            <p><strong>التكلفة لكل دورة كاملة:</strong> $0.01</p>
-            <p><strong>لألف سهم:</strong> 0.01 $ × 1,000 = 10 $ للصفقة</p>
-            <p><strong>100 صفقة:</strong> 1,000 $ تكاليف فارق</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">الخطوة 2: نمذج الـslippage</summary>
-          <div class="accordion-content">
-            <p><strong>ما هي:</strong> الفرق بين السعر المقصود والتنفيذ الفعلي</p>
-            <p><strong>slippage واقعي بحسب الظروف:</strong></p>
-            <ul>
-              <li><strong>سيولة عادية:</strong> 0.01-0.02%</li>
-              <li><strong>أسواق متقلّبة:</strong> 0.05-0.10%</li>
-              <li><strong>سيولة ضحلة:</strong> 0.10-0.30%</li>
-              <li><strong>مركز كبير الحجم:</strong> 0.20-0.50%</li>
-            </ul>
-            <p><strong>افتراض متحفّظ:</strong> 0.05 % لكل صفقة</p>
-            <p>مركز بـ10,000 $ × 0.05 % = 5 $ slippage لكل جهة = 10 $ للدورة الكاملة</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">الخطوة 3: نمذج العمولات</summary>
-          <div class="accordion-content">
-            <p><strong>مثال: Interactive Brokers</strong></p>
-            <ul>
-              <li>0.005 $ للسهم، بحدّ أدنى 1 $</li>
-              <li>200 سهم × 0.005 $ = 1 $ لكل جهة</li>
-              <li>الدورة الكاملة = 2 $</li>
-            </ul>
-            <p><strong>100 صفقة:</strong> 200 $ عمولات</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">الخطوة 4: إجمالي التكلفة الواقعية</summary>
-          <div class="accordion-content">
-            <p><strong>لكل صفقة (دورة كاملة):</strong></p>
-            <ul>
-              <li>الفارق: 10 $</li>
-              <li>الـslippage: 10 $</li>
-              <li>العمولة: 2 $</li>
-            </ul>
-            <p><strong>الإجمالي: 22 $ للصفقة</strong></p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">إن كانت استراتيجيتك تدرّ 50 $ إجماليًا للصفقة ← 28 $ صافيًا (انخفاض 44 %!)</p>
-          </div>
-        </details>
-      </div>
-<h3 id="backtest-adjustment-example">مثال على تصحيح الـbacktest</h3>
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
-        <h4>قبل التكاليف الواقعية وبعدها</h4>
-        <p><strong>الاستراتيجية: 100 صفقة، بمتوسط ربح 50 $ للصفقة</strong></p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>backtest (خيال):</strong></p>
-        <p>100 صفقة × 50 $ = 5,000 $ ربحًا</p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>بعد التكاليف الواقعية:</strong></p>
-        <ul>
-          <li>الإجمالي: 5,000 $</li>
-          <li>الفارق: -1,000 $</li>
-          <li>الـslippage: -1,000 $</li>
-          <li>العمولات: -200 $</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">صافي الربح: 2,800 $ (انخفاض 44 %)</p>
       </div>
 
       <div class="section-break"><span>الجزء 3: داخل العيّنة مقابل خارج العيّنة</span></div>

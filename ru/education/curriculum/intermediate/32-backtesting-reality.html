@@ -194,6 +194,172 @@
         <li>In-sample против out-of-sample (единственная проверка, которая имеет значение)</li>
       </ul>
 
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Что нужно знать заранее</h4>
+        <p>Этот урок опирается на понятия из:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Урок 30: Volume Oracle</a> &mdash; Мастерство Signal Pilot</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Урок 31: Построение портфеля</a> &mdash; Мастерство Signal Pilot</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Если ты их прошёл, можно начинать. Если нет, сначала пройди базовые уроки.</p>
+      </div>
+
+      <div class="section-break"><span>Часть 1: четыре способа, которыми backtest лжёт</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          Подробнее: почему результаты backtesting ничего не стоят (и что делать вместо этого) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">Почему ваша идеальная стратегия провалится в реале</h2>
+
+      <p>Начнём с неудобной правды: если вы оптимизировали стратегию так, чтобы она легла на исторические данные, вы нашли не преимущество. Вы нашли шум.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">Проблема 1: переобучение</button>
+          <button>Проблема 2: заглядывание в будущее</button>
+          <button>Проблема 3: фантазии об исполнении</button>
+          <button>Проблема 4: ошибка выжившего</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">Подгонка кривой под случайный шум</h3>
+            <p><strong>Что это:</strong> Крутить параметры, пока backtest не станет выглядеть идеально</p>
+            <p><strong>Пример:</strong></p>
+            <ul>
+              <li>Вы перебираете 100 разных периодов EMA (10, 11, 12… 110)</li>
+              <li>EMA(47) даёт в backtest матожидание 4,2R</li>
+              <li>Вам кажется, что вы нашли «волшебное число»</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Реальность:</strong> EMA(47) просто случайно легла на этот конкретный набор данных. А в проверке вперёд? Матожидание -0,8R. Вы выучили шум, а не сигнал.</p>
+            <p><strong>Лучше:</strong> Ограничьте оптимизацию. Берите стандартные параметры. Проверяйте на невиданных данных.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">Использовать данные из будущего (в реале это невозможно)</h3>
+            <p><strong>Что это:</strong> Код, который «подглядывает» в будущие свечи, чтобы решить сейчас</p>
+            <p><strong>Пример:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # использует 5 БУДУЩИХ свечей
+    enter_long()</code></pre>
+            <p><strong>Проблема:</strong> В backtesting у вас есть данные из будущего. В реальной торговле — нет.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Реальность:</strong> Этот код в реале попросту не может исполниться. Ваш backtest проверяет стратегию, которой не существует.</p>
+            <p><strong>Лучше:</strong> Используйте только те данные, которые доступны в момент решения.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">Предполагать идеальные исполнения по идеальным ценам</h3>
+<p><strong>Допущение в backtest:</strong> «Я покупаю ровно по 100,00 $»</p>
+            <p><strong>Реальность:</strong> Рыночная заявка исполняется по 100,12 $ (спред + slippage)</p>
+            <p><strong>Влияние на 100 сделках:</strong></p>
+            <ul>
+              <li>Прибыль по backtest: 5 000 $</li>
+              <li>Издержки на спред (0,10 $ за сделку): -1 000 $</li>
+              <li>slippage (0,05 $ за сделку): -500 $</li>
+              <li>Комиссии (2 $ за сделку): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Реальность:</strong> Настоящая прибыль = 3 300 $ (на 34 % меньше, чем в backtest)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">Проверять только на выживших</h3>
+            <p><strong>Что это:</strong> Делать backtesting только по нынешнему составу S&P 500</p>
+            <p><strong>Проблема:</strong> Вы выбрасываете более 200 бумаг, которые были исключены из листинга или обанкротились</p>
+            <p><strong>Пример:</strong></p>
+            <ul>
+              <li>Backtest по списку S&P 500 на 2024 год: матожидание 1,8R, профит-фактор 2,1</li>
+              <li>Но за этот период вы были бы в лонге по Hertz (банкротство в 2020-м), по SVB Financial (крах в 2023-м) и по всем остальным именам, ушедшим в ноль.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Реальность:</strong> Ваше матожидание не учитывает катастрофические убытки от исключений из листинга. Настоящее матожидание: -0,2R (убыточная система).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 момент озарения</h4>
+        <p>Backtest — это не реальность. Это симуляция. И если в вашу симуляцию заложены невозможные допущения, ваши результаты в реале окажутся столь же невозможными.</p>
+      </div>
+
+      <div class="section-break"><span>Часть 2: моделирование реалистичных издержек</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">Скрытые издержки, которые убивают стратегии</h2>
+
+      <p>Вот что большинство backtest игнорирует — и почему ваш, скорее всего, на 20-40 % оптимистичнее правды:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">Шаг 1: смоделировать спред между покупкой и продажей</summary>
+          <div class="accordion-content">
+            <p><strong>Что это:</strong> Разница между ценой покупки и ценой продажи</p>
+            <p><strong>Пример:</strong></p>
+            <ul>
+              <li>SPY покупка: 450,00 $ / продажа: 450,01 $ → спред = 0,01 $</li>
+              <li>Вы покупаете: платите 450,01 $ (половина спреда = 0,005 $)</li>
+              <li>Вы продаёте: получаете 450,00 $ (половина спреда = 0,005 $)</li>
+            </ul>
+            <p><strong>Издержки за круг:</strong> $0.01</p>
+            <p><strong>Для 1 000 бумаг:</strong> 0,01 $ × 1 000 = 10 $ за сделку</p>
+            <p><strong>100 сделок:</strong> 1 000 $ издержек на спред</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Шаг 2: смоделировать slippage</summary>
+          <div class="accordion-content">
+            <p><strong>Что это:</strong> Разница между желаемой ценой и фактическим исполнением</p>
+            <p><strong>Реалистичный slippage по условиям:</strong></p>
+            <ul>
+              <li><strong>Обычная ликвидность:</strong> 0.01-0.02%</li>
+              <li><strong>Волатильные рынки:</strong> 0.05-0.10%</li>
+              <li><strong>Тонкая ликвидность:</strong> 0.10-0.30%</li>
+              <li><strong>Крупный размер позиции:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>Консервативное допущение:</strong> 0,05 % на сделку</p>
+            <p>Позиция 10 000 $ × 0,05 % = 5 $ slippage с каждой стороны = 10 $ за круг</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Шаг 3: смоделировать комиссии</summary>
+          <div class="accordion-content">
+            <p><strong>Пример: Interactive Brokers</strong></p>
+            <ul>
+              <li>0,005 $ за бумагу, минимум 1 $</li>
+              <li>200 бумаг × 0,005 $ = 1 $ с каждой стороны</li>
+              <li>За круг = 2 $</li>
+            </ul>
+            <p><strong>100 сделок:</strong> 200 $ комиссий</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Шаг 4: итоговые реалистичные издержки</summary>
+          <div class="accordion-content">
+            <p><strong>На сделку (за круг):</strong></p>
+            <ul>
+              <li>Спред: 10 $</li>
+              <li>slippage: 10 $</li>
+              <li>Комиссия: 2 $</li>
+            </ul>
+            <p><strong>Итого: 22 $ за сделку</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Если ваша стратегия приносит 50 $ валовой прибыли за сделку → 28 $ чистыми (на 44 % меньше!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">Пример пересчёта backtest</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>До и после реалистичных издержек</h4>
+        <p><strong>Стратегия: 100 сделок, в среднем 50 $ прибыли на сделку</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Backtest (фантазия):</strong></p>
+        <p>100 сделок × 50 $ = 5 000 $ прибыли</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>После реалистичных издержек:</strong></p>
+        <ul>
+          <li>Валовая: 5 000 $</li>
+          <li>Спред: -1 000 $</li>
+          <li>slippage: -1 000 $</li>
+          <li>Комиссии: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Чистая прибыль: 2 800 $ (на 44 % меньше)</p>
+      </div>
+
 <div class="example-block">
         <h4>Составной пример: как «идеальный» backtest с матожиданием 1,3R превратился в -0,45R вживую</h4>
 
@@ -463,172 +629,6 @@
         </div>
 
         <p><b>Урок: backtest Криса был фантазией. Если перебрать 15 000 сочетаний параметров, одно из них гарантированно ляжет на исторический шум идеально. То «идеальное» матожидание в 1,3R было подогнанным мусором. Проверка out-of-sample показала бы это до потери 8 400 $. Backtesting нужен не для того, чтобы найти лучший результат в прошлом, а для того, чтобы найти то, что будет работать дальше. А для этого нужны невиданные данные, реалистичные издержки и полное отсутствие заглядывания в будущее.</b></p>
-      </div>
-
-      <div class="section-break"><span>Часть 1: четыре способа, которыми backtest лжёт</span></div>
-
-      <div class="blog-callout">
-        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
-          Подробнее: почему результаты backtesting ничего не стоят (и что делать вместо этого) →
-        </a>
-      </div>
-      <!-- Prerequisites -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>&#128203; Что нужно знать заранее</h4>
-        <p>Этот урок опирается на понятия из:</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Урок 30: Volume Oracle</a> &mdash; Мастерство Signal Pilot</li>
-            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Урок 31: Построение портфеля</a> &mdash; Мастерство Signal Pilot</li>
-        </ul>
-        <p style="margin-top:0.75rem">&#9989; Если ты их прошёл, можно начинать. Если нет, сначала пройди базовые уроки.</p>
-      </div>
-
-<h2 id="why-your-perfect-strategy-will-fail-live">Почему ваша идеальная стратегия провалится в реале</h2>
-
-      <p>Начнём с неудобной правды: если вы оптимизировали стратегию так, чтобы она легла на исторические данные, вы нашли не преимущество. Вы нашли шум.</p>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">Проблема 1: переобучение</button>
-          <button>Проблема 2: заглядывание в будущее</button>
-          <button>Проблема 3: фантазии об исполнении</button>
-          <button>Проблема 4: ошибка выжившего</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="curve-fitting-to-random-noise">Подгонка кривой под случайный шум</h3>
-            <p><strong>Что это:</strong> Крутить параметры, пока backtest не станет выглядеть идеально</p>
-            <p><strong>Пример:</strong></p>
-            <ul>
-              <li>Вы перебираете 100 разных периодов EMA (10, 11, 12… 110)</li>
-              <li>EMA(47) даёт в backtest матожидание 4,2R</li>
-              <li>Вам кажется, что вы нашли «волшебное число»</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Реальность:</strong> EMA(47) просто случайно легла на этот конкретный набор данных. А в проверке вперёд? Матожидание -0,8R. Вы выучили шум, а не сигнал.</p>
-            <p><strong>Лучше:</strong> Ограничьте оптимизацию. Берите стандартные параметры. Проверяйте на невиданных данных.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="using-future-data-impossible-in-live-trading">Использовать данные из будущего (в реале это невозможно)</h3>
-            <p><strong>Что это:</strong> Код, который «подглядывает» в будущие свечи, чтобы решить сейчас</p>
-            <p><strong>Пример:</strong></p>
-            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # использует 5 БУДУЩИХ свечей
-    enter_long()</code></pre>
-            <p><strong>Проблема:</strong> В backtesting у вас есть данные из будущего. В реальной торговле — нет.</p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Реальность:</strong> Этот код в реале попросту не может исполниться. Ваш backtest проверяет стратегию, которой не существует.</p>
-            <p><strong>Лучше:</strong> Используйте только те данные, которые доступны в момент решения.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="assuming-perfect-fills-at-perfect-prices">Предполагать идеальные исполнения по идеальным ценам</h3>
-<p><strong>Допущение в backtest:</strong> «Я покупаю ровно по 100,00 $»</p>
-            <p><strong>Реальность:</strong> Рыночная заявка исполняется по 100,12 $ (спред + slippage)</p>
-            <p><strong>Влияние на 100 сделках:</strong></p>
-            <ul>
-              <li>Прибыль по backtest: 5 000 $</li>
-              <li>Издержки на спред (0,10 $ за сделку): -1 000 $</li>
-              <li>slippage (0,05 $ за сделку): -500 $</li>
-              <li>Комиссии (2 $ за сделку): -200 $</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Реальность:</strong> Настоящая прибыль = 3 300 $ (на 34 % меньше, чем в backtest)</p>
-          </div>
-          <div class="tab-panel"><h3 id="testing-only-on-survivors">Проверять только на выживших</h3>
-            <p><strong>Что это:</strong> Делать backtesting только по нынешнему составу S&P 500</p>
-            <p><strong>Проблема:</strong> Вы выбрасываете более 200 бумаг, которые были исключены из листинга или обанкротились</p>
-            <p><strong>Пример:</strong></p>
-            <ul>
-              <li>Backtest по списку S&P 500 на 2024 год: матожидание 1,8R, профит-фактор 2,1</li>
-              <li>Но за этот период вы были бы в лонге по Hertz (банкротство в 2020-м), по SVB Financial (крах в 2023-м) и по всем остальным именам, ушедшим в ноль.</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Реальность:</strong> Ваше матожидание не учитывает катастрофические убытки от исключений из листинга. Настоящее матожидание: -0,2R (убыточная система).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout-key">
-        <h4>💡 момент озарения</h4>
-        <p>Backtest — это не реальность. Это симуляция. И если в вашу симуляцию заложены невозможные допущения, ваши результаты в реале окажутся столь же невозможными.</p>
-      </div>
-
-      <div class="section-break"><span>Часть 2: моделирование реалистичных издержек</span></div>
-<h2 id="the-hidden-costs-that-kill-strategies">Скрытые издержки, которые убивают стратегии</h2>
-
-      <p>Вот что большинство backtest игнорирует — и почему ваш, скорее всего, на 20-40 % оптимистичнее правды:</p>
-
-      <div class="accordion">
-        <details class="accordion-item">
-          <summary class="accordion-header">Шаг 1: смоделировать спред между покупкой и продажей</summary>
-          <div class="accordion-content">
-            <p><strong>Что это:</strong> Разница между ценой покупки и ценой продажи</p>
-            <p><strong>Пример:</strong></p>
-            <ul>
-              <li>SPY покупка: 450,00 $ / продажа: 450,01 $ → спред = 0,01 $</li>
-              <li>Вы покупаете: платите 450,01 $ (половина спреда = 0,005 $)</li>
-              <li>Вы продаёте: получаете 450,00 $ (половина спреда = 0,005 $)</li>
-            </ul>
-            <p><strong>Издержки за круг:</strong> $0.01</p>
-            <p><strong>Для 1 000 бумаг:</strong> 0,01 $ × 1 000 = 10 $ за сделку</p>
-            <p><strong>100 сделок:</strong> 1 000 $ издержек на спред</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Шаг 2: смоделировать slippage</summary>
-          <div class="accordion-content">
-            <p><strong>Что это:</strong> Разница между желаемой ценой и фактическим исполнением</p>
-            <p><strong>Реалистичный slippage по условиям:</strong></p>
-            <ul>
-              <li><strong>Обычная ликвидность:</strong> 0.01-0.02%</li>
-              <li><strong>Волатильные рынки:</strong> 0.05-0.10%</li>
-              <li><strong>Тонкая ликвидность:</strong> 0.10-0.30%</li>
-              <li><strong>Крупный размер позиции:</strong> 0.20-0.50%</li>
-            </ul>
-            <p><strong>Консервативное допущение:</strong> 0,05 % на сделку</p>
-            <p>Позиция 10 000 $ × 0,05 % = 5 $ slippage с каждой стороны = 10 $ за круг</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Шаг 3: смоделировать комиссии</summary>
-          <div class="accordion-content">
-            <p><strong>Пример: Interactive Brokers</strong></p>
-            <ul>
-              <li>0,005 $ за бумагу, минимум 1 $</li>
-              <li>200 бумаг × 0,005 $ = 1 $ с каждой стороны</li>
-              <li>За круг = 2 $</li>
-            </ul>
-            <p><strong>100 сделок:</strong> 200 $ комиссий</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Шаг 4: итоговые реалистичные издержки</summary>
-          <div class="accordion-content">
-            <p><strong>На сделку (за круг):</strong></p>
-            <ul>
-              <li>Спред: 10 $</li>
-              <li>slippage: 10 $</li>
-              <li>Комиссия: 2 $</li>
-            </ul>
-            <p><strong>Итого: 22 $ за сделку</strong></p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Если ваша стратегия приносит 50 $ валовой прибыли за сделку → 28 $ чистыми (на 44 % меньше!)</p>
-          </div>
-        </details>
-      </div>
-<h3 id="backtest-adjustment-example">Пример пересчёта backtest</h3>
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
-        <h4>До и после реалистичных издержек</h4>
-        <p><strong>Стратегия: 100 сделок, в среднем 50 $ прибыли на сделку</strong></p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Backtest (фантазия):</strong></p>
-        <p>100 сделок × 50 $ = 5 000 $ прибыли</p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>После реалистичных издержек:</strong></p>
-        <ul>
-          <li>Валовая: 5 000 $</li>
-          <li>Спред: -1 000 $</li>
-          <li>slippage: -1 000 $</li>
-          <li>Комиссии: -200 $</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Чистая прибыль: 2 800 $ (на 44 % меньше)</p>
       </div>
 
       <div class="section-break"><span>Часть 3: in-sample против out-of-sample</span></div>

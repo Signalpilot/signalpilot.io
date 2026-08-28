@@ -194,6 +194,172 @@
         <li>イン・サンプルとアウト・オブ・サンプル（意味のある検証はこれだけ）</li>
       </ul>
 
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; 前提知識</h4>
+        <p>このレッスンは次の内容を土台にしています：</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">レッスン30：Volume Oracle</a> &mdash; Signal Pilot の習熟</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">レッスン31：ポートフォリオ構築</a> &mdash; Signal Pilot の習熟</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; これらを終えていれば準備は整っています。まだなら、まず基礎のレッスンから始めてください。</p>
+      </div>
+
+      <div class="section-break"><span>パート1：backtestが嘘をつく4つの手口</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          さらに深く：backtestingの結果はなぜ無価値なのか（そして代わりに何をすべきか） →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">あなたの完璧な戦略が実弾で崩れる理由</h2>
+
+      <p>居心地の悪い真実から始めよう。過去のデータに合うように戦略を最適化したのなら、あなたが見つけたのは優位ではない。ノイズだ。</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">問題1：過剰適合</button>
+          <button>問題2：先読みバイアス</button>
+          <button>問題3：執行についての空想</button>
+          <button>問題4：生存者バイアス</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">ランダムなノイズに曲線を合わせ込む</h3>
+            <p><strong>どんな手口か：</strong> backtestが完璧に見えるまでパラメータをいじり続ける</p>
+            <p><strong>例：</strong></p>
+            <ul>
+              <li>EMAの期間を100通り試す（10、11、12……110）</li>
+              <li>EMA(47)がbacktestで4.2Rの期待値を出す</li>
+              <li>「魔法の数字」を見つけたと思い込む</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>実際：</strong> EMA(47)はたまたまその特定のデータに合っただけだ。前向きに検証すると？期待値-0.8R。あなたが学んだのはノイズであって、シグナルではない。</p>
+            <p><strong>改善策：</strong> 最適化を抑える。標準的なパラメータを使う。見たことのないデータで試す。</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">未来のデータを使う（実弾では不可能）</h3>
+            <p><strong>どんな手口か：</strong> いまの判断のために未来の足を「のぞき見る」コード</p>
+            <p><strong>例：</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # 未来の5本を使っている
+    enter_long()</code></pre>
+            <p><strong>問題点：</strong> backtestingでは未来のデータが手元にある。実弾ではない。</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>実際：</strong> このコードは実弾ではそもそも動かない。あなたのbacktestは、存在しない戦略を検証している。</p>
+            <p><strong>改善策：</strong> 判断した時点で手に入るデータだけを使うこと。</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">完璧な価格での完璧な約定を前提にする</h3>
+<p><strong>backtestの前提：</strong> 「100.00ドルちょうどで買う」</p>
+            <p><strong>実際：</strong> 成行注文は100.12ドルで約定する（スプレッド＋slippage）</p>
+            <p><strong>100トレードでの影響：</strong></p>
+            <ul>
+              <li>backtestの利益：5,000ドル</li>
+              <li>スプレッドのコスト（1トレード0.10ドル）：-1,000ドル</li>
+              <li>slippage（1トレード0.05ドル）：-500ドル</li>
+              <li>手数料（1トレード2ドル）：-200ドル</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>実際：</strong> 本当の利益 ＝ 3,300ドル（backtestより34％少ない）</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">生き残ったものだけで検証する</h3>
+            <p><strong>どんな手口か：</strong> いまのS&P 500構成銘柄だけでbacktestingをする</p>
+            <p><strong>問題点：</strong> 上場廃止や破綻で消えた200を超える銘柄を除外している</p>
+            <p><strong>例：</strong></p>
+            <ul>
+              <li>2024年のS&P 500リストでbacktest：期待値1.8R、プロフィットファクター2.1</li>
+              <li>だがその期間を通じて、あなたはHertz（2020年に破綻）やSVB Financial（2023年に破綻）をはじめ、ゼロになったあらゆる銘柄を買っていたはずだ。</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>実際：</strong> あなたの期待値は、上場廃止による壊滅的な損失を除外している。本当の期待値は-0.2R（負けるシステム）。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 腑に落ちる瞬間</h4>
+        <p>backtestは現実ではない。シミュレーションだ。そしてシミュレーションにあり得ない前提が入っていれば、実弾の結果も同じくらいあり得ないものになる。</p>
+      </div>
+
+      <div class="section-break"><span>パート2：現実的なコストを見積もる</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">戦略を殺す隠れたコスト</h2>
+
+      <p>大半のbacktestが無視しているのがこれだ。だからあなたのbacktestも、おそらく20〜40％は楽観的すぎる。</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">手順1：ビッド・アスクのスプレッドを見積もる</summary>
+          <div class="accordion-content">
+            <p><strong>どんな手口か：</strong> 買値と売値の差</p>
+            <p><strong>例：</strong></p>
+            <ul>
+              <li>SPYのビッド：450.00ドル／アスク：450.01ドル → スプレッド ＝ 0.01ドル</li>
+              <li>買うとき：450.01ドルを払う（スプレッドの半分＝0.005ドル）</li>
+              <li>売るとき：450.00ドルを受け取る（スプレッドの半分＝0.005ドル）</li>
+            </ul>
+            <p><strong>往復あたりのコスト：</strong> $0.01</p>
+            <p><strong>1,000株なら：</strong> 0.01ドル × 1,000 ＝ 1トレードあたり10ドル</p>
+            <p><strong>100トレード：</strong> スプレッドコスト1,000ドル</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">手順2：slippageを見積もる</summary>
+          <div class="accordion-content">
+            <p><strong>どんな手口か：</strong> 狙った価格と実際の約定価格の差</p>
+            <p><strong>状況別の現実的なslippage：</strong></p>
+            <ul>
+              <li><strong>通常の流動性：</strong> 0.01-0.02%</li>
+              <li><strong>荒れた相場：</strong> 0.05-0.10%</li>
+              <li><strong>流動性が薄い：</strong> 0.10-0.30%</li>
+              <li><strong>建玉が大きい：</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>保守的な前提：</strong> 1トレードあたり0.05％</p>
+            <p>1万ドルの建玉 × 0.05％ ＝ 片道5ドルのslippage ＝ 往復10ドル</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">手順3：手数料を見積もる</summary>
+          <div class="accordion-content">
+            <p><strong>例：Interactive Brokers</strong></p>
+            <ul>
+              <li>1株あたり0.005ドル、最低1ドル</li>
+              <li>200株 × 0.005ドル ＝ 片道1ドル</li>
+              <li>往復 ＝ 2ドル</li>
+            </ul>
+            <p><strong>100トレード：</strong> 手数料200ドル</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">手順4：現実的なコストの合計</summary>
+          <div class="accordion-content">
+            <p><strong>1トレードあたり（往復）：</strong></p>
+            <ul>
+              <li>スプレッド：10ドル</li>
+              <li>slippage：10ドル</li>
+              <li>手数料：2ドル</li>
+            </ul>
+            <p><strong>合計：1トレードあたり22ドル</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">あなたの戦略が1トレードあたり50ドルの粗利を生むなら → 手取り28ドル（44％減）</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">backtestを補正する例</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>現実的なコストの前と後</h4>
+        <p><strong>戦略：100トレード、1トレードあたり平均50ドルの利益</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>backtest（空想）：</strong></p>
+        <p>100トレード × 50ドル ＝ 5,000ドルの利益</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>現実的なコストを引いた後：</strong></p>
+        <ul>
+          <li>粗利：5,000ドル</li>
+          <li>スプレッド：-1,000ドル</li>
+          <li>slippage：-1,000ドル</li>
+          <li>手数料：-200ドル</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">純利益：2,800ドル（44％減）</p>
+      </div>
+
 <div class="example-block">
         <h4>合成事例：期待値1.3Rの「完璧な」backtest が、実弾で-0.45Rになるまで</h4>
 
@@ -463,172 +629,6 @@
         </div>
 
         <p><b>教訓：クリスのbacktestは空想だった。15,000通りのパラメータを試せば、過去のノイズにぴたりと沿うものが必ず見つかる。あの「完璧な」1.3Rという期待値は、曲線に合わせ込んだだけのゴミだった。アウト・オブ・サンプル検証をしていれば、8,400ドルを失う前に分かっていた。backtestingとは過去の最高成績を探すことではなく、これから通用するものを探すことだ。そのためには、見たことのないデータ、現実的なコスト、そして先読みバイアスゼロが要る。</b></p>
-      </div>
-
-      <div class="section-break"><span>パート1：backtestが嘘をつく4つの手口</span></div>
-
-      <div class="blog-callout">
-        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
-          さらに深く：backtestingの結果はなぜ無価値なのか（そして代わりに何をすべきか） →
-        </a>
-      </div>
-      <!-- Prerequisites -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>&#128203; 前提知識</h4>
-        <p>このレッスンは次の内容を土台にしています：</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">レッスン30：Volume Oracle</a> &mdash; Signal Pilot の習熟</li>
-            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">レッスン31：ポートフォリオ構築</a> &mdash; Signal Pilot の習熟</li>
-        </ul>
-        <p style="margin-top:0.75rem">&#9989; これらを終えていれば準備は整っています。まだなら、まず基礎のレッスンから始めてください。</p>
-      </div>
-
-<h2 id="why-your-perfect-strategy-will-fail-live">あなたの完璧な戦略が実弾で崩れる理由</h2>
-
-      <p>居心地の悪い真実から始めよう。過去のデータに合うように戦略を最適化したのなら、あなたが見つけたのは優位ではない。ノイズだ。</p>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">問題1：過剰適合</button>
-          <button>問題2：先読みバイアス</button>
-          <button>問題3：執行についての空想</button>
-          <button>問題4：生存者バイアス</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="curve-fitting-to-random-noise">ランダムなノイズに曲線を合わせ込む</h3>
-            <p><strong>どんな手口か：</strong> backtestが完璧に見えるまでパラメータをいじり続ける</p>
-            <p><strong>例：</strong></p>
-            <ul>
-              <li>EMAの期間を100通り試す（10、11、12……110）</li>
-              <li>EMA(47)がbacktestで4.2Rの期待値を出す</li>
-              <li>「魔法の数字」を見つけたと思い込む</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>実際：</strong> EMA(47)はたまたまその特定のデータに合っただけだ。前向きに検証すると？期待値-0.8R。あなたが学んだのはノイズであって、シグナルではない。</p>
-            <p><strong>改善策：</strong> 最適化を抑える。標準的なパラメータを使う。見たことのないデータで試す。</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="using-future-data-impossible-in-live-trading">未来のデータを使う（実弾では不可能）</h3>
-            <p><strong>どんな手口か：</strong> いまの判断のために未来の足を「のぞき見る」コード</p>
-            <p><strong>例：</strong></p>
-            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # 未来の5本を使っている
-    enter_long()</code></pre>
-            <p><strong>問題点：</strong> backtestingでは未来のデータが手元にある。実弾ではない。</p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>実際：</strong> このコードは実弾ではそもそも動かない。あなたのbacktestは、存在しない戦略を検証している。</p>
-            <p><strong>改善策：</strong> 判断した時点で手に入るデータだけを使うこと。</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="assuming-perfect-fills-at-perfect-prices">完璧な価格での完璧な約定を前提にする</h3>
-<p><strong>backtestの前提：</strong> 「100.00ドルちょうどで買う」</p>
-            <p><strong>実際：</strong> 成行注文は100.12ドルで約定する（スプレッド＋slippage）</p>
-            <p><strong>100トレードでの影響：</strong></p>
-            <ul>
-              <li>backtestの利益：5,000ドル</li>
-              <li>スプレッドのコスト（1トレード0.10ドル）：-1,000ドル</li>
-              <li>slippage（1トレード0.05ドル）：-500ドル</li>
-              <li>手数料（1トレード2ドル）：-200ドル</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>実際：</strong> 本当の利益 ＝ 3,300ドル（backtestより34％少ない）</p>
-          </div>
-          <div class="tab-panel"><h3 id="testing-only-on-survivors">生き残ったものだけで検証する</h3>
-            <p><strong>どんな手口か：</strong> いまのS&P 500構成銘柄だけでbacktestingをする</p>
-            <p><strong>問題点：</strong> 上場廃止や破綻で消えた200を超える銘柄を除外している</p>
-            <p><strong>例：</strong></p>
-            <ul>
-              <li>2024年のS&P 500リストでbacktest：期待値1.8R、プロフィットファクター2.1</li>
-              <li>だがその期間を通じて、あなたはHertz（2020年に破綻）やSVB Financial（2023年に破綻）をはじめ、ゼロになったあらゆる銘柄を買っていたはずだ。</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>実際：</strong> あなたの期待値は、上場廃止による壊滅的な損失を除外している。本当の期待値は-0.2R（負けるシステム）。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout-key">
-        <h4>💡 腑に落ちる瞬間</h4>
-        <p>backtestは現実ではない。シミュレーションだ。そしてシミュレーションにあり得ない前提が入っていれば、実弾の結果も同じくらいあり得ないものになる。</p>
-      </div>
-
-      <div class="section-break"><span>パート2：現実的なコストを見積もる</span></div>
-<h2 id="the-hidden-costs-that-kill-strategies">戦略を殺す隠れたコスト</h2>
-
-      <p>大半のbacktestが無視しているのがこれだ。だからあなたのbacktestも、おそらく20〜40％は楽観的すぎる。</p>
-
-      <div class="accordion">
-        <details class="accordion-item">
-          <summary class="accordion-header">手順1：ビッド・アスクのスプレッドを見積もる</summary>
-          <div class="accordion-content">
-            <p><strong>どんな手口か：</strong> 買値と売値の差</p>
-            <p><strong>例：</strong></p>
-            <ul>
-              <li>SPYのビッド：450.00ドル／アスク：450.01ドル → スプレッド ＝ 0.01ドル</li>
-              <li>買うとき：450.01ドルを払う（スプレッドの半分＝0.005ドル）</li>
-              <li>売るとき：450.00ドルを受け取る（スプレッドの半分＝0.005ドル）</li>
-            </ul>
-            <p><strong>往復あたりのコスト：</strong> $0.01</p>
-            <p><strong>1,000株なら：</strong> 0.01ドル × 1,000 ＝ 1トレードあたり10ドル</p>
-            <p><strong>100トレード：</strong> スプレッドコスト1,000ドル</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">手順2：slippageを見積もる</summary>
-          <div class="accordion-content">
-            <p><strong>どんな手口か：</strong> 狙った価格と実際の約定価格の差</p>
-            <p><strong>状況別の現実的なslippage：</strong></p>
-            <ul>
-              <li><strong>通常の流動性：</strong> 0.01-0.02%</li>
-              <li><strong>荒れた相場：</strong> 0.05-0.10%</li>
-              <li><strong>流動性が薄い：</strong> 0.10-0.30%</li>
-              <li><strong>建玉が大きい：</strong> 0.20-0.50%</li>
-            </ul>
-            <p><strong>保守的な前提：</strong> 1トレードあたり0.05％</p>
-            <p>1万ドルの建玉 × 0.05％ ＝ 片道5ドルのslippage ＝ 往復10ドル</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">手順3：手数料を見積もる</summary>
-          <div class="accordion-content">
-            <p><strong>例：Interactive Brokers</strong></p>
-            <ul>
-              <li>1株あたり0.005ドル、最低1ドル</li>
-              <li>200株 × 0.005ドル ＝ 片道1ドル</li>
-              <li>往復 ＝ 2ドル</li>
-            </ul>
-            <p><strong>100トレード：</strong> 手数料200ドル</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">手順4：現実的なコストの合計</summary>
-          <div class="accordion-content">
-            <p><strong>1トレードあたり（往復）：</strong></p>
-            <ul>
-              <li>スプレッド：10ドル</li>
-              <li>slippage：10ドル</li>
-              <li>手数料：2ドル</li>
-            </ul>
-            <p><strong>合計：1トレードあたり22ドル</strong></p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">あなたの戦略が1トレードあたり50ドルの粗利を生むなら → 手取り28ドル（44％減）</p>
-          </div>
-        </details>
-      </div>
-<h3 id="backtest-adjustment-example">backtestを補正する例</h3>
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
-        <h4>現実的なコストの前と後</h4>
-        <p><strong>戦略：100トレード、1トレードあたり平均50ドルの利益</strong></p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>backtest（空想）：</strong></p>
-        <p>100トレード × 50ドル ＝ 5,000ドルの利益</p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>現実的なコストを引いた後：</strong></p>
-        <ul>
-          <li>粗利：5,000ドル</li>
-          <li>スプレッド：-1,000ドル</li>
-          <li>slippage：-1,000ドル</li>
-          <li>手数料：-200ドル</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">純利益：2,800ドル（44％減）</p>
       </div>
 
       <div class="section-break"><span>パート3：イン・サンプルとアウト・オブ・サンプル</span></div>

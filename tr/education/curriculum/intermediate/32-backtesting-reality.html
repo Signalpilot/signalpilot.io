@@ -194,6 +194,172 @@
         <li>Örneklem içi ile örneklem dışı (önemi olan tek doğrulama)</li>
       </ul>
 
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Ön koşullar</h4>
+        <p>Bu ders şu derslerdeki kavramların üzerine kurulu:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Ders 30: Volume Oracle</a> &mdash; Signal Pilot ustalığı</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Ders 31: Portföy kurulumu</a> &mdash; Signal Pilot ustalığı</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Bunları tamamladıysan hazırsın. Tamamlamadıysan önce temel derslerle başla.</p>
+      </div>
+
+      <div class="section-break"><span>Bölüm 1: backtest'lerin yalan söylediği dört yol</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          Derinlemesine: backtesting sonuçları neden hiçbir işe yaramaz (ve onun yerine ne yapmalı) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">Kusursuz stratejin canlıda neden çökecek</h2>
+
+      <p>Rahatsız edici gerçekten başlayalım: bir stratejiyi tarihsel veriye uysun diye optimize ettiysen, bir üstünlük bulmadın. Gürültü buldun.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">Sorun 1: aşırı uyum</button>
+          <button>Sorun 2: ileriye bakma yanlılığı</button>
+          <button>Sorun 3: uygulama hayali</button>
+          <button>Sorun 4: hayatta kalan yanlılığı</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">Eğriyi rastgele gürültüye uydurmak</h3>
+            <p><strong>Nedir:</strong> backtest kusursuz görünene kadar parametreleri optimize etmek</p>
+            <p><strong>Örnek:</strong></p>
+            <ul>
+              <li>100 farklı EMA periyodu deniyorsun (10, 11, 12… 110)</li>
+              <li>EMA(47), backtest'te 4,2R beklenti veriyor</li>
+              <li>«Sihirli sayıyı» bulduğunu sanıyorsun</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> EMA(47) yalnızca o veri kümesine tesadüfen oturmuştu. İleriye dönük sınamada? -0,8R beklenti. Sinyali değil, gürültüyü öğrendin.</p>
+            <p><strong>Daha iyisi:</strong> Optimizasyonu sınırla. Standart parametreler kullan. Görülmemiş veride sına.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">Geleceğin verisini kullanmak (canlıda imkânsız)</h3>
+            <p><strong>Nedir:</strong> Bugünkü kararı vermek için gelecekteki mumlara «göz atan» kod</p>
+            <p><strong>Örnek:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # GELECEKTEKİ 5 mumu kullanıyor
+    enter_long()</code></pre>
+            <p><strong>Sorun:</strong> backtesting'de geleceğin verisi elinde olur. Canlı işlemde olmaz.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Bu kod canlıda düpedüz çalışamaz. backtest'in, var olmayan bir stratejiyi sınıyor.</p>
+            <p><strong>Daha iyisi:</strong> Yalnızca karar anında elinde olan veriyi kullan.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">Kusursuz fiyatlardan kusursuz gerçekleşme varsaymak</h3>
+<p><strong>backtest'in varsayımı:</strong> «Tam 100,00 $'dan alıyorum»</p>
+            <p><strong>Gerçek:</strong> Piyasa emri 100,12 $'dan gerçekleşiyor (spread + slippage)</p>
+            <p><strong>100 işlemdeki etkisi:</strong></p>
+            <ul>
+              <li>backtest kârı: 5.000 $</li>
+              <li>Spread maliyeti (işlem başına 0,10 $): -1.000 $</li>
+              <li>slippage (işlem başına 0,05 $): -500 $</li>
+              <li>Komisyonlar (işlem başına 2 $): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Gerçek kâr = 3.300 $ (backtest'ten %34 az)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">Yalnızca hayatta kalanlarda sınamak</h3>
+            <p><strong>Nedir:</strong> backtesting'i yalnızca bugünkü S&P 500 hisseleriyle yapmak</p>
+            <p><strong>Sorun:</strong> Kottan çıkmış ya da batmış 200'ü aşkın hisseyi dışarıda bırakıyorsun</p>
+            <p><strong>Örnek:</strong></p>
+            <ul>
+              <li>2024 S&P 500 listesiyle backtest: 1,8R beklenti, 2,1 kâr faktörü</li>
+              <li>Ama o dönem boyunca Hertz'te (2020'de battı), SVB Financial'da (2023'te çöktü) ve sıfıra giden diğer bütün isimlerde uzun pozisyonda olurdun.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Beklentin, kottan çıkmaların yol açtığı yıkıcı kayıpları dışarıda bırakıyor. Gerçek beklenti: -0,2R (kaybettiren bir sistem).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 jeton düşme anı</h4>
+        <p>backtest gerçeklik değildir. Bir benzetimdir. Ve benzetimin imkânsız varsayımlar içeriyorsa, canlı sonuçların da aynı ölçüde imkânsız olur.</p>
+      </div>
+
+      <div class="section-break"><span>Bölüm 2: gerçekçi maliyetleri modellemek</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">Stratejileri öldüren gizli maliyetler</h2>
+
+      <p>backtest'lerin çoğunun yok saydığı şey bu — ve seninki de bu yüzden muhtemelen %20-40 fazla iyimser:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">Adım 1: alış-satış farkını modelle</summary>
+          <div class="accordion-content">
+            <p><strong>Nedir:</strong> Alış fiyatı ile satış fiyatı arasındaki fark</p>
+            <p><strong>Örnek:</strong></p>
+            <ul>
+              <li>SPY alış: 450,00 $ / satış: 450,01 $ → spread = 0,01 $</li>
+              <li>Alıyorsun: 450,01 $ ödüyorsun (farkın yarısı = 0,005 $)</li>
+              <li>Satıyorsun: 450,00 $ alıyorsun (farkın yarısı = 0,005 $)</li>
+            </ul>
+            <p><strong>Gidiş dönüş başına maliyet:</strong> $0.01</p>
+            <p><strong>1.000 hisse için:</strong> 0,01 $ × 1.000 = işlem başına 10 $</p>
+            <p><strong>100 işlem:</strong> 1.000 $ spread maliyeti</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Adım 2: slippage'ı modelle</summary>
+          <div class="accordion-content">
+            <p><strong>Nedir:</strong> Hedeflenen fiyat ile gerçek gerçekleşme arasındaki fark</p>
+            <p><strong>Koşullara göre gerçekçi slippage:</strong></p>
+            <ul>
+              <li><strong>Normal likidite:</strong> 0.01-0.02%</li>
+              <li><strong>Oynak piyasalar:</strong> 0.05-0.10%</li>
+              <li><strong>İnce likidite:</strong> 0.10-0.30%</li>
+              <li><strong>Büyük pozisyon:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>Temkinli varsayım:</strong> İşlem başına %0,05</p>
+            <p>10.000 $'lık pozisyon × %0,05 = yön başına 5 $ slippage = gidiş dönüş 10 $</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Adım 3: komisyonları modelle</summary>
+          <div class="accordion-content">
+            <p><strong>Örnek: Interactive Brokers</strong></p>
+            <ul>
+              <li>Hisse başına 0,005 $, en az 1 $</li>
+              <li>200 hisse × 0,005 $ = yön başına 1 $</li>
+              <li>Gidiş dönüş = 2 $</li>
+            </ul>
+            <p><strong>100 işlem:</strong> 200 $ komisyon</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Adım 4: toplam gerçekçi maliyet</summary>
+          <div class="accordion-content">
+            <p><strong>İşlem başına (gidiş dönüş):</strong></p>
+            <ul>
+              <li>Spread: 10 $</li>
+              <li>slippage: 10 $</li>
+              <li>Komisyon: 2 $</li>
+            </ul>
+            <p><strong>Toplam: işlem başına 22 $</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Stratejin işlem başına 50 $ brüt kazandırıyorsa → net 28 $ (%44 azalma!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">backtest'i düzeltme örneği</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>Gerçekçi maliyetlerden önce ve sonra</h4>
+        <p><strong>Strateji: 100 işlem, işlem başına ortalama 50 $ kâr</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>backtest (hayal):</strong></p>
+        <p>100 işlem × 50 $ = 5.000 $ kâr</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Gerçekçi maliyetlerden sonra:</strong></p>
+        <ul>
+          <li>Brüt: 5.000 $</li>
+          <li>Spread: -1.000 $</li>
+          <li>slippage: -1.000 $</li>
+          <li>Komisyonlar: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Net kâr: 2.800 $ (%44 azalma)</p>
+      </div>
+
 <div class="example-block">
         <h4>Bileşik örnek: 1,3R beklentili «kusursuz» bir backtest'in canlıda -0,45R'ye dönüşmesi</h4>
 
@@ -463,172 +629,6 @@
         </div>
 
         <p><b>Ders: Chris'in backtest'i bir hayaldi. 15.000 parametre bileşimi denersen, tarihsel gürültüye kusursuzca oturan birini bulman garantidir. O «kusursuz» 1,3R beklenti, eğriye uydurulmuş çöptü. Örneklem dışı bir sınama, 8.400 $ kaybedilmeden önce bunu ortaya çıkarırdı. backtesting, geçmişin en iyi performansını bulmak değil, bundan sonra tutacak olanı bulmaktır. Bunun için de görülmemiş veri, gerçekçi maliyetler ve sıfır ileriye bakma yanlılığı gerekir.</b></p>
-      </div>
-
-      <div class="section-break"><span>Bölüm 1: backtest'lerin yalan söylediği dört yol</span></div>
-
-      <div class="blog-callout">
-        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
-          Derinlemesine: backtesting sonuçları neden hiçbir işe yaramaz (ve onun yerine ne yapmalı) →
-        </a>
-      </div>
-      <!-- Prerequisites -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>&#128203; Ön koşullar</h4>
-        <p>Bu ders şu derslerdeki kavramların üzerine kurulu:</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Ders 30: Volume Oracle</a> &mdash; Signal Pilot ustalığı</li>
-            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Ders 31: Portföy kurulumu</a> &mdash; Signal Pilot ustalığı</li>
-        </ul>
-        <p style="margin-top:0.75rem">&#9989; Bunları tamamladıysan hazırsın. Tamamlamadıysan önce temel derslerle başla.</p>
-      </div>
-
-<h2 id="why-your-perfect-strategy-will-fail-live">Kusursuz stratejin canlıda neden çökecek</h2>
-
-      <p>Rahatsız edici gerçekten başlayalım: bir stratejiyi tarihsel veriye uysun diye optimize ettiysen, bir üstünlük bulmadın. Gürültü buldun.</p>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">Sorun 1: aşırı uyum</button>
-          <button>Sorun 2: ileriye bakma yanlılığı</button>
-          <button>Sorun 3: uygulama hayali</button>
-          <button>Sorun 4: hayatta kalan yanlılığı</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="curve-fitting-to-random-noise">Eğriyi rastgele gürültüye uydurmak</h3>
-            <p><strong>Nedir:</strong> backtest kusursuz görünene kadar parametreleri optimize etmek</p>
-            <p><strong>Örnek:</strong></p>
-            <ul>
-              <li>100 farklı EMA periyodu deniyorsun (10, 11, 12… 110)</li>
-              <li>EMA(47), backtest'te 4,2R beklenti veriyor</li>
-              <li>«Sihirli sayıyı» bulduğunu sanıyorsun</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> EMA(47) yalnızca o veri kümesine tesadüfen oturmuştu. İleriye dönük sınamada? -0,8R beklenti. Sinyali değil, gürültüyü öğrendin.</p>
-            <p><strong>Daha iyisi:</strong> Optimizasyonu sınırla. Standart parametreler kullan. Görülmemiş veride sına.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="using-future-data-impossible-in-live-trading">Geleceğin verisini kullanmak (canlıda imkânsız)</h3>
-            <p><strong>Nedir:</strong> Bugünkü kararı vermek için gelecekteki mumlara «göz atan» kod</p>
-            <p><strong>Örnek:</strong></p>
-            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # GELECEKTEKİ 5 mumu kullanıyor
-    enter_long()</code></pre>
-            <p><strong>Sorun:</strong> backtesting'de geleceğin verisi elinde olur. Canlı işlemde olmaz.</p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Bu kod canlıda düpedüz çalışamaz. backtest'in, var olmayan bir stratejiyi sınıyor.</p>
-            <p><strong>Daha iyisi:</strong> Yalnızca karar anında elinde olan veriyi kullan.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="assuming-perfect-fills-at-perfect-prices">Kusursuz fiyatlardan kusursuz gerçekleşme varsaymak</h3>
-<p><strong>backtest'in varsayımı:</strong> «Tam 100,00 $'dan alıyorum»</p>
-            <p><strong>Gerçek:</strong> Piyasa emri 100,12 $'dan gerçekleşiyor (spread + slippage)</p>
-            <p><strong>100 işlemdeki etkisi:</strong></p>
-            <ul>
-              <li>backtest kârı: 5.000 $</li>
-              <li>Spread maliyeti (işlem başına 0,10 $): -1.000 $</li>
-              <li>slippage (işlem başına 0,05 $): -500 $</li>
-              <li>Komisyonlar (işlem başına 2 $): -200 $</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Gerçek kâr = 3.300 $ (backtest'ten %34 az)</p>
-          </div>
-          <div class="tab-panel"><h3 id="testing-only-on-survivors">Yalnızca hayatta kalanlarda sınamak</h3>
-            <p><strong>Nedir:</strong> backtesting'i yalnızca bugünkü S&P 500 hisseleriyle yapmak</p>
-            <p><strong>Sorun:</strong> Kottan çıkmış ya da batmış 200'ü aşkın hisseyi dışarıda bırakıyorsun</p>
-            <p><strong>Örnek:</strong></p>
-            <ul>
-              <li>2024 S&P 500 listesiyle backtest: 1,8R beklenti, 2,1 kâr faktörü</li>
-              <li>Ama o dönem boyunca Hertz'te (2020'de battı), SVB Financial'da (2023'te çöktü) ve sıfıra giden diğer bütün isimlerde uzun pozisyonda olurdun.</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Beklentin, kottan çıkmaların yol açtığı yıkıcı kayıpları dışarıda bırakıyor. Gerçek beklenti: -0,2R (kaybettiren bir sistem).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout-key">
-        <h4>💡 jeton düşme anı</h4>
-        <p>backtest gerçeklik değildir. Bir benzetimdir. Ve benzetimin imkânsız varsayımlar içeriyorsa, canlı sonuçların da aynı ölçüde imkânsız olur.</p>
-      </div>
-
-      <div class="section-break"><span>Bölüm 2: gerçekçi maliyetleri modellemek</span></div>
-<h2 id="the-hidden-costs-that-kill-strategies">Stratejileri öldüren gizli maliyetler</h2>
-
-      <p>backtest'lerin çoğunun yok saydığı şey bu — ve seninki de bu yüzden muhtemelen %20-40 fazla iyimser:</p>
-
-      <div class="accordion">
-        <details class="accordion-item">
-          <summary class="accordion-header">Adım 1: alış-satış farkını modelle</summary>
-          <div class="accordion-content">
-            <p><strong>Nedir:</strong> Alış fiyatı ile satış fiyatı arasındaki fark</p>
-            <p><strong>Örnek:</strong></p>
-            <ul>
-              <li>SPY alış: 450,00 $ / satış: 450,01 $ → spread = 0,01 $</li>
-              <li>Alıyorsun: 450,01 $ ödüyorsun (farkın yarısı = 0,005 $)</li>
-              <li>Satıyorsun: 450,00 $ alıyorsun (farkın yarısı = 0,005 $)</li>
-            </ul>
-            <p><strong>Gidiş dönüş başına maliyet:</strong> $0.01</p>
-            <p><strong>1.000 hisse için:</strong> 0,01 $ × 1.000 = işlem başına 10 $</p>
-            <p><strong>100 işlem:</strong> 1.000 $ spread maliyeti</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Adım 2: slippage'ı modelle</summary>
-          <div class="accordion-content">
-            <p><strong>Nedir:</strong> Hedeflenen fiyat ile gerçek gerçekleşme arasındaki fark</p>
-            <p><strong>Koşullara göre gerçekçi slippage:</strong></p>
-            <ul>
-              <li><strong>Normal likidite:</strong> 0.01-0.02%</li>
-              <li><strong>Oynak piyasalar:</strong> 0.05-0.10%</li>
-              <li><strong>İnce likidite:</strong> 0.10-0.30%</li>
-              <li><strong>Büyük pozisyon:</strong> 0.20-0.50%</li>
-            </ul>
-            <p><strong>Temkinli varsayım:</strong> İşlem başına %0,05</p>
-            <p>10.000 $'lık pozisyon × %0,05 = yön başına 5 $ slippage = gidiş dönüş 10 $</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Adım 3: komisyonları modelle</summary>
-          <div class="accordion-content">
-            <p><strong>Örnek: Interactive Brokers</strong></p>
-            <ul>
-              <li>Hisse başına 0,005 $, en az 1 $</li>
-              <li>200 hisse × 0,005 $ = yön başına 1 $</li>
-              <li>Gidiş dönüş = 2 $</li>
-            </ul>
-            <p><strong>100 işlem:</strong> 200 $ komisyon</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Adım 4: toplam gerçekçi maliyet</summary>
-          <div class="accordion-content">
-            <p><strong>İşlem başına (gidiş dönüş):</strong></p>
-            <ul>
-              <li>Spread: 10 $</li>
-              <li>slippage: 10 $</li>
-              <li>Komisyon: 2 $</li>
-            </ul>
-            <p><strong>Toplam: işlem başına 22 $</strong></p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Stratejin işlem başına 50 $ brüt kazandırıyorsa → net 28 $ (%44 azalma!)</p>
-          </div>
-        </details>
-      </div>
-<h3 id="backtest-adjustment-example">backtest'i düzeltme örneği</h3>
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
-        <h4>Gerçekçi maliyetlerden önce ve sonra</h4>
-        <p><strong>Strateji: 100 işlem, işlem başına ortalama 50 $ kâr</strong></p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>backtest (hayal):</strong></p>
-        <p>100 işlem × 50 $ = 5.000 $ kâr</p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Gerçekçi maliyetlerden sonra:</strong></p>
-        <ul>
-          <li>Brüt: 5.000 $</li>
-          <li>Spread: -1.000 $</li>
-          <li>slippage: -1.000 $</li>
-          <li>Komisyonlar: -200 $</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Net kâr: 2.800 $ (%44 azalma)</p>
       </div>
 
       <div class="section-break"><span>Bölüm 3: örneklem içi ile örneklem dışı</span></div>

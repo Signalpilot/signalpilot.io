@@ -194,6 +194,172 @@
         <li>In-sample tegenover out-of-sample (de enige validatie die telt)</li>
       </ul>
 
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Vereisten</h4>
+        <p>Deze les bouwt voort op begrippen uit:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Les 30: Volume Oracle</a> &mdash; Signal Pilot beheersen</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Les 31: Portefeuilleconstructie</a> &mdash; Signal Pilot beheersen</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Heb je die afgerond, dan ben je klaar om te beginnen. Zo niet, start dan eerst met de basislessen.</p>
+      </div>
+
+      <div class="section-break"><span>Deel 1: de vier manieren waarop backtests liegen</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          Verder lezen: waarom backtesting-resultaten waardeloos zijn (en wat je in plaats daarvan doet) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">Waarom je perfecte strategie live gaat sneuvelen</h2>
+
+      <p>Laten we met de ongemakkelijke waarheid beginnen: als je een strategie hebt geoptimaliseerd om op historische data te passen, heb je geen voordeel gevonden. Je hebt ruis gevonden.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">Probleem 1: overfitting</button>
+          <button>Probleem 2: vooruitkijkbias</button>
+          <button>Probleem 3: uitvoeringsfantasie</button>
+          <button>Probleem 4: overlevingsbias</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">De curve op willekeurige ruis passen</h3>
+            <p><strong>Wat het is:</strong> Parameters optimaliseren tot de backtest er perfect uitziet</p>
+            <p><strong>Voorbeeld:</strong></p>
+            <ul>
+              <li>Je test 100 verschillende EMA-perioden (10, 11, 12… 110)</li>
+              <li>EMA(47) geeft 4,2R verwachting in de backtest</li>
+              <li>Je denkt dat je het „magische getal” hebt gevonden</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Werkelijkheid:</strong> EMA(47) paste puur toevallig op precies die dataset. En vooruit getest? -0,8R verwachting. Je hebt de ruis geleerd, niet het signaal.</p>
+            <p><strong>Beter:</strong> Beperk het optimaliseren. Gebruik standaardparameters. Test op ongeziene data.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">Toekomstige data gebruiken (live onmogelijk)</h3>
+            <p><strong>Wat het is:</strong> Code die in toekomstige kaarsen „gluurt” om nu een beslissing te nemen</p>
+            <p><strong>Voorbeeld:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # gebruikt de 5 TOEKOMSTIGE kaarsen
+    enter_long()</code></pre>
+            <p><strong>Het probleem:</strong> In backtesting heb je de toekomstige data. Live niet.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Werkelijkheid:</strong> Deze code kan live domweg niet draaien. Je backtest test een strategie die niet bestaat.</p>
+            <p><strong>Beter:</strong> Gebruik alleen data die op het moment van beslissen beschikbaar is.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">Perfecte uitvoeringen tegen perfecte koersen aannemen</h3>
+<p><strong>Aanname in de backtest:</strong> „Ik koop precies op 100,00 $”</p>
+            <p><strong>Werkelijkheid:</strong> De marktorder wordt uitgevoerd op 100,12 $ (spread + slippage)</p>
+            <p><strong>Effect over 100 trades:</strong></p>
+            <ul>
+              <li>Backtestwinst: 5.000 $</li>
+              <li>Spreadkosten (0,10 $ per trade): -1.000 $</li>
+              <li>Slippage (0,05 $ per trade): -500 $</li>
+              <li>Commissies (2 $ per trade): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Werkelijkheid:</strong> Echte winst = 3.300 $ (34 % minder dan de backtest)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">Alleen op de overlevers testen</h3>
+            <p><strong>Wat het is:</strong> Backtesting alleen op de aandelen die nu in de S&P 500 zitten</p>
+            <p><strong>Het probleem:</strong> Je laat meer dan 200 aandelen weg die van de beurs zijn gehaald of failliet gingen</p>
+            <p><strong>Voorbeeld:</strong></p>
+            <ul>
+              <li>Backtest op de S&P 500-lijst van 2024: 1,8R verwachting, winstfactor 2,1</li>
+              <li>Maar over die hele periode zou je long hebben gezeten in Hertz (failliet in 2020), in SVB Financial (ingestort in 2023) en in elke andere naam die naar nul ging.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Werkelijkheid:</strong> Je verwachting laat de catastrofale verliezen van beursverwijderingen buiten beschouwing. Echte verwachting: -0,2R (een verliesgevend systeem).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 het aha-moment</h4>
+        <p>Een backtest is niet de werkelijkheid. Het is een simulatie. En als je simulatie onmogelijke aannames bevat, worden je liveresultaten net zo onmogelijk.</p>
+      </div>
+
+      <div class="section-break"><span>Deel 2: realistische kosten modelleren</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">De verborgen kosten die strategieën om zeep helpen</h2>
+
+      <p>Dit is wat de meeste backtests negeren — en waarom die van jou waarschijnlijk 20-40 % te optimistisch is:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">Stap 1: het bied-laatverschil modelleren</summary>
+          <div class="accordion-content">
+            <p><strong>Wat het is:</strong> Het verschil tussen de koopkoers en de verkoopkoers</p>
+            <p><strong>Voorbeeld:</strong></p>
+            <ul>
+              <li>SPY bied: 450,00 $ / laat: 450,01 $ → spread = 0,01 $</li>
+              <li>Je koopt: je betaalt 450,01 $ (halve spread = 0,005 $)</li>
+              <li>Je verkoopt: je krijgt 450,00 $ (halve spread = 0,005 $)</li>
+            </ul>
+            <p><strong>Kosten per keer heen en terug:</strong> $0.01</p>
+            <p><strong>Voor 1.000 stuks:</strong> 0,01 $ × 1.000 = 10 $ per trade</p>
+            <p><strong>100 trades:</strong> 1.000 $ aan spreadkosten</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Stap 2: slippage modelleren</summary>
+          <div class="accordion-content">
+            <p><strong>Wat het is:</strong> Verschil tussen de bedoelde koers en de werkelijke uitvoering</p>
+            <p><strong>Realistische slippage per situatie:</strong></p>
+            <ul>
+              <li><strong>Normale liquiditeit:</strong> 0.01-0.02%</li>
+              <li><strong>Volatiele markten:</strong> 0.05-0.10%</li>
+              <li><strong>Dunne liquiditeit:</strong> 0.10-0.30%</li>
+              <li><strong>Grote positieomvang:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>Voorzichtige aanname:</strong> 0,05 % per trade</p>
+            <p>Positie van 10.000 $ × 0,05 % = 5 $ slippage per kant = 10 $ heen en terug</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Stap 3: commissies modelleren</summary>
+          <div class="accordion-content">
+            <p><strong>Voorbeeld: Interactive Brokers</strong></p>
+            <ul>
+              <li>0,005 $ per stuk, minimaal 1 $</li>
+              <li>200 stuks × 0,005 $ = 1 $ per kant</li>
+              <li>Heen en terug = 2 $</li>
+            </ul>
+            <p><strong>100 trades:</strong> 200 $ aan commissies</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Stap 4: totale realistische kosten</summary>
+          <div class="accordion-content">
+            <p><strong>Per trade (heen en terug):</strong></p>
+            <ul>
+              <li>Spread: 10 $</li>
+              <li>Slippage: 10 $</li>
+              <li>Commissie: 2 $</li>
+            </ul>
+            <p><strong>Totaal: 22 $ per trade</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Levert je strategie bruto 50 $ per trade op → 28 $ netto (44 % minder!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">Rekenvoorbeeld: de backtest bijstellen</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>Voor en na realistische kosten</h4>
+        <p><strong>Strategie: 100 trades, gemiddeld 50 $ winst per trade</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Backtest (fantasie):</strong></p>
+        <p>100 trades × 50 $ = 5.000 $ winst</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Na realistische kosten:</strong></p>
+        <ul>
+          <li>Bruto: 5.000 $</li>
+          <li>Spread: -1.000 $</li>
+          <li>Slippage: -1.000 $</li>
+          <li>Commissies: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Nettowinst: 2.800 $ (44 % minder)</p>
+      </div>
+
 <div class="example-block">
         <h4>Samengesteld voorbeeld: hoe een „perfecte” backtest met 1,3R verwachtingswaarde live -0,45R werd</h4>
 
@@ -463,172 +629,6 @@
         </div>
 
         <p><b>De les: de backtest van Chris was een fantasie. Wie 15.000 parametercombinaties test, vindt gegarandeerd er één die perfect om de historische ruis heen sluit. Die „perfecte” verwachting van 1,3R was curve-fitting-rommel. Een out-of-sampletest had dat aan het licht gebracht vóór die 8.400 $ verlies. Backtesting draait niet om de beste prestatie uit het verleden, maar om wat hierna gaat werken. En daarvoor heb je ongeziene data, realistische kosten en nul vooruitkijkbias nodig.</b></p>
-      </div>
-
-      <div class="section-break"><span>Deel 1: de vier manieren waarop backtests liegen</span></div>
-
-      <div class="blog-callout">
-        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
-          Verder lezen: waarom backtesting-resultaten waardeloos zijn (en wat je in plaats daarvan doet) →
-        </a>
-      </div>
-      <!-- Prerequisites -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>&#128203; Vereisten</h4>
-        <p>Deze les bouwt voort op begrippen uit:</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Les 30: Volume Oracle</a> &mdash; Signal Pilot beheersen</li>
-            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Les 31: Portefeuilleconstructie</a> &mdash; Signal Pilot beheersen</li>
-        </ul>
-        <p style="margin-top:0.75rem">&#9989; Heb je die afgerond, dan ben je klaar om te beginnen. Zo niet, start dan eerst met de basislessen.</p>
-      </div>
-
-<h2 id="why-your-perfect-strategy-will-fail-live">Waarom je perfecte strategie live gaat sneuvelen</h2>
-
-      <p>Laten we met de ongemakkelijke waarheid beginnen: als je een strategie hebt geoptimaliseerd om op historische data te passen, heb je geen voordeel gevonden. Je hebt ruis gevonden.</p>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">Probleem 1: overfitting</button>
-          <button>Probleem 2: vooruitkijkbias</button>
-          <button>Probleem 3: uitvoeringsfantasie</button>
-          <button>Probleem 4: overlevingsbias</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="curve-fitting-to-random-noise">De curve op willekeurige ruis passen</h3>
-            <p><strong>Wat het is:</strong> Parameters optimaliseren tot de backtest er perfect uitziet</p>
-            <p><strong>Voorbeeld:</strong></p>
-            <ul>
-              <li>Je test 100 verschillende EMA-perioden (10, 11, 12… 110)</li>
-              <li>EMA(47) geeft 4,2R verwachting in de backtest</li>
-              <li>Je denkt dat je het „magische getal” hebt gevonden</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Werkelijkheid:</strong> EMA(47) paste puur toevallig op precies die dataset. En vooruit getest? -0,8R verwachting. Je hebt de ruis geleerd, niet het signaal.</p>
-            <p><strong>Beter:</strong> Beperk het optimaliseren. Gebruik standaardparameters. Test op ongeziene data.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="using-future-data-impossible-in-live-trading">Toekomstige data gebruiken (live onmogelijk)</h3>
-            <p><strong>Wat het is:</strong> Code die in toekomstige kaarsen „gluurt” om nu een beslissing te nemen</p>
-            <p><strong>Voorbeeld:</strong></p>
-            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # gebruikt de 5 TOEKOMSTIGE kaarsen
-    enter_long()</code></pre>
-            <p><strong>Het probleem:</strong> In backtesting heb je de toekomstige data. Live niet.</p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Werkelijkheid:</strong> Deze code kan live domweg niet draaien. Je backtest test een strategie die niet bestaat.</p>
-            <p><strong>Beter:</strong> Gebruik alleen data die op het moment van beslissen beschikbaar is.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="assuming-perfect-fills-at-perfect-prices">Perfecte uitvoeringen tegen perfecte koersen aannemen</h3>
-<p><strong>Aanname in de backtest:</strong> „Ik koop precies op 100,00 $”</p>
-            <p><strong>Werkelijkheid:</strong> De marktorder wordt uitgevoerd op 100,12 $ (spread + slippage)</p>
-            <p><strong>Effect over 100 trades:</strong></p>
-            <ul>
-              <li>Backtestwinst: 5.000 $</li>
-              <li>Spreadkosten (0,10 $ per trade): -1.000 $</li>
-              <li>Slippage (0,05 $ per trade): -500 $</li>
-              <li>Commissies (2 $ per trade): -200 $</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Werkelijkheid:</strong> Echte winst = 3.300 $ (34 % minder dan de backtest)</p>
-          </div>
-          <div class="tab-panel"><h3 id="testing-only-on-survivors">Alleen op de overlevers testen</h3>
-            <p><strong>Wat het is:</strong> Backtesting alleen op de aandelen die nu in de S&P 500 zitten</p>
-            <p><strong>Het probleem:</strong> Je laat meer dan 200 aandelen weg die van de beurs zijn gehaald of failliet gingen</p>
-            <p><strong>Voorbeeld:</strong></p>
-            <ul>
-              <li>Backtest op de S&P 500-lijst van 2024: 1,8R verwachting, winstfactor 2,1</li>
-              <li>Maar over die hele periode zou je long hebben gezeten in Hertz (failliet in 2020), in SVB Financial (ingestort in 2023) en in elke andere naam die naar nul ging.</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Werkelijkheid:</strong> Je verwachting laat de catastrofale verliezen van beursverwijderingen buiten beschouwing. Echte verwachting: -0,2R (een verliesgevend systeem).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout-key">
-        <h4>💡 het aha-moment</h4>
-        <p>Een backtest is niet de werkelijkheid. Het is een simulatie. En als je simulatie onmogelijke aannames bevat, worden je liveresultaten net zo onmogelijk.</p>
-      </div>
-
-      <div class="section-break"><span>Deel 2: realistische kosten modelleren</span></div>
-<h2 id="the-hidden-costs-that-kill-strategies">De verborgen kosten die strategieën om zeep helpen</h2>
-
-      <p>Dit is wat de meeste backtests negeren — en waarom die van jou waarschijnlijk 20-40 % te optimistisch is:</p>
-
-      <div class="accordion">
-        <details class="accordion-item">
-          <summary class="accordion-header">Stap 1: het bied-laatverschil modelleren</summary>
-          <div class="accordion-content">
-            <p><strong>Wat het is:</strong> Het verschil tussen de koopkoers en de verkoopkoers</p>
-            <p><strong>Voorbeeld:</strong></p>
-            <ul>
-              <li>SPY bied: 450,00 $ / laat: 450,01 $ → spread = 0,01 $</li>
-              <li>Je koopt: je betaalt 450,01 $ (halve spread = 0,005 $)</li>
-              <li>Je verkoopt: je krijgt 450,00 $ (halve spread = 0,005 $)</li>
-            </ul>
-            <p><strong>Kosten per keer heen en terug:</strong> $0.01</p>
-            <p><strong>Voor 1.000 stuks:</strong> 0,01 $ × 1.000 = 10 $ per trade</p>
-            <p><strong>100 trades:</strong> 1.000 $ aan spreadkosten</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Stap 2: slippage modelleren</summary>
-          <div class="accordion-content">
-            <p><strong>Wat het is:</strong> Verschil tussen de bedoelde koers en de werkelijke uitvoering</p>
-            <p><strong>Realistische slippage per situatie:</strong></p>
-            <ul>
-              <li><strong>Normale liquiditeit:</strong> 0.01-0.02%</li>
-              <li><strong>Volatiele markten:</strong> 0.05-0.10%</li>
-              <li><strong>Dunne liquiditeit:</strong> 0.10-0.30%</li>
-              <li><strong>Grote positieomvang:</strong> 0.20-0.50%</li>
-            </ul>
-            <p><strong>Voorzichtige aanname:</strong> 0,05 % per trade</p>
-            <p>Positie van 10.000 $ × 0,05 % = 5 $ slippage per kant = 10 $ heen en terug</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Stap 3: commissies modelleren</summary>
-          <div class="accordion-content">
-            <p><strong>Voorbeeld: Interactive Brokers</strong></p>
-            <ul>
-              <li>0,005 $ per stuk, minimaal 1 $</li>
-              <li>200 stuks × 0,005 $ = 1 $ per kant</li>
-              <li>Heen en terug = 2 $</li>
-            </ul>
-            <p><strong>100 trades:</strong> 200 $ aan commissies</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Stap 4: totale realistische kosten</summary>
-          <div class="accordion-content">
-            <p><strong>Per trade (heen en terug):</strong></p>
-            <ul>
-              <li>Spread: 10 $</li>
-              <li>Slippage: 10 $</li>
-              <li>Commissie: 2 $</li>
-            </ul>
-            <p><strong>Totaal: 22 $ per trade</strong></p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Levert je strategie bruto 50 $ per trade op → 28 $ netto (44 % minder!)</p>
-          </div>
-        </details>
-      </div>
-<h3 id="backtest-adjustment-example">Rekenvoorbeeld: de backtest bijstellen</h3>
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
-        <h4>Voor en na realistische kosten</h4>
-        <p><strong>Strategie: 100 trades, gemiddeld 50 $ winst per trade</strong></p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Backtest (fantasie):</strong></p>
-        <p>100 trades × 50 $ = 5.000 $ winst</p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Na realistische kosten:</strong></p>
-        <ul>
-          <li>Bruto: 5.000 $</li>
-          <li>Spread: -1.000 $</li>
-          <li>Slippage: -1.000 $</li>
-          <li>Commissies: -200 $</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Nettowinst: 2.800 $ (44 % minder)</p>
       </div>
 
       <div class="section-break"><span>Deel 3: in-sample tegenover out-of-sample</span></div>

@@ -181,6 +181,172 @@
         <li>In-sample vs. out-of-sample testing (the only validation that matters)</li>
       </ul>
 
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Prerequisites</h4>
+        <p>This lesson builds on concepts from:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Lesson 30: Volume Oracle</a> &mdash; Signal Pilot Mastery</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Lesson 31: Portfolio Construction</a> &mdash; Signal Pilot Mastery</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; If you've completed these, you're ready. Otherwise, start with the foundational lessons first.</p>
+      </div>
+
+      <div class="section-break"><span>Part 1: The Four Ways Backtests Lie</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          Deep dive: Why Backtesting Results Are Worthless (And What to Do Instead) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">Why Your Perfect Strategy Will Fail Live</h2>
+
+      <p>Let's start with the uncomfortable truth: If you optimized a strategy to fit historical data, you didn't find an edge. You found noise.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">Problem 1: Overfitting</button>
+          <button>Problem 2: Look-Ahead Bias</button>
+          <button>Problem 3: Execution Fantasy</button>
+          <button>Problem 4: Survivorship Bias</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">Curve-Fitting to Random Noise</h3>
+            <p><strong>What it is:</strong> Optimizing parameters until backtest looks perfect</p>
+            <p><strong>Example:</strong></p>
+            <ul>
+              <li>You test 100 different EMA periods (10, 11, 12... 110)</li>
+              <li>EMA(47) gives 4.2R expectancy in backtest</li>
+              <li>You think you found the "magic number"</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Reality:</strong> EMA(47) just happened to fit that specific data set. Forward test? -0.8R expectancy. You learned the noise, not the signal.</p>
+            <p><strong>Fix:</strong> Limit optimization. Use standard parameters. Test on unseen data.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">Using Future Data (Impossible in Live Trading)</h3>
+            <p><strong>What it is:</strong> Code that "peeks" into future candles to make current decisions</p>
+            <p><strong>Example:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # Uses FUTURE 5 candles
+    enter_long()</code></pre>
+            <p><strong>The problem:</strong> In backtesting, you have future data. In live trading, you don't.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Reality:</strong> This code literally cannot execute live. Your backtest is testing a strategy that doesn't exist.</p>
+            <p><strong>Fix:</strong> Only use data available at the moment of decision.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">Assuming Perfect Fills at Perfect Prices</h3>
+<p><strong>Backtest assumption:</strong> "I buy at $100.00 exactly"</p>
+            <p><strong>Reality:</strong> Market order fills at $100.12 (spread + slippage)</p>
+            <p><strong>Impact over 100 trades:</strong></p>
+            <ul>
+              <li>Backtest profit: $5,000</li>
+              <li>Spread cost ($0.10/trade): -$1,000</li>
+              <li>Slippage ($0.05/trade): -$500</li>
+              <li>Commissions ($2/trade): -$200</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Reality:</strong> Real profit = $3,300 (34% less than backtest)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">Testing Only on Survivors</h3>
+            <p><strong>What it is:</strong> Backtesting on current S&P 500 stocks only</p>
+            <p><strong>The problem:</strong> You're excluding 200+ stocks that got delisted/bankrupted</p>
+            <p><strong>Example:</strong></p>
+            <ul>
+              <li>Backtest on 2024 S&P 500 list: 1.8R expectancy, 2.1 profit factor</li>
+              <li>But across that window you'd have been long Hertz (bankrupt 2020), SVB Financial (collapsed 2023), and every other name that went to zero.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Reality:</strong> Your expectancy excludes catastrophic losses from delistings. Real expectancy: -0.2R (losing system).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 The Aha Moment</h4>
+        <p>A backtest isn't reality. It's a simulation. And if your simulation includes impossible assumptions, your live results will be impossible too.</p>
+      </div>
+
+      <div class="section-break"><span>Part 2: Modeling Realistic Costs</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">The Hidden Costs That Kill Strategies</h2>
+
+      <p>Here's what most backtests ignore—and why yours is probably 20-40% too optimistic:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">Step 1: Model Bid-Ask Spread</summary>
+          <div class="accordion-content">
+            <p><strong>What it is:</strong> The difference between buy price and sell price</p>
+            <p><strong>Example:</strong></p>
+            <ul>
+              <li>SPY bid: $450.00 / ask: $450.01 → Spread = $0.01</li>
+              <li>You buy: Pay $450.01 (half spread = $0.005)</li>
+              <li>You sell: Receive $450.00 (half spread = $0.005)</li>
+            </ul>
+            <p><strong>Cost per round trip:</strong> $0.01</p>
+            <p><strong>For 1,000 shares:</strong> $0.01 × 1,000 = $10 per trade</p>
+            <p><strong>100 trades:</strong> $1,000 in spread costs</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Step 2: Model Slippage</summary>
+          <div class="accordion-content">
+            <p><strong>What it is:</strong> Difference between intended price and actual fill</p>
+            <p><strong>Realistic slippage by condition:</strong></p>
+            <ul>
+              <li><strong>Normal liquidity:</strong> 0.01-0.02%</li>
+              <li><strong>Volatile markets:</strong> 0.05-0.10%</li>
+              <li><strong>Thin liquidity:</strong> 0.10-0.30%</li>
+              <li><strong>Large position size:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>Conservative assumption:</strong> 0.05% per trade</p>
+            <p>$10,000 position × 0.05% = $5 slippage per side = $10 round trip</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Step 3: Model Commissions</summary>
+          <div class="accordion-content">
+            <p><strong>Example: Interactive Brokers</strong></p>
+            <ul>
+              <li>$0.005 per share, $1 minimum</li>
+              <li>200 shares × $0.005 = $1 per side</li>
+              <li>Round trip = $2</li>
+            </ul>
+            <p><strong>100 trades:</strong> $200 in commissions</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Step 4: Total Realistic Cost</summary>
+          <div class="accordion-content">
+            <p><strong>Per trade (round trip):</strong></p>
+            <ul>
+              <li>Spread: $10</li>
+              <li>Slippage: $10</li>
+              <li>Commission: $2</li>
+            </ul>
+            <p><strong>Total: $22 per trade</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">If your strategy makes $50/trade gross → $28 net (44% reduction!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">Backtest Adjustment Example</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>Before vs. After Realistic Costs</h4>
+        <p><strong>Strategy: 100 trades, $50 avg profit per trade</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Backtest (fantasy):</strong></p>
+        <p>100 trades × $50 = $5,000 profit</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>After realistic costs:</strong></p>
+        <ul>
+          <li>Gross: $5,000</li>
+          <li>Spread: -$1,000</li>
+          <li>Slippage: -$1,000</li>
+          <li>Commissions: -$200</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Net profit: $2,800 (44% reduction)</p>
+      </div>
+
 <div class="example-block">
         <h4>Composite Example: how a &ldquo;perfect&rdquo; 1.3R expectancy backtest became -0.45R live</h4>
 
@@ -450,172 +616,6 @@
         </div>
 
         <p><b>The lesson: Chris's backtest was a fantasy. Testing 15,000 parameter combinations guarantees you'll find one that fits historical noise perfectly. The "perfect" 1.3R expectancy was curve-fit garbage. Out-of-sample testing would have revealed this before losing $8,400. Backtesting isn't about finding the best historical performance—it's about finding what will work going forward. And that requires unseen data, realistic costs, and zero look-ahead bias.</b></p>
-      </div>
-
-      <div class="section-break"><span>Part 1: The Four Ways Backtests Lie</span></div>
-
-      <div class="blog-callout">
-        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
-          Deep dive: Why Backtesting Results Are Worthless (And What to Do Instead) →
-        </a>
-      </div>
-      <!-- Prerequisites -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>&#128203; Prerequisites</h4>
-        <p>This lesson builds on concepts from:</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Lesson 30: Volume Oracle</a> &mdash; Signal Pilot Mastery</li>
-            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Lesson 31: Portfolio Construction</a> &mdash; Signal Pilot Mastery</li>
-        </ul>
-        <p style="margin-top:0.75rem">&#9989; If you've completed these, you're ready. Otherwise, start with the foundational lessons first.</p>
-      </div>
-
-<h2 id="why-your-perfect-strategy-will-fail-live">Why Your Perfect Strategy Will Fail Live</h2>
-
-      <p>Let's start with the uncomfortable truth: If you optimized a strategy to fit historical data, you didn't find an edge. You found noise.</p>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">Problem 1: Overfitting</button>
-          <button>Problem 2: Look-Ahead Bias</button>
-          <button>Problem 3: Execution Fantasy</button>
-          <button>Problem 4: Survivorship Bias</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="curve-fitting-to-random-noise">Curve-Fitting to Random Noise</h3>
-            <p><strong>What it is:</strong> Optimizing parameters until backtest looks perfect</p>
-            <p><strong>Example:</strong></p>
-            <ul>
-              <li>You test 100 different EMA periods (10, 11, 12... 110)</li>
-              <li>EMA(47) gives 4.2R expectancy in backtest</li>
-              <li>You think you found the "magic number"</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Reality:</strong> EMA(47) just happened to fit that specific data set. Forward test? -0.8R expectancy. You learned the noise, not the signal.</p>
-            <p><strong>Fix:</strong> Limit optimization. Use standard parameters. Test on unseen data.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="using-future-data-impossible-in-live-trading">Using Future Data (Impossible in Live Trading)</h3>
-            <p><strong>What it is:</strong> Code that "peeks" into future candles to make current decisions</p>
-            <p><strong>Example:</strong></p>
-            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # Uses FUTURE 5 candles
-    enter_long()</code></pre>
-            <p><strong>The problem:</strong> In backtesting, you have future data. In live trading, you don't.</p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Reality:</strong> This code literally cannot execute live. Your backtest is testing a strategy that doesn't exist.</p>
-            <p><strong>Fix:</strong> Only use data available at the moment of decision.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="assuming-perfect-fills-at-perfect-prices">Assuming Perfect Fills at Perfect Prices</h3>
-<p><strong>Backtest assumption:</strong> "I buy at $100.00 exactly"</p>
-            <p><strong>Reality:</strong> Market order fills at $100.12 (spread + slippage)</p>
-            <p><strong>Impact over 100 trades:</strong></p>
-            <ul>
-              <li>Backtest profit: $5,000</li>
-              <li>Spread cost ($0.10/trade): -$1,000</li>
-              <li>Slippage ($0.05/trade): -$500</li>
-              <li>Commissions ($2/trade): -$200</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Reality:</strong> Real profit = $3,300 (34% less than backtest)</p>
-          </div>
-          <div class="tab-panel"><h3 id="testing-only-on-survivors">Testing Only on Survivors</h3>
-            <p><strong>What it is:</strong> Backtesting on current S&P 500 stocks only</p>
-            <p><strong>The problem:</strong> You're excluding 200+ stocks that got delisted/bankrupted</p>
-            <p><strong>Example:</strong></p>
-            <ul>
-              <li>Backtest on 2024 S&P 500 list: 1.8R expectancy, 2.1 profit factor</li>
-              <li>But across that window you'd have been long Hertz (bankrupt 2020), SVB Financial (collapsed 2023), and every other name that went to zero.</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Reality:</strong> Your expectancy excludes catastrophic losses from delistings. Real expectancy: -0.2R (losing system).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout-key">
-        <h4>💡 The Aha Moment</h4>
-        <p>A backtest isn't reality. It's a simulation. And if your simulation includes impossible assumptions, your live results will be impossible too.</p>
-      </div>
-
-      <div class="section-break"><span>Part 2: Modeling Realistic Costs</span></div>
-<h2 id="the-hidden-costs-that-kill-strategies">The Hidden Costs That Kill Strategies</h2>
-
-      <p>Here's what most backtests ignore—and why yours is probably 20-40% too optimistic:</p>
-
-      <div class="accordion">
-        <details class="accordion-item">
-          <summary class="accordion-header">Step 1: Model Bid-Ask Spread</summary>
-          <div class="accordion-content">
-            <p><strong>What it is:</strong> The difference between buy price and sell price</p>
-            <p><strong>Example:</strong></p>
-            <ul>
-              <li>SPY bid: $450.00 / ask: $450.01 → Spread = $0.01</li>
-              <li>You buy: Pay $450.01 (half spread = $0.005)</li>
-              <li>You sell: Receive $450.00 (half spread = $0.005)</li>
-            </ul>
-            <p><strong>Cost per round trip:</strong> $0.01</p>
-            <p><strong>For 1,000 shares:</strong> $0.01 × 1,000 = $10 per trade</p>
-            <p><strong>100 trades:</strong> $1,000 in spread costs</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Step 2: Model Slippage</summary>
-          <div class="accordion-content">
-            <p><strong>What it is:</strong> Difference between intended price and actual fill</p>
-            <p><strong>Realistic slippage by condition:</strong></p>
-            <ul>
-              <li><strong>Normal liquidity:</strong> 0.01-0.02%</li>
-              <li><strong>Volatile markets:</strong> 0.05-0.10%</li>
-              <li><strong>Thin liquidity:</strong> 0.10-0.30%</li>
-              <li><strong>Large position size:</strong> 0.20-0.50%</li>
-            </ul>
-            <p><strong>Conservative assumption:</strong> 0.05% per trade</p>
-            <p>$10,000 position × 0.05% = $5 slippage per side = $10 round trip</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Step 3: Model Commissions</summary>
-          <div class="accordion-content">
-            <p><strong>Example: Interactive Brokers</strong></p>
-            <ul>
-              <li>$0.005 per share, $1 minimum</li>
-              <li>200 shares × $0.005 = $1 per side</li>
-              <li>Round trip = $2</li>
-            </ul>
-            <p><strong>100 trades:</strong> $200 in commissions</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Step 4: Total Realistic Cost</summary>
-          <div class="accordion-content">
-            <p><strong>Per trade (round trip):</strong></p>
-            <ul>
-              <li>Spread: $10</li>
-              <li>Slippage: $10</li>
-              <li>Commission: $2</li>
-            </ul>
-            <p><strong>Total: $22 per trade</strong></p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">If your strategy makes $50/trade gross → $28 net (44% reduction!)</p>
-          </div>
-        </details>
-      </div>
-<h3 id="backtest-adjustment-example">Backtest Adjustment Example</h3>
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
-        <h4>Before vs. After Realistic Costs</h4>
-        <p><strong>Strategy: 100 trades, $50 avg profit per trade</strong></p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Backtest (fantasy):</strong></p>
-        <p>100 trades × $50 = $5,000 profit</p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>After realistic costs:</strong></p>
-        <ul>
-          <li>Gross: $5,000</li>
-          <li>Spread: -$1,000</li>
-          <li>Slippage: -$1,000</li>
-          <li>Commissions: -$200</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Net profit: $2,800 (44% reduction)</p>
       </div>
 
       <div class="section-break"><span>Part 3: In-Sample vs. Out-of-Sample</span></div>

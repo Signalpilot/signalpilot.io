@@ -194,6 +194,172 @@
         <li>Mintán belül és mintán kívül (az egyetlen ellenőrzés, ami számít)</li>
       </ul>
 
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Előfeltételek</h4>
+        <p>Ez a lecke a következők fogalmaira épül:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">30. lecke: Volume Oracle</a> &mdash; A Signal Pilot mesterfokon</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">31. lecke: Portfólióépítés</a> &mdash; A Signal Pilot mesterfokon</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Ha ezeket elvégezted, készen állsz. Ha nem, kezdd előbb az alapozó leckékkel.</p>
+      </div>
+
+      <div class="section-break"><span>1. rész: a négy mód, ahogy a backtestek hazudnak</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          Mélyebben: miért nem érnek semmit a backtesting eredményei (és mit csinálj helyette) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">Miért fog elbukni élesben a tökéletes stratégiád</h2>
+
+      <p>Kezdjük a kényelmetlen igazsággal: ha úgy optimalizáltál egy stratégiát, hogy illeszkedjen a történelmi adatokhoz, akkor nem előnyt találtál. Zajt találtál.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">1. probléma: túlillesztés</button>
+          <button>2. probléma: előretekintési torzítás</button>
+          <button>3. probléma: végrehajtási ábránd</button>
+          <button>4. probléma: túlélési torzítás</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">A görbe ráillesztése véletlen zajra</h3>
+            <p><strong>Mi ez:</strong> Addig csavarni a paramétereket, amíg a backtest tökéletesen nem fest</p>
+            <p><strong>Példa:</strong></p>
+            <ul>
+              <li>Kipróbálsz 100 különböző EMA-periódust (10, 11, 12… 110)</li>
+              <li>Az EMA(47) 4,2R várható értéket ad a backtestben</li>
+              <li>Azt hiszed, megtaláltad a „bűvös számot”</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Az EMA(47) pusztán véletlenül illeszkedett arra a konkrét adathalmazra. És előretesztelve? -0,8R várható érték. A zajt tanultad meg, nem a jelet.</p>
+            <p><strong>Jobb:</strong> Fogd vissza az optimalizálást. Használj szokásos paramétereket. Tesztelj nem látott adaton.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">Jövőbeli adatok használata (élesben lehetetlen)</h3>
+            <p><strong>Mi ez:</strong> Kód, amely a jövőbeli gyertyákba „kukucskál”, hogy most döntsön</p>
+            <p><strong>Példa:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # a JÖVŐBELI 5 gyertyát használja
+    enter_long()</code></pre>
+            <p><strong>A probléma:</strong> A backtestingben megvannak a jövőbeli adatok. Élesben nincsenek.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Ez a kód élesben egyszerűen nem tud lefutni. A backtested olyan stratégiát tesztel, amely nem létezik.</p>
+            <p><strong>Jobb:</strong> Csak azokat az adatokat használd, amelyek a döntés pillanatában elérhetők.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">Tökéletes teljesüléseket feltételezni tökéletes árakon</h3>
+<p><strong>A backtest feltevése:</strong> „Pontosan 100,00 dolláron veszek”</p>
+            <p><strong>A valóság:</strong> A piaci megbízás 100,12 dolláron teljesül (spread + slippage)</p>
+            <p><strong>Hatás 100 ügyleten:</strong></p>
+            <ul>
+              <li>A backtest nyeresége: 5 000 $</li>
+              <li>Spreadköltség (0,10 $ ügyletenként): -1 000 $</li>
+              <li>slippage (0,05 $ ügyletenként): -500 $</li>
+              <li>Jutalékok (2 $ ügyletenként): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Valódi nyereség = 3 300 $ (34 %-kal kevesebb, mint a backtestben)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">Csak a túlélőkön tesztelni</h3>
+            <p><strong>Mi ez:</strong> Backtestinget csak a mai S&P 500-részvényeken végezni</p>
+            <p><strong>A probléma:</strong> Kihagysz több mint 200 részvényt, amelyet kivezettek vagy csődbe ment</p>
+            <p><strong>Példa:</strong></p>
+            <ul>
+              <li>Backtest a 2024-es S&P 500-listán: 1,8R várható érték, 2,1-es profitfaktor</li>
+              <li>De ebben az időszakban long lettél volna a Hertzben (2020-ban csődbe ment), az SVB Financialben (2023-ban összeomlott) és minden más névben, amely nullára futott.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> A várható értéked kihagyja a kivezetésekből eredő katasztrofális veszteségeket. A valódi várható érték: -0,2R (veszteséges rendszer).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 az aha-pillanat</h4>
+        <p>A backtest nem a valóság. Szimuláció. És ha a szimulációdban lehetetlen feltevések vannak, az éles eredményeid is ugyanolyan lehetetlenek lesznek.</p>
+      </div>
+
+      <div class="section-break"><span>2. rész: reális költségek modellezése</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">A rejtett költségek, amelyek megölik a stratégiákat</h2>
+
+      <p>Ezt hagyja figyelmen kívül a legtöbb backtest — és ezért a tiéd is alighanem 20-40 %-kal derűlátóbb a kelleténél:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">1. lépés: modellezd a vételi-eladási különbözetet</summary>
+          <div class="accordion-content">
+            <p><strong>Mi ez:</strong> A vételi és az eladási ár közti különbség</p>
+            <p><strong>Példa:</strong></p>
+            <ul>
+              <li>SPY vétel: 450,00 $ / eladás: 450,01 $ → spread = 0,01 $</li>
+              <li>Veszel: 450,01 dollárt fizetsz (fél spread = 0,005 $)</li>
+              <li>Eladsz: 450,00 dollárt kapsz (fél spread = 0,005 $)</li>
+            </ul>
+            <p><strong>Költség oda-vissza:</strong> $0.01</p>
+            <p><strong>1 000 részvényre:</strong> 0,01 $ × 1 000 = 10 $ ügyletenként</p>
+            <p><strong>100 ügylet:</strong> 1 000 $ spreadköltség</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">2. lépés: modellezd a slippage-et</summary>
+          <div class="accordion-content">
+            <p><strong>Mi ez:</strong> A szándékolt ár és a tényleges teljesülés közti különbség</p>
+            <p><strong>Reális slippage a körülmények szerint:</strong></p>
+            <ul>
+              <li><strong>Normál likviditás:</strong> 0.01-0.02%</li>
+              <li><strong>Volatilis piacok:</strong> 0.05-0.10%</li>
+              <li><strong>Vékony likviditás:</strong> 0.10-0.30%</li>
+              <li><strong>Nagy pozícióméret:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>Óvatos feltevés:</strong> 0,05 % ügyletenként</p>
+            <p>10 000 dolláros pozíció × 0,05 % = 5 $ slippage oldalanként = 10 $ oda-vissza</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">3. lépés: modellezd a jutalékokat</summary>
+          <div class="accordion-content">
+            <p><strong>Példa: Interactive Brokers</strong></p>
+            <ul>
+              <li>0,005 $ részvényenként, minimum 1 $</li>
+              <li>200 részvény × 0,005 $ = 1 $ oldalanként</li>
+              <li>Oda-vissza = 2 $</li>
+            </ul>
+            <p><strong>100 ügylet:</strong> 200 $ jutalék</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">4. lépés: a teljes reális költség</summary>
+          <div class="accordion-content">
+            <p><strong>Ügyletenként (oda-vissza):</strong></p>
+            <ul>
+              <li>Spread: 10 $</li>
+              <li>slippage: 10 $</li>
+              <li>Jutalék: 2 $</li>
+            </ul>
+            <p><strong>Összesen: 22 $ ügyletenként</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Ha a stratégiád ügyletenként 50 $ bruttót hoz → 28 $ nettó (44 %-kal kevesebb!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">Példa a backtest kiigazítására</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>Reális költségek előtt és után</h4>
+        <p><strong>Stratégia: 100 ügylet, ügyletenként átlagosan 50 $ nyereség</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Backtest (ábránd):</strong></p>
+        <p>100 ügylet × 50 $ = 5 000 $ nyereség</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Reális költségek után:</strong></p>
+        <ul>
+          <li>Bruttó: 5 000 $</li>
+          <li>Spread: -1 000 $</li>
+          <li>slippage: -1 000 $</li>
+          <li>Jutalékok: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Nettó nyereség: 2 800 $ (44 %-kal kevesebb)</p>
+      </div>
+
 <div class="example-block">
         <h4>Összetett példa: hogyan lett egy «tökéletes», 1,3R várható értékű backtest élesben -0,45R</h4>
 
@@ -463,172 +629,6 @@
         </div>
 
         <p><b>A tanulság: Chris backtestje ábránd volt. Ha 15 000 paraméterkombinációt próbálsz ki, garantáltan találsz egyet, amely tökéletesen ráfekszik a történelmi zajra. Az a „tökéletes” 1,3R várható érték görbére illesztett szemét volt. Egy mintán kívüli teszt ezt megmutatta volna, mielőtt elúszott az a 8 400 $. A backtesting nem arról szól, hogy megtaláld a legjobb múltbeli teljesítményt, hanem hogy megtaláld, ami ezután fog működni. Ehhez pedig nem látott adat, reális költségek és nulla előretekintési torzítás kell.</b></p>
-      </div>
-
-      <div class="section-break"><span>1. rész: a négy mód, ahogy a backtestek hazudnak</span></div>
-
-      <div class="blog-callout">
-        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
-          Mélyebben: miért nem érnek semmit a backtesting eredményei (és mit csinálj helyette) →
-        </a>
-      </div>
-      <!-- Prerequisites -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>&#128203; Előfeltételek</h4>
-        <p>Ez a lecke a következők fogalmaira épül:</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">30. lecke: Volume Oracle</a> &mdash; A Signal Pilot mesterfokon</li>
-            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">31. lecke: Portfólióépítés</a> &mdash; A Signal Pilot mesterfokon</li>
-        </ul>
-        <p style="margin-top:0.75rem">&#9989; Ha ezeket elvégezted, készen állsz. Ha nem, kezdd előbb az alapozó leckékkel.</p>
-      </div>
-
-<h2 id="why-your-perfect-strategy-will-fail-live">Miért fog elbukni élesben a tökéletes stratégiád</h2>
-
-      <p>Kezdjük a kényelmetlen igazsággal: ha úgy optimalizáltál egy stratégiát, hogy illeszkedjen a történelmi adatokhoz, akkor nem előnyt találtál. Zajt találtál.</p>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">1. probléma: túlillesztés</button>
-          <button>2. probléma: előretekintési torzítás</button>
-          <button>3. probléma: végrehajtási ábránd</button>
-          <button>4. probléma: túlélési torzítás</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="curve-fitting-to-random-noise">A görbe ráillesztése véletlen zajra</h3>
-            <p><strong>Mi ez:</strong> Addig csavarni a paramétereket, amíg a backtest tökéletesen nem fest</p>
-            <p><strong>Példa:</strong></p>
-            <ul>
-              <li>Kipróbálsz 100 különböző EMA-periódust (10, 11, 12… 110)</li>
-              <li>Az EMA(47) 4,2R várható értéket ad a backtestben</li>
-              <li>Azt hiszed, megtaláltad a „bűvös számot”</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Az EMA(47) pusztán véletlenül illeszkedett arra a konkrét adathalmazra. És előretesztelve? -0,8R várható érték. A zajt tanultad meg, nem a jelet.</p>
-            <p><strong>Jobb:</strong> Fogd vissza az optimalizálást. Használj szokásos paramétereket. Tesztelj nem látott adaton.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="using-future-data-impossible-in-live-trading">Jövőbeli adatok használata (élesben lehetetlen)</h3>
-            <p><strong>Mi ez:</strong> Kód, amely a jövőbeli gyertyákba „kukucskál”, hogy most döntsön</p>
-            <p><strong>Példa:</strong></p>
-            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # a JÖVŐBELI 5 gyertyát használja
-    enter_long()</code></pre>
-            <p><strong>A probléma:</strong> A backtestingben megvannak a jövőbeli adatok. Élesben nincsenek.</p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Ez a kód élesben egyszerűen nem tud lefutni. A backtested olyan stratégiát tesztel, amely nem létezik.</p>
-            <p><strong>Jobb:</strong> Csak azokat az adatokat használd, amelyek a döntés pillanatában elérhetők.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="assuming-perfect-fills-at-perfect-prices">Tökéletes teljesüléseket feltételezni tökéletes árakon</h3>
-<p><strong>A backtest feltevése:</strong> „Pontosan 100,00 dolláron veszek”</p>
-            <p><strong>A valóság:</strong> A piaci megbízás 100,12 dolláron teljesül (spread + slippage)</p>
-            <p><strong>Hatás 100 ügyleten:</strong></p>
-            <ul>
-              <li>A backtest nyeresége: 5 000 $</li>
-              <li>Spreadköltség (0,10 $ ügyletenként): -1 000 $</li>
-              <li>slippage (0,05 $ ügyletenként): -500 $</li>
-              <li>Jutalékok (2 $ ügyletenként): -200 $</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> Valódi nyereség = 3 300 $ (34 %-kal kevesebb, mint a backtestben)</p>
-          </div>
-          <div class="tab-panel"><h3 id="testing-only-on-survivors">Csak a túlélőkön tesztelni</h3>
-            <p><strong>Mi ez:</strong> Backtestinget csak a mai S&P 500-részvényeken végezni</p>
-            <p><strong>A probléma:</strong> Kihagysz több mint 200 részvényt, amelyet kivezettek vagy csődbe ment</p>
-            <p><strong>Példa:</strong></p>
-            <ul>
-              <li>Backtest a 2024-es S&P 500-listán: 1,8R várható érték, 2,1-es profitfaktor</li>
-              <li>De ebben az időszakban long lettél volna a Hertzben (2020-ban csődbe ment), az SVB Financialben (2023-ban összeomlott) és minden más névben, amely nullára futott.</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>A valóság:</strong> A várható értéked kihagyja a kivezetésekből eredő katasztrofális veszteségeket. A valódi várható érték: -0,2R (veszteséges rendszer).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout-key">
-        <h4>💡 az aha-pillanat</h4>
-        <p>A backtest nem a valóság. Szimuláció. És ha a szimulációdban lehetetlen feltevések vannak, az éles eredményeid is ugyanolyan lehetetlenek lesznek.</p>
-      </div>
-
-      <div class="section-break"><span>2. rész: reális költségek modellezése</span></div>
-<h2 id="the-hidden-costs-that-kill-strategies">A rejtett költségek, amelyek megölik a stratégiákat</h2>
-
-      <p>Ezt hagyja figyelmen kívül a legtöbb backtest — és ezért a tiéd is alighanem 20-40 %-kal derűlátóbb a kelleténél:</p>
-
-      <div class="accordion">
-        <details class="accordion-item">
-          <summary class="accordion-header">1. lépés: modellezd a vételi-eladási különbözetet</summary>
-          <div class="accordion-content">
-            <p><strong>Mi ez:</strong> A vételi és az eladási ár közti különbség</p>
-            <p><strong>Példa:</strong></p>
-            <ul>
-              <li>SPY vétel: 450,00 $ / eladás: 450,01 $ → spread = 0,01 $</li>
-              <li>Veszel: 450,01 dollárt fizetsz (fél spread = 0,005 $)</li>
-              <li>Eladsz: 450,00 dollárt kapsz (fél spread = 0,005 $)</li>
-            </ul>
-            <p><strong>Költség oda-vissza:</strong> $0.01</p>
-            <p><strong>1 000 részvényre:</strong> 0,01 $ × 1 000 = 10 $ ügyletenként</p>
-            <p><strong>100 ügylet:</strong> 1 000 $ spreadköltség</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">2. lépés: modellezd a slippage-et</summary>
-          <div class="accordion-content">
-            <p><strong>Mi ez:</strong> A szándékolt ár és a tényleges teljesülés közti különbség</p>
-            <p><strong>Reális slippage a körülmények szerint:</strong></p>
-            <ul>
-              <li><strong>Normál likviditás:</strong> 0.01-0.02%</li>
-              <li><strong>Volatilis piacok:</strong> 0.05-0.10%</li>
-              <li><strong>Vékony likviditás:</strong> 0.10-0.30%</li>
-              <li><strong>Nagy pozícióméret:</strong> 0.20-0.50%</li>
-            </ul>
-            <p><strong>Óvatos feltevés:</strong> 0,05 % ügyletenként</p>
-            <p>10 000 dolláros pozíció × 0,05 % = 5 $ slippage oldalanként = 10 $ oda-vissza</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">3. lépés: modellezd a jutalékokat</summary>
-          <div class="accordion-content">
-            <p><strong>Példa: Interactive Brokers</strong></p>
-            <ul>
-              <li>0,005 $ részvényenként, minimum 1 $</li>
-              <li>200 részvény × 0,005 $ = 1 $ oldalanként</li>
-              <li>Oda-vissza = 2 $</li>
-            </ul>
-            <p><strong>100 ügylet:</strong> 200 $ jutalék</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">4. lépés: a teljes reális költség</summary>
-          <div class="accordion-content">
-            <p><strong>Ügyletenként (oda-vissza):</strong></p>
-            <ul>
-              <li>Spread: 10 $</li>
-              <li>slippage: 10 $</li>
-              <li>Jutalék: 2 $</li>
-            </ul>
-            <p><strong>Összesen: 22 $ ügyletenként</strong></p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Ha a stratégiád ügyletenként 50 $ bruttót hoz → 28 $ nettó (44 %-kal kevesebb!)</p>
-          </div>
-        </details>
-      </div>
-<h3 id="backtest-adjustment-example">Példa a backtest kiigazítására</h3>
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
-        <h4>Reális költségek előtt és után</h4>
-        <p><strong>Stratégia: 100 ügylet, ügyletenként átlagosan 50 $ nyereség</strong></p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Backtest (ábránd):</strong></p>
-        <p>100 ügylet × 50 $ = 5 000 $ nyereség</p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Reális költségek után:</strong></p>
-        <ul>
-          <li>Bruttó: 5 000 $</li>
-          <li>Spread: -1 000 $</li>
-          <li>slippage: -1 000 $</li>
-          <li>Jutalékok: -200 $</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Nettó nyereség: 2 800 $ (44 %-kal kevesebb)</p>
       </div>
 
       <div class="section-break"><span>3. rész: mintán belül és mintán kívül</span></div>

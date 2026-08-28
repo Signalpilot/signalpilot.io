@@ -194,6 +194,172 @@
         <li>In-Sample gegen Out-of-Sample (die einzige Validierung, die zählt)</li>
       </ul>
 
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Voraussetzungen</h4>
+        <p>Diese Lektion baut auf Konzepten auf aus:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Lektion 30: Volume Oracle</a> &mdash; Signal Pilot meistern</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Lektion 31: Portfoliokonstruktion</a> &mdash; Signal Pilot meistern</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Wenn du diese abgeschlossen hast, kann es losgehen. Andernfalls beginne zuerst mit den Grundlagenlektionen.</p>
+      </div>
+
+      <div class="section-break"><span>Teil 1: Die vier Arten, wie Backtests lügen</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          Zum Vertiefen: Warum Backtesting-Ergebnisse wertlos sind (und was du stattdessen tun solltest) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">Warum deine perfekte Strategie live scheitern wird</h2>
+
+      <p>Fangen wir mit der unbequemen Wahrheit an: Wenn du eine Strategie so optimiert hast, dass sie zu historischen Daten passt, hast du keinen Vorteil gefunden. Du hast Rauschen gefunden.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">Problem 1: Overfitting</button>
+          <button>Problem 2: Look-ahead-Bias</button>
+          <button>Problem 3: Ausführungsfantasie</button>
+          <button>Problem 4: Survivorship-Bias</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">Kurvenanpassung an zufälliges Rauschen</h3>
+            <p><strong>Was es ist:</strong> Parameter so lange optimieren, bis der Backtest perfekt aussieht</p>
+            <p><strong>Beispiel:</strong></p>
+            <ul>
+              <li>Du testest 100 verschiedene EMA-Perioden (10, 11, 12 … 110)</li>
+              <li>EMA(47) liefert im Backtest 4,2R Erwartung</li>
+              <li>Du glaubst, du hättest die „magische Zahl“ gefunden</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Realität:</strong> EMA(47) passte einfach zufällig zu genau diesem Datensatz. Und im Forward-Test? -0,8R Erwartung. Du hast das Rauschen gelernt, nicht das Signal.</p>
+            <p><strong>Besser:</strong> Optimierung begrenzen. Standardparameter nutzen. Auf ungesehenen Daten testen.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">Zukunftsdaten nutzen (im Live-Handel unmöglich)</h3>
+            <p><strong>Was es ist:</strong> Code, der in künftige Kerzen „späht“, um heutige Entscheidungen zu treffen</p>
+            <p><strong>Beispiel:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # nutzt die 5 ZUKÜNFTIGEN Kerzen
+    enter_long()</code></pre>
+            <p><strong>Das Problem:</strong> Beim Backtesting hast du Zukunftsdaten. Im Live-Handel nicht.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Realität:</strong> Dieser Code kann live schlicht nicht ausgeführt werden. Dein Backtest prüft eine Strategie, die es gar nicht gibt.</p>
+            <p><strong>Besser:</strong> Nur Daten nutzen, die im Moment der Entscheidung verfügbar sind.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">Perfekte Fills zu perfekten Kursen unterstellen</h3>
+<p><strong>Annahme im Backtest:</strong> „Ich kaufe exakt zu 100,00 $“</p>
+            <p><strong>Realität:</strong> Die Market-Order wird zu 100,12 $ ausgeführt (Spread + slippage)</p>
+            <p><strong>Auswirkung über 100 Trades:</strong></p>
+            <ul>
+              <li>Backtest-Gewinn: 5.000 $</li>
+              <li>Spreadkosten (0,10 $/Trade): -1.000 $</li>
+              <li>slippage (0,05 $/Trade): -500 $</li>
+              <li>Kommissionen (2 $/Trade): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Realität:</strong> Echter Gewinn = 3.300 $ (34 % weniger als im Backtest)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">Nur auf den Überlebenden testen</h3>
+            <p><strong>Was es ist:</strong> Backtesting nur auf den heutigen Werten des S&P 500</p>
+            <p><strong>Das Problem:</strong> Du klammerst über 200 Aktien aus, die delistet wurden oder pleitegingen</p>
+            <p><strong>Beispiel:</strong></p>
+            <ul>
+              <li>Backtest auf der S&P-500-Liste von 2024: 1,8R Erwartung, Profitfaktor 2,1</li>
+              <li>Über diesen Zeitraum wärst du aber long in Hertz (Insolvenz 2020), SVB Financial (Kollaps 2023) und in jedem anderen Namen gewesen, der auf null ging.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Realität:</strong> Deine Erwartung blendet katastrophale Verluste aus Delistings aus. Echte Erwartung: -0,2R (ein Verlustsystem).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 der Aha-Moment</h4>
+        <p>Ein Backtest ist nicht die Realität. Er ist eine Simulation. Und wenn deine Simulation unmögliche Annahmen enthält, werden deine Live-Ergebnisse ebenso unmöglich sein.</p>
+      </div>
+
+      <div class="section-break"><span>Teil 2: Realistische Kosten modellieren</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">Die versteckten Kosten, die Strategien töten</h2>
+
+      <p>Das ignorieren die meisten Backtests — und darum ist deiner wahrscheinlich 20-40 % zu optimistisch:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">Schritt 1: Geld-Brief-Spanne modellieren</summary>
+          <div class="accordion-content">
+            <p><strong>Was es ist:</strong> Der Unterschied zwischen Kauf- und Verkaufskurs</p>
+            <p><strong>Beispiel:</strong></p>
+            <ul>
+              <li>SPY Geld: 450,00 $ / Brief: 450,01 $ → Spread = 0,01 $</li>
+              <li>Du kaufst: zahlst 450,01 $ (halber Spread = 0,005 $)</li>
+              <li>Du verkaufst: bekommst 450,00 $ (halber Spread = 0,005 $)</li>
+            </ul>
+            <p><strong>Kosten pro Hin- und Rückweg:</strong> $0.01</p>
+            <p><strong>Für 1.000 Stück:</strong> 0,01 $ × 1.000 = 10 $ pro Trade</p>
+            <p><strong>100 Trades:</strong> 1.000 $ an Spreadkosten</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Schritt 2: slippage modellieren</summary>
+          <div class="accordion-content">
+            <p><strong>Was es ist:</strong> Unterschied zwischen gewünschtem Kurs und tatsächlichem Fill</p>
+            <p><strong>Realistische slippage nach Marktlage:</strong></p>
+            <ul>
+              <li><strong>Normale Liquidität:</strong> 0.01-0.02%</li>
+              <li><strong>Volatile Märkte:</strong> 0.05-0.10%</li>
+              <li><strong>Dünne Liquidität:</strong> 0.10-0.30%</li>
+              <li><strong>Große Positionsgröße:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>Konservative Annahme:</strong> 0,05 % pro Trade</p>
+            <p>10.000-$-Position × 0,05 % = 5 $ slippage je Seite = 10 $ hin und zurück</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Schritt 3: Kommissionen modellieren</summary>
+          <div class="accordion-content">
+            <p><strong>Beispiel: Interactive Brokers</strong></p>
+            <ul>
+              <li>0,005 $ je Stück, mindestens 1 $</li>
+              <li>200 Stück × 0,005 $ = 1 $ je Seite</li>
+              <li>Hin und zurück = 2 $</li>
+            </ul>
+            <p><strong>100 Trades:</strong> 200 $ an Kommissionen</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Schritt 4: Realistische Gesamtkosten</summary>
+          <div class="accordion-content">
+            <p><strong>Pro Trade (hin und zurück):</strong></p>
+            <ul>
+              <li>Spread: 10 $</li>
+              <li>slippage: 10 $</li>
+              <li>Kommission: 2 $</li>
+            </ul>
+            <p><strong>Gesamt: 22 $ pro Trade</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Wenn deine Strategie brutto 50 $ pro Trade bringt → 28 $ netto (44 % weniger!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">Beispielrechnung: Backtest mit Kosten</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>Vorher und nachher mit realistischen Kosten</h4>
+        <p><strong>Strategie: 100 Trades, im Schnitt 50 $ Gewinn pro Trade</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Backtest (Fantasie):</strong></p>
+        <p>100 Trades × 50 $ = 5.000 $ Gewinn</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Nach realistischen Kosten:</strong></p>
+        <ul>
+          <li>Brutto: 5.000 $</li>
+          <li>Spread: -1.000 $</li>
+          <li>slippage: -1.000 $</li>
+          <li>Kommissionen: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Nettogewinn: 2.800 $ (44 % weniger)</p>
+      </div>
+
 <div class="example-block">
         <h4>Zusammengesetztes Beispiel: wie aus einem „perfekten“ backtest mit 1,3R Erwartung live -0,45R wurden</h4>
 
@@ -463,172 +629,6 @@
         </div>
 
         <p><b>Die Lehre: Chris' Backtest war eine Fantasie. Wer 15.000 Parameterkombinationen testet, findet garantiert eine, die sich perfekt an historisches Rauschen schmiegt. Die „perfekte“ Erwartung von 1,3R war kurvengefitteter Müll. Ein Out-of-Sample-Test hätte das gezeigt, bevor 8.400 $ verloren waren. Beim Backtesting geht es nicht darum, die beste historische Leistung zu finden — sondern das, was künftig funktioniert. Und dafür braucht es ungesehene Daten, realistische Kosten und null Look-ahead-Bias.</b></p>
-      </div>
-
-      <div class="section-break"><span>Teil 1: Die vier Arten, wie Backtests lügen</span></div>
-
-      <div class="blog-callout">
-        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
-          Zum Vertiefen: Warum Backtesting-Ergebnisse wertlos sind (und was du stattdessen tun solltest) →
-        </a>
-      </div>
-      <!-- Prerequisites -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>&#128203; Voraussetzungen</h4>
-        <p>Diese Lektion baut auf Konzepten auf aus:</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Lektion 30: Volume Oracle</a> &mdash; Signal Pilot meistern</li>
-            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Lektion 31: Portfoliokonstruktion</a> &mdash; Signal Pilot meistern</li>
-        </ul>
-        <p style="margin-top:0.75rem">&#9989; Wenn du diese abgeschlossen hast, kann es losgehen. Andernfalls beginne zuerst mit den Grundlagenlektionen.</p>
-      </div>
-
-<h2 id="why-your-perfect-strategy-will-fail-live">Warum deine perfekte Strategie live scheitern wird</h2>
-
-      <p>Fangen wir mit der unbequemen Wahrheit an: Wenn du eine Strategie so optimiert hast, dass sie zu historischen Daten passt, hast du keinen Vorteil gefunden. Du hast Rauschen gefunden.</p>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">Problem 1: Overfitting</button>
-          <button>Problem 2: Look-ahead-Bias</button>
-          <button>Problem 3: Ausführungsfantasie</button>
-          <button>Problem 4: Survivorship-Bias</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="curve-fitting-to-random-noise">Kurvenanpassung an zufälliges Rauschen</h3>
-            <p><strong>Was es ist:</strong> Parameter so lange optimieren, bis der Backtest perfekt aussieht</p>
-            <p><strong>Beispiel:</strong></p>
-            <ul>
-              <li>Du testest 100 verschiedene EMA-Perioden (10, 11, 12 … 110)</li>
-              <li>EMA(47) liefert im Backtest 4,2R Erwartung</li>
-              <li>Du glaubst, du hättest die „magische Zahl“ gefunden</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Realität:</strong> EMA(47) passte einfach zufällig zu genau diesem Datensatz. Und im Forward-Test? -0,8R Erwartung. Du hast das Rauschen gelernt, nicht das Signal.</p>
-            <p><strong>Besser:</strong> Optimierung begrenzen. Standardparameter nutzen. Auf ungesehenen Daten testen.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="using-future-data-impossible-in-live-trading">Zukunftsdaten nutzen (im Live-Handel unmöglich)</h3>
-            <p><strong>Was es ist:</strong> Code, der in künftige Kerzen „späht“, um heutige Entscheidungen zu treffen</p>
-            <p><strong>Beispiel:</strong></p>
-            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # nutzt die 5 ZUKÜNFTIGEN Kerzen
-    enter_long()</code></pre>
-            <p><strong>Das Problem:</strong> Beim Backtesting hast du Zukunftsdaten. Im Live-Handel nicht.</p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Realität:</strong> Dieser Code kann live schlicht nicht ausgeführt werden. Dein Backtest prüft eine Strategie, die es gar nicht gibt.</p>
-            <p><strong>Besser:</strong> Nur Daten nutzen, die im Moment der Entscheidung verfügbar sind.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="assuming-perfect-fills-at-perfect-prices">Perfekte Fills zu perfekten Kursen unterstellen</h3>
-<p><strong>Annahme im Backtest:</strong> „Ich kaufe exakt zu 100,00 $“</p>
-            <p><strong>Realität:</strong> Die Market-Order wird zu 100,12 $ ausgeführt (Spread + slippage)</p>
-            <p><strong>Auswirkung über 100 Trades:</strong></p>
-            <ul>
-              <li>Backtest-Gewinn: 5.000 $</li>
-              <li>Spreadkosten (0,10 $/Trade): -1.000 $</li>
-              <li>slippage (0,05 $/Trade): -500 $</li>
-              <li>Kommissionen (2 $/Trade): -200 $</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Realität:</strong> Echter Gewinn = 3.300 $ (34 % weniger als im Backtest)</p>
-          </div>
-          <div class="tab-panel"><h3 id="testing-only-on-survivors">Nur auf den Überlebenden testen</h3>
-            <p><strong>Was es ist:</strong> Backtesting nur auf den heutigen Werten des S&P 500</p>
-            <p><strong>Das Problem:</strong> Du klammerst über 200 Aktien aus, die delistet wurden oder pleitegingen</p>
-            <p><strong>Beispiel:</strong></p>
-            <ul>
-              <li>Backtest auf der S&P-500-Liste von 2024: 1,8R Erwartung, Profitfaktor 2,1</li>
-              <li>Über diesen Zeitraum wärst du aber long in Hertz (Insolvenz 2020), SVB Financial (Kollaps 2023) und in jedem anderen Namen gewesen, der auf null ging.</li>
-            </ul>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Realität:</strong> Deine Erwartung blendet katastrophale Verluste aus Delistings aus. Echte Erwartung: -0,2R (ein Verlustsystem).</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="callout-key">
-        <h4>💡 der Aha-Moment</h4>
-        <p>Ein Backtest ist nicht die Realität. Er ist eine Simulation. Und wenn deine Simulation unmögliche Annahmen enthält, werden deine Live-Ergebnisse ebenso unmöglich sein.</p>
-      </div>
-
-      <div class="section-break"><span>Teil 2: Realistische Kosten modellieren</span></div>
-<h2 id="the-hidden-costs-that-kill-strategies">Die versteckten Kosten, die Strategien töten</h2>
-
-      <p>Das ignorieren die meisten Backtests — und darum ist deiner wahrscheinlich 20-40 % zu optimistisch:</p>
-
-      <div class="accordion">
-        <details class="accordion-item">
-          <summary class="accordion-header">Schritt 1: Geld-Brief-Spanne modellieren</summary>
-          <div class="accordion-content">
-            <p><strong>Was es ist:</strong> Der Unterschied zwischen Kauf- und Verkaufskurs</p>
-            <p><strong>Beispiel:</strong></p>
-            <ul>
-              <li>SPY Geld: 450,00 $ / Brief: 450,01 $ → Spread = 0,01 $</li>
-              <li>Du kaufst: zahlst 450,01 $ (halber Spread = 0,005 $)</li>
-              <li>Du verkaufst: bekommst 450,00 $ (halber Spread = 0,005 $)</li>
-            </ul>
-            <p><strong>Kosten pro Hin- und Rückweg:</strong> $0.01</p>
-            <p><strong>Für 1.000 Stück:</strong> 0,01 $ × 1.000 = 10 $ pro Trade</p>
-            <p><strong>100 Trades:</strong> 1.000 $ an Spreadkosten</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Schritt 2: slippage modellieren</summary>
-          <div class="accordion-content">
-            <p><strong>Was es ist:</strong> Unterschied zwischen gewünschtem Kurs und tatsächlichem Fill</p>
-            <p><strong>Realistische slippage nach Marktlage:</strong></p>
-            <ul>
-              <li><strong>Normale Liquidität:</strong> 0.01-0.02%</li>
-              <li><strong>Volatile Märkte:</strong> 0.05-0.10%</li>
-              <li><strong>Dünne Liquidität:</strong> 0.10-0.30%</li>
-              <li><strong>Große Positionsgröße:</strong> 0.20-0.50%</li>
-            </ul>
-            <p><strong>Konservative Annahme:</strong> 0,05 % pro Trade</p>
-            <p>10.000-$-Position × 0,05 % = 5 $ slippage je Seite = 10 $ hin und zurück</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Schritt 3: Kommissionen modellieren</summary>
-          <div class="accordion-content">
-            <p><strong>Beispiel: Interactive Brokers</strong></p>
-            <ul>
-              <li>0,005 $ je Stück, mindestens 1 $</li>
-              <li>200 Stück × 0,005 $ = 1 $ je Seite</li>
-              <li>Hin und zurück = 2 $</li>
-            </ul>
-            <p><strong>100 Trades:</strong> 200 $ an Kommissionen</p>
-          </div>
-        </details>
-
-        <details class="accordion-item">
-          <summary class="accordion-header">Schritt 4: Realistische Gesamtkosten</summary>
-          <div class="accordion-content">
-            <p><strong>Pro Trade (hin und zurück):</strong></p>
-            <ul>
-              <li>Spread: 10 $</li>
-              <li>slippage: 10 $</li>
-              <li>Kommission: 2 $</li>
-            </ul>
-            <p><strong>Gesamt: 22 $ pro Trade</strong></p>
-            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Wenn deine Strategie brutto 50 $ pro Trade bringt → 28 $ netto (44 % weniger!)</p>
-          </div>
-        </details>
-      </div>
-<h3 id="backtest-adjustment-example">Beispielrechnung: Backtest mit Kosten</h3>
-<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
-        <h4>Vorher und nachher mit realistischen Kosten</h4>
-        <p><strong>Strategie: 100 Trades, im Schnitt 50 $ Gewinn pro Trade</strong></p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Backtest (Fantasie):</strong></p>
-        <p>100 Trades × 50 $ = 5.000 $ Gewinn</p>
-        <hr style="margin:1rem 0;opacity:.3">
-        <p><strong>Nach realistischen Kosten:</strong></p>
-        <ul>
-          <li>Brutto: 5.000 $</li>
-          <li>Spread: -1.000 $</li>
-          <li>slippage: -1.000 $</li>
-          <li>Kommissionen: -200 $</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Nettogewinn: 2.800 $ (44 % weniger)</p>
       </div>
 
       <div class="section-break"><span>Teil 3: In-Sample gegen Out-of-Sample</span></div>
