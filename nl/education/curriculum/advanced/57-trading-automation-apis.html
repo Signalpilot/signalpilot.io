@@ -153,11 +153,11 @@
   <div class="quiz-options">
     <div class="quiz-option" data-correct="false">A) Slippage bij de uitvoering en latentieproblemen</div>
     <div class="quiz-option" data-correct="false">B) De API-verbinding viel weg tijdens de klap</div>
-    <div class="quiz-option" data-correct="true">C) NUL veiligheidscontroles: de bot middelde 4× bij tijdens een daling van 7 % op één dag en kwam op een positie van $800.000 (4× hefboom) op een rekening van $200.000</div>
-    <div class="quiz-option" data-correct="false">D) Een codefout leverde dubbele orders op</div>
+    <div class="quiz-option" data-correct="false">C) Een codefout leverde dubbele orders op</div>
+    <div class="quiz-option" data-correct="true">D) NUL veiligheidscontroles: de bot middelde 4× bij tijdens een daling van 7 % op één dag en kwam op een positie van $800.000 (4× hefboom) op een rekening van $200.000</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Juist: C.</strong> Mike programmeerde «koop bij een oververkochte RSI», maar nooit positielimieten, volatiliteitsfilters of een noodstop. De bot bouwde tijdens de klap een 4× gehefboomde positie op: $19.005 in de min en een margin call voordat hij bij een toetsenbord kon komen. Herstel: 5 veiligheidscontroles toegevoegd, van $195.000 naar $218.000 in 8 maanden. Programmeer EERST de veiligheidscontroles.
+    <strong>Correct: D.</strong> Mike programmeerde «koop bij een oververkochte RSI», maar nooit positielimieten, volatiliteitsfilters of een noodstop. De bot bouwde tijdens de klap een 4× gehefboomde positie op: $19.005 in de min en een margin call voordat hij bij een toetsenbord kon komen. Herstel: 5 veiligheidscontroles toegevoegd, van $195.000 naar $218.000 in 8 maanden. Programmeer EERST de veiligheidscontroles.
   </div>
 </div>
 
@@ -173,10 +173,31 @@
 </details>
 
 <div class="section-break"><span>Deel 1: waarom zou je je handel automatiseren?</span></div>
+      <div class="callout-tip">
+        <h4>&#127919; Wat je gaat beheersen</h4>
+        <p>Aan het eind van deze les begrijp je:</p>
+        <ul>
+          <li>Waarom automatisering emotie wegneemt maar een strategie zonder edge niet kan redden</li>
+          <li>Hoe je van een tradingidee naar uitvoerbare code tegen een broker-API komt</li>
+          <li>Hoe een realistische paper-tradingperiode eruitziet vóór echt geld, en waarom die meerdere marktomstandigheden omspant</li>
+          <li>De operationele kant: foutafhandeling, noodstopschakelaars, hosting en de maandelijkse onderhoudscheck</li>
+        </ul>
+      </div>
+
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Vereisten</h4>
+        <p>Deze les bouwt voort op begrippen uit:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/advanced/55-machine-learning-trading.html" style="color:#00d4aa;text-decoration:underline">Les 55: Machine learning in trading</a> &mdash; Algoritmisch handelen</li>
+            <li><a href="/education/curriculum/advanced/56-high-frequency-concepts.html" style="color:#00d4aa;text-decoration:underline">Les 56: Concepten van hoogfrequente handel</a> &mdash; Algoritmisch handelen</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Heb je die afgerond, dan ben je klaar om te beginnen. Zo niet, start dan eerst met de basislessen.</p>
+      </div>
 
 <h2 id="the-human-problem">Het menselijke probleem in trading</h2>
 
-<p>Je hebt 6 maanden aan een strategie geschaafd. Gebacktest. Vooruit getest. Winstpercentage: 62 %. Gemiddelde R: 2,3. Edge bevestigd.</p>
+<p>Je hebt 6 maanden besteed aan het perfectioneren van een tradingstrategie. Gebacktest. Vooruit getest. Trefkans: 62%. Uitbetalingsratio: 2,3:1. Edge bevestigd.</p>
 
 <p>Je gaat er live mee handelen. Het resultaat?</p>
 
@@ -746,6 +767,8 @@ except Exception as e:
 <h3>Maandelijkse onderhoudschecklist voor de bot</h3>
       <p><strong>1. Prestatiecijfers:</strong> Winstpercentage binnen 5 % van de backtest? Gemiddelde R positief? Drawdown acceptabel? Slippage verslechterd? <strong>2. Foutlogboeken:</strong> Verbindingsfouten, geweigerde orders, randgevallen. <strong>3. Regimecheck:</strong> Is de markt nog gunstig voor de strategie? VIX hoog → pauzeren. Lage volatiliteit → breakouts hebben het zwaar.</p>
 
+      <p><strong>Waar Signal Pilot hierin staat:</strong> De indicatoren produceren het signaal, maar automatisering heeft nodig dat dat signaal de grafiek verlaat. In de praktijk betekent dat een TradingView-alert die een gestructureerde payload naar de webhook stuurt waar je bot op luistert, zodat de instapvoorwaarde waarop je code handelt dezelfde is die je visueel valideerde &mdash; en niet een herimplementatie in Python die stilletjes van het origineel afdrijft.</p>
+
       <div class="key-takeaway">
         <h4>🎓 De kern</h4>
         <ul>
@@ -802,19 +825,22 @@ except Exception as e:
         <div class="quiz-question">
           <p><strong>Vraag 1: je hebt een bot gecodeerd die perfect draait in papieren modus. Wat is de minimale testperiode voordat je live gaat?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">
-              <strong>A)</strong> 1 week (als hij werkt, live ermee!)
+            <div class="quiz-option" data-correct="true">
+              <strong>A)</strong> 3-6 maanden (consistentie over verschillende marktomstandigheden nagaan)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>B)</strong> 1 maand (genoeg om te zien of hij winstgevend is)
             </div>
-            <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> 3-6 maanden (consistentie over verschillende marktomstandigheden nagaan)
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> 1 week (als hij werkt, live ermee!)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> Testen is niet nodig (de backtest volstaat)
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Juist: A.</strong> Een week of een maand vertelt je alleen dat de strategie één marktregime heeft overleefd, en een bot die niets anders dan een trendmatige tape heeft verhandeld is niet getest, die heeft geluk gehad. Drie tot zes maanden is het kortste venster dat wisselende omstandigheden omspant. D is de fout waar de volgende vraag over gaat: een backtest is een hypothese over het verleden, geen bewijs over het heden.
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 
@@ -824,16 +850,19 @@ except Exception as e:
             <div class="quiz-option" data-correct="false">
               <strong>A)</strong> De broker saboteert je trades
             </div>
-            <div class="quiz-option" data-correct="false">
-              <strong>B)</strong> Je code heeft een bug (willekeurig gedrag)
-            </div>
             <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> Het marktregime is veranderd (de strategie past niet bij de huidige omstandigheden)
+              <strong>B)</strong> Het marktregime is veranderd (de strategie past niet bij de huidige omstandigheden)
+            </div>
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> Je code heeft een bug (willekeurig gedrag)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> Backtesting is nutteloos (het faalt altijd live)
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Juist: B.</strong> Een daling van 65% naar 48% die twee maanden aanhoudt is groot, aanhoudend en gericht &mdash; zo ziet een regimewissel eruit. C is het uitsluiten waard, maar een bug levert meestal grillig gedrag of ronduit fouten op, niet een consistente verschuiving in trefkans. A is geen mechanisme. D overcorrigeert: backtests falen wanneer ze op één regime zijn gefit, en dat pleit voor walk-forward testen, niet voor het opgeven van testen.
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 

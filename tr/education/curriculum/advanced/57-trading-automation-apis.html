@@ -153,11 +153,11 @@
   <div class="quiz-options">
     <div class="quiz-option" data-correct="false">A) Emir uygulamasındaki slippage ve gecikme sorunları</div>
     <div class="quiz-option" data-correct="false">B) Çöküş sırasında API bağlantısı koptu</div>
-    <div class="quiz-option" data-correct="true">C) SIFIR güvenlik kontrolü: bot bir günde %7’lik düşüş boyunca 4 kez maliyet düşürdü ve 200.000 dolarlık hesapta 800.000 dolarlık (4 kat kaldıraçlı) pozisyona ulaştı</div>
-    <div class="quiz-option" data-correct="false">D) Koddaki bir hata mükerrer emir üretti</div>
+    <div class="quiz-option" data-correct="false">C) Koddaki bir hata mükerrer emir üretti</div>
+    <div class="quiz-option" data-correct="true">D) SIFIR güvenlik kontrolü: bot bir günde %7’lik düşüş boyunca 4 kez maliyet düşürdü ve 200.000 dolarlık hesapta 800.000 dolarlık (4 kat kaldıraçlı) pozisyona ulaştı</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Doğru: C.</strong> Mike «RSI aşırı satımdayken al» kısmını kodladı ama pozisyon limitini, volatilite filtresini ya da acil durdurmayı hiç kodlamadı. Bot çöküşün ortasında 4 kat kaldıraçlı bir pozisyon kurdu: klavyeye ulaşamadan 19.005 dolar zarar ve bir teminat çağrısı. Toparlanma: 5 güvenlik kontrolü ekledi ve 8 ayda 195.000 doları 218.000 dolara çıkardı. Güvenlik kontrollerini ÖNCE kodla.
+    <strong>Doğru: D.</strong> Mike «RSI aşırı satımdayken al» kısmını kodladı ama pozisyon limitini, volatilite filtresini ya da acil durdurmayı hiç kodlamadı. Bot çöküşün ortasında 4 kat kaldıraçlı bir pozisyon kurdu: klavyeye ulaşamadan 19.005 dolar zarar ve bir teminat çağrısı. Toparlanma: 5 güvenlik kontrolü ekledi ve 8 ayda 195.000 doları 218.000 dolara çıkardı. Güvenlik kontrollerini ÖNCE kodla.
   </div>
 </div>
 
@@ -173,10 +173,31 @@
 </details>
 
 <div class="section-break"><span>1. Bölüm: neden işlemlerini otomatikleştirmelisin?</span></div>
+      <div class="callout-tip">
+        <h4>&#127919; Neyde ustalaşacaksın</h4>
+        <p>Bu dersin sonunda şunları anlayacaksın:</p>
+        <ul>
+          <li>Otomasyonun duyguyu neden ortadan kaldırdığı ama üstünlüğü olmayan bir stratejiyi kurtaramadığı</li>
+          <li>Bir trading fikrinden, bir aracı kurum API’sine karşı çalışan yürütülebilir koda nasıl geçilir</li>
+          <li>Gerçek parayla başlamadan önceki gerçekçi bir paper trading döneminin nasıl göründüğü ve neden farklı piyasa koşullarını kapsadığı</li>
+          <li>Operasyonel taraf: hata yönetimi, acil durdurma anahtarları, barındırma ve aylık bakım kontrolü</li>
+        </ul>
+      </div>
+
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Ön koşullar</h4>
+        <p>Bu ders şu derslerdeki kavramların üzerine kurulu:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/advanced/55-machine-learning-trading.html" style="color:#00d4aa;text-decoration:underline">Ders 55: Trading’de makine öğrenmesi</a> &mdash; Algoritmik trading</li>
+            <li><a href="/education/curriculum/advanced/56-high-frequency-concepts.html" style="color:#00d4aa;text-decoration:underline">Ders 56: Yüksek frekanslı işlem kavramları</a> &mdash; Algoritmik trading</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Bunları tamamladıysan hazırsın. Tamamlamadıysan önce temel derslerle başla.</p>
+      </div>
 
 <h2 id="the-human-problem">Trading’deki insan sorunu</h2>
 
-<p>Bir stratejiyi 6 ay boyunca cilaladın. Backtest yaptın. İleriye dönük test ettin. Kazanma oranı: %62. Ortalama R: 2,3. Avantaj doğrulandı.</p>
+<p>Bir trading stratejisini mükemmelleştirmek için 6 ay harcadın. Backtest ettin. İleriye dönük test ettin. Kazanma oranı: %62. Payoff ratio: 2,3:1. Üstünlük doğrulandı.</p>
 
 <p>Gerçek parayla işlem yapmaya başlıyorsun. Sonuç?</p>
 
@@ -746,6 +767,8 @@ except Exception as e:
 <h3>Botun aylık bakım listesi</h3>
       <p><strong>1. Performans ölçütleri:</strong> Kazanma oranı backtest’in %5 içinde mi? Ortalama R pozitif mi? Drawdown kabul edilebilir mi? Slippage kötüleşti mi? <strong>2. Hata kayıtları:</strong> Bağlantı hataları, reddedilen emirler, uç durumlar. <strong>3. Rejim kontrolü:</strong> Piyasa hâlâ stratejiye uygun mu? VIX yüksek → duraklat. Düşük volatilite → kırılımlar zorlanır.</p>
 
+      <p><strong>Signal Pilot bu işin neresinde:</strong> Sinyali göstergeler üretir, ama otomasyonun o sinyalin grafikten çıkmasına ihtiyacı vardır. Pratikte bu, yapılandırılmış bir yükü botunun dinlediği webhook’a taşıyan bir TradingView uyarısı demektir; böylece kodunun göre hareket ettiği giriş koşulu, gözle doğruladığın koşulun ta kendisi olur &mdash; sessizce özgününden uzaklaşan bir Python yeniden yazımı değil.</p>
+
       <div class="key-takeaway">
         <h4>🎓 Öne çıkanlar</h4>
         <ul>
@@ -802,19 +825,22 @@ except Exception as e:
         <div class="quiz-question">
           <p><strong>Soru 1: kâğıt üzerinde kusursuz çalışan bir bot yazdın. Gerçeğe geçmeden önceki asgari test süresi nedir?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">
-              <strong>A)</strong> 1 hafta (çalışıyorsa devreye al!)
+            <div class="quiz-option" data-correct="true">
+              <strong>A)</strong> 3-6 ay (farklı piyasa koşullarında tutarlılığı doğrulamak)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>B)</strong> 1 ay (kârlı olup olmadığını görmeye yeter)
             </div>
-            <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> 3-6 ay (farklı piyasa koşullarında tutarlılığı doğrulamak)
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> 1 hafta (çalışıyorsa devreye al!)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> Teste gerek yok (backtest yeterli)
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Doğru: A.</strong> Bir hafta ya da bir ay sana yalnızca stratejinin tek bir piyasa rejimini atlattığını söyler; trend hâlindeki bir tape dışında hiçbir şey görmemiş bir bot test edilmiş değildir, şanslı olmuştur. Değişen koşulları kapsayan en kısa pencere üç ilâ altı aydır. D, bir sonraki sorunun konusu olan hatadır: backtest geçmişe dair bir hipotezdir, bugüne dair bir kanıt değil.
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 
@@ -824,16 +850,19 @@ except Exception as e:
             <div class="quiz-option" data-correct="false">
               <strong>A)</strong> Aracı kurum işlemlerini sabote ediyor
             </div>
-            <div class="quiz-option" data-correct="false">
-              <strong>B)</strong> Kodunda bir hata var (rastgele davranış)
-            </div>
             <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> Piyasa rejimi değişti (strateji mevcut koşullara uymuyor)
+              <strong>B)</strong> Piyasa rejimi değişti (strateji mevcut koşullara uymuyor)
+            </div>
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> Kodunda bir hata var (rastgele davranış)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> Backtesting işe yaramaz (gerçekte hep çuvallar)
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Doğru: B.</strong> %65’ten %48’e inen ve iki ay süren bir düşüş büyüktür, kalıcıdır ve yönlüdür &mdash; rejim değişimi tam da böyle görünür. C’yi elemekte yarar var, ama bir yazılım hatası genellikle düzensiz davranış ya da açık hatalar üretir, kazanma oranında tutarlı bir kayma değil. A bir mekanizma değildir. D fazla düzeltir: backtest’ler tek bir rejime uydurulduklarında başarısız olur; bu da walk-forward testini savunur, testten vazgeçmeyi değil.
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 

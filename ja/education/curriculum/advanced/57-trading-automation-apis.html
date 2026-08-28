@@ -153,11 +153,11 @@
   <div class="quiz-options">
     <div class="quiz-option" data-correct="false">A) 執行のslippageとレイテンシーの問題</div>
     <div class="quiz-option" data-correct="false">B) 暴落中にAPIの接続が切れた</div>
-    <div class="quiz-option" data-correct="true">C) 安全装置がゼロ — ボットは1日で7%下げる中で4回ナンピンし、20万ドルの口座で80万ドル（レバレッジ4倍）のポジションを抱えた</div>
-    <div class="quiz-option" data-correct="false">D) コードのバグで注文が二重に出た</div>
+    <div class="quiz-option" data-correct="false">C) コードのバグで注文が二重に出た</div>
+    <div class="quiz-option" data-correct="true">D) 安全装置がゼロ — ボットは1日で7%下げる中で4回ナンピンし、20万ドルの口座で80万ドル（レバレッジ4倍）のポジションを抱えた</div>
   </div>
   <div class="quiz-explanation">
-    <strong>正解：C。</strong> マイクは「RSIが売られすぎたら買う」はコードにしたが、ポジション上限もボラティリティフィルターも緊急停止も一度もコードにしなかった。暴落のさなかにボットはレバレッジ4倍のポジションを組み上げ、彼がキーボードにたどり着く前に1万9,005ドルの含み損と追証が確定した。立て直し：5つの安全装置を追加し、8か月で19万5,000ドルを21万8,000ドルに。安全装置を最初にコードにすること。
+    <strong>正解：D。</strong> マイクは「RSIが売られすぎたら買う」はコードにしたが、ポジション上限もボラティリティフィルターも緊急停止も一度もコードにしなかった。暴落のさなかにボットはレバレッジ4倍のポジションを組み上げ、彼がキーボードにたどり着く前に1万9,005ドルの含み損と追証が確定した。立て直し：5つの安全装置を追加し、8か月で19万5,000ドルを21万8,000ドルに。安全装置を最初にコードにすること。
   </div>
 </div>
 
@@ -173,10 +173,31 @@
 </details>
 
 <div class="section-break"><span>パート1：なぜ取引を自動化するのか</span></div>
+      <div class="callout-tip">
+        <h4>&#127919; 習得すること</h4>
+        <p>このレッスンを終える頃には、次のことが分かります：</p>
+        <ul>
+          <li>自動化が感情を取り除ける一方で、エッジのない戦略は救えない理由</li>
+          <li>トレードのアイデアから、ブローカーの API を叩く実行可能なコードまでの進み方</li>
+          <li>実弾の前に置くべき現実的なペーパートレード期間の姿と、それが複数の相場環境をまたぐ理由</li>
+          <li>運用面：エラー処理、キルスイッチ、ホスティング、そして毎月の保守チェック</li>
+        </ul>
+      </div>
+
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; 前提知識</h4>
+        <p>このレッスンは次の内容を土台にしています：</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/advanced/55-machine-learning-trading.html" style="color:#00d4aa;text-decoration:underline">レッスン55：トレーディングにおける機械学習</a> &mdash; アルゴリズム取引</li>
+            <li><a href="/education/curriculum/advanced/56-high-frequency-concepts.html" style="color:#00d4aa;text-decoration:underline">レッスン56：高頻度取引の概念</a> &mdash; アルゴリズム取引</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; これらを終えていれば準備は整っています。まだなら、まず基礎のレッスンから始めてください。</p>
+      </div>
 
 <h2 id="the-human-problem">トレーディングにおける人間の問題</h2>
 
-<p>あなたは6か月かけて戦略を磨いた。backtestもした。フォワードテストもした。勝率62%。平均R 2.3。優位性は確認済みだ。</p>
+<p>あなたは6か月かけてトレード戦略を磨き上げた。backtest も済ませた。フォワードテストも済ませた。勝率62％。payoff ratio 2.3:1。エッジは確認済みだ。</p>
 
 <p>それを実弾で回し始める。結果は？</p>
 
@@ -746,6 +767,8 @@ except Exception as e:
 <h3>ボットの月次メンテナンス項目</h3>
       <p><strong>1. 成績の指標：</strong> 勝率はbacktestの5%以内か？ 平均Rはプラスか？ Drawdownは許容範囲か？ Slippageは悪化していないか？ <strong>2. エラーログ：</strong> 接続エラー、注文の拒否、想定外のケース。 <strong>3. レジーム点検：</strong> 相場はまだこの戦略に向いているか？ VIXが高い → 一時停止。低ボラ → ブレイクアウトは苦戦する。</p>
 
+      <p><strong>この件で Signal Pilot が立つ位置：</strong> シグナルを作るのはインジケーターだが、自動化にはそのシグナルがチャートの外へ出ていく必要がある。実務的には、構造化したペイロードを載せた TradingView のアラートを、ボットが待ち受ける webhook へ送るということだ。そうすればコードが従うエントリー条件は、あなたが目で検証したものと同じになる &mdash; 元の条件から静かにずれていく Python の再実装ではなく。</p>
+
       <div class="key-takeaway">
         <h4>🎓 要点</h4>
         <ul>
@@ -802,19 +825,22 @@ except Exception as e:
         <div class="quiz-question">
           <p><strong>設問1：ペーパートレードで完璧に動くボットを書いた。実弾に移る前の最低限のテスト期間は？</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">
-              <strong>A)</strong> 1週間（動くなら投入だ！）
+            <div class="quiz-option" data-correct="true">
+              <strong>A)</strong> 3〜6か月（さまざまな相場条件での一貫性を確かめる）
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>B)</strong> 1か月（利益が出るか見るには十分）
             </div>
-            <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> 3〜6か月（さまざまな相場条件での一貫性を確かめる）
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> 1週間（動くなら投入だ！）
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> テストは不要（backtestで十分）
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>正解：A。</strong> 1週間や1か月でわかるのは、その戦略がひとつの相場レジームを生き延びたということだけだ。トレンドしか経験していないボットは、テストされたのではなく運がよかっただけだ。移り変わる環境をまたぐ最短の期間は3〜6か月である。D は次の設問が扱う誤りだ：backtest は過去についての仮説であって、現在についての証拠ではない。
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 
@@ -824,16 +850,19 @@ except Exception as e:
             <div class="quiz-option" data-correct="false">
               <strong>A)</strong> ブローカーがあなたのトレードを妨害している
             </div>
-            <div class="quiz-option" data-correct="false">
-              <strong>B)</strong> コードにバグがある（挙動がランダム）
-            </div>
             <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> 相場のレジームが変わった（戦略が今の環境に合っていない）
+              <strong>B)</strong> 相場のレジームが変わった（戦略が今の環境に合っていない）
+            </div>
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> コードにバグがある（挙動がランダム）
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> Backtestingは無意味（実運用では必ず崩れる）
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>正解：B。</strong> 65％から48％への低下が2か月続いているなら、それは大きく、持続的で、方向性がある &mdash; レジーム変化とはそういう見え方をする。C は排除しておく価値があるが、バグはたいてい不規則な挙動や明白なエラーとして出るのであって、勝率の一貫した低下としては出にくい。A は仕組みではない。D は行きすぎた修正だ：backtest が失敗するのは単一のレジームに適合させたときであり、それはウォークフォワード検証を求める論拠であって、検証をやめる論拠ではない。
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 

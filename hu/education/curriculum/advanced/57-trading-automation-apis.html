@@ -153,11 +153,11 @@
   <div class="quiz-options">
     <div class="quiz-option" data-correct="false">A) Végrehajtási slippage és késleltetési gondok</div>
     <div class="quiz-option" data-correct="false">B) Az API-kapcsolat megszakadt az összeomlás alatt</div>
-    <div class="quiz-option" data-correct="true">C) NULLA biztonsági kontroll: a bot négyszer átlagolt lefelé egy 7 %-os napi esés alatt, és 200 000 dolláros számlán 800 000 dolláros (4-szeres tőkeáttételű) pozícióig jutott</div>
-    <div class="quiz-option" data-correct="false">D) Egy kódhiba dupla megbízásokat adott</div>
+    <div class="quiz-option" data-correct="false">C) Egy kódhiba dupla megbízásokat adott</div>
+    <div class="quiz-option" data-correct="true">D) NULLA biztonsági kontroll: a bot négyszer átlagolt lefelé egy 7 %-os napi esés alatt, és 200 000 dolláros számlán 800 000 dolláros (4-szeres tőkeáttételű) pozícióig jutott</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Helyes: C.</strong> Mike lekódolta, hogy «vásárolj, ha az RSI túladott», de soha nem kódolt pozíciólimitet, volatilitásszűrőt vagy vészleállítót. A bot az összeomlás közben 4-szeres tőkeáttételű pozíciót épített: 19 005 dollár mínusz és egy letéthívás, mielőtt Mike egyáltalán billentyűzet közelébe ért volna. Talpra állás: 5 biztonsági kontroll hozzáadva, 8 hónap alatt 195 000 dollárból 218 000 dollár. A biztonsági kontrollokat kódold le ELŐSZÖR.
+    <strong>Helyes: D.</strong> Mike lekódolta, hogy «vásárolj, ha az RSI túladott», de soha nem kódolt pozíciólimitet, volatilitásszűrőt vagy vészleállítót. A bot az összeomlás közben 4-szeres tőkeáttételű pozíciót épített: 19 005 dollár mínusz és egy letéthívás, mielőtt Mike egyáltalán billentyűzet közelébe ért volna. Talpra állás: 5 biztonsági kontroll hozzáadva, 8 hónap alatt 195 000 dollárból 218 000 dollár. A biztonsági kontrollokat kódold le ELŐSZÖR.
   </div>
 </div>
 
@@ -173,10 +173,31 @@
 </details>
 
 <div class="section-break"><span>1. rész: miért automatizáld a kereskedésedet?</span></div>
+      <div class="callout-tip">
+        <h4>&#127919; Amit elsajátítasz</h4>
+        <p>A lecke végére érteni fogod:</p>
+        <ul>
+          <li>Miért veszi el az automatizálás az érzelmet, és miért nem menti meg az előny nélküli stratégiát</li>
+          <li>Hogyan jutsz el egy kereskedési ötlettől a bróker API-ja ellen futtatható kódig</li>
+          <li>Hogyan néz ki egy valósághű papírkereskedési időszak az éles pénz előtt, és miért ível át több piaci helyzeten</li>
+          <li>Az üzemeltetési oldal: hibakezelés, vészleállítók, hosztolás és a havi karbantartási ellenőrzés</li>
+        </ul>
+      </div>
+
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Előfeltételek</h4>
+        <p>Ez a lecke a következők fogalmaira épül:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/advanced/55-machine-learning-trading.html" style="color:#00d4aa;text-decoration:underline">55. lecke: Gépi tanulás a kereskedésben</a> &mdash; Algoritmikus kereskedés</li>
+            <li><a href="/education/curriculum/advanced/56-high-frequency-concepts.html" style="color:#00d4aa;text-decoration:underline">56. lecke: Nagyfrekvenciás kereskedési fogalmak</a> &mdash; Algoritmikus kereskedés</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Ha ezeket elvégezted, készen állsz. Ha nem, kezdd előbb az alapozó leckékkel.</p>
+      </div>
 
 <h2 id="the-human-problem">Az emberi probléma a kereskedésben</h2>
 
-<p>6 hónapot töltöttél egy stratégia csiszolásával. Backtestelted. Előre tesztelted. Találati arány: 62 %. Átlagos R: 2,3. Az előny igazolva.</p>
+<p>6 hónapot töltöttél egy kereskedési stratégia tökéletesítésével. Backtestelted. Előre is tesztelted. Találati arány: 62%. Payoff ratio: 2,3:1. Az előny igazolva.</p>
 
 <p>Elkezded élesben kereskedni. Az eredmény?</p>
 
@@ -746,6 +767,8 @@ except Exception as e:
 <h3>A bot havi karbantartási listája</h3>
       <p><strong>1. Teljesítménymutatók:</strong> A találati arány a backtest 5 %-án belül van? Az átlagos R pozitív? A drawdown elfogadható? Romlott a slippage? <strong>2. Hibanaplók:</strong> Kapcsolati hibák, elutasított megbízások, szélsőséges esetek. <strong>3. Rezsimellenőrzés:</strong> A piac még mindig kedvez a stratégiának? Magas VIX → szüneteltetés. Alacsony volatilitás → a kitörések nehezen mennek.</p>
 
+      <p><strong>Hol áll ebben a Signal Pilot:</strong> A jelet az indikátorok állítják elő, az automatizálásnak viszont arra van szüksége, hogy ez a jel elhagyja a grafikont. A gyakorlatban ez egy TradingView-riasztást jelent, amely strukturált adatcsomagot visz a webhookra, amit a botod hallgat — így a belépési feltétel, amire a kódod reagál, ugyanaz, amit szemmel validáltál &mdash; nem pedig egy Python-újraimplementáció, ami csendben elsodródik az eredetitől.</p>
+
       <div class="key-takeaway">
         <h4>🎓 A lényeg</h4>
         <ul>
@@ -802,19 +825,22 @@ except Exception as e:
         <div class="quiz-question">
           <p><strong>1. kérdés: írtál egy botot, amely papírkereskedésben tökéletesen fut. Mennyi a minimális tesztidő az éles indulás előtt?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">
-              <strong>A)</strong> 1 hét (ha megy, élesítsd!)
+            <div class="quiz-option" data-correct="true">
+              <strong>A)</strong> 3-6 hónap (a következetesség ellenőrzése különböző piaci körülmények között)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>B)</strong> 1 hónap (elég annak megítéléséhez, nyereséges-e)
             </div>
-            <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> 3-6 hónap (a következetesség ellenőrzése különböző piaci körülmények között)
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> 1 hét (ha megy, élesítsd!)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> Nem kell tesztelni (a backtest elég)
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Helyes: A.</strong> Egy hét vagy egy hónap csak annyit mond, hogy a stratégia egyetlen piaci rezsimet túlélt, és az a bot, ami semmi mást nem kereskedett, csak egy trendelő szalagot, nem tesztelt: szerencsés volt. A változó körülményeket átfogó legrövidebb ablak három-hat hónap. A D válasz az a hiba, amiről a következő kérdés szól: a backtest hipotézis a múltról, nem bizonyíték a jelenről.
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 
@@ -824,16 +850,19 @@ except Exception as e:
             <div class="quiz-option" data-correct="false">
               <strong>A)</strong> A bróker szabotálja az ügyleteidet
             </div>
-            <div class="quiz-option" data-correct="false">
-              <strong>B)</strong> Hibás a kódod (véletlenszerű viselkedés)
-            </div>
             <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> Megváltozott a piaci rezsim (a stratégia nem illik a mostani körülményekhez)
+              <strong>B)</strong> Megváltozott a piaci rezsim (a stratégia nem illik a mostani körülményekhez)
+            </div>
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> Hibás a kódod (véletlenszerű viselkedés)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> A backtesting haszontalan (élesben mindig elbukik)
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Helyes: B.</strong> A 65%-ról 48%-ra esés, ami két hónapig kitart, nagy, tartós és irányított &mdash; pontosan így néz ki egy rezsimváltás. A C választ érdemes kizárni, de egy programhiba rendszerint szeszélyes viselkedést vagy nyílt hibákat okoz, nem a találati arány egyenletes eltolódását. Az A válasz nem mechanizmus. A D válasz túlkorrigál: a backtestek akkor buknak meg, ha egyetlen rezsimre illesztették őket, ami a walk-forward tesztelés mellett szól, nem a tesztelés feladása mellett.
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 

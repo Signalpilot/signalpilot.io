@@ -153,11 +153,11 @@
   <div class="quiz-options">
     <div class="quiz-option" data-correct="false">A) Slippage de ejecución y problemas de latencia</div>
     <div class="quiz-option" data-correct="false">B) La conexión de la API falló durante el desplome</div>
-    <div class="quiz-option" data-correct="true">C) CERO controles de seguridad: el bot promedió a la baja 4 veces durante una caída del 7 % en un día y llegó a una posición de 800.000 $ (4 veces de apalancamiento) sobre una cuenta de 200.000 $</div>
-    <div class="quiz-option" data-correct="false">D) Un error de programación generó órdenes duplicadas</div>
+    <div class="quiz-option" data-correct="false">C) Un error de programación generó órdenes duplicadas</div>
+    <div class="quiz-option" data-correct="true">D) CERO controles de seguridad: el bot promedió a la baja 4 veces durante una caída del 7 % en un día y llegó a una posición de 800.000 $ (4 veces de apalancamiento) sobre una cuenta de 200.000 $</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Correcta: C.</strong> Mike programó «comprar con el RSI sobrevendido», pero nunca programó límites de posición, filtros de volatilidad ni botones de parada. El bot construyó una posición apalancada 4 veces durante el desplome: 19.005 $ de pérdida y un ajuste de márgenes antes de que pudiera llegar a un teclado. Recuperación: añadió 5 controles de seguridad y llevó los 195.000 $ a 218.000 $ en 8 meses. Programa PRIMERO los controles de seguridad.
+    <strong>Correcto: D.</strong> Mike programó «comprar con el RSI sobrevendido», pero nunca programó límites de posición, filtros de volatilidad ni botones de parada. El bot construyó una posición apalancada 4 veces durante el desplome: 19.005 $ de pérdida y un ajuste de márgenes antes de que pudiera llegar a un teclado. Recuperación: añadió 5 controles de seguridad y llevó los 195.000 $ a 218.000 $ en 8 meses. Programa PRIMERO los controles de seguridad.
   </div>
 </div>
 
@@ -173,10 +173,31 @@
 </details>
 
 <div class="section-break"><span>Parte 1: ¿por qué automatizar tu trading?</span></div>
+      <div class="callout-tip">
+        <h4>&#127919; Lo que vas a dominar</h4>
+        <p>Al final de esta lección entenderás:</p>
+        <ul>
+          <li>Por qué la automatización elimina la emoción pero no puede rescatar una estrategia sin ventaja</li>
+          <li>Cómo pasar de una idea de trading a código ejecutable contra la API de un bróker</li>
+          <li>Cómo es un periodo realista de paper trading antes del dinero real, y por qué abarca varias condiciones de mercado</li>
+          <li>El lado operativo: manejo de errores, interruptores de emergencia, alojamiento y la revisión mensual de mantenimiento</li>
+        </ul>
+      </div>
+
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Requisitos previos</h4>
+        <p>Esta lección se apoya en conceptos de:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/advanced/55-machine-learning-trading.html" style="color:#00d4aa;text-decoration:underline">Lección 55: Machine learning en el trading</a> &mdash; Trading algorítmico</li>
+            <li><a href="/education/curriculum/advanced/56-high-frequency-concepts.html" style="color:#00d4aa;text-decoration:underline">Lección 56: Conceptos de negociación de alta frecuencia</a> &mdash; Trading algorítmico</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Si ya las has completado, estás listo. Si no, empieza primero por las lecciones fundamentales.</p>
+      </div>
 
 <h2 id="the-human-problem">El problema humano en el trading</h2>
 
-<p>Has pasado 6 meses puliendo una estrategia. La has pasado por backtest. La has probado hacia delante. Tasa de acierto: 62 %. R medio: 2,3. Ventaja confirmada.</p>
+<p>Has dedicado 6 meses a perfeccionar una estrategia de trading. La has backtesteado. La has probado hacia delante. Acierto: 62 %. Ratio de pago: 2,3:1. Ventaja confirmada.</p>
 
 <p>Empiezas a operarla en real. ¿El resultado?</p>
 
@@ -746,6 +767,8 @@ except Exception as e:
 <h3>Lista de mantenimiento mensual del bot</h3>
       <p><strong>1. Métricas de rendimiento:</strong> ¿Tasa de acierto dentro de un 5 % del backtest? ¿R medio positivo? ¿Drawdown aceptable? ¿Slippage empeorado? <strong>2. Registros de errores:</strong> Errores de conexión, órdenes rechazadas, casos límite. <strong>3. Comprobación de régimen:</strong> ¿El mercado sigue favoreciendo la estrategia? VIX elevado → pausar. Volatilidad baja → las rupturas sufren.</p>
 
+      <p><strong>Dónde encaja Signal Pilot en esto:</strong> Los indicadores producen la señal, pero la automatización necesita que esa señal salga del gráfico. En la práctica, eso significa una alerta de TradingView que lleva un payload estructurado al webhook en el que escucha tu bot, para que la condición de entrada sobre la que actúa tu código sea la misma que validaste visualmente &mdash; y no una reimplementación en Python que se aparta del original sin avisar.</p>
+
       <div class="key-takeaway">
         <h4>🎓 Ideas clave</h4>
         <ul>
@@ -802,19 +825,22 @@ except Exception as e:
         <div class="quiz-question">
           <p><strong>Pregunta 1: has programado un bot que funciona a la perfección en simulado. ¿Cuál es el periodo mínimo de prueba antes de pasar a real?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">
-              <strong>A)</strong> 1 semana (si funciona, ¡a producción!)
+            <div class="quiz-option" data-correct="true">
+              <strong>A)</strong> 3-6 meses (verificar la consistencia en distintas condiciones de mercado)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>B)</strong> 1 mes (suficiente para ver si es rentable)
             </div>
-            <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> 3-6 meses (verificar la consistencia en distintas condiciones de mercado)
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> 1 semana (si funciona, ¡a producción!)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> No hace falta probar (con el backtest basta)
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Correcto: A.</strong> Una semana o un mes solo te dice que la estrategia sobrevivió a un único régimen de mercado, y un bot que no ha operado más que una cinta en tendencia no ha sido probado: ha tenido suerte. De tres a seis meses es la ventana más corta que abarca condiciones cambiantes. D es el error del que trata la siguiente pregunta: un backtest es una hipótesis sobre el pasado, no una prueba sobre el presente.
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 
@@ -824,16 +850,19 @@ except Exception as e:
             <div class="quiz-option" data-correct="false">
               <strong>A)</strong> El bróker sabotea tus operaciones
             </div>
-            <div class="quiz-option" data-correct="false">
-              <strong>B)</strong> Tu código tiene un fallo (comportamiento aleatorio)
-            </div>
             <div class="quiz-option" data-correct="true">
-              <strong>C)</strong> Cambió el régimen de mercado (la estrategia no encaja con las condiciones actuales)
+              <strong>B)</strong> Cambió el régimen de mercado (la estrategia no encaja con las condiciones actuales)
+            </div>
+            <div class="quiz-option" data-correct="false">
+              <strong>C)</strong> Tu código tiene un fallo (comportamiento aleatorio)
             </div>
             <div class="quiz-option" data-correct="false">
               <strong>D)</strong> El backtesting es inútil (siempre falla en real)
             </div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Correcto: B.</strong> Una caída del 65 % al 48 % que persiste durante dos meses es grande, sostenida y direccional &mdash; así es como se ve un cambio de régimen. C conviene descartarlo, pero un bug suele producir comportamiento errático o errores directos, más que un desplazamiento constante del acierto. A no es un mecanismo. D sobrecorrige: los backtests fallan cuando se ajustan a un solo régimen, lo que aboga por pruebas walk-forward, no por dejar de probar.
+        </div>
           <div class="quiz-feedback"></div>
         </div>
 
