@@ -38,13 +38,20 @@ def txt(h):
 def profile(path):
     body = open(path).read().split('<div class="prose">', 1)[-1]
     n = len(body) or 1
+    # The anchor is the first substantial non-narrative paragraph. Some lessons
+    # teach in short paragraphs and lists rather than long ones, so a flat
+    # 260-character floor reports them as having no teaching at all. Fall back
+    # to the first paragraph over 140 characters before concluding that.
     teach = None
-    for p in re.finditer(r'<p[^>]*>(.*?)</p>', body, re.S):
-        t = txt(p.group(1)).strip()
-        if len(t) < 260 or len(NARR.findall(t)) > 2:
-            continue
-        teach = p.start()
-        break
+    for floor in (260, 140):
+        for p in re.finditer(r'<p[^>]*>(.*?)</p>', body, re.S):
+            t = txt(p.group(1)).strip()
+            if len(t) < floor or len(NARR.findall(t)) > 2:
+                continue
+            teach = p.start()
+            break
+        if teach is not None:
+            break
     def at(pat):
         m = pat.search(body)
         return m.start() if m else None
