@@ -85,7 +85,8 @@ PREREQ = re.compile(r'(?i)prerequisite')
 OBJECTIVES = re.compile(r'(?i)what you\'?ll (?:learn|master|gain)|learning objective|'
                         r'by the end of this lesson|in this lesson,? you')
 TAKEAWAY = re.compile(r'(?i)key-takeaway|key takeaway')
-ACTION = re.compile(r'(?i)action step|this week|exercise|practice')
+# "Quick Wins for Tomorrow" is the curriculum's own name for the action block.
+ACTION = re.compile(r'(?i)action step|this week|exercise|practice|quick wins?')
 INDICATOR = re.compile(r'Janus|Atlas|Plutus|Pentarch|Omnideck|Augury|'
                        r'Volume Oracle|Pilot Line|Volume Zones|Harmonic Oscillator|'
                        r'Order Flow Toolkit')
@@ -96,9 +97,20 @@ _IDX = {e['href'].lstrip('/'): e
         for e in json.load(open(f'{ROOT}/index.json', encoding='utf-8'))}
 
 
+GENERIC = {'all signal pilot indicators', 'signal pilot', 'all indicators'}
+
+
 def declares_indicator(path):
+    """True only when the lesson names SPECIFIC indicators.
+
+    A declaration of "All Signal Pilot Indicators" makes the check vacuous --
+    every page carries the brand in its header and footer -- so it is not
+    evidence the lesson bridges to a tool.
+    """
     e = _IDX.get(path)
-    return bool(e and e.get('spIndicators'))
+    if not e:
+        return False
+    return any(i.strip().lower() not in GENERIC for i in (e.get('spIndicators') or []))
 Q_QUESTION = re.compile(r'class="quiz-question"')
 Q_EXPLAIN = re.compile(r'class="quiz-explanation"')
 
