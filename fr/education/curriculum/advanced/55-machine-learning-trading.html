@@ -143,6 +143,22 @@
         </ul>
         <p style="margin-top:0.75rem">&#9989; Si vous les avez terminées, vous êtes prêt. Sinon, commencez d'abord par les leçons fondamentales.</p>
       </div>
+      <div class="section-break"><span>Partie 1 : ce que l'apprentissage automatique peut et ne peut pas faire ici</span></div>
+<h2 id="what-ml-can-and-cannot-do">Un filtre, pas un prévisionniste</h2>
+
+      <p>La bonne façon de penser l'apprentissage automatique en trading n'est pas « que va faire le prix » mais « parmi les configurations que ma méthode produit déjà, lesquelles devrais-je écarter ». Comme prévisionniste, un modèle affronte toutes les institutions dotées de meilleures données et de plus de calcul. Comme filtre, il fait quelque chose de bien plus étroit et bien plus atteignable : apprendre lesquels de vos propres signaux ont historiquement été les faibles.</p>
+
+      <p>Trois propriétés des données de marché rendent cela plus difficile que ne le suggèrent les tutoriels, et il faut respecter les trois, faute de quoi le modèle paraîtra brillant et se comportera mal :</p>
+
+      <ul>
+        <li><strong>Les marchés ne sont pas stationnaires.</strong> La relation que votre modèle a apprise en 2021 peut tout simplement ne plus exister en 2024, parce que les participants et le régime ont changé. Un modèle entraîné une fois puis laissé seul se dégrade dès le jour de sa mise en service.</li>
+        <li><strong>Le rapport signal sur bruit est brutal.</strong> Dans la plupart des domaines, un modèle s'améliore avec plus de données. Ici, l'essentiel des données supplémentaires est du bruit, et un modèle assez souple s'ajustera parfaitement au bruit sans rien apprendre.</li>
+        <li><strong>La fuite de données est facile et invisible.</strong> Utiliser le plus haut du jour comme variable pour prédire le sens de la journée, ou séparer entraînement et test au hasard plutôt que dans l'ordre du temps, laisse le modèle voir l'avenir. Le backtest qui en sort n'est pas optimiste : il ne veut rien dire.</li>
+      </ul>
+
+      <p>Et une chose pèse plus que tout ce qui précède : l'exactitude est le mauvais objectif. Un modèle qui a raison 90 % du temps sur des trades rapportant 0,3R et tort 10 % du temps sur des trades perdant 3R a une espérance négative et un magnifique score d'exactitude. Ce que le modèle doit relever, c'est l'espérance — le taux de réussite et le gain moyen ensemble — et non le taux de réussite seul. Ce qui suit est une trader qui a appris tout cela à la dure.</p>
+
+      <div class="section-break"><span>Partie 2 : un modèle, construit d'abord mal puis bien</span></div>
 <h2 id="ninas-47300-ml-overfitting-disaster-and-how-she-fixed-it">Le désastre de surapprentissage ML de Nina : 47 300 $ (et comment elle l'a réparé)</h2>
 
       <p><strong>Trader :</strong> Nina Patel (exemple composite), 29 ans, analyste quantitative devenue trader indépendante, San Francisco, Californie<br>
@@ -404,8 +420,8 @@
 
       <p><strong>La stratégie de déploiement de la V2 de Nina :</strong></p>
       <ul style="margin:.5rem 0">
-        <li>Validation sur 20 trades en paper trading (mai 2024) : 70 % de réussite, 1,5R en moyenne → validé !</li>
-        <li>Passage en réel avec une demi-taille de position, soit 50 % (juin) : 65 % de réussite → la confiance revient</li>
+        <li>Validation en paper trading sur 20 trades (mai 2024) : 14 gagnants, 1,5R en moyenne &mdash; assez pour repérer un modèle cassé, très loin d'assez pour confirmer un taux</li>
+        <li>Démarrage en réel à 50 % de la taille (juin) : voir la ligne de juin dans le tableau ci-dessous</li>
         <li>Taille de position complète (à partir de juillet) : filtre ML opérationnel</li>
         <li>Réentraînement mensuel : ajouter les nouveaux trades, relancer le walk-forward, mettre à jour le modèle s'il gagne +3 %</li>
       </ul>
@@ -597,21 +613,6 @@
         <li><strong>Valeur future :</strong> Le filtre ML rapporte désormais environ 4 300 $/mois (+51 000 $/an) par rapport à la référence sans filtre</li>
         <li><strong>Calendrier du retour sur investissement :</strong> L'investissement est intégralement remboursé fin novembre, ensuite c'est du profit pur</li>
       </ul>
-      <div class="callout-tip"><h4>🎯 Ce que vous allez y gagner</h4><p>À l'issue de cette leçon, vous saurez :</p><ul><li>Construire des filtres ML pour les trades (prédire quels setups ont le plus de chances de gagner)</li><li>Concevoir correctement les variables (stationnaires, sans biais d'anticipation)</li><li>Utiliser la validation croisée walk-forward pour éviter le surapprentissage</li><li>Choisir les modèles avec discernement (Random Forest > réseaux de neurones dans la plupart des cas)</li></ul></div>
-      <div class="callout-key"><h4>💡 le déclic</h4><p>Le ML n'est pas une stratégie autonome. C'est un FILTRE. Tu as déjà des setups (les sweeps Janus). Le ML prédit lesquels ont 68 % de probabilité contre 55 %. Trade ceux à 68 %, ignore ceux à 55 %. C'est ça, l'avantage.</p></div>
-
-                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gains rapides pour demain (cliquez pour déplier)</summary>
-        <div style="margin-top:1rem">
-          <p>Ne vous surchargez pas. Commencez par ces trois actions :</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Commence par une ingénierie des variables simple (pas encore de ML)</strong> — Avant les réseaux de neurones, identifie 3 à 5 variables simples susceptibles d'améliorer ta stratégie. Variables = entrées mesurables. Exemples : (1) ratio d'ATR (ATR actuel ÷ moyenne 20 jours) = contexte de volatilité, (2) ratio de volume (actuel ÷ moyenne 20 jours) = participation, (3) heure de la journée = effets de séance, (4) divergence du RSI = momentum qui faiblit, (5) distance à la moyenne mobile (prix ÷ EMA 20 - 1) = force de tendance. Ce soir, choisis 3 variables. Note-les à l'entrée de tes 10 prochains trades. Après 10 trades, analyse : « Les gagnants avaient-ils des valeurs différentes des perdants ? » Exemple : 8 gains sur 10 avaient un ratio d'ATR >1,2 et 7 pertes sur 10 <0,9. Tu as trouvé un filtre sans ML : « Ne prends les cassures que si l'ATR est >1,2. » L'ingénierie des variables, c'est 80 % de la réussite en ML. Tester à la main d'abord construit l'intuition et évite le surapprentissage plus tard.</li>
-            <li><strong>Apprends à repérer le surapprentissage dans les backtests</strong> — Surapprentissage = le modèle a mémorisé l'historique au lieu d'apprendre des schémas. Test : (1) backtest sur tout l'historique → note le taux de réussite et le profit, (2) backtest sur les premiers 60 % (période d'entraînement), (3) teste les 40 % restants (période de test). Si entraînement : 75 % de réussite et +50 000 $, test : 52 % de réussite et -8 000 $ = surapprentissage (du bruit appris qui ne s'est pas répété). Nina Patel a perdu <span style="color:#ff5252;font-weight:700">$47,300</span> en déployant une stratégie ML surapprise — backtest à 87 % de réussite, 41 % en réel (schémas aléatoires mémorisés). Les bonnes stratégies affichent une baisse de performance <10 % entre entraînement et test. Ce soir, découpe ton historique 60/40. Compare les résultats. Si le test chute de >15 %, les règles collent trop à l'historique. Simplifie (moins de paramètres, filtres plus larges).</li>
-            <li><strong>Fais des tests walk-forward avant de passer en réel</strong> — Walk-forward = découpage entraînement/test glissant qui avance dans le temps. Méthode : (1) entraîne de janvier à juin (6 mois), (2) teste juillet (1 mois), (3) avance : entraîne de février à juillet, teste août, (4) répète sur toutes les données. La stratégie doit être rentable sur la PLUPART des périodes de test (70 %+). Exemple : 12 périodes testées, rentable sur 9 mois sur 12 (75 % de constance) = bien. 5 mois sur 12 (42 %) = avantage instable qui a eu de la chance sur une période. Calcule : « périodes de test rentables ÷ total ». Si c'est <60 %, l'avantage est instable ou surappris. Le walk-forward simule le trading réel mieux qu'un backtest unique. Les marchés changent. Les stratégies qui fonctionnent sur plusieurs périodes survivent aux changements de régime. Il attrape le surapprentissage que les backtests uniques ratent.</li>
-          </ol>
-        </div>
-      </details>
-
       <div class="section-break"><span>Quiz : testez votre compréhension</span></div>
       <div class="quiz">
 <h4>&#127918; Contrôle de bon sens du machine learning</h4>

@@ -143,6 +143,22 @@
         </ul>
         <p style="margin-top:0.75rem">&#9989; Se le hai completate, sei pronto. Altrimenti, parti prima dalle lezioni fondamentali.</p>
       </div>
+      <div class="section-break"><span>Parte 1: che cosa può e che cosa non può fare qui il machine learning</span></div>
+<h2 id="what-ml-can-and-cannot-do">Un filtro, non un previsore</h2>
+
+      <p>Il modo utile di pensare al machine learning nel trading non è «che cosa farà il prezzo» ma «fra i setup che il mio metodo produce già, quali dovrei saltare». Come previsore, un modello se la vede con ogni istituzione dotata di dati migliori e più capacità di calcolo. Come filtro fa qualcosa di molto più stretto e molto più raggiungibile: impara quali dei tuoi segnali sono stati storicamente i deboli.</p>
+
+      <p>Tre proprietà dei dati di mercato rendono la cosa più difficile di quanto suggeriscano i tutorial, e vanno rispettate tutte e tre, altrimenti il modello sembrerà brillante e si comporterà male:</p>
+
+      <ul>
+        <li><strong>I mercati non sono stazionari.</strong> La relazione che il tuo modello ha imparato nel 2021 potrebbe semplicemente non esistere nel 2024, perché sono cambiati i partecipanti e il regime. Un modello addestrato una volta e lasciato lì si degrada dal giorno in cui va in produzione.</li>
+        <li><strong>Il rapporto segnale-rumore è brutale.</strong> Nella maggior parte dei campi, un modello con più dati fa meglio. Qui gran parte dei dati aggiuntivi è rumore, e un modello abbastanza flessibile si adatterà perfettamente al rumore senza imparare nulla.</li>
+        <li><strong>La fuga di informazione è facile e invisibile.</strong> Usare il massimo di giornata come variabile per prevedere la direzione della giornata, o separare training e test a caso invece che in ordine temporale, lascia che il modello veda il futuro. Il backtest che ne esce non è ottimista: non significa niente.</li>
+      </ul>
+
+      <p>E una cosa pesa più di tutte le precedenti: l'accuratezza è l'obiettivo sbagliato. Un modello che ha ragione il 90 % delle volte su operazioni da 0,3R e torto il 10 % delle volte su operazioni da -3R ha aspettativa negativa e uno splendido punteggio di accuratezza. Quello che vuoi che il modello alzi è l'aspettativa — percentuale di successo e payoff insieme — non la percentuale da sola. Quello che segue è una trader che ha imparato tutto questo per la via costosa.</p>
+
+      <div class="section-break"><span>Parte 2: un modello, costruito prima male e poi bene</span></div>
 <h2 id="ninas-47300-ml-overfitting-disaster-and-how-she-fixed-it">Il disastro da overfitting ML di Nina: 47.300 $ (e come l'ha risolto)</h2>
 
       <p><strong>Trader:</strong> Nina Patel (esempio composito), 29 anni, analista quantitativa diventata trader indipendente, San Francisco, California<br>
@@ -404,8 +420,8 @@
 
       <p><strong>La strategia di rilascio della V2 di Nina:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>Validazione su 20 trade in paper trading (maggio 2024): 70 % di win rate, 1,5R medio → superata!</li>
-        <li>Partenza in live con mezza size, cioè il 50 % (giugno): 65 % di win rate → la fiducia cresce</li>
+        <li>Validazione in paper trading su 20 operazioni (maggio 2024): 14 vincenti, 1,5R medio &mdash; abbastanza per scoprire un modello rotto, molto lontano dall'essere abbastanza per confermare una percentuale</li>
+        <li>Partenza dal vivo al 50 % della size (giugno): vedi la riga di giugno nella tabella qui sotto</li>
         <li>Size piena (da luglio in poi): filtro ML operativo</li>
         <li>Riaddestramento mensile: aggiungere i nuovi trade, rifare il walk-forward, aggiornare il modello se migliora del +3 %</li>
       </ul>
@@ -597,21 +613,6 @@
         <li><strong>Valore futuro:</strong> Il filtro ML ora aggiunge circa 4.300 $/mese (+51.000 $/anno) rispetto al riferimento senza filtro</li>
         <li><strong>Tempi di rientro:</strong> L'investimento rientra per intero entro fine novembre, poi è profitto puro</li>
       </ul>
-      <div class="callout-tip"><h4>🎯 Cosa ci guadagni</h4><p>Al termine di questa lezione saprai:</p><ul><li>Costruire filtri ML per i trade (prevedere quali setup hanno più probabilità di vincere)</li><li>Progettare bene le feature (stazionarie, senza look-ahead bias)</li><li>Usare la validazione incrociata walk-forward per evitare l'overfitting</li><li>Scegliere i modelli con criterio (Random Forest > reti neurali nella maggior parte dei casi)</li></ul></div>
-      <div class="callout-key"><h4>💡 il momento della verità</h4><p>Il ML non è una strategia a sé. È un FILTRO. I setup li hai già (gli sweep di Janus). Il ML prevede quali hanno il 68 % di probabilità invece del 55 %. Opera quelli al 68 %, salta quelli al 55 %. Il vantaggio è tutto qui.</p></div>
-
-                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Risultati rapidi per domani (clicca per aprire)</summary>
-        <div style="margin-top:1rem">
-          <p>Non caricarti troppo. Comincia da queste tre azioni:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Parti da un'ingegneria delle feature semplice (ancora senza ML)</strong> — Prima delle reti neurali, individua 3-5 feature semplici che potrebbero migliorare la tua strategia. Feature = input misurabili. Esempi: (1) rapporto ATR (ATR attuale ÷ media a 20 giorni) = contesto di volatilità, (2) rapporto di volume (attuale ÷ media a 20 giorni) = partecipazione, (3) ora del giorno = effetti di sessione, (4) divergenza dell'RSI = momentum che si indebolisce, (5) distanza dalla media mobile (prezzo ÷ EMA 20 - 1) = forza del trend. Stasera scegli 3 feature. Annotale all'ingresso dei prossimi 10 trade. Dopo 10 trade analizza: «I vincenti avevano valori diversi dai perdenti?». Esempio: 8 vincite su 10 avevano un rapporto ATR >1,2 e 7 perdite su 10 <0,9. Hai trovato un filtro senza ML: «Prendi i breakout solo quando l'ATR è >1,2». L'ingegneria delle feature è l'80 % del successo con il ML. Testare a mano prima costruisce intuito ed evita l'overfitting dopo.</li>
-            <li><strong>Impara a riconoscere l'overfitting nei backtest</strong> — Overfitting = il modello ha memorizzato lo storico invece di imparare gli schemi. Test: (1) backtest su tutto lo storico → annota win rate e profitto, (2) backtest sul primo 60 % (periodo di addestramento), (3) testa il restante 40 % (periodo di test). Se addestramento: 75 % di win rate e +50.000 $, test: 52 % di win rate e -8.000 $ = overfitting (rumore imparato che non si è ripetuto). Nina Patel ha perso <span style="color:#ff5252;font-weight:700">$47,300</span> mettendo in produzione una strategia ML in overfitting: il backtest dava l'87 % di win rate, in live è stato il 41 % (schemi casuali memorizzati). Le buone strategie mostrano un calo di performance <10 % tra addestramento e test. Stasera dividi lo storico 60/40. Confronta i risultati. Se il test scende di >15 %, le regole sono troppo adattate allo storico. Semplifica (meno parametri, filtri più larghi).</li>
-            <li><strong>Usa i test walk-forward prima di andare in live</strong> — Walk-forward = divisione addestramento/test mobile che avanza nel tempo. Metodo: (1) addestra da gennaio a giugno (6 mesi), (2) testa luglio (1 mese), (3) avanza: addestra da febbraio a luglio, testa agosto, (4) ripeti su tutti i dati. La strategia dovrebbe essere profittevole nella MAGGIOR PARTE dei periodi di test (70 %+). Esempio: 12 periodi testati, profittevole in 9 mesi su 12 (75 % di coerenza) = bene. 5 mesi su 12 (42 %) = vantaggio instabile che ha avuto fortuna in un periodo. Calcola: «periodi di test profittevoli ÷ totale». Se è <60 %, il vantaggio è instabile o in overfitting. Il walk-forward simula il trading live meglio di un singolo backtest. I mercati cambiano. Le strategie che funzionano su più periodi sopravvivono ai cambi di regime. Intercetta l'overfitting che i backtest singoli si lasciano sfuggire.</li>
-          </ol>
-        </div>
-      </details>
-
       <div class="section-break"><span>Quiz: metti alla prova la tua comprensione</span></div>
       <div class="quiz">
 <h4>&#127918; Controllo di buon senso sul machine learning</h4>

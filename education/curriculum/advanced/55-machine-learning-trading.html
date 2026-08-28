@@ -130,6 +130,22 @@
         </ul>
         <p style="margin-top:0.75rem">&#9989; If you've completed these, you're ready. Otherwise, start with the foundational lessons first.</p>
       </div>
+      <div class="section-break"><span>Part 1: What Machine Learning Can and Cannot Do Here</span></div>
+<h2 id="what-ml-can-and-cannot-do">A Filter, Not a Forecaster</h2>
+
+      <p>The useful way to think about machine learning in trading is not &ldquo;what will price do&rdquo; but &ldquo;of the setups my method already produces, which ones should I skip&rdquo;. As a forecaster a model is competing against every institution with better data and more compute. As a filter it is doing something much narrower and much more achievable: learning which of your own signals have historically been the weak ones.</p>
+
+      <p>Three properties of market data make this harder than the tutorials suggest, and all three have to be respected or the model will look brilliant and behave badly:</p>
+
+      <ul>
+        <li><strong>Markets are non-stationary.</strong> The relationship your model learned in 2021 may simply not exist in 2024, because the participants and the regime changed. A model trained once and left alone is decaying from the day it is deployed.</li>
+        <li><strong>The signal-to-noise ratio is brutal.</strong> In most fields a model with more data does better. Here, most of the additional data is noise, and a flexible enough model will fit the noise perfectly and learn nothing.</li>
+        <li><strong>Leakage is easy and invisible.</strong> Using the day&rsquo;s high as a feature to predict the day&rsquo;s direction, or splitting train and test at random rather than in time order, lets the model see the future. The backtest that results is not optimistic &mdash; it is meaningless.</li>
+      </ul>
+
+      <p>And one thing that matters more than any of the above: accuracy is the wrong objective. A model that is right 90% of the time on trades that make 0.3R and wrong 10% of the time on trades that lose 3R has a negative expectancy and a beautiful accuracy score. What you want the model to raise is expectancy &mdash; the win rate and the payoff together &mdash; not the win rate alone. What follows is a trader who learned every one of these the expensive way.</p>
+
+      <div class="section-break"><span>Part 2: One Model, Built Wrong and Then Right</span></div>
 <h2 id="ninas-47300-ml-overfitting-disaster-and-how-she-fixed-it">Nina's $47,300 ML Overfitting Disaster (And How She Fixed It)</h2>
 
       <p><strong>Trader:</strong> Nina Patel (composite example), 29, quant analyst turned independent trader, San Francisco, CA<br>
@@ -391,8 +407,8 @@
 
       <p><strong>Nina's V2 Deployment Strategy:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>20-trade paper trading validation (May 2024): 70% win rate, 1.5R avg → passed!</li>
-        <li>Started live with 50% position sizing (June): 65% win rate → confidence building</li>
+        <li>20-trade paper trading validation (May 2024): 14 winners, 1.5R avg &mdash; enough to catch a broken model, nowhere near enough to confirm a rate</li>
+        <li>Started live at 50% position sizing (June): the June row of the table below</li>
         <li>Full position sizing (July onwards): ML filter operational</li>
         <li>Monthly retraining: Add new trades, re-run walk-forward, update model if +3% improvement</li>
       </ul>
@@ -584,21 +600,6 @@
         <li><strong>Future value:</strong> ML filter now adds ~$4.3K/month (+$51K/year) vs. no-filter baseline</li>
         <li><strong>ROI timeline:</strong> Investment pays back in full by end of November, then pure profit</li>
       </ul>
-      <div class="callout-tip"><h4>🎯 What You'll Gain</h4><p>After this lesson, you'll be able to:</p><ul><li>Build ML trade filters (predict which setups likely to win)</li><li>Engineer features properly (stationary, no look-ahead bias)</li><li>Use walk-forward cross-validation to avoid overfitting</li><li>Choose models wisely (Random Forest > Neural Networks for most cases)</li></ul></div>
-      <div class="callout-key"><h4>💡 The Aha Moment</h4><p>ML isn't a standalone strategy. It's a FILTER. You already have setups (Janus sweeps). ML predicts which ones have 68% vs 55% probability. Trade the 68% ones, skip the 55%. That's the edge.</p></div>
-
-                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
-        <div style="margin-top:1rem">
-          <p>Don't overwhelm yourself. Start with these 3 actions:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Start with Simple Feature Engineering (No ML Yet)</strong> — Before neural networks, identify 3-5 simple features that might improve your strategy. Features = measurable inputs. Examples: (1) ATR ratio (current ATR ÷ 20-day avg) = volatility context, (2) Volume ratio (current ÷ 20-day avg) = participation, (3) Time of day = session effects, (4) RSI divergence = momentum weakening, (5) Distance from MA (price ÷ 20 EMA - 1) = trend strength. Tonight pick 3 features. For next 10 trades, record these at entry. After 10 trades analyze: "Did winners have different feature values than losers?" Example: 8/10 wins had ATR ratio >1.2, 7/10 losses <0.9. You discovered filter without ML: "Only take breakouts when ATR >1.2." Feature engineering = 80% of ML success. Manual testing first builds intuition, avoids overfitting later.</li>
-            <li><strong>Learn to Spot Overfitting in Backtests</strong> — Overfitting = model memorized history instead of learning patterns. Test: (1) Backtest all historical data → record win rate/profit, (2) Backtest first 60% (train period), (3) Test remaining 40% (test period). If train: 75% win rate +$50K, test: 52% win rate -$8K = overfitting (learned noise that didn't repeat). Nina Patel lost <span style="color:#ff5252;font-weight:700">$47,300</span> deploying overfitted ML strategy—backtest 87% win rate, live 41% (memorized random patterns). Good strategies show <10% performance drop between train and test. Tonight split historical data 60/40. Compare results. If test drops >15%, rules too fitted to history. Simplify (fewer parameters, looser filters).</li>
-            <li><strong>Use Walk-Forward Testing Before Going Live</strong> — Walk-forward = rolling train/test split forward through time. Approach: (1) Train Jan-Jun (6 months), (2) Test Jul (1 month), (3) Move forward: train Feb-Jul, test Aug, (4) Repeat for all data. Strategy should be profitable in MOST test periods (70%+). Example: test 12 periods, profitable 9/12 months (75% consistency) = good. 5/12 months (42%) = unstable edge got lucky in one period. Calculate: "# profitable test periods ÷ total." If <60%, edge unstable or overfitted. Walk-forward simulates live trading better than single backtests. Markets change. Strategies working across multiple time periods survive regime changes. Catches overfitting single backtests miss.</li>
-          </ol>
-        </div>
-      </details>
-
       <div class="section-break"><span>Quiz: Test Your Understanding</span></div>
       <div class="quiz">
 <h4>&#127918; Machine Learning Sanity Check</h4>

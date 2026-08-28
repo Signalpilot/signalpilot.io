@@ -143,6 +143,22 @@
         </ul>
         <p style="margin-top:0.75rem">&#9989; Ha ezeket elvégezted, készen állsz. Ha nem, kezdd előbb az alapozó leckékkel.</p>
       </div>
+      <div class="section-break"><span>1. rész: mit tud és mit nem tud itt a gépi tanulás</span></div>
+<h2 id="what-ml-can-and-cannot-do">Szűrő, nem jós</h2>
+
+      <p>A gépi tanulásra a kereskedésben az a hasznos nézőpont, hogy nem azt kérdezed, „mit fog csinálni az ár”, hanem azt, hogy „a módszerem által amúgy is előállított felállások közül melyiket hagyjam ki”. Jósként a modell minden olyan intézménnyel versenyez, amelynek jobb adata és több számítási kapacitása van. Szűrőként valami sokkal szűkebbet és sokkal elérhetőbbet csinál: megtanulja, a saját jelzéseid közül melyek voltak történetileg a gyengék.</p>
+
+      <p>A piaci adatok három tulajdonsága ezt nehezebbé teszi, mint amit az útmutatók sugallnak, és mindhármat tiszteletben kell tartani, különben a modell zseniálisnak látszik és rosszul viselkedik:</p>
+
+      <ul>
+        <li><strong>A piacok nem stacionáriusak.</strong> Az az összefüggés, amit a modelled 2021-ben megtanult, 2024-ben egyszerűen nem biztos, hogy létezik, mert megváltoztak a résztvevők és a rezsim. Az egyszer betanított és magára hagyott modell az üzembe helyezés napjától romlik.</li>
+        <li><strong>A jel-zaj arány kegyetlen.</strong> A legtöbb területen a több adat jobb modellt ad. Itt a pluszadat nagy része zaj, és egy elég rugalmas modell tökéletesen ráilleszkedik a zajra, és semmit nem tanul.</li>
+        <li><strong>Az adatszivárgás könnyen és láthatatlanul történik.</strong> Ha a nap csúcsát használod jellemzőként ugyanannak a napnak az irányához, vagy ha az edzés és a teszt szétválasztása véletlenszerű és nem időrendi, akkor a modell belelát a jövőbe. Az így születő backtest nem optimista — hanem értelmetlen.</li>
+      </ul>
+
+      <p>És van valami, ami mindennél nehezebben nyom a latban: a pontosság rossz cél. Az a modell, amely az esetek 90 %-ában igazat mond 0,3R-t hozó ügyleteknél, és 10 %-ában téved 3R-t vivő ügyleteknél, negatív várható értékű, a pontossági mutatója pedig gyönyörű. Amit a modelltől emelni akarsz, az a várható érték — a találati arány és a kifizetés együtt —, nem a találati arány önmagában. Ami következik, egy kereskedő, aki mindezt drágán tanulta meg.</p>
+
+      <div class="section-break"><span>2. rész: egy modell, előbb rosszul, aztán jól megépítve</span></div>
 <h2 id="ninas-47300-ml-overfitting-disaster-and-how-she-fixed-it">Nina 47 300 dolláros ML-túltanulási katasztrófája (és hogyan hozta helyre)</h2>
 
       <p><strong>Kereskedő:</strong> Nina Patel (összetett példa), 29 éves, kvantitatív elemzőből lett független trader, a kaliforniai San Franciscóból<br>
@@ -404,8 +420,8 @@
 
       <p><strong>Nina V2 élesítési stratégiája:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>Validálás 20 papírkereskedéses ügylettel (2024. május): 70 % találati arány, átlagosan 1,5R → megfelelt!</li>
-        <li>Élesben fél pozícióméretttel, vagyis 50 %-kal indult (június): 65 % találati arány → épül a bizalom</li>
+        <li>20 ügyletes papírkereskedéses ellenőrzés (2024. május): 14 nyerő, átlagosan 1,5R &mdash; ennyi elég egy elromlott modell kiszúrására, egy arány megerősítésére közel sem</li>
+        <li>Élesben indult a méret 50 %-ával (június): lásd a lenti táblázat júniusi sorát</li>
         <li>Teljes pozícióméret (júliustól): az ML-szűrő üzemel</li>
         <li>Havi újratanítás: új ügyletek hozzáadása, a walk-forward újrafuttatása, a modell frissítése +3 %-os javulás esetén</li>
       </ul>
@@ -597,21 +613,6 @@
         <li><strong>Jövőbeli érték:</strong> Az ML-szűrő most havi nagyjából 4 300 dollárt (évi +51 000 dollárt) tesz hozzá a szűrő nélküli alaphoz képest</li>
         <li><strong>Megtérülési ütem:</strong> A befektetés november végére teljesen megtérül, onnantól tiszta profit</li>
       </ul>
-      <div class="callout-tip"><h4>🎯 Mit nyersz vele</h4><p>A lecke végére képes leszel:</p><ul><li>ML-alapú ügyletszűrőket építeni (megjósolni, mely setupok nyernek nagyobb eséllyel)</li><li>Jellemzőket helyesen tervezni (stacionárius, előretekintési torzítás nélkül)</li><li>Walk-forward keresztvalidációt használni a túltanulás elkerülésére</li><li>Okosan modellt választani (a legtöbb esetben Random Forest > neurális hálók)</li></ul></div>
-      <div class="callout-key"><h4>💡 az aha-pillanat</h4><p>Az ML nem önálló stratégia. Egy SZŰRŐ. Setupjaid már vannak (a Janus sweepek). Az ML megjósolja, melyiknél 68 % a valószínűség 55 % helyett. A 68 %-osakat kereskedd, az 55 %-osakat hagyd ki. Ez az előny.</p></div>
-
-                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gyors eredmények holnapra (kattints a kinyitáshoz)</summary>
-        <div style="margin-top:1rem">
-          <p>Ne terheld túl magad. Kezdd ezzel a hárommal:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Kezdd egyszerű jellemzőtervezéssel (ML nélkül)</strong> — A neurális hálók előtt keress 3-5 egyszerű jellemzőt, amely javíthatja a stratégiádat. A jellemző = mérhető bemenet. Példák: (1) ATR-arány (aktuális ATR ÷ 20 napos átlag) = volatilitási kontextus, (2) volumenarány (aktuális ÷ 20 napos átlag) = részvétel, (3) napszak = szeánszhatások, (4) RSI-divergencia = gyengülő momentum, (5) mozgóátlagtól mért távolság (ár ÷ 20 EMA - 1) = trenderősség. Ma este válassz ki 3 jellemzőt. A következő 10 ügyletnél belépéskor jegyezd fel őket. 10 ügylet után elemezz: «Más értékek jellemezték a nyerteseket, mint a veszteseket?» Példa: a 10 nyerőből 8-nál az ATR-arány 1,2 fölött volt, a 10 veszteségből 7-nél 0,9 alatt. ML nélkül találtál egy szűrőt: «Kitöréseket csak akkor veszek, ha az ATR 1,2 fölött van.» A jellemzőtervezés az ML-siker 80 %-a. Ha előbb kézzel tesztelsz, intuíciót építesz, és később elkerülöd a túltanulást.</li>
-            <li><strong>Tanuld meg felismerni a túltanulást a backtestekben</strong> — Túltanulás = a modell bemagolta a múltat mintázatok tanulása helyett. Teszt: (1) futtass backtestet a teljes múltbeli adaton → jegyezd fel a találati arányt és a profitot, (2) futtass backtestet az első 60 %-on (tanítási időszak), (3) teszteld a maradék 40 %-ot (tesztidőszak). Ha a tanításon 75 % találat és +50 000 dollár, a teszten 52 % találat és -8 000 dollár, az túltanulás (megjegyzett zaj, ami nem ismétlődött). Nina Patel <span style="color:#ff5252;font-weight:700">$47,300</span> veszteséget szenvedett egy túltanult ML-stratégia élesítésével — a backtest 87 % találati arányt mutatott, élesben 41 % lett (véletlen mintázatokat magolt be). A jó stratégiáknál a tanítás és a teszt közti teljesítményesés 10 % alatt marad. Ma este oszd fel a múltbeli adatodat 60/40 arányban. Hasonlítsd össze az eredményeket. Ha a teszt 15 %-nál többet esik, a szabályok túlságosan a múltra vannak szabva. Egyszerűsíts (kevesebb paraméter, lazább szűrők).</li>
-            <li><strong>Élesítés előtt végezz walk-forward tesztet</strong> — Walk-forward = gördülő tanító/teszt felosztás, amely előrehalad az időben. Módszer: (1) tanítás januártól júniusig (6 hónap), (2) teszt júliusra (1 hónap), (3) lépj előre: tanítás februártól júliusig, teszt augusztusra, (4) ismételd meg az összes adatra. A stratégiának a tesztidőszakok TÖBBSÉGÉBEN nyereségesnek kell lennie (70 %+). Példa: 12 időszakot tesztelsz, 12 hónapból 9-ben nyereséges (75 % következetesség) = jó. 12 hónapból 5 (42 %) = instabil előny, amelynek egy időszakban szerencséje volt. Számold ki: «nyereséges tesztidőszakok ÷ összes». Ha 60 % alatt van, az előny instabil vagy túltanult. A walk-forward jobban modellezi az éles kereskedést, mint egyetlen backtest. A piacok változnak. A több időszakon működő stratégiák túlélik a rezsimváltásokat. Elkapja azt a túltanulást, amit az egyszeri backtestek nem vesznek észre.</li>
-          </ol>
-        </div>
-      </details>
-
       <div class="section-break"><span>Kvíz: teszteld a tudásodat</span></div>
       <div class="quiz">
 <h4>&#127918; Gépi tanulás józansági ellenőrzése</h4>

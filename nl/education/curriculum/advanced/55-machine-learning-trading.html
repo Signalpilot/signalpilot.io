@@ -143,6 +143,22 @@
         </ul>
         <p style="margin-top:0.75rem">&#9989; Heb je die afgerond, dan ben je klaar om te beginnen. Zo niet, start dan eerst met de basislessen.</p>
       </div>
+      <div class="section-break"><span>Deel 1: wat machine learning hier wel en niet kan</span></div>
+<h2 id="what-ml-can-and-cannot-do">Een filter, geen voorspeller</h2>
+
+      <p>De bruikbare manier om over machine learning in handel te denken is niet „wat gaat de koers doen” maar „welke van de opzetten die mijn methode toch al oplevert, moet ik overslaan”. Als voorspeller neemt een model het op tegen elke instelling met betere data en meer rekenkracht. Als filter doet het iets veel smallers en veel haalbaarders: het leert welke van je eigen signalen historisch de zwakke waren.</p>
+
+      <p>Drie eigenschappen van marktdata maken dit lastiger dan de tutorials doen voorkomen, en alle drie moeten worden gerespecteerd, anders ziet het model er briljant uit en gedraagt het zich slecht:</p>
+
+      <ul>
+        <li><strong>Markten zijn niet stationair.</strong> Het verband dat je model in 2021 leerde, bestaat in 2024 misschien simpelweg niet meer, omdat de deelnemers en het regime veranderd zijn. Een model dat één keer is getraind en daarna aan zichzelf overgelaten, verslechtert vanaf de dag dat het live gaat.</li>
+        <li><strong>De signaal-ruisverhouding is meedogenloos.</strong> In de meeste vakgebieden wordt een model beter met meer data. Hier is het grootste deel van die extra data ruis, en een voldoende flexibel model past zich perfect aan de ruis aan en leert niets.</li>
+        <li><strong>Datalekkage is makkelijk en onzichtbaar.</strong> De dagtop als kenmerk gebruiken om de richting van diezelfde dag te voorspellen, of trainen en testen willekeurig splitsen in plaats van op tijdvolgorde, laat het model de toekomst zien. De backtest die daaruit komt is niet optimistisch — hij betekent niets.</li>
+      </ul>
+
+      <p>En één ding weegt zwaarder dan al het voorgaande: nauwkeurigheid is het verkeerde doel. Een model dat 90 % van de tijd gelijk heeft op trades die 0,3R opleveren en 10 % van de tijd ongelijk op trades die 3R kosten, heeft een negatieve verwachting en een prachtige nauwkeurigheidsscore. Wat het model moet verhogen is de verwachting — trefkans en uitbetaling samen — niet de trefkans alleen. Wat volgt is een trader die dit allemaal op de dure manier leerde.</p>
+
+      <div class="section-break"><span>Deel 2: één model, eerst verkeerd en daarna goed gebouwd</span></div>
 <h2 id="ninas-47300-ml-overfitting-disaster-and-how-she-fixed-it">Nina's ML-overfittingdrama van $47.300 (en hoe ze het oploste)</h2>
 
       <p><strong>Trader:</strong> Nina Patel (samengesteld voorbeeld), 29, kwantitatief analist en inmiddels zelfstandig trader, San Francisco, Californië<br>
@@ -404,8 +420,8 @@
 
       <p><strong>Nina's uitrolstrategie voor V2:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>Validatie met 20 trades in paper trading (mei 2024): 70 % winnaars, gemiddeld 1,5R → geslaagd!</li>
-        <li>Live gestart met halve positiegrootte, dus 50 % (juni): 65 % winnaars → vertrouwen groeit</li>
+        <li>Papieren validatie over 20 trades (mei 2024): 14 winnaars, gemiddeld 1,5R &mdash; genoeg om een kapot model te betrappen, bij lange na niet genoeg om een trefkans te bevestigen</li>
+        <li>Live gestart op 50 % positiegrootte (juni): zie de junirij in de tabel hieronder</li>
         <li>Volledige positiegrootte (vanaf juli): ML-filter operationeel</li>
         <li>Maandelijkse hertraining: nieuwe trades toevoegen, walk-forward opnieuw draaien, het model bijwerken bij +3 % verbetering</li>
       </ul>
@@ -597,21 +613,6 @@
         <li><strong>Toekomstige waarde:</strong> Het ML-filter levert nu ongeveer $4.300/maand op (+$51.000/jaar) ten opzichte van de basislijn zonder filter</li>
         <li><strong>Terugverdientijd:</strong> De investering is eind november volledig terugverdiend, daarna is het pure winst</li>
       </ul>
-      <div class="callout-tip"><h4>🎯 Wat je eraan hebt</h4><p>Na deze les kun je:</p><ul><li>ML-tradefilters bouwen (voorspellen welke setups waarschijnlijk winnen)</li><li>Features goed ontwerpen (stationair, zonder look-ahead bias)</li><li>Walk-forward-kruisvalidatie gebruiken om overfitting te vermijden</li><li>Modellen verstandig kiezen (Random Forest > neurale netwerken in de meeste gevallen)</li></ul></div>
-      <div class="callout-key"><h4>💡 het aha-moment</h4><p>ML is geen zelfstandige strategie. Het is een FILTER. Je hebt al setups (de sweeps van Janus). ML voorspelt welke een kans van 68 % hebben in plaats van 55 %. Handel die van 68 % en sla die van 55 % over. Dat is de edge.</p></div>
-
-                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Snelle winst voor morgen (klik om uit te klappen)</summary>
-        <div style="margin-top:1rem">
-          <p>Maak het jezelf niet te zwaar. Begin met deze drie stappen:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Begin met eenvoudige feature engineering (nog zonder ML)</strong> — Identificeer vóór neurale netwerken 3-5 eenvoudige features die je strategie kunnen verbeteren. Features = meetbare inputs. Voorbeelden: (1) ATR-ratio (huidige ATR ÷ gemiddelde over 20 dagen) = volatiliteitscontext, (2) volumeratio (huidig ÷ gemiddelde over 20 dagen) = deelname, (3) tijdstip van de dag = sessie-effecten, (4) RSI-divergentie = momentum dat verzwakt, (5) afstand tot het voortschrijdend gemiddelde (koers ÷ 20-EMA - 1) = trendsterkte. Kies vanavond 3 features. Noteer ze bij de entry van je volgende 10 trades. Analyseer na 10 trades: «Hadden de winnaars andere waarden dan de verliezers?» Voorbeeld: 8 van de 10 winsten hadden een ATR-ratio >1,2 en 7 van de 10 verliezen <0,9. Je hebt een filter gevonden zonder ML: «Neem breakouts alleen als de ATR >1,2 is.» Feature engineering is 80 % van het succes met ML. Eerst met de hand testen bouwt intuïtie op en voorkomt later overfitting.</li>
-            <li><strong>Leer overfitting in backtests herkennen</strong> — Overfitting = het model heeft de historie onthouden in plaats van patronen geleerd. Test: (1) backtest over alle historische data → noteer winstpercentage en winst, (2) backtest over de eerste 60 % (trainingsperiode), (3) test de resterende 40 % (testperiode). Als training: 75 % winst en +$50.000, test: 52 % winst en -$8.000 = overfitting (ruis geleerd die zich niet herhaalde). Nina Patel verloor <span style="color:#ff5252;font-weight:700">$47,300</span> door een overfitte ML-strategie uit te rollen — de backtest gaf 87 % winnaars, live werd het 41 % (willekeurige patronen uit het hoofd geleerd). Goede strategieën laten <10 % prestatieverlies zien tussen training en test. Splits vanavond je historische data 60/40. Vergelijk de resultaten. Zakt de test met >15 %, dan zijn de regels te strak op de historie gepast. Vereenvoudig (minder parameters, ruimere filters).</li>
-            <li><strong>Doe walk-forward-tests voordat je live gaat</strong> — Walk-forward = rollende trainings-/testsplitsing die door de tijd heen opschuift. Aanpak: (1) train jan-jun (6 maanden), (2) test juli (1 maand), (3) schuif op: train feb-jul, test augustus, (4) herhaal voor alle data. De strategie hoort winstgevend te zijn in de MEESTE testperiodes (70 %+). Voorbeeld: 12 periodes getest, winstgevend in 9 van de 12 maanden (75 % consistentie) = goed. 5 van de 12 maanden (42 %) = instabiele edge die in één periode geluk had. Reken uit: «winstgevende testperiodes ÷ totaal». Is dat <60 %, dan is de edge instabiel of overfit. Walk-forward benadert live trading beter dan één enkele backtest. Markten veranderen. Strategieën die over meerdere periodes werken, overleven regimewissels. Het vangt overfitting die losse backtests missen.</li>
-          </ol>
-        </div>
-      </details>
-
       <div class="section-break"><span>Quiz: toets je begrip</span></div>
       <div class="quiz">
 <h4>&#127918; Redelijkheidscheck voor machine learning</h4>

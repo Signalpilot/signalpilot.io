@@ -143,6 +143,22 @@
         </ul>
         <p style="margin-top:0.75rem">&#9989; Se já as concluiu, está pronto. Caso contrário, comece primeiro pelas lições fundamentais.</p>
       </div>
+      <div class="section-break"><span>Parte 1: o que a aprendizagem automática pode e não pode fazer aqui</span></div>
+<h2 id="what-ml-can-and-cannot-do">Um filtro, não um previsor</h2>
+
+      <p>A forma útil de pensar a aprendizagem automática no trading não é «o que vai o preço fazer» mas «dos setups que o meu método já produz, quais devo saltar». Como previsor, um modelo compete com qualquer instituição com melhores dados e mais capacidade de cálculo. Como filtro faz algo muito mais estreito e muito mais alcançável: aprende quais dos teus próprios sinais foram historicamente os fracos.</p>
+
+      <p>Três propriedades dos dados de mercado tornam isto mais difícil do que os tutoriais sugerem, e é preciso respeitar as três, ou o modelo parecerá brilhante e comportar-se-á mal:</p>
+
+      <ul>
+        <li><strong>Os mercados não são estacionários.</strong> A relação que o teu modelo aprendeu em 2021 pode simplesmente não existir em 2024, porque mudaram os participantes e o regime. Um modelo treinado uma vez e deixado sozinho degrada-se a partir do dia em que é posto a correr.</li>
+        <li><strong>A relação sinal-ruído é brutal.</strong> Na maioria dos campos, um modelo com mais dados fica melhor. Aqui, a maior parte desses dados extra é ruído, e um modelo suficientemente flexível ajustar-se-á ao ruído na perfeição e não aprenderá nada.</li>
+        <li><strong>A fuga de informação é fácil e invisível.</strong> Usar o máximo do dia como variável para prever a direcção do dia, ou dividir treino e teste ao acaso em vez de por ordem temporal, deixa o modelo ver o futuro. O backtest que sai daí não é optimista: não quer dizer nada.</li>
+      </ul>
+
+      <p>E há algo que pesa mais do que tudo isto: a exactidão é o objectivo errado. Um modelo que acerta 90 % das vezes em operações que ganham 0,3R e erra 10 % das vezes em operações que perdem 3R tem esperança negativa e uma bonita pontuação de exactidão. O que queres que o modelo suba é a esperança — o acerto e o pagamento juntos — e não o acerto sozinho. O que se segue é uma trader que aprendeu tudo isto pela via cara.</p>
+
+      <div class="section-break"><span>Parte 2: um modelo, construído primeiro mal e depois bem</span></div>
 <h2 id="ninas-47300-ml-overfitting-disaster-and-how-she-fixed-it">O desastre de overfitting com ML da Nina: 47.300 $ (e como ela resolveu)</h2>
 
       <p><strong>Trader:</strong> Nina Patel (exemplo composto), 29 anos, analista quantitativa que virou trader independente, São Francisco, Califórnia<br>
@@ -404,8 +420,8 @@
 
       <p><strong>A estratégia de implantação da V2 da Nina:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>Validação com 20 trades em paper trading (maio de 2024): 70 % de acerto, 1,5R em média → aprovada!</li>
-        <li>Começou ao vivo com metade do tamanho de posição, ou seja 50 % (junho): 65 % de acerto → confiança crescendo</li>
+        <li>Validação em paper trading com 20 operações (maio de 2024): 14 vencedoras, 1,5R em média &mdash; que chega para apanhar um modelo partido, e está muito longe de chegar para confirmar uma taxa</li>
+        <li>Arrancou ao vivo com 50 % do tamanho (junho): ver a linha de junho na tabela abaixo</li>
         <li>Tamanho de posição integral (a partir de julho): filtro de ML operacional</li>
         <li>Retreino mensal: adicionar trades novos, refazer o walk-forward, atualizar o modelo se melhorar +3 %</li>
       </ul>
@@ -597,21 +613,6 @@
         <li><strong>Valor futuro:</strong> O filtro de ML agora acrescenta cerca de 4.300 $/mês (+51.000 $/ano) em relação à referência sem filtro</li>
         <li><strong>Prazo de retorno:</strong> O investimento se paga por completo até o fim de novembro; daí em diante é lucro puro</li>
       </ul>
-      <div class="callout-tip"><h4>🎯 O que vais ganhar</h4><p>No fim desta lição vais conseguir:</p><ul><li>Construir filtros de ML para trades (prever quais setups têm mais chance de ganhar)</li><li>Criar features do jeito certo (estacionárias, sem viés de antecipação)</li><li>Usar validação cruzada walk-forward para evitar overfitting</li><li>Escolher modelos com critério (Random Forest > redes neurais na maioria dos casos)</li></ul></div>
-      <div class="callout-key"><h4>💡 o momento da verdade</h4><p>ML não é uma estratégia independente. É um FILTRO. Você já tem setups (os sweeps do Janus). O ML prevê quais têm 68 % de probabilidade em vez de 55 %. Opere os de 68 % e pule os de 55 %. A vantagem está aí.</p></div>
-
-                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Ganhos rápidos para amanhã (clica para abrir)</summary>
-        <div style="margin-top:1rem">
-          <p>Não te sobrecarregues. Começa por estas três ações:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Comece com engenharia de features simples (ainda sem ML)</strong> — Antes das redes neurais, identifique 3-5 features simples que possam melhorar sua estratégia. Features = entradas mensuráveis. Exemplos: (1) razão do ATR (ATR atual ÷ média de 20 dias) = contexto de volatilidade, (2) razão de volume (atual ÷ média de 20 dias) = participação, (3) hora do dia = efeitos de sessão, (4) divergência do RSI = momentum enfraquecendo, (5) distância da média móvel (preço ÷ EMA de 20 - 1) = força da tendência. Hoje à noite escolha 3 features. Registre-as na entrada dos seus próximos 10 trades. Depois de 10 trades, analise: «Os vencedores tinham valores diferentes dos perdedores?». Exemplo: 8 de 10 ganhos tinham razão do ATR >1,2 e 7 de 10 perdas <0,9. Você encontrou um filtro sem ML: «Só entre em rompimentos quando o ATR estiver >1,2». Engenharia de features é 80 % do sucesso com ML. Testar na mão primeiro constrói intuição e evita overfitting depois.</li>
-            <li><strong>Aprenda a identificar overfitting nos backtests</strong> — Overfitting = o modelo memorizou o histórico em vez de aprender padrões. Teste: (1) backtest em todo o histórico → anote taxa de acerto e lucro, (2) backtest nos primeiros 60 % (período de treino), (3) teste os 40 % restantes (período de teste). Se treino: 75 % de acerto e +50.000 $, teste: 52 % de acerto e -8.000 $ = overfitting (ruído aprendido que não se repetiu). Nina Patel perdeu <span style="color:#ff5252;font-weight:700">$47,300</span> ao colocar em produção uma estratégia de ML com overfitting — o backtest dava 87 % de acerto e ao vivo foi 41 % (padrões aleatórios memorizados). Boas estratégias mostram queda de desempenho <10 % entre treino e teste. Hoje à noite divida seu histórico 60/40. Compare os resultados. Se o teste cair >15 %, as regras estão ajustadas demais ao histórico. Simplifique (menos parâmetros, filtros mais amplos).</li>
-            <li><strong>Use testes walk-forward antes de ir para o ao vivo</strong> — Walk-forward = divisão treino/teste móvel que avança no tempo. Método: (1) treine de janeiro a junho (6 meses), (2) teste julho (1 mês), (3) avance: treine de fevereiro a julho, teste agosto, (4) repita para todos os dados. A estratégia deve ser lucrativa na MAIORIA dos períodos de teste (70 %+). Exemplo: 12 períodos testados, lucrativa em 9 de 12 meses (75 % de consistência) = bom. 5 de 12 meses (42 %) = vantagem instável que teve sorte em um período. Calcule: «períodos de teste lucrativos ÷ total». Se for <60 %, a vantagem é instável ou está com overfitting. O walk-forward simula o trading ao vivo melhor do que um backtest único. Os mercados mudam. Estratégias que funcionam em vários períodos sobrevivem a mudanças de regime. Ele pega o overfitting que backtests únicos deixam passar.</li>
-          </ol>
-        </div>
-      </details>
-
       <div class="section-break"><span>Questionário: testa a tua compreensão</span></div>
       <div class="quiz">
 <h4>&#127918; Verificação de bom senso do machine learning</h4>
