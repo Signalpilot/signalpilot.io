@@ -34,6 +34,9 @@ OK_DOUBLES = {
     # ("سوق سوقًا" = one market ... another market) are grammar, not stutters.
     'ru': {'что что'},
     'ar': {'سوق سوق'},
+    # Hungarian forms "one X after another" by repeating the noun:
+    # "ügylet ügylet után" is trade after trade, not a stutter.
+    'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés'},
 }
 
 
