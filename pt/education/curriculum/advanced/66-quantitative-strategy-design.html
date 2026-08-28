@@ -123,52 +123,6 @@
   <div class="wrap article-grid">
     <div class="prose">
 
-      <div class="example-block">
-        <h4>📊 Exemplo composto: o Marcus e um fracasso de 18.400 $ com uma estratégia quantitativa</h4>
-
-        <p><strong>Contexto:</strong> Marcus (exemplo composto), antigo programador de Python que se tornou trader algorítmico, passou seis meses no início de 2023 a construir aquela que julgava ser a estratégia de reversão à média perfeita para o SPY. Os resultados do backtest pareciam incríveis: 32 % de rentabilidade anual, um Sharpe de 1,8 e apenas 8 % de drawdown máximo entre 2015 e 2022. Essa combinação devia ter sido o primeiro aviso. Um Sharpe de 1,8 sobre uma rentabilidade de 32 % implica cerca de 16 % de volatilidade anual, e uma estratégia que oscila 16 % ao ano não atravessa oito anos com um pior drawdown de 8 %. Quando os três números do título não podem ser todos verdadeiros ao mesmo tempo, o backtest está a descrever os dados e não o mercado.</p>
-
-        <p><strong>A estratégia:</strong> Comprar SPY quando fecha 1,2 % ou mais em baixa e vender quando recupera 0,8 %. Testou mais de 10.000 combinações de parâmetros e encontrou estes números «ótimos». Entusiasmado com os resultados, colocou 75.000 $ de capital real em março de 2023.</p>
-
-        <p><strong>O desastre:</strong></p>
-        <ul>
-          <li><strong>Mês 1 (março de 2023):</strong> Menos 4.200 $ (-5,6 %). O mercado não revertia como o backtest previa.</li>
-          <li><strong>Mês 2 (abril de 2023):</strong> Mais 7.800 $ de queda — um mês de -10,4 %, que o deixou nos -16,0 % acumulados. O seu gatilho de «-1,2 %» continuava a disparar, mas as recuperações demoravam mais do que os 0,8 % permitiam.</li>
-          <li><strong>Mês 3 (maio de 2023):</strong> Mais 6.400 $ perdidos. Prejuízo total: <strong>18.400 $ em 3 meses</strong> (-24.5%).</li>
-        </ul>
-
-        <p><strong>O que correu mal:</strong> Marcus tinha cometido todos os pecados quantitativos:</p>
-        <ul>
-          <li>❌ <strong>Ajuste à curva:</strong> Otimizou o 1,2 % e o 0,8 % contra ruído histórico, não contra comportamento real do mercado</li>
-          <li>❌ <strong>Sem testes fora da amostra:</strong> Usou TODOS os seus dados para otimizar (sem conjunto de validação)</li>
-          <li>❌ <strong>Custos de transação ignorados:</strong> O backtest assumia execuções perfeitas; na realidade 0,03 % de slippage por operação devorava o seu fino edge</li>
-          <li>❌ <strong>Parâmetros frágeis:</strong> Limiares de 1,1 % ou 1,3 % falhavam por completo — sinal de sobreajuste</li>
-        </ul>
-
-        <p><strong>A recuperação:</strong> Depois do desastre, Marcus recomeçou do zero com a metodologia que esta lição ensina. Redesenhou com:</p>
-        <ul>
-          <li>✅ Validação walk-forward (reotimizar de 6 em 6 meses sobre janela móvel)</li>
-          <li>✅ Testes fora da amostra (guardou os dados de 2022-2023 e nunca lhes tocou durante o desenvolvimento)</li>
-          <li>✅ Custos realistas (0,05 % de slippage + 1 $ de comissão por operação)</li>
-          <li>✅ Testes de robustez dos parâmetros (a estratégia funciona no intervalo de limiar 1,0-1,5 %, não só a 1,2 %)</li>
-        </ul>
-
-        <p><strong>Resultados depois do redesenho:</strong> A nova estratégia dava 18 % ao ano no backtest em vez de 32 %, e aguentou-se ao vivo. Nos seis meses de setembro de 2023 a fevereiro de 2024 rendeu cerca de 8,5 %, ou seja, à volta de 4.800 $ sobre os 56.600 $ que lhe restavam.</p>
-
-        <p><strong>Faça essa conta antes de se sentir bem com ela.</strong> A 18 % ao ano, recuperar 18.400 $ numa conta de 56.600 $ leva cerca de dois anos. Esse é o preço real de três meses de ajuste à curva: não os 18.400 $, mas os dois anos de capitalização que custa voltar ao ponto de partida. Quem lhe disser que «recuperou tudo» em seis meses com uma estratégia de 18 % está a descrever outra estratégia.</p>
-
-        <p><strong>A lição de Marcus:</strong> «Uma estratégia de 18 % que funciona vale mais do que um backtest de 32 % que falha. A chave não está em encontrar os parâmetros perfeitos, mas em construir algo suficientemente robusto para sobreviver a mercados reais.»</p>
-      </div>
-
-      <p>Uma estratégia quantitativa bem desenhada elimina a emoção, valida o edge estatisticamente e compõe rentabilidades de forma sistemática. Esta lição ensina-o a desenhar, backtestar e colocar em produção sistemas de negociação de nível institucional — e a evitar o erro de 18.000 $ que Marcus cometeu.</p>
-
-      <div class="callout callout-danger">
-        <h4>⚠️ O cemitério do sobreajuste</h4>
-        <p>Um fundo quantitativo faz backtest a 10.000 combinações de parâmetros e encontra uma estratégia «perfeita»: 45 % de rentabilidade anual, um Sharpe de 2,6 e 12 % de drawdown máximo entre 2010 e 2020. Em janeiro de 2021 coloca 50 milhões de dólares.</p>
-        <p>Em dezembro de 2021 o fundo está 28 % em baixa. A estratégia estava ajustada ao ruído histórico, não a um edge real de mercado.</p>
-        <p><strong>Lição:</strong> a taxa de insucesso das estratégias com backtest é alta o suficiente para que o ónus da prova recaia sobre a estratégia e não sobre o cético. Verá muitas vezes citado que «95 % falham»; ninguém alguma vez o mediu, porque ninguém tem a população das estratégias que as pessoas abandonaram em silêncio. O que é mensurável é mais estreito e mais útil: quando os investigadores voltam a testar anomalias publicadas em dados recolhidos depois da publicação, as rentabilidades médias caem para cerca de metade e uma parte substancial deixa de funcionar por completo. Parta do princípio de que o seu backtest é pelo menos assim tão otimista e desenhe em conformidade.</p>
-      </div>
-
       <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
         <h3 style="margin:0 0 1rem 0">🎯 O que vais aprender</h3>
         <p style="margin:0 0 0.75rem 0">No final desta aula vais saber:</p>
@@ -515,6 +469,52 @@
       <p><strong>Leia a forma, não a contagem.</strong> Dois mapas de calor podem mostrar ambos 40 % de células lucrativas e significar o oposto: um em que essas células formam um único bloco ligado no centro do qual estão os seus parâmetros, e outro em que aparecem salpicadas ao acaso. O primeiro diz que o edge é insensível ao ajuste exato, que é o que robustez significa. O segundo diz que encontrou quarenta por cento de uma moeda ao ar.</p>
     </div>
   </details>
+
+      <div class="example-block">
+        <h4>📊 Exemplo composto: o Marcus e um fracasso de 18.400 $ com uma estratégia quantitativa</h4>
+
+        <p><strong>Contexto:</strong> Marcus (exemplo composto), antigo programador de Python que se tornou trader algorítmico, passou seis meses no início de 2023 a construir aquela que julgava ser a estratégia de reversão à média perfeita para o SPY. Os resultados do backtest pareciam incríveis: 32 % de rentabilidade anual, um Sharpe de 1,8 e apenas 8 % de drawdown máximo entre 2015 e 2022. Essa combinação devia ter sido o primeiro aviso. Um Sharpe de 1,8 sobre uma rentabilidade de 32 % implica cerca de 16 % de volatilidade anual, e uma estratégia que oscila 16 % ao ano não atravessa oito anos com um pior drawdown de 8 %. Quando os três números do título não podem ser todos verdadeiros ao mesmo tempo, o backtest está a descrever os dados e não o mercado.</p>
+
+        <p><strong>A estratégia:</strong> Comprar SPY quando fecha 1,2 % ou mais em baixa e vender quando recupera 0,8 %. Testou mais de 10.000 combinações de parâmetros e encontrou estes números «ótimos». Entusiasmado com os resultados, colocou 75.000 $ de capital real em março de 2023.</p>
+
+        <p><strong>O desastre:</strong></p>
+        <ul>
+          <li><strong>Mês 1 (março de 2023):</strong> Menos 4.200 $ (-5,6 %). O mercado não revertia como o backtest previa.</li>
+          <li><strong>Mês 2 (abril de 2023):</strong> Mais 7.800 $ de queda — um mês de -10,4 %, que o deixou nos -16,0 % acumulados. O seu gatilho de «-1,2 %» continuava a disparar, mas as recuperações demoravam mais do que os 0,8 % permitiam.</li>
+          <li><strong>Mês 3 (maio de 2023):</strong> Mais 6.400 $ perdidos. Prejuízo total: <strong>18.400 $ em 3 meses</strong> (-24.5%).</li>
+        </ul>
+
+        <p><strong>O que correu mal:</strong> Marcus tinha cometido todos os pecados quantitativos:</p>
+        <ul>
+          <li>❌ <strong>Ajuste à curva:</strong> Otimizou o 1,2 % e o 0,8 % contra ruído histórico, não contra comportamento real do mercado</li>
+          <li>❌ <strong>Sem testes fora da amostra:</strong> Usou TODOS os seus dados para otimizar (sem conjunto de validação)</li>
+          <li>❌ <strong>Custos de transação ignorados:</strong> O backtest assumia execuções perfeitas; na realidade 0,03 % de slippage por operação devorava o seu fino edge</li>
+          <li>❌ <strong>Parâmetros frágeis:</strong> Limiares de 1,1 % ou 1,3 % falhavam por completo — sinal de sobreajuste</li>
+        </ul>
+
+        <p><strong>A recuperação:</strong> Depois do desastre, Marcus recomeçou do zero com a metodologia que esta lição ensina. Redesenhou com:</p>
+        <ul>
+          <li>✅ Validação walk-forward (reotimizar de 6 em 6 meses sobre janela móvel)</li>
+          <li>✅ Testes fora da amostra (guardou os dados de 2022-2023 e nunca lhes tocou durante o desenvolvimento)</li>
+          <li>✅ Custos realistas (0,05 % de slippage + 1 $ de comissão por operação)</li>
+          <li>✅ Testes de robustez dos parâmetros (a estratégia funciona no intervalo de limiar 1,0-1,5 %, não só a 1,2 %)</li>
+        </ul>
+
+        <p><strong>Resultados depois do redesenho:</strong> A nova estratégia dava 18 % ao ano no backtest em vez de 32 %, e aguentou-se ao vivo. Nos seis meses de setembro de 2023 a fevereiro de 2024 rendeu cerca de 8,5 %, ou seja, à volta de 4.800 $ sobre os 56.600 $ que lhe restavam.</p>
+
+        <p><strong>Faça essa conta antes de se sentir bem com ela.</strong> A 18 % ao ano, recuperar 18.400 $ numa conta de 56.600 $ leva cerca de dois anos. Esse é o preço real de três meses de ajuste à curva: não os 18.400 $, mas os dois anos de capitalização que custa voltar ao ponto de partida. Quem lhe disser que «recuperou tudo» em seis meses com uma estratégia de 18 % está a descrever outra estratégia.</p>
+
+        <p><strong>A lição de Marcus:</strong> «Uma estratégia de 18 % que funciona vale mais do que um backtest de 32 % que falha. A chave não está em encontrar os parâmetros perfeitos, mas em construir algo suficientemente robusto para sobreviver a mercados reais.»</p>
+      </div>
+
+      <p>Uma estratégia quantitativa bem desenhada elimina a emoção, valida o edge estatisticamente e compõe rentabilidades de forma sistemática. Esta lição ensina-o a desenhar, backtestar e colocar em produção sistemas de negociação de nível institucional — e a evitar o erro de 18.000 $ que Marcus cometeu.</p>
+
+      <div class="callout callout-danger">
+        <h4>⚠️ O cemitério do sobreajuste</h4>
+        <p>Um fundo quantitativo faz backtest a 10.000 combinações de parâmetros e encontra uma estratégia «perfeita»: 45 % de rentabilidade anual, um Sharpe de 2,6 e 12 % de drawdown máximo entre 2010 e 2020. Em janeiro de 2021 coloca 50 milhões de dólares.</p>
+        <p>Em dezembro de 2021 o fundo está 28 % em baixa. A estratégia estava ajustada ao ruído histórico, não a um edge real de mercado.</p>
+        <p><strong>Lição:</strong> a taxa de insucesso das estratégias com backtest é alta o suficiente para que o ónus da prova recaia sobre a estratégia e não sobre o cético. Verá muitas vezes citado que «95 % falham»; ninguém alguma vez o mediu, porque ninguém tem a população das estratégias que as pessoas abandonaram em silêncio. O que é mensurável é mais estreito e mais útil: quando os investigadores voltam a testar anomalias publicadas em dados recolhidos depois da publicação, as rentabilidades médias caem para cerca de metade e uma parte substancial deixa de funcionar por completo. Parta do princípio de que o seu backtest é pelo menos assim tão otimista e desenhe em conformidade.</p>
+      </div>
 
   <h2 id="part-5-validation-stress-testing">Parte 5: validação e testes de esforço</h2>
 

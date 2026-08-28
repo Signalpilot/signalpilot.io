@@ -123,52 +123,6 @@
   <div class="wrap article-grid">
     <div class="prose">
 
-      <div class="example-block">
-        <h4>📊 Bileşik örnek: Marcus ve 18.400 $’lık bir nicel strateji başarısızlığı</h4>
-
-        <p><strong>Arka plan:</strong> Marcus (bileşik örnek), Python geliştiricisiyken algoritmik trader'a dönüşmüş biri; 2023'ün başında altı ayını SPY için kusursuz olduğuna inandığı bir ortalamaya dönüş stratejisi kurmaya harcadı. Backtest sonuçları inanılmaz görünüyordu: 2015-2022 arasında yılda %32 getiri, 1,8 Sharpe oranı ve yalnızca %8 azami drawdown. İlk uyarı tam da bu bileşim olmalıydı. %32 getiride 1,8 Sharpe, kabaca yıllık %16 volatilite demektir; yılda %16 salınan bir strateji de sekiz yılı en kötü %8'lik bir drawdown ile geçmez. Manşetteki üç sayı aynı anda doğru olamıyorsa, o backtest piyasayı değil veriyi tarif ediyordur.</p>
-
-        <p><strong>Strateji:</strong> SPY %1,2 veya daha fazla düşüşle kapandığında al, %0,8 toparladığında sat. 10.000'den fazla parametre bileşimi test etti ve bu «optimal» sayıları buldu. Sonuçlardan heyecanlanıp Mart 2023'te 75.000 dolarlık gerçek sermaye koydu.</p>
-
-        <p><strong>Felaket:</strong></p>
-        <ul>
-          <li><strong>1. ay (Mart 2023):</strong> 4.200 dolar aşağıda (%-5,6). Piyasa backtest'in öngördüğü gibi geri dönmüyordu.</li>
-          <li><strong>2. ay (Nisan 2023):</strong> 7.800 dolar daha aşağıda — o ay için %10,4, kümülatifte %16,0 aşağı. «%1,2 düşüş» tetikleyicisi durmadan çalışıyordu ama toparlanmalar %0,8'e ulaşmak için daha uzun sürüyordu.</li>
-          <li><strong>3. ay (Mayıs 2023):</strong> 6.400 dolar daha kaybetti. Toplam kayıp: <strong>3 ayda 18.400 dolar</strong> (-24.5%).</li>
-        </ul>
-
-        <p><strong>Ne ters gitti:</strong> Marcus her kantitatif günahı işlemişti:</p>
-        <ul>
-          <li>❌ <strong>Eğri uydurma:</strong> %1,2 ve %0,8'i gerçek piyasa davranışına değil, geçmişin gürültüsüne göre optimize etti</li>
-          <li>❌ <strong>Örneklem dışı sınama yok:</strong> Optimizasyon için verisinin TAMAMINI kullandı (doğrulama kümesi yok)</li>
-          <li>❌ <strong>İşlem maliyetlerini yok saydı:</strong> Backtest'i kusursuz gerçekleşmeler varsayıyordu; gerçekte işlem başına %0,03 slippage vardı ve bu ince edge'i yok ediyordu</li>
-          <li>❌ <strong>Kırılgan parametreler:</strong> %1,1 veya %1,3 eşikleri tamamen çöktü — aşırı uyumun işareti</li>
-        </ul>
-
-        <p><strong>Toparlanma:</strong> Bu felaketten sonra Marcus, bu derste öğretilen doğru yöntemle sıfırdan başladı. Şöyle yeniden tasarladı:</p>
-        <ul>
-          <li>✅ Walk-forward doğrulama (kayan pencerede her 6 ayda bir yeniden optimize)</li>
-          <li>✅ Örneklem dışı sınama (geliştirme sırasında hiç dokunmadığı 2022-2023 verisini ayırdı)</li>
-          <li>✅ Gerçekçi maliyetler (işlem başına %0,05 slippage + 1 dolar komisyon)</li>
-          <li>✅ Parametre sağlamlığı sınaması (strateji yalnızca %1,2'de değil, %1,0-1,5 eşik aralığında çalışıyor)</li>
-        </ul>
-
-        <p><strong>Yeniden tasarımdan sonraki sonuçlar:</strong> Yeni stratejisinin backtest'i %32 yerine yılda %18 verdi ve gerçekte de ayakta kaldı. Eylül 2023'ten Şubat 2024'e altı ayda yaklaşık %8,5 getirdi — elinde kalan 56.600 dolar üzerinden kabaca 4.800 dolar.</p>
-
-        <p><strong>Kendinizi iyi hissetmeden önce bu aritmetiği yapın.</strong> Yılda %18 ile 56.600 dolarlık bir hesapta 18.400 doları geri kazanmak yaklaşık iki yıl sürer. Üç aylık eğri uydurmanın gerçek bedeli budur: 18.400 dolar değil, başladığı yere dönmek için harcanan iki yıllık bileşik getiri. Size %18'lik bir stratejiyle altı ayda «hepsini geri aldığını» söyleyen biri, başka bir stratejiyi anlatıyordur.</p>
-
-        <p><strong>Marcus'un dersi:</strong> «Çalışan %18'lik bir strateji, çöken %32'lik bir backtest'i yener. Mesele kusursuz parametreleri bulmak değil — gerçek piyasada hayatta kalacak kadar sağlam bir şey kurmak.»</p>
-      </div>
-
-      <p>İyi tasarlanmış bir kantitatif strateji duyguyu devre dışı bırakır, edge'i istatistiksel olarak doğrular ve getiriyi sistematik biçimde bileşikleştirir. Bu ders size kurumsal seviyede alım satım sistemlerini nasıl tasarlayacağınızı, backtest edeceğinizi ve devreye alacağınızı öğretir — ve Marcus'un yaptığı 18 bin dolarlık hatadan nasıl kaçınacağınızı.</p>
-
-      <div class="callout callout-danger">
-        <h4>⚠️ Aşırı uyum mezarlığı</h4>
-        <p>Bir kantitatif fon 10.000 parametre bileşimini backtest ediyor ve «kusursuz» bir strateji buluyor: 2010-2020 arasında yılda %45 getiri, 2,6 Sharpe ve %12 azami drawdown. Ocak 2021'de 50 milyon dolar koyuyorlar.</p>
-        <p>Aralık 2021'e gelindiğinde fon %28 aşağıda. Strateji gerçek bir piyasa edge'ine değil, geçmişin gürültüsüne uydurulmuştu.</p>
-        <p><strong>Ders:</strong> backtest'ten geçmiş stratejilerin başarısızlık oranı, ispat yükünü kuşkucuya değil stratejiye yükleyecek kadar yüksektir. «%95'i çöker» ifadesini çok göreceksiniz; bunu kimse ölçmedi, çünkü insanların sessizce bıraktığı stratejilerin evreni kimsede yok. Ölçülebilir olan daha dar ve daha yararlı: araştırmacılar yayımlanmış anomalileri yayın sonrası toplanan veriyle yeniden sınadığında ortalama getiriler kabaca yarıya iniyor ve önemli bir kısmı tamamen çalışmayı bırakıyor. Kendi backtest'inizin en az bu kadar iyimser olduğunu varsayın ve buna göre tasarlayın.</p>
-      </div>
-
       <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
         <h3 style="margin:0 0 1rem 0">🎯 Neler öğreneceksin</h3>
         <p style="margin:0 0 0.75rem 0">Bu dersin sonunda şunları yapabileceksin:</p>
@@ -515,6 +469,52 @@
       <p><strong>Sayıyı değil, şekli okuyun.</strong> İki ısı haritası da %40 kârlı gösterip birbirinin tam tersini anlatabilir: birinde kârlı hücreler tek ve bitişik bir blok oluşturur ve parametreleriniz tam ortasındadır, diğerinde rastgele serpiştirilmiştir. Birincisi edge'in tam ayara duyarsız olduğunu söyler; sağlamlık dediğimiz budur. İkincisi yazı turanın yüzde kırkını bulduğunuzu söyler.</p>
     </div>
   </details>
+
+      <div class="example-block">
+        <h4>📊 Bileşik örnek: Marcus ve 18.400 $’lık bir nicel strateji başarısızlığı</h4>
+
+        <p><strong>Arka plan:</strong> Marcus (bileşik örnek), Python geliştiricisiyken algoritmik trader'a dönüşmüş biri; 2023'ün başında altı ayını SPY için kusursuz olduğuna inandığı bir ortalamaya dönüş stratejisi kurmaya harcadı. Backtest sonuçları inanılmaz görünüyordu: 2015-2022 arasında yılda %32 getiri, 1,8 Sharpe oranı ve yalnızca %8 azami drawdown. İlk uyarı tam da bu bileşim olmalıydı. %32 getiride 1,8 Sharpe, kabaca yıllık %16 volatilite demektir; yılda %16 salınan bir strateji de sekiz yılı en kötü %8'lik bir drawdown ile geçmez. Manşetteki üç sayı aynı anda doğru olamıyorsa, o backtest piyasayı değil veriyi tarif ediyordur.</p>
+
+        <p><strong>Strateji:</strong> SPY %1,2 veya daha fazla düşüşle kapandığında al, %0,8 toparladığında sat. 10.000'den fazla parametre bileşimi test etti ve bu «optimal» sayıları buldu. Sonuçlardan heyecanlanıp Mart 2023'te 75.000 dolarlık gerçek sermaye koydu.</p>
+
+        <p><strong>Felaket:</strong></p>
+        <ul>
+          <li><strong>1. ay (Mart 2023):</strong> 4.200 dolar aşağıda (%-5,6). Piyasa backtest'in öngördüğü gibi geri dönmüyordu.</li>
+          <li><strong>2. ay (Nisan 2023):</strong> 7.800 dolar daha aşağıda — o ay için %10,4, kümülatifte %16,0 aşağı. «%1,2 düşüş» tetikleyicisi durmadan çalışıyordu ama toparlanmalar %0,8'e ulaşmak için daha uzun sürüyordu.</li>
+          <li><strong>3. ay (Mayıs 2023):</strong> 6.400 dolar daha kaybetti. Toplam kayıp: <strong>3 ayda 18.400 dolar</strong> (-24.5%).</li>
+        </ul>
+
+        <p><strong>Ne ters gitti:</strong> Marcus her kantitatif günahı işlemişti:</p>
+        <ul>
+          <li>❌ <strong>Eğri uydurma:</strong> %1,2 ve %0,8'i gerçek piyasa davranışına değil, geçmişin gürültüsüne göre optimize etti</li>
+          <li>❌ <strong>Örneklem dışı sınama yok:</strong> Optimizasyon için verisinin TAMAMINI kullandı (doğrulama kümesi yok)</li>
+          <li>❌ <strong>İşlem maliyetlerini yok saydı:</strong> Backtest'i kusursuz gerçekleşmeler varsayıyordu; gerçekte işlem başına %0,03 slippage vardı ve bu ince edge'i yok ediyordu</li>
+          <li>❌ <strong>Kırılgan parametreler:</strong> %1,1 veya %1,3 eşikleri tamamen çöktü — aşırı uyumun işareti</li>
+        </ul>
+
+        <p><strong>Toparlanma:</strong> Bu felaketten sonra Marcus, bu derste öğretilen doğru yöntemle sıfırdan başladı. Şöyle yeniden tasarladı:</p>
+        <ul>
+          <li>✅ Walk-forward doğrulama (kayan pencerede her 6 ayda bir yeniden optimize)</li>
+          <li>✅ Örneklem dışı sınama (geliştirme sırasında hiç dokunmadığı 2022-2023 verisini ayırdı)</li>
+          <li>✅ Gerçekçi maliyetler (işlem başına %0,05 slippage + 1 dolar komisyon)</li>
+          <li>✅ Parametre sağlamlığı sınaması (strateji yalnızca %1,2'de değil, %1,0-1,5 eşik aralığında çalışıyor)</li>
+        </ul>
+
+        <p><strong>Yeniden tasarımdan sonraki sonuçlar:</strong> Yeni stratejisinin backtest'i %32 yerine yılda %18 verdi ve gerçekte de ayakta kaldı. Eylül 2023'ten Şubat 2024'e altı ayda yaklaşık %8,5 getirdi — elinde kalan 56.600 dolar üzerinden kabaca 4.800 dolar.</p>
+
+        <p><strong>Kendinizi iyi hissetmeden önce bu aritmetiği yapın.</strong> Yılda %18 ile 56.600 dolarlık bir hesapta 18.400 doları geri kazanmak yaklaşık iki yıl sürer. Üç aylık eğri uydurmanın gerçek bedeli budur: 18.400 dolar değil, başladığı yere dönmek için harcanan iki yıllık bileşik getiri. Size %18'lik bir stratejiyle altı ayda «hepsini geri aldığını» söyleyen biri, başka bir stratejiyi anlatıyordur.</p>
+
+        <p><strong>Marcus'un dersi:</strong> «Çalışan %18'lik bir strateji, çöken %32'lik bir backtest'i yener. Mesele kusursuz parametreleri bulmak değil — gerçek piyasada hayatta kalacak kadar sağlam bir şey kurmak.»</p>
+      </div>
+
+      <p>İyi tasarlanmış bir kantitatif strateji duyguyu devre dışı bırakır, edge'i istatistiksel olarak doğrular ve getiriyi sistematik biçimde bileşikleştirir. Bu ders size kurumsal seviyede alım satım sistemlerini nasıl tasarlayacağınızı, backtest edeceğinizi ve devreye alacağınızı öğretir — ve Marcus'un yaptığı 18 bin dolarlık hatadan nasıl kaçınacağınızı.</p>
+
+      <div class="callout callout-danger">
+        <h4>⚠️ Aşırı uyum mezarlığı</h4>
+        <p>Bir kantitatif fon 10.000 parametre bileşimini backtest ediyor ve «kusursuz» bir strateji buluyor: 2010-2020 arasında yılda %45 getiri, 2,6 Sharpe ve %12 azami drawdown. Ocak 2021'de 50 milyon dolar koyuyorlar.</p>
+        <p>Aralık 2021'e gelindiğinde fon %28 aşağıda. Strateji gerçek bir piyasa edge'ine değil, geçmişin gürültüsüne uydurulmuştu.</p>
+        <p><strong>Ders:</strong> backtest'ten geçmiş stratejilerin başarısızlık oranı, ispat yükünü kuşkucuya değil stratejiye yükleyecek kadar yüksektir. «%95'i çöker» ifadesini çok göreceksiniz; bunu kimse ölçmedi, çünkü insanların sessizce bıraktığı stratejilerin evreni kimsede yok. Ölçülebilir olan daha dar ve daha yararlı: araştırmacılar yayımlanmış anomalileri yayın sonrası toplanan veriyle yeniden sınadığında ortalama getiriler kabaca yarıya iniyor ve önemli bir kısmı tamamen çalışmayı bırakıyor. Kendi backtest'inizin en az bu kadar iyimser olduğunu varsayın ve buna göre tasarlayın.</p>
+      </div>
 
   <h2 id="part-5-validation-stress-testing">Bölüm 5: doğrulama ve stres testi</h2>
 

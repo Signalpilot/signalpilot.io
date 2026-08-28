@@ -123,52 +123,6 @@
   <div class="wrap article-grid">
     <div class="prose">
 
-      <div class="example-block">
-        <h4>📊 Esempio composito: Marcus e un fallimento da 18.400 $ di una strategia quantitativa</h4>
-
-        <p><strong>Contesto:</strong> Marcus (esempio composito), ex sviluppatore Python diventato trader algoritmico, ha passato sei mesi all'inizio del 2023 a costruire quella che riteneva la strategia di ritorno alla media perfetta per SPY. I risultati del backtest sembravano incredibili: 32 % di rendimento annuo, uno Sharpe di 1,8 e appena l'8 % di drawdown massimo dal 2015 al 2022. Proprio quella combinazione avrebbe dovuto essere il primo campanello d'allarme. Uno Sharpe di 1,8 su un rendimento del 32 % implica circa il 16 % di volatilità annua, e una strategia che oscilla del 16 % all'anno non attraversa otto anni con un drawdown peggiore dell'8 %. Quando i tre numeri del titolo non possono essere veri insieme, il backtest sta descrivendo i dati, non il mercato.</p>
-
-        <p><strong>La strategia:</strong> Comprare SPY quando chiude in calo dell'1,2 % o più, vendere quando recupera lo 0,8 %. Ha testato oltre 10.000 combinazioni di parametri e ha trovato questi numeri «ottimali». Entusiasta dei risultati, a marzo 2023 ha impiegato 75.000 $ di capitale reale.</p>
-
-        <p><strong>Il disastro:</strong></p>
-        <ul>
-          <li><strong>Mese 1 (marzo 2023):</strong> In perdita di 4.200 $ (-5,6 %). Il mercato non tornava indietro come prevedeva il backtest.</li>
-          <li><strong>Mese 2 (aprile 2023):</strong> Altri 7.800 $ in meno — un mese a -10,4 %, che lo portava a -16,0 % cumulato. Il suo innesco «-1,2 %» continuava a scattare, ma i recuperi ci mettevano più di quanto lo 0,8 % concedesse.</li>
-          <li><strong>Mese 3 (maggio 2023):</strong> Altri 6.400 $ persi. Perdita totale: <strong>18.400 $ in 3 mesi</strong> (-24.5%).</li>
-        </ul>
-
-        <p><strong>Che cosa è andato storto:</strong> Marcus aveva commesso ogni peccato quantitativo:</p>
-        <ul>
-          <li>❌ <strong>Adattamento alla curva:</strong> Ha ottimizzato l'1,2 % e lo 0,8 % sul rumore storico, non sul comportamento reale del mercato</li>
-          <li>❌ <strong>Nessun test fuori campione:</strong> Ha usato TUTTI i suoi dati per ottimizzare (nessun insieme di validazione)</li>
-          <li>❌ <strong>Costi di transazione ignorati:</strong> Il suo backtest presupponeva esecuzioni perfette; nella realtà uno slippage dello 0,03 % per operazione divorava il suo sottile edge</li>
-          <li>❌ <strong>Parametri fragili:</strong> Soglie dell'1,1 % o dell'1,3 % fallivano del tutto — segno di overfitting</li>
-        </ul>
-
-        <p><strong>La ripresa:</strong> Dopo il disastro Marcus ha ricominciato da zero con la metodologia insegnata in questa lezione. Ha riprogettato con:</p>
-        <ul>
-          <li>✅ Validazione walk-forward (riottimizzazione ogni 6 mesi su finestra mobile)</li>
-          <li>✅ Test fuori campione (dati 2022-2023 messi da parte e mai toccati durante lo sviluppo)</li>
-          <li>✅ Costi realistici (0,05 % di slippage + 1 $ di commissione per operazione)</li>
-          <li>✅ Test di robustezza dei parametri (la strategia funziona nell'intervallo di soglia 1,0-1,5 %, non solo a 1,2 %)</li>
-        </ul>
-
-        <p><strong>Risultati dopo la riprogettazione:</strong> La nuova strategia dava il 18 % annuo nel backtest invece del 32 %, e ha tenuto dal vivo. Nei sei mesi da settembre 2023 a febbraio 2024 ha reso circa l'8,5 %, cioè all'incirca 4.800 $ sui 56.600 $ che gli erano rimasti.</p>
-
-        <p><strong>Fai quel conto prima di compiacerti.</strong> Al 18 % annuo, recuperare 18.400 $ su un conto da 56.600 $ richiede circa due anni. Questo è il prezzo vero di tre mesi di adattamento alla curva: non i 18.400 $, ma i due anni di capitalizzazione che servono per tornare al punto di partenza. Chi ti racconta di aver «recuperato tutto» in sei mesi con una strategia al 18 % ti sta descrivendo un'altra strategia.</p>
-
-        <p><strong>La lezione di Marcus:</strong> «Una strategia al 18 % che funziona batte un backtest al 32 % che fallisce. La chiave non è trovare i parametri perfetti, ma costruire qualcosa di abbastanza robusto da sopravvivere ai mercati veri.»</p>
-      </div>
-
-      <p>Una strategia quantitativa progettata bene elimina l'emotività, valida l'edge statisticamente e compone i rendimenti in modo sistematico. Questa lezione ti insegna a progettare, backtestare e mettere in produzione sistemi di trading di livello istituzionale — e a evitare l'errore da 18.000 $ di Marcus.</p>
-
-      <div class="callout callout-danger">
-        <h4>⚠️ Il cimitero dell'overfitting</h4>
-        <p>Un fondo quantitativo backtesta 10.000 combinazioni di parametri e trova una strategia «perfetta»: 45 % di rendimento annuo, uno Sharpe di 2,6 e il 12 % di drawdown massimo dal 2010 al 2020. A gennaio 2021 impiega 50 milioni di dollari.</p>
-        <p>A dicembre 2021 il fondo è in calo del 28 %. La strategia era adattata al rumore storico, non a un vero edge di mercato.</p>
-        <p><strong>Lezione:</strong> il tasso di fallimento delle strategie passate al backtest è abbastanza alto da far ricadere l'onere della prova sulla strategia e non sullo scettico. Sentirai spesso citare «il 95 % fallisce»; nessuno l'ha mai misurato, perché nessuno possiede la popolazione delle strategie abbandonate in silenzio. Quello che si può misurare è più stretto e più utile: quando i ricercatori ritestano anomalie pubblicate su dati raccolti dopo la pubblicazione, i rendimenti medi si dimezzano circa e una quota consistente smette del tutto di funzionare. Dai per scontato che il tuo backtest sia almeno altrettanto ottimista e progetta di conseguenza.</p>
-      </div>
-
       <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
         <h3 style="margin:0 0 1rem 0">🎯 Cosa imparerai</h3>
         <p style="margin:0 0 0.75rem 0">Alla fine di questa lezione saprai:</p>
@@ -515,6 +469,52 @@
       <p><strong>Leggi la forma, non il conteggio.</strong> Due mappe di calore possono mostrare entrambe il 40 % di caselle profittevoli e significare l'opposto: una in cui quelle caselle formano un unico blocco connesso al cui centro stanno i tuoi parametri, e una in cui sono spruzzate a caso. La prima dice che l'edge è insensibile all'impostazione esatta, che è esattamente ciò che significa robustezza. La seconda dice che hai trovato il quaranta per cento di un lancio di moneta.</p>
     </div>
   </details>
+
+      <div class="example-block">
+        <h4>📊 Esempio composito: Marcus e un fallimento da 18.400 $ di una strategia quantitativa</h4>
+
+        <p><strong>Contesto:</strong> Marcus (esempio composito), ex sviluppatore Python diventato trader algoritmico, ha passato sei mesi all'inizio del 2023 a costruire quella che riteneva la strategia di ritorno alla media perfetta per SPY. I risultati del backtest sembravano incredibili: 32 % di rendimento annuo, uno Sharpe di 1,8 e appena l'8 % di drawdown massimo dal 2015 al 2022. Proprio quella combinazione avrebbe dovuto essere il primo campanello d'allarme. Uno Sharpe di 1,8 su un rendimento del 32 % implica circa il 16 % di volatilità annua, e una strategia che oscilla del 16 % all'anno non attraversa otto anni con un drawdown peggiore dell'8 %. Quando i tre numeri del titolo non possono essere veri insieme, il backtest sta descrivendo i dati, non il mercato.</p>
+
+        <p><strong>La strategia:</strong> Comprare SPY quando chiude in calo dell'1,2 % o più, vendere quando recupera lo 0,8 %. Ha testato oltre 10.000 combinazioni di parametri e ha trovato questi numeri «ottimali». Entusiasta dei risultati, a marzo 2023 ha impiegato 75.000 $ di capitale reale.</p>
+
+        <p><strong>Il disastro:</strong></p>
+        <ul>
+          <li><strong>Mese 1 (marzo 2023):</strong> In perdita di 4.200 $ (-5,6 %). Il mercato non tornava indietro come prevedeva il backtest.</li>
+          <li><strong>Mese 2 (aprile 2023):</strong> Altri 7.800 $ in meno — un mese a -10,4 %, che lo portava a -16,0 % cumulato. Il suo innesco «-1,2 %» continuava a scattare, ma i recuperi ci mettevano più di quanto lo 0,8 % concedesse.</li>
+          <li><strong>Mese 3 (maggio 2023):</strong> Altri 6.400 $ persi. Perdita totale: <strong>18.400 $ in 3 mesi</strong> (-24.5%).</li>
+        </ul>
+
+        <p><strong>Che cosa è andato storto:</strong> Marcus aveva commesso ogni peccato quantitativo:</p>
+        <ul>
+          <li>❌ <strong>Adattamento alla curva:</strong> Ha ottimizzato l'1,2 % e lo 0,8 % sul rumore storico, non sul comportamento reale del mercato</li>
+          <li>❌ <strong>Nessun test fuori campione:</strong> Ha usato TUTTI i suoi dati per ottimizzare (nessun insieme di validazione)</li>
+          <li>❌ <strong>Costi di transazione ignorati:</strong> Il suo backtest presupponeva esecuzioni perfette; nella realtà uno slippage dello 0,03 % per operazione divorava il suo sottile edge</li>
+          <li>❌ <strong>Parametri fragili:</strong> Soglie dell'1,1 % o dell'1,3 % fallivano del tutto — segno di overfitting</li>
+        </ul>
+
+        <p><strong>La ripresa:</strong> Dopo il disastro Marcus ha ricominciato da zero con la metodologia insegnata in questa lezione. Ha riprogettato con:</p>
+        <ul>
+          <li>✅ Validazione walk-forward (riottimizzazione ogni 6 mesi su finestra mobile)</li>
+          <li>✅ Test fuori campione (dati 2022-2023 messi da parte e mai toccati durante lo sviluppo)</li>
+          <li>✅ Costi realistici (0,05 % di slippage + 1 $ di commissione per operazione)</li>
+          <li>✅ Test di robustezza dei parametri (la strategia funziona nell'intervallo di soglia 1,0-1,5 %, non solo a 1,2 %)</li>
+        </ul>
+
+        <p><strong>Risultati dopo la riprogettazione:</strong> La nuova strategia dava il 18 % annuo nel backtest invece del 32 %, e ha tenuto dal vivo. Nei sei mesi da settembre 2023 a febbraio 2024 ha reso circa l'8,5 %, cioè all'incirca 4.800 $ sui 56.600 $ che gli erano rimasti.</p>
+
+        <p><strong>Fai quel conto prima di compiacerti.</strong> Al 18 % annuo, recuperare 18.400 $ su un conto da 56.600 $ richiede circa due anni. Questo è il prezzo vero di tre mesi di adattamento alla curva: non i 18.400 $, ma i due anni di capitalizzazione che servono per tornare al punto di partenza. Chi ti racconta di aver «recuperato tutto» in sei mesi con una strategia al 18 % ti sta descrivendo un'altra strategia.</p>
+
+        <p><strong>La lezione di Marcus:</strong> «Una strategia al 18 % che funziona batte un backtest al 32 % che fallisce. La chiave non è trovare i parametri perfetti, ma costruire qualcosa di abbastanza robusto da sopravvivere ai mercati veri.»</p>
+      </div>
+
+      <p>Una strategia quantitativa progettata bene elimina l'emotività, valida l'edge statisticamente e compone i rendimenti in modo sistematico. Questa lezione ti insegna a progettare, backtestare e mettere in produzione sistemi di trading di livello istituzionale — e a evitare l'errore da 18.000 $ di Marcus.</p>
+
+      <div class="callout callout-danger">
+        <h4>⚠️ Il cimitero dell'overfitting</h4>
+        <p>Un fondo quantitativo backtesta 10.000 combinazioni di parametri e trova una strategia «perfetta»: 45 % di rendimento annuo, uno Sharpe di 2,6 e il 12 % di drawdown massimo dal 2010 al 2020. A gennaio 2021 impiega 50 milioni di dollari.</p>
+        <p>A dicembre 2021 il fondo è in calo del 28 %. La strategia era adattata al rumore storico, non a un vero edge di mercato.</p>
+        <p><strong>Lezione:</strong> il tasso di fallimento delle strategie passate al backtest è abbastanza alto da far ricadere l'onere della prova sulla strategia e non sullo scettico. Sentirai spesso citare «il 95 % fallisce»; nessuno l'ha mai misurato, perché nessuno possiede la popolazione delle strategie abbandonate in silenzio. Quello che si può misurare è più stretto e più utile: quando i ricercatori ritestano anomalie pubblicate su dati raccolti dopo la pubblicazione, i rendimenti medi si dimezzano circa e una quota consistente smette del tutto di funzionare. Dai per scontato che il tuo backtest sia almeno altrettanto ottimista e progetta di conseguenza.</p>
+      </div>
 
   <h2 id="part-5-validation-stress-testing">Parte 5: validazione e stress test</h2>
 
