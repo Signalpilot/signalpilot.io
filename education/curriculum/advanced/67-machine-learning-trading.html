@@ -583,33 +583,7 @@
   <p><strong>Use case:</strong> Train separate models for trending vs mean-reverting regimes</p>
   <p><strong>Process:</strong> Use Harmonic Oscillator to label historical data (trending/ranging), train 2 models, deploy based on current regime</p>
 
-  <h2 id="quiz-test-your-understanding">Quiz: Test Your Understanding</h2>
-  <div class="quiz">
-    <div class="quiz-question">
-      <p><strong>Q1:</strong> You have 2,000 daily bars. How many features should you use maximum?</p>
-      <details>
-        <summary>Show Answer</summary>
-        <p><strong>Answer:</strong> 20-40 features maximum. At the floor of 50 samples per feature, 2,000 bars supports 40 features; at the safer 100 samples per feature, 20. Jason's model in the case study above ran 200 features on 1,700 bars — 8.5 samples per feature — and it memorised the training set rather than learning anything. Start with 10-20 of the most important features and expand only if validation performance actually improves, not merely because you have more features available.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q2:</strong> Training accuracy = 92%, test accuracy = 54%. What's the problem?</p>
-      <details>
-        <summary>Show Answer</summary>
-        <p><strong>Answer:</strong> Severe overfitting. Model memorized training data noise (92%) but has no predictive power on unseen data (54% barely better than coin flip). Reduce features, add regularization, or use simpler model.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q3:</strong> Your random forest ranks "day of week" as the #1 most important feature. Is this valid?</p>
-      <details>
-        <summary>Show Answer</summary>
-        <p><strong>Answer:</strong> Red flag. While calendar anomalies exist (Monday effect), they're weak and largely arbitraged away. If "day of week" dominates, model likely overfit to random noise in training data. Remove feature and retrain.</p>
-      </details>
-    </div>
-  </div>
-<h2 id="practical-checklist">Practical Checklist</h2>
+  <h2 id="practical-checklist">Practical Checklist</h2>
   <div class="checklist">
     <h4>Before Training ML Model:</h4>
     <ul>
@@ -637,18 +611,7 @@
 
   <div class="section-break"><span>Real Trader Case Study</span></div>
 
-        <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
-        <div style="margin-top:1rem">
-          <p>Don't overwhelm yourself. Start with these 3 actions:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Start Simple: Feature Engineering BEFORE Neural Networks</strong> — Derek Chen (composite example) lost <span style="color:#ff5252;font-weight:700">$19,700</span> (-6.6%) in 6 months on a $298,000 account, building a deep LSTM with no feature engineering at all—94% backtest accuracy, 48% live. The 94% was the tell: he computed his indicators across the whole series before splitting it, so tomorrow's data was sitting inside today's inputs. Note the size of the loss as well as its cause. An unlevered daily model that is slightly worse than a coin flip bleeds slowly, through costs and a small negative edge; it does not take 70% of an account. If you read a blow-up story that does, there was leverage. Start simple: engineer 10-20 basic features (RSI divergence, volume spikes, VIX relationships), test with a random forest FIRST. Tonight: build a spreadsheet with 5 features (14-day RSI, 20-day price change %, volume vs 20-day avg, VIX level, put/call ratio). Calculate them for SPY over the past year, splitting the data before you compute anything. Use Excel regression or Python sklearn to predict next-day return. Accuracy >55% = signal. &lt;53% = needs work.</li>
-            <li><strong>Implement K-Fold Cross-Validation (Stop Training on 100% of Data)</strong> — Amanda Torres (composite example) lost <span style="color:#ff5252;font-weight:700">$23,800</span> (-8.5%) in 4 months on a $279,000 account, training a random forest on 100% of her data (2015-2023)—the model memorized historical noise instead of learning a pattern, scoring 71% on the very rows it had been fitted to against 49% live. Fix: Split data into 5 folds, train on 4, test on 1, rotate 5 times. Tonight: Split 2015-2024 data into 5 periods. Train on first 4, test on 5th. Repeat 5 times. Average test accuracy >55% AND consistent across folds = robust. Wildly varying (60%, 48%, 62%) = unstable, needs simplification.</li>
-            <li><strong>Track Feature Importance (Drop Noise Features)</strong> — Michael Park (composite example) lost <span style="color:#ff5252;font-weight:700">$31,500</span> (-9.8%) in 8 months on a $320,000 account, using 87 features on about 2,000 daily bars without knowing which of them mattered—23 samples per feature, so the model fitted noise such as "day of week". When the noise changed, the model collapsed. Tonight: Train random forest, extract feature importance scores. Drop features with importance &lt;0.02 (noise). Re-train with top 10-15 features. Performance IMPROVES = you were overfitting. Michael found his top 5 features (VIX, put/call ratio, 20-day momentum, volume, yield curve) carried 78% of the importance. Rebuilt with 12 features, he made +5.4% over the following 6 months — against about +8% for simply holding SPY across the same stretch. The rebuild stopped the bleeding; it did not beat the index, and it is worth being clear about which of those two you have achieved.</li>
-          </ol>
-        </div>
-      </details>
-      <div class="callout callout-danger">
+        <div class="callout callout-danger">
     <h4>📉 CASE STUDY: Jason's $145K ML Overfitting Disaster</h4>
     <p><strong>Trader:</strong> Jason Wu (composite example), 31, quant developer ($250K account), CS/ML background</p>
     <p><strong>Strategy:</strong> Random Forest algo trained on 2015-2021 SPY data, 83% backtest win rate</p>
@@ -701,7 +664,44 @@
     </div>
   </div>
 
-  <div class="key-takeaway">
+  <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
+        <div style="margin-top:1rem">
+          <p>Don't overwhelm yourself. Start with these 3 actions:</p>
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>Start Simple: Feature Engineering BEFORE Neural Networks</strong> — Derek Chen (composite example) lost <span style="color:#ff5252;font-weight:700">$19,700</span> (-6.6%) in 6 months on a $298,000 account, building a deep LSTM with no feature engineering at all—94% backtest accuracy, 48% live. The 94% was the tell: he computed his indicators across the whole series before splitting it, so tomorrow's data was sitting inside today's inputs. Note the size of the loss as well as its cause. An unlevered daily model that is slightly worse than a coin flip bleeds slowly, through costs and a small negative edge; it does not take 70% of an account. If you read a blow-up story that does, there was leverage. Start simple: engineer 10-20 basic features (RSI divergence, volume spikes, VIX relationships), test with a random forest FIRST. Tonight: build a spreadsheet with 5 features (14-day RSI, 20-day price change %, volume vs 20-day avg, VIX level, put/call ratio). Calculate them for SPY over the past year, splitting the data before you compute anything. Use Excel regression or Python sklearn to predict next-day return. Accuracy >55% = signal. &lt;53% = needs work.</li>
+            <li><strong>Implement K-Fold Cross-Validation (Stop Training on 100% of Data)</strong> — Amanda Torres (composite example) lost <span style="color:#ff5252;font-weight:700">$23,800</span> (-8.5%) in 4 months on a $279,000 account, training a random forest on 100% of her data (2015-2023)—the model memorized historical noise instead of learning a pattern, scoring 71% on the very rows it had been fitted to against 49% live. Fix: Split data into 5 folds, train on 4, test on 1, rotate 5 times. Tonight: Split 2015-2024 data into 5 periods. Train on first 4, test on 5th. Repeat 5 times. Average test accuracy >55% AND consistent across folds = robust. Wildly varying (60%, 48%, 62%) = unstable, needs simplification.</li>
+            <li><strong>Track Feature Importance (Drop Noise Features)</strong> — Michael Park (composite example) lost <span style="color:#ff5252;font-weight:700">$31,500</span> (-9.8%) in 8 months on a $320,000 account, using 87 features on about 2,000 daily bars without knowing which of them mattered—23 samples per feature, so the model fitted noise such as "day of week". When the noise changed, the model collapsed. Tonight: Train random forest, extract feature importance scores. Drop features with importance &lt;0.02 (noise). Re-train with top 10-15 features. Performance IMPROVES = you were overfitting. Michael found his top 5 features (VIX, put/call ratio, 20-day momentum, volume, yield curve) carried 78% of the importance. Rebuilt with 12 features, he made +5.4% over the following 6 months — against about +8% for simply holding SPY across the same stretch. The rebuild stopped the bleeding; it did not beat the index, and it is worth being clear about which of those two you have achieved.</li>
+          </ol>
+        </div>
+      </details>
+      <h2 id="quiz-test-your-understanding">Quiz: Test Your Understanding</h2>
+  <div class="quiz">
+    <div class="quiz-question">
+      <p><strong>Q1:</strong> You have 2,000 daily bars. How many features should you use maximum?</p>
+      <details>
+        <summary>Show Answer</summary>
+        <p><strong>Answer:</strong> 20-40 features maximum. At the floor of 50 samples per feature, 2,000 bars supports 40 features; at the safer 100 samples per feature, 20. Jason's model in the case study above ran 200 features on 1,700 bars — 8.5 samples per feature — and it memorised the training set rather than learning anything. Start with 10-20 of the most important features and expand only if validation performance actually improves, not merely because you have more features available.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q2:</strong> Training accuracy = 92%, test accuracy = 54%. What's the problem?</p>
+      <details>
+        <summary>Show Answer</summary>
+        <p><strong>Answer:</strong> Severe overfitting. Model memorized training data noise (92%) but has no predictive power on unseen data (54% barely better than coin flip). Reduce features, add regularization, or use simpler model.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q3:</strong> Your random forest ranks "day of week" as the #1 most important feature. Is this valid?</p>
+      <details>
+        <summary>Show Answer</summary>
+        <p><strong>Answer:</strong> Red flag. While calendar anomalies exist (Monday effect), they're weak and largely arbitraged away. If "day of week" dominates, model likely overfit to random noise in training data. Remove feature and retrain.</p>
+      </details>
+    </div>
+  </div>
+<div class="key-takeaway">
     <h4>Key Takeaways</h4>
     <ul>
       <li><strong>ML works only with proper feature engineering</strong> (garbage in = garbage out)</li>

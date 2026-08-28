@@ -596,33 +596,7 @@
   <p><strong>Kullanım alanı:</strong> Trend ve ortalamaya dönüş rejimleri için ayrı modeller eğitmek</p>
   <p><strong>Süreç:</strong> Harmonic Oscillator ile geçmiş veriyi etiketlemek (trend/yatay), 2 model eğitmek ve güncel rejime uygun olanı devreye almak</p>
 
-  <h2 id="quiz-test-your-understanding">Sınav: anlayışını test et</h2>
-  <div class="quiz">
-    <div class="quiz-question">
-      <p><strong>Q1:</strong> 2.000 günlük barınız var. En fazla kaç öznitelik kullanmalısınız?</p>
-      <details>
-        <summary>Cevabı göster</summary>
-        <p><strong>Cevap:</strong> En fazla 20-40 öznitelik. Öznitelik başına 50 örneklem tabanında 2.000 bar 40 özniteliği taşır; daha güvenli olan 100 örneklemde 20. Yukarıdaki vaka çalışmasında Jason'ın modeli 1.700 barda 200 öznitelikle çalışıyordu — öznitelik başına 8,5 örneklem — ve bir şey öğrenmek yerine eğitim kümesini ezberledi. En önemli 10-20 öznitelikle başlayın ve yalnızca doğrulama performansı gerçekten iyileşirse genişletin; elinizde daha fazla öznitelik olduğu için değil.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q2:</strong> Eğitim isabeti = %92, test isabeti = %54. Sorun ne?</p>
-      <details>
-        <summary>Cevabı göster</summary>
-        <p><strong>Cevap:</strong> Ağır aşırı uyum. Model eğitim verisinin gürültüsünü ezberledi (%92) ama görülmemiş veride öngörü gücü yok (%54, yazı turadan zar zor iyi). Öznitelikleri azaltın, düzenlileştirme ekleyin ya da daha basit bir model kullanın.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q3:</strong> Random forest'ınız «haftanın günü»nü en önemli öznitelik olarak sıralıyor. Bu geçerli mi?</p>
-      <details>
-        <summary>Cevabı göster</summary>
-        <p><strong>Cevap:</strong> Kırmızı bayrak. Takvim anomalileri vardır (pazartesi etkisi) ama zayıftır ve büyük ölçüde arbitrajla silinmiştir. «Haftanın günü» baskınsa, model büyük ihtimalle eğitim verisindeki rastgele gürültüye uymuştur. Özniteliği çıkarın ve yeniden eğitin.</p>
-      </details>
-    </div>
-  </div>
-<h2 id="practical-checklist">Pratik kontrol listesi</h2>
+  <h2 id="practical-checklist">Pratik kontrol listesi</h2>
   <div class="checklist">
     <h4>ML modelini eğitmeden önce:</h4>
     <ul>
@@ -650,18 +624,7 @@
 
   <div class="section-break"><span>Gerçek bir trader vakası</span></div>
 
-        <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Yarın için hızlı kazanımlar (açmak için tıkla)</summary>
-        <div style="margin-top:1rem">
-          <p>Kendini fazla yükleme. Şu üç adımla başla:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Basit başlayın: yapay sinir ağlarından ÖNCE öznitelik mühendisliği</strong> — Derek Chen (bileşik örnek) kaybetti: <span style="color:#ff5252;font-weight:700">$19,700</span> (%-6,6) 6 ayda, 298.000 dolarlık bir hesapta; hiç öznitelik mühendisliği yapmadan derin bir LSTM kurdu: backtest'te %94 isabet, gerçekte %48. O %94 asıl ipucuydu: göstergelerini seriyi bölmeden önce tüm seri üzerinde hesaplamıştı, yani yarının verisi bugünün girdilerinin içinde oturuyordu. Yalnızca nedenine değil, zararın büyüklüğüne de bakın. Yazı turadan biraz daha kötü olan, kaldıraçsız bir günlük model yavaş kanar; maliyetler ve küçük bir negatif edge üzerinden. Bir hesabın %70'ini almaz. Aldığı bir çöküş hikâyesi okuyorsanız, orada kaldıraç vardı. Basit başlayın: 10-20 temel öznitelik kurun (RSI uyumsuzluğu, hacim sıçramaları, VIX ilişkileri) ve ÖNCE bir random forest ile test edin. Bu gece: 5 öznitelikle bir tablo hazırlayın (14 günlük RSI, 20 günlük fiyat değişimi %, 20 günlük ortalamaya göre hacim, VIX seviyesi, put/call oranı). Bunları geçen yıl için SPY üzerinde hesaplayın ve hiçbir şey hesaplamadan önce veriyi bölün. Ertesi günün getirisini tahmin etmek için Excel regresyonu ya da Python sklearn kullanın. İsabet >%55 = sinyal. &lt;%53 = daha çalışmak gerek.</li>
-            <li><strong>K katlı çapraz doğrulamayı uygulayın (verinin %100'ünde eğitmeyi bırakın)</strong> — Amanda Torres (bileşik örnek) kaybetti: <span style="color:#ff5252;font-weight:700">$23,800</span> (%-8,5) 4 ayda, 279.000 dolarlık bir hesapta; bir random forest'ı verisinin %100'ünde eğitti (2015-2023). Model bir örüntü öğrenmek yerine tarihsel gürültüyü ezberledi ve tam da uydurulduğu satırlarda %71, gerçekte %49 yaptı. Çözüm: veriyi 5 kata bölün, 4'ünde eğitin, 1'inde test edin ve beş kez döndürün. Bu gece: 2015-2024 verisini 5 döneme bölün. İlk 4'ünde eğitin, 5.'sinde test edin. Beş kez tekrarlayın. Ortalama test isabeti >%55 VE katlar arasında tutarlıysa sağlam. Çok oynaksa (%60, %48, %62) kararsızdır, basitleştirmek gerekir.</li>
-            <li><strong>Öznitelik önemini takip edin (gürültü özniteliklerini atın)</strong> — Michael Park (bileşik örnek) kaybetti: <span style="color:#ff5252;font-weight:700">$31,500</span> (%-9,8) 8 ayda, 320.000 dolarlık bir hesapta; yaklaşık 2.000 günlük barda 87 öznitelik kullandı ve hangisinin önemli olduğunu bilmiyordu — öznitelik başına 23 örneklem, yani model «haftanın günü» gibi gürültüye uydu. Gürültü değişince model çöktü. Bu gece: bir random forest eğitin ve öznitelik önem puanlarını çıkarın. Önemi &lt;0,02 olan öznitelikleri atın (gürültü). En iyi 10-15 ile yeniden eğitin. Performans İYİLEŞİYORSA aşırı uyum yapıyordunuz. Michael en iyi 5 özniteliğinin (VIX, put/call oranı, 20 günlük momentum, hacim, getiri eğrisi) önemin %78'ini taşıdığını gördü. 12 öznitelikle yeniden kurunca sonraki 6 ayda %+5,4 yaptı — aynı dönemde sadece SPY'yi tutsaydı yaklaşık %+8 olacaktı. Yeniden kurmak kanamayı durdurdu; endeksi yenmedi ve bu ikisinden hangisini başardığınız konusunda açık olmakta fayda var.</li>
-          </ol>
-        </div>
-      </details>
-      <div class="callout callout-danger">
+        <div class="callout callout-danger">
     <h4>📉 VAKA ÇALIŞMASI: Jason'ın 145.000 dolarlık ML aşırı uyum felaketi</h4>
     <p><strong>Trader:</strong> Jason Wu (bileşik örnek), 31 yaşında, kantitatif geliştirici (250.000 dolarlık hesap), bilgisayar bilimi ve ML geçmişi</p>
     <p><strong>Strateji:</strong> 2015-2021 SPY verisinde eğitilmiş random forest algoritması, backtest'te %83 kazanma oranı</p>
@@ -714,7 +677,44 @@
     </div>
   </div>
 
-  <div class="key-takeaway">
+  <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Yarın için hızlı kazanımlar (açmak için tıkla)</summary>
+        <div style="margin-top:1rem">
+          <p>Kendini fazla yükleme. Şu üç adımla başla:</p>
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>Basit başlayın: yapay sinir ağlarından ÖNCE öznitelik mühendisliği</strong> — Derek Chen (bileşik örnek) kaybetti: <span style="color:#ff5252;font-weight:700">$19,700</span> (%-6,6) 6 ayda, 298.000 dolarlık bir hesapta; hiç öznitelik mühendisliği yapmadan derin bir LSTM kurdu: backtest'te %94 isabet, gerçekte %48. O %94 asıl ipucuydu: göstergelerini seriyi bölmeden önce tüm seri üzerinde hesaplamıştı, yani yarının verisi bugünün girdilerinin içinde oturuyordu. Yalnızca nedenine değil, zararın büyüklüğüne de bakın. Yazı turadan biraz daha kötü olan, kaldıraçsız bir günlük model yavaş kanar; maliyetler ve küçük bir negatif edge üzerinden. Bir hesabın %70'ini almaz. Aldığı bir çöküş hikâyesi okuyorsanız, orada kaldıraç vardı. Basit başlayın: 10-20 temel öznitelik kurun (RSI uyumsuzluğu, hacim sıçramaları, VIX ilişkileri) ve ÖNCE bir random forest ile test edin. Bu gece: 5 öznitelikle bir tablo hazırlayın (14 günlük RSI, 20 günlük fiyat değişimi %, 20 günlük ortalamaya göre hacim, VIX seviyesi, put/call oranı). Bunları geçen yıl için SPY üzerinde hesaplayın ve hiçbir şey hesaplamadan önce veriyi bölün. Ertesi günün getirisini tahmin etmek için Excel regresyonu ya da Python sklearn kullanın. İsabet >%55 = sinyal. &lt;%53 = daha çalışmak gerek.</li>
+            <li><strong>K katlı çapraz doğrulamayı uygulayın (verinin %100'ünde eğitmeyi bırakın)</strong> — Amanda Torres (bileşik örnek) kaybetti: <span style="color:#ff5252;font-weight:700">$23,800</span> (%-8,5) 4 ayda, 279.000 dolarlık bir hesapta; bir random forest'ı verisinin %100'ünde eğitti (2015-2023). Model bir örüntü öğrenmek yerine tarihsel gürültüyü ezberledi ve tam da uydurulduğu satırlarda %71, gerçekte %49 yaptı. Çözüm: veriyi 5 kata bölün, 4'ünde eğitin, 1'inde test edin ve beş kez döndürün. Bu gece: 2015-2024 verisini 5 döneme bölün. İlk 4'ünde eğitin, 5.'sinde test edin. Beş kez tekrarlayın. Ortalama test isabeti >%55 VE katlar arasında tutarlıysa sağlam. Çok oynaksa (%60, %48, %62) kararsızdır, basitleştirmek gerekir.</li>
+            <li><strong>Öznitelik önemini takip edin (gürültü özniteliklerini atın)</strong> — Michael Park (bileşik örnek) kaybetti: <span style="color:#ff5252;font-weight:700">$31,500</span> (%-9,8) 8 ayda, 320.000 dolarlık bir hesapta; yaklaşık 2.000 günlük barda 87 öznitelik kullandı ve hangisinin önemli olduğunu bilmiyordu — öznitelik başına 23 örneklem, yani model «haftanın günü» gibi gürültüye uydu. Gürültü değişince model çöktü. Bu gece: bir random forest eğitin ve öznitelik önem puanlarını çıkarın. Önemi &lt;0,02 olan öznitelikleri atın (gürültü). En iyi 10-15 ile yeniden eğitin. Performans İYİLEŞİYORSA aşırı uyum yapıyordunuz. Michael en iyi 5 özniteliğinin (VIX, put/call oranı, 20 günlük momentum, hacim, getiri eğrisi) önemin %78'ini taşıdığını gördü. 12 öznitelikle yeniden kurunca sonraki 6 ayda %+5,4 yaptı — aynı dönemde sadece SPY'yi tutsaydı yaklaşık %+8 olacaktı. Yeniden kurmak kanamayı durdurdu; endeksi yenmedi ve bu ikisinden hangisini başardığınız konusunda açık olmakta fayda var.</li>
+          </ol>
+        </div>
+      </details>
+      <h2 id="quiz-test-your-understanding">Sınav: anlayışını test et</h2>
+  <div class="quiz">
+    <div class="quiz-question">
+      <p><strong>Q1:</strong> 2.000 günlük barınız var. En fazla kaç öznitelik kullanmalısınız?</p>
+      <details>
+        <summary>Cevabı göster</summary>
+        <p><strong>Cevap:</strong> En fazla 20-40 öznitelik. Öznitelik başına 50 örneklem tabanında 2.000 bar 40 özniteliği taşır; daha güvenli olan 100 örneklemde 20. Yukarıdaki vaka çalışmasında Jason'ın modeli 1.700 barda 200 öznitelikle çalışıyordu — öznitelik başına 8,5 örneklem — ve bir şey öğrenmek yerine eğitim kümesini ezberledi. En önemli 10-20 öznitelikle başlayın ve yalnızca doğrulama performansı gerçekten iyileşirse genişletin; elinizde daha fazla öznitelik olduğu için değil.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q2:</strong> Eğitim isabeti = %92, test isabeti = %54. Sorun ne?</p>
+      <details>
+        <summary>Cevabı göster</summary>
+        <p><strong>Cevap:</strong> Ağır aşırı uyum. Model eğitim verisinin gürültüsünü ezberledi (%92) ama görülmemiş veride öngörü gücü yok (%54, yazı turadan zar zor iyi). Öznitelikleri azaltın, düzenlileştirme ekleyin ya da daha basit bir model kullanın.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q3:</strong> Random forest'ınız «haftanın günü»nü en önemli öznitelik olarak sıralıyor. Bu geçerli mi?</p>
+      <details>
+        <summary>Cevabı göster</summary>
+        <p><strong>Cevap:</strong> Kırmızı bayrak. Takvim anomalileri vardır (pazartesi etkisi) ama zayıftır ve büyük ölçüde arbitrajla silinmiştir. «Haftanın günü» baskınsa, model büyük ihtimalle eğitim verisindeki rastgele gürültüye uymuştur. Özniteliği çıkarın ve yeniden eğitin.</p>
+      </details>
+    </div>
+  </div>
+<div class="key-takeaway">
     <h4>Temel çıkarımlar</h4>
     <ul>
       <li><strong>ML yalnızca düzgün öznitelik mühendisliğiyle işe yarar</strong> (çöp girerse çöp çıkar)</li>

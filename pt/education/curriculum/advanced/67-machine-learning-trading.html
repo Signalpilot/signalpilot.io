@@ -596,33 +596,7 @@
   <p><strong>Caso de uso:</strong> Treinar modelos separados para regimes de tendência e de reversão à média</p>
   <p><strong>Processo:</strong> Usar o Harmonic Oscillator para etiquetar os dados históricos (tendência/lateral), treinar 2 modelos e usar o que corresponde ao regime atual</p>
 
-  <h2 id="quiz-test-your-understanding">Questionário: testa a tua compreensão</h2>
-  <div class="quiz">
-    <div class="quiz-question">
-      <p><strong>Q1:</strong> Tens 2.000 velas diárias. Quantas features deverias usar no máximo?</p>
-      <details>
-        <summary>Mostrar resposta</summary>
-        <p><strong>Resposta:</strong> No máximo 20-40 features. No chão de 50 amostras por feature, 2.000 velas suportam 40; nas mais seguras 100 amostras por feature, 20. O modelo do Jason no caso de estudo acima corria com 200 features sobre 1.700 velas — 8,5 amostras por feature — e memorizou o conjunto de treino em vez de aprender fosse o que fosse. Começa pelas 10-20 features mais importantes e só alarga se o desempenho na validação melhorar mesmo, não simplesmente porque tens mais features disponíveis.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q2:</strong> Acerto no treino = 92 %, acerto no teste = 54 %. Qual é o problema?</p>
-      <details>
-        <summary>Mostrar resposta</summary>
-        <p><strong>Resposta:</strong> Sobreajuste grave. O modelo memorizou o ruído dos dados de treino (92 %) mas não tem poder preditivo em dados nunca vistos (54 %, pouco melhor do que uma moeda ao ar). Reduz as features, acrescenta regularização ou usa um modelo mais simples.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q3:</strong> O teu random forest coloca «o dia da semana» como a feature mais importante. Isto é válido?</p>
-      <details>
-        <summary>Mostrar resposta</summary>
-        <p><strong>Resposta:</strong> Sinal de alarme. As anomalias de calendário existem (o efeito segunda-feira), mas são fracas e em grande medida já arbitradas. Se «o dia da semana» domina, o modelo ajustou-se provavelmente a ruído aleatório nos dados de treino. Retira a feature e volta a treinar.</p>
-      </details>
-    </div>
-  </div>
-<h2 id="practical-checklist">Checklist prática</h2>
+  <h2 id="practical-checklist">Checklist prática</h2>
   <div class="checklist">
     <h4>Antes de treinar o modelo de ML:</h4>
     <ul>
@@ -650,18 +624,7 @@
 
   <div class="section-break"><span>Caso de estudo real</span></div>
 
-        <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Ganhos rápidos para amanhã (clica para abrir)</summary>
-        <div style="margin-top:1rem">
-          <p>Não te sobrecarregues. Começa por estas três ações:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Começa simples: engenharia de features ANTES de redes neuronais</strong> — Derek Chen (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$19,700</span> (-6,6 %) em 6 meses numa conta de 298.000 $, ao construir uma LSTM profunda sem qualquer engenharia de features: 94 % de acerto em backtest, 48 % no real. Os 94 % eram a pista: calculou os indicadores sobre a série inteira antes de a dividir, pelo que os dados de amanhã estavam dentro dos inputs de hoje. Repara também no tamanho da perda, não só na sua causa. Um modelo diário sem alavancagem ligeiramente pior do que uma moeda ao ar sangra devagar, por custos e por uma pequena vantagem negativa; não leva 70 % de uma conta. Se leres uma história de ruína em que leva, havia alavancagem. Começa simples: constrói 10-20 features básicas (divergência do RSI, picos de volume, relações com o VIX) e testa PRIMEIRO com um random forest. Esta noite: monta uma folha de cálculo com 5 features (RSI de 14 dias, variação de preço a 20 dias em %, volume face à média de 20 dias, nível do VIX, rácio put/call). Calcula-as para o SPY no último ano, dividindo os dados antes de calculares o que quer que seja. Usa uma regressão do Excel ou o sklearn de Python para prever o retorno do dia seguinte. Acerto >55 % = sinal. &lt;53 % = há trabalho a fazer.</li>
-            <li><strong>Implementa validação cruzada k-fold (para de treinar com 100 % dos dados)</strong> — Amanda Torres (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$23,800</span> (-8,5 %) em 4 meses numa conta de 279.000 $, ao treinar um random forest com 100 % dos seus dados (2015-2023): o modelo memorizou ruído histórico em vez de aprender um padrão, e obtinha 71 % nas próprias linhas em que tinha sido ajustado contra 49 % no real. Correção: divide os dados em 5 dobras, treina com 4, testa com 1 e roda cinco vezes. Esta noite: divide os dados de 2015-2024 em 5 períodos. Treina nos 4 primeiros e testa no 5.º. Repete cinco vezes. Acerto médio no teste >55 % E consistente entre dobras = robusto. Muito variável (60 %, 48 %, 62 %) = instável, é preciso simplificar.</li>
-            <li><strong>Acompanha a importância das features (elimina as que só captam ruído)</strong> — Michael Park (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$31,500</span> (-9,8 %) em 8 meses numa conta de 320.000 $, ao usar 87 features sobre cerca de 2.000 velas diárias sem saber quais importavam: 23 amostras por feature, pelo que o modelo ajustou ruído como «o dia da semana». Quando o ruído mudou, o modelo desabou. Esta noite: treina um random forest e extrai as pontuações de importância das features. Elimina as que tenham importância &lt;0,02 (ruído). Volta a treinar com as 10-15 melhores. Se o desempenho MELHORAR, estavas em sobreajuste. Michael descobriu que as suas 5 melhores features (VIX, rácio put/call, momentum a 20 dias, volume, curva de rendimentos) carregavam 78 % da importância. Reconstruído com 12 features, fez +5,4 % nos 6 meses seguintes, contra cerca de +8 % se tivesse simplesmente mantido o SPY no mesmo troço. A reconstrução travou a hemorragia; não bateu o índice, e vale a pena ser claro sobre qual das duas coisas se alcançou.</li>
-          </ol>
-        </div>
-      </details>
-      <div class="callout callout-danger">
+        <div class="callout callout-danger">
     <h4>📉 CASO DE ESTUDO: o desastre de sobreajuste de ML do Jason, 145.000 $</h4>
     <p><strong>Trader:</strong> Jason Wu (exemplo composto), 31 anos, programador quantitativo (conta de 250.000 $), formação em informática e ML</p>
     <p><strong>Estratégia:</strong> Algoritmo random forest treinado com dados do SPY de 2015-2021, 83 % de operações vencedoras em backtest</p>
@@ -714,7 +677,44 @@
     </div>
   </div>
 
-  <div class="key-takeaway">
+  <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Ganhos rápidos para amanhã (clica para abrir)</summary>
+        <div style="margin-top:1rem">
+          <p>Não te sobrecarregues. Começa por estas três ações:</p>
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>Começa simples: engenharia de features ANTES de redes neuronais</strong> — Derek Chen (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$19,700</span> (-6,6 %) em 6 meses numa conta de 298.000 $, ao construir uma LSTM profunda sem qualquer engenharia de features: 94 % de acerto em backtest, 48 % no real. Os 94 % eram a pista: calculou os indicadores sobre a série inteira antes de a dividir, pelo que os dados de amanhã estavam dentro dos inputs de hoje. Repara também no tamanho da perda, não só na sua causa. Um modelo diário sem alavancagem ligeiramente pior do que uma moeda ao ar sangra devagar, por custos e por uma pequena vantagem negativa; não leva 70 % de uma conta. Se leres uma história de ruína em que leva, havia alavancagem. Começa simples: constrói 10-20 features básicas (divergência do RSI, picos de volume, relações com o VIX) e testa PRIMEIRO com um random forest. Esta noite: monta uma folha de cálculo com 5 features (RSI de 14 dias, variação de preço a 20 dias em %, volume face à média de 20 dias, nível do VIX, rácio put/call). Calcula-as para o SPY no último ano, dividindo os dados antes de calculares o que quer que seja. Usa uma regressão do Excel ou o sklearn de Python para prever o retorno do dia seguinte. Acerto >55 % = sinal. &lt;53 % = há trabalho a fazer.</li>
+            <li><strong>Implementa validação cruzada k-fold (para de treinar com 100 % dos dados)</strong> — Amanda Torres (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$23,800</span> (-8,5 %) em 4 meses numa conta de 279.000 $, ao treinar um random forest com 100 % dos seus dados (2015-2023): o modelo memorizou ruído histórico em vez de aprender um padrão, e obtinha 71 % nas próprias linhas em que tinha sido ajustado contra 49 % no real. Correção: divide os dados em 5 dobras, treina com 4, testa com 1 e roda cinco vezes. Esta noite: divide os dados de 2015-2024 em 5 períodos. Treina nos 4 primeiros e testa no 5.º. Repete cinco vezes. Acerto médio no teste >55 % E consistente entre dobras = robusto. Muito variável (60 %, 48 %, 62 %) = instável, é preciso simplificar.</li>
+            <li><strong>Acompanha a importância das features (elimina as que só captam ruído)</strong> — Michael Park (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$31,500</span> (-9,8 %) em 8 meses numa conta de 320.000 $, ao usar 87 features sobre cerca de 2.000 velas diárias sem saber quais importavam: 23 amostras por feature, pelo que o modelo ajustou ruído como «o dia da semana». Quando o ruído mudou, o modelo desabou. Esta noite: treina um random forest e extrai as pontuações de importância das features. Elimina as que tenham importância &lt;0,02 (ruído). Volta a treinar com as 10-15 melhores. Se o desempenho MELHORAR, estavas em sobreajuste. Michael descobriu que as suas 5 melhores features (VIX, rácio put/call, momentum a 20 dias, volume, curva de rendimentos) carregavam 78 % da importância. Reconstruído com 12 features, fez +5,4 % nos 6 meses seguintes, contra cerca de +8 % se tivesse simplesmente mantido o SPY no mesmo troço. A reconstrução travou a hemorragia; não bateu o índice, e vale a pena ser claro sobre qual das duas coisas se alcançou.</li>
+          </ol>
+        </div>
+      </details>
+      <h2 id="quiz-test-your-understanding">Questionário: testa a tua compreensão</h2>
+  <div class="quiz">
+    <div class="quiz-question">
+      <p><strong>Q1:</strong> Tens 2.000 velas diárias. Quantas features deverias usar no máximo?</p>
+      <details>
+        <summary>Mostrar resposta</summary>
+        <p><strong>Resposta:</strong> No máximo 20-40 features. No chão de 50 amostras por feature, 2.000 velas suportam 40; nas mais seguras 100 amostras por feature, 20. O modelo do Jason no caso de estudo acima corria com 200 features sobre 1.700 velas — 8,5 amostras por feature — e memorizou o conjunto de treino em vez de aprender fosse o que fosse. Começa pelas 10-20 features mais importantes e só alarga se o desempenho na validação melhorar mesmo, não simplesmente porque tens mais features disponíveis.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q2:</strong> Acerto no treino = 92 %, acerto no teste = 54 %. Qual é o problema?</p>
+      <details>
+        <summary>Mostrar resposta</summary>
+        <p><strong>Resposta:</strong> Sobreajuste grave. O modelo memorizou o ruído dos dados de treino (92 %) mas não tem poder preditivo em dados nunca vistos (54 %, pouco melhor do que uma moeda ao ar). Reduz as features, acrescenta regularização ou usa um modelo mais simples.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q3:</strong> O teu random forest coloca «o dia da semana» como a feature mais importante. Isto é válido?</p>
+      <details>
+        <summary>Mostrar resposta</summary>
+        <p><strong>Resposta:</strong> Sinal de alarme. As anomalias de calendário existem (o efeito segunda-feira), mas são fracas e em grande medida já arbitradas. Se «o dia da semana» domina, o modelo ajustou-se provavelmente a ruído aleatório nos dados de treino. Retira a feature e volta a treinar.</p>
+      </details>
+    </div>
+  </div>
+<div class="key-takeaway">
     <h4>Pontos principais</h4>
     <ul>
       <li><strong>O ML só funciona com engenharia de features a sério</strong> (lixo à entrada = lixo à saída)</li>

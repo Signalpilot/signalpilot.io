@@ -596,33 +596,7 @@
   <p><strong>Cas d'usage :</strong> Entraîner des modèles distincts pour les régimes directionnels et de retour à la moyenne</p>
   <p><strong>Processus :</strong> Utiliser l'Harmonic Oscillator pour étiqueter les données historiques (tendance/range), entraîner 2 modèles et déployer celui qui correspond au régime en cours</p>
 
-  <h2 id="quiz-test-your-understanding">Quiz : testez votre compréhension</h2>
-  <div class="quiz">
-    <div class="quiz-question">
-      <p><strong>Q1:</strong> Vous avez 2 000 bougies quotidiennes. Combien de features devriez-vous utiliser au maximum ?</p>
-      <details>
-        <summary>Afficher la réponse</summary>
-        <p><strong>Réponse :</strong> 20-40 features au maximum. Au plancher de 50 échantillons par feature, 2 000 bougies en supportent 40 ; aux 100 échantillons par feature plus prudents, 20. Le modèle de Jason, dans l'étude de cas ci-dessus, tournait avec 200 features sur 1 700 bougies — 8,5 échantillons par feature — et il a mémorisé le jeu d'entraînement au lieu d'apprendre quoi que ce soit. Commencez par les 10-20 features les plus importantes et n'élargissez que si la performance en validation s'améliore réellement, pas simplement parce que vous avez plus de features sous la main.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q2:</strong> Réussite à l'entraînement = 92 %, réussite en test = 54 %. Où est le problème ?</p>
-      <details>
-        <summary>Afficher la réponse</summary>
-        <p><strong>Réponse :</strong> Sur-ajustement sévère. Le modèle a mémorisé le bruit des données d'entraînement (92 %) mais n'a aucun pouvoir prédictif sur des données inédites (54 %, à peine mieux qu'un tirage à pile ou face). Réduisez les features, ajoutez de la régularisation ou prenez un modèle plus simple.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q3:</strong> Votre random forest classe « le jour de la semaine » comme feature la plus importante. Est-ce valable ?</p>
-      <details>
-        <summary>Afficher la réponse</summary>
-        <p><strong>Réponse :</strong> Signal d'alarme. Les anomalies calendaires existent (l'effet lundi), mais elles sont faibles et largement arbitrées. Si « le jour de la semaine » domine, le modèle s'est probablement ajusté à du bruit aléatoire dans les données d'entraînement. Retirez la feature et réentraînez.</p>
-      </details>
-    </div>
-  </div>
-<h2 id="practical-checklist">Checklist pratique</h2>
+  <h2 id="practical-checklist">Checklist pratique</h2>
   <div class="checklist">
     <h4>Avant d'entraîner le modèle de ML :</h4>
     <ul>
@@ -650,18 +624,7 @@
 
   <div class="section-break"><span>Étude de cas réelle</span></div>
 
-        <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gains rapides pour demain (cliquez pour déplier)</summary>
-        <div style="margin-top:1rem">
-          <p>Ne vous surchargez pas. Commencez par ces trois actions :</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Commencez simple : l'ingénierie des features AVANT les réseaux de neurones</strong> — Derek Chen (exemple composite) a perdu <span style="color:#ff5252;font-weight:700">$19,700</span> (-6,6 %) en 6 mois sur un compte de 298 000 $, en construisant un LSTM profond sans la moindre ingénierie des features : 94 % de réussite en backtest, 48 % en réel. Les 94 % étaient l'indice : il calculait ses indicateurs sur toute la série avant de la découper, si bien que les données de demain se trouvaient dans les entrées d'aujourd'hui. Notez aussi la taille de la perte, pas seulement sa cause. Un modèle quotidien sans levier légèrement pire qu'un tirage à pile ou face saigne lentement, par les coûts et un petit edge négatif ; il ne prend pas 70 % d'un compte. Si vous lisez une histoire de faillite où c'est le cas, il y avait du levier. Commencez simple : construisez 10-20 features de base (divergence du RSI, pics de volume, relations avec le VIX) et testez D'ABORD avec un random forest. Ce soir : montez un tableur avec 5 features (RSI 14 jours, variation de prix sur 20 jours en %, volume par rapport à la moyenne 20 jours, niveau du VIX, ratio put/call). Calculez-les pour SPY sur l'année écoulée, en découpant les données avant de calculer quoi que ce soit. Utilisez une régression Excel ou Python sklearn pour prédire le rendement du lendemain. Réussite >55 % = signal. &lt;53 % = il reste du travail.</li>
-            <li><strong>Mettez en place la validation croisée k-fold (arrêtez d'entraîner sur 100 % des données)</strong> — Amanda Torres (exemple composite) a perdu <span style="color:#ff5252;font-weight:700">$23,800</span> (-8,5 %) en 4 mois sur un compte de 279 000 $, en entraînant un random forest sur 100 % de ses données (2015-2023) : le modèle a mémorisé le bruit historique au lieu d'apprendre un motif, et il obtenait 71 % sur les lignes mêmes sur lesquelles il avait été ajusté contre 49 % en réel. Correctif : découpez les données en 5 plis, entraînez sur 4, testez sur 1, et faites tourner cinq fois. Ce soir : découpez les données 2015-2024 en 5 périodes. Entraînez sur les 4 premières, testez sur la 5e. Répétez cinq fois. Réussite moyenne en test >55 % ET cohérente entre les plis = robuste. Très variable (60 %, 48 %, 62 %) = instable, il faut simplifier.</li>
-            <li><strong>Suivez l'importance des features (supprimez celles qui ne captent que du bruit)</strong> — Michael Park (exemple composite) a perdu <span style="color:#ff5252;font-weight:700">$31,500</span> (-9,8 %) en 8 mois sur un compte de 320 000 $, en utilisant 87 features sur environ 2 000 bougies quotidiennes sans savoir lesquelles comptaient : 23 échantillons par feature, si bien que le modèle a ajusté du bruit comme « le jour de la semaine ». Quand le bruit a changé, le modèle s'est effondré. Ce soir : entraînez un random forest et extrayez les scores d'importance des features. Supprimez celles dont l'importance est &lt;0,02 (bruit). Réentraînez avec les 10-15 meilleures. Si la performance S'AMÉLIORE, vous étiez en sur-ajustement. Michael a découvert que ses 5 meilleures features (VIX, ratio put/call, momentum 20 jours, volume, courbe des taux) portaient 78 % de l'importance. Reconstruit avec 12 features, il a fait +5,4 % sur les 6 mois suivants — contre environ +8 % s'il avait simplement gardé SPY sur la même période. La reconstruction a arrêté l'hémorragie ; elle n'a pas battu l'indice, et il vaut la peine d'être clair sur laquelle des deux choses vous avez accomplie.</li>
-          </ol>
-        </div>
-      </details>
-      <div class="callout callout-danger">
+        <div class="callout callout-danger">
     <h4>📉 ÉTUDE DE CAS : le désastre de sur-ajustement ML de Jason, 145 000 $</h4>
     <p><strong>Trader :</strong> Jason Wu (exemple composite), 31 ans, développeur quantitatif (compte de 250 000 $), formation informatique et ML</p>
     <p><strong>Stratégie :</strong> Algorithme random forest entraîné sur les données SPY 2015-2021, 83 % de trades gagnants en backtest</p>
@@ -714,7 +677,44 @@
     </div>
   </div>
 
-  <div class="key-takeaway">
+  <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gains rapides pour demain (cliquez pour déplier)</summary>
+        <div style="margin-top:1rem">
+          <p>Ne vous surchargez pas. Commencez par ces trois actions :</p>
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>Commencez simple : l'ingénierie des features AVANT les réseaux de neurones</strong> — Derek Chen (exemple composite) a perdu <span style="color:#ff5252;font-weight:700">$19,700</span> (-6,6 %) en 6 mois sur un compte de 298 000 $, en construisant un LSTM profond sans la moindre ingénierie des features : 94 % de réussite en backtest, 48 % en réel. Les 94 % étaient l'indice : il calculait ses indicateurs sur toute la série avant de la découper, si bien que les données de demain se trouvaient dans les entrées d'aujourd'hui. Notez aussi la taille de la perte, pas seulement sa cause. Un modèle quotidien sans levier légèrement pire qu'un tirage à pile ou face saigne lentement, par les coûts et un petit edge négatif ; il ne prend pas 70 % d'un compte. Si vous lisez une histoire de faillite où c'est le cas, il y avait du levier. Commencez simple : construisez 10-20 features de base (divergence du RSI, pics de volume, relations avec le VIX) et testez D'ABORD avec un random forest. Ce soir : montez un tableur avec 5 features (RSI 14 jours, variation de prix sur 20 jours en %, volume par rapport à la moyenne 20 jours, niveau du VIX, ratio put/call). Calculez-les pour SPY sur l'année écoulée, en découpant les données avant de calculer quoi que ce soit. Utilisez une régression Excel ou Python sklearn pour prédire le rendement du lendemain. Réussite >55 % = signal. &lt;53 % = il reste du travail.</li>
+            <li><strong>Mettez en place la validation croisée k-fold (arrêtez d'entraîner sur 100 % des données)</strong> — Amanda Torres (exemple composite) a perdu <span style="color:#ff5252;font-weight:700">$23,800</span> (-8,5 %) en 4 mois sur un compte de 279 000 $, en entraînant un random forest sur 100 % de ses données (2015-2023) : le modèle a mémorisé le bruit historique au lieu d'apprendre un motif, et il obtenait 71 % sur les lignes mêmes sur lesquelles il avait été ajusté contre 49 % en réel. Correctif : découpez les données en 5 plis, entraînez sur 4, testez sur 1, et faites tourner cinq fois. Ce soir : découpez les données 2015-2024 en 5 périodes. Entraînez sur les 4 premières, testez sur la 5e. Répétez cinq fois. Réussite moyenne en test >55 % ET cohérente entre les plis = robuste. Très variable (60 %, 48 %, 62 %) = instable, il faut simplifier.</li>
+            <li><strong>Suivez l'importance des features (supprimez celles qui ne captent que du bruit)</strong> — Michael Park (exemple composite) a perdu <span style="color:#ff5252;font-weight:700">$31,500</span> (-9,8 %) en 8 mois sur un compte de 320 000 $, en utilisant 87 features sur environ 2 000 bougies quotidiennes sans savoir lesquelles comptaient : 23 échantillons par feature, si bien que le modèle a ajusté du bruit comme « le jour de la semaine ». Quand le bruit a changé, le modèle s'est effondré. Ce soir : entraînez un random forest et extrayez les scores d'importance des features. Supprimez celles dont l'importance est &lt;0,02 (bruit). Réentraînez avec les 10-15 meilleures. Si la performance S'AMÉLIORE, vous étiez en sur-ajustement. Michael a découvert que ses 5 meilleures features (VIX, ratio put/call, momentum 20 jours, volume, courbe des taux) portaient 78 % de l'importance. Reconstruit avec 12 features, il a fait +5,4 % sur les 6 mois suivants — contre environ +8 % s'il avait simplement gardé SPY sur la même période. La reconstruction a arrêté l'hémorragie ; elle n'a pas battu l'indice, et il vaut la peine d'être clair sur laquelle des deux choses vous avez accomplie.</li>
+          </ol>
+        </div>
+      </details>
+      <h2 id="quiz-test-your-understanding">Quiz : testez votre compréhension</h2>
+  <div class="quiz">
+    <div class="quiz-question">
+      <p><strong>Q1:</strong> Vous avez 2 000 bougies quotidiennes. Combien de features devriez-vous utiliser au maximum ?</p>
+      <details>
+        <summary>Afficher la réponse</summary>
+        <p><strong>Réponse :</strong> 20-40 features au maximum. Au plancher de 50 échantillons par feature, 2 000 bougies en supportent 40 ; aux 100 échantillons par feature plus prudents, 20. Le modèle de Jason, dans l'étude de cas ci-dessus, tournait avec 200 features sur 1 700 bougies — 8,5 échantillons par feature — et il a mémorisé le jeu d'entraînement au lieu d'apprendre quoi que ce soit. Commencez par les 10-20 features les plus importantes et n'élargissez que si la performance en validation s'améliore réellement, pas simplement parce que vous avez plus de features sous la main.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q2:</strong> Réussite à l'entraînement = 92 %, réussite en test = 54 %. Où est le problème ?</p>
+      <details>
+        <summary>Afficher la réponse</summary>
+        <p><strong>Réponse :</strong> Sur-ajustement sévère. Le modèle a mémorisé le bruit des données d'entraînement (92 %) mais n'a aucun pouvoir prédictif sur des données inédites (54 %, à peine mieux qu'un tirage à pile ou face). Réduisez les features, ajoutez de la régularisation ou prenez un modèle plus simple.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q3:</strong> Votre random forest classe « le jour de la semaine » comme feature la plus importante. Est-ce valable ?</p>
+      <details>
+        <summary>Afficher la réponse</summary>
+        <p><strong>Réponse :</strong> Signal d'alarme. Les anomalies calendaires existent (l'effet lundi), mais elles sont faibles et largement arbitrées. Si « le jour de la semaine » domine, le modèle s'est probablement ajusté à du bruit aléatoire dans les données d'entraînement. Retirez la feature et réentraînez.</p>
+      </details>
+    </div>
+  </div>
+<div class="key-takeaway">
     <h4>À retenir</h4>
     <ul>
       <li><strong>Le ML ne fonctionne qu'avec une vraie ingénierie des features</strong> (des ordures en entrée = des ordures en sortie)</li>

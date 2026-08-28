@@ -596,33 +596,7 @@
   <p><strong>Mikor jó:</strong> Külön modellek tanítása trendelő és átlaghoz visszatérő rezsimekre</p>
   <p><strong>Folyamat:</strong> A Harmonic Oscillatorral címkézd a történelmi adatot (trend/oldalazás), taníts 2 modellt, és azt vesd be, amelyik az aktuális rezsimhez illik</p>
 
-  <h2 id="quiz-test-your-understanding">Kvíz: teszteld a tudásodat</h2>
-  <div class="quiz">
-    <div class="quiz-question">
-      <p><strong>Q1:</strong> Van 2 000 napos gyertyád. Legfeljebb hány jellemzőt használj?</p>
-      <details>
-        <summary>Válasz mutatása</summary>
-        <p><strong>Válasz:</strong> Legfeljebb 20-40 jellemzőt. A jellemzőnkénti 50 megfigyeléses alsó határnál 2 000 gyertya 40 jellemzőt bír el; a biztonságosabb 100 megfigyelésnél 20-at. Jason modellje a fenti esettanulmányban 200 jellemzővel futott 1 700 gyertyán — jellemzőnként 8,5 megfigyelés —, és ahelyett, hogy bármit tanult volna, bemagolta a tanítóhalmazt. Kezdd a 10-20 legfontosabb jellemzővel, és csak akkor bővíts, ha a validációs teljesítmény tényleg javul, nem pusztán azért, mert több jellemző áll rendelkezésedre.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q2:</strong> Tanítási találat = 92 %, teszttalálat = 54 %. Mi a baj?</p>
-      <details>
-        <summary>Válasz mutatása</summary>
-        <p><strong>Válasz:</strong> Súlyos túlillesztés. A modell bemagolta a tanítóadat zaját (92 %), de nem látott adaton nincs előrejelző ereje (54 %, alig jobb a pénzfeldobásnál). Csökkentsd a jellemzőket, adj hozzá regularizációt, vagy válassz egyszerűbb modellt.</p>
-      </details>
-    </div>
-
-    <div class="quiz-question">
-      <p><strong>Q3:</strong> A random forestod «a hét napját» hozza ki a legfontosabb jellemzőnek. Ez rendben van?</p>
-      <details>
-        <summary>Válasz mutatása</summary>
-        <p><strong>Válasz:</strong> Vészjelzés. Naptári anomáliák léteznek (hétfő-hatás), de gyengék és nagyrészt már elarbitrálták őket. Ha «a hét napja» dominál, a modell valószínűleg a tanítóadat véletlen zajára illeszkedett. Vedd ki a jellemzőt, és taníts újra.</p>
-      </details>
-    </div>
-  </div>
-<h2 id="practical-checklist">Gyakorlati ellenőrzőlista</h2>
+  <h2 id="practical-checklist">Gyakorlati ellenőrzőlista</h2>
   <div class="checklist">
     <h4>Az ML-modell tanítása előtt:</h4>
     <ul>
@@ -650,18 +624,7 @@
 
   <div class="section-break"><span>Valós kereskedői esettanulmány</span></div>
 
-        <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gyors eredmények holnapra (kattints a kinyitáshoz)</summary>
-        <div style="margin-top:1rem">
-          <p>Ne terheld túl magad. Kezdd ezzel a hárommal:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Kezdd egyszerűen: jellemzőtervezés a neurális hálók ELŐTT</strong> — Derek Chen (összetett példa) elveszített <span style="color:#ff5252;font-weight:700">$19,700</span> (-6,6 %) 6 hónap alatt egy 298 000 dolláros számlán, mert mindenféle jellemzőtervezés nélkül épített egy mély LSTM-et: 94 % találat a backtestben, 48 % élesben. A 94 % volt az árulkodó jel: az indikátorait a teljes idősoron számolta ki, mielőtt szétosztotta volna, így a holnapi adat ott ült a mai bemenetben. Figyeld a veszteség nagyságát is, ne csak az okát. Egy tőkeáttétel nélküli napi modell, ami épp csak rosszabb a pénzfeldobásnál, lassan vérzik el, költségeken és egy apró negatív edge-en keresztül; nem visz el egy számla 70 %-át. Ha olyan bukástörténetet olvasol, ahol elvisz, ott tőkeáttétel volt. Kezdd egyszerűen: építs 10-20 alapjellemzőt (RSI-divergencia, forgalmi kiugrások, VIX-kapcsolatok), és ELŐSZÖR random foresttel tesztelj. Ma este: készíts táblázatot 5 jellemzővel (14 napos RSI, 20 napos árváltozás %-ban, forgalom a 20 napos átlaghoz képest, VIX-szint, put/call arány). Számold ki őket a SPY-ra az elmúlt évre, és ossz szét az adatot, mielőtt bármit is számolnál. Excel-regresszióval vagy Python sklearnnel jósold meg a következő napi hozamot. Találat >55 % = jel. &lt;53 % = még van munka.</li>
-            <li><strong>Vezess be k-szoros keresztvalidációt (hagyj fel az adat 100 %-án való tanítással)</strong> — Amanda Torres (összetett példa) elveszített <span style="color:#ff5252;font-weight:700">$23,800</span> (-8,5 %) 4 hónap alatt egy 279 000 dolláros számlán, mert az adatai 100 %-án tanított egy random forestet (2015-2023): a modell mintázat tanulása helyett a történelmi zajt magolta be, és pont azokon a sorokon, amelyekre illesztették, 71 %-ot ért el, élesben viszont 49 %-ot. Javítás: oszd az adatot 5 hajtásra, taníts 4-en, tesztelj 1-en, és forgasd ötször. Ma este: oszd a 2015-2024 adatot 5 időszakra. Taníts az első 4-en, tesztelj az 5.-en. Ismételd ötször. Az átlagos teszttalálat >55 % ÉS hajtásonként következetes = robusztus. Erősen ingadozó (60 %, 48 %, 62 %) = instabil, egyszerűsíteni kell.</li>
-            <li><strong>Kövesd a jellemzők fontosságát (dobd ki a zajjellemzőket)</strong> — Michael Park (összetett példa) elveszített <span style="color:#ff5252;font-weight:700">$31,500</span> (-9,8 %) 8 hónap alatt egy 320 000 dolláros számlán, mert 87 jellemzőt használt nagyjából 2 000 napos gyertyán anélkül, hogy tudta volna, melyik számít — jellemzőnként 23 megfigyelés, így a modell olyan zajra illeszkedett, mint «a hét napja». Amikor a zaj megváltozott, a modell összeomlott. Ma este: taníts egy random forestet, és kérd le a jellemzőfontossági pontszámokat. Dobd ki azokat, amelyek fontossága &lt;0,02 (zaj). Taníts újra a legjobb 10-15-tel. Ha a teljesítmény JAVUL, túlillesztettél. Michael azt találta, hogy az 5 legjobb jellemzője (VIX, put/call arány, 20 napos momentum, forgalom, hozamgörbe) vitte a fontosság 78 %-át. 12 jellemzővel újraépítve a következő 6 hónapban +5,4 %-ot hozott — szemben azzal a nagyjából +8 %-kal, amit ugyanezen a szakaszon a SPY egyszerű tartása adott volna. Az újraépítés elállította a vérzést; az indexet nem verte meg, és érdemes tisztán látni, a kettő közül melyiket érted el.</li>
-          </ol>
-        </div>
-      </details>
-      <div class="callout callout-danger">
+        <div class="callout callout-danger">
     <h4>📉 ESETTANULMÁNY: Jason 145 000 dolláros ML-túlillesztési katasztrófája</h4>
     <p><strong>Kereskedő:</strong> Jason Wu (összetett példa), 31 éves, kvantitatív fejlesztő (250 000 dolláros számla), informatikai és ML-háttérrel</p>
     <p><strong>Stratégia:</strong> 2015-2021-es SPY-adaton tanított random forest algoritmus, 83 %-os találati arány a backtestben</p>
@@ -714,7 +677,44 @@
     </div>
   </div>
 
-  <div class="key-takeaway">
+  <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gyors eredmények holnapra (kattints a kinyitáshoz)</summary>
+        <div style="margin-top:1rem">
+          <p>Ne terheld túl magad. Kezdd ezzel a hárommal:</p>
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>Kezdd egyszerűen: jellemzőtervezés a neurális hálók ELŐTT</strong> — Derek Chen (összetett példa) elveszített <span style="color:#ff5252;font-weight:700">$19,700</span> (-6,6 %) 6 hónap alatt egy 298 000 dolláros számlán, mert mindenféle jellemzőtervezés nélkül épített egy mély LSTM-et: 94 % találat a backtestben, 48 % élesben. A 94 % volt az árulkodó jel: az indikátorait a teljes idősoron számolta ki, mielőtt szétosztotta volna, így a holnapi adat ott ült a mai bemenetben. Figyeld a veszteség nagyságát is, ne csak az okát. Egy tőkeáttétel nélküli napi modell, ami épp csak rosszabb a pénzfeldobásnál, lassan vérzik el, költségeken és egy apró negatív edge-en keresztül; nem visz el egy számla 70 %-át. Ha olyan bukástörténetet olvasol, ahol elvisz, ott tőkeáttétel volt. Kezdd egyszerűen: építs 10-20 alapjellemzőt (RSI-divergencia, forgalmi kiugrások, VIX-kapcsolatok), és ELŐSZÖR random foresttel tesztelj. Ma este: készíts táblázatot 5 jellemzővel (14 napos RSI, 20 napos árváltozás %-ban, forgalom a 20 napos átlaghoz képest, VIX-szint, put/call arány). Számold ki őket a SPY-ra az elmúlt évre, és ossz szét az adatot, mielőtt bármit is számolnál. Excel-regresszióval vagy Python sklearnnel jósold meg a következő napi hozamot. Találat >55 % = jel. &lt;53 % = még van munka.</li>
+            <li><strong>Vezess be k-szoros keresztvalidációt (hagyj fel az adat 100 %-án való tanítással)</strong> — Amanda Torres (összetett példa) elveszített <span style="color:#ff5252;font-weight:700">$23,800</span> (-8,5 %) 4 hónap alatt egy 279 000 dolláros számlán, mert az adatai 100 %-án tanított egy random forestet (2015-2023): a modell mintázat tanulása helyett a történelmi zajt magolta be, és pont azokon a sorokon, amelyekre illesztették, 71 %-ot ért el, élesben viszont 49 %-ot. Javítás: oszd az adatot 5 hajtásra, taníts 4-en, tesztelj 1-en, és forgasd ötször. Ma este: oszd a 2015-2024 adatot 5 időszakra. Taníts az első 4-en, tesztelj az 5.-en. Ismételd ötször. Az átlagos teszttalálat >55 % ÉS hajtásonként következetes = robusztus. Erősen ingadozó (60 %, 48 %, 62 %) = instabil, egyszerűsíteni kell.</li>
+            <li><strong>Kövesd a jellemzők fontosságát (dobd ki a zajjellemzőket)</strong> — Michael Park (összetett példa) elveszített <span style="color:#ff5252;font-weight:700">$31,500</span> (-9,8 %) 8 hónap alatt egy 320 000 dolláros számlán, mert 87 jellemzőt használt nagyjából 2 000 napos gyertyán anélkül, hogy tudta volna, melyik számít — jellemzőnként 23 megfigyelés, így a modell olyan zajra illeszkedett, mint «a hét napja». Amikor a zaj megváltozott, a modell összeomlott. Ma este: taníts egy random forestet, és kérd le a jellemzőfontossági pontszámokat. Dobd ki azokat, amelyek fontossága &lt;0,02 (zaj). Taníts újra a legjobb 10-15-tel. Ha a teljesítmény JAVUL, túlillesztettél. Michael azt találta, hogy az 5 legjobb jellemzője (VIX, put/call arány, 20 napos momentum, forgalom, hozamgörbe) vitte a fontosság 78 %-át. 12 jellemzővel újraépítve a következő 6 hónapban +5,4 %-ot hozott — szemben azzal a nagyjából +8 %-kal, amit ugyanezen a szakaszon a SPY egyszerű tartása adott volna. Az újraépítés elállította a vérzést; az indexet nem verte meg, és érdemes tisztán látni, a kettő közül melyiket érted el.</li>
+          </ol>
+        </div>
+      </details>
+      <h2 id="quiz-test-your-understanding">Kvíz: teszteld a tudásodat</h2>
+  <div class="quiz">
+    <div class="quiz-question">
+      <p><strong>Q1:</strong> Van 2 000 napos gyertyád. Legfeljebb hány jellemzőt használj?</p>
+      <details>
+        <summary>Válasz mutatása</summary>
+        <p><strong>Válasz:</strong> Legfeljebb 20-40 jellemzőt. A jellemzőnkénti 50 megfigyeléses alsó határnál 2 000 gyertya 40 jellemzőt bír el; a biztonságosabb 100 megfigyelésnél 20-at. Jason modellje a fenti esettanulmányban 200 jellemzővel futott 1 700 gyertyán — jellemzőnként 8,5 megfigyelés —, és ahelyett, hogy bármit tanult volna, bemagolta a tanítóhalmazt. Kezdd a 10-20 legfontosabb jellemzővel, és csak akkor bővíts, ha a validációs teljesítmény tényleg javul, nem pusztán azért, mert több jellemző áll rendelkezésedre.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q2:</strong> Tanítási találat = 92 %, teszttalálat = 54 %. Mi a baj?</p>
+      <details>
+        <summary>Válasz mutatása</summary>
+        <p><strong>Válasz:</strong> Súlyos túlillesztés. A modell bemagolta a tanítóadat zaját (92 %), de nem látott adaton nincs előrejelző ereje (54 %, alig jobb a pénzfeldobásnál). Csökkentsd a jellemzőket, adj hozzá regularizációt, vagy válassz egyszerűbb modellt.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Q3:</strong> A random forestod «a hét napját» hozza ki a legfontosabb jellemzőnek. Ez rendben van?</p>
+      <details>
+        <summary>Válasz mutatása</summary>
+        <p><strong>Válasz:</strong> Vészjelzés. Naptári anomáliák léteznek (hétfő-hatás), de gyengék és nagyrészt már elarbitrálták őket. Ha «a hét napja» dominál, a modell valószínűleg a tanítóadat véletlen zajára illeszkedett. Vedd ki a jellemzőt, és taníts újra.</p>
+      </details>
+    </div>
+  </div>
+<div class="key-takeaway">
     <h4>A lényeg</h4>
     <ul>
       <li><strong>Az ML csak rendes jellemzőtervezéssel működik</strong> (szemét be = szemét ki)</li>

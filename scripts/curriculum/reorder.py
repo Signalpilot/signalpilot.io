@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Move the "Quick Wins for Tomorrow" block below the teaching.
+"""Relocate "Quick Wins for Tomorrow" to just ABOVE the closing quiz.
 
-The block is a self-contained <details> element that currently sits near the
-top of most lessons, so the reader is told to do things -- widen stops with
-1.5x ATR, avoid the first fifteen minutes -- before the lesson has explained
-any of the terms those instructions use. The chosen spine puts it after the
-teaching and the case study, just before the quiz.
+The first pass anchored on the depth of the quiz *questions*, which is a depth
+INSIDE <div class="quiz">. So in 62 lessons the action block landed nested in
+the quiz container, under the "Test Your Understanding" banner -- structurally
+balanced, pedagogically wrong. The reader is told to go do three things while
+sitting in the middle of the test.
 
-Two things make this safe to do mechanically. The block is one element, so
-lifting it cannot orphan a tag. And the insertion point is chosen by tag
-DEPTH rather than by a text pattern: we walk the prose region tracking how
-deep we are, and only ever reinsert at a point where the depth matches the
-depth the block was lifted from. A regex anchor would happily drop the block
-inside a table cell.
+This pass anchors on the top level of the prose region instead: the last
+depth-0 boundary before the quiz is the quiz container's own open tag, and if
+a "Test Your Understanding" section break sits immediately above it, that
+break is the real top of the assessment block and the action goes above it.
 """
 import re, sys, glob
 
@@ -21,21 +19,18 @@ VOID = {'br','img','input','hr','meta','link','source','area','base','col',
         'polygon','stop','use','ellipse','marker'}
 TAG = re.compile(r'<(/?)([a-zA-Z][a-zA-Z0-9]*)([^>]*?)(/?)>')
 
-def depths(s):
-    """Yield (position, depth_before_this_tag) for every tag in s."""
+def walk(s):
     d = 0
-    out = []
     for m in TAG.finditer(s):
         closing, name, attrs, selfclose = m.groups()
-        out.append((m.start(), d, m))
+        yield m.start(), d, m
         if name.lower() in VOID or selfclose:
             continue
         d += -1 if closing else 1
-    return out
 
 def balance(s):
     d = 0
-    for m in TAG.finditer(s):
+    for _, _, m in walk(s):
         closing, name, _, selfclose = m.groups()
         if name.lower() in VOID or selfclose:
             continue
@@ -44,6 +39,11 @@ def balance(s):
 
 QW = re.compile(r'[ \t]*<details[^>]*>\s*<summary[^>]*>[^<]*Quick Wins.*?</details>\s*',
                 re.S | re.I)
+HEAD  = re.compile(r'<h[1-6][^>]*>([^<]*)</h[1-6]>')
+LEAD  = re.compile(r'<p[^>]*>([^<]{0,160})</p>')
+QUIZWORD = re.compile(r'(?i)test your|quick check|knowledge check'
+                      r'|check your|\bquiz\b')
+BREAK = re.compile(r'<div class="section-break"><span>([^<]*)</span></div>')
 
 def move(path, dry=False):
     s = open(path).read()
@@ -54,10 +54,6 @@ def move(path, dry=False):
     if not m:
         return 'no quick-wins block'
     block = m.group()
-    # Lessons scatter knowledge checks through the text, so the first
-    # quiz-question is often a mid-lesson check rather than the closing quiz.
-    # Group the questions into clusters and anchor on the last cluster, which
-    # is the end-of-lesson quiz the spine puts after the action steps.
     qs = [q.start() for q in re.finditer(r'class="quiz-question"', body)]
     if not qs:
         return 'no quiz to anchor on'
@@ -66,42 +62,46 @@ def move(path, dry=False):
     for a, b2 in zip(qs, qs[1:]):
         if b2 - a > gap:
             cluster = b2
-    quiz = type('Q', (), {'start': staticmethod(lambda c=cluster: c)})()
-    if m.start() > quiz.start():
-        return 'already below the closing quiz'
 
     stripped = body[:m.start()] + body[m.end():]
-    # quiz position shifts left by the length we removed
-    qpos = quiz.start() - len(block) if quiz.start() > m.start() else quiz.start()
+    qpos = cluster - len(block) if cluster > m.start() else cluster
 
-    # Anchor on the depth AT the closing quiz, not the depth the block happens
-    # to sit at now. Those differ whenever the quiz lives inside a wrapper that
-    # opened earlier, and matching the old depth then throws the block back to
-    # the last top-level boundary -- which is near the top of the page, exactly
-    # where we are trying to move it away from.
-    here = balance(stripped[:qpos])
-    best = None
-    for pos, d, tm in depths(stripped[:qpos]):
-        if d == here:
-            best = pos
-    if best is None:
-        return f'no depth-{here} boundary before the quiz'
+    tops = [pos for pos, d, _ in walk(stripped[:qpos]) if d == 0]
+    if not tops:
+        return 'no top-level boundary before the quiz'
+    best = tops[-1]
+    # The assessment usually opens with a banner or two -- a section break, a
+    # heading, sometimes a one-line "test your understanding of X" lead-in --
+    # before the container itself. Walk back over every consecutive sibling
+    # that reads as assessment framing, so the action block lands above the
+    # whole block rather than wedged between a banner and the quiz it labels.
+    for prev in reversed(tops[:-1]):
+        b = (BREAK.match(stripped, prev) or HEAD.match(stripped, prev)
+             or LEAD.match(stripped, prev))
+        if b and QUIZWORD.search(b.group(1)):
+            best = prev
+        else:
+            break
+    if best == m.start():
+        return 'already in place'
 
     out = head + sep + stripped[:best] + block + stripped[best:]
     if balance(out) != balance(s):
         return 'REFUSED: tag balance would change'
+    if len(out) != len(s):
+        return f'REFUSED: length changed {len(s)} -> {len(out)}'
     if not dry:
         open(path, 'w').write(out)
-    return f'moved (depth {here}, {len(block)} bytes)'
+    return 'moved'
 
 if __name__ == '__main__':
     dry = '--dry' in sys.argv
     ok = skip = 0
     for f in sorted(glob.glob('education/curriculum/*/*.html')):
         r = move(f, dry)
-        if r.startswith('moved'):
+        if r == 'moved':
             ok += 1
         else:
             skip += 1
             print(f'  {f.split("/")[-1][:-5]:<38} {r}')
-    print(f'\nmoved: {ok}   left alone: {skip}   {"(dry run)" if dry else ""}')
+    print(f'\nmoved: {ok}   left alone: {skip}   {"(dry)" if dry else ""}')
