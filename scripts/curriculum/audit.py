@@ -41,6 +41,16 @@ DEBUNK = re.compile(r'(?i)no source|never been produced|nobody has ever|is a myt
 
 def debunked(text, m, window=260):
     return bool(DEBUNK.search(text[m.end():m.end() + window]))
+
+
+# A file-wide search for "composite" lets a lesson clear the case-study check while its
+# HEADING still announces a real-world example. Scope the check to the heading itself.
+HEADING_CASE = re.compile(r'<h[2-4][^>]*>([^<]*(?:Real[- ]World Example|Real Example)[^<]*)</h[2-4]>', re.I)
+
+
+def overclaiming_headings(html):
+    return sum(1 for m in HEADING_CASE.finditer(html)
+               if re.search(r'(?i)composite example', html[m.end():m.end() + 1400]))
 # A "case study" of a real, dated market episode (2020 COVID QE, the 2022 QT
 # bear) needs no composite label -- it happened. What needs one is an invented
 # PERSON: a first name carrying a possessive or a parenthetical, next to a
@@ -90,7 +100,8 @@ def score(path):
         't1_flattery':  sum(1 for m in FLATTERY.finditer(t) if not debunked(t, m)),
         't1_baserate':  sum(1 for m in BASERATE.finditer(t) if not debunked(t, m)),
         't1_vague':     sum(1 for m in VAGUE.finditer(t) if not debunked(t, m)),
-        't1_unlabelled_case': int(bool(CASE.search(t)) and not bool(LABEL.search(t))),
+        't1_unlabelled_case': int(bool(CASE.search(t)) and not bool(LABEL.search(t)))
+                              + overclaiming_headings(h),
         't1_no_disclaimer':   int(not DISC_COMPONENT.search(h) and not DISC_WORDS.search(t)),
         't1_nonstd_disclaimer': int(not DISC_COMPONENT.search(h) and bool(DISC_WORDS.search(t))),
         # tier 2
