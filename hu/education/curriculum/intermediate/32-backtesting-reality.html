@@ -206,7 +206,7 @@
       </details>
 
       <div class="example-block">
-        <h4>Valódi példa: hogyan lett egy 1,3R várható értékű „tökéletes” backtestből élesben -0,45R-es katasztrófa</h4>
+        <h4>Összetett példa: hogyan lett egy «tökéletes», 1,3R várható értékű backtest élesben -0,45R</h4>
 
         <p><strong>Háttér:</strong> 2024 márciusában Chris (összetett példa) hat hónapnyi optimalizálás után kitörési stratégiát épített. A backtest hihetetlenül festett: 1,3R várható érték, 4,9-es profitfaktor, 67 % találati arány, 2 év SPY-adaton (2022-2023) tesztelve. 2024 áprilisában 50 000 $ került bevetésre. 2024 júniusára a számla 8 400 $-t bukott (-16,8 %). Íme a teljes boncolás.</p>
 
@@ -483,6 +483,16 @@
           Mélyebben: miért nem érnek semmit a backtesting eredményei (és mit csinálj helyette) →
         </a>
       </div>
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Előfeltételek</h4>
+        <p>Ez a lecke a következők fogalmaira épül:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">30. lecke: Volume Oracle</a> &mdash; A Signal Pilot mesterfokon</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">31. lecke: Portfólióépítés</a> &mdash; A Signal Pilot mesterfokon</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Ha ezeket elvégezted, készen állsz. Ha nem, kezdd előbb az alapozó leckékkel.</p>
+      </div>
 
 <h2 id="why-your-perfect-strategy-will-fail-live">Miért fog elbukni élesben a tökéletes stratégiád</h2>
 
@@ -728,11 +738,11 @@
           <p><strong>K: Backtestelsz egy stratégiát: 5,2R várható érték, 4,2-es Sharpe-mutató, 25 ügyleten tesztelve, EMA(47)-tel, mert az adta a legjobb eredményt 100 különböző periódus kipróbálása után. Mi a baj vele?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Semmi — remek stratégia!</div>
-            <div class="quiz-option" data-correct="true">B) Minden: túl kicsi a minta, túl magas a Sharpe és a várható érték, az EMA(47) pedig görbére illesztett</div>
-            <div class="quiz-option" data-correct="false">C) Csak a várható érték túl magas</div>
+            <div class="quiz-option" data-correct="false">B) Csak a várható érték túl magas</div>
+            <div class="quiz-option" data-correct="true">C) Minden: túl kicsi a minta, túl magas a Sharpe és a várható érték, az EMA(47) pedig görbére illesztett</div>
             <div class="quiz-option" data-correct="false">D) Csak a minta túl kicsi</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Helyes!</strong> Három komoly vészjelzés: (1) mindössze 25 ügylet = statisztikailag jelentéktelen, (2) 4,2-es Sharpe = gyanúsan magas (valószínűleg túlillesztett), (3) a 100 periódus kipróbálásával talált EMA(47) = a zajra illesztve. Ez a stratégia élesben elbukik. Kell hozzá: több mint 100 ügylet, reális Sharpe (1,5-2,5) és szokásos paraméterek.
           </div>
         </div>
@@ -741,11 +751,11 @@
           <p><strong>Backtestelsz egy átlaghoz visszatérő stratégiát az SPY-on 2010-től 2024-ig. Eredmények: 2,8R várható érték, 68 % találati arány, 120 000 $ nyereség. Az adatok csak az S&P 500 mai összetevőit tartalmazzák (a ma az indexben lévő részvényeket). 2025-ben élesbe mész — és elbukik. Mi ment félre?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Semmi: a 2025-ös piaci körülmények megváltoztak, ez előre nem látható</div>
-            <div class="quiz-option" data-correct="true">B) Túlélési torzítás: a backtest kihagyta azoknak a részvényeknek a 30-40 %-át, amelyeket 2010 és 2024 között kivezettek vagy csődbe mentek</div>
+            <div class="quiz-option" data-correct="false">B) Túl magas a várható érték: átlaghoz visszatérésnél a 2,8R irreális</div>
             <div class="quiz-option" data-correct="false">C) Túl kicsi a minta: 14 évnél több adat kell</div>
-            <div class="quiz-option" data-correct="false">D) Túl magas a várható érték: átlaghoz visszatérésnél a 2,8R irreális</div>
+            <div class="quiz-option" data-correct="true">D) Túlélési torzítás: a backtest kihagyta azoknak a részvényeknek a 30-40 %-át, amelyeket 2010 és 2024 között kivezettek vagy csődbe mentek</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Helyes!</strong> A túlélési torzítás klasszikus csapdája. Az „S&P 500 mai összetevőin” tesztelni azt jelenti, hogy csak a NYERTESEKET tesztelted: olyan részvényeket, amelyek túléltek 14 évet, és bekerültek a mai indexbe. Kihagytad a csődbe ment cégeket, a kivezetett részvényeket és a megbukott vállalkozásokat (az összes 30-40 %-át). Éppen ezek a halott részvények indították volna el az átlaghoz visszatérő belépőidet, és soha nem álltak volna talpra. Pontosan ez az, ami a fenti példa 1,8R-es várható értékét a valóságban -0,2R-ré teszi. Megoldás: használj point-in-time adatot, amely MINDEN egyes dátumon létező részvényt tartalmaz, a később kivezetetteket is. A túlélési torzítás 20-50 %-kal felfújja a backtest eredményeit.
           </div>
         </div>
@@ -753,13 +763,13 @@
         <div class="quiz-question" style="margin-top:2rem">
           <p><strong>Walk-forward teszteled a stratégiádat: tanítás 2018-2020, teszt 2021-en (átment). Tanítás 2018-2021, teszt 2022-n (átment). Tanítás 2018-2022, teszt 2023-on (átment). Sem a slippage-et, sem a jutalékokat nem modellezted. Kereskedd ezt a stratégiát élesben?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">A) Igen — minden walk-forward teszten átment, robusztus stratégia</div>
-            <div class="quiz-option" data-correct="true">B) Nem — előbb reális költségeket kell hozzáadni (0,2-0,4 % slippage plusz jutalékok), és újratesztelni. Ha akkor is nyereséges, akkor igen.</div>
+            <div class="quiz-option" data-correct="true">A) Nem — előbb reális költségeket kell hozzáadni (0,2-0,4 % slippage plusz jutalékok), és újratesztelni. Ha akkor is nyereséges, akkor igen.</div>
+            <div class="quiz-option" data-correct="false">B) Igen — minden walk-forward teszten átment, robusztus stratégia</div>
             <div class="quiz-option" data-correct="false">C) Igen — a walk-forward ellenőrzés elég, a költségek alig számítanak</div>
             <div class="quiz-option" data-correct="false">D) Nem — az ellenőrzéshez legalább 10 walk-forward időszak kell</div>
           </div>
-          <div class="quiz-feedback">
-            <strong>Helyes!</strong> A walk-forward tesztek a robusztusságot igazolják (vagyis hogy nem egyetlen időszakra van illesztve), de élesbe menés előtt KÖTELEZŐ reális költségeket modellezned. A slippage (oldalanként 0,1-0,2 % = oda-vissza 0,2-0,4 %) plusz a jutalékok (ügyletenként 2-5 $) 30-60 %-kal is levághatják a várható értéket. Egy költségek nélkül 2,5R várható értékű stratégia költségekkel akár 1,2R-re is eshet — még nyereséges, de éppen csak. A fenti Chris-eset pontosan ez a bukás: egy 1,3R-es backtest, amely élesben -0,45R lett, amint a költségek valódivá váltak. A költségeket UTOLJÁRA add hozzá (a walk-forward után); ha a várható érték 1,5R fölött, a találati arány pedig 45 % fölött marad, mehet élesben. Soha ne hagyd ki a költségmodellezést — ez választja el a nyereséget a fájdalomtól.
+          <div class="quiz-explanation">
+            <strong>Helyes!</strong> Az előrehaladó tesztek igazolják a robusztusságot (nincs egyetlen időszakra való túlillesztés), de éles kereskedés előtt KÖTELEZŐ reális költségeket modellezned. A slippage (oldalanként 0,1-0,2% = oda-vissza 0,2-0,4%) és a jutalékok (2-5 $ ügyletenként) 30-60%-kal csökkenthetik a várható értéket. Egy költségek nélkül 2,5R várható értékű stratégia költségekkel 1,2R-re eshet &mdash; még nyereséges, de épphogy. Chris fenti esete pontosan ez a bukás: egy 1,3R-es backtest, amely élesben -0,45R lett, amint a költségek valódivá váltak. A költségeket UTOLJÁRA add hozzá (az előrehaladó teszt után); ha a várható érték &gt;1,5R és a találati arány &gt;45% marad, mehet élesben. A költségmodellezést soha ne hagyd ki &mdash; ez a különbség a nyereség és a fájdalom között.
           </div>
         </div>
 
@@ -795,7 +805,7 @@
         <p><strong>33. lecke: haladó kockázatkezelés — a profi keretek</strong> — Ismerd meg a Kelly-kritériumot, a dinamikus pozícióméretezést és a drawdown-eljárásokat.</p>
       </div>
 
-      <blockquote><strong>Kizárólag oktatási célra.</strong> A kereskedés jelentős veszteségkockázattal jár. A múltbeli teljesítmény nem garantálja a jövőbeli eredményeket.</blockquote>
+      <blockquote class="sp-disclaimer"><strong>Kizárólag oktatási célra.</strong> A kereskedés jelentős veszteségkockázattal jár. Ez nem pénzügyi tanácsadás. A múltbeli teljesítmény nem garantálja a jövőbeli eredményeket.</blockquote>
 
       <!-- Discussion Section -->
       <div class="discussion-section" id="discussion-section">
@@ -867,7 +877,6 @@
       </a>
     </div>
   </div>
-  <blockquote class="sp-disclaimer"><strong>Kizárólag oktatási célra.</strong> A kereskedés jelentős veszteségkockázattal jár. Ez nem pénzügyi tanácsadás. A múltbeli teljesítmény nem garantálja a jövőbeli eredményeket.</blockquote>
 </article>
 
 <footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Beszéljük meg a Discordon</a><a href="https://www.signalpilot.io/affiliates.html">Partnerprogram</a><a href="https://www.signalpilot.io/privacy.html">Adatvédelem</a><a href="https://www.signalpilot.io/terms.html">Feltételek</a></div></div></footer>

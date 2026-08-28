@@ -206,7 +206,7 @@
       </details>
 
       <div class="example-block">
-        <h4>Exemple concret : comment un backtest « parfait » à 1,3R d'espérance est devenu un désastre à -0,45R en réel</h4>
+        <h4>Exemple composite : comment un backtest « parfait » à 1,3R d'espérance est devenu -0,45R en réel</h4>
 
         <p><strong>Contexte :</strong> En mars 2024, Chris (exemple composite) a mis au point une stratégie de cassure après 6 mois d'optimisation. Le backtest était incroyable : 1,3R d'espérance, facteur de profit 4,9, 67 % de réussite, testé sur 2 ans de données SPY (2022-2023). 50 000 $ ont été déployés en avril 2024. En juin 2024, le compte accusait -8 400 $ (-16,8 %). Voici l'autopsie complète.</p>
 
@@ -483,6 +483,16 @@
           Pour aller plus loin : pourquoi les résultats de backtesting ne valent rien (et quoi faire à la place) →
         </a>
       </div>
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Prérequis</h4>
+        <p>Cette leçon s'appuie sur des notions vues dans :</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Leçon 30 : Volume Oracle</a> &mdash; Maîtrise de Signal Pilot</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Leçon 31 : Construction de portefeuille</a> &mdash; Maîtrise de Signal Pilot</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Si vous les avez terminées, vous êtes prêt. Sinon, commencez d'abord par les leçons fondamentales.</p>
+      </div>
 
 <h2 id="why-your-perfect-strategy-will-fail-live">Pourquoi votre stratégie parfaite échouera en réel</h2>
 
@@ -728,11 +738,11 @@
           <p><strong>Q : Vous faites le backtest d'une stratégie : 5,2R d'espérance, ratio de Sharpe de 4,2, testée sur 25 positions, avec EMA(47) parce que c'est elle qui donnait le meilleur résultat après avoir essayé 100 périodes. Qu'est-ce qui cloche ?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Rien — excellente stratégie !</div>
-            <div class="quiz-option" data-correct="true">B) Tout : échantillon trop petit, Sharpe et espérance trop élevés, EMA(47) est une courbe ajustée</div>
-            <div class="quiz-option" data-correct="false">C) Seulement l'espérance, trop élevée</div>
+            <div class="quiz-option" data-correct="false">B) Seulement l'espérance, trop élevée</div>
+            <div class="quiz-option" data-correct="true">C) Tout : échantillon trop petit, Sharpe et espérance trop élevés, EMA(47) est une courbe ajustée</div>
             <div class="quiz-option" data-correct="false">D) Seulement l'échantillon, trop petit</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Exact !</strong> Trois signaux d'alerte majeurs : (1) seulement 25 positions = statistiquement insignifiant, (2) Sharpe de 4,2 = suspicieusement élevé (sans doute surajusté), (3) EMA(47) trouvée en testant 100 périodes = ajustée au bruit. Cette stratégie échouera en réel. Il faut : plus de 100 positions, un Sharpe réaliste (1,5-2,5), des paramètres standards.
           </div>
         </div>
@@ -741,11 +751,11 @@
           <p><strong>Vous faites le backtest d'une stratégie de retour à la moyenne sur le SPY de 2010 à 2024. Résultats : 2,8R d'espérance, 68 % de réussite, 120 000 $ de profit. Les données ne contiennent que les composantes actuelles du S&P 500 (les titres présents dans l'indice aujourd'hui). Vous passez en réel en 2025 : ça échoue. Qu'est-ce qui a cloché ?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Rien — les conditions de marché de 2025 ont changé, c'était imprévisible</div>
-            <div class="quiz-option" data-correct="true">B) Le biais du survivant — le backtest a exclu 30-40 % des titres radiés ou en faillite entre 2010 et 2024</div>
+            <div class="quiz-option" data-correct="false">B) Espérance trop élevée — 2,8R est irréaliste pour du retour à la moyenne</div>
             <div class="quiz-option" data-correct="false">C) Échantillon trop petit — il faut plus de 14 ans de données</div>
-            <div class="quiz-option" data-correct="false">D) Espérance trop élevée — 2,8R est irréaliste pour du retour à la moyenne</div>
+            <div class="quiz-option" data-correct="true">D) Le biais du survivant — le backtest a exclu 30-40 % des titres radiés ou en faillite entre 2010 et 2024</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Exact !</strong> Le piège classique du biais du survivant. Tester sur « les composantes actuelles du S&P 500 » signifie que vous n'avez testé que les GAGNANTS : des titres qui ont survécu 14 ans et sont arrivés dans l'indice d'aujourd'hui. Vous avez laissé de côté les entreprises en faillite, les titres radiés et les modèles ratés (30-40 % du total). Ce sont précisément ces titres morts qui auraient déclenché vos entrées de retour à la moyenne sans jamais se relever. C'est exactement ce qui transforme l'espérance de 1,8R de l'exemple ci-dessus en un vrai -0,2R. Solution : utilisez des données point-in-time contenant TOUS les titres existant à chaque date, y compris ceux radiés par la suite. Le biais du survivant gonfle les résultats de backtest de 20 à 50 %.
           </div>
         </div>
@@ -753,13 +763,13 @@
         <div class="quiz-question" style="margin-top:2rem">
           <p><strong>Vous faites un test walk-forward de votre stratégie : entraînement 2018-2020, test 2021 (réussi). Entraînement 2018-2021, test 2022 (réussi). Entraînement 2018-2022, test 2023 (réussi). Vous n'avez modélisé ni le slippage ni les commissions. Faut-il trader cette stratégie en réel ?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">A) Oui — elle a passé tous les tests walk-forward, c'est une stratégie robuste</div>
-            <div class="quiz-option" data-correct="true">B) Non — il faut d'abord ajouter des coûts réalistes (0,2-0,4 % de slippage + commissions) et retester. Si elle reste rentable, alors oui.</div>
+            <div class="quiz-option" data-correct="true">A) Non — il faut d'abord ajouter des coûts réalistes (0,2-0,4 % de slippage + commissions) et retester. Si elle reste rentable, alors oui.</div>
+            <div class="quiz-option" data-correct="false">B) Oui — elle a passé tous les tests walk-forward, c'est une stratégie robuste</div>
             <div class="quiz-option" data-correct="false">C) Oui — la validation walk-forward suffit, les coûts comptent peu</div>
             <div class="quiz-option" data-correct="false">D) Non — il faut au moins 10 périodes walk-forward pour valider</div>
           </div>
-          <div class="quiz-feedback">
-            <strong>Exact !</strong> Les tests walk-forward prouvent la robustesse (pas d'ajustement à une seule période), mais vous DEVEZ modéliser des coûts réalistes avant de trader en réel. Le slippage (0,1-0,2 % par sens = 0,2-0,4 % l'aller-retour) plus les commissions (2 à 5 $ par position) peuvent réduire l'espérance de 30 à 60 %. Une stratégie à 2,5R d'espérance sans coûts peut tomber à 1,2R avec : toujours rentable, mais de justesse. Le cas de Chris plus haut est exactement cet échec : un backtest à 1,3R qui est ressorti à -0,45R en réel dès que les coûts sont devenus réels. Ajoutez les coûts EN DERNIER (après le walk-forward) ; si l'espérance reste au-dessus de 1,5R et la réussite au-dessus de 45 %, tradez-la en réel. Ne sautez jamais la modélisation des coûts : c'est ce qui sépare le profit de la douleur.
+          <div class="quiz-explanation">
+            <strong>Exact !</strong> Les tests walk-forward prouvent la robustesse (pas de surajustement à une seule période), mais vous DEVEZ modéliser des coûts réalistes avant de passer en réel. Le slippage (0,1-0,2 % par côté = 0,2-0,4 % aller-retour) plus les commissions (2-5 $ par trade) peuvent réduire l'espérance de 30 à 60 %. Une stratégie à 2,5R d'espérance hors coûts peut tomber à 1,2R avec les coûts &mdash; encore rentable, mais de justesse. Le cas de Chris ci-dessus est exactement cet échec : un backtest à 1,3R qui est ressorti à -0,45R en réel dès que les coûts sont devenus réels. Ajoutez les coûts EN DERNIER (après le walk-forward) ; si l'espérance reste &gt;1,5R et le taux de réussite &gt;45 %, passez en réel. Ne sautez jamais la modélisation des coûts : c'est la différence entre le profit et la douleur.
           </div>
         </div>
 
@@ -795,7 +805,7 @@
         <p><strong>Leçon #33 : gestion avancée du risque — les cadres professionnels</strong> — Découvrez le critère de Kelly, le dimensionnement dynamique et les protocoles de drawdown.</p>
       </div>
 
-      <blockquote><strong>À but éducatif uniquement.</strong> Le trading comporte un risque de perte substantiel. Les performances passées ne garantissent pas les résultats futurs.</blockquote>
+      <blockquote class="sp-disclaimer"><strong>À but éducatif uniquement.</strong> Le trading comporte un risque de perte substantiel. Ceci n'est pas un conseil financier. Les performances passées ne garantissent pas les résultats futurs.</blockquote>
 
       <!-- Discussion Section -->
       <div class="discussion-section" id="discussion-section">
@@ -867,7 +877,6 @@
       </a>
     </div>
   </div>
-  <blockquote class="sp-disclaimer"><strong>À but éducatif uniquement.</strong> Le trading comporte un risque de perte substantiel. Ceci n'est pas un conseil financier. Les performances passées ne garantissent pas les résultats futurs.</blockquote>
 </article>
 
 <footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">En discuter sur Discord</a><a href="https://www.signalpilot.io/affiliates.html">Affiliation</a><a href="https://www.signalpilot.io/privacy.html">Confidentialité</a><a href="https://www.signalpilot.io/terms.html">Conditions</a></div></div></footer>

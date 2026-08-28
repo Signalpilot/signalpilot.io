@@ -206,7 +206,7 @@
       </details>
 
       <div class="example-block">
-        <h4>Exemplo real: como um backtest «perfeito» com expectativa de 1,3R virou um desastre de -0,45R no real</h4>
+        <h4>Exemplo compósito: como um backtest «perfeito» com 1,3R de esperança acabou em -0,45R ao vivo</h4>
 
         <p><strong>Contexto:</strong> Em março de 2024, Chris (exemplo composto) desenvolveu uma estratégia de rompimento após 6 meses de otimização. O backtest parecia incrível: expectativa de 1,3R, fator de lucro 4,9 e 67 % de acerto, testado em 2 anos de dados do SPY (2022-2023). Em abril de 2024 colocou 50.000 $ para trabalhar. Em junho de 2024 a conta estava 8.400 $ no vermelho (-16,8 %). Aqui vai a autópsia completa.</p>
 
@@ -483,6 +483,16 @@
           Para aprofundar: por que os resultados de backtesting não valem nada (e o que fazer no lugar) →
         </a>
       </div>
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Pré-requisitos</h4>
+        <p>Esta aula assenta em conceitos de:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Lição 30: Volume Oracle</a> &mdash; Domínio do Signal Pilot</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Lição 31: Construção de carteira</a> &mdash; Domínio do Signal Pilot</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Se já as concluiu, está pronto. Caso contrário, comece primeiro pelas lições fundamentais.</p>
+      </div>
 
 <h2 id="why-your-perfect-strategy-will-fail-live">Por que sua estratégia perfeita vai fracassar no real</h2>
 
@@ -728,11 +738,11 @@
           <p><strong>P: Você faz o backtest de uma estratégia: expectativa de 5,2R, índice de Sharpe de 4,2, testada em 25 operações, usando EMA(47) porque foi a que deu o melhor resultado depois de testar 100 períodos diferentes. O que está errado?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Nada, estratégia excelente!</div>
-            <div class="quiz-option" data-correct="true">B) Tudo: amostra pequena demais, Sharpe e expectativa altos demais, EMA(47) está ajustada à curva</div>
-            <div class="quiz-option" data-correct="false">C) Só a expectativa, que está alta demais</div>
+            <div class="quiz-option" data-correct="false">B) Só a expectativa, que está alta demais</div>
+            <div class="quiz-option" data-correct="true">C) Tudo: amostra pequena demais, Sharpe e expectativa altos demais, EMA(47) está ajustada à curva</div>
             <div class="quiz-option" data-correct="false">D) Só a amostra, que está pequena demais</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Certo!</strong> Três sinais de alerta sérios: (1) só 25 operações = estatisticamente insignificante, (2) Sharpe de 4,2 = suspeitosamente alto (provavelmente sobreajustada), (3) EMA(47) achada testando 100 períodos = ajustada ao ruído. Essa estratégia vai fracassar no real. É preciso: mais de 100 operações, um Sharpe realista (1,5-2,5) e parâmetros padrão.
           </div>
         </div>
@@ -741,11 +751,11 @@
           <p><strong>Você faz o backtest de uma estratégia de reversão à média no SPY de 2010 a 2024. Resultados: expectativa de 2,8R, 68 % de acerto, 120.000 $ de lucro. Os dados incluem apenas os componentes atuais do S&P 500 (as ações que estão no índice hoje). Você vai para o real em 2025 e fracassa. O que deu errado?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Nada: as condições de mercado de 2025 mudaram, era imprevisível</div>
-            <div class="quiz-option" data-correct="true">B) Viés de sobrevivência: o backtest deixou de fora 30-40 % das ações que saíram do índice ou quebraram entre 2010 e 2024</div>
+            <div class="quiz-option" data-correct="false">B) Expectativa alta demais: 2,8R é irreal para reversão à média</div>
             <div class="quiz-option" data-correct="false">C) Amostra pequena demais: são precisos mais de 14 anos de dados</div>
-            <div class="quiz-option" data-correct="false">D) Expectativa alta demais: 2,8R é irreal para reversão à média</div>
+            <div class="quiz-option" data-correct="true">D) Viés de sobrevivência: o backtest deixou de fora 30-40 % das ações que saíram do índice ou quebraram entre 2010 e 2024</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Certo!</strong> A armadilha clássica do viés de sobrevivência. Testar nos «componentes atuais do S&P 500» significa que você testou só os VENCEDORES: ações que sobreviveram 14 anos e chegaram ao índice de hoje. Você deixou de fora empresas quebradas, ações retiradas do índice e negócios fracassados (30-40 % do total). São justamente essas ações mortas que teriam disparado suas entradas de reversão à média sem nunca se recuperar. É exatamente isso que transforma a expectativa de 1,8R do exemplo acima num -0,2R de verdade. Solução: use dados point-in-time que incluam TODAS as ações existentes em cada data, inclusive as que saíram do índice depois. O viés de sobrevivência infla os resultados do backtest em 20-50 %.
           </div>
         </div>
@@ -753,13 +763,13 @@
         <div class="quiz-question" style="margin-top:2rem">
           <p><strong>Você faz um teste walk-forward da sua estratégia: treina em 2018-2020 e testa em 2021 (passa). Treina em 2018-2021 e testa em 2022 (passa). Treina em 2018-2022 e testa em 2023 (passa). Você não modelou o slippage nem as corretagens. Deve operar essa estratégia no real?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">A) Sim: passou em todos os testes walk-forward, é uma estratégia robusta</div>
-            <div class="quiz-option" data-correct="true">B) Não: é preciso acrescentar custos realistas (0,2-0,4 % de slippage mais corretagens) e testar de novo. Se continuar lucrativa, aí sim.</div>
+            <div class="quiz-option" data-correct="true">A) Não: é preciso acrescentar custos realistas (0,2-0,4 % de slippage mais corretagens) e testar de novo. Se continuar lucrativa, aí sim.</div>
+            <div class="quiz-option" data-correct="false">B) Sim: passou em todos os testes walk-forward, é uma estratégia robusta</div>
             <div class="quiz-option" data-correct="false">C) Sim: a validação walk-forward basta, os custos pouco importam</div>
             <div class="quiz-option" data-correct="false">D) Não: são precisos pelo menos 10 períodos walk-forward para validar</div>
           </div>
-          <div class="quiz-feedback">
-            <strong>Certo!</strong> Os testes walk-forward comprovam robustez (ou seja, que não está ajustada a um único período), mas você PRECISA modelar custos realistas antes de operar no real. O slippage (0,1-0,2 % por lado = 0,2-0,4 % na ida e volta) mais as corretagens (2-5 $ por operação) podem reduzir a expectativa em 30-60 %. Uma estratégia com expectativa de 2,5R sem custos pode cair para 1,2R com eles: ainda lucrativa, mas por pouco. O caso do Chris lá em cima é exatamente esse fracasso: um backtest de 1,3R que saiu a -0,45R no real assim que os custos ficaram reais. Acrescente os custos POR ÚLTIMO (depois do walk-forward); se a expectativa ficar acima de 1,5R e o acerto acima de 45 %, opere no real. Nunca pule a modelagem de custos: é a diferença entre o lucro e a dor.
+          <div class="quiz-explanation">
+            <strong>Certo!</strong> Os testes walk-forward provam robustez (não sobreajuste a um único período), mas TEM de modelar custos realistas antes de negociar ao vivo. O slippage (0,1-0,2% por lado = 0,2-0,4% ida e volta) mais as comissões (2-5 $ por operação) podem reduzir a esperança em 30-60%. Uma estratégia com 2,5R de esperança sem custos pode cair para 1,2R com custos &mdash; ainda rentável, mas por pouco. O caso do Chris acima é exatamente esta falha: um backtest de 1,3R que saiu a -0,45R ao vivo assim que os custos passaram a ser reais. Acrescente os custos NO FIM (depois do walk-forward) e, se a esperança se mantiver &gt;1,5R e o acerto &gt;45%, negoceie ao vivo. Nunca salte a modelação de custos: é a diferença entre lucro e sofrimento.
           </div>
         </div>
 
@@ -795,7 +805,7 @@
         <p><strong>Lição #33: gestão avançada de risco — os modelos profissionais</strong> — Aprenda o critério de Kelly, o dimensionamento dinâmico e os protocolos de drawdown.</p>
       </div>
 
-      <blockquote><strong>Apenas para fins educativos.</strong> Negociar envolve risco substancial de perda. Resultados passados não garantem resultados futuros.</blockquote>
+      <blockquote class="sp-disclaimer"><strong>Apenas para fins educativos.</strong> Negociar envolve risco substancial de perda. Não é aconselhamento financeiro. Resultados passados não garantem resultados futuros.</blockquote>
 
       <!-- Discussion Section -->
       <div class="discussion-section" id="discussion-section">
@@ -867,7 +877,6 @@
       </a>
     </div>
   </div>
-  <blockquote class="sp-disclaimer"><strong>Apenas para fins educativos.</strong> Negociar envolve risco substancial de perda. Não é aconselhamento financeiro. Resultados passados não garantem resultados futuros.</blockquote>
 </article>
 
 <footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Falar no Discord</a><a href="https://www.signalpilot.io/affiliates.html">Afiliados</a><a href="https://www.signalpilot.io/privacy.html">Privacidade</a><a href="https://www.signalpilot.io/terms.html">Termos</a></div></div></footer>

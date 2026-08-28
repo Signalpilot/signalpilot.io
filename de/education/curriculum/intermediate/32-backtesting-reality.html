@@ -206,7 +206,7 @@
       </details>
 
       <div class="example-block">
-        <h4>Praxisbeispiel: Wie aus einem „perfekten“ Backtest mit 1,3R Erwartung live ein Desaster mit -0,45R wurde</h4>
+        <h4>Zusammengesetztes Beispiel: wie aus einem „perfekten“ backtest mit 1,3R Erwartung live -0,45R wurden</h4>
 
         <p><strong>Hintergrund:</strong> Im März 2024 entwickelte Chris (zusammengesetztes Beispiel) nach 6 Monaten Optimierung eine Breakout-Strategie. Der Backtest sah unglaublich aus: 1,3R Erwartung, Profitfaktor 4,9, 67 % Trefferquote, getestet auf 2 Jahren SPY-Daten (2022-2023). Im April 2024 wurden 50.000 $ eingesetzt. Bis Juni 2024 lag das Konto 8.400 $ im Minus (-16,8 %). Hier die vollständige Obduktion.</p>
 
@@ -483,6 +483,16 @@
           Zum Vertiefen: Warum Backtesting-Ergebnisse wertlos sind (und was du stattdessen tun solltest) →
         </a>
       </div>
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Voraussetzungen</h4>
+        <p>Diese Lektion baut auf Konzepten auf aus:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Lektion 30: Volume Oracle</a> &mdash; Signal Pilot meistern</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Lektion 31: Portfoliokonstruktion</a> &mdash; Signal Pilot meistern</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Wenn du diese abgeschlossen hast, kann es losgehen. Andernfalls beginne zuerst mit den Grundlagenlektionen.</p>
+      </div>
 
 <h2 id="why-your-perfect-strategy-will-fail-live">Warum deine perfekte Strategie live scheitern wird</h2>
 
@@ -728,11 +738,11 @@
           <p><strong>F: Du testest eine Strategie im Backtest: 5,2R Erwartung, Sharpe 4,2, geprüft auf 25 Trades, mit EMA(47), weil dieser Wert nach dem Durchtesten von 100 Perioden am besten abschnitt. Was stimmt daran nicht?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Nichts — großartige Strategie!</div>
-            <div class="quiz-option" data-correct="true">B) Alles daran: Stichprobe zu klein, Sharpe und Erwartung zu hoch, EMA(47) ist kurvengefittet</div>
-            <div class="quiz-option" data-correct="false">C) Nur die Erwartung ist zu hoch</div>
+            <div class="quiz-option" data-correct="false">B) Nur die Erwartung ist zu hoch</div>
+            <div class="quiz-option" data-correct="true">C) Alles daran: Stichprobe zu klein, Sharpe und Erwartung zu hoch, EMA(47) ist kurvengefittet</div>
             <div class="quiz-option" data-correct="false">D) Nur die Stichprobe ist zu klein</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Richtig!</strong> Drei große Warnzeichen: (1) nur 25 Trades = statistisch bedeutungslos, (2) Sharpe 4,2 = verdächtig hoch (wahrscheinlich overfitted), (3) EMA(47) durch das Testen von 100 Perioden gefunden = an Rauschen angepasst. Diese Strategie wird live scheitern. Nötig sind: 100+ Trades, realistischer Sharpe (1,5-2,5), Standardparameter.
           </div>
         </div>
@@ -741,11 +751,11 @@
           <p><strong>Du testest eine Mean-Reversion-Strategie im Backtest auf SPY von 2010 bis 2024. Ergebnis: 2,8R Erwartung, 68 % Trefferquote, 120.000 $ Gewinn. Die Daten enthalten nur die heutigen Werte des S&P 500 (die Aktien, die heute im Index sind). Du gehst 2025 live — und scheiterst. Was ist schiefgelaufen?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Nichts — die Marktbedingungen 2025 haben sich geändert, nicht vorhersehbar</div>
-            <div class="quiz-option" data-correct="true">B) Survivorship-Bias — der Backtest ließ 30-40 % der Aktien weg, die zwischen 2010 und 2024 delistet wurden oder pleitegingen</div>
+            <div class="quiz-option" data-correct="false">B) Erwartung zu hoch — 2,8R ist für Mean Reversion unrealistisch</div>
             <div class="quiz-option" data-correct="false">C) Stichprobe zu klein — es braucht mehr als 14 Jahre Daten</div>
-            <div class="quiz-option" data-correct="false">D) Erwartung zu hoch — 2,8R ist für Mean Reversion unrealistisch</div>
+            <div class="quiz-option" data-correct="true">D) Survivorship-Bias — der Backtest ließ 30-40 % der Aktien weg, die zwischen 2010 und 2024 delistet wurden oder pleitegingen</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Richtig!</strong> Die klassische Survivorship-Falle. Auf „den heutigen Werten des S&P 500“ zu testen heißt, dass du nur die GEWINNER geprüft hast — Aktien, die 14 Jahre überlebt haben und es in den heutigen Index geschafft haben. Du hast insolvente Unternehmen, delistete Aktien und gescheiterte Geschäftsmodelle ausgeklammert (30-40 % der Gesamtzahl). Genau diese toten Aktien hätten deine Mean-Reversion-Einstiege ausgelöst und sich nie wieder erholt. Genau das macht aus der Erwartung von 1,8R im Beispiel oben in Wahrheit -0,2R. Lösung: Nutz Point-in-Time-Daten, die ALLE zum jeweiligen Datum existierenden Aktien enthalten, inklusive der später delisteten. Survivorship-Bias bläht Backtest-Ergebnisse um 20-50 % auf.
           </div>
         </div>
@@ -753,13 +763,13 @@
         <div class="quiz-question" style="margin-top:2rem">
           <p><strong>Du machst einen Walk-Forward-Test: Training 2018-2020, Test 2021 (bestanden). Training 2018-2021, Test 2022 (bestanden). Training 2018-2022, Test 2023 (bestanden). slippage und Kommissionen hast du nicht modelliert. Solltest du die Strategie live handeln?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">A) Ja — alle Walk-Forward-Tests bestanden, robuste Strategie</div>
-            <div class="quiz-option" data-correct="true">B) Nein — erst realistische Kosten ansetzen (0,2-0,4 % slippage plus Kommissionen) und erneut testen. Bleibt sie profitabel, dann ja.</div>
+            <div class="quiz-option" data-correct="true">A) Nein — erst realistische Kosten ansetzen (0,2-0,4 % slippage plus Kommissionen) und erneut testen. Bleibt sie profitabel, dann ja.</div>
+            <div class="quiz-option" data-correct="false">B) Ja — alle Walk-Forward-Tests bestanden, robuste Strategie</div>
             <div class="quiz-option" data-correct="false">C) Ja — die Walk-Forward-Validierung reicht, Kosten fallen kaum ins Gewicht</div>
             <div class="quiz-option" data-correct="false">D) Nein — für eine Validierung braucht es mindestens 10 Walk-Forward-Perioden</div>
           </div>
-          <div class="quiz-feedback">
-            <strong>Richtig!</strong> Walk-Forward-Tests belegen Robustheit (also keine Anpassung an einen einzigen Zeitraum), aber du MUSST realistische Kosten modellieren, bevor du live gehst. slippage (0,1-0,2 % je Seite = 0,2-0,4 % hin und zurück) plus Kommissionen (2-5 $ pro Trade) können die Erwartung um 30-60 % drücken. Eine Strategie mit 2,5R Erwartung ohne Kosten landet mit Kosten vielleicht bei 1,2R — noch profitabel, aber knapp. Chris' Fall oben ist genau dieses Scheitern: ein Backtest mit 1,3R, der live bei -0,45R ankam, sobald die Kosten echt waren. Setz die Kosten ZULETZT an (nach dem Walk-Forward); bleibt die Erwartung dann über 1,5R und die Trefferquote über 45 %, handle sie live. Überspring die Kostenmodellierung nie — sie ist der Unterschied zwischen Gewinn und Schmerz.
+          <div class="quiz-explanation">
+            <strong>Richtig!</strong> Walk-Forward-Tests belegen Robustheit (kein Overfitting auf einen einzelnen Zeitraum), aber du MUSST realistische Kosten modellieren, bevor du live gehst. Slippage (0,1-0,2 % je Seite = 0,2-0,4 % hin und zurück) plus Kommissionen (2-5 $ pro Trade) können die Erwartung um 30-60 % senken. Eine Strategie mit 2,5R Erwartung ohne Kosten kann mit Kosten auf 1,2R fallen &mdash; noch profitabel, aber knapp. Chris' Fall oben ist genau dieses Versagen: ein backtest mit 1,3R, der live bei -0,45R ankam, sobald die Kosten echt waren. Rechne die Kosten ZULETZT ein (nach dem Walk-Forward); bleibt die Erwartung dann &gt;1,5R und die Trefferquote &gt;45 %, handle sie live. Überspringe die Kostenmodellierung nie &mdash; sie ist der Unterschied zwischen Gewinn und Schmerz.
           </div>
         </div>
 
@@ -795,7 +805,7 @@
         <p><strong>Lektion #33: Fortgeschrittenes Risikomanagement — professionelle Regelwerke</strong> — Lerne das Kelly-Kriterium, dynamische Positionsgrößen und drawdown-Protokolle.</p>
       </div>
 
-      <blockquote><strong>Nur zu Bildungszwecken.</strong> Der Handel ist mit erheblichem Verlustrisiko verbunden. Vergangene Wertentwicklung ist keine Garantie für zukünftige Ergebnisse.</blockquote>
+      <blockquote class="sp-disclaimer"><strong>Nur zu Bildungszwecken.</strong> Der Handel ist mit erheblichem Verlustrisiko verbunden. Keine Finanzberatung. Vergangene Wertentwicklung ist keine Garantie für zukünftige Ergebnisse.</blockquote>
 
       <!-- Discussion Section -->
       <div class="discussion-section" id="discussion-section">
@@ -867,7 +877,6 @@
       </a>
     </div>
   </div>
-  <blockquote class="sp-disclaimer"><strong>Nur zu Bildungszwecken.</strong> Der Handel ist mit erheblichem Verlustrisiko verbunden. Keine Finanzberatung. Vergangene Wertentwicklung ist keine Garantie für zukünftige Ergebnisse.</blockquote>
 </article>
 
 <footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Auf Discord diskutieren</a><a href="https://www.signalpilot.io/affiliates.html">Partnerprogramm</a><a href="https://www.signalpilot.io/privacy.html">Datenschutz</a><a href="https://www.signalpilot.io/terms.html">AGB</a></div></div></footer>

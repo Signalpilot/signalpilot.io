@@ -206,7 +206,7 @@
       </details>
 
       <div class="example-block">
-        <h4>Praktijkvoorbeeld: hoe een „perfecte” backtest met 1,3R verwachting live een ramp van -0,45R werd</h4>
+        <h4>Samengesteld voorbeeld: hoe een „perfecte” backtest met 1,3R verwachtingswaarde live -0,45R werd</h4>
 
         <p><strong>Achtergrond:</strong> In maart 2024 bouwde Chris (samengesteld voorbeeld) na 6 maanden optimaliseren een uitbraakstrategie. De backtest zag er ongelooflijk uit: 1,3R verwachting, winstfactor 4,9, 67 % winnaars, getest op 2 jaar SPY-data (2022-2023). In april 2024 ging er 50.000 $ in. In juni 2024 stond het account 8.400 $ in het rood (-16,8 %). Dit is de volledige lijkschouwing.</p>
 
@@ -483,6 +483,16 @@
           Verder lezen: waarom backtesting-resultaten waardeloos zijn (en wat je in plaats daarvan doet) →
         </a>
       </div>
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Vereisten</h4>
+        <p>Deze les bouwt voort op begrippen uit:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/30-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">Les 30: Volume Oracle</a> &mdash; Signal Pilot beheersen</li>
+            <li><a href="/education/curriculum/intermediate/31-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">Les 31: Portefeuilleconstructie</a> &mdash; Signal Pilot beheersen</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Heb je die afgerond, dan ben je klaar om te beginnen. Zo niet, start dan eerst met de basislessen.</p>
+      </div>
 
 <h2 id="why-your-perfect-strategy-will-fail-live">Waarom je perfecte strategie live gaat sneuvelen</h2>
 
@@ -728,11 +738,11 @@
           <p><strong>V: Je backtest een strategie: 5,2R verwachting, Sharpe-ratio 4,2, getest op 25 trades, met EMA(47) omdat die het beste resultaat gaf na 100 verschillende perioden te hebben geprobeerd. Wat klopt er niet?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Niets — prima strategie!</div>
-            <div class="quiz-option" data-correct="true">B) Alles: steekproef te klein, Sharpe en verwachting te hoog, EMA(47) is curve-fit</div>
-            <div class="quiz-option" data-correct="false">C) Alleen de verwachting is te hoog</div>
+            <div class="quiz-option" data-correct="false">B) Alleen de verwachting is te hoog</div>
+            <div class="quiz-option" data-correct="true">C) Alles: steekproef te klein, Sharpe en verwachting te hoog, EMA(47) is curve-fit</div>
             <div class="quiz-option" data-correct="false">D) Alleen de steekproef is te klein</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Klopt!</strong> Drie forse waarschuwingssignalen: (1) maar 25 trades = statistisch betekenisloos, (2) Sharpe 4,2 = verdacht hoog (waarschijnlijk overfit), (3) EMA(47) gevonden door 100 perioden te testen = op ruis gepast. Deze strategie gaat live sneuvelen. Nodig: meer dan 100 trades, een realistische Sharpe (1,5-2,5) en standaardparameters.
           </div>
         </div>
@@ -741,11 +751,11 @@
           <p><strong>Je backtest een mean-reversionstrategie op de SPY van 2010 tot 2024. Resultaten: 2,8R verwachting, 68 % winnaars, 120.000 $ winst. De data bevatten alleen de huidige onderdelen van de S&P 500 (de aandelen die er vandaag in zitten). Je gaat in 2025 live — en het mislukt. Wat ging er mis?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Niets — de marktomstandigheden van 2025 veranderden, niet te voorzien</div>
-            <div class="quiz-option" data-correct="true">B) Overlevingsbias — de backtest liet 30-40 % van de aandelen weg die tussen 2010 en 2024 van de beurs verdwenen of failliet gingen</div>
+            <div class="quiz-option" data-correct="false">B) Verwachting te hoog — 2,8R is onrealistisch voor mean reversion</div>
             <div class="quiz-option" data-correct="false">C) Steekproef te klein — er is meer dan 14 jaar data nodig</div>
-            <div class="quiz-option" data-correct="false">D) Verwachting te hoog — 2,8R is onrealistisch voor mean reversion</div>
+            <div class="quiz-option" data-correct="true">D) Overlevingsbias — de backtest liet 30-40 % van de aandelen weg die tussen 2010 en 2024 van de beurs verdwenen of failliet gingen</div>
           </div>
-          <div class="quiz-feedback">
+          <div class="quiz-explanation">
             <strong>Klopt!</strong> De klassieke val van de overlevingsbias. Testen op „de huidige onderdelen van de S&P 500” betekent dat je alleen de WINNAARS hebt getest: aandelen die 14 jaar overleefden en de index van vandaag haalden. Je liet failliete bedrijven, verdwenen aandelen en mislukte ondernemingen weg (30-40 % van het totaal). Juist die dode aandelen zouden je mean-reversioninstappen hebben getriggerd zonder ooit te herstellen. Dat is precies wat de verwachting van 1,8R uit het voorbeeld hierboven in werkelijkheid -0,2R maakt. Oplossing: gebruik point-in-time-data met ALLE aandelen die op elke datum bestonden, inclusief de later verdwenen namen. Overlevingsbias blaast backtestresultaten met 20-50 % op.
           </div>
         </div>
@@ -753,13 +763,13 @@
         <div class="quiz-question" style="margin-top:2rem">
           <p><strong>Je doet een walk-forwardtest van je strategie: trainen op 2018-2020, testen op 2021 (geslaagd). Trainen op 2018-2021, testen op 2022 (geslaagd). Trainen op 2018-2022, testen op 2023 (geslaagd). Je hebt slippage noch commissies gemodelleerd. Moet je deze strategie live handelen?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">A) Ja — alle walk-forwardtests geslaagd, robuuste strategie</div>
-            <div class="quiz-option" data-correct="true">B) Nee — eerst realistische kosten toevoegen (0,2-0,4 % slippage plus commissies) en opnieuw testen. Blijft ze winstgevend, dan ja.</div>
+            <div class="quiz-option" data-correct="true">A) Nee — eerst realistische kosten toevoegen (0,2-0,4 % slippage plus commissies) en opnieuw testen. Blijft ze winstgevend, dan ja.</div>
+            <div class="quiz-option" data-correct="false">B) Ja — alle walk-forwardtests geslaagd, robuuste strategie</div>
             <div class="quiz-option" data-correct="false">C) Ja — walk-forwardvalidatie volstaat, kosten wegen nauwelijks</div>
             <div class="quiz-option" data-correct="false">D) Nee — er zijn minstens 10 walk-forwardperioden nodig om te valideren</div>
           </div>
-          <div class="quiz-feedback">
-            <strong>Klopt!</strong> Walk-forwardtests bewijzen robuustheid (dus geen aanpassing aan één enkele periode), maar je MOET realistische kosten modelleren voordat je live gaat. Slippage (0,1-0,2 % per kant = 0,2-0,4 % heen en terug) plus commissies (2-5 $ per trade) kunnen de verwachting met 30-60 % drukken. Een strategie met 2,5R verwachting zonder kosten komt met kosten misschien op 1,2R uit — nog winstgevend, maar net. Het geval van Chris hierboven is precies dit falen: een backtest van 1,3R die live op -0,45R uitkwam zodra de kosten echt waren. Zet de kosten er ALS LAATSTE bij (na de walk-forward); blijft de verwachting boven 1,5R en het aandeel winnaars boven 45 %, handel hem dan live. Sla het modelleren van kosten nooit over — dat is het verschil tussen winst en pijn.
+          <div class="quiz-explanation">
+            <strong>Klopt!</strong> Walk-forwardtests tonen robuustheid aan (geen overfitting op één periode), maar je MOET realistische kosten modelleren voordat je live gaat. Slippage (0,1-0,2% per kant = 0,2-0,4% heen en terug) plus commissies (2-5 $ per trade) kunnen de verwachtingswaarde met 30-60% verlagen. Een strategie met 2,5R verwachtingswaarde zonder kosten kan met kosten zakken naar 1,2R &mdash; nog winstgevend, maar nipt. Chris' geval hierboven is precies deze mislukking: een backtest van 1,3R die live op -0,45R uitkwam zodra de kosten echt waren. Tel de kosten ALS LAATSTE mee (na de walk-forward); blijft de verwachtingswaarde dan &gt;1,5R en het winstpercentage &gt;45%, handel hem dan live. Sla het modelleren van kosten nooit over &mdash; het is het verschil tussen winst en pijn.
           </div>
         </div>
 
@@ -795,7 +805,7 @@
         <p><strong>Les #33: gevorderd risicobeheer — de professionele kaders</strong> — Leer het Kelly-criterium, dynamische positiegrootte en drawdown-protocollen.</p>
       </div>
 
-      <blockquote><strong>Uitsluitend educatief.</strong> Handelen brengt een aanzienlijk risico op verlies met zich mee. Resultaten uit het verleden bieden geen garantie voor de toekomst.</blockquote>
+      <blockquote class="sp-disclaimer"><strong>Uitsluitend educatief.</strong> Handelen brengt een aanzienlijk risico op verlies met zich mee. Dit is geen financieel advies. Resultaten uit het verleden bieden geen garantie voor de toekomst.</blockquote>
 
       <!-- Discussion Section -->
       <div class="discussion-section" id="discussion-section">
@@ -867,7 +877,6 @@
       </a>
     </div>
   </div>
-  <blockquote class="sp-disclaimer"><strong>Uitsluitend educatief.</strong> Handelen brengt een aanzienlijk risico op verlies met zich mee. Dit is geen financieel advies. Resultaten uit het verleden bieden geen garantie voor de toekomst.</blockquote>
 </article>
 
 <footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Bespreken op Discord</a><a href="https://www.signalpilot.io/affiliates.html">Affiliates</a><a href="https://www.signalpilot.io/privacy.html">Privacy</a><a href="https://www.signalpilot.io/terms.html">Voorwaarden</a></div></div></footer>
