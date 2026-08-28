@@ -16,7 +16,8 @@ import re, sys, glob, os
 Q = re.compile(r'<div class="quiz-question".*?(?=<div class="quiz-question"|</section|</article)', re.S)
 OPT = re.compile(r'<div class="quiz-option"([^>]*)>(.*?)</div>', re.S)
 EXP = re.compile(r'<div class="quiz-explanation">(.*?)</div>', re.S)
-LETTER = re.compile(r'Correct:\s*([A-Z])\b')
+# Two phrasings are used: "Correct: C." and "Why C is correct:".
+LETTER = re.compile(r'Correct:\s*([A-Z])\b|\bWhy\s+([A-Z])\s+is\s+correct\b')
 OPT_LETTER = re.compile(r'^\s*([A-Z])\)')
 NUM = re.compile(r'\d[\d,.]*')
 BANNED = re.compile(r'(?i)studies show|research shows|statistics show|% of (?:retail |day )?traders|'
@@ -46,7 +47,11 @@ def check(path):
         text = strip(body)
         # 2. letter agreement
         correct = [OPT_LETTER.match(strip(t)) for a, t in OPT.findall(block) if 'data-correct="true"' in a]
-        named = LETTER.search(text)
+        nm = LETTER.search(text)
+        named = None
+        if nm:
+            g = nm.group(1) or nm.group(2)
+            named = type('M', (), {'group': staticmethod(lambda i=0, v=g: v)})()
         if named:
             if not correct:
                 issues.append((qi, 'NO-KEY', f'explanation says "{named.group(1)}" but no option is data-correct="true"'))
