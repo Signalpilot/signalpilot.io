@@ -15,9 +15,14 @@ ROOT = 'education/curriculum'
 FILES = sorted(glob.glob(f'{ROOT}/*/*.html'))
 
 def txt(h):
-    """Visible text only - strip script/style, then tags."""
+    """Visible text only - strip script/style, then tags.
+
+    A tag name must start with a letter, /, ! or ? -- otherwise a raw '<' in a
+    code block ("DIX < 35%") makes a naive <[^>]+> swallow everything up to the
+    next '>', silently hiding real prose from every text check below.
+    """
     h = re.sub(r'(?is)<(script|style)\b.*?</\1>', ' ', h)
-    return re.sub(r'<[^>]+>', ' ', h)
+    return re.sub(r'<[a-zA-Z!/?][^>]*>', ' ', h)
 
 # ---- Tier 1 -----------------------------------------------------------------
 FLATTERY = re.compile(
@@ -82,7 +87,18 @@ OBJECTIVES = re.compile(r'(?i)what you\'?ll (?:learn|master|gain)|learning objec
 TAKEAWAY = re.compile(r'(?i)key-takeaway|key takeaway')
 ACTION = re.compile(r'(?i)action step|this week|exercise|practice')
 INDICATOR = re.compile(r'Janus|Atlas|Plutus|Pentarch|Omnideck|Augury|'
-                       r'Volume Oracle|Pilot Line')
+                       r'Volume Oracle|Pilot Line|Volume Zones|Harmonic Oscillator|'
+                       r'Order Flow Toolkit')
+# Only a lesson that DECLARES indicators in index.json owes the reader a bridge to
+# one. Forcing a product mention into the tax or infrastructure lesson would be
+# crowbarring, not quality.
+_IDX = {e['href'].lstrip('/'): e
+        for e in json.load(open(f'{ROOT}/index.json', encoding='utf-8'))}
+
+
+def declares_indicator(path):
+    e = _IDX.get(path)
+    return bool(e and e.get('spIndicators'))
 Q_QUESTION = re.compile(r'class="quiz-question"')
 Q_EXPLAIN = re.compile(r'class="quiz-explanation"')
 
@@ -136,7 +152,7 @@ def score(path):
         't3_no_objectives':  int(not OBJECTIVES.search(t)),
         't3_no_takeaway':    int(not TAKEAWAY.search(h)),
         't3_no_action':      int(not ACTION.search(t)),
-        't3_no_indicator':   int(not INDICATOR.search(t)),
+        't3_no_indicator':   int(declares_indicator(path) and not INDICATOR.search(t)),
         # a lesson with only <details> self-assessment questions still has a quiz
         't3_no_quiz':        int(nany == 0),
         't3_quiz_gap':       max(0, nq - nx),
