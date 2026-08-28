@@ -77,8 +77,8 @@ SMALL_SHARPE = re.compile(
 
 # ---- Tier 3 -----------------------------------------------------------------
 PREREQ = re.compile(r'(?i)prerequisite')
-OBJECTIVES = re.compile(r'(?i)what you\'?ll learn|learning objective|'
-                        r'by the end of this lesson|in this lesson you')
+OBJECTIVES = re.compile(r'(?i)what you\'?ll (?:learn|master|gain)|learning objective|'
+                        r'by the end of this lesson|in this lesson,? you')
 TAKEAWAY = re.compile(r'(?i)key-takeaway|key takeaway')
 ACTION = re.compile(r'(?i)action step|this week|exercise|practice')
 INDICATOR = re.compile(r'Janus|Atlas|Plutus|Pentarch|Omnideck|Augury|'
