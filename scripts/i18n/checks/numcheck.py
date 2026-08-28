@@ -19,16 +19,16 @@ def toks(s):
     # and the next unit up: 5億 == 500000000. Apply 億 first so a compound
     # like 5億2,000万 collapses left to right.
     def oku(m):
-        hi = int(m.group(1))
+        hi = float(re.sub(r'[,\u00a0 ]', '', m.group(1)))
         man = int(re.sub(r'[,\u00a0 ]', '', m.group(2))) if m.group(2) else 0
         lo = re.sub(r'[,\u00a0 ]', '', m.group(3) or '') or '0'
-        return str(hi*100000000 + man*10000 + int(lo))
-    s = re.sub(r'(\d+)\u5104(?:([\d,\u00a0 ]+)\u4e07)?([\d,\u00a0 ]*)', oku, s)
+        return str(round(hi*100000000 + man*10000 + int(lo)))
+    s = re.sub(r'(\d[\d,\u00a0 ]*(?:\.\d+)?)\u5104(?:([\d,\u00a0 ]+)\u4e07)?([\d,\u00a0 ]*)', oku, s)
     def myriad(m):
-        hi = int(m.group(1))
+        hi = float(re.sub(r'[,\u00a0 ]', '', m.group(1)))
         lo = re.sub(r'[,\u00a0 ]', '', m.group(2) or '') or '0'
-        return str(hi*10000 + int(lo))
-    s = re.sub(r'(\d+)\u4e07([\d,\u00a0 ]*)', myriad, s)
+        return str(round(hi*10000 + int(lo)))
+    s = re.sub(r'(\d[\d,\u00a0 ]*(?:\.\d+)?)\u4e07([\d,\u00a0 ]*)', myriad, s)
     return {re.sub(r'[.,  ]','',m.group()) for m in DIGITS.finditer(s)}
 
 def allowed(en):
@@ -50,12 +50,31 @@ def allowed(en):
             a.add(v)
         # locales spell the o'clock out: "2pm" -> "14:00" / "14.00"
         a.add('00')
+    # An ISO date "2024-03-15" is written "15.03.2024" in German and Russian,
+    # "2024.03.15." in Hungarian. Separator stripping collapses each into one
+    # run, so allow every ordering of the same three fields.
+    for y, mo, dd in re.findall(r'\b(\d{4})-(\d{2})-(\d{2})\b', en):
+        for a_, b_, c_ in ((y, mo, dd), (dd, mo, y), (mo, dd, y)):
+            a.add(f'{a_}{b_}{c_}')
+            a.add(f'{int(a_)}{int(b_)}{int(c_)}' if a_ != y else f'{a_}{int(b_)}{int(c_)}')
+    # A range shares one meridiem the way a range shares a K suffix:
+    # "1-3pm" means 13:00 to 15:00, and "9:30-11am" means 09:30 to 11:00.
+    for lo, hi, mer in re.findall(r'(\d{1,2})\s*[-\u2013]\s*(\d{1,2})\s*([ap])m', en, re.I):
+        for h in (lo, hi):
+            v = int(h) + (12 if mer.lower() == 'p' and int(h) != 12 else 0)
+            a.add(str(v)); a.add(f'{v}00')
+    # "$432.20-50" abbreviates the upper bound to its last two digits. Every
+    # locale writes it out in full, so license the expanded figure.
+    for whole, frac, hi in re.findall(r'(\d+)\.(\d{2})\s*[-\u2013]\s*(\d{2})\b', en):
+        a.add(f'{whole}{hi}')
     # A US "10/23" date is written "23.10." or "23/10" almost everywhere else,
     # and the separator stripping in toks() collapses that into one run. Both
     # orders name the same day, so allow either concatenation.
     for d1, d2 in re.findall(r'\b(\d{1,2})/(\d{1,2})\b', en):
         for x, y in ((d1, d2), (d2, d1)):
             a.add(f'{x}{y}'); a.add(f'{int(x)}{int(y)}')
+            # German and Russian zero-pad both fields: "5/15" is "15.05."
+            a.add(f'{int(x):02d}{int(y):02d}')
     # $17.3K -> 17300 ; 47K -> 47000
     # a range shares one suffix: "$3-5K" means 3,000 to 5,000
     for lo,hi in re.findall(r'(\d+(?:\.\d+)?)\s*[-\u2013]\s*(\d+(?:\.\d+)?)\s*[Kk]\b', en):
@@ -82,12 +101,27 @@ def allowed(en):
         for v in (lo, hi): a.add(str(round(float(v)*1_000_000_000)))
     for num in re.findall(r'(\d+(?:\.\d+)?)\s*B\b', en):
         a.add(str(round(float(num)*1_000_000_000)))
+    # Spanish and Portuguese have no word for a short-scale billion and write
+    # "9.000 millones"; French writes trillions as "4 000 Md$". Both are the
+    # same figure counted one scale down.
+    for lo, hi in re.findall(r'(\d+(?:\.\d+)?)\s*[-\u2013]\s*(\d+(?:\.\d+)?)\s*(?:B\b|billions?\b)', en, re.I):
+        for v in (lo, hi):
+            a.add(str(round(float(v) * 1_000)))
+            a.add(str(round(float(v) * 1_000_000_000)))
+    for num in re.findall(r'(\d+(?:\.\d+)?)\s*(?:B\b|billions?\b)', en, re.I):
+        a.add(str(round(float(num) * 1_000)))
+    for num in re.findall(r'(\d+(?:\.\d+)?)\s*(?:T\b|trillions?\b)', en, re.I):
+        a.add(str(round(float(num) * 1_000)))
+        a.add(str(round(float(num) * 1_000_000)))
+        a.add(str(round(float(num) * 1_000_000_000_000)))
     # Locales spell a bare hour as a full clock time: English "2 AM" becomes
     # Dutch "2.00 uur", German "2:00 Uhr", Italian "ore 2:00". Those tokenise
     # to "200", which no bare "2" in the source can produce. Only do this for
     # strings that actually talk about clock time, so a plain "6 contracts"
     # never licenses "600".
-    if re.search(r'\b(?:[AP]M|ET|EST|EDT)\b', en):
+    if (re.search(r'\b(?:[AaPp]\.?[Mm]|ET|EST|EDT)\b', en)
+            or re.search(r'\d\s*[ap]m\b', en, re.I)
+            or re.search(r'\b\d{1,2}:\d{2}\b', en)):
         # A range shares one meridiem: "3:50-4:00 PM" means 15:50 and 16:00.
         # Locales that write the clock with a dot ("15.50 uur") tokenise the
         # whole time as one run, which no 12-hour form in the source can produce.
@@ -140,13 +174,35 @@ def allowed(en):
     return a
 
 
+def licensed(t, ok):
+    if t in ok or (t.lstrip('0') or '0') in ok:
+        return True
+    # French, Russian and Hungarian group thousands with a space, so two
+    # numbers either side of a space fuse into one run: "15h30 450,80 $"
+    # tokenises as 3045080. Allow a run that splits cleanly into two figures
+    # the English already licenses, and only that -- one split, both halves.
+    for i in range(1, len(t)):
+        lo, hi = t[:i], t[i:]
+        if ((lo in ok or (lo.lstrip('0') or '0') in ok)
+                and (hi in ok or (hi.lstrip('0') or '0') in ok)):
+            return True
+    return False
+
+
 def run(slug, report=print):
     bad = 0
     for lang, ps in ctx.pairs(slug):
-        for k, v in ps:
-            ok = allowed(k)
+        # An inline tag can cut a sentence in half -- "the S&P 500 gained an
+        # average of" | "0.4%" | "in the 24 hours before FOMC" -- and word
+        # order moves a figure from one half to the other. Licensing the
+        # neighbouring segments keeps that from reading as an invented number.
+        for i, (k, v) in enumerate(ps):
+            ok = set()
+            for j in (i - 1, i, i + 1):
+                if 0 <= j < len(ps):
+                    ok |= allowed(ps[j][0])
             extra = {t for t in toks(v)
-                     if len(t) > 1 and t not in ok and (t.lstrip('0') or '0') not in ok}
+                     if len(t) > 1 and t.strip('0') and not licensed(t, ok)}
             if extra:
                 report(f'  {lang}: {sorted(extra)} | {k[:62]}\n         -> {v[:82]}')
                 bad += 1

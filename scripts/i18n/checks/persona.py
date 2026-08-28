@@ -45,14 +45,23 @@ HEADINGS = {'Disaster', 'Recovery', 'Result', 'Results', 'Journal', 'Account',
             # name. German capitalises every noun, so "Bot"/"Bots" appears in
             # hundreds of non-naming strings there and drowns its own n-grams.
             'Bot', 'Bots', 'Whale', 'Whales', 'Token', 'Tokens', 'Pool', 'Pools',
+            # The tape is a thing, not a person, and the lessons write
+            # "the Tape's warning signs" often enough to look like one.
+            'Tape', 'Ladder', 'Book', 'Print', 'Prints', 'Wall', 'Walls',
             'Volatility', 'Gamma', 'Vanna', 'Charm', 'Citadel', 'Friday', 'Today'}
 # Asset and instrument names take possessives too -- "Check Gold's move",
 # "the divergence resolves toward DXY's direction" -- and are never the
 # protagonist of a case study.
+# Methods named after the people who described them. They take possessives
+# ("Wyckoff's accumulation phase") but they are technical vocabulary, not the
+# protagonist of a case study, and every locale transliterates them freely.
+METHODS = {'Wyckoff', 'Fibonacci', 'Elliott', 'Gann', 'Dow', 'Kelly',
+           'Sharpe', 'Sortino', 'Bollinger', 'Keltner', 'Donchian',
+           'Markowitz', 'Black', 'Scholes', 'Merton', 'Ichimoku'}
 ASSETS = {'Gold', 'Oil', 'Bitcoin', 'Crypto', 'Nasdaq', 'Dollar', 'Bonds',
           'Bond', 'Yields', 'Yield', 'Equities', 'Futures', 'Treasury',
           'Treasuries', 'Copper', 'Silver', 'Energy', 'Tech'}
-HEADINGS |= ASSETS
+HEADINGS |= ASSETS | METHODS
 PRODUCTS |= CALENDAR | HEADINGS
 PRODUCTS |= CONTRACTIONS
 def analyse(SRC):
@@ -149,7 +158,12 @@ def run(slug, report=print):
             others = [k for k in keys if k not in named]
             if len(named) < 2:
                 continue
-            shortest = min((d[k] for k in named), key=len)
+            # Draw candidate grams from the several shortest naming
+            # strings, not just the shortest one. An inline tag can split
+            # a heading into a bare "Mark's", whose translation is two
+            # letters long and contains no name at all -- and every gram
+            # the check would test then comes from that fragment.
+            short = sorted((d[k] for k in named), key=len)[:5]
             # A short name can hide inside an unrelated word -- Arabic "نينا"
             # sits in "تهانينا" (congratulations) -- so allow a little
             # background noise rather than demanding the n-gram be unique to
@@ -168,13 +182,24 @@ def run(slug, report=print):
                     hit = sum(m(d[k]) for k in named)
                     if hit < max(2, len(named) * 0.4):
                         continue
+                    other = sum(m(d[k]) for k in others)
                     allow = noise if hit < len(named) else max(noise, len(others) * 0.05)
-                    if sum(m(d[k]) for k in others) <= allow:
+                    if other <= allow:
+                        out.append(m)
+                        continue
+                    # A whole page carries words that contain the name by
+                    # accident -- Spanish "Market" contains "Mark" -- and with
+                    # every string in scope those swamp a fixed allowance. A
+                    # gram that names nearly every case-study string and is
+                    # three times rarer elsewhere is still the name.
+                    if (hit / len(named) >= 0.9
+                            and other / max(1, len(others)) <= hit / len(named) / 3):
                         out.append(m)
                 return out
 
             def keepers(lo):
-                return survivors([(lambda t, g=g: g in t) for g in grams(shortest, lo=lo)])
+                gs = set().union(*(grams(t, lo=lo) for t in short))
+                return survivors([(lambda t, g=g: g in t) for g in gs])
 
             # Arabic writes Sarah as سارة, which sits inside خسارة (loss) -- a
             # word a trading lesson uses on every other line, so every n-gram of
@@ -182,7 +207,7 @@ def run(slug, report=print):
             # rescues it, at the cost of the inflection tolerance n-grams buy,
             # so only try it last.
             def keepers_word():
-                runs = {r for r in LETTERS.findall(shortest) if len(r) > 2}
+                runs = {r for t in short for r in LETTERS.findall(t) if len(r) > 2}
                 return survivors([(lambda t, r=r: bool(re.search(rf'(?<!\w){re.escape(r)}(?!\w)', t)))
                                   for r in runs])
 
@@ -198,6 +223,13 @@ def run(slug, report=print):
                 bad_total += 1
                 continue
             for k in named:
+                # An inline tag can cut a sentence just after the possessive,
+                # leaving a segment that is nothing but "Mark's ". Word order
+                # moves the name into the next segment -- Spanish renders the
+                # pair as "El 55 % de acierto de Mark" -- so the fragment's own
+                # translation is an article and carries no name by design.
+                if len(d[k]) < 12:
+                    continue
                 if not any(m(d[k]) for m in keep):
                     hits.append((p, k, d[k]))
         # A foreign persona's surname can also be an ordinary noun in the
