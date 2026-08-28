@@ -36,7 +36,7 @@ OK_DOUBLES = {
     'ar': {'سوق سوق'},
     # Hungarian forms "one X after another" by repeating the noun:
     # "ügylet ügylet után" is trade after trade, not a stutter.
-    'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés', 'melyik melyik', 'felállás felállás'},
+    'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés', 'melyik melyik', 'felállás felállás', 'kitörés kitörés'},
 }
 
 
