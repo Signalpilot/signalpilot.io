@@ -34,7 +34,9 @@ VAGUE = re.compile(r'(?i)\b(?:studies show|research shows|research suggests|'
 # does exactly that with the "90% of traders lose 90% in 90 days" myth, and the
 # check must not push an author into deleting the debunking.
 DEBUNK = re.compile(r'(?i)no source|never been produced|nobody has ever|is a myth|'
-                    r'made up|no study|unsourced|invented|has no basis')
+                    r'made up|no study|unsourced|invented|has no basis|'
+                    r'statistically insignificant|too small|red flag|not yet worth|'
+                    r'is noise|suspiciously high|what.s wrong|red flags')
 
 
 def debunked(text, m, window=260):
@@ -51,13 +53,17 @@ DISC_WORDS = re.compile(r'(?i)not financial advice|educational purposes|'
                         r'does not guarantee|no representation')
 
 # ---- Tier 2 -----------------------------------------------------------------
-AVG_R = re.compile(r'(?i)average r-multiple|\bavg\.? r\b|\baverage r\b')
+# "Avg R:R" is correctly named -- it IS the payoff ratio. Only a bare "avg R" /
+# "average R-multiple" is ambiguous between expectancy and the ratio.
+AVG_R = re.compile(r'(?i)average r-multiple|\bavg\.? r\b(?!\s*:)|\baverage r\b(?!\s*:)')
 PAYOFF = re.compile(r'(?i)payoff ratio')
 SHARPE = re.compile(r'(?i)sharpe')
 # Sharpe quoted next to a sample under 100
+# Must not span two checklist items ("rolling 3-month Sharpe" then "last 50
+# trades" are separate lines), so the window may not cross a checkbox or bullet.
 SMALL_SHARPE = re.compile(
-    r'(?i)sharpe[^.]{0,80}?\b([1-9]\d?)\s*(?:trades|setups|examples)'
-    r'|\b([1-9]\d?)\s*(?:trades|setups|examples)[^.]{0,80}?sharpe')
+    r'(?i)sharpe[^.\u2610\u2611\u2022\n]{0,80}?\b([1-9]\d?)\s*(?:trades|setups|examples)'
+    r'|\b([1-9]\d?)\s*(?:trades|setups|examples)[^.\u2610\u2611\u2022\n]{0,80}?sharpe')
 
 # ---- Tier 3 -----------------------------------------------------------------
 PREREQ = re.compile(r'(?i)prerequisite')
@@ -88,10 +94,19 @@ def score(path):
         't1_no_disclaimer':   int(not DISC_COMPONENT.search(h) and not DISC_WORDS.search(t)),
         't1_nonstd_disclaimer': int(not DISC_COMPONENT.search(h) and bool(DISC_WORDS.search(t))),
         # tier 2
-        't2_avg_r':     len(AVG_R.findall(t)),
+        't2_avg_r':     len([m for m in AVG_R.finditer(t)
+                             # sibling metrics in a list ("expectancy, avg R"),
+                             # not a definition ("expectancy: average R-multiple")
+                             if re.search(r'(?i)expectancy\s*(?:in R\s*)?,\s*(?:and\s+)?$',
+                                          t[max(0, m.start()-70):m.start()])
+                             or re.search(r'(?i)^[^.]{0,40}(?:target|>|&gt;|below|under)\s*[0-9]',
+                                          t[m.end():m.end()+60])]),
         't2_payoff':    len(PAYOFF.findall(t)),
+        # A lesson may quote a small-sample Sharpe in order to call it a red
+        # flag -- lesson 32's quiz does exactly that.
         't2_small_sharpe': len([m for m in SMALL_SHARPE.finditer(t)
-                                if any(g and int(g) < 100 for g in m.groups())]),
+                                if any(g and int(g) < 100 for g in m.groups())
+                                and not debunked(t, m, 420)]),
         # tier 3
         't3_no_prereq':      int(not PREREQ.search(t)),
         't3_no_objectives':  int(not OBJECTIVES.search(t)),
