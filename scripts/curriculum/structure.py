@@ -11,7 +11,8 @@ explained.
 This checks the reading order instead, against one rule: a reader should meet
 the idea before they meet a demonstration of it or an instruction based on it.
 
-  hook          a few sentences of motivation                     fine, expected
+  hook          a few sentences of motivation, under or above the <h1>
+                                                                  fine, expected
   objectives    what the lesson will do                           fine
   prerequisites what to read first                                fine
   teaching      enough explanation to have met the idea           <- the anchor
@@ -36,6 +37,10 @@ experiences, and because every naive shortcut here produces a wrong answer:
 
 * "This week" is an action-steps heading and also an ordinary sentence
   ("This week? Five losing trades in a row."). Only the heading counts.
+
+* The article is not the same as div.prose. Lessons 46 and 47 keep their
+  objectives AND their Quick Wins block inside <header>, above that div, so
+  splitting there hid an action block sitting at the very top of the lesson.
 
 * Lessons teach in whatever container the author reached for. Lesson 62 puts
   all four career stages inside <pre> blocks; counting only <p> and <li> made
@@ -65,6 +70,7 @@ PREREQ = re.compile(r'(?i)prerequisite')
 # when its heading is a headline ("From $50K to $214K: The System That Worked").
 COMPOSITE = re.compile(r'(?i)composite example|case study')
 
+H1 = re.compile(r'(?is)<h1\b')
 HEADING = re.compile(
     r'(?is)<h[1-4]\b[^>]*>(.*?)</h[1-4]>'
     r'|<summary\b[^>]*>(.*?)</summary>'
@@ -94,9 +100,14 @@ def sections(body):
         end = marks[i + 1][0] if i + 1 < len(marks) else len(body)
         spans.append((pos, label, end))
     out = []
-    for pos, label, end in spans:
+    for idx, (pos, label, end) in enumerate(spans):
         head = txt(body[pos:pos + COMPOSITE_HEAD * 3])[:COMPOSITE_HEAD]
-        if PREREQ.search(label):
+        # The hook is motivation, not teaching, and it lives in two places: before
+        # the first heading, and under the <h1> itself. Counting it as teaching
+        # let an action block sitting at the very top of lessons 46 and 47 pass.
+        if idx == 0 or H1.match(body[pos:pos + 4]):
+            kind = 'hook'
+        elif PREREQ.search(label):
             kind = 'prereq'
         elif OBJ.search(label):
             kind = 'obj'
@@ -110,8 +121,21 @@ def sections(body):
     return out
 
 
+def article(raw):
+    """Everything from the headline down.
+
+    Splitting on <div class="prose"> looked equivalent and was not: lessons 46
+    and 47 keep their objectives AND their Quick Wins block inside <header>,
+    above that div, so the checker could not see an action block sitting at the
+    very top of the lesson. Anchor on the headline instead, which every lesson
+    has, and the whole article is in scope.
+    """
+    m = re.search(r'<h1 class="headline', raw)
+    return raw[m.start():] if m else raw.split('<div class="prose">', 1)[-1]
+
+
 def profile(path):
-    body = open(path, encoding='utf-8').read().split('<div class="prose">', 1)[-1]
+    body = article(open(path, encoding='utf-8').read())
     n = len(body) or 1
     secs = sections(body)
 
