@@ -21,14 +21,14 @@
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
   <title>Je indicatoren liegen tegen je (het repaintprobleem) — Signal Pilot Education</title>
-  <meta name="description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta name="description" content="A repainting indicator shows perfect signals in backtest that never existed in real time. Learn the detection methods and why deterministic code matters.">
   <meta name="theme-color" content="#05070d">
   <link rel="canonical" href="https://www.signalpilot.io/nl/education/curriculum/beginner/04-repaint-problem.html">
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.signalpilot.io/education/curriculum/beginner/04-repaint-problem.html">
   <meta property="og:title" content="Your Indicators Are Lying to You (The Repaint Problem) — Signal Pilot Education">
-  <meta property="og:description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta property="og:description" content="A repainting indicator shows perfect signals in backtest that never existed in real time. Learn the detection methods and why deterministic code matters.">
   <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.signalpilot.io/education/curriculum/beginner/04-repaint-problem.html">
   <meta name="twitter:title" content="Your Indicators Are Lying to You (The Repaint Problem) — Signal Pilot Education">
-  <meta name="twitter:description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta name="twitter:description" content="A repainting indicator shows perfect signals in backtest that never existed in real time. Learn the detection methods and why deterministic code matters.">
   <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
   <link rel="prev" href="https://www.signalpilot.io/education/curriculum/beginner/03-price-action-is-dead.html"/>
   <link rel="next" href="https://www.signalpilot.io/education/curriculum/beginner/05-rsi-extremes.html"/>
@@ -146,9 +146,9 @@
         <p style="margin:0 0 0.75rem 0">Aan het eind van deze les kun je:</p>
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Indicatoren testen op repainten (screenshot van het signaal vóór de sluiting van de candle, daarna controleren)</li>
-          <li>Herkennen welke TradingView-indicatoren hertekenen (60 tot 90 % van de particuliere indicatoren doet dat)</li>
+          <li>De indicatorcategorieën herkennen die het vaakst repainten, en waarom elk dat doet</li>
           <li>Alleen gereedschap gebruiken dat niet hertekent (geen enkele SignalPilot-indicator doet dat)</li>
-          <li>Twee tot vier weken walk-forward testen op live data voordat je een indicator vertrouwt</li>
+          <li>Een indicator op vier manieren controleren &mdash; live meekijken, Bar Replay, alerts en de broncode &mdash; voordat hij echt geld aanraakt</li>
         </ul>
       </div>
 
@@ -192,7 +192,7 @@
   </div>
 
   <p><strong>Trader:</strong> Jake Morrison (samengesteld voorbeeld), 26, voormalig marketinganalist (account van $32.000)</p>
-  <p><strong>Strategie:</strong> TradingView-indicator „Ultimate Reversal Pro” (47.000 downloads, 4,8 ★)</p>
+  <p><strong>Strategie:</strong> een populaire gratis omkeerindicator uit de openbare TradingView-bibliotheek</p>
   <p><strong>Fatale fout:</strong> De indicator hertekende: signalen veranderden of verdwenen na de sluiting van de candle</p>
 
   <details style="margin:1rem 0;background:rgba(0,0,0,0.2);border-radius:8px">
@@ -201,17 +201,17 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.5rem">
         <div style="background:rgba(139,92,246,0.1);padding:1rem;border-radius:8px">
           <div style="font-weight:600;margin-bottom:0.5rem;color:#a78bfa">Backtest (januari 2024)</div>
-          <div style="font-size:0.9rem">71,4 % trefferpercentage</div>
-          <div style="font-size:0.9rem">profitfactor 3,2</div>
-          <div style="font-size:0.9rem">3.8:1 R:R</div>
-          <div style="font-size:0.9rem">+247 % rendement</div>
+          <div style="font-size:0.9rem">trefkans in de zeventig</div>
+          <div style="font-size:0.9rem">profit factor boven 3</div>
+          <div style="font-size:0.9rem">een gladde equitycurve</div>
+          <div style="font-size:0.9rem">bijna geen verliesreeksen</div>
         </div>
         <div style="background:rgba(255,82,82,0.1);padding:1rem;border-radius:8px">
           <div style="font-weight:600;margin-bottom:0.5rem;color:#ff5252">Live (februari-april 2024)</div>
-          <div style="font-size:0.9rem">34,2 % trefferpercentage</div>
-          <div style="font-size:0.9rem">profitfactor 0,58</div>
-          <div style="font-size:0.9rem">0.92:1 R:R</div>
-          <div style="font-size:0.9rem">-45,9 % rendement</div>
+          <div style="font-size:0.9rem">trefkans in de dertig</div>
+          <div style="font-size:0.9rem">profit factor onder 1</div>
+          <div style="font-size:0.9rem">verlies vanaf de eerste week</div>
+          <div style="font-size:0.9rem">dezelfde regels, dezelfde markt</div>
         </div>
       </div>
     </div>
@@ -227,15 +227,15 @@
 
   <p><strong>Het onderzoek:</strong> 43 van de 47 signalen waren verschoven (repaintpercentage van 91,5 %). Een controle van de code vond <code>request.security()</code> zonder <code>lookahead=barmerge.lookahead_off</code>.</p>
 
-  <p><strong>Herstel (mei-augustus 2024):</strong> Overgestapt op deterministische indicatoren. 90 trades, 58,9 % trefferpercentage, $12.820 winst. Account: $17.300 → $30.100 (+74,1 %).</p>
+  <p><strong>Herstel:</strong> Jake stapte over op indicatoren waarvan de signalen niet verschuiven en draaide dezelfde strategie opnieuw. Wat telt is niet wat hij daarna verdiende &mdash; de cijfers van één samengesteld voorbeeld bewijzen hoe dan ook niets. Wat telt is dat zijn live resultaat en zijn backtest eindelijk hetzelfde systeem beschreven.</p>
 
   <p style="margin-top:1rem;padding:1rem;background:rgba(139,92,246,.08);border-radius:8px;border-left:4px solid #8b5cf6">
-    <strong>Jakes advies:</strong> „Ik verloor $14.700 met het handelen in spoken — signalen die VERSCHOVEN na de sluiting van de candle. Test ELKE indicator: screenshot live, vergelijk na de sluiting. Ziet een backtest er TE perfect uit (meer dan 70 % treffers, <10 % DD), dan hertekent hij waarschijnlijk. Echte voorsprongen leveren 55-65 % treffers op. Vertrouw NOOIT, controleer ALTIJD.”
+    <strong>Jakes advies:</strong> „Ik verloor $14.700 aan het verhandelen van spoken &mdash; signalen die VERSCHOVEN na het sluiten van de candle. Test ELKE indicator: screenshot live, vergelijk na de close. Als de backtest een hoge trefkans heeft en bijna geen drawdown, is dat juist het teken. Vertrouw NOOIT, verifieer ALTIJD.”
   </p>
 </div>
 
       <div class="quiz-question" style="margin-top:2rem">
-        <p><strong>Casusvraag: Jake deed een backtest van de indicator „Ultimate Reversal Pro” en kreeg schitterende cijfers: 71,4 % treffers, profitfactor 3,2, +247 % rendement. Hij ging live met $32.000 en verloor in tien weken $14.700 (-45,9 %), met slechts 34,2 % treffers. Wat was zijn fatale fout?</strong></p>
+        <p><strong>Casusvraag: Jake backtestte een openbare omkeerindicator en kreeg een vrijwel vlekkeloos resultaat &mdash; een hoge trefkans, een diepe profit factor en nauwelijks een verliesreeks in de curve. Live verloren dezelfde regels met $32K in 10 weken $14.700. Wat was zijn fatale fout?</strong></p>
         <div class="quiz-options">
           <div class="quiz-option" data-correct="false">
             A) Hij had kleinere posities moeten nemen om het risico te beperken
@@ -251,7 +251,7 @@
           </div>
         </div>
         <div class="quiz-explanation">
-          <p><strong>Correct: D.</strong> Jakes indicator liet 71,4% winnende trades zien in de backtest, maar 91,5% van de signalen verschoof of verdween na het sluiten van de candle. Hij handelde in „spoken”: entries die er alleen perfect uitzagen omdat ze hertekenden. Oplossing: test live signalen met screenshots. Ziet een backtest er te perfect uit (&gt;70% winnaars), dan hertekent hij waarschijnlijk. Echte edges leveren winstpercentages van 55-65% op.</p>
+          <p><strong>Correct: D.</strong> De backtest vleide omdat 43 van Jakes 47 signalen verschoven of verdwenen nadat hun candle sloot. Hij verhandelde spoken: entries die er alleen perfect uitzagen omdat ze waren verplaatst toen de afloop al bekend was. Het middel is de screenshottest. En let op wat het teken is &mdash; niet een hoge trefkans op zich, maar een curve zonder enige pijn.</p>
         </div>
       </div>
 
@@ -300,9 +300,9 @@
 
       <p>Zo ziet repainten eruit als je het betrapt:</p>
 
-      <p>Eentje heb je al gezien: Jakes drie gecontroleerde signalen hierboven, allemaal uit „Ultimate Reversal Pro”. Hetzelfde gebeurt in hele categorieën indicatoren, en het ziet er niet altijd uit als een verschuivende pijl. Hier zijn twee andere vormen die het aanneemt.</p>
+      <p>Je hebt er al een gezien: Jakes drie gecontroleerde signalen hierboven. Hetzelfde gebeurt in hele categorieën indicatoren, en het ziet er niet altijd uit als een verschuivende pijl. Hier zijn twee andere vormen die het aanneemt. Beide worden per categorie beschreven en niet per productnaam, omdat het om het mechanisme gaat &mdash; en omdat geen enkele indicator op iemands woord van repainten beschuldigd hoort te worden, ook niet op het onze. Doe de test zelf.</p>
 
-      <p><strong>Voorbeeld 1: indicator „AI Prediction Zones” (TradingView, 85.000 downloads)</strong></p>
+      <p><strong>Voorbeeld 1: een indicator met dynamische steun-/weerstandszones</strong></p>
 
       <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code><strong>12.04 uur (tijdens de candle):</strong>
 Toont een „steunzone” op SPY $519,00-$519,50 (groen gearceerd vak)
@@ -319,7 +319,7 @@ $0,80 per aandeel verlies op 500 aandelen = -$400
 De indicator legt de steun nu op $518,20, waar hij „had moeten liggen”
 → Zo lijkt de indicator perfect in de historie en is hij live waardeloos</code></pre>
 
-      <p><strong>Voorbeeld 2: indicator „Smart Money Divergence” (betaald, $199)</strong></p>
+      <p><strong>Voorbeeld 2: een divergentie-indicator</strong></p>
 
       <div style="padding:1rem;background:rgba(255,82,82,0.08);border-radius:8px;border-left:4px solid #ff5252;margin:1.5rem 0">
         <p><strong>Livesignaal (13.30 uur):</strong> „BULLISH DIVERGENTIE GEVONDEN — lagere bodem in de prijs, hogere bodem in de indicator”</p>
@@ -389,7 +389,7 @@ De indicator legt de steun nu op $518,20, waar hij „had moeten liggen”
       </div>
 
       <p style="padding:1rem;background:rgba(255,82,82,0.08);border-radius:8px;border-left:4px solid #ff5252;margin:1.5rem 0">
-        <strong>Waarschuwingssignaal:</strong> Als de backtest van een indicator meer dan 75 % treffers laat zien met <10 % drawdown, dan hertekent hij vrijwel zeker. Echte, eerlijke voorsprongen leveren 55-65 % treffers op met realistische drawdowns (15-30 %). Perfectie in een backtest is fraude in de praktijk.
+        <strong>Waarschuwingssignaal:</strong> Een backtest met een zeer hoge trefkans en bijna geen drawdown is veel vaker een repaintende indicator dan een echte edge. Let op wat het waarschuwingssignaal níét is: een lage trefkans. Een eerlijke edge kan een derde van zijn trades winnen en toch geld verdienen, als de winnaars groot genoeg zijn. Wat je wantrouwig moet maken is een curve zonder enige pijn.
       </p>
 
 <h3 id="bar-replay-walkthrough">Repainten opsporen met Bar Replay, stap voor stap</h3>
@@ -408,7 +408,7 @@ De indicator legt de steun nu op $518,20, waar hij „had moeten liggen”
         <li><strong>Zoek naar verschillen:</strong> Staan de signalen op dezelfde plek? Of zijn ze verschoven?</li>
       </ol>
 
-      <p><strong>Voorbeeld van uitkomsten (Bar Replay op „Ultimate Reversal Pro”):</strong></p>
+      <p><strong>Voorbeeld van testresultaten (Bar Replay op een omkeerindicator):</strong></p>
 
       <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code><strong>Replaymodus (candle voor candle vooruit):</strong>
 10.15 uur: geen signaal
@@ -479,7 +479,7 @@ pivot_high = ta.pivothigh(high, 5, 5)  // kijkt vijf candles terug en vijf candl
       <div class="key-takeaway">
         <h4>🎓 De kern</h4>
         <ul>
-          <li><strong>60 tot 90 % van de indicatoren hertekent</strong> — test alles voordat je ermee handelt</li>
+          <li><strong>Repainten komt veel voor in de openbare bibliotheek</strong> &mdash; test alles voordat je het verhandelt</li>
           <li><strong>Repainten = schijnvoorsprong</strong> — perfecte backtests, rampzalige resultaten in de praktijk</li>
           <li><strong>Gebruik vier opsporingsmethoden</strong> — visueel, replay, alarm en codecontrole</li>
           <li><strong>Deterministische code doet ertoe</strong> — Een signaal dat op een gesloten candle is afgedrukt, kan niet verschuiven</li>

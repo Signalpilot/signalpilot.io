@@ -21,14 +21,14 @@
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
   <title>Os teus indicadores estão a mentir-te (o problema do repaint) — Signal Pilot Education</title>
-  <meta name="description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta name="description" content="A repainting indicator shows perfect signals in backtest that never existed in real time. Learn the detection methods and why deterministic code matters.">
   <meta name="theme-color" content="#05070d">
   <link rel="canonical" href="https://www.signalpilot.io/pt/education/curriculum/beginner/04-repaint-problem.html">
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.signalpilot.io/education/curriculum/beginner/04-repaint-problem.html">
   <meta property="og:title" content="Your Indicators Are Lying to You (The Repaint Problem) — Signal Pilot Education">
-  <meta property="og:description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta property="og:description" content="A repainting indicator shows perfect signals in backtest that never existed in real time. Learn the detection methods and why deterministic code matters.">
   <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -37,7 +37,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.signalpilot.io/education/curriculum/beginner/04-repaint-problem.html">
   <meta name="twitter:title" content="Your Indicators Are Lying to You (The Repaint Problem) — Signal Pilot Education">
-  <meta name="twitter:description" content="60-90% of indicators repaint—showing perfect signals in backtest that never existed real-time. Learn detection methods and why deterministic code matters.">
+  <meta name="twitter:description" content="A repainting indicator shows perfect signals in backtest that never existed in real time. Learn the detection methods and why deterministic code matters.">
   <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
   <link rel="prev" href="https://www.signalpilot.io/education/curriculum/beginner/03-price-action-is-dead.html"/>
   <link rel="next" href="https://www.signalpilot.io/education/curriculum/beginner/05-rsi-extremes.html"/>
@@ -146,9 +146,9 @@
         <p style="margin:0 0 0.75rem 0">No final desta aula vais saber:</p>
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Testar se um indicador faz repaint (captura do sinal antes do fecho da vela, verificação depois)</li>
-          <li>Identificar que indicadores do TradingView fazem repaint (entre 60 % e 90 % dos indicadores de retalho fazem)</li>
+          <li>Reconhecer as categorias de indicadores que mais repintam, e porque cada uma o faz</li>
           <li>Usar apenas ferramentas que não fazem repaint (nenhum indicador SignalPilot faz)</li>
-          <li>Fazer um teste walk-forward com dados reais durante duas a quatro semanas antes de confiar num indicador</li>
+          <li>Auditar um indicador de quatro formas &mdash; observação ao vivo, Bar Replay, alertas e o código-fonte &mdash; antes de tocar em dinheiro real</li>
         </ul>
       </div>
 
@@ -192,7 +192,7 @@
   </div>
 
   <p><strong>Trader:</strong> Jake Morrison (exemplo compósito), 26 anos, ex-analista de marketing (conta de 32.000 $)</p>
-  <p><strong>Estratégia:</strong> Indicador do TradingView «Ultimate Reversal Pro» (47.000 transferências, 4,8 ★)</p>
+  <p><strong>Estratégia:</strong> um indicador de reversão gratuito e popular da biblioteca pública do TradingView</p>
   <p><strong>Falha fatal:</strong> O indicador fazia repaint: os sinais mudavam ou desapareciam depois do fecho da vela</p>
 
   <details style="margin:1rem 0;background:rgba(0,0,0,0.2);border-radius:8px">
@@ -201,17 +201,17 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.5rem">
         <div style="background:rgba(139,92,246,0.1);padding:1rem;border-radius:8px">
           <div style="font-weight:600;margin-bottom:0.5rem;color:#a78bfa">Backtest (janeiro de 2024)</div>
-          <div style="font-size:0.9rem">71,4 % de acerto</div>
-          <div style="font-size:0.9rem">fator de lucro 3,2</div>
-          <div style="font-size:0.9rem">3.8:1 R:R</div>
-          <div style="font-size:0.9rem">+247 % de retorno</div>
+          <div style="font-size:0.9rem">taxa de acerto na casa dos setenta</div>
+          <div style="font-size:0.9rem">fator de lucro acima de 3</div>
+          <div style="font-size:0.9rem">uma curva de capital suave</div>
+          <div style="font-size:0.9rem">quase nenhuma sequência perdedora</div>
         </div>
         <div style="background:rgba(255,82,82,0.1);padding:1rem;border-radius:8px">
           <div style="font-weight:600;margin-bottom:0.5rem;color:#ff5252">Em real (fevereiro-abril de 2024)</div>
-          <div style="font-size:0.9rem">34,2 % de acerto</div>
-          <div style="font-size:0.9rem">fator de lucro 0,58</div>
-          <div style="font-size:0.9rem">0.92:1 R:R</div>
-          <div style="font-size:0.9rem">-45,9 % de retorno</div>
+          <div style="font-size:0.9rem">taxa de acerto na casa dos trinta</div>
+          <div style="font-size:0.9rem">fator de lucro abaixo de 1</div>
+          <div style="font-size:0.9rem">a perder desde a primeira semana</div>
+          <div style="font-size:0.9rem">as mesmas regras, o mesmo mercado</div>
         </div>
       </div>
     </div>
@@ -227,15 +227,15 @@
 
   <p><strong>A investigação:</strong> 43 de 47 sinais tinham mudado (taxa de repaint de 91,5 %). A auditoria ao código encontrou <code>request.security()</code> sem <code>lookahead=barmerge.lookahead_off</code>.</p>
 
-  <p><strong>Recuperação (maio-agosto de 2024):</strong> Passou para indicadores determinísticos. 90 operações, 58,9 % de acerto, +12.820 $ de lucro. Conta: 17.300 $ → 30.100 $ (+74,1 %).</p>
+  <p><strong>Recuperação:</strong> Jake passou a usar indicadores cujos sinais não se movem e voltou a correr a mesma estratégia. O que importa não é quanto ganhou depois &mdash; os números de um único exemplo composto não provam nada, num sentido ou no outro. Importa que o seu resultado real e o seu backtest passaram finalmente a descrever o mesmo sistema.</p>
 
   <p style="margin-top:1rem;padding:1rem;background:rgba(139,92,246,.08);border-radius:8px;border-left:4px solid #8b5cf6">
-    <strong>O conselho de Jake:</strong> «Perdi 14.700 $ a negociar fantasmas: sinais que MUDAVAM depois do fecho da vela. Testa TODOS os indicadores: captura em direto, comparação depois do fecho. Se um backtest parecer DEMASIADO perfeito (mais de 70 % de acerto, <10 % de DD), o mais provável é que faça repaint. As vantagens reais dão entre 55 % e 65 % de acerto. Nunca confies, verifica SEMPRE.»
+    <strong>O conselho de Jake:</strong> «Perdi 14.700 $ a negociar fantasmas &mdash; sinais que se MOVERAM depois do fecho da vela. Teste TODOS os indicadores: captura ao vivo, comparação depois do fecho. Se o backtest tiver uma taxa de acerto alta e quase nenhum drawdown, é esse o sinal. NUNCA confie, verifique SEMPRE.»
   </p>
 </div>
 
       <div class="quiz-question" style="margin-top:2rem">
-        <p><strong>Questionário do caso: Jake fez o backtest do indicador «Ultimate Reversal Pro» e obteve resultados espantosos: 71,4 % de acerto, fator de lucro 3,2, +247 % de retorno. Passou a real com 32.000 $ e perdeu 14.700 $ (-45,9 %) em dez semanas, com apenas 34,2 % de acerto. Qual foi o erro fatal?</strong></p>
+        <p><strong>Questionário do caso: Jake fez backtest a um indicador de reversão público e obteve um resultado quase impecável &mdash; taxa de acerto alta, fator de lucro profundo e quase nenhuma sequência perdedora na curva. Ao vivo, com 32.000 $, as mesmas regras perderam 14.700 $ em 10 semanas. Qual foi o seu erro fatal?</strong></p>
         <div class="quiz-options">
           <div class="quiz-option" data-correct="false">
             A) Devia ter usado posições mais pequenas para reduzir o risco
@@ -251,7 +251,7 @@
           </div>
         </div>
         <div class="quiz-explanation">
-          <p><strong>Correto: D.</strong> O indicador do Jake mostrava 71,4% de operações vencedoras em backtest, mas 91,5% dos sinais moviam-se ou desapareciam após o fecho da vela. Estava a «negociar fantasmas»: entradas que só pareciam perfeitas porque se redesenhavam. Correção: verifique os sinais ao vivo com capturas de ecrã. Se um backtest parecer demasiado perfeito (&gt;70% de vencedoras), o mais provável é estar a redesenhar. As vantagens reais produzem taxas de acerto de 55-65%.</p>
+          <p><strong>Correto: D.</strong> O backtest lisonjeava porque 43 dos 47 sinais de Jake se moveram ou desapareceram depois de fechar a sua vela. Ele negociava fantasmas: entradas que só pareciam perfeitas porque tinham sido recolocadas depois de conhecido o desfecho. O remédio é o teste da captura. E repare no que é o sinal &mdash; não uma taxa de acerto alta por si só, mas uma curva sem qualquer dor.</p>
         </div>
       </div>
 
@@ -300,9 +300,9 @@
 
       <p>É assim que o repaint se apresenta quando o apanhas:</p>
 
-      <p>Já viste um: os três sinais auditados do Jake aí em cima, todos do «Ultimate Reversal Pro». O mesmo acontece em categorias inteiras de indicadores, e nem sempre tem o aspeto de uma seta que se mexe. Aqui ficam outras duas formas que assume.</p>
+      <p>Já viu um: os três sinais auditados de Jake, acima. O mesmo acontece em categorias inteiras de indicadores, e nem sempre se parece com uma seta que se desloca. Aqui ficam outras duas formas que assume. Ambas são descritas por categoria e não por nome de produto, porque o que conta é o mecanismo &mdash; e porque nenhum indicador deve ser acusado de repintar pela palavra de quem quer que seja, incluindo a nossa. Faça o teste você mesmo.</p>
 
-      <p><strong>Exemplo 1: indicador «AI Prediction Zones» (TradingView, 85.000 transferências)</strong></p>
+      <p><strong>Exemplo 1: um indicador de zonas dinâmicas de suporte/resistência</strong></p>
 
       <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code><strong>12:04 (durante a vela):</strong>
 Mostra uma «zona de suporte» no SPY em 519,00-519,50 $ (caixa verde sombreada)
@@ -319,7 +319,7 @@ Perdeste 0,80 $ por ação em 500 ações = -400 $
 Agora o indicador põe o suporte em 518,20 $, onde «devia ter estado»
 → Isso faz o indicador parecer perfeito no histórico e inútil em direto</code></pre>
 
-      <p><strong>Exemplo 2: indicador «Smart Money Divergence» (pago, 199 $)</strong></p>
+      <p><strong>Exemplo 2: um indicador de divergência</strong></p>
 
       <div style="padding:1rem;background:rgba(255,82,82,0.08);border-radius:8px;border-left:4px solid #ff5252;margin:1.5rem 0">
         <p><strong>Sinal em direto (13:30):</strong> «DIVERGÊNCIA DE ALTA DETETADA — mínimo mais baixo no preço, mínimo mais alto no indicador»</p>
@@ -389,7 +389,7 @@ Agora o indicador põe o suporte em 518,20 $, onde «devia ter estado»
       </div>
 
       <p style="padding:1rem;background:rgba(255,82,82,0.08);border-radius:8px;border-left:4px solid #ff5252;margin:1.5rem 0">
-        <strong>Sinal de alarme:</strong> Se o backtest de um indicador mostrar mais de 75 % de acerto com <10 % de drawdown, é quase certo que faz repaint. As vantagens reais e honestas dão entre 55 % e 65 % de acerto com drawdowns realistas (15-30 %). Perfeição no backtest é fraude em real.
+        <strong>Sinal de alarme:</strong> Um backtest com uma taxa de acerto muito alta e quase sem drawdown é muito mais vezes um indicador que repinta do que uma vantagem real. Repare no que NÃO é o sinal de alarme: uma taxa de acerto baixa. Uma vantagem honesta pode ganhar um terço das suas operações e continuar a dar lucro, se as ganhadoras forem suficientemente grandes. O que deve levantar suspeitas é uma curva sem qualquer dor.
       </p>
 
 <h3 id="bar-replay-walkthrough">Detetar repaint com o Bar Replay, passo a passo</h3>
@@ -408,7 +408,7 @@ Agora o indicador põe o suporte em 518,20 $, onde «devia ter estado»
         <li><strong>Procura discrepâncias:</strong> Os sinais estão no mesmo sítio? Ou mudaram?</li>
       </ol>
 
-      <p><strong>Exemplo de resultados (Bar Replay em «Ultimate Reversal Pro»):</strong></p>
+      <p><strong>Exemplo de resultados do teste (Bar Replay num indicador de reversão):</strong></p>
 
       <pre style="background:#1a1a1a;padding:1.5rem;border-radius:8px;overflow-x:auto;font-size:.9rem"><code><strong>Modo de repetição (a avançar vela a vela):</strong>
 10:15: nenhum sinal
@@ -479,7 +479,7 @@ pivot_high = ta.pivothigh(high, 5, 5)  // olha cinco velas para trás e cinco pa
       <div class="key-takeaway">
         <h4>🎓 Pontos essenciais</h4>
         <ul>
-          <li><strong>Entre 60 % e 90 % dos indicadores fazem repaint</strong> — testa tudo antes de negociar com isso</li>
+          <li><strong>Repintar é comum na biblioteca pública</strong> &mdash; teste tudo antes de o negociar</li>
           <li><strong>Repaint = vantagem falsa</strong> — backtests perfeitos, resultados desastrosos em direto</li>
           <li><strong>Usa quatro métodos de deteção</strong> — visual, repetição, alertas e auditoria ao código</li>
           <li><strong>Código determinístico importa</strong> — Um sinal impresso numa vela fechada não se pode mexer</li>
