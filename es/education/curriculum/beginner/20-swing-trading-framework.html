@@ -190,7 +190,7 @@
       </div>
 
       <div class="example-block">
-        <h4>Ejemplo real: el desastre de tamaño de posición de Monica, 27.710 $</h4>
+        <h4>Ejemplo compuesto: Monica y un fallo de dimensionamiento de 27.710 $</h4>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 130px),1fr));gap:0.75rem;margin:1rem 0 1.5rem 0">
           <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
@@ -214,6 +214,16 @@
         <p><strong>El error:</strong> Monica (ejemplo compuesto; day trader rentable, 58 % de acierto) usó un 2 % de riesgo para swings, olvidando los huecos nocturnos. Resultado: 5 de 8 operaciones abrieron con hueco atravesando los stops. TSLA -2.950 $ (debería haber sido -738 $), META -4.800 $ (debería haber sido -1.200 $). <strong style="color:#ff5252">Cuenta: 92.000 $ → 64.000 $ (-30 %).</strong></p>
 
         <p><strong>La solución:</strong> 0,5 % de riesgo, cerrar antes de resultados, reducir un 50 % antes del FOMC o del IPC. Resultado: 64.000 $ → 88.000 $ (+36 %), mayor pérdida -520 $ (frente a -4.800 $ antes).</p>
+      </div>
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Requisitos previos</h4>
+        <p>Esta lección se apoya en conceptos de:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/beginner/18-session-liquidity-advanced.html" style="color:#00d4aa;text-decoration:underline">Lección 18: Liquidez de sesión avanzada</a> &mdash; Puente de principiante a intermedio</li>
+            <li><a href="/education/curriculum/beginner/19-footprint-charts-advanced.html" style="color:#00d4aa;text-decoration:underline">Lección 19: Gráficos de footprint avanzados</a> &mdash; Puente de principiante a intermedio</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Si ya las has completado, estás listo. Si no, empieza primero por las lecciones fundamentales.</p>
       </div>
 <h2 id="part-1-daily-timeframe-structure-analysis">Parte 1: análisis de la estructura en temporalidad diaria</h2>
 
@@ -762,8 +772,8 @@ R real: 2.070 $ ÷ 700 $ = 2,96R
           <li>✓ Anotar la operación: motivo de entrada, motivo de salida, R obtenida</li>
           <li>✓ Repasar qué funcionó: ¿aguantó la estructura? ¿fue bueno el momento?</li>
           <li>✓ Repasar qué falló: ¿te sacó el stop? ¿por qué? ¿rotura de estructura? ¿una noticia?</li>
-          <li>✓ Calcular el acierto y la R media de las últimas 20 operaciones de swing</li>
-          <li>✓ Ajustar la estrategia si el acierto es &lt;50 % o la R media &lt;2R</li>
+          <li>✓ Calcula la tasa de acierto, el payoff ratio y la esperanza en R de las últimas 20 operaciones de swing</li>
+          <li>✓ Ajusta la estrategia si la tasa de acierto es &lt;50 % o el payoff ratio &lt;2:1</li>
         </ul>
       </div>
 
@@ -916,10 +926,13 @@ R real: 2.070 $ ÷ 700 $ = 2,96R
           <p><strong>P1: ¿Cuál fue el error fatal de Monica que le costó 27.710 $ en swing trading?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Operó los valores equivocados, con demasiada volatilidad</div>
-            <div class="quiz-option" data-correct="true">B) Usó un 2 % de tamaño de posición (tamaño de day trading) en vez de un 0,5 % para swing, ignorando el riesgo de hueco nocturno</div>
-            <div class="quiz-option" data-correct="false">C) No usó stops en sus operaciones de swing</div>
+            <div class="quiz-option" data-correct="false">B) No usó stops en sus operaciones de swing</div>
+            <div class="quiz-option" data-correct="true">C) Usó un 2 % de tamaño de posición (tamaño de day trading) en vez de un 0,5 % para swing, ignorando el riesgo de hueco nocturno</div>
             <div class="quiz-option" data-correct="false">D) Mantuvo las posiciones demasiado tiempo (semanas en vez de días)</div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Correcta: C.</strong> El hueco es justamente el asunto. Una operación intradía se cierra antes del final de la sesión, así que su stop es exigible; una posición de swing atraviesa la apertura, donde el precio puede saltar por encima de él. Los stops de Monica no faltaban &mdash; fueron saltados en 5 de 8 operaciones, y por eso TSLA costó 2.950 $ cuando el riesgo previsto era de 738 $. A y D describen cosas que pueden dañar a un swing trader, pero ninguna explica por qué sus pérdidas salieron unas cuatro veces mayores de lo planeado.
+        </div>
           <div class="quiz-feedback">
             <p><strong>¡Correcto!</strong> Monica era rentable en day trading con un 2 % de riesgo por operación, pero usó el MISMO tamaño en swing. El day trading no tiene riesgo nocturno (cierras cada día), pero el swing te expone a huecos durante 16 horas o más. Necesitaba un 0,5 % de riesgo (cuatro veces menos) para cubrir el riesgo de hueco nocturno. 5 de sus 8 operaciones abrieron con hueco atravesando sus stops, con pérdidas entre un 60 % y un 220 % peores de lo previsto. Un tamaño correcto del 0,5 % le habría ahorrado 14.850 $.</p>
           </div>
@@ -929,10 +942,13 @@ R real: 2.070 $ ÷ 700 $ = 2,96R
           <p><strong>P2: Según la lección, ¿cuál es el tamaño de posición adecuado para swing frente a day trading?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) El mismo que en day trading (1-2 % de riesgo), ya que ambos son trading activo</div>
-            <div class="quiz-option" data-correct="true">B) 0,5-1 % de riesgo en swing (cuatro veces menos que el 1-2 % del day trading) por los huecos nocturnos y la exposición de varios días</div>
+            <div class="quiz-option" data-correct="false">B) 0,1 % de riesgo en swing (ultraconservador para todas las posiciones)</div>
             <div class="quiz-option" data-correct="false">C) 3-5 % de riesgo en swing (mayor) para compensar los stops más amplios</div>
-            <div class="quiz-option" data-correct="false">D) 0,1 % de riesgo en swing (ultraconservador para todas las posiciones)</div>
+            <div class="quiz-option" data-correct="true">D) 0,5-1 % de riesgo en swing (cuatro veces menos que el 1-2 % del day trading) por los huecos nocturnos y la exposición de varios días</div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Correcto: D.</strong> La proporción se deduce del riesgo que no puedes controlar. Intradía, tu stop es el peor caso. De un día para otro lo es el hueco &mdash; y contra un hueco ningún stop protege. Así que la posición se encoge más o menos en el factor en que un hueco puede superar al stop. A trata ambos estilos como una sola actividad porque los dos son activos. C invierte la lógica: un stop más ancho es una razón para tener menos acciones, no para arriesgar más cuenta. B es seguro pero tan pequeño que una ventaja real nunca llega a componerse en nada.
+        </div>
           <div class="quiz-feedback">
             <p><strong>¡Correcto!</strong> Las operaciones de swing exigen un 0,5-1 % de riesgo por operación, cuatro veces menos que el 1-2 % típico del day trading. ¿Por qué? Riesgo de hueco nocturno, riesgo de evento (resultados, FOMC, IPC), riesgo de fin de semana y exposición de varios días. Estás «a ciegas» durante 16 horas o más por la noche, y los huecos pueden atravesar los stops. El error de Monica fue usar un 2 % (tamaño de day trading) y que los huecos la destrozaran. El marco de la lección: «¿Sobrevivo a un hueco nocturno del 10 % con este tamaño de posición?»</p>
           </div>
@@ -941,11 +957,14 @@ R real: 2.070 $ ÷ 700 $ = 2,96R
         <div class="quiz-question">
           <p><strong>P3: Según esta lección, ¿cuál es el marco recomendado para las entradas de swing?</strong></p>
           <div class="quiz-options">
-            <div class="quiz-option" data-correct="false">A) Operar rupturas en gráficos de 5 minutos con stops ajustados</div>
-            <div class="quiz-option" data-correct="true">B) Sesgo de tendencia en diario → esperar un retroceso en 4H hasta el soporte o la media → entrar con la confirmación en 1H → mantener de 2 a 7 días buscando un 3-8 %</div>
+            <div class="quiz-option" data-correct="true">A) Sesgo de tendencia en diario → esperar un retroceso en 4H hasta el soporte o la media → entrar con la confirmación en 1H → mantener de 2 a 7 días buscando un 3-8 %</div>
+            <div class="quiz-option" data-correct="false">B) Operar rupturas en gráficos de 5 minutos con stops ajustados</div>
             <div class="quiz-option" data-correct="false">C) Comprar números redondos en diario y mantener indefinidamente</div>
             <div class="quiz-option" data-correct="false">D) Hacer scalping de order blocks diarios buscando ganancias rápidas del 0,5-1 %</div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Correcto: A.</strong> El marco es un embudo, y cada temporalidad responde a una pregunta distinta: el diario fija la dirección, el de 4H encuentra un lugar donde merece la pena entrar, el de 1H aporta el disparador. B es intradía con etiqueta de swing &mdash; un gráfico de 5 minutos no puede establecer un sesgo de varios días. C no tiene invalidación ni objetivo, así que no hay nada en lo que acertar o fallar. D asume riesgo nocturno de tamaño swing para una recompensa de tamaño intradía.
+        </div>
           <div class="quiz-feedback">
             <p><strong>¡Correcto!</strong> El marco de swing trading es: (1) determinar el sesgo diario con los máximos y mínimos crecientes o decrecientes, (2) esperar un retroceso en 4 horas hasta un soporte, una media móvil o un order block, (3) entrar con la vela de confirmación de 1 hora y (4) mantener de 2 a 7 días buscando movimientos del 3-8 %. Este enfoque multitemporal asegura que operas CON la tendencia diaria mientras consigues entradas limpias en el retroceso. El ruido intradía desaparece en el diario: ahí es donde el minorista puede competir con las instituciones.</p>
           </div>
@@ -959,6 +978,9 @@ R real: 2.070 $ ÷ 700 $ = 2,96R
             <div class="quiz-option" data-correct="false">C) Mantener toda la posición: los eventos no afectan a las operaciones de swing</div>
             <div class="quiz-option" data-correct="false">D) Alejar los stops para acomodar la volatilidad del evento</div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Correcto: B.</strong> Reducir tamaño antes de un evento programado es el único ajuste que funciona de verdad, porque es justo entonces cuando el riesgo de hueco del que no puedes salir con stop es a la vez el mayor y el más previsible. D es la respuesta tentadora, porque un stop más ancho parece dar espacio a la volatilidad &mdash; pero un hueco salta el stop lo pongas donde lo pongas, así que ensancharlo solo agranda la pérdida cuando llega. A redobla precisamente el único riesgo que un swing trader no puede gestionar.
+        </div>
           <div class="quiz-feedback">
             <p><strong>¡Correcto!</strong> Las reglas de recuperación de Monica: cerrar o reducir un 75 % antes de resultados (le ahorró 5.150 $), reducir un 50 % antes del FOMC o del IPC (3.180 $) y reducir un 30-50 % antes de los fines de semana (3.660 $). NUNCA muevas los stops en swing (Monica perdió 2.860 $ en AAPL por mover el suyo). El riesgo de evento es real: los huecos no respetan los stops. Ahorro potencial total con una buena gestión de eventos: 14.850 $ en el caso de Monica.</p>
           </div>
@@ -968,10 +990,13 @@ R real: 2.070 $ ÷ 700 $ = 2,96R
           <p><strong>P5: Según la lección, ¿cuál es la ventaja clave del swing trading frente al day trading?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) El swing trading exige más horas de pantalla y una ejecución más rápida</div>
-            <div class="quiz-option" data-correct="true">B) Los gráficos diarios eliminan la competencia del HFT: operas en temporalidades institucionales, donde los order blocks duran semanas y el posicionamiento tarda días</div>
-            <div class="quiz-option" data-correct="false">C) El swing trading no tiene riesgo porque mantienes más tiempo</div>
+            <div class="quiz-option" data-correct="false">B) El swing trading no tiene riesgo porque mantienes más tiempo</div>
+            <div class="quiz-option" data-correct="true">C) Los gráficos diarios eliminan la competencia del HFT: operas en temporalidades institucionales, donde los order blocks duran semanas y el posicionamiento tarda días</div>
             <div class="quiz-option" data-correct="false">D) Puedes usar stops más ajustados porque los movimientos diarios son menores</div>
           </div>
+        <div class="quiz-explanation">
+          <strong>Correcta: C.</strong> Intradía compites con participantes que son más rápidos que tú por diseño, y en esa temporalidad la velocidad <em>es</em> la ventaja. Los gráficos diarios llevan la competición a una temporalidad donde el posicionamiento institucional tarda días en construirse y deshacerse, así que ser lento no te cuesta nada. A describe el intradía. B es sencillamente falso &mdash; mantener más tiempo añade riesgo nocturno en lugar de quitarlo. D está al revés: los rangos diarios son más amplios, así que los stops de swing son más amplios, y por eso mismo la posición tiene que ser menor.
+        </div>
           <div class="quiz-feedback">
             <p><strong>¡Correcto!</strong> La lección dice: «Hacer day trading es pelear contra algoritmos de HFT en su terreno: ejecución en milisegundos, spreads por debajo del centavo. El swing trading le da la vuelta a la tortilla.» En los gráficos diarios operas donde el posicionamiento institucional tarda DÍAS en construirse y deshacerse, donde los fundamentales se encuentran con lo técnico, donde los order blocks duran semanas. Operas CON las instituciones mientras se recolocan, no contra algoritmos de HFT. Es «la estrategia con mayor acierto a la que accede un minorista» si aguantas la volatilidad nocturna.</p>
           </div>
@@ -1007,7 +1032,7 @@ R real: 2.070 $ ÷ 700 $ = 2,96R
         <p>Pasamos al nivel Intermedio con el dominio de la plataforma Signal Pilot, configuraciones avanzadas de escáner, reconocimiento algorítmico de patrones y la construcción de tu primer sistema de trading completo.</p>
       </div>
 
-      <blockquote><strong>Solo con fines educativos.</strong> Operar conlleva un riesgo sustancial de pérdida. Los resultados pasados no garantizan resultados futuros.</blockquote>
+      <blockquote class="sp-disclaimer"><strong>Solo con fines educativos.</strong> Operar conlleva un riesgo sustancial de pérdida. No es asesoramiento financiero. Los resultados pasados no garantizan resultados futuros.</blockquote>
 
       <!-- Discussion Section -->
       <div class="discussion-section" id="discussion-section">
@@ -1079,7 +1104,6 @@ R real: 2.070 $ ÷ 700 $ = 2,96R
       </div>
     </div>
   </div>
-  <blockquote class="sp-disclaimer"><strong>Solo con fines educativos.</strong> Operar conlleva un riesgo sustancial de pérdida. No es asesoramiento financiero. Los resultados pasados no garantizan resultados futuros.</blockquote>
 </article>
 
 
