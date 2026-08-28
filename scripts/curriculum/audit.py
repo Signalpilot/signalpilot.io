@@ -30,6 +30,15 @@ BASERATE = re.compile(
     r'|\bblows? up \d{1,2}% of traders\b')
 VAGUE = re.compile(r'(?i)\b(?:studies show|research shows|research suggests|'
                    r'statistics show|data shows that|it\'s well documented)')
+# A lesson is allowed to QUOTE a bogus statistic in order to debunk it. Lesson 62
+# does exactly that with the "90% of traders lose 90% in 90 days" myth, and the
+# check must not push an author into deleting the debunking.
+DEBUNK = re.compile(r'(?i)no source|never been produced|nobody has ever|is a myth|'
+                    r'made up|no study|unsourced|invented|has no basis')
+
+
+def debunked(text, m, window=260):
+    return bool(DEBUNK.search(text[m.end():m.end() + window]))
 CASE = re.compile(r'(?i)real[- ]world example|real example|case study')
 LABEL = re.compile(r'(?i)composite|illustrative|hypothetical|for illustration')
 DISC_COMPONENT = re.compile(r'sp-disclaimer')
@@ -67,9 +76,9 @@ def score(path):
         'tier': path.split('/')[2],
         'path': path,
         # tier 1
-        't1_flattery':  len(FLATTERY.findall(t)),
-        't1_baserate':  len(BASERATE.findall(t)),
-        't1_vague':     len(VAGUE.findall(t)),
+        't1_flattery':  sum(1 for m in FLATTERY.finditer(t) if not debunked(t, m)),
+        't1_baserate':  sum(1 for m in BASERATE.finditer(t) if not debunked(t, m)),
+        't1_vague':     sum(1 for m in VAGUE.finditer(t) if not debunked(t, m)),
         't1_unlabelled_case': int(bool(CASE.search(t)) and not bool(LABEL.search(t))),
         't1_no_disclaimer':   int(not DISC_COMPONENT.search(h) and not DISC_WORDS.search(t)),
         't1_nonstd_disclaimer': int(not DISC_COMPONENT.search(h) and bool(DISC_WORDS.search(t))),
