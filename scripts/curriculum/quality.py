@@ -27,6 +27,8 @@ BOILER = re.compile(
     r'<div class="callout-warning"[^>]*>\s*<h4>[^<]*Prerequisites.*?</div>|'
     r'<h[23][^>]*>\s*Related Lessons.*|'
     r'<div class="discussion-section".*|'
+    r'<div class="callout-info"[^>]*>\s*<p>You&#39;re about halfway.*?</div>|'
+    r"<div class=\"callout-info\"[^>]*>\s*<p>You're about halfway.*?</div>|"
     r'<footer.*')
 
 # Terms a lesson may use; flagged when used but never explained in that lesson.
@@ -178,8 +180,17 @@ def dupes(paths):
         passages.append(dict(slug=p.split('/')[-1][:-5], n_words=n,
                              shared_with=[o.split('/')[-1][:-5] for o in run[0][2]],
                              text=text))
-    passages.sort(key=lambda d: -d['n_words'])
-    return passages
+    # one row per distinct passage, listing every lesson that carries it
+    grouped = {}
+    for d in passages:
+        key = d['text']
+        g = grouped.setdefault(key, dict(n_words=d['n_words'], text=key, lessons=set()))
+        g['lessons'].add(d['slug'])
+        g['lessons'].update(d['shared_with'])
+    out2 = [dict(n_words=g['n_words'], text=g['text'], lessons=sorted(g['lessons']))
+            for g in grouped.values()]
+    out2.sort(key=lambda d: (-len(d['lessons']), -d['n_words']))
+    return out2
 
 
 def main():
@@ -188,8 +199,8 @@ def main():
         ps = dupes(paths)
         print(f'shared passages of {MIN_PASSAGE}+ words: {len(ps)}\n')
         for d in ps[:60]:
-            print(f"{d['n_words']:>4}w  {d['slug']}  <-> {', '.join(d['shared_with'])}")
-            print(f'        {d["text"][:150]}...')
+            print(f"{d['n_words']:>4}w  in {len(d['lessons'])}: {', '.join(d['lessons'])}")
+            print(f'        {d["text"][:170]}...')
         return
     profs = [profile(p) for p in paths]
     if '--json' in sys.argv:
