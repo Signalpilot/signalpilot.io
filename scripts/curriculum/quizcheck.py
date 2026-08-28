@@ -32,8 +32,14 @@ def check(path):
     for qi, qm in enumerate(Q.finditer(h), 1):
         block = qm.group()
         exps = EXP.findall(block)
+        # Two quiz formats exist. Multiple choice (.quiz-option + data-correct) needs an
+        # authored .quiz-explanation. The self-assessment format already carries its answer
+        # in a <details>/<summary>Show Answer block and must NOT get a second one.
+        self_answered = bool(re.search(r'<summary[^>]*>\s*(?:Show|Check)\s+Answer', block))
         if len(exps) == 0:
-            issues.append((qi, 'MISSING', 'no .quiz-explanation')); continue
+            if not self_answered and 'class="quiz-option"' in block:
+                issues.append((qi, 'MISSING', 'multiple-choice question with no .quiz-explanation'))
+            continue
         if len(exps) > 1:
             issues.append((qi, 'DUPLICATE', f'{len(exps)} explanations')); continue
         body = exps[0]
