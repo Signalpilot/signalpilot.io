@@ -90,8 +90,21 @@ Q_EXPLAIN = re.compile(r'class="quiz-explanation"')
 def score(path):
     h = open(path, encoding='utf-8').read()
     t = txt(h)
-    nq = len(Q_QUESTION.findall(h))
-    nx = len(Q_EXPLAIN.findall(h))
+    # Only multiple-choice questions need an authored explanation. The
+    # <details>/"Show Answer" format already carries its answer; counting those
+    # as gaps overstates the work (42 questions across 12 lessons).
+    QBLOCK = re.compile(r'<div class="quiz-question".*?(?=<div class="quiz-question"|</section|</article)', re.S)
+    nq = nx = nany = 0
+    for qm in QBLOCK.finditer(h):
+        blk = qm.group()
+        nany += 1
+        if re.search(r'<summary[^>]*>\s*(?:Show|Check)\s+Answer', blk):
+            continue
+        if 'class="quiz-option"' not in blk:
+            continue
+        nq += 1
+        if 'class="quiz-explanation"' in blk:
+            nx += 1
     d = {
         'slug': os.path.basename(path)[:-5],
         'tier': path.split('/')[2],
@@ -124,7 +137,8 @@ def score(path):
         't3_no_takeaway':    int(not TAKEAWAY.search(h)),
         't3_no_action':      int(not ACTION.search(t)),
         't3_no_indicator':   int(not INDICATOR.search(t)),
-        't3_no_quiz':        int(nq == 0),
+        # a lesson with only <details> self-assessment questions still has a quiz
+        't3_no_quiz':        int(nany == 0),
         't3_quiz_gap':       max(0, nq - nx),
         'nq': nq, 'nx': nx,
     }
