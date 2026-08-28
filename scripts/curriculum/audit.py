@@ -39,7 +39,12 @@ DEBUNK = re.compile(r'(?i)no source|never been produced|nobody has ever|is a myt
 
 def debunked(text, m, window=260):
     return bool(DEBUNK.search(text[m.end():m.end() + window]))
-CASE = re.compile(r'(?i)real[- ]world example|real example|case study')
+# A "case study" of a real, dated market episode (2020 COVID QE, the 2022 QT
+# bear) needs no composite label -- it happened. What needs one is an invented
+# PERSON: a first name carrying a possessive or a parenthetical, next to a
+# case-study heading. Lessons 41 and 64 were false positives under the old rule.
+CASE = re.compile(r'(?i)(real[- ]world example|real example|case study)'
+                  r'[^<\n]{0,60}?\b[A-Z][a-z]{2,}(?:\'s|\u2019s)')
 LABEL = re.compile(r'(?i)composite|illustrative|hypothetical|for illustration')
 DISC_COMPONENT = re.compile(r'sp-disclaimer')
 DISC_WORDS = re.compile(r'(?i)not financial advice|educational purposes|'
