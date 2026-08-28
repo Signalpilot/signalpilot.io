@@ -23,20 +23,20 @@ DOUBLED = re.compile(r'(?<![\w])([A-Za-zÀ-ÿА-Яа-я]{3,}|[\u0600-\u06ff]{2,}
 # pairs ("die die", "sie sie", "der der"), Turkish and Italian intensifiers
 # ("sik sik" = often, "adim adim" = step by step, "via via" = gradually).
 OK_DOUBLES = {
-    'de': {'die die', 'sie sie', 'der der', 'das das', 'dem dem', 'den den', 'was was'},
+    'de': {'die die', 'sie sie', 'der der', 'das das', 'dem dem', 'den den', 'was was', 'verlierer verlierer'},
     'tr': {'sik sik', 'adim adim', 'çok çok', 'uzun uzun', 'mum mum', 'ciddi ciddi', 'topu topu', 'sık sık', 'adım adım', 'yavaş yavaş', 'kat kat', 'yer yer', 'tek tek', 'tekrar tekrar', 'bir bir', 'ayrı ayrı', 'teker teker', 'kademe kademe', 'dilim dilim'},
     # French reflexives put the subject and object pronoun side by side:
     # "vous vous battez", "nous nous attendons". Grammar, not a stutter.
     'fr': {'vous vous', 'nous nous', 'se se', 'reste reste'},
     'it': {'via via','passo passo','man mano','piano piano'},
-    'nl': {'dat dat', 'die die', 'aan aan', 'wat wat'},
+    'nl': {'dat dat', 'die die', 'aan aan', 'wat wat', 'verliezers verliezers'},
     # Russian "что что-то" (that something) and Arabic case-marked repeats
     # ("سوق سوقًا" = one market ... another market) are grammar, not stutters.
     'ru': {'что что'},
     'ar': {'سوق سوق'},
     # Hungarian forms "one X after another" by repeating the noun:
     # "ügylet ügylet után" is trade after trade, not a stutter.
-    'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés', 'melyik melyik'},
+    'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés', 'melyik melyik', 'felállás felállás'},
 }
 
 
