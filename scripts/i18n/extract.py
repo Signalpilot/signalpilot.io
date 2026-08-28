@@ -10,7 +10,14 @@ import re, json, sys, hashlib
 
 # A tag name must start with a letter (or !, /, ?), so "<10% DD" is text, not a
 # tag -- and a '>' inside a quoted attribute value does not end the tag.
-TAG = re.compile(r'''(<[a-zA-Z!/?][^>"']*(?:"[^"]*"[^>"']*|'[^']*'[^>"']*)*>)''')
+#
+# Comments have to be matched first and on their own terms. An apostrophe
+# inside one ("<!-- Ryan's case study -->") sends the quoted-attribute branch
+# hunting for a closing quote that is not there, and the match then runs on
+# past the comment and swallows whatever markup follows it. Everything inside
+# that swallowed span stops being a segment, so it ships untranslated in every
+# locale, silently, because no check can see a string that was never extracted.
+TAG = re.compile(r'''(<!--.*?-->|<[a-zA-Z!/?][^>"']*(?:"[^"]*"[^>"']*|'[^']*'[^>"']*)*>)''', re.S)
 ATTR = re.compile(r'\b(title|alt|aria-label|placeholder)="([^"]*)"')
 # Two letters is enough: a lone "or" between two <strong> tags is a
 # segment like any other, and a 3-letter floor silently left it in English.
