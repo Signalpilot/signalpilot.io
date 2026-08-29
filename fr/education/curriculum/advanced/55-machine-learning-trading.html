@@ -334,7 +334,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Modèle</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Réseau de neurones : 5 couches, 128 neurones (~50 000 poids sur 180 trades !)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest : max_depth=4, 30 arbres (~450 règles de séparation sur 240 trades)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest : max_depth=4, 30 arbres &mdash; environ 450 règles de découpe apprises sur 240 trades, plus petit que V1 et malgré tout plus de capacité que les données n'en supportent</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Objectif d'optimisation</strong></td>
@@ -410,203 +410,30 @@
         </tbody>
       </table>
 
-      <p><strong>À retenir :</strong> La V2 affichait 67 % de réussite contre 87 % pour la V1. Mais les 67 % de la V2 étaient RÉELS (validés sur 4 fenêtres temporelles), alors que les 87 % de la V1 étaient faux (du bruit surappris).</p>
+      <p><strong>À retenir :</strong> V2 a mesuré 67 % là où V1 mesurait 87 %, et le chiffre le plus bas est le plus fiable parce qu'il a survécu à quatre fenêtres auxquelles le modèle n'a jamais été ajusté. Attention néanmoins au poids que vous lui donnez : quatre fenêtres de test tirées de deux ou trois cents trades, cela fait quelques dizaines de trades par fenêtre, et quelques dizaines de trades mesurent un taux de réussite à une dizaine de points de pourcentage près. Ce que les quatre fenêtres écartent réellement, c'est la défaillance de V1 : un score d'entraînement qui s'effondre sur des données inédites. Elles ne fixent pas le vrai taux, et aucun redécoupage des mêmes trades ne le fera.</p>
 
 
 
-      <h3 id="act-3-live-trading-the-proper-model-june-october-2024">Acte 3 : trader le bon modèle en réel (juin-octobre 2024)</h3>
+      <h3 id="act-3-what-the-rebuild-establishes">Acte 3 : Ce que la reconstruction établit &mdash; et là où V2 se trompe encore</h3>
 
-      <p><strong>La stratégie de déploiement de la V2 de Nina :</strong></p>
+      <p>Nina a déployé V2 comme il faut : d'abord vingt signaux sur papier, puis demi-taille, puis pleine taille, avec réentraînement mensuel et une règle décidant quand un modèle réentraîné remplace celui en place. La phase papier mérite d'être lue correctement. Quatorze gagnants sur vingt suffisent à repérer un modèle cassé &mdash; un modèle avec un bug en réel échoue plutôt de façon voyante que subtile &mdash; et sont très loin de suffire à confirmer un taux de 67 %. L'erreur type sur vingt trades avoisine onze points de pourcentage.</p>
+
+      <p>Ce que nous n'allons pas vous donner, c'est son P&amp;L en réel. Une version antérieure de cette page en affichait cinq mois, une comparaison avec la base prétendant que le filtre avait ajouté 21 300 $, un titre annonçant « 62,5 % d'amélioration » et un calendrier de rentabilisation. Chacun de ces chiffres était inventé et, pire, c'était le mauvais type de preuve pour l'affirmation avancée. Cinq mois de signaux filtrés d'un seul trader ne peuvent pas distinguer « le filtre marche » de « le marché convenait à ces configurations » ; il faudrait faire tourner le filtre et la base sur les mêmes trades sur la même période, un grand nombre de fois, pour que l'écart signifie quelque chose.</p>
+
+      <p><strong>Ce que les deux versions établissent réellement :</strong></p>
       <ul style="margin:.5rem 0">
-        <li>Validation en paper trading sur 20 trades (mai 2024) : 14 gagnants, 1,5R en moyenne &mdash; assez pour repérer un modèle cassé, très loin d'assez pour confirmer un taux</li>
-        <li>Démarrage en réel à 50 % de la taille (juin) : voir la ligne de juin dans le tableau ci-dessous</li>
-        <li>Taille de position complète (à partir de juillet) : filtre ML opérationnel</li>
-        <li>Réentraînement mensuel : ajouter les nouveaux trades, relancer le walk-forward, mettre à jour le modèle s'il gagne +3 %</li>
+        <li><strong>L'effondrement de V1 est une vraie preuve.</strong> 87 % en backtest et 41 % en réel sur le même modèle, ce n'est pas de la malchance. Chacune des cinq erreurs a un mécanisme connu, et chacune gonfle un backtest dans une direction prévisible à l'avance. C'est la partie utile de cette histoire, et elle ne dépend en rien de ce qui a suivi.</li>
+        <li><strong>V2 a supprimé ces mécanismes précis.</strong> Aucune variable en look-ahead, des découpages ordonnés dans le temps, un modèle plus petit, l'espérance comme objectif. Chaque changement est défendable par sa propre logique, avant le moindre trade en réel.</li>
+        <li><strong>Les écarts entraînement-test sont restés faibles sur quatre fenêtres.</strong> C'est l'absence de drapeau rouge plutôt que la preuve d'un avantage, et quatre fenêtres tirées de quelques centaines de trades sont un petit échantillon d'un petit échantillon.</li>
       </ul>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Résultats en réel de la V2 de Nina : performance du filtre ML (juin-octobre 2024, 5 mois)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Mois</th>
-            <th style="padding:0.75rem;text-align:right;">Signaux</th>
-            <th style="padding:0.75rem;text-align:right;">Filtrés par le ML</th>
-            <th style="padding:0.75rem;text-align:right;">Trades pris</th>
-            <th style="padding:0.75rem;text-align:right;">Taux de réussite</th>
-            <th style="padding:0.75rem;text-align:right;">R moyen</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Juin 2024</td>
-            <td style="padding:0.75rem;text-align:right;">42</td>
-            <td style="padding:0.75rem;text-align:right;">18 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">67%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.3R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$9,400</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Juil. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">38</td>
-            <td style="padding:0.75rem;text-align:right;">15 (39%)</td>
-            <td style="padding:0.75rem;text-align:right;">23</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">70%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.6R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$12,700</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Août 2024</td>
-            <td style="padding:0.75rem;text-align:right;">46</td>
-            <td style="padding:0.75rem;text-align:right;">20 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">26</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">65%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.2R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,800</span></td>
-          </tr><tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Sept. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">40</td>
-            <td style="padding:0.75rem;text-align:right;">16 (40%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">71%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$11,900</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Oct. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">44</td>
-            <td style="padding:0.75rem;text-align:right;">19 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">25</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,600</span></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">TOTAUX SUR 5 MOIS :</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;">122 trades</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$55,400</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Là où V2 surapprend encore, d'après ses propres chiffres.</strong> Le tableau comparatif vend le correctif comme « Random Forest, max_depth=4, 30 arbres » face à 240 trades. Trente arbres à profondeur quatre, cela fait de l'ordre de quatre cents règles de découpe apprises sur 240 exemples &mdash; toujours bien plus de capacité que les données n'en supportent. C'est une erreur plus petite qu'un réseau à cinq couches sur 180 trades, pas une erreur d'une autre nature. Si vous travaillez avec quelques centaines de trades, le modèle honnête est une régression logistique sur trois ou quatre variables, ou un arbre de décision que vous pouvez imprimer sur une page et lire. Si vous ne pouvez pas lire le modèle, vous ne pouvez pas savoir s'il a appris votre avantage ou votre échantillon.</p>
+        <p style="margin-top:0.75rem">Deuxième chose que le tableau masque : la sortie d'une Random Forest est une fraction d'arbres qui votent, non une probabilité calibrée. Un « 0,65 » ne veut pas dire 65 % de chances de gagner. Vous pouvez toujours l'utiliser comme classement &mdash; prenez le tiers le mieux noté de vos signaux &mdash; mais traiter ce nombre comme une probabilité, et surtout inverser les faibles en signaux vendeurs, c'est prêter un sens à une échelle arbitraire.</p>
+      </div>
 
-      <p><strong>Comparaison de référence : et si Nina avait pris TOUS les signaux (sans filtre ML) ?</strong></p>
+      <p><strong>Le résumé honnête de tout l'épisode :</strong> Nina a remplacé un processus dont elle pouvait prouver qu'il était cassé par un autre dont elle avait au moins testé les modes de défaillance, et elle a monté en taille assez lentement pour qu'une seconde erreur reste survivable. Voilà la leçon transposable. Savoir si son filtre fonctionne encore aujourd'hui, seules ses propres exécutions consignées peuvent le dire &mdash; et c'est pareil pour les vôtres.</p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Impact du filtre ML : trades filtrés (68,2 %) vs tous les signaux (54,7 %)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Scénario</th>
-            <th style="padding:0.75rem;text-align:right;">Trades pris</th>
-            <th style="padding:0.75rem;text-align:right;">Taux de réussite</th>
-            <th style="padding:0.75rem;text-align:right;">R moyen</th>
-            <th style="padding:0.75rem;text-align:right;">P&L total</th>
-            <th style="padding:0.75rem;text-align:left;">Analyse</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Sans filtre (tous les signaux)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">210</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">54.7%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">0.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">+$34,100</span></td>
-            <td style="padding:0.75rem;">Référence : avantage médiocre, beaucoup de trades de bruit</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;"><strong>Filtrés par le ML (haute confiance)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">122</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;"><strong>Le ML a apporté +21 300 $ (+62,5 % d'amélioration !)</strong></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="5" style="padding:0.75rem;text-align:right;font-weight:bold;">VALEUR AJOUTÉE DU FILTRE ML :</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">+21 300 $ (62,5 % de mieux)</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Les enseignements clés du succès de la V2 de Nina :</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>Le filtre ML a écarté 42 % des signaux</strong> → Setups à faible confiance ignorés</li>
-        <li><strong>Trades filtrés : 68,2 % de réussite</strong> contre 54,7 % pour la référence → +13,5 % d'amélioration</li>
-        <li><strong>De meilleurs multiples de R :</strong> 1,4R en moyenne contre 0,5R pour la référence → le ML a retenu les setups au meilleur R:R</li>
-        <li><strong>62,5 % d'amélioration du P&L :</strong> +55 400 $ contre +34 100 $ pour la référence = +21 300 $ de valeur ajoutée</li>
-        <li><strong>Performance réaliste :</strong> les 68 % en réel collent aux 67 % du test walk-forward → aucun surapprentissage !</li>
-      </ul>
-
-      <p><strong>Résultats finaux de Nina : perte du T1 2024 vs redressement de juin-octobre 2024</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Le parcours complet : du désastre à -47 300 $ au succès à +55 400 $</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Période</th>
-            <th style="padding:0.75rem;text-align:left;">Version du modèle</th>
-            <th style="padding:0.75rem;text-align:right;">Taux de réussite</th>
-            <th style="padding:0.75rem;text-align:right;">R moyen</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Leçon apprise</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,82,82,0.12)">
-            <td style="padding:0.75rem;">Q1 2024</td>
-            <td style="padding:0.75rem;">V1 (surapprise)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">41.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-0.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-$47,300</span></td>
-            <td style="padding:0.75rem;">Biais d'anticipation, découpage aléatoire, réseau de neurones démesuré</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;">Juin-oct. 2024</td>
-            <td style="padding:0.75rem;">V2 (validée)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;">Variables propres, walk-forward, Random Forest, optimisée sur l'espérance</td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="4" style="padding:0.75rem;text-align:right;font-weight:bold;">RÉSULTAT NET 2024 :</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$8,100</span></td>
-            <td style="padding:0.75rem;font-weight:bold;">À l'équilibre après une leçon coûteuse</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>La sagesse durement acquise de Nina (octobre 2024) :</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        « J'ai perdu 47 300 $ en 3 mois parce que je pensais que le ML était magique. Il ne l'est pas. C'est de la reconnaissance de schémas — et si tu lui donnes de la camelote (biais d'anticipation, découpages aléatoires, réseaux de neurones surappris), tu obtiens des prédictions de camelote.
-        <br><br>
-        La solution n'était pas un meilleur modèle. C'était une meilleure MÉTHODOLOGIE :
-        <br>
-        • Zéro variable d'anticipation (uniquement les données disponibles au moment du signal)<br>
-        • Validation walk-forward (entraîner sur le passé, tester sur le futur, 4 fenêtres glissantes)<br>
-        • Un modèle plus simple (Random Forest bat généralement les réseaux de neurones sur de petits jeux de trades)<br>
-        • Optimiser l'espérance, pas la réussite (68 % à 1,4R > 87 % à -0,4R)<br>
-        • Faire du paper trading sur 20 signaux avant de risquer du capital
-        <br><br>
-        Mon modèle V2 ne prédit pas l'avenir. Il filtre mes setups : 68 % de réussite contre 55 % pour la référence. Cet avantage de +13 % a rapporté 21 300 $ en 5 mois.
-        <br><br>
-        Le ML n'est pas une stratégie. C'est un filtre. Sers-t'en pour éviter les trades à faible probabilité, pas pour en générer. C'est ça, le secret. »
-        <br><br>
-        — Nina Patel, trader quantitative (octobre 2024)
-      </blockquote>
-
-      <p><strong>Coût de la formation ML de Nina :</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>Pertes du T1 2024 :</strong> -47 300 $ (frais de scolarité du modèle surappris)</li>
-        <li><strong>Honoraires du mentor :</strong> -10 000 $ (2 mois × 5 000 $, avril-mai)</li>
-        <li><strong>Investissement total :</strong> -$57,300</li>
-        <li><strong>Redressement sur 5 mois :</strong> +55 400 $ (juin-oct.)</li>
-        <li><strong>Position nette :</strong> -1 900 $ (presque à l'équilibre)</li>
-        <li><strong>Valeur future :</strong> Le filtre ML rapporte désormais environ 4 300 $/mois (+51 000 $/an) par rapport à la référence sans filtre</li>
-        <li><strong>Calendrier du retour sur investissement :</strong> L'investissement est intégralement remboursé fin novembre, ensuite c'est du profit pur</li>
-      </ul>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Vous êtes à peu près à la moitié de cette leçon.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Un bon moment pour faire une pause. Ce qui suit s’appuie directement sur ce que vous venez de lire.</p>
@@ -660,20 +487,24 @@
         <h4>🎓 À retenir</h4>
         <ul>
           <li><strong>Le ML est un filtre, pas une stratégie :</strong> Sers-t'en pour prédire quels setups ont la meilleure espérance, pas pour générer des trades</li>
-          <li><strong>Ingénierie des variables > choix du modèle :</strong> De bonnes variables (RSI, distance au VWAP) battent à chaque fois les modèles sophistiqués</li>
+          <li><strong>Le choix des variables compte plus que le choix du modèle :</strong> et choisir moins de variables compte plus que tout. Chaque variable ajoutée est un moyen de plus pour le modèle d'ajuster votre échantillon plutôt que votre avantage.</li>
           <li><strong>La validation walk-forward est obligatoire :</strong> Un découpage entraînement/test sur des séries temporelles = fuite de données. Utilise des fenêtres glissantes</li>
-          <li><strong>Optimise l'espérance :</strong> 80 % de réussite avec un mauvais R:R perd de l'argent. 55 % de réussite avec 3R gagne</li>
+          <li><strong>Optimise l'espérance :</strong> 80 % de précision avec un mauvais rapport de gain perd de l'argent ; 55 % à 3R non. La précision est la métrique qu'un classifieur affiche par défaut et presque jamais celle sur laquelle vous êtes payé.</li>
           <li><strong>Évite le biais d'anticipation :</strong> Les variables ne doivent utiliser QUE les données disponibles au moment de la prédiction</li>
-          <li><strong>Random Forest > réseaux de neurones :</strong> Pour la plupart des applications de trading, les modèles plus simples généralisent mieux</li>
+          <li><strong>Ajustez la capacité du modèle à la taille de l'échantillon, pas à la mode :</strong> une forêt bat un réseau sur quelques centaines de trades parce que les données supportent moins de paramètres, non parce que les forêts sont meilleures. Sur 200 trades, le modèle honnête est une régression logistique sur trois ou quatre variables, ou un arbre lisible sur une page.</li>
         </ul>
       </div>
 
       <div class="callout-key">
         <h4>🎯 Exercice pratique : mettre en place l'ingénierie des variables ML pour filtrer les trades</h4>
-        <p><strong>Objectif :</strong> Construis un modèle ML qui filtre tes setups existants et améliore l'espérance de 10 à 15 % en tradant de façon sélective.</p>
+        <p><strong>Objectif :</strong> Construisez le plus petit modèle capable de classer vos configurations existantes, et découvrez honnêtement s'il les classe seulement. Notez ce que cet exercice ne promet pas : un chiffre d'amélioration. Savoir si un filtre vous aide est une question empirique sur vos propres trades, et un objectif chiffré annoncé d'avance est exactement ce qui pousse à continuer de régler jusqu'à l'atteindre.</p>
 
         <p><strong>Partie 1 : ingénierie des variables (l'étape la plus importante)</strong></p>
-        <p>Pour chacun de tes trades historiques, calcule ces variables AU MOMENT DU SIGNAL (pas d'anticipation !) :</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Modèle de jeu de variables (20+ variables recommandées) :
+        <p>Pour chacun de vos trades passés, calculez ces variables AU MOMENT DU SIGNAL (pas de look-ahead !). Mais d'abord, la contrainte qui gouverne tout l'exercice :</p>
+
+        <p><strong>Choisissez trois à six variables. Pas vingt.</strong> Un plancher grossier, c'est dix trades par variable avant qu'un modèle ait la moindre chance d'apprendre une relation plutôt que de mémoriser votre échantillon &mdash; et c'est un plancher, pas un objectif. Avec soixante trades consignés, vous pouvez supporter six variables tout au plus, et vous obtiendrez une réponse plus honnête avec trois. C'est le calcul qui a tué V1 : trente-deux variables sur 180 trades font moins de six trades par variable, ce qui n'est pas un modèle mais une table de correspondance. La liste ci-dessous est un menu où choisir, non un ensemble à utiliser.</p>
+
+        <p>Choisissez les trois ou quatre pour lesquelles vous pouvez donner une raison en une phrase &mdash; « mes perdants se concentrent quand j'entre loin du VWAP », « mes perdants se concentrent dans les quinze premières minutes » &mdash; et laissez le reste de côté. Si vous ne pouvez pas dire pourquoi une variable devrait compter, le modèle y trouvera quand même une relation, et cette relation sera du bruit.</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Menu de variables -- choisissez-en 3 à 6, pas toutes :
 
 VARIABLES DE PRIX :
 1. Distance au VWAP (%) : (prix - VWAP) / VWAP
@@ -704,11 +535,12 @@ VARIABLES DE TEMPS :
 
 VARIABLES DE RÉGIME :
 18. Niveau du VIX : lecture actuelle du VIX
-19. Score de régime : composite ADX + ATR + largeur des bandes
+19. Score de régime : rang centile de ADX, ATR et largeur des bandes, moyenné
+    (ne les additionnez pas bruts -- ils sont dans des unités différentes)
 20. Variation du DXY % : vent contraire ou favorable côté macro
 
-TES VARIABLES (à calculer sur 50+ trades historiques) :
-Trade 1 : [variable 1 : ___, variable 2 : ___, ..., variable 20 : ___, résultat : gain/perte]
+TES VARIABLES (choisis-en 3-6, puis calcule-les sur 50+ trades historiques) :
+Trade 1 : [Variable A : ___, Variable B : ___, Variable C : ___, Résultat : Gain/Perte]
 Trade 2 : [...]</code></pre>
 
         <p><strong>Partie 2 : découpage entraînement/test (UNIQUEMENT temporel)</strong></p>
@@ -803,7 +635,19 @@ Si l'écart est inférieur à 2%, garde le modèle plus simple (moins de surappr
 Seuils de confiance :
 Probabilité > 0,65 = haute confiance (prendre le trade)
 Probabilité 0,45-0,65 = neutre (passer le trade)
-Probabilité < 0,45 = faible confiance (passer ou inverser)
+Probabilité &lt; 0,45 = faible confiance (passer -- NE PAS inverser)
+
+Une note sur ce que sont ces nombres. Un score de Random Forest est la fraction
+d'arbres qui votent oui. Ce n'est pas une probabilité calibrée : 0,65 ne veut pas
+dire 65 % de chances de gagner, et l'écart entre 0,65 et 0,45 n'a aucun sens fixe
+en trades. Utilisez le score comme classement -- prenez le tiers supérieur de vos
+signaux, plutôt que comme probabilité, et revérifiez le seuil à chaque
+réentraînement, car l'échelle dérive quand le modèle dérive.
+
+Et ne tradez jamais les scores faibles à l'envers. Un modèle qui ne trouve pas de
+raison de prendre un trade n'a pas pour autant trouvé de raison de le vendre à
+découvert ; il n'a rien trouvé. Inverser transforme "aucune information" en une
+position qui paie des coûts.
 
 Résultats de backtest par seuil :
 Tous les trades (sans filtre) : 55% de réussite, 0,5R en moyenne
@@ -841,10 +685,10 @@ Processus de réentraînement :
 - Comparer le nouveau modèle à l'ancien sur le même jeu de test
 - Déployer seulement si le nouveau fait mieux de 3% ou plus</code></pre>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Objectif de mise en œuvre :</strong> Construis un filtre ML sur 4 à 6 semaines à partir de tes 50 à 100 derniers trades. Déploie-le en paper trading sur 20 signaux. Objectif d'exemple : améliorer l'espérance d'au moins 10 % par un filtrage sélectif. Si ça marche, le ML aura relevé ton espérance de façon mesurable en t'aidant à éviter les setups à faible probabilité. C'est ainsi que les professionnels utilisent le ML : pas comme une baguette magique, mais comme une amélioration systématique de l'avantage.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Objectif de mise en œuvre :</strong> Construisez le filtre en 4 à 6 semaines à partir de vos 50 à 100 derniers trades, puis passez-le sur 20 signaux papier. Le résultat recherché n'est pas un pourcentage d'amélioration &mdash; à cette taille d'échantillon, vous ne pourriez pas le mesurer de façon fiable même s'il existait. C'est la réponse à une question plus étroite : le modèle classe-t-il seulement vos trades ? Triez vos trades consignés par score du modèle et comparez le tiers supérieur au tiers inférieur. Si les deux groupes donnent des résultats indiscernables, le modèle n'a rien appris et la bonne action est d'arrêter, pas d'ajouter des variables. Ce résultat négatif vaut les quatre semaines ; c'est exactement le constat dont V1 avait besoin et qu'elle n'a obtenu qu'après avoir coûté de l'argent réel.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Tu viens d'apprendre ce que la plupart des traders ML découvrent après avoir grillé un compte : l'ingénierie des variables prime sur le choix du modèle, les tests walk-forward sont obligatoires, et il faut optimiser l'espérance (pas la réussite). Tu peux maintenant utiliser le ML comme un outil, pas comme un pari.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Les trois échecs de cette leçon &mdash; des variables en look-ahead, un découpage mélangé et plus de modèle que de données &mdash; partagent une propriété : chacun rend un backtest meilleur d'une façon invisible depuis l'intérieur du backtest. C'est pourquoi la discipline doit être procédurale et non intuitive. On ne peut pas dire en regardant un bon résultat s'il vient d'un avantage ou de l'un de ces trois défauts, et c'est exactement pour cela que le processus doit les écarter avant que le résultat n'arrive.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Leçons associées</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

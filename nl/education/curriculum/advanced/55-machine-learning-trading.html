@@ -334,7 +334,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Model</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Neuraal netwerk: 5 lagen, 128 neuronen (~50.000 gewichten op 180 trades!)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 bomen (~450 splitsingsregels op 240 trades)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 bomen &mdash; ongeveer 450 splitsregels geleerd uit 240 trades, kleiner dan V1 en nog steeds meer capaciteit dan de data dragen</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Optimalisatiedoel</strong></td>
@@ -410,203 +410,30 @@
         </tbody>
       </table>
 
-      <p><strong>Kernpunt:</strong> V2 gaf 67 % winnaars tegenover 87 % bij V1. Maar die 67 % van V2 was ECHT (gevalideerd over 4 tijdvensters), terwijl de 87 % van V1 vals was (overfitte ruis).</p>
+      <p><strong>Kernpunt:</strong> V2 mat 67% waar V1 87% mat, en het lagere getal is het betrouwbaardere omdat het vier vensters overleefde waarop het model nooit is gefit. Wees toch voorzichtig met het gewicht dat je eraan geeft: vier testvensters uit een paar honderd trades betekent enkele tientallen trades per venster, en enkele tientallen trades meten een winstpercentage tot op ongeveer tien procentpunten nauwkeurig. Wat de vier vensters werkelijk uitsluiten is het falen dat V1 had: een trainingsscore die instort op ongeziene data. Ze leggen het ware percentage niet vast, en geen enkele hoeveelheid hersplitsen van dezelfde trades zal dat doen.</p>
 
 
 
-      <h3 id="act-3-live-trading-the-proper-model-june-october-2024">Akte 3: het juiste model live handelen (juni-oktober 2024)</h3>
+      <h3 id="act-3-what-the-rebuild-establishes">Bedrijf 3: Wat de herbouw aantoont &mdash; en waar V2 nog steeds fout zit</h3>
 
-      <p><strong>Nina's uitrolstrategie voor V2:</strong></p>
+      <p>Nina zette V2 uit zoals het hoort: eerst twintig papieren signalen, dan halve omvang, dan vol, met maandelijkse hertraining en een regel voor wanneer een hertraind model het zittende vervangt. De papierfase moet je goed lezen. Veertien winnaars op twintig is genoeg om een kapot model te betrappen &mdash; een model met een live bug faalt meestal opvallend, niet subtiel &mdash; en bij lange na niet genoeg om een percentage van 67% te bevestigen. De standaardfout bij twintig trades is ongeveer elf procentpunten.</p>
+
+      <p>Wat we je niet gaan geven is haar live P&amp;L. Een eerdere versie van deze pagina droeg er vijf maanden van, een basisvergelijking die beweerde dat het filter $21.300 toevoegde, een kop over "62,5% verbetering" en een terugverdientijd. Elk van die getallen was verzonnen, en erger nog: het was het verkeerde soort bewijs voor de gemaakte bewering. Vijf maanden gefilterde signalen van één trader kunnen "het filter werkt" niet scheiden van "de markt paste bij deze setups"; je zou het filter en de basislijn over dezelfde trades in dezelfde periode moeten draaien, vele malen, voordat het verschil iets betekende.</p>
+
+      <p><strong>Wat de twee versies werkelijk aantonen:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>Papieren validatie over 20 trades (mei 2024): 14 winnaars, gemiddeld 1,5R &mdash; genoeg om een kapot model te betrappen, bij lange na niet genoeg om een trefkans te bevestigen</li>
-        <li>Live gestart op 50 % positiegrootte (juni): zie de junirij in de tabel hieronder</li>
-        <li>Volledige positiegrootte (vanaf juli): ML-filter operationeel</li>
-        <li>Maandelijkse hertraining: nieuwe trades toevoegen, walk-forward opnieuw draaien, het model bijwerken bij +3 % verbetering</li>
+        <li><strong>De instorting van V1 is echt bewijs.</strong> 87% in de backtest en 41% live met hetzelfde model is geen pech. Elk van de vijf fouten heeft een bekend mechanisme, en elk blaast een backtest op in een richting die je vooraf kunt voorspellen. Dat is het nuttige deel van dit verhaal, en het hangt van niets af wat daarna gebeurde.</li>
+        <li><strong>V2 verwijderde precies die mechanismen.</strong> Geen look-aheadkenmerken, tijdgeordende splitsingen, een kleiner model, verwachtingswaarde als doel. Elke verandering is verdedigbaar op eigen logica, vóór één enkele live trade.</li>
+        <li><strong>De train-testgaten bleven klein over vier vensters.</strong> Dat is de afwezigheid van een rode vlag eerder dan het bewijs van een edge, en vier vensters uit een paar honderd trades zijn een kleine steekproef uit een kleine steekproef.</li>
       </ul>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Nina's live resultaten met V2: prestatie van het ML-filter (juni-oktober 2024, 5 maanden)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Maand</th>
-            <th style="padding:0.75rem;text-align:right;">Signalen</th>
-            <th style="padding:0.75rem;text-align:right;">Door ML gefilterd</th>
-            <th style="padding:0.75rem;text-align:right;">Genomen trades</th>
-            <th style="padding:0.75rem;text-align:right;">Trefkans</th>
-            <th style="padding:0.75rem;text-align:right;">Gem. R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Jun. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">42</td>
-            <td style="padding:0.75rem;text-align:right;">18 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">67%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.3R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$9,400</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Jul. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">38</td>
-            <td style="padding:0.75rem;text-align:right;">15 (39%)</td>
-            <td style="padding:0.75rem;text-align:right;">23</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">70%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.6R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$12,700</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Aug. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">46</td>
-            <td style="padding:0.75rem;text-align:right;">20 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">26</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">65%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.2R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,800</span></td>
-          </tr><tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Sep. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">40</td>
-            <td style="padding:0.75rem;text-align:right;">16 (40%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">71%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$11,900</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Okt. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">44</td>
-            <td style="padding:0.75rem;text-align:right;">19 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">25</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,600</span></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">TOTALEN OVER 5 MAANDEN:</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;">122 trades</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$55,400</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Waar V2 volgens zijn eigen cijfers nog steeds overfit.</strong> De vergelijkingstabel verkoopt de oplossing als "Random Forest, max_depth=4, 30 bomen" tegenover 240 trades. Dertig bomen op diepte vier is in de orde van vierhonderd splitsregels geleerd uit 240 voorbeelden &mdash; nog altijd veel meer capaciteit dan de data dragen. Het is een kleinere fout dan een vijflaags netwerk op 180 trades, geen andersoortige fout. Werk je met een paar honderd trades, dan is het eerlijke model een logistische regressie op drie of vier kenmerken, of een beslisboom die je op één pagina kunt afdrukken en lezen. Kun je het model niet lezen, dan kun je niet vaststellen of het je edge heeft geleerd of je steekproef.</p>
+        <p style="margin-top:0.75rem">Een tweede ding dat de tabel verbergt: de uitvoer van een Random Forest is een fractie stemmende bomen, geen gekalibreerde kans. Een "0,65" betekent niet 65% kans op een winnaar. Je kunt het nog steeds als rangschikking gebruiken &mdash; neem het best scorende derde van je signalen &mdash; maar het getal als kans behandelen, en zeker de lage omkeren in shortsignalen, is betekenis lezen in een willekeurige schaal.</p>
+      </div>
 
-      <p><strong>Vergelijkingsbasis: wat als Nina ALLE signalen had genomen (zonder ML-filter)?</strong></p>
+      <p><strong>De eerlijke samenvatting van de hele episode:</strong> Nina verving een proces waarvan zij kon bewijzen dat het kapot was door een proces waarvan zij de faalwijzen tenminste had getest, en schaalde langzaam genoeg op dat een tweede vergissing overleefbaar zou zijn geweest. Dat is de overdraagbare les. Of haar filter vandaag nog werkt, kunnen alleen haar eigen gelogde fills beantwoorden, en voor de jouwe geldt hetzelfde.</p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Effect van het ML-filter: gefilterde trades (68,2 %) vs. alle signalen (54,7 %)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Scenario</th>
-            <th style="padding:0.75rem;text-align:right;">Genomen trades</th>
-            <th style="padding:0.75rem;text-align:right;">Trefkans</th>
-            <th style="padding:0.75rem;text-align:right;">Gem. R</th>
-            <th style="padding:0.75rem;text-align:right;">Totale P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Analyse</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Geen filter (alle signalen)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">210</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">54.7%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">0.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">+$34,100</span></td>
-            <td style="padding:0.75rem;">Basislijn: middelmatige edge, veel ruistrades</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;"><strong>Door ML gefilterd (hoog vertrouwen)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">122</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;"><strong>ML leverde +$21.300 op (+62,5 % verbetering!)</strong></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="5" style="padding:0.75rem;text-align:right;font-weight:bold;">MEERWAARDE VAN HET ML-FILTER:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">+$21.300 (62,5 % meer)</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Belangrijkste inzichten uit Nina's succes met V2:</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>Het ML-filter schrapte 42 % van de signalen</strong> → Setups met laag vertrouwen overgeslagen</li>
-        <li><strong>Gefilterde trades: 68,2 % winnaars</strong> tegenover 54,7 % in de basislijn → +13,5 % verbetering</li>
-        <li><strong>Betere R-multiples:</strong> gemiddeld 1,4R tegenover 0,5R in de basislijn → ML koos de setups met de beste R:R</li>
-        <li><strong>62,5 % verbetering van de P&L:</strong> +$55.400 tegenover +$34.100 in de basislijn = +$21.300 meerwaarde</li>
-        <li><strong>Realistische prestatie:</strong> de 68 % live kwam overeen met de 67 % uit de walk-forward-test → geen overfitting!</li>
-      </ul>
-
-      <p><strong>Nina's eindresultaat: verlies in Q1 2024 vs. herstel van juni-oktober 2024</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>De volledige reis: van de ramp van -$47.300 naar het succes van +$55.400</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Periode</th>
-            <th style="padding:0.75rem;text-align:left;">Modelversie</th>
-            <th style="padding:0.75rem;text-align:right;">Trefkans</th>
-            <th style="padding:0.75rem;text-align:right;">Gem. R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Geleerde les</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,82,82,0.12)">
-            <td style="padding:0.75rem;">Q1 2024</td>
-            <td style="padding:0.75rem;">V1 (overfit)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">41.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-0.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-$47,300</span></td>
-            <td style="padding:0.75rem;">Look-ahead bias, willekeurige splitsing, neuraal netwerk als overkill</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;">Jun.-okt. 2024</td>
-            <td style="padding:0.75rem;">V2 (gevalideerd)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;">Schone features, walk-forward, Random Forest, geoptimaliseerd op verwachting</td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="4" style="padding:0.75rem;text-align:right;font-weight:bold;">NETTORESULTAAT 2024:</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$8,100</span></td>
-            <td style="padding:0.75rem;font-weight:bold;">Quitte na een dure les</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Nina's zwaarbevochten wijsheid (oktober 2024):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        «Ik verloor $47.300 in 3 maanden omdat ik dacht dat ML magie was. Dat is het niet. Het is patroonherkenning — en voer je er rommel in (look-ahead bias, willekeurige splitsingen, overfitte neurale netwerken), dan komt er rommel als voorspelling uit.
-        <br><br>
-        De oplossing was geen beter model. Het was een betere METHODIEK:
-        <br>
-        • Nul features met look-ahead (alleen data die op het moment van het signaal beschikbaar is)<br>
-        • Walk-forward-validatie (trainen op het verleden, testen op de toekomst, 4 rollende vensters)<br>
-        • Een eenvoudiger model (Random Forest wint meestal van neurale netwerken bij kleine tradesets)<br>
-        • Optimaliseren op verwachting, niet op trefzekerheid (68 % bij 1,4R > 87 % bij -0,4R)<br>
-        • 20 signalen paper traden voordat je kapitaal riskeert
-        <br><br>
-        Mijn V2-model voorspelt de toekomst niet. Het filtert mijn setups: 68 % winnaars tegenover 55 % in de basislijn. Die edge van +13 % leverde $21.300 op in 5 maanden.
-        <br><br>
-        ML is geen strategie. Het is een filter. Gebruik het om trades met lage kans over te slaan, niet om ze te genereren. Dat is het geheim.»
-        <br><br>
-        — Nina Patel, kwantitatief trader (oktober 2024)
-      </blockquote>
-
-      <p><strong>Kosten van Nina's ML-opleiding:</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>Verliezen in Q1 2024:</strong> -$47.300 (lesgeld voor het overfitte model)</li>
-        <li><strong>Kosten van de mentor:</strong> -$10.000 (2 maanden × $5.000, april-mei)</li>
-        <li><strong>Totale investering:</strong> -$57,300</li>
-        <li><strong>Herstel over 5 maanden:</strong> +$55.400 (juni-okt.)</li>
-        <li><strong>Nettopositie:</strong> -$1.900 (bijna quitte)</li>
-        <li><strong>Toekomstige waarde:</strong> Het ML-filter levert nu ongeveer $4.300/maand op (+$51.000/jaar) ten opzichte van de basislijn zonder filter</li>
-        <li><strong>Terugverdientijd:</strong> De investering is eind november volledig terugverdiend, daarna is het pure winst</li>
-      </ul>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Je bent ongeveer halverwege deze les.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Een goed moment om even te pauzeren. Wat volgt bouwt rechtstreeks voort op wat je net hebt gelezen.</p>
@@ -660,20 +487,24 @@
         <h4>🎓 De kern</h4>
         <ul>
           <li><strong>ML is een filter, geen strategie:</strong> Gebruik het om te voorspellen welke setups een hogere verwachting hebben, niet om trades te genereren</li>
-          <li><strong>Feature engineering > modelkeuze:</strong> Goede features (RSI, afstand tot VWAP) verslaan elke keer weer chique modellen</li>
+          <li><strong>De keuze van kenmerken telt zwaarder dan de keuze van model:</strong> en minder kenmerken kiezen telt het zwaarst. Elk kenmerk dat je toevoegt is weer een manier voor het model om je steekproef te fitten in plaats van je edge.</li>
           <li><strong>Walk-forward-validatie is verplicht:</strong> Een trainings-/testsplitsing op tijdreeksen = datalekkage. Gebruik rollende vensters</li>
-          <li><strong>Optimaliseer op verwachting:</strong> 80 % trefzekerheid met een slechte R:R verliest geld. 55 % trefzekerheid met 3R wint</li>
+          <li><strong>Optimaliseer op verwachting:</strong> 80% nauwkeurigheid bij een slechte payoffverhouding verliest geld; 55% bij 3R niet. Nauwkeurigheid is de maatstaf die een classifier standaard rapporteert en vrijwel nooit die waarop je wordt betaald.</li>
           <li><strong>Vermijd look-ahead bias:</strong> Features mogen ALLEEN data gebruiken die op het moment van de voorspelling beschikbaar is</li>
-          <li><strong>Random Forest > neurale netwerken:</strong> Voor de meeste toepassingen in trading generaliseren eenvoudiger modellen beter</li>
+          <li><strong>Stem de modelcapaciteit af op de steekproefomvang, niet op de mode:</strong> een forest verslaat een netwerk op een paar honderd trades omdat de data minder parameters dragen, niet omdat forests beter zijn. Bij 200 trades is het eerlijke model een logistische regressie op drie of vier kenmerken, of een boom die je op één pagina kunt lezen.</li>
         </ul>
       </div>
 
       <div class="callout-key">
         <h4>🎯 Praktijkoefening: pas ML-feature engineering toe om trades te filteren</h4>
-        <p><strong>Doel:</strong> Bouw een ML-model dat je bestaande setups filtert en de verwachting met 10-15 % verbetert door selectief te handelen.</p>
+        <p><strong>Doel:</strong> Bouw het kleinste model dat je bestaande setups kan rangschikken, en zoek eerlijk uit of het ze überhaupt rangschikt. Merk op wat deze oefening niet belooft: een verbeteringspercentage. Of een filter jou helpt is een empirische vraag over je eigen trades, en een vooraf genoemd streefgetal is precies wat mensen verleidt te blijven bijstellen tot ze het halen.</p>
 
         <p><strong>Deel 1: feature engineering (de belangrijkste stap)</strong></p>
-        <p>Bereken voor elk van je historische trades deze features OP HET MOMENT VAN HET SIGNAAL (geen look-ahead!):</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Sjabloon voor een featureset (20+ features aanbevolen):
+        <p>Bereken voor elk van je historische trades deze kenmerken OP HET MOMENT VAN HET SIGNAAL (geen look-ahead!). Maar eerst de beperking die de hele oefening bepaalt:</p>
+
+        <p><strong>Kies drie tot zes kenmerken. Geen twintig.</strong> Een ruwe ondergrens is tien trades per kenmerk voordat een model enige kans heeft een relatie te leren in plaats van je steekproef uit het hoofd te leren &mdash; en dat is een ondergrens, geen doel. Met zestig gelogde trades kun je hooguit zes kenmerken dragen, en met drie krijg je een eerlijker antwoord. Het is dezelfde rekensom die V1 fataal werd: tweeëndertig kenmerken op 180 trades is minder dan zes trades per kenmerk, en dat is geen model maar een opzoektabel. De lijst hieronder is een menu om uit te kiezen, geen set om te gebruiken.</p>
+
+        <p>Kies de drie of vier waarvoor je in één zin een reden kunt geven &mdash; "mijn verliezers clusteren wanneer ik ver van VWAP instap", "mijn verliezers clusteren in de eerste vijftien minuten" &mdash; en laat de rest weg. Kun je niet zeggen waarom een kenmerk zou moeten uitmaken, dan vindt het model er toch een relatie in, en die relatie is ruis.</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Featuremenu -- kies er 3 tot 6, gebruik ze niet allemaal:
 
 KOERSFEATURES:
 1. Afstand tot VWAP (%): (koers - VWAP) / VWAP
@@ -704,11 +535,12 @@ TIJDFEATURES:
 
 REGIMEFEATURES:
 18. Niveau van de VIX: huidige VIX-stand
-19. Regimescore: samenstelling van ADX + ATR + bandbreedte
+19. Regimescore: percentielrang van ADX, ATR en bandbreedte, gemiddeld
+    (niet ruw optellen -- ze staan in verschillende eenheden)
 20. Verandering van de DXY %: macro-tegenwind of -rugwind
 
-JOUW FEATURES (bereken voor 50+ historische trades):
-Trade 1: [feature 1: ___, feature 2: ___, ..., feature 20: ___, uitkomst: winst/verlies]
+JOUW FEATURES (kies er 3-6 en bereken ze voor 50+ historische trades):
+Trade 1: [Feature A: ___, Feature B: ___, Feature C: ___, Uitkomst: Winst/Verlies]
 Trade 2: [...]</code></pre>
 
         <p><strong>Deel 2: trainings-/testsplitsing (UITSLUITEND op tijd)</strong></p>
@@ -803,7 +635,18 @@ Is het verschil kleiner dan 2%, gebruik dan het eenvoudigere model (minder overf
 Vertrouwensdrempels:
 Kans > 0,65 = hoog vertrouwen (trade nemen)
 Kans 0,45-0,65 = neutraal (trade overslaan)
-Kans < 0,45 = laag vertrouwen (overslaan of omkeren)
+Kans &lt; 0,45 = laag vertrouwen (overslaan -- NIET omkeren)
+
+Een opmerking over wat deze getallen zijn. Een Random Forest-score is de fractie
+bomen die ja stemt. Het is geen gekalibreerde kans: 0,65 betekent niet 65% kans op
+een winnaar, en het gat tussen 0,65 en 0,45 heeft in trades geen vaste betekenis.
+Gebruik de score als rangschikking -- neem het bovenste derde van je signalen --
+in plaats van als kans, en controleer de grens bij elke hertraining opnieuw, want
+de schaal schuift mee als het model schuift.
+
+En handel lage scores nooit omgekeerd. Een model dat geen reden vindt om een trade
+te nemen, heeft daarmee geen reden gevonden om hem te shorten; het heeft niets
+gevonden. Omkeren maakt van "geen informatie" een positie die kosten betaalt.
 
 Backtestresultaten per drempel:
 Alle trades (geen filter): 55% winnaars, gemiddeld 0,5R
@@ -841,10 +684,10 @@ Proces voor hertraining:
 - Vergelijk het nieuwe model met het oude op dezelfde testset
 - Rol alleen uit als het nieuwe model 3% of meer beter presteert</code></pre>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Doel van de invoering:</strong> Bouw in 4-6 weken een ML-filter met je laatste 50-100 trades. Zet het 20 signalen lang in paper trading in. Voorbeelddoel: de verwachting met minimaal 10 % verbeteren door selectief te filteren. Lukt dat, dan heeft ML je verwachting meetbaar verhoogd door je te helpen setups met lage kans over te slaan. Zo gebruiken professionals ML: niet als magie, maar als systematische versterking van de edge.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Doel van de invoering:</strong> Bouw het filter in 4-6 weken met je laatste 50-100 trades en laat het dan los op 20 papieren signalen. Het resultaat waar je naar zoekt is geen verbeteringspercentage &mdash; bij deze steekproefomvang zou je er geen betrouwbaar kunnen meten, ook al bestond het. Het is het antwoord op een nauwere vraag: rangschikt het model je trades überhaupt? Sorteer je gelogde trades op modelscore en vergelijk het bovenste derde met het onderste. Zijn de uitkomsten van beide groepen niet te onderscheiden, dan heeft het model niets geleerd en is stoppen de juiste actie, niet kenmerken toevoegen. Dat negatieve resultaat is de vier weken waard; het is precies de bevinding die V1 nodig had en pas kreeg toen zij echt geld had gekost.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Je hebt net geleerd wat de meeste ML-traders pas ontdekken na een opgeblazen account: feature engineering telt zwaarder dan modelkeuze, walk-forward-tests zijn verplicht en je moet op verwachting optimaliseren (niet op trefzekerheid). Nu kun je ML als gereedschap gebruiken in plaats van als gok.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">De drie mislukkingen in deze les &mdash; look-aheadkenmerken, een geschudde splitsing en meer model dan data &mdash; delen één eigenschap: elk laat een backtest er beter uitzien op een manier die van binnenuit de backtest onzichtbaar is. Daarom moet de discipline procedureel zijn en niet intuïtief. Je kunt aan een goed resultaat niet zien of het van een edge kwam of van een van deze drie, en juist daarom moet het proces ze uitsluiten voordat het resultaat binnenkomt.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Gerelateerde lessen</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

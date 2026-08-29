@@ -334,7 +334,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Modell</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Neurális háló: 5 réteg, 128 neuron (~50 000 súly 180 ügyletre!)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 fa (~450 vágási szabály 240 ügyletre)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 fa &mdash; nagyjából 450 vágási szabály 240 kereskedésből tanulva, kisebb a V1-nél és még mindig több kapacitás, mint amit az adat elbír</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Optimalizálási cél</strong></td>
@@ -410,203 +410,30 @@
         </tbody>
       </table>
 
-      <p><strong>A lényeg:</strong> A V2 találati aránya 67 % volt, a V1-é 87 %. De a V2-nél a 67 % VALÓDI volt (4 időablakon validálva), a V1-nél a 87 % hamis (túltanult zaj).</p>
+      <p><strong>A lényeg:</strong> A V2 67%-ot mért ott, ahol a V1 87%-ot, és az alacsonyabb szám a megbízhatóbb, mert túlélt négy ablakot, amelyekre a modellt sosem illesztették. Azért vigyázz, mekkora súlyt adsz neki: néhány száz kereskedésből vett négy tesztablak ablakonként pár tucat kereskedést jelent, és pár tucat kereskedés nagyjából tíz százalékpontos pontossággal mér találati arányt. Amit a négy ablak valóban kizár, az a V1 hibája: olyan tanítási pontszám, amely nem látott adaton összeomlik. A valódi arányt nem szögezik le, és ugyanazoknak a kereskedéseknek bármennyi újrafelosztása sem fogja.</p>
 
 
 
-      <h3 id="act-3-live-trading-the-proper-model-june-october-2024">3. felvonás: a helyes modell éles kereskedése (2024. június-október)</h3>
+      <h3 id="act-3-what-the-rebuild-establishes">3. felvonás: Mit bizonyít az újraépítés &mdash; és hol téved még mindig a V2</h3>
 
-      <p><strong>Nina V2 élesítési stratégiája:</strong></p>
+      <p>Nina úgy állította élesbe a V2-t, ahogy kell: előbb húsz papírjelzés, aztán fél méret, aztán teljes, havi újratanítással és szabállyal arra, mikor váltja le az újratanított modell a hivatalban lévőt. A papírszakaszt jól kell olvasni. Húszból tizennégy nyertes elég ahhoz, hogy elkapj egy elromlott modellt &mdash; az élesben hibás modell inkább feltűnően bukik, mint finoman &mdash; és meg sem közelíti azt, amivel egy 67%-os arány megerősíthető. Húsz kereskedésnél a standard hiba körülbelül tizenegy százalékpont.</p>
+
+      <p>Amit nem fogunk megadni, az az éles P&amp;L-je. Ennek az oldalnak egy korábbi változata öt hónapnyit hozott belőle, egy alapvonal-összehasonlítást azzal az állítással, hogy a szűrő 21 300 dollárt tett hozzá, egy „62,5%-os javulás" főcímet és egy megtérülési ütemtervet. Mindegyik szám kitalált volt &mdash; és ami rosszabb, rossz fajta bizonyíték volt az állításhoz. Egyetlen kereskedő öt hónapnyi szűrt jelzése nem tudja elválasztani azt, hogy „a szűrő működik", attól, hogy „a piac illett ezekhez a beállásokhoz"; ahhoz a szűrőt és az alapvonalat ugyanazokon a kereskedéseken, ugyanabban az időszakban, sokszor kellene futtatni, mire a különbség jelentene valamit.</p>
+
+      <p><strong>Amit a két változat valóban bizonyít:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>20 ügyletes papírkereskedéses ellenőrzés (2024. május): 14 nyerő, átlagosan 1,5R &mdash; ennyi elég egy elromlott modell kiszúrására, egy arány megerősítésére közel sem</li>
-        <li>Élesben indult a méret 50 %-ával (június): lásd a lenti táblázat júniusi sorát</li>
-        <li>Teljes pozícióméret (júliustól): az ML-szűrő üzemel</li>
-        <li>Havi újratanítás: új ügyletek hozzáadása, a walk-forward újrafuttatása, a modell frissítése +3 %-os javulás esetén</li>
+        <li><strong>A V1 összeomlása valódi bizonyíték.</strong> Ugyanazzal a modellel 87% a backtest -ben és 41% élesben nem balszerencse. Az öt hiba mindegyikének ismert mechanizmusa van, és mindegyik előre megjósolható irányba fújja fel a backtest -et. Ez a történet hasznos része, és semmi nem függ benne attól, ami utána történt.</li>
+        <li><strong>A V2 pontosan azokat a mechanizmusokat szüntette meg.</strong> Nincsenek előretekintő jellemzők, időrendi felosztás, kisebb modell, célfüggvényként a várható érték. Minden változtatás védhető a saját logikája alapján, egyetlen éles kereskedés előtt.</li>
+        <li><strong>A tanító- és tesztszakasz közti eltérés négy ablakon át kicsi maradt.</strong> Ez inkább a vörös zászló hiánya, mint egy előny bizonyítéka &mdash; és néhány száz kereskedésből vett négy ablak kis minta kis mintája.</li>
       </ul>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Nina éles V2 eredményei: az ML-szűrő teljesítménye (2024. június-október, 5 hónap)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Hónap</th>
-            <th style="padding:0.75rem;text-align:right;">Jelzések</th>
-            <th style="padding:0.75rem;text-align:right;">ML-lel szűrve</th>
-            <th style="padding:0.75rem;text-align:right;">Megkötött ügyletek</th>
-            <th style="padding:0.75rem;text-align:right;">Találati arány</th>
-            <th style="padding:0.75rem;text-align:right;">Átl. R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024. jún.</td>
-            <td style="padding:0.75rem;text-align:right;">42</td>
-            <td style="padding:0.75rem;text-align:right;">18 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">67%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.3R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$9,400</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024. júl.</td>
-            <td style="padding:0.75rem;text-align:right;">38</td>
-            <td style="padding:0.75rem;text-align:right;">15 (39%)</td>
-            <td style="padding:0.75rem;text-align:right;">23</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">70%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.6R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$12,700</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024. aug.</td>
-            <td style="padding:0.75rem;text-align:right;">46</td>
-            <td style="padding:0.75rem;text-align:right;">20 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">26</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">65%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.2R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,800</span></td>
-          </tr><tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024. szept.</td>
-            <td style="padding:0.75rem;text-align:right;">40</td>
-            <td style="padding:0.75rem;text-align:right;">16 (40%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">71%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$11,900</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024. okt.</td>
-            <td style="padding:0.75rem;text-align:right;">44</td>
-            <td style="padding:0.75rem;text-align:right;">19 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">25</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,600</span></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">5 HÓNAP ÖSSZESEN:</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;">122 ügylet</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$55,400</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Hol illeszt túl a V2 még mindig &mdash; a saját számai szerint.</strong> Az összehasonlító táblázat úgy árulja a javítást, hogy „Random Forest, max_depth=4, 30 fa" 240 kereskedéssel szemben. Harminc négy mélységű fa nagyságrendileg négyszáz vágási szabályt jelent 240 példából tanulva &mdash; ez még mindig sokkal több kapacitás, mint amit az adat elbír. Kisebb hiba, mint egy ötrétegű háló 180 kereskedésen, de nem másfajta hiba. Ha néhány száz kereskedéssel dolgozol, a becsületes modell egy három-négy jellemzős logisztikus regresszió, vagy egy döntési fa, amit ki tudsz nyomtatni egy oldalra és el tudsz olvasni. Ha nem tudod elolvasni a modellt, azt sem tudod megmondani, az előnyödet tanulta-e meg vagy a mintádat.</p>
+        <p style="margin-top:0.75rem">Egy másik dolog, amit a táblázat elfed: a Random Forest kimenete az igennel szavazó fák aránya, nem kalibrált valószínűség. A „0,65" nem azt jelenti, hogy 65% az esély a nyerésre. Rangsorként továbbra is használhatod &mdash; vedd a jelzéseid legjobb harmadát &mdash; de a számot valószínűségként kezelni, pláne az alacsonyakat short jelzésekké fordítani, annyi, mint jelentést olvasni bele egy önkényes skálába.</p>
+      </div>
 
-      <p><strong>Összehasonlítási alap: mi lett volna, ha Nina MINDEN jelzést megfog (ML-szűrő nélkül)?</strong></p>
+      <p><strong>Az egész epizód becsületes összegzése:</strong> Nina egy folyamatot, amelyről bizonyítani tudta, hogy hibás, olyanra cserélt, amelynek legalább a hibamódjait tesztelte, és elég lassan növelt méretet ahhoz, hogy egy második tévedés túlélhető maradjon. Ez az átvihető tanulság. Hogy a szűrője ma is működik-e, arra csak a saját naplózott teljesülései tudnak válaszolni &mdash; és ugyanez igaz a tiédre.</p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Az ML-szűrő hatása: szűrt ügyletek (68,2 %) kontra összes jelzés (54,7 %)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Helyzet</th>
-            <th style="padding:0.75rem;text-align:right;">Megkötött ügyletek</th>
-            <th style="padding:0.75rem;text-align:right;">Találati arány</th>
-            <th style="padding:0.75rem;text-align:right;">Átl. R</th>
-            <th style="padding:0.75rem;text-align:right;">Teljes P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Elemzés</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Szűrő nélkül (összes jelzés)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">210</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">54.7%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">0.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">+$34,100</span></td>
-            <td style="padding:0.75rem;">Alap: közepes előny, sok zajügylet</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;"><strong>ML-lel szűrve (magas bizalom)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">122</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;"><strong>Az ML +21 300 dollárt tett hozzá (+62,5 %-os javulás!)</strong></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="5" style="padding:0.75rem;text-align:right;font-weight:bold;">AZ ML-SZŰRŐ HOZZÁADOTT ÉRTÉKE:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">+21 300 dollár (62,5 %-os többlet)</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>A legfontosabb tanulságok Nina V2-sikeréből:</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>Az ML-szűrő a jelzések 42 %-át kiszűrte</strong> → Kihagyta az alacsony bizalmú setupokat</li>
-        <li><strong>Szűrt ügyletek: 68,2 %-os találati arány</strong> az alap 54,7 %-ával szemben → 13,5 %-os javulás</li>
-        <li><strong>Jobb R-szorzók:</strong> átlagosan 1,4R az alap 0,5R-jével szemben → az ML a jobb R:R-ű setupokat választotta</li>
-        <li><strong>62,5 %-os P&L-javulás:</strong> +55 400 dollár az alap +34 100 dollárjával szemben = +21 300 dollár hozzáadott érték</li>
-        <li><strong>Realisztikus teljesítmény:</strong> az éles 68 % egybevágott a walk-forward teszt 67 %-ával → semmi túltanulás!</li>
-      </ul>
-
-      <p><strong>Nina végeredménye: a 2024 Q1-es veszteség kontra a 2024. június-októberi talpra állás</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>A teljes út: a -47 300 dolláros katasztrófától a +55 400 dolláros sikerig</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Időszak</th>
-            <th style="padding:0.75rem;text-align:left;">Modellverzió</th>
-            <th style="padding:0.75rem;text-align:right;">Találati arány</th>
-            <th style="padding:0.75rem;text-align:right;">Átl. R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Megtanult lecke</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,82,82,0.12)">
-            <td style="padding:0.75rem;">Q1 2024</td>
-            <td style="padding:0.75rem;">V1 (túltanult)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">41.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-0.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-$47,300</span></td>
-            <td style="padding:0.75rem;">Előretekintési torzítás, véletlenszerű felosztás, túlméretezett neurális háló</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;">2024. jún.-okt.</td>
-            <td style="padding:0.75rem;">V2 (validált)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;">Tiszta jellemzők, walk-forward, Random Forest, várható értékre optimalizálva</td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="4" style="padding:0.75rem;text-align:right;font-weight:bold;">2024-ES NETTÓ EREDMÉNY:</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$8,100</span></td>
-            <td style="padding:0.75rem;font-weight:bold;">Nullszaldó egy drága lecke után</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Nina keservesen megszerzett bölcsessége (2024. október):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        «3 hónap alatt 47 300 dollárt vesztettem, mert azt hittem, az ML varázslat. Nem az. Mintázatfelismerés — és ha szemetet adsz be neki (előretekintési torzítás, véletlenszerű felosztások, túltanult neurális hálók), szemét előrejelzést kapsz vissza.
-        <br><br>
-        A megoldás nem egy jobb modell volt. Egy jobb MÓDSZERTAN volt:
-        <br>
-        • Nulla előretekintő jellemző (csak a jelzés pillanatában elérhető adat)<br>
-        • Walk-forward validálás (tanítás a múlton, teszt a jövőn, 4 gördülő ablak)<br>
-        • Egyszerűbb modell (kis ügylethalmazokon a Random Forest többnyire veri a neurális hálókat)<br>
-        • A várható értékre optimalizálj, ne a találati arányra (68 % 1,4R-nél > 87 % -0,4R-nél)<br>
-        • Papíron kereskedj le 20 jelzést, mielőtt tőkét kockáztatsz
-        <br><br>
-        A V2 modellem nem jósolja meg a jövőt. A setupjaimat szűri: 68 %-os találati arány az alap 55 %-ával szemben. Ez a +13 %-os előny 5 hónap alatt 21 300 dollárt hozott.
-        <br><br>
-        Az ML nem stratégia. Szűrő. Arra használd, hogy kihagyd az alacsony valószínűségű ügyleteket, ne arra, hogy ügyleteket generálj. Ez a titok.»
-        <br><br>
-        — Nina Patel, kvantitatív trader (2024. október)
-      </blockquote>
-
-      <p><strong>Nina ML-képzésének költsége:</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>2024 Q1-es veszteségek:</strong> -47 300 dollár (a túltanult modell tandíja)</li>
-        <li><strong>Mentordíj:</strong> -10 000 dollár (2 hónap × 5 000 dollár, április-május)</li>
-        <li><strong>Összes befektetés:</strong> -$57,300</li>
-        <li><strong>5 hónapos talpra állás:</strong> +55 400 dollár (június-okt.)</li>
-        <li><strong>Nettó pozíció:</strong> -1 900 dollár (majdnem nullszaldó)</li>
-        <li><strong>Jövőbeli érték:</strong> Az ML-szűrő most havi nagyjából 4 300 dollárt (évi +51 000 dollárt) tesz hozzá a szűrő nélküli alaphoz képest</li>
-        <li><strong>Megtérülési ütem:</strong> A befektetés november végére teljesen megtérül, onnantól tiszta profit</li>
-      </ul>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Nagyjából a lecke felénél tartasz.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Jó pont a megállásra. Ami ezután jön, közvetlenül arra épül, amit az imént olvastál.</p>
@@ -660,20 +487,24 @@
         <h4>🎓 A lényeg</h4>
         <ul>
           <li><strong>Az ML szűrő, nem stratégia:</strong> Arra használd, hogy megjósold, mely setupok várható értéke magasabb, ne arra, hogy ügyleteket generálj</li>
-          <li><strong>Jellemzőtervezés > modellválasztás:</strong> A jó jellemzők (RSI, VWAP-távolság) minden alkalommal megverik a cifra modelleket</li>
+          <li><strong>A jellemzők megválasztása többet számít, mint a modellé:</strong> és a legtöbbet az számít, hogy kevesebb jellemzőt válassz. Minden hozzáadott jellemző egy újabb módja annak, hogy a modell a mintádra illeszkedjen, ne az előnyödre.</li>
           <li><strong>A walk-forward validálás kötelező:</strong> Tanító/teszt felosztás idősoron = adatszivárgás. Használj gördülő ablakokat</li>
-          <li><strong>Optimalizálj a várható értékre:</strong> 80 %-os találati arány rossz R:R-rel pénzt veszít. 55 %-os találati arány 3R-rel nyer</li>
+          <li><strong>Optimalizálj a várható értékre:</strong> Rossz kifizetési aránynál a 80%-os pontosság pénzt veszít; 3R mellett az 55% nem. A pontosság az a mérőszám, amelyet egy osztályozó alapból jelent, és szinte soha nem az, amiért fizetnek.</li>
           <li><strong>Kerüld az előretekintési torzítást:</strong> A jellemzők KIZÁRÓLAG az előrejelzés pillanatában elérhető adatot használhatják</li>
-          <li><strong>Random Forest > neurális hálók:</strong> A legtöbb kereskedési feladatban az egyszerűbb modellek jobban általánosítanak</li>
+          <li><strong>A modell kapacitását a mintamérethez igazítsd, ne a divathoz:</strong> egy erdő néhány száz kereskedésen azért ver egy hálót, mert az adat kevesebb paramétert bír el, nem mert az erdők jobbak. 200 kereskedésnél a becsületes modell egy három-négy jellemzős logisztikus regresszió, vagy egyetlen oldalon elolvasható fa.</li>
         </ul>
       </div>
 
       <div class="callout-key">
         <h4>🎯 Gyakorlati feladat: valósíts meg ML-jellemzőtervezést az ügyletek szűrésére</h4>
-        <p><strong>Cél:</strong> Építs olyan ML-modellt, amely szűri a meglévő setupjaidat, és a szelektív belépéssel 10-15 %-kal javítja a várható értéket.</p>
+        <p><strong>Cél:</strong> Építsd meg a legkisebb modellt, amely rangsorolni tudja a meglévő beállásaidat, és derítsd ki becsületesen, hogy egyáltalán rangsorolja-e őket. Figyeld meg, mit nem ígér ez a gyakorlat: javulási számot. Hogy egy szűrő segít-e neked, empirikus kérdés a saját kereskedéseidről, és az előre kimondott célszám épp az, ami arra csábít, hogy addig hangolj, amíg el nem éred.</p>
 
         <p><strong>1. rész: jellemzőtervezés (a legfontosabb lépés)</strong></p>
-        <p>Minden múltbeli ügyletedre számold ki ezeket a jellemzőket A JELZÉS PILLANATÁBAN (előretekintés nélkül!):</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Jellemzőkészlet-sablon (20+ jellemző ajánlott):
+        <p>Minden korábbi kereskedésedre számold ki ezeket a jellemzőket A JELZÉS PILLANATÁBAN (semmi előretekintés!). De előbb a megkötés, amely az egész gyakorlatot vezérli:</p>
+
+        <p><strong>Válassz három-hat jellemzőt. Ne húszat.</strong> Durva alsó korlát: jellemzőnként tíz kereskedés, mielőtt egy modellnek egyáltalán esélye lenne kapcsolatot tanulni ahelyett, hogy a mintádat magolná be &mdash; és ez alsó korlát, nem cél. Hatvan naplózott kereskedéssel legfeljebb hat jellemzőt bírsz el, hárommal pedig becsületesebb választ kapsz. Ugyanaz a számtan, ami a V1-et megölte: harminckét jellemző 180 kereskedésen jellemzőnként hat kereskedés alatt van, és az nem modell, hanem kikeresőtábla. Az alábbi lista választható étlap, nem használandó készlet.</p>
+
+        <p>Válaszd azt a hármat-négyet, amelyre egy mondatban tudsz indokot mondani &mdash; „a veszteségeim akkor csoportosulnak, amikor messze a VWAP -tól lépek be", „a veszteségeim az első tizenöt percben csoportosulnak" &mdash; a többit hagyd ki. Ha nem tudod megmondani, miért kellene számítania egy jellemzőnek, a modell akkor is talál benne összefüggést, és az az összefüggés zaj lesz.</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Jellemzőmenü -- válassz 3-6 darabot, ne használd mindet:
 
 ÁR-JELLEMZŐK:
 1. VWAP-tól mért távolság (%): (ár - VWAP) / VWAP
@@ -704,11 +535,12 @@ IDŐ-JELLEMZŐK:
 
 REZSIM-JELLEMZŐK:
 18. VIX szintje: az aktuális VIX érték
-19. Rezsimpontszám: ADX + ATR + szalagszélesség együtt
+19. Rezsimpontszám: az ADX, az ATR és a szalagszélesség percentilis rangja, átlagolva
+    (nyersen ne add össze őket -- más mértékegységben vannak)
 20. DXY változása %: makró ellenszél vagy hátszél
 
-A TE JELLEMZŐID (számold ki 50+ múltbeli ügyletre):
-1. ügylet: [1. jellemző: ___, 2. jellemző: ___, ..., 20. jellemző: ___, kimenet: nyereség/veszteség]
+A TE JELLEMZŐID (válassz 3-6 darabot, majd számold ki 50+ múltbeli ügyletre):
+1. ügylet: [A jellemző: ___, B jellemző: ___, C jellemző: ___, Kimenet: Nyereség/Veszteség]
 2. ügylet: [...]</code></pre>
 
         <p><strong>2. rész: tanító/teszt felosztás (KIZÁRÓLAG idő szerint)</strong></p>
@@ -803,7 +635,19 @@ Ha az eltérés 2% alatti, használd az egyszerűbb modellt (kevesebb túltanul�
 Bizalmi küszöbök:
 Valószínűség > 0,65 = magas bizalom (megnyitjuk az ügyletet)
 Valószínűség 0,45-0,65 = semleges (kihagyjuk)
-Valószínűség < 0,45 = alacsony bizalom (kihagyjuk vagy megfordítjuk)
+Valószínűség &lt; 0,45 = alacsony bizalom (kihagyjuk; soha ne fordítsd meg)
+
+Egy megjegyzés arról, mik ezek a számok. A Random Forest pontszáma az igennel
+szavazó fák aránya. Nem kalibrált valószínűség: a 0,65 nem azt jelenti, hogy 65% az
+esély a nyerésre, és a 0,65 meg a 0,45 közti különbségnek sincs rögzített jelentése
+ügyletekben. A pontszámot rangsorként használd -- vedd a jelzéseid felső harmadát --
+ne valószínűségként, és a küszöböt minden újratanításnál nézd át újra, mert a skála
+elmozdul, amikor a modell elmozdul.
+
+És soha ne kereskedd az alacsony pontszámokat fordítva. Az a modell, amelyik nem
+talál okot egy ügylet megkötésére, ezzel még nem talált okot a shortolására sem;
+semmit nem talált. A megfordítás a "nincs információ"-ból költséget fizető
+pozíciót csinál.
 
 Backtest-eredmények küszöbönként:
 Minden ügylet (szűrő nélkül): 55% találati arány, átlagosan 0,5R
@@ -841,10 +685,10 @@ Az újratanítás menete:
 - Vesd össze az új modellt a régivel ugyanazon a tesztkészleten
 - Csak akkor élesíts, ha az új modell 3%-kal vagy többel jobb</code></pre>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>A bevezetés célja:</strong> Építs ML-szűrőt 4-6 hét alatt az utolsó 50-100 ügyleted alapján. Futtasd papíron 20 jelzésen keresztül. Példacél: a várható érték legalább 10 %-os javítása szelektív szűréssel. Ha sikerül, az ML mérhetően megemelte a várható értékedet azzal, hogy segített kihagyni az alacsony valószínűségű setupokat. A profik így használják az ML-t: nem varázslatként, hanem az előny rendszerszintű erősítéseként.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>A bevezetés célja:</strong> Építsd meg a szűrőt 4-6 hét alatt az utolsó 50-100 kereskedésedből, majd futtasd 20 papírjelzésen. Amit keresel, az nem javulási százalék &mdash; ekkora mintán akkor sem tudnád megbízhatóan mérni, ha létezne. Egy szűkebb kérdésre kell válasz: rangsorolja-e egyáltalán a modell a kereskedéseidet? Rendezd a naplózott kereskedéseidet modellpontszám szerint, és hasonlítsd össze a felső harmadot az alsóval. Ha a két csoport eredménye megkülönböztethetetlen, a modell nem tanult semmit, és a helyes lépés a megállás, nem a jellemzők hozzáadása. Ez a negatív eredmény megéri a négy hetet; épp ez az a lelet, amire a V1-nek szüksége lett volna, és amit csak akkor kapott meg, amikor már valódi pénzbe került.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Most tanultad meg azt, amire a legtöbb ML-kereskedő csak egy felrobbantott számla után jön rá: a jellemzőtervezés fontosabb a modellválasztásnál, a walk-forward teszt kötelező, és a várható értékre kell optimalizálni (nem a találati arányra). Mostantól eszközként használhatod az ML-t, nem szerencsejátékként.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">E lecke három kudarcának &mdash; előretekintő jellemzők, összekevert felosztás, és több modell, mint adat &mdash; van egy közös tulajdonsága: mindegyik jobbnak mutat egy backtest -et, méghozzá úgy, hogy ez a backtest belsejéből láthatatlan. Ezért kell a fegyelemnek eljárásbelinek lennie, nem ösztönösnek. Egy jó eredményre ránézve nem tudod megmondani, előnyből származik-e vagy ezek valamelyikéből &mdash; és épp ezért kell a folyamatnak kizárnia őket, mielőtt az eredmény megérkezik.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Kapcsolódó leckék</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

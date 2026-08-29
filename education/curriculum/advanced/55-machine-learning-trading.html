@@ -321,7 +321,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Model</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Neural network: 5 layers, 128 neurons (~50,000 weights on 180 trades!)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 trees (~450 split rules on 240 trades)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 trees &mdash; about 450 split rules learned from 240 trades, which is smaller than V1 and still more capacity than the data supports</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Optimization Target</strong></td>
@@ -397,203 +397,30 @@
         </tbody>
       </table>
 
-      <p><strong>Key Insight:</strong> V2 showed 67% win rate vs. V1's 87%. But V2's 67% was REAL (validated across 4 time windows), while V1's 87% was fake (overfitted noise).</p>
+      <p><strong>Key Insight:</strong> V2 measured 67% where V1 measured 87%, and the lower number is the more trustworthy one because it survived four windows the model was never fitted to. Be careful how much weight you put on it even so: four test windows drawn from a couple of hundred trades means each window holds a few dozen trades, and a few dozen trades measures a win rate to within roughly ten percentage points. What the four windows really rule out is the failure V1 had &mdash; a train score that collapses on unseen data. They do not pin down the true rate, and no amount of re-splitting the same trades will.</p>
 
 
 
-      <h3 id="act-3-live-trading-the-proper-model-june-october-2024">Act 3: Live Trading the Proper Model (June-October 2024)</h3>
+      <h3 id="act-3-what-the-rebuild-establishes">Act 3: What the Rebuild Establishes &mdash; and Where V2 Is Still Wrong</h3>
 
-      <p><strong>Nina's V2 Deployment Strategy:</strong></p>
+      <p>Nina deployed V2 the way you should: twenty paper signals first, then half size, then full, with monthly retraining and a rule for when a retrained model replaces the incumbent. The paper stage is worth reading correctly. Fourteen winners out of twenty is enough to catch a model that is broken &mdash; a model with a live bug tends to fail obviously, not subtly &mdash; and nowhere near enough to confirm a 67% rate. The standard error on twenty trades is about eleven percentage points.</p>
+
+      <p>What we are not going to give you is her live P&amp;L. An earlier version of this page carried five months of it, a baseline comparison claiming the filter added $21,300, a "62.5% improvement" headline and a payback timeline. Every one of those numbers was invented, and worse, they were the wrong kind of evidence for the claim being made. Five months of one trader's filtered signals cannot separate "the filter works" from "the market suited these setups"; you would need the filter and the baseline running over the same trades in the same period, many times over, before the difference meant anything.</p>
+
+      <p><strong>What the two versions genuinely establish:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>20-trade paper trading validation (May 2024): 14 winners, 1.5R avg &mdash; enough to catch a broken model, nowhere near enough to confirm a rate</li>
-        <li>Started live at 50% position sizing (June): the June row of the table below</li>
-        <li>Full position sizing (July onwards): ML filter operational</li>
-        <li>Monthly retraining: Add new trades, re-run walk-forward, update model if +3% improvement</li>
+        <li><strong>V1's collapse is real evidence.</strong> 87% in backtest and 41% live on the same model is not bad luck. Each of the five mistakes has a known mechanism, and each one inflates a backtest in a direction you can predict in advance. That is the useful part of this story and it does not depend on anything that happened afterwards.</li>
+        <li><strong>V2 removed those specific mechanisms.</strong> No look-ahead features, time-ordered splits, a smaller model, expectancy as the objective. Each change is defensible on its own logic before a single live trade.</li>
+        <li><strong>The train-test gaps stayed small across four windows.</strong> That is the absence of a red flag rather than proof of an edge, and four windows on a few hundred trades is a small sample of a small sample.</li>
       </ul>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Nina's V2 Live Results: ML Filter Performance (June-October 2024, 5 Months)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Month</th>
-            <th style="padding:0.75rem;text-align:right;">Signals</th>
-            <th style="padding:0.75rem;text-align:right;">ML Filtered</th>
-            <th style="padding:0.75rem;text-align:right;">Trades Taken</th>
-            <th style="padding:0.75rem;text-align:right;">Win Rate</th>
-            <th style="padding:0.75rem;text-align:right;">Avg R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Jun 2024</td>
-            <td style="padding:0.75rem;text-align:right;">42</td>
-            <td style="padding:0.75rem;text-align:right;">18 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">67%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.3R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$9,400</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Jul 2024</td>
-            <td style="padding:0.75rem;text-align:right;">38</td>
-            <td style="padding:0.75rem;text-align:right;">15 (39%)</td>
-            <td style="padding:0.75rem;text-align:right;">23</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">70%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.6R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$12,700</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Aug 2024</td>
-            <td style="padding:0.75rem;text-align:right;">46</td>
-            <td style="padding:0.75rem;text-align:right;">20 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">26</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">65%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.2R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,800</span></td>
-          </tr><tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Sep 2024</td>
-            <td style="padding:0.75rem;text-align:right;">40</td>
-            <td style="padding:0.75rem;text-align:right;">16 (40%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">71%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$11,900</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Oct 2024</td>
-            <td style="padding:0.75rem;text-align:right;">44</td>
-            <td style="padding:0.75rem;text-align:right;">19 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">25</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,600</span></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">5-MONTH TOTALS:</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;">122 trades</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$55,400</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Where V2 is still overfitting, by its own numbers.</strong> The comparison table sells the fix as "Random Forest, max_depth=4, 30 trees" against 240 trades. Thirty trees at depth four is on the order of four hundred split rules learned from 240 examples &mdash; still far more capacity than the data supports. It is a smaller mistake than a five-layer network on 180 trades, not a different kind of mistake. If you are working with a few hundred trades, the honest model is a logistic regression on three or four features, or a decision tree you can print on one page and read. If you cannot read the model, you cannot tell whether it learned your edge or your sample.</p>
+        <p style="margin-top:0.75rem">A second thing the table hides: a Random Forest's output is a fraction of trees voting, not a calibrated probability. A "0.65" does not mean a 65% chance of a winner. You can still use it as a ranking &mdash; take the top-scoring third of your signals &mdash; but treating the number as a probability, and especially inverting the low ones into short signals, is reading meaning into an arbitrary scale.</p>
+      </div>
 
-      <p><strong>Baseline Comparison: What If Nina Took ALL Signals (No ML Filter)?</strong></p>
+      <p><strong>The honest summary of the whole episode:</strong> Nina replaced a process she could prove was broken with one whose failure modes she had at least tested for, and sized up slowly enough that being wrong a second time would have been survivable. That is the transferable lesson. Whether her filter still works today is a question only her own logged fills can answer, and the same is true of yours.</p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>ML Filter Impact: Filtered Trades (68.2%) vs. All Signals (54.7%)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Scenario</th>
-            <th style="padding:0.75rem;text-align:right;">Trades Taken</th>
-            <th style="padding:0.75rem;text-align:right;">Win Rate</th>
-            <th style="padding:0.75rem;text-align:right;">Avg R</th>
-            <th style="padding:0.75rem;text-align:right;">Total P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Analysis</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>No Filter (All Signals)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">210</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">54.7%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">0.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">+$34,100</span></td>
-            <td style="padding:0.75rem;">Baseline: Mediocre edge, lots of noise trades</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;"><strong>ML Filtered (High Confidence)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">122</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;"><strong>ML added +$21,300 (+62.5% improvement!)</strong></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="5" style="padding:0.75rem;text-align:right;font-weight:bold;">ML FILTER VALUE-ADD:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">+$21,300 (62.5% boost)</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Key Insights from Nina's V2 Success:</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>ML filtered out 42% of signals</strong> → Skipped low-confidence setups</li>
-        <li><strong>Filtered trades: 68.2% win rate</strong> vs. 54.7% baseline → +13.5% improvement</li>
-        <li><strong>Better R multiples:</strong> 1.4R avg vs. 0.5R baseline → ML selected better R:R setups</li>
-        <li><strong>62.5% P&L improvement:</strong> +$55.4K vs. +$34.1K baseline = +$21,300 added value</li>
-        <li><strong>Realistic performance:</strong> 68% live matched 67% walk-forward test → no overfitting!</li>
-      </ul>
-
-      <p><strong>Nina's Final Results: Q1 2024 Loss vs. June-Oct 2024 Recovery</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>The Complete Journey: From -$47,300 Disaster to +$55,400 Success</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Period</th>
-            <th style="padding:0.75rem;text-align:left;">Model Version</th>
-            <th style="padding:0.75rem;text-align:right;">Win Rate</th>
-            <th style="padding:0.75rem;text-align:right;">Avg R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Lesson Learned</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,82,82,0.12)">
-            <td style="padding:0.75rem;">Q1 2024</td>
-            <td style="padding:0.75rem;">V1 (Overfitted)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">41.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-0.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-$47,300</span></td>
-            <td style="padding:0.75rem;">Look-ahead bias, random split, neural network overkill</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;">Jun-Oct 2024</td>
-            <td style="padding:0.75rem;">V2 (Validated)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;">Clean features, walk-forward, Random Forest, expectancy-optimized</td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="4" style="padding:0.75rem;text-align:right;font-weight:bold;">NET 2024 RESULT:</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$8,100</span></td>
-            <td style="padding:0.75rem;font-weight:bold;">Break-even after expensive lesson</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Nina's Hard-Won Wisdom (October 2024):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        "I lost $47,300 in 3 months because I thought ML was magic. It's not. It's pattern recognition—and if you feed it garbage (look-ahead bias, random splits, overfitted neural networks), you get garbage predictions.
-        <br><br>
-        The fix wasn't a better model. It was better METHODOLOGY:
-        <br>
-        • Zero look-ahead features (only data available at signal time)<br>
-        • Walk-forward validation (train on past, test on future, 4 rolling windows)<br>
-        • Simpler model (Random Forest usually beats neural networks on small trade datasets)<br>
-        • Optimize for expectancy, not accuracy (68% at 1.4R > 87% at -0.4R)<br>
-        • Paper trade 20 signals before risking capital
-        <br><br>
-        My V2 model doesn't predict the future. It filters my setups: 68% win rate vs. 55% baseline. That +13% edge added $21,300 in 5 months.
-        <br><br>
-        ML isn't a strategy. It's a filter. Use it to skip low-probability trades, not to generate them. That's the secret."
-        <br><br>
-        — Nina Patel, Quantitative Trader (October 2024)
-      </blockquote>
-
-      <p><strong>Cost of Nina's ML Education:</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>Q1 2024 losses:</strong> -$47,300 (overfitted model tuition)</li>
-        <li><strong>Mentor fees:</strong> -$10,000 (2 months × $5K, April-May)</li>
-        <li><strong>Total investment:</strong> -$57,300</li>
-        <li><strong>5-month recovery:</strong> +$55,400 (June-Oct)</li>
-        <li><strong>Net position:</strong> -$1,900 (nearly break-even)</li>
-        <li><strong>Future value:</strong> ML filter now adds ~$4.3K/month (+$51K/year) vs. no-filter baseline</li>
-        <li><strong>ROI timeline:</strong> Investment pays back in full by end of November, then pure profit</li>
-      </ul>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>You're about halfway through this lesson.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">A good place to pause. What follows builds directly on what you have just read.</p>
@@ -647,20 +474,24 @@
         <h4>🎓 Key Takeaways</h4>
         <ul>
           <li><strong>ML is a filter, not a strategy:</strong> Use it to predict which setups have higher expectancy, not to generate trades</li>
-          <li><strong>Feature engineering > model choice:</strong> Good features (RSI, VWAP distance) beat fancy models every time</li>
+          <li><strong>Feature choice matters more than model choice:</strong> and choosing fewer features matters most of all. Every feature you add is another way for the model to fit your sample rather than your edge.</li>
           <li><strong>Walk-forward validation is mandatory:</strong> Train/test split on time series = data leakage. Use rolling windows</li>
-          <li><strong>Optimize for expectancy:</strong> 80% accuracy with bad R:R loses money. 55% accuracy with 3R wins</li>
+          <li><strong>Optimize for expectancy:</strong> 80% accuracy at a poor payoff loses money; 55% accuracy at 3R does not. Accuracy is the metric a classifier reports by default and almost never the one you are paid on.</li>
           <li><strong>Avoid look-ahead bias:</strong> Features must use ONLY data available at prediction time</li>
-          <li><strong>Random Forest > Neural Networks:</strong> For most trading applications, simpler models generalize better</li>
+          <li><strong>Match model capacity to sample size, not to fashion:</strong> a forest beats a network on a few hundred trades because the data supports fewer parameters, not because forests are better. With 200 trades the honest model is a logistic regression on three or four features, or a tree you can read on one page.</li>
         </ul>
       </div>
 
       <div class="callout-key">
         <h4>🎯 Practice Exercise: Implement ML Feature Engineering for Trade Filtering</h4>
-        <p><strong>Objective:</strong> Build an ML model that filters your existing setups, improving expectancy by 10-15% through selective trade-taking.</p>
+        <p><strong>Objective:</strong> Build the smallest model that can rank your existing setups, and find out honestly whether it ranks them at all. Note what this exercise does not promise: an improvement figure. Whether a filter helps you is an empirical question about your own trades, and a target number stated in advance is the thing that tempts people to keep tuning until they hit it.</p>
 
         <p><strong>Part 1: Feature Engineering (The Most Important Step)</strong></p>
-        <p>For each of your historical trades, calculate these features AT TIME OF SIGNAL (no look-ahead!):</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Feature Set Template (20+ features recommended):
+        <p>For each of your historical trades, calculate these features AT TIME OF SIGNAL (no look-ahead!). But first, the constraint that governs the whole exercise:</p>
+
+        <p><strong>Pick three to six features. Not twenty.</strong> A rough floor is ten trades per feature before a model has any chance of learning a relationship rather than memorising your sample &mdash; and that is a floor, not a target. With sixty logged trades you can support six features at the very outside and you will get a more honest answer from three. This is the same arithmetic that killed V1: thirty-two features on 180 trades is under six trades per feature, which is not a model, it is a lookup table. The list below is a menu to choose from, not a set to use.</p>
+
+        <p>Choose the three or four you can state a reason for in one sentence &mdash; "my losers cluster when I enter far from VWAP", "my losers cluster in the first fifteen minutes" &mdash; and leave the rest out. If you cannot say why a feature should matter, the model will find a relationship in it anyway, and that relationship will be noise.</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Feature Set Menu -- pick 3 to 6, do not use all of them:
 
 PRICE FEATURES:
 1. Distance from VWAP (%): (Price - VWAP) / VWAP
@@ -691,11 +522,12 @@ TIME FEATURES:
 
 REGIME FEATURES:
 18. VIX level: Current VIX reading
-19. Regime score: ADX + ATR + BB Width composite
+19. Regime score: percentile rank of ADX, ATR and BB width, averaged
+    (do not add them raw -- they are in different units)
 20. DXY change %: Macro headwind/tailwind
 
-YOUR FEATURES (calculate for 50+ historical trades):
-Trade 1: [Feature 1: ___, Feature 2: ___, ..., Feature 20: ___, Outcome: Win/Loss]
+YOUR FEATURES (pick 3-6, then calculate them for 50+ historical trades):
+Trade 1: [Feature A: ___, Feature B: ___, Feature C: ___, Outcome: Win/Loss]
 Trade 2: [...]</code></pre>
 
         <p><strong>Part 2: Train/Test Split (Time-Based ONLY)</strong></p>
@@ -790,7 +622,18 @@ If within 2%, use simpler model (less overfitting)</code></pre>
 Confidence Thresholds:
 Probability > 0.65 = High confidence (take trade)
 Probability 0.45-0.65 = Neutral (skip trade)
-Probability < 0.45 = Low confidence (skip or inverse)
+Probability &lt; 0.45 = Low confidence (skip -- do NOT invert)
+
+A note on what these numbers are. A Random Forest score is the fraction of
+trees voting yes. It is not a calibrated probability: 0.65 does not mean a
+65% chance of a winner, and the gap between 0.65 and 0.45 has no fixed
+meaning in trades. Use the score as a ranking -- take the top third of your
+signals -- rather than as a probability, and re-check the cut-off on each
+retrain, because the scale drifts when the model does.
+
+And never trade the low scores in reverse. A model that cannot find a reason
+to take a trade has not thereby found a reason to short it; it has found
+nothing. Inverting turns "no information" into a position that pays costs.
 
 Backtest Results by Threshold:
 All Trades (no filter): 55% win rate, 0.5R avg
@@ -828,10 +671,10 @@ Retrain Process:
 - Compare new model to old model on same test set
 - Deploy only if new model outperforms by 3%+</code></pre>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Implementation Goal:</strong> Build ML filter over 4-6 weeks using your last 50-100 trades. Deploy in paper trading for 20 signals. Example target: Improve expectancy by 10%+ through selective filtering. If successful, ML has measurably lifted your expectancy by helping you skip low-probability setups. This is how professionals use ML—not as magic, but as systematic edge enhancement.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Implementation Goal:</strong> Build the filter over 4-6 weeks using your last 50-100 trades, then run it on 20 paper signals. The result you are looking for is not an improvement percentage &mdash; on this sample size you could not measure one reliably if it existed. It is an answer to a narrower question: does the model rank your trades at all? Sort your logged trades by model score and compare the top third against the bottom third. If the two groups have indistinguishable outcomes, the model has learned nothing and the correct action is to stop, not to add features. That negative result is worth the four weeks; it is the same finding V1 needed and did not get until it had cost real money.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">You just learned what most ML traders discover after blowing up an account: feature engineering > model choice, walk-forward testing is mandatory, and optimize for expectancy (not accuracy). Now you can use ML as a tool, not a gamble.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">The three failures in this lesson &mdash; look-ahead features, a shuffled split, and more model than data &mdash; share one property: each makes a backtest look better in a way that is invisible from inside the backtest. That is why the discipline has to be procedural rather than intuitive. You cannot tell by looking at a good result whether it came from an edge or from one of these, which is exactly why the process has to rule them out before the result arrives.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Related Lessons</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

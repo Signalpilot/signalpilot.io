@@ -334,7 +334,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Model</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Sinir ağı: 5 katman, 128 nöron (180 işlem için ~50.000 ağırlık!)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 ağaç (240 işlem için ~450 bölme kuralı)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest: max_depth=4, 30 ağaç &mdash; 240 işlemden öğrenilmiş yaklaşık 450 bölme kuralı; V1’den küçük ve yine de verinin taşıyabileceğinden fazla kapasite</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Optimizasyon hedefi</strong></td>
@@ -410,203 +410,30 @@
         </tbody>
       </table>
 
-      <p><strong>Temel çıkarım:</strong> V2 %67 kazanma oranı gösterdi, V1 ise %87. Ama V2’nin %67’si GERÇEKTİ (4 zaman penceresinde doğrulandı), V1’in %87’si ise sahteydi (aşırı öğrenilmiş gürültü).</p>
+      <p><strong>Temel çıkarım:</strong> V1’in %87 ölçtüğü yerde V2 %67 ölçtü ve düşük olan sayı daha güvenilir olanıdır; çünkü modelin hiç uydurulmadığı dört pencereden sağ çıktı. Yine de ona ne kadar ağırlık verdiğine dikkat et: birkaç yüz işlemden alınan dört test penceresi, pencere başına birkaç düzine işlem demektir ve birkaç düzine işlem bir kazanma oranını ancak on puanlık bir aralıkla ölçer. Dört pencerenin gerçekten dışladığı şey, V1’in yaşadığı arızadır: görülmemiş veride çöken bir eğitim skoru. Gerçek oranı çivilemezler ve aynı işlemleri kaç kez yeniden bölersen böl, çivilenmez.</p>
 
 
 
-      <h3 id="act-3-live-trading-the-proper-model-june-october-2024">3. Perde: doğru modeli canlıda işletmek (haziran-ekim 2024)</h3>
+      <h3 id="act-3-what-the-rebuild-establishes">3. Perde: Yeniden inşa neyi ortaya koyar &mdash; ve V2 nerede hâlâ yanlış</h3>
 
-      <p><strong>Nina’nın V2 devreye alma stratejisi:</strong></p>
+      <p>Nina V2’yi olması gerektiği gibi devreye aldı: önce yirmi kâğıt sinyal, sonra yarım büyüklük, sonra tam; aylık yeniden eğitim ve yeniden eğitilmiş bir modelin mevcut modeli ne zaman değiştireceğine dair bir kuralla birlikte. Kâğıt aşamasını doğru okumak gerekir. Yirmide on dört kazanan, bozuk bir modeli yakalamaya yeter &mdash; canlıda hatası olan bir model ince değil, göze batan biçimde çöker &mdash; ve %67’lik bir oranı doğrulamaya hiç yetmez. Yirmi işlemde standart hata yaklaşık on bir puandır.</p>
+
+      <p>Sana vermeyeceğimiz şey onun canlı P&amp;L’i. Bu sayfanın eski bir sürümü bunun beş ayını, filtrenin 21.300 $ eklediğini öne süren bir temel karşılaştırmasını, «%62,5 iyileşme» başlığını ve bir geri ödeme takvimini taşıyordu. O sayıların her biri uydurmaydı; daha kötüsü, ileri sürülen iddia için yanlış türden kanıttı. Tek bir yatırımcının filtrelenmiş beş aylık sinyali, «filtre işe yarıyor» ile «piyasa bu kurulumlara uygundu» arasını ayıramaz; farkın bir anlam taşıması için filtrenin ve temel çizginin aynı dönemde aynı işlemler üzerinde, pek çok kez koşturulması gerekirdi.</p>
+
+      <p><strong>İki sürümün gerçekten ortaya koyduğu:</strong></p>
       <ul style="margin:.5rem 0">
-        <li>20 işlemlik kâğıt üzerinde doğrulama (Mayıs 2024): 14 kazanç, ortalama 1,5R &mdash; bozuk bir modeli yakalamaya yeter, bir oranı doğrulamaya asla yetmez</li>
-        <li>Haziranda hacmin %50'siyle canlıya geçiş: aşağıdaki tablonun haziran satırına bak</li>
-        <li>Tam pozisyon büyüklüğü (temmuzdan itibaren): ML filtresi devrede</li>
-        <li>Aylık yeniden eğitim: yeni işlemleri ekle, walk-forward’ı yeniden çalıştır, %3’ten fazla iyileşme varsa modeli güncelle</li>
+        <li><strong>V1’in çöküşü gerçek bir kanıttır.</strong> Aynı modelde backtest ’te %87, canlıda %41 kötü şans değildir. Beş hatanın her birinin bilinen bir mekanizması vardır ve her biri bir backtest ’i önceden kestirebileceğin bir yönde şişirir. Bu hikâyenin işe yarar kısmı budur ve sonrasında olanların hiçbirine bağlı değildir.</li>
+        <li><strong>V2 tam da o mekanizmaları ortadan kaldırdı.</strong> İleri bakan öznitelik yok, zaman sırasına göre bölme, daha küçük bir model, hedef olarak beklenen değer. Her değişiklik, tek bir canlı işlem yapılmadan önce kendi mantığıyla savunulabilir.</li>
+        <li><strong>Eğitim-test açıkları dört pencere boyunca küçük kaldı.</strong> Bu, bir avantajın kanıtı olmaktan çok kırmızı bayrağın yokluğudur; üstelik birkaç yüz işlemden alınan dört pencere, küçük bir örneklemden alınan küçük bir örneklemdir.</li>
       </ul>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Nina’nın V2 canlı sonuçları: ML filtresinin performansı (haziran-ekim 2024, 5 ay)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Ay</th>
-            <th style="padding:0.75rem;text-align:right;">Sinyaller</th>
-            <th style="padding:0.75rem;text-align:right;">ML ile süzülen</th>
-            <th style="padding:0.75rem;text-align:right;">Alınan işlem</th>
-            <th style="padding:0.75rem;text-align:right;">Kazanma oranı</th>
-            <th style="padding:0.75rem;text-align:right;">Ort. R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Haz. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">42</td>
-            <td style="padding:0.75rem;text-align:right;">18 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">67%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.3R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$9,400</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Tem. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">38</td>
-            <td style="padding:0.75rem;text-align:right;">15 (39%)</td>
-            <td style="padding:0.75rem;text-align:right;">23</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">70%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.6R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$12,700</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Ağu. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">46</td>
-            <td style="padding:0.75rem;text-align:right;">20 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">26</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">65%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.2R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,800</span></td>
-          </tr><tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Eyl. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">40</td>
-            <td style="padding:0.75rem;text-align:right;">16 (40%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">71%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$11,900</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">Eki. 2024</td>
-            <td style="padding:0.75rem;text-align:right;">44</td>
-            <td style="padding:0.75rem;text-align:right;">19 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">25</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,600</span></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">5 AYLIK TOPLAM:</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;">122 işlem</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$55,400</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>V2’nin kendi sayılarına göre hâlâ aşırı uyum yaptığı yer.</strong> Karşılaştırma tablosu düzeltmeyi 240 işleme karşı «Random Forest, max_depth=4, 30 ağaç» diye pazarlıyor. Derinliği dört olan otuz ağaç, 240 örnekten öğrenilmiş dört yüz mertebesinde bölme kuralı demektir &mdash; hâlâ verinin taşıyabileceğinden çok daha fazla kapasite. Bu, 180 işlem üzerinde beş katmanlı bir ağdan daha küçük bir hatadır; farklı türde bir hata değildir. Birkaç yüz işlemle çalışıyorsan dürüst model, üç dört öznitelik üzerine bir lojistik regresyon ya da tek sayfaya basıp okuyabileceğin bir karar ağacıdır. Modeli okuyamıyorsan, senin avantajını mı yoksa senin örneklemini mi öğrendiğini de söyleyemezsin.</p>
+        <p style="margin-top:0.75rem">Tablonun gizlediği ikinci şey: bir Random Forest çıktısı, evet oyu veren ağaçların oranıdır; kalibre edilmiş bir olasılık değil. «0,65» kazanma ihtimalinin %65 olduğu anlamına gelmez. Onu yine de sıralama olarak kullanabilirsin &mdash; sinyallerinin en yüksek puanlı üçte birini al &mdash; ama sayıyı olasılık saymak, hele düşük olanları short sinyaline çevirmek, keyfî bir ölçeğe anlam yüklemektir.</p>
+      </div>
 
-      <p><strong>Karşılaştırma tabanı: Nina TÜM sinyalleri alsaydı ne olurdu (ML filtresi olmadan)?</strong></p>
+      <p><strong>Tüm bu hikâyenin dürüst özeti:</strong> Nina, bozuk olduğunu kanıtlayabildiği bir süreci, hiç değilse başarısızlık biçimlerini sınadığı bir süreçle değiştirdi ve ikinci kez yanılmanın atlatılabilir kalacağı kadar yavaş büyüdü. Aktarılabilir ders budur. Filtresinin bugün hâlâ çalışıp çalışmadığını yalnızca kendi kayıtlı doldurmaları yanıtlayabilir; seninkiler için de aynısı geçerli.</p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>ML filtresinin etkisi: süzülen işlemler (%68,2) ile tüm sinyaller (%54,7)</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Senaryo</th>
-            <th style="padding:0.75rem;text-align:right;">Alınan işlem</th>
-            <th style="padding:0.75rem;text-align:right;">Kazanma oranı</th>
-            <th style="padding:0.75rem;text-align:right;">Ort. R</th>
-            <th style="padding:0.75rem;text-align:right;">Toplam P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Analiz</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Filtresiz (tüm sinyaller)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">210</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">54.7%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">0.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">+$34,100</span></td>
-            <td style="padding:0.75rem;">Taban: vasat bir avantaj, çok sayıda gürültü işlemi</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;"><strong>ML ile süzülen (yüksek güven)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">122</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;"><strong>ML +21.300 dolar kattı (%62,5 iyileşme!)</strong></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="5" style="padding:0.75rem;text-align:right;font-weight:bold;">ML FİLTRESİNİN KATTIĞI DEĞER:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">+21.300 dolar (%62,5 artış)</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Nina’nın V2 başarısından çıkan temel dersler:</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>ML filtresi sinyallerin %42’sini eledi</strong> → Düşük güvenli setup’lar atlandı</li>
-        <li><strong>Süzülen işlemler: %68,2 kazanma oranı</strong> tabandaki %54,7’ye karşı → %13,5 iyileşme</li>
-        <li><strong>Daha iyi R katsayıları:</strong> ortalama 1,4R, tabandaki 0,5R’ye karşı → ML daha iyi R:R’lı setup’ları seçti</li>
-        <li><strong>P&L’de %62,5 iyileşme:</strong> tabandaki +34.100 dolara karşı +55.400 dolar = +21.300 dolar katma değer</li>
-        <li><strong>Gerçekçi performans:</strong> canlıdaki %68, walk-forward testindeki %67 ile örtüştü → aşırı öğrenme yok!</li>
-      </ul>
-
-      <p><strong>Nina’nın nihai sonuçları: 2024 Ç1 kaybı ile haziran-ekim 2024 toparlanması</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Yolculuğun tamamı: -47.300 dolarlık felaketten +55.400 dolarlık başarıya</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Dönem</th>
-            <th style="padding:0.75rem;text-align:left;">Model sürümü</th>
-            <th style="padding:0.75rem;text-align:right;">Kazanma oranı</th>
-            <th style="padding:0.75rem;text-align:right;">Ort. R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-            <th style="padding:0.75rem;text-align:left;">Öğrenilen ders</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,82,82,0.12)">
-            <td style="padding:0.75rem;">Q1 2024</td>
-            <td style="padding:0.75rem;">V1 (aşırı öğrenmiş)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">41.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-0.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-$47,300</span></td>
-            <td style="padding:0.75rem;">İleriye bakma yanlılığı, rastgele bölme, aşırıya kaçan sinir ağı</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;">Haz.-eki. 2024</td>
-            <td style="padding:0.75rem;">V2 (doğrulanmış)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;">Temiz öznitelikler, walk-forward, Random Forest, beklentiye göre optimize</td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="4" style="padding:0.75rem;text-align:right;font-weight:bold;">2024 NET SONUCU:</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$8,100</span></td>
-            <td style="padding:0.75rem;font-weight:bold;">Pahalı bir dersin ardından başa baş</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>Nina’nın zorlukla kazandığı bilgelik (ekim 2024):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        «ML’i sihir sandığım için 3 ayda 47.300 dolar kaybettim. Sihir değil. Örüntü tanıma — ve ona çöp verirsen (ileriye bakma yanlılığı, rastgele bölmeler, aşırı öğrenmiş sinir ağları) çöp tahmin alırsın.
-        <br><br>
-        Çözüm daha iyi bir model değildi. Daha iyi bir METODOLOJİYDİ:
-        <br>
-        • Sıfır ileriye bakan öznitelik (yalnızca sinyal anında elde olan veriler)<br>
-        • Walk-forward doğrulama (geçmişte eğit, gelecekte test et, 4 kayan pencere)<br>
-        • Daha basit model (küçük işlem kümelerinde Random Forest çoğunlukla sinir ağlarını geçer)<br>
-        • İsabeti değil beklentiyi optimize et (1,4R’de %68 > -0,4R’de %87)<br>
-        • Sermaye riske atmadan önce 20 sinyali kâğıt üzerinde işle
-        <br><br>
-        V2 modelim geleceği tahmin etmiyor. Setup’larımı süzüyor: tabandaki %55’e karşı %68 kazanma oranı. Bu %13’lük avantaj 5 ayda 21.300 dolar getirdi.
-        <br><br>
-        ML bir strateji değil. Bir filtre. Onu düşük olasılıklı işlemleri atlamak için kullan, işlem üretmek için değil. Sır bu.»
-        <br><br>
-        — Nina Patel, kantitatif trader (ekim 2024)
-      </blockquote>
-
-      <p><strong>Nina’nın ML eğitiminin maliyeti:</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>2024 Ç1 kayıpları:</strong> -47.300 dolar (aşırı öğrenmiş modelin okul harcı)</li>
-        <li><strong>Mentor ücreti:</strong> -10.000 dolar (2 ay × 5.000 dolar, nisan-mayıs)</li>
-        <li><strong>Toplam yatırım:</strong> -$57,300</li>
-        <li><strong>5 aylık toparlanma:</strong> +55.400 dolar (haziran-eki.)</li>
-        <li><strong>Net pozisyon:</strong> -1.900 dolar (neredeyse başa baş)</li>
-        <li><strong>Gelecekteki değer:</strong> ML filtresi artık filtresiz tabana kıyasla ayda yaklaşık 4.300 dolar (yılda +51.000 dolar) katıyor</li>
-        <li><strong>Geri dönüş takvimi:</strong> Yatırım kasım sonuna kadar tümüyle geri döner, sonrası saf kâr</li>
-      </ul>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Bu dersin yaklaşık yarısındasın.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Ara vermek için iyi bir yer. Bundan sonrası, az önce okuduğunun doğrudan üzerine kurulur.</p>
@@ -660,20 +487,24 @@
         <h4>🎓 Öne çıkanlar</h4>
         <ul>
           <li><strong>ML bir filtredir, strateji değil:</strong> İşlem üretmek için değil, hangi setup’ların beklentisinin daha yüksek olduğunu tahmin etmek için kullan</li>
-          <li><strong>Öznitelik mühendisliği > model seçimi:</strong> İyi öznitelikler (RSI, VWAP uzaklığı) her seferinde gösterişli modelleri geçer</li>
+          <li><strong>Öznitelik seçimi model seçiminden daha önemlidir:</strong> ve en çok önemli olan, daha az öznitelik seçmektir. Eklediğin her öznitelik, modelin avantajın yerine örneklemine uymasının bir yolu daha demektir.</li>
           <li><strong>Walk-forward doğrulama zorunludur:</strong> Zaman serilerinde eğitim/test bölmesi = veri sızıntısı. Kayan pencereler kullan</li>
-          <li><strong>Beklentiyi optimize et:</strong> Kötü R:R ile %80 isabet para kaybettirir. 3R ile %55 isabet kazandırır</li>
+          <li><strong>Beklentiyi optimize et:</strong> Kötü bir ödül oranında %80 isabet para kaybettirir; 3R’de %55 kaybettirmez. İsabet, bir sınıflandırıcının varsayılan olarak raporladığı ölçüdür ve neredeyse hiçbir zaman senin para kazandığın ölçü değildir.</li>
           <li><strong>İleriye bakma yanlılığından kaçın:</strong> Öznitelikler YALNIZCA tahmin anında elde olan veriyi kullanmalı</li>
-          <li><strong>Random Forest > sinir ağları:</strong> Trading uygulamalarının çoğunda daha basit modeller daha iyi genelleşir</li>
+          <li><strong>Model kapasitesini modaya değil, örneklem büyüklüğüne uydur:</strong> birkaç yüz işlemde bir orman, bir ağı yener; çünkü veri daha az parametreyi taşır, ormanlar daha iyi olduğu için değil. 200 işlemde dürüst model, üç dört öznitelikli bir lojistik regresyon ya da tek sayfada okunabilen bir ağaçtır.</li>
         </ul>
       </div>
 
       <div class="callout-key">
         <h4>🎯 Uygulama alıştırması: işlemleri süzmek için ML öznitelik mühendisliğini hayata geçir</h4>
-        <p><strong>Amaç:</strong> Mevcut setup’larını süzen ve seçici işlem alarak beklentiyi %10-15 iyileştiren bir ML modeli kur.</p>
+        <p><strong>Amaç:</strong> Mevcut kurulumlarını sıralayabilecek en küçük modeli kur ve onları hiç sıralayıp sıralamadığını dürüstçe öğren. Bu alıştırmanın neyi vaat etmediğine dikkat et: bir iyileşme yüzdesi. Bir filtrenin sana yarayıp yaramadığı, kendi işlemlerin hakkında görgül bir sorudur; önceden söylenmiş bir hedef sayı ise insanı, o sayıya ulaşana kadar ayar yapmaya iten şeydir.</p>
 
         <p><strong>Bölüm 1: öznitelik mühendisliği (en önemli adım)</strong></p>
-        <p>Geçmiş işlemlerinin her biri için bu öznitelikleri SİNYAL ANINDA hesapla (ileriye bakmak yok!):</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Öznitelik seti şablonu (20+ öznitelik önerilir):
+        <p>Geçmiş işlemlerinin her biri için bu öznitelikleri SİNYAL ANINDA hesapla (ileri bakış yok!). Ama önce, tüm alıştırmayı yöneten kısıt:</p>
+
+        <p><strong>Üç ile altı arası öznitelik seç. Yirmi değil.</strong> Kaba bir alt sınır, öznitelik başına on işlemdir; bunun altında model, örneklemini ezberlemek yerine bir ilişki öğrenme şansına hiç sahip olamaz &mdash; ve bu bir alt sınırdır, hedef değil. Kayıtlı altmış işlemle en fazla altı özniteliği taşıyabilirsin, üçle ise daha dürüst bir yanıt alırsın. V1’i öldüren de aynı hesaptı: 180 işlem üzerinde otuz iki öznitelik, öznitelik başına altı işlemin altındadır; bu model değil, arama tablosudur. Aşağıdaki liste, seçim yapılacak bir menüdür; kullanılacak bir küme değil.</p>
+
+        <p>Bir cümleyle gerekçesini söyleyebildiğin üç dördü seç &mdash; «kayıplarım VWAP ’tan uzakta girdiğimde kümeleniyor», «kayıplarım ilk on beş dakikada kümeleniyor» &mdash; gerisini dışarıda bırak. Bir özniteliğin neden önemli olması gerektiğini söyleyemiyorsan, model orada yine de bir ilişki bulacaktır ve o ilişki gürültü olacaktır.</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Öznitelik menüsü -- 3 ile 6 arası seç, hepsini kullanma:
 
 FİYAT ÖZNİTELİKLERİ:
 1. VWAP uzaklığı (%): (fiyat - VWAP) / VWAP
@@ -704,11 +535,12 @@ ZAMAN ÖZNİTELİKLERİ:
 
 REJİM ÖZNİTELİKLERİ:
 18. VIX seviyesi: güncel VIX değeri
-19. Rejim skoru: ADX + ATR + bant genişliği bileşimi
+19. Rejim skoru: ADX, ATR ve bant genişliğinin yüzdelik sırası, ortalaması alınmış
+    (ham hâlleriyle toplama -- birimleri farklı)
 20. DXY değişimi %: makro rüzgâr lehte mi aleyhte mi
 
-SENİN ÖZNİTELİKLERİN (50+ geçmiş işlem için hesapla):
-İşlem 1: [öznitelik 1: ___, öznitelik 2: ___, ..., öznitelik 20: ___, sonuç: kazanç/kayıp]
+SENİN ÖZNİTELİKLERİN (3-6 tane seç, sonra 50+ geçmiş işlem için hesapla):
+İşlem 1: [Öznitelik A: ___, Öznitelik B: ___, Öznitelik C: ___, Sonuç: Kazanç/Kayıp]
 İşlem 2: [...]</code></pre>
 
         <p><strong>Bölüm 2: eğitim/test bölmesi (YALNIZCA zamana göre)</strong></p>
@@ -803,7 +635,18 @@ Fark %2’nin altındaysa daha basit modeli kullan (daha az aşırı öğrenme)<
 Güven eşikleri:
 Olasılık > 0,65 = yüksek güven (işlemi al)
 Olasılık 0,45-0,65 = nötr (işlemi atla)
-Olasılık < 0,45 = düşük güven (atla ya da tersine dön)
+Olasılık &lt; 0,45 = düşük güven (atla -- TERSİNE DÖNME)
+
+Bu sayıların ne olduğuna dair bir not. Random Forest skoru, evet oyu veren
+ağaçların oranıdır. Kalibre edilmiş bir olasılık değildir: 0,65 kazanma ihtimalinin
+%65 olduğu anlamına gelmez ve 0,65 ile 0,45 arasındaki farkın işlemler açısından
+sabit bir anlamı yoktur. Skoru olasılık olarak değil sıralama olarak kullan
+-- sinyallerinin en üst üçte birini al -- ve eşiği her yeniden eğitimde yeniden
+denetle; çünkü model kaydıkça ölçek de kayar.
+
+Ve düşük skorları asla tersinden işleme sokma. Bir işlemi almak için gerekçe
+bulamayan bir model, bu yüzden onu satmak için gerekçe bulmuş olmaz; hiçbir şey
+bulmamıştır. Tersine çevirmek, "bilgi yok"u maliyet ödeyen bir pozisyona dönüştürür.
 
 Eşiğe göre backtest sonuçları:
 Tüm işlemler (filtresiz): %55 kazanma oranı, ortalama 0,5R
@@ -841,10 +684,10 @@ Yeniden eğitim süreci:
 - Yeni modeli eskisiyle aynı test kümesinde karşılaştır
 - Yalnızca yeni model %3 ya da daha fazla üstünse devreye al</code></pre>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Uygulama hedefi:</strong> Son 50-100 işlemini kullanarak 4-6 hafta içinde bir ML filtresi kur. 20 sinyal boyunca kâğıt üzerinde çalıştır. Örnek hedef: seçici süzme ile beklentiyi en az %10 iyileştirmek. Başarırsan, düşük olasılıklı setup’ları atlamana yardım ederek ML beklentini ölçülebilir biçimde yükseltmiş olur. Profesyoneller ML’i böyle kullanır: sihir olarak değil, avantajı sistematik biçimde güçlendiren bir araç olarak.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Uygulama hedefi:</strong> Filtreyi son 50-100 işlemini kullanarak 4-6 haftada kur, sonra 20 kâğıt sinyalde çalıştır. Aradığın sonuç bir iyileşme yüzdesi değildir &mdash; bu örneklem büyüklüğünde, var olsa bile güvenilir biçimde ölçemezdin. Aradığın, daha dar bir sorunun yanıtıdır: model işlemlerini hiç sıralıyor mu? Kayıtlı işlemlerini model puanına göre sırala ve üst üçte biri alt üçte birle karşılaştır. İki grubun sonuçları ayırt edilemiyorsa model hiçbir şey öğrenmemiştir ve doğru hamle öznitelik eklemek değil, durmaktır. O olumsuz sonuç dört haftaya değer; V1’in ihtiyacı olan ve gerçek para kaybettirene kadar elde edemediği bulgunun ta kendisidir.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Çoğu ML trader’ının ancak bir hesabı patlattıktan sonra keşfettiği şeyi az önce öğrendin: öznitelik mühendisliği model seçiminden önemlidir, walk-forward testi zorunludur ve optimize edilmesi gereken şey beklentidir (isabet değil). Artık ML’i kumar olarak değil araç olarak kullanabilirsin.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Bu dersteki üç başarısızlık &mdash; ileri bakan öznitelikler, karıştırılmış bir bölme ve veriden fazla model &mdash; tek bir özelliği paylaşır: her biri bir backtest ’i, backtest ’in içinden görünmeyen bir biçimde daha iyi gösterir. Disiplinin sezgisel değil yordamsal olması gerekmesinin nedeni budur. İyi bir sonuca bakarak onun bir avantajdan mı yoksa bunlardan birinden mi geldiğini söyleyemezsin; süreç de tam bu yüzden, sonuç gelmeden önce bunları elemek zorundadır.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">İlgili dersler</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

@@ -334,7 +334,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>モデル</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">ニューラルネット：5層、128ニューロン（180トレードに対して約5万個の重み！）</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest：max_depth=4、30本の木（240トレードに対して約450個の分岐ルール）</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Random Forest：max_depth=4、木30本 &mdash; 240トレードから学ばれた分割規則がおよそ450。V1より小さいが、データが支えられる以上の容量であることに変わりはない</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>最適化の目標</strong></td>
@@ -410,203 +410,30 @@
         </tbody>
       </table>
 
-      <p><strong>要点：</strong> V2の勝率は67%で、V1の87%より低い。だがV2の67%は本物（4つの時間窓で検証済み）、V1の87%は偽物（過学習したノイズ）だった。</p>
+      <p><strong>要点：</strong> V1が87%と測ったところで、V2は67%と測った。低いほうの数字のほうが信頼できる。モデルが一度も適合されていない四つの窓を通り抜けたからだ。それでも、そこに置く重みには注意がいる。数百トレードから取った四つの検証窓とは、一つの窓に数十トレードということであり、数十トレードでは勝率をおよそ十ポイントの幅でしか測れない。四つの窓が実際に排除しているのは、V1が抱えていた失敗 &mdash; 未知のデータで崩れる学習スコア &mdash; である。真の勝率を確定させはしないし、同じトレードを何度切り直しても確定しない。</p>
 
 
 
-      <h3 id="act-3-live-trading-the-proper-model-june-october-2024">第3幕：正しいモデルを実運用する（2024年6〜10月）</h3>
+      <h3 id="act-3-what-the-rebuild-establishes">第3幕：作り直しが立証すること &mdash; そして、V2がなお誤っているところ</h3>
 
-      <p><strong>ニーナのV2投入戦略：</strong></p>
+      <p>ニーナはV2を、あるべきやり方で投入した。まず紙上のシグナル二十件、次に半分のサイズ、そして満額。毎月再学習し、再学習した版が現行版を置き換える条件も決めてあった。紙上の段階は正しく読む必要がある。二十件中十四件が勝ちというのは、壊れたモデルを捕まえるには十分だ。実運用にバグのあるモデルは、たいてい微妙にではなく露骨に失敗する。だが、67%という数字を確認するには、まったく足りない。二十トレードの標準誤差は、およそ十一ポイントである。</p>
+
+      <p>ここで出さないのは、彼女のライブのP&amp;Lである。このページの以前の版は、それを五か月ぶん載せ、フィルターが2万1,300ドルを上乗せしたというベースライン比較を載せ、「62.5%の改善」という見出しを掲げ、回収の時期まで書いていた。どの数字も作りものだった。そしてより悪いことに、それらは主張したい事柄に対して種類の違う証拠だった。トレーダー一人の、フィルターを通した五か月ぶんのシグナルでは、「フィルターが効いている」と「相場がこれらのセットアップに合っていた」を切り分けられない。差に意味を持たせるには、同じ期間の同じトレードに対してフィルターとベースラインを並走させ、それを何度も繰り返す必要がある。</p>
+
+      <p><strong>二つの版が本当に立証していること：</strong></p>
       <ul style="margin:.5rem 0">
-        <li>20トレードでのペーパートレード検証（2024年5月）：14勝、平均1.5R &mdash; 壊れたモデルを見つけるには足りるが、勝率を確かめるには到底足りない</li>
-        <li>6月に建玉を半分にして本番開始：下の表の6月の行を参照</li>
-        <li>フルサイズ（7月以降）：MLフィルターが本稼働</li>
-        <li>毎月の再学習：新しいトレードを追加し、ウォークフォワードを回し直し、3%以上の改善があればモデルを更新</li>
+        <li><strong>V1の崩壊は本物の証拠である。</strong> 同じモデルで backtest が87%、実運用が41%というのは、不運ではない。五つの誤りにはそれぞれ既知の仕組みがあり、どれもが backtest を、あらかじめ予測できる向きに膨らませる。ここがこの話の有用な部分であり、そのあと何が起きたかにはまったく依存しない。</li>
+        <li><strong>V2は、その具体的な仕組みを取り除いた。</strong> 先読みのある特徴量をなくし、時間順に分割し、モデルを小さくし、目的関数を期待値にした。どの変更も、実弾を一回も入れる前に、それ自体の論理として擁護できる。</li>
+        <li><strong>学習と検証のギャップは、四つの窓を通じて小さいままだった。</strong> これはエッジの証明というより、赤信号が出なかったというだけのことである。しかも数百トレードから取った四つの窓は、小さな標本から取った小さな標本にすぎない。</li>
       </ul>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>ニーナのV2実運用結果：MLフィルターの成績（2024年6〜10月、5か月）</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">月</th>
-            <th style="padding:0.75rem;text-align:right;">シグナル</th>
-            <th style="padding:0.75rem;text-align:right;">MLで絞り込み</th>
-            <th style="padding:0.75rem;text-align:right;">執行トレード数</th>
-            <th style="padding:0.75rem;text-align:right;">勝率</th>
-            <th style="padding:0.75rem;text-align:right;">平均R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024年6月</td>
-            <td style="padding:0.75rem;text-align:right;">42</td>
-            <td style="padding:0.75rem;text-align:right;">18 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">67%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.3R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$9,400</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024年7月</td>
-            <td style="padding:0.75rem;text-align:right;">38</td>
-            <td style="padding:0.75rem;text-align:right;">15 (39%)</td>
-            <td style="padding:0.75rem;text-align:right;">23</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">70%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.6R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$12,700</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024年8月</td>
-            <td style="padding:0.75rem;text-align:right;">46</td>
-            <td style="padding:0.75rem;text-align:right;">20 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">26</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">65%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.2R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,800</span></td>
-          </tr><tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024年9月</td>
-            <td style="padding:0.75rem;text-align:right;">40</td>
-            <td style="padding:0.75rem;text-align:right;">16 (40%)</td>
-            <td style="padding:0.75rem;text-align:right;">24</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">71%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$11,900</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;">2024年10月</td>
-            <td style="padding:0.75rem;text-align:right;">44</td>
-            <td style="padding:0.75rem;text-align:right;">19 (43%)</td>
-            <td style="padding:0.75rem;text-align:right;">25</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$10,600</span></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">5か月の合計：</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;">122トレード</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$55,400</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>V2が、自身の数字からしてなお過剰適合しているところ。</strong> 比較表は、この修正を「Random Forest、max_depth=4、木30本」として、240トレードに対して売り込んでいる。深さ4の木が30本といえば、240の事例から学ばれた分割規則が四百程度ということであり、依然としてデータが支えられる以上の容量である。180トレードに五層のネットワークを載せるより小さい誤りではあるが、種類の違う誤りではない。数百トレードで作業しているなら、正直なモデルは、三つか四つの特徴量によるロジスティック回帰か、一ページに印刷して読める決定木である。モデルが読めなければ、それが自分のエッジを学んだのか、自分の標本を学んだのかを判別できない。</p>
+        <p style="margin-top:0.75rem">表が隠しているもう一つのこと。Random Forestの出力は、賛成に投じた木の割合であって、較正された確率ではない。「0.65」は、勝ちになる確率が65%だという意味ではない。順位づけとして使うことはできる &mdash; スコア上位三分の一のシグナルを取る、というふうに &mdash; しかしこの数字を確率として扱うこと、まして低いものを売りシグナルへ反転させることは、恣意的な目盛りに意味を読み込むことである。</p>
+      </div>
 
-      <p><strong>比較の基準：ニーナがすべてのシグナルを取っていたら（MLフィルターなし）？</strong></p>
+      <p><strong>この一件全体の、正直な要約：</strong> ニーナは、壊れていると証明できる工程を、少なくとも失敗の仕方を検証してある工程に置き換え、二度目に間違えても生き延びられる程度にゆっくりサイズを上げた。転用できる教訓はそこである。彼女のフィルターが今も効いているかどうかは、彼女自身の記録された約定にしか答えられない。あなたのフィルターについても同じである。</p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>MLフィルターの効果：絞り込んだトレード（68.2%）対 全シグナル（54.7%）</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">場面</th>
-            <th style="padding:0.75rem;text-align:right;">執行トレード数</th>
-            <th style="padding:0.75rem;text-align:right;">勝率</th>
-            <th style="padding:0.75rem;text-align:right;">平均R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L 合計</th>
-            <th style="padding:0.75rem;text-align:left;">分析</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>フィルターなし（全シグナル）</strong></td>
-            <td style="padding:0.75rem;text-align:right;">210</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">54.7%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">0.5R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ffc107">+$34,100</span></td>
-            <td style="padding:0.75rem;">基準：平凡なエッジ、ノイズトレードが多い</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;"><strong>MLで絞り込み（高確信度）</strong></td>
-            <td style="padding:0.75rem;text-align:right;">122</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;"><strong>MLが+2万1,300ドルを上乗せ（+62.5%の改善！）</strong></td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="5" style="padding:0.75rem;text-align:right;font-weight:bold;">MLフィルターの付加価値：</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">+2万1,300ドル（62.5%の上乗せ）</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>ニーナのV2成功から得られた要点：</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>MLフィルターがシグナルの42%を除外</strong> → 確信度の低いセットアップを見送った</li>
-        <li><strong>絞り込んだトレード：勝率68.2%</strong> 基準の54.7%に対して → 13.5%の改善</li>
-        <li><strong>より良いR倍率：</strong> 平均1.4R、基準の0.5Rに対して → MLがR:Rの良いセットアップを選んだ</li>
-        <li><strong>P&Lが62.5%改善：</strong> 基準の+3万4,100ドルに対して+5万5,400ドル ＝ +2万1,300ドルの付加価値</li>
-        <li><strong>現実的な成績：</strong> 実運用の68%はウォークフォワード検証の67%と一致 → 過学習なし！</li>
-      </ul>
-
-      <p><strong>ニーナの最終結果：2024年Q1の損失 対 6〜10月の回復</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>全行程：-4万7,300ドルの惨事から+5万5,400ドルの成功へ</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">期間</th>
-            <th style="padding:0.75rem;text-align:left;">モデルのバージョン</th>
-            <th style="padding:0.75rem;text-align:right;">勝率</th>
-            <th style="padding:0.75rem;text-align:right;">平均R</th>
-            <th style="padding:0.75rem;text-align:right;">P&L</th>
-            <th style="padding:0.75rem;text-align:left;">学んだこと</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,82,82,0.12)">
-            <td style="padding:0.75rem;">Q1 2024</td>
-            <td style="padding:0.75rem;">V1（過学習）</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">41.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-0.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#ff5252">-$47,300</span></td>
-            <td style="padding:0.75rem;">先読みバイアス、ランダム分割、過剰なニューラルネット</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem;">2024年6〜10月</td>
-            <td style="padding:0.75rem;">V2（検証済み）</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">68.2%</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1.4R</span></td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">+$55,400</span></td>
-            <td style="padding:0.75rem;">きれいな特徴量、ウォークフォワード、Random Forest、期待値で最適化</td>
-          </tr>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <td colspan="4" style="padding:0.75rem;text-align:right;font-weight:bold;">2024年の純結果：</td>
-            <td style="padding:0.75rem;text-align:right;font-weight:bold;"><span style="color:#22c55e;font-size:1.2rem">+$8,100</span></td>
-            <td style="padding:0.75rem;font-weight:bold;">高い授業料を払って収支トントン</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p><strong>ニーナが苦労して得た教訓（2024年10月）：</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        「MLを魔法だと思っていたせいで、3か月で4万7,300ドルを失った。魔法ではない。パターン認識だ。ゴミを食わせれば（先読みバイアス、ランダム分割、過学習したニューラルネット）、ゴミの予測が返ってくる。
-        <br><br>
-        解決策は良いモデルではなかった。より良い方法論だった：
-        <br>
-        • 先読みのある特徴量はゼロ（シグナル時点で手に入るデータだけ）<br>
-        • ウォークフォワード検証（過去で学習、未来で検証、4つのローリングウィンドウ）<br>
-        • よりシンプルなモデル（小さなトレード集合ではRandom Forestがニューラルネットに勝つことが多い）<br>
-        • 正解率ではなく期待値を最適化する（1.4Rでの68% ＞ -0.4Rでの87%）<br>
-        • 資金を賭ける前に20シグナルをペーパートレードする
-        <br><br>
-        私のV2モデルは未来を当てない。セットアップを絞り込むだけだ：基準の勝率55%に対して68%。この+13%のエッジが5か月で2万1,300ドルを生んだ。
-        <br><br>
-        MLは戦略ではない。フィルターだ。低確率のトレードを見送るために使うもので、トレードを生み出すためのものではない。それが秘訣」
-        <br><br>
-        — ニーナ・パテル、クオンツトレーダー（2024年10月）
-      </blockquote>
-
-      <p><strong>ニーナのML学習にかかった費用：</strong></p>
-      <ul style="margin:.5rem 0">
-        <li><strong>2024年Q1の損失：</strong> -4万7,300ドル（過学習モデルの授業料）</li>
-        <li><strong>メンター費用：</strong> -1万ドル（月5,000ドル × 2か月、4〜5月）</li>
-        <li><strong>投資の総額：</strong> -$57,300</li>
-        <li><strong>5か月の回復：</strong> +5万5,400ドル（6〜10月）</li>
-        <li><strong>ネットポジション：</strong> -1,900ドル（ほぼ収支トントン）</li>
-        <li><strong>この先の価値：</strong> MLフィルターは現在、フィルターなしの基準に対して月あたり約4,300ドル（年5万1,000ドル）を上乗せしている</li>
-        <li><strong>投資回収の時期：</strong> 投資は11月末までに全額回収でき、そこから先は純粋な利益</li>
-      </ul>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>このレッスンの半ばあたりです。</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">ひと息つくのに良いところです。この先は、いま読んだ内容の上に直接積み上がっていきます。</p>
@@ -660,20 +487,24 @@
         <h4>🎓 要点</h4>
         <ul>
           <li><strong>MLは戦略ではなくフィルター：</strong> トレードを生み出すためではなく、どのセットアップの期待値が高いかを予測するために使う</li>
-          <li><strong>特徴量エンジニアリング ＞ モデル選択：</strong> 良い特徴量（RSI、VWAPからの乖離）は毎回、凝ったモデルに勝つ</li>
+          <li><strong>特徴量の選択はモデルの選択より重い：</strong> そして、より少ない特徴量を選ぶことが何より重い。特徴量を一つ加えるたびに、モデルが自分のエッジではなく自分の標本に合わせ込む道が一つ増える。</li>
           <li><strong>ウォークフォワード検証は必須：</strong> 時系列データでの学習／検証分割 ＝ データリーク。ローリングウィンドウを使うこと</li>
-          <li><strong>期待値を最適化する：</strong> R:Rが悪ければ正解率80%でも損をする。3Rなら正解率55%で勝てる</li>
+          <li><strong>期待値を最適化する：</strong> 見返りの比が悪ければ、正解率80%でも金は減る。3Rなら正解率55%でも減らない。正解率は分類器が既定で出す指標であって、あなたが対価を受け取る指標であることはまずない。</li>
           <li><strong>先読みバイアスを避ける：</strong> 特徴量は予測時点で入手できるデータだけを使わなければならない</li>
-          <li><strong>Random Forest ＞ ニューラルネット：</strong> トレーディングの用途の多くでは、単純なモデルのほうがよく汎化する</li>
+          <li><strong>モデルの容量は流行にではなく標本の大きさに合わせる：</strong> 数百トレードでフォレストがネットワークに勝つのは、データが支えられるパラメータが少ないからであって、フォレストが優れているからではない。200トレードなら、正直なモデルは三つか四つの特徴量によるロジスティック回帰か、一ページで読める木である。</li>
         </ul>
       </div>
 
       <div class="callout-key">
         <h4>🎯 実践演習：トレードを絞り込むML特徴量エンジニアリングを実装する</h4>
-        <p><strong>目的：</strong> 既存のセットアップを絞り込み、選択的にトレードすることで期待値を10〜15%改善するMLモデルを作ろう。</p>
+        <p><strong>目的：</strong> 既存のセットアップに順位をつけられる、いちばん小さいモデルを作ること。そして、そもそも順位がついているのかを正直に確かめること。この演習が約束していないものに注意してほしい。改善率である。フィルターが自分の役に立つかどうかは、自分のトレードについての経験的な問いであり、あらかじめ掲げられた目標値こそ、その数字に届くまで調整を続けさせる元凶である。</p>
 
         <p><strong>パート1：特徴量エンジニアリング（最も重要な工程）</strong></p>
-        <p>過去のトレードそれぞれについて、シグナル発生時点で次の特徴量を計算する（先読み禁止！）：</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>特徴量セットのテンプレート（20個以上を推奨）：
+        <p>過去のトレードそれぞれについて、これらの特徴量を「シグナル時点で」計算すること（先読み厳禁）。だがまず、この演習全体を規定する制約から。</p>
+
+        <p><strong>特徴量は三つから六つ選ぶこと。二十ではない。</strong> 目安となる下限は、特徴量一つにつき十トレードである。それを下回ると、モデルは関係を学ぶ機会そのものを失い、標本を暗記するだけになる。しかもこれは下限であって、目標ではない。六十トレードの記録があるなら、支えられる特徴量はせいぜい六つ、三つにすればもっと正直な答えが返る。V1を殺したのと同じ算数だ。180トレードに三十二の特徴量では、特徴量あたり六トレードを切る。それはモデルではなく、対応表である。下の一覧は選ぶための献立であって、まるごと使う集合ではない。</p>
+
+        <p>一文で理由を言えるものを三つか四つ選ぶこと &mdash; 「自分の負けは VWAP から離れて入ったときに固まっている」「自分の負けは最初の十五分に固まっている」といったふうに &mdash; 残りは外す。ある特徴量がなぜ効くはずなのかを言えないなら、モデルはそこにともかく関係を見つける。そしてその関係はノイズである。</p><pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>特徴量メニュー -- 3つから6つを選ぶ。全部は使わない：
 
 価格の特徴量：
 1. VWAPからの乖離（%）：（価格 - VWAP）／VWAP
@@ -704,11 +535,12 @@
 
 レジームの特徴量：
 18. VIX水準：現在のVIXの値
-19. レジームスコア：ADX ＋ ATR ＋ バンド幅の複合
+19. レジームスコア：ADX、ATR、バンド幅のパーセンタイル順位を平均
+    （そのまま足さないこと -- 単位が違う）
 20. DXYの変化率 %：マクロの逆風か追い風か
 
-あなたの特徴量（過去50トレード以上で計算）：
-トレード1：[特徴量1：___、特徴量2：___、…、特徴量20：___、結果：勝ち／負け]
+あなたの特徴量（3〜6個を選び、過去50トレード以上で計算）：
+トレード1：[特徴量A：___、特徴量B：___、特徴量C：___、結果：勝ち／負け]
 トレード2：[…]</code></pre>
 
         <p><strong>パート2：学習／検証分割（時間軸のみ）</strong></p>
@@ -803,7 +635,17 @@
 確信度のしきい値：
 確率0.65超 ＝ 高確信度（トレードする）
 確率0.45〜0.65 ＝ 中立（見送る）
-確率0.45未満 ＝ 低確信度（見送るか逆張り）
+確率0.45未満 ＝ 低確信度（見送る -- 逆張りはしない）
+
+これらの数字が何であるかについて、一つ注意。Random Forestのスコアは、賛成に投じた
+木の割合である。較正された確率ではない。0.65は勝ちになる確率が65%という意味ではないし、
+0.65と0.45の差にも、トレードの上での固定した意味はない。このスコアは確率としてではなく
+順位づけとして使うこと -- シグナルの上位三分の一を取る、というふうに。そして再学習の
+たびに閾値を見直すこと。モデルがずれれば、目盛りもずれるからだ。
+
+そして、低いスコアを逆に売買してはいけない。トレードを取る理由を見つけられなかった
+モデルは、それによって売る理由を見つけたわけではない。何も見つけていないのである。
+反転させることは、「情報なし」を、コストを払うポジションに変えることだ。
 
 しきい値別のbacktest結果：
 全トレード（フィルターなし）：勝率55%、平均0.5R
@@ -841,10 +683,10 @@ MLフィルターで取ったトレード：全シグナル100件中 ___件
 - 同じ検証セットで新旧のモデルを比べる
 - 新しいモデルが3%以上上回る場合だけ投入する</code></pre>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>実行の目標：</strong> 直近50〜100トレードを使って4〜6週間でMLフィルターを作ろう。20シグナル分をペーパートレードで運用する。目標の例：選択的な絞り込みで期待値を10%以上改善する。うまくいけば、低確率のセットアップを見送る助けとして、MLがあなたの期待値を測定可能な形で押し上げたことになる。プロがMLを使うのはこういうやり方だ。魔法としてではなく、エッジを体系的に高める道具として。</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>実行の目標：</strong> 直近の50〜100トレードを使って4〜6週間でフィルターを作り、それを紙上の20シグナルに当てる。求めている結果は改善率ではない。この標本サイズでは、たとえ改善が存在しても信頼できる形では測れない。求めているのは、もっと狭い問いへの答えである。そのモデルは、そもそも自分のトレードに順位をつけているのか。記録したトレードをモデルのスコアで並べ替え、上位三分の一と下位三分の一を比べてみること。二つの群の結果が見分けられないなら、モデルは何も学んでいない。そのとき正しい行動は、特徴量を足すことではなく、やめることである。この否定的な結果は四週間に見合う。V1に必要だったのに、実際の金を失うまで得られなかったのが、まさにこの結果だった。</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">多くのMLトレーダーが口座を吹き飛ばしてから気づくことを、あなたはたった今学んだ：特徴量エンジニアリングはモデル選択に勝る、ウォークフォワード検証は必須、そして最適化すべきは期待値（正解率ではない）。これでMLを賭けではなく道具として使える。</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">このレッスンに出てきた三つの失敗 &mdash; 先読みのある特徴量、シャッフルした分割、データより大きいモデル &mdash; には共通する性質がある。どれも backtest を良く見せるが、その良く見せ方が backtest の内側からは見えないのだ。だから規律は、直観ではなく手続きでなければならない。良い結果を眺めただけでは、それがエッジから来たのか、この三つのどれかから来たのかを判別できない。まさにそれゆえ、工程のほうで、結果が出る前にこれらを排除しておかねばならない。</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">関連レッスン</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
