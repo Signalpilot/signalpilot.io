@@ -244,7 +244,11 @@ Tatsächliche Volatilität: ~18 % (NIEDRIGER als beide!)
 
 Warum: Verluste in A werden manchmal durch Gewinne in B ausgeglichen
 Ergebnis: Höhere Rendite pro Risikoeinheit</code></pre>
-            <p><em>Das ist das einzige „Gratis-Mittagessen“ in der Finanzwelt. Nutze es.</em></p>
+            <p>Dieser Effekt ist real und lohnt sich. Er wird auch routinemäßig übertrieben verkauft &mdash; unter anderem von einer früheren Fassung dieser Seite, die ihn das einzige Gratis-Mittagessen der Finanzwelt nannte.</p>
+
+      <p><strong>Was du tatsächlich zahlst.</strong> Die Volatilität ist gefallen, weil sich die beiden Anlagen manchmal auseinanderbewegen &mdash; und genau dieselbe Tatsache, die deine Verluste kappt, wenn A fällt und B steigt, kappt auch deine Gewinne, wenn A steigt und B nicht. Du hast nicht Rendite umsonst bekommen. Du hast einen Teil der besten Ergebnisse gegen weniger der schlechtesten getauscht &mdash; ein Tausch, den die meisten wollen und niemand geschenkt bekommt. Laurens Fall weiter unten ist derselbe Punkt mit echten Zahlen: Ihre diversifizierte Allokation verlor 2022 halb so viel und verlor dann 2023 und 2024 deutlich gegen die zehn Tech-Aktien, die sie aufgegeben hatte.</p>
+
+      <p>Noch etwas, das die Rechnung voraussetzt: jene Korrelation von 0,3. Korrelationen werden aus einem Ausschnitt der Geschichte geschätzt, und sie bewegen sich &mdash; meist Richtung 1, genau unter den Bedingungen, unter denen du dich darauf verlassen hattest, dass sie niedrig bleiben. Alles auf dieser Seite erbt diese Annahme.</p>
           </div>
         </details>
         <details class="accordion-item">
@@ -298,6 +302,11 @@ Risiko (Volatilität) → Rendite
 30 %                 15 %  (hohes Risiko, abnehmender Ertrag)
 
 Dein Ziel: Wähle einen Punkt auf der Kurve nach deiner Risikotoleranz</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Bevor du dich hinsetzt und eine berechnest.</strong> Die Effizienzkurve wird aus erwarteten Renditen, Volatilitäten und Korrelationen gezeichnet &mdash; von denen du keine kennst. Du schätzt sie aus vergangenen Daten, und die Schätzungen sind auf eine bestimmte, schädliche Weise verrauscht: Erwartete Renditen sind von den dreien am schwersten zu messen und zugleich das, worauf der Optimierer am empfindlichsten reagiert. Füttere ihn mit einer leicht großzügigen Schätzung für ein Asset, und er steckt bereitwillig den größten Teil des Portfolios dorthin.</p>
+        <p style="margin-top:0.75rem">Deshalb erzeugt eine naiv gerechnete Mittelwert-Varianz-Optimierung extreme, instabile Allokationen, die sich drastisch ändern, wenn du die Stichprobe um ein paar Monate verlängerst. In der Praxis begegnet man dem mit Gewichtsbeschränkungen, indem man die Renditeschätzungen zu einem gemeinsamen Wert hin schrumpft, oder indem man erwartete Renditen ganz aus dem Problem herauslässt &mdash; genau das tun die risikobasierten Ansätze im nächsten Teil. Behandle eine selbst berechnete Effizienzkurve als Skizze des Trade-offs, nicht als Anweisung über Gewichte.</p>
+      </div>
 
       <h3>Das optimale Portfolio finden (maximale Sharpe Ratio)</h3>
 
@@ -698,29 +707,54 @@ Sieger: Portfolio C (beste risikoadjustierte Rendite)</code></pre>
 
       <p>Das klassische 60/40-Portfolio (60 % Aktien, 40 % Anleihen) hat ein schmutziges Geheimnis:</p>
 
-      <p><strong>Mehr als 80 % des Risikos kommen aus den 60 % in Aktien.</strong></p>
+      <p><strong>Fast das gesamte Risiko kommt aus den 60 % in Aktien.</strong></p>
 
-      <p>Ich zeige es dir:</p>
+      <p>Hier ist die Rechnung &mdash; und es lohnt sich, sie richtig zu machen, denn die schnelle Variante liefert eine falsche Antwort, und zwar auf genau die Weise, vor der diese Lektion in Teil 1 gewarnt hat.</p>
 
       <pre style="overflow-x:auto"><code>60/40-Portfolio:
-60 % SPY (Volatilität: 18 %)
-40 % TLT (Volatilität: 12 %)
+60% SPY (Volatilitaet 18%)
+40% TLT (Volatilitaet 12%)
+Korrelation: -0,30
 
-Risiko läuft über die Varianz, also die gewichteten Vola quadrieren:
-SPY: (0,60 × 18 %)^2 = 10,8^2 = 116,6
-TLT: (0,40 × 12 %)^2 =  4,8^2 =  23,0
-                       gesamt = 139,6
+DIE SCHNELLE VARIANTE (was auf dieser Seite frueher stand):
+Gewichtete Vols quadrieren und die Anteile nehmen.
+SPY: (0,60 x 18%)^2 = 10,8^2 = 116,6
+TLT: (0,40 x 12%)^2 =  4,8^2 =  23,0
+                       total  = 139,6
+SPY-Anteil: 116,6 / 139,6 = 84%
+TLT-Anteil:  23,0 / 139,6 = 16%
 
-Risikoanteil:
-SPY: 116,6 / 139,6 = 84 %
-TLT:  23,0 / 139,6 = 16 %
+Diese Methode ignoriert den Korrelationsterm, der das ganze
+Thema dieser Lektion ist. Sie stimmt nur, wenn die Korrelation
+null ist -- hier ist sie -0,30.
 
-Ergebnis: Das Portfolio hängt zu ~84 % am Aktienrisiko
-          Risikoseitig nicht diversifiziert!</code></pre>
+DIE TATSAECHLICHE RECHNUNG:
+Zuerst die Portfoliovolatilitaet:
+  var = (0,6 x 0,18)^2 + (0,4 x 0,12)^2
+      + 2 x 0,6 x 0,4 x (-0,30) x 0,18 x 0,12
+      = 0,011664 + 0,002304 - 0,003110
+      = 0,010858        ->  Vol = 10,42%
 
-      <p>Denk über Risk Parity nach.</p>
+Der Risikobeitrag jedes Assets ist sein Gewicht mal dem, wie stark
+sich die Portfoliovolatilitaet bewegt, wenn man ein wenig davon
+hinzufuegt:
+  SPY: 0,6 x (0,6 x 0,18^2 + 0,4 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,6 x  0,016848 / 0,1042 = 0,0970   ->  93% von 10,42%
+  TLT: 0,4 x (0,4 x 0,12^2 + 0,6 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,4 x  0,001872 / 0,1042 = 0,0072   ->   7% von 10,42%
 
-      <h3>Risk Parity: Gleiches Risiko, nicht gleiche Dollar</h3>
+Ergebnis: die 60% in Aktien tragen rund 93% des Risikos,
+        nicht 84%. Die negative Korrelation macht die
+        Anleihen-Sleeve zu WENIGER Risikobeitrag, nicht mehr --
+        sie wirkt ausgleichend, was gewollt war, und sie
+        bedeutet zugleich, dass das Portfolio noch mehr eine
+        Aktienwette ist, als die schnelle Rechnung nahelegte.</code></pre>
+
+      <p>Daraus folgen zwei Dinge. Erstens der Punkt, den dieser Abschnitt macht: Ein 60/40-Portfolio ist, in Risikobegriffen, ein Aktienportfolio mit einer kleinen angehängten Absicherung. Zweitens eine Warnung zur Methode &mdash; wenn du Portfoliorisiko zerlegst, indem du gewichtete Volatilitäten quadrierst, setzt du genau das voraus, was du eigentlich messen solltest.</p>
+
+      <h3>Risiko statt Dollar ausgleichen</h3>
+
+      <p><strong>Eine Anmerkung zur Benennung, bevor gerechnet wird.</strong> Was folgt, ist inverse Volatilitätsgewichtung: Gib jedem Asset ein Gewicht proportional zu eins durch seine Volatilität. Das ist einfach, robust und das, was die meisten meinen, wenn sie umgangssprachlich „Risk Parity" sagen. Echte Risk Parity gleicht die Risiko-Beiträge aus, so berechnet wie eben oben &mdash; das braucht die ganze Korrelationsmatrix und hat im Allgemeinen keine geschlossene Lösung; man löst sie numerisch. Die beiden fallen nur zusammen, wenn alle paarweisen Korrelationen gleich sind. Nutze inverse Volatilität ruhig; wisse nur, welches von beiden du tust, denn bei stark negativer Korrelation liefern die beiden sichtbar verschiedene Gewichte.</p>
 
       <div class="tabs">
         <div class="tabs-nav">
@@ -777,17 +811,23 @@ Ergebnis: Das Portfolio hängt zu ~84 % am Aktienrisiko
       <pre style="overflow-x:auto"><code>Kelly % = (Trefferquote × Ø Gewinn - Verlustquote × Ø Verlust) / Ø Gewinn
 
 Beispiel:
-Trefferquote: 65 %
+Trefferquote: 65%
 Ø Gewinn: 2,5R
-Verlustquote: 35 %
+Verlustquote: 35%
 Ø Verlust: 1R
 
 Kelly = (0,65 × 2,5 - 0,35 × 1) / 2,5
       = (1,625 - 0,35) / 2,5
       = 1,275 / 2,5
-      = 0,51 = 51 %
+      = 0,51 = 51%
 
-Deutung: Allokiere 51 % des Kapitals in diese Strategie</code></pre>
+Deutung: bei jedem Trade 51% des Kapitals riskieren</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Lies diese Deutung genau, denn die Formulierung zählt hier mehr als die Rechnung.</strong> Kelly sagt dir nicht, welchen Anteil des Kontos du in eine Strategie stecken sollst. Es sagt dir, welchen Anteil des Kontos du bei jeder Wette aufs Spiel setzen sollst &mdash; den Betrag, den du verlierst, wenn der Trade verliert. „51 % Kelly" bei einer Strategie, deren Verlierer 1R ist, heißt also: 51 % deines Kontos in einem einzigen Trade riskieren. Eine frühere Fassung dieser Seite schrieb „51 % des Kapitals allokieren", was zum Lesen als Positionsgröße einlädt und maßlos untertreibt, worum die Zahl eigentlich bittet.</p>
+        <p style="margin-top:0.75rem"><strong>Und das Eingabeproblem ist schlimmer als das Sizing-Problem.</strong> Kelly setzt voraus, dass du Trefferquote und Auszahlungsverhältnis genau kennst. Tust du nicht; du hast Schätzungen aus einer endlichen Stichprobe, und die Formel ist um sie herum asymmetrisch &mdash; deinen Edge zu überschätzen treibt die empfohlene Wette schneller hoch, als ihn zu unterschätzen sie herunterdrückt. Über Kelly hinaus zu setzen senkt deine Wachstumsrate nicht sanft, es treibt sie ins Negative. Diese Asymmetrie, nicht Zimperlichkeit, ist der Grund, warum es fraktionales Kelly gibt.</p>
+        <p style="margin-top:0.75rem"><strong>Wie sich das mit den 1-2 % pro Trade verträgt, die dieses Curriculum an anderer Stelle lehrt.</strong> Gar nicht &mdash; und das soll es auch nicht. Wenn dein Risiko je Trade 1 % des Kontos beträgt und volles Kelly auf deinen gemessenen Zahlen 51 % ergibt, handelst du bei etwa einem Fünfzigstel Kelly. Das ist eine bewusste Entscheidung, und die Begründung steht oben: Deine 65 % Trefferquote ist eine Messung mit Fehlerbalken, das Auszahlungsverhältnis eine weitere, und ein Fünfzigstel einer Zahl, deren du dir nicht sicher bist, ist ein vertretbarer Standort. Behandle Kelly als Obergrenze, die dir sagt, welche deiner Strategien mehr Gewicht verdient als eine andere &mdash; nicht als Ziel, dem man sich nähert.</p>
+      </div>
 
       <p>Aber hier ist der Haken:</p>
 
@@ -795,7 +835,7 @@ Deutung: Allokiere 51 % des Kapitals in diese Strategie</code></pre>
         <h4>🚨 Volles Kelly ist aggressiv</h4>
         <p>Volles Kelly maximiert das langfristige Wachstum, hat aber wilde Schwankungen.</p>
         <p><strong>Das professionelle Vorgehen:</strong> Nutze 1/4 Kelly bis 1/2 Kelly für eine glattere Equity-Kurve.</p>
-        <p>Beispiel: 51 % volles Kelly → nutze 13–25 % Allokation (sicherer).</p>
+        <p>Beispiel: 51 % volles Kelly ergeben zu einem Viertel immer noch 12,75 % des Kontos, riskiert in einem einzigen Trade. Selbst das ist ein Vielfaches dessen, was irgendein Risikokapitel in diesem Curriculum erlaubt. Der nützliche Ertrag von Kelly ist hier keine Zahl zum Handeln &mdash; er ist die Rangfolge: Eine Strategie mit dem doppelten Kelly-Wert einer anderen hat sich ungefähr das doppelte Gewicht verdient, auf welchem absoluten Niveau du auch tatsächlich fährst.</p>
       </div>
 <h2 id="multi-strategy-portfolio">Multi-Strategie-Portfolio</h2>
 
@@ -805,27 +845,43 @@ Deutung: Allokiere 51 % des Kapitals in diese Strategie</code></pre>
         <details class="accordion-item">
           <summary class="accordion-header">Beispiel für ein Strategieportfolio</summary>
           <div class="accordion-content">
-            <pre style="overflow-x:auto"><code>Strategie A (Janus Sweeps):
-Trefferquote: 65 %, Auszahlungsverhältnis: 2,5:1
-Volles Kelly 51 % -> 13 % allokieren (1/4 Kelly)
-Regime: Funktioniert in Trendmärkten
+            <pre style="overflow-x:auto"><code>Strategie A (Janus-Sweeps):
+Trefferquote 65%, Auszahlungsverhaeltnis 2,5:1
+Kelly = 0,65 - 0,35/2,5 = 0,51
+Regime: funktioniert in Trendmaerkten
 
 Strategie B (Mean Reversion):
-Trefferquote: 58 %, Auszahlungsverhältnis: 2,0:1
-Volles Kelly 37 % -> 9 % allokieren (1/4 Kelly)
-Regime: Funktioniert in Seitwärtsmärkten
+Trefferquote 58%, Auszahlungsverhaeltnis 2,0:1
+Kelly = 0,58 - 0,42/2,0 = 0,37
+Regime: funktioniert in Seitwaertsmaerkten
 
 Strategie C (Breakouts):
-Trefferquote: 52 %, Auszahlungsverhältnis: 3,0:1
-Volles Kelly 36 % -> 9 % allokieren (1/4 Kelly)
-Regime: Funktioniert in volatilen Expansionen
+Trefferquote 52%, Auszahlungsverhaeltnis 3,0:1
+Kelly = 0,52 - 0,48/3,0 = 0,36
+Regime: funktioniert in volatilen Ausdehnungen
 
-Gesamtallokation: 31 % (Rest als Cash-Puffer)
+DIESE ZAHLEN RICHTIG BENUTZEN:
+Lies 51 / 37 / 36 nicht als Prozentsaetze des Kontos. Lies die
+VERHAELTNISSE: 51 : 37 : 36, also rund 41% / 30% / 29% des
+Gesamtrisikos, das du zu fahren beschlossen hast. Ist deine Regel
+1% des Kontos je Trade ueber das ganze Buch, bekommt A etwas mehr
+von diesem Budget als B und C -- und das ist alles, was Kelly dir
+hier sagt.
 
-Ergebnis:
-- Verschiedene Regime = eine Strategie arbeitet immer
-- Unkorrelierte Strategien = glattere Equity-Kurve
-- Cash-Puffer = Flexibilität bei drawdowns</code></pre>
+WAS DIESER AUFBAU BRINGT UND WAS NICHT:
+- Drei Strategien fuer verschiedene Regimes heisst: seltener steht
+  gar nichts. Es heisst NICHT, dass immer eine funktioniert: ein
+  langsamer, richtungsloser Markt mit wenig Volumen ist gleichzeitig
+  schlecht fuer Trend, Mean Reversion und Breakouts.
+- Die glattere Kapitalkurve haengt daran, dass die drei wirklich
+  unkorreliert sind. Miss das an deinem eigenen Handelsjournal --
+  stelle die Tages-P&L der Strategien nebeneinander und pruefe es.
+  Von einer Person auf einem Instrument gebaute Strategien sind
+  meist korrelierter, als sie aussehen, weil sie dein Instrument,
+  deine Handelszeiten und deine Vorstellung von einem Setup teilen.
+- Cash ist hier kein untaetiges Kapital, sondern das, was verhindert,
+  dass ein Drawdown in einer Sleeve dich zwingt, eine andere zu
+  schliessen.</code></pre>
           </div>
         </details>
       </div>
@@ -836,7 +892,7 @@ Ergebnis:
           <li><strong>Korrelation zählt mehr als die Anzahl der Assets – prüfe sie, bevor du von Diversifikation sprichst</strong></li>
           <li><strong>Effizienzkurve = maximale Rendite für gegebenes Risiko (optimiere deine Allokation)</strong></li>
           <li><strong>Risk Parity = gleicher Risikobeitrag, nicht gleiche Dollar (ausgewogener als 60/40)</strong></li>
-          <li><strong>Kelly-Kriterium = optimale Größe für Wachstum (nutze 1/4 bis 1/2 Kelly zur Sicherheit)</strong></li>
+          <li><strong>Kelly liefert einen Risikoanteil je Wette, berechnet aus Zahlen, von denen du nur Schätzungen hast</strong> &mdash; nutze es, um Strategien gegeneinander zu ordnen, nicht um das Niveau festzulegen. Bei 1 % Risiko je Trade fährst du bewusst nur einen kleinen Bruchteil davon.</li>
           <li><strong>Multi-Strategie-Portfolios = unkorrelierte Edges = glattere Renditen</strong></li>
         </ul>
       </div>
@@ -927,7 +983,7 @@ Ergebnis:
             </div>
           </div>
         <div class="quiz-explanation">
-          <strong>Richtig: D.</strong> Kelly nimmt das Auszahlungsverhältnis als sein b-Glied: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40 %. C ist die Falle &mdash; die Antwort an der Trefferquote abzulesen überspringt das Auszahlungsverhältnis vollständig, und dass beide hier bei 60 % zusammenfallen, wäre ein Zufall, keine Regel. Beachte: Volles Kelly bei 40 % ist zum tatsächlichen Handeln viel zu aggressiv, weshalb diese Lektion mit einem Viertel davon dimensioniert.
+          <strong>Richtig: D.</strong> Kelly nimmt das Auszahlungsverhältnis als b-Term: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40 %. C ist die Falle &mdash; die Antwort von der Trefferquote abzulesen überspringt das Auszahlungsverhältnis ganz, und dass beide hier bei 60 % zusammenfallen, wäre ein Zufall, keine Regel. Beachte, was diese 40 % sind: der Anteil des Kontos, den du bei einem Trade riskieren würdest, nicht der Anteil, den du allokierst. Ein Viertel davon bedeutet immer noch 10 % Risiko je Trade &mdash; ein Mehrfaches dessen, was hier irgendein Risikokapitel erlaubt. Kelly taugt als Rangfolge zwischen Strategien und als Obergrenze, unter der du deutlich bleibst; eine Positionsgröße ist es nicht.
         </div>
         </div>
 
@@ -936,7 +992,7 @@ Ergebnis:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Wenn du bis hierher gekommen bist, verstehst du, dass Portfoliokonstruktion Mathematik ist, nicht Raten. Korrelation, Sharpe Ratios, Kelly-Kriterium – das sind keine akademischen Übungen. Das sind Werkzeuge, die Profis täglich nutzen.
+        Jedes Werkzeug in dieser Lektion nimmt geschätzte Eingaben und liefert eine selbstsicher aussehende Zahl zurück. Die Korrelationsmatrix, die Effizienzkurve, der Kelly-Bruchteil: Jedes ist nur so gut wie ein Ausschnitt der Geschichte, der sich nicht genau wiederholen wird. Das ist kein Argument dafür, wieder zu raten &mdash; die Rechnung schlägt die Intuition deutlich und beständig. Es ist ein Argument dafür, die Ergebnisse als Rangfolgen und Obergrenzen zu benutzen statt als Anweisungen, und Portfolios zu bauen, die es überleben, wenn du dich in den Eingaben irrst. Laurens Anleihen-Absicherung versagte in dem einen Jahr, in dem sie hätte funktionieren sollen, und das Portfolio verlor trotzdem halb so viel &mdash; weil sieben Dinge, die von unterschiedlichen Kräften getrieben werden, nicht am selben Tag alle brechen.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Verwandte Lektionen</h3>

@@ -244,7 +244,11 @@ Tényleges volatilitás: ~18 % (ALACSONYABB mindkettőnél!)
 
 Miért: az A-n elszenvedett veszteségeket néha kiegyenlítik a B-n elért nyereségek
 Eredmény: több hozam kockázategységenként</code></pre>
-            <p><em>Ez az egyetlen «ingyenebéd» a pénzügyekben. Használd.</em></p>
+            <p>Ez a hatás valóságos, és érdemes használni. Ugyanakkor rendszeresen túl is adják rajta &mdash; ennek az oldalnak egy korábbi változata is, amely a pénzügyek egyetlen ingyenebédjének nevezte.</p>
+
+      <p><strong>Amit valójában fizetsz.</strong> A volatilitás azért esett, mert a két eszköz néha széttart &mdash; és ugyanez a tény, amely csökkenti a veszteségedet, amikor A esik és B emelkedik, csökkenti a nyereségedet is, amikor A emelkedik és B nem. Nem kaptál hozamot ingyen. A legjobb kimenetelek egy részét cserélted a legrosszabbak kevesebbjére, és ezt a cserét a legtöbben akarják, ingyen pedig senki nem kapja meg. Lauren esete alább ugyanez valós számokkal: a diverzifikált allokációja 2022-ben feleannyit vesztett, majd 2023-ban és 2024-ben nagy különbséggel alulmaradt a tíz technológiai részvénnyel szemben, amelyeket elhagyott.</p>
+
+      <p>Még valami, amit a számtan feltételez: azt a 0,3-es korrelációt. A korrelációkat a történelem egy ablakából becsüljük, és mozognak &mdash; jellemzően 1 felé, épp azokban a körülményekben, amelyekben arra számítottál, hogy alacsonyak maradnak. Ezen az oldalon minden ezt a feltevést örökli.</p>
           </div>
         </details>
         <details class="accordion-item">
@@ -298,6 +302,11 @@ Kockázat (volatilitás) → Hozam
 30 %                 15 %  (magas kockázat, csökkenő hozadék)
 
 A célod: válassz egy pontot a határon a kockázattűrésed szerint</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Mielőtt nekiállnál kiszámolni egyet.</strong> A hatékony határvonalat várható hozamokból, volatilitásokból és korrelációkból rajzolják &mdash; és ezek közül egyiket sem ismered. Múltbeli adatból becsülöd őket, és a becslések egy meghatározott, kártékony módon zajosak: a várható hozam a három közül a legnehezebben mérhető, és éppen arra a legérzékenyebb az optimalizáló. Adj neki egy kicsit bőkezű becslést egy eszközre, és boldogan odateszi a portfólió nagy részét.</p>
+        <p style="margin-top:0.75rem">Ezért ad a naivan futtatott átlag-variancia optimalizálás szélsőséges, instabil súlyokat, amelyek drámaian megváltoznak, ha pár hónappal meghosszabbítod a mintát. A gyakorlatban ezt súlykorlátokkal kezelik, a hozambecsléseket egy közös érték felé zsugorítva, vagy a várható hozamokat teljesen kihagyva a feladatból &mdash; ez utóbbit teszik a következő rész kockázatalapú megközelítései. A magad számolta határvonalat a kompromisszum vázlataként kezeld, ne súlyokra vonatkozó utasításként.</p>
+      </div>
 
       <h3>Az optimális portfólió megtalálása (maximális Sharpe-mutató)</h3>
 
@@ -698,29 +707,54 @@ Győztes: C portfólió (legjobb kockázattal korrigált hozam)</code></pre>
 
       <p>A klasszikus 60/40 portfóliónak (60 % részvény, 40 % kötvény) van egy piszkos titka:</p>
 
-      <p><strong>A kockázat több mint 80 %-a a részvényekben lévő 60 %-ból jön.</strong></p>
+      <p><strong>A kockázat szinte egésze a részvényekben lévő 60%-ból származik.</strong></p>
 
-      <p>Megmutatom:</p>
+      <p>Íme a számítás, és érdemes rendesen elvégezni, mert a gyors változat pontosan úgy ad rossz eredményt, ahogy e lecke első része figyelmeztet rá.</p>
 
-      <pre style="overflow-x:auto"><code>60/40 portfólió:
-60 % SPY (volatilitás: 18 %)
-40 % TLT (volatilitás: 12 %)
+      <pre style="overflow-x:auto"><code>60/40 portfolio:
+60% SPY (volatilitas 18%)
+40% TLT (volatilitas 12%)
+Korrelacio: -0,30
 
-A kockázat a variancián át halad, ezért emeld négyzetre a súlyozott volatilitásokat:
-SPY: (0,60 × 18 %)^2 = 10,8^2 = 116,6
-TLT: (0,40 × 12 %)^2 =  4,8^2 =  23,0
-                     összesen = 139,6
+A GYORS VALTOZAT (amit ez az oldal korabban csinalt):
+Emeld negyzetre a sulyozott volatilitasokat, es vedd a hanyadokat.
+SPY: (0,60 x 18%)^2 = 10,8^2 = 116,6
+TLT: (0,40 x 12%)^2 =  4,8^2 =  23,0
+                       total  = 139,6
+SPY hanyad: 116,6 / 139,6 = 84%
+TLT hanyad:  23,0 / 139,6 = 16%
 
-A kockázat megoszlása:
-SPY: 116,6 / 139,6 = 84 %
-TLT:  23,0 / 139,6 = 16 %
+Ez a modszer figyelmen kivul hagyja a korrelacios tagot, pedig
+ez a lecke egesz targya. Csak akkor helyes, ha a korrelacio
+nulla -- itt viszont -0,30.
 
-Eredmény: a portfólió ~84 %-ban részvénykockázatnak van kitéve
-          Kockázati értelemben nem diverzifikált!</code></pre>
+A TENYLEGES SZAMITAS:
+Eloszor a portfolio volatilitasa:
+  var = (0,6 x 0,18)^2 + (0,4 x 0,12)^2
+      + 2 x 0,6 x 0,4 x (-0,30) x 0,18 x 0,12
+      = 0,011664 + 0,002304 - 0,003110
+      = 0,010858        ->  vol = 10,42%
 
-      <p>Vedd fontolóra a risk parityt.</p>
+Minden eszkoz kockazati hozzajarulasa a sulya szorozva azzal,
+mennyit mozdul a portfolio volatilitasa, ha egy kicsit hozzaadsz
+belole:
+  SPY: 0,6 x (0,6 x 0,18^2 + 0,4 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,6 x  0,016848 / 0,1042 = 0,0970   ->  93% ebbol: 10,42%
+  TLT: 0,4 x (0,4 x 0,12^2 + 0,6 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,4 x  0,001872 / 0,1042 = 0,0072   ->   7% ebbol: 10,42%
 
-      <h3>Risk parity: egyenlő kockázat, nem egyenlő dollár</h3>
+Eredmeny: a reszvenyekben levo 60% viseli a kockazat
+        mintegy 93%-at, nem 84%-at. A negativ korrelacio a
+        kotvenyszeletet KISEBB, nem nagyobb kockazati
+        hozzajarulova teszi -- ellensulyoz, amit akartal, es
+        egyben azt is jelenti, hogy a portfolio meg inkabb
+        reszvenyfogadás, mint amit a gyors szamtan sugallt.</code></pre>
+
+      <p>Ebből két dolog következik. Az első a szakasz állítása: a 60/40-es portfólió kockázati értelemben egy részvényportfólió, amelyre egy kis fedezet van akasztva. A második egy módszertani figyelmeztetés &mdash; ha úgy bontod fel a portfóliókockázatot, hogy súlyozott volatilitásokat emelsz négyzetre, épp azt feltételezed, amit mérned kellene.</p>
+
+      <h3>Dollárok helyett a kockázat kiegyenlítése</h3>
+
+      <p><strong>Egy elnevezési megjegyzés a számolás előtt.</strong> Ami következik, az inverz volatilitás szerinti súlyozás: adj minden eszköznek a volatilitása reciprokával arányos súlyt. Egyszerű, robusztus, és a legtöbben ezt értik, amikor kötetlenül „risk parity"-t mondanak. Az igazi kockázati paritás a fentebb kiszámolt módon vett kockázati hozzájárulásokat egyenlíti ki, ami a teljes korrelációs mátrixot igényli, és általában nincs zárt alakú megoldása &mdash; numerikusan oldják meg. A kettő csak akkor esik egybe, ha minden páronkénti korreláció egyenlő. Használd nyugodtan az inverz volatilitást; csak tudd, melyiket csinálod, mert erősen negatív korrelációnál a kettő láthatóan más súlyokat ad.</p>
 
       <div class="tabs">
         <div class="tabs-nav">
@@ -774,20 +808,26 @@ Eredmény: a portfólió ~84 %-ban részvénykockázatnak van kitéve
 
       <p><strong>Válasz: a Kelly-kritérium.</strong></p>
 
-      <pre style="overflow-x:auto"><code>Kelly % = (találati arány × átl. nyereség - vesztési arány × átl. veszteség) / átl. nyereség
+      <pre style="overflow-x:auto"><code>Kelly % = (Találati arány × Átl. nyereség - Veszteségarány × Átl. veszteség) / Átl. nyereség
 
 Példa:
-Találati arány: 65 %
+Találati arány: 65%
 Átl. nyereség: 2,5R
-Vesztési arány: 35 %
+Veszteségarány: 35%
 Átl. veszteség: 1R
 
 Kelly = (0,65 × 2,5 - 0,35 × 1) / 2,5
       = (1,625 - 0,35) / 2,5
       = 1,275 / 2,5
-      = 0,51 = 51 %
+      = 0,51 = 51%
 
-Értelmezés: allokáld a tőke 51 %-át erre a stratégiára</code></pre>
+Értelmezés: minden kereskedésen a tőke 51%-át kockáztatni</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Ezt az értelmezést olvasd figyelmesen, mert itt a megfogalmazás többet számít, mint a számtan.</strong> A Kelly nem azt mondja meg, a számla mekkora hányadát parkoltasd egy stratégiában. Azt mondja meg, a számla mekkora hányadát tedd kockára minden fogadásnál &mdash; azt az összeget, amit elveszítesz, ha a kereskedés veszít. Tehát „51% Kelly" egy olyan stratégián, amelynek vesztese 1R, azt jelenti, hogy a számlád 51%-át kockáztatod egyetlen kereskedésen. Ennek az oldalnak egy korábbi változata azt írta: „allokálj 51% tőkét", ami pozícióméretként való olvasásra hív, és óriási mértékben alábecsüli, mit kér a szám.</p>
+        <p style="margin-top:0.75rem"><strong>És a bemeneti probléma rosszabb, mint a méretezési.</strong> A Kelly feltételezi, hogy pontosan ismered a találati arányt és a kifizetési arányt. Nem ismered; véges mintából vett becsléseid vannak, és a képlet aszimmetrikus körülöttük &mdash; az előnyöd túlbecslése gyorsabban tolja felfelé az ajánlott tétet, mint amilyen gyorsan az alulbecslés lefelé tolja. A Kelly fölé fogadás nem finoman csökkenti a növekedési ütemedet, hanem negatívba viszi. Ez az aszimmetria, nem a félénkség, a tört Kelly létezésének oka.</p>
+        <p style="margin-top:0.75rem"><strong>Hogyan fér ez össze a kereskedésenkénti 1-2%-kal, amit ez a tananyag máshol tanít.</strong> Nem fér össze, és nem is kell. Ha a kereskedésenkénti kockázatod a számla 1%-a, és a mért számaidon a teljes Kelly 51%, akkor nagyjából a Kelly ötvened részén kereskedsz. Ez tudatos döntés, és az érvelés fent van: a 65%-os találati arányod hibasávos mérés, a kifizetési arány egy másik, és egy olyan szám ötvened része, amiben nem vagy biztos, védhető hely a megálláshoz. A Kellyt olyan plafonként kezeld, amely megmondja, melyik stratégiád érdemel több súlyt a másiknál &mdash; nem célként, amit meg kell közelíteni.</p>
+      </div>
 
       <p>De itt a csapda:</p>
 
@@ -795,7 +835,7 @@ Kelly = (0,65 × 2,5 - 0,35 × 1) / 2,5
         <h4>🚨 A teljes Kelly agresszív</h4>
         <p>A teljes Kelly maximalizálja a hosszú távú növekedést, de vad kilengésekkel jár.</p>
         <p><strong>A professzionális megközelítés:</strong> Használj 1/4 és 1/2 Kelly közötti értéket a simább tőkegörbéért.</p>
-        <p>Példa: 51 % teljes Kelly → használj 13-25 % allokációt (biztonságosabb).</p>
+        <p>Példa: a teljes Kelly 51%-ának negyede is még mindig a számla 12,75%-a kockáztatva egyetlen kereskedésen. Ez is sokszorosa annak, amit e tananyag bármely kockázati fejezete megenged. A Kelly hasznos kimenete itt nem egy szám, amivel kereskedni lehet &mdash; hanem a rangsor: az a stratégia, amelynek Kelly-száma egy másikénak a kétszerese, nagyjából kétszeres súlyt érdemelt ki, bármilyen abszolút szinten futtatod is.</p>
       </div>
 <h2 id="multi-strategy-portfolio">Többstratégiás portfólió</h2>
 
@@ -805,27 +845,43 @@ Kelly = (0,65 × 2,5 - 0,35 × 1) / 2,5
         <details class="accordion-item">
           <summary class="accordion-header">Példa stratégiaportfólióra</summary>
           <div class="accordion-content">
-            <pre style="overflow-x:auto"><code>A stratégia (Janus Sweeps):
-Találati arány: 65 %, payoff ratio: 2,5:1
-Teljes Kelly 51 % -> allokálj 13 %-ot (1/4 Kelly)
-Rezsim: trendelő piacokon működik
+            <pre style="overflow-x:auto"><code>A stratégia (Janus söprések):
+Találati arány 65%, kifizetési arány 2,5:1
+Kelly = 0,65 - 0,35/2,5 = 0,51
+Rezsim: trendes piacokon működik
 
-B stratégia (átlaghoz való visszatérés):
-Találati arány: 58 %, payoff ratio: 2,0:1
-Teljes Kelly 37 % -> allokálj 9 %-ot (1/4 Kelly)
+B stratégia (átlaghoz visszatérés):
+Találati arány 58%, kifizetési arány 2,0:1
+Kelly = 0,58 - 0,42/2,0 = 0,37
 Rezsim: oldalazó piacokon működik
 
 C stratégia (kitörések):
-Találati arány: 52 %, payoff ratio: 3,0:1
-Teljes Kelly 36 % -> allokálj 9 %-ot (1/4 Kelly)
-Rezsim: volatilis kiterjedésekben működik
+Találati arány 52%, kifizetési arány 3,0:1
+Kelly = 0,52 - 0,48/3,0 = 0,36
+Rezsim: volatilis tágulásokban működik
 
-Teljes allokáció: 31 % (a többi készpénz pufferként)
+HOGYAN HASZNÁLD JÓL EZEKET A SZÁMOKAT:
+Ne olvasd az 51 / 37 / 36 értékeket a számla százalékaiként. Az
+ARÁNYOKAT olvasd: 51 : 37 : 36, vagyis nagyjából 41% / 30% / 29%-a
+annak a teljes kockázatnak, amit futtatni döntöttél. Ha a szabályod
+kereskedésenként a számla 1%-a az egész könyvön, akkor A valamivel
+többet kap ebből a keretből, mint B és C -- és ennyi az egész, amit
+a Kelly itt mond neked.
 
-Eredmény:
-- Különböző rezsimek = mindig dolgozik valamelyik stratégia
-- Korrelálatlan stratégiák = simább tőkegörbe
-- Készpénzpuffer = rugalmasság a drawdown időszakokban</code></pre>
+MIT VESZ MEG ÉS MIT NEM VESZ MEG EZ A FELÁLLÁS:
+- Három, különböző rezsimekhez illő stratégia azt jelenti, hogy
+  kisebb eséllyel nem működik semmi. NEM azt jelenti, hogy MINDIG
+  működik valamelyik: egy lassú, iránytalan, alacsony forgalmú piac
+  egyszerre rossz a trendnek, az átlaghoz visszatérésnek és a
+  kitöréseknek.
+- A simább tőkegörbe azon múlik, hogy a három valóban korrelálatlan-e.
+  Mérd meg a saját kereskedési naplódon: állítsd egymás mellé az
+  egyes stratégiák napi P&L-jét, és ellenőrizd. Az egy ember által
+  egy eszközön épített stratégiák általában erősebben korrelálnak,
+  mint amilyennek látszanak, mert osztoznak az eszközödön, az
+  óráidon és azon, amit te beállásnak nevezel.
+- A készpénz itt nem tétlen tőke: ez az, ami megakadályozza, hogy az
+  egyik szeletben lévő drawdown egy másik zárására kényszerítsen.</code></pre>
           </div>
         </details>
       </div>
@@ -836,7 +892,7 @@ Eredmény:
           <li><strong>A korreláció többet számít, mint az eszközök száma – ellenőrizd, mielőtt diverzifikáltnak mondod magad</strong></li>
           <li><strong>Hatékony határ = maximális hozam adott kockázatra (optimalizáld az allokációdat)</strong></li>
           <li><strong>Risk parity = egyenlő kockázati hozzájárulás, nem egyenlő dollár (kiegyensúlyozottabb, mint a 60/40)</strong></li>
-          <li><strong>Kelly-kritérium = optimális méret a növekedéshez (a biztonság kedvéért 1/4 és 1/2 Kelly között)</strong></li>
+          <li><strong>A Kelly fogadásonkénti kockázati hányadot ad, olyan számokból számolva, amelyekről csak becsléseid vannak</strong> &mdash; arra használd, hogy a stratégiákat egymáshoz mérd, ne a szint beállítására. Kereskedésenkénti 1% kockázatnál tudatosan ennek csak kis töredékén futsz.</li>
           <li><strong>Többstratégiás portfóliók = korrelálatlan edge-ek = simább hozamok</strong></li>
         </ul>
       </div>
@@ -927,7 +983,7 @@ Eredmény:
             </div>
           </div>
         <div class="quiz-explanation">
-          <strong>Helyes: D.</strong> A Kelly a payoff ratiót veszi b tagként: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40%. A C válasz a csapda &mdash; ha a találati arányból olvasod ki a választ, teljesen kihagyod a payoff ratiót, és hogy a kettő itt éppen 60%-on esik egybe, az véletlen, nem szabály. Vedd észre: a 40%-os teljes Kelly jóval túl agresszív ahhoz, hogy valóban kereskedj vele, ezért méretez ez a lecke a negyedével.
+          <strong>Helyes: D.</strong> A Kelly a kifizetési arányt veszi b tagnak: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40%. A C a csapda &mdash; a választ a találati arányról leolvasni teljesen kihagyja a kifizetési arányt, és hogy a kettő itt 60%-nál egybeesik, véletlen lenne, nem szabály. Figyeld meg, mi ez a 40%: a számla azon hányada, amit egy kereskedésen kockáztatnál, nem az, amit allokálsz. Ennek a negyede is kereskedésenkénti 10% kockázat, többszöröse annak, amit itt bármely kockázati fejezet enged. A Kelly stratégiák közti rangsorként és jóval alatta maradó plafonként hasznos; nem pozícióméret.
         </div>
         </div>
 
@@ -936,7 +992,7 @@ Eredmény:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Ha idáig eljutottál, érted, hogy a portfólióépítés matematika, nem találgatás. Korreláció, Sharpe-mutatók, Kelly-kritérium – ezek nem akadémiai gyakorlatok. Ezek eszközök, amelyeket a profik naponta használnak.
+        E lecke minden eszköze becsült bemeneteket vesz, és magabiztosnak látszó számot ad vissza. A korrelációs mátrix, a határvonal, a Kelly-hányad: mindegyik csak annyit ér, amennyit a történelem egy mintája, amely nem fog pontosan megismétlődni. Ez nem érv amellett, hogy térjünk vissza a találgatáshoz &mdash; a számtan egyértelműen és következetesen veri a megérzést. Ez érv amellett, hogy a kimeneteket rangsorként és plafonként használd, ne utasításként, és hogy olyan portfóliókat építs, amelyek túlélik, ha tévedtél a bemenetekben. Lauren kötvényfedezete abban az egy évben mondott csődöt, amikor működnie kellett volna, és a portfólió mégis feleannyit vesztett &mdash; mert hét, különböző erők hajtotta dolog nem törik el ugyanazon a napon.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Kapcsolódó leckék</h3>

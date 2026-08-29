@@ -244,7 +244,11 @@ Werkelijke volatiliteit: ~18 % (LAGER dan allebei!)
 
 Waarom: verliezen in A worden soms gecompenseerd door winsten in B
 Resultaat: meer rendement per eenheid risico</code></pre>
-            <p><em>Dit is de enige «gratis lunch» in de financiële wereld. Gebruik hem.</em></p>
+            <p>Dit effect is echt en het loont om het te gebruiken. Het wordt ook routineus oververkocht &mdash; onder meer door een eerdere versie van deze pagina, die het de enige gratis lunch in de financiële wereld noemde.</p>
+
+      <p><strong>Wat je werkelijk betaalt.</strong> De volatiliteit daalde omdat de twee activa soms uit elkaar bewegen &mdash; en precies datzelfde feit dat je verliezen beperkt wanneer A daalt en B stijgt, beperkt ook je winsten wanneer A stijgt en B niet. Je hebt geen rendement voor niets gekregen. Je hebt een deel van de beste uitkomsten geruild voor minder van de slechtste, en dat is een ruil die de meesten willen en niemand gratis krijgt. Laurens geval verderop is hetzelfde punt met echte cijfers: haar gespreide allocatie verloor in 2022 half zoveel en verloor daarna in 2023 en 2024 ruimschoots van de tien techaandelen die zij had opgegeven.</p>
+
+      <p>Nog iets wat de rekensom aanneemt: die correlatie van 0,3. Correlaties worden geschat uit een venster van historie en ze bewegen, meestal richting 1 in precies de omstandigheden waarin je erop rekende dat ze laag zouden zijn. Alles op deze pagina erft die aanname.</p>
           </div>
         </details>
         <details class="accordion-item">
@@ -298,6 +302,11 @@ Risico (volatiliteit) → Rendement
 30 %                 15 %  (hoog risico, afnemend rendement)
 
 Jouw doel: kies een punt op de grenslijn dat past bij je risicotolerantie</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Voordat je er een gaat uitrekenen.</strong> De efficiënte grens wordt getekend uit verwachte rendementen, volatiliteiten en correlaties &mdash; die je geen van alle kent. Je schat ze uit historische data, en de schattingen zijn ruizig op een specifieke en schadelijke manier: verwachte rendementen zijn van de drie het moeilijkst te meten en datgene waar de optimalisator het gevoeligst voor is. Voer hem een iets royale schatting voor één asset en hij stopt daar met plezier het grootste deel van de portefeuille in.</p>
+        <p style="margin-top:0.75rem">Daarom levert naïef toegepaste gemiddelde-variantieoptimalisatie extreme, instabiele allocaties op die drastisch veranderen als je de steekproef met een paar maanden verlengt. In de praktijk pakt men dat aan door gewichten te begrenzen, door rendementsschattingen naar een gemeenschappelijke waarde te krimpen, of door verwachte rendementen helemaal uit het probleem te laten &mdash; en dat is wat de risicogebaseerde benaderingen in het volgende deel doen. Behandel een grens die je zelf berekende als een schets van de afruil, niet als een instructie over gewichten.</p>
+      </div>
 
       <h3>De optimale portefeuille vinden (hoogste sharperatio)</h3>
 
@@ -698,29 +707,55 @@ Winnaar: portefeuille C (beste risicogecorrigeerde rendement)</code></pre>
 
       <p>De klassieke 60/40-portefeuille (60 % aandelen, 40 % obligaties) heeft een vuil geheim:</p>
 
-      <p><strong>Meer dan 80 % van het risico komt uit de 60 % in aandelen.</strong></p>
+      <p><strong>Vrijwel al het risico komt uit de 60% in aandelen.</strong></p>
 
-      <p>Ik laat het je zien:</p>
+      <p>Hier is de berekening, en het loont om haar goed te doen, want de snelle versie geeft het verkeerde antwoord op precies de manier waar deel 1 van deze les voor waarschuwt.</p>
 
       <pre style="overflow-x:auto"><code>60/40-portefeuille:
-60 % SPY (volatiliteit: 18 %)
-40 % TLT (volatiliteit: 12 %)
+60% SPY (volatiliteit 18%)
+40% TLT (volatiliteit 12%)
+Correlatie: -0,30
 
-Risico loopt via de variantie, dus kwadrateer de gewogen vol:
-SPY: (0,60 × 18 %)^2 = 10,8^2 = 116,6
-TLT: (0,40 × 12 %)^2 =  4,8^2 =  23,0
-                      totaal = 139,6
+DE SNELLE VERSIE (wat deze pagina vroeger deed):
+Kwadrateer de gewogen vols en neem de aandelen.
+SPY: (0,60 x 18%)^2 = 10,8^2 = 116,6
+TLT: (0,40 x 12%)^2 =  4,8^2 =  23,0
+                       total  = 139,6
+Aandeel SPY: 116,6 / 139,6 = 84%
+Aandeel TLT:  23,0 / 139,6 = 16%
 
-Aandeel in het risico:
-SPY: 116,6 / 139,6 = 84 %
-TLT:  23,0 / 139,6 = 16 %
+Die methode negeert de correlatieterm, en dat is het hele
+onderwerp van deze les. Zij klopt alleen wanneer de correlatie
+nul is, en hier is die -0,30.
 
-Resultaat: de portefeuille hangt voor ~84 % aan aandelenrisico
-           Niet gediversifieerd in risicotermen!</code></pre>
+DE ECHTE BEREKENING:
+Eerst de portefeuillevolatiliteit:
+  var = (0,6 x 0,18)^2 + (0,4 x 0,12)^2
+      + 2 x 0,6 x 0,4 x (-0,30) x 0,18 x 0,12
+      = 0,011664 + 0,002304 - 0,003110
+      = 0,010858        ->  vol = 10,42%
 
-      <p>Overweeg risk parity.</p>
+De risicobijdrage van elk actief is zijn gewicht maal hoeveel de
+volatiliteit van de portefeuille beweegt als je er een beetje van
+toevoegt:
+  SPY: 0,6 x (0,6 x 0,18^2 + 0,4 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,6 x  0,016848 / 0,1042 = 0,0970   ->  93% van 10,42%
+  TLT: 0,4 x (0,4 x 0,12^2 + 0,6 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,4 x  0,001872 / 0,1042 = 0,0072   ->   7% van 10,42%
 
-      <h3>Risk parity: gelijk risico, niet gelijke dollars</h3>
+Resultaat: de 60% in aandelen draagt ongeveer 93% van het
+        risico, niet 84%. De negatieve correlatie maakt de
+        obligatiesleeve een KLEINERE risicobijdrager, niet
+        grotere -- zij compenseert, en dat wilde je, en het
+        betekent ook dat de portefeuille nog meer een
+        aandelenweddenschap is dan het snelle rekensommetje
+        suggereerde.</code></pre>
+
+      <p>Daaruit volgen twee dingen. Het eerste is het punt van deze paragraaf: een 60/40-portefeuille is in risicotermen een aandelenportefeuille met een kleine hedge eraan. Het tweede is een waarschuwing over methode &mdash; als je portefeuillerisico ontleedt door gewogen volatiliteiten te kwadrateren, neem je precies aan wat je zou moeten meten.</p>
+
+      <h3>Risico gelijktrekken in plaats van dollars</h3>
+
+      <p><strong>Een naamkwestie vóór het rekenwerk.</strong> Wat volgt is inverse-volatiliteitsweging: geef elk actief een gewicht evenredig aan één gedeeld door zijn volatiliteit. Het is eenvoudig, het is robuust, en het is wat de meeste mensen informeel bedoelen met "risk parity". Echte risicopariteit trekt de risicobijdragen gelijk zoals ze hierboven zijn berekend, en dat vraagt de hele correlatiematrix en heeft doorgaans geen gesloten oplossing &mdash; je lost het numeriek op. De twee vallen alleen samen wanneer alle paarsgewijze correlaties gelijk zijn. Gebruik inverse volatiliteit gerust; weet alleen welke van de twee je doet, want bij een sterk negatieve correlatie geven ze zichtbaar verschillende gewichten.</p>
 
       <div class="tabs">
         <div class="tabs-nav">
@@ -774,20 +809,26 @@ Resultaat: de portefeuille hangt voor ~84 % aan aandelenrisico
 
       <p><strong>Antwoord: het kelly-criterium.</strong></p>
 
-      <pre style="overflow-x:auto"><code>Kelly % = (trefkans × gem. winst - verlieskans × gem. verlies) / gem. winst
+      <pre style="overflow-x:auto"><code>Kelly % = (Winstpercentage × Gem. winst - Verliespercentage × Gem. verlies) / Gem. winst
 
 Voorbeeld:
-Trefkans: 65 %
+Winstpercentage: 65%
 Gem. winst: 2,5R
-Verlieskans: 35 %
+Verliespercentage: 35%
 Gem. verlies: 1R
 
 Kelly = (0,65 × 2,5 - 0,35 × 1) / 2,5
       = (1,625 - 0,35) / 2,5
       = 1,275 / 2,5
-      = 0,51 = 51 %
+      = 0,51 = 51%
 
-Uitleg: alloceer 51 % van het kapitaal aan deze strategie</code></pre>
+Interpretatie: bij elke trade 51% van het kapitaal riskeren</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Lees die interpretatie zorgvuldig, want de formulering telt zwaarder dan het rekenwerk.</strong> Kelly zegt je niet welk deel van de rekening je in een strategie moet parkeren. Het zegt je welk deel van de rekening je bij elke inzet moet riskeren &mdash; het bedrag dat je verliest als de trade verliest. Dus "51% Kelly" op een strategie met een verliezer van 1R betekent 51% van je rekening riskeren op één trade. Een eerdere versie van deze pagina zei "alloceer 51% van het kapitaal", wat uitnodigt het als positiegrootte te lezen en enorm onderschat wat het getal vraagt.</p>
+        <p style="margin-top:0.75rem"><strong>En het invoerprobleem is erger dan het sizingprobleem.</strong> Kelly gaat ervan uit dat je het winstpercentage en de payoffverhouding exact kent. Dat doe je niet; je hebt schattingen uit een eindige steekproef, en de formule is asymmetrisch rond die schattingen &mdash; je edge overschatten duwt de aanbevolen inzet sneller omhoog dan onderschatten hem omlaag duwt. Boven Kelly inzetten verlaagt je groeivoet niet zachtjes, het maakt hem negatief. Die asymmetrie, en niet schuchterheid, is waarom fractionele Kelly bestaat.</p>
+        <p style="margin-top:0.75rem"><strong>Hoe dit zich verhoudt tot de 1-2% per trade die dit curriculum elders leert.</strong> Dat doet het niet, en dat hoort ook niet. Is je risico per trade 1% van de rekening en is volledige Kelly op je gemeten getallen 51%, dan handel je op ongeveer een vijftigste Kelly. Dat is een bewuste keuze, en de redenering staat hierboven: je 65% winstpercentage is een meting met foutmarges, de payoffverhouding een tweede, en een vijftigste van een getal waarvan je niet zeker bent is een verdedigbare plek om te staan. Behandel Kelly als een plafond dat je vertelt welke van je strategieën meer gewicht verdient dan een andere &mdash; niet als een doel om naartoe te werken.</p>
+      </div>
 
       <p>Maar hier zit de adder:</p>
 
@@ -795,7 +836,7 @@ Uitleg: alloceer 51 % van het kapitaal aan deze strategie</code></pre>
         <h4>🚨 Volledige kelly is agressief</h4>
         <p>Volledige kelly maximaliseert de groei op lange termijn maar kent wilde uitslagen.</p>
         <p><strong>De professionele aanpak:</strong> Gebruik 1/4 tot 1/2 kelly voor een vlakkere kapitaalcurve.</p>
-        <p>Voorbeeld: 51 % volledige kelly → gebruik 13-25 % allocatie (veiliger).</p>
+        <p>Voorbeeld: 51% volledige Kelly, op een kwart genomen, is nog altijd 12,75% van de rekening geriskeerd op één trade. Zelfs dat is vele malen wat welk risicohoofdstuk in dit curriculum ook toestaat. Wat Kelly hier bruikbaar oplevert is geen getal om te handelen &mdash; het is de rangorde: een strategie met het dubbele Kellygetal van een andere heeft ongeveer het dubbele gewicht verdiend, op welk absoluut niveau je ook daadwerkelijk draait.</p>
       </div>
 <h2 id="multi-strategy-portfolio">Multistrategieportefeuille</h2>
 
@@ -805,27 +846,41 @@ Uitleg: alloceer 51 % van het kapitaal aan deze strategie</code></pre>
         <details class="accordion-item">
           <summary class="accordion-header">Voorbeeld van een strategieportefeuille</summary>
           <div class="accordion-content">
-            <pre style="overflow-x:auto"><code>Strategie A (Janus Sweeps):
-Trefkans: 65 %, uitbetalingsratio: 2,5:1
-Volledige kelly 51 % -> 13 % alloceren (1/4 kelly)
-Regime: werkt in trendende markten
+            <pre style="overflow-x:auto"><code>Strategie A (Janus sweeps):
+Winstpercentage 65%, payoffverhouding 2,5:1
+Kelly = 0,65 - 0,35/2,5 = 0,51
+Regime: werkt in trendmarkten
 
 Strategie B (mean reversion):
-Trefkans: 58 %, uitbetalingsratio: 2,0:1
-Volledige kelly 37 % -> 9 % alloceren (1/4 kelly)
+Winstpercentage 58%, payoffverhouding 2,0:1
+Kelly = 0,58 - 0,42/2,0 = 0,37
 Regime: werkt in zijwaartse markten
 
 Strategie C (breakouts):
-Trefkans: 52 %, uitbetalingsratio: 3,0:1
-Volledige kelly 36 % -> 9 % alloceren (1/4 kelly)
+Winstpercentage 52%, payoffverhouding 3,0:1
+Kelly = 0,52 - 0,48/3,0 = 0,36
 Regime: werkt in volatiele expansies
 
-Totale allocatie: 31 % (de rest als cashbuffer)
+DEZE GETALLEN GOED GEBRUIKEN:
+Lees 51 / 37 / 36 niet als percentages van de rekening. Lees de
+VERHOUDINGEN: 51 : 37 : 36, oftewel ruwweg 41% / 30% / 29% van het
+totale risico dat je hebt besloten te draaien. Is je regel 1% van
+de rekening per trade over het hele boek, dan krijgt A iets meer
+van dat budget dan B en C, en dat is alles wat Kelly je hier zegt.
 
-Resultaat:
-- Verschillende regimes = er werkt altijd één strategie
-- Ongecorreleerde strategieën = vlakkere kapitaalcurve
-- Cashbuffer = flexibiliteit tijdens drawdowns</code></pre>
+WAT DEZE OPZET WEL EN NIET KOOPT:
+- Drie strategieen voor verschillende regimes betekent dat het
+  minder waarschijnlijk is dat er niets werkt. Het betekent NIET dat
+  er ALTIJD een werkt: een trage, richtingloze markt met weinig
+  volume is tegelijk slecht voor trend, mean reversion en breakouts.
+- De vlakkere kapitaalcurve hangt ervan af of de drie werkelijk
+  ongecorreleerd zijn. Meet dat op je eigen tradelog: zet de
+  dagelijkse P&L van elke strategie naast elkaar en controleer het.
+  Strategieen die door een persoon op een instrument zijn gebouwd
+  zijn meestal meer gecorreleerd dan ze lijken, omdat ze jouw
+  instrument, jouw uren en jouw idee van een setup delen.
+- Cash is hier geen ledig kapitaal: het is wat voorkomt dat een
+  drawdown in de ene sleeve je dwingt een andere te sluiten.</code></pre>
           </div>
         </details>
       </div>
@@ -836,7 +891,7 @@ Resultaat:
           <li><strong>Correlatie telt zwaarder dan het aantal activa — controleer hem voordat je zegt dat je gediversifieerd bent</strong></li>
           <li><strong>Efficiënte grenslijn = maximaal rendement bij gegeven risico (optimaliseer je allocatie)</strong></li>
           <li><strong>Risk parity = gelijke risicobijdrage, niet gelijke dollars (evenwichtiger dan 60/40)</strong></li>
-          <li><strong>Kelly-criterium = optimale omvang voor groei (gebruik 1/4 tot 1/2 kelly voor de veiligheid)</strong></li>
+          <li><strong>Kelly geeft een risicofractie per inzet, berekend uit getallen waarvan je alleen schattingen hebt</strong> &mdash; gebruik het om strategieën onderling te rangschikken, niet om het niveau te bepalen. Bij 1% risico per trade draai je er bewust een kleine fractie van.</li>
           <li><strong>Multistrategieportefeuilles = ongecorreleerde edges = vlakkere rendementen</strong></li>
         </ul>
       </div>
@@ -927,7 +982,7 @@ Resultaat:
             </div>
           </div>
         <div class="quiz-explanation">
-          <strong>Correct: D.</strong> Kelly neemt de uitbetalingsratio als zijn b-term: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40%. C is de val &mdash; het antwoord van de trefkans aflezen slaat de uitbetalingsratio volledig over, en dat die twee hier allebei op 60% uitkomen zou toeval zijn, geen regel. Let op: volledige Kelly op 40% is veel te agressief om echt te handelen, en daarom rekent deze les met een kwart daarvan.
+          <strong>Correct: D.</strong> Kelly neemt de payoffverhouding als b-term: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40%. C is de val &mdash; het antwoord van het winstpercentage aflezen slaat de payoffverhouding volledig over, en dat beide hier op 60% samenvallen zou toeval zijn, geen regel. Let op wat die 40% is: de fractie van de rekening die je op één trade zou riskeren, niet de fractie die je alloceert. Een kwart ervan is nog altijd 10% risico per trade, vele malen wat welk risicohoofdstuk hier ook toestaat. Kelly dient als rangorde tussen strategieën en als plafond waar je ruim onder blijft; het is geen positiegrootte.
         </div>
         </div>
 
@@ -936,7 +991,7 @@ Resultaat:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Als je tot hier bent gekomen, snap je dat portefeuilleconstructie wiskunde is, geen gokwerk. Correlatie, sharperatio's, kelly-criterium — dat zijn geen academische oefeningen. Het zijn gereedschappen die professionals dagelijks gebruiken.
+        Elk gereedschap in deze les neemt geschatte invoer en geeft een zelfverzekerd ogend getal terug. De correlatiematrix, de grens, de Kellyfractie: elk is niet beter dan een steekproef uit de historie die zich niet precies zal herhalen. Dat is geen argument om terug te gaan naar gokken &mdash; het rekenwerk verslaat de intuïtie duidelijk en consistent. Het is een argument om de uitkomsten als rangordes en plafonds te gebruiken in plaats van als instructies, en om portefeuilles te bouwen die overleven dat je je in de invoer vergist. Laurens obligatiehedge faalde in het enige jaar waarin hij had moeten werken, en de portefeuille verloor toch de helft minder, omdat zeven dingen die door verschillende krachten worden gedreven niet allemaal op dezelfde dag breken.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Gerelateerde lessen</h3>

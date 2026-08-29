@@ -244,7 +244,11 @@ Gerçek volatilite: ~%18 (ikisinden de DÜŞÜK!)
 
 Neden: A’daki kayıplar bazen B’deki kazançlarla dengelenir
 Sonuç: birim risk başına daha fazla getiri</code></pre>
-            <p><em>Bu, finanstaki tek «bedava öğle yemeği». Kullan.</em></p>
+            <p>Bu etki gerçektir ve kullanmaya değer. Aynı zamanda rutin olarak fazla pazarlanır &mdash; bu sayfanın eski bir sürümü de dahil; orada finanstaki tek bedava öğle yemeği deniyordu.</p>
+
+      <p><strong>Gerçekte ne ödüyorsun.</strong> Volatilite düştü, çünkü iki varlık kimi zaman ayrışıyor &mdash; ve A düşüp B yükselirken kayıplarını kısan bu aynı olgu, A yükselip B yükselmediğinde kazançlarını da kısar. Sana bedavaya getiri verilmedi. En iyi sonuçların bir kısmını, en kötülerin daha azıyla takas ettin; bu, çoğu insanın istediği ve kimsenin bedavaya alamadığı bir takastır. İlerideki Lauren örneği aynı noktayı gerçek sayılarla söylüyor: çeşitlendirilmiş dağılımı 2022’de yarısı kadar kaybetti, sonra 2023 ve 2024 boyunca bıraktığı on teknoloji hissesine açık farkla yenildi.</p>
+
+      <p>Hesabın varsaydığı bir şey daha: o 0,3’lük korelasyon. Korelasyonlar bir tarih penceresinden tahmin edilir ve hareket eder; genelde de tam düşük kalmalarına bel bağladığın koşullarda 1’e doğru. Bu sayfadaki her şey o varsayımı devralır.</p>
           </div>
         </details>
         <details class="accordion-item">
@@ -298,6 +302,11 @@ Risk (volatilite) → Getiri
 %30                 %15   (yüksek risk, azalan verim)
 
 Hedefin: risk toleransına göre sınır üzerinde bir nokta seç</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Gidip bir tane hesaplamadan önce.</strong> Etkin sınır; beklenen getiriler, volatiliteler ve korelasyonlardan çizilir &mdash; hiçbirini bilmediğin şeylerden. Onları geçmiş veriden tahmin edersin ve tahminler belirli ve zarar verici bir biçimde gürültülüdür: beklenen getiriler üçü içinde ölçülmesi en zor olanıdır ve optimizasyonun en duyarlı olduğu şeydir. Bir varlık için biraz cömert bir tahmin ver, portföyün büyük bölümünü memnuniyetle oraya koysun.</p>
+        <p style="margin-top:0.75rem">Bu yüzden saf biçimde koşturulan ortalama-varyans optimizasyonu, örneklemi birkaç ay uzattığında dramatik biçimde değişen uç ve istikrarsız dağılımlar üretir. Uygulamada bununla ağırlıkları kısıtlayarak, getiri tahminlerini ortak bir değere doğru büzerek ya da beklenen getirileri problemden tümüyle çıkararak baş edilir &mdash; sonraki bölümdeki risk temelli yaklaşımların yaptığı budur. Kendi hesapladığın bir sınırı, ağırlıklara dair bir talimat olarak değil, ödünleşimin bir taslağı olarak gör.</p>
+      </div>
 
       <h3>Optimal portföyü bulmak (maksimum Sharpe oranı)</h3>
 
@@ -698,29 +707,53 @@ Kazanan: C portföyü (en iyi riske göre düzeltilmiş getiri)</code></pre>
 
       <p>Klasik 60/40 portföyün (%60 hisse, %40 tahvil) kirli bir sırrı var:</p>
 
-      <p><strong>Riskin %80’den fazlası hissedeki %60’tan geliyor.</strong></p>
+      <p><strong>Riskin neredeyse tamamı hisselerdeki %60’tan gelir.</strong></p>
 
-      <p>Göstereyim:</p>
+      <p>Hesap şöyle ve doğru yapmaya değer; çünkü hızlı sürüm, tam da bu dersin 1. bölümünün uyardığı biçimde yanlış cevabı verir.</p>
 
-      <pre style="overflow-x:auto"><code>60/40 portföy:
-%60 SPY (volatilite: %18)
-%40 TLT (volatilite: %12)
+      <pre style="overflow-x:auto"><code>60/40 Portfoy:
+60% SPY (volatilite 18%)
+40% TLT (volatilite 12%)
+Korelasyon: -0,30
 
-Risk varyans üzerinden yürür, o yüzden ağırlıklı volatiliteleri karesine al:
-SPY: (0,60 × %18)^2 = 10,8^2 = 116,6
-TLT: (0,40 × %12)^2 =  4,8^2 =  23,0
-                     toplam = 139,6
+HIZLI SURUM (bu sayfanin eskiden yaptigi):
+Agirlikli volatiliteleri karele ve paylari al.
+SPY: (0,60 x 18%)^2 = 10,8^2 = 116,6
+TLT: (0,40 x 12%)^2 =  4,8^2 =  23,0
+                       total  = 139,6
+SPY payi: 116,6 / 139,6 = 84%
+TLT payi:  23,0 / 139,6 = 16%
 
-Riskin payı:
-SPY: 116,6 / 139,6 = %84
-TLT:  23,0 / 139,6 = %16
+Bu yontem korelasyon terimini yok sayar; oysa bu dersin butun
+konusu odur. Yalnizca korelasyon sifirken dogrudur, burada ise
+-0,30.
 
-Sonuç: portföy hisse riskine ~%84 maruz
-       Risk açısından çeşitlendirilmiş değil!</code></pre>
+ASIL HESAP:
+Once portfoy volatilitesi:
+  var = (0,6 x 0,18)^2 + (0,4 x 0,12)^2
+      + 2 x 0,6 x 0,4 x (-0,30) x 0,18 x 0,12
+      = 0,011664 + 0,002304 - 0,003110
+      = 0,010858        ->  vol = 10,42%
 
-      <p>Risk parity’yi düşün.</p>
+Her varligin risk katkisi, agirligi ile, ondan biraz eklendiginde
+portfoy volatilitesinin ne kadar hareket ettiginin carpimidir:
+  SPY: 0,6 x (0,6 x 0,18^2 + 0,4 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,6 x  0,016848 / 0,1042 = 0,0970   ->  93% ve 10,42%
+  TLT: 0,4 x (0,4 x 0,12^2 + 0,6 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,4 x  0,001872 / 0,1042 = 0,0072   ->   7% ve 10,42%
 
-      <h3>Risk parity: eşit risk, eşit dolar değil</h3>
+Sonuc: hisselerdeki %60, riskin %84unu degil yaklasik
+        %93unu tasir. Negatif korelasyon tahvil dilimini
+        daha buyuk degil DAHA KUCUK bir risk katkicisi
+        yapar -- dengeler; istedigin de buydu, ve ayrica
+        portfoyun hizli aritmetigin ima ettiginden bile
+        daha fazla bir hisse bahsi oldugu anlamina gelir.</code></pre>
+
+      <p>Bundan iki şey çıkar. Birincisi bölümün söylediği şey: 60/40 bir portföy, risk açısından, üzerine küçük bir koruma iliştirilmiş bir hisse portföyüdür. İkincisi bir yöntem uyarısı: portföy riskini ağırlıklı volatiliteleri kareleyerek ayrıştırıyorsan, ölçmen gereken şeyi varsaymış olursun.</p>
+
+      <h3>Dolarları değil riski eşitlemek</h3>
+
+      <p><strong>Hesaptan önce bir adlandırma notu.</strong> Aşağıdaki şey ters volatilite ağırlıklandırmasıdır: her varlığa volatilitesinin tersiyle orantılı bir ağırlık ver. Basittir, sağlamdır ve çoğu kişi gündelik konuşmada "risk paritesi" derken bunu kasteder. Gerçek risk paritesi, yukarıda hesaplandığı biçimdeki risk katkılarını eşitler; bu da tüm korelasyon matrisini gerektirir ve genelde kapalı bir çözümü yoktur, sayısal olarak çözersin. İkisi yalnızca tüm ikili korelasyonlar eşit olduğunda çakışır. Ters volatiliteyi gönül rahatlığıyla kullan; yeter ki hangisini yaptığını bil, çünkü güçlü negatif korelasyonda ikisi gözle görülür biçimde farklı ağırlıklar verir.</p>
 
       <div class="tabs">
         <div class="tabs-nav">
@@ -774,20 +807,26 @@ Sonuç: portföy hisse riskine ~%84 maruz
 
       <p><strong>Cevap: Kelly kriteri.</strong></p>
 
-      <pre style="overflow-x:auto"><code>Kelly % = (kazanma oranı × ort. kazanç - kaybetme oranı × ort. kayıp) / ort. kazanç
+      <pre style="overflow-x:auto"><code>Kelly % = (Kazanma oranı × Ort. kazanç - Kaybetme oranı × Ort. kayıp) / Ort. kazanç
 
 Örnek:
-Kazanma oranı: %65
+Kazanma oranı: 65%
 Ort. kazanç: 2,5R
-Kaybetme oranı: %35
+Kaybetme oranı: 35%
 Ort. kayıp: 1R
 
 Kelly = (0,65 × 2,5 - 0,35 × 1) / 2,5
       = (1,625 - 0,35) / 2,5
       = 1,275 / 2,5
-      = 0,51 = %51
+      = 0,51 = 51%
 
-Yorum: sermayenin %51’ini bu stratejiye ayır</code></pre>
+Yorum: her işlemde sermayenin %51’ini riske atmak</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Bu yorumu dikkatle oku; çünkü burada ifade, hesaptan daha önemlidir.</strong> Kelly, hesabın hangi kısmını bir stratejiye park edeceğini söylemez. Her bahiste hesabın hangi kısmını riske atacağını söyler &mdash; işlem kaybettiğinde kaybettiğin tutarı. Yani kaybedeni 1R olan bir stratejide "%51 Kelly", tek bir işlemde hesabının %51’ini riske atmak demektir. Bu sayfanın eski bir sürümü "sermayenin %51’ini tahsis et" diyordu; bu, ifadeyi pozisyon büyüklüğü diye okumaya davet eder ve sayının istediği şeyi muazzam ölçüde küçük gösterir.</p>
+        <p style="margin-top:0.75rem"><strong>Ve girdi sorunu, büyüklük sorunundan daha kötüdür.</strong> Kelly, kazanma oranını ve ödül oranını tam olarak bildiğini varsayar. Bilmiyorsun; sonlu bir örneklemden gelen tahminlerin var ve formül bunların etrafında asimetriktir &mdash; avantajını fazla tahmin etmek önerilen bahsi yukarı, eksik tahmin etmenin aşağı ittiğinden daha hızlı iter. Kelly’nin üstünde bahis yapmak büyüme oranını nazikçe düşürmez, negatife çevirir. Kesirli Kelly’nin varlık nedeni ürkeklik değil, işte bu asimetridir.</p>
+        <p style="margin-top:0.75rem"><strong>Bunun, bu müfredatın başka yerlerinde öğretilen işlem başına %1-2 ile nasıl bağdaştığı.</strong> Bağdaşmıyor ve bağdaşması da beklenmiyor. İşlem başına riskin hesabın %1’iyse ve ölçtüğün sayılarla tam Kelly %51 ise, Kelly’nin kabaca ellide biri kadarıyla işlem yapıyorsun. Bu bilinçli bir tercihtir ve gerekçesi yukarıda: %65’lik kazanma oranın hata payı olan bir ölçümdür, ödül oranı bir başkası; ve emin olmadığın bir sayının ellide biri, durmak için savunulabilir bir yerdir. Kelly’yi, hangi stratejinin diğerinden daha çok ağırlığı hak ettiğini söyleyen bir tavan olarak gör; yaklaşılacak bir hedef olarak değil.</p>
+      </div>
 
       <p>Ama işin püf noktası şu:</p>
 
@@ -795,7 +834,7 @@ Yorum: sermayenin %51’ini bu stratejiye ayır</code></pre>
         <h4>🚨 Tam Kelly agresiftir</h4>
         <p>Tam Kelly uzun vadeli büyümeyi maksimize eder ama savrulmaları serttir.</p>
         <p><strong>Profesyonel yaklaşım:</strong> Daha düzgün bir sermaye eğrisi için 1/4 ile 1/2 Kelly kullan.</p>
-        <p>Örnek: %51 tam Kelly → %13-25 dağılım kullan (daha güvenli).</p>
+        <p>Örnek: tam Kelly %51’in dörtte biri bile, tek bir işlemde hesabın %12,75’ini riske atmak demektir. Bu bile, bu müfredattaki herhangi bir risk bölümünün izin verdiğinin kat kat üstündedir. Kelly’nin buradaki yararlı çıktısı, işlem yapılacak bir sayı değildir &mdash; sıralamadır: Kelly değeri bir başkasının iki katı olan bir strateji, kabaca iki katı ağırlığı hak etmiştir; hangi mutlak seviyede çalışıyor olursan ol.</p>
       </div>
 <h2 id="multi-strategy-portfolio">Çok stratejili portföy</h2>
 
@@ -805,27 +844,41 @@ Yorum: sermayenin %51’ini bu stratejiye ayır</code></pre>
         <details class="accordion-item">
           <summary class="accordion-header">Strateji portföyü örneği</summary>
           <div class="accordion-content">
-            <pre style="overflow-x:auto"><code>A stratejisi (Janus Sweeps):
-Kazanma oranı: %65, payoff ratio: 2,5:1
-Tam Kelly %51 -> %13 ayır (1/4 Kelly)
-Rejim: trendli piyasalarda çalışır
+            <pre style="overflow-x:auto"><code>Strateji A (Janus supurmeleri):
+Kazanma orani 65%, odul orani 2,5:1
+Kelly = 0,65 - 0,35/2,5 = 0,51
+Rejim: trendli piyasalarda calisir
 
-B stratejisi (ortalamaya dönüş):
-Kazanma oranı: %58, payoff ratio: 2,0:1
-Tam Kelly %37 -> %9 ayır (1/4 Kelly)
-Rejim: yatay piyasalarda çalışır
+Strateji B (ortalamaya donus):
+Kazanma orani 58%, odul orani 2,0:1
+Kelly = 0,58 - 0,42/2,0 = 0,37
+Rejim: yatay piyasalarda calisir
 
-C stratejisi (kırılımlar):
-Kazanma oranı: %52, payoff ratio: 3,0:1
-Tam Kelly %36 -> %9 ayır (1/4 Kelly)
-Rejim: volatil genişlemelerde çalışır
+Strateji C (kirilmalar):
+Kazanma orani 52%, odul orani 3,0:1
+Kelly = 0,52 - 0,48/3,0 = 0,36
+Rejim: volatil genislemelerde calisir
 
-Toplam dağılım: %31 (kalanı tampon olarak nakit)
+BU SAYILARI DOGRU KULLANMAK:
+51 / 37 / 36 sayilarini hesabin yuzdeleri diye okuma. ORANLARI oku:
+51 : 37 : 36, yani calistirmaya karar verdigin toplam riskin kabaca
+%41 / %30 / %29'u. Kuralin butun kitap boyunca islem basina hesabin
+%1'i ise, A bu butceden B ve C'den biraz daha fazlasini alir; ve
+Kelly'nin burada sana soyledigi seyin tamami budur.
 
-Sonuç:
-- Farklı rejimler = her zaman çalışan bir strateji var
-- Korelasyonsuz stratejiler = daha düzgün sermaye eğrisi
-- Nakit tamponu = drawdown dönemlerinde esneklik</code></pre>
+BU KURULUM NE SATIN ALIR, NE ALMAZ:
+- Farkli rejimlere uygun uc strateji, hicbir seyin calismamasi
+  ihtimalinin dusmesi demektir. HER ZAMAN birinin calistigi anlamina
+  GELMEZ: yavas, yonsuz, dusuk hacimli bir piyasa ayni anda trend,
+  ortalamaya donus ve kirilmalar icin kotudur.
+- Daha duzgun sermaye egrisi, ucunun gercekten ilintisiz olmasina
+  baglidir. Bunu kendi islem gunlugunde olc: her stratejinin gunluk
+  P&L'ini yan yana koy ve kontrol et. Tek bir kisinin tek bir
+  enstruman uzerinde kurdugu stratejiler genelde gorundugunden daha
+  ilintilidir; cunku senin enstrumanini, senin saatlerini ve senin
+  kurulum anlayisini paylasirlar.
+- Nakit burada atil sermaye degildir: bir dilimdeki drawdown ’un seni
+  baska bir dilimi kapatmaya zorlamasini engelleyen seydir.</code></pre>
           </div>
         </details>
       </div>
@@ -836,7 +889,7 @@ Sonuç:
           <li><strong>Korelasyon varlık sayısından önemlidir — çeşitlendirdiğini söylemeden önce kontrol et</strong></li>
           <li><strong>Etkin sınır = verili risk için maksimum getiri (dağılımını optimize et)</strong></li>
           <li><strong>Risk parity = eşit risk katkısı, eşit dolar değil (60/40’tan daha dengeli)</strong></li>
-          <li><strong>Kelly kriteri = büyüme için optimal boyut (güvenlik için 1/4 ile 1/2 Kelly kullan)</strong></li>
+          <li><strong>Kelly, bahis başına bir risk oranı verir; üstelik yalnızca tahminlerine sahip olduğun sayılardan hesaplanır</strong> &mdash; stratejileri birbirine göre sıralamak için kullan, seviyeyi belirlemek için değil. İşlem başına %1 riskle, bilinçli olarak onun küçük bir kesrini çalıştırıyorsun.</li>
           <li><strong>Çok stratejili portföyler = korelasyonsuz edge’ler = daha düzgün getiriler</strong></li>
         </ul>
       </div>
@@ -927,7 +980,7 @@ Sonuç:
             </div>
           </div>
         <div class="quiz-explanation">
-          <strong>Doğru: D.</strong> Kelly, payoff ratio’yu b terimi olarak alır: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = %40. C tuzaktır &mdash; cevabı kazanma oranından okumak payoff ratio’yu tamamen atlar; ikisinin burada %60’ta çakışması ise kural değil rastlantı olurdu. Şuna dikkat: %40’lık tam Kelly gerçekten işlem yapmak için fazlasıyla agresiftir, bu ders de bu yüzden onun dörtte biriyle büyüklük belirler.
+          <strong>Doğru: D.</strong> Kelly, ödül oranını b terimi olarak alır: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = %40. Tuzak C’dir &mdash; cevabı kazanma oranından okumak, ödül oranını tümüyle atlar; ikisinin burada %60’ta çakışması bir tesadüf olurdu, kural değil. Bu %40’ın ne olduğuna dikkat et: bir işlemde riske atacağın hesap oranıdır, tahsis edeceğin oran değil. Dörtte biri bile işlem başına %10 risk demektir; buradaki herhangi bir risk bölümünün izin verdiğinin kat kat üstü. Kelly, stratejiler arasında bir sıralama ve altında rahatça kaldığın bir tavan olarak işe yarar; bir pozisyon büyüklüğü değildir.
         </div>
         </div>
 
@@ -936,7 +989,7 @@ Sonuç:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Buraya kadar geldiysen, portföy kurgusunun tahmin değil matematik olduğunu anlamışsındır. Korelasyon, Sharpe oranları, Kelly kriteri — bunlar akademik alıştırma değil. Profesyonellerin her gün kullandığı araçlar.
+        Bu dersteki her araç, tahmini girdiler alır ve kendinden emin görünen bir sayı döndürür. Korelasyon matrisi, etkin sınır, Kelly kesri: her biri, birebir tekrarlanmayacak bir tarih örneklemi kadar iyidir. Bu, tahmin yürütmeye geri dönmek için bir gerekçe değildir &mdash; aritmetik sezgiyi açık ve istikrarlı biçimde yener. Bu, çıktıları talimat olarak değil sıralama ve tavan olarak kullanmak ve girdilerde yanılmayı atlatabilen portföyler kurmak için bir gerekçedir. Lauren’ın tahvil koruması, işe yaraması gereken tek yılda başarısız oldu; portföy yine de yarısı kadar kaybetti, çünkü farklı güçlerin sürüklediği yedi şey aynı gün hep birden kırılmaz.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">İlgili dersler</h3>

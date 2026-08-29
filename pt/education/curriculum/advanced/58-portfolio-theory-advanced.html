@@ -244,7 +244,11 @@ Volatilidade real: ~18 % (MENOR que as duas!)
 
 Por quê: perdas em A às vezes são compensadas por ganhos em B
 Resultado: mais retorno por unidade de risco</code></pre>
-            <p><em>Este é o único «almoço grátis» das finanças. Use-o.</em></p>
+            <p>Este efeito é real e vale a pena usá-lo. Também é rotineiramente vendido a mais, incluindo por uma versão anterior desta página, que lhe chamava o único almoço grátis das finanças.</p>
+
+      <p><strong>O que estás realmente a pagar.</strong> A volatilidade desceu porque os dois activos por vezes se separam &mdash; e esse mesmo facto que corta as tuas perdas quando A cai e B sobe também corta os teus ganhos quando A sobe e B não. Não te deram retorno de graça. Trocaste parte dos melhores desfechos por menos dos piores, que é uma troca que quase toda a gente quer e ninguém consegue de borla. O caso da Lauren mais à frente é o mesmo ponto com números reais: a alocação diversificada dela perdeu metade em 2022 e depois perdeu com folga para as dez tecnológicas que abandonou ao longo de 2023 e 2024.</p>
+
+      <p>Outra coisa que a aritmética pressupõe: aquela correlação de 0,3. As correlações estimam-se a partir de uma janela de história e movem-se, normalmente na direcção de 1 precisamente nas condições em que contavas que fossem baixas. Tudo nesta página herda esse pressuposto.</p>
           </div>
         </details>
         <details class="accordion-item">
@@ -298,6 +302,11 @@ Risco (volatilidade) → Retorno
 30 %                 15 %  (risco alto, retornos decrescentes)
 
 Seu objetivo: escolher um ponto na fronteira conforme sua tolerância ao risco</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Antes de ires calcular uma.</strong> A fronteira eficiente é desenhada a partir de retornos esperados, volatilidades e correlações &mdash; nenhum dos quais conheces. Estimas-os a partir de dados passados, e as estimativas são ruidosas de uma forma concreta e danosa: os retornos esperados são os mais difíceis dos três de medir e aqueles a que o optimizador é mais sensível. Dá-lhe uma estimativa ligeiramente generosa para um activo e ele mete lá alegremente quase toda a carteira.</p>
+        <p style="margin-top:0.75rem">É por isso que uma optimização média-variância feita de forma ingénua produz alocações extremas e instáveis, que mudam drasticamente quando alargas a amostra uns meses. Na prática lida-se com isso restringindo os pesos, encolhendo as estimativas de retorno para um valor comum, ou tirando os retornos esperados do problema por completo &mdash; que é o que fazem as abordagens baseadas em risco da parte seguinte. Trata uma fronteira que calculaste como um esboço do compromisso, não como uma instrução sobre pesos.</p>
+      </div>
 
       <h3>Encontrar a carteira ótima (índice de Sharpe máximo)</h3>
 
@@ -698,29 +707,53 @@ Vencedora: carteira C (melhor retorno ajustado ao risco)</code></pre>
 
       <p>A clássica carteira 60/40 (60 % ações, 40 % títulos) tem um segredo sujo:</p>
 
-      <p><strong>Mais de 80 % do risco vem dos 60 % em ações.</strong></p>
+      <p><strong>Quase todo o risco vem dos 60% em acções.</strong></p>
 
-      <p>Vou mostrar-te:</p>
+      <p>Aqui está o cálculo, e vale a pena fazê-lo como deve ser, porque a versão rápida dá a resposta errada exactamente da forma contra a qual a Parte 1 desta lição avisou.</p>
 
       <pre style="overflow-x:auto"><code>Carteira 60/40:
-60 % SPY (volatilidade: 18 %)
-40 % TLT (volatilidade: 12 %)
+60% SPY (volatilidade 18%)
+40% TLT (volatilidade 12%)
+Correlacao: -0,30
 
-O risco passa pela variância: eleve ao quadrado as vol ponderadas.
-SPY: (0,60 × 18 %)^2 = 10,8^2 = 116,6
-TLT: (0,40 × 12 %)^2 =  4,8^2 =  23,0
-                       total = 139,6
+A VERSAO RAPIDA (o que esta pagina fazia antes):
+Eleva ao quadrado as vols ponderadas e tira as quotas.
+SPY: (0,60 x 18%)^2 = 10,8^2 = 116,6
+TLT: (0,40 x 12%)^2 =  4,8^2 =  23,0
+                       total  = 139,6
+Quota SPY: 116,6 / 139,6 = 84%
+Quota TLT:  23,0 / 139,6 = 16%
 
-Fatia do risco:
-SPY: 116,6 / 139,6 = 84 %
-TLT:  23,0 / 139,6 = 16 %
+Esse metodo ignora o termo de correlacao, que e todo o
+assunto desta licao. So esta certo quando a correlacao
+e zero, e aqui e -0,30.
 
-Resultado: a carteira está ~84 % exposta ao risco de ações
-           Não é diversificada em termos de risco!</code></pre>
+O CALCULO A SERIO:
+Primeiro a volatilidade da carteira:
+  var = (0,6 x 0,18)^2 + (0,4 x 0,12)^2
+      + 2 x 0,6 x 0,4 x (-0,30) x 0,18 x 0,12
+      = 0,011664 + 0,002304 - 0,003110
+      = 0,010858        ->  vol = 10,42%
 
-      <p>Considere o risk parity.</p>
+A contribuicao para o risco de cada activo e o seu peso vezes
+quanto a volatilidade da carteira se mexe quando lhe juntas um pouco:
+  SPY: 0,6 x (0,6 x 0,18^2 + 0,4 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,6 x  0,016848 / 0,1042 = 0,0970   ->  93% de 10,42%
+  TLT: 0,4 x (0,4 x 0,12^2 + 0,6 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,4 x  0,001872 / 0,1042 = 0,0072   ->   7% de 10,42%
 
-      <h3>Risk parity: risco igual, não dólares iguais</h3>
+Resultado: os 60% em accoes levam cerca de 93% do risco,
+        nao 84%. A correlacao negativa faz da fatia de
+        obrigacoes um contribuidor MENOR para o risco, nao
+        maior -- compensa, que era o que querias, e tambem
+        significa que a carteira e ainda mais uma aposta em
+        accoes do que a aritmetica rapida sugeria.</code></pre>
+
+      <p>Daí decorrem duas coisas. A primeira é o ponto da secção: uma carteira 60/40 é, em termos de risco, uma carteira de acções com uma pequena cobertura pendurada. A segunda é um aviso de método: se decompões o risco da carteira elevando ao quadrado volatilidades ponderadas, estás a pressupor precisamente aquilo que devias estar a medir.</p>
+
+      <h3>Igualar risco em vez de dólares</h3>
+
+      <p><strong>Uma nota de nomenclatura antes da aritmética.</strong> O que se segue é ponderação pelo inverso da volatilidade: dá a cada activo um peso proporcional a um a dividir pela sua volatilidade. É simples, é robusto e é o que a maioria quer dizer quando fala de «risk parity» de forma informal. A verdadeira paridade de risco iguala as contribuições para o risco calculadas como acabou de ser feito acima, o que exige toda a matriz de correlações e em geral não tem solução fechada: resolve-se numericamente. As duas coincidem apenas quando todas as correlações aos pares são iguais. Usa o inverso da volatilidade à vontade; só tem consciência de qual das duas estás a fazer, porque com uma correlação fortemente negativa as duas dão pesos visivelmente diferentes.</p>
 
       <div class="tabs">
         <div class="tabs-nav">
@@ -774,20 +807,26 @@ Resultado: a carteira está ~84 % exposta ao risco de ações
 
       <p><strong>Resposta: o critério de Kelly.</strong></p>
 
-      <pre style="overflow-x:auto"><code>Kelly % = (taxa de acerto × ganho médio - taxa de erro × perda média) / ganho médio
+      <pre style="overflow-x:auto"><code>Kelly % = (Taxa de acerto × Ganho médio - Taxa de perda × Perda média) / Ganho médio
 
 Exemplo:
-Taxa de acerto: 65 %
+Taxa de acerto: 65%
 Ganho médio: 2,5R
-Taxa de erro: 35 %
+Taxa de perda: 35%
 Perda média: 1R
 
 Kelly = (0,65 × 2,5 - 0,35 × 1) / 2,5
       = (1,625 - 0,35) / 2,5
       = 1,275 / 2,5
-      = 0,51 = 51 %
+      = 0,51 = 51%
 
-Interpretação: aloque 51 % do capital nesta estratégia</code></pre>
+Interpretação: arriscar 51% do capital em cada operação</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Lê essa interpretação com atenção, porque a formulação importa mais do que a aritmética.</strong> Kelly não te diz que fracção da conta estacionar numa estratégia. Diz-te que fracção da conta pôr em risco em cada aposta: o valor que perdes quando a operação perde. Portanto «51% de Kelly» numa estratégia cuja perdedora é 1R significa arriscar 51% da tua conta numa única operação. Uma versão anterior desta página dizia «aloca 51% do capital», o que convida a lê-lo como um tamanho de posição e subestima enormemente o que o número está a pedir.</p>
+        <p style="margin-top:0.75rem"><strong>E o problema dos dados de entrada é pior do que o do dimensionamento.</strong> Kelly pressupõe que conheces exactamente a taxa de acerto e o rácio de payoff. Não conheces: tens estimativas de uma amostra finita, e a fórmula é assimétrica em torno delas &mdash; sobrestimar a tua vantagem empurra a aposta recomendada para cima mais depressa do que subestimá-la a empurra para baixo. Apostar acima de Kelly não reduz suavemente a tua taxa de crescimento: torna-a negativa. É essa assimetria, e não o receio, a razão de existir o Kelly fraccionário.</p>
+        <p style="margin-top:0.75rem"><strong>Como isto se concilia com o 1-2% por operação que este currículo ensina noutros pontos.</strong> Não se concilia, e não é suposto conciliar-se. Se o teu risco por operação é 1% da conta e o Kelly cheio nos teus números medidos é 51%, estás a operar a cerca de um cinquentavo de Kelly. É uma escolha deliberada, e o raciocínio está acima: os teus 65% de acerto são uma medição com margens de erro, o rácio de payoff é outra, e um cinquentavo de um número de que não tens certeza é um sítio defensável onde ficar. Trata Kelly como um tecto que te diz qual das tuas estratégias merece mais peso do que outra, não como um alvo a aproximar.</p>
+      </div>
 
       <p>Mas aqui está a pegadinha:</p>
 
@@ -795,7 +834,7 @@ Interpretação: aloque 51 % do capital nesta estratégia</code></pre>
         <h4>🚨 O Kelly cheio é agressivo</h4>
         <p>O Kelly cheio maximiza o crescimento de longo prazo, mas tem oscilações selvagens.</p>
         <p><strong>A abordagem profissional:</strong> Use de 1/4 a 1/2 Kelly para uma curva de capital mais suave.</p>
-        <p>Exemplo: 51 % de Kelly cheio → use uma alocação de 13-25 % (mais segura).</p>
+        <p>Exemplo: 51% de Kelly cheio, tomado a um quarto, continua a ser 12,75% da conta arriscados numa só operação. Mesmo isso é muitas vezes o que qualquer capítulo de risco deste currículo permite. O que Kelly produz de útil aqui não é um número para negociar &mdash; é a ordenação: uma estratégia com o dobro do valor de Kelly de outra ganhou aproximadamente o dobro do peso, seja qual for o nível absoluto a que realmente operas.</p>
       </div>
 <h2 id="multi-strategy-portfolio">Carteira multiestratégia</h2>
 
@@ -805,27 +844,42 @@ Interpretação: aloque 51 % do capital nesta estratégia</code></pre>
         <details class="accordion-item">
           <summary class="accordion-header">Exemplo de carteira de estratégias</summary>
           <div class="accordion-content">
-            <pre style="overflow-x:auto"><code>Estratégia A (Janus Sweeps):
-Taxa de acerto: 65 %, rácio de pagamento: 2,5:1
-Kelly cheio 51 % -> alocar 13 % (1/4 Kelly)
-Regime: funciona em mercados em tendência
+            <pre style="overflow-x:auto"><code>Estrategia A (varrimentos Janus):
+Taxa de acerto 65%, racio de payoff 2,5:1
+Kelly = 0,65 - 0,35/2,5 = 0,51
+Regime: funciona em mercados em tendencia
 
-Estratégia B (reversão à média):
-Taxa de acerto: 58 %, rácio de pagamento: 2,0:1
-Kelly cheio 37 % -> alocar 9 % (1/4 Kelly)
+Estrategia B (reversao a media):
+Taxa de acerto 58%, racio de payoff 2,0:1
+Kelly = 0,58 - 0,42/2,0 = 0,37
 Regime: funciona em mercados laterais
 
-Estratégia C (rompimentos):
-Taxa de acerto: 52 %, rácio de pagamento: 3,0:1
-Kelly cheio 36 % -> alocar 9 % (1/4 Kelly)
-Regime: funciona em expansões voláteis
+Estrategia C (rupturas):
+Taxa de acerto 52%, racio de payoff 3,0:1
+Kelly = 0,52 - 0,48/3,0 = 0,36
+Regime: funciona em expansoes volateis
 
-Alocação total: 31 % (o resto em caixa como colchão)
+COMO USAR BEM ESTES NUMEROS:
+Nao leias 51 / 37 / 36 como percentagens da conta. Le as
+PROPORCOES: 51 : 37 : 36, ou seja cerca de 41% / 30% / 29% do
+risco total que decidiste correr. Se a tua regra e 1% da conta por
+operacao em todo o livro, A recebe um pouco mais desse orcamento
+do que B e C, e isso e tudo o que Kelly te diz aqui.
 
-Resultado:
-- Regimes diferentes = sempre há uma estratégia funcionando
-- Estratégias não correlacionadas = curva de capital mais suave
-- Colchão de caixa = flexibilidade nos drawdowns</code></pre>
+O QUE ESTE ARRANJO COMPRA E O QUE NAO COMPRA:
+- Tres estrategias adequadas a regimes diferentes significa que e
+  menos provavel que nada funcione. NAO significa que haja SEMPRE
+  uma a funcionar: um mercado lento, sem direccao e de baixo volume
+  e mau ao mesmo tempo para tendencia, reversao e rupturas.
+- A curva mais suave depende de as tres estarem mesmo
+  descorrelacionadas. Mede isso no teu proprio registo: poe lado a
+  lado o P&L diario de cada estrategia e verifica. Estrategias
+  construidas por uma pessoa num instrumento costumam estar mais
+  correlacionadas do que parecem, porque partilham o teu
+  instrumento, as tuas horas e a tua ideia do que e uma
+  configuracao.
+- O dinheiro aqui nao e capital parado: e o que evita que um
+  drawdown numa fatia te obrigue a fechar outra.</code></pre>
           </div>
         </details>
       </div>
@@ -836,7 +890,7 @@ Resultado:
           <li><strong>A correlação importa mais que a quantidade de ativos: verifique antes de dizer que está diversificado</strong></li>
           <li><strong>Fronteira eficiente = retorno máximo para um dado risco (otimize sua alocação)</strong></li>
           <li><strong>Risk parity = contribuição de risco igual, não dólares iguais (mais equilibrado que o 60/40)</strong></li>
-          <li><strong>Critério de Kelly = tamanho ótimo para o crescimento (use de 1/4 a 1/2 Kelly por segurança)</strong></li>
+          <li><strong>Kelly dá uma fracção de risco por aposta, calculada a partir de números de que só tens estimativas</strong> &mdash; usa-o para ordenar estratégias umas em relação às outras, não para fixar o nível. Com 1% de risco por operação estás, deliberadamente, a correr uma pequena fracção dele.</li>
           <li><strong>Carteiras multiestratégia = edges não correlacionados = retornos mais suaves</strong></li>
         </ul>
       </div>
@@ -927,7 +981,7 @@ Resultado:
             </div>
           </div>
         <div class="quiz-explanation">
-          <strong>Correto: D.</strong> Kelly toma o rácio de pagamento como o seu termo b: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40%. C é a armadilha &mdash; ler a resposta na taxa de acerto salta o rácio de pagamento por completo, e o facto de os dois coincidirem aqui nos 60% seria coincidência, não regra. Repare que um Kelly completo de 40% é demasiado agressivo para se operar de facto, e é por isso que esta aula dimensiona a um quarto.
+          <strong>Correto: D.</strong> Kelly toma o rácio de payoff como o seu termo b: (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40%. C é a armadilha &mdash; ler a resposta na taxa de acerto salta o rácio de payoff por completo, e os dois coincidirem aqui nos 60% seria coincidência, não regra. Repara no que é esse 40%: a fracção da conta que arriscarias numa operação, não a fracção que alocas. Um quarto disso continua a ser 10% em risco por operação, várias vezes o que qualquer capítulo de risco daqui permite. Kelly serve como ordenação entre estratégias e como tecto do qual ficas bem abaixo; não é um tamanho de posição.
         </div>
         </div>
 
@@ -936,7 +990,7 @@ Resultado:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Se você chegou até aqui, entende que construir uma carteira é matemática, não chute. Correlação, índices de Sharpe, critério de Kelly: não são exercícios acadêmicos. São ferramentas que profissionais usam todo dia.
+        Todas as ferramentas desta lição pegam em entradas estimadas e devolvem um número de ar confiante. A matriz de correlações, a fronteira, a fracção de Kelly: cada uma vale o que vale uma amostra de história que não se vai repetir exactamente. Isso não é um argumento para voltar a adivinhar &mdash; a aritmética ganha à intuição, de forma clara e consistente. É um argumento para usar os resultados como ordenações e tectos em vez de instruções, e para construir carteiras que sobrevivam a teres errado nas entradas. A cobertura de obrigações da Lauren falhou no único ano em que devia ter funcionado, e a carteira ainda assim perdeu metade, porque sete coisas movidas por forças diferentes não se partem todas no mesmo dia.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Aulas relacionadas</h3>

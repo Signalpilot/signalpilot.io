@@ -244,7 +244,11 @@ Volatilité réelle : ~18 % (PLUS FAIBLE que les deux !)
 
 Pourquoi : les pertes sur A sont parfois compensées par des gains sur B
 Résultat : plus de performance par unité de risque</code></pre>
-            <p><em>C'est le seul « repas gratuit » de la finance. Sers-t'en.</em></p>
+            <p>Cet effet est réel et vaut la peine d'être utilisé. Il est aussi systématiquement survendu &mdash; y compris par une version antérieure de cette page, qui l'appelait le seul déjeuner gratuit de la finance.</p>
+
+      <p><strong>Ce que vous payez réellement.</strong> La volatilité a baissé parce que les deux actifs s'écartent parfois &mdash; et ce même fait, qui réduit vos pertes quand A baisse et que B monte, réduit aussi vos gains quand A monte et que B ne suit pas. On ne vous a pas donné du rendement pour rien. Vous avez échangé une partie des meilleurs résultats contre moins des pires, un échange que la plupart des gens veulent et que personne n'obtient gratuitement. Le cas de Lauren plus loin dit la même chose avec de vrais chiffres : son allocation diversifiée a perdu moitié moins en 2022, puis a nettement perdu face aux dix valeurs technologiques qu'elle avait abandonnées sur 2023 et 2024.</p>
+
+      <p>Autre chose que le calcul suppose : cette corrélation de 0,3. Les corrélations sont estimées sur une fenêtre d'historique et elles bougent, généralement vers 1 précisément dans les conditions où vous comptiez sur leur faiblesse. Tout ce qui figure sur cette page hérite de cette hypothèse.</p>
           </div>
         </details>
         <details class="accordion-item">
@@ -298,6 +302,11 @@ Risque (volatilité) → Performance
 30 %                 15 %  (risque élevé, rendements décroissants)
 
 Ton objectif : choisir un point sur la frontière selon ta tolérance au risque</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Avant d'aller en calculer une.</strong> La frontière efficiente se trace à partir de rendements attendus, de volatilités et de corrélations &mdash; dont vous ne connaissez aucun. Vous les estimez sur des données passées, et ces estimations sont bruitées d'une façon précise et dommageable : les rendements attendus sont les plus difficiles des trois à mesurer et ceux auxquels l'optimiseur est le plus sensible. Donnez-lui une estimation légèrement généreuse pour un actif et il y mettra volontiers l'essentiel du portefeuille.</p>
+        <p style="margin-top:0.75rem">C'est pourquoi une optimisation moyenne-variance appliquée naïvement produit des allocations extrêmes et instables, qui changent radicalement quand on allonge l'échantillon de quelques mois. On y remédie en contraignant les poids, en rapprochant les estimations de rendement d'une valeur commune, ou en retirant complètement les rendements attendus du problème &mdash; ce que font les approches fondées sur le risque de la partie suivante. Traitez une frontière que vous avez calculée vous-même comme une esquisse de l'arbitrage, non comme une consigne de pondération.</p>
+      </div>
 
       <h3>Trouver le portefeuille optimal (ratio de Sharpe maximal)</h3>
 
@@ -698,29 +707,54 @@ Gagnant : portefeuille C (meilleure performance ajustée du risque)</code></pre>
 
       <p>Le classique portefeuille 60/40 (60 % actions, 40 % obligations) a un sale secret :</p>
 
-      <p><strong>Plus de 80 % du risque vient des 60 % en actions.</strong></p>
+      <p><strong>La quasi-totalité du risque vient des 60 % en actions.</strong></p>
 
-      <p>Je te montre :</p>
+      <p>Voici le calcul, et il vaut la peine de le faire correctement, car la version rapide donne une mauvaise réponse exactement de la façon dont la partie 1 de cette leçon vous a mis en garde.</p>
 
       <pre style="overflow-x:auto"><code>Portefeuille 60/40 :
-60 % SPY (volatilité : 18 %)
-40 % TLT (volatilité : 12 %)
+60% SPY (volatilite 18%)
+40% TLT (volatilite 12%)
+Correlation : -0,30
 
-Le risque passe par la variance : élève au carré les vol pondérées.
-SPY : (0,60 × 18 %)^2 = 10,8^2 = 116,6
-TLT : (0,40 × 12 %)^2 =  4,8^2 =  23,0
-                        total = 139,6
+LA VERSION RAPIDE (ce que cette page faisait avant) :
+On eleve au carre les vols ponderees et on prend les parts.
+SPY: (0,60 x 18%)^2 = 10,8^2 = 116,6
+TLT: (0,40 x 12%)^2 =  4,8^2 =  23,0
+                       total  = 139,6
+Part SPY : 116,6 / 139,6 = 84%
+Part TLT :  23,0 / 139,6 = 16%
 
-Part du risque :
-SPY : 116,6 / 139,6 = 84 %
-TLT :  23,0 / 139,6 = 16 %
+Cette methode ignore le terme de correlation, qui est tout le
+sujet de cette lecon. Elle n'est correcte que si la correlation
+est nulle -- ici elle vaut -0,30.
 
-Résultat : le portefeuille est exposé à ~84 % au risque actions
-           Pas diversifié en termes de risque !</code></pre>
+LE VRAI CALCUL :
+La volatilite du portefeuille d'abord :
+  var = (0,6 x 0,18)^2 + (0,4 x 0,12)^2
+      + 2 x 0,6 x 0,4 x (-0,30) x 0,18 x 0,12
+      = 0,011664 + 0,002304 - 0,003110
+      = 0,010858        ->  vol = 10,42%
 
-      <p>Pense à la risk parity.</p>
+La contribution au risque de chaque actif est son poids multiplie
+par l'ampleur du mouvement de la volatilite du portefeuille quand
+on en ajoute un peu :
+  SPY: 0,6 x (0,6 x 0,18^2 + 0,4 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,6 x  0,016848 / 0,1042 = 0,0970   ->  93% de 10,42%
+  TLT: 0,4 x (0,4 x 0,12^2 + 0,6 x (-0,30) x 0,18 x 0,12) / 0,1042
+     = 0,4 x  0,001872 / 0,1042 = 0,0072   ->   7% de 10,42%
 
-      <h3>Risk parity : risque égal, pas dollars égaux</h3>
+Resultat : les 60% en actions portent environ 93% du risque,
+        et non 84%. La correlation negative fait de la poche
+        obligataire un contributeur MOINDRE au risque, pas plus --
+        elle compense, ce que vous vouliez, et cela signifie
+        aussi que le portefeuille est encore plus un pari
+        actions que ne le suggerait le calcul rapide.</code></pre>
+
+      <p>Deux choses en découlent. La première est le point de la section : un portefeuille 60/40 est, en termes de risque, un portefeuille actions avec une petite couverture accrochée. La seconde est un avertissement de méthode : si vous décomposez le risque d'un portefeuille en élevant au carré des volatilités pondérées, vous supposez précisément ce que vous êtes censé mesurer.</p>
+
+      <h3>Égaliser le risque plutôt que les dollars</h3>
+
+      <p><strong>Une note de vocabulaire avant le calcul.</strong> Ce qui suit est une pondération par l'inverse de la volatilité : donnez à chaque actif un poids proportionnel à un sur sa volatilité. C'est simple, c'est robuste, et c'est ce que la plupart des gens entendent quand ils disent « risk parity » de façon informelle. La vraie parité de risque égalise les contributions au risque calculées comme ci-dessus, ce qui exige toute la matrice de corrélations et n'a généralement pas de solution analytique : on la résout numériquement. Les deux coïncident seulement quand toutes les corrélations deux à deux sont égales. Utilisez l'inverse de la volatilité sans hésiter ; sachez simplement laquelle des deux vous faites, car avec une corrélation fortement négative les deux donnent des poids visiblement différents.</p>
 
       <div class="tabs">
         <div class="tabs-nav">
@@ -774,20 +808,26 @@ Résultat : le portefeuille est exposé à ~84 % au risque actions
 
       <p><strong>Réponse : le critère de Kelly.</strong></p>
 
-      <pre style="overflow-x:auto"><code>Kelly % = (taux de réussite × gain moyen - taux de perte × perte moyenne) / gain moyen
+      <pre style="overflow-x:auto"><code>Kelly % = (Taux de réussite × Gain moyen - Taux d'échec × Perte moyenne) / Gain moyen
 
 Exemple :
-Taux de réussite : 65 %
+Taux de réussite : 65%
 Gain moyen : 2,5R
-Taux de perte : 35 %
+Taux d'échec : 35%
 Perte moyenne : 1R
 
 Kelly = (0,65 × 2,5 - 0,35 × 1) / 2,5
       = (1,625 - 0,35) / 2,5
       = 1,275 / 2,5
-      = 0,51 = 51 %
+      = 0,51 = 51%
 
-Interprétation : alloue 51 % du capital à cette stratégie</code></pre>
+Interprétation : risquer 51% du capital à chaque trade</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Lisez cette interprétation attentivement, car la formulation compte plus que le calcul.</strong> Kelly ne vous dit pas quelle fraction du compte garer dans une stratégie. Il vous dit quelle fraction du compte mettre en risque à chaque pari &mdash; le montant que vous perdez quand le trade perd. Donc « 51 % de Kelly » sur une stratégie dont le perdant vaut 1R signifie risquer 51 % de votre compte sur un seul trade. Une version antérieure de cette page disait « allouer 51 % du capital », ce qui invite à le lire comme une taille de position et sous-estime énormément ce que le chiffre demande.</p>
+        <p style="margin-top:0.75rem"><strong>Et le problème des entrées est pire que celui du dimensionnement.</strong> Kelly suppose que vous connaissez exactement le taux de réussite et le rapport de gain. Ce n'est pas le cas : vous avez des estimations issues d'un échantillon fini, et la formule est asymétrique autour d'elles &mdash; surestimer votre avantage pousse la mise recommandée vers le haut plus vite que la sous-estimer ne la pousse vers le bas. Miser au-delà de Kelly ne réduit pas doucement votre taux de croissance, elle le rend négatif. C'est cette asymétrie, et non la frilosité, qui justifie le Kelly fractionnaire.</p>
+        <p style="margin-top:0.75rem"><strong>Comment cela se concilie avec le 1-2 % par trade enseigné ailleurs dans ce cursus.</strong> Elle ne s'y concilie pas, et ce n'est pas censé être le cas. Si votre risque par trade est de 1 % du compte et que le Kelly plein sur vos chiffres mesurés vaut 51 %, vous tradez à environ un cinquantième de Kelly. C'est un choix délibéré, et le raisonnement est ci-dessus : votre taux de réussite de 65 % est une mesure assortie de barres d'erreur, le rapport de gain en est une autre, et un cinquantième d'un nombre dont vous n'êtes pas sûr est une position défendable. Traitez Kelly comme un plafond qui vous dit laquelle de vos stratégies mérite plus de poids qu'une autre &mdash; non comme une cible à approcher.</p>
+      </div>
 
       <p>Mais voici le piège :</p>
 
@@ -795,7 +835,7 @@ Interprétation : alloue 51 % du capital à cette stratégie</code></pre>
         <h4>🚨 Le Kelly plein est agressif</h4>
         <p>Le Kelly plein maximise la croissance à long terme mais connaît des oscillations sauvages.</p>
         <p><strong>L'approche professionnelle :</strong> Utilise 1/4 à 1/2 Kelly pour une courbe de capital plus lisse.</p>
-        <p>Exemple : 51 % de Kelly plein → utilise une allocation de 13-25 % (plus sûre).</p>
+        <p>Exemple : 51 % de Kelly plein, pris au quart, cela fait encore 12,75 % du compte risqués sur un seul trade. Même cela dépasse de plusieurs fois ce que permet n'importe quel chapitre de risque de ce cursus. Ce que Kelly produit d'utile ici n'est pas un nombre à trader &mdash; c'est le classement : une stratégie dont le chiffre de Kelly vaut le double d'une autre a mérité environ le double de poids, quel que soit le niveau absolu auquel vous opérez.</p>
       </div>
 <h2 id="multi-strategy-portfolio">Portefeuille multi-stratégies</h2>
 
@@ -805,27 +845,43 @@ Interprétation : alloue 51 % du capital à cette stratégie</code></pre>
         <details class="accordion-item">
           <summary class="accordion-header">Exemple de portefeuille de stratégies</summary>
           <div class="accordion-content">
-            <pre style="overflow-x:auto"><code>Stratégie A (Janus Sweeps) :
-Taux de réussite : 65 %, ratio de gain : 2,5:1
-Kelly plein 51 % -> allouer 13 % (1/4 Kelly)
-Régime : fonctionne en marchés directionnels
+            <pre style="overflow-x:auto"><code>Strategie A (balayages Janus) :
+Taux de reussite 65%, rapport de gain 2,5:1
+Kelly = 0,65 - 0,35/2,5 = 0,51
+Regime : fonctionne en marches de tendance
 
-Stratégie B (retour à la moyenne) :
-Taux de réussite : 58 %, ratio de gain : 2,0:1
-Kelly plein 37 % -> allouer 9 % (1/4 Kelly)
-Régime : fonctionne en marchés en range
+Strategie B (retour a la moyenne) :
+Taux de reussite 58%, rapport de gain 2,0:1
+Kelly = 0,58 - 0,42/2,0 = 0,37
+Regime : fonctionne en marches en range
 
-Stratégie C (cassures) :
-Taux de réussite : 52 %, ratio de gain : 3,0:1
-Kelly plein 36 % -> allouer 9 % (1/4 Kelly)
-Régime : fonctionne en expansions volatiles
+Strategie C (cassures) :
+Taux de reussite 52%, rapport de gain 3,0:1
+Kelly = 0,52 - 0,48/3,0 = 0,36
+Regime : fonctionne en expansions volatiles
 
-Allocation totale : 31 % (le reste en liquidités comme tampon)
+UTILISER CES CHIFFRES CORRECTEMENT :
+Ne lisez pas 51 / 37 / 36 comme des pourcentages du compte. Lisez
+les RAPPORTS : 51 : 37 : 36, soit environ 41% / 30% / 29% du risque
+total que vous avez decide de faire tourner. Si votre regle est 1%
+du compte par trade sur l'ensemble du livre, A recoit un peu plus
+de ce budget que B et C, et c'est tout ce que Kelly vous dit ici.
 
-Résultat :
-- Régimes différents = une stratégie fonctionne toujours
-- Stratégies non corrélées = courbe de capital plus lisse
-- Tampon de liquidités = souplesse pendant les drawdowns</code></pre>
+CE QUE CE MONTAGE ACHETE ET N'ACHETE PAS :
+- Trois strategies adaptees a des regimes differents, cela veut dire
+  qu'il est moins probable que rien ne fonctionne. Cela ne veut PAS
+  dire qu'il y en a TOUJOURS une qui marche : un marche lent, sans
+  direction et peu volumineux est mauvais a la fois pour la
+  tendance, le retour a la moyenne et les cassures.
+- La courbe plus lisse depend du fait que les trois soient
+  reellement decorrelees. Mesurez-le sur votre propre journal :
+  alignez le P&L quotidien de chaque strategie et verifiez. Des
+  strategies construites par une seule personne sur un seul
+  instrument sont d'ordinaire plus correlees qu'elles n'en ont
+  l'air, car elles partagent votre instrument, vos horaires et
+  votre idee de ce qu'est une configuration.
+- Le cash n'est pas ici du capital inactif : c'est ce qui empeche
+  qu'un drawdown sur une poche vous force a en fermer une autre.</code></pre>
           </div>
         </details>
       </div>
@@ -836,7 +892,7 @@ Résultat :
           <li><strong>La corrélation compte plus que le nombre d'actifs — vérifie-la avant de te dire diversifié</strong></li>
           <li><strong>Frontière efficiente = performance maximale pour un risque donné (optimise ton allocation)</strong></li>
           <li><strong>Risk parity = contribution au risque égale, pas dollars égaux (plus équilibré que le 60/40)</strong></li>
-          <li><strong>Critère de Kelly = taille optimale pour la croissance (utilise 1/4 à 1/2 Kelly par sécurité)</strong></li>
+          <li><strong>Kelly donne une fraction de risque par pari, calculée à partir de nombres dont vous n'avez que des estimations</strong> &mdash; servez-vous-en pour classer vos stratégies les unes par rapport aux autres, non pour fixer le niveau. À 1 % de risque par trade, vous en êtes délibérément à une petite fraction.</li>
           <li><strong>Portefeuilles multi-stratégies = edges non corrélés = performances plus lisses</strong></li>
         </ul>
       </div>
@@ -927,7 +983,7 @@ Résultat :
             </div>
           </div>
         <div class="quiz-explanation">
-          <strong>Bonne réponse : D.</strong> Kelly prend le ratio de gain comme terme b : (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40 %. C est le piège &mdash; lire la réponse sur le taux de réussite saute complètement le ratio de gain, et si les deux coïncident ici à 60 %, c’est une coïncidence, pas une règle. À noter : un Kelly plein à 40 % est bien trop agressif pour être tradé tel quel, d’où le dimensionnement au quart dans cette leçon.
+          <strong>Bonne réponse : D.</strong> Kelly prend le rapport de gain comme terme b : (0,60 &times; 2 &minus; 0,40) &divide; 2 = 0,80 &divide; 2 = 40 %. C est le piège &mdash; lire la réponse sur le taux de réussite escamote complètement le rapport de gain, et que les deux coïncident ici à 60 % serait une coïncidence, pas une règle. Notez ce qu'est ce 40 % : la fraction du compte que vous risqueriez sur un trade, non celle que vous allouez. Un quart de cela fait encore 10 % de risque par trade, plusieurs fois ce qu'autorise n'importe quel chapitre de risque ici. Kelly sert de classement entre stratégies et de plafond sous lequel on reste largement ; ce n'est pas une taille de position.
         </div>
         </div>
 
@@ -936,7 +992,7 @@ Résultat :
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Si tu es arrivé jusqu'ici, tu comprends que la construction de portefeuille est une affaire de maths, pas de suppositions. Corrélation, ratios de Sharpe, critère de Kelly : ce ne sont pas des exercices académiques. Ce sont des outils que les professionnels utilisent tous les jours.
+        Chaque outil de cette leçon prend des entrées estimées et rend un nombre à l'air assuré. La matrice de corrélations, la frontière, la fraction de Kelly : chacun ne vaut que ce que vaut un échantillon d'histoire qui ne se répétera pas à l'identique. Ce n'est pas un argument pour revenir aux devinettes &mdash; l'arithmétique bat l'intuition, nettement et constamment. C'est un argument pour utiliser les résultats comme des classements et des plafonds plutôt que comme des consignes, et pour construire des portefeuilles qui survivent au fait de s'être trompé sur les entrées. La couverture obligataire de Lauren a échoué la seule année où elle était censée fonctionner, et le portefeuille a quand même perdu deux fois moins, parce que sept choses mues par des forces différentes ne cassent pas toutes le même jour.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Leçons associées</h3>

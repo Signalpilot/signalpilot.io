@@ -231,7 +231,11 @@ Actual volatility: ~18% (LOWER than both!)
 
 Why: Losses in A sometimes offset by gains in B
 Result: Higher return per unit of risk</code></pre>
-            <p><em>This is the only "free lunch" in finance. Use it.</em></p>
+            <p>This effect is real and it is worth using. It is also routinely oversold, including by an earlier version of this page, which called it the only free lunch in finance.</p>
+
+      <p><strong>What you are actually paying.</strong> The volatility fell because the two assets sometimes move apart &mdash; and the same fact that cuts your losses when A falls and B rises also cuts your gains when A rises and B does not. You have not been given return for nothing. You have exchanged some of the best outcomes for fewer of the worst ones, which is a trade most people want and none of them get for free. Lauren's case later in this lesson is the same point with real numbers: her diversified allocation lost half as much in 2022 and then lost badly to the ten tech stocks she abandoned across 2023 and 2024.</p>
+
+      <p>One more thing the arithmetic assumes: that 0.3 correlation. Correlations are estimated from a window of history and they move, usually toward 1 in exactly the conditions where you were relying on them to be low. Everything on this page inherits that assumption.</p>
           </div>
         </details>
         <details class="accordion-item">
@@ -285,6 +289,11 @@ Risk (Volatility) → Return
 30%                 15%  (high risk, diminishing returns)
 
 Your goal: Pick a point on the frontier based on risk tolerance</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Before you go and compute one.</strong> The efficient frontier is drawn from expected returns, volatilities and correlations &mdash; none of which you know. You estimate them from past data, and the estimates are noisy in a specific and damaging way: expected returns are the hardest of the three to measure and the one the optimiser is most sensitive to. Feed it a slightly generous estimate for one asset and it will happily put most of the portfolio there.</p>
+        <p style="margin-top:0.75rem">This is why mean-variance optimisation run naively produces extreme, unstable allocations that change dramatically when you extend the sample by a few months. Practitioners handle it by constraining weights, by shrinking the return estimates toward a common value, or by dropping expected returns from the problem altogether &mdash; which is what the risk-based approaches in the next part do. Treat a frontier you computed yourself as a sketch of the trade-off, not as an instruction about weights.</p>
+      </div>
 
       <h3>Finding the Optimal Portfolio (Max Sharpe Ratio)</h3>
 
@@ -685,29 +694,53 @@ Winner: Portfolio C (best risk-adjusted return)</code></pre>
 
       <p>The classic 60/40 portfolio (60% stocks, 40% bonds) has a dirty secret:</p>
 
-      <p><strong>More than 80% of the risk comes from the 60% in stocks.</strong></p>
+      <p><strong>Almost all of the risk comes from the 60% in stocks.</strong></p>
 
-      <p>Let me show you:</p>
+      <p>Here is the calculation, and it is worth doing it properly, because the quick version of it gets the wrong answer in a way this lesson has spent Part 1 warning you about.</p>
 
       <pre style="overflow-x:auto"><code>60/40 Portfolio:
-60% SPY (volatility: 18%)
-40% TLT (volatility: 12%)
+60% SPY (volatility 18%)
+40% TLT (volatility 12%)
+Correlation: -0.30
 
-Risk travels through variance, so square the weighted vols:
-SPY: (0.60 × 18%)^2 = 10.8^2 = 116.6
-TLT: (0.40 × 12%)^2 =  4.8^2 =  23.0
+THE QUICK VERSION (what this page used to do):
+Square the weighted vols and take the shares.
+SPY: (0.60 x 18%)^2 = 10.8^2 = 116.6
+TLT: (0.40 x 12%)^2 =  4.8^2 =  23.0
                        total  = 139.6
+SPY share: 116.6 / 139.6 = 84%
+TLT share:  23.0 / 139.6 = 16%
 
-Share of risk:
-SPY: 116.6 / 139.6 = 84%
-TLT:  23.0 / 139.6 = 16%
+That method ignores the correlation term, which is the entire
+subject of this lesson. It is only correct when the correlation
+is zero, and here it is -0.30.
 
-Result: Portfolio is ~84% exposed to stock risk
-        Not diversified in risk terms!</code></pre>
+THE ACTUAL CALCULATION:
+Portfolio volatility first:
+  var = (0.6 x 0.18)^2 + (0.4 x 0.12)^2
+      + 2 x 0.6 x 0.4 x (-0.30) x 0.18 x 0.12
+      = 0.011664 + 0.002304 - 0.003110
+      = 0.010858        ->  vol = 10.42%
 
-      <p>Consider risk parity.</p>
+Each asset's risk contribution is its weight times how much the
+portfolio's volatility moves when you add a little of it:
+  SPY: 0.6 x (0.6 x 0.18^2 + 0.4 x (-0.30) x 0.18 x 0.12) / 0.1042
+     = 0.6 x  0.016848 / 0.1042 = 0.0970   ->  93% of 10.42%
+  TLT: 0.4 x (0.4 x 0.12^2 + 0.6 x (-0.30) x 0.18 x 0.12) / 0.1042
+     = 0.4 x  0.001872 / 0.1042 = 0.0072   ->   7% of 10.42%
 
-      <h3>Risk Parity: Equal Risk, Not Equal Dollars</h3>
+Result: the 60% in stocks carries about 93% of the risk,
+        not 84%. The negative correlation makes the bond
+        sleeve LESS of a risk contributor, not more --
+        it is offsetting, which is what you wanted, and
+        it also means the portfolio is even more of a
+        stock bet than the quick arithmetic suggested.</code></pre>
+
+      <p>Two things follow from that. The first is the point the section is making: a 60/40 portfolio is, in risk terms, an equity portfolio with a small hedge attached. The second is a warning about method &mdash; if you decompose portfolio risk by squaring weighted volatilities, you are assuming the thing you are supposed to be measuring.</p>
+
+      <h3>Equalising Risk Instead of Dollars</h3>
+
+      <p><strong>A naming note before the arithmetic.</strong> What follows is inverse-volatility weighting: give each asset a weight proportional to one over its volatility. It is simple, it is robust, and it is what most people mean when they say "risk parity" informally. True risk parity equalises the risk contributions computed the way they were computed just above, which requires the whole correlation matrix and generally has no closed-form answer &mdash; you solve for it numerically. The two coincide only when all the pairwise correlations are equal. Use inverse volatility by all means; just know which one you are doing, because with a strongly negative correlation the two give visibly different weights.</p>
 
       <div class="tabs">
         <div class="tabs-nav">
@@ -774,7 +807,13 @@ Kelly = (0.65 × 2.5 - 0.35 × 1) / 2.5
       = 1.275 / 2.5
       = 0.51 = 51%
 
-Interpretation: Allocate 51% of capital to this strategy</code></pre>
+Interpretation: risk 51% of capital on each trade</code></pre>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Read that interpretation carefully, because the wording matters more than the arithmetic.</strong> Kelly does not tell you what fraction of the account to park in a strategy. It tells you what fraction of the account to put at risk on each bet &mdash; the amount you lose when the trade loses. So "51% Kelly" on a strategy whose loser is 1R means risking 51% of your account on a single trade. An earlier version of this page said "allocate 51% of capital", which invites reading it as a position size and understates what the number is asking for by an enormous margin.</p>
+        <p style="margin-top:0.75rem"><strong>And the input problem is worse than the sizing problem.</strong> Kelly assumes you know the win rate and the payoff ratio exactly. You do not; you have estimates from a finite sample, and the formula is asymmetric around them &mdash; overestimating your edge pushes the recommended bet up faster than underestimating it pushes it down. Over-betting Kelly does not reduce your growth rate gently, it drives it negative. That asymmetry, not squeamishness, is why fractional Kelly exists.</p>
+        <p style="margin-top:0.75rem"><strong>How this reconciles with the 1-2% per trade this curriculum teaches elsewhere.</strong> It does not, and it is not supposed to. If your risk per trade is 1% of the account and full Kelly on your measured numbers is 51%, you are trading at roughly one-fiftieth of Kelly. That is a deliberate choice, and the reasoning is above: your 65% win rate is a measurement with error bars, the payoff ratio is another, and a fiftieth of a number you are not sure of is a defensible place to stand. Treat Kelly as a ceiling that tells you which of your strategies deserves more weight than another &mdash; not as a target to approach.</p>
+      </div>
 
       <p>But here's the catch:</p>
 
@@ -782,7 +821,7 @@ Interpretation: Allocate 51% of capital to this strategy</code></pre>
         <h4>🚨 Full Kelly Is Aggressive</h4>
         <p>Full Kelly maximizes long-term growth but has wild swings.</p>
         <p><strong>Professional approach:</strong> Use 1/4 Kelly to 1/2 Kelly for smoother equity curve.</p>
-        <p>Example: 51% full Kelly → Use 13-25% allocation (safer).</p>
+        <p>Example: 51% full Kelly at a quarter is still 12.75% of the account risked on one trade. Even that is many times what any risk chapter in this curriculum permits. The useful output of Kelly here is not a number to trade &mdash; it is the ranking: a strategy with double the Kelly figure of another has earned roughly double the weight, whatever absolute level you actually run at.</p>
       </div>
 <h2 id="multi-strategy-portfolio">Multi-Strategy Portfolio</h2>
 
@@ -793,26 +832,40 @@ Interpretation: Allocate 51% of capital to this strategy</code></pre>
           <summary class="accordion-header">Strategy Portfolio Example</summary>
           <div class="accordion-content">
             <pre style="overflow-x:auto"><code>Strategy A (Janus Sweeps):
-Win rate: 65%, payoff ratio: 2.5:1
-Full Kelly 51% -> allocate 13% (1/4 Kelly)
-Regime: Works in trending markets
+Win rate 65%, payoff ratio 2.5:1
+Kelly = 0.65 - 0.35/2.5 = 0.51
+Regime: works in trending markets
 
 Strategy B (Mean Reversion):
-Win rate: 58%, payoff ratio: 2.0:1
-Full Kelly 37% -> allocate 9% (1/4 Kelly)
-Regime: Works in ranging markets
+Win rate 58%, payoff ratio 2.0:1
+Kelly = 0.58 - 0.42/2.0 = 0.37
+Regime: works in ranging markets
 
 Strategy C (Breakouts):
-Win rate: 52%, payoff ratio: 3.0:1
-Full Kelly 36% -> allocate 9% (1/4 Kelly)
-Regime: Works in volatile expansions
+Win rate 52%, payoff ratio 3.0:1
+Kelly = 0.52 - 0.48/3.0 = 0.36
+Regime: works in volatile expansions
 
-Total allocation: 31% (rest in cash as buffer)
+USING THESE NUMBERS THE RIGHT WAY:
+Do not read 51 / 37 / 36 as percentages of the account. Read the
+RATIOS: 51 : 37 : 36, or roughly 41% / 30% / 29% of whatever total
+risk you have decided to run. If your rule is 1% of account risked
+per trade across the book, A gets a little more of that budget than
+B and C, and that is the whole of what Kelly is telling you here.
 
-Result:
-- Different regimes = one strategy always working
-- Uncorrelated strategies = smoother equity curve
-- Cash buffer = flexibility for drawdowns</code></pre>
+WHAT THIS SETUP DOES AND DOES NOT BUY:
+- Three strategies suited to different regimes means you are less
+  likely to have nothing working. It does not mean one is ALWAYS
+  working: a slow, directionless, low-volume market is bad for
+  trend, mean reversion and breakouts at the same time.
+- The smoother equity curve depends on the three being genuinely
+  uncorrelated. Measure that on your own trade log -- pair the
+  daily P&L of each strategy and check. Strategies built by one
+  person on one instrument are usually more correlated than they
+  look, because they share your instrument, your hours and your
+  idea of what a setup is.
+- Cash is not idle capital here, it is the thing that lets a
+  drawdown in one sleeve not force you to close another.</code></pre>
           </div>
         </details>
       </div>
@@ -823,7 +876,7 @@ Result:
           <li><strong>Correlation matters more than asset count—check it before claiming diversification</strong></li>
           <li><strong>Efficient frontier = max return for given risk (optimize your allocation)</strong></li>
           <li><strong>Risk parity = equal risk contribution, not equal dollars (more balanced than 60/40)</strong></li>
-          <li><strong>Kelly Criterion = optimal sizing for growth (use 1/4 to 1/2 Kelly for safety)</strong></li>
+          <li><strong>Kelly gives a risk fraction per bet, computed from numbers you only have estimates of</strong> &mdash; use it to rank strategies against each other, not to set the level. At 1% risk per trade you are running at a small fraction of it, deliberately.</li>
           <li><strong>Multi-strategy portfolios = uncorrelated edges = smoother returns</strong></li>
         </ul>
       </div>
@@ -914,7 +967,7 @@ Result:
             </div>
           </div>
         <div class="quiz-explanation">
-          <strong>Correct: D.</strong> Kelly takes the payoff ratio as its b term: (0.60 &times; 2 &minus; 0.40) &divide; 2 = 0.80 &divide; 2 = 40%. C is the trap &mdash; reading the answer off the win rate skips the payoff ratio entirely, and the two coinciding at 60% here would be a coincidence, not a rule. Note that full Kelly at 40% is far too aggressive to actually trade, which is why this lesson sizes at a quarter of it.
+          <strong>Correct: D.</strong> Kelly takes the payoff ratio as its b term: (0.60 &times; 2 &minus; 0.40) &divide; 2 = 0.80 &divide; 2 = 40%. C is the trap &mdash; reading the answer off the win rate skips the payoff ratio entirely, and the two coinciding at 60% here would be a coincidence, not a rule. Note what that 40% is: the fraction of the account you would risk on one trade, not the fraction you would allocate. A quarter of it is still 10% at risk per trade, which is several times what any risk chapter here permits. Kelly is useful as a ranking between strategies and as a ceiling you stay well under; it is not a position size.
         </div>
         </div>
 
@@ -923,7 +976,7 @@ Result:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        If you made it this far, you understand that portfolio construction is about math, not guesses. Correlation, Sharpe ratios, Kelly criterion—these aren't academic exercises. They're tools professionals use daily.
+        Every tool in this lesson takes estimated inputs and returns a confident-looking number. The correlation matrix, the frontier, the Kelly fraction: each is only as good as a sample of history that will not repeat exactly. That is not an argument for going back to guessing &mdash; the arithmetic beats intuition badly and consistently. It is an argument for using the outputs as rankings and ceilings rather than as instructions, and for building portfolios that survive being wrong about the inputs. Lauren's bond hedge failed in the one year it was supposed to work, and the portfolio still lost half as much, because seven things driven by different forces do not all break on the same day.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Related Lessons</h3>
