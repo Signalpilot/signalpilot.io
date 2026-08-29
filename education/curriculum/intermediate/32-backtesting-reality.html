@@ -175,7 +175,7 @@
 
       <p><strong>In this lesson, you'll learn:</strong></p>
       <ul>
-        <li>Why 90% of backtests fail when taken live</li>
+        <li>Why a backtest can be arithmetically correct and still describe a strategy that cannot be traded</li>
         <li>The 4 deadly sins: overfitting, look-ahead bias, unrealistic costs, survivorship bias</li>
         <li>How to model slippage and spreads that actually reflect reality</li>
         <li>In-sample vs. out-of-sample testing (the only validation that matters)</li>
@@ -248,7 +248,7 @@
           </div>
           <div class="tab-panel"><h3 id="testing-only-on-survivors">Testing Only on Survivors</h3>
             <p><strong>What it is:</strong> Backtesting on current S&P 500 stocks only</p>
-            <p><strong>The problem:</strong> You're excluding 200+ stocks that got delisted/bankrupted</p>
+            <p><strong>The problem:</strong> the index is not the same 500 companies it was ten years ago. Names leave it constantly &mdash; most through acquisition or falling out of the size band, some by going to zero &mdash; and the ones that went to zero are precisely the ones a mean-reversion rule would have kept buying</p>
             <p><strong>Example:</strong></p>
             <ul>
               <li>Backtest on 2024 S&P 500 list: 1.8R expectancy, 2.1 profit factor</li>
@@ -267,7 +267,7 @@
       <div class="section-break"><span>Part 2: Modeling Realistic Costs</span></div>
 <h2 id="the-hidden-costs-that-kill-strategies">The Hidden Costs That Kill Strategies</h2>
 
-      <p>Here's what most backtests ignore—and why yours is probably 20-40% too optimistic:</p>
+      <p>Here's what most backtests ignore. How much it costs you depends on your instrument, size and holding period, so the only honest answer is the one you compute below from your own numbers:</p>
 
       <div class="accordion">
         <details class="accordion-item">
@@ -393,7 +393,7 @@
             <td style="padding:0.75rem">"Tiny drawdown. Extremely safe."</td>
           </tr>
           <tr style="background:rgba(34,197,94,0.2)">
-            <td style="padding:0.75rem">Total Return (2 years)</td>
+            <td style="padding:0.75rem">Total Return (2 years, $10K test account, 2% risk per trade)</td>
             <td style="padding:0.75rem;text-align:right"><strong>+$40,600 (+406%)</strong></td>
             <td style="padding:0.75rem"><strong>"This is the one. I'm quitting my job."</strong></td>
           </tr>
@@ -651,7 +651,7 @@
         <h4>🚩 Warning Signs Your Strategy Is Curve-Fit</h4>
         <ul>
           <li><strong>Sharpe > 3.0:</strong> Too good to be true</li>
-          <li><strong>Expectancy > 5R:</strong> Extremely rare (verify execution assumptions)</li>
+          <li><strong>Expectancy above about +0.5R per trade:</strong> rare enough that it needs an explanation. Above +1R, an execution assumption is almost certainly wrong &mdash; note that Chris's "holy grail" backtest above was +1.3R</li>
           <li><strong>Only 20-30 trades:</strong> Sample size too small (statistically meaningless)</li>
           <li><strong>Perfect equity curve:</strong> Smooth line with no drawdowns (impossible)</li>
           <li><strong>Tested on 1 asset only:</strong> Likely fit to that specific regime</li>
@@ -698,10 +698,23 @@
           <li>Backtest on 60% of your data (in-sample). Record: trades, expectancy, Sharpe, max DD</li>
           <li>Identify parameters used (EMAs, thresholds, etc.). Did you optimize these by testing multiple values?</li>
           <li>Test on remaining 40% of data (out-of-sample). Compare results to in-sample.</li>
-          <li>Use the validation scorecard from the template (8 categories, 60 points max)</li>
-          <li>Calculate your score: 50-60 = proceed, 40-49 = revise, <40 = scrap</li>
-          <li>If score ≥50: Paper trade for 30-60 trades before going live</li>
+          <li>Score the strategy on the eight checks below, 0 to 5 each (40 points maximum)</li>
+          <li>Add it up: 32 or more = proceed to paper trading, 24-31 = revise and re-test, under 24 = scrap it</li>
+          <li>If you scored 32 or more: paper trade for 30-60 trades before going live</li>
         </ol>
+
+        <p style="margin-top:1rem;font-weight:600">The eight checks (0 = not done at all, 5 = done properly)</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>Data split.</strong> Was a genuine out-of-sample period held back and left untouched during development? Score 0 if you optimised on everything you had.</li>
+          <li><strong>Optimisation restraint.</strong> How many parameter combinations did you try? Under 10 scores 5; thousands scores 0, whatever the result looked like.</li>
+          <li><strong>Cost modelling.</strong> Are spread, slippage and commission in the equity curve at values you could defend to a broker? Zero costs scores 0.</li>
+          <li><strong>Look-ahead check.</strong> Did you re-read the entry logic asking specifically whether each input existed at the moment of the decision? Signal on this candle, execution on the next, scores 5.</li>
+          <li><strong>Out-of-sample result.</strong> How much did performance degrade on the untouched data? Under 30% degradation scores 5; over 70%, as in Chris's case, scores 0.</li>
+          <li><strong>Walk-forward consistency.</strong> Did you roll the optimisation window forward and test the next period, several times? One period scores 1; four consistent periods score 5.</li>
+          <li><strong>Sample size.</strong> Fewer than 30 trades scores 0 no matter how good they look; 100 or more scores 5.</li>
+          <li><strong>Breadth.</strong> Does it hold on more than one instrument, or across more than one market regime? One asset in one regime scores 1.</li>
+        </ol>
+        <p style="margin-top:1rem">Run Chris's strategy through this and it scores 2 out of 40 &mdash; a point for sample size and a point for having a walk-forward period at all. The scorecard would have caught it in an afternoon, for free.</p>
         <p style="margin-top:1rem"><strong>Goal:</strong> Catch curve-fitting, look-ahead bias, and unrealistic assumptions BEFORE they destroy your live account. Better to scrap a bad strategy in backtesting than lose real money.</p>
       </div>
 
@@ -730,7 +743,7 @@
             <div class="quiz-option" data-correct="false">D) Just the sample size is too small</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correct!</strong> Three major red flags: (1) Only 25 trades = statistically insignificant, (2) Sharpe 4.2 = suspiciously high (likely overfit), (3) EMA(47) found by testing 100 periods = curve-fit to noise. This strategy will fail live. Need: 100+ trades, realistic Sharpe (1.5-2.5), standard parameters.
+            <strong>Correct!</strong> Three major red flags: (1) Only 25 trades = statistically insignificant, (2) Sharpe 4.2 = suspiciously high (likely overfit), (3) EMA(47) found by testing 100 periods = curve-fit to noise. Need: 100+ trades, standard parameters, and a Sharpe you would not be embarrassed to defend &mdash; above 2 is exceptional even for professional systematic funds, and a retail backtest showing 4.2 is describing an execution assumption, not an edge.
           </div>
         </div>
 
@@ -740,10 +753,10 @@
             <div class="quiz-option" data-correct="false">A) Nothing—2025 market conditions changed, unforeseeable</div>
             <div class="quiz-option" data-correct="false">B) Expectancy too high—2.8R is unrealistic for mean reversion</div>
             <div class="quiz-option" data-correct="false">C) Sample size too small—need more than 14 years of data</div>
-            <div class="quiz-option" data-correct="true">D) Survivorship bias—backtest excluded 30-40% of stocks that delisted/went bankrupt during 2010-2024</div>
+            <div class="quiz-option" data-correct="true">D) Survivorship bias—the backtest only contains companies that were still in the index in 2024, so every name that left it between 2010 and 2024 is missing</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correct!</strong> Classic survivorship bias trap. Testing on "current S&P 500 components" means you only tested WINNERS—stocks that survived 14 years and made it into today's index. You excluded bankrupt companies, delisted stocks, and failed businesses (30-40% of total). These dead stocks would have triggered your mean-reversion entries but never recovered, destroying expectancy. That is exactly what turns the 1.8R expectancy in the example above into a real -0.2R. Solution: Use point-in-time data that includes ALL stocks that existed at each date, including future delistings. Survivorship bias inflates backtest results by 20-50%.
+            <strong>Correct!</strong> Classic survivorship bias trap. Testing on "current S&P 500 components" means you only tested WINNERS—stocks that survived 14 years and made it into today's index. Excluded from the test: every company that was acquired, dropped out of the index, or went to zero over those fourteen years. The ones that went to zero are the ones that matter here, because a mean-reversion rule buys weakness &mdash; it would have bought them all the way down and never been paid. How much this inflates a given backtest depends entirely on the universe and the rule, so no percentage is quoted; what is certain is the direction, and that it is never in your favour. Solution: use point-in-time data that includes ALL stocks that existed at each date, including the ones that later delisted.
           </div>
         </div>
 
@@ -756,7 +769,7 @@
             <div class="quiz-option" data-correct="false">D) No—need at least 10 walk-forward periods to validate</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correct!</strong> Walk-forward tests prove robustness (not overfit to single period), but you MUST model realistic costs before trading live. Slippage (0.1-0.2% per side = 0.2-0.4% round-trip) + commissions ($2-5/trade) can reduce expectancy by 30-60%. A strategy with 2.5R expectancy and no costs might drop to 1.2R with costs—still profitable but barely. Chris's case above is this exact failure: a 1.3R backtest that came in at -0.45R live once the costs were real. Add costs LAST (after walk-forward), then if expectancy stays &gt;1.5R and win rate &gt;45%, trade it live. Never skip cost modeling—it's the difference between profit and pain.
+            <strong>Correct!</strong> Walk-forward tests prove robustness (not overfit to single period), but you MUST model realistic costs before trading live. Slippage (0.1-0.2% per side = 0.2-0.4% round-trip) plus commissions ($2-5/trade) come off the top of every trade, and they come off in R terms too: on a trade risking $500, $150 of costs is 0.3R gone before the market does anything. A backtest at +0.5R can land near zero once that is real. Chris's case above is this exact failure &mdash; a +1.3R backtest that came in at -0.45R live once the costs were real. Add costs LAST (after walk-forward), then ask whether the expectancy is still positive by a margin you could defend, and whether you can say what produces it. A small, explicable edge that survives costs beats a large one that does not.
           </div>
         </div>
 

@@ -188,7 +188,7 @@
 
       <p><strong>Dans cette leçon, tu vas apprendre :</strong></p>
       <ul>
-        <li>Pourquoi 90 % des backtests échouent une fois passés en réel</li>
+        <li>Pourquoi un backtest peut être arithmétiquement juste et décrire malgré tout une stratégie impossible à trader</li>
         <li>Les 4 péchés capitaux : surapprentissage, biais d'anticipation, coûts irréalistes, biais du survivant</li>
         <li>Comment modéliser le slippage et les spreads pour qu'ils collent vraiment à la réalité</li>
         <li>In-sample contre out-of-sample (la seule validation qui compte)</li>
@@ -261,7 +261,7 @@
           </div>
           <div class="tab-panel"><h3 id="testing-only-on-survivors">Ne tester que sur les survivants</h3>
             <p><strong>Ce que c'est :</strong> Faire du backtesting uniquement sur les valeurs actuelles du S&P 500</p>
-            <p><strong>Le problème :</strong> Vous excluez plus de 200 titres radiés ou tombés en faillite</p>
+            <p><strong>Le problème :</strong> L'indice n'est pas composé des mêmes 500 entreprises qu'il y a dix ans. Des noms le quittent en permanence — le plus souvent par rachat ou en sortant de la tranche de capitalisation, certains en tombant à zéro — et ceux qui sont tombés à zéro sont précisément ceux qu'une règle de retour à la moyenne aurait continué d'acheter</p>
             <p><strong>Exemple :</strong></p>
             <ul>
               <li>Backtest sur la liste S&P 500 de 2024 : 1,8R d'espérance, facteur de profit 2,1</li>
@@ -280,7 +280,7 @@
       <div class="section-break"><span>Partie 2 : modéliser des coûts réalistes</span></div>
 <h2 id="the-hidden-costs-that-kill-strategies">Les coûts cachés qui tuent les stratégies</h2>
 
-      <p>Voici ce que la plupart des backtests ignorent — et pourquoi le vôtre est sans doute 20 à 40 % trop optimiste :</p>
+      <p>Voici ce que la plupart des backtests ignorent. Ce que cela vous coûte dépend de votre instrument, de votre taille et de votre durée de détention : la seule réponse honnête est donc celle que vous calculerez ci-dessous à partir de vos propres chiffres :</p>
 
       <div class="accordion">
         <details class="accordion-item">
@@ -406,7 +406,7 @@
             <td style="padding:0.75rem">« Un drawdown minuscule. Ultra sûr. »</td>
           </tr>
           <tr style="background:rgba(34,197,94,0.2)">
-            <td style="padding:0.75rem">Rendement total (2 ans)</td>
+            <td style="padding:0.75rem">Rendement total (2 ans, compte de test de 10 000 $, 2 % de risque par position)</td>
             <td style="padding:0.75rem;text-align:right"><strong>+$40,600 (+406%)</strong></td>
             <td style="padding:0.75rem"><strong>« C'est la bonne. Je quitte mon travail. »</strong></td>
           </tr>
@@ -664,7 +664,7 @@
         <h4>🚩 Les signes que votre stratégie est une courbe ajustée</h4>
         <ul>
           <li><strong>Sharpe supérieur à 3,0 :</strong> Trop beau pour être vrai</li>
-          <li><strong>Espérance supérieure à 5R :</strong> Extrêmement rare (vérifiez vos hypothèses d'exécution)</li>
+          <li><strong>Espérance supérieure à environ +0,5R par position :</strong> assez rare pour exiger une explication. Au-delà de +1R, une hypothèse d'exécution est presque certainement fausse — le backtest « graal » de Chris, plus haut, affichait +1,3R</li>
           <li><strong>Seulement 20-30 positions :</strong> Échantillon trop petit (statistiquement dénué de sens)</li>
           <li><strong>Courbe de capital parfaite :</strong> Une ligne lisse sans drawdowns (impossible)</li>
           <li><strong>Testée sur un seul actif :</strong> Sans doute ajustée à ce régime précis</li>
@@ -711,10 +711,23 @@
           <li>Faites le backtest sur 60 % de vos données (in-sample). Notez : positions, espérance, Sharpe, DD maximal</li>
           <li>Repérez les paramètres utilisés (EMAs, seuils, etc.). Les avez-vous optimisés en essayant plusieurs valeurs ?</li>
           <li>Testez sur les 40 % restants (out-of-sample). Comparez avec l'in-sample.</li>
-          <li>Utilisez la grille de validation du modèle (8 catégories, 60 points maximum)</li>
-          <li>Calculez votre score : 50-60 = on y va, 40-49 = à revoir, moins de 40 = à jeter</li>
-          <li>Si le score atteint 50 : tradez sur papier pendant 30 à 60 positions avant de passer en réel</li>
+          <li>Notez la stratégie sur les huit vérifications ci-dessous, de 0 à 5 chacune (40 points maximum)</li>
+          <li>Faites le total : 32 ou plus = passez au papier, 24-31 = révisez et retestez, moins de 24 = abandonnez</li>
+          <li>Si vous avez obtenu 32 ou plus : tradez sur papier pendant 30 à 60 positions avant de passer en réel</li>
         </ol>
+
+        <p style="margin-top:1rem;font-weight:600">Les huit vérifications (0 = pas faite du tout, 5 = faite correctement)</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>Découpage des données.</strong> Une véritable période hors échantillon a-t-elle été mise de côté et laissée intacte pendant le développement ? 0 point si vous avez optimisé sur tout ce que vous aviez.</li>
+          <li><strong>Retenue dans l'optimisation.</strong> Combien de combinaisons de paramètres avez-vous essayées ? Moins de 10 vaut 5 ; des milliers valent 0, quel que soit l'aspect du résultat.</li>
+          <li><strong>Modélisation des coûts.</strong> Le spread, le slippage et la commission figurent-ils dans la courbe de capital, à des valeurs que vous pourriez défendre devant un courtier ? Zéro coût vaut 0.</li>
+          <li><strong>Contrôle du look-ahead.</strong> Avez-vous relu la logique d'entrée en vous demandant expressément si chaque donnée existait au moment de la décision ? Signal sur cette bougie, exécution sur la suivante, vaut 5.</li>
+          <li><strong>Résultat hors échantillon.</strong> De combien la performance s'est-elle dégradée sur les données intactes ? Moins de 30 % de dégradation vaut 5 ; plus de 70 %, comme chez Chris, vaut 0.</li>
+          <li><strong>Constance en walk-forward.</strong> Avez-vous fait glisser la fenêtre d'optimisation vers l'avant et testé la période suivante, plusieurs fois ? Une période vaut 1 ; quatre périodes cohérentes valent 5.</li>
+          <li><strong>Taille de l'échantillon.</strong> Moins de 30 positions vaut 0, si belles soient-elles ; 100 ou plus vaut 5.</li>
+          <li><strong>Étendue.</strong> Tient-elle sur plus d'un instrument, ou à travers plus d'un régime de marché ? Un seul actif dans un seul régime vaut 1.</li>
+        </ol>
+        <p style="margin-top:1rem">Passez la stratégie de Chris là-dedans et elle obtient 2 sur 40 — un point pour la taille de l'échantillon et un pour avoir seulement eu une période walk-forward. La grille l'aurait repérée en un après-midi, gratuitement.</p>
         <p style="margin-top:1rem"><strong>Objectif :</strong> Attrapez la courbe ajustée, le biais d'anticipation et les hypothèses irréalistes AVANT qu'ils ne détruisent votre compte réel. Mieux vaut jeter une mauvaise stratégie en backtesting que perdre de l'argent réel.</p>
       </div>
 
@@ -743,7 +756,7 @@
             <div class="quiz-option" data-correct="false">D) Seulement l'échantillon, trop petit</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Exact !</strong> Trois signaux d'alerte majeurs : (1) seulement 25 positions = statistiquement insignifiant, (2) Sharpe de 4,2 = suspicieusement élevé (sans doute surajusté), (3) EMA(47) trouvée en testant 100 périodes = ajustée au bruit. Cette stratégie échouera en réel. Il faut : plus de 100 positions, un Sharpe réaliste (1,5-2,5), des paramètres standards.
+            <strong>Exact !</strong> Trois gros signaux d'alarme : (1) seulement 25 positions = statistiquement insignifiant, (2) Sharpe 4,2 = suspectement élevé (probablement surajusté), (3) EMA(47) trouvée en testant 100 périodes = ajustée au bruit. Il faut : 100+ positions, des paramètres standards, et un Sharpe que vous n'auriez pas honte de défendre — au-delà de 2, c'est exceptionnel même pour des fonds systématiques professionnels, et un backtest de particulier affichant 4,2 décrit une hypothèse d'exécution, pas un avantage.
           </div>
         </div>
 
@@ -753,10 +766,10 @@
             <div class="quiz-option" data-correct="false">A) Rien — les conditions de marché de 2025 ont changé, c'était imprévisible</div>
             <div class="quiz-option" data-correct="false">B) Espérance trop élevée — 2,8R est irréaliste pour du retour à la moyenne</div>
             <div class="quiz-option" data-correct="false">C) Échantillon trop petit — il faut plus de 14 ans de données</div>
-            <div class="quiz-option" data-correct="true">D) Le biais du survivant — le backtest a exclu 30-40 % des titres radiés ou en faillite entre 2010 et 2024</div>
+            <div class="quiz-option" data-correct="true">D) Biais du survivant — le backtest ne contient que des sociétés encore dans l'indice en 2024, si bien que tout nom qui l'a quitté entre 2010 et 2024 est absent</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Exact !</strong> Le piège classique du biais du survivant. Tester sur « les composantes actuelles du S&P 500 » signifie que vous n'avez testé que les GAGNANTS : des titres qui ont survécu 14 ans et sont arrivés dans l'indice d'aujourd'hui. Vous avez laissé de côté les entreprises en faillite, les titres radiés et les modèles ratés (30-40 % du total). Ce sont précisément ces titres morts qui auraient déclenché vos entrées de retour à la moyenne sans jamais se relever. C'est exactement ce qui transforme l'espérance de 1,8R de l'exemple ci-dessus en un vrai -0,2R. Solution : utilisez des données point-in-time contenant TOUS les titres existant à chaque date, y compris ceux radiés par la suite. Le biais du survivant gonfle les résultats de backtest de 20 à 50 %.
+            <strong>Exact !</strong> Le piège classique du biais du survivant. Tester sur « les composants actuels du S&P 500 », c'est n'avoir testé que des GAGNANTES : des titres qui ont survécu 14 ans et figurent dans l'indice d'aujourd'hui. Sont exclues du test : toutes les sociétés rachetées, sorties de l'indice ou tombées à zéro pendant ces quatorze ans. Celles qui sont tombées à zéro sont celles qui comptent ici, car une règle de retour à la moyenne achète la faiblesse : elle les aurait achetées tout le long de la descente sans jamais être payée. De combien cela gonfle un backtest donné dépend entièrement de l'univers et de la règle, aucun pourcentage n'est donc avancé ; ce qui est certain, c'est le sens, et il n'est jamais en votre faveur. Solution : utilisez des données point-in-time incluant TOUTES les actions existant à chaque date, y compris celles qui ont ensuite été radiées.
           </div>
         </div>
 
@@ -769,7 +782,7 @@
             <div class="quiz-option" data-correct="false">D) Non — il faut au moins 10 périodes walk-forward pour valider</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Exact !</strong> Les tests walk-forward prouvent la robustesse (pas de surajustement à une seule période), mais vous DEVEZ modéliser des coûts réalistes avant de passer en réel. Le slippage (0,1-0,2 % par côté = 0,2-0,4 % aller-retour) plus les commissions (2-5 $ par trade) peuvent réduire l'espérance de 30 à 60 %. Une stratégie à 2,5R d'espérance hors coûts peut tomber à 1,2R avec les coûts &mdash; encore rentable, mais de justesse. Le cas de Chris ci-dessus est exactement cet échec : un backtest à 1,3R qui est ressorti à -0,45R en réel dès que les coûts sont devenus réels. Ajoutez les coûts EN DERNIER (après le walk-forward) ; si l'espérance reste &gt;1,5R et le taux de réussite &gt;45 %, passez en réel. Ne sautez jamais la modélisation des coûts : c'est la différence entre le profit et la douleur.
+            <strong>Exact !</strong> Les tests walk-forward démontrent la robustesse (pas de surajustement à une seule période), mais vous DEVEZ modéliser des coûts réalistes avant de passer en réel. Le slippage (0,1-0,2 % par côté = 0,2-0,4 % aller-retour) plus les commissions (2-5 $ par position) se prélèvent en haut de chaque trade, et se prélèvent aussi en R : sur une position qui risque 500 $, 150 $ de frais font 0,3R partis avant que le marché ne fasse quoi que ce soit. Un backtest à +0,5R peut finir près de zéro une fois cela réel. Le cas de Chris ci-dessus est exactement cet échec — un backtest à +1,3R arrivé à −0,45R en réel une fois les coûts réels. Ajoutez les coûts EN DERNIER (après le walk-forward), puis demandez-vous si l'espérance reste positive d'une marge que vous pourriez défendre, et si vous savez dire d'où elle vient. Un petit avantage explicable qui survit aux coûts vaut mieux qu'un grand qui n'y survit pas.
           </div>
         </div>
 

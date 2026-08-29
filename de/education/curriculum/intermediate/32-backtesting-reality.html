@@ -188,7 +188,7 @@
 
       <p><strong>In dieser Lektion lernst du:</strong></p>
       <ul>
-        <li>Warum 90 % der Backtests live scheitern</li>
+        <li>Warum ein Backtest rechnerisch stimmen und trotzdem eine Strategie beschreiben kann, die sich nicht handeln lässt</li>
         <li>Die 4 Todsünden: Overfitting, Look-ahead-Bias, unrealistische Kosten, Survivorship-Bias</li>
         <li>Wie du slippage und Spreads modellierst, die der Realität wirklich entsprechen</li>
         <li>In-Sample gegen Out-of-Sample (die einzige Validierung, die zählt)</li>
@@ -261,7 +261,7 @@
           </div>
           <div class="tab-panel"><h3 id="testing-only-on-survivors">Nur auf den Überlebenden testen</h3>
             <p><strong>Was es ist:</strong> Backtesting nur auf den heutigen Werten des S&P 500</p>
-            <p><strong>Das Problem:</strong> Du klammerst über 200 Aktien aus, die delistet wurden oder pleitegingen</p>
+            <p><strong>Das Problem:</strong> Der Index besteht nicht mehr aus denselben 500 Unternehmen wie vor zehn Jahren. Ständig verlassen ihn Namen — die meisten durch Übernahme oder weil sie aus dem Größenband fallen, manche, weil sie auf null gehen — und genau die, die auf null gingen, sind die, die eine Regel auf Rückkehr zum Mittelwert immer weiter gekauft hätte</p>
             <p><strong>Beispiel:</strong></p>
             <ul>
               <li>Backtest auf der S&P-500-Liste von 2024: 1,8R Erwartung, Profitfaktor 2,1</li>
@@ -280,7 +280,7 @@
       <div class="section-break"><span>Teil 2: Realistische Kosten modellieren</span></div>
 <h2 id="the-hidden-costs-that-kill-strategies">Die versteckten Kosten, die Strategien töten</h2>
 
-      <p>Das ignorieren die meisten Backtests — und darum ist deiner wahrscheinlich 20-40 % zu optimistisch:</p>
+      <p>Das hier lassen die meisten Backtests weg. Wie viel es dich kostet, hängt von deinem Instrument, deiner Größe und deiner Haltedauer ab — die einzige redliche Antwort ist deshalb die, die du unten aus deinen eigenen Zahlen errechnest:</p>
 
       <div class="accordion">
         <details class="accordion-item">
@@ -406,7 +406,7 @@
             <td style="padding:0.75rem">„Winziger drawdown. Extrem sicher.“</td>
           </tr>
           <tr style="background:rgba(34,197,94,0.2)">
-            <td style="padding:0.75rem">Gesamtrendite (2 Jahre)</td>
+            <td style="padding:0.75rem">Gesamtrendite (2 Jahre, Testkonto 10.000 $, 2 % Risiko pro Trade)</td>
             <td style="padding:0.75rem;text-align:right"><strong>+$40,600 (+406%)</strong></td>
             <td style="padding:0.75rem"><strong>„Das ist es. Ich kündige meinen Job.“</strong></td>
           </tr>
@@ -664,7 +664,7 @@
         <h4>🚩 Anzeichen, dass deine Strategie kurvengefittet ist</h4>
         <ul>
           <li><strong>Sharpe über 3,0:</strong> Zu gut, um wahr zu sein</li>
-          <li><strong>Erwartung über 5R:</strong> Extrem selten (prüf deine Ausführungsannahmen)</li>
+          <li><strong>Erwartungswert über etwa +0,5R pro Trade:</strong> so selten, dass er einer Erklärung bedarf. Über +1R ist mit ziemlicher Sicherheit eine Ausführungsannahme falsch — Chris’ „Heiliger Gral“-Backtest oben lag bei +1,3R</li>
           <li><strong>Nur 20-30 Trades:</strong> Stichprobe zu klein (statistisch bedeutungslos)</li>
           <li><strong>Perfekte Kapitalkurve:</strong> Glatte Linie ohne drawdowns (unmöglich)</li>
           <li><strong>Nur auf einem Wert getestet:</strong> Wahrscheinlich an genau dieses Regime angepasst</li>
@@ -711,10 +711,23 @@
           <li>Backtest auf 60 % deiner Daten (In-Sample). Notiere: Trades, Erwartung, Sharpe, maximaler DD</li>
           <li>Halte die verwendeten Parameter fest (EMAs, Schwellen usw.). Hast du sie optimiert, indem du mehrere Werte durchprobiert hast?</li>
           <li>Teste auf den übrigen 40 % der Daten (Out-of-Sample). Vergleiche mit dem In-Sample-Ergebnis.</li>
-          <li>Nutz die Validierungs-Scorecard aus der Vorlage (8 Kategorien, maximal 60 Punkte)</li>
-          <li>Zähl deine Punkte zusammen: 50-60 = weitermachen, 40-49 = überarbeiten, unter 40 = verwerfen</li>
-          <li>Bei 50 Punkten oder mehr: 30-60 Trades auf dem Demokonto, bevor du live gehst</li>
+          <li>Bewerte die Strategie anhand der acht Prüfungen unten, je 0 bis 5 Punkte (höchstens 40 Punkte)</li>
+          <li>Zähl zusammen: 32 oder mehr = weiter zum Papierhandel, 24 bis 31 = überarbeiten und erneut testen, unter 24 = verwerfen</li>
+          <li>Wenn du 32 oder mehr erreicht hast: 30 bis 60 Trades lang auf Papier handeln, bevor du live gehst</li>
         </ol>
+
+        <p style="margin-top:1rem;font-weight:600">Die acht Prüfungen (0 = gar nicht gemacht, 5 = ordentlich gemacht)</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>Datenaufteilung.</strong> Wurde ein echter Zeitraum außerhalb der Stichprobe zurückgehalten und während der Entwicklung nicht angerührt? 0 Punkte, wenn du auf allem optimiert hast, was du hattest.</li>
+          <li><strong>Zurückhaltung beim Optimieren.</strong> Wie viele Parameterkombinationen hast du ausprobiert? Unter 10 gibt 5 Punkte; Tausende geben 0, egal wie das Ergebnis aussah.</li>
+          <li><strong>Kostenmodellierung.</strong> Stecken Spread, Slippage und Kommission in der Kapitalkurve, und zwar in Werten, die du gegenüber einem Broker verteidigen könntest? Null Kosten geben 0 Punkte.</li>
+          <li><strong>Prüfung auf Blick in die Zukunft.</strong> Hast du die Einstiegslogik noch einmal gelesen und dabei gezielt gefragt, ob jede Eingabe im Moment der Entscheidung schon existierte? Signal auf dieser Kerze, Ausführung auf der nächsten, gibt 5 Punkte.</li>
+          <li><strong>Ergebnis außerhalb der Stichprobe.</strong> Wie stark hat sich die Leistung auf den unangetasteten Daten verschlechtert? Unter 30 % Verschlechterung gibt 5 Punkte; über 70 %, wie bei Chris, gibt 0.</li>
+          <li><strong>Beständigkeit im Walk-Forward.</strong> Hast du das Optimierungsfenster nach vorn gerollt und den nächsten Zeitraum getestet, und das mehrfach? Ein Zeitraum gibt 1 Punkt; vier beständige Zeiträume geben 5.</li>
+          <li><strong>Stichprobengröße.</strong> Weniger als 30 Trades geben 0 Punkte, egal wie gut sie aussehen; 100 oder mehr geben 5.</li>
+          <li><strong>Breite.</strong> Hält es auf mehr als einem Instrument oder über mehr als ein Marktregime hinweg? Ein Wert in einem Regime gibt 1 Punkt.</li>
+        </ol>
+        <p style="margin-top:1rem">Lässt man Chris’ Strategie hier durchlaufen, kommt sie auf 2 von 40 Punkten — je einen Punkt für die Stichprobengröße und dafür, überhaupt einen Walk-Forward-Zeitraum gehabt zu haben. Die Bewertungsliste hätte das an einem Nachmittag aufgedeckt, kostenlos.</p>
         <p style="margin-top:1rem"><strong>Ziel:</strong> Erkenne Kurvenanpassung, Look-ahead-Bias und unrealistische Annahmen, BEVOR sie dein echtes Konto zerlegen. Lieber eine schlechte Strategie beim Backtesting verwerfen, als echtes Geld zu verlieren.</p>
       </div>
 
@@ -743,7 +756,7 @@
             <div class="quiz-option" data-correct="false">D) Nur die Stichprobe ist zu klein</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Richtig!</strong> Drei große Warnzeichen: (1) nur 25 Trades = statistisch bedeutungslos, (2) Sharpe 4,2 = verdächtig hoch (wahrscheinlich overfitted), (3) EMA(47) durch das Testen von 100 Perioden gefunden = an Rauschen angepasst. Diese Strategie wird live scheitern. Nötig sind: 100+ Trades, realistischer Sharpe (1,5-2,5), Standardparameter.
+            <strong>Richtig!</strong> Drei große Warnzeichen: (1) nur 25 Trades = statistisch bedeutungslos, (2) Sharpe 4,2 = verdächtig hoch (wahrscheinlich überangepasst), (3) EMA(47), gefunden durch das Testen von 100 Perioden = ans Rauschen angepasst. Nötig sind: 100+ Trades, Standardparameter und ein Sharpe, den du ohne Verlegenheit verteidigen könntest — über 2 ist selbst für professionelle systematische Fonds außergewöhnlich, und ein Privatanleger-Backtest mit 4,2 beschreibt eine Ausführungsannahme, keinen Vorteil.
           </div>
         </div>
 
@@ -753,10 +766,10 @@
             <div class="quiz-option" data-correct="false">A) Nichts — die Marktbedingungen 2025 haben sich geändert, nicht vorhersehbar</div>
             <div class="quiz-option" data-correct="false">B) Erwartung zu hoch — 2,8R ist für Mean Reversion unrealistisch</div>
             <div class="quiz-option" data-correct="false">C) Stichprobe zu klein — es braucht mehr als 14 Jahre Daten</div>
-            <div class="quiz-option" data-correct="true">D) Survivorship-Bias — der Backtest ließ 30-40 % der Aktien weg, die zwischen 2010 und 2024 delistet wurden oder pleitegingen</div>
+            <div class="quiz-option" data-correct="true">D) Survivorship Bias — der Backtest enthält nur Unternehmen, die 2024 noch im Index waren, sodass jeder Name fehlt, der ihn zwischen 2010 und 2024 verlassen hat</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Richtig!</strong> Die klassische Survivorship-Falle. Auf „den heutigen Werten des S&P 500“ zu testen heißt, dass du nur die GEWINNER geprüft hast — Aktien, die 14 Jahre überlebt haben und es in den heutigen Index geschafft haben. Du hast insolvente Unternehmen, delistete Aktien und gescheiterte Geschäftsmodelle ausgeklammert (30-40 % der Gesamtzahl). Genau diese toten Aktien hätten deine Mean-Reversion-Einstiege ausgelöst und sich nie wieder erholt. Genau das macht aus der Erwartung von 1,8R im Beispiel oben in Wahrheit -0,2R. Lösung: Nutz Point-in-Time-Daten, die ALLE zum jeweiligen Datum existierenden Aktien enthalten, inklusive der später delisteten. Survivorship-Bias bläht Backtest-Ergebnisse um 20-50 % auf.
+            <strong>Richtig!</strong> Die klassische Survivorship-Bias-Falle. Auf „den heutigen Bestandteilen des S&P 500“ zu testen heißt, nur GEWINNER getestet zu haben — Aktien, die 14 Jahre überlebt haben und es in den heutigen Index geschafft haben. Vom Test ausgeschlossen: jedes Unternehmen, das übernommen wurde, aus dem Index fiel oder in diesen vierzehn Jahren auf null ging. Auf die, die auf null gingen, kommt es hier an, denn eine Regel auf Rückkehr zum Mittelwert kauft Schwäche — sie hätte sie den ganzen Weg nach unten gekauft und wäre nie bezahlt worden. Wie stark das einen bestimmten Backtest aufbläht, hängt ganz vom Universum und von der Regel ab, deshalb wird kein Prozentsatz genannt; sicher ist nur die Richtung, und die ist nie zu deinen Gunsten. Lösung: Verwende Punkt-in-der-Zeit-Daten, die ALLE Aktien enthalten, die zum jeweiligen Datum existierten, auch die später delisteten.
           </div>
         </div>
 
@@ -769,7 +782,7 @@
             <div class="quiz-option" data-correct="false">D) Nein — für eine Validierung braucht es mindestens 10 Walk-Forward-Perioden</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Richtig!</strong> Walk-Forward-Tests belegen Robustheit (kein Overfitting auf einen einzelnen Zeitraum), aber du MUSST realistische Kosten modellieren, bevor du live gehst. Slippage (0,1-0,2 % je Seite = 0,2-0,4 % hin und zurück) plus Kommissionen (2-5 $ pro Trade) können die Erwartung um 30-60 % senken. Eine Strategie mit 2,5R Erwartung ohne Kosten kann mit Kosten auf 1,2R fallen &mdash; noch profitabel, aber knapp. Chris' Fall oben ist genau dieses Versagen: ein backtest mit 1,3R, der live bei -0,45R ankam, sobald die Kosten echt waren. Rechne die Kosten ZULETZT ein (nach dem Walk-Forward); bleibt die Erwartung dann &gt;1,5R und die Trefferquote &gt;45 %, handle sie live. Überspringe die Kostenmodellierung nie &mdash; sie ist der Unterschied zwischen Gewinn und Schmerz.
+            <strong>Richtig!</strong> Walk-Forward-Tests belegen Robustheit (keine Überanpassung an einen einzelnen Zeitraum), aber du MUSST realistische Kosten modellieren, bevor du live handelst. Slippage (0,1 bis 0,2 % je Seite = 0,2 bis 0,4 % je Runde) plus Kommissionen (2 bis 5 $ je Trade) gehen von jedem Trade oben weg — und sie gehen auch in R weg: Bei einem Trade mit 500 $ Risiko sind 150 $ Kosten 0,3R, die weg sind, bevor der Markt irgendetwas tut. Ein Backtest mit +0,5R kann nahe null landen, sobald das real wird. Genau dieses Versagen ist Chris’ Fall oben — ein Backtest mit +1,3R, der live bei −0,45R ankam, als die Kosten echt wurden. Füge die Kosten ZULETZT hinzu (nach dem Walk-Forward) und frage dann, ob der Erwartungswert noch mit einem Abstand positiv ist, den du verteidigen könntest, und ob du sagen kannst, woher er kommt. Ein kleiner, erklärbarer Vorteil, der die Kosten überlebt, schlägt einen großen, der es nicht tut.
           </div>
         </div>
 
