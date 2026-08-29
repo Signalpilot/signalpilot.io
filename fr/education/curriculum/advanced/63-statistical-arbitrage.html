@@ -277,7 +277,7 @@
       <p><strong>Nouveau processus :</strong></p>
       <ol>
         <li><strong>Tester CHAQUE paire à l'ADF</strong> — la p-valeur doit être &lt;0,05 pour un spread stationnaire</li>
-        <li><strong>Calculer la demi-vie</strong> — ne trader que si le retour à la moyenne prend &lt;20 jours</li>
+        <li><strong>Calculer la demi-vie</strong> &mdash; Ne tradez que si le retour à la moyenne tient dans 5 à 30 jours</li>
         <li><strong>Entrée par z-score</strong> — |Z| &gt; 2,0 (2+ écarts-types par rapport à la moyenne)</li>
         <li><strong>Stop de décointégration</strong> — si la p-valeur ADF passe &gt;0,10, sortir immédiatement</li>
       </ol>
@@ -582,6 +582,14 @@ Conclusion : KO/PEP est une paire tradable
         <p><strong>Ce que ça implique :</strong> Attendez le retour à la moyenne sous ~14 jours. S'il faut plus de 30 jours, votre modèle est peut-être en train de casser.</p>
       </div>
 
+      <div class="callout-warning">
+        <h4>&#128680; Votre règle de sortie et votre stop temporel se contredisent &mdash; faites le calcul</h4>
+        <p>Le modèle conservateur ci-dessus dit : entrer à |Z| = 2, sortir quand Z franchit 0. Les règles de stop disent : sortir si la position est ouverte depuis plus de deux demi-vies. Appliquez les deux à un spread qui se comporte exactement comme modélisé et elles se contredisent.</p>
+        <p>Une demi-vie est le temps que met le spread à parcourir la moitié de sa distance à la moyenne. Depuis |Z| = 2, la trajectoire attendue est donc : 1,0 après une demi-vie, 0,5 après deux, 0,25 après trois. Atteindre Z = 0 prend environ quatre demi-vies et demie, et à la rigueur cela n'arrive jamais : on s'en approche seulement autant qu'on veut. Votre stop temporel se déclenche à deux demi-vies, quand la lecture attendue est encore de 0,5. Sur une paire qui fonctionne parfaitement, le stop temporel ferme donc la position avant que la règle de sortie ne se déclenche, et vous le lirez comme un échec du modèle.</p>
+        <p><strong>La solution est de sortir à |Z| &le; 0,5 plutôt qu'à 0</strong>, ce que fait déjà la sortie partielle du modèle agressif. Vous renoncez à un quart du mouvement théorique et vous divisez à peu près par deux la durée de détention : 1,5&sigma; capturés sur deux demi-vies, contre 2&sigma; sur quatre et demie. Par unité de temps, cela fait environ 60 % de plus, et comme la friction se paie à l'aller-retour et non à la journée, la détention plus courte est aussi la moins chère.</p>
+        <p>Gardez le stop temporel : c'est lui qui vous dit que la relation a cessé de fonctionner. Calez-le simplement sur la sortie que vous employez vraiment : deux à trois demi-vies si vous sortez à 0,5, quatre ou plus si vous tenez à attendre 0.</p>
+      </div>
+
       <div class="section-break"><span>Partie 4 : dimensionnement et gestion du risque</span></div>
 <h2 id="how-much-to-allocate-per-trade">Combien allouer par trade</h2>
 
@@ -607,6 +615,7 @@ Conclusion : KO/PEP est une paire tradable
         <p><strong>Demi-Kelly :</strong> f* / 2<br>
         <strong>Quart de Kelly :</strong> f* / 4</p>
         <p>Cela vous protège d'une rupture du modèle tout en captant l'edge.</p>
+        <p>Il vaut la peine d'être précis sur la raison pour laquelle le plafond l'emporte. Kelly est optimal quand p et b sont <strong>connus</strong>. Les vôtres sont estimés, généralement à partir de quelques dizaines de trades clôturés, et l'erreur type d'un taux de réussite mesuré sur 40 trades avoisine huit points de pourcentage. Donnez à la formule un p trop élevé de huit points et la fraction qu'elle renvoie est démesurée. Surmiser par rapport à Kelly est bien plus sévèrement puni que sous-miser, car la courbe de croissance s'effondre au-dessus de l'optimum et ne descend que doucement en dessous. Sur une paire avec p = 0,60 et b = 1, la formule réclame 20 % du capital dans un seul spread. Le plafond de 2-5 % n'est donc pas une correction timide d'une meilleure réponse : il correspond à peu près à ce que donne le quart de Kelly une fois prise au sérieux l'incertitude de vos propres entrées, ce qui est la conclusion à laquelle parvient la leçon de théorie du portefeuille par l'autre bout.</p>
       </div>
 <h3 id="portfolio-of-pairs-diversification">Portefeuille de paires : la diversification</h3>
 
@@ -744,6 +753,7 @@ NET par trade :                             +2,20 $</code></pre>
         <h4>📐 Une remarque sur ces Sharpe</h4>
         <p>Les trois chiffres sont annuels, nets de coûts, et volontairement plus bas que ce que vous verrez ailleurs. Un Sharpe durablement supérieur à 2 est une caractéristique documentée d'une poignée de firmes disposant d'infrastructures colocalisées, de desks de prêt-emprunt et de coûts d'exécution auxquels vous n'avez pas accès. Un livre de stat arb de particulier qui délivre réellement 1,0-1,5 de Sharpe sur plusieurs années s'en sort très bien.</p>
         <p>Vérifiez aussi le rapport : une stratégie qui annonce 40 % de rendement pour 30 % de drawdown n'est pas une stratégie à Sharpe 3, quoi qu'en dise le marketing. Ici, le rendement divisé par le drawdown maximal tourne autour de 0,8-1,0 dans chaque profil, ce que ces niveaux de risque peuvent effectivement porter.</p>
+        <p>Une comparaison de plus que le marketing ne fait jamais. Un portefeuille neutre au marché garde l'essentiel de son capital en collatéral, lequel rapporte le taux du cash : la référence est donc le cash, pas zéro. Avec un taux à 4 %, les 6-10 % de rendement total du niveau conservateur représentent 2-6 % d'excès &mdash; c'est sur ce chiffre que se calcule le Sharpe, et c'est lui qu'il faut mettre en regard du travail de suivre dix paires et de les retester chaque mois. Avec un taux à 0 %, le même portefeuille paraît nettement meilleur. Ni la stratégie ni votre compétence n'ont changé ; c'est l'alternative qui a changé.</p>
       </div>
 
       <div class="callout-warning">
@@ -809,7 +819,8 @@ NET par trade :                             +2,20 $</code></pre>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Testez ce soir la cointégration de votre première paire</strong> — Avec Python : `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. Une p-valeur inférieure à 0,05 signifie que vous pouvez rejeter l'hypothèse nulle « pas de cointégration » au seuil de 5 % ; au-dessus de 0,05 vous ne le pouvez pas, donc ne tradez pas. Forte corrélation ≠ cointégration. Une réserve qui compte plus qu'il n'y paraît : si vous passez au crible 100 paires au seuil de 5 %, environ 5 passeront par pur hasard. Testez une liste courte pour laquelle vous avez une raison économique, pas le marché entier.</li>
-            <li><strong>Construisez votre tableur de z-score</strong> — Z = (spread actuel - spread moyen) / écart-type. Entrée : |z| > 2,0 (2 écarts-types par rapport à la moyenne). Sortie : z revient à 0. Stop : |z| > 3,0 (l'écart devient trop grand). Taille de position : 2 % par paire.</li>
+            <li><strong>Construisez votre tableur de z-score</strong> &mdash; Z = (spread actuel - spread moyen) / écart type. Entrée : |z| > 2,0 (2 écarts types de la moyenne). Sortie : z revient à 0,5 (voir la note sur le stop temporel &mdash; attendre 0 entre en collision avec lui). Stop : |z| &gt; 3,5 (divergence trop forte). Taille de position : 2 % par paire.</li>
+            <li><strong>Tracez le spread, pas les deux cours</strong> &mdash; le trade est dans le spread, et le regarder directement rend la divergence évidente comme deux courbes superposées ne le font jamais.</li>
             <li><strong>Tradez UNE paire en démo pendant 30 jours</strong> — Choisissez une paire cointégrée (SPY-IWM, KO-PEP). Entrée à z ≥ 2,0, sortie à z ≤ 0,5. Notez 10 à 15 trades. Soyez honnête sur ce que cet échantillon permet de dire : 12 trades ne peuvent pas établir un taux de réussite — la marge d'erreur sur 12 tirages à pile ou face est d'environ ±14 points. Ce qu'il valide VRAIMENT, c'est l'exécution : avez-vous été exécuté sur les deux jambes, combien l'aller-retour a-t-il réellement coûté, le spread s'est-il comporté comme le modèle l'annonçait ?</li>
           </ol>
         </div>
@@ -884,17 +895,6 @@ NET par trade :                             +2,20 $</code></pre>
         </div>
       </div>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Gains rapides pour demain (cliquez pour développer)</summary>
-        <div style="margin-top:1rem">
-          <p>Ne vous surchargez pas. Commencez par ces 3 actions :</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Prenez une paire que vous croyez liée et testez-la correctement</strong> &mdash; faites le test de cointégration, pas seulement la corrélation. Ils répondent à des questions différentes et un seul des deux justifie un trade de retour à la moyenne.</li>
-            <li><strong>Tracez le spread, pas les deux cours</strong> &mdash; le trade est dans le spread, et le regarder directement rend la divergence évidente comme deux courbes superposées ne le font jamais.</li>
-            <li><strong>Définissez votre sortie avant l’entrée</strong> &mdash; décidez quel niveau de spread ferme le trade et quel niveau dit que la relation est cassée, car ce sont deux événements différents.</li>
-          </ol>
-        </div>
-      </details>
 
       <h3 style="margin:2rem 0 1rem 0">Leçons associées</h3>
       <ul style="margin:0 0 0 1.5rem;line-height:2">

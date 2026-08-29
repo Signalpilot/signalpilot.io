@@ -277,7 +277,7 @@
       <p><strong>Nieuw proces:</strong></p>
       <ol>
         <li><strong>ADF-test op ELK paar</strong> — de p-waarde moet &lt;0,05 zijn voor een stationaire spread</li>
-        <li><strong>Halfwaardetijd berekenen</strong> — alleen traden als de mean reversion &lt;20 dagen duurt</li>
+        <li><strong>Halfwaardetijd berekenen</strong> &mdash; Handel alleen als de terugkeer naar het gemiddelde binnen 5-30 dagen valt</li>
         <li><strong>Instap op z-score</strong> — |Z| &gt; 2,0 (2+ standaarddeviaties van het gemiddelde)</li>
         <li><strong>Decointegratie-stop</strong> — stijgt de ADF-p-waarde boven &gt;0,10, direct eruit</li>
       </ol>
@@ -582,6 +582,14 @@ Conclusie: KO/PEP is een verhandelbaar paar
         <p><strong>Wat het betekent:</strong> Verwacht mean reversion binnen ~14 dagen. Duurt het 30+ dagen, dan valt je model misschien uit elkaar.</p>
       </div>
 
+      <div class="callout-warning">
+        <h4>&#128680; Je exitregel en je tijdstop spreken elkaar tegen &mdash; reken het na</h4>
+        <p>Het conservatieve model hierboven zegt: instappen bij |Z| = 2, uitstappen wanneer Z door 0 gaat. De stopregels zeggen: uitstappen als de positie langer openstaat dan tweemaal de halfwaardetijd. Leg die twee naast elkaar op een spread die zich precies volgens het model gedraagt en ze spreken elkaar tegen.</p>
+        <p>Een halfwaardetijd is de tijd die de spread nodig heeft om de helft van zijn afstand tot het gemiddelde af te leggen. Vanaf |Z| = 2 is het verwachte pad dus: 1,0 na één halfwaardetijd, 0,5 na twee, 0,25 na drie. Z = 0 bereiken duurt zo'n vier en een halve halfwaardetijd, en strikt genomen komt het er nooit: het nadert alleen willekeurig dicht. Je tijdstop gaat af na twee halfwaardetijden, wanneer de verwachte stand nog 0,5 is. Bij een paar dat perfect werkt sluit de tijdstop de trade dus vóór de exitregel ooit afgaat, en jij leest dat als falen van het model.</p>
+        <p><strong>De oplossing is uitstappen bij |Z| &le; 0,5 in plaats van bij 0</strong>, wat de gedeeltelijke exit van het agressieve model al doet. Je geeft een kwart van de theoretische beweging op en halveert ruwweg de aanhoudperiode: 1,5&sigma; gevangen over twee halfwaardetijden tegen 2&sigma; over vier en een half. Per tijdseenheid is dat ongeveer 60 % meer, en omdat de frictie per round trip wordt gerekend en niet per dag, is de kortere houdduur meteen ook de goedkopere.</p>
+        <p>Houd de tijdstop &mdash; die vertelt je dat de relatie is opgehouden te werken. Stel hem alleen af op de exit die je werkelijk gebruikt: twee tot drie halfwaardetijden als je bij 0,5 uitstapt, vier of meer als je per se op 0 wilt wachten.</p>
+      </div>
+
       <div class="section-break"><span>Deel 4: positiegrootte en risicobeheer</span></div>
 <h2 id="how-much-to-allocate-per-trade">Hoeveel je per trade toewijst</h2>
 
@@ -607,6 +615,7 @@ Conclusie: KO/PEP is een verhandelbaar paar
         <p><strong>Halve Kelly:</strong> f* / 2<br>
         <strong>Kwart Kelly:</strong> f* / 4</p>
         <p>Dat beschermt je tegen het uiteenvallen van het model en laat je de edge toch pakken.</p>
+        <p>Het loont om precies te zijn over waarom de bovengrens wint. Kelly is optimaal wanneer p en b <strong>bekend zijn</strong>. De jouwe zijn geschat, meestal uit enkele tientallen gesloten trades, en de standaardfout van een over 40 trades gemeten winstpercentage bedraagt ongeveer acht procentpunten. Voer de formule een p die acht punten te hoog is en de fractie die eruit komt is wild te groot. Boven Kelly inzetten wordt veel harder afgestraft dan eronder, omdat de groeicurve boven het optimum steil wegvalt en eronder slechts zacht daalt. Bij een paar met p = 0,60 en b = 1 vraagt de formule om 20 % van het kapitaal in één enkele spread. De grens van 2-5 % is dus geen schuchtere correctie van een beter antwoord: het is ongeveer wat kwart-Kelly oplevert zodra je de onzekerheid in je eigen invoer serieus neemt, en dat is dezelfde conclusie die de portefeuilletheorieles vanaf de andere kant bereikt.</p>
       </div>
 <h3 id="portfolio-of-pairs-diversification">Portefeuille van paren: spreiding</h3>
 
@@ -744,6 +753,7 @@ NETTO per trade:                             +$2,20</code></pre>
         <h4>📐 Een opmerking over die Sharpe-cijfers</h4>
         <p>Alle drie de cijfers zijn jaarlijks, na kosten en bewust lager dan wat je elders leest. Een Sharpe die duurzaam boven 2 ligt is een gedocumenteerd kenmerk van een handvol firma's met gecoloceerde infrastructuur, eigen leendesks en uitvoeringskosten waar jij niet bij komt. Een particulier stat arb-boek dat over meerdere jaren echt Sharpe 1,0-1,5 levert, doet het goed.</p>
         <p>Kijk ook naar de verhouding: een strategie die 40 % rendement claimt bij 30 % drawdown is geen Sharpe 3-strategie, wat de marketing ook zegt. Hier ligt rendement gedeeld door maximale drawdown in elke categorie rond 0,8-1,0, en dat is wat deze risiconiveaus daadwerkelijk dragen.</p>
+        <p>Nog een vergelijking die de marketing nooit maakt. Een marktneutraal boek houdt het grootste deel van zijn kapitaal als onderpand, dat de kasrente verdient, dus de maatstaf is contant geld en niet nul. Bij een kasrente van 4 % is het totale rendement van 6-10 % in de conservatieve laag 2-6 % aan overrendement &mdash; dat is het getal waarop de Sharpe wordt berekend, en het getal dat je moet afwegen tegen het werk van tien paren volgen en ze maandelijks hertesten. Bij een kasrente van 0 % ziet hetzelfde boek er aanzienlijk beter uit. Noch de strategie noch je vaardigheid is veranderd; het alternatief is veranderd.</p>
       </div>
 
       <div class="callout-warning">
@@ -809,7 +819,8 @@ NETTO per trade:                             +$2,20</code></pre>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Test vanavond je eerste paar op cointegratie</strong> — Met Python: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. Een p-waarde onder 0,05 betekent dat je de nulhypothese «geen cointegratie» op het 5 %-niveau kunt verwerpen; boven 0,05 kun je dat niet, dus niet traden. Hoge correlatie ≠ cointegratie. Eén kanttekening die zwaarder weegt dan hij klinkt: als je 100 paren screent op het 5 %-niveau, slagen er ongeveer 5 puur door toeval. Test een korte lijst waarvoor je een economische reden hebt, niet de hele markt.</li>
-            <li><strong>Bouw je z-score-spreadsheet</strong> — Z = (huidige spread - gemiddelde spread) / standaarddeviatie. Instap: |z| > 2,0 (2 standaarddeviaties van het gemiddelde). Uitstap: z keert terug naar 0. Stop: |z| > 3,0 (loopt te ver uiteen). Positiegrootte: 2 % per paar.</li>
+            <li><strong>Bouw je z-score-spreadsheet</strong> &mdash; Z = (huidige spread - gemiddelde spread) / standaarddeviatie. Instap: |z| > 2,0 (2 standaarddeviaties van het gemiddelde). Uitstap: z keert terug naar 0,5 (zie de noot over de tijdstop &mdash; wachten op 0 botst daarmee). Stop: |z| &gt; 3,5 (loopt te ver uiteen). Positiegrootte: 2 % per paar.</li>
+            <li><strong>Plot de spread, niet de twee koersen</strong> &mdash; de trade zit in de spread, en er rechtstreeks naar kijken maakt de divergentie duidelijk op een manier die twee over elkaar gelegde grafieken nooit halen.</li>
             <li><strong>Trade ÉÉN paar 30 dagen in demo</strong> — Kies een gecointegreerd paar (SPY-IWM, KO-PEP). Instap bij z ≥ 2,0, uitstap bij z ≤ 0,5. Noteer 10-15 trades. Wees eerlijk over wat die steekproef kan zeggen: 12 trades kunnen geen trefkans vaststellen — de foutmarge bij 12 muntworpen is ongeveer ±14 punten. Wat het WEL valideert is de uitvoering: kreeg je beide benen uitgevoerd, wat kostte de heen-en-weer echt, gedroeg de spread zich zoals het model zei?</li>
           </ol>
         </div>
@@ -884,17 +895,6 @@ NETTO per trade:                             +$2,20</code></pre>
         </div>
       </div>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Snelle winsten voor morgen (klik om uit te klappen)</summary>
-        <div style="margin-top:1rem">
-          <p>Overlaad jezelf niet. Begin met deze 3 acties:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Neem een paar waarvan je denkt dat het samenhangt en test het fatsoenlijk</strong> &mdash; draai de cointegratietest, niet alleen de correlatie. Ze beantwoorden verschillende vragen en maar één ervan rechtvaardigt een trade op terugkeer naar het gemiddelde.</li>
-            <li><strong>Plot de spread, niet de twee koersen</strong> &mdash; de trade zit in de spread, en er rechtstreeks naar kijken maakt de divergentie duidelijk op een manier die twee over elkaar gelegde grafieken nooit halen.</li>
-            <li><strong>Bepaal je uitstap vóór de instap</strong> &mdash; beslis welk spreadniveau de trade sluit en welk niveau zegt dat de relatie gebroken is, want dat zijn verschillende gebeurtenissen.</li>
-          </ol>
-        </div>
-      </details>
 
       <h3 style="margin:2rem 0 1rem 0">Gerelateerde lessen</h3>
       <ul style="margin:0 0 0 1.5rem;line-height:2">

@@ -277,7 +277,7 @@
       <p><strong>Yeni süreç:</strong></p>
       <ol>
         <li><strong>HER çifte ADF testi</strong> — spread'in durağan olması için p-değeri &lt;0,05 olmalı</li>
-        <li><strong>Yarı ömrü hesapla</strong> — ortalamaya dönüş &lt;20 gün sürüyorsa işle</li>
+        <li><strong>Yarı ömrü hesapla</strong> &mdash; Yalnızca ortalamaya dönüş 5-30 gün aralığındaysa işlem yapın</li>
         <li><strong>z-score ile giriş</strong> — |Z| &gt; 2,0 (ortalamadan 2+ standart sapma)</li>
         <li><strong>Eşbütünleşme bozulma stopu</strong> — ADF p-değeri &gt;0,10'un üstüne çıkarsa hemen çık</li>
       </ol>
@@ -582,6 +582,14 @@ Sonuç: KO/PEP işlenebilir bir çift
         <p><strong>Anlamı:</strong> Ortalamaya dönüşü ~14 gün içinde bekle. 30+ gün sürüyorsa modelin bozuluyor olabilir.</p>
       </div>
 
+      <div class="callout-warning">
+        <h4>&#128680; Çıkış kuralınız ile zaman stopunuz çelişiyor &mdash; hesabı kontrol edin</h4>
+        <p>Yukarıdaki muhafazakâr model şunu söylüyor: |Z| = 2'de gir, Z sıfırı geçince çık. Stop kuralları ise şunu söylüyor: pozisyon yarı ömrün iki katından uzun süredir açıksa çık. Tam modellendiği gibi davranan bir spread üzerinde ikisini bir araya getirin; birbirleriyle çelişirler.</p>
+        <p>Yarı ömür, spread'in ortalamaya olan mesafesinin yarısını kapatması için geçen süredir. Dolayısıyla |Z| = 2'den beklenen yol şudur: bir yarı ömür sonra 1,0, iki yarı ömür sonra 0,5, üç yarı ömür sonra 0,25. Z = 0'a ulaşmak yaklaşık dört buçuk yarı ömür alır ve kesin konuşursak oraya hiç varılmaz; yalnızca istenildiği kadar yaklaşılır. Zaman stopunuz iki yarı ömürde ateşlenir, yani beklenen okuma hâlâ 0,5'ken. Kusursuz çalışan bir çiftte zaman stopu işlemi, çıkış kuralı hiç tetiklenmeden kapatır ve siz bunu modelin başarısızlığı olarak okursunuz.</p>
+        <p><strong>Çözüm, 0 yerine |Z| &le; 0,5'te çıkmaktır</strong>ve bu zaten agresif modelin kısmi çıkışının yaptığı şeydir. Teorik hareketin dörtte birinden vazgeçer, tutma süresini kabaca yarıya indirirsiniz: iki yarı ömürde yakalanan 1,5&sigma;'ya karşılık dört buçuk yarı ömürde 2&sigma;. Birim zaman başına bu yaklaşık %60 daha fazladır; üstelik sürtünme gün başına değil gidiş-dönüş başına alındığından, kısa tutma aynı zamanda ucuz olanıdır.</p>
+        <p>Zaman stopunu koruyun &mdash; ilişkinin çalışmayı bıraktığını size o söyler. Yalnızca gerçekten kullandığınız çıkışa göre ayarlayın: 0,5'te çıkıyorsanız iki ila üç yarı ömür, ille de 0'ı bekleyecekseniz dört ya da daha fazla.</p>
+      </div>
+
       <div class="section-break"><span>Bölüm 4: pozisyon büyüklüğü ve risk yönetimi</span></div>
 <h2 id="how-much-to-allocate-per-trade">İşlem başına ne kadar ayırmalı</h2>
 
@@ -607,6 +615,7 @@ Sonuç: KO/PEP işlenebilir bir çift
         <p><strong>Yarım Kelly:</strong> f* / 2<br>
         <strong>Çeyrek Kelly:</strong> f* / 4</p>
         <p>Bu seni modelin çökmesinden korurken edge'i almanı da sürdürür.</p>
+        <p>Üst sınırın neden kazandığını tam olarak söylemekte fayda var. Kelly, p ve b <strong>bilindiğinde optimaldir</strong>. Sizinkiler tahmindir, genelde birkaç düzine kapanmış işlemden çıkarılır ve 40 işlem üzerinden ölçülen bir kazanma oranının standart hatası yaklaşık sekiz yüzde puanıdır. Formüle sekiz puan yüksek bir p verin, döndürdüğü oran fena hâlde büyük çıkar. Kelly'nin üzerinde bahis oynamak, altında oynamaktan çok daha ağır cezalandırılır; çünkü büyüme eğrisi optimumun üstünde dik biçimde düşer, altında ise yumuşakça iner. p = 0,60 ve b = 1 olan bir çiftte formül, sermayenin %20'sini tek bir spread'e koymanızı ister. Yani %2-5 sınırı, daha iyi bir cevabın çekingen bir ezmesi değildir: kendi girdilerinizdeki belirsizliği ciddiye aldığınızda çeyrek-Kelly'nin verdiği şeye yaklaşık olarak denk gelir. Portföy teorisi dersi de öbür uçtan aynı sonuca varır.</p>
       </div>
 <h3 id="portfolio-of-pairs-diversification">Çiftlerden oluşan portföy: çeşitlendirme</h3>
 
@@ -744,6 +753,7 @@ Sürtünme düşülünce:                     -21,90 dolar
         <h4>📐 Bu Sharpe rakamları üzerine bir not</h4>
         <p>Üç rakam da yıllık, maliyetler düşülmüş ve başka yerde göreceğinden bilerek daha düşük. Sürekli 2'nin üzerinde bir Sharpe, kolokasyon altyapısı, kendi ödünç masaları ve senin erişemeyeceğin uygulama maliyetleri olan bir avuç şirkette belgelenmiş bir özelliktir. Yıllar boyunca gerçekten 1,0-1,5 Sharpe veren bireysel bir stat arb defteri iyi iş çıkarıyordur.</p>
         <p>Oranı da kontrol et: %30 drawdown'a karşılık %40 getiri iddia eden bir strateji, pazarlama ne derse desin Sharpe 3 stratejisi değildir. Burada getirinin maksimum drawdown'a bölümü her kademede 0,8-1,0 civarında ve bu risk seviyelerinin gerçekten taşıyabileceği de bu kadar.</p>
+        <p>Pazarlamanın hiç yapmadığı bir karşılaştırma daha. Piyasadan bağımsız bir kitap sermayesinin çoğunu teminat olarak tutar ve teminat nakit faizi kazanır; dolayısıyla ölçüt sıfır değil, nakittir. %4'lük bir nakit faiz ortamında muhafazakâr kademenin %6-10'luk toplam getirisi %2-6'lık bir fazla getiri demektir &mdash; Sharpe o sayı üzerinden hesaplanır ve on çifti yürütüp her ay yeniden test etmenin emeğiyle tartılması gereken de o sayıdır. %0'lık bir nakit faiz ortamında aynı kitap hayli daha iyi görünür. Ne strateji ne de beceriniz değişti; değişen alternatiftir.</p>
       </div>
 
       <div class="callout-warning">
@@ -809,7 +819,8 @@ Sürtünme düşülünce:                     -21,90 dolar
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Bu akşam ilk çiftini eşbütünleşme için test et</strong> — Python ile: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. p-değeri 0,05'in altındaysa «eşbütünleşme yok» sıfır hipotezini %5 düzeyinde reddedebilirsin; 0,05'in üstündeyse reddedemezsin, o zaman işlem yapma. Yüksek korelasyon ≠ eşbütünleşme. Kulağa geldiğinden daha önemli bir uyarı: 100 çifti %5 düzeyinde tararsan yaklaşık 5'i tamamen rastlantıyla geçer. Ekonomik bir gerekçen olan kısa bir listeyi test et, tüm piyasayı değil.</li>
-            <li><strong>z-score tablonu kur</strong> — Z = (mevcut spread - ortalama spread) / standart sapma. Giriş: |z| > 2,0 (ortalamadan 2 standart sapma). Çıkış: z 0'a döner. Stop: |z| > 3,0 (fazla açılıyor). Pozisyon büyüklüğü: çift başına %2.</li>
+            <li><strong>z-score tablonu kur</strong> &mdash; Z = (mevcut spread - ortalama spread) / standart sapma. Giriş: |z| > 2,0 (ortalamadan 2 standart sapma). Çıkış: z 0,5'e döndüğünde (zaman stopu notuna bakın &mdash; 0'ı beklemek onunla çakışır). Stop: |z| &gt; 3,5 (fazla açılıyor). Pozisyon büyüklüğü: çift başına %2.</li>
+            <li><strong>İki fiyatı değil, spread’i çiz</strong> &mdash; işlem spread’in içindedir; ona doğrudan bakmak, üst üste bindirilmiş iki grafiğin asla başaramadığı biçimde ayrışmayı görünür kılar.</li>
             <li><strong>BİR çifti 30 gün demoda işle</strong> — Eşbütünleşik bir çift seç (SPY-IWM, KO-PEP). z ≥ 2,0'da gir, z ≤ 0,5'te çık. 10-15 işlem kaydet. O örneklemin ne söyleyebileceği konusunda dürüst ol: 12 işlem bir isabet oranı kurmaz — 12 yazı turada hata payı yaklaşık ±14 puandır. Asıl doğruladığı şey uygulamadır: iki bacakta da doluş aldın mı, gidiş dönüş gerçekte ne tuttu, spread modelin dediği gibi mi davrandı?</li>
           </ol>
         </div>
@@ -884,17 +895,6 @@ Sürtünme düşülünce:                     -21,90 dolar
         </div>
       </div>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Yarın için hızlı kazanımlar (açmak için tıkla)</summary>
-        <div style="margin-top:1rem">
-          <p>Kendini boğma. Şu 3 adımla başla:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>İlişkili olduğunu düşündüğün bir çifti al ve düzgünce test et</strong> &mdash; yalnızca korelasyonu değil, eşbütünleşme testini çalıştır. İkisi farklı sorulara yanıt verir ve ortalamaya dönüş işlemini yalnızca biri haklı çıkarır.</li>
-            <li><strong>İki fiyatı değil, spread’i çiz</strong> &mdash; işlem spread’in içindedir; ona doğrudan bakmak, üst üste bindirilmiş iki grafiğin asla başaramadığı biçimde ayrışmayı görünür kılar.</li>
-            <li><strong>Çıkışını girişten önce tanımla</strong> &mdash; hangi spread seviyesinin işlemi kapattığına ve hangi seviyenin ilişkinin koptuğunu söylediğine karar ver; bunlar farklı olaylardır.</li>
-          </ol>
-        </div>
-      </details>
 
       <h3 style="margin:2rem 0 1rem 0">İlgili dersler</h3>
       <ul style="margin:0 0 0 1.5rem;line-height:2">

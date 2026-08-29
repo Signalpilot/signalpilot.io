@@ -264,7 +264,7 @@
       <p><strong>New Process:</strong></p>
       <ol>
         <li><strong>ADF test EVERY pair</strong> — p-value must be &lt;0.05 for stationary spread</li>
-        <li><strong>Calculate half-life</strong> — Only trade if mean reversion &lt;20 days</li>
+        <li><strong>Calculate half-life</strong> — Only trade if mean reversion is inside 5-30 days</li>
         <li><strong>Z-score entry</strong> — |Z| &gt; 2.0 (2+ std devs from mean)</li>
         <li><strong>Decointegration stop</strong> — If ADF p-value rises &gt;0.10, exit immediately</li>
       </ol>
@@ -569,6 +569,14 @@ Conclusion: KO/PEP is a tradeable pair
         <p><strong>Implication:</strong> Expect mean reversion within ~14 days. If it takes 30+ days, your model may be breaking down.</p>
       </div>
 
+      <div class="callout-warning">
+        <h4>&#128680; Your exit rule and your time stop are in conflict &mdash; check the arithmetic</h4>
+        <p>The conservative model above says enter at |Z| = 2, exit when Z crosses 0. The stop rules say exit if the position has been open longer than twice the half-life. Put those two together on a spread that is behaving exactly as modelled and they contradict each other.</p>
+        <p>A half-life is the time it takes the spread to close half its distance to the mean. So from |Z| = 2, the expected path is: 1.0 after one half-life, 0.5 after two, 0.25 after three. Reaching Z = 0 takes about four and a half half-lives, and strictly it never arrives &mdash; it only gets arbitrarily close. Your time stop fires at two half-lives, when the expected reading is still 0.5. On a pair that is working perfectly, the time stop closes the trade before the exit rule ever triggers, and you will read that as the model failing.</p>
+        <p><strong>The fix is to exit at |Z| &le; 0.5 rather than at 0</strong>, which is what the aggressive model's partial exit already does. You give up a quarter of the theoretical move and roughly halve the holding period: 1.5&sigma; captured over two half-lives, against 2&sigma; over four and a half. Per unit of time that is about 60% more, and since friction is charged per round trip rather than per day, the shorter hold is also the cheaper one.</p>
+        <p>Keep the time stop &mdash; it is what tells you the relationship has stopped working. Just set it against the exit you actually use: two to three half-lives if you exit at 0.5, four or more if you insist on waiting for 0.</p>
+      </div>
+
       <div class="section-break"><span>Part 4: Position Sizing & Risk Management</span></div>
 <h2 id="how-much-to-allocate-per-trade">How Much to Allocate Per Trade</h2>
 
@@ -594,6 +602,7 @@ Conclusion: KO/PEP is a tradeable pair
         <p><strong>Half-Kelly:</strong> f* / 2<br>
         <strong>Quarter-Kelly:</strong> f* / 4</p>
         <p>This protects you from model breakdown while still capturing edge.</p>
+        <p>It is worth being precise about why the cap wins. Kelly is optimal when p and b are <strong>known</strong>. Yours are estimated, usually from a few dozen closed trades, and the standard error on a win rate measured over 40 trades is about eight percentage points. Feed a p that is eight points too high into the formula and the fraction it returns is wildly too large; over-betting Kelly is punished far harder than under-betting it, because the growth curve falls away steeply above the optimum and gently below it. On a pair with p = 0.60 and b = 1, the formula asks for 20% of capital in a single spread. The 2-5% cap is not a timid override of a better answer &mdash; it is roughly what quarter-Kelly gives you once the uncertainty in your own inputs is taken seriously, which is the same conclusion the portfolio-theory lesson reaches from the other direction.</p>
       </div>
 <h3 id="portfolio-of-pairs-diversification">Portfolio of Pairs: Diversification</h3>
 
@@ -731,6 +740,7 @@ NET per trade:                             +$2.20</code></pre>
         <h4>📐 A Note on Those Sharpe Numbers</h4>
         <p>All three figures are annual, net of costs, and deliberately lower than what you will see quoted elsewhere. Sustained Sharpe above 2 is a documented characteristic of a handful of firms with co-located infrastructure, borrow desks and execution costs you cannot access. A retail stat arb book that genuinely delivers Sharpe 1.0-1.5 over several years is doing well.</p>
         <p>Also check the ratio: a strategy claiming 40% returns against a 30% drawdown is not a Sharpe 3 strategy, whatever the marketing says. Return divided by max drawdown here sits around 0.8-1.0 in every tier, which is what these risk levels actually support.</p>
+        <p>One more comparison the marketing never makes. A market-neutral book carries most of its capital as collateral, which earns the cash rate, so the benchmark is cash and not zero. In a 4% cash environment the conservative tier's 6-10% total return is 2-6% of excess &mdash; that is the number the Sharpe is computed on, and it is the number to weigh against the work of running ten pairs and re-testing them monthly. In a 0% cash environment the same book looks considerably better. Neither the strategy nor your skill changed; the alternative did.</p>
       </div>
 
       <div class="callout-warning">
@@ -796,7 +806,8 @@ NET per trade:                             +$2.20</code></pre>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Test Your First Pair for Cointegration Tonight</strong> — Use Python: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. p-value below 0.05 means you can reject the "no cointegration" null at the 5% level; above 0.05 means you can't, so don't trade it. High correlation ≠ cointegration. One caveat that matters more than it sounds: if you screen 100 pairs at the 5% level, roughly 5 will pass by pure chance. Test a shortlist you have an economic reason for, not the whole market.</li>
-            <li><strong>Build Your Z-Score Spreadsheet</strong> — Z = (Current Spread - Avg Spread) / StdDev. Entry: |z| > 2.0 (2 standard deviations from mean). Exit: z returns to 0. Stop: |z| > 3.0 (diverging too far). Position size: 2% per pair.</li>
+            <li><strong>Build Your Z-Score Spreadsheet</strong> — Z = (Current Spread - Avg Spread) / StdDev. Entry: |z| > 2.0 (2 standard deviations from mean). Exit: z returns to 0.5 (see the note on the time stop &mdash; waiting for 0 collides with it). Stop: |z| &gt; 3.5 (diverging too far). Position size: 2% per pair.</li>
+            <li><strong>Plot the spread, not the two prices</strong> &mdash; the trade is in the spread, and looking at it directly makes divergence obvious in a way two overlaid charts never do.</li>
             <li><strong>Paper Trade ONE Pair for 30 Days</strong> — Pick one cointegrated pair (SPY-IWM, KO-PEP). Enter at z ≥ 2.0, exit at z ≤ 0.5. Track 10-15 trades. Be honest about what that sample can tell you: 12 trades cannot establish a win rate — the margin of error on 12 coin flips is about ±14 points. What it CAN validate is execution: did you get filled on both legs, what did the round trip actually cost, did the spread behave the way the model said?</li>
           </ol>
         </div>
@@ -871,17 +882,6 @@ NET per trade:                             +$2.20</code></pre>
         </div>
       </div>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Quick Wins for Tomorrow (Click to expand)</summary>
-        <div style="margin-top:1rem">
-          <p>Don&rsquo;t overwhelm yourself. Start with these 3 actions:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Take one pair you believe is related and test it properly</strong> &mdash; run the cointegration test, not just the correlation. They answer different questions and only one of them justifies a mean-reversion trade.</li>
-            <li><strong>Plot the spread, not the two prices</strong> &mdash; the trade is in the spread, and looking at it directly makes divergence obvious in a way two overlaid charts never do.</li>
-            <li><strong>Define your exit before entry</strong> &mdash; decide what spread level closes the trade and what level says the relationship has broken, because those are different events.</li>
-          </ol>
-        </div>
-      </details>
 
       <h3 style="margin:2rem 0 1rem 0">Related Lessons</h3>
       <ul style="margin:0 0 0 1.5rem;line-height:2">

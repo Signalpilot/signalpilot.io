@@ -277,7 +277,7 @@
       <p><strong>Nuovo processo:</strong></p>
       <ol>
         <li><strong>Test ADF su OGNI coppia</strong> — il p-value deve essere &lt;0,05 perché lo spread sia stazionario</li>
-        <li><strong>Calcolare l'emivita</strong> — operare solo se il ritorno alla media richiede &lt;20 giorni</li>
+        <li><strong>Calcolare l'emivita</strong> &mdash; Opera solo se il ritorno alla media rientra in 5-30 giorni</li>
         <li><strong>Ingresso con z-score</strong> — |Z| &gt; 2,0 (2+ deviazioni standard dalla media)</li>
         <li><strong>Stop per scointegrazione</strong> — se il p-value ADF supera &gt;0,10, uscire subito</li>
       </ol>
@@ -582,6 +582,14 @@ Conclusione: KO/PEP è una coppia operabile
         <p><strong>Implicazione:</strong> Aspettati il rientro entro ~14 giorni. Se ne servono 30+, il tuo modello si sta forse rompendo.</p>
       </div>
 
+      <div class="callout-warning">
+        <h4>&#128680; La tua regola di uscita e il tuo stop temporale sono in conflitto &mdash; fai i conti</h4>
+        <p>Il modello conservativo qui sopra dice: entrare a |Z| = 2, uscire quando Z attraversa lo 0. Le regole di stop dicono: uscire se la posizione è aperta da più del doppio dell'emivita. Mettile insieme su uno spread che si comporta esattamente come modellato e si contraddicono.</p>
+        <p>Un'emivita è il tempo che lo spread impiega a coprire metà della distanza dalla media. Da |Z| = 2 il percorso atteso è quindi: 1,0 dopo un'emivita, 0,5 dopo due, 0,25 dopo tre. Arrivare a Z = 0 richiede circa quattro emivite e mezza e, a rigore, non arriva mai: si avvicina soltanto quanto si vuole. Il tuo stop temporale scatta a due emivite, quando la lettura attesa è ancora 0,5. Su una coppia che funziona perfettamente, lo stop temporale chiude l'operazione prima che la regola di uscita si attivi, e tu lo leggerai come un fallimento del modello.</p>
+        <p><strong>La soluzione è uscire a |Z| &le; 0,5 anziché a 0</strong>, che è ciò che l'uscita parziale del modello aggressivo già fa. Rinunci a un quarto del movimento teorico e dimezzi all'incirca il periodo di detenzione: 1,5&sigma; catturati in due emivite contro 2&sigma; in quattro e mezza. Per unità di tempo è circa il 60 % in più e, poiché la frizione si paga per andata e ritorno e non al giorno, la detenzione più breve è anche la più economica.</p>
+        <p>Tieni lo stop temporale: è quello che ti dice che la relazione ha smesso di funzionare. Tararlo però sull'uscita che usi davvero: due o tre emivite se esci a 0,5, quattro o più se insisti ad aspettare lo 0.</p>
+      </div>
+
       <div class="section-break"><span>Parte 4: dimensionamento e gestione del rischio</span></div>
 <h2 id="how-much-to-allocate-per-trade">Quanto allocare per operazione</h2>
 
@@ -607,6 +615,7 @@ Conclusione: KO/PEP è una coppia operabile
         <p><strong>Mezzo Kelly:</strong> f* / 2<br>
         <strong>Un quarto di Kelly:</strong> f* / 4</p>
         <p>Ti protegge dal cedimento del modello e ti lascia comunque catturare l'edge.</p>
+        <p>Vale la pena essere precisi sul perché il tetto vinca. Kelly è ottimale quando p e b sono <strong>noti</strong>. I tuoi sono stimati, di solito da poche decine di operazioni chiuse, e l'errore standard di un tasso di successo misurato su 40 operazioni è di circa otto punti percentuali. Dai in pasto alla formula una p troppo alta di otto punti e la frazione che restituisce è enormemente eccessiva. Puntare sopra Kelly è punito assai più duramente che puntare sotto, perché la curva di crescita crolla ripidamente sopra l'ottimo e scende dolcemente sotto. Su una coppia con p = 0,60 e b = 1 la formula chiede il 20 % del capitale in un solo spread. Il tetto del 2-5 % non è quindi una timida correzione di una risposta migliore: è all'incirca ciò che dà il quarto di Kelly una volta presa sul serio l'incertezza dei tuoi stessi input, la stessa conclusione a cui arriva dall'altro lato la lezione di teoria del portafoglio.</p>
       </div>
 <h3 id="portfolio-of-pairs-diversification">Portafoglio di coppie: diversificazione</h3>
 
@@ -744,6 +753,7 @@ NETTO per operazione:                  +2,20 $</code></pre>
         <h4>📐 Una nota su questi Sharpe</h4>
         <p>Tutte e tre le cifre sono annue, al netto dei costi e volutamente più basse di quelle che troverai altrove. Uno Sharpe stabilmente sopra 2 è una caratteristica documentata di una manciata di società con infrastruttura in colocation, desk di prestito titoli e costi di esecuzione a cui non hai accesso. Un book di stat arb retail che consegna davvero Sharpe 1,0-1,5 per più anni sta andando bene.</p>
         <p>Controlla anche il rapporto: una strategia che dichiara il 40 % di rendimento con il 30 % di drawdown non è una strategia da Sharpe 3, checché ne dica il marketing. Qui il rendimento diviso il drawdown massimo si aggira su 0,8-1,0 in ogni profilo, ed è quanto questi livelli di rischio possono davvero reggere.</p>
+        <p>Un altro confronto che il marketing non fa mai. Un book neutrale al mercato tiene gran parte del capitale come collaterale, che rende il tasso della liquidità: il benchmark è quindi la liquidità, non lo zero. Con un tasso al 4 %, il 6-10 % di rendimento totale del livello conservativo sono 2-6 % di eccesso &mdash; è su quel numero che si calcola lo Sharpe, ed è quello da pesare contro il lavoro di gestire dieci coppie e ritestarle ogni mese. Con un tasso allo 0 % lo stesso book appare parecchio migliore. Non sono cambiate né la strategia né la tua abilità: è cambiata l'alternativa.</p>
       </div>
 
       <div class="callout-warning">
@@ -809,7 +819,8 @@ NETTO per operazione:                  +2,20 $</code></pre>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Testa stasera la cointegrazione della tua prima coppia</strong> — Con Python: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. Un p-value sotto 0,05 significa che puoi rifiutare l'ipotesi nulla di «nessuna cointegrazione» al livello del 5 %; sopra 0,05 non puoi, quindi non operarla. Alta correlazione ≠ cointegrazione. Un'avvertenza che pesa più di quanto sembri: se passi al setaccio 100 coppie al livello del 5 %, circa 5 passeranno per puro caso. Testa una lista ristretta per cui hai una ragione economica, non l'intero mercato.</li>
-            <li><strong>Costruisci il tuo foglio di calcolo dello z-score</strong> — Z = (spread attuale - spread medio) / deviazione standard. Ingresso: |z| > 2,0 (2 deviazioni standard dalla media). Uscita: z torna a 0. Stop: |z| > 3,0 (si allarga troppo). Dimensione della posizione: 2 % per coppia.</li>
+            <li><strong>Costruisci il tuo foglio di calcolo dello z-score</strong> &mdash; Z = (spread attuale - spread medio) / deviazione standard. Ingresso: |z| > 2,0 (2 deviazioni standard dalla media). Uscita: z torna a 0,5 (vedi la nota sullo stop temporale &mdash; aspettare lo 0 va in collisione con esso). Stop: |z| &gt; 3,5 (divergenza eccessiva). Dimensione della posizione: 2 % per coppia.</li>
+            <li><strong>Traccia lo spread, non i due prezzi</strong> &mdash; l’operazione sta nello spread, e guardarlo direttamente rende la divergenza evidente in un modo che due grafici sovrapposti non ottengono mai.</li>
             <li><strong>Opera UNA coppia in demo per 30 giorni</strong> — Scegli una coppia cointegrata (SPY-IWM, KO-PEP). Entra a z ≥ 2,0, esci a z ≤ 0,5. Annota 10-15 operazioni. Sii onesto su cosa può dirti quel campione: 12 operazioni non stabiliscono una percentuale di successo — il margine d'errore su 12 lanci di moneta è di circa ±14 punti. Ciò che invece valida DAVVERO è l'esecuzione: sei stato eseguito su entrambe le gambe, quanto è costato davvero il giro completo, lo spread si è comportato come diceva il modello?</li>
           </ol>
         </div>
@@ -884,17 +895,6 @@ NETTO per operazione:                  +2,20 $</code></pre>
         </div>
       </div>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Vittorie rapide per domani (clicca per espandere)</summary>
-        <div style="margin-top:1rem">
-          <p>Non sovraccaricarti. Inizia da queste 3 azioni:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Prendi una coppia che ritieni collegata e testala per bene</strong> &mdash; esegui il test di cointegrazione, non solo la correlazione. Rispondono a domande diverse e solo una delle due giustifica un’operazione di ritorno alla media.</li>
-            <li><strong>Traccia lo spread, non i due prezzi</strong> &mdash; l’operazione sta nello spread, e guardarlo direttamente rende la divergenza evidente in un modo che due grafici sovrapposti non ottengono mai.</li>
-            <li><strong>Definisci l’uscita prima dell’ingresso</strong> &mdash; decidi quale livello di spread chiude l’operazione e quale livello dice che la relazione si è rotta, perché sono due eventi diversi.</li>
-          </ol>
-        </div>
-      </details>
 
       <h3 style="margin:2rem 0 1rem 0">Lezioni correlate</h3>
       <ul style="margin:0 0 0 1.5rem;line-height:2">

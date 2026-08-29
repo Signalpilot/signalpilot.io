@@ -277,7 +277,7 @@
       <p><strong>Neuer Prozess:</strong></p>
       <ol>
         <li><strong>JEDES Paar per ADF testen</strong> — p-Wert muss &lt;0,05 sein, damit der Spread stationär ist</li>
-        <li><strong>Halbwertszeit berechnen</strong> — nur handeln, wenn Mean Reversion &lt;20 Tage dauert</li>
+        <li><strong>Halbwertszeit berechnen</strong> &mdash; Nur handeln, wenn die Mean Reversion innerhalb von 5-30 Tagen liegt</li>
         <li><strong>Z-Score-Einstieg</strong> — |Z| &gt; 2,0 (2+ Standardabweichungen vom Mittelwert)</li>
         <li><strong>Dekointegrations-Stopp</strong> — steigt der ADF-p-Wert &gt;0,10, sofort raus</li>
       </ol>
@@ -582,6 +582,14 @@ Fazit: KO/PEP ist ein handelbares Paar
         <p><strong>Bedeutung:</strong> Erwarten Sie Mean Reversion innerhalb von ~14 Tagen. Dauert es 30+ Tage, bricht Ihr Modell womöglich zusammen.</p>
       </div>
 
+      <div class="callout-warning">
+        <h4>&#128680; Deine Ausstiegsregel und dein Zeit-Stop widersprechen sich &mdash; rechne nach</h4>
+        <p>Das konservative Modell oben sagt: Einstieg bei |Z| = 2, Ausstieg, wenn Z die Null kreuzt. Die Stop-Regeln sagen: aussteigen, wenn die Position länger als die doppelte Halbwertszeit offen ist. Setzt man beides auf einen Spread an, der sich genau modellgemäß verhält, widersprechen sie sich.</p>
+        <p>Eine Halbwertszeit ist die Zeit, in der der Spread die Hälfte seines Abstands zum Mittelwert schließt. Von |Z| = 2 aus lautet der erwartete Pfad also: 1,0 nach einer Halbwertszeit, 0,5 nach zweien, 0,25 nach dreien. Bis Z = 0 dauert es rund viereinhalb Halbwertszeiten &mdash; und streng genommen kommt es nie an, sondern nähert sich nur beliebig weit. Dein Zeit-Stop feuert nach zwei Halbwertszeiten, wenn der Erwartungswert noch bei 0,5 steht. Auf einem Paar, das einwandfrei funktioniert, schließt der Zeit-Stop den Trade also, bevor die Ausstiegsregel je auslöst &mdash; und du liest das als Modellversagen.</p>
+        <p><strong>Die Lösung ist, bei |Z| &le; 0,5 auszusteigen statt bei 0</strong>, was der Teilausstieg des aggressiven Modells ohnehin schon tut. Du gibst ein Viertel der theoretischen Bewegung auf und halbierst die Haltedauer ungefähr: 1,5&sigma; über zwei Halbwertszeiten gegen 2&sigma; über viereinhalb. Pro Zeiteinheit sind das rund 60 % mehr &mdash; und weil die Reibung pro Roundtrip anfällt und nicht pro Tag, ist die kürzere Haltedauer zugleich die günstigere.</p>
+        <p>Behalte den Zeit-Stop &mdash; er ist es, der dir sagt, dass die Beziehung nicht mehr funktioniert. Stelle ihn nur auf den Ausstieg ein, den du tatsächlich nutzt: zwei bis drei Halbwertszeiten, wenn du bei 0,5 aussteigst, vier oder mehr, wenn du unbedingt auf 0 warten willst.</p>
+      </div>
+
       <div class="section-break"><span>Teil 4: Positionsgrößen und Risikomanagement</span></div>
 <h2 id="how-much-to-allocate-per-trade">Wie viel pro Trade allokieren</h2>
 
@@ -607,6 +615,7 @@ Fazit: KO/PEP ist ein handelbares Paar
         <p><strong>Half-Kelly:</strong> f* / 2<br>
         <strong>Quarter-Kelly:</strong> f* / 4</p>
         <p>Das schützt Sie vor Modellversagen und lässt Sie die Edge trotzdem mitnehmen.</p>
+        <p>Es lohnt sich, genau zu sagen, warum die Obergrenze gewinnt. Kelly ist optimal, wenn p und b <strong>bekannt sind</strong>. Deine sind geschätzt &mdash; meist aus ein paar Dutzend geschlossenen Trades &mdash;, und der Standardfehler einer über 40 Trades gemessenen Trefferquote liegt bei etwa acht Prozentpunkten. Füttere die Formel mit einem p, das acht Punkte zu hoch ist, und der zurückgegebene Anteil ist wild überhöht. Zu viel nach Kelly zu setzen wird weit härter bestraft als zu wenig, weil die Wachstumskurve oberhalb des Optimums steil abfällt und unterhalb nur sanft. Bei einem Paar mit p = 0,60 und b = 1 verlangt die Formel 20 % des Kapitals in einem einzigen Spread. Die Grenze von 2-5 % ist also keine ängstliche Übersteuerung der besseren Antwort &mdash; sie entspricht ungefähr dem, was Viertel-Kelly liefert, sobald man die Unsicherheit in den eigenen Eingaben ernst nimmt. Zu demselben Schluss kommt die Portfoliotheorie-Lektion von der anderen Seite.</p>
       </div>
 <h3 id="portfolio-of-pairs-diversification">Portfolio aus Paaren: Diversifikation</h3>
 
@@ -744,6 +753,7 @@ NETTO je Trade:                                +2,20 $</code></pre>
         <h4>📐 Eine Anmerkung zu diesen Sharpe-Werten</h4>
         <p>Alle drei Angaben sind jährlich, nach Kosten und bewusst niedriger als das, was Ihnen anderswo genannt wird. Ein dauerhafter Sharpe über 2 ist ein dokumentiertes Merkmal einer Handvoll Firmen mit kolokierter Infrastruktur, eigenen Leihdesks und Ausführungskosten, an die Sie nicht herankommen. Ein privates Stat-Arb-Buch, das über mehrere Jahre wirklich Sharpe 1,0-1,5 liefert, macht es gut.</p>
         <p>Prüfen Sie außerdem das Verhältnis: Eine Strategie, die 40 % Rendite bei 30 % Drawdown behauptet, ist keine Sharpe-3-Strategie, was auch immer das Marketing sagt. Rendite geteilt durch maximalen Drawdown liegt hier in jeder Stufe bei rund 0,8-1,0 — und genau das tragen diese Risikoniveaus.</p>
+        <p>Noch ein Vergleich, den das Marketing nie zieht. Ein marktneutrales Buch hält den Großteil seines Kapitals als Sicherheit, die den Geldmarktzins verdient &mdash; der Vergleichsmaßstab ist also Cash und nicht null. Bei einem Cash-Zins von 4 % sind die 6-10 % Gesamtrendite der konservativen Stufe 2-6 % Überrendite. Auf diese Zahl wird die Sharpe-Ratio gerechnet, und diese Zahl ist gegen die Arbeit abzuwägen, zehn Paare zu führen und sie monatlich neu zu testen. Bei einem Cash-Zins von 0 % sieht dasselbe Buch deutlich besser aus. Weder die Strategie noch dein Können hat sich geändert &mdash; die Alternative hat sich geändert.</p>
       </div>
 
       <div class="callout-warning">
@@ -809,7 +819,8 @@ NETTO je Trade:                                +2,20 $</code></pre>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Testen Sie heute Abend Ihr erstes Paar auf Kointegration</strong> — Mit Python: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. Ein p-Wert unter 0,05 heißt, dass Sie die Nullhypothese „keine Kointegration“ auf dem 5-%-Niveau verwerfen können; über 0,05 können Sie das nicht, also nicht handeln. Hohe Korrelation ≠ Kointegration. Ein Vorbehalt, der wichtiger ist, als er klingt: Wenn Sie 100 Paare auf dem 5-%-Niveau screenen, bestehen rund 5 rein zufällig. Testen Sie eine Auswahl, für die Sie einen ökonomischen Grund haben, nicht den ganzen Markt.</li>
-            <li><strong>Bauen Sie Ihr Z-Score-Tabellenblatt</strong> — Z = (aktueller Spread - durchschnittlicher Spread) / Standardabweichung. Einstieg: |z| > 2,0 (2 Standardabweichungen vom Mittelwert). Ausstieg: z kehrt auf 0 zurück. Stopp: |z| > 3,0 (läuft zu weit auseinander). Positionsgröße: 2 % pro Paar.</li>
+            <li><strong>Bauen Sie Ihr Z-Score-Tabellenblatt</strong> &mdash; Z = (aktueller Spread - durchschnittlicher Spread) / Standardabweichung. Einstieg: |z| > 2,0 (2 Standardabweichungen vom Mittelwert). Ausstieg: z kehrt auf 0,5 zurück (siehe die Anmerkung zum Zeit-Stop &mdash; auf 0 zu warten kollidiert damit). Stop: |z| &gt; 3,5 (läuft zu weit auseinander). Positionsgröße: 2 % pro Paar.</li>
+            <li><strong>Zeichne den Spread, nicht die beiden Kurse</strong> &mdash; der Trade steckt im Spread, und ihn direkt anzusehen macht die Divergenz auf eine Weise sichtbar, wie es zwei übereinandergelegte Charts nie tun.</li>
             <li><strong>Papertraden Sie EIN Paar 30 Tage lang</strong> — Nehmen Sie ein kointegriertes Paar (SPY-IWM, KO-PEP). Einstieg bei z ≥ 2,0, Ausstieg bei z ≤ 0,5. Erfassen Sie 10-15 Trades. Seien Sie ehrlich, was diese Stichprobe hergibt: 12 Trades können keine Trefferquote belegen — der Fehlerbereich bei 12 Münzwürfen liegt bei etwa ±14 Punkten. Was sie SEHR WOHL validiert, ist die Ausführung: Wurden beide Beine gefüllt, was hat der Roundtrip tatsächlich gekostet, hat sich der Spread so verhalten, wie das Modell es sagte?</li>
           </ol>
         </div>
@@ -884,17 +895,6 @@ NETTO je Trade:                                +2,20 $</code></pre>
         </div>
       </div>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Schnelle Erfolge für morgen (zum Aufklappen klicken)</summary>
-        <div style="margin-top:1rem">
-          <p>Überfordere dich nicht. Beginne mit diesen 3 Schritten:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Nimm ein Paar, von dem du glaubst, dass es zusammengehört, und teste es ordentlich</strong> &mdash; führe den Kointegrationstest durch, nicht bloß die Korrelation. Die beiden beantworten verschiedene Fragen, und nur eine davon rechtfertigt einen Mean-Reversion-Trade.</li>
-            <li><strong>Zeichne den Spread, nicht die beiden Kurse</strong> &mdash; der Trade steckt im Spread, und ihn direkt anzusehen macht die Divergenz auf eine Weise sichtbar, wie es zwei übereinandergelegte Charts nie tun.</li>
-            <li><strong>Lege deinen Ausstieg vor dem Einstieg fest</strong> &mdash; entscheide, welches Spread-Niveau den Trade schließt und welches sagt, dass die Beziehung gebrochen ist &mdash; das sind zwei verschiedene Ereignisse.</li>
-          </ol>
-        </div>
-      </details>
 
       <h3 style="margin:2rem 0 1rem 0">Verwandte Lektionen</h3>
       <ul style="margin:0 0 0 1.5rem;line-height:2">

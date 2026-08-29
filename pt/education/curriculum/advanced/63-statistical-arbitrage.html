@@ -277,7 +277,7 @@
       <p><strong>Novo processo:</strong></p>
       <ol>
         <li><strong>Teste ADF em TODOS os pares</strong> — o p-valor precisa ser &lt;0,05 para o spread ser estacionário</li>
-        <li><strong>Calcular a meia-vida</strong> — só operar se a reversão à média levar &lt;20 dias</li>
+        <li><strong>Calcular a meia-vida</strong> &mdash; Só opera se a reversão à média couber em 5-30 dias</li>
         <li><strong>Entrada por z-score</strong> — |Z| &gt; 2,0 (2+ desvios padrão da média)</li>
         <li><strong>Stop por descointegração</strong> — se o p-valor ADF subir acima de &gt;0,10, sair na hora</li>
       </ol>
@@ -582,6 +582,14 @@ Conclusão: KO/PEP é um par operável
         <p><strong>Implicação:</strong> Espere a reversão em ~14 dias. Se levar mais de 30, talvez o seu modelo esteja quebrando.</p>
       </div>
 
+      <div class="callout-warning">
+        <h4>&#128680; A tua regra de saída e o teu stop temporal estão em conflito &mdash; faz as contas</h4>
+        <p>O modelo conservador acima diz: entrar em |Z| = 2, sair quando Z cruza 0. As regras de stop dizem: sair se a posição estiver aberta há mais do dobro da meia-vida. Junta as duas num spread que se comporta exatamente como modelado e contradizem-se.</p>
+        <p>Uma meia-vida é o tempo que o spread demora a fechar metade da sua distância à média. A partir de |Z| = 2, o percurso esperado é: 1,0 após uma meia-vida, 0,5 após duas, 0,25 após três. Chegar a Z = 0 leva cerca de quatro meias-vidas e meia e, a rigor, nunca chega: apenas se aproxima o quanto se queira. O teu stop temporal dispara às duas meias-vidas, quando a leitura esperada ainda é 0,5. Num par que está a funcionar na perfeição, o stop temporal fecha a operação antes de a regra de saída chegar a disparar, e tu vais ler isso como uma falha do modelo.</p>
+        <p><strong>A solução é sair em |Z| &le; 0,5 em vez de em 0</strong>, que é o que a saída parcial do modelo agressivo já faz. Abdicas de um quarto do movimento teórico e reduzes para cerca de metade o período de detenção: 1,5&sigma; capturados em duas meias-vidas contra 2&sigma; em quatro e meia. Por unidade de tempo isso é cerca de 60 % mais e, como a fricção se paga por ida e volta e não por dia, a detenção mais curta é também a mais barata.</p>
+        <p>Mantém o stop temporal: é o que te diz que a relação deixou de funcionar. Só o deves calibrar pela saída que realmente usas: duas a três meias-vidas se sais em 0,5, quatro ou mais se insistes em esperar por 0.</p>
+      </div>
+
       <div class="section-break"><span>Parte 4: dimensionamento e gestão de risco</span></div>
 <h2 id="how-much-to-allocate-per-trade">Quanto alocar por operação</h2>
 
@@ -607,6 +615,7 @@ Conclusão: KO/PEP é um par operável
         <p><strong>Meio Kelly:</strong> f* / 2<br>
         <strong>Um quarto de Kelly:</strong> f* / 4</p>
         <p>Isso protege você contra a quebra do modelo e ainda captura a edge.</p>
+        <p>Vale a pena ser preciso sobre porque é que o teto ganha. Kelly é ótimo quando p e b são <strong>conhecidos</strong>. Os teus são estimados, normalmente a partir de algumas dezenas de operações fechadas, e o erro-padrão de uma taxa de acerto medida sobre 40 operações ronda os oito pontos percentuais. Mete na fórmula um p oito pontos alto demais e a fração que ela devolve é desmesurada. Apostar acima de Kelly é castigado muito mais duramente do que apostar abaixo, porque a curva de crescimento cai a pique acima do ótimo e desce suavemente abaixo. Num par com p = 0,60 e b = 1, a fórmula pede 20 % do capital num único spread. O teto de 2-5 % não é, portanto, uma correção tímida de uma resposta melhor: é aproximadamente o que dá o quarto de Kelly assim que se leva a sério a incerteza dos teus próprios dados, que é a mesma conclusão a que a lição de teoria de carteiras chega pelo outro lado.</p>
       </div>
 <h3 id="portfolio-of-pairs-diversification">Carteira de pares: diversificação</h3>
 
@@ -744,6 +753,7 @@ LÍQUIDO por operação:                        +2,20 $</code></pre>
         <h4>📐 Uma nota sobre esses Sharpe</h4>
         <p>Os três números são anuais, líquidos de custos e propositalmente mais baixos do que os que você verá por aí. Um Sharpe sustentado acima de 2 é característica documentada de um punhado de firmas com infraestrutura em colocation, mesas de aluguel de ativos e custos de execução aos quais você não tem acesso. Um livro de stat arb de varejo que entregue de verdade Sharpe 1,0-1,5 ao longo de vários anos está indo bem.</p>
         <p>Confira também a proporção: uma estratégia que anuncia 40 % de retorno com 30 % de drawdown não é uma estratégia de Sharpe 3, diga o marketing o que disser. Aqui o retorno dividido pelo drawdown máximo fica em torno de 0,8-1,0 em todos os níveis, e é isso que esses níveis de risco de fato sustentam.</p>
+        <p>Mais uma comparação que o marketing nunca faz. Uma carteira neutra ao mercado mantém a maior parte do capital como colateral, que rende a taxa do dinheiro, pelo que a referência é o dinheiro e não o zero. Com uma taxa de 4 %, os 6-10 % de retorno total do nível conservador são 2-6 % de excesso &mdash; é sobre esse número que o Sharpe é calculado, e é esse que se deve pesar contra o trabalho de gerir dez pares e voltar a testá-los todos os meses. Com uma taxa de 0 %, a mesma carteira parece bastante melhor. Nem a estratégia nem a tua competência mudaram; mudou a alternativa.</p>
       </div>
 
       <div class="callout-warning">
@@ -809,7 +819,8 @@ LÍQUIDO por operação:                        +2,20 $</code></pre>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Teste hoje à noite a cointegração do seu primeiro par</strong> — Com Python: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. Um p-valor abaixo de 0,05 significa que você pode rejeitar a hipótese nula de «sem cointegração» ao nível de 5 %; acima de 0,05 não pode, então não opere. Alta correlação ≠ cointegração. Uma ressalva que pesa mais do que parece: se você filtrar 100 pares ao nível de 5 %, cerca de 5 passarão por puro acaso. Teste uma lista curta para a qual você tenha uma razão econômica, não o mercado inteiro.</li>
-            <li><strong>Monte a sua planilha de z-score</strong> — Z = (spread atual - spread médio) / desvio padrão. Entrada: |z| > 2,0 (2 desvios padrão da média). Saída: z volta a 0. Stop: |z| > 3,0 (afastando demais). Tamanho da posição: 2 % por par.</li>
+            <li><strong>Monte a sua planilha de z-score</strong> &mdash; Z = (spread atual - spread médio) / desvio-padrão. Entrada: |z| > 2,0 (2 desvios-padrão da média). Saída: z volta a 0,5 (ver a nota sobre o stop temporal &mdash; esperar por 0 colide com ele). Stop: |z| &gt; 3,5 (a divergir demasiado). Tamanho da posição: 2 % por par.</li>
+            <li><strong>Trace o spread, não os dois preços</strong> &mdash; a operação está no spread, e olhar directamente para ele torna a divergência evidente de um modo que dois gráficos sobrepostos nunca conseguem.</li>
             <li><strong>Opere UM par em conta demo por 30 dias</strong> — Escolha um par cointegrado (SPY-IWM, KO-PEP). Entre em z ≥ 2,0, saia em z ≤ 0,5. Registre 10-15 operações. Seja honesto sobre o que essa amostra pode dizer: 12 operações não estabelecem uma taxa de acerto — a margem de erro em 12 lançamentos de moeda é de cerca de ±14 pontos. O que ela VALIDA é a execução: você foi executado nas duas pernas, quanto custou de fato a ida e volta, o spread se comportou como o modelo dizia?</li>
           </ol>
         </div>
@@ -884,17 +895,6 @@ LÍQUIDO por operação:                        +2,20 $</code></pre>
         </div>
       </div>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Ganhos rápidos para amanhã (clique para expandir)</summary>
-        <div style="margin-top:1rem">
-          <p>Não se sobrecarregue. Comece por estas 3 ações:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Pegue num par que julgue relacionado e teste-o como deve ser</strong> &mdash; faça o teste de cointegração, não apenas a correlação. Respondem a perguntas diferentes e só uma delas justifica uma operação de reversão à média.</li>
-            <li><strong>Trace o spread, não os dois preços</strong> &mdash; a operação está no spread, e olhar directamente para ele torna a divergência evidente de um modo que dois gráficos sobrepostos nunca conseguem.</li>
-            <li><strong>Defina a saída antes da entrada</strong> &mdash; decida que nível de spread fecha a operação e que nível diz que a relação se partiu, porque são acontecimentos diferentes.</li>
-          </ol>
-        </div>
-      </details>
 
       <h3 style="margin:2rem 0 1rem 0">Aulas relacionadas</h3>
       <ul style="margin:0 0 0 1.5rem;line-height:2">

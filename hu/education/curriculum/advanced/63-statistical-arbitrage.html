@@ -277,7 +277,7 @@
       <p><strong>Új folyamat:</strong></p>
       <ol>
         <li><strong>ADF-teszt MINDEN párra</strong> — a p-értéknek &lt;0,05-nek kell lennie a stacionárius spreadhez</li>
-        <li><strong>Felezési idő számítása</strong> — csak akkor kereskedj, ha az átlaghoz térés &lt;20 nap</li>
+        <li><strong>Felezési idő számítása</strong> &mdash; Csak akkor kereskedj, ha az átlaghoz való visszatérés 5-30 napon belül van</li>
         <li><strong>Belépés z-score alapján</strong> — |Z| &gt; 2,0 (2+ szórásnyira az átlagtól)</li>
         <li><strong>Kointegrációvesztési stop</strong> — ha az ADF p-érték &gt;0,10 fölé emelkedik, azonnal ki</li>
       </ol>
@@ -582,6 +582,14 @@ Következtetés: a KO/PEP kereskedhető pár
         <p><strong>Amit jelent:</strong> Az átlaghoz térést ~14 napon belül várd. Ha 30+ napot vesz igénybe, a modelled talán éppen szétesik.</p>
       </div>
 
+      <div class="callout-warning">
+        <h4>&#128680; A kilépési szabályod és az időstopod ellentmond egymásnak &mdash; nézd meg a számokat</h4>
+        <p>A fenti konzervatív modell azt mondja: lépj be |Z| = 2-nél, szállj ki, amikor Z átmegy a nullán. A stopszabályok azt mondják: szállj ki, ha a pozíció a felezési idő kétszeresénél hosszabb ideje nyitva van. Tedd össze a kettőt egy pontosan a modell szerint viselkedő spreaden, és ellentmondanak egymásnak.</p>
+        <p>A felezési idő az az idő, amennyi alatt a spread az átlagtól mért távolságának felét megteszi. |Z| = 2-től tehát a várható pálya: 1,0 egy felezési idő után, 0,5 kettő után, 0,25 három után. A Z = 0 eléréséhez nagyjából négy és fél felezési idő kell, és szigorúan véve soha nem érkezik meg &mdash; csak tetszőlegesen közel kerül. Az időstopod két felezési időnél sül el, amikor a várható érték még 0,5. Egy tökéletesen működő páron tehát az időstop azelőtt zárja a kötést, hogy a kilépési szabály valaha is aktiválódna &mdash; te pedig ezt a modell kudarcaként olvasod.</p>
+        <p><strong>A megoldás az, hogy |Z| &le; 0,5-nél szállj ki, ne 0-nál</strong>, ami az agresszív modell részleges kiszállása amúgy is. Lemondasz az elméleti mozgás negyedéről, és nagyjából felezed a tartási időt: két felezési idő alatt megfogott 1,5&sigma; a négy és fél alatti 2&sigma;-val szemben. Időegységre vetítve ez körülbelül 60 %-kal több &mdash; és mivel a súrlódást fordulónként számolják, nem naponta, a rövidebb tartás egyben az olcsóbb is.</p>
+        <p>Az időstopot tartsd meg &mdash; ez mondja meg, hogy a kapcsolat abbahagyta a működést. Csak ahhoz a kilépéshez igazítsd, amit ténylegesen használsz: két-három felezési idő, ha 0,5-nél szállsz ki, négy vagy több, ha ragaszkodsz a 0-hoz.</p>
+      </div>
+
       <div class="section-break"><span>4. rész: pozícióméretezés és kockázatkezelés</span></div>
 <h2 id="how-much-to-allocate-per-trade">Mennyit allokálj ügyletenként</h2>
 
@@ -607,6 +615,7 @@ Következtetés: a KO/PEP kereskedhető pár
         <p><strong>Fél Kelly:</strong> f* / 2<br>
         <strong>Negyed Kelly:</strong> f* / 4</p>
         <p>Ez megvéd a modell összeomlásától, és közben az edge-et is beszeded.</p>
+        <p>Érdemes pontosan megmondani, miért győz a felső korlát. A Kelly akkor optimális, ha p és b <strong>ismert</strong>. A tieid becslések, rendszerint néhány tucat lezárt kötésből, és egy 40 kötésen mért találati arány szórása körülbelül nyolc százalékpont. Adj a képletnek nyolc ponttal túl magas p-t, és a visszaadott hányad vadul túl nagy lesz. A Kelly fölé fogadást sokkal keményebben bünteti a piac, mint az alá fogadást, mert a növekedési görbe az optimum fölött meredeken zuhan, alatta pedig csak enyhén ereszkedik. Egy p = 0,60 és b = 1 páron a képlet a tőke 20 %-át kéri egyetlen spreadbe. A 2-5 %-os korlát tehát nem egy jobb válasz félénk felülírása: nagyjából annyi, amennyit a negyed-Kelly ad, ha komolyan vesszük a saját bemeneteink bizonytalanságát &mdash; ugyanaz a következtetés, amelyre a portfólióelméleti lecke a másik oldalról jut.</p>
       </div>
 <h3 id="portfolio-of-pairs-diversification">Párok portfóliója: diverzifikáció</h3>
 
@@ -744,6 +753,7 @@ NETTÓ ügyletenként:                             +2,20 dollár</code></pre>
         <h4>📐 Megjegyzés ezekhez a Sharpe-számokhoz</h4>
         <p>Mindhárom szám éves, költségek után, és szándékosan alacsonyabb annál, amit máshol látni fogsz. A tartósan 2 fölötti Sharpe olyan maroknyi cég dokumentált sajátossága, amelyeknek kolokált infrastruktúrájuk, saját kölcsönzési asztaluk és számodra elérhetetlen végrehajtási költségeik vannak. Egy lakossági stat arb könyv, amely több éven át tényleg 1,0-1,5 Sharpe-ot hoz, jól teljesít.</p>
         <p>Ellenőrizd az arányt is: az a stratégia, amely 40 % hozamot állít 30 % drawdown mellett, nem Sharpe 3-as stratégia, bármit mond is a marketing. Itt a hozam osztva a maximális drawdownnal minden szinten 0,8-1,0 körül van, és ennyit bírnak el ezek a kockázati szintek.</p>
+        <p>Még egy összehasonlítás, amit a marketing sosem tesz meg. Egy piacsemleges könyv a tőkéje nagy részét fedezetként tartja, ami a készpénzkamatot hozza, tehát a viszonyítási alap a készpénz, nem a nulla. 4 %-os készpénzkamat mellett a konzervatív szint 6-10 %-os teljes hozama 2-6 % többlethozam &mdash; a Sharpe erre a számra számolódik, és ezt kell mérlegre tenni tíz pár futtatásának és havi újratesztelésének munkájával szemben. 0 %-os készpénzkamat mellett ugyanaz a könyv jóval jobban fest. Sem a stratégia, sem a tudásod nem változott; az alternatíva változott.</p>
       </div>
 
       <div class="callout-warning">
@@ -809,7 +819,8 @@ NETTÓ ügyletenként:                             +2,20 dollár</code></pre>
         <div style="margin-top:1rem">
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Teszteld ma este az első párodat kointegrációra</strong> — Pythonnal: `from statsmodels.tsa.stattools import coint; score, pvalue, _ = coint(spy, qqq)`. Ha a p-érték 0,05 alatt van, 5 %-os szinten elvetheted a «nincs kointegráció» nullhipotézist; 0,05 felett nem tudod, tehát ne kereskedd. Magas korreláció ≠ kointegráció. Egy kikötés, ami többet nyom, mint amennyire hangzik: ha 100 párt szűrsz 5 %-os szinten, nagyjából 5 tisztán a véletlen miatt megy át. Olyan rövid listát tesztelj, amire van közgazdasági indokod, ne az egész piacot.</li>
-            <li><strong>Építsd meg a z-score táblázatodat</strong> — Z = (aktuális spread - átlagos spread) / szórás. Belépés: |z| > 2,0 (2 szórásnyira az átlagtól). Kilépés: z visszatér 0-ra. Stop: |z| > 3,0 (túl messzire nyílik). Pozícióméret: páronként 2 %.</li>
+            <li><strong>Építsd meg a z-score táblázatodat</strong> &mdash; Z = (aktuális spread - átlagos spread) / szórás. Belépés: |z| > 2,0 (2 szórásnyira az átlagtól). Kilépés: z visszatér 0,5-re (lásd az időstopról szóló megjegyzést &mdash; a 0-ra várás ütközik vele). Stop: |z| &gt; 3,5 (túl messzire szalad). Pozícióméret: páronként 2 %.</li>
+            <li><strong>A spreadet ábrázold, ne a két árat</strong> &mdash; a kötés a spreadben van, és ha közvetlenül ránézel, az eltérés úgy válik nyilvánvalóvá, ahogy két egymásra vetített grafikon soha.</li>
             <li><strong>Kereskedj EGY párt 30 napig demóban</strong> — Válassz egy kointegrált párt (SPY-IWM, KO-PEP). Belépés z ≥ 2,0-nál, kilépés z ≤ 0,5-nél. Vezess 10-15 ügyletet. Légy őszinte azzal kapcsolatban, mit mondhat ez a minta: 12 ügylet nem állapít meg találati arányt — 12 pénzfeldobásnál a hibahatár nagyjából ±14 pont. Amit VISZONT igazol, az a végrehajtás: mindkét lábra kaptál teljesülést, mennyibe került valójában az oda-vissza út, úgy viselkedett-e a spread, ahogy a modell mondta?</li>
           </ol>
         </div>
@@ -884,17 +895,6 @@ NETTÓ ügyletenként:                             +2,20 dollár</code></pre>
         </div>
       </div>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Gyors nyerések holnapra (kattints a kibontáshoz)</summary>
-        <div style="margin-top:1rem">
-          <p>Ne terheld túl magad. Kezdd ezzel a 3 lépéssel:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Végy egy párt, amelyet összefüggőnek gondolsz, és teszteld rendesen</strong> &mdash; futtasd le a kointegrációs tesztet, ne csak a korrelációt. Más kérdésre válaszolnak, és csak az egyik igazol egy átlaghoz visszatérő kötést.</li>
-            <li><strong>A spreadet ábrázold, ne a két árat</strong> &mdash; a kötés a spreadben van, és ha közvetlenül ránézel, az eltérés úgy válik nyilvánvalóvá, ahogy két egymásra vetített grafikon soha.</li>
-            <li><strong>A kilépést a belépés előtt határozd meg</strong> &mdash; döntsd el, melyik spreadszint zárja a kötést, és melyik mondja azt, hogy a kapcsolat elromlott, mert ez két külön esemény.</li>
-          </ol>
-        </div>
-      </details>
 
       <h3 style="margin:2rem 0 1rem 0">Kapcsolódó leckék</h3>
       <ul style="margin:0 0 0 1.5rem;line-height:2">
