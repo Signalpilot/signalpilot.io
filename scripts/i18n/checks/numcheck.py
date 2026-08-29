@@ -90,6 +90,15 @@ def allowed(en):
     for num, word in re.findall(r'(\d+(?:\.\d+)?)\s*(thousand|million|billion)\b', en, re.I):
         a.add(str(round(float(num) * {'thousand': 1_000, 'million': 1_000_000,
                                     'billion': 1_000_000_000}[word.lower()])))
+    # a spelled-out range shares its word the way "$3-5K" shares its suffix:
+    # "70-90 million shares" means 70,000,000 to 90,000,000, and Japanese
+    # writes both ends as myriads (7,000万 / 9,000万).
+    for lo, hi, word in re.findall(
+            r'(\d+(?:\.\d+)?)\s*[-\u2013]\s*(\d+(?:\.\d+)?)\s*(thousand|million|billion)\b',
+            en, re.I):
+        for v in (lo, hi):
+            a.add(str(round(float(v) * {'thousand': 1_000, 'million': 1_000_000,
+                                        'billion': 1_000_000_000}[word.lower()])))
     # a range shares one suffix here too: "$15-20M" means 15,000,000 to 20,000,000
     for lo, hi in re.findall(r'(\d+(?:\.\d+)?)\s*[-\u2013]\s*(\d+(?:\.\d+)?)\s*M\b', en):
         for v in (lo, hi): a.add(str(round(float(v)*1_000_000)))
