@@ -598,20 +598,23 @@ NOVO MÉTODO PROTEGIDO:
   -> é este o ajuste que importa. Mesmo com todo o resto feito
      errado, 0,8 % limita o dano a 3.200 $.
 
-RESULTADOS (novembro de 2024):
-- Total pago: 400.000 $ por 43.956 UNI (9,10 $ em média)
-- Slippage real: 0,26 % em média (1.040 $ de custo)
-- Ataques de MEV: ZERO
-- Economia vs a montagem antiga: cerca de 11.000 $ nesta operação
+O QUE MUDA E O QUE PODES MESMO VERIFICAR:
+- O RPC privado e o leilão por lotes mudam a probabilidade de
+  seres sanduichado. Ninguém te pode dizer quanto, porque o
+  contrafactual - o que um bot teria tirado de um swap que
+  nunca viu - não é observável
+- A tolerância muda o tamanho da perda, e essa é aritmética que
+  podes fazer antes de assinar: 5 % sobre 400.000 $ são 20.000 $
+  de dano pré-autorizado; 0,8 % são 3.200 $. Nada do
+  comportamento do bot entra nessa conta
+- Portanto, a tolerância é a única linha desta lista cujo
+  benefício consegues calcular à partida. As outras três valem
+  a pena e não se conseguem pontuar
 
-RESULTADOS DE 6 MESES (34 operações, 8,4 mi $ de volume):
-- Slippage médio: 0,31 %, ou seja 26.040 $ de slippage total pago
-- Na montagem antiga, uma operação sanduichada entregava quase
-  os 5 % inteiros; as não sanduichadas ainda pagavam o impacto
-- Economia: entre 195.000 $ e 325.000 $. A faixa é honesta e
-  não preguiçosa — 325.000 $ supõe que todas as 34 teriam sido
-  sanduichadas, e as abaixo de 100 mil $ provavelmente não
-  valeriam o gas de um bot.
+Desconfia de quem te cite o que a proteção MEV lhe «poupou» em
+seis meses. Esse número é a diferença entre o que aconteceu e
+uma história sobre o que teria acontecido, e só uma dessas duas
+coisas tem um hash de transação.
 
 A lição de Lisa: «Um sanduíche levou 15 mil $ de um swap de 500 mil $,
 e levou exatamente os 5 % que eu tinha autorizado. Agora eu ponho
@@ -709,8 +712,9 @@ e levou exatamente os 5 % que eu tinha autorizado. Agora eu ponho
           <p>Não te sobrecarregues. Começa por estas três ações:</p>
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Acompanhe as taxas de financiamento de BTC/ETH (capture squeezes de alavancagem excessiva)</strong> — Sarah Martinez (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$89,400</span> (-48 %) em maio de 2021, com 186.000 $ de BTC à vista comprados a 58.000 $ enquanto o financiamento do perpétuo ficava em +0,15 % (positivo extremo = longs alavancados demais). Ela não tinha alavancagem, então nada a liquidou — simplesmente acompanhou o instrumento até 30.000 $ em uma semana enquanto todos os que, esses sim, <em>estavam</em> alavancados eram liquidados nas mãos dela. É exatamente esse o sentido do sinal: o financiamento fala da alavancagem dos outros, e a alavancagem dos outros é o que move o preço que você tem. Hoje à noite: salve nos favoritos o painel de financiamento do coinglass.com. Verifique BTC/ETH a cada 8 horas. Financiamento &gt;+0,10 % (longs pagando shorts) = longs alavancados demais, espere um squeeze de baixa. Financiamento &lt;-0,05 % = shorts alavancados demais, espere um squeeze de alta. E observe a persistência tanto quanto o nível: +0,08 % mantido por 3 dias custa a um long cerca de 0,72 % de financiamento acumulado, mais ou menos o que custa um pico breve acima de +0,10 %, então trate do mesmo jeito e reduza a exposição.</li>
-            <li><strong>Configure alertas de arbitragem entre corretoras (capture spreads de preço)</strong> — Michael Chen (exemplo composto) ganhou <span style="color:#22c55e;font-weight:700">28.600 $ de lucro</span> em 6 meses (junho-novembro de 2023) explorando spreads de preço do BTC entre Coinbase (institucional) e Binance (varejo/Ásia). Quando o BTC da Coinbase ficava mais de 150 $ acima do da Binance → comprava na Binance, vendia na Coinbase, embolsava o spread. Lucro médio de 275 $ por operação, com cerca de 4 operações por semana, o que ao longo de 26 semanas dá os 28.600 $ — faça você mesmo essa multiplicação em qualquer promessa de arbitragem que ler, porque o número por operação e o total anunciado muitas vezes não se encontram. Hoje à noite: acompanhe os preços do BTC na Coinbase, na Binance e na Kraken a cada hora. Spread &gt;150 $ = oportunidade de arbitragem; note que, contra o BTC de 26.000-38.000 $ negociado naqueles meses, 150 $ são 0,4-0,6 %, e não os 0,3 % que você obteria aos preços de hoje, então recalcule o limiar em porcentagem para o nível em que o BTC estiver quando você ler isto. Compre na corretora mais barata, venda na mais cara simultaneamente. Feche quando o spread normalizar. Os spreads de Michael se fechavam em minutos: em tamanho de varejo, atrasos de transferência, limites de saque e risco de contraparte da corretora podem comer o spread inteiro. Opere pequeno até ter medido a sua própria taxa de execução.</li>
-            <li><strong>Use endpoints RPC protegidos contra MEV (pare o front-running em DEX)</strong> — Amanda Torres (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$31,800</span> em 8 meses para front-running de MEV na Uniswap. Swaps grandes (>50.000 $) eram sanduichados — os bots passavam na frente da compra dela (empurrando o preço +2-4 %), depois vendiam atrás. Perda média: 1.200-2.500 $ por operação. Hoje à noite: mude o RPC da carteira para o Flashbots Protect RPC (impede que os bots de MEV vejam a transação). Para swaps >25.000 $, divida em 5-10 swaps menores ao longo de 2-6 horas. Evita 30.000 $ ou mais de perdas por extração de MEV.</li>
+            <li><strong>Configure alertas de arbitragem entre corretoras (capture spreads de preço)</strong> &mdash; O BTC negoceia mesmo a preços diferentes em praças diferentes, e o diferencial entre uma praça institucional e uma de retalho é real. Antes de o perseguires, calcula a ida e volta completa em vez do intervalo do título. Supõe que a Coinbase está 150 $ acima da Binance com BTC a 30.000 $: são 0,5 % brutos. Agora subtrai as comissões taker das duas pernas (0,1 % cada nos escalões de retalho, ou seja 0,2 %), a comissão de levantamento para mover o ativo ou o custo de pré-financiar ambas as praças para não teres de o mover, e o spread que atravessas de facto em vez do ponto médio que citaste. O que sobra dos 0,5 % é normalmente uma fração, e só está disponível enquanto o intervalo persistir. Hoje à noite: acompanhe os preços do BTC na Coinbase, na Binance e na Kraken a cada hora. Spread &gt;150 $ = oportunidade de arbitragem; note que, contra o BTC de 26.000-38.000 $ negociado naqueles meses, 150 $ são 0,4-0,6 %, e não os 0,3 % que você obteria aos preços de hoje, então recalcule o limiar em porcentagem para o nível em que o BTC estiver quando você ler isto. Compre na corretora mais barata, venda na mais cara simultaneamente. Feche quando o spread normalizar. Os spreads de Michael se fechavam em minutos: em tamanho de varejo, atrasos de transferência, limites de saque e risco de contraparte da corretora podem comer o spread inteiro. Opere pequeno até ter medido a sua própria taxa de execução.</li>
+            <li><strong>Leia uma transacção sua num explorador de blocos</strong> &mdash; veja o que dela era público, e a partir de quando. É disso que o MEV se alimenta.</li>
+            <li><strong>Use endpoints RPC protegidos contra MEV (pare o front-running em DEX)</strong> — Amanda Torres (exemplo composto) perdeu <span style="color:#ff5252;font-weight:700">$31,800</span> em 8 meses para front-running de MEV na Uniswap. Swaps grandes (>50.000 $) eram sanduichados — os bots passavam na frente da compra dela (empurrando o preço +2-4 %), depois vendiam atrás. Perda média: 1.200-2.500 $ por operação. Confronta isso com a Parte 3 antes de seguires: 1.200-2.500 $ num swap de 50.000 $ são 2,4-5 %, o que significa que a tolerância de slippage dela estava nessa faixa, porque o contrato não consegue liquidar pior do que o número nessa caixa. A mudança de RPC abaixo ajuda. Foi a tolerância que decidiu o tamanho. Hoje à noite: mude o RPC da carteira para o Flashbots Protect RPC (impede que os bots de MEV vejam a transação). Para swaps >25.000 $, divida em 5-10 swaps menores ao longo de 2-6 horas. Evita 30.000 $ ou mais de perdas por extração de MEV.</li>
           </ol>
         </div>
       </details>
@@ -738,17 +742,6 @@ e levou exatamente os 5 % que eu tinha autorizado. Agora eu ponho
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">A microestrutura cripto é selvagem, mas taxas de financiamento, MEV e wash trading são três coisas que a maioria de quem opera nesses mercados nunca olhou diretamente, e cada uma custa dinheiro em silêncio até você olhar. Não são tanto vantagens quanto vazamentos que dá para estancar.</p>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Ganhos rápidos para amanhã (clique para expandir)</summary>
-        <div style="margin-top:1rem">
-          <p>Não se sobrecarregue. Comece por estas 3 ações:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Verifique o funding do par que mais negoceia, duas vezes por dia durante uma semana</strong> &mdash; anote o sinal e a dimensão, e o que o preço fez a seguir.</li>
-            <li><strong>Execute a mesma ordem pequena numa CEX e numa DEX</strong> &mdash; compare o custo total, incluindo comissões e slippage. É dessa diferença que esta aula trata.</li>
-            <li><strong>Leia uma transacção sua num explorador de blocos</strong> &mdash; veja o que dela era público, e a partir de quando. É disso que o MEV se alimenta.</li>
-          </ol>
-        </div>
-      </details>
 
       <div class="key-takeaway">
         <h3>&#127891; Ideias-chave</h3>

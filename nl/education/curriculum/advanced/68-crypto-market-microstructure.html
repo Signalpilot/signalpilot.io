@@ -598,20 +598,23 @@ NIEUWE BESCHERMDE METHODE:
   -> dit is de instelling die telt. Zelfs als al het andere
      fout gaat, begrenst 0,8 % de schade op $3.200.
 
-RESULTATEN (november 2024):
-- Totaal betaald: $400.000 voor 43.956 UNI (gemiddeld $9,10)
-- Werkelijke slippage: gemiddeld 0,26 % ($1.040 aan kosten)
-- MEV-aanvallen: NUL
-- Besparing t.o.v. de oude opzet: ongeveer $11.000 op deze trade
+WAT VERANDERT, EN WAT JE ECHT KUNT CONTROLEREN:
+- De private RPC en de batchveiling veranderen de kans dat je
+  gesandwicht wordt. Hoeveel, kan niemand je zeggen, want het
+  contrafeitelijke - wat een bot zou hebben gepakt van een swap
+  die hij nooit zag - is niet waarneembaar
+- De tolerantie verandert de omvang van het verlies, en dat is
+  rekenwerk dat je vóór het tekenen kunt doen: 5 % op $400.000
+  is $20.000 aan vooraf toegestane schade; 0,8 % is $3.200. Aan
+  die som komt niets van het gedrag van de bot te pas
+- De tolerantie is dus de enige regel op deze lijst waarvan je
+  het voordeel vooraf kunt uitrekenen. De andere drie zijn de
+  moeite waard en laten zich niet scoren
 
-RESULTATEN OVER 6 MAANDEN (34 trades, $8,4 mln volume):
-- Gemiddelde slippage: 0,31 %, dus $26.040 aan slippage betaald
-- Onder de oude opzet gaf een gesandwichte trade bijna de volle
-  5 % weg; de niet-gesandwichte betaalden nog steeds poolimpact
-- Besparing: ergens tussen $195.000 en $325.000. De marge is
-  eerlijk en niet lui — $325.000 gaat ervan uit dat alle 34
-  gesandwicht zouden zijn, en die onder $100K waren de gas van
-  een bot waarschijnlijk niet waard geweest.
+Wees sceptisch bij iedereen die je voorrekent wat MEV-bescherming
+hem over zes maanden heeft "bespaard". Dat cijfer is het verschil
+tussen wat er gebeurde en een verhaal over wat er zou zijn
+gebeurd, en maar één van die twee heeft een transactiehash.
 
 Lisa's les: «Eén sandwich pakte $15K uit een swap van $500K, en het
 was precies de 5 % die ik had toegestaan. Nu zet ik 0,8 % en routeer
@@ -709,8 +712,9 @@ ik via CowSwap. De tolerantie was altijd al de bepalende instelling.»</code></p
           <p>Maak het jezelf niet te zwaar. Begin met deze drie stappen:</p>
           <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
             <li><strong>Volg de funding rates van BTC/ETH (vang squeezes met te veel hefboom)</strong> — Sarah Martinez (samengesteld voorbeeld) verloor <span style="color:#ff5252;font-weight:700">$89,400</span> (-48 %) in mei 2021, terwijl ze $186.000 aan spot-BTC hield die ze op $58.000 had gekocht en de funding op de perpetual op +0,15 % stond (extreem positief = veel te veel longs met hefboom). Zij had zelf geen hefboom, dus niets liquideerde haar — ze reed het instrument gewoon omlaag naar $30.000 in een week, terwijl iedereen die <em>wel</em> met hefboom zat, in haar handen werd geliquideerd. Dat is precies waar het signaal om draait: funding vertelt je iets over de hefboom van anderen, en de hefboom van anderen is wat de prijs beweegt die jij bezit. Vanavond: zet het funding-dashboard van coinglass.com bij je favorieten. Check BTC/ETH elke 8 uur. Funding &gt;+0,10 % (longs betalen shorts) = longs met te veel hefboom, verwacht een squeeze omlaag. Funding &lt;-0,05 % = shorts met te veel hefboom, verwacht een squeeze omhoog. En let net zo goed op hardnekkigheid als op niveau: +0,08 % dat 3 dagen aanhoudt kost een long ongeveer 0,72 % aan opgebouwde funding, ongeveer wat een korte piek boven +0,10 % kost, dus behandel het hetzelfde en bouw je positie af.</li>
-            <li><strong>Zet arbitragemeldingen tussen beurzen op (vang prijsverschillen)</strong> — Michael Chen (samengesteld voorbeeld) verdiende <span style="color:#22c55e;font-weight:700">$28.600 winst</span> in 6 maanden (juni-november 2023) door prijsverschillen in BTC tussen Coinbase (institutioneel) en Binance (retail/Azië) uit te buiten. Als BTC op Coinbase meer dan $150 boven Binance stond → kopen op Binance, verkopen op Coinbase, verschil opstrijken. Gemiddelde winst $275 per trade bij ongeveer 4 trades per week, wat over 26 weken uitkomt op die $28.600 — doe die vermenigvuldiging zelf bij elke arbitrageclaim die je leest, want het bedrag per trade en het totaal in de kop komen vaak niet bij elkaar. Vanavond: volg de BTC-koersen op Coinbase, Binance en Kraken per uur. Verschil &gt;$150 = arbitragekans; let erop dat $150 tegen de $26.000-38.000 waarop BTC in die maanden handelde 0,4-0,6 % is, en niet de 0,3 % die je bij de koersen van vandaag krijgt, dus reken de drempel om naar een percentage voor het niveau waarop BTC staat als je dit leest. Koop op de goedkope beurs, verkoop tegelijk op de dure. Sluit als het verschil normaliseert. De verschillen van Michael sloten binnen enkele minuten: op retailformaat kunnen overboekingsvertraging, opnamelimieten en tegenpartijrisico van de beurs het hele verschil opeten. Handel klein tot je je eigen fill rate hebt gemeten.</li>
-            <li><strong>Gebruik MEV-beschermde RPC-endpoints (stop front-running op DEX'en)</strong> — Amanda Torres (samengesteld voorbeeld) verloor <span style="color:#ff5252;font-weight:700">$31,800</span> in 8 maanden aan MEV-front-running op Uniswap. Grote swaps (>$50.000) werden gesandwicht — bots gingen voor haar koop staan (prijs +2-4 % omhoog) en verkochten er daarna in. Gemiddeld verlies: $1.200-2.500 per trade. Vanavond: zet de RPC van je wallet om naar Flashbots Protect RPC (voorkomt dat MEV-bots je transactie zien). Splits swaps >$25.000 in 5-10 kleinere swaps over 2-6 uur. Voorkomt $30.000 en meer aan MEV-extractieverlies.</li>
+            <li><strong>Zet arbitragemeldingen tussen beurzen op (vang prijsverschillen)</strong> &mdash; BTC handelt inderdaad tegen verschillende prijzen op verschillende platforms, en het verschil tussen een institutioneel en een retailplatform is echt. Voordat je erachteraan gaat, reken de hele round trip door in plaats van het kopgat. Stel dat Coinbase $150 boven Binance staat bij een BTC van $30.000: dat is 0,5 % bruto. Trek nu de takerkosten op beide benen af (0,1 % elk op retailniveaus is 0,2 %), de opnamekosten om het actief te verplaatsen of de kosten om beide platforms voor te financieren zodat dat niet hoeft, en de spread die je werkelijk oversteekt in plaats van de mid die je citeerde. Wat er van die 0,5 % overblijft is meestal een fractie, en is alleen beschikbaar zolang het gat bestaat. Vanavond: volg de BTC-koersen op Coinbase, Binance en Kraken per uur. Verschil &gt;$150 = arbitragekans; let erop dat $150 tegen de $26.000-38.000 waarop BTC in die maanden handelde 0,4-0,6 % is, en niet de 0,3 % die je bij de koersen van vandaag krijgt, dus reken de drempel om naar een percentage voor het niveau waarop BTC staat als je dit leest. Koop op de goedkope beurs, verkoop tegelijk op de dure. Sluit als het verschil normaliseert. De verschillen van Michael sloten binnen enkele minuten: op retailformaat kunnen overboekingsvertraging, opnamelimieten en tegenpartijrisico van de beurs het hele verschil opeten. Handel klein tot je je eigen fill rate hebt gemeten.</li>
+            <li><strong>Lees een van je eigen transacties in een block explorer</strong> &mdash; kijk wat eraan openbaar was, en vanaf wanneer. Daar leeft MEV van.</li>
+            <li><strong>Gebruik MEV-beschermde RPC-endpoints (stop front-running op DEX'en)</strong> — Amanda Torres (samengesteld voorbeeld) verloor <span style="color:#ff5252;font-weight:700">$31,800</span> in 8 maanden aan MEV-front-running op Uniswap. Grote swaps (>$50.000) werden gesandwicht — bots gingen voor haar koop staan (prijs +2-4 % omhoog) en verkochten er daarna in. Gemiddeld verlies: $1.200-2.500 per trade. Leg dat naast deel 3 voordat je verder leest: $1.200-2.500 op een swap van $50K is 2,4-5 %, wat betekent dat haar slippage-tolerantie ergens in dat bereik stond, want het contract kan niet slechter afwikkelen dan het getal in dat vakje. De RPC-wissel hieronder helpt. De omvang werd bepaald door de tolerantie. Vanavond: zet de RPC van je wallet om naar Flashbots Protect RPC (voorkomt dat MEV-bots je transactie zien). Splits swaps >$25.000 in 5-10 kleinere swaps over 2-6 uur. Voorkomt $30.000 en meer aan MEV-extractieverlies.</li>
           </ol>
         </div>
       </details>
@@ -738,17 +742,6 @@ ik via CowSwap. De tolerantie was altijd al de bepalende instelling.»</code></p
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Cryptomicrostructuur is wild, maar funding rates, MEV en wash trading zijn drie dingen waar de meeste mensen die deze markten handelen nooit rechtstreeks naar hebben gekeken, en elk ervan kost stilletjes geld tot je dat wel doet. Het zijn niet zozeer randjes als wel lekken die je kunt dichten.</p>
 
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">&#9889; Snelle winsten voor morgen (klik om uit te klappen)</summary>
-        <div style="margin-top:1rem">
-          <p>Overlaad jezelf niet. Begin met deze 3 acties:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Check een week lang twee keer per dag de funding op het paar dat je het meest verhandelt</strong> &mdash; noteer het teken en de omvang, en wat de koers daarna deed.</li>
-            <li><strong>Voer dezelfde kleine order uit op een CEX en op een DEX</strong> &mdash; vergelijk de totale kosten inclusief fees en slippage. Dat gat is waar deze les over gaat.</li>
-            <li><strong>Lees een van je eigen transacties in een block explorer</strong> &mdash; kijk wat eraan openbaar was, en vanaf wanneer. Daar leeft MEV van.</li>
-          </ol>
-        </div>
-      </details>
 
       <div class="key-takeaway">
         <h3>&#127891; Kernpunten</h3>
