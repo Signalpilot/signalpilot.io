@@ -188,7 +188,7 @@
     <tr>
       <td><strong>2. Tamanho de posição</strong></td>
       <td>1-2 % fixo por operação (ignora o edge)</td>
-      <td>Critério de Kelly ajustado à força do edge (5-15 % para edges comprovados)</td>
+      <td>Dimensionar pela força da vantagem em vez de por uma regra fixa — uma fração de Kelly, recalculada à medida que a estimativa da vantagem muda</td>
     </tr>
     <tr>
       <td><strong>3. Gestão da correlação</strong></td>
@@ -266,7 +266,7 @@
 
 <p>Desenvolvido por John Kelly Jr. nos Bell Labs em 1956, foi usado por:</p>
 <ul>
-  <li><strong>Ed Thorp:</strong> Venceu o blackjack contando cartas e depois conduziu a Princeton/Newport Partners com Kelly fracionário por duas décadas, a cerca de 20 % ao ano — 227 meses positivos em 230</li>
+  <li><strong>Ed Thorp:</strong> Bateu o blackjack a contar cartas e depois dirigiu a Princeton/Newport Partners com Kelly fracionário de 1969 a 1988: cerca de 15% ao ano líquidos para os investidores, à volta de 19% antes de comissões, com 227 meses positivos em 230. O número que habitualmente se lhe atribui é o bruto; o líquido é o que um investidor capitalizou de facto</li>
   <li><strong>Warren Buffett e Charlie Munger:</strong> Ambos já descreveram um dimensionamento pela força do edge em vez de pesos fixos: a lógica de Kelly sem a fórmula</li>
   <li><strong>Renaissance Technologies:</strong> O fundo Medallion de Jim Simons compôs cerca de 39 % ao ano líquidos de taxas por três décadas exatamente nesse formato: muitos edges pequenos e pouco correlacionados, cada um dimensionado para crescer e não para dar conforto</li>
 </ul>
@@ -352,19 +352,20 @@
 <details class="accordion">
   <summary>Por que Ed Thorp usava o Kelly fracionário</summary>
   <div class="accordion-content">
-    <p>Thorp — o matemático que venceu o blackjack e depois conduziu a Princeton/Newport por duas décadas a cerca de 20 % ao ano — defendia o Kelly fracionário pela aritmética, não pelos nervos. O crescimento a uma fração f de Kelly vale (2f &#8722; f&#178;) do máximo, enquanto a volatilidade cresce linearmente com f. Em meio Kelly você preserva 2(0,5) &#8722; 0,25 = 75 % da taxa de crescimento com metade das oscilações. Em um quarto de Kelly você preserva 2(0,25) &#8722; 0,0625 = 44 % com um quarto das oscilações. Pagar um quarto da sua taxa de crescimento para cortar os drawdowns pela metade é a melhor troca do cardápio, e pagar 56 % dela para reduzi-los a um quarto continua sendo a troca que a maioria deveria aceitar: são os drawdowns que você atravessa de verdade que decidem se você ainda estará por aqui para compor. <strong>Regra:</strong> Use 25-50 % de Kelly no trading real.</p>
+    <p>Thorp — o matemático que bateu o blackjack e depois dirigiu a Princeton/Newport durante duas décadas a cerca de 15% ao ano líquidos — defendeu o Kelly fracionário com aritmética, não com nervos. O crescimento a uma fração f de Kelly é (2f − f²) do máximo, ao passo que a volatilidade escala linearmente com f. Com meio Kelly ficas com 2(0,5) − 0,25 = 75% da taxa de crescimento para metade dos solavancos. Com um quarto de Kelly ficas com 2(0,25) − 0,0625 = 44% para um quarto dos solavancos. Pagar um quarto da tua taxa de crescimento para reduzir a metade as quedas é o melhor negócio do menu, e pagar 56% dela para as reduzir a um quarto é o que a maioria deveria ainda assim aceitar — as quedas que atravessas de facto decidem se ainda estás por cá para capitalizar. <strong>Regra:</strong> Use 25-50 % de Kelly no trading real.</p>
+    <p><strong>E há uma segunda razão, que pesa mais do que os nervos.</strong> Kelly parte do princípio de que conheces p e b. Não conheces. Estimaste-os a partir de uma amostra finita das tuas próprias operações, e essa estimativa traz margens de erro que a fórmula nunca vê. Mete lá uma taxa de acerto ligeiramente optimista e a fração que sai não é ligeiramente grande demais: é bastante grande demais. Pega no exemplo dos 60% / 1,67 acima, em que o Kelly completo dá cerca de 36%. Cem operações com 60% de vencedoras colocam a taxa verdadeira algures entre 50% e 70% à confiança habitual. Com p = 0,55 a fórmula diz 28%. Com p = 0,50 diz 20%. O teu tamanho de posição oscila quase para o dobro por causa de uma diferença na taxa de acerto que cem operações simplesmente não conseguem resolver. E o erro não é simétrico nas consequências: apostar acima de Kelly destrói o crescimento muito mais depressa do que apostar abaixo te custa, por isso uma estimativa alta demais faz muito mais estragos do que uma igualmente errada por baixo. É isto que o Kelly fracionário te compra de facto. Se a vantagem que mediste pudesse plausivelmente valer metade do que parece, dimensionar a um quarto do que os teus números implicam não é timidez: é dimensionar para a vantagem que talvez tenhas mesmo, e não para aquela que a tua amostra calhou mostrar.</p>
   </div>
 </details>
 
   <div class="callout callout-success">
     <h4>💰 Exemplo trabalhado: o que a fracção de Kelly faz a um livro de 500 000 $</h4>
-    <p>Trader de prop trading com um livro de 500.000 $: 58 % de acerto, 450 $ de ganho médio, 300 $ de perda média. <strong>Antes (2 % fixo):</strong> +140.000 $/ano (+28 %), Sharpe 1,2, 15 % de drawdown. <strong>A conta:</strong> b = 450/300 = 1,5, então o Kelly cheio = (0,58 &#215; 1,5 &#8722; 0,42) / 1,5 = 30,0 %, um número que ele nunca operaria. Foi para um décimo dele: 3 % por operação. <strong>Depois (3 %):</strong> +224.000 $/ano (+45 %), Sharpe ainda em 1,2, 22 % de drawdown. O tamanho de posição não melhora o seu retorno ajustado ao risco: retorno e drawdown cresceram ambos cerca de 1,5 vez. O que Kelly lhe deu foi a certeza de que 3 % estava muito longe do teto, então ele parou de deixar dois terços de um edge comprovado sem uso.</p>
+    <p>Trader de prop trading com um livro de 500.000 $: 58 % de acerto, 450 $ de ganho médio, 300 $ de perda média. <strong>Antes (2 % fixo):</strong> +140.000 $/ano (+28 %), Sharpe 1,2, 15 % de drawdown. <strong>A conta:</strong> b = 450/300 = 1,5, então o Kelly cheio = (0,58 &#215; 1,5 &#8722; 0,42) / 1,5 = 30,0 %, um número que ele nunca operaria. Foi para um décimo dele: 3 % por operação. <strong>Depois (3 %):</strong> +210 000 $/ano (+42%), Sharpe continua em 1,2, 22% de DD. Dimensionar mais não melhora o teu retorno ajustado ao risco — retorno e drawdown escalaram ambos cerca de 1,5 vezes. O que Kelly lhe deu foi a certeza de que 3% não estava sequer perto do tecto, e por isso pôde deixar de desperdiçar dois terços de uma vantagem comprovada.</p>
   </div>
 <div class="callout callout-danger">
   <h4>📉 ESTUDO DE CASO: o desastre de 114.000 $ de Lisa com o Kelly cheio</h4>
   <p><strong>Configuração:</strong> Lisa Chang (exemplo composto), operadora de opções com 68 % de acerto em credit spreads — exatamente o formato que os credit spreads realmente têm: ganhos pequenos e perdas grandes (ganho médio 250 $, perda média 400 $, R:R 0,63:1). Expectativa de +42 $ por operação, um edge real. Kelly cheio = (0,68 &#215; 0,625 &#8722; 0,32) / 0,625 = 16,8 % por operação. Conta de 185.000 $, abril-junho de 2024.</p>
   <p><strong>O desastre:</strong> Semanas 1-2: +7.500 $ de lucro com Kelly cheio, conta em 192.500 $. Semana 3: uma sequência de 6 operações perdedoras (0,32^6 = 0,1 % de probabilidade). Cada perda leva 16,8 % e, composta: 0,832^6 = 0,332, ou seja um drawdown de -66,8 %. A conta caiu de 192.500 $ para 64.000 $ em UMA SEMANA. Ela operou pequeno no resto do trimestre e fechou junho em 71.000 $: -114.000 $, -62 % em 3 meses, numa estratégia cujo edge nunca esteve em dúvida.</p>
-  <p><strong>Recuperação:</strong> Passou para 1/4 de Kelly (4,2 % por operação). Resultado: 71.000 $ → 111.000 $ (+56 %) em 6 meses, drawdown máximo -12 % (contra -67 %). O mesmo edge, com uma variância que dá para sobreviver. A mesma sequência de seis perdas a 4,2 % a teria levado de 192.500 $ para 149.000 $ em vez de 64.000 $: a fração valia 85.000 $.</p>
+  <p><strong>O que mudou:</strong> Passou para um quarto de Kelly, 4,2% por operação. Não é reportado qualquer retorno para os meses que se seguiram — seis meses de uma única conta não te podem dizer se uma regra de dimensionamento funciona, e a aritmética pode, que é precisamente a razão de este caso estar aqui. Faz correr a mesma série de seis perdas a 4,2%: 0,958^6 = 0,773, portanto 192 500 $ passam a 149 000 $ em vez de 64 000 $. A mesma vantagem, a mesma série, o mesmo azar, 85 000 $ de diferença — e cada dólar veio da fração, não de nada que ela tenha aprendido sobre o mercado entretanto.</p>
   <p><strong>Lição:</strong> O Kelly cheio é o ótimo teórico e traz junto uma variância catastrófica. Um quarto de Kelly preserva cerca de 44 % da taxa de crescimento teórica com drawdowns de 12 % em vez de 67 %, e 44 % de uma taxa de crescimento à qual você sobrevive ganha de 100 % de uma à qual não sobrevive. Calcule o Kelly cheio e depois USE 25-50 % desse número.</p>
 </div>
 
@@ -386,7 +387,7 @@
           </div>
         </div>
         <div class="quiz-explanation">
-          <strong>Resposta correta: A.</strong> A armadilha do Kelly cheio: a conta de Lisa estava certa (16,8 % é mesmo o ótimo de crescimento), mas o Kelly cheio pressupõe capital infinito, zero emoção e um edge estável para sempre. A realidade: uma sequência de 6 operações perdedoras (0,32^6 = 0,1 % de probabilidade) causou um drawdown de -66,8 % em uma semana — 0,832^6 = 0,332, ou seja 192.500 $ → 64.000 $. O Kelly cheio produz drawdowns de 40-70 % mesmo com edge positivo. Ela passou para 1/4 de Kelly (4,2 %) e se recuperou de 71.000 $ para 111.000 $ em 6 meses, com drawdown máximo de -12 %. A mesma sequência de seis com 1/4 de Kelly dá 0,958^6 = 0,773, um drawdown de -22,7 % (192.500 $ → 149.000 $): a fração valia 85.000 $. O crescimento a uma fração f de Kelly vale (2f &#8722; f&#178;) do máximo, então um quarto de Kelly preserva cerca de 44 % da taxa de crescimento com um quarto da volatilidade. Kelly mostra o teto teórico, não a meta prática.
+          <strong>Resposta correta: A.</strong> A armadilha do Kelly completo: as contas da Lisa estavam certas (16,8% é o óptimo para o crescimento), mas o Kelly completo pressupõe capital infinito, zero emoções e uma vantagem estável para sempre. A realidade: uma série perdedora de 6 operações (0,32^6 = 0,1% de probabilidade) causou um drawdown de -66,8% numa semana — 0,832^6 = 0,332, ou seja 192 500 $ → 64 000 $. O Kelly completo produz quedas de 40-70% mesmo com vantagem positiva. Passou para 1/4 de Kelly (4,2%). A mesma série de 6 perdas nessa fração dá 0,958^6 = 0,773, um drawdown de -22,7% (192 500 $ → 149 000 $ em vez de 64 000 $): a fração valia 85 000 $. Repara que este número é aritmética sobre a série que realmente aconteceu, não uma afirmação sobre o que ela ganhou depois. O crescimento a uma fração f de Kelly é (2f − f²) do máximo, por isso um quarto de Kelly conserva cerca de 44% da taxa de crescimento com um quarto da volatilidade. Kelly mostra o tecto teórico, não o alvo prático.
         </div>
       </div>
       </div>
@@ -558,7 +559,7 @@
     <thead>
       <tr style="background:rgba(251,191,36,0.15)">
         <th>Estratégia</th>
-        <th>Kelly %</th>
+        <th>Risco por posição aberta</th>
         <th>Posições abertas</th>
         <th>Carga atual</th>
       </tr>
@@ -566,29 +567,29 @@
     <tbody>
       <tr>
         <td>Rompimentos</td>
-        <td>6.7%</td>
-        <td>1</td>
-        <td>6.7%</td>
+        <td>1.7%</td>
+        <td>2</td>
+        <td>3.4%</td>
       </tr>
       <tr>
         <td>Reversão</td>
-        <td>6.27%</td>
+        <td>1.6%</td>
         <td>0</td>
         <td>0%</td>
       </tr>
       <tr>
         <td>Volatilidade</td>
-        <td>3.5%</td>
+        <td>0.9%</td>
         <td>1</td>
-        <td>3.5%</td>
+        <td>0.9%</td>
       </tr>
       <tr style="background:rgba(251,191,36,0.15);font-weight:600">
         <td colspan="3">Carga total da carteira</td>
-        <td>10.2% ✅</td>
+        <td>4.3% ✅</td>
       </tr>
     </tbody>
   </table>
-  <p><strong>Regra:</strong> Antes de entrar em qualquer operação nova, confira este painel. Se adicioná-la empurrar a carga acima de 15 %, espere alguma posição existente fechar.</p>
+  <p><strong>Regra:</strong> Antes de entrares em qualquer nova operação, consulta este painel. Se a operação empurrasse o heat acima do tecto retalhista de 6%, espera que uma posição já aberta feche. Repara bem na coluna do meio: é o risco de cada posição aberta, não a alocação a que a estratégia tem direito. Pôr a fração de Kelly de uma estratégia numa coluna de heat é a forma mais comum de construir mal esta folha, e faz um livro que corre 4% de heat parecer que corre 10%.</p>
 </div>
 
 <h2 id="part-4-dynamic-position-sizing">Parte 4: tamanho de posição dinâmico</h2>
@@ -703,7 +704,7 @@
         <p><strong>Tarefa 1:</strong> Kelly cheio: A = 26,7 % (45 % de acerto, b 3,0), B = 35,8 % (65 % de acerto, b 1,2), C = 10,0 % (70 % de acerto, b 0,5).</p>
         <p><strong>Tarefa 2:</strong> Use um quarto de Kelly: cerca de 44 % da taxa de crescimento teórica em troca de drawdowns de 10-15 % em vez dos 40-70 % que o Kelly cheio produz. Resultado: A = 6,7 %, B = 9,0 %, C = 2,5 %.</p>
         <p><strong>Tarefa 3:</strong> B e C têm correlação de 0,6, então ambas levam o corte de 30 % da parte 3: A = 6,7 % (sem mudança), B = 9,0 % &#215; 0,70 = 6,3 %, C = 2,5 % &#215; 0,70 = 1,75 %. Total = 14,75 %.</p>
-        <p><strong>Tarefa 4:</strong> Conta de 100.000 $: A = 6.700 $ por operação, B = 6.300 $, C = 1.750 $, ou seja 14.750 $ de carga se as três estiverem abertas ao mesmo tempo, dentro de um teto de 15 %. Se os edges se mantiverem, espere algo em torno de 15-25 % de CAGR com drawdowns máximos de 12-18 %.</p>
+        <p><strong>Tarefa 4:</strong> Conta de 100 000 $: A = 6 700 $/operação, B = 6 300 $/operação, C = 1 750 $/operação — 14 750 $ de heat se as três estiverem abertas ao mesmo tempo. E é esta a verdadeira lição do exercício: um quarto de Kelly sobre três vantagens genuínas pede 14,75% da conta, e o limite retalhista de heat da Parte 3 diz 6%. As duas restrições contradizem-se, e ganha o limite. Kelly diz-te o máximo que uma única vantagem poderia justificar; o heat da carteira diz-te quanto perdes numa manhã má em tudo o que tens aberto. Quando entram em conflito, dimensiona pelo número mais pequeno — reduz as três por 6 / 14,75 = 0,41, o que dá cerca de 2 700 $, 2 600 $ e 700 $. Não se projecta aqui nenhum CAGR: três vantagens estimadas, um corte por correlação e um tecto não se combinam num retorno que alguém possa prever.</p>
       </div>
     </details>
   </div>
@@ -712,8 +713,8 @@
     <div style="margin-top:1rem">
       <p>Comece por estas 3 ações:</p>
       <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-        <li><strong>Calcule o % de Kelly da sua melhor estratégia</strong>. Você precisa de 3 números: (1) taxa de acerto (ganhos ÷ total), (2) ganho médio, (3) perda média. Fórmula: Kelly % = (TA × (GM ÷ PM) - (1-TA)) ÷ (GM ÷ PM). Exemplo: 58,3 % de acerto, 360 $ de ganho médio, 200 $ de perda média = 35,1 % de Kelly cheio. Use 1/4 de Kelly = 8,8 % por operação. Ed Thorp conduziu a Princeton/Newport Partners com Kelly fracionário por duas décadas, a cerca de 20 % ao ano.</li>
-        <li><strong>Implemente o tamanho de posição guiado pela curva de capital</strong>. Calcule a média móvel de 20 dias do seu capital. Acima da média = aumente o tamanho em 25 % (sequência boa). Abaixo da média = reduza 50 % (sequência ruim). Evita o revenge trading e deixa as fases vencedoras trabalharem. É a regra de disciplina mais antiga de qualquer mesa profissional: aperta quando o livro está funcionando, corta quando não está.</li>
+        <li><strong>Calcule o % de Kelly da sua melhor estratégia</strong>. Precisas de 3 números: (1) taxa de acerto (vencedoras ÷ total), (2) ganho médio, (3) perda média. Fórmula: Kelly % = (TA × (GM ÷ PM) - (1-TA)) ÷ (GM ÷ PM). Exemplo: 58,3% de acerto, 360 $ de ganho médio, 200 $ de perda média = 35,1% de Kelly completo. Usa 1/4 de Kelly = 8,8% por operação. Ed Thorp dirigiu a Princeton/Newport Partners com Kelly fracionário durante duas décadas a cerca de 15% ao ano líquidos de comissões.</li>
+        <li><strong>Implemente o tamanho de posição guiado pela curva de capital</strong>. Calcula a média de 20 dias do teu capital. Acima da média = aumenta o tamanho 25% (boa fase). Abaixo = reduz 50% (má fase). Evita o trading de vingança, maximiza as vencedoras. É a regra de disciplina mais antiga de uma mesa profissional: carrega quando o livro está a funcionar, corta quando não está. Mas tem claro o que isto é: uma camada de seguimento de tendência aplicada à tua própria curva de capital. Compensa quando as perdas se agrupam e os ganhos se agrupam, e custa-te quando os resultados apenas alternam, porque aí entras pequeno em cada recuperação e grande em cada queda. Testa-a contra o teu próprio histórico antes de confiares nela; numa curva sem séries é um travão pequeno e constante.</li>
         <li><strong>Faça um teste de estresse de Kelly na sua pior sequência de perdas</strong>. Encontre a pior sequência de perdas consecutivas (digamos 7). Calcule: 2 % de risco = -14 % de drawdown. Kelly cheio a 20 % = -79 % de drawdown (conta destruída). Um quarto de Kelly a 5 % = -30 % de drawdown (recuperável). O Kelly cheio VAI destruir você. Use um quarto de Kelly.</li>
       </ol>
 
@@ -799,7 +800,7 @@
     <ul>
       <li>Identificar a que estratégia pertence este setup</li>
       <li>Conferir a alocação restante dessa estratégia (você chegou ao limite de Kelly?)</li>
-      <li>Conferir a carga da carteira: o risco total de todas as posições abertas está abaixo do seu teto de 10-15 %?</li>
+      <li>Verifica o heat da carteira: o risco total de todas as posições abertas está abaixo do teu limite de 6%?</li>
       <li>Usar a Pentarch Pilot Line do Signal Pilot para confirmar o edge (fluxo institucional alinhado?)</li>
       <li>Se o edge estiver confirmado, use o Kelly cheio (um quarto/metade). Se não, use 0,5× Kelly ou passe</li>
     </ul>

@@ -188,7 +188,7 @@
     <tr>
       <td><strong>2. Pozisyon büyüklüğü</strong></td>
       <td>İşlem başına sabit %1-2 (edge’i yok sayar)</td>
-      <td>Edge’in gücüne göre ayarlanmış Kelly kriteri (kanıtlanmış edge’ler için %5-15)</td>
+      <td>Sabit bir kural yerine avantajın gücüne göre boyutlandırmak — avantaj tahmini değiştikçe yeniden hesaplanan bir Kelly kesri</td>
     </tr>
     <tr>
       <td><strong>3. Korelasyon yönetimi</strong></td>
@@ -266,7 +266,7 @@
 
 <p>1956’da Bell Labs’ta John Kelly Jr. tarafından geliştirildi ve şunlar tarafından kullanıldı:</p>
 <ul>
-  <li><strong>Ed Thorp:</strong> Kart sayarak blackjack’i yendi, ardından Princeton/Newport Partners’ı yirmi yıl boyunca kesirli Kelly ile yaklaşık yıllık %20 ile yönetti — 230 ayın 227’si artıda</li>
+  <li><strong>Ed Thorp:</strong> Kart sayarak blackjack’i yendi, ardından 1969’dan 1988’e Princeton/Newport Partners’ı kesirli Kelly ile yönetti — yatırımcıya net yılda yaklaşık %15, ücretlerden önce yaklaşık %19 ve 230 ayın 227’sinde kâr. Onun adına genelde anılan rakam brüt olanı; net olan ise bir yatırımcının gerçekten bileşiklendirdiği rakam</li>
   <li><strong>Warren Buffett ve Charlie Munger:</strong> İkisi de sabit ağırlıklar yerine edge’in gücüne göre büyüklük belirlediklerini anlattı: formülsüz Kelly mantığı</li>
   <li><strong>Renaissance Technologies:</strong> Jim Simons’ın Medallion fonu, tam da bu biçimde otuz yıl boyunca ücretler sonrası yıllık yaklaşık %39 bileşik getirdi: çok sayıda küçük ve zayıf korelasyonlu edge, her biri rahatlık için değil büyüme için ölçeklendi</li>
 </ul>
@@ -352,19 +352,20 @@
 <details class="accordion">
   <summary>Ed Thorp neden kesirli Kelly kullandı</summary>
   <div class="accordion-content">
-    <p>Thorp — blackjack’i yenen ve ardından Princeton/Newport’u yirmi yıl boyunca yaklaşık yıllık %20 ile yöneten matematikçi — kesirli Kelly’yi cesaretle değil aritmetikle savundu. Kelly’nin f kesrindeki büyüme maksimumun (2f &#8722; f&#178;) katıdır, volatilite ise f ile doğrusal ölçeklenir. Yarım Kelly’de 2(0,5) &#8722; 0,25 = %75 büyüme oranını salınımların yarısıyla korursunuz. Çeyrek Kelly’de 2(0,25) &#8722; 0,0625 = %44’ünü salınımların dörtte biriyle korursunuz. Drawdown’ınızı yarıya indirmek için büyüme oranınızın dörtte birini ödemek menüdeki en iyi takastır; dörtte bire indirmek için %56’sını ödemek ise çoğu kişinin yine de kabul etmesi gereken takas. Çünkü gerçekten içinden geçtiğiniz drawdown’lar, bileşik getiriyi toplamak için hâlâ orada olup olmayacağınıza karar verir. <strong>Kural:</strong> Gerçek işlemde Kelly’nin %25-50’sini kullanın.</p>
+    <p>Thorp — blackjack’i yenen, ardından yirmi yıl boyunca Princeton/Newport’u net yılda yaklaşık %15 ile yöneten matematikçi — kesirli Kelly’yi sinirlerle değil aritmetikle savundu. Kelly’nin f kesrindeki büyüme, azaminin (2f − f²)’si kadardır; oynaklık ise f ile doğrusal ölçeklenir. Yarım Kelly’de büyüme oranının 2(0,5) − 0,25 = %75’ini, salınımların yarısıyla korursun. Çeyrek Kelly’de 2(0,25) − 0,0625 = %44’ünü, salınımların dörtte biriyle korursun. Düşüşlerini yarıya indirmek için büyüme oranının dörtte birini ödemek menüdeki en iyi anlaşmadır; onları dörtte bire indirmek için %56’sını ödemek de çoğu kişinin yine de kabul etmesi gereken anlaşmadır — bileşik getiri için ortalıkta kalıp kalmayacağına, gerçekten içinden geçtiğin düşüşler karar verir. <strong>Kural:</strong> Gerçek işlemde Kelly’nin %25-50’sini kullanın.</p>
+    <p><strong>Ve ikinci bir neden var; bu, sinirlerden daha ağır basar.</strong> Kelly, p ve b’yi bildiğini varsayar. Bilmiyorsun. Onları kendi işlemlerinden oluşan sonlu bir örneklemden tahmin ettin ve o tahmin, formülün asla göremediği hata paylarını taşıyor. İçeri biraz iyimser bir isabet oranı ver; çıkan kesir biraz değil, epeyce büyük olur. Yukarıdaki %60 / 1,67 örneğini al: tam Kelly yaklaşık %36 diyor. Kazananların %60 olduğu yüz işlem, gerçek oranı olağan güven düzeyinde %50 ile %70 arasında bir yere koyar. p = 0,55’te formül %28 der. p = 0,50’de %20 der. Pozisyon büyüklüğün, yüz işlemin çözemeyeceği bir isabet oranı farkı yüzünden neredeyse iki katına varan bir aralıkta salınıyor. Üstelik hata sonuçları bakımından simetrik değil: Kelly’nin üzerinde bahis oynamak büyümeyi, az bahis oynamanın sana mal olduğundan çok daha hızlı yok eder; dolayısıyla fazla yüksek bir tahmin, aynı ölçüde yanlış ama düşük bir tahminden çok daha fazla acıtır. Kesirli Kelly’nin gerçekte satın aldığı şey budur. Ölçtüğün avantaj makul olarak göründüğünün yarısı kadar olabiliyorsa, ölçtüğün sayıların ima ettiğinin dörtte biriyle boyutlandırmak çekingenlik değildir — örneklemin tesadüfen gösterdiği avantaja değil, gerçekten sahip olabileceğin avantaja göre boyutlandırmaktır.</p>
   </div>
 </details>
 
   <div class="callout callout-success">
     <h4>💰 İşlenmiş örnek: Kelly oranı 500.000 $'lık bir defterde ne yapar</h4>
-    <p>500.000 dolarlık kitabı olan bir prop trader: %58 kazanma oranı, 450 dolar ortalama kazanç, 300 dolar ortalama kayıp. <strong>Eski (sabit %2):</strong> Yılda +140.000 dolar (+%28), Sharpe 1,2, %15 drawdown. <strong>Hesap:</strong> b = 450/300 = 1,5, yani tam Kelly = (0,58 &#215; 1,5 &#8722; 0,42) / 1,5 = %30,0 — asla işleme sokmayacağı bir rakam. Onun onda birine indi: işlem başına %3. <strong>Yeni (%3):</strong> Yılda +224.000 dolar (+%45), Sharpe yine 1,2, %22 drawdown. Pozisyon büyüklüğü riske göre düzeltilmiş getirinizi iyileştirmez; getiri de drawdown da kabaca 1,5 katına çıktı. Kelly’nin ona kazandırdığı şey, %3’ün tavana daha çok uzak olduğu güveniydi; böylece kanıtlanmış bir edge’in üçte ikisini boşta bırakmayı bıraktı.</p>
+    <p>500.000 dolarlık kitabı olan bir prop trader: %58 kazanma oranı, 450 dolar ortalama kazanç, 300 dolar ortalama kayıp. <strong>Eski (sabit %2):</strong> Yılda +140.000 dolar (+%28), Sharpe 1,2, %15 drawdown. <strong>Hesap:</strong> b = 450/300 = 1,5, yani tam Kelly = (0,58 &#215; 1,5 &#8722; 0,42) / 1,5 = %30,0 — asla işleme sokmayacağı bir rakam. Onun onda birine indi: işlem başına %3. <strong>Yeni (%3):</strong> Yılda +210 bin $ (+%42), Sharpe yine 1,2, %22 DD. Boyutlandırma riske göre düzeltilmiş getirini iyileştirmez — getiri de düşüş de yaklaşık 1,5 kat ölçeklendi. Kelly’nin ona kazandırdığı şey, %3’ün tavana yaklaşmadığına dair güvendi; böylece kanıtlanmış bir avantajın üçte ikisini kullanmadan bırakmayı bıraktı.</p>
   </div>
 <div class="callout callout-danger">
   <h4>📉 VAKA ÇALIŞMASI: Lisa’nın tam Kelly ile yaşadığı 114.000 dolarlık felaket</h4>
   <p><strong>Kurulum:</strong> Lisa Chang (bileşik örnek), credit spread’lerde %68 kazanma oranıyla çalışan bir opsiyon traderı — credit spread’lerin gerçekte sahip olduğu biçimle: küçük kazançlar, büyük kayıplar (ortalama kazanç 250 dolar, ortalama kayıp 400 dolar, R:R 0,63:1). İşlem başına beklenen değer +42 dolar, gerçek bir edge. Tam Kelly = (0,68 &#215; 0,625 &#8722; 0,32) / 0,625 = işlem başına %16,8. 185.000 dolarlık hesap, Nisan-Haziran 2024.</p>
   <p><strong>Felaket:</strong> 1-2. haftalar: tam Kelly ile +7.500 dolar kâr, hesap 192.500 dolarda. 3. hafta: 6 işlemlik bir kayıp serisi (0,32^6 = %0,1 olasılık). Her kayıp %16,8 götürüyor ve bileşik olarak: 0,832^6 = 0,332, yani -%66,8 drawdown. Hesap BİR HAFTADA 192.500 dolardan 64.000 dolara düştü. Çeyreğin kalanını küçük işlem yaparak geçirdi ve haziranı 71.000 dolarla kapattı: 3 ayda -114.000 dolar, -%62 — üstelik edge’i hiç tartışmalı olmayan bir stratejide.</p>
-  <p><strong>Toparlanma:</strong> 1/4 Kelly’ye geçti (işlem başına %4,2). Sonuç: 6 ayda 71.000 → 111.000 dolar (+%56), azami drawdown -%12 (-%67 yerine). Aynı edge, hayatta kalınabilir varyans. Aynı altılı kayıp serisi %4,2 ile onu 192.500 dolardan 64.000 değil 149.000 dolara götürürdü: kesir 85.000 dolar değerindeydi.</p>
+  <p><strong>Ne değişti:</strong> Çeyrek Kelly’ye, işlem başına %4,2’ye geçti. Ardından gelen aylar için herhangi bir getiri bildirilmiyor — tek bir hesabın altı ayı, bir boyutlandırma kuralının işe yarayıp yaramadığını sana söyleyemez; aritmetik ise söyleyebilir ve bu vaka tam olarak bunun için burada. Aynı altı kayıplık seriyi %4,2 ile çalıştır: 0,958^6 = 0,773, yani 192,5 bin $ 64 bin $ yerine 149 bin $ olur. Aynı avantaj, aynı seri, aynı şanssızlık, 85 bin $ fark — ve bunun her doları kesirden geldi, o arada piyasa hakkında öğrendiği bir şeyden değil.</p>
   <p><strong>Ders:</strong> Tam Kelly teorik optimumdur ve yanında felaket düzeyinde bir varyans getirir. Çeyrek Kelly, teorik büyüme oranının yaklaşık %44’ünü korurken drawdown’ı %67 yerine %12’de tutar — ve hayatta kaldığınız bir büyüme oranının %44’ü, kalamadığınız bir oranın %100’ünü yener. Tam Kelly’yi hesaplayın, sonra o sayının %25-50’sini KULLANIN.</p>
 </div>
 
@@ -386,7 +387,7 @@
           </div>
         </div>
         <div class="quiz-explanation">
-          <strong>Doğru: A.</strong> Tam Kelly tuzağı: Lisa’nın hesabı doğruydu (%16,8 gerçekten büyüme için optimaldir), ama tam Kelly sonsuz sermaye, sıfır duygu ve sonsuza kadar istikrarlı bir edge varsayar. Gerçek: 6 işlemlik bir kayıp serisi (0,32^6 = %0,1 olasılık) bir haftada -%66,8 drawdown yarattı — 0,832^6 = 0,332, yani 192.500 → 64.000 dolar. Tam Kelly, pozitif edge’le bile %40-70 arası drawdown üretir. 1/4 Kelly’ye (%4,2) geçti ve 6 ayda 71.000 dolardan 111.000 dolara döndü, azami drawdown -%12. Aynı altılı seri 1/4 Kelly ile 0,958^6 = 0,773 verir, yani -%22,7 drawdown (192.500 → 149.000 dolar): kesir 85.000 dolar değerindeydi. Kelly’nin f kesrindeki büyüme maksimumun (2f &#8722; f&#178;) katıdır; dolayısıyla çeyrek Kelly, volatilitenin dörtte biriyle büyüme oranının yaklaşık %44’ünü korur. Kelly teorik tavanı gösterir, pratik hedefi değil.
+          <strong>Doğru: A.</strong> Tam Kelly tuzağı: Lisa’nın hesabı doğruydu (%16,8 büyüme için optimaldir), ama tam Kelly sonsuz bir sermayeyi, hiç duygu olmamasını ve sonsuza dek istikrarlı bir avantajı varsayar. Gerçek şu: 6 işlemlik bir kayıp serisi (0,32^6 = %0,1 olasılık) bir haftada -%66,8’lik bir düşüşe yol açtı — 0,832^6 = 0,332, yani 192,5 bin $ → 64 bin $. Tam Kelly, avantaj pozitif olsa bile %40-70 arası düşüşler üretir. O da 1/4 Kelly’ye (%4,2) geçti. Aynı 6 kayıplık seri bu kesirde 0,958^6 = 0,773 verir, -%22,7’lik bir düşüş (192,5 bin $ → 64 bin $ yerine 149 bin $): kesir 85 bin $ değerindeydi. Dikkat et, bu rakam gerçekten yaşanmış seri üzerinde yapılan bir aritmetiktir; sonrasında ne kazandığına dair bir iddia değil. Kelly’nin f kesrindeki büyüme azaminin (2f − f²)’sidir; dolayısıyla çeyrek Kelly, oynaklığın dörtte biriyle büyüme oranının yaklaşık %44’ünü korur. Kelly teorik tavanı gösterir, pratik hedefi değil.
         </div>
       </div>
       </div>
@@ -558,7 +559,7 @@
     <thead>
       <tr style="background:rgba(251,191,36,0.15)">
         <th>Strateji</th>
-        <th>Kelly %</th>
+        <th>Açık işlem başına risk</th>
         <th>Açık pozisyonlar</th>
         <th>Mevcut yük</th>
       </tr>
@@ -566,29 +567,29 @@
     <tbody>
       <tr>
         <td>Kırılımlar</td>
-        <td>6.7%</td>
-        <td>1</td>
-        <td>6.7%</td>
+        <td>1.7%</td>
+        <td>2</td>
+        <td>3.4%</td>
       </tr>
       <tr>
         <td>Ortalamaya dönüş</td>
-        <td>6.27%</td>
+        <td>1.6%</td>
         <td>0</td>
         <td>0%</td>
       </tr>
       <tr>
         <td>Oynaklık</td>
-        <td>3.5%</td>
+        <td>0.9%</td>
         <td>1</td>
-        <td>3.5%</td>
+        <td>0.9%</td>
       </tr>
       <tr style="background:rgba(251,191,36,0.15);font-weight:600">
         <td colspan="3">Toplam portföy yükü</td>
-        <td>10.2% ✅</td>
+        <td>4.3% ✅</td>
       </tr>
     </tbody>
   </table>
-  <p><strong>Kural:</strong> Yeni bir işleme girmeden önce bu panele bakın. İşlemi eklemek yükü %15’in üzerine çıkaracaksa, mevcut bir pozisyonun kapanmasını bekleyin.</p>
+  <p><strong>Kural:</strong> Yeni bir işleme girmeden önce bu panele bak. İşlem heat’i bireysel yatırımcı tavanı olan %6’nın üzerine çıkaracaksa, mevcut bir pozisyon kapanana kadar bekle. Ortadaki sütuna dikkatle bak: orada olan, her açık işlemdeki risktir; stratejinin hakkı olan tahsis değil. Bir stratejinin Kelly kesrini heat sütununa yazmak, bu tabloyu yanlış kurmanın en yaygın yoludur ve %4 heat taşıyan bir defteri %10 taşıyor gibi gösterir.</p>
 </div>
 
 <h2 id="part-4-dynamic-position-sizing">Bölüm 4: dinamik pozisyon büyüklüğü</h2>
@@ -703,7 +704,7 @@
         <p><strong>Görev 1:</strong> Tam Kelly: A = %26,7 (%45 kazanma, b 3,0), B = %35,8 (%65 kazanma, b 1,2), C = %10,0 (%70 kazanma, b 0,5).</p>
         <p><strong>Görev 2:</strong> Çeyrek Kelly kullanın: tam Kelly’nin ürettiği %40-70 yerine %10-15 drawdown karşılığında teorik büyüme oranının yaklaşık %44’ü. Sonuç: A = %6,7, B = %9,0, C = %2,5.</p>
         <p><strong>Görev 3:</strong> B ile C’nin korelasyonu 0,6, dolayısıyla ikisi de bölüm 3’teki %30 kesintiyi alır: A = %6,7 (değişmez), B = %9,0 &#215; 0,70 = %6,3, C = %2,5 &#215; 0,70 = %1,75. Toplam = %14,75.</p>
-        <p><strong>Görev 4:</strong> 100.000 dolarlık hesap: A = işlem başına 6.700 dolar, B = 6.300 dolar, C = 1.750 dolar — üçü aynı anda açıksa 14.750 dolarlık yük, yani %15’lik tavanın içinde. Edge’ler korunursa kabaca %15-25 yıllık bileşik getiri ve %12-18 azami drawdown bekleyin.</p>
+        <p><strong>Görev 4:</strong> 100 bin $ hesap: A = işlem başına 6.700 $, B = 6.300 $, C = 1.750 $ — üçü aynı anda açıksa 14.750 $ heat. Ve alıştırmanın asıl dersi budur: üç gerçek avantaj üzerinde çeyrek Kelly hesabın %14,75’ini ister, Bölüm 3’teki bireysel heat tavanı ise %6 der. İki kısıt birbiriyle çelişir ve tavan kazanır. Kelly sana tek bir avantajın haklı çıkarabileceği en yüksek miktarı söyler; portföy heat’i ise elindeki her şey üzerinden kötü bir sabahta ne kaybedeceğini. Çatıştıklarında küçük olan sayıya göre boyutlandır — üçünü de 6 / 14,75 = 0,41 ile ölçekle, yaklaşık 2.700 $, 2.600 $ ve 700 $ elde et. Burada hiçbir CAGR öngörülmüyor: üç tahmini avantaj, bir korelasyon kesintisi ve bir tavan, kimsenin öngörebileceği bir getiriye toplanmaz.</p>
       </div>
     </details>
   </div>
@@ -712,8 +713,8 @@
     <div style="margin-top:1rem">
       <p>Şu 3 adımla başlayın:</p>
       <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-        <li><strong>En iyi stratejinizin Kelly yüzdesini hesaplayın</strong>. 3 sayıya ihtiyacınız var: (1) kazanma oranı (kazançlar ÷ toplam), (2) ortalama kazanç, (3) ortalama kayıp. Formül: Kelly % = (KO × (OK ÷ OKy) - (1-KO)) ÷ (OK ÷ OKy). Örnek: %58,3 kazanma oranı, 360 dolar ortalama kazanç, 200 dolar ortalama kayıp = %35,1 tam Kelly. 1/4 Kelly kullanın = işlem başına %8,8. Ed Thorp, Princeton/Newport Partners’ı yirmi yıl boyunca kesirli Kelly ile yaklaşık yıllık %20 getiriyle yönetti.</li>
-        <li><strong>Sermaye eğrisine bağlı pozisyon büyüklüğünü uygulayın</strong>. Sermayenizin 20 günlük hareketli ortalamasını hesaplayın. Ortalamanın üzerinde = büyüklüğü %25 artırın (iyi seri). Altında = %50 azaltın (kötü seri). Bu, intikam işlemlerini önler ve kazandığınız dönemleri büyütür. Profesyonel bir masadaki en eski disiplin kuralıdır: kitap çalışıyorsa bastırırsın, çalışmıyorsa kısarsın.</li>
+        <li><strong>En iyi stratejinizin Kelly yüzdesini hesaplayın</strong>. 3 sayıya ihtiyacın var: (1) isabet oranı (kazananlar ÷ toplam), (2) ortalama kazanç, (3) ortalama kayıp. Formül: Kelly % = (İO × (OK ÷ OZ) - (1-İO)) ÷ (OK ÷ OZ). Örnek: %58,3 isabet, 360 $ ortalama kazanç, 200 $ ortalama kayıp = %35,1 tam Kelly. 1/4 Kelly, yani işlem başına %8,8 kullan. Ed Thorp, Princeton/Newport Partners’ı yirmi yıl boyunca kesirli Kelly ile, ücretlerden sonra yılda yaklaşık %15 ile yönetti.</li>
+        <li><strong>Sermaye eğrisine bağlı pozisyon büyüklüğünü uygulayın</strong>. Sermayenin 20 günlük ortalamasını hesapla. Ortalamanın üstünde = boyutu %25 artır (iyi seri). Altında = %50 azalt (kötü seri). İntikam işlemini önler, kazananları büyütür. Profesyonel bir masadaki en eski disiplin kuralıdır: defter çalışırken bastır, çalışmıyorken kes. Ama bunun ne olduğu konusunda net ol: kendi sermaye eğrine uygulanan bir trend takip katmanı. Kayıplar kümelenip kazançlar kümelendiğinde ödeme yapar; sonuçlar sadece dönüşümlü geldiğinde ise sana pahalıya patlar, çünkü o zaman her toparlanmaya küçük, her düşüşe büyük girersin. Güvenmeden önce kendi işlem geçmişinde test et; seri barındırmayan bir eğride bu, küçük ama sürekli bir frendir.</li>
         <li><strong>En kötü kayıp serinizde Kelly stres testi yapın</strong>. Üst üste gelen en kötü kayıp serinizi bulun (diyelim 7). Hesaplayın: %2 risk = -%14 drawdown. %20’lik tam Kelly = -%79 drawdown (hesap yok olur). %5’lik çeyrek Kelly = -%30 drawdown (telafi edilebilir). Tam Kelly sizi MUTLAKA yok eder. Çeyrek Kelly kullanın.</li>
       </ol>
 
@@ -799,7 +800,7 @@
     <ul>
       <li>Bu setupin hangi stratejiye ait olduğunu belirleyin</li>
       <li>O stratejinin kalan payını kontrol edin (Kelly limitine ulaştınız mı?)</li>
-      <li>Portföy yükünü kontrol edin: tüm açık pozisyonlardaki toplam risk %10-15’lik tavanınızın altında mı?</li>
+      <li>Portföy heat’ini kontrol et: tüm açık pozisyonlardaki toplam risk %6’lık tavanının altında mı?</li>
       <li>Edge’i doğrulamak için Signal Pilot Pentarch Pilot Line kullanın (kurumsal akış aynı yönde mi?)</li>
       <li>Edge doğrulanmışsa tam (çeyrek/yarım) Kelly kullanın. Doğrulanmamışsa 0,5× Kelly kullanın ya da geçin</li>
     </ul>

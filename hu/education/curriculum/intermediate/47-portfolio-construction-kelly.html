@@ -188,7 +188,7 @@
     <tr>
       <td><strong>2. Pozícióméret</strong></td>
       <td>Fix 1-2 % ügyletenként (figyelmen kívül hagyja az edge-et)</td>
-      <td>Az edge erősségéhez igazított Kelly-kritérium (bizonyított edge-eknél 5-15 %)</td>
+      <td>Az előny erőssége szerint méretezni, nem egy általános szabály szerint – a Kelly egy hányada, újraszámolva, ahogy az előny becslése változik</td>
     </tr>
     <tr>
       <td><strong>3. Korrelációkezelés</strong></td>
@@ -266,7 +266,7 @@
 
 <p>John Kelly Jr. dolgozta ki a Bell Labsban 1956-ban, és azóta használták:</p>
 <ul>
-  <li><strong>Ed Thorp:</strong> Lapszámolással verte a blackjacket, majd két évtizeden át törtrész-Kellyvel vezette a Princeton/Newport Partnerst nagyjából évi 20 %-kal — 230 hónapból 227 volt nyereséges</li>
+  <li><strong>Ed Thorp:</strong> Lapszámolással verte meg a blackjacket, majd 1969-től 1988-ig frakcionális Kellyvel vezette a Princeton/Newport Partnerst – a befektetőknek nettó évi nagyjából 15%, díjak előtt körülbelül 19%, 230 hónapból 227 nyereséges. Az a szám, amelyet szokás emlegetni vele kapcsolatban, a bruttó; a nettó az, amit egy befektető valóban kamatoztatott</li>
   <li><strong>Warren Buffett és Charlie Munger:</strong> Mindketten úgy fogalmaztak, hogy az edge erőssége szerint méreteznek, nem fix súlyok szerint: Kelly-logika képlet nélkül</li>
   <li><strong>Renaissance Technologies:</strong> Jim Simons Medallion alapja három évtizeden át évi nagyjából 39 %-ot hozott díjak után, pontosan ebben a formában: sok kicsi, gyengén korreláló edge, mindegyik növekedésre és nem kényelemre méretezve</li>
 </ul>
@@ -352,19 +352,20 @@
 <details class="accordion">
   <summary>Miért használt Ed Thorp törtrész-Kellyt</summary>
   <div class="accordion-content">
-    <p>Thorp — a matematikus, aki megverte a blackjacket, majd két évtizeden át nagyjából évi 20 %-kal vezette a Princeton/Newportot — aritmetikával érvelt a törtrész-Kelly mellett, nem idegekkel. A növekedés a Kelly f törtrészénél a maximum (2f &#8722; f&#178;) szerese, míg a volatilitás lineárisan skálázódik f-fel. Fél Kellynél 2(0,5) &#8722; 0,25 = 75 %-át tartod meg a növekedési ütemnek a kilengések felével. Negyed Kellynél 2(0,25) &#8722; 0,0625 = 44 %-át a kilengések negyedével. A növekedési ütem negyedét kifizetni azért, hogy feleződjenek a drawdownjaid, a legjobb üzlet az étlapon; és 56 %-ot fizetni azért, hogy negyedelődjenek, az is olyan üzlet, amit a legtöbbeknek meg kellene kötniük — mert azok a drawdownok döntik el, hogy egyáltalán ott leszel-e még kamatoztatni, amelyeken ténylegesen átmész. <strong>Szabály:</strong> Éles kereskedésben használd a Kelly 25-50 %-át.</p>
+    <p>Thorp – a matematikus, aki megverte a blackjacket, majd két évtizeden át nagyjából évi 15% nettóval vezette a Princeton/Newportot – a frakcionális Kelly mellett számtannal érvelt, nem idegekkel. A növekedés a Kelly f hányadánál a maximum (2f − f²)-szerese, míg a volatilitás f-fel lineárisan skálázódik. Fél Kellynél a növekedési ütem 2(0,5) − 0,25 = 75%-át tartod meg a kilengések feléért. Negyed Kellynél 2(0,25) − 0,0625 = 44%-át a kilengések negyedéért. A növekedési ütemed negyedét fizetni azért, hogy feleződjenek a visszaeséseid, a legjobb üzlet az étlapon; és 56%-át fizetni azért, hogy negyedelődjenek, olyan üzlet, amelyet a legtöbb embernek akkor is meg kellene kötnie – az dönti el, ott leszel-e egyáltalán kamatoztatni, hogy milyen visszaeséseken élsz át ténylegesen. <strong>Szabály:</strong> Éles kereskedésben használd a Kelly 25-50 %-át.</p>
+    <p><strong>És van egy második ok is, amely többet nyom a latban, mint az idegek.</strong> A Kelly feltételezi, hogy ismered p-t és b-t. Nem ismered. Saját kereskedéseid véges mintájából becsülted őket, és ez a becslés olyan hibahatárokat hordoz, amelyeket a képlet sosem lát. Adj be egy kicsivel optimistább találati arányt, és a kijövő hányad nem kicsivel lesz túl nagy, hanem jelentősen. Vedd a fenti 60% / 1,67 példát, ahol a teljes Kelly nagyjából 36%-ot mond. Száz kereskedés 60% nyertessel a valódi arányt szokásos konfidencia mellett valahová 50% és 70% közé helyezi. p = 0,55-nél a képlet 28%-ot mond. p = 0,50-nél 20%-ot. A pozícióméreted csaknem kétszeres tartományban ingadozik egy olyan találatiarány-különbség miatt, amelyet száz kereskedés egyszerűen nem tud eldönteni. És a hiba a következményeit tekintve nem szimmetrikus: a Kelly fölé tenni sokkal gyorsabban pusztítja a növekedést, mint amennyibe az alultétel kerül, így egy túl magas becslés jóval többet árt, mint egy ugyanennyire téves alacsony. Ezt veszi meg neked valójában a frakcionális Kelly. Ha a mért előnyöd hihetően a felét is érhetné annak, aminek látszik, akkor a mért számaid által sugallt hányad negyedével méretezni nem félénkség – hanem arra az előnyre méretezni, amellyel talán ténylegesen rendelkezel, nem arra, amelyet a mintád véletlenül megmutatott.</p>
   </div>
 </details>
 
   <div class="callout callout-success">
     <h4>💰 Kidolgozott példa: mit tesz a Kelly-hányad egy 500 000 $-os könyvvel</h4>
-    <p>Prop trader egy 500 000 dolláros könyvvel: 58 % találati arány, 450 dollár átlagos nyereség, 300 dollár átlagos veszteség. <strong>Régen (fix 2 %):</strong> Évi +140 000 dollár (+28 %), Sharpe 1,2, 15 % drawdown. <strong>A számítás:</strong> b = 450/300 = 1,5, tehát a teljes Kelly = (0,58 &#215; 1,5 &#8722; 0,42) / 1,5 = 30,0 % — olyan szám, amit soha nem kereskedett volna. Ennek a tizedére állt rá: ügyletenként 3 %-ra. <strong>Most (3 %):</strong> Évi +224 000 dollár (+45 %), a Sharpe továbbra is 1,2, 22 % drawdown. A pozícióméret nem javítja a kockázattal korrigált hozamodat: a hozam és a drawdown is nagyjából 1,5-szeresére nőtt. Amit Kelly adott neki, az a bizonyosság volt, hogy a 3 % még messze van a plafontól, így abbahagyta, hogy egy bizonyított edge kétharmadát parlagon hagyja.</p>
+    <p>Prop trader egy 500 000 dolláros könyvvel: 58 % találati arány, 450 dollár átlagos nyereség, 300 dollár átlagos veszteség. <strong>Régen (fix 2 %):</strong> Évi +140 000 dollár (+28 %), Sharpe 1,2, 15 % drawdown. <strong>A számítás:</strong> b = 450/300 = 1,5, tehát a teljes Kelly = (0,58 &#215; 1,5 &#8722; 0,42) / 1,5 = 30,0 % — olyan szám, amit soha nem kereskedett volna. Ennek a tizedére állt rá: ügyletenként 3 %-ra. <strong>Most (3 %):</strong> +210 ezer $/év (+42%), a Sharpe továbbra is 1,2, a DD 22%. A méretezés nem javítja a kockázattal korrigált hozamodat – a hozam és a visszaesés is nagyjából 1,5-szeresére skálázódott. Amit Kelly adott neki, az a bizonyosság volt, hogy a 3% meg sem közelíti a plafont, így abbahagyhatta, hogy egy bizonyított előny kétharmadát kihasználatlanul hagyja.</p>
   </div>
 <div class="callout callout-danger">
   <h4>📉 ESETTANULMÁNY: Lisa 114 000 dolláros bukása a teljes Kellyvel</h4>
   <p><strong>Felállás:</strong> Lisa Chang (összeállított példa), opciós kereskedő 68 %-os találati aránnyal credit spreadeken — pontosan abban a formában, ahogy a credit spreadek valójában viselkednek: kis nyereségek, nagy veszteségek (átlagos nyereség 250 dollár, átlagos veszteség 400 dollár, R:R 0,63:1). Várható érték ügyletenként +42 dollár, valódi edge. Teljes Kelly = (0,68 &#215; 0,625 &#8722; 0,32) / 0,625 = ügyletenként 16,8 %. 185 000 dolláros számla, 2024. április-június.</p>
   <p><strong>A bukás:</strong> 1-2. hét: +7500 dollár nyereség teljes Kellyvel, a számla 192 500 dolláron. 3. hét: hat vesztes ügylet egymás után (0,32^6 = 0,1 % valószínűség). Minden veszteség elvisz 16,8 %-ot, kamatos kamattal: 0,832^6 = 0,332, azaz -66,8 %-os drawdown. A számla EGYETLEN HÉT alatt 192 500 dollárról 64 000 dollárra esett. A negyedév hátralévő részét kis mérettel kereskedte végig, és júniust 71 000 dolláron zárta: 3 hónap alatt -114 000 dollár, -62 % — egy olyan stratégián, amelynek az edge-e soha nem volt kérdéses.</p>
-  <p><strong>Talpra állás:</strong> Átállt az 1/4 Kellyre (ügyletenként 4,2 %). Eredmény: 6 hónap alatt 71 000 → 111 000 dollár (+56 %), a maximális drawdown -12 % (a -67 % helyett). Ugyanaz az edge, de túlélhető szórással. Ugyanaz a hatos veszteségszéria 4,2 %-kal 192 500 dollárról nem 64 000, hanem 149 000 dollárra vitte volna: a törtrész 85 000 dollárt ért.</p>
+  <p><strong>Mi változott:</strong> Áttért negyed Kellyre, kereskedésenként 4,2%-ra. A rákövetkező hónapokra semmilyen hozamot nem közlünk – egyetlen számla hat hónapja nem mondja meg, működik-e egy méretezési szabály, a számtan viszont megmondja, és pontosan ezért van itt ez az esettanulmány. Futtasd le ugyanazt a hat veszteséges sorozatot 4,2%-kal: 0,958^6 = 0,773, tehát 192,5 ezer $-ból 64 ezer $ helyett 149 ezer $ lesz. Ugyanaz az előny, ugyanaz a sorozat, ugyanaz a balszerencse, 85 ezer $ különbség – és ennek minden dollárja a hányadból jött, nem valamiből, amit közben a piacról megtanult.</p>
   <p><strong>Tanulság:</strong> A teljes Kelly az elméleti optimum, és katasztrofális szórást hoz magával. A negyed Kelly az elméleti növekedési ütem nagyjából 44 %-át tartja meg, miközben a drawdown 67 % helyett 12 % — és egy olyan növekedési ütem 44 %-a, amelyet túlélsz, többet ér, mint egy olyan 100 %-a, amelyet nem. Számold ki a teljes Kellyt, aztán HASZNÁLD annak a 25-50 %-át.</p>
 </div>
 
@@ -386,7 +387,7 @@
           </div>
         </div>
         <div class="quiz-explanation">
-          <strong>Helyes: A.</strong> A teljes Kelly csapdája: Lisa számítása helyes volt (a 16,8 % tényleg optimális a növekedésre), de a teljes Kelly végtelen tőkét, nulla érzelmet és örökké stabil edge-et feltételez. A valóság: hat vesztes ügylet egymás után (0,32^6 = 0,1 % valószínűség) egy hét alatt -66,8 %-os drawdownt okozott — 0,832^6 = 0,332, azaz 192 500 → 64 000 dollár. A teljes Kelly pozitív edge mellett is 40-70 %-os drawdownokat termel. Átállt az 1/4 Kellyre (4,2 %), és 6 hónap alatt 71 000 dollárról 111 000 dollárra jött vissza, -12 %-os maximális drawdownnal. Ugyanaz a hatos széria 1/4 Kellyvel 0,958^6 = 0,773, azaz -22,7 %-os drawdown (192 500 → 149 000 dollár): a törtrész 85 000 dollárt ért. A növekedés a Kelly f törtrészénél a maximum (2f &#8722; f&#178;) szerese, tehát a negyed Kelly a volatilitás negyedéért a növekedési ütem nagyjából 44 %-át tartja meg. A Kelly az elméleti plafont mutatja, nem a gyakorlati célt.
+          <strong>Helyes: A.</strong> A teljes Kelly csapdája: Lisa számolása helyes volt (16,8% a növekedés szempontjából optimális), de a teljes Kelly végtelen tőkét, nulla érzelmet és örökké stabil előnyt feltételez. A valóság: egy 6 kereskedésből álló veszteségsorozat (0,32^6 = 0,1% valószínűség) egy hét alatt -66,8%-os visszaesést okozott – 0,832^6 = 0,332, vagyis 192,5 ezer $ → 64 ezer $. A teljes Kelly pozitív előny mellett is 40-70%-os visszaeséseket termel. Áttért 1/4 Kellyre (4,2%). Ugyanaz a 6 veszteséges sorozat ennél a hányadnál 0,958^6 = 0,773, azaz -22,7%-os visszaesés (192,5 ezer $ → 64 ezer $ helyett 149 ezer $): a hányad 85 ezer $-t ért. Vedd észre, hogy ez a szám a ténylegesen megtörtént sorozaton végzett számtan, nem állítás arról, mennyit keresett utána. A növekedés a Kelly f hányadánál a maximum (2f − f²)-szerese, tehát a negyed Kelly a volatilitás negyedéért a növekedési ütem nagyjából 44%-át tartja meg. A Kelly az elméleti plafont mutatja, nem a gyakorlati célt.
         </div>
       </div>
       </div>
@@ -558,7 +559,7 @@
     <thead>
       <tr style="background:rgba(251,191,36,0.15)">
         <th>Stratégia</th>
-        <th>Kelly %</th>
+        <th>Kockázat nyitott pozíciónként</th>
         <th>Nyitott pozíciók</th>
         <th>Jelenlegi terhelés</th>
       </tr>
@@ -566,29 +567,29 @@
     <tbody>
       <tr>
         <td>Kitörések</td>
-        <td>6.7%</td>
-        <td>1</td>
-        <td>6.7%</td>
+        <td>1.7%</td>
+        <td>2</td>
+        <td>3.4%</td>
       </tr>
       <tr>
         <td>Visszatérés</td>
-        <td>6.27%</td>
+        <td>1.6%</td>
         <td>0</td>
         <td>0%</td>
       </tr>
       <tr>
         <td>Volatilitás</td>
-        <td>3.5%</td>
+        <td>0.9%</td>
         <td>1</td>
-        <td>3.5%</td>
+        <td>0.9%</td>
       </tr>
       <tr style="background:rgba(251,191,36,0.15);font-weight:600">
         <td colspan="3">Teljes portfólióterhelés</td>
-        <td>10.2% ✅</td>
+        <td>4.3% ✅</td>
       </tr>
     </tbody>
   </table>
-  <p><strong>Szabály:</strong> Mielőtt bármilyen új ügyletbe belépnél, nézd meg ezt a műszerfalat. Ha az ügylet 15 % fölé vinné a terhelést, várd meg, amíg egy meglévő pozíció lezárul.</p>
+  <p><strong>Szabály:</strong> Mielőtt bármilyen új kereskedésbe belépnél, nézd meg ezt a műszerfalat. Ha a kereskedés a heatet a 6%-os lakossági korlát fölé tolná, várd meg, amíg egy meglévő pozíció lezárul. A középső oszlopot nézd meg alaposan: az az egyes nyitott kereskedések kockázata, nem az a keret, amely a stratégiát megilleti. Egy stratégia Kelly-hányadát a heat oszlopba írni a leggyakoribb módja annak, hogy ezt a táblát rosszul építsd fel, és egy 4% heattel futó könyvet úgy mutat, mintha 10%-kal futna.</p>
 </div>
 
 <h2 id="part-4-dynamic-position-sizing">4. rész: dinamikus pozícióméret</h2>
@@ -703,7 +704,7 @@
         <p><strong>1. feladat:</strong> Teljes Kelly: A = 26,7 % (45 % találati arány, b 3,0), B = 35,8 % (65 % találati arány, b 1,2), C = 10,0 % (70 % találati arány, b 0,5).</p>
         <p><strong>2. feladat:</strong> Használj negyed Kellyt: az elméleti növekedési ütem nagyjából 44 %-a, cserébe 10-15 %-os drawdownért a teljes Kelly 40-70 %-a helyett. Eredmény: A = 6,7 %, B = 9,0 %, C = 2,5 %.</p>
         <p><strong>3. feladat:</strong> B és C korrelációja 0,6, így mindkettő megkapja a 3. részben szereplő 30 %-os levágást: A = 6,7 % (változatlan), B = 9,0 % &#215; 0,70 = 6,3 %, C = 2,5 % &#215; 0,70 = 1,75 %. Összesen = 14,75 %.</p>
-        <p><strong>4. feladat:</strong> 100 000 dolláros számla: A = ügyletenként 6700 dollár, B = 6300 dollár, C = 1750 dollár — vagyis 14 750 dollár terhelés, ha mind a három egyszerre nyitva van, ami belefér egy 15 %-os korlátba. Ha az edge-ek kitartanak, nagyjából 15-25 % éves hozamra és 12-18 %-os maximális drawdownra számíts.</p>
+        <p><strong>4. feladat:</strong> 100 ezer $-os számla: A = 6 700 $/kereskedés, B = 6 300 $/kereskedés, C = 1 750 $/kereskedés – 14 750 $ heat, ha mindhárom egyszerre nyitva van. És épp ez a feladat igazi tanulsága: a negyed Kelly három valódi előnyön a számla 14,75%-át kéri, a 3. rész lakossági heat-korlátja pedig 6%-ot mond. A két megkötés ellentmond egymásnak, és a korlát nyer. A Kelly azt mondja meg, mennyit indokolhatna legfeljebb egyetlen előny; a portfólió heatje azt, mennyit veszítesz egyetlen rossz reggelen mindazon, amit tartasz. Ha ütköznek, a kisebbik számhoz méretezz – skálázd le mindhármat 6 / 14,75 = 0,41-del, ami nagyjából 2 700 $-t, 2 600 $-t és 700 $-t ad. Itt semmilyen CAGR nincs előrevetítve: három becsült előny, egy korrelációs levonás és egy korlát nem áll össze olyan hozammá, amelyet bárki előre tudna jelezni.</p>
       </div>
     </details>
   </div>
@@ -712,8 +713,8 @@
     <div style="margin-top:1rem">
       <p>Kezdd ezzel a 3 lépéssel:</p>
       <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-        <li><strong>Számold ki a legjobb stratégiád Kelly-százalékát</strong>. Három szám kell hozzá: (1) találati arány (nyerők ÷ összes), (2) átlagos nyereség, (3) átlagos veszteség. Képlet: Kelly % = (TA × (ÁNy ÷ ÁV) - (1-TA)) ÷ (ÁNy ÷ ÁV). Példa: 58,3 % találati arány, 360 dollár átlagos nyereség, 200 dollár átlagos veszteség = 35,1 % teljes Kelly. Használd az 1/4 Kellyt = ügyletenként 8,8 %. Ed Thorp két évtizeden át törtrész-Kellyvel vezette a Princeton/Newport Partnerst, nagyjából évi 20 %-kal.</li>
-        <li><strong>Vezess be a tőkegörbédhez kötött pozícióméretet</strong>. Számold ki a tőkéd 20 napos mozgóátlagát. Az átlag felett = növeld a méretet 25 %-kal (jó széria). Alatta = csökkentsd 50 %-kal (rossz széria). Ez megakadályozza a bosszúkereskedést, és hagyja dolgozni a nyerő szakaszokat. Ez a legrégebbi fegyelmi szabály minden profi asztalnál: nyomsz, amikor a könyv működik, és visszaveszel, amikor nem.</li>
+        <li><strong>Számold ki a legjobb stratégiád Kelly-százalékát</strong>. 3 szám kell hozzá: (1) találati arány (nyertesek ÷ összes), (2) átlagos nyertes, (3) átlagos vesztes. Képlet: Kelly % = (TA × (ÁNY ÷ ÁV) - (1-TA)) ÷ (ÁNY ÷ ÁV). Példa: 58,3% találati arány, 360 $ átlagos nyereség, 200 $ átlagos veszteség = 35,1% teljes Kelly. Használj 1/4 Kellyt = kereskedésenként 8,8%-ot. Ed Thorp két évtizeden át vezette a Princeton/Newport Partnerst frakcionális Kellyvel, díjak után évi nagyjából 15%-kal.</li>
+        <li><strong>Vezess be a tőkegörbédhez kötött pozícióméretet</strong>. Számold ki a tőkéd 20 napos mozgóátlagát. Az átlag felett = növeld a méretet 25%-kal (jó széria). Alatta = csökkentsd 50%-kal (rossz széria). Megakadályozza a bosszúkereskedést, kihozza a maximumot a nyertesekből. Ez a legrégebbi fegyelmi szabály egy profi asztalon: nyomd, amikor a könyv működik, vágj, amikor nem. De legyen világos, mi ez: egy trendkövető réteg a saját tőkegörbéden. Akkor fizet, amikor a veszteségek és a nyereségek egymás mellé csoportosulnak, és akkor kerül pénzbe, amikor az eredmények pusztán váltakoznak, mert olyankor minden fellendülésbe kicsivel, minden visszaesésbe naggyal mész bele. Teszteld a saját kereskedési előtörténeteden, mielőtt megbíznál benne; szériák nélküli görbén ez egy kicsi, de állandó fékezés.</li>
         <li><strong>Csinálj Kelly-stressztesztet a legrosszabb veszteségszériádon</strong>. Keresd meg a leghosszabb egymást követő veszteségszériádat (mondjuk 7). Számolj: 2 % kockázat = -14 % drawdown. Teljes Kelly 20 %-kal = -79 % drawdown (a számla megsemmisül). Negyed Kelly 5 %-kal = -30 % drawdown (visszahozható). A teljes Kelly BIZTOSAN tönkretesz. Használj negyed Kellyt.</li>
       </ol>
 
@@ -799,7 +800,7 @@
     <ul>
       <li>Állapítsd meg, melyik stratégiához tartozik ez a setup</li>
       <li>Nézd meg az adott stratégia maradék allokációját (elérted a Kelly-limitet?)</li>
-      <li>Ellenőrizd a portfólióterhelést: az összes nyitott pozíció együttes kockázata a 10-15 %-os korlátod alatt van?</li>
+      <li>Ellenőrizd a portfólió heatjét: az összes nyitott pozíció együttes kockázata a 6%-os korlátod alatt van?</li>
       <li>Erősítsd meg az edge-et a Signal Pilot Pentarch Pilot Line-jával (egy irányba mutat az intézményi áram?)</li>
       <li>Ha az edge megerősítést kapott, használj teljes (negyed/fél) Kellyt. Ha nem, akkor 0,5× Kellyt vagy hagyd ki</li>
     </ul>

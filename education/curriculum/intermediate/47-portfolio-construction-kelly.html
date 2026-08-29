@@ -175,7 +175,7 @@
     <tr>
       <td><strong>2. Position Sizing</strong></td>
       <td>Fixed 1-2% per trade (ignores edge)</td>
-      <td>Kelly Criterion adjusted for edge strength (5-15% for proven edges)</td>
+      <td>Size by edge strength rather than by a flat rule &mdash; a fraction of Kelly, recomputed as the estimate of the edge changes</td>
     </tr>
     <tr>
       <td><strong>3. Correlation Management</strong></td>
@@ -253,7 +253,7 @@
 
 <p>Developed by John Kelly Jr. at Bell Labs in 1956, it's been used by:</p>
 <ul>
-  <li><strong>Ed Thorp:</strong> Beat blackjack with card counting, then ran Princeton/Newport Partners on fractional Kelly at roughly 20% a year for two decades — 227 profitable months out of 230</li>
+  <li><strong>Ed Thorp:</strong> Beat blackjack with card counting, then ran Princeton/Newport Partners on fractional Kelly from 1969 to 1988 &mdash; about 15% a year net to investors, roughly 19% before fees, with 227 profitable months out of 230. The number usually quoted at him is the gross one; the net one is what an investor actually compounded</li>
   <li><strong>Warren Buffett and Charlie Munger:</strong> Both have described sizing by how strong the edge is rather than by fixed weights — Kelly logic without the formula</li>
   <li><strong>Renaissance Technologies:</strong> Jim Simons' Medallion fund compounded at roughly 39% a year net of fees for three decades on exactly this shape — many small, weakly correlated edges, each sized for growth rather than for comfort</li>
 </ul>
@@ -339,19 +339,20 @@
 <details class="accordion">
   <summary>Why Ed Thorp Used Fractional Kelly</summary>
   <div class="accordion-content">
-    <p>Thorp — the mathematician who beat blackjack and then ran Princeton/Newport at roughly 20% a year for two decades — argued for fractional Kelly on arithmetic, not nerves. Growth at a fraction f of Kelly is (2f &#8722; f&#178;) of the maximum, while volatility scales linearly with f. At half Kelly you keep 2(0.5) &#8722; 0.25 = 75% of the growth rate for half the swings. At quarter Kelly you keep 2(0.25) &#8722; 0.0625 = 44% for a quarter of the swings. Paying a quarter of your growth rate to halve your drawdowns is the best trade on the menu, and paying 56% of it to quarter them is the one most people should still take — the drawdowns you actually live through decide whether you are around to compound at all. <strong>Rule:</strong> Use 25-50% of Kelly for real trading.</p>
+    <p>Thorp &mdash; the mathematician who beat blackjack and then ran Princeton/Newport for two decades at about 15% a year net &mdash; argued for fractional Kelly on arithmetic, not nerves. Growth at a fraction f of Kelly is (2f &#8722; f&#178;) of the maximum, while volatility scales linearly with f. At half Kelly you keep 2(0.5) &#8722; 0.25 = 75% of the growth rate for half the swings. At quarter Kelly you keep 2(0.25) &#8722; 0.0625 = 44% for a quarter of the swings. Paying a quarter of your growth rate to halve your drawdowns is the best trade on the menu, and paying 56% of it to quarter them is the one most people should still take — the drawdowns you actually live through decide whether you are around to compound at all. <strong>Rule:</strong> Use 25-50% of Kelly for real trading.</p>
+    <p><strong>And there is a second reason, which matters more than the nerves.</strong> Kelly assumes you know p and b. You do not. You estimated them from a finite sample of your own trades, and that estimate carries error bars the formula never sees. Feed a slightly optimistic win rate in and the fraction that comes out is not slightly too large, it is substantially too large. Take the 60% / 1.67 example above, where full Kelly says about 36%. A hundred trades showing 60% winners places the true rate somewhere around 50% to 70% at ordinary confidence. At p = 0.55 the formula says 28%. At p = 0.50 it says 20%. Your position size swings by nearly two to one on a difference in win rate that a hundred trades simply cannot resolve. And the error is not symmetric in its consequences: overbetting Kelly destroys growth far faster than underbetting costs you, so an estimate that is too high hurts much more than an equally wrong estimate that is too low. This is what fractional Kelly is really buying. If your measured edge could plausibly be half of what it looks like, sizing at a quarter of what your measured numbers imply is not timidity &mdash; it is sizing for the edge you might actually have rather than the one your sample happened to show.</p>
   </div>
 </details>
 
   <div class="callout callout-success">
     <h4>💰 Worked example: what the Kelly fraction does to a $500K book</h4>
-    <p>Prop trader on a $500K book: 58% WR, $450 avg win, $300 avg loss. <strong>Old (2% fixed):</strong> +$140K/year (+28%), Sharpe 1.2, 15% DD. <strong>The calculation:</strong> b = 450/300 = 1.5, so full Kelly = (0.58 &#215; 1.5 &#8722; 0.42) / 1.5 = 30.0% — a number he was never going to trade. He moved to one-tenth of it: 3% per trade. <strong>New (3%):</strong> +$224K/year (+45%), Sharpe still 1.2, 22% DD. Sizing does not improve your risk-adjusted return — return and drawdown both scaled by roughly 1.5&#215;. What Kelly bought him was the confidence that 3% was nowhere near the ceiling, so he could stop leaving two-thirds of a proven edge unused.</p>
+    <p>Prop trader on a $500K book: 58% WR, $450 avg win, $300 avg loss. <strong>Old (2% fixed):</strong> +$140K/year (+28%), Sharpe 1.2, 15% DD. <strong>The calculation:</strong> b = 450/300 = 1.5, so full Kelly = (0.58 &#215; 1.5 &#8722; 0.42) / 1.5 = 30.0% — a number he was never going to trade. He moved to one-tenth of it: 3% per trade. <strong>New (3%):</strong> +$210K/year (+42%), Sharpe still 1.2, 22% DD. Sizing does not improve your risk-adjusted return — return and drawdown both scaled by roughly 1.5&#215;. What Kelly bought him was the confidence that 3% was nowhere near the ceiling, so he could stop leaving two-thirds of a proven edge unused.</p>
   </div>
 <div class="callout callout-danger">
   <h4>📉 CASE STUDY: Lisa's $114,000 Full Kelly Disaster</h4>
   <p><strong>Setup:</strong> Lisa Chang (composite example), options trader with 68% WR credit spreads — the shape credit spreads actually have: small wins, big losses (avg win $250, avg loss $400, 0.63:1 R:R). Expectancy +$42 per trade, a real edge. Full Kelly = (0.68 &#215; 0.625 &#8722; 0.32) / 0.625 = 16.8% per trade. $185K account, Apr-Jun 2024.</p>
   <p><strong>The disaster:</strong> Weeks 1-2: +$7.5K profit using full Kelly, account at $192.5K. Week 3: a 6-trade losing streak (0.32^6 = 0.1% probability). Each loss takes 16.8%, compounding: 0.832^6 = 0.332, a -66.8% drawdown. Account dropped $192.5K → $64K in ONE WEEK. She traded small for the rest of the quarter and finished June at $71K: -$114K, -62% in 3 months, on a strategy whose edge was never in doubt.</p>
-  <p><strong>Recovery:</strong> Switched to 1/4 Kelly (4.2% per trade). Results: $71K → $111K (+56%) in 6 months, max DD -12% (vs -67%). Same edge, survivable variance. The identical six-loss streak at 4.2% would have taken her from $192.5K to $149K instead of $64K — the fraction was worth $85K.</p>
+  <p><strong>What changed:</strong> she moved to quarter Kelly, 4.2% per trade. No return is reported for the months that followed &mdash; six months of one account cannot tell you whether a sizing rule works, and the arithmetic can, which is the whole reason this case study is here. Run the identical six-loss streak at 4.2%: 0.958^6 = 0.773, so $192.5K becomes $149K instead of $64K. Same edge, same streak, same bad luck, $85K of difference &mdash; and every dollar of it came from the fraction, not from anything she learned about the market in the meantime.</p>
   <p><strong>Lesson:</strong> Full Kelly is the theoretical optimum and it carries catastrophic variance. Quarter Kelly keeps about 44% of the theoretical growth rate with 12% drawdowns instead of 67% — and 44% of a growth rate you survive beats 100% of one you do not. Calculate full Kelly, then USE 25-50% of that number.</p>
 </div>
 
@@ -373,7 +374,7 @@
           </div>
         </div>
         <div class="quiz-explanation">
-          <strong>Correct: A.</strong> Full Kelly trap: Lisa's math was correct (16.8% is optimal for growth), but full Kelly assumes an infinite bankroll, no emotions, and a stable edge forever. Reality: a 6-trade losing streak (0.32^6 = 0.1% probability) caused a -66.8% DD in one week — 0.832^6 = 0.332, so $192.5K → $64K. Full Kelly produces 40-70% drawdowns even with a positive edge. She switched to 1/4 Kelly (4.2%) and recovered $71K → $111K in 6 months, max DD -12%. The same 6-loss streak at 1/4 Kelly is 0.958^6 = 0.773, a -22.7% DD ($192.5K → $149K) — the fraction was worth $85K. Growth at a fraction f of Kelly is (2f &#8722; f&#178;) of the maximum, so quarter Kelly keeps about 44% of the growth rate for a quarter of the volatility. Kelly shows the theoretical ceiling, not the practical target.
+          <strong>Correct: A.</strong> Full Kelly trap: Lisa's math was correct (16.8% is optimal for growth), but full Kelly assumes an infinite bankroll, no emotions, and a stable edge forever. Reality: a 6-trade losing streak (0.32^6 = 0.1% probability) caused a -66.8% DD in one week — 0.832^6 = 0.332, so $192.5K → $64K. Full Kelly produces 40-70% drawdowns even with a positive edge. She switched to 1/4 Kelly (4.2%). The same 6-loss streak at that fraction is 0.958^6 = 0.773, a -22.7% DD ($192.5K &rarr; $149K instead of $64K) &mdash; the fraction was worth $85K. Note that this figure is arithmetic on the streak that actually happened, not a claim about what she earned afterwards. Growth at a fraction f of Kelly is (2f &#8722; f&#178;) of the maximum, so quarter Kelly keeps about 44% of the growth rate for a quarter of the volatility. Kelly shows the theoretical ceiling, not the practical target.
         </div>
       </div>
       </div>
@@ -545,7 +546,7 @@
     <thead>
       <tr style="background:rgba(251,191,36,0.15)">
         <th>Strategy</th>
-        <th>Kelly %</th>
+        <th>Risk per Open Trade</th>
         <th>Open Positions</th>
         <th>Current Heat</th>
       </tr>
@@ -553,29 +554,29 @@
     <tbody>
       <tr>
         <td>Breakouts</td>
-        <td>6.7%</td>
-        <td>1</td>
-        <td>6.7%</td>
+        <td>1.7%</td>
+        <td>2</td>
+        <td>3.4%</td>
       </tr>
       <tr>
         <td>Mean Rev</td>
-        <td>6.27%</td>
+        <td>1.6%</td>
         <td>0</td>
         <td>0%</td>
       </tr>
       <tr>
         <td>Volatility</td>
-        <td>3.5%</td>
+        <td>0.9%</td>
         <td>1</td>
-        <td>3.5%</td>
+        <td>0.9%</td>
       </tr>
       <tr style="background:rgba(251,191,36,0.15);font-weight:600">
         <td colspan="3">Total Portfolio Heat</td>
-        <td>10.2% ✅</td>
+        <td>4.3% ✅</td>
       </tr>
     </tbody>
   </table>
-  <p><strong>Rule:</strong> Before entering any new trade, check this dashboard. If adding the trade would push heat above 15%, wait for an existing position to close first.</p>
+  <p><strong>Rule:</strong> Before entering any new trade, check this dashboard. If adding the trade would push heat above the 6% retail cap, wait for an existing position to close first. Note the middle column carefully: it is the risk on each open trade, not the allocation the strategy is entitled to. Putting a strategy's Kelly fraction in a heat column is the most common way this spreadsheet gets built wrong, and it makes a book that is running 4% of heat look like it is running 10%.</p>
 </div>
 
 <h2 id="part-4-dynamic-position-sizing">Part 4: Dynamic Position Sizing</h2>
@@ -690,7 +691,7 @@
         <p><strong>Task 1:</strong> Full Kelly: A = 26.7% (45% WR, 3.0 b), B = 35.8% (65% WR, 1.2 b), C = 10.0% (70% WR, 0.5 b).</p>
         <p><strong>Task 2:</strong> Use quarter Kelly — about 44% of the theoretical growth rate for 10-15% drawdowns instead of the 40-70% full Kelly produces. Result: A = 6.7%, B = 9.0%, C = 2.5%.</p>
         <p><strong>Task 3:</strong> B and C have 0.6 correlation, so both take the 30% haircut from Part 3: A = 6.7% (unchanged), B = 9.0% &#215; 0.70 = 6.3%, C = 2.5% &#215; 0.70 = 1.75%. Total = 14.75%.</p>
-        <p><strong>Task 4:</strong> $100K account: A = $6,700/trade, B = $6,300/trade, C = $1,750/trade — $14,750 of heat if all three are open at once, inside a 15% cap. If the edges hold, expect roughly 15-25% CAGR with 12-18% peak-to-trough drawdowns.</p>
+        <p><strong>Task 4:</strong> $100K account: A = $6,700/trade, B = $6,300/trade, C = $1,750/trade &mdash; $14,750 of heat if all three are open at once. Which is the real lesson of the exercise: quarter Kelly on three genuine edges asks for 14.75% of the account, and the retail heat cap from Part 3 says 6%. The two constraints disagree, and the cap wins. Kelly tells you the most a single edge could justify; portfolio heat tells you what you lose in one bad morning across everything you are holding. When they conflict, size to the smaller number &mdash; scale all three down by 6 / 14.75 = 0.41, giving roughly $2,700, $2,600 and $700. No CAGR is projected here: three estimated edges, a correlation haircut and a cap do not combine into a return anybody can forecast.</p>
       </div>
     </details>
   </div>
@@ -699,8 +700,8 @@
     <div style="margin-top:1rem">
       <p>Start with these 3 actions:</p>
       <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-        <li><strong>Calculate Kelly % for your best strategy</strong>. Need 3 numbers: (1) Win rate (wins ÷ total), (2) Avg winner, (3) Avg loser. Formula: Kelly % = (WR × (AvgW ÷ AvgL) - (1-WR)) ÷ (AvgW ÷ AvgL). Example: 58.3% WR, $360 avg win, $200 avg loss = 35.1% full Kelly. Use 1/4 Kelly = 8.8% per trade. Ed Thorp ran Princeton/Newport Partners on fractional Kelly at roughly 20% a year for two decades.</li>
-        <li><strong>Implement equity curve position sizing</strong>. Calculate 20-day MA of equity. Above MA = increase size 25% (hot streak). Below MA = decrease 50% (cold streak). Prevents revenge trading, maximizes winners. It is the oldest discipline rule on a professional desk: press when the book is working, cut when it is not.</li>
+        <li><strong>Calculate Kelly % for your best strategy</strong>. Need 3 numbers: (1) Win rate (wins ÷ total), (2) Avg winner, (3) Avg loser. Formula: Kelly % = (WR × (AvgW ÷ AvgL) - (1-WR)) ÷ (AvgW ÷ AvgL). Example: 58.3% WR, $360 avg win, $200 avg loss = 35.1% full Kelly. Use 1/4 Kelly = 8.8% per trade. Ed Thorp ran Princeton/Newport Partners on fractional Kelly for two decades at about 15% a year net of fees.</li>
+        <li><strong>Implement equity curve position sizing</strong>. Calculate 20-day MA of equity. Above MA = increase size 25% (hot streak). Below MA = decrease 50% (cold streak). Prevents revenge trading, maximizes winners. It is the oldest discipline rule on a professional desk: press when the book is working, cut when it is not. Be clear about what it is, though: a trend-following overlay applied to your own equity curve. It pays when losses cluster and wins cluster, and it costs you when results merely alternate, because then you are sizing small into every recovery and large into every drawdown. Test it against your own trade history before trusting it; on a curve without streaks it is a small, steady drag.</li>
         <li><strong>Run Kelly stress test on worst losing streak</strong>. Find worst consecutive losses (say 7). Calculate: 2% risk = -14% DD. Full Kelly 20% = -79% DD (account destroyed). Quarter Kelly 5% = -30% DD (recoverable). Full Kelly WILL destroy you. Use quarter Kelly.</li>
       </ol>
 
@@ -786,7 +787,7 @@
     <ul>
       <li>Identify which strategy this setup belongs to</li>
       <li>Check remaining allocation for that strategy (have you hit Kelly limit?)</li>
-      <li>Check portfolio heat: Total risk across all open positions under your 10-15% cap?</li>
+      <li>Check portfolio heat: total risk across all open positions under your 6% cap?</li>
       <li>Use Signal Pilot Pentarch Pilot Line to confirm edge (institutional flow aligned?)</li>
       <li>If edge confirmed, use full (quarter/half) Kelly. If not, use 0.5× Kelly or skip</li>
     </ul>
