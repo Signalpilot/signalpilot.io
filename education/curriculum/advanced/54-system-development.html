@@ -217,10 +217,10 @@
       <ol style="margin:1rem 0;line-height:1.8">
         <li><strong>In-Sample Only</strong> — Tested on same 2020-2022 data. System memorized patterns, no out-of-sample validation</li>
         <li><strong>Parameter Overfitting</strong> — 8 parameters optimized (ADX>23.4, RSI<38.7). Curve-fitted to noise</li>
-        <li><strong>Ignored Transaction Costs</strong> — Zero slippage/commission in backtest. Live: 0.08% slippage + $2/trade ate about 30% of the edge</li>
+        <li><strong>Ignored Transaction Costs</strong> &mdash; Zero slippage and commission in the backtest. Worth being precise about how much this actually cost him, because it is less than people assume: on SPY the round-trip cost at his size was single-digit dollars a trade, which is a few percent of the gross profit per trade, not a third of it. Costs were a real omission and a sign of a careless process, but they are not what turned 78% into 48%. Overfitting did that. Get the diagnosis right or you will fix the cheap problem and keep the expensive one.</li>
         <li><strong>No Walk-Forward</strong> — Single backtest, no rolling windows. Didn't test degradation on new data</li>
         <li><strong>Skipped Paper Trading</strong> — Straight to live, full size. Could have saved $40K</li>
-        <li><strong>Execution Assumptions</strong> — Assumed fills at close price. Real fills 0.05% worse</li>
+        <li><strong>Execution Assumptions</strong> &mdash; Assumed fills at the closing price of the signal bar. In reality the signal is only known once that bar has closed, so the earliest available fill is the next bar's open. That is not a slippage adjustment, it is a bar of look-ahead built into the backtest, and on a momentum system it flatters results in exactly the direction the system trades.</li>
       </ol>
 
       <p><strong>The Reckoning (March 31, 2023):</strong></p>
@@ -263,7 +263,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Transaction Costs</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Ignored (assumed zero)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">0.08% slippage + $2 commission + 0.02% spread per trade</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Modelled from his own fills: a penny of spread each way plus commission, about $6 a round trip at 200 shares</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Validation</strong></td>
@@ -347,43 +347,27 @@
         </tbody>
       </table>
 
-      <p><strong>Transaction Cost Reality Check:</strong></p>
+      <p><strong>Transaction Cost Reality Check &mdash; and the Rule That Actually Governs It:</strong></p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>V2 Backtest: Before vs. After Transaction Costs</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Metric</th>
-            <th style="padding:0.75rem;text-align:right;">Before Costs</th>
-            <th style="padding:0.75rem;text-align:right;">After Costs</th>
-            <th style="padding:0.75rem;text-align:left;">Impact</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Avg Trade Profit</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$767</td>
-            <td style="padding:0.75rem;text-align:right;">$545</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-29% per trade</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Annual Return (200 trades)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">+$153,400</td>
-            <td style="padding:0.75rem;text-align:right;">+$109,000</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-$44,400 (-29%)</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Sharpe Ratio</strong></td>
-            <td style="padding:0.75rem;text-align:right;">2.1</td>
-            <td style="padding:0.75rem;text-align:right;">1.4</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-33% degradation</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">Still Viable?</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e">✓ YES ($109K annual, Sharpe 1.4)</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <p>V1 assumed zero costs. V2 modelled them, and this is where most write-ups of this subject go wrong, including an earlier version of this one. It used to say costs took 29% of the edge, on an assumed 0.08% of slippage per trade. On SPY at $520 a share, 0.08% is 42 cents. The actual spread on SPY in regular hours is a penny &mdash; about 0.002% &mdash; so the assumed cost was roughly twenty times the real one, and the 29% that followed from it was an artefact of the assumption, not a finding.</p>
+
+      <p>Here is the arithmetic you can check. Say the system trades 200 shares of SPY per position, entering and exiting with limit orders that rest rather than cross:</p>
+
+      <ul style="margin:.5rem 0">
+        <li><strong>Spread cost:</strong> a penny a share, paid on entry and exit if you cross, and close to nothing if you rest. Crossing both sides: 200 shares &times; $0.01 &times; 2 = <strong>$4</strong>.</li>
+        <li><strong>Commission:</strong> $1 a side at a per-share broker, so <strong>$2</strong> round trip.</li>
+        <li><strong>Total: about $6 a round trip</strong>, which is what you should put in the backtest until your own fill records say otherwise.</li>
+      </ul>
+
+      <p>Against an average gross profit of a few hundred dollars a trade, $6 is a rounding error. Against an average gross profit of $15, it is most of the edge. That is the rule, and it is not the one people usually state:</p>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Cost drag is the ratio of cost per trade to gross edge per trade. Trade count does not enter it.</strong> Double the number of trades and you double the costs, but you also double the gross profit; the fraction is unchanged. What makes high-frequency systems cost-sensitive is not that they pay costs more often &mdash; it is that their edge per trade is small, so the same $6 is a large share of it. A system that scalps eight ticks and a system that holds for two days pay identical costs per round trip and are affected completely differently.</p>
+      </div>
+
+      <p>Which means the honest way to run this check on your own system is not to apply somebody else's percentage. It is to divide your modelled cost per round trip by your backtest's average gross profit per trade. If that number is under 5%, costs are not your problem and you should stop worrying about them. If it is over 30%, your system is a cost-arbitrage business and every remaining decision &mdash; broker, order type, routing &mdash; matters more than the signal does.</p>
+
+      <p>One thing costs do reliably change is the marginal trade. Trades whose expected value was slightly positive before costs are negative after them, so a properly costed backtest should show <strong>fewer trades taken</strong>, not just the same trades earning less. If your cost model only subtracts a fixed amount from every result and never removes a trade from the set, it is not modelling costs; it is applying a haircut.</p>
 
       <p><strong>Paper Trading Validation (August 2023, 50 trades):</strong></p>
 
@@ -402,7 +386,7 @@
             <td style="padding:0.75rem;"><strong>Win Rate</strong></td>
             <td style="padding:0.75rem;text-align:right;">59%</td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">56%</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">-3% (GOOD!)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">-3pp (inside the noise band)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Avg R</strong></td>
@@ -417,107 +401,34 @@
             <td style="padding:0.75rem;"><span style="color:#22c55e">+2% (within tolerance)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">VALIDATION STATUS:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ PASSED (proceed to live)</span></td>
-          </tr>
-        </tbody>
-      </table><h3 id="act-4-live-trading-success-september-2023-october-2024-14-months">Act 4: Live Trading Success (September 2023 - October 2024, 14 months)</h3>
-
-      <p><strong>Tom's Deployment Strategy:</strong> Paper passed → 25% size for 1 month → 50% size for 2 months → 100% size (Dec 2023 onwards)</p>
-
-      <p><strong>Tom's V2 in live trading (Sep 2023 - Oct 2024):</strong> he started at 25% size while the system was still on validation, and only ramped to full size in December, once several months of live results had come in line with the backtest. That ramp is the part worth copying: size follows evidence, not confidence. One good month tells you nothing about whether a system works.</p>
-
-      <p><strong>Discretionary (2022) vs. Systematic (2023-2024) Comparison:</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Tom's Trading: Before vs. After Systematization</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Metric</th>
-            <th style="padding:0.75rem;text-align:right;">2022 (Discretionary)</th>
-            <th style="padding:0.75rem;text-align:right;">2024 (Systematic)</th>
-            <th style="padding:0.75rem;text-align:left;">Change</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Annual Income</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$163,500</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">$92,600</span></td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-43% (but...)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Time Required</strong></td>
-            <td style="padding:0.75rem;text-align:right;">6.5 hrs/day (market hours)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0.5 hrs/day (monitoring)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ -92% time (6 hrs freed!)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Emotional Stress</strong></td>
-            <td style="padding:0.75rem;text-align:right;">High (screen time fatigue)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Low (code executes)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Stress-free execution</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Scalability</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Capped (1 person limit)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Unlimited (add assets)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Can scale to QQQ, IWM, etc.</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Missed Setups</strong></td>
-            <td style="padding:0.75rem;text-align:right;">~20% (away from desk)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0% (24/7 monitoring)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Never miss a signal</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Consistency</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Variable (emotion-dependent)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Perfect (rule-based)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ 100% rule adherence</span></td>
+            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">WHAT THIS ESTABLISHES:</td>
+            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ The rules are executable in real time</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p><strong>Tom's Current Reality (October 2024):</strong></p>
+      <p><strong>Read that table for what it can support, not for what it looks like it supports.</strong> Fifty trades at a 59% expected win rate has a standard error of about seven percentage points, so anything from roughly 45% to 73% is an ordinary result for a system that genuinely wins 59% of the time. A 3-point gap is therefore not evidence that the system works; it is the absence of evidence that it is broken, which is a much weaker and much more useful thing. If the paper result had come in at 38%, that would have been informative &mdash; five standard errors below is not noise. The asymmetry is the point: a paper stage can refute a system, and cannot confirm one.</p>
+
+      <p>What the paper stage genuinely does confirm, and what nothing before it could, is that the rules can be executed as written. The data arrives in time. The signal does not repaint after the bar closes. The order type exists at the broker. The position sizing does not demand fractional shares the account cannot hold. Those are the failures paper trading is for, and every one of them is a yes-or-no answer that fifty trades is plenty to establish.</p>
+
+      <h3 id="act-4-what-the-record-can-and-cannot-show">Act 4: What Happened Next &mdash; and What It Can and Cannot Show</h3>
+
+      <p>Tom deployed the way the pipeline says to: paper first, then a quarter of intended size, then half, then full, with each step conditional on the previous one behaving. That ramp is the part of this story worth copying, and it is worth copying for a reason that has nothing to do with how it turned out. Size that follows evidence rather than confidence is correct whether the system goes on to work or not, because it is the only sizing rule that costs you little when you are wrong.</p>
+
+      <p>What we are deliberately not going to do here is give you his live results. Not because they were bad, and not because we are hiding them &mdash; but because a single trader's fourteen months of one system tells you nothing you could act on. Fourteen months is roughly one market regime. A system that made money through it might be sound, or might be a momentum system that happened to run during a trending stretch; the record cannot distinguish those two, and neither can Tom. If we printed a number here, the only thing it would reliably do is make you feel that this pipeline produces that number, which is exactly the inference the lesson has spent four stages telling you not to make.</p>
+
+      <p><strong>What the two versions genuinely establish:</strong></p>
       <ul style="margin:.5rem 0">
-        <li><strong>System income:</strong> $92,600 a year at his 14-month pace, from the SPY momentum system</li>
-        <li><strong>Time commitment:</strong> 30 min/day monitoring (vs. 6.5 hours discretionary)</li>
-        <li><strong>Freed time:</strong> Now developing 2nd system for QQQ, 3rd for crypto</li>
-        <li><strong>Scalability:</strong> Plans to run 5 uncorrelated systems by 2025 → target $250K+ annual</li>
-        <li><strong>Stress level:</strong> "I sleep better. Code doesn't panic. I don't override anymore."</li>
-        <li><strong>Net after Q1 2023 loss:</strong> -$39,900 (V1 disaster) + $108,000 (14mo V2) = <strong>+$68,100 net</strong></li>
+        <li><strong>The V1 gap is real evidence, because it is a disaster.</strong> A backtest showing 78% and live trading showing 48% on the same rules is not ambiguous. Something in the process manufactured 30 points of win rate that did not exist. That inference runs in the direction that works: you can prove a method was broken from one bad outcome far more easily than you can prove one was sound from one good outcome.</li>
+        <li><strong>The V2 process removed the specific mechanism that produced the gap.</strong> Eight parameters fitted to three years of data he had already traded became three parameters tested on data the fitting never saw. That is a defensible change on its own logic, before any results arrive.</li>
+        <li><strong>The train-test gaps stayed small across five windows.</strong> Five windows is not many, and a 5&ndash;8% gap is not a guarantee of anything. But the alternative &mdash; a gap that widens window after window &mdash; would have been decisive evidence against, and it did not appear.</li>
       </ul>
 
-      <p><strong>Tom's Hard-Won Wisdom (October 2024):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        "I lost $40K in Q1 2023 because I thought backtesting meant 'run code on past data and optimize parameters.' Wrong.
-        <br><br>
-        Real system development is:
-        <br>
-        • Walk-forward testing (train on past, test on future, repeat)<br>
-        • Transaction cost modeling (slippage kills 30% of edge)<br>
-        • Monte Carlo stress testing (know your worst-case drawdown)<br>
-        • Paper trading 50+ trades before risking a dollar<br>
-        • Simple rules > complex optimization (3 params beat 8)
-        <br><br>
-        My V2 system makes about $93K a year in 30 min/day. I have 6 hours freed to build more systems. By 2025, I'll run 5 systems across different assets.
-        <br><br>
-        Discretionary trading capped me at $163K and burned me out. Systematic trading scales infinitely—if you do it right."
-        <br><br>
-        — Tom Anderson, Systematic Trader (October 2024)
-      </blockquote>
+      <p><strong>What no version of this story establishes:</strong> that a properly validated system earns a particular income, that systematic trading beats discretionary, or that Tom's rules will keep working. His discretionary year and his systematic year were different years in different markets; comparing their income is comparing two market regimes as much as two methods. The honest summary is that he replaced a process he could prove was broken with one whose failure mode he had at least tested for, and then sized up slowly enough that being wrong again would have been survivable.</p>
 
-      <p><strong>Total Cost of Tom's Education:</strong></p><ul style="margin:.5rem 0">
-        <li><strong>Q1 2023 V1 losses:</strong> -$39,900 (overfitted system tuition)</li>
-        <li><strong>Consultant fees:</strong> -$8,000 (4 months, April-July 2023)</li>
-        <li><strong>Development time:</strong> 4 months opportunity cost (could have traded discretionary for ~$54K)</li>
-        <li><strong>Total investment:</strong> ~$102K</li>
-        <li><strong>14-month recovery:</strong> +$108,000 (V2 systematic)</li>
-        <li><strong>Net position:</strong> +$6,000 (break-even after expensive education)</li>
-        <li><strong>Future value:</strong> System now earns about $93K/year in 30 min/day, freeing 6 hrs/day for scaling</li>
-        <li><strong>5-year projection:</strong> 5 systems × ~$50K avg = $250K/year (vs. the $163K discretionary ceiling) — and that assumes each new system holds up, which is the part nobody can promise</li>
-      </ul>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>The claim this lesson used to make, and why it was wrong.</strong> An earlier version of this page ended with "systematic trading scales infinitely &mdash; if you do it right", a five-year projection of five systems at $50K each, and a table listing scalability as "Unlimited". None of that is true, and the box at the top of this lesson already says why: a system is capped by the liquidity of what it trades and by how long the edge survives being traded. It is also capped by something subtler &mdash; your five systems are unlikely to be five independent edges. Most retail systems are momentum or mean reversion wearing different parameters, and running five correlated systems is running one system at five times the size, which is the opposite of what the projection assumed.</p>
+      </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>You're about halfway through this lesson.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">A good place to pause. What follows builds directly on what you have just read.</p>
@@ -532,11 +443,11 @@
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Almost no change, since costs are small per trade</div>
             <div class="quiz-option" data-correct="false">B) The result improves, because costs filter out marginal trades</div>
-            <div class="quiz-option" data-correct="true">C) A large reduction &mdash; a fraction of a percent per trade can remove a third or more of the return</div>
+            <div class="quiz-option" data-correct="true">C) It depends on the ratio of cost per trade to gross profit per trade, and on nothing else &mdash; you cannot answer without both numbers</div>
             <div class="quiz-option" data-correct="false">D) The result becomes unmeasurable</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correct: C.</strong> Costs scale with trade count, so a high-frequency system pays them many times over while the edge per trade stays fixed. A is the assumption that makes backtests look profitable when they are not. B has a grain of truth &mdash; costs do penalise marginal trades &mdash; but that shows up as fewer trades taken, not as a better return on the same set.
+            <strong>Correct: C.</strong> Trade count cancels: double the trades and you double both the costs and the gross profit, leaving the fraction unchanged. What decides the damage is cost per round trip divided by gross profit per round trip. Six dollars against $400 of gross edge is nothing; six dollars against $20 is most of it. A is right for a system with a large edge per trade and badly wrong for a scalping system, which is why it is not a general answer. B has a grain of truth &mdash; costs do make marginal trades negative &mdash; but that shows up as fewer trades taken, not as a higher return on the same set. D is wrong because the calculation is entirely measurable once you have your own fill records.
           </div>
         </div>
 
@@ -570,10 +481,10 @@
       <div class="key-takeaway">
         <h4>🎓 Key Takeaways</h4>
         <ul>
-          <li><strong>Systematize to scale:</strong> Discretionary trading caps at $100-500K, systematic has no ceiling</li>
-          <li><strong>Walk-forward testing:</strong> Only validation method that matters—train on past, test on future (repeatedly)</li>
-          <li><strong>Monte Carlo simulation:</strong> Test 1,000+ scenarios to understand true risk/reward distribution</li>
-          <li><strong>Transaction costs are CRITICAL:</strong> 0.1% per trade destroys 30%+ of backtest returns</li>
+          <li><strong>What systematizing actually buys you:</strong> the same edge running across more instruments and more hours than one person can watch. Not an unlimited ceiling &mdash; a system is still capped by the liquidity of what it trades and by how long the edge survives.</li>
+          <li><strong>Walk-forward testing:</strong> the only stage that ever shows the rules data they were not fitted to, and it does so repeatedly rather than once. A gap that widens window after window is the finding; a small gap is only the absence of a red flag.</li>
+          <li><strong>Monte Carlo tells you about sequence, not about the future:</strong> reshuffling your trades shows how bad the ordering could have been given the returns you observed. It cannot tell you about a regime that produces returns you have not observed, which is the risk that actually ends systems.</li>
+          <li><strong>Cost the backtest from your own fills:</strong> the damage is cost per round trip divided by gross profit per round trip. Under 5% and it is not your problem; over 30% and the broker and the order type matter more than the signal.</li>
           <li><strong>Deploy incrementally:</strong> Paper → Micro size → Small → Full (validate at each stage)</li>
           <li><strong>Avoid overfitting:</strong> More parameters = more curve fitting. Simple systems survive live trading</li>
         </ul>
@@ -586,17 +497,17 @@
         <p><strong>6-Step System Development Process:</strong></p>
         <ol style="margin:.75rem 0;line-height:1.8">
           <li><strong>Codify Rules</strong> — Convert discretionary setup to exact entry/exit conditions (5+ rules). Example: "Price sweeps 15-min low by $0.20+, reclaims within 5 candles, ADX>22"</li>
-          <li><strong>Backtest (200+ trades, 2+ years)</strong> — Track: Win rate >50%, Avg R >0.5R, Max DD <25%, Sharpe >1.0</li>
+          <li><strong>Backtest (200+ trades, 2+ years)</strong> &mdash; Track win rate, average R, maximum drawdown and Sharpe, but treat all four as estimates with error bars rather than thresholds to clear. At 200 trades a measured 55% win rate is consistent with anything from about 48% to 62%, and a Sharpe of 1.0 over two years is consistent with a true Sharpe anywhere from roughly 0 to 2. Write down the range, not the point.</li>
 
           <li><strong>Walk-Forward Validation</strong> — Split into 6-month chunks, train→test rolling. If test performance 30%+ worse than train = overfitting</li>
-          <li><strong>Monte Carlo Stress Test</strong> — Shuffle 1,000 sequences. If 95th percentile DD >30% or Risk of Ruin >1% = reduce size</li>
+          <li><strong>Monte Carlo Stress Test</strong> &mdash; Reshuffle the trade sequence a thousand times and read the drawdown distribution. This answers one question well: given these returns, how unlucky could the ordering have been? It does not answer what happens if the returns themselves change, so treat the 95th-percentile drawdown as a floor on your worst case, never as a ceiling.</li>
           <li><strong>Live Deployment (3 stages)</strong> — Paper (50 trades, win rate within 5% of backtest) → Micro size (30 trades, 25% size) → Full size (100%). If fails any stage, return to backtest</li>
-          <li><strong>Transaction Cost Reality</strong> — Add slippage (0.05%), commission, spread. If profit reduction >50% = not viable</li>
+          <li><strong>Transaction Cost Reality</strong> &mdash; Model the spread from the instrument's actual quote and the commission from your actual schedule, then divide the round-trip cost by the gross profit per trade. Do not import a percentage from an article; on liquid instruments the numbers people quote are an order of magnitude too high, and on illiquid ones they are too low.</li>
         </ol>
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Goal:</strong> Complete steps 1-4 over 2-4 weeks. Paper trade minimum 50 trades. Only go live if paper matches backtest within 10%. Most systems fail at paper stage—that's GOOD. Better to find out now than lose real money.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Goal:</strong> Complete steps 1-4 over 2-4 weeks, then paper trade at least fifty trades. Go live small unless paper trading gave you a reason not to &mdash; and be clear which kind of reason it was. An execution failure (late data, a repainting signal, an order type your broker will not accept) is disqualifying and fixable. A win rate a few points below the backtest is neither; fifty trades cannot resolve a gap that small. Most systems that fail here fail on execution, and finding that out with no money on it is the entire purpose of the stage.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">You just learned what separates hobbyists from professional systematic traders. Walk-forward testing, Monte Carlo, cost modeling—these aren't optional. They're survival. Now you know how to build systems that don't blow up live.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">The pipeline in this lesson is not a guarantee that a system works. It is a sequence of five chances to find out that one does not, arranged cheapest-first, so that the discovery costs you a weekend of coding rather than a quarter of returns. Tom's V1 skipped four of them and paid for the information at the last and most expensive stage. That is the whole argument for doing it in order.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Related Lessons</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

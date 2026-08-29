@@ -230,10 +230,10 @@
       <ol style="margin:1rem 0;line-height:1.8">
         <li><strong>Csak mintán belül</strong> — Ugyanazon a 2020-2022-es adaton tesztelte. A rendszer bemagolta a mintázatokat, mintán kívüli ellenőrzés nélkül</li>
         <li><strong>A paraméterek túlillesztése</strong> — 8 optimalizált paraméter (ADX>23,4, RSI<38,7). A zajra illesztve</li>
-        <li><strong>Figyelmen kívül hagyta a tranzakciós költségeket</strong> — Nulla slippage és jutalék a backtestben. Élesben: 0,08 % slippage + ügyletenként 2 dollár megette az edge nagyjából 30 %-át</li>
+        <li><strong>Figyelmen kívül hagyta a tranzakciós költségeket</strong> &mdash; Nulla slippage és nulla jutalék a backtest során. Érdemes pontosan megmondani, mennyibe került ez valójában, mert kevesebbe, mint hinnék: az SPY -on az ő méretében az oda-vissza költség kereskedésenként néhány dollár volt, vagyis a kereskedésenkénti bruttó nyereség kis százaléka, nem a harmada. A költségek valódi mulasztást és hanyag folyamatot jeleztek, de nem ezek csinálták a 78%-ból a 48%-ot. Azt a túlillesztés csinálta. Állítsd fel jól a diagnózist, különben az olcsó bajt javítod meg, és a drágát megtartod.</li>
         <li><strong>Semmi walk-forward</strong> — Egyetlen backtest, gördülő ablakok nélkül. Az új adaton mutatott romlást nem tesztelte</li>
         <li><strong>Kihagyta a papírkereskedést</strong> — Egyből élesben, teljes mérettel. 40 000 dollárt spórolhatott volna</li>
-        <li><strong>Feltevések a végrehajtásról</strong> — Záróáras teljesülést feltételezett. A valódi teljesülések 0,05 %-kal rosszabbak voltak</li>
+        <li><strong>Feltevések a végrehajtásról</strong> &mdash; A jelzést adó gyertya záróárán feltételezett teljesülés. Valójában a jelzés csak akkor ismert, amikor az a gyertya lezárult, tehát a legkorábbi elérhető teljesülés a következő gyertya nyitása. Ez nem slippage -korrekció, hanem egy egész gyertyányi előrelátás beépítve a backtest -be, és egy momentumrendszernél pontosan abba az irányba szépíti az eredményt, amerre a rendszer kereskedik.</li>
       </ol>
 
       <p><strong>A szembenézés (2023. március 31.):</strong></p>
@@ -276,7 +276,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Tranzakciós költségek</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Figyelmen kívül hagyva (nullának véve)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">Ügyletenként 0,08 % slippage + 2 dollár jutalék + 0,02 % spread</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">A saját teljesüléseiből modellezve: oldalanként egy cent spread plusz jutalék, 200 részvénynél oda-vissza körülbelül 6 $</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Ellenőrzés</strong></td>
@@ -360,43 +360,27 @@
         </tbody>
       </table>
 
-      <p><strong>A tranzakciós költségek valóságpróbája:</strong></p>
+      <p><strong>Tranzakciós költségek valóságpróbája &mdash; és a szabály, amely valójában meghatározza őket:</strong></p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>A V2 backtestje: a tranzakciós költségek előtt és után</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Mutató</th>
-            <th style="padding:0.75rem;text-align:right;">Költségek előtt</th>
-            <th style="padding:0.75rem;text-align:right;">Költségek után</th>
-            <th style="padding:0.75rem;text-align:left;">Hatás</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Átlagos nyereség ügyletenként</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$767</td>
-            <td style="padding:0.75rem;text-align:right;">$545</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">Ügyletenként -29 %</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Éves hozam (200 ügylet)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">+$153,400</td>
-            <td style="padding:0.75rem;text-align:right;">+$109,000</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-$44,400 (-29%)</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Sharpe-mutató</strong></td>
-            <td style="padding:0.75rem;text-align:right;">2.1</td>
-            <td style="padding:0.75rem;text-align:right;">1.4</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">33 % romlás</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">Még mindig életképes?</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e">✓ IGEN (évi 109 000 dollár, Sharpe 1,4)</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <p>A V1 nulla költséget feltételezett. A V2 modellezte őket, és a téma legtöbb feldolgozása épp itt siklik ki &mdash; ennek az oldalnak egy korábbi változata is. Az állt benne, hogy a költségek az előny 29%-át viszik el, egy feltételezett, kereskedésenkénti 0,08% slippage alapján. Az SPY -on 520 $-os árfolyamnál a 0,08% 42 cent. Az SPY tényleges spreadje a normál kereskedési időben egy cent &mdash; nagyjából 0,002% &mdash; vagyis a feltételezett költség körülbelül hússzorosa volt a valódinak, és a belőle következő 29% a feltevés műterméke volt, nem eredmény.</p>
+
+      <p>Íme a számtan, amit magad is ellenőrizhetsz. Tegyük fel, hogy a rendszer pozíciónként 200 SPY -részvénnyel kereskedik, és úgy lép be és ki, hogy limitáras megbízásai pihennek, nem lépnek át:</p>
+
+      <ul style="margin:.5rem 0">
+        <li><strong>A spread költsége:</strong> részvényenként egy cent, belépéskor és kilépéskor is fizeted, ha átlépsz, és szinte semmit, ha pihensz. Mindkét oldalon átlépve: 200 részvény &times; 0,01 $ &times; 2 = <strong>$4</strong>.</li>
+        <li><strong>Jutalék:</strong> részvényenkénti díjszabású brókernél oldalanként 1 $, tehát <strong>$2</strong> oda-vissza.</li>
+        <li><strong>Összesen: oda-vissza körülbelül 6 $</strong>, és ezt kell betenned a backtest -be, amíg a saját teljesülési kimutatásaid mást nem mondanak.</li>
+      </ul>
+
+      <p>Kereskedésenként néhány száz dolláros átlagos bruttó nyereséghez képest a 6 $ kerekítési hiba. Kereskedésenként 15 $ átlagos bruttó nyereséghez képest viszont majdnem az egész előny. Ez a szabály, és nem az, amit szokás mondani:</p>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>A költséghúzás a kereskedésenkénti költség és a kereskedésenkénti bruttó előny hányadosa. A kereskedések száma nem szerepel benne.</strong> Kétszerezd meg a kereskedések számát, és megkétszerezed a költségeket &mdash; de megkétszerezed a bruttó nyereséget is; a hányados változatlan. A nagy frekvenciájú rendszereket nem az teszi költségérzékennyé, hogy gyakrabban fizetnek, hanem hogy kereskedésenkénti előnyük kicsi, így ugyanaz a 6 $ annak nagy hányada. Egy nyolc tickre skalpoló és egy két napig tartó rendszer oda-vissza azonos költséget fizet, és teljesen máshogy érinti őket.</p>
+      </div>
+
+      <p>Vagyis a becsületes módja annak, hogy ezt a saját rendszereden elvégezd, nem az, hogy valaki más százalékát alkalmazod. Hanem hogy elosztod a modellezett oda-vissza költséget a backtest kereskedésenkénti átlagos bruttó nyereségével. Ha ez a szám 5% alatt van, a költségek nem a te bajod, és abbahagyhatod a rágódást. Ha 30% fölött van, a rendszered költségarbitrázs-üzlet, és minden hátralévő döntés &mdash; bróker, megbízástípus, útvonal &mdash; többet nyom a latban, mint maga a jelzés.</p>
+
+      <p>Egyvalamit a költségek megbízhatóan megváltoztatnak: a határkereskedést. Azok a kereskedések, amelyek várható értéke költségek előtt épphogy pozitív volt, utána negatívak, tehát egy rendesen költségelt backtest  <strong>kevesebb megkötött kereskedést mutat</strong>, nem pedig egyszerűen ugyanazokat a kereskedéseket kevesebb hozammal. Ha a költségmodelled csak levon egy fix összeget minden eredményből, és soha nem vesz ki kereskedést a halmazból, akkor nem költséget modellez, hanem árengedményt alkalmaz.</p>
 
       <p><strong>Ellenőrzés papíron (2023. augusztus, 50 ügylet):</strong></p>
 
@@ -415,7 +399,7 @@
             <td style="padding:0.75rem;"><strong>Találati arány</strong></td>
             <td style="padding:0.75rem;text-align:right;">59%</td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">56%</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 % (JÓ!)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 százalékpont (a zajsávon belül)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Átl. R</strong></td>
@@ -430,107 +414,34 @@
             <td style="padding:0.75rem;"><span style="color:#22c55e">+2 % (tűréshatáron belül)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">AZ ELLENŐRZÉS ÁLLAPOTA:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ MEGFELELT (jöhet az éles)</span></td>
-          </tr>
-        </tbody>
-      </table><h3 id="act-4-live-trading-success-september-2023-october-2024-14-months">4. felvonás: siker élesben (2023. szeptembertől 2024. októberig, 14 hónap)</h3>
-
-      <p><strong>Tom élesítési stratégiája:</strong> Papír megvolt → a méret 25 %-a 1 hónapig → 50 % 2 hónapig → 100 % (2023 decemberétől)</p>
-
-      <p><strong>Tom V2-je éles kereskedésben (2023. szept. - 2024. okt.):</strong> A rendszer validálása alatt 25 %-os mérettel indult, és csak decemberben ment fel teljes méretre, miután több hónapnyi éles eredmény egybevágott a backtesttel. Ez a fokozatosság az, amit érdemes átvenni: a méret a bizonyítékot követi, nem a magabiztosságot. Egy jó hónap semmit nem mond arról, hogy működik-e egy rendszer.</p>
-
-      <p><strong>A diszkrecionális (2022) és a szisztematikus (2023-2024) összehasonlítása:</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Tom kereskedése: a rendszerezés előtt és után</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Mutató</th>
-            <th style="padding:0.75rem;text-align:right;">2022 (diszkrecionális)</th>
-            <th style="padding:0.75rem;text-align:right;">2024 (szisztematikus)</th>
-            <th style="padding:0.75rem;text-align:left;">Változás</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Éves jövedelem</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$163,500</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">$92,600</span></td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-43 % (de…)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Szükséges idő</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Napi 6,5 óra (piaci órák)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Napi 0,5 óra (felügyelet)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ -92 % idő (6 óra felszabadult!)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Érzelmi terhelés</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Magas (képernyőfáradtság)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Alacsony (a kód hajtja végre)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Stresszmentes végrehajtás</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Skálázhatóság</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Korlátos (egy ember a határ)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Korlátlan (elég eszközt hozzáadni)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Kiterjeszthető QQQ-ra, IWM-re stb.</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Kihagyott setupok</strong></td>
-            <td style="padding:0.75rem;text-align:right;">~20 % (távol az asztaltól)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0 % (folyamatos felügyelet)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Többé egy jelzés sem vész el</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Következetesség</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Ingadozó (érzelemfüggő)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Tökéletes (szabályalapú)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ 100 %-os szabálykövetés</span></td>
+            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">EZ MIT BIZONYÍT:</td>
+            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ A szabályok valós időben végrehajthatók</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p><strong>Tom mai helyzete (2024. október):</strong></p>
+      <p><strong>Azt a táblázatot aszerint olvasd, amit alá tud támasztani, nem aszerint, aminek alátámasztásaként fest.</strong> Ötven kereskedés 59%-os várt találati aránynál körülbelül hét százalékpontos standard hibát ad, tehát nagyjából 45% és 73% között bármi hétköznapi eredmény egy olyan rendszernél, amely valóban az esetek 59%-ában nyer. Egy hárompontos eltérés ezért nem bizonyíték arra, hogy a rendszer működik; annak a bizonyítéknak a hiánya, hogy elromlott &mdash; ami sokkal gyengébb és sokkal hasznosabb állítás. Ha a papíreredmény 38% lett volna, az informatív lett volna: öt standard hibával lejjebb már nem zaj. Az aszimmetria a lényeg: a papírszakasz megcáfolhat egy rendszert, de nem tudja megerősíteni.</p>
+
+      <p>megerősít &mdash; és amit előtte semmi nem tudott &mdash;, az az, hogy a szabályok úgy hajthatók végre, ahogy le vannak írva. Az adat időben megérkezik. A jelzés nem rajzolódik újra a gyertya zárása után. A megbízástípus létezik a brókernél. A pozícióméret nem követel töredékrészvényt, amit a számla nem tarthat. Ezek azok a hibák, amiért a papírkereskedés létezik, és mindegyik igen-nem kérdés, amelyhez ötven kereskedés bőven elég.</p>
+
+      <h3 id="act-4-what-the-record-can-and-cannot-show">4. felvonás: Mi történt ezután &mdash; és mit tud, illetve mit nem tud megmutatni</h3>
+
+      <p>Tom úgy állította élesbe, ahogy a folyamat előírja: előbb papír, aztán a tervezett méret negyede, aztán a fele, aztán a teljes, és minden lépés attól függött, hogy az előző rendesen viselkedett-e. Ez a felfutás az, amit ebből a történetből érdemes lemásolni, és olyan okból érdemes, aminek semmi köze ahhoz, hogyan végződött. Az a méret, amely a bizonyítékot követi, nem a magabiztosságot, akkor is helyes, ha a rendszer működik, és akkor is, ha nem &mdash; mert ez az egyetlen méretezési szabály, amely keveset kóstál, amikor tévedsz.</p>
+
+      <p>Amit itt szándékosan nem fogunk megtenni: nem közöljük az éles eredményeit. Nem azért, mert rosszak voltak, és nem azért, mert titkolnánk valamit &mdash; hanem mert egyetlen kereskedő tizennégy hónapja egyetlen rendszerrel semmit nem mond, amire építeni lehetne. A tizennégy hónap nagyjából egy piaci rezsim. Egy rendszer, amely ez alatt pénzt keresett, lehet szilárd, de lehet olyan momentumrendszer is, amelyik véletlenül egy trendes szakaszban futott; a teljesítménytörténet ezt a kettőt nem tudja szétválasztani, és Tom sem. Ha ide számot írnánk, az egyetlen dolog, amit megbízhatóan elérne, az az érzés volna, hogy ez a folyamat azt a számot termeli &mdash; épp az a következtetés, amelytől a lecke négy szakaszon át óv.</p>
+
+      <p><strong>Amit a két változat valóban bizonyít:</strong></p>
       <ul style="margin:.5rem 0">
-        <li><strong>A rendszer hozta jövedelem:</strong> Ennek a 14 hónapnak a tempójában évi 92 600 dollár, az SPY momentumrendszeréből</li>
-        <li><strong>Ráfordított idő:</strong> Napi 30 perc felügyelet (a diszkrecionális 6,5 órához képest)</li>
-        <li><strong>Felszabadult idő:</strong> Most fejleszti a 2. rendszert a QQQ-ra és a 3.-at a kriptóra</li>
-        <li><strong>Skálázhatóság:</strong> 2025-re 5 korrelálatlan rendszert tervez futtatni → cél évi 250 000 dollár fölött</li>
-        <li><strong>Stresszszint:</strong> «Jobban alszom. A kód nem esik pánikba. Már nem írom felül a saját szabályaimat.»</li>
-        <li><strong>Nettó a 2023 Q1-es veszteség után:</strong> -39 900 dollár (a V1 katasztrófája) + 108 000 dollár (14 hónap V2) = <strong>nettó +68 100 dollár</strong></li>
+        <li><strong>A V1 szakadéka valódi bizonyíték, mert katasztrófa.</strong> Egy 78%-ot mutató backtest és ugyanazokkal a szabályokkal 48%-ot hozó éles kereskedés nem kétértelmű. A folyamatban valami 30 százalékpontnyi találati arányt gyártott, ami nem létezett. Ez a következtetés abba az irányba fut, amelyik működik: egyetlen rossz kimenetelből sokkal könnyebb bizonyítani, hogy egy módszer hibás volt, mint egyetlen jóból, hogy szilárd.</li>
+        <li><strong>A V2 folyamata pontosan azt a mechanizmust szüntette meg, amely a szakadékot előállította.</strong> A már lekereskedett három év adatára illesztett nyolc paraméterből három paraméter lett, olyan adaton tesztelve, amelyet az illesztés soha nem látott. Ez a saját logikája alapján védhető változtatás &mdash; még mielőtt bármilyen eredmény megérkezne.</li>
+        <li><strong>A tanító- és tesztszakasz közti eltérés öt ablakon át kicsi maradt.</strong> Öt ablak nem sok, és egy 5&ndash;8%-os eltérés semmit nem garantál. De az alternatíva &mdash; ablakról ablakra táguló eltérés &mdash; döntő ellenbizonyíték lett volna, és az nem jelent meg.</li>
       </ul>
 
-      <p><strong>Tom keservesen megszerzett tanulsága (2024. október):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        «2023 első negyedévében 40 000 dollárt veszítettem, mert azt hittem, a backtesting annyi, hogy ‹lefuttatok kódot a múltbeli adaton és optimalizálom a paramétereket›. Tévedés.
-        <br><br>
-        Az igazi rendszerfejlesztés ez:
-        <br>
-        • Walk-forward tesztek (tanítás a múlton, teszt a jövőn, ismétlés)<br>
-        • A tranzakciós költségek modellezése (a slippage elviszi az edge 30 %-át)<br>
-        • Monte Carlo stressztesztek (tudd, mekkora a legrosszabb drawdownod)<br>
-        • Legalább 50 ügylet papíron, mielőtt egyetlen dollárt is kockáztatnál<br>
-        • Egyszerű szabályok > összetett optimalizálás (3 paraméter veri a 8-at)
-        <br><br>
-        A V2-es rendszerem napi 30 perc mellett nagyjából évi 93 000 dollárt hoz. 6 órám szabad, hogy újabb rendszereket építsek. 2025-re 5 rendszert futtatok különböző eszközökön.
-        <br><br>
-        A diszkrecionális kereskedés 163 000 dollárnál lezárt és kiégetett. A szisztematikus végtelenül skálázódik — ha jól csinálod.»
-        <br><br>
-        — Tom Anderson, szisztematikus kereskedő (2024. október)
-      </blockquote>
+      <p><strong>Amit e történet egyik változata sem bizonyít:</strong> hogy egy rendesen validált rendszer meghatározott jövedelmet hoz, hogy a rendszerszerű kereskedés veri a diszkrecionálisat, vagy hogy Tom szabályai továbbra is működni fognak. A diszkrecionális éve és a rendszerszerű éve különböző évek voltak különböző piacokon; a jövedelmüket összevetni annyira két piaci rezsim összevetése, mint két módszeré. A becsületes összegzés az, hogy egy folyamatot, amelyről bizonyítani tudta, hogy hibás, olyanra cserélt, amelynek legalább a hibamódját tesztelte, majd elég lassan növelt méretet ahhoz, hogy egy újabb tévedés túlélhető maradjon.</p>
 
-      <p><strong>Mennyibe került összesen Tom tanulása:</strong></p><ul style="margin:.5rem 0">
-        <li><strong>A V1 veszteségei 2023 Q1-ben:</strong> -39 900 dollár (tandíj egy túlillesztett rendszerért)</li>
-        <li><strong>A tanácsadó díja:</strong> -8 000 dollár (4 hónap, 2023. április-július)</li>
-        <li><strong>Fejlesztésre fordított idő:</strong> 4 hónap elmaradt haszon (diszkrecionálisan nagyjából 54 000 dollárt kereshetett volna)</li>
-        <li><strong>Összes befektetés:</strong> ~$102K</li>
-        <li><strong>Megtérülés 14 hónap alatt:</strong> +108 000 dollár (szisztematikusan, a V2-vel)</li>
-        <li><strong>Nettó pozíció:</strong> +6 000 dollár (nullszaldó egy drága tanulás után)</li>
-        <li><strong>Jövőbeli érték:</strong> A rendszer most napi 30 perc mellett nagyjából évi 93 000 dollárt hoz, és napi 6 órát szabadít fel a növekedésre</li>
-        <li><strong>5 éves előrejelzés:</strong> 5 rendszer × nagyjából 50 000 dollár átlagosan = évi 250 000 dollár (a 163 000 dolláros diszkrecionális plafonhoz képest) — és ez feltételezi, hogy minden új rendszer megáll a lábán, ami éppen az a rész, amit senki nem ígérhet meg</li>
-      </ul>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Az az állítás, amelyet ez a lecke korábban tett, és hogy miért volt téves.</strong> Ennek az oldalnak egy korábbi változata így zárult: „a rendszerszerű kereskedés végtelenül skálázódik &mdash; ha jól csinálod", mellette ötéves előrejelzés öt rendszerrel, egyenként 50 ezer dollárral, és egy táblázat, amely a skálázhatóságot „korlátlan"-ként tüntette fel. Ebből semmi sem igaz, és a lecke elején lévő doboz már megmondja, miért: egy rendszert korlátoz annak likviditása, amivel kereskedik, és az, hogy az előny meddig éli túl, hogy kereskednek rá. Korlátozza valami finomabb is: az öt rendszered aligha lesz öt független előny. A lakossági rendszerek többsége más paramétereket viselő momentum vagy átlaghoz visszatérés, és öt korrelált rendszert futtatni annyi, mint egy rendszert ötszörös méretben futtatni &mdash; épp az ellenkezője annak, amit az előrejelzés feltételezett.</p>
+      </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Nagyjából a lecke felénél tartasz.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Jó pont a megállásra. Ami ezután jön, közvetlenül arra épül, amit az imént olvastál.</p>
@@ -545,11 +456,11 @@
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Szinte semmi változásra, hiszen a költség kötésenként kicsi</div>
             <div class="quiz-option" data-correct="false">B) Az eredmény javul, mert a költség kiszűri a határeseti kötéseket</div>
-            <div class="quiz-option" data-correct="true">C) Nagy csökkenésre &mdash; kötésenként a százalék töredéke is elviheti a hozam harmadát vagy többet</div>
+            <div class="quiz-option" data-correct="true">C) A kereskedésenkénti költség és a kereskedésenkénti bruttó nyereség arányától függ, és semmi mástól &mdash; a két szám nélkül nem válaszolható meg</div>
             <div class="quiz-option" data-correct="false">D) Az eredmény mérhetetlenné válik</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Helyes: C.</strong> A költség a kötésszámmal együtt nő, így egy nagyfrekvenciás rendszer sokszorosan fizeti meg, miközben a kötésenkénti előny változatlan marad. Az A válasz az a feltevés, amitől a nem is nyereséges backtestek nyereségesnek látszanak. A B válaszban van igazságmag &mdash; a költség valóban bünteti a határeseti kötéseket &mdash;, de ez kevesebb megkötött ügyletként jelenik meg, nem ugyanazon a halmazon elért jobb hozamként.
+            <strong>Helyes: C.</strong> A kereskedésszám kiesik: kétszerezd meg a kereskedéseket, és megkétszereződik a költség is, a bruttó nyereség is, a hányados változatlan. A kárt a gyakorlatban az oda-vissza költség és az oda-vissza bruttó nyereség hányadosa dönti el. Hat dollár 400 $ bruttó előnnyel szemben semmi; hat dollár 20 $-ral szemben majdnem minden. Az A igaz egy nagy kereskedésenkénti előnnyel bíró rendszerre, és durván téves egy skalpoló rendszerre &mdash; ezért nem általános válasz. A B-ben van igazságmag &mdash; a költségek negatívba fordítják a határkereskedéseket &mdash; de ez kevesebb megkötött kereskedésként jelenik meg, nem ugyanazon a halmazon elért magasabb hozamként. A D téves, mert a számítás teljesen mérhető, amint megvannak a saját teljesülési kimutatásaid.
           </div>
         </div>
 
@@ -583,10 +494,10 @@
       <div class="key-takeaway">
         <h4>🎓 A lényeg</h4>
         <ul>
-          <li><strong>Rendszerezz, hogy növekedhess:</strong> A diszkrecionális kereskedés 100 000-500 000 dollárnál elakad, a szisztematikusnak nincs plafonja</li>
-          <li><strong>Walk-forward teszt:</strong> Az egyetlen ellenőrzési módszer, ami számít: tanítás a múlton, tesztelés a jövőn (újra és újra)</li>
-          <li><strong>Monte Carlo szimuláció:</strong> Több mint 1 000 forgatókönyv tesztelése, hogy lásd a kockázat és a hozam valódi eloszlását</li>
-          <li><strong>A tranzakciós költségek KRITIKUSAK:</strong> Ügyletenként 0,1 % a backtest hozamának több mint 30 %-át megsemmisíti</li>
+          <li><strong>Amit a rendszerbe foglalás valójában megvesz neked:</strong> ugyanaz az előny fut több eszközön és több órán át, mint amennyit egy ember figyelni tud. Nem korlátlan plafon &mdash; a rendszert továbbra is korlátozza annak likviditása, amivel kereskedik, és az, meddig él az előny.</li>
+          <li><strong>Walk-forward teszt:</strong> az egyetlen szakasz, amely valaha olyan adatot mutat a szabályoknak, amelyre nem illesztették őket &mdash; és ezt ismételten teszi, nem egyszer. Az ablakról ablakra táguló eltérés a lelet; a kicsi eltérés csak a vörös zászló hiánya.</li>
+          <li><strong>A Monte Carlo a sorrendről mond valamit, nem a jövőről:</strong> a kereskedéseid újrakeverése megmutatja, mennyire lehetett volna rossz a sorrend a megfigyelt hozamok mellett. Semmit nem mond olyan rezsimről, amely a nem megfigyelt hozamokat termeli &mdash; és valójában ez a kockázat vet véget a rendszereknek.</li>
+          <li><strong>A backtest költségeit a saját teljesüléseidből számold:</strong> a kár az oda-vissza költség osztva az oda-vissza bruttó nyereséggel. 5% alatt nem a te bajod; 30% fölött a bróker és a megbízástípus többet nyom, mint a jelzés.</li>
           <li><strong>Élesíts lépcsőzetesen:</strong> Papír → mikroméret → kicsi → teljes (minden szakaszban ellenőrizve)</li>
           <li><strong>Kerüld a túlillesztést:</strong> Több paraméter = több görbére illesztés. Az egyszerű rendszerek élik túl az éles piacot</li>
         </ul>
@@ -599,17 +510,17 @@
         <p><strong>Rendszerfejlesztés 6 lépésben:</strong></p>
         <ol style="margin:.75rem 0;line-height:1.8">
           <li><strong>Szabályokba önteni</strong> — Alakítsd a diszkrecionális setupot pontos be- és kilépési feltételekké (5 vagy több szabály). Példa: «Az ár legalább 0,20 dollárral lesöpri a 15 perces mélypontot, 5 gyertyán belül visszaveszi, ADX>22»</li>
-          <li><strong>Backtest (200+ ügylet, 2+ év)</strong> — Kövesd: találati arány >50 %, átlagos R >0,5R, legnagyobb drawdown <25 %, Sharpe >1,0</li>
+          <li><strong>Backtest (200+ ügylet, 2+ év)</strong> &mdash; Kövesd a találati arányt, az átlagos R-t, a maximális drawdown -t és a Sharpe-ot, de mind a négyet hibasávos becslésként kezeld, ne teljesítendő küszöbként. 200 kereskedésnél egy mért 55%-os találati arány nagyjából 48% és 62% között bármivel összefér, és egy kétéves 1,0-es Sharpe nagyjából 0 és 2 közötti valódi Sharpe-pal fér össze. A tartományt írd fel, ne a pontot.</li>
 
           <li><strong>Walk-forward ellenőrzés</strong> — Oszd 6 hónapos blokkokra, és gördülve taníts és tesztelj. Ha a teszt 30 %-kal vagy többel rosszabb a tanításnál = túlillesztés</li>
-          <li><strong>Monte Carlo stresszteszt</strong> — Keverd össze 1 000 sorrendben. Ha a 95. percentilis drawdownja 30 % fölött van, vagy a csőd kockázata 1 % fölött = csökkentsd a méretet</li>
+          <li><strong>Monte Carlo stresszteszt</strong> &mdash; Keverd újra a kereskedések sorrendjét ezerszer, és olvasd le a drawdown eloszlását. Ez egy kérdésre jól válaszol: e hozamok mellett mennyire lehetett volna szerencsétlen a sorrend? Arra nem válaszol, mi történik, ha maguk a hozamok változnak &mdash; így a 95. percentilis drawdown -t a legrosszabb eseted alsó korlátjának tekintsd, soha ne felsőnek.</li>
           <li><strong>Élesítés (3 szakasz)</strong> — Papír (50 ügylet, a találati arány a backtest 5 %-án belül) → mikroméret (30 ügylet, a méret 25 %-a) → teljes méret (100 %). Ha bármelyik szakaszon elbukik, vissza a backtesthez</li>
-          <li><strong>A tranzakciós költségek valósága</strong> — Add hozzá a slippage-et (0,05 %), a jutalékot és a spreadet. Ha a nyereség több mint 50 %-kal esik = nem életképes</li>
+          <li><strong>A tranzakciós költségek valósága</strong> &mdash; A spreadet az eszköz tényleges jegyzéséből, a jutalékot a saját tényleges díjszabásodból modellezd, majd oszd el az oda-vissza költséget a kereskedésenkénti bruttó nyereséggel. Ne importálj százalékot egy cikkből: likvid eszközökön a szokásosan idézett számok egy nagyságrenddel túl magasak, illikvideken pedig túl alacsonyak.</li>
         </ol>
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Cél:</strong> Az 1-4. lépést 2-4 hét alatt végezd el. Papíron legalább 50 ügyletet köss. Csak akkor menj élesbe, ha a papír 10 %-on belül egyezik a backtesttel. A legtöbb rendszer a papírszakaszban bukik el — és ez JÓ. Jobb most kiderülnie, mint valódi pénzt veszíteni.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Cél:</strong> Végezd el az 1-4. lépést 2-4 hét alatt, aztán kereskedj papíron legalább ötven kereskedést. Menj élesbe kicsiben, hacsak a papírkereskedés nem adott okot, hogy ne tedd &mdash; és legyen világos, milyen okról volt szó. A végrehajtási hiba (késve érkező adat, újrarajzoló jelzés, olyan megbízástípus, amelyet a bróker nem fogad el) kizáró ok, és javítható. A backtest -nél néhány ponttal alacsonyabb találati arány egyik sem; ötven kereskedés nem tud ilyen kis eltérést eldönteni. Az itt elbukó rendszerek többsége a végrehajtáson bukik el, és ezt pénz nélkül megtudni ennek a szakasznak a teljes értelme.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Most tanultad meg, mi választja el a hobbistákat a profi szisztematikus kereskedőktől. Walk-forward tesztek, Monte Carlo, költségmodellezés: ezek nem opcionálisak. Ezek a túlélés. Most már tudod, hogyan építs olyan rendszereket, amelyek élesben nem robbannak fel.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Az e leckében leírt folyamat nem garancia arra, hogy egy rendszer működik. Öt lehetőség sorozata annak kiderítésére, hogy nem működik &mdash; a legolcsóbbal kezdve, hogy a felismerés egy hétvégényi kódolásba kerüljön, ne egy negyedévnyi hozamba. Tom V1-e négyet kihagyott közülük, és az információt az utolsó, legdrágább szakaszban fizette meg. Ennyi az egész érv amellett, hogy sorrendben csináld.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Kapcsolódó leckék</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

@@ -230,10 +230,10 @@
       <ol style="margin:1rem 0;line-height:1.8">
         <li><strong>Nur In-Sample</strong> — Auf denselben Daten von 2020-2022 getestet. Das System hat Muster auswendig gelernt, keine Out-of-Sample-Validierung</li>
         <li><strong>Overfitting der Parameter</strong> — 8 Parameter optimiert (ADX>23,4, RSI<38,7). An das Rauschen angepasst</li>
-        <li><strong>Transaktionskosten ignoriert</strong> — Null slippage und Kommissionen im backtest. Live: 0,08 % slippage + 2 $ pro Trade fraßen etwa 30 % der Edge</li>
+        <li><strong>Transaktionskosten ignoriert</strong> &mdash; Null Slippage und keine Kommissionen im backtest. Es lohnt sich, genau zu sein, was ihn das wirklich gekostet hat, denn es ist weniger, als man annimmt: Bei SPY lagen die Round-Trip-Kosten in seiner Größe im einstelligen Dollarbereich pro Trade, also bei wenigen Prozent des Bruttogewinns pro Trade, nicht bei einem Drittel davon. Die Kosten waren eine echte Auslassung und ein Zeichen für einen schlampigen Prozess, aber sie sind nicht das, was aus 78 % 48 % gemacht hat. Das war das Overfitting. Stell die Diagnose richtig, sonst behebst du das billige Problem und behältst das teure.</li>
         <li><strong>Kein Walk-Forward</strong> — Ein einziger backtest, keine rollierenden Fenster. Der Abbau auf neuen Daten wurde nicht getestet</li>
         <li><strong>Papierhandel übersprungen</strong> — Direkt live, in voller Größe. Hätte 40.000 $ sparen können</li>
-        <li><strong>Annahmen zur Ausführung</strong> — Ausführungen zum Schlusskurs angenommen. Reale Ausführungen 0,05 % schlechter</li>
+        <li><strong>Annahmen zur Ausführung</strong> &mdash; Fills zum Schlusskurs der Signalkerze angenommen. In Wirklichkeit ist das Signal erst bekannt, wenn diese Kerze geschlossen hat, also ist der früheste verfügbare Fill die Eröffnung der nächsten Kerze. Das ist keine Slippage-Korrektur, sondern eine ganze Kerze Look-ahead, die im backtest eingebaut ist &mdash; und bei einem Momentum-System schönt sie das Ergebnis genau in der Richtung, in die das System handelt.</li>
       </ol>
 
       <p><strong>Die Abrechnung (31. März 2023):</strong></p>
@@ -276,7 +276,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Transaktionskosten</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Ignoriert (als null angenommen)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">0,08 % slippage + 2 $ Kommission + 0,02 % Spread pro Trade</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Aus seinen eigenen Fills modelliert: ein Cent Spread pro Seite plus Kommission, rund 6 $ pro Round Trip bei 200 Aktien</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Validierung</strong></td>
@@ -360,43 +360,27 @@
         </tbody>
       </table>
 
-      <p><strong>Realitätscheck bei den Transaktionskosten:</strong></p>
+      <p><strong>Realitätscheck Transaktionskosten &mdash; und die Regel, die sie tatsächlich bestimmt:</strong></p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Backtest V2: vor und nach Transaktionskosten</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Kennzahl</th>
-            <th style="padding:0.75rem;text-align:right;">Vor Kosten</th>
-            <th style="padding:0.75rem;text-align:right;">Nach Kosten</th>
-            <th style="padding:0.75rem;text-align:left;">Auswirkung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Ø Gewinn pro Trade</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$767</td>
-            <td style="padding:0.75rem;text-align:right;">$545</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-29 % pro Trade</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Jahresrendite (200 Trades)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">+$153,400</td>
-            <td style="padding:0.75rem;text-align:right;">+$109,000</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-$44,400 (-29%)</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Sharpe Ratio</strong></td>
-            <td style="padding:0.75rem;text-align:right;">2.1</td>
-            <td style="padding:0.75rem;text-align:right;">1.4</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-33 % Abbau</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">Immer noch tragfähig?</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e">✓ JA (109.000 $ pro Jahr, Sharpe 1,4)</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <p>V1 nahm null Kosten an. V2 modellierte sie &mdash; und genau hier gehen die meisten Darstellungen dieses Themas schief, einschließlich einer früheren Fassung dieser hier. Sie behauptete, die Kosten nähmen 29 % des Edge, auf Basis angenommener 0,08 % Slippage pro Trade. Bei SPY zu 520 $ je Aktie sind 0,08 % gleich 42 Cent. Der tatsächliche Spread in SPY ist während der regulären Handelszeit ein Cent &mdash; rund 0,002 % &mdash; die angenommenen Kosten waren also etwa zwanzigmal so hoch wie die echten, und die 29 %, die daraus folgten, waren ein Artefakt der Annahme, kein Befund.</p>
+
+      <p>Hier ist die Rechnung, die du nachprüfen kannst. Nehmen wir an, das System handelt 200 SPY-Aktien je Position und geht mit Limit-Orders rein und raus, die liegen bleiben statt zu überqueren:</p>
+
+      <ul style="margin:.5rem 0">
+        <li><strong>Spread-Kosten:</strong> ein Cent je Aktie, beim Einstieg und beim Ausstieg fällig, wenn du überquerst, und nahezu null, wenn du liegen bleibst. Auf beiden Seiten überqueren: 200 Aktien &times; 0,01 $ &times; 2 = <strong>$4</strong>.</li>
+        <li><strong>Kommission:</strong> 1 $ pro Seite bei einem Broker mit Per-Share-Tarif, also <strong>$2</strong> für den Round Trip.</li>
+        <li><strong>Summe: rund 6 $ pro Round Trip</strong>, und genau das gehört in den backtest, bis deine eigenen Ausführungsprotokolle etwas anderes sagen.</li>
+      </ul>
+
+      <p>Gegen einen durchschnittlichen Bruttogewinn von ein paar hundert Dollar pro Trade sind 6 $ ein Rundungsfehler. Gegen einen durchschnittlichen Bruttogewinn von 15 $ sind sie fast der ganze Edge. Das ist die Regel &mdash; und sie ist nicht die, die man üblicherweise hört:</p>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Der Kostenzug ist das Verhältnis von Kosten je Trade zu Brutto-Edge je Trade. Die Anzahl der Trades kommt darin nicht vor.</strong> Verdopple die Zahl der Trades, und du verdoppelst die Kosten &mdash; aber du verdoppelst auch den Bruttogewinn; der Bruchteil bleibt gleich. Was Hochfrequenzsysteme kostenempfindlich macht, ist nicht, dass sie öfter zahlen, sondern dass ihr Edge je Trade klein ist, sodass dieselben 6 $ ein großer Anteil davon sind. Ein System, das acht Ticks skalpiert, und eines, das zwei Tage hält, zahlen je Round Trip identische Kosten und sind davon völlig unterschiedlich betroffen.</p>
+      </div>
+
+      <p>Das heißt: Der ehrliche Weg, diese Prüfung an deinem eigenen System vorzunehmen, besteht nicht darin, den Prozentsatz eines anderen anzuwenden. Er besteht darin, deine modellierten Kosten pro Round Trip durch den durchschnittlichen Bruttogewinn je Trade in deinem backtest zu teilen. Liegt die Zahl unter 5 %, sind die Kosten nicht dein Problem und du solltest aufhören, dir darüber Gedanken zu machen. Liegt sie über 30 %, ist dein System ein Kostenarbitrage-Geschäft, und jede verbleibende Entscheidung &mdash; Broker, Ordertyp, Routing &mdash; zählt mehr als das Signal.</p>
+
+      <p>Eines ändern Kosten zuverlässig: den Grenztrade. Trades, deren Erwartungswert vor Kosten leicht positiv war, sind danach negativ; ein sauber kostenbereinigter backtest sollte also <strong>weniger Trades ausweisen</strong>, nicht einfach dieselben Trades mit weniger Ertrag. Wenn dein Kostenmodell nur von jedem Ergebnis einen festen Betrag abzieht und nie einen Trade aus der Menge entfernt, modelliert es keine Kosten &mdash; es macht einen Abschlag.</p>
 
       <p><strong>Validierung im Papierhandel (August 2023, 50 Trades):</strong></p>
 
@@ -415,7 +399,7 @@
             <td style="padding:0.75rem;"><strong>Trefferquote</strong></td>
             <td style="padding:0.75rem;text-align:right;">59%</td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">56%</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 % (GUT!)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 Pp (innerhalb des Rauschbands)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Ø R</strong></td>
@@ -430,107 +414,34 @@
             <td style="padding:0.75rem;"><span style="color:#22c55e">+2 % (innerhalb der Toleranz)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">STATUS DER VALIDIERUNG:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ BESTANDEN (weiter zum Livehandel)</span></td>
-          </tr>
-        </tbody>
-      </table><h3 id="act-4-live-trading-success-september-2023-october-2024-14-months">Akt 4: Erfolg im Livehandel (September 2023 bis Oktober 2024, 14 Monate)</h3>
-
-      <p><strong>Toms Einführungsstrategie:</strong> Papierhandel bestanden → 25 % Größe für 1 Monat → 50 % Größe für 2 Monate → 100 % Größe (ab Dezember 2023)</p>
-
-      <p><strong>Toms V2 im Live-Handel (Sep. 2023 – Okt. 2024):</strong> Er startete mit 25 % Größe, solange das System noch in der Validierung war, und ging erst im Dezember auf volle Größe, nachdem mehrere Monate Live-Ergebnisse zum Backtest gepasst hatten. Diese Rampe ist der Teil, den man übernehmen sollte: Die Größe folgt der Evidenz, nicht der Zuversicht. Ein guter Monat sagt nichts darüber aus, ob ein System funktioniert.</p>
-
-      <p><strong>Vergleich diskretionär (2022) und systematisch (2023-2024):</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Toms Handel: vor und nach der Systematisierung</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Kennzahl</th>
-            <th style="padding:0.75rem;text-align:right;">2022 (diskretionär)</th>
-            <th style="padding:0.75rem;text-align:right;">2024 (systematisch)</th>
-            <th style="padding:0.75rem;text-align:left;">Veränderung</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Jahreseinkommen</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$163,500</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">$92,600</span></td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-43 % (aber …)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Zeitaufwand</strong></td>
-            <td style="padding:0.75rem;text-align:right;">6,5 Std. pro Tag (Handelszeiten)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0,5 Std. pro Tag (Überwachung)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ -92 % Zeit (6 Stunden frei!)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Emotionale Belastung</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Hoch (Ermüdung durch Bildschirmzeit)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Gering (der Code führt aus)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Ausführung ohne Stress</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Skalierbarkeit</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Begrenzt (eine Person ist die Grenze)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Unbegrenzt (Assets hinzufügen)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Skalierbar auf QQQ, IWM usw.</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Verpasste Setups</strong></td>
-            <td style="padding:0.75rem;text-align:right;">~20 % (nicht am Schreibtisch)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0 % (Überwachung rund um die Uhr)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Nie wieder ein Signal verpassen</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Konstanz</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Schwankend (von Emotionen abhängig)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Perfekt (regelbasiert)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ 100 % Regeltreue</span></td>
+            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">WAS DAS BELEGT:</td>
+            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ Die Regeln sind in Echtzeit ausführbar</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p><strong>Toms aktuelle Lage (Oktober 2024):</strong></p>
+      <p><strong>Lies diese Tabelle danach, was sie stützen kann, nicht danach, was sie zu stützen scheint.</strong> Fünfzig Trades bei einer erwarteten Trefferquote von 59 % haben einen Standardfehler von etwa sieben Prozentpunkten &mdash; alles zwischen rund 45 % und 73 % ist also ein ganz gewöhnliches Ergebnis für ein System, das tatsächlich in 59 % der Fälle gewinnt. Eine Lücke von drei Punkten ist deshalb kein Beleg dafür, dass das System funktioniert; sie ist das Ausbleiben eines Belegs dafür, dass es kaputt ist &mdash; was viel schwächer und viel nützlicher ist. Wäre das Papierergebnis bei 38 % gelandet, wäre das aussagekräftig gewesen: fünf Standardfehler darunter ist kein Rauschen. Genau darin liegt die Asymmetrie: Eine Papierphase kann ein System widerlegen, bestätigen kann sie es nicht.</p>
+
+      <p>bestätigen kann die Papierphase &mdash; und nichts davor konnte es &mdash;, dass die Regeln so ausführbar sind, wie sie geschrieben stehen. Die Daten kommen rechtzeitig an. Das Signal zeichnet sich nach dem Kerzenschluss nicht neu. Der Ordertyp existiert beim Broker. Die Positionsgröße verlangt keine Bruchteilsaktien, die das Konto nicht halten kann. Das sind die Fehler, für die es Papierhandel gibt, und jeder davon ist eine Ja-oder-Nein-Antwort, für die fünfzig Trades reichlich sind.</p>
+
+      <h3 id="act-4-what-the-record-can-and-cannot-show">Akt 4: Was danach geschah &mdash; und was es zeigen kann und was nicht</h3>
+
+      <p>Tom setzte so ein, wie die Pipeline es vorschreibt: erst Papier, dann ein Viertel der beabsichtigten Größe, dann die Hälfte, dann voll, wobei jeder Schritt davon abhing, dass sich der vorige gut verhielt. Diese Rampe ist der Teil dieser Geschichte, den man kopieren sollte, und zwar aus einem Grund, der nichts damit zu tun hat, wie sie ausgegangen ist. Eine Größe, die der Evidenz statt der Zuversicht folgt, ist richtig, ob das System am Ende funktioniert oder nicht &mdash; denn es ist die einzige Sizing-Regel, die dich wenig kostet, wenn du falsch liegst.</p>
+
+      <p>Was wir hier bewusst nicht tun werden: dir seine Live-Ergebnisse nennen. Nicht weil sie schlecht waren, und nicht weil wir etwas verbergen &mdash; sondern weil vierzehn Monate eines einzelnen Traders mit einem einzigen System dir nichts sagen, wonach du handeln könntest. Vierzehn Monate sind ungefähr ein Marktregime. Ein System, das darin Geld verdient hat, kann solide sein oder ein Momentum-System, das zufällig in einer Trendphase lief; der Track Record kann diese beiden nicht auseinanderhalten, und Tom kann es auch nicht. Stünde hier eine Zahl, wäre das Einzige, was sie zuverlässig bewirkt, das Gefühl, diese Pipeline produziere diese Zahl &mdash; genau der Schluss, von dem dich die Lektion vier Stufen lang abbringen wollte.</p>
+
+      <p><strong>Was die beiden Versionen tatsächlich belegen:</strong></p>
       <ul style="margin:.5rem 0">
-        <li><strong>Einkommen aus dem System:</strong> 92.600 $ pro Jahr im Tempo der 14 Monate, aus dem SPY-Momentum-System</li>
-        <li><strong>Zeitaufwand:</strong> 30 Min. pro Tag Überwachung (gegenüber 6,5 Stunden diskretionär)</li>
-        <li><strong>Gewonnene Zeit:</strong> Entwickelt jetzt ein 2. System für QQQ und ein 3. für Krypto</li>
-        <li><strong>Skalierbarkeit:</strong> Plant, bis 2025 fünf unkorrelierte Systeme zu betreiben → Ziel über 250.000 $ pro Jahr</li>
-        <li><strong>Stressniveau:</strong> «Ich schlafe besser. Code gerät nicht in Panik. Ich übersteuere nicht mehr.»</li>
-        <li><strong>Netto nach dem Verlust in Q1 2023:</strong> -39.900 $ (Desaster V1) + 108.000 $ (14 Monate V2) = <strong>+68.100 $ netto</strong></li>
+        <li><strong>Die V1-Lücke ist echte Evidenz, weil sie eine Katastrophe ist.</strong> Ein backtest, der 78 % zeigt, und Live-Handel, der bei denselben Regeln 48 % zeigt, ist nicht mehrdeutig. Irgendetwas im Prozess hat 30 Punkte Trefferquote hergestellt, die es nicht gab. Dieser Schluss läuft in der Richtung, die funktioniert: Dass eine Methode kaputt war, lässt sich aus einem schlechten Ergebnis weit leichter belegen als, dass eine Methode solide war, aus einem guten.</li>
+        <li><strong>Der V2-Prozess hat genau den Mechanismus beseitigt, der die Lücke erzeugt hat.</strong> Acht Parameter, angepasst an drei Jahre Daten, die er bereits gehandelt hatte, wurden zu drei Parametern, die auf Daten geprüft wurden, welche die Anpassung nie gesehen hatte. Das ist aus eigener Logik heraus eine vertretbare Änderung &mdash; noch bevor irgendein Ergebnis vorliegt.</li>
+        <li><strong>Die Train-Test-Lücken blieben über fünf Fenster hinweg klein.</strong> Fünf Fenster sind nicht viele, und eine Lücke von 5&ndash;8 % ist keine Garantie für irgendetwas. Aber die Alternative &mdash; eine Lücke, die sich Fenster um Fenster ausweitet &mdash; wäre ein entscheidender Gegenbeleg gewesen, und der trat nicht ein.</li>
       </ul>
 
-      <p><strong>Toms hart erarbeitete Erkenntnis (Oktober 2024):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        «Ich habe 40.000 $ im ersten Quartal 2023 verloren, weil ich dachte, backtesting heiße ‹Code auf alten Daten laufen lassen und Parameter optimieren›. Falsch.
-        <br><br>
-        Echte Systementwicklung ist:
-        <br>
-        • Walk-Forward-Tests (auf der Vergangenheit trainieren, auf der Zukunft testen, wiederholen)<br>
-        • Modellierung der Transaktionskosten (slippage frisst 30 % der Edge)<br>
-        • Monte-Carlo-Stresstests (kenne deinen schlimmstmöglichen drawdown)<br>
-        • 50 und mehr Trades im Papierhandel, bevor du einen Dollar riskierst<br>
-        • Einfache Regeln > komplexe Optimierung (3 Parameter schlagen 8)
-        <br><br>
-        Mein System V2 bringt etwa 93.000 $ im Jahr bei 30 Minuten Aufwand pro Tag. Ich habe 6 Stunden frei, um weitere Systeme zu bauen. Bis 2025 werde ich 5 Systeme über verschiedene Assets betreiben.
-        <br><br>
-        Der diskretionäre Handel hat mich bei 163.000 $ gedeckelt und ausgebrannt. Systematischer Handel skaliert unbegrenzt — wenn man es richtig macht.»
-        <br><br>
-        — Tom Anderson, systematischer Trader (Oktober 2024)
-      </blockquote>
+      <p><strong>Was keine Fassung dieser Geschichte belegt:</strong> dass ein ordentlich validiertes System ein bestimmtes Einkommen erzielt, dass systematischer Handel den diskretionären schlägt, oder dass Toms Regeln weiter funktionieren werden. Sein diskretionäres Jahr und sein systematisches Jahr waren verschiedene Jahre in verschiedenen Märkten; ihre Einkommen zu vergleichen heißt ebenso sehr, zwei Marktregime zu vergleichen wie zwei Methoden. Die ehrliche Zusammenfassung lautet: Er hat einen Prozess, von dem er beweisen konnte, dass er kaputt war, durch einen ersetzt, dessen Versagensmodus er wenigstens geprüft hatte &mdash; und ist dann langsam genug hochgefahren, dass ein erneuter Irrtum überlebbar gewesen wäre.</p>
 
-      <p><strong>Was Toms Ausbildung insgesamt gekostet hat:</strong></p><ul style="margin:.5rem 0">
-        <li><strong>Verluste mit V1 in Q1 2023:</strong> -39.900 $ (Lehrgeld für ein überangepasstes System)</li>
-        <li><strong>Beraterhonorar:</strong> -8.000 $ (4 Monate, April-Juli 2023)</li>
-        <li><strong>Entwicklungszeit:</strong> 4 Monate Opportunitätskosten (hätte diskretionär rund 54.000 $ verdienen können)</li>
-        <li><strong>Gesamtinvestition:</strong> ~$102K</li>
-        <li><strong>Erholung über 14 Monate:</strong> +108.000 $ (systematisch mit V2)</li>
-        <li><strong>Nettoposition:</strong> +6.000 $ (kostendeckend nach einer teuren Ausbildung)</li>
-        <li><strong>Zukünftiger Wert:</strong> Das System bringt jetzt etwa 93.000 $ pro Jahr bei 30 Minuten Aufwand am Tag und macht 6 Stunden täglich zum Skalieren frei</li>
-        <li><strong>Prognose auf 5 Jahre:</strong> 5 Systeme × rund 50.000 $ im Schnitt = 250.000 $ pro Jahr (gegenüber der diskretionären Obergrenze von 163.000 $) — und das setzt voraus, dass jedes neue System hält, was genau der Teil ist, den niemand versprechen kann</li>
-      </ul>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Die Behauptung, die diese Lektion früher aufstellte, und warum sie falsch war.</strong> Eine frühere Fassung dieser Seite endete mit „systematischer Handel skaliert unendlich &mdash; wenn du es richtig machst", einer Fünfjahresprojektion von fünf Systemen zu je 50.000 $ und einer Tabelle, die die Skalierbarkeit als „unbegrenzt" auswies. Nichts davon stimmt, und der Kasten am Anfang dieser Lektion sagt bereits warum: Ein System ist durch die Liquidität dessen begrenzt, was es handelt, und dadurch, wie lange der Edge das Gehandeltwerden überlebt. Es ist außerdem durch etwas Feineres begrenzt: Deine fünf Systeme sind höchstwahrscheinlich keine fünf unabhängigen Edges. Die meisten Retail-Systeme sind Momentum oder Mean Reversion in anderen Parametern, und fünf korrelierte Systeme zu fahren heißt, ein System in fünffacher Größe zu fahren &mdash; das Gegenteil dessen, was die Projektion unterstellte.</p>
+      </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Du bist etwa in der Mitte dieser Lektion.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Ein guter Moment für eine Pause. Was jetzt kommt, baut unmittelbar auf dem auf, was du gerade gelesen hast.</p>
@@ -545,11 +456,11 @@
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Fast keine Veränderung, weil die Kosten je Trade klein sind</div>
             <div class="quiz-option" data-correct="false">B) Das Ergebnis verbessert sich, weil die Kosten Grenzfall-Trades herausfiltern</div>
-            <div class="quiz-option" data-correct="true">C) Eine starke Reduktion &mdash; ein Bruchteil eines Prozents je Trade kann ein Drittel der Rendite oder mehr wegnehmen</div>
+            <div class="quiz-option" data-correct="true">C) Es hängt vom Verhältnis der Kosten je Trade zum Bruttogewinn je Trade ab &mdash; und von nichts sonst; ohne beide Zahlen ist die Frage nicht zu beantworten</div>
             <div class="quiz-option" data-correct="false">D) Das Ergebnis wird unmessbar</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Richtig: C.</strong> Die Kosten skalieren mit der Anzahl der Trades, also zahlt ein hochfrequentes System sie vielfach, während der Vorteil je Trade gleich bleibt. A ist die Annahme, die Backtests profitabel aussehen lässt, obwohl sie es nicht sind. B enthält ein Körnchen Wahrheit &mdash; Kosten bestrafen Grenzfall-Trades tatsächlich &mdash;, aber das zeigt sich in weniger eingegangenen Trades, nicht in einer besseren Rendite auf derselben Menge.
+            <strong>Richtig: C.</strong> Die Trade-Zahl kürzt sich weg: Verdoppelst du die Trades, verdoppelst du sowohl die Kosten als auch den Bruttogewinn, der Bruchteil bleibt gleich. Über den Schaden entscheidet Kosten je Round Trip geteilt durch Bruttogewinn je Round Trip. Sechs Dollar gegen 400 $ Brutto-Edge sind nichts; sechs Dollar gegen 20 $ sind fast alles. A stimmt für ein System mit großem Edge je Trade und ist für ein Scalping-System grob falsch &mdash; deshalb ist es keine allgemeine Antwort. B enthält ein Körnchen Wahrheit &mdash; Kosten machen Grenztrades negativ &mdash; aber das zeigt sich in weniger genommenen Trades, nicht in höherem Ertrag derselben Menge. D ist falsch, weil die Rechnung vollständig messbar ist, sobald du deine eigenen Ausführungsprotokolle hast.
           </div>
         </div>
 
@@ -583,10 +494,10 @@
       <div class="key-takeaway">
         <h4>🎓 Die wichtigsten Erkenntnisse</h4>
         <ul>
-          <li><strong>Systematisieren, um zu skalieren:</strong> Diskretionärer Handel endet bei 100.000-500.000 $, systematischer hat keine Obergrenze</li>
-          <li><strong>Walk-Forward-Test:</strong> Die einzige Validierungsmethode, die zählt — auf der Vergangenheit trainieren, auf der Zukunft testen (immer wieder)</li>
-          <li><strong>Monte-Carlo-Simulation:</strong> Über 1.000 Szenarien testen, um die tatsächliche Verteilung von Risiko und Ertrag zu verstehen</li>
-          <li><strong>Transaktionskosten sind ENTSCHEIDEND:</strong> 0,1 % pro Trade vernichten über 30 % der Rendite aus dem backtest</li>
+          <li><strong>Was Systematisierung dir tatsächlich verschafft:</strong> derselbe Edge, laufend über mehr Instrumente und mehr Stunden, als ein Mensch überwachen kann. Keine unbegrenzte Decke &mdash; ein System bleibt durch die Liquidität dessen begrenzt, was es handelt, und dadurch, wie lange der Edge überlebt.</li>
+          <li><strong>Walk-Forward-Test:</strong> die einzige Stufe, die den Regeln überhaupt jemals Daten zeigt, an die sie nicht angepasst wurden &mdash; und das wiederholt statt nur einmal. Eine Lücke, die sich Fenster um Fenster ausweitet, ist der Befund; eine kleine Lücke ist nur das Ausbleiben einer roten Flagge.</li>
+          <li><strong>Monte Carlo sagt dir etwas über die Reihenfolge, nicht über die Zukunft:</strong> Deine Trades neu zu mischen zeigt, wie schlecht die Reihenfolge bei den Renditen, die du beobachtet hast, hätte ausfallen können. Es kann dir nichts über ein Regime sagen, das Renditen erzeugt, die du nicht beobachtet hast &mdash; und genau dieses Risiko beendet Systeme.</li>
+          <li><strong>Kostet den backtest aus euren eigenen Ausführungen:</strong> Der Schaden ist Kosten je Round Trip geteilt durch Bruttogewinn je Round Trip. Unter 5 % ist es nicht dein Problem; über 30 % zählen Broker und Ordertyp mehr als das Signal.</li>
           <li><strong>Schrittweise einführen:</strong> Papierhandel → Mikrogröße → klein → voll (auf jeder Stufe validieren)</li>
           <li><strong>Overfitting vermeiden:</strong> Mehr Parameter = mehr Kurvenanpassung. Einfache Systeme überleben den Livehandel</li>
         </ul>
@@ -599,17 +510,17 @@
         <p><strong>Systementwicklung in 6 Schritten:</strong></p>
         <ol style="margin:.75rem 0;line-height:1.8">
           <li><strong>Regeln kodifizieren</strong> — Wandle das diskretionäre Setup in exakte Ein- und Ausstiegsbedingungen um (5 oder mehr Regeln). Beispiel: «Der Kurs sweept das 15-Minuten-Tief um mindestens 0,20 $, erobert es innerhalb von 5 Kerzen zurück, ADX>22»</li>
-          <li><strong>Backtest (200+ Trades, 2+ Jahre)</strong> — Verfolge: Trefferquote >50 %, Ø R >0,5R, maximaler drawdown <25 %, Sharpe >1,0</li>
+          <li><strong>Backtest (200+ Trades, 2+ Jahre)</strong> &mdash; Erfasse Trefferquote, durchschnittliches R, maximalen drawdown und Sharpe, behandle aber alle vier als Schätzungen mit Fehlerbalken statt als Schwellen, die zu überschreiten sind. Bei 200 Trades ist eine gemessene Trefferquote von 55 % mit allem zwischen rund 48 % und 62 % vereinbar, und ein Sharpe von 1,0 über zwei Jahre ist mit einem wahren Sharpe von etwa 0 bis 2 vereinbar. Schreib die Spanne auf, nicht den Punkt.</li>
 
           <li><strong>Walk-Forward-Validierung</strong> — In 6-Monats-Blöcke aufteilen, rollierend trainieren und testen. Ist die Testleistung 30 % oder mehr schlechter als im Training = Overfitting</li>
-          <li><strong>Monte-Carlo-Stresstest</strong> — 1.000 Reihenfolgen durchmischen. Liegt der drawdown im 95. Perzentil über 30 % oder das Ruinrisiko über 1 % = Größe reduzieren</li>
+          <li><strong>Monte-Carlo-Stresstest</strong> &mdash; Mische die Trade-Reihenfolge tausendmal neu und lies die Verteilung der drawdowns ab. Das beantwortet eine Frage gut: Wie unglücklich hätte die Reihenfolge bei diesen Renditen ausfallen können? Es beantwortet nicht, was geschieht, wenn sich die Renditen selbst ändern &mdash; behandle den drawdown im 95. Perzentil also als Untergrenze deines Worst Case, nie als Obergrenze.</li>
           <li><strong>Einführung im Livehandel (3 Stufen)</strong> — Papierhandel (50 Trades, Trefferquote im Rahmen von 5 % um den backtest) → Mikrogröße (30 Trades, 25 % Größe) → volle Größe (100 %). Scheitert eine Stufe, zurück zum backtest</li>
-          <li><strong>Realität der Transaktionskosten</strong> — slippage (0,05 %), Kommission und Spread einrechnen. Sinkt der Gewinn um mehr als 50 % = nicht tragfähig</li>
+          <li><strong>Realität der Transaktionskosten</strong> &mdash; Modelliere den Spread aus der tatsächlichen Notierung des Instruments und die Kommission aus deiner tatsächlichen Gebührenordnung, dann teile die Round-Trip-Kosten durch den Bruttogewinn je Trade. Übernimm keinen Prozentsatz aus einem Artikel: Bei liquiden Instrumenten sind die üblich zitierten Zahlen eine Größenordnung zu hoch, bei illiquiden zu niedrig.</li>
         </ol>
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Ziel:</strong> Arbeite die Schritte 1-4 in 2-4 Wochen ab. Handle mindestens 50 Trades auf dem Papier. Geh nur live, wenn der Papierhandel den backtest auf 10 % genau trifft. Die meisten Systeme scheitern in der Papierphase — und das ist GUT. Besser jetzt herausfinden, als echtes Geld zu verlieren.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Ziel:</strong> Arbeite die Schritte 1-4 in 2-4 Wochen durch und handle danach mindestens fünfzig Trades auf Papier. Geh klein live, sofern der Papierhandel dir keinen Grund dagegen geliefert hat &mdash; und sei dir klar, welche Art von Grund es war. Ein Ausführungsfehler (verspätete Daten, ein repaintendes Signal, ein Ordertyp, den dein Broker nicht annimmt) ist disqualifizierend und behebbar. Eine Trefferquote ein paar Punkte unter dem backtest ist beides nicht; fünfzig Trades können eine so kleine Lücke nicht auflösen. Die meisten Systeme, die hier scheitern, scheitern an der Ausführung &mdash; und das ohne Geld herauszufinden ist der ganze Zweck dieser Stufe.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Du hast gerade gelernt, was Hobbyisten von professionellen systematischen Tradern unterscheidet. Walk-Forward-Tests, Monte Carlo, Kostenmodellierung — das ist nicht optional. Das ist Überleben. Jetzt weißt du, wie man Systeme baut, die im Livehandel nicht in die Luft fliegen.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Die Pipeline in dieser Lektion ist keine Garantie, dass ein System funktioniert. Sie ist eine Folge von fünf Gelegenheiten herauszufinden, dass es das nicht tut &mdash; nach Kosten geordnet, die billigste zuerst, damit die Entdeckung dich ein Wochenende Programmieren kostet und nicht ein Quartal Rendite. Toms V1 hat vier davon übersprungen und die Information auf der letzten und teuersten Stufe bezahlt. Das ist das ganze Argument dafür, es der Reihe nach zu tun.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Verwandte Lektionen</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

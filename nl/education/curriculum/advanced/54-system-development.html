@@ -230,10 +230,10 @@
       <ol style="margin:1rem 0;line-height:1.8">
         <li><strong>Alleen binnen de steekproef</strong> — Getest op diezelfde data van 2020-2022. Het systeem leerde de patronen uit het hoofd, zonder validatie buiten de steekproef</li>
         <li><strong>Overfitting van parameters</strong> — 8 parameters geoptimaliseerd (ADX>23,4, RSI<38,7). Aan de ruis aangepast</li>
-        <li><strong>Transactiekosten genegeerd</strong> — Nul slippage en commissie in de backtest. Live: 0,08 % slippage + $2 per trade aten ongeveer 30 % van de edge op</li>
+        <li><strong>Transactiekosten genegeerd</strong> &mdash; Nul slippage en nul commissie in de backtest. Het loont om precies te zijn over wat dit hem werkelijk kostte, want het is minder dan men aanneemt: in SPY waren de round-tripkosten op zijn omvang een paar dollar per trade, dus een klein percentage van de brutowinst per trade, niet een derde ervan. De kosten waren een echte omissie en een teken van een slordig proces, maar zij zijn niet wat van 78% 48% maakte. Dat deed de overfitting. Stel de juiste diagnose, anders repareer je het goedkope probleem en houd je het dure.</li>
         <li><strong>Geen walk-forward</strong> — Eén enkele backtest, geen rollende vensters. De achteruitgang op nieuwe data is nooit getest</li>
         <li><strong>Papierfase overgeslagen</strong> — Direct live, op volle omvang. Had $40K kunnen schelen</li>
-        <li><strong>Aannames over uitvoering</strong> — Uitvoering op de slotkoers aangenomen. Werkelijke uitvoeringen waren 0,05 % slechter</li>
+        <li><strong>Aannames over uitvoering</strong> &mdash; Fills aangenomen op de slotkoers van de signaalcandle. In werkelijkheid is het signaal pas bekend zodra die candle gesloten is, dus de vroegst beschikbare fill is de opening van de volgende candle. Dat is geen slippage-correctie maar een hele candle look-ahead die in de backtest is ingebouwd, en bij een momentumsysteem fleurt zij het resultaat op precies in de richting waarin het systeem handelt.</li>
       </ol>
 
       <p><strong>De afrekening (31 maart 2023):</strong></p>
@@ -276,7 +276,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Transactiekosten</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Genegeerd (op nul gezet)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">0,08 % slippage + $2 commissie + 0,02 % spread per trade</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Gemodelleerd uit zijn eigen fills: een cent spread per kant plus commissie, ongeveer $6 per round trip bij 200 aandelen</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Validatie</strong></td>
@@ -360,43 +360,27 @@
         </tbody>
       </table>
 
-      <p><strong>De werkelijkheidstoets van de transactiekosten:</strong></p>
+      <p><strong>Realiteitscheck op transactiekosten &mdash; en de regel die ze werkelijk bepaalt:</strong></p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Backtest van V2: voor en na transactiekosten</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Kengetal</th>
-            <th style="padding:0.75rem;text-align:right;">Voor kosten</th>
-            <th style="padding:0.75rem;text-align:right;">Na kosten</th>
-            <th style="padding:0.75rem;text-align:left;">Effect</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Gemiddelde winst per trade</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$767</td>
-            <td style="padding:0.75rem;text-align:right;">$545</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-29 % per trade</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Jaarrendement (200 trades)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">+$153,400</td>
-            <td style="padding:0.75rem;text-align:right;">+$109,000</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-$44,400 (-29%)</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Sharpe-ratio</strong></td>
-            <td style="padding:0.75rem;text-align:right;">2.1</td>
-            <td style="padding:0.75rem;text-align:right;">1.4</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-33 % achteruitgang</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">Nog steeds haalbaar?</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e">✓ JA ($109K per jaar, Sharpe 1,4)</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <p>V1 ging uit van nul kosten. V2 modelleerde ze, en hier gaat het in de meeste stukken over dit onderwerp mis, ook in een eerdere versie van dit stuk. Daar stond dat kosten 29% van de edge namen, op een aangenomen 0,08% slippage per trade. Bij SPY op $520 per aandeel is 0,08% gelijk aan 42 cent. De werkelijke spread in SPY tijdens reguliere uren is een cent &mdash; ongeveer 0,002% &mdash; dus de aangenomen kosten waren ruwweg twintig keer de echte, en de 29% die eruit volgde was een artefact van de aanname, geen bevinding.</p>
+
+      <p>Hier is de rekensom die je kunt controleren. Stel dat het systeem 200 aandelen SPY per positie handelt en in- en uitstapt met limietorders die blijven rusten in plaats van te kruisen:</p>
+
+      <ul style="margin:.5rem 0">
+        <li><strong>Spreadkosten:</strong> een cent per aandeel, betaald bij in- en uitstap als je kruist, en vrijwel niets als je blijft rusten. Aan beide kanten kruisen: 200 aandelen &times; $0,01 &times; 2 = <strong>$4</strong>.</li>
+        <li><strong>Commissie:</strong> $1 per kant bij een broker met tarief per aandeel, dus <strong>$2</strong> per round trip.</li>
+        <li><strong>Totaal: ongeveer $6 per round trip</strong>, en dat is wat je in de backtest hoort te zetten tot je eigen fillrapporten iets anders zeggen.</li>
+      </ul>
+
+      <p>Tegenover een gemiddelde brutowinst van een paar honderd dollar per trade is $6 een afrondingsfout. Tegenover een gemiddelde brutowinst van $15 is het bijna de hele edge. Dat is de regel, en het is niet de regel die men gewoonlijk formuleert:</p>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>De kostenrem is de verhouding tussen kosten per trade en bruto-edge per trade. Het aantal trades komt er niet in voor.</strong> Verdubbel het aantal trades en je verdubbelt de kosten, maar je verdubbelt ook de brutowinst; de breuk blijft gelijk. Wat hoogfrequente systemen kostengevoelig maakt is niet dat ze vaker betalen, maar dat hun edge per trade klein is, zodat diezelfde $6 er een groot deel van is. Een systeem dat acht ticks scalpt en een systeem dat twee dagen aanhoudt betalen identieke kosten per round trip en worden er volstrekt verschillend door geraakt.</p>
+      </div>
+
+      <p>Wat betekent dat de eerlijke manier om deze check op je eigen systeem te doen niet is het percentage van iemand anders toe te passen. Het is je gemodelleerde kosten per round trip te delen door de gemiddelde brutowinst per trade in je backtest. Ligt dat getal onder 5%, dan zijn kosten niet je probleem en moet je erover ophouden. Ligt het boven 30%, dan is je systeem een kostenarbitragebedrijf en telt elke resterende beslissing &mdash; broker, ordertype, routering &mdash; zwaarder dan het signaal.</p>
+
+      <p>Eén ding veranderen kosten wel betrouwbaar: de marginale trade. Trades waarvan de verwachtingswaarde vóór kosten licht positief was, zijn erna negatief, dus een correct gekostprijsde backtest hoort <strong>minder genomen trades te tonen</strong> te tonen, niet simpelweg dezelfde trades die minder opleveren. Als je kostenmodel alleen een vast bedrag van elk resultaat aftrekt en nooit een trade uit de verzameling verwijdert, modelleert het geen kosten maar past het een korting toe.</p>
 
       <p><strong>Validatie op papier (augustus 2023, 50 trades):</strong></p>
 
@@ -415,7 +399,7 @@
             <td style="padding:0.75rem;"><strong>Trefkans</strong></td>
             <td style="padding:0.75rem;text-align:right;">59%</td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">56%</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 % (GOED!)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 pp (binnen de ruisband)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Gem. R</strong></td>
@@ -430,107 +414,34 @@
             <td style="padding:0.75rem;"><span style="color:#22c55e">+2 % (binnen de tolerantie)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">STATUS VAN DE VALIDATIE:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ GESLAAGD (door naar live)</span></td>
-          </tr>
-        </tbody>
-      </table><h3 id="act-4-live-trading-success-september-2023-october-2024-14-months">Bedrijf 4: succes in de live markt (september 2023 tot oktober 2024, 14 maanden)</h3>
-
-      <p><strong>Toms uitrolstrategie:</strong> Papier geslaagd → 25 % omvang gedurende 1 maand → 50 % gedurende 2 maanden → 100 % (vanaf december 2023)</p>
-
-      <p><strong>Toms V2 in live trading (sep. 2023 - okt. 2024):</strong> Hij begon op 25 % van de omvang zolang het systeem nog in validatie was, en ging pas in december naar volle omvang, toen meerdere maanden liveresultaten in lijn lagen met de backtest. Die opbouw is het deel dat je moet overnemen: omvang volgt op bewijs, niet op vertrouwen. Eén goede maand zegt niets over de vraag of een systeem werkt.</p>
-
-      <p><strong>Vergelijking discretionair (2022) en systematisch (2023-2024):</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Toms handel: voor en na de systematisering</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Kengetal</th>
-            <th style="padding:0.75rem;text-align:right;">2022 (discretionair)</th>
-            <th style="padding:0.75rem;text-align:right;">2024 (systematisch)</th>
-            <th style="padding:0.75rem;text-align:left;">Verandering</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Jaarinkomen</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$163,500</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">$92,600</span></td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-43 % (maar…)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Benodigde tijd</strong></td>
-            <td style="padding:0.75rem;text-align:right;">6,5 uur per dag (beursuren)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0,5 uur per dag (bewaking)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ -92 % tijd (6 uur vrijgemaakt!)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Emotionele belasting</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Hoog (schermmoeheid)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Laag (de code voert uit)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Uitvoering zonder stress</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Schaalbaarheid</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Begrensd (één persoon is de grens)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Onbeperkt (assets erbij zetten)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Uit te breiden naar QQQ, IWM enz.</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Gemiste setups</strong></td>
-            <td style="padding:0.75rem;text-align:right;">~20 % (niet achter het bureau)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0 % (bewaking 24 uur per dag)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Nooit meer een signaal missen</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Consistentie</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Wisselend (afhankelijk van emotie)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Perfect (op regels gebaseerd)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ 100 % regeltrouw</span></td>
+            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">WAT DIT AANTOONT:</td>
+            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ De regels zijn in realtime uitvoerbaar</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p><strong>Waar Tom nu staat (oktober 2024):</strong></p>
+      <p><strong>Lees die tabel op wat zij kan onderbouwen, niet op wat zij lijkt te onderbouwen.</strong> Vijftig trades bij een verwacht winstpercentage van 59% hebben een standaardfout van ongeveer zeven procentpunten, dus alles tussen ruwweg 45% en 73% is een doodgewoon resultaat voor een systeem dat werkelijk 59% van de keren wint. Een gat van drie punten is daarom geen bewijs dat het systeem werkt; het is de afwezigheid van bewijs dat het stuk is, wat veel zwakker en veel nuttiger is. Was het papierresultaat op 38% uitgekomen, dan was dat wél informatief geweest: vijf standaardfouten eronder is geen ruis. De asymmetrie is het punt: een papierfase kan een systeem weerleggen en kan het niet bevestigen.</p>
+
+      <p>bevestigen, en wat niets ervoor kon vaststellen, is dat de regels uitvoerbaar zijn zoals ze geschreven staan. De data komen op tijd binnen. Het signaal herschildert niet nadat de candle sluit. Het ordertype bestaat bij de broker. De positiegrootte vraagt geen fractionele aandelen die de rekening niet kan aanhouden. Dat zijn de storingen waarvoor papierhandel bestaat, en elk ervan is een ja-of-nee-antwoord waarvoor vijftig trades ruimschoots volstaan.</p>
+
+      <h3 id="act-4-what-the-record-can-and-cannot-show">Bedrijf 4: Wat er daarna gebeurde &mdash; en wat dat wel en niet kan aantonen</h3>
+
+      <p>Tom zette het uit zoals de pijplijn voorschrijft: eerst papier, dan een kwart van de beoogde omvang, dan de helft, dan vol, met elke stap afhankelijk van goed gedrag van de vorige. Die opbouw is het deel van dit verhaal dat het kopiëren waard is, en het is het waard om een reden die niets te maken heeft met hoe het afliep. Omvang die het bewijs volgt in plaats van het vertrouwen is juist of het systeem nu blijkt te werken of niet, want het is de enige sizingregel die je weinig kost wanneer je ongelijk hebt.</p>
+
+      <p>Wat we hier bewust niet gaan doen is je zijn liveresultaten geven. Niet omdat ze slecht waren, en niet omdat we iets verbergen &mdash; maar omdat veertien maanden van één trader met één systeem je niets vertellen waarnaar je kunt handelen. Veertien maanden is ongeveer één marktregime. Een systeem dat daar geld verdiende kan deugdelijk zijn, of een momentumsysteem dat toevallig in een trendfase liep; het trackrecord kan die twee niet onderscheiden, en Tom evenmin. Zou hier een getal staan, dan is het enige wat het betrouwbaar doet je het gevoel geven dat deze pijplijn dat getal oplevert, en dat is precies de gevolgtrekking waartegen de les vier fasen lang waarschuwt.</p>
+
+      <p><strong>Wat de twee versies werkelijk aantonen:</strong></p>
       <ul style="margin:.5rem 0">
-        <li><strong>Inkomen uit het systeem:</strong> $92.600 per jaar in het tempo van die 14 maanden, uit het SPY-momentumsysteem</li>
-        <li><strong>Tijdsbesteding:</strong> 30 min per dag bewaking (tegenover 6,5 uur discretionair)</li>
-        <li><strong>Vrijgekomen tijd:</strong> Ontwikkelt nu een 2e systeem voor QQQ en een 3e voor crypto</li>
-        <li><strong>Schaalbaarheid:</strong> Wil tegen 2025 vijf ongecorreleerde systemen draaien → doel meer dan $250K per jaar</li>
-        <li><strong>Stressniveau:</strong> «Ik slaap beter. Code raakt niet in paniek. Ik ga niet meer tegen mijn eigen regels in.»</li>
-        <li><strong>Netto na het verlies van Q1 2023:</strong> -$39.900 (V1-drama) + $108.000 (14 maanden V2) = <strong>+$68.100 netto</strong></li>
+        <li><strong>Het gat van V1 is echt bewijs, juist omdat het een ramp is.</strong> Een backtest die 78% laat zien en live handel die op dezelfde regels 48% laat zien, is niet dubbelzinnig. Iets in het proces heeft 30 punten winstpercentage gefabriceerd die er niet waren. Die gevolgtrekking loopt in de richting die werkt: dat een methode kapot was, bewijs je uit één slechte uitkomst veel makkelijker dan dat een methode deugde uit één goede.</li>
+        <li><strong>Het V2-proces verwijderde precies het mechanisme dat het gat produceerde.</strong> Acht parameters gefit op drie jaar data die hij al had verhandeld werden drie parameters, getest op data die de fit nooit had gezien. Dat is op eigen logica een verdedigbare verandering, nog voordat er enig resultaat binnenkomt.</li>
+        <li><strong>De train-testgaten bleven klein over vijf vensters.</strong> Vijf vensters is niet veel, en een gat van 5&ndash;8% garandeert niets. Maar het alternatief &mdash; een gat dat venster na venster groter wordt &mdash; zou beslissend bewijs tegen zijn geweest, en dat verscheen niet.</li>
       </ul>
 
-      <p><strong>Toms zuurverdiende les (oktober 2024):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        «Ik verloor $40K in het eerste kwartaal van 2023 omdat ik dacht dat backtesting betekende "code over oude data draaien en parameters optimaliseren". Fout.
-        <br><br>
-        Echte systeemontwikkeling is:
-        <br>
-        • Walk-forward-testen (trainen op het verleden, testen op de toekomst, herhalen)<br>
-        • De transactiekosten modelleren (slippage kost 30 % van je edge)<br>
-        • Monte Carlo-stresstests (weet wat je slechtste drawdown kan zijn)<br>
-        • 50 trades of meer op papier voordat je één dollar riskeert<br>
-        • Eenvoudige regels > complexe optimalisatie (3 parameters verslaan er 8)
-        <br><br>
-        Mijn V2-systeem levert zo’n $93K per jaar op bij 30 minuten per dag. Ik heb 6 uur vrij om meer systemen te bouwen. In 2025 draai ik er 5 over verschillende assets.
-        <br><br>
-        Discretionair handelen zette me vast op $163K en brandde me op. Systematisch handelen schaalt eindeloos — als je het goed doet.»
-        <br><br>
-        — Tom Anderson, systematisch trader (oktober 2024)
-      </blockquote>
+      <p><strong>Wat geen enkele versie van dit verhaal aantoont:</strong> dat een netjes gevalideerd systeem een bepaald inkomen oplevert, dat systematisch handelen discretionair handelen verslaat, of dat Toms regels blijven werken. Zijn discretionaire jaar en zijn systematische jaar waren verschillende jaren in verschillende markten; hun inkomen vergelijken is evenzeer twee marktregimes vergelijken als twee methoden. De eerlijke samenvatting is dat hij een proces waarvan hij kon bewijzen dat het kapot was verving door een proces waarvan hij de faalwijze tenminste had getest, en daarna langzaam genoeg opschaalde dat opnieuw ongelijk hebben overleefbaar zou zijn geweest.</p>
 
-      <p><strong>Wat Toms leergeld in totaal kostte:</strong></p><ul style="margin:.5rem 0">
-        <li><strong>V1-verliezen in Q1 2023:</strong> -$39.900 (leergeld voor een overfit systeem)</li>
-        <li><strong>Kosten van de consultant:</strong> -$8.000 (4 maanden, april-juli 2023)</li>
-        <li><strong>Ontwikkeltijd:</strong> 4 maanden gemiste kans (had discretionair ongeveer $54K kunnen verdienen)</li>
-        <li><strong>Totale investering:</strong> ~$102K</li>
-        <li><strong>Herstel over 14 maanden:</strong> +$108.000 (systematisch met V2)</li>
-        <li><strong>Nettopositie:</strong> +$6.000 (quitte na een dure leerschool)</li>
-        <li><strong>Toekomstige waarde:</strong> Het systeem levert nu zo’n $93K per jaar op bij 30 minuten per dag en maakt 6 uur per dag vrij om op te schalen</li>
-        <li><strong>Vooruitblik op 5 jaar:</strong> 5 systemen × ongeveer $50K gemiddeld = $250K per jaar (tegenover het discretionaire plafond van $163K) — en dat gaat ervan uit dat elk nieuw systeem standhoudt, precies het stuk dat niemand kan beloven</li>
-      </ul>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>De bewering die deze les vroeger deed, en waarom die onjuist was.</strong> Een eerdere versie van deze pagina eindigde met "systematisch handelen schaalt oneindig &mdash; als je het goed doet", een vijfjaarsprojectie van vijf systemen à $50K elk, en een tabel die schaalbaarheid als "onbeperkt" opvoerde. Niets daarvan is waar, en het kader boven aan deze les zegt al waarom: een systeem wordt begrensd door de liquiditeit van wat het verhandelt en door hoe lang de edge het verhandeld worden overleeft. Het wordt ook begrensd door iets subtielers: jouw vijf systemen zijn vermoedelijk geen vijf onafhankelijke edges. De meeste particuliere systemen zijn momentum of mean reversion in andere parameters, en vijf gecorreleerde systemen draaien is één systeem op vijf keer de omvang draaien &mdash; het tegendeel van wat de projectie aannam.</p>
+      </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Je bent ongeveer halverwege deze les.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Een goed moment om even te pauzeren. Wat volgt bouwt rechtstreeks voort op wat je net hebt gelezen.</p>
@@ -545,11 +456,11 @@
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Bijna geen verschil, want de kosten per trade zijn klein</div>
             <div class="quiz-option" data-correct="false">B) Het resultaat verbetert, omdat kosten marginale trades eruit filteren</div>
-            <div class="quiz-option" data-correct="true">C) Een forse daling &mdash; een fractie van een procent per trade kan een derde of meer van het rendement wegnemen</div>
+            <div class="quiz-option" data-correct="true">C) Het hangt af van de verhouding tussen kosten per trade en brutowinst per trade, en van niets anders &mdash; zonder beide getallen kun je het niet beantwoorden</div>
             <div class="quiz-option" data-correct="false">D) Het resultaat wordt onmeetbaar</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Juist: C.</strong> Kosten schalen met het aantal trades, dus een hoogfrequent systeem betaalt ze vele malen terwijl de edge per trade gelijk blijft. A is de aanname die backtests winstgevend laat lijken terwijl ze dat niet zijn. B bevat een kern van waarheid &mdash; kosten straffen marginale trades inderdaad af &mdash; maar dat komt eruit als minder genomen trades, niet als een beter rendement op dezelfde set.
+            <strong>Juist: C.</strong> Het aantal trades valt weg: verdubbel de trades en je verdubbelt zowel de kosten als de brutowinst, de breuk blijft gelijk. Wat de schade bepaalt is kosten per round trip gedeeld door brutowinst per round trip. Zes dollar tegenover $400 bruto-edge is niets; zes dollar tegenover $20 is bijna alles. A klopt voor een systeem met een grote edge per trade en is ronduit fout voor een scalpingsysteem, en daarom is het geen algemeen antwoord. B heeft een kern van waarheid &mdash; kosten maken marginale trades negatief &mdash; maar dat verschijnt als minder genomen trades, niet als een hoger rendement op dezelfde verzameling. D is fout omdat de berekening volledig meetbaar is zodra je je eigen fillrapporten hebt.
           </div>
         </div>
 
@@ -583,10 +494,10 @@
       <div class="key-takeaway">
         <h4>🎓 De kern</h4>
         <ul>
-          <li><strong>Systematiseren om op te schalen:</strong> Discretionair handelen loopt vast tussen $100.000 en $500.000, systematisch heeft geen plafond</li>
-          <li><strong>Walk-forwardtest:</strong> De enige validatiemethode die telt — trainen op het verleden, testen op de toekomst (keer op keer)</li>
-          <li><strong>Monte Carlo-simulatie:</strong> Meer dan 1.000 scenario’s testen om de werkelijke verdeling van risico en rendement te begrijpen</li>
-          <li><strong>Transactiekosten zijn CRUCIAAL:</strong> 0,1 % per trade vernietigt meer dan 30 % van het rendement uit de backtest</li>
+          <li><strong>Wat systematiseren je werkelijk oplevert:</strong> dezelfde edge draaiend over meer instrumenten en meer uren dan één mens kan bewaken. Geen onbeperkt plafond &mdash; een systeem blijft begrensd door de liquiditeit van wat het verhandelt en door hoe lang de edge overleeft.</li>
+          <li><strong>Walk-forwardtest:</strong> de enige fase die de regels ooit data laat zien waarop ze niet gefit zijn, en die dat herhaaldelijk doet in plaats van één keer. Een gat dat venster na venster groter wordt is de bevinding; een klein gat is alleen de afwezigheid van een rode vlag.</li>
+          <li><strong>Monte Carlo vertelt je iets over de volgorde, niet over de toekomst:</strong> je trades opnieuw schudden laat zien hoe slecht de volgorde had kunnen uitpakken gegeven de rendementen die je hebt waargenomen. Het kan je niets zeggen over een regime dat rendementen produceert die je niet hebt waargenomen, en dat is het risico dat systemen daadwerkelijk beëindigt.</li>
+          <li><strong>Kostprijs de backtest met je eigen fills:</strong> de schade is kosten per round trip gedeeld door brutowinst per round trip. Onder 5% is het je probleem niet; boven 30% tellen de broker en het ordertype zwaarder dan het signaal.</li>
           <li><strong>Neem stapsgewijs in gebruik:</strong> Papier → micro-omvang → klein → volledig (op elke stap valideren)</li>
           <li><strong>Vermijd overfitting:</strong> Meer parameters = meer curve fitting. Eenvoudige systemen overleven de echte markt</li>
         </ul>
@@ -599,17 +510,17 @@
         <p><strong>Systeemontwikkeling in 6 stappen:</strong></p>
         <ol style="margin:.75rem 0;line-height:1.8">
           <li><strong>Regels vastleggen</strong> — Zet de discretionaire setup om in exacte in- en uitstapvoorwaarden (5 regels of meer). Voorbeeld: «De koers sweept de 15-minutenbodem met $0,20 of meer, herovert die binnen 5 candles, ADX>22»</li>
-          <li><strong>Backtest (200+ trades, 2+ jaar)</strong> — Let op: trefkans >50 %, gemiddelde R >0,5R, maximale drawdown <25 %, Sharpe >1,0</li>
+          <li><strong>Backtest (200+ trades, 2+ jaar)</strong> &mdash; Houd winstpercentage, gemiddelde R, maximale drawdown en Sharpe bij, maar behandel alle vier als schattingen met foutmarges in plaats van drempels om te halen. Bij 200 trades is een gemeten winstpercentage van 55% verenigbaar met alles van ruwweg 48% tot 62%, en een Sharpe van 1,0 over twee jaar met een werkelijke Sharpe van grofweg 0 tot 2. Schrijf het bereik op, niet het punt.</li>
 
           <li><strong>Walk-forward-validatie</strong> — Verdeel in blokken van 6 maanden en train en test rollend. Presteert de test 30 % of meer slechter dan de training = overfitting</li>
-          <li><strong>Monte Carlo-stresstest</strong> — Schud 1.000 volgordes door elkaar. Ligt de drawdown in het 95e percentiel boven 30 % of het risico op ruïne boven 1 % = omvang verkleinen</li>
+          <li><strong>Monte Carlo-stresstest</strong> &mdash; Schud de tradevolgorde duizend keer opnieuw en lees de verdeling van de drawdowns af. Dat beantwoordt één vraag goed: hoe ongelukkig had de volgorde kunnen uitpakken gegeven deze rendementen? Het beantwoordt niet wat er gebeurt als de rendementen zelf veranderen, dus behandel de drawdown op het 95e percentiel als een ondergrens van je worstcase, nooit als een bovengrens.</li>
           <li><strong>Live gaan (3 stappen)</strong> — Papier (50 trades, trefkans binnen 5 % van de backtest) → micro-omvang (30 trades, 25 % omvang) → volle omvang (100 %). Zakt een stap, dan terug naar de backtest</li>
-          <li><strong>De werkelijkheid van de transactiekosten</strong> — Tel slippage (0,05 %), commissie en spread erbij. Daalt de winst met meer dan 50 % = niet haalbaar</li>
+          <li><strong>De werkelijkheid van de transactiekosten</strong> &mdash; Modelleer de spread uit de werkelijke notering van het instrument en de commissie uit je werkelijke tarief, en deel dan de round-tripkosten door de brutowinst per trade. Importeer geen percentage uit een artikel: bij liquide instrumenten zijn de gangbare cijfers een orde van grootte te hoog, en bij illiquide te laag.</li>
         </ol>
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Doel:</strong> Doe stap 1 tot en met 4 in 2 tot 4 weken. Handel minimaal 50 trades op papier. Ga alleen live als het papier binnen 10 % overeenkomt met de backtest. De meeste systemen sneuvelen in de papierfase — en dat is GOED. Beter nu ontdekken dan echt geld verliezen.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Doel:</strong> Doe stappen 1-4 in 2-4 weken en handel daarna minstens vijftig trades op papier. Ga klein live tenzij papierhandel je een reden gaf om dat niet te doen &mdash; en wees helder over wat voor soort reden dat was. Een uitvoeringsfout (te late data, een repaintend signaal, een ordertype dat je broker niet accepteert) is diskwalificerend en oplosbaar. Een winstpercentage een paar punten onder de backtest is geen van beide; vijftig trades kunnen zo’n klein gat niet beslechten. De meeste systemen die hier stranden, stranden op de uitvoering, en dat zonder geld ontdekken is het hele doel van deze fase.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Je hebt net geleerd wat hobbyisten scheidt van professionele systematische traders. Walk-forward-testen, Monte Carlo, kostenmodellering: dat is niet optioneel. Dat is overleven. Nu weet je hoe je systemen bouwt die live niet ontploffen.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">De pijplijn in deze les is geen garantie dat een systeem werkt. Het is een reeks van vijf kansen om te ontdekken dat het niet werkt, gerangschikt van goedkoop naar duur, zodat de ontdekking je een weekend programmeren kost in plaats van een kwartaal rendement. Toms V1 sloeg er vier over en betaalde voor de informatie in de laatste en duurste fase. Dat is het hele argument om het op volgorde te doen.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Gerelateerde lessen</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

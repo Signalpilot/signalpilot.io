@@ -230,10 +230,10 @@
       <ol style="margin:1rem 0;line-height:1.8">
         <li><strong>Só dentro da amostra</strong> — Testado nos mesmos dados de 2020-2022. O sistema decorou os padrões, sem validação fora da amostra</li>
         <li><strong>Sobreajuste de parâmetros</strong> — 8 parâmetros otimizados (ADX>23,4, RSI<38,7). Ajustados ao ruído</li>
-        <li><strong>Ignorou os custos de transação</strong> — Zero slippage e corretagem no backtest. Ao vivo: 0,08 % de slippage + 2 $ por operação comeram cerca de 30 % do edge</li>
+        <li><strong>Ignorou os custos de transação</strong> &mdash; Zero slippage e zero comissões no backtest. Vale a pena ser preciso sobre quanto isto lhe custou de facto, porque é menos do que se supõe: no SPY o custo de ida e volta ao tamanho dele era de uns poucos dólares por operação, ou seja uma pequena percentagem do lucro bruto por operação, não um terço dele. Os custos foram uma omissão real e sinal de um processo descuidado, mas não são o que transformou 78% em 48%. Isso foi o sobreajuste. Acerta no diagnóstico ou vais resolver o problema barato e ficar com o caro.</li>
         <li><strong>Sem walk-forward</strong> — Um único backtest, sem janelas móveis. Não testou a degradação em dados novos</li>
         <li><strong>Pulou o papel</strong> — Direto para o ao vivo, no tamanho cheio. Poderia ter economizado 40.000 $</li>
-        <li><strong>Suposições de execução</strong> — Assumiu execução no preço de fechamento. As execuções reais foram 0,05 % piores</li>
+        <li><strong>Suposições de execução</strong> &mdash; Assumiu execuções ao fecho da vela do sinal. Na realidade o sinal só é conhecido depois de essa vela fechar, por isso a execução mais cedo disponível é a abertura da vela seguinte. Isso não é um ajuste de slippage: é uma vela inteira de look-ahead embutida no backtest, e num sistema de momento embeleza o resultado exactamente na direcção em que o sistema opera.</li>
       </ol>
 
       <p><strong>O acerto de contas (31 de março de 2023):</strong></p>
@@ -276,7 +276,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Custos de transação</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Ignorados (assumidos como zero)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">0,08 % de slippage + 2 $ de corretagem + 0,02 % de spread por operação</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Modelado a partir das suas próprias execuções: um cêntimo de spread de cada lado mais comissão, cerca de 6 $ por ida e volta com 200 acções</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Validação</strong></td>
@@ -360,43 +360,27 @@
         </tbody>
       </table>
 
-      <p><strong>O banho de realidade dos custos de transação:</strong></p>
+      <p><strong>Teste de realidade dos custos de transacção &mdash; e a regra que realmente os governa:</strong></p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Backtest do V2: antes e depois dos custos de transação</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Métrica</th>
-            <th style="padding:0.75rem;text-align:right;">Antes dos custos</th>
-            <th style="padding:0.75rem;text-align:right;">Depois dos custos</th>
-            <th style="padding:0.75rem;text-align:left;">Impacto</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Lucro médio por operação</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$767</td>
-            <td style="padding:0.75rem;text-align:right;">$545</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-29 % por operação</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Retorno anual (200 operações)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">+$153,400</td>
-            <td style="padding:0.75rem;text-align:right;">+$109,000</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-$44,400 (-29%)</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Índice de Sharpe</strong></td>
-            <td style="padding:0.75rem;text-align:right;">2.1</td>
-            <td style="padding:0.75rem;text-align:right;">1.4</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-33 % de degradação</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">Ainda é viável?</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e">✓ SIM (109.000 $ por ano, Sharpe 1,4)</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <p>A V1 assumia custo zero. A V2 modelou-os, e é aqui que a maioria das exposições deste tema se desvia, incluindo uma versão anterior desta. Dizia que os custos levavam 29% da vantagem, sobre uns supostos 0,08% de slippage por operação. No SPY a 520 $ por acção, 0,08% são 42 cêntimos. O spread real do SPY em sessão é um cêntimo &mdash; cerca de 0,002% &mdash; portanto o custo suposto era cerca de vinte vezes o real, e os 29% que daí saíam eram um artefacto do pressuposto, não um achado.</p>
+
+      <p>Aqui está a aritmética que podes verificar. Digamos que o sistema opera 200 acções de SPY por posição, entrando e saindo com ordens limitadas que pousam em vez de atravessar:</p>
+
+      <ul style="margin:.5rem 0">
+        <li><strong>Custo do spread:</strong> um cêntimo por acção, pago na entrada e na saída se atravessares, e quase nada se pousares. Atravessando de ambos os lados: 200 acções &times; 0,01 $ &times; 2 = <strong>$4</strong>.</li>
+        <li><strong>Corretagem:</strong> 1 $ por lado num corretor com tarifa por acção, logo <strong>$2</strong> por ida e volta.</li>
+        <li><strong>Total: cerca de 6 $ por ida e volta</strong>, que é o que deves pôr no backtest até que os teus próprios registos de execução digam outra coisa.</li>
+      </ul>
+
+      <p>Contra um lucro bruto médio de algumas centenas de dólares por operação, 6 $ são um erro de arredondamento. Contra um lucro bruto médio de 15 $, são quase toda a vantagem. Essa é a regra, e não é a que costuma ser enunciada:</p>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>O arrasto dos custos é o rácio entre o custo por operação e a vantagem bruta por operação. O número de operações não entra nele.</strong> Duplica o número de operações e duplicas os custos, mas também duplicas o lucro bruto; a fracção não muda. O que torna os sistemas de alta frequência sensíveis ao custo não é pagarem mais vezes, é a vantagem por operação ser pequena, de modo que os mesmos 6 $ são uma parte grande dela. Um sistema que escalpa oito ticks e um que segura dois dias pagam custos idênticos por ida e volta e são afectados de forma completamente diferente.</p>
+      </div>
+
+      <p>O que significa que a forma honesta de fazer esta verificação no teu próprio sistema não é aplicar a percentagem de outra pessoa. É dividir o teu custo modelado por ida e volta pelo lucro bruto médio por operação do teu backtest. Se esse número ficar abaixo de 5%, os custos não são o teu problema e podes deixar de te preocupar com eles. Se ficar acima de 30%, o teu sistema é um negócio de arbitragem de custos, e cada decisão restante &mdash; corretor, tipo de ordem, encaminhamento &mdash; importa mais do que o sinal.</p>
+
+      <p>Há uma coisa que os custos mudam de forma fiável: a operação marginal. As operações cujo valor esperado era ligeiramente positivo antes dos custos ficam negativas depois, por isso um backtest correctamente custeado deve mostrar <strong>menos operações tomadas</strong>, não simplesmente as mesmas operações a render menos. Se o teu modelo de custos apenas subtrai um valor fixo a cada resultado e nunca retira uma operação do conjunto, não está a modelar custos: está a aplicar um corte.</p>
 
       <p><strong>Validação no papel (agosto de 2023, 50 operações):</strong></p>
 
@@ -415,7 +399,7 @@
             <td style="padding:0.75rem;"><strong>Taxa de acerto</strong></td>
             <td style="padding:0.75rem;text-align:right;">59%</td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">56%</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 % (BOM!)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 pp (dentro da banda de ruído)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>R médio</strong></td>
@@ -430,107 +414,34 @@
             <td style="padding:0.75rem;"><span style="color:#22c55e">+2 % (dentro da tolerância)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">SITUAÇÃO DA VALIDAÇÃO:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ APROVADO (pode ir para o ao vivo)</span></td>
-          </tr>
-        </tbody>
-      </table><h3 id="act-4-live-trading-success-september-2023-october-2024-14-months">Ato 4: sucesso ao vivo (de setembro de 2023 a outubro de 2024, 14 meses)</h3>
-
-      <p><strong>A estratégia de implantação de Tom:</strong> Papel aprovado → 25 % do tamanho por 1 mês → 50 % por 2 meses → 100 % (a partir de dezembro de 2023)</p>
-
-      <p><strong>A V2 do Tom em real (set. 2023 - out. 2024):</strong> Começou com 25 % do tamanho enquanto o sistema ainda estava em validação, e só passou ao tamanho total em dezembro, quando vários meses de resultados em real já batiam certo com o backtest. Essa rampa é a parte que vale a pena copiar: o tamanho segue as provas, não a confiança. Um bom mês não diz nada sobre se um sistema funciona.</p>
-
-      <p><strong>Comparação entre discricionário (2022) e sistemático (2023-2024):</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>As operações de Tom: antes e depois de sistematizar</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Métrica</th>
-            <th style="padding:0.75rem;text-align:right;">2022 (discricionário)</th>
-            <th style="padding:0.75rem;text-align:right;">2024 (sistemático)</th>
-            <th style="padding:0.75rem;text-align:left;">Variação</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Renda anual</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$163,500</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">$92,600</span></td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-43 % (mas…)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Tempo necessário</strong></td>
-            <td style="padding:0.75rem;text-align:right;">6,5 h por dia (horário de mercado)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0,5 h por dia (monitoramento)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ -92 % de tempo (6 horas liberadas!)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Estresse emocional</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Alto (cansaço de tela)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Baixo (quem executa é o código)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Execução sem estresse</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Escalabilidade</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Travada (o limite é uma pessoa)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Ilimitada (é só acrescentar ativos)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Dá para estender a QQQ, IWM etc.</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Setups perdidos</strong></td>
-            <td style="padding:0.75rem;text-align:right;">~20 % (longe da mesa)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0 % (monitoramento 24 horas por dia)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Nunca mais perde um sinal</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Consistência</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Variável (depende da emoção)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Perfeita (baseada em regras)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ 100 % de adesão às regras</span></td>
+            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">O QUE ISTO ESTABELECE:</td>
+            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ As regras são executáveis em tempo real</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p><strong>A situação atual de Tom (outubro de 2024):</strong></p>
+      <p><strong>Lê essa tabela pelo que ela consegue sustentar, não pelo que parece sustentar.</strong> Cinquenta operações com uma taxa de acerto esperada de 59% têm um erro-padrão de cerca de sete pontos percentuais, por isso qualquer coisa entre aproximadamente 45% e 73% é um resultado banal para um sistema que ganha mesmo 59% das vezes. Uma diferença de três pontos não é, portanto, prova de que o sistema funciona; é a ausência de prova de que está avariado, o que é bem mais fraco e bem mais útil. Se o resultado em papel tivesse dado 38%, isso sim seria informativo: cinco erros-padrão abaixo não é ruído. A assimetria é o ponto: uma fase em papel pode refutar um sistema, e não o pode confirmar.</p>
+
+      <p>confirmar, e que nada antes dela conseguia, é que as regras são executáveis tal como estão escritas. Os dados chegam a tempo. O sinal não se repinta depois de a vela fechar. O tipo de ordem existe no corretor. O dimensionamento não exige fracções de acção que a conta não pode deter. São estas as falhas para que o papel existe, e cada uma é uma resposta de sim ou não que cinquenta operações bastam para estabelecer.</p>
+
+      <h3 id="act-4-what-the-record-can-and-cannot-show">Acto 4: O que aconteceu a seguir &mdash; e o que isso pode e não pode mostrar</h3>
+
+      <p>O Tom pôs em produção como o processo manda: primeiro papel, depois um quarto do tamanho pretendido, depois metade, depois o tamanho todo, com cada passo condicionado a o anterior se ter portado bem. Essa rampa é a parte desta história que vale a pena copiar, e vale a pena copiá-la por uma razão que nada tem a ver com o desfecho. Um tamanho que segue a evidência em vez da confiança está certo quer o sistema venha a funcionar quer não, porque é a única regra de dimensionamento que te custa pouco quando estás enganado.</p>
+
+      <p>O que deliberadamente não vamos fazer aqui é dar-te os resultados dele em real. Não porque fossem maus, nem porque estejamos a esconder algo, mas porque catorze meses de um único trader com um único sistema não te dizem nada sobre que possas agir. Catorze meses são mais ou menos um regime de mercado. Um sistema que ganhou dinheiro nesse período pode ser sólido, ou pode ser um sistema de momento que calhou correr durante uma fase tendencial; o historial não distingue esses dois casos, e o Tom também não. Se puséssemos aqui um número, a única coisa que ele faria de forma fiável seria dar-te a sensação de que este processo produz aquele número, que é exactamente a inferência de que a lição te tem afastado ao longo de quatro etapas.</p>
+
+      <p><strong>O que as duas versões estabelecem de facto:</strong></p>
       <ul style="margin:.5rem 0">
-        <li><strong>Renda do sistema:</strong> 92.600 $ por ano no ritmo desses 14 meses, com o sistema de momento no SPY</li>
-        <li><strong>Tempo dedicado:</strong> 30 min por dia de monitoramento (contra 6,5 horas no discricionário)</li>
-        <li><strong>Tempo liberado:</strong> Agora está desenvolvendo um 2º sistema para QQQ e um 3º para cripto</li>
-        <li><strong>Escalabilidade:</strong> Planeja rodar 5 sistemas não correlacionados até 2025 → meta acima de 250.000 $ por ano</li>
-        <li><strong>Nível de estresse:</strong> «Durmo melhor. O código não entra em pânico. Não passo mais por cima das minhas regras.»</li>
-        <li><strong>Líquido depois do prejuízo do Q1 2023:</strong> -39.900 $ (desastre do V1) + 108.000 $ (14 meses de V2) = <strong>+68.100 $ líquidos</strong></li>
+        <li><strong>A diferença da V1 é evidência real, porque é um desastre.</strong> Um backtest a mostrar 78% e negociação em real a mostrar 48% com as mesmas regras não é ambíguo. Alguma coisa no processo fabricou 30 pontos de taxa de acerto que não existiam. Essa inferência corre no sentido que funciona: provar que um método estava avariado a partir de um mau resultado é muito mais fácil do que provar que era sólido a partir de um bom.</li>
+        <li><strong>O processo da V2 eliminou o mecanismo concreto que produziu a diferença.</strong> Oito parâmetros ajustados a três anos de dados que ele já tinha negociado tornaram-se três parâmetros testados sobre dados que o ajuste nunca viu. Essa é uma mudança defensável pela sua própria lógica, antes de chegar qualquer resultado.</li>
+        <li><strong>As diferenças entre treino e teste mantiveram-se pequenas ao longo de cinco janelas.</strong> Cinco janelas não são muitas, e uma diferença de 5&ndash;8% não garante nada. Mas a alternativa &mdash; uma diferença que alarga janela após janela &mdash; teria sido prova decisiva em contrário, e não apareceu.</li>
       </ul>
 
-      <p><strong>A lição suada de Tom (outubro de 2024):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        «Perdi 40.000 $ no primeiro trimestre de 2023 porque eu achava que backtesting era "rodar código em dados passados e otimizar parâmetros". Errado.
-        <br><br>
-        Desenvolvimento de sistema de verdade é:
-        <br>
-        • Testes walk-forward (treinar no passado, testar no futuro, repetir)<br>
-        • Modelar os custos de transação (o slippage leva 30 % do edge)<br>
-        • Testes de estresse de Monte Carlo (conhecer o seu pior drawdown possível)<br>
-        • Operar no papel pelo menos 50 operações antes de arriscar um dólar<br>
-        • Regras simples > otimização complexa (3 parâmetros ganham de 8)
-        <br><br>
-        O meu sistema V2 rende cerca de 93.000 $ por ano com 30 minutos por dia. Tenho 6 horas livres para construir mais sistemas. Até 2025 vou rodar 5 sistemas em ativos diferentes.
-        <br><br>
-        O trading discricionário me travou em 163.000 $ e me esgotou. O sistemático escala sem limite — se você fizer direito.»
-        <br><br>
-        — Tom Anderson, trader sistemático (outubro de 2024)
-      </blockquote>
+      <p><strong>O que nenhuma versão desta história estabelece:</strong> que um sistema devidamente validado gere um determinado rendimento, que a negociação sistemática bata a discricionária, ou que as regras do Tom vão continuar a funcionar. O ano discricionário dele e o ano sistemático foram anos diferentes em mercados diferentes; comparar os rendimentos é comparar dois regimes de mercado tanto como dois métodos. O resumo honesto é que substituiu um processo que conseguia provar estar avariado por outro cujo modo de falha pelo menos tinha testado, e depois subiu de tamanho devagar o suficiente para que voltar a enganar-se fosse sobrevivível.</p>
 
-      <p><strong>Quanto custou a formação de Tom no total:</strong></p><ul style="margin:.5rem 0">
-        <li><strong>Prejuízos do V1 no Q1 2023:</strong> -39.900 $ (mensalidade de um sistema sobreajustado)</li>
-        <li><strong>Honorários do consultor:</strong> -8.000 $ (4 meses, de abril a julho de 2023)</li>
-        <li><strong>Tempo de desenvolvimento:</strong> 4 meses de custo de oportunidade (poderia ter operado no discricionário por uns 54.000 $)</li>
-        <li><strong>Investimento total:</strong> ~$102K</li>
-        <li><strong>Recuperação em 14 meses:</strong> +108.000 $ (sistemático com o V2)</li>
-        <li><strong>Posição líquida:</strong> +6.000 $ (empatou depois de uma formação cara)</li>
-        <li><strong>Valor futuro:</strong> Agora o sistema rende cerca de 93.000 $ por ano com 30 minutos por dia e libera 6 horas por dia para escalar</li>
-        <li><strong>Projeção de 5 anos:</strong> 5 sistemas × uns 50.000 $ em média = 250.000 $ por ano (contra o teto discricionário de 163.000 $), e isso supondo que cada sistema novo se sustente, que é justamente a parte que ninguém pode prometer</li>
-      </ul>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>A afirmação que esta lição fazia antes, e porque estava errada.</strong> Uma versão anterior desta página acabava com «a negociação sistemática escala infinitamente &mdash; se a fizeres bem», uma projecção a cinco anos de cinco sistemas a 50.000 $ cada, e uma tabela que listava a escalabilidade como «ilimitada». Nada disso é verdade, e a caixa no início desta lição já diz porquê: um sistema é limitado pela liquidez daquilo que negoceia e por quanto tempo a vantagem sobrevive a ser negociada. É também limitado por algo mais subtil: os teus cinco sistemas dificilmente serão cinco vantagens independentes. A maioria dos sistemas de retalho são momento ou reversão à média com outros parâmetros, e correr cinco sistemas correlacionados é correr um só sistema a cinco vezes o tamanho, o oposto do que a projecção assumia.</p>
+      </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Está mais ou menos a meio desta lição.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Um bom momento para uma pausa. O que se segue assenta diretamente no que acabou de ler.</p>
@@ -545,11 +456,11 @@
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Quase nenhuma mudança, já que os custos por operação são pequenos</div>
             <div class="quiz-option" data-correct="false">B) O resultado melhora, porque os custos filtram as operações marginais</div>
-            <div class="quiz-option" data-correct="true">C) Uma redução grande &mdash; uma fracção de ponto percentual por operação pode retirar um terço do retorno ou mais</div>
+            <div class="quiz-option" data-correct="true">C) Depende do rácio entre o custo por operação e o lucro bruto por operação, e de mais nada &mdash; não se pode responder sem os dois números</div>
             <div class="quiz-option" data-correct="false">D) O resultado passa a não ser mensurável</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correta: C.</strong> Os custos escalam com o número de operações, por isso um sistema de alta frequência paga-os muitas vezes enquanto a vantagem por operação se mantém fixa. A é o pressuposto que faz backtests parecerem rentáveis quando não são. B tem um fundo de verdade &mdash; os custos penalizam mesmo as operações marginais &mdash;, mas isso aparece como menos operações feitas, não como um retorno melhor sobre o mesmo conjunto.
+            <strong>Correta: C.</strong> O número de operações cancela-se: duplica as operações e duplicas tanto os custos como o lucro bruto, e a fracção fica igual. O que decide o estrago é o custo por ida e volta dividido pelo lucro bruto por ida e volta. Seis dólares contra 400 $ de vantagem bruta não são nada; seis dólares contra 20 $ são quase tudo. A está certa para um sistema com grande vantagem por operação e claramente errada para um sistema de scalping, e é por isso que não é uma resposta geral. B tem um fundo de verdade &mdash; os custos tornam negativas as operações marginais &mdash; mas isso aparece como menos operações tomadas, não como maior rendimento sobre o mesmo conjunto. D está errada porque o cálculo é totalmente mensurável assim que tens os teus próprios registos de execução.
           </div>
         </div>
 
@@ -583,10 +494,10 @@
       <div class="key-takeaway">
         <h4>🎓 Pontos essenciais</h4>
         <ul>
-          <li><strong>Sistematize para escalar:</strong> O trading discricionário trava entre 100.000 e 500.000 $; o sistemático não tem teto</li>
-          <li><strong>Teste walk-forward:</strong> O único método de validação que importa: treinar no passado, testar no futuro (repetidas vezes)</li>
-          <li><strong>Simulação de Monte Carlo:</strong> Testar mais de 1.000 cenários para entender a verdadeira distribuição de risco e retorno</li>
-          <li><strong>Os custos de transação são CRÍTICOS:</strong> 0,1 % por operação destrói mais de 30 % do retorno do backtest</li>
+          <li><strong>O que sistematizar te dá realmente:</strong> a mesma vantagem a correr em mais instrumentos e mais horas do que uma pessoa consegue vigiar. Não um tecto ilimitado: um sistema continua limitado pela liquidez daquilo que negoceia e por quanto tempo a vantagem sobrevive.</li>
+          <li><strong>Teste walk-forward:</strong> a única fase que alguma vez mostra às regras dados a que não foram ajustadas, e que o faz repetidamente em vez de uma só vez. Uma diferença que alarga janela após janela é o achado; uma diferença pequena é apenas a ausência de um sinal de alarme.</li>
+          <li><strong>Monte Carlo fala-te da sequência, não do futuro:</strong> baralhar de novo as tuas operações mostra quão má poderia ter sido a ordenação, dados os retornos que observaste. Não te pode dizer nada sobre um regime que produza retornos que não observaste, e é esse o risco que realmente acaba com os sistemas.</li>
+          <li><strong>Custeia o backtest a partir das tuas próprias execuções:</strong> o estrago é o custo por ida e volta dividido pelo lucro bruto por ida e volta. Abaixo de 5% não é problema teu; acima de 30%, o corretor e o tipo de ordem importam mais do que o sinal.</li>
           <li><strong>Implante por etapas:</strong> Papel → tamanho micro → pequeno → cheio (validando em cada etapa)</li>
           <li><strong>Evite o sobreajuste:</strong> Mais parâmetros = mais ajuste à curva. Os sistemas simples sobrevivem ao mercado de verdade</li>
         </ul>
@@ -599,17 +510,17 @@
         <p><strong>O desenvolvimento de um sistema em 6 passos:</strong></p>
         <ol style="margin:.75rem 0;line-height:1.8">
           <li><strong>Codificar as regras</strong> — Transforme o setup discricionário em condições exatas de entrada e saída (5 regras ou mais). Exemplo: «O preço varre a mínima de 15 minutos em 0,20 $ ou mais, retoma em até 5 candles, ADX>22»</li>
-          <li><strong>Backtest (200+ operações, 2+ anos)</strong> — Acompanhe: acerto >50 %, R médio >0,5R, drawdown máximo <25 %, Sharpe >1,0</li>
+          <li><strong>Backtest (200+ operações, 2+ anos)</strong> &mdash; Regista taxa de acerto, R médio, drawdown máximo e Sharpe, mas trata os quatro como estimativas com barras de erro, não como limiares a ultrapassar. Com 200 operações, uma taxa de acerto medida de 55% é compatível com qualquer valor entre cerca de 48% e 62%, e um Sharpe de 1,0 ao longo de dois anos é compatível com um Sharpe verdadeiro entre grosso modo 0 e 2. Anota o intervalo, não o ponto.</li>
 
           <li><strong>Validação walk-forward</strong> — Divida em blocos de 6 meses e treine e teste de forma móvel. Se o desempenho no teste for 30 % ou mais pior do que no treino = sobreajuste</li>
-          <li><strong>Teste de estresse de Monte Carlo</strong> — Embaralhe 1.000 sequências. Se o drawdown do percentil 95 passar de 30 % ou o risco de ruína passar de 1 % = reduza o tamanho</li>
+          <li><strong>Teste de estresse de Monte Carlo</strong> &mdash; Baralha mil vezes a sequência de operações e lê a distribuição dos drawdowns. Isso responde bem a uma pergunta: dados estes retornos, quão azarada poderia ter sido a ordenação? Não responde ao que acontece se os próprios retornos mudarem, por isso trata o drawdown do percentil 95 como um piso do teu pior caso, nunca como um tecto.</li>
           <li><strong>Entrada ao vivo (3 etapas)</strong> — Papel (50 operações, com o acerto dentro de 5 % do backtest) → tamanho micro (30 operações, 25 % do tamanho) → tamanho cheio (100 %). Se falhar em alguma etapa, volte ao backtest</li>
-          <li><strong>A realidade dos custos de transação</strong> — Some slippage (0,05 %), corretagem e spread. Se o lucro cair mais de 50 % = não é viável</li>
+          <li><strong>A realidade dos custos de transação</strong> &mdash; Modela o spread a partir da cotação real do instrumento e a comissão a partir do teu tarifário real, depois divide o custo de ida e volta pelo lucro bruto por operação. Não importes uma percentagem de um artigo: em instrumentos líquidos os números citados são uma ordem de grandeza altos demais, e nos ilíquidos baixos demais.</li>
         </ol>
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Objetivo:</strong> Faça os passos 1-4 em 2 a 4 semanas. Opere no papel pelo menos 50 operações. Só vá ao vivo se o papel bater com o backtest dentro de 10 %. A maioria dos sistemas falha na fase de papel, e isso é BOM. Melhor descobrir agora do que perder dinheiro de verdade.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Objetivo:</strong> Completa os passos 1-4 em 2-4 semanas e depois faz pelo menos cinquenta operações em papel. Vai a real em pequeno, a não ser que o papel te tenha dado razão para não ires &mdash; e tem claro que tipo de razão foi. Uma falha de execução (dados atrasados, um sinal que se repinta, um tipo de ordem que o teu corretor não aceita) é desqualificante e reparável. Uma taxa de acerto uns pontos abaixo do backtest não é nem uma coisa nem outra; cinquenta operações não conseguem resolver uma diferença tão pequena. A maioria dos sistemas que falham aqui falham na execução, e descobri-lo sem dinheiro em jogo é todo o propósito desta etapa.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Você acabou de aprender o que separa os amadores dos traders sistemáticos profissionais. Testes walk-forward, Monte Carlo, modelagem de custos: não são opcionais. São sobrevivência. Agora você sabe construir sistemas que não explodem ao vivo.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">O processo desta lição não garante que um sistema funcione. É uma sequência de cinco oportunidades de descobrir que não funciona, ordenadas da mais barata para a mais cara, para que a descoberta te custe um fim-de-semana de código em vez de um trimestre de rendimentos. A V1 do Tom saltou quatro delas e pagou a informação na última e mais cara. É esse todo o argumento para o fazer por ordem.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Aulas relacionadas</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

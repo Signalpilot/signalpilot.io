@@ -230,10 +230,10 @@
       <ol style="margin:1rem 0;line-height:1.8">
         <li><strong>インサンプルのみ</strong> — 同じ2020〜2022年のデータで検証した。システムはパターンを暗記しただけで、アウト・オブ・サンプルの確認がない</li>
         <li><strong>パラメータの過剰適合</strong> — 8個のパラメータを最適化（ADX>23.4、RSI<38.7）。ノイズに合わせ込んだ</li>
-        <li><strong>取引コストを無視</strong> — backtestではslippageも手数料もゼロ。実弾では0.08 %のslippage＋1トレードあたり2ドルがエッジの約30 %を食った</li>
+        <li><strong>取引コストを無視</strong> &mdash; backtest に slippage も手数料も入れていなかった。これが実際にいくらかかったのかは、正確に言っておく価値がある。世間の想定より小さいからだ。 SPY で彼のサイズなら、往復コストは1トレードあたり数ドルにすぎず、1トレードあたりの粗利益の数パーセントであって、その三分の一ではない。コストを落としていたのは本物の手落ちであり、雑な工程のしるしでもあるが、78%を48%に変えたのはコストではない。それをやったのは過剰適合である。診断を正しくしないと、安いほうの問題を直して高いほうを抱えたままになる。</li>
         <li><strong>ウォークフォワードなし</strong> — backtestは1回だけ、ローリング・ウィンドウなし。新しいデータでの劣化を検証していない</li>
         <li><strong>ペーパートレードを飛ばした</strong> — いきなりフルサイズで実弾。4万ドルを節約できたはずだ</li>
-        <li><strong>執行についての前提</strong> — 終値で約定すると想定した。実際の約定は0.05 %悪かった</li>
+        <li><strong>執行についての前提</strong> &mdash; シグナル足の終値で約定すると仮定していた。実際にはその足が閉じるまでシグナルは分からないのだから、いちばん早い約定は次の足の始値である。これは slippage の調整ではなく、 backtest に組み込まれた一本ぶんの先読みであり、モメンタム・システムでは、まさにそのシステムが取引する方向に結果を良く見せてしまう。</li>
       </ol>
 
       <p><strong>清算のとき（2023年3月31日）：</strong></p>
@@ -276,7 +276,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>取引コスト</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">無視（ゼロと仮定）</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">1トレードあたり0.08 %のslippage＋2ドルの手数料＋0.02 %のスプレッド</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">自分の約定記録からモデル化：片側1セントのスプレッドに手数料を加えて、200株なら往復でおよそ6ドル</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>検証</strong></td>
@@ -360,43 +360,27 @@
         </tbody>
       </table>
 
-      <p><strong>取引コストの現実チェック：</strong></p>
+      <p><strong>取引コストの現実チェック &mdash; そして、それを実際に支配している規則：</strong></p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>V2のbacktest：取引コスト前と後</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">指標</th>
-            <th style="padding:0.75rem;text-align:right;">コスト前</th>
-            <th style="padding:0.75rem;text-align:right;">コスト後</th>
-            <th style="padding:0.75rem;text-align:left;">影響額</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>1トレードあたりの平均利益</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$767</td>
-            <td style="padding:0.75rem;text-align:right;">$545</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">1トレードあたり-29 %</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>年間リターン（200トレード）</strong></td>
-            <td style="padding:0.75rem;text-align:right;">+$153,400</td>
-            <td style="padding:0.75rem;text-align:right;">+$109,000</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-$44,400 (-29%)</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>シャープレシオ</strong></td>
-            <td style="padding:0.75rem;text-align:right;">2.1</td>
-            <td style="padding:0.75rem;text-align:right;">1.4</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">33 %の劣化</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">それでも成立するか？</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e">✓ する（年10万9,000ドル、シャープ1.4）</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <p>V1はコストをゼロと仮定していた。V2はそれをモデル化した。ここが、この題目を扱う説明のほとんどが道を誤るところで、この記事の以前の版もそうだった。旧版は、1トレードあたり0.08%の slippage を仮定したうえで、コストがエッジの29%を持っていくと書いていた。1株520ドルの SPY で0.08%といえば42セントである。 SPY の実際のスプレッドは通常時間帯で1セント、およそ0.002%だ。つまり仮定したコストは本物のおよそ二十倍であり、そこから出てきた29%は、発見ではなく仮定の産物だった。</p>
+
+      <p>自分で検算できる計算を示す。システムが1ポジションあたり SPY を200株売買し、出入りはいずれも、渡らずに置いておく指値注文で行うとしよう。</p>
+
+      <ul style="margin:.5rem 0">
+        <li><strong>スプレッドのコスト：</strong> 1株1セント。渡れば入りと出の両方で払い、置いておけばほぼ払わない。両側とも渡った場合：200株 &times; 0.01ドル &times; 2 = <strong>$4</strong>.</li>
+        <li><strong>手数料：</strong> 1株課金のブローカーで片道1ドル、つまり <strong>$2</strong> が往復ぶんである。</li>
+        <li><strong>合計：往復でおよそ6ドル</strong>。自分の約定記録が別のことを示すまでは、この数字を backtest に入れておけばよい。</li>
+      </ul>
+
+      <p>1トレードあたりの粗利益が数百ドルなら、6ドルは丸め誤差である。1トレードあたりの粗利益が15ドルなら、それはエッジのほとんどである。これが規則であり、普通に語られている規則とは違う。</p>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>コストの重しとは、1トレードあたりのコストと1トレードあたりの粗いエッジとの比である。トレード回数はそこに入ってこない。</strong> トレード回数を倍にすればコストも倍になるが、粗利益も倍になる。比は変わらない。高頻度のシステムがコストに弱いのは、支払う回数が多いからではなく、1トレードあたりのエッジが小さいために、同じ6ドルがその大きな割合を占めるからである。八ティックを抜くシステムと二日持つシステムは、往復あたり同じコストを払い、受ける影響はまったく違う。</p>
+      </div>
+
+      <p>つまり、自分のシステムでこの点検を正直に行う方法は、他人のパーセンテージを当てはめることではない。自分がモデル化した往復コストを、自分の backtest における1トレードあたりの平均粗利益で割ることである。その数字が5%を下回るなら、コストはあなたの問題ではないから、心配するのはやめてよい。30%を上回るなら、あなたのシステムはコスト裁定の商売であり、残りの判断はすべて &mdash; ブローカー、注文種別、執行経路 &mdash; シグナルより重い。</p>
+
+      <p>コストが確実に変えるものが一つある。限界的なトレードである。コスト控除前にわずかに期待値がプラスだったトレードは、控除後にはマイナスになる。だから、コストを正しく織り込んだ backtest では、 <strong>取ったトレードの数が減っているはずだ</strong>ということであって、同じトレードの利益がただ減るということではない。もしコストのモデルが各結果から一定額を引くだけで、トレードを集合から除くことが一度もないなら、それはコストのモデルではなく、単なる値引きである。</p>
 
       <p><strong>ペーパートレードでの検証（2023年8月、50トレード）：</strong></p>
 
@@ -415,7 +399,7 @@
             <td style="padding:0.75rem;"><strong>勝率</strong></td>
             <td style="padding:0.75rem;text-align:right;">59%</td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">56%</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 %（良好！）</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">-3ポイント（ノイズの幅の内側）</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>平均R</strong></td>
@@ -430,107 +414,34 @@
             <td style="padding:0.75rem;"><span style="color:#22c55e">+2 %（許容範囲内）</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">検証の結果：</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ 合格（実弾へ進む）</span></td>
-          </tr>
-        </tbody>
-      </table><h3 id="act-4-live-trading-success-september-2023-october-2024-14-months">第4幕：実弾での成功（2023年9月〜2024年10月、14か月）</h3>
-
-      <p><strong>トムの導入戦略：</strong> ペーパー合格 → サイズ25 %で1か月 → サイズ50 %で2か月 → 100 %（2023年12月以降）</p>
-
-      <p><strong>トムの V2 の実運用（2023 年 9 月〜2024 年 10 月）：</strong> システムがまだ検証段階のうちは 25 % のサイズで始め、実際の成績が数か月にわたってバックテストと一致してから、12 月にようやく通常サイズに上げました。真似すべきなのはこの上げ方です。サイズは自信ではなく、証拠のあとについてくる。ひと月良かったからといって、そのシステムが機能するかどうかは何も分かりません。</p>
-
-      <p><strong>裁量（2022年）とシステマティック（2023〜2024年）の比較：</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>トムの取引：体系化の前と後</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">指標</th>
-            <th style="padding:0.75rem;text-align:right;">2022年（裁量）</th>
-            <th style="padding:0.75rem;text-align:right;">2024年（システマティック）</th>
-            <th style="padding:0.75rem;text-align:left;">変化</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>年間収入</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$163,500</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">$92,600</span></td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-43 %（ただし……）</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>必要な時間</strong></td>
-            <td style="padding:0.75rem;text-align:right;">1日6.5時間（市場が開いている時間）</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">1日0.5時間（監視）</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ 時間-92 %（6時間の自由！）</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>感情的な負荷</strong></td>
-            <td style="padding:0.75rem;text-align:right;">高い（画面疲れ）</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">低い（実行するのはコード）</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ ストレスのない執行</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>拡張性</strong></td>
-            <td style="padding:0.75rem;text-align:right;">頭打ち（一人が限界）</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">無制限（銘柄を足せばいい）</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ QQQやIWMなどへ広げられる</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>見逃したセットアップ</strong></td>
-            <td style="padding:0.75rem;text-align:right;">約20 %（机を離れていて）</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">0 %（24時間監視）</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ もうシグナルを逃さない</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>一貫性</strong></td>
-            <td style="padding:0.75rem;text-align:right;">ばらつく（感情次第）</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">完璧（ルールベース）</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ ルール遵守100 %</span></td>
+            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">これが示すこと：</td>
+            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ ルールはリアルタイムで実行できる</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p><strong>トムのいまの状況（2024年10月）：</strong></p>
+      <p><strong>あの表は、支えているように見えるものではなく、実際に支えられるものを基準に読むこと。</strong> 期待勝率59%で五十トレードなら、標準誤差はおよそ七ポイントである。したがって、本当に59%勝つシステムでも、おおむね45%から73%までは普通に出る。三ポイントの差は、システムが機能する証拠ではない。壊れている証拠が出なかった、というだけのことであり、それははるかに弱く、はるかに有用な事実である。もし紙上の結果が38%で返ってきていたなら、それは意味を持った。下に標準誤差五つぶんはノイズではない。この非対称性が要点である。紙上の段階はシステムを反証できるが、証明はできない。</p>
+
+      <p>確認できるのは &mdash; そしてそれ以前のどの段階にもできなかったのは &mdash; ルールが書かれたとおりに実行できるということである。データは間に合って届く。シグナルは足が閉じたあとに描き直されない。その注文種別はブローカーに存在する。ポジションサイズは、口座が保有できない端株を要求しない。これらこそ紙上取引が存在する理由の不具合であり、どれも「はい／いいえ」で答えが出る問いだから、五十トレードあれば十分に片がつく。</p>
+
+      <h3 id="act-4-what-the-record-can-and-cannot-show">第4幕：その後どうなったか &mdash; そして、それが示せることと示せないこと</h3>
+
+      <p>トムはパイプラインが言うとおりに実戦投入した。まず紙、次に予定サイズの四分の一、次に半分、そして満額。各段階は、前の段階がおとなしく振る舞うことを条件にしていた。この段階的な引き上げこそ、この話で真似すべき部分であり、真似すべき理由は結果がどうだったかとはまったく関係がない。確信ではなく証拠に従うサイズは、システムが結局うまくいくかどうかに関わらず正しい。間違っていたときの代償が小さい唯一のサイズ決定則だからである。</p>
+
+      <p>ここで意図的にやらないことがある。彼のライブの成績を書くことである。成績が悪かったからではないし、隠しているからでもない。トレーダー一人の、システム一つの、十四か月というのは、それに基づいて行動できるものを何も教えてくれないからだ。十四か月とは、およそ相場の一局面である。その間に儲かったシステムは、健全なのかもしれないし、たまたまトレンドの続いた時期に走っていたモメンタム・システムなのかもしれない。その記録では両者を区別できないし、トム自身にも区別できない。ここに数字を置けば、確実に起こることは一つだけである。この工程はその数字を生むのだ、と読者に感じさせることだ。それこそ、このレッスンが四つの段階をかけてしないよう説いてきた推論である。</p>
+
+      <p><strong>二つの版が本当に立証していること：</strong></p>
       <ul style="margin:.5rem 0">
-        <li><strong>システムからの収入：</strong> この14か月のペースで年9万2,600ドル、SPYのモメンタム・システムから</li>
-        <li><strong>投じた時間：</strong> 1日30分の監視（裁量時代の6.5時間に対して）</li>
-        <li><strong>空いた時間：</strong> いまはQQQ向けの2本目、暗号資産向けの3本目を開発中</li>
-        <li><strong>拡張性：</strong> 2025年までに相関のない5本のシステムを回す計画 → 目標は年25万ドル超</li>
-        <li><strong>ストレスの度合い：</strong> 「よく眠れるようになった。コードは慌てない。もう自分のルールを踏み越えない。」</li>
-        <li><strong>2023年Q1の損失を差し引いた正味：</strong> -3万9,900ドル（V1の惨事）＋10万8,000ドル（V2の14か月）＝ <strong>正味+6万8,100ドル</strong></li>
+        <li><strong>V1のギャップは本物の証拠である。破綻だからだ。</strong> 同じルールで backtest が78%、実弾が48%というのは、曖昧ではない。工程のどこかが、存在しない勝率を30ポイント製造したのである。この推論は、うまくいく向きに走っている。ある手法が壊れていたことを一つの悪い結果から示すのは、ある手法が健全だったことを一つの良い結果から示すよりも、はるかに易しい。</li>
+        <li><strong>V2の工程は、そのギャップを生んだ当の仕組みを取り除いた。</strong> 自分がすでに取引した三年ぶんのデータに合わせ込んだ八つのパラメータが、合わせ込みが一度も見ていないデータで検証される三つのパラメータになった。これは、どんな結果が出るより前に、それ自体の論理として擁護できる変更である。</li>
+        <li><strong>学習と検証のギャップは、五つの窓を通じて小さいままだった。</strong> 五つの窓は多くないし、5〜8%のギャップは何の保証でもない。しかし、その反対 &mdash; 窓を追うごとに広がっていくギャップ &mdash; であれば決定的な反証になったはずで、それは現れなかった。</li>
       </ul>
 
-      <p><strong>トムが苦労して得た知恵（2024年10月）：</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        「2023年の第1四半期に4万ドル失った。backtestingとは『過去データでコードを走らせてパラメータを最適化すること』だと思っていたからだ。間違いだった。
-        <br><br>
-        本当のシステム開発とは：
-        <br>
-        • ウォークフォワード検証（過去で学習し、将来で検証し、繰り返す）<br>
-        • 取引コストのモデル化（slippageはエッジの30 %を持っていく）<br>
-        • モンテカルロのストレステスト（最悪のdrawdownを把握する）<br>
-        • 1ドルを賭ける前にペーパーで50トレード以上<br>
-        • 単純なルール > 複雑な最適化（3個のパラメータが8個に勝つ）
-        <br><br>
-        私のV2システムは1日30分で年およそ9万3,000ドルを生む。空いた6時間で次のシステムを作れる。2025年までに別々の銘柄で5本を回すつもりだ。
-        <br><br>
-        裁量トレードは私を16万3,000ドルで頭打ちにし、燃え尽きさせた。システマティックは無限に広がる——正しくやればの話だが。」
-        <br><br>
-        — トム・アンダーソン、システマティック・トレーダー（2024年10月）
-      </blockquote>
+      <p><strong>この話のどの版も立証しないこと：</strong> 正しく検証されたシステムがある特定の収入を生むということも、システム的な売買が裁量的な売買に勝るということも、トムのルールがこれからも機能し続けるということも、この話は立証しない。彼の裁量の年とシステムの年は、別の市場の別の年である。両者の収入を比べることは、二つの手法を比べるのと同じくらい、二つの相場局面を比べることでもある。正直な要約はこうだ。壊れていると証明できる工程を、少なくとも失敗の仕方を検証してある工程に置き換え、そのうえで、もう一度間違えても生き延びられる程度にゆっくりとサイズを上げていった。</p>
 
-      <p><strong>トムの学びにかかった総額：</strong></p><ul style="margin:.5rem 0">
-        <li><strong>2023年Q1のV1での損失：</strong> -3万9,900ドル（過剰適合したシステムの授業料）</li>
-        <li><strong>コンサルタント料：</strong> -8,000ドル（4か月、2023年4〜7月）</li>
-        <li><strong>開発にかけた時間：</strong> 4か月の機会費用（裁量で取引していればおよそ5万4,000ドル）</li>
-        <li><strong>投資の総額：</strong> ~$102K</li>
-        <li><strong>14か月での回収：</strong> +10万8,000ドル（V2でのシステマティック）</li>
-        <li><strong>ネットポジション：</strong> +6,000ドル（高い授業料を払ってようやく収支トントン）</li>
-        <li><strong>この先の価値：</strong> いまやシステムは1日30分で年およそ9万3,000ドルを生み、拡大のために1日6時間を空けてくれる</li>
-        <li><strong>5年後の見通し：</strong> 5本のシステム×平均およそ5万ドル＝年25万ドル（裁量の天井16万3,000ドルに対して）——ただしこれは、新しいシステムがどれも通用することが前提で、まさにそこは誰にも約束できない</li>
-      </ul>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>このレッスンがかつてしていた主張と、それが誤りだった理由。</strong> このページの以前の版は、「システム的な売買は無限にスケールする &mdash; 正しくやればだが」という一文と、五つのシステムが各5万ドルという五年計画と、拡張性を「無制限」と記した表とで終わっていた。どれも正しくない。理由は、このレッスン冒頭の囲みがすでに述べている。システムは、それが取引する対象の流動性と、そのエッジが取引され続けてどれだけ生き延びるかによって頭打ちになる。さらに、もっと微妙な形でも頭打ちになる。あなたの五つのシステムが、独立した五つのエッジである見込みは薄いのだ。個人のシステムの大半は、パラメータを着替えたモメンタムか平均回帰であり、相関した五つのシステムを回すことは、一つのシステムを五倍のサイズで回すことである。それは、あの計画が前提していたことの正反対である。</p>
+      </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>このレッスンの半ばあたりです。</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">ひと息つくのに良いところです。この先は、いま読んだ内容の上に直接積み上がっていきます。</p>
@@ -545,11 +456,11 @@
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A）ほとんど変わらない。1トレードあたりのコストは小さいから</div>
             <div class="quiz-option" data-correct="false">B）結果は良くなる。コストが限界的なトレードをふるい落とすから</div>
-            <div class="quiz-option" data-correct="true">C）大幅に減る &mdash; 1トレードあたり数分の1パーセントでも、リターンの3分の1以上を削り取りうる</div>
+            <div class="quiz-option" data-correct="true">C) 1トレードあたりのコストと1トレードあたりの粗利益との比だけで決まる。両方の数字がなければ答えられない</div>
             <div class="quiz-option" data-correct="false">D）結果は測定不能になる</div>
           </div>
           <div class="quiz-explanation">
-            <strong>正解：C。</strong> コストはトレード回数に比例して膨らむので、高頻度のシステムは何度もそれを払う一方、1トレードあたりのエッジは固定のままだ。A は、実際には利益の出ない backtest を利益が出るように見せる思い込みそのものだ。B には一片の真実がある &mdash; コストは確かに限界的なトレードに罰を与える &mdash; が、それは取るトレードが減るという形で表れるのであって、同じ母集団のリターンが良くなるという形ではない。
+            <strong>正解：C。</strong> トレード回数は約分されて消える。回数を倍にすればコストも粗利益も倍になり、比は変わらない。損害を決めるのは、往復あたりのコストを往復あたりの粗利益で割った値である。粗いエッジが400ドルなら6ドルは何でもない。20ドルなら、そのほとんどである。Aは1トレードあたりのエッジが大きいシステムでは正しく、スキャルピングのシステムではひどく誤りである。だから一般的な答えにはならない。Bには一片の真実がある。コストは限界的なトレードをマイナスにする。しかしそれは、同じ集合での利回りが上がる形ではなく、取るトレードが減る形で現れる。Dは誤りだ。自分の約定記録さえあれば、この計算は完全に測定できる。
           </div>
         </div>
 
@@ -583,10 +494,10 @@
       <div class="key-takeaway">
         <h4>🎓 要点</h4>
         <ul>
-          <li><strong>体系化して規模を広げる：</strong> 裁量トレードは10万〜50万ドルで頭打ち、システマティックには天井がない</li>
-          <li><strong>ウォークフォワード検証：</strong> 意味のある検証方法はこれだけだ——過去で学習し、将来で検証する（何度も）</li>
-          <li><strong>モンテカルロ・シミュレーション：</strong> 1,000通り以上のシナリオを試し、リスクとリターンの本当の分布を把握する</li>
-          <li><strong>取引コストは決定的に重要：</strong> 1トレードあたり0.1 %でbacktestのリターンの30 %以上が消える</li>
+          <li><strong>システム化が実際に買ってくれるもの：</strong> 一人では見きれない数の銘柄と時間帯にわたって、同じエッジを走らせられること。無限の天井ではない。システムは依然として、取引対象の流動性と、エッジがどれだけ生き延びるかに縛られている。</li>
+          <li><strong>ウォークフォワード検証：</strong> ルールが合わせ込まれていないデータを、ルールに見せる唯一の段階であり、しかも一度きりでなく繰り返しそうする。窓を追うごとに広がるギャップこそが発見である。小さなギャップは、赤信号が出なかったというだけのことだ。</li>
+          <li><strong>モンテカルロが教えるのは順序であって、将来ではない：</strong> 自分のトレードを並べ替えてみると、観測したリターンを所与として、順序がどこまで悪くなりえたかが分かる。だが、観測していないリターンを生む局面については何も教えてくれない。そして実際にシステムを終わらせるのは、その手のリスクである。</li>
+          <li><strong> backtest のコストは自分の約定から入れる：</strong> 損害は、往復あたりのコストを往復あたりの粗利益で割った値である。5%未満ならあなたの問題ではない。30%を超えるなら、ブローカーと注文種別のほうがシグナルより重い。</li>
           <li><strong>段階的に導入する：</strong> ペーパー → 極小サイズ → 小さめ → フル（各段階で検証する）</li>
           <li><strong>過剰適合を避ける：</strong> パラメータが増えるほどカーブフィッティングも増える。単純なシステムが実弾を生き延びる</li>
         </ul>
@@ -599,17 +510,17 @@
         <p><strong>システム開発の6ステップ：</strong></p>
         <ol style="margin:.75rem 0;line-height:1.8">
           <li><strong>ルールを明文化する</strong> — 裁量のセットアップを、正確なエントリーとエグジットの条件に変換する（5つ以上のルール）。例：「価格が15分足の安値を0.20ドル以上スイープし、5本以内のローソク足で回復、ADX>22」</li>
-          <li><strong>Backtest（200トレード以上、2年以上）</strong> — 追うべき数字：勝率>50 %、平均R>0.5R、最大drawdown<25 %、シャープ>1.0</li>
+          <li><strong>Backtest（200トレード以上、2年以上）</strong> &mdash; 勝率、平均R、最大 drawdown 、シャープを記録すること。ただし四つとも、越えるべき閾値ではなく、誤差幅を伴う推定値として扱うこと。200トレードなら、測定された勝率55%は、およそ48%から62%までのどれとも整合する。二年間のシャープ1.0は、真のシャープがおよそ0から2のどこであっても整合する。点ではなく幅を書き留めること。</li>
 
           <li><strong>ウォークフォワード検証</strong> — 6か月ごとの区切りに分け、学習と検証をずらしながら回す。検証の成績が学習より30 %以上悪ければ過剰適合</li>
-          <li><strong>モンテカルロのストレステスト</strong> — 1,000通りの順序をシャッフルする。95パーセンタイルのdrawdownが30 %を超える、または破産確率が1 %を超えるならサイズを落とす</li>
+          <li><strong>モンテカルロのストレステスト</strong> &mdash; トレードの並びを千通り組み替え、 drawdown の分布を読む。これは一つの問いにはよく答える。これらのリターンを所与として、順序はどこまで不運になりえたか、である。リターン自体が変わったらどうなるかには答えない。だから95パーセンタイルの drawdown は、最悪ケースの下限として扱い、上限としては決して扱わないこと。</li>
           <li><strong>実弾への移行（3段階）</strong> — ペーパー（50トレード、勝率がbacktestの5 %以内） → 極小サイズ（30トレード、サイズ25 %） → フルサイズ（100 %）。どこかの段階で不合格ならbacktestに戻る</li>
-          <li><strong>取引コストの現実</strong> — slippage（0.05 %）、手数料、スプレッドを加える。利益の減少が50 %を超えるなら成立しない</li>
+          <li><strong>取引コストの現実</strong> &mdash; スプレッドはその銘柄の実際の気配から、手数料は自分の実際の料金体系からモデル化し、往復コストを1トレードあたりの粗利益で割ること。記事から百分率を持ち込んではいけない。流動性の高い銘柄では、よく引かれる数字は一桁多すぎ、流動性の低い銘柄では少なすぎる。</li>
         </ol>
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>目的：</strong> ステップ1〜4を2〜4週間で終える。ペーパートレードは最低50トレード。ペーパーがbacktestと10 %以内で一致したときだけ実弾に進め。ほとんどのシステムはペーパーの段階で落ちる——それは良いことだ。本物の金を失う前に分かるほうがいい。</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>目的：</strong> 手順1〜4を2〜4週間でやり切り、そのあと最低五十トレードを紙上で回すこと。紙上取引が止める理由をくれなかったのなら、小さく実弾に出ること。そして、その理由がどちらの種類だったかをはっきりさせること。執行の不具合（データの遅延、描き直すシグナル、ブローカーが受け付けない注文種別）は失格事由であり、かつ直せる。 backtest より数ポイント低い勝率は、そのどちらでもない。五十トレードでは、その程度の差は決着しない。ここで落ちるシステムの大半は執行で落ちる。お金を賭けずにそれが分かることこそ、この段階の全目的である。</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">あなたはいま、趣味の人とプロのシステマティック・トレーダーを分けるものを学んだ。ウォークフォワード検証、モンテカルロ、コストのモデル化——これらは選択肢ではない。生き残るための条件だ。実弾で吹き飛ばないシステムの作り方が、これで分かった。</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">このレッスンの工程は、システムが機能することの保証ではない。機能しないと分かる機会が五つ、安いものから順に並んでいるだけである。そうしておけば、その発見の代償は、四半期ぶんのリターンではなく、週末一回ぶんのコーディングで済む。トムのV1はそのうち四つを飛ばし、同じ情報を最後の、いちばん高い段階で買った。順番どおりにやるべき理由は、それに尽きる。</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">関連レッスン</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">

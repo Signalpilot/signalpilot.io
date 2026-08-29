@@ -230,10 +230,10 @@
       <ol style="margin:1rem 0;line-height:1.8">
         <li><strong>Yalnızca örneklem içi</strong> — Aynı 2020-2022 verisinde test edildi. Sistem örüntüleri ezberledi, örneklem dışı doğrulama yok</li>
         <li><strong>Parametrelerde aşırı uyum</strong> — 8 parametre optimize edildi (ADX>23,4, RSI<38,7). Gürültüye uydurulmuş</li>
-        <li><strong>İşlem maliyetlerini yok saydı</strong> — Backtest’te sıfır slippage ve komisyon. Canlıda: %0,08 slippage + işlem başına 2 dolar, edge’in yaklaşık %30’unu yedi</li>
+        <li><strong>İşlem maliyetlerini yok saydı</strong> &mdash; backtest içinde sıfır slippage ve sıfır komisyon. Bunun ona gerçekte kaça mal olduğunu tam söylemeye değer, çünkü sanıldığından azdır: SPY üzerinde onun büyüklüğünde gidiş-dönüş maliyeti işlem başına birkaç dolardı; yani işlem başına brüt kârın küçük bir yüzdesi, üçte biri değil. Maliyetler gerçek bir eksiklikti ve özensiz bir sürecin işaretiydi, ama %78’i %48’e çeviren onlar değil. Bunu aşırı uyum yaptı. Teşhisi doğru koy, yoksa ucuz sorunu çözüp pahalı olanı elinde tutarsın.</li>
         <li><strong>Walk-forward yok</strong> — Tek bir backtest, kayan pencere yok. Yeni veride bozulmayı hiç test etmedi</li>
         <li><strong>Kâğıt üzerindeki aşamayı atladı</strong> — Doğrudan canlıya, tam büyüklükte. 40.000 doları kurtarabilirdi</li>
-        <li><strong>İcra varsayımları</strong> — Kapanış fiyatından gerçekleşeceğini varsaydı. Gerçek gerçekleşmeler %0,05 daha kötüydü</li>
+        <li><strong>İcra varsayımları</strong> &mdash; Doldurmaların sinyal mumunun kapanış fiyatından olduğu varsayıldı. Gerçekte sinyal ancak o mum kapandığında bilinir, yani en erken doldurma bir sonraki mumun açılışıdır. Bu bir slippage düzeltmesi değil, backtest içine gömülmüş tam bir mumluk ileri bakıştır ve momentum sistemlerinde sonucu tam da sistemin işlem yaptığı yönde güzelleştirir.</li>
       </ol>
 
       <p><strong>Hesaplaşma (31 Mart 2023):</strong></p>
@@ -276,7 +276,7 @@
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>İşlem maliyetleri</strong></td>
             <td style="padding:0.75rem;"><span style="color:#ff5252">Yok sayıldı (sıfır kabul edildi)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">İşlem başına %0,08 slippage + 2 dolar komisyon + %0,02 spread</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">Kendi doldurmalarından modellendi: her yönde bir sent makas artı komisyon, 200 hissede gidiş-dönüş yaklaşık 6 $</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Doğrulama</strong></td>
@@ -360,43 +360,27 @@
         </tbody>
       </table>
 
-      <p><strong>İşlem maliyetlerinde gerçeklik kontrolü:</strong></p>
+      <p><strong>İşlem maliyetleri gerçeklik kontrolü &mdash; ve onları asıl yöneten kural:</strong></p>
 
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>V2 backtest’i: işlem maliyetlerinden önce ve sonra</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Ölçüt</th>
-            <th style="padding:0.75rem;text-align:right;">Maliyetlerden önce</th>
-            <th style="padding:0.75rem;text-align:right;">Maliyetlerden sonra</th>
-            <th style="padding:0.75rem;text-align:left;">Etki</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>İşlem başına ortalama kâr</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$767</td>
-            <td style="padding:0.75rem;text-align:right;">$545</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">İşlem başına -%29</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Yıllık getiri (200 işlem)</strong></td>
-            <td style="padding:0.75rem;text-align:right;">+$153,400</td>
-            <td style="padding:0.75rem;text-align:right;">+$109,000</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-$44,400 (-29%)</span></td>
-          </tr>
-          <tr style="background:rgba(255,193,7,0.08)">
-            <td style="padding:0.75rem;"><strong>Sharpe oranı</strong></td>
-            <td style="padding:0.75rem;text-align:right;">2.1</td>
-            <td style="padding:0.75rem;text-align:right;">1.4</td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">%33 bozulma</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">Hâlâ yaşayabilir mi?</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e">✓ EVET (yılda 109.000 dolar, Sharpe 1,4)</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <p>V1 maliyeti sıfır varsayıyordu. V2 onu modelledi ve bu konudaki anlatımların çoğu tam burada raydan çıkar; bu sayfanın eski sürümü de dahil. Eskiden, işlem başına varsayılan %0,08 slippage üzerinden maliyetlerin avantajın %29’unu aldığı yazıyordu. Hissesi 520 $ olan SPY üzerinde %0,08, 42 sent eder. SPY ’nin normal seansta gerçek makası bir senttir &mdash; yaklaşık %0,002 &mdash; yani varsayılan maliyet gerçeğinin kabaca yirmi katıydı ve ondan çıkan %29 bir bulgu değil, varsayımın ürünüydü.</p>
+
+      <p>İşte kendin doğrulayabileceğin hesap. Sistemin pozisyon başına 200 SPY hissesi işlem gördüğünü, giriş ve çıkışını karşıya geçmeden bekleyen limit emirlerle yaptığını varsayalım:</p>
+
+      <ul style="margin:.5rem 0">
+        <li><strong>Makas maliyeti:</strong> hisse başına bir sent; karşıya geçersen girişte ve çıkışta ödenir, beklersen neredeyse hiç ödenmez. Her iki tarafta da geçerek: 200 hisse &times; 0,01 $ &times; 2 = <strong>$4</strong>.</li>
+        <li><strong>Komisyon:</strong> hisse başına ücret alan bir aracıda yön başına 1 $, yani <strong>$2</strong> gidiş-dönüş.</li>
+        <li><strong>Toplam: gidiş-dönüş yaklaşık 6 $</strong> ki kendi doldurma kayıtların aksini söyleyene kadar backtest ’e koyman gereken sayı budur.</li>
+      </ul>
+
+      <p>İşlem başına ortalama birkaç yüz dolarlık brüt kâra karşı 6 $ bir yuvarlama hatasıdır. İşlem başına ortalama 15 $’lık brüt kâra karşı ise avantajın neredeyse tamamıdır. Kural budur ve genelde söylenen kural bu değildir:</p>
+
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Maliyet yükü, işlem başına maliyetin işlem başına brüt avantaja oranıdır. İşlem sayısı bu orana girmez.</strong> İşlem sayısını ikiye katlarsan maliyetler de ikiye katlanır, ama brüt kâr da ikiye katlanır; oran değişmez. Yüksek frekanslı sistemleri maliyete duyarlı kılan, maliyeti daha sık ödemeleri değil, işlem başına avantajlarının küçük olmasıdır; öyle ki aynı 6 $ bunun büyük bir payını oluşturur. Sekiz tik kesen bir sistemle iki gün tutan bir sistem, gidiş-dönüş başına aynı maliyeti öder ve bundan tümüyle farklı biçimde etkilenir.</p>
+      </div>
+
+      <p>Yani bu kontrolü kendi sisteminde dürüstçe yapmanın yolu, başkasının yüzdesini uygulamak değildir. Modellediğin gidiş-dönüş maliyetini, backtest ’inin işlem başına ortalama brüt kârına bölmektir. Bu sayı %5’in altındaysa maliyetler senin sorunun değildir, onları dert etmeyi bırak. %30’un üstündeyse sistemin bir maliyet arbitrajı işidir ve geriye kalan her karar &mdash; aracı kurum, emir türü, yönlendirme &mdash; sinyalden daha çok önem taşır.</p>
+
+      <p>Maliyetlerin güvenilir biçimde değiştirdiği bir şey var: marjinal işlem. Maliyet öncesi beklenen değeri hafifçe pozitif olan işlemler maliyet sonrası negatife döner; dolayısıyla düzgün maliyetlendirilmiş bir backtest ’in göstermesi gereken şey <strong>daha az işlem alınmasıdır</strong>, yalnızca aynı işlemlerin daha az kazanması değil. Maliyet modelin her sonuçtan sabit bir tutar düşüyor ama kümeden hiçbir işlemi çıkarmıyorsa, o maliyet modellemiyor; ıskonto uyguluyordur.</p>
 
       <p><strong>Kâğıt üzerinde doğrulama (Ağustos 2023, 50 işlem):</strong></p>
 
@@ -415,7 +399,7 @@
             <td style="padding:0.75rem;"><strong>Kazanma oranı</strong></td>
             <td style="padding:0.75rem;text-align:right;">59%</td>
             <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">56%</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">-%3 (İYİ!)</span></td>
+            <td style="padding:0.75rem;"><span style="color:#22c55e">-3 puan (gürültü bandının içinde)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.08)">
             <td style="padding:0.75rem;"><strong>Ort. R</strong></td>
@@ -430,107 +414,34 @@
             <td style="padding:0.75rem;"><span style="color:#22c55e">+%2 (tolerans içinde)</span></td>
           </tr>
           <tr style="background:rgba(34,197,94,0.12)">
-            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">DOĞRULAMA DURUMU:</td>
-            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ GEÇTİ (canlıya geçilebilir)</span></td>
-          </tr>
-        </tbody>
-      </table><h3 id="act-4-live-trading-success-september-2023-october-2024-14-months">4. Perde: canlıda başarı (Eylül 2023 - Ekim 2024, 14 ay)</h3>
-
-      <p><strong>Tom’un devreye alma stratejisi:</strong> Kâğıt geçti → 1 ay boyunca büyüklüğün %25’i → 2 ay boyunca %50 → %100 (Aralık 2023’ten itibaren)</p>
-
-      <p><strong>Tom'un V2'si canlı işlemde (Eyl. 2023 - Eki. 2024):</strong> Sistem hâlâ doğrulama aşamasındayken %25 büyüklükle başladı ve tam büyüklüğe ancak aralıkta, canlı sonuçların birkaç ay boyunca geri testle örtüşmesinden sonra çıktı. Kopyalanmaya değer olan bu kademelenmedir: büyüklük güvenin değil, kanıtın ardından gelir. Tek bir iyi ay, bir sistemin işleyip işlemediği hakkında hiçbir şey söylemez.</p>
-
-      <p><strong>İhtiyari (2022) ile sistematik (2023-2024) karşılaştırması:</strong></p>
-
-      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
-        <caption>Tom’un işlemleri: sistemleşmeden önce ve sonra</caption>
-        <thead>
-          <tr style="background:rgba(255,255,255,0.08)">
-            <th style="padding:0.75rem;text-align:left;">Ölçüt</th>
-            <th style="padding:0.75rem;text-align:right;">2022 (ihtiyari)</th>
-            <th style="padding:0.75rem;text-align:right;">2024 (sistematik)</th>
-            <th style="padding:0.75rem;text-align:left;">Değişim</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Yıllık gelir</strong></td>
-            <td style="padding:0.75rem;text-align:right;">$163,500</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">$92,600</span></td>
-            <td style="padding:0.75rem;"><span style="color:#ffc107">-%43 (ama…)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Gereken zaman</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Günde 6,5 saat (piyasa saatleri)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Günde 0,5 saat (izleme)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ -%92 zaman (6 saat serbest!)</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Duygusal yük</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Yüksek (ekran yorgunluğu)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Düşük (icra eden kod)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Stressiz icra</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Ölçeklenebilirlik</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Sınırlı (sınır tek kişi)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Sınırsız (varlık eklemek yeter)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ QQQ, IWM vb.’ye genişletilebilir</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Kaçan kurulumlar</strong></td>
-            <td style="padding:0.75rem;text-align:right;">~%20 (masadan uzakken)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">%0 (kesintisiz izleme)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Bir daha sinyal kaçmaz</span></td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem;"><strong>Tutarlılık</strong></td>
-            <td style="padding:0.75rem;text-align:right;">Değişken (duyguya bağlı)</td>
-            <td style="padding:0.75rem;text-align:right;"><span style="color:#22c55e">Kusursuz (kural temelli)</span></td>
-            <td style="padding:0.75rem;"><span style="color:#22c55e">✓ Kurallara %100 bağlılık</span></td>
+            <td colspan="3" style="padding:0.75rem;text-align:right;font-weight:bold;">BU NEYİ ORTAYA KOYAR:</td>
+            <td style="padding:0.75rem;font-weight:bold;"><span style="color:#22c55e;font-size:1.1rem">✓ Kurallar gerçek zamanlı olarak uygulanabilir</span></td>
           </tr>
         </tbody>
       </table>
 
-      <p><strong>Tom’un bugünkü durumu (Ekim 2024):</strong></p>
+      <p><strong>O tabloyu, desteklediğini sandığın şeye göre değil, gerçekten destekleyebildiği şeye göre oku.</strong> Beklenen kazanma oranı %59 olan elli işlemin standart hatası yaklaşık yedi puandır; yani gerçekten zamanın %59’unda kazanan bir sistem için kabaca %45 ile %73 arası sıradan bir sonuçtur. Üç puanlık bir fark bu yüzden sistemin çalıştığının kanıtı değildir; bozuk olduğuna dair kanıtın yokluğudur ki bu çok daha zayıf ve çok daha yararlı bir şeydir. Kâğıt üzerindeki sonuç %38 gelseydi, işte o bilgi verirdi: beş standart hata aşağısı gürültü değildir. Asimetri işin özüdür: kâğıt aşaması bir sistemi çürütebilir, doğrulayamaz.</p>
+
+      <p>doğruladığı ve kendinden önce hiçbir aşamanın doğrulayamadığı şey, kuralların yazıldığı gibi uygulanabildiğidir. Veri zamanında gelir. Sinyal mum kapandıktan sonra yeniden çizilmez. Emir türü aracı kurumda mevcuttur. Pozisyon büyüklüğü, hesabın tutamayacağı kesirli hisse talep etmez. Kâğıt üzerinde işlem tam da bu arızalar için vardır ve her biri elli işlemin fazlasıyla yettiği bir evet-hayır sorusudur.</p>
+
+      <h3 id="act-4-what-the-record-can-and-cannot-show">4. Perde: Sonra ne oldu &mdash; ve bunun gösterebildiği ve gösteremediği</h3>
+
+      <p>Tom, hattın söylediği gibi devreye aldı: önce kâğıt, sonra hedef büyüklüğün dörtte biri, sonra yarısı, sonra tamamı; her adım bir öncekinin uslu durmasına bağlıydı. Bu kademeli artış, bu hikâyenin kopyalanmaya değer kısmıdır ve kopyalanmaya değmesinin nedeninin işin nasıl bittiğiyle hiçbir ilgisi yoktur. Güvene değil kanıta uyan bir büyüklük, sistem sonunda çalışsa da çalışmasa da doğrudur; çünkü yanıldığında sana az mal olan tek büyüklük kuralıdır.</p>
+
+      <p>Burada bilerek yapmayacağımız şey, onun canlı sonuçlarını vermektir. Kötü oldukları için değil, bir şey sakladığımız için de değil &mdash; tek bir yatırımcının tek bir sistemle geçirdiği on dört ay, üzerine hareket edebileceğin hiçbir şey söylemediği için. On dört ay kabaca tek bir piyasa rejimidir. O dönemde para kazanan bir sistem sağlam olabilir, ya da tesadüfen trendli bir dönemde çalışmış bir momentum sistemi olabilir; sicil bu ikisini ayırt edemez, Tom da edemez. Buraya bir sayı koysaydık, güvenilir biçimde yapacağı tek şey, bu hattın o sayıyı ürettiği hissini vermek olurdu ki dersin dört aşamadır seni uzaklaştırmaya çalıştığı çıkarım tam da budur.</p>
+
+      <p><strong>İki sürümün gerçekten ortaya koyduğu:</strong></p>
       <ul style="margin:.5rem 0">
-        <li><strong>Sistemden gelen gelir:</strong> Bu 14 ayın temposuyla yılda 92.600 dolar, SPY momentum sisteminden</li>
-        <li><strong>Ayrılan zaman:</strong> Günde 30 dakika izleme (ihtiyari dönemdeki 6,5 saate karşılık)</li>
-        <li><strong>Serbest kalan zaman:</strong> Şimdi QQQ için 2., kripto için 3. sistemi geliştiriyor</li>
-        <li><strong>Ölçeklenebilirlik:</strong> 2025’e kadar birbirinden bağımsız 5 sistem çalıştırmayı planlıyor → hedef yılda 250.000 doların üzeri</li>
-        <li><strong>Stres düzeyi:</strong> «Daha iyi uyuyorum. Kod panik yapmıyor. Artık kendi kurallarımı çiğnemiyorum.»</li>
-        <li><strong>2023 Ç1 kaybından sonra net:</strong> -39.900 dolar (V1 felaketi) + 108.000 dolar (14 ay V2) = <strong>net +68.100 dolar</strong></li>
+        <li><strong>V1’in açığı gerçek bir kanıttır, çünkü bir felakettir.</strong> Aynı kurallarla %78 gösteren bir backtest ile %48 gösteren canlı işlem belirsiz değildir. Süreçteki bir şey, var olmayan 30 puanlık kazanma oranı imal etmiştir. Bu çıkarım işleyen yönde ilerler: bir yöntemin bozuk olduğunu tek bir kötü sonuçtan kanıtlamak, sağlam olduğunu tek bir iyi sonuçtan kanıtlamaktan çok daha kolaydır.</li>
+        <li><strong>V2 süreci, açığı üreten mekanizmanın ta kendisini ortadan kaldırdı.</strong> Kendi işlem yaptığı üç yıllık veriye uydurulmuş sekiz parametre, uydurmanın hiç görmediği veride sınanan üç parametreye dönüştü. Bu, herhangi bir sonuç gelmeden önce, kendi mantığıyla savunulabilir bir değişikliktir.</li>
+        <li><strong>Eğitim-test açıkları beş pencere boyunca küçük kaldı.</strong> Beş pencere çok değildir ve %5&ndash;8’lik bir açık hiçbir şeyin güvencesi olmaz. Ama alternatifi &mdash; her yeni pencerede biraz daha genişleyen bir açık &mdash; aleyhte belirleyici kanıt olurdu ve o ortaya çıkmadı.</li>
       </ul>
 
-      <p><strong>Tom’un zor kazanılmış dersi (Ekim 2024):</strong></p>
-      <blockquote style="border-left:4px solid var(--accent);padding-left:1rem;margin:1rem 0;font-style:italic">
-        «2023’ün ilk çeyreğinde 40.000 dolar kaybettim, çünkü backtesting’in ‹geçmiş veride kod çalıştırıp parametre optimize etmek› demek olduğunu sanıyordum. Yanlış.
-        <br><br>
-        Gerçek sistem geliştirme şudur:
-        <br>
-        • Walk-forward testleri (geçmişte eğit, gelecekte test et, tekrarla)<br>
-        • İşlem maliyetlerini modellemek (slippage edge’in %30’unu götürür)<br>
-        • Monte Carlo stres testleri (en kötü drawdown’unuzu bilin)<br>
-        • Bir dolar riske atmadan önce kâğıt üzerinde en az 50 işlem<br>
-        • Basit kurallar > karmaşık optimizasyon (3 parametre 8’i yener)
-        <br><br>
-        V2 sistemim günde 30 dakikayla yılda yaklaşık 93.000 dolar getiriyor. Yeni sistemler kurmak için 6 saatim serbest. 2025’e kadar farklı varlıklarda 5 sistem çalıştıracağım.
-        <br><br>
-        İhtiyari işlem beni 163.000 dolarda tıkadı ve tüketti. Sistematik işlem sınırsız büyür — doğru yaparsanız.»
-        <br><br>
-        — Tom Anderson, sistematik trader (Ekim 2024)
-      </blockquote>
+      <p><strong>Bu hikâyenin hiçbir sürümünün ortaya koymadığı şey:</strong> düzgün doğrulanmış bir sistemin belirli bir gelir getirdiğini, sistematik işlemin iradi işlemi yendiğini ya da Tom’un kurallarının çalışmayı sürdüreceğini. İradi yılı ile sistematik yılı, farklı piyasalardaki farklı yıllardı; gelirlerini karşılaştırmak, iki yöntemi karşılaştırmak kadar iki piyasa rejimini karşılaştırmaktır. Dürüst özet şudur: bozuk olduğunu kanıtlayabildiği bir süreci, hiç değilse başarısızlık biçimini sınadığı bir süreçle değiştirdi ve sonra, yeniden yanılmanın atlatılabilir kalacağı kadar yavaş büyüdü.</p>
 
-      <p><strong>Tom’un eğitiminin toplam maliyeti:</strong></p><ul style="margin:.5rem 0">
-        <li><strong>2023 Ç1’de V1 kayıpları:</strong> -39.900 dolar (aşırı uyumlu bir sistemin okul parası)</li>
-        <li><strong>Danışman ücreti:</strong> -8.000 dolar (4 ay, Nisan-Temmuz 2023)</li>
-        <li><strong>Geliştirme süresi:</strong> 4 aylık fırsat maliyeti (ihtiyari olarak yaklaşık 54.000 dolar kazanabilirdi)</li>
-        <li><strong>Toplam yatırım:</strong> ~$102K</li>
-        <li><strong>14 ayda toparlanma:</strong> +108.000 dolar (V2 ile sistematik)</li>
-        <li><strong>Net pozisyon:</strong> +6.000 dolar (pahalı bir eğitimin ardından başa baş)</li>
-        <li><strong>Gelecekteki değer:</strong> Sistem artık günde 30 dakikayla yılda yaklaşık 93.000 dolar getiriyor ve büyümek için günde 6 saat serbest bırakıyor</li>
-        <li><strong>5 yıllık öngörü:</strong> 5 sistem × ortalama yaklaşık 50.000 dolar = yılda 250.000 dolar (163.000 dolarlık ihtiyari tavana karşı) — ve bu, her yeni sistemin tutması varsayımına dayanır ki kimsenin söz veremeyeceği kısım tam da budur</li>
-      </ul>
+      <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+        <p><strong>Bu dersin eskiden ileri sürdüğü iddia ve neden yanlış olduğu.</strong> Bu sayfanın daha eski bir sürümü şöyle bitiyordu: «sistematik işlem sonsuza kadar ölçeklenir &mdash; doğru yaparsan», ardından her biri 50.000 $ getiren beş sistemlik beş yıllık bir projeksiyon ve ölçeklenebilirliği «sınırsız» diye yazan bir tablo. Bunların hiçbiri doğru değil ve bu dersin başındaki kutu nedenini zaten söylüyor: bir sistem, işlem gördüğü şeyin likiditesiyle ve avantajın işlem görmeye ne kadar dayandığıyla sınırlıdır. Ayrıca daha ince bir şeyle de sınırlıdır: beş sistemin, beş bağımsız avantaj olma ihtimali düşüktür. Bireysel sistemlerin çoğu, başka parametrelere bürünmüş momentum ya da ortalamaya dönüştür; ve birbiriyle ilintili beş sistem işletmek, tek bir sistemi beş kat büyüklükte işletmektir ki bu, projeksiyonun varsaydığının tam tersidir.</p>
+      </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Bu dersin yaklaşık yarısındasın.</p>
   <p style="margin-top:0.5rem;font-size:0.9rem">Ara vermek için iyi bir yer. Bundan sonrası, az önce okuduğunun doğrudan üzerine kurulur.</p>
@@ -545,11 +456,11 @@
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Neredeyse hiç değişiklik olmaz, çünkü işlem başına maliyet küçüktür</div>
             <div class="quiz-option" data-correct="false">B) Sonuç iyileşir, çünkü maliyetler sınırdaki işlemleri eler</div>
-            <div class="quiz-option" data-correct="true">C) Büyük bir düşüş &mdash; işlem başına yüzdenin küçük bir kesri getirinin üçte birini ya da fazlasını alıp götürebilir</div>
+            <div class="quiz-option" data-correct="true">C) İşlem başına maliyetin işlem başına brüt kâra oranına bağlıdır, başka hiçbir şeye değil &mdash; iki sayı olmadan yanıtlanamaz</div>
             <div class="quiz-option" data-correct="false">D) Sonuç ölçülemez hâle gelir</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Doğru: C.</strong> Maliyetler işlem sayısıyla birlikte büyür; yüksek frekanslı bir sistem onları defalarca öderken işlem başına üstünlük sabit kalır. A, aslında kârlı olmayan backtest’leri kârlı gösteren varsayımdır. B’de bir doğruluk payı vardır &mdash; maliyetler gerçekten de sınırdaki işlemleri cezalandırır &mdash; ama bu, alınan işlem sayısının azalması olarak görünür, aynı küme üzerinde daha iyi bir getiri olarak değil.
+            <strong>Doğru: C.</strong> İşlem sayısı sadeleşir: işlemleri ikiye katlarsan hem maliyetler hem brüt kâr ikiye katlanır, oran değişmez. Hasarı belirleyen şey, gidiş-dönüş maliyetinin gidiş-dönüş brüt kârına bölümüdür. 400 $’lık brüt avantaja karşı altı dolar hiçtir; 20 $’a karşı altı dolar neredeyse her şeydir. A, işlem başına avantajı büyük bir sistem için doğrudur ve bir scalping sistemi için fena hâlde yanlıştır; bu yüzden genel bir yanıt değildir. B’de bir doğruluk payı vardır &mdash; maliyetler marjinal işlemleri negatife çevirir &mdash; ama bu, aynı küme üzerinde daha yüksek getiri olarak değil, daha az işlem alınması olarak görünür. D yanlıştır, çünkü kendi doldurma kayıtların elindeyse hesap tümüyle ölçülebilir.
           </div>
         </div>
 
@@ -583,10 +494,10 @@
       <div class="key-takeaway">
         <h4>🎓 Öne çıkanlar</h4>
         <ul>
-          <li><strong>Büyümek için sistemleştirin:</strong> İhtiyari işlem 100.000-500.000 dolarda tıkanır, sistematiğin tavanı yoktur</li>
-          <li><strong>Walk-forward sınaması:</strong> Önemli olan tek doğrulama yöntemi: geçmişte eğit, gelecekte test et (defalarca)</li>
-          <li><strong>Monte Carlo benzetimi:</strong> Riskin ve getirinin gerçek dağılımını anlamak için 1.000’den fazla senaryo denemek</li>
-          <li><strong>İşlem maliyetleri KRİTİKTİR:</strong> İşlem başına %0,1, backtest getirisinin %30’undan fazlasını yok eder</li>
+          <li><strong>Sistemleştirmenin sana gerçekte kazandırdığı:</strong> aynı avantajın, tek bir kişinin izleyebileceğinden daha çok enstrümanda ve daha çok saatte çalışması. Sınırsız bir tavan değil &mdash; bir sistem hâlâ işlem gördüğü şeyin likiditesiyle ve avantajın ne kadar dayandığıyla sınırlıdır.</li>
+          <li><strong>Walk-forward sınaması:</strong> kurallara, uydurulmadıkları veriyi gösteren tek aşamadır ve bunu bir kez değil, tekrar tekrar yapar. Pencere pencere genişleyen bir açık bulgudur; küçük bir açık ise yalnızca kırmızı bayrağın yokluğudur.</li>
+          <li><strong>Monte Carlo sana sıralamayı anlatır, geleceği değil:</strong> işlemlerini yeniden karmak, gözlemlediğin getiriler verildiğinde sıralamanın ne kadar kötü olabileceğini gösterir. Gözlemlemediğin getirileri üreten bir rejim hakkında sana hiçbir şey söyleyemez ve sistemleri asıl bitiren risk odur.</li>
+          <li><strong> backtest ’i kendi doldurmalarından maliyetlendir:</strong> hasar, gidiş-dönüş maliyetinin gidiş-dönüş brüt kârına bölümüdür. %5’in altındaysa senin sorunun değil; %30’un üstündeyse aracı kurum ve emir türü sinyalden daha çok önem taşır.</li>
           <li><strong>Kademeli devreye alın:</strong> Kâğıt → mikro büyüklük → küçük → tam (her aşamada doğrulayarak)</li>
           <li><strong>Aşırı uyumdan kaçın:</strong> Daha çok parametre = daha çok eğriye uydurma. Basit sistemler canlı piyasada ayakta kalır</li>
         </ul>
@@ -599,17 +510,17 @@
         <p><strong>6 adımda sistem geliştirme:</strong></p>
         <ol style="margin:.75rem 0;line-height:1.8">
           <li><strong>Kuralları yazıya dökün</strong> — İhtiyari kurulumu tam giriş ve çıkış koşullarına çevirin (5 veya daha fazla kural). Örnek: «Fiyat 15 dakikalık dibi en az 0,20 dolar süpürüyor, 5 mum içinde geri alıyor, ADX>22»</li>
-          <li><strong>Backtest (200+ işlem, 2+ yıl)</strong> — Takip edin: kazanma oranı >%50, ortalama R >0,5R, azami drawdown <%25, Sharpe >1,0</li>
+          <li><strong>Backtest (200+ işlem, 2+ yıl)</strong> &mdash; Kazanma oranını, ortalama R’yi, azami drawdown ’u ve Sharpe’ı izle; ama dördünü de aşılacak eşikler değil, hata payı olan tahminler olarak gör. 200 işlemde ölçülen %55’lik bir kazanma oranı, kabaca %48 ile %62 arasındaki her şeyle tutarlıdır; iki yıllık 1,0’lik bir Sharpe ise gerçek Sharpe’ın kabaca 0 ile 2 arasında herhangi bir yerde olmasıyla tutarlıdır. Noktayı değil aralığı yaz.</li>
 
           <li><strong>Walk-forward doğrulaması</strong> — 6 aylık bloklara bölün, kaydırarak eğitin ve test edin. Testteki performans eğitimden %30 veya daha fazla kötüyse = aşırı uyum</li>
-          <li><strong>Monte Carlo stres testi</strong> — 1.000 diziyi karıştırın. 95. yüzdelik drawdown %30’u ya da iflas riski %1’i aşıyorsa = büyüklüğü azaltın</li>
+          <li><strong>Monte Carlo stres testi</strong> &mdash; İşlem sırasını bin kez yeniden karıştır ve drawdown dağılımını oku. Bu, tek bir soruyu iyi yanıtlar: bu getiriler verildiğinde sıralama ne kadar şanssız olabilirdi? Getirilerin kendisi değişirse ne olacağını yanıtlamaz; bu yüzden 95’inci yüzdelik drawdown ’u en kötü durumunun tavanı değil, tabanı say.</li>
           <li><strong>Canlıya geçiş (3 aşama)</strong> — Kâğıt (50 işlem, kazanma oranı backtest’in %5 içinde) → mikro büyüklük (30 işlem, büyüklüğün %25’i) → tam büyüklük (%100). Herhangi bir aşamada takılırsa backtest’e dönün</li>
-          <li><strong>İşlem maliyetlerinin gerçeği</strong> — Slippage (%0,05), komisyon ve spread ekleyin. Kâr %50’den fazla düşüyorsa = yaşayabilir değil</li>
+          <li><strong>İşlem maliyetlerinin gerçeği</strong> &mdash; Makası enstrümanın gerçek kotasyonundan, komisyonu kendi gerçek tarifenden modelle; sonra gidiş-dönüş maliyetini işlem başına brüt kâra böl. Bir yazıdan yüzde ithal etme: likit enstrümanlarda alıntılanan sayılar bir büyüklük mertebesi fazla yüksektir, likit olmayanlarda ise fazla düşüktür.</li>
         </ol>
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Amaç:</strong> 1-4. adımları 2-4 haftada tamamlayın. Kâğıt üzerinde en az 50 işlem yapın. Ancak kâğıt, backtest ile %10 içinde örtüşüyorsa canlıya geçin. Sistemlerin çoğu kâğıt aşamasında elenir — bu İYİ bir şey. Gerçek para kaybetmektense şimdi öğrenmek daha iyidir.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Amaç:</strong> Adım 1-4’ü 2-4 hafta içinde tamamla, sonra en az elli işlemi kâğıt üzerinde yap. Kâğıt sana yapmamak için bir neden vermediyse küçük başlayarak canlıya geç &mdash; ve bu nedenin hangi türden olduğu konusunda net ol. Bir uygulama arızası (geç gelen veri, yeniden çizilen bir sinyal, aracının kabul etmediği bir emir türü) diskalifiye edicidir ve düzeltilebilir. backtest ’in birkaç puan altında bir kazanma oranı ise ne odur ne bu; elli işlem bu kadar küçük bir farkı çözemez. Burada düşen sistemlerin çoğu uygulamada düşer ve bunu para ortada yokken öğrenmek, bu aşamanın tüm amacıdır.</p>
       </div>
 
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Meraklıları profesyonel sistematik traderlardan ayıran şeyi az önce öğrendiniz. Walk-forward testleri, Monte Carlo, maliyet modellemesi: bunlar isteğe bağlı değil. Hayatta kalmanın kendisi. Artık canlıda patlamayan sistemleri nasıl kuracağınızı biliyorsunuz.</p>
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Bu dersteki hat, bir sistemin çalıştığının güvencesi değildir. Çalışmadığını öğrenmek için, ucuzdan pahalıya dizilmiş beş fırsattan oluşan bir sıradır; öyle ki bu keşif sana bir çeyreklik getiri yerine bir hafta sonu kodlamaya mal olsun. Tom’un V1’i bunlardan dördünü atladı ve bilgiyi en son, en pahalı aşamada satın aldı. Sırayla yapmanın bütün gerekçesi budur.</p>
 
       <h3 style="margin:3rem 0 1.5rem 0">İlgili dersler</h3>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
