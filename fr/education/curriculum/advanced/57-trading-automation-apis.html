@@ -132,12 +132,14 @@
 
       <p>Ton bot passe le trade, place le stop, vise 3R. Pendant que tu rêves.</p>
 
-      <p>6 h du matin. Tu te réveilles. Position clôturée. +2,8R de gain. Le café a meilleur goût.</p>
+      <p>6 h. Vous vous réveillez. Position fermée. Le bot a fait exactement ce que vous lui aviez dit.</p>
+
+      <p>Certains matins, cela veut dire un gagnant que vous auriez dormi. D'autres, une perte que vous vous seriez dissuadé de prendre, et que le bot a prise parce que c'étaient les règles. Les deux sont la même fonctionnalité. Si vous ne voulez que la première, vous ne voulez pas l'automatisation, vous voulez un bon résultat, et aucun code ne le fournit.</p>
 
       <div class="callout-tip">
         <h4>🎯 La promesse de l'automatisation</h4>
         <p>Pas de FOMO. Pas de peur. Pas d'hésitation. Juste du code qui exécute tes règles parfaitement, à chaque fois.</p>
-        <p>Ce n'est pas de la science-fiction. C'est ainsi que les professionnels tradent en 2024.</p>
+        <p>C'est une technologie ordinaire, pas de la science-fiction. Ce n'est pas non plus une stratégie : tout ce qui suit suppose que vous en avez déjà une qui fonctionne, et la dernière partie de cette leçon porte sur ce qui arrive quand cette hypothèse cesse discrètement d'être vraie.</p>
       </div>
 
       <div class="callout-tip">
@@ -235,7 +237,11 @@
     <li><strong>Aucun FOMO :</strong> Le setup n'apparaît pas → le bot attend (peu importe l'ennui du marché)</li>
     <li><strong>Taille parfaite :</strong> Chaque trade risque exactement 2 % (ou ce que tu as programmé), à chaque fois</li>
   </ul>
-  <p><strong>Résultat :</strong> Ta performance en backtest devient ta performance réelle. L'avantage que tu as testé est l'avantage que tu obtiens.</p>
+  <p><strong>Résultat :</strong> l'écart entre la performance de votre stratégie sur le papier et votre performance quand vous la tradez se referme. C'est un gain réel et souvent important, et c'est la version honnête de ce que l'automatisation vous apporte.</p>
+
+  <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+    <p><strong>Ce qu'elle ne vous donne pas.</strong> Une version antérieure de cette page disait que votre performance en backtest devient votre performance en réel. Non, et le croire est précisément la façon dont on déploie avec confiance vers une perte. L'automatisation supprime une source d'écart entre backtest et réel : vous. Toutes les autres restent : des coûts et un slippage non modélisés, une bougie de look-ahead dans le signal, des paramètres calés sur l'échantillon, et un régime de marché qui a bougé depuis la collecte des données. Un bot exécute vos règles parfaitement. Savoir si les règles valent quelque chose est une autre question, à laquelle cette leçon ne peut pas répondre pour vous et à laquelle la leçon 54 consacre cinq étapes.</p>
+  </div>
 </div>
 
 <h3>Le problème d'échelle (les limites du trading manuel)</h3>
@@ -269,14 +275,14 @@
     <tr>
       <td><strong>Setups</strong></td>
       <td>Attraper 5-10 setups par semaine (réaliste pour un discrétionnaire)</td>
-      <td>Attraper 50-200 setups par semaine (le bot ne dort jamais et ne rate rien)</td>
+      <td>Ne dort jamais et ne rate aucun signal &mdash; mais comptez les occasions décorrélées, pas les signaux. Quatre symboles corrélés qui se déclenchent en même temps, c'est un seul trade en taille quadruple</td>
     </tr>
   </tbody>
 </table>
 
 <p><strong>Exemple :</strong> Un trader manuel suit ES (futures S&P) en 15 minutes. Il attrape environ 8 setups par semaine. Il gagne 3 200 $ par mois en moyenne, soit environ 92 $ par setup.</p>
 
-<p><strong>Le même trader, automatisé :</strong> Le bot scanne ES, NQ et RTY (futures indiciels) plus GC et CL (métaux et énergie) en 5m, 15m et 1h. Il attrape environ 24 setups par semaine. Aux mêmes 92 $ par setup, cela fait 9 600 $ par mois.</p>
+<p><strong>Le même trader, automatisé :</strong> Le bot scanne ES, NQ et RTY (futures indiciels) plus GC et CL (métaux et énergie) en 5m, 15m et 1h, et attrape environ 24 configurations par semaine au lieu de 8. Il est tentant de multiplier : trois fois plus de configurations à 92 $ pièce font 9 600 $ par mois. Ne le faites pas, et il vaut la peine de préciser pourquoi, car ce calcul figure dans toutes les publicités pour l'automatisation. Les 92 $ ont été mesurés sur ES en 15 minutes. C'est une moyenne sur un instrument, dans un horizon, sur une portion particulière de marché. Rien n'établit que la même configuration paie 92 $ sur le pétrole, ni en 5 minutes, ni sur l'or ; ce sont d'autres marchés, d'autres participants, un autre bruit, et l'attente honnête pour une configuration portée sur un nouvel instrument est qu'elle marche moins bien, pas aussi bien. Ce que les symboles supplémentaires multiplient à coup sûr, c'est votre nombre de trades. S'ils multiplient votre avantage est précisément ce qu'il faudrait tester, un instrument à la fois.</p>
 
 <p><strong>Le déclic :</strong> Tu ne trades pas mieux. Tu trades PLUS — sans t'épuiser.</p>
 
@@ -599,8 +605,18 @@ run_bot()  # ~75 lignes - et les trois qui comptent le plus sont les garde-fous.
   <h4>📉 ÉTUDE DE CAS : l'appel de marge à 19 000 $ de Mike</h4>
   <p><strong>Configuration :</strong> Mike Sullivan (exemple composite), développeur Python, compte de 200 000 $. Bot sur l'API Alpaca (acheter SPY quand RSI<30). Backtest 2020-2023 : 67 % de réussite, +140 000 $. Déployé avec ZÉRO garde-fou.</p>
   <p><strong>Le désastre (un matin de choc sur l'inflation) :</strong> Le bot a tourné 8 semaines et gagné 14 000 $. SPY ouvre en gap de -2,8 % à 510 $. Le bot voit un RSI à 22 et continue d'acheter : 200 000 $ à 510 $, 505 $, 495 $ et 490 $ = position de 800 000 $ (levier 4, prix de revient 499,87 $). À 15 h : SPY à 488 $ — 7 % sous la clôture de la veille — la position vaut 781 000 $, soit 19 005 $ de perte, et l'appel de marge tombe. Mike était au bureau et n'a rien pu faire.</p>
-  <p><strong>Redressement :</strong> Compte après l'accident : 195 000 $. Reconstruit avec 5 garde-fous : position maximale de 50 000 $, VIX>25 = désactivé, 3 trades par jour maximum, alerte à -5 % sous le plus haut, arrêt complet à -10 %. Résultat sur les 8 mois suivants : 195 000 $ → 218 000 $ (+12 %), et aucun garde-fou n'a jamais failli.</p>
-  <p><strong>Leçon :</strong> Code les garde-fous D'ABORD : (1) limites de position, (2) filtres de volatilité, (3) coupure au drawdown maximal, (4) bouton d'arrêt. Les backtests mentent : ils ignorent les cygnes noirs.</p>
+  <p><strong>Ce qu'il a reconstruit :</strong> cinq contrôles, chacun visant une chose précise qui a mal tourné ce matin-là &mdash; un plafond dur sur la taille de position quoi que dise le signal, un filtre de volatilité qui désactive le bot au-dessus de VIX 25, une limite de trois trades par jour, une alerte à -5 % depuis le sommet, et un arrêt total à -10 %.</p>
+
+  <p><strong>Ce qui s'est passé ensuite n'est pas le sujet, donc nous ne vous le dirons pas.</strong> Quoi qu'ait fait son compte les mois suivants, ce serait un trader, une stratégie et une portion de marché, et cela ne pourrait pas établir que ces contrôles fonctionnent. Le désastre, lui, établit quelque chose, et proprement : un bot sans limite de position, avec un signal de survente et un marché qui continue de baisser, achètera jusqu'à ce que le courtier l'arrête. Cette inférence n'a pas besoin d'un redressement en annexe, et en ajouter un ne ferait que vous inviter à lire les contrôles comme une route vers +12 % plutôt que comme une route vers le fait d'avoir encore un compte.</p>
+
+  <p><strong>Lisez les contrôles pour ce que chacun empêche :</strong></p>
+  <ul style="margin:.5rem 0">
+    <li><strong>Plafond de position.</strong> Le signal n'a aucune idée de ce que vous détenez déjà. Moyenner à la baisse n'est pas une stratégie que le bot a choisie ; c'est ce que « acheter quand le RSI est bas » signifie quand le RSI reste bas.</li>
+    <li><strong>Filtre de volatilité.</strong> Non parce que la forte volatilité serait non rentable, mais parce que l'écart entre le comportement au backtest et le comportement réel est le plus large précisément là, et c'est là que vous voulez le moins le découvrir.</li>
+    <li><strong>Limite de trades et arrêt sur drawdown.</strong> Ils n'améliorent aucune décision prise isolément. Ils bornent l'ampleur de l'erreur que le système entier peut commettre avant qu'un humain soit requis, ce qui est une propriété différente et plus importante.</li>
+  </ul>
+
+  <p><strong>Leçon :</strong> codez les contrôles de sécurité avant la stratégie, pas après. Un backtest est un relevé de ce qui a survécu à l'échantillon ; les événements qui tuent les comptes sont, presque par construction, ceux qui n'y figuraient pas.</p>
 </div>
 
 <div class="quiz-question" style="margin-top:2rem">
@@ -612,7 +628,7 @@ run_bot()  # ~75 lignes - et les trois qui comptent le plus sont les garde-fous.
     <div class="quiz-option" data-correct="true">D) ZÉRO garde-fou : le bot a moyenné à la baisse 4 fois pendant une chute de 7 % sur la journée, atteignant une position de 800 000 $ (levier 4) sur un compte de 200 000 $</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Bonne réponse : D.</strong> Mike a codé « acheter quand le RSI est survendu » mais jamais de limite de position, de filtre de volatilité ni de bouton d'arrêt. Le bot a bâti une position à levier 4 pendant le krach : 19 005 $ de perte et un appel de marge avant qu'il n'atteigne un clavier. Redressement : 5 garde-fous ajoutés, 195 000 $ → 218 000 $ en 8 mois. Code les garde-fous D'ABORD.
+    <strong>Bonne réponse : D.</strong> Mike a programmé « acheter quand le RSI est survendu » mais jamais de limites de position, de filtres de volatilité ni de coupe-circuit. Le bot a construit une position à effet de levier 4× pendant la chute &mdash; 19 005 $ de perte et un appel de marge avant qu'il n'atteigne un clavier. La défaillance précise : rien dans le code ne savait ce qu'il détenait déjà, si bien qu'une lecture de survente qui persistait produisait un ordre à chaque vérification. A est faux car le slippage et la latence amplifient la taille d'une erreur sans la créer. B aurait empêché le bot de trader, ce qui ce matin-là aurait aidé. C produit un comportement erratique plutôt qu'une accumulation constante et orientée. Codez d'abord les contrôles de sécurité.
   </div>
 </div>
 
@@ -724,7 +740,7 @@ except Exception as e:
               <li><strong>Mises à jour Windows :</strong> Redémarrage automatique à 3 h = bot mort</li>
               <li><strong>Toi :</strong> « Je redémarre juste vite fait mon PC… »</li>
             </ul>
-            <p><strong>Disponibilité :</strong> 95 % (inacceptable pour du trading algo)</p>
+            <p><strong>Disponibilité :</strong> quel qu'il soit réellement, vous l'ignorez &mdash; et les pannes ne seront pas réparties au hasard, car la tempête qui vous coupe le courant fait aussi bouger le marché</p>
           </div>
           <div class="tab-panel">
             <h3>Pourquoi le VPS cloud gagne</h3>
@@ -871,7 +887,7 @@ except Exception as e:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Si tu es arrivé jusqu'ici, tu comprends que l'automatisation n'a rien de magique : c'est de l'exécution disciplinée à grande échelle. Code ton avantage. Teste rigoureusement. Déploie prudemment. Surveille en continu.
+        L'automatisation, c'est de l'exécution disciplinée à grande échelle, et rien d'autre. Elle referme l'écart entre la stratégie que vous avez conçue et les trades que vous prenez réellement, ce qui pour la plupart des gens est un écart réel et coûteux. Elle n'en referme aucun autre. Un bot hérite de chaque défaut des règles que vous lui avez données et les exécute plus vite et plus régulièrement que vous ne l'auriez fait, ce qui est un avantage considérable quand les règles sont bonnes et un risque considérable quand elles ne le sont pas. Codez d'abord les contrôles de sécurité, gardez la période papier assez longue pour couvrir plus d'un type de marché, et vérifiez chaque mois si ce qui faisait marcher la stratégie est toujours là.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Leçons associées</h3>

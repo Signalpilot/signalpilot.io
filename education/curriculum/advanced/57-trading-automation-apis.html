@@ -119,12 +119,14 @@
 
       <p>Your bot places the trade, sets the stop, targets 3R. All while you're dreaming.</p>
 
-      <p>6 AM. You wake up. Position closed. +2.8R profit. Coffee tastes better.</p>
+      <p>6 AM. You wake up. Position closed. The bot did exactly what you told it to.</p>
+
+      <p>Some mornings that means a winner you would have slept through. Other mornings it means a loss you would have talked yourself out of taking, and the bot took it because those were the rules. Both are the same feature. If you only want the first one, you do not want automation, you want a good outcome, and no amount of code supplies that.</p>
 
       <div class="callout-tip">
         <h4>🎯 The Promise of Automation</h4>
         <p>No FOMO. No fear. No hesitation. Just code executing your rules perfectly, every single time.</p>
-        <p>This isn't science fiction. It's how professionals trade in 2024.</p>
+        <p>This is ordinary technology, not science fiction. It is also not a strategy: everything below assumes you already have one that works, and the last part of this lesson is about what happens when that assumption quietly stops being true.</p>
       </div>
 
       <div class="callout-tip">
@@ -222,7 +224,11 @@
     <li><strong>No FOMO:</strong> Setup doesn't appear → bot waits (no matter how boring the market feels)</li>
     <li><strong>Perfect sizing:</strong> Every trade risks exactly 2% (or whatever you programmed), every single time</li>
   </ul>
-  <p><strong>Result:</strong> Your backtest performance becomes your live performance. The edge you tested is the edge you get.</p>
+  <p><strong>Result:</strong> the gap between how your strategy performs on paper and how you perform trading it closes. That is a real and often large gain, and it is the honest version of what automation gives you.</p>
+
+  <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+    <p><strong>What it does not give you.</strong> An earlier version of this page said your backtest performance becomes your live performance. It does not, and believing that is how people deploy confidently into a loss. Automation removes one source of difference between backtest and live results &mdash; you. Every other source is untouched: costs and slippage you did not model, a bar of look-ahead in the signal, parameters fitted to the sample, and a market regime that has moved on since the data was collected. A bot executes your rules perfectly. Whether the rules are any good is a separate question that this lesson cannot answer for you and that lesson 54 spends five stages on.</p>
+  </div>
 </div>
 
 <h3>The Scalability Problem (Manual Trading Limits)</h3>
@@ -256,14 +262,14 @@
     <tr>
       <td><strong>Setups</strong></td>
       <td>Catch 5-10 setups/week (realistic for discretionary trader)</td>
-      <td>Catch 50-200 setups/week (bot never sleeps, never misses)</td>
+      <td>Never sleeps and never misses a signal &mdash; but count uncorrelated opportunities, not signals. Four correlated symbols firing at once is one trade at four times the size</td>
     </tr>
   </tbody>
 </table>
 
 <p><strong>Example:</strong> A manual trader watches ES (S&P futures) on the 15-minute chart. Catches ~8 setups per week. Makes $3,200/month average — about $92 per setup.</p>
 
-<p><strong>Same trader, automated:</strong> Bot scans ES, NQ and RTY (index futures) plus GC and CL (metals and energy) on 5m, 15m and 1h. Catches ~24 setups per week. At the same $92 per setup, that is $9,600/month.</p>
+<p><strong>Same trader, automated:</strong> the bot scans ES, NQ and RTY (index futures) plus GC and CL (metals and energy) on 5m, 15m and 1h, and catches roughly 24 setups a week instead of 8. It is tempting to multiply: three times the setups at $92 each is $9,600 a month. Do not do that, and it is worth being precise about why, because this arithmetic appears in every piece of marketing for automation. The $92 was measured on ES on the 15-minute chart. It is an average over one instrument in one timeframe over some particular stretch of market. Nothing establishes that the same setup pays $92 in crude oil, or on the 5-minute chart, or in gold; those are different markets with different participants and different noise, and the honest expectation for a setup ported to a new instrument is that it works less well, not equally well. What the extra symbols reliably multiply is your trade count. Whether they multiply your edge is exactly the thing you would have to test, one instrument at a time.</p>
 
 <p><strong>The unlock:</strong> You're not trading better. You're trading MORE—without burning out.</p>
 
@@ -586,8 +592,18 @@ run_bot()  # ~75 lines - and the three that matter most are the controls.</code>
   <h4>📉 CASE STUDY: Mike's $19,000 Margin Call</h4>
   <p><strong>Setup:</strong> Mike Sullivan (composite example), Python dev, $200K account. Alpaca API bot (buy SPY @ RSI<30). Backtested 2020-2023: 67% WR, +$140K. Deployed with ZERO safety controls.</p>
   <p><strong>The disaster (a CPI-shock morning):</strong> Bot worked for 8 weeks and made $14K. SPY gapped down -2.8% to $510. Bot saw RSI 22, kept buying: $200K @ $510, $505, $495, $490 = $800K position (4× leverage, average cost $499.87). By 3 PM: SPY @ $488 — 7% below the prior close — the position was worth $781K, down $19,005, and the maintenance call landed. Mike was at work and couldn't stop it.</p>
-  <p><strong>Recovery:</strong> Account after the blow-up: $195K. Rebuilt with 5 controls: max $50K position, VIX>25=disable, max 3 trades/day, alert at -5% peak-to-trough, full shutdown at -10%. Result over the next 8 months: $195K → $218K (+12%), and no control ever failed to fire.</p>
-  <p><strong>Lesson:</strong> Code safety controls FIRST: (1) Position limits, (2) Volatility filters, (3) Max DD shutoff, (4) Kill switch. Backtests lie—they skip black swans.</p>
+  <p><strong>What he rebuilt:</strong> five controls, each aimed at a specific thing that went wrong that morning &mdash; a hard cap on position size regardless of what the signal says, a volatility filter that disables the bot above VIX 25, a limit of three trades a day, an alert at -5% peak-to-trough, and a full shutdown at -10%.</p>
+
+  <p><strong>What happened next is not the point, so we are not going to tell you.</strong> Whatever his account did over the following months would be one trader, one strategy and one stretch of market, and it could not establish that these controls work. The disaster establishes something, and it establishes it cleanly: a bot with no position limit, given an oversold signal and a market that keeps falling, will keep buying until the broker stops it. That inference does not need a recovery attached to it, and adding one would only invite you to read the controls as a route to +12% rather than as a route to still having an account.</p>
+
+  <p><strong>Read the controls for what each one prevents:</strong></p>
+  <ul style="margin:.5rem 0">
+    <li><strong>Position cap.</strong> The signal has no idea how much you already own. Averaging down is not a strategy the bot chose; it is what "buy when RSI is low" means when RSI stays low.</li>
+    <li><strong>Volatility filter.</strong> Not because high volatility is unprofitable, but because the gap between backtested and live behaviour is widest exactly there, and that is where you least want to be discovering it.</li>
+    <li><strong>Trade limit and drawdown shutdown.</strong> These do not improve any single decision. They bound how wrong the whole system can be before a human is required, which is a different and more important property.</li>
+  </ul>
+
+  <p><strong>Lesson:</strong> code the safety controls before the strategy, not after it. A backtest is a record of what happened to survive the sample; the events that end accounts are, almost by construction, the ones that were not in it.</p>
 </div>
 
 <div class="quiz-question" style="margin-top:2rem">
@@ -599,7 +615,7 @@ run_bot()  # ~75 lines - and the three that matter most are the controls.</code>
     <div class="quiz-option" data-correct="true">D) ZERO safety controls—bot averaged down 4× during a 7% single-day drop, hitting an $800K position (4× leverage) on a $200K account</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Correct: D.</strong> Mike programmed "buy @ RSI oversold" but never programmed position limits, volatility filters, or kill switches. Bot built a 4× leveraged position during the crash — $19,005 down and a maintenance call before he could reach a keyboard. Recovery: added 5 safety controls, took $195K → $218K over 8 months. Code safety controls FIRST.
+    <strong>Correct: D.</strong> Mike programmed "buy @ RSI oversold" but never programmed position limits, volatility filters, or kill switches. Bot built a 4× leveraged position during the crash — $19,005 down and a maintenance call before he could reach a keyboard. The specific failure is that nothing in the code knew how much he already owned, so an oversold reading that persisted produced an order every time it was checked. A is wrong because slippage and latency scale with the size of a mistake and do not create one. B would have stopped the bot trading, which on that morning would have helped. C produces erratic behaviour rather than a consistent, directional accumulation. Code the safety controls first.
   </div>
 </div>
 
@@ -711,7 +727,7 @@ except Exception as e:
               <li><strong>Windows updates:</strong> Auto-restart at 3 AM = bot dead</li>
               <li><strong>You:</strong> "Let me just restart my PC real quick..."</li>
             </ul>
-            <p><strong>Uptime:</strong> 95% (unacceptable for algo trading)</p>
+            <p><strong>Uptime:</strong> whatever it actually is, you do not know it &mdash; and the outages will not be randomly distributed, because the storm that cuts your power is also moving the market</p>
           </div>
           <div class="tab-panel">
             <h3>Why Cloud VPS Wins</h3>
@@ -858,7 +874,7 @@ except Exception as e:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        If you made it this far, you understand that automation isn't magic—it's disciplined execution at scale. Code your edge. Test rigorously. Deploy cautiously. Monitor continuously.
+        Automation is disciplined execution at scale, and that is all it is. It closes the gap between the strategy you designed and the trades you actually take, which for most people is a real and expensive gap. It closes no other gap. A bot inherits every flaw in the rules you gave it and executes them faster and more consistently than you would have, which is a considerable advantage when the rules are sound and a considerable liability when they are not. Code the safety controls first, keep the paper period long enough to span more than one kind of market, and check monthly whether the thing that made the strategy work is still there.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Related Lessons</h3>

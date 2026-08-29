@@ -132,12 +132,14 @@
 
       <p>Je bot legt de trade in, zet de stop en mikt op 3R. Terwijl jij ligt te dromen.</p>
 
-      <p>6 uur 's ochtends. Je wordt wakker. Positie gesloten. +2,8R winst. De koffie smaakt beter.</p>
+      <p>6 uur. Je wordt wakker. Positie gesloten. De bot deed precies wat je hem opdroeg.</p>
+
+      <p>Sommige ochtenden betekent dat een winnaar die je zou hebben verslapen. Andere ochtenden een verlies dat je jezelf zou hebben uitgepraat, en dat de bot nam omdat dat de regels waren. Het is dezelfde eigenschap. Wil je alleen het eerste, dan wil je geen automatisering maar een goede uitkomst, en die levert geen code.</p>
 
       <div class="callout-tip">
         <h4>🎯 De belofte van automatisering</h4>
         <p>Geen FOMO. Geen angst. Geen aarzeling. Alleen code die je regels perfect uitvoert, elke keer weer.</p>
-        <p>Dit is geen sciencefiction. Zo handelen professionals in 2024.</p>
+        <p>Dit is gewone technologie, geen sciencefiction. Het is ook geen strategie: alles hieronder gaat ervan uit dat je er al een hebt die werkt, en het laatste deel van deze les gaat over wat er gebeurt wanneer die aanname stilletjes niet meer klopt.</p>
       </div>
 
       <div class="callout-tip">
@@ -235,7 +237,11 @@
     <li><strong>Geen FOMO:</strong> Setup verschijnt niet → de bot wacht (hoe saai de markt ook aanvoelt)</li>
     <li><strong>Perfecte omvang:</strong> Elke trade riskeert precies 2 % (of wat je hebt geprogrammeerd), elke keer weer</li>
   </ul>
-  <p><strong>Resultaat:</strong> Je prestatie in de backtest wordt je prestatie in het echt. De edge die je testte is de edge die je krijgt.</p>
+  <p><strong>Resultaat:</strong> het gat tussen hoe je strategie op papier presteert en hoe jij presteert door haar te handelen sluit zich. Dat is een echte en vaak grote winst, en het is de eerlijke versie van wat automatisering je geeft.</p>
+
+  <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+    <p><strong>Wat het je niet geeft.</strong> Een eerdere versie van deze pagina zei dat je backtestprestatie je liveprestatie wordt. Dat wordt zij niet, en dat geloven is precies hoe mensen zelfverzekerd een verlies in stappen. Automatisering verwijdert één bron van verschil tussen backtest en liveresultaat: jou. Elke andere blijft: kosten en slippage die je niet modelleerde, een candle look-ahead in het signaal, parameters gefit op de steekproef, en een marktregime dat sinds de dataverzameling verder is gegaan. Een bot voert je regels perfect uit. Of de regels deugen is een aparte vraag, die deze les niet voor je kan beantwoorden en waaraan les 54 vijf fasen wijdt.</p>
+  </div>
 </div>
 
 <h3>Het schaalprobleem (de grenzen van handmatig handelen)</h3>
@@ -269,14 +275,14 @@
     <tr>
       <td><strong>Setups</strong></td>
       <td>5-10 setups per week pakken (realistisch voor een discretionaire trader)</td>
-      <td>50-200 setups per week pakken (de bot slaapt nooit en mist niets)</td>
+      <td>Slaapt nooit en mist nooit een signaal &mdash; maar tel ongecorreleerde kansen, geen signalen. Vier gecorreleerde symbolen die tegelijk afgaan zijn één trade op vier keer de omvang</td>
     </tr>
   </tbody>
 </table>
 
 <p><strong>Voorbeeld:</strong> Een handmatige trader volgt ES (S&P-futures) op de 15-minutengrafiek. Pakt zo'n 8 setups per week. Verdient gemiddeld $3.200 per maand, ongeveer $92 per setup.</p>
 
-<p><strong>Dezelfde trader, geautomatiseerd:</strong> De bot scant ES, NQ en RTY (indexfutures) plus GC en CL (metalen en energie) op 5m, 15m en 1u. Pakt zo'n 24 setups per week. Tegen dezelfde $92 per setup is dat $9.600 per maand.</p>
+<p><strong>Dezelfde trader, geautomatiseerd:</strong> De bot scant ES, NQ en RTY (indexfutures) plus GC en CL (metalen en energie) op 5m, 15m en 1h, en vangt ongeveer 24 setups per week in plaats van 8. Het is verleidelijk te vermenigvuldigen: drie keer de setups à $92 elk is $9.600 per maand. Doe dat niet, en het loont om precies te zijn over waarom, want deze rekensom staat in elke reclame voor automatisering. De $92 is gemeten op ES op de 15-minutengrafiek. Het is een gemiddelde over één instrument, in één timeframe, over een bepaald stuk markt. Niets toont aan dat dezelfde setup $92 betaalt in ruwe olie, of op de 5-minutengrafiek, of in goud; dat zijn andere markten met andere deelnemers en andere ruis, en de eerlijke verwachting voor een setup die naar een nieuw instrument wordt overgezet is dat hij slechter werkt, niet even goed. Wat de extra symbolen betrouwbaar vermenigvuldigen is je aantal trades. Of ze je edge vermenigvuldigen is precies wat je zou moeten testen, één instrument tegelijk.</p>
 
 <p><strong>De doorbraak:</strong> Je handelt niet beter. Je handelt MEER — zonder op te branden.</p>
 
@@ -599,8 +605,18 @@ run_bot()  # ~75 regels - en de drie die er het meest toe doen zijn de controles
   <h4>📉 CASUS: Mikes margin call van $19.000</h4>
   <p><strong>Opzet:</strong> Mike Sullivan (samengesteld voorbeeld), Python-ontwikkelaar, rekening van $200.000. Bot op de Alpaca-API (koop SPY bij RSI<30). Backtest 2020-2023: 67 % winnaars, +$140.000. Live gezet met NUL veiligheidscontroles.</p>
   <p><strong>De ramp (een ochtend met een inflatieschok):</strong> De bot draaide 8 weken en verdiende $14.000. SPY opende met een gat van -2,8 % op $510. De bot zag RSI 22 en bleef kopen: $200.000 op $510, $505, $495 en $490 = positie van $800.000 (4× hefboom, gemiddelde kostprijs $499,87). Om 15:00 uur: SPY op $488 — 7 % onder de vorige slotkoers — de positie was $800.000 gekost en nog $781.000 waard, $19.005 in de min, en de margin call kwam binnen. Mike zat op zijn werk en kon niets doen.</p>
-  <p><strong>Herstel:</strong> Rekening na de knal: $195.000. Herbouwd met 5 controles: positie maximaal $50.000, VIX>25 = uit, hoogstens 3 trades per dag, waarschuwing bij -5 % onder de top, volledige stop bij -10 %. Resultaat over de 8 maanden erna: $195.000 → $218.000 (+12 %), en geen enkele controle heeft ooit gefaald.</p>
-  <p><strong>Les:</strong> Programmeer EERST de veiligheidscontroles: (1) positielimieten, (2) volatiliteitsfilters, (3) afslag bij maximale drawdown, (4) noodstop. Backtests liegen: ze slaan de zwarte zwanen over.</p>
+  <p><strong>Wat hij opnieuw bouwde:</strong> vijf controles, elk gericht op iets specifieks dat die ochtend misging &mdash; een harde bovengrens aan de positiegrootte ongeacht wat het signaal zegt, een volatiliteitsfilter dat de bot boven VIX 25 uitschakelt, een limiet van drie trades per dag, een alarm bij -5% vanaf de piek, en een volledige uitschakeling bij -10%.</p>
+
+  <p><strong>Wat er daarna gebeurde is niet het punt, dus dat vertellen we niet.</strong> Wat zijn rekening de volgende maanden ook deed, het zou één handelaar zijn, één strategie en één stuk markt, en het zou niet kunnen vaststellen dat deze controles werken. De ramp stelt wél iets vast, en netjes: een bot zonder positielimiet, met een oversold signaal en een markt die blijft dalen, koopt door tot de broker hem stopt. Die gevolgtrekking heeft geen herstel nodig als bijlage, en er een aan toevoegen zou je alleen uitnodigen de controles te lezen als een route naar +12% in plaats van als een route naar het nog hebben van een rekening.</p>
+
+  <p><strong>Lees de controles op wat elk ervan voorkomt:</strong></p>
+  <ul style="margin:.5rem 0">
+    <li><strong>Positieplafond.</strong> Het signaal heeft geen idee hoeveel je al bezit. Bijkopen in een daling is geen strategie die de bot koos; het is wat "koop wanneer RSI laag is" betekent wanneer RSI laag blijft.</li>
+    <li><strong>Volatiliteitsfilter.</strong> Niet omdat hoge volatiliteit onrendabel zou zijn, maar omdat het gat tussen het gedrag in de backtest en het echte gedrag daar juist het grootst is, en dat is de plek waar je dat het minst wilt ontdekken.</li>
+    <li><strong>Tradelimiet en drawdown-uitschakeling.</strong> Zij verbeteren geen enkele afzonderlijke beslissing. Zij begrenzen hoe fout het hele systeem kan zitten voordat er een mens nodig is, en dat is een andere en belangrijkere eigenschap.</li>
+  </ul>
+
+  <p><strong>Les:</strong> programmeer de veiligheidscontroles vóór de strategie, niet erna. Een backtest is een verslag van wat de steekproef heeft overleefd; de gebeurtenissen die rekeningen beëindigen zijn, bijna per constructie, die er niet in zaten.</p>
 </div>
 
 <div class="quiz-question" style="margin-top:2rem">
@@ -612,7 +628,7 @@ run_bot()  # ~75 regels - en de drie die er het meest toe doen zijn de controles
     <div class="quiz-option" data-correct="true">D) NUL veiligheidscontroles: de bot middelde 4× bij tijdens een daling van 7 % op één dag en kwam op een positie van $800.000 (4× hefboom) op een rekening van $200.000</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Correct: D.</strong> Mike programmeerde «koop bij een oververkochte RSI», maar nooit positielimieten, volatiliteitsfilters of een noodstop. De bot bouwde tijdens de klap een 4× gehefboomde positie op: $19.005 in de min en een margin call voordat hij bij een toetsenbord kon komen. Herstel: 5 veiligheidscontroles toegevoegd, van $195.000 naar $218.000 in 8 maanden. Programmeer EERST de veiligheidscontroles.
+    <strong>Correct: D.</strong> Mike programmeerde "koop bij oversold RSI" maar nooit positielimieten, volatiliteitsfilters of noodstops. De bot bouwde tijdens de crash een 4× gehefboomde positie op &mdash; $19.005 in het rood en een margin call voordat hij bij een toetsenbord kon komen. De concrete storing: niets in de code wist hoeveel hij al bezat, dus een aanhoudende oversold-waarde leverde bij elke controle een order op. A is fout omdat slippage en latentie meeschalen met de omvang van een fout maar er geen veroorzaken. B zou de bot hebben belet te handelen, wat die ochtend geholpen zou hebben. C levert grillig gedrag op, geen consistente, gerichte opbouw. Programmeer eerst de veiligheidscontroles.
   </div>
 </div>
 
@@ -724,7 +740,7 @@ except Exception as e:
               <li><strong>Windows-updates:</strong> Automatische herstart om 3 uur 's nachts = bot dood</li>
               <li><strong>Jij:</strong> «Ik herstart mijn pc heel even…»</li>
             </ul>
-            <p><strong>Beschikbaarheid:</strong> 95 % (onacceptabel voor algohandel)</p>
+            <p><strong>Beschikbaarheid:</strong> wat hij werkelijk is weet je niet &mdash; en de storingen zullen niet willekeurig verdeeld zijn, want de storm die je stroom afsnijdt beweegt ook de markt</p>
           </div>
           <div class="tab-panel">
             <h3>Waarom de cloud-VPS wint</h3>
@@ -871,7 +887,7 @@ except Exception as e:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Ben je zover gekomen, dan begrijp je dat automatisering geen magie is: het is gedisciplineerde uitvoering op schaal. Codeer je edge. Test grondig. Rol voorzichtig uit. Blijf volgen.
+        Automatisering is gedisciplineerde uitvoering op schaal, en meer is het niet. Het sluit het gat tussen de strategie die je ontwierp en de trades die je werkelijk neemt, en voor de meeste mensen is dat een echt en duur gat. Het sluit geen enkel ander gat. Een bot erft elk gebrek in de regels die je hem gaf en voert ze sneller en consistenter uit dan jij zou hebben gedaan, wat een aanzienlijk voordeel is wanneer de regels deugen en een aanzienlijk risico wanneer niet. Programmeer eerst de veiligheidscontroles, houd de papierperiode lang genoeg om meer dan één soort markt te overspannen, en controleer maandelijks of dat wat de strategie liet werken er nog is.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Gerelateerde lessen</h3>

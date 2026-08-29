@@ -132,12 +132,14 @@
 
       <p>Tu bot coloca la operación, pone el stop y apunta a 3R. Todo mientras sueñas.</p>
 
-      <p>Las 6 de la mañana. Te despiertas. Posición cerrada. +2,8R de beneficio. El café sabe mejor.</p>
+      <p>6 de la mañana. Te despiertas. Posición cerrada. El bot hizo exactamente lo que le dijiste.</p>
+
+      <p>Algunas mañanas eso significa una ganadora que te habrías perdido durmiendo. Otras significa una perdedora que te habrías convencido de no tomar, y el bot la tomó porque esas eran las reglas. Ambas cosas son la misma característica. Si solo quieres la primera, no quieres automatización: quieres un buen resultado, y eso no lo entrega ningún código.</p>
 
       <div class="callout-tip">
         <h4>🎯 La promesa de la automatización</h4>
         <p>Sin FOMO. Sin miedo. Sin dudas. Solo código ejecutando tus reglas a la perfección, todas y cada una de las veces.</p>
-        <p>Esto no es ciencia ficción. Así operan los profesionales en 2024.</p>
+        <p>Esto es tecnología corriente, no ciencia ficción. Tampoco es una estrategia: todo lo que sigue supone que ya tienes una que funciona, y la última parte de esta lección trata de qué pasa cuando ese supuesto deja de ser cierto sin avisar.</p>
       </div>
 
       <div class="callout-tip">
@@ -235,7 +237,11 @@
     <li><strong>Sin FOMO:</strong> No aparece el setup → el bot espera (por muy aburrido que se ponga el mercado)</li>
     <li><strong>Tamaño perfecto:</strong> Cada operación arriesga exactamente un 2 % (o lo que hayas programado), todas y cada una de las veces</li>
   </ul>
-  <p><strong>Resultado:</strong> Tu rendimiento en backtest se convierte en tu rendimiento real. La ventaja que probaste es la ventaja que obtienes.</p>
+  <p><strong>Resultado:</strong> se cierra la brecha entre cómo rinde tu estrategia sobre el papel y cómo rindes tú operándola. Eso es una ganancia real y a menudo grande, y es la versión honesta de lo que te da la automatización.</p>
+
+  <div class="callout-warning" style="background:rgba(255,193,7,0.08);border-left:4px solid #ffc107;margin:1.5rem 0">
+    <p><strong>Lo que no te da.</strong> Una versión anterior de esta página decía que tu rendimiento en backtest se convierte en tu rendimiento en real. No es así, y creerlo es la forma en que la gente despliega con confianza hacia una pérdida. La automatización elimina una fuente de diferencia entre el backtest y los resultados en real: tú. Todas las demás quedan intactas: costes y slippage que no modelaste, una vela de look-ahead en la señal, parámetros ajustados a la muestra y un régimen de mercado que ha seguido adelante desde que se recogieron los datos. Un bot ejecuta tus reglas a la perfección. Si las reglas sirven es otra cuestión, que esta lección no puede responder por ti y a la que la lección 54 dedica cinco etapas.</p>
+  </div>
 </div>
 
 <h3>El problema de escala (los límites del trading manual)</h3>
@@ -269,14 +275,14 @@
     <tr>
       <td><strong>Setups</strong></td>
       <td>Cazar 5-10 setups por semana (realista para un discrecional)</td>
-      <td>Cazar 50-200 setups por semana (el bot no duerme ni se despista)</td>
+      <td>Nunca duerme y nunca se pierde una señal, pero cuenta oportunidades no correlacionadas, no señales. Cuatro símbolos correlacionados disparando a la vez son una sola operación al cuádruple de tamaño</td>
     </tr>
   </tbody>
 </table>
 
 <p><strong>Ejemplo:</strong> Un trader manual vigila ES (futuros del S&P) en el gráfico de 15 minutos. Caza unos 8 setups por semana. Gana 3.200 $ al mes de media, unos 92 $ por setup.</p>
 
-<p><strong>El mismo trader, automatizado:</strong> El bot escanea ES, NQ y RTY (futuros de índices) más GC y CL (metales y energía) en 5m, 15m y 1h. Caza unos 24 setups por semana. A los mismos 92 $ por setup, eso son 9.600 $ al mes.</p>
+<p><strong>El mismo trader, automatizado:</strong> El bot escanea ES, NQ y RTY (futuros de índices) más GC y CL (metales y energía) en 5m, 15m y 1h, y captura unos 24 setups por semana en vez de 8. Es tentador multiplicar: tres veces los setups a 92 $ cada uno son 9.600 $ al mes. No lo hagas, y vale la pena ser preciso sobre por qué, porque esta aritmética aparece en toda la publicidad de la automatización. Los 92 $ se midieron en ES en el gráfico de 15 minutos. Son una media sobre un instrumento, en un marco temporal, en un tramo concreto de mercado. Nada establece que el mismo setup pague 92 $ en el crudo, o en el gráfico de 5 minutos, o en el oro; son mercados distintos con participantes distintos y ruido distinto, y la expectativa honesta para un setup trasladado a un instrumento nuevo es que funcione peor, no igual de bien. Lo que los símbolos extra multiplican con seguridad es tu número de operaciones. Si multiplican tu ventaja es exactamente lo que tendrías que probar, instrumento por instrumento.</p>
 
 <p><strong>La palanca:</strong> No estás operando mejor. Estás operando MÁS, sin quemarte.</p>
 
@@ -599,8 +605,18 @@ run_bot()  # ~75 lineas - y las tres que mas importan son los controles.</code><
   <h4>📉 CASO PRÁCTICO: la llamada de margen de 19.000 $ de Mike</h4>
   <p><strong>Planteamiento:</strong> Mike Sullivan (ejemplo compuesto), desarrollador de Python, cuenta de 200.000 $. Bot sobre la API de Alpaca (comprar SPY con RSI<30). Backtest 2020-2023: 67 % de acierto, +140.000 $. Desplegado con CERO controles de seguridad.</p>
   <p><strong>El desastre (una mañana de shock del IPC):</strong> El bot funcionó 8 semanas y ganó 14.000 $. SPY abrió con un hueco del -2,8 % hasta 510 $. El bot vio el RSI en 22 y siguió comprando: 200.000 $ a 510 $, 505 $, 495 $ y 490 $ = posición de 800.000 $ (4 veces de apalancamiento, coste medio 499,87 $). A las 15:00: SPY a 488 $ —un 7 % por debajo del cierre anterior—, la posición valía 781.000 $, con 19.005 $ de pérdida, y llegó el ajuste de márgenes. Mike estaba en el trabajo y no pudo hacer nada.</p>
-  <p><strong>Recuperación:</strong> Cuenta tras el estallido: 195.000 $. Reconstruido con 5 controles: posición máxima de 50.000 $, VIX>25 = desactivado, máximo 3 operaciones al día, aviso al -5 % desde máximos y apagado total al -10 %. Resultado en los 8 meses siguientes: 195.000 $ → 218.000 $ (+12 %), y ningún control falló nunca.</p>
-  <p><strong>Lección:</strong> Programa PRIMERO los controles de seguridad: (1) límites de posición, (2) filtros de volatilidad, (3) corte por drawdown máximo, (4) botón de parada. Los backtests mienten: se saltan los cisnes negros.</p>
+  <p><strong>Lo que reconstruyó:</strong> cinco controles, cada uno apuntando a algo concreto que salió mal aquella mañana: un tope duro al tamaño de posición diga lo que diga la señal, un filtro de volatilidad que desactiva el bot por encima de VIX 25, un límite de tres operaciones al día, una alerta al -5% desde máximos y un apagado total al -10%.</p>
+
+  <p><strong>Lo que pasó después no es lo relevante, así que no te lo vamos a contar.</strong> Lo que hiciera su cuenta en los meses siguientes sería un trader, una estrategia y un tramo de mercado, y no podría establecer que estos controles funcionan. El desastre sí establece algo, y lo establece limpiamente: un bot sin límite de posición, con una señal de sobreventa y un mercado que sigue cayendo, seguirá comprando hasta que el bróker lo detenga. Esa inferencia no necesita una recuperación adjunta, y adjuntarla solo te invitaría a leer los controles como un camino al +12% en lugar de como un camino a seguir teniendo cuenta.</p>
+
+  <p><strong>Lee los controles por lo que previene cada uno:</strong></p>
+  <ul style="margin:.5rem 0">
+    <li><strong>Tope de posición.</strong> La señal no tiene ni idea de cuánto tienes ya. Promediar a la baja no es una estrategia que el bot eligiera; es lo que significa «compra cuando el RSI está bajo» cuando el RSI se queda bajo.</li>
+    <li><strong>Filtro de volatilidad.</strong> No porque la alta volatilidad no sea rentable, sino porque la brecha entre el comportamiento en backtest y el real es más ancha justamente ahí, y ahí es donde menos te conviene descubrirla.</li>
+    <li><strong>Límite de operaciones y apagado por drawdown.</strong> No mejoran ninguna decisión individual. Acotan cuánto puede equivocarse el sistema entero antes de que haga falta un humano, que es una propiedad distinta y más importante.</li>
+  </ul>
+
+  <p><strong>Lección:</strong> programa los controles de seguridad antes que la estrategia, no después. Un backtest es un registro de lo que sobrevivió a la muestra; los sucesos que acaban con cuentas son, casi por construcción, los que no estaban en ella.</p>
 </div>
 
 <div class="quiz-question" style="margin-top:2rem">
@@ -612,7 +628,7 @@ run_bot()  # ~75 lineas - y las tres que mas importan son los controles.</code><
     <div class="quiz-option" data-correct="true">D) CERO controles de seguridad: el bot promedió a la baja 4 veces durante una caída del 7 % en un día y llegó a una posición de 800.000 $ (4 veces de apalancamiento) sobre una cuenta de 200.000 $</div>
   </div>
   <div class="quiz-explanation">
-    <strong>Correcto: D.</strong> Mike programó «comprar con el RSI sobrevendido», pero nunca programó límites de posición, filtros de volatilidad ni botones de parada. El bot construyó una posición apalancada 4 veces durante el desplome: 19.005 $ de pérdida y un ajuste de márgenes antes de que pudiera llegar a un teclado. Recuperación: añadió 5 controles de seguridad y llevó los 195.000 $ a 218.000 $ en 8 meses. Programa PRIMERO los controles de seguridad.
+    <strong>Correcto: D.</strong> Mike programó «compra con RSI sobrevendido» pero nunca programó límites de posición, filtros de volatilidad ni interruptores de emergencia. El bot construyó una posición apalancada 4× durante la caída: 19.005 $ abajo y un ajuste de márgenes antes de que pudiera llegar a un teclado. El fallo concreto es que nada en el código sabía cuánto tenía ya, así que una lectura de sobreventa que persistía generaba una orden cada vez que se comprobaba. A es incorrecta porque el slippage y la latencia escalan con el tamaño de un error, no lo crean. B habría impedido que el bot operase, lo cual aquella mañana habría ayudado. C produce comportamiento errático, no una acumulación consistente y direccional. Programa primero los controles de seguridad.
   </div>
 </div>
 
@@ -724,7 +740,7 @@ except Exception as e:
               <li><strong>Actualizaciones de Windows:</strong> Reinicio automático a las 3 de la mañana = bot muerto</li>
               <li><strong>Tú:</strong> «Solo voy a reiniciar el PC un momento…»</li>
             </ul>
-            <p><strong>Disponibilidad:</strong> 95 % (inaceptable para trading algorítmico)</p>
+            <p><strong>Disponibilidad:</strong> sea cual sea en realidad, no la conoces, y los cortes no estarán distribuidos al azar, porque la tormenta que te corta la luz también mueve el mercado</p>
           </div>
           <div class="tab-panel">
             <h3>Por qué gana el VPS en la nube</h3>
@@ -871,7 +887,7 @@ except Exception as e:
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        Si has llegado hasta aquí, entiendes que automatizar no es magia: es ejecución disciplinada a escala. Programa tu ventaja. Prueba con rigor. Despliega con cautela. Vigila sin parar.
+        La automatización es ejecución disciplinada a escala, y no es nada más. Cierra la brecha entre la estrategia que diseñaste y las operaciones que realmente tomas, que para la mayoría es una brecha real y cara. No cierra ninguna otra. Un bot hereda todos los defectos de las reglas que le diste y las ejecuta más rápido y con más consistencia de lo que tú lo harías, lo cual es una ventaja considerable cuando las reglas son buenas y un riesgo considerable cuando no lo son. Programa primero los controles de seguridad, mantén el periodo en papel lo bastante largo como para abarcar más de un tipo de mercado, y comprueba cada mes si sigue ahí aquello que hacía funcionar la estrategia.
       </p>
 
       <h3 style="margin:3rem 0 1.5rem 0">Lecciones relacionadas</h3>
