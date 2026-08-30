@@ -102,7 +102,7 @@
     const BEGINNER_TOTAL = 20;
     const INTERMEDIATE_TOTAL = 27;
     const ADVANCED_TOTAL = 35;
-    const TOTAL_LESSONS = 82;
+    const TOTAL_LESSONS = 86;
 
     // Define milestones with tier-specific tracking
     const milestones = [

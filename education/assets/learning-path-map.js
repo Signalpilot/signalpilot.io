@@ -230,7 +230,7 @@
     indicator.className = 'current-position-indicator';
     indicator.innerHTML = `
       <span style="font-size: 1.2rem;">📍</span>
-      <span>You are ${currentLesson <= 82 ? `on lesson ${currentLesson}` : 'all done! 🎉'}</span>
+      <span>You are ${currentLesson <= 86 ? `on lesson ${currentLesson}` : 'all done! 🎉'}</span>
     `;
     container.appendChild(indicator);
   }
@@ -243,7 +243,7 @@
     if (!container) return;
 
     let totalCompleted = 0;
-    let totalLessons = 82;
+    let totalLessons = 86;
 
     let html = '<div class="progress-overview">';
 

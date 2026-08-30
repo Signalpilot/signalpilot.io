@@ -111,7 +111,7 @@ Your learning progress is automatically tracked as you read lessons!
 ⚫ **Tier 4: Professional** (8 lessons)
 → Trading business, career paths, mastery
 
-**Total:** 82 comprehensive lessons
+**Total:** 86 comprehensive lessons
 
 📚 [View Full Curriculum](/)
 
@@ -250,7 +250,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 
 **Style:** Professional trading education (institutional concepts, not retail hype)
 
-**Total:** 82+ comprehensive lessons across 7 tiers
+**Total:** 86 comprehensive lessons across 4 tiers
 
 **What makes them different:**
 ✅ Story-driven (real trader mistakes)
@@ -392,7 +392,7 @@ Type **"help"** to see all available topics!
                             </div>
                             <div class="sp-chatbot-message-content">
                                 <p><strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.</p>
-                                <p>I can help you navigate our 82 trading lessons, explain concepts, and guide your learning path!</p>
+                                <p>I can help you navigate our 86 trading lessons, explain concepts, and guide your learning path!</p>
                                 <p><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em></p>
                             </div>
                         </div>
@@ -645,7 +645,7 @@ Type **"help"** to see all available topics!
 
             // Re-add welcome message
             this.addMessage(
-                `<strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.<br><br>I can help you navigate our 82 trading lessons, explain concepts, and guide your learning path!<br><br><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em>`,
+                `<strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.<br><br>I can help you navigate our 86 trading lessons, explain concepts, and guide your learning path!<br><br><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em>`,
                 'bot'
             );
         }

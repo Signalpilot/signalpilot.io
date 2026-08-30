@@ -115,7 +115,7 @@
         title: 'Apply What You\'ve Learned',
         text: 'Don\'t just read about these concepts—trade them. The SignalPilot Suite helps you execute the strategies taught in this curriculum.',
         stats: {
-          lessons: '82',
+          lessons: '86',
           hours: '40+',
           indicators: '7'
         },

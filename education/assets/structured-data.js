@@ -33,7 +33,7 @@
     "@type": "EducationalOrganization",
     "name": "Signal Pilot Education Hub",
     "url": BASE,
-    "description": "Learn institutional trading concepts from Signal Pilot. 82 comprehensive lessons covering order flow, liquidity engineering, and professional trading frameworks.",
+    "description": "Learn institutional trading concepts from Signal Pilot. 86 comprehensive lessons covering order flow, liquidity engineering, and professional trading frameworks.",
     "provider": {
       "@type": "Organization",
       "name": "Signal Pilot"
@@ -58,7 +58,7 @@
       "courseWorkload": "PT40H"
     },
     "educationalLevel": "Beginner to Advanced",
-    "numberOfCredits": 82,
+    "numberOfCredits": 86,
     "about": [
       "Trading",
       "Order Flow",

@@ -15,8 +15,8 @@
   };
 
   /**
-   * Convert lesson number (1-82) to level and articleId
-   * @param {number} lessonNum - Lesson number (1-82)
+   * Convert lesson number (1-86) to level and articleId
+   * @param {number} lessonNum - Lesson number (1-86)
    * @returns {{level: string, articleId: number}} - Level and article ID
    */
   function getLessonKey(lessonNum) {
@@ -416,7 +416,7 @@
         </div>
         <div class="time-stat">
           <div class="time-stat-icon">📚</div>
-          <div class="time-stat-value">${completedLessons}/82</div>
+          <div class="time-stat-value">${completedLessons}/86</div>
           <div class="time-stat-label">Lessons</div>
         </div>
         <div class="time-stat">
