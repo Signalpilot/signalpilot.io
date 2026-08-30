@@ -38,6 +38,7 @@ def prose(v):
 def e(t):
     """Escape, then honour the *emphasis* the audit notes were written with."""
     t = html.escape(t, quote=False)
+    t = t.replace(' -- ', ' \u2014 ')
     return re.sub(r'\*([^*\n]+)\*', r'<em>\1</em>', t)
 
 
