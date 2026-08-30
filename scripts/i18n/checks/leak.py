@@ -18,6 +18,10 @@ TICKERS = ['SPY','QQQ','AAPL','BTC','ES','NQ','MTF','WR','R','A','B','C','D','K'
 NOTRANS = sorted(set(LOCKED) | set(TICKERS), key=len, reverse=True)
 
 def residue(s):
+    # Entity names are markup, not words. Without this, '&minus;12%' leaves the
+    # letters of "minus" behind and a bare percentage looks like untranslated
+    # prose; likewise '&times;' inside a formula.
+    s = re.sub(r'&(?:[a-zA-Z][a-zA-Z0-9]*|#[0-9]+|#x[0-9A-Fa-f]+);', ' ', s)
     for t in NOTRANS:
         s = re.sub(r'(?<![A-Za-z0-9])' + re.escape(t) + r'(?![A-Za-z0-9])', ' ', s)
     return re.sub(r'[^A-Za-z]', '', s)
