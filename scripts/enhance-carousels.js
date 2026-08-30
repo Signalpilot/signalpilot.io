@@ -1732,7 +1732,7 @@ const POSTS = [
     s3Pillars: [
       { title:'<span class="warm">7</span> Integrated Systems', desc:'Each system sees different market dimensions', color:'orange', barWidth:95, barRgb:R.orange },
       { title:'<span style="color:var(--accent-gold)">Regime</span> Classification', desc:'Automatically adapts to trending, ranging, transitions', color:'gold', barWidth:92, barRgb:R.gold },
-      { title:'<span style="color:var(--accent-teal)">Free</span> Education', desc:'82 lessons, zero paywalls, real trading knowledge', color:'teal', barWidth:90, barRgb:R.teal },
+      { title:'<span style="color:var(--accent-teal)">Free</span> Education', desc:'86 lessons, zero paywalls, real trading knowledge', color:'teal', barWidth:90, barRgb:R.teal },
       { title:'<span style="color:var(--accent-purple)">Non-Repainting</span>', desc:'Every signal is close-confirmed. What you see happened.', color:'purple', barWidth:95, barRgb:R.purple },
       { title:'<span style="color:var(--accent-green)">Community</span>', desc:'1000+ traders learning and growing together', color:'green', barWidth:88, barRgb:R.green },
     ],
@@ -1758,7 +1758,7 @@ const POSTS = [
     s2Tag: 'What You Get', s2Title: 'Full <span class="warm">Access</span> for 7 Days',
     s2Cards: [
       { icon:'&#10003;', title:'All 7 Systems', desc:'Every indicator unlocked from day one', iconColor:'green', cardClass:'card-green', barWidth:95, barRgb:R.green },
-      { icon:'&#10003;', title:'Education Library', desc:'82 lessons covering every aspect of trading', iconColor:'green', cardClass:'card-green', barWidth:92, barRgb:R.green },
+      { icon:'&#10003;', title:'Education Library', desc:'86 lessons covering every aspect of trading', iconColor:'green', cardClass:'card-green', barWidth:92, barRgb:R.green },
       { icon:'&#10003;', title:'Real-Time Alerts', desc:'Live signals as they happen, no delay', iconColor:'blue', cardClass:'card-blue', barWidth:90, barRgb:R.blue },
       { icon:'&#10003;', title:'Cancel Anytime', desc:'No commitment. No hidden fees. Walk away free.', iconColor:'teal', cardClass:'card-teal', barWidth:88, barRgb:R.teal },
     ],
@@ -1767,7 +1767,7 @@ const POSTS = [
     s3Tag: 'How It Works', s3Title: '5 Steps to <span class="warm">Start</span>',
     s3Pillars: [
       { title:'Sign Up <span class="warm">Free</span>', desc:'Create your account in under 60 seconds', color:'orange', barWidth:95, barRgb:R.orange },
-      { title:'Get <span style="color:var(--accent-gold)">Instant</span> Access', desc:'All 7 systems and 82 lessons unlocked immediately', color:'gold', barWidth:92, barRgb:R.gold },
+      { title:'Get <span style="color:var(--accent-gold)">Instant</span> Access', desc:'All 7 systems and 86 lessons unlocked immediately', color:'gold', barWidth:92, barRgb:R.gold },
       { title:'Start <span style="color:var(--accent-teal)">Learning</span>', desc:'Follow the education pathway at your pace', color:'teal', barWidth:90, barRgb:R.teal },
       { title:'Trade With <span style="color:var(--accent-purple)">Confidence</span>', desc:'Apply what you learn with real-time signals', color:'purple', barWidth:88, barRgb:R.purple },
       { title:'Decide on <span style="color:var(--accent-green)">Day 7</span>', desc:'Stay if you love it. Leave if you don\'t. Simple.', color:'green', barWidth:86, barRgb:R.green },
@@ -1777,7 +1777,7 @@ const POSTS = [
     s4Truths: [
       { icon:'&#9656;', title:'Full Access', desc:'No features held back. Everything unlocked.', color:'orange' },
       { icon:'&#9670;', title:'No Commitment', desc:'Cancel anytime. No questions asked.', color:'gold' },
-      { icon:'&#9674;', title:'Real Education', desc:'82 lessons that build real understanding', color:'teal' },
+      { icon:'&#9674;', title:'Real Education', desc:'86 lessons that build real understanding', color:'teal' },
       { icon:'&#10003;', title:'Zero Risk', desc:'$0 cost. 7 days. Full power.', color:'green' },
     ],
     s4Philosophy: 'If Signal Pilot does not improve your trading in 7 days,<br>walk away. No charge. No questions.',
@@ -1886,7 +1886,7 @@ const POSTS = [
       { icon:'&#9656;', title:'Understanding Compounds', desc:'Knowledge grows. Signals are temporary.', color:'orange' },
       { icon:'&#9670;', title:'Education Is the Real Edge', desc:'Signals change. Understanding endures.', color:'gold' },
       { icon:'&#9674;', title:'Why > When', desc:'Knowing why a signal works is more valuable than when', color:'teal' },
-      { icon:'&#10003;', title:'Free Forever', desc:'82 lessons. Zero paywalls. No excuses.', color:'green' },
+      { icon:'&#10003;', title:'Free Forever', desc:'86 lessons. Zero paywalls. No excuses.', color:'green' },
     ],
     s4Philosophy: 'Signal Pilot teaches you WHY signals work,<br>not just WHEN they fire. That understanding compounds.',
     ctaOrbIcon: '&#9733;', ctaTagline: 'Understand.<br>Then <span class="warm">Trade.</span>',

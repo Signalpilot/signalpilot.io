@@ -111,7 +111,7 @@
       { count: BEGINNER_TOTAL, key: 'beginner_tier', name: 'Beginner Tier Complete (all 20 beginner lessons)', type: 'tier', tier: 'beginner', tierCount: beginnerCompleted, tierTotal: BEGINNER_TOTAL },
       { count: INTERMEDIATE_TOTAL, key: 'intermediate_tier', name: 'Intermediate Tier Complete (all 27 intermediate lessons)', type: 'tier', tier: 'intermediate', tierCount: intermediateCompleted, tierTotal: INTERMEDIATE_TOTAL },
       { count: ADVANCED_TOTAL, key: 'advanced_tier', name: 'Advanced Tier Complete (all 35 advanced lessons)', type: 'tier', tier: 'advanced', tierCount: advancedCompleted, tierTotal: ADVANCED_TOTAL },
-      { count: TOTAL_LESSONS, key: 'complete_mastery', name: 'all 82 lessons - Complete Mastery', type: 'total' }
+      { count: TOTAL_LESSONS, key: 'complete_mastery', name: 'all 86 lessons - Complete Mastery', type: 'total' }
     ];
 
     // Check each milestone

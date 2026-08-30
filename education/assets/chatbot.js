@@ -144,7 +144,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             spread: `**Bid-Ask Spread Lessons:**
 
-**Main Lesson:** [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/intermediate/21-bid-ask-spread-dynamics.html)
+**Main Lesson:** [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/intermediate/22-bid-ask-spread-dynamics.html)
 
 **Key Concepts:**
 • Spread is a tax on impatience (not a fixed cost)
@@ -164,7 +164,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             automation: `**Trading Automation:**
 
-**Main Lesson:** [Lesson 57: Trading Automation & APIs](/education/curriculum/advanced/57-trading-automation-apis.html)
+**Main Lesson:** [Lesson 57: Trading Automation & APIs](/education/curriculum/advanced/61-trading-automation-apis.html)
 
 **Key Concepts:**
 • Automation amplifies mistakes (1 bug = 47 orders in 90 sec)
@@ -187,7 +187,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             chatbot: `**About This Chatbot:**
 
-I'm a pattern-matching assistant (no AI API needed!) built to help you navigate the 82 lessons.
+I'm a pattern-matching assistant (no AI API needed!) built to help you navigate the 86 lessons.
 
 **I can help with:**
 • Lesson recommendations ("What should I learn first?")
@@ -203,7 +203,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 
 **How I work:**
 • Pattern matching (instant responses)
-• Knowledge base from all 82 lessons
+• Knowledge base from all 86 lessons
 • No data sent to external APIs
 • Conversation history saved locally
 
@@ -218,7 +218,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 → Focus: Debunking retail myths, understanding liquidity engineering
 
 **Week 4-7: Intermediate Microstructure** (27 lessons)
-→ [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/intermediate/21-bid-ask-spread-dynamics.html)
+→ [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/intermediate/22-bid-ask-spread-dynamics.html)
 → Order flow, order books, footprint charts, institutional flow
 
 **Week 8-11: Advanced Implementation** (27 lessons)
@@ -295,7 +295,7 @@ Try asking about:
 
 Type **"help"** to see all available topics!
 
-💡 **Tip:** Use the search bar at the top to search all 82 lessons, or browse by tier on the homepage.
+💡 **Tip:** Use the search bar at the top to search all 86 lessons, or browse by tier on the homepage.
 
 **Quick links:**
 • [Beginner Lessons](/education/beginner.html)

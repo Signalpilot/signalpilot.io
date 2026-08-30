@@ -182,7 +182,7 @@
       name: 'Graduate Scholar',
       icon: '&#127891;', // graduation cap
       emoji: '\u{1F393}',
-      description: 'Complete all 82 lessons',
+      description: 'Complete all 86 lessons',
       category: 'completion',
       check: function(stats) {
         return stats.lessonsCompleted >= 82;
