@@ -23,7 +23,7 @@ NUM = re.compile(r'\d[\d,.]*')
 BANNED = re.compile(r'(?i)studies show|research shows|statistics show|% of (?:retail |day )?traders|'
                     r'average r-multiple|you now understand|ahead of \d')
 
-def strip(t): return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', t)).strip()
+def strip(t): return re.sub(r'\s+', ' ', re.sub(r'<[a-zA-Z!/?][^>]*>', ' ', t)).strip()
 
 def check(path):
     h = open(path, encoding='utf-8').read()

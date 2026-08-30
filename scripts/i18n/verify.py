@@ -11,7 +11,10 @@ VOID = {'area','base','br','col','embed','hr','img','input','link','meta','param
 def _strip(h):
     h = re.sub(r'<script[\s\S]*?</script>', '', h)
     h = re.sub(r'<style[\s\S]*?</style>', '', h)
-    return re.sub(r'<[^>]*>', ' ', h)
+    # A tag name must start with a letter, /, ! or ? -- otherwise a raw '<'
+    # in prose ("ADX < 20") makes a naive <[^>]*> swallow everything up to
+    # the next '>', hiding real text from the locked-term and count checks.
+    return re.sub(r'<[a-zA-Z!/?][^>]*>', ' ', h)
 
 
 def _tag_errors(h):

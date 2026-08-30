@@ -55,7 +55,7 @@ def body(path):
 def visible(h):
     h = re.sub(r'(?is)<(script|style|svg)\b.*?</\1>', ' ', h)
     h = re.sub(r'(?s)<!--.*?-->', ' ', h)
-    return html.unescape(re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', h))).strip()
+    return html.unescape(re.sub(r'\s+', ' ', re.sub(r'<[a-zA-Z!/?][^>]*>', ' ', h))).strip()
 
 
 def words(t):
