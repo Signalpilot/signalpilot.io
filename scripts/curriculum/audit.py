@@ -33,7 +33,9 @@ BASERATE = re.compile(
     r'(?i)\b(?:9[0-9]|8[0-9]|7[0-9])%\s*of\s*(?:traders|retail|day traders|people)'
     r'|\bmost traders (?:lose|fail|blow up)\b'
     r'|\bblows? up \d{1,2}% of traders\b')
-VAGUE = re.compile(r'(?i)\b(?:studies show|research shows|research suggests|'
+# "case studies show" is a lesson pointing at its own two case studies, not an
+# appeal to unnamed research, so the bare "studies show" must not match it.
+VAGUE = re.compile(r'(?i)\b(?:(?<!case )studies show|research shows|research suggests|'
                    r'statistics show|data shows that|it\'s well documented)')
 # A lesson is allowed to QUOTE a bogus statistic in order to debunk it. Lesson 62
 # does exactly that with the "90% of traders lose 90% in 90 days" myth, and the
@@ -41,7 +43,8 @@ VAGUE = re.compile(r'(?i)\b(?:studies show|research shows|research suggests|'
 DEBUNK = re.compile(r'(?i)no source|never been produced|nobody has ever|is a myth|'
                     r'made up|no study|unsourced|invented|has no basis|'
                     r'statistically insignificant|too small|red flag|not yet worth|'
-                    r'is noise|suspiciously high|what.s wrong|red flags')
+                    r'is noise|suspiciously high|what.s wrong|red flags|'
+                    r'standard error')
 
 
 def debunked(text, m, window=260):
@@ -54,8 +57,22 @@ HEADING_CASE = re.compile(r'<h[2-4][^>]*>([^<]*(?:Real[- ]World Example|Real Exa
 
 
 def overclaiming_headings(html):
-    return sum(1 for m in HEADING_CASE.finditer(html)
-               if re.search(r'(?i)composite example', html[m.end():m.end() + 1400]))
+    """A "Real Example" heading whose OWN section turns out to be a composite.
+
+    The window has to stop at the next heading. Lesson 78 opens a real, dated
+    section (2008) and then starts a separately headed composite case study a
+    few hundred characters later; without the cut, the second section's label
+    convicts the first section's heading.
+    """
+    n = 0
+    for m in HEADING_CASE.finditer(html):
+        sect = html[m.end():m.end() + 1400]
+        nxt = re.search(r'<h[2-4][^>]*>', sect)
+        if nxt:
+            sect = sect[:nxt.start()]
+        if re.search(r'(?i)composite example', sect):
+            n += 1
+    return n
 # A "case study" of a real, dated market episode (2020 COVID QE, the 2022 QT
 # bear) needs no composite label -- it happened. What needs one is an invented
 # PERSON: a first name carrying a possessive or a parenthetical, next to a
