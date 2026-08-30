@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17835897996"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-440EJBMYST');
+  gtag('config', 'AW-17835897996');
+</script>
+  <link rel="manifest" href="/education/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/education/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/education/assets/icons/icon-180x180.png">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover"/>
+  <meta name="robots" content="index,follow"/>
+  <!-- AGGRESSIVE CACHE PREVENTION: Forces fresh load every time -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>backtesting والواقع: ذلك التوقّع المثالي يكذب عليك — Signal Pilot Education</title>
+  <meta name="description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta name="sp-level" content="Intermediate"><meta name="sp-order" content="32">
+  <meta name="theme-color" content="#05070d">
+  <link rel="canonical" href="https://www.signalpilot.io/ar/education/curriculum/intermediate/35-backtesting-reality.html">
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.signalpilot.io/education/curriculum/intermediate/35-backtesting-reality.html">
+  <meta property="og:title" content="Backtesting Reality: That Perfect Expectancy Is Lying to You — Signal Pilot Education">
+  <meta property="og:description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Signal Pilot Education">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.signalpilot.io/education/curriculum/intermediate/35-backtesting-reality.html">
+  <meta name="twitter:title" content="Backtesting Reality: That Perfect Expectancy Is Lying to You — Signal Pilot Education">
+  <meta name="twitter:description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
+  <link rel="prev" href="https://www.signalpilot.io/education/curriculum/intermediate/34-portfolio-construction.html"/>
+  <link rel="next" href="https://www.signalpilot.io/education/curriculum/intermediate/36-advanced-risk-management.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gugi&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <!-- SignalPilot Theme System -->
+  <link rel="stylesheet" href="/education/assets/signalpilot-theme.css">
+  <link rel="stylesheet" href="/education/assets/edu.css">
+  <link rel="stylesheet" href="/education/assets/chatbot.css">
+  <link rel="stylesheet" href="/education/assets/lang-switcher.css">
+  <link rel="stylesheet" href="/education/assets/notes.css">
+  <link rel="stylesheet" href="/education/assets/auth-ui.css">
+  <link rel="stylesheet" href="/education/assets/trial-cta.css">
+  <link rel="stylesheet" href="/education/assets/blog-links.css">
+  <link rel="stylesheet" href="/education/assets/discussions.css">
+  <!-- Logger must load first, before other scripts that use it -->
+  <script src="/education/assets/logger.js"></script>
+  <script src="/education/assets/dev-utils.js" defer></script>
+<script src="/education/assets/structured-data.js" defer></script>
+<script src="/education/assets/lazy-load.js" defer></script>
+<script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
+  <style>
+    /* Mobile-friendly code blocks and tables - prevent horizontal scroll */
+    @media (max-width: 768px) {
+      .prose pre {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        white-space: pre;
+        max-width: 100%;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        padding: 0.75rem;
+      }
+      .prose pre code {
+        white-space: pre;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+      /* Tabs content code blocks */
+      .tab-panel pre {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        white-space: pre;
+        max-width: 100%;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        padding: 0.75rem !important;
+      }
+      .tab-panel pre code {
+        white-space: pre;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+      .prose table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+        font-size: 0.8rem;
+      }
+      .prose table th,
+      .prose table td {
+        padding: 0.5rem !important;
+        min-width: 80px;
+      }
+    }
+  </style>
+  <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="de" href="https://www.signalpilot.io/de/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="fr" href="https://www.signalpilot.io/fr/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="it" href="https://www.signalpilot.io/it/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="pt" href="https://www.signalpilot.io/pt/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="nl" href="https://www.signalpilot.io/nl/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="ru" href="https://www.signalpilot.io/ru/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="ja" href="https://www.signalpilot.io/ja/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="tr" href="https://www.signalpilot.io/tr/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="hu" href="https://www.signalpilot.io/hu/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="ar" href="https://www.signalpilot.io/ar/education/curriculum/intermediate/35-backtesting-reality.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/curriculum/intermediate/35-backtesting-reality.html">
+</head>
+<body class="table-accordions-mobile">
+  <div class="bg-stars" aria-hidden="true"></div>
+  <canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
+  <div class="bg-aurora" aria-hidden="true"></div>
+
+<header class="sp-header">
+  <div class="wrap">
+    <a href="https://www.signalpilot.io" class="brand">
+      <span>Signal Pilot</span>
+    </a>
+    <nav id="mainnav" aria-label="المحتوى الرئيسي"><ul>
+      <li><a href="/education/">التعليم</a></li>
+      <li><a href="/education/search.html">بحث</a></li>
+      <li><a href="/education/my-library.html">مكتبتي</a></li>
+      <li><a href="https://www.signalpilot.io/blog" target="_blank" rel="noopener">المدونة</a></li>
+    </ul></nav>
+    <div class="header-ctls">
+      <div id="google_translate_element"></div><button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="تبديل المظهر">
+        <span id="theme-icon">☽</span>
+      </button><button id="menuToggle" class="menu-toggle" aria-expanded="false"><span class="menu-toggle-text">القائمة </span>☰</button></div>
+  </div>
+</header>
+
+<article class="article">
+  <header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="مسار التنقّل">
+        <a href="/education/">الرئيسية</a> › <a href="/education/intermediate.html">المنهج المتوسط</a> › <span>واقع backtesting</span>
+      </nav>
+      <span class="badge">🟡 متوسط • الدرس 35 من 86</span>
+      <h1 class="headline xl">backtesting والواقع: ذلك التوقّع المثالي يكذب عليك</h1>
+      <div class="meta">16 دقيقة قراءة • التحقّق من الاستراتيجية<span class="view-count" data-view-count style="display:none"> • <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> <span data-view-num></span></span></div>
+
+      <!-- Author Byline -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(118,221,255,0.2); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-2);">
+        <div>
+          <div style="font-weight: 600; color: var(--text-1);">Signal Pilot</div>
+          <div>تعليم تداول احترافي</div>
+        </div>
+      </div>
+
+      <!-- Article Progress Indicator -->
+      <div class="article-progress" style="--progress:0%">
+        <div class="progress-circle"><span>0%</span></div>
+        <div class="progress-text">
+          <strong>أنت تتقدّم!</strong>
+          <div style="font-size:.85rem;color:var(--muted)">واصل القراءة لإكمال هذا الدرس</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap article-grid">
+    <div class="prose">
+      <p><b>الـbacktest عندك: توقّع 8R. عامل ربح 3.5. 50,000 $ أرباحًا على حساب بـ10,000 $.</b></p>
+
+      <p>تنتقل إلى التداول الحيّ. الأسبوع الأول: توقّع -2R. عامل ربح 0.4. الحساب أدنى بنسبة 12 %.</p>
+
+      <p>ماذا حدث؟ الـbacktest كذب عليك.</p>
+
+      <div class="callout-warning">
+        <h4>🚨 بصراحة</h4>
+        <p>معظم اختبارات backtest خيال محض. تفترض تنفيذًا مثاليًا، وslippage صفرًا، وانعدام الفروق السعرية، ومداخل سحرية لا وجود لها في السوق الحيّ.</p>
+        <p>إذا بدت نتيجة الـbacktest أجمل من أن تكون حقيقية، فهي كذلك. أنت واءمت الضجيج لا الإشارة.</p>
+      </div>
+
+      <p><strong>في هذا الدرس ستتعلّم:</strong></p>
+      <ul>
+        <li>لماذا قد يكون الـbacktest صحيحًا حسابيًا ومع ذلك يصف استراتيجية لا يمكن تداولها</li>
+        <li>الخطايا الأربع المميتة: الإفراط في المواءمة، والنظر إلى المستقبل، والتكاليف غير الواقعية، وانحياز الناجين</li>
+        <li>كيف تنمذج الـslippage والفروق السعرية بما يعكس الواقع فعلًا</li>
+        <li>داخل العيّنة مقابل خارج العيّنة (التحقّق الوحيد الذي له معنى)</li>
+      </ul>
+
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; المتطلبات المسبقة</h4>
+        <p>يبني هذا الدرس على مفاهيم من:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/33-volume-oracle-regimes.html" style="color:#00d4aa;text-decoration:underline">الدرس 33: Volume Oracle</a> &mdash; إتقان Signal Pilot</li>
+            <li><a href="/education/curriculum/intermediate/34-portfolio-construction.html" style="color:#00d4aa;text-decoration:underline">الدرس 34: بناء المحفظة</a> &mdash; إتقان Signal Pilot</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; إذا أنهيت هذه الدروس فأنت جاهز. وإن لم تكن، فابدأ بالدروس التأسيسية أولاً.</p>
+      </div>
+
+      <div class="section-break"><span>الجزء 1: الطرق الأربع التي يكذب بها الـbacktest</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          للتعمّق: لماذا لا تساوي نتائج الـbacktesting شيئًا (وماذا تفعل بدلًا منها) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">لماذا ستفشل استراتيجيتك المثالية في الحيّ</h2>
+
+      <p>لنبدأ بالحقيقة المزعجة: إن كنت قد حسّنت استراتيجية لتنطبق على بيانات الماضي، فأنت لم تجد أفضلية. وجدت ضجيجًا.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">المشكلة 1: الإفراط في المواءمة</button>
+          <button>المشكلة 2: النظر إلى المستقبل</button>
+          <button>المشكلة 3: أوهام التنفيذ</button>
+          <button>المشكلة 4: انحياز الناجين</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">مواءمة المنحنى مع ضجيج عشوائي</h3>
+            <p><strong>ما هي:</strong> تعديل الوسائط إلى أن يبدو الـbacktest مثاليًا</p>
+            <p><strong>مثال:</strong></p>
+            <ul>
+              <li>تجرّب 100 فترة مختلفة لـEMA (10، 11، 12… 110)</li>
+              <li>تعطي EMA(47) توقّعًا قدره 4.2R في الـbacktest</li>
+              <li>تظن أنك عثرت على «الرقم السحري»</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> لم تكن EMA(47) سوى مصادفة انطبقت على تلك البيانات بالذات. وفي الاختبار الأمامي؟ توقّع -0.8R. تعلّمت الضجيج لا الإشارة.</p>
+            <p><strong>الأفضل:</strong> احصر التحسين. استخدم وسائط قياسية. اختبر على بيانات لم ترها.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">استخدام بيانات المستقبل (مستحيل في التداول الحيّ)</h3>
+            <p><strong>ما هي:</strong> كود «يختلس النظر» إلى الشموع المقبلة ليقرّر الآن</p>
+            <p><strong>مثال:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # يستخدم الشموع الخمس القادمة
+    enter_long()</code></pre>
+            <p><strong>المشكلة:</strong> في الـbacktesting تكون بيانات المستقبل بين يديك. أما في التداول الحيّ فلا.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> هذا الكود لا يمكن أن يُنفَّذ في الحيّ أصلًا. الـbacktest عندك يختبر استراتيجية لا وجود لها.</p>
+            <p><strong>الأفضل:</strong> لا تستخدم إلا البيانات المتاحة لحظة اتخاذ القرار.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">افتراض تنفيذ مثالي عند أسعار مثالية</h3>
+<p><strong>افتراض الـbacktest:</strong> «أشتري عند 100.00 $ بالضبط»</p>
+            <p><strong>الواقع:</strong> يُنفَّذ الأمر السوقي عند 100.12 $ (الفارق + الـslippage)</p>
+            <p><strong>الأثر على 100 صفقة:</strong></p>
+            <ul>
+              <li>ربح الـbacktest: 5,000 $</li>
+              <li>تكلفة الفارق (0.10 $ للصفقة): -1,000 $</li>
+              <li>الـslippage (0.05 $ للصفقة): -500 $</li>
+              <li>العمولات (2 $ للصفقة): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> الربح الحقيقي = 3,300 $ (أقل بنسبة 34 % من الـbacktest)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">الاختبار على الناجين وحدهم</h3>
+            <p><strong>ما هي:</strong> إجراء backtesting على أسهم S&P 500 الحالية فقط</p>
+            <p><strong>المشكلة:</strong> المؤشر ليس الشركات الخمسمئة نفسها التي كانت فيه قبل عشر سنوات. تغادره أسماء باستمرار — أكثرها بالاستحواذ أو بخروجها من نطاق الحجم، وبعضها بذهابه إلى الصفر — والتي ذهبت إلى الصفر هي بالضبط تلك التي كانت قاعدة العودة إلى المتوسط ستظل تشتريها</p>
+            <p><strong>مثال:</strong></p>
+            <ul>
+              <li>backtest على قائمة S&P 500 لعام 2024: توقّع 1.8R، وعامل ربح 2.1</li>
+              <li>لكنك عبر تلك الفترة كنت ستكون شاريًا لـHertz (أفلست 2020) ولـSVB Financial (انهارت 2023) ولكل اسم آخر ذهب إلى الصفر.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>الواقع:</strong> توقّعك يستبعد الخسائر الكارثية الناتجة عن الشطب من الإدراج. التوقّع الحقيقي: -0.2R (نظام خاسر).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 لحظة الإدراك</h4>
+        <p>الـbacktest ليس الواقع. إنه محاكاة. وإذا احتوت محاكاتك على افتراضات مستحيلة، فستكون نتائجك في الحيّ مستحيلة بالقدر نفسه.</p>
+      </div>
+
+      <div class="section-break"><span>الجزء 2: نمذجة تكاليف واقعية</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">التكاليف الخفية التي تقتل الاستراتيجيات</h2>
+
+      <p>هذا ما تتجاهله معظم اختبارات backtest. وكم يكلّفك ذلك يتوقّف على أداتك وحجمك ومدة احتفاظك، ولذلك فالجواب الأمين الوحيد هو الذي تحسبه أدناه من أرقامك أنت:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">الخطوة 1: نمذج الفارق بين العرض والطلب</summary>
+          <div class="accordion-content">
+            <p><strong>ما هي:</strong> الفرق بين سعر الشراء وسعر البيع</p>
+            <p><strong>مثال:</strong></p>
+            <ul>
+              <li>SPY طلب: 450.00 $ / عرض: 450.01 $ ← الفارق = 0.01 $</li>
+              <li>تشتري: تدفع 450.01 $ (نصف الفارق = 0.005 $)</li>
+              <li>تبيع: تحصل على 450.00 $ (نصف الفارق = 0.005 $)</li>
+            </ul>
+            <p><strong>التكلفة لكل دورة كاملة:</strong> $0.01</p>
+            <p><strong>لألف سهم:</strong> 0.01 $ × 1,000 = 10 $ للصفقة</p>
+            <p><strong>100 صفقة:</strong> 1,000 $ تكاليف فارق</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">الخطوة 2: نمذج الـslippage</summary>
+          <div class="accordion-content">
+            <p><strong>ما هي:</strong> الفرق بين السعر المقصود والتنفيذ الفعلي</p>
+            <p><strong>slippage واقعي بحسب الظروف:</strong></p>
+            <ul>
+              <li><strong>سيولة عادية:</strong> 0.01-0.02%</li>
+              <li><strong>أسواق متقلّبة:</strong> 0.05-0.10%</li>
+              <li><strong>سيولة ضحلة:</strong> 0.10-0.30%</li>
+              <li><strong>مركز كبير الحجم:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>افتراض متحفّظ:</strong> 0.05 % لكل صفقة</p>
+            <p>مركز بـ10,000 $ × 0.05 % = 5 $ slippage لكل جهة = 10 $ للدورة الكاملة</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">الخطوة 3: نمذج العمولات</summary>
+          <div class="accordion-content">
+            <p><strong>مثال: Interactive Brokers</strong></p>
+            <ul>
+              <li>0.005 $ للسهم، بحدّ أدنى 1 $</li>
+              <li>200 سهم × 0.005 $ = 1 $ لكل جهة</li>
+              <li>الدورة الكاملة = 2 $</li>
+            </ul>
+            <p><strong>100 صفقة:</strong> 200 $ عمولات</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">الخطوة 4: إجمالي التكلفة الواقعية</summary>
+          <div class="accordion-content">
+            <p><strong>لكل صفقة (دورة كاملة):</strong></p>
+            <ul>
+              <li>الفارق: 10 $</li>
+              <li>الـslippage: 10 $</li>
+              <li>العمولة: 2 $</li>
+            </ul>
+            <p><strong>الإجمالي: 22 $ للصفقة</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">إن كانت استراتيجيتك تدرّ 50 $ إجماليًا للصفقة ← 28 $ صافيًا (انخفاض 44 %!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">مثال على تصحيح الـbacktest</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>قبل التكاليف الواقعية وبعدها</h4>
+        <p><strong>الاستراتيجية: 100 صفقة، بمتوسط ربح 50 $ للصفقة</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>backtest (خيال):</strong></p>
+        <p>100 صفقة × 50 $ = 5,000 $ ربحًا</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>بعد التكاليف الواقعية:</strong></p>
+        <ul>
+          <li>الإجمالي: 5,000 $</li>
+          <li>الفارق: -1,000 $</li>
+          <li>الـslippage: -1,000 $</li>
+          <li>العمولات: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">صافي الربح: 2,800 $ (انخفاض 44 %)</p>
+      </div>
+
+<div class="example-block">
+        <h4>مثال مركّب: كيف تحوّل backtest «مثالي» بتوقّع 1.3R إلى ‏-0.45R في التداول الحقيقي</h4>
+
+        <p><strong>الخلفية:</strong> في مارس 2024 طوّر كريس (مثال مركّب) استراتيجية اختراقات بعد 6 أشهر من التحسين. بدت نتيجة الـbacktest مذهلة: توقّع 1.3R، وعامل ربح 4.9، ونسبة نجاح 67 %، مختبَرة على سنتين من بيانات SPY (2022-2023). في أبريل 2024 وُضع 50,000 $ في السوق. وبحلول يونيو 2024 كان الحساب خاسرًا 8,400 $ (-16.8 %). وإليك التشريح الكامل.</p>
+
+        <h5>الـbacktest «المثالي» (بيانات 2022-2023)</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">نتائج الـbacktest (يناير 2022 - ديسمبر 2023، سنتان)</caption>
+          <tr style="background:rgba(34,197,94,0.15);border-bottom:2px solid rgba(34,197,94,0.3)">
+            <th style="padding:0.75rem;text-align:left">المقياس</th>
+            <th style="padding:0.75rem;text-align:right">القيمة</th>
+            <th style="padding:0.75rem;text-align:left">ما كان يفكّر فيه كريس</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">إجمالي الصفقات</td>
+            <td style="padding:0.75rem;text-align:right">156</td>
+            <td style="padding:0.75rem">عيّنة جيدة الحجم</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">نسبة الصفقات الرابحة</td>
+            <td style="padding:0.75rem;text-align:right">67.3% (105W / 51L)</td>
+            <td style="padding:0.75rem">«لا يُصدّق! أعلى بكثير من المتوسط.»</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">متوسط الربح / متوسط الخسارة</td>
+            <td style="padding:0.75rem;text-align:right">+2.4R / -1R</td>
+            <td style="padding:0.75rem">«R:R ممتاز، الرابحة تعادل 2.4 ضعف الخاسرة.»</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">عامل الربح</td>
+            <td style="padding:0.75rem;text-align:right">4.9</td>
+            <td style="padding:0.75rem">«رقم بمستوى المحترفين.»</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">القيمة المتوقعة</td>
+            <td style="padding:0.75rem;text-align:right">‎+1.3R‎ لكل صفقة</td>
+            <td style="padding:0.75rem">«أرض الكأس المقدّسة.»</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">أقصى drawdown</td>
+            <td style="padding:0.75rem;text-align:right">-8.2%</td>
+            <td style="padding:0.75rem">«drawdown ضئيل جدًا. آمن إلى أبعد حد.»</td>
+          </tr>
+          <tr style="background:rgba(34,197,94,0.2)">
+            <td style="padding:0.75rem">إجمالي العائد (سنتان، حساب اختبار بـ10,000 دولار، مخاطرة 2 % لكل صفقة)</td>
+            <td style="padding:0.75rem;text-align:right"><strong>+$40,600 (+406%)</strong></td>
+            <td style="padding:0.75rem"><strong>«هذه هي. سأترك عملي.»</strong></td>
+          </tr>
+        </table>
+        </div>
+
+        <p><strong>كيف كان كريس يحسّن:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>جرّب 50 فترة مختلفة لـEMA (ووجد أن EMA(34) «مثالية»)</li>
+          <li>جرّب 20 مضاعفًا لـATR لأوامر الإيقاف (ووجد أن 1.47× ATR «الأمثل»)</li>
+          <li>جرّب 15 مستوى لجني الأرباح (ووجد أن 2.8R «الأفضل»)</li>
+          <li>الاستراتيجية النهائية: تقاطع EMA(34) + إيقاف عند 1.47× ATR + هدف 2.8R</li>
+          <li><strong>مجموع التوليفات المجرَّبة:</strong> 50 × 20 × 15 = 15,000 صيغة</li>
+        </ul>
+
+        <p><strong>ما لم يُدخله كريس في الـbacktest:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>الـslippage (افترض تنفيذًا مثاليًا عند الأسعار المضبوطة)</li>
+          <li>الفارق بين العرض والطلب (افترض فارقًا صفريًا)</li>
+          <li>العمولات (نسي أن ينمذجها)</li>
+          <li>رفض الأوامر (افترض تنفيذًا بنسبة 100 %)</li>
+          <li>الاختبار خارج العيّنة (لم يجرّب قط على بيانات لم يرها)</li>
+        </ul>
+
+        <h5>واقع التداول الحيّ (أبريل-يونيو 2024، 10 أسابيع)</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">نتائج التداول الحيّ (10 أسابيع، حساب 50,000 $)</caption>
+          <tr style="background:rgba(255,82,82,0.15);border-bottom:2px solid rgba(255,82,82,0.3)">
+            <th style="padding:0.75rem;text-align:left">المقياس</th>
+            <th style="padding:0.75rem;text-align:right">backtest</th>
+            <th style="padding:0.75rem;text-align:right">الواقع في الحيّ</th>
+            <th style="padding:0.75rem;text-align:right">الفارق</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">نسبة الصفقات الرابحة</td>
+            <td style="padding:0.75rem;text-align:right">67.3%</td>
+            <td style="padding:0.75rem;text-align:right">51.4% (19W / 18L)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">أسوأ بمقدار 15.9 نقطة</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">متوسط الربح</td>
+            <td style="padding:0.75rem;text-align:right">+2.4R (+$1,200)</td>
+            <td style="padding:0.75rem;text-align:right">+1.8R (+$900)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">أصغر بنسبة 25 %</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">متوسط الخسارة</td>
+            <td style="padding:0.75rem;text-align:right">-1R (-$500)</td>
+            <td style="padding:0.75rem;text-align:right">-1.3R (-$650)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">أكبر بنسبة 30 %</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">عامل الربح</td>
+            <td style="padding:0.75rem;text-align:right">4.9</td>
+            <td style="padding:0.75rem;text-align:right">1.46</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">انهيار بنسبة 70 %</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">القيمة المتوقعة</td>
+            <td style="padding:0.75rem;text-align:right">+1.3R</td>
+            <td style="padding:0.75rem;text-align:right">-0.45R بعد التكاليف</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-1.75R بالسالب</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">أقصى drawdown</td>
+            <td style="padding:0.75rem;text-align:right">-8.2%</td>
+            <td style="padding:0.75rem;text-align:right">-21.4%</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">أسوأ بـ2.6 مرة</span></td>
+          </tr>
+          <tr style="background:rgba(255,82,82,0.25)">
+            <td style="padding:0.75rem">العائد الإجمالي (10 أسابيع)</td>
+            <td style="padding:0.75rem;text-align:right">‎+9,600‎ $ متوقّعة</td>
+            <td style="padding:0.75rem;text-align:right"><strong>-$8,400 (-16.8%)</strong></td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252;font-weight:bold">فجوة قدرها 18,000 $</span></td>
+          </tr>
+        </table>
+        </div>
+
+        <h5>الحساب الكامل للتكاليف: أين ذهبت الـ18,000 $</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">تشريح فجوة الأداء (37 صفقة، 10 أسابيع)</caption>
+          <tr style="background:rgba(118,221,255,0.15);border-bottom:2px solid rgba(118,221,255,0.3)">
+            <th style="padding:0.75rem;text-align:left">بند التكلفة</th>
+            <th style="padding:0.75rem;text-align:left">الوصف</th>
+            <th style="padding:0.75rem;text-align:right">الأثر</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>1. الإفراط في المواءمة (مواءمة المنحنى)</strong></td>
+            <td style="padding:0.75rem">عملت EMA(34) + 1.47× ATR بإتقان على بيانات 2022-2023، لكنها كانت مُحسَّنة على ضجيج الماضي. وظروف سوق 2024 = ضجيج آخر.</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$6,200</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>2. الـslippage (لم يُنمذَج)</strong></td>
+            <td style="padding:0.75rem">slippage بمتوسط 0.08 % لكل صفقة × 25,000 $ متوسط المركز × 37 صفقة ذهابًا وإيابًا = 1,480 $ تكاليف slippage</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$1,480</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>3. الفارق بين العرض والطلب</strong></td>
+            <td style="padding:0.75rem">فارق SPY 0.01 $ × 500 سهم في المتوسط × 37 صفقة = 185 $. الخيارات (استُخدمت للرفع) الفارق = 0.03 $ للسهم × 100 سهم لكل عقد × 20 عقدًا × 37 صفقة = 2,220 $ إجمالي تكلفة الفارق</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$2,405</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>4. العمولات</strong></td>
+            <td style="padding:0.75rem">الخيارات: 0.65 $ لكل عقد × 20 عقدًا × 37 صفقة × 2 (ذهابًا وإيابًا) = 962 $</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$962</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>5. رفض الأوامر</strong></td>
+            <td style="padding:0.75rem">في 8 صفقات لم تُنفَّذ الأوامر المحددة قط (فاتته 5 رابحة و3 خاسرة). صافي تكلفة الفرصة: 5 رابحة فائتة بـ‎+1.8R‎ (-9R) ناقص 3 خاسرة تفاداها بـ-1.3R (‎+3.9R‎) = -5.1R = 2,550 $</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$2,550</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>6. النظر إلى المستقبل</strong></td>
+            <td style="padding:0.75rem">كان كود الـbacktest يحسب الدخول بـclose[0] ثم يدخل عند إغلاق الشمعة نفسها (وهذا في الحيّ مستحيل). الدخول في الحيّ يكون عند افتتاح الشمعة التالية. دخول أسوأ بنسبة 0.3 % في المتوسط = 2,775 $ تدهورًا</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$2,775</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>7. تأخّر التنفيذ</strong></td>
+            <td style="padding:0.75rem">زمن استجابة المنصّة + وقت مراجعة الأمر = تأخّر من 2 إلى 8 ثوانٍ. الاختراقات السريعة كانت تتحرّك 0.15 % في المتوسط قبل التنفيذ = 1,387 $ من الـslippage بسبب التأخّر</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-$1,387</span></td>
+          </tr>
+          <tr style="background:rgba(255,82,82,0.2)">
+            <td colspan="2" style="padding:0.75rem;text-align:right;font-weight:bold">إجمالي التدهور مقارنةً بالـbacktest:</td>
+            <td style="padding:0.75rem;text-align:right;font-weight:bold"><span style="color:#ff5252;font-size:1.1rem">-$17,759</span></td>
+          </tr>
+        </table>
+        </div>
+
+        <p><strong>الحساب:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>الربح الذي توقّعه الـbacktest (10 أسابيع): ‎+9,600‎ $</li>
+          <li>ناقص تكاليف التدهور: -17,759 $</li>
+          <li>النتيجة المتوقّعة في الحيّ: -8,159 $</li>
+          <li>النتيجة الفعلية في الحيّ: -8,400 $ — الحساب يقترب مما جرى فعلًا في حدود 250 $</li>
+        </ul>
+
+        <h5>ما الذي كان ينبغي فعله: التحقّق كما يجب</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <tr style="background:rgba(34,197,94,0.15);border-bottom:2px solid rgba(34,197,94,0.3)">
+            <th style="padding:0.75rem;text-align:left">الخطوة</th>
+            <th style="padding:0.75rem;text-align:left">ما فعله كريس (خطأ)</th>
+            <th style="padding:0.75rem;text-align:left">ما ينبغي فعله (صواب)</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>1. تقسيم البيانات</strong></td>
+            <td style="padding:0.75rem">استخدم كل بيانات 2022-2023 في التحسين</td>
+            <td style="padding:0.75rem">حسّن على 2022 واحتفظ بـ2023 جانبًا لاختبار خارج العيّنة</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>2. التحسين</strong></td>
+            <td style="padding:0.75rem">جرّب 15,000 توليفة من الوسائط</td>
+            <td style="padding:0.75rem">استخدم وسائط قياسية (EMA 20/50، إيقاف عند 2× ATR). واحصر التجريب في أقل من 10 صيغ</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>3. نمذجة التكاليف</strong></td>
+            <td style="padding:0.75rem">افترض تكاليف صفرية</td>
+            <td style="padding:0.75rem">انمذج 0.10 % slippage + 0.01 $ فارقًا + 2 $ عمولة لكل صفقة = -30 $ لكل صفقة على الأقل</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>4. التحقّق من النظر إلى المستقبل</strong></td>
+            <td style="padding:0.75rem">استخدم إغلاق الشمعة نفسها للإشارة وللتنفيذ معًا</td>
+            <td style="padding:0.75rem">الإشارة على close[0] والتنفيذ على open[1] (الشمعة التالية). توقيت واقعي.</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>5. الاختبار خارج العيّنة</strong></td>
+            <td style="padding:0.75rem">لم يجرّب قط على بيانات لم يرها</td>
+            <td style="padding:0.75rem">اختبر على بيانات 2023 (من دون مساس). إن تدهور الأداء بأكثر من 30 % فالاستراتيجية مفرطة المواءمة</td>
+          </tr>
+          <tr>
+            <td style="padding:0.75rem"><strong>6. Walk-forward</strong></td>
+            <td style="padding:0.75rem">فترة backtest واحدة لا غير</td>
+            <td style="padding:0.75rem">نوافذ تحسين مدتها 6 أشهر، ثم اختبار على الأشهر الثلاثة التالية. كرّر بالتقدّم. وراقب الاتساق.</td>
+          </tr>
+        </table>
+        </div>
+
+        <h5>الاختبار خارج العيّنة الذي كان على كريس إجراؤه</h5>
+
+        <p><strong>الطريقة الصحيحة:</strong></p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>فترة داخل العيّنة:</strong> حسّن على بيانات 2022 فقط (لا تمسّ 2023)</li>
+          <li><strong>جد الوسائط:</strong> EMA(34) + 1.47× ATR (النتيجة نفسها، لكن باستخدام 2022 وحدها)</li>
+          <li><strong>ثبّت الوسائط:</strong> لا مزيد من التغييرات. الوسائط مجمَّدة.</li>
+          <li><strong>الاختبار خارج العيّنة:</strong> شغّل الوسائط نفسها تمامًا على بيانات 2023</li>
+          <li><strong>قارن النتائج:</strong> إذا نزل أداء 2023 دون 70 % من أداء 2022 فالاستراتيجية مفرطة المواءمة</li>
+        </ol><p><strong>ماذا كان سيحدث:</strong></p>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <tr style="background:rgba(255,193,7,0.15);border-bottom:2px solid rgba(255,193,7,0.3)">
+            <th style="padding:0.75rem;text-align:left">الفترة</th>
+            <th style="padding:0.75rem;text-align:right">القيمة المتوقعة</th>
+            <th style="padding:0.75rem;text-align:right">عامل الربح</th>
+            <th style="padding:0.75rem;text-align:left">الحكم</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,193,7,0.1)">
+            <td style="padding:0.75rem">2022 (داخل العيّنة)</td>
+            <td style="padding:0.75rem;text-align:right">+1.4R</td>
+            <td style="padding:0.75rem;text-align:right">3.1</td>
+            <td style="padding:0.75rem">أداء مُحسَّن</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,193,7,0.1)">
+            <td style="padding:0.75rem">2023 (خارج العيّنة)</td>
+            <td style="padding:0.75rem;text-align:right">+0.4R</td>
+            <td style="padding:0.75rem;text-align:right">1.4</td>
+            <td style="padding:0.75rem"><span style="color:#fbbf24">⚠️ تدهور بنسبة 71 %</span></td>
+          </tr>
+          <tr style="background:rgba(255,193,7,0.2)">
+            <td colspan="4" style="padding:0.75rem;font-weight:bold">
+              <strong>الخلاصة:</strong> الاستراتيجية مفرطة المواءمة بشدّة. توقّع 2023 يساوي 29 % من توقّع 2022. ومع تكاليف واقعية (-30 $ للصفقة = -0.15R) يبقى صافي التوقّع عند ‎+0.25R‎ (بالكاد فوق الصفر). <span style="color:#ff5252">لا تشغّلها.</span>
+            </td>
+          </tr>
+        </table>
+        </div>
+
+        <p><b>الدرس: كان backtest كريس خيالًا. تجريب 15,000 توليفة من الوسائط يضمن أن تجد واحدة تنطبق على ضجيج الماضي انطباقًا تامًا. ذلك التوقّع «المثالي» البالغ 1.3R لم يكن سوى نفاية مواءَمة على المنحنى. واختبار خارج العيّنة كان سيكشف ذلك قبل خسارة 8,400 $. الـbacktesting ليس بحثًا عن أفضل أداء في الماضي، بل بحثًا عمّا سينجح فيما بعد. وهذا يقتضي بيانات لم تُرَ من قبل، وتكاليف واقعية، وصفرًا من النظر إلى المستقبل.</b></p>
+      </div>
+
+      <div class="section-break"><span>الجزء 3: داخل العيّنة مقابل خارج العيّنة</span></div>
+<h2 id="the-only-validation-that-matters">التحقّق الوحيد الذي له معنى</h2>
+
+      <p>هكذا يتحقّق المحترفون من استراتيجية:</p>
+
+      <p><strong>قسّم بياناتك إلى فترتين.</strong></p>
+
+      <ol>
+        <li><strong>داخل العيّنة (60-70 %):</strong> هنا تبني استراتيجيتك وتحسّنها</li>
+        <li><strong>خارج العيّنة (30-40 %):</strong> تحقّق على بيانات لم تُرَ من قبل</li>
+      </ol>
+
+      <div class="callout-tip">
+        <h4>🎯 مثال: 6 سنوات من البيانات (2018-2024)</h4>
+        <p><strong>داخل العيّنة:</strong> 2018-2022 (حسّن هنا)</p>
+        <ul>
+          <li>جرّب وسائط مختلفة</li>
+          <li>جد القواعد الأفضل أداءً</li>
+          <li>هذّب منطق الدخول والخروج</li>
+        </ul>
+        <p style="margin-top:1rem"><strong>خارج العيّنة:</strong> 2023-2024 (تحقّق هنا)</p>
+        <ul>
+          <li>شغّل الاستراتيجية من دون أي تغيير</li>
+          <li>قارن الأداء بأداء داخل العيّنة</li>
+          <li>إن كان متقاربًا ← ليست مفرطة المواءمة!</li>
+          <li>إن كان أسوأ بكثير ← مواءَمة على ضجيج داخل العيّنة</li>
+        </ul>
+      </div>
+<h3 id="red-flags-of-overfitting">العلامات الحمراء للإفراط في المواءمة</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(255,107,107,.12);border-radius:12px">
+        <h4>🚩 دلائل على أن استراتيجيتك مواءَمة على المنحنى</h4>
+        <ul>
+          <li><strong>شارب فوق 3.0:</strong> أجمل من أن يكون حقيقيًا</li>
+          <li><strong>توقّع أعلى من نحو ‎+0.5R‎ لكل صفقة:</strong> نادر إلى حدّ يستوجب تفسيرًا. وفوق ‎+1R‎ يكون أحد افتراضات التنفيذ خاطئًا على الأرجح — وbacktest كريس «الكأس المقدسة» أعلاه كان ‎+1.3R‎</li>
+          <li><strong>20-30 صفقة فقط:</strong> عيّنة أصغر من اللازم (بلا دلالة إحصائية)</li>
+          <li><strong>منحنى رأس مال مثالي:</strong> خط أملس بلا drawdown (مستحيل)</li>
+          <li><strong>مُختبَرة على أصل واحد فقط:</strong> على الأرجح مواءَمة على تلك الحالة بعينها</li>
+          <li><strong>10 وسائط مُحسَّنة أو أكثر:</strong> واءمت الضجيج لا الإشارة</li>
+        </ul>
+      </div>
+
+      <div class="section-break"><span>الجزء 4: تحليل walk-forward</span></div>
+<h2 id="the-professional-validation-method">طريقة التحقّق الاحترافية</h2>
+
+      <p>داخل العيّنة مقابل خارجها جيد. وwalk-forward أفضل.</p>
+
+      <p><strong>كيف يعمل:</strong></p>
+
+      <div style="margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg, rgba(91,138,255,.12), rgba(118,221,255,.08));border-radius:16px">
+        <h4 style="margin-top:0">📊 إطار walk-forward</h4>
+        <p><strong>الفترة 1:</strong> درّب على 2018-2019 ← اختبر على 2020</p>
+        <p><strong>الفترة 2:</strong> درّب على 2019-2020 ← اختبر على 2021</p>
+        <p><strong>الفترة 3:</strong> درّب على 2020-2021 ← اختبر على 2022</p>
+        <p><strong>الفترة 4:</strong> درّب على 2021-2022 ← اختبر على 2023</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>إن كان متسقًا عبر كل الفترات:</strong> استراتيجية متينة</p>
+        <p><strong>إن تدهور الأداء:</strong> مفرطة المواءمة أو مرهونة بحالة السوق</p>
+      </div>
+
+      <div class="key-takeaway">
+        <h4>🎓 أهم الخلاصات</h4>
+        <ul>
+          <li><strong>انمذج تكاليف واقعية:</strong> الفارق والـslippage والعمولات (انخفاض الأرباح 20-40 %)</li>
+          <li><strong>تجنّب الإفراط في المواءمة:</strong> احصر الوسائط، واختبر في أسواق متعددة</li>
+          <li><strong>داخل العيّنة مقابل خارج العيّنة:</strong> ابنِ على 60-70 %، وتحقّق على 30-40 %</li>
+          <li><strong>اختبار walk-forward:</strong> تأكّد من الاتساق عبر الزمن</li>
+          <li><strong>العلامات الحمراء:</strong> شارب فوق 3.0، توقّع فوق 5R، أقل من 30 صفقة</li>
+          <li><strong>اختبر أماميًا قبل الحيّ:</strong> 3-6 أشهر على الورق كحدّ أدنى</li>
+        </ul>
+      </div>
+<div class="section-break"><span>تمرين تطبيقي</span></div>
+
+      <div class="callout-key">
+        <h4>🎯 تمرين على التحقّق من الـbacktest</h4>
+        <p><strong>تمرين: تحقّق من استراتيجيتك بكاشف العلامات الحمراء</strong></p>
+        <p>خذ استراتيجيتك الحالية (أو واحدة تفكّر فيها) ومرّرها عبر التحقّق:</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>أجرِ backtest على 60 % من بياناتك (داخل العيّنة). سجّل: عدد الصفقات، والتوقّع، وشارب، وأقصى انخفاض</li>
+          <li>دوّن الوسائط المستخدمة (متوسطات EMA، والعتبات، وغيرها). هل حسّنتها بتجريب عدة قيم؟</li>
+          <li>اختبر على الـ40 % المتبقية (خارج العيّنة). وقارن بنتيجة داخل العيّنة.</li>
+          <li>قيّم الاستراتيجية على الفحوص الثمانية أدناه، من 0 إلى 5 لكل فحص (40 نقطة كحد أقصى)</li>
+          <li>اجمع النقاط: 32 فأكثر = انتقل إلى التداول على الورق، 24-31 = راجع وأعد الاختبار، أقل من 24 = اطرحها جانبًا</li>
+          <li>إن حصلت على 32 فأكثر: تداول على الورق 30-60 صفقة قبل الانتقال إلى الحي</li>
+        </ol>
+
+        <p style="margin-top:1rem;font-weight:600">الفحوص الثمانية (0 = لم يُفعل إطلاقًا، 5 = فُعل كما ينبغي)</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>تقسيم البيانات.</strong> هل جُنّبت فترة حقيقية خارج العيّنة وتُركت دون مساس أثناء التطوير؟ صفر إن حسّنت على كل ما لديك.</li>
+          <li><strong>ضبط النفس في التحسين.</strong> كم تركيبة من المعاملات جرّبت؟ أقل من 10 تساوي 5؛ والآلاف تساوي صفرًا، مهما بدت النتيجة.</li>
+          <li><strong>نمذجة التكاليف.</strong> هل السبريد والانزلاق (slippage) والعمولة داخل منحنى رأس المال، وبقيم تستطيع الدفاع عنها أمام وسيط؟ تكاليف صفرية تساوي صفرًا.</li>
+          <li><strong>فحص النظر إلى المستقبل.</strong> هل أعدت قراءة منطق الدخول متسائلًا تحديدًا عمّا إذا كان كل مدخل موجودًا لحظة القرار؟ إشارة على هذه الشمعة وتنفيذ على التالية تساوي 5.</li>
+          <li><strong>النتيجة خارج العيّنة.</strong> كم تدهور الأداء على البيانات التي لم تُمَسّ؟ تدهور دون 30 % يساوي 5؛ وفوق 70 %، كما في حالة كريس، يساوي صفرًا.</li>
+          <li><strong>اتساق المشي إلى الأمام.</strong> هل حرّكت نافذة التحسين إلى الأمام واختبرت الفترة التالية، مرات عدة؟ فترة واحدة تساوي 1؛ وأربع فترات متسقة تساوي 5.</li>
+          <li><strong>حجم العيّنة.</strong> أقل من 30 صفقة تساوي صفرًا مهما بدت جيدة؛ و100 فأكثر تساوي 5.</li>
+          <li><strong>الاتساع.</strong> هل يصمد على أكثر من أداة، أو عبر أكثر من نظام سوقي؟ أداة واحدة في نظام واحد تساوي 1.</li>
+        </ol>
+        <p style="margin-top:1rem">مرّر استراتيجية كريس على هذا فتحصل على 2 من 40 — نقطة لحجم العيّنة ونقطة لأنها امتلكت فترة مشي إلى الأمام أصلًا. كانت هذه البطاقة ستكشفها في أصيل واحد، ومجانًا.</p>
+        <p style="margin-top:1rem"><strong>الهدف:</strong> اضبط مواءمة المنحنى والنظر إلى المستقبل والافتراضات غير الواقعية قبل أن تدمّر حسابك الحقيقي. من الأفضل أن تطرح استراتيجية سيئة أثناء الـbacktesting على أن تخسر مالًا حقيقيًا.</p>
+      </div>
+
+                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ خطوات سريعة للغد (اضغط للعرض)</summary>
+        <div style="margin-top:1rem">
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>أضف تكاليف واقعية إلى الـbacktest</strong> — احسب slippage بنسبة 0.03-0.05 % لكل صفقة إضافة إلى الفارق السعري الفعلي. إن انهارت النتائج فأفضليتك كانت زائفة.</li>
+            <li><strong>قسّم بياناتك 70/30</strong> — حسّن على 70 % من البيانات، وتحقّق على الـ30 % التي لم ترها قط. إن سقط اختبار خارج العيّنة فقد واءمت المنحنى.</li>
+            <li><strong>تداول على الورق 30 يومًا قبل الحيّ</strong> — إذا اختلفت نتائج الورق كثيرًا عن الـbacktest فثمّة خلل. لا تنتقل إلى الحيّ قبل أن تتطابقا.</li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="section-break"><span>اختبر فهمك</span></div>
+
+      <div class="quiz">
+<h4>🎮 تحقّق سريع</h4>
+
+        <div class="quiz-question">
+          <p><strong>س: تُجري backtest لاستراتيجية: توقّع 5.2R، ونسبة شارب 4.2، مختبَرة على 25 صفقة، باستخدام EMA(47) لأنها أعطت أفضل نتيجة بعد تجريب 100 فترة مختلفة. ما الخطأ هنا؟</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">أ) لا شيء — استراتيجية رائعة!</div>
+            <div class="quiz-option" data-correct="false">ب) التوقّع وحده مرتفع أكثر من اللازم</div>
+            <div class="quiz-option" data-correct="true">ج) كل شيء: العيّنة أصغر من اللازم، وشارب والتوقّع مرتفعان أكثر من اللازم، وEMA(47) مواءَمة على المنحنى</div>
+            <div class="quiz-option" data-correct="false">د) العيّنة وحدها أصغر من اللازم</div>
+          </div>
+          <div class="quiz-explanation">
+            <strong>إجابة صحيحة!</strong> ثلاث إشارات خطر كبيرة: (1) 25 صفقة فقط = بلا دلالة إحصائية، (2) شارب 4.2 = مرتفع على نحو مريب (على الأرجح مفرط التكييف)، (3) EMA(47) وُجدت باختبار 100 فترة = مكيّفة على الضجيج. المطلوب: 100 صفقة فأكثر، ومعاملات قياسية، ونسبة شارب لا تخجل من الدفاع عنها — فما فوق 2 استثنائي حتى لصناديق منهجية محترفة، وbacktest فردي يُظهر 4.2 إنما يصف افتراض تنفيذ لا أفضلية.
+          </div>
+        </div>
+
+        <div class="quiz-question" style="margin-top:2rem">
+          <p><strong>تُجري backtest لاستراتيجية عودة إلى المتوسط على SPY من 2010 إلى 2024. النتائج: توقّع 2.8R، ونسبة نجاح 68 %، و120,000 $ ربحًا. البيانات لا تتضمّن سوى مكوّنات S&P 500 الحالية (الأسهم الموجودة في المؤشر اليوم). تنتقل إلى الحيّ في 2025 فتفشل. ما الذي أخفق؟</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">أ) لا شيء — تغيّرت ظروف السوق في 2025، وهذا لم يكن متوقّعًا</div>
+            <div class="quiz-option" data-correct="false">ب) التوقّع مرتفع أكثر من اللازم — 2.8R غير واقعي لاستراتيجية عودة إلى المتوسط</div>
+            <div class="quiz-option" data-correct="false">ج) العيّنة أصغر من اللازم — تلزم بيانات لأكثر من 14 سنة</div>
+            <div class="quiz-option" data-correct="true">D) تحيّز الناجين — الـbacktest لا يضم إلا شركات كانت لا تزال في المؤشر عام 2024، فيغيب عنه كل اسم غادره بين 2010 و2024</div>
+          </div>
+          <div class="quiz-explanation">
+            <strong>إجابة صحيحة!</strong> الفخ الكلاسيكي لتحيّز الناجين. الاختبار على «مكوّنات S&P 500 الحالية» يعني أنك لم تختبر إلا الرابحين: أسهمًا صمدت 14 عامًا وبلغت مؤشر اليوم. أما المستبعد من الاختبار فهو كل شركة استُحوذ عليها أو خرجت من المؤشر أو ذهبت إلى الصفر خلال تلك الأعوام الأربعة عشر. والتي ذهبت إلى الصفر هي المهمة هنا، لأن قاعدة العودة إلى المتوسط تشتري الضعف: كانت ستشتريها طوال طريق الهبوط ولا تُدفع لها أبدًا. وكم يضخّم هذا backtest بعينه يتوقّف كليًا على مجموعة الأسهم وعلى القاعدة، ولذلك لا تُذكر أي نسبة؛ والمؤكد وحده هو الاتجاه، وهو لا يكون في صالحك أبدًا. الحل: استخدم بيانات نقطة-في-الزمن تضم كل الأسهم التي كانت موجودة في كل تاريخ، بما فيها التي شُطبت لاحقًا.
+          </div>
+        </div>
+
+        <div class="quiz-question" style="margin-top:2rem">
+          <p><strong>تُجري اختبار walk-forward لاستراتيجيتك: تدريب 2018-2020 واختبار على 2021 (نجح). تدريب 2018-2021 واختبار على 2022 (نجح). تدريب 2018-2022 واختبار على 2023 (نجح). ولم تنمذج لا الـslippage ولا العمولات. هل تتداول هذه الاستراتيجية في الحيّ؟</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="true">أ) لا — يجب أولًا إضافة تكاليف واقعية (0.2-0.4 % slippage إضافة إلى العمولات) وإعادة الاختبار. فإن بقيت رابحة، فنعم.</div>
+            <div class="quiz-option" data-correct="false">ب) نعم — اجتازت كل اختبارات walk-forward، فهي استراتيجية متينة</div>
+            <div class="quiz-option" data-correct="false">ج) نعم — يكفي التحقّق بـwalk-forward، والتكاليف لا تؤثّر كثيرًا</div>
+            <div class="quiz-option" data-correct="false">د) لا — يلزم 10 فترات walk-forward على الأقل للتحقّق</div>
+          </div>
+          <div class="quiz-explanation">
+            <strong>إجابة صحيحة!</strong> اختبارات المشي إلى الأمام تثبت المتانة (أن الاستراتيجية ليست مفرطة التكييف على فترة واحدة)، لكن يجب عليك نمذجة تكاليف واقعية قبل التداول الحي. الانزلاق (slippage) (0.1-0.2 % لكل جانب = 0.2-0.4 % ذهابًا وإيابًا) مع العمولات (2-5 دولارات للصفقة) يُقتطع من أعلى كل صفقة، ويُقتطع بوحدة R أيضًا: في صفقة تخاطر بـ500 دولار، 150 دولارًا من التكاليف تعني 0.3R ذهبت قبل أن يفعل السوق شيئًا. وbacktest عند ‎+0.5R‎ قد ينتهي قرب الصفر متى صار ذلك واقعًا. وحالة كريس أعلاه هي هذا الإخفاق بعينه — backtest عند ‎+1.3R‎ جاء حيًّا عند ‎−0.45R‎ حين صارت التكاليف حقيقية. أضف التكاليف أخيرًا (بعد المشي إلى الأمام)، ثم اسأل: هل ما زال التوقّع موجبًا بهامش تستطيع الدفاع عنه، وهل تستطيع أن تقول ما الذي ينتجه؟ أفضلية صغيرة قابلة للتفسير تنجو من التكاليف خير من أفضلية كبيرة لا تنجو.
+          </div>
+        </div>
+
+        <button class="btn btn-primary quiz-submit">عرض الإجابات</button>
+      </div>
+
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">في الـbacktesting، الكمال مدعاة للشك. والأفضلية تأتي من الواقعية. انمذج التكاليف، وتجنّب الإفراط في المواءمة، واختبر أماميًا — وإلا فستفشل في الحيّ.</p>
+
+      <h3 style="margin-bottom:1.5rem">دروس ذات صلة</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
+        <div class="card" style="padding:1rem">
+          <span class="badge">متوسط #37</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">إتقان مفكرة التداول</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">تابع أداءك في الحيّ وقارنه بنتائج الـbacktest.</p>
+          <a href="/education/curriculum/intermediate/37-trade-journal-mastery.html" class="btn btn-sm btn-ghost">اقرأ الدرس &larr;</a>
+        </div>
+        <div class="card" style="padding:1rem">
+          <span class="badge">مبتدئ #9</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">تحديد حجم المركز</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">استخدم حجم مركز سليمًا في اختبارات backtest كي تكون النتائج واقعية.</p>
+          <a href="/education/curriculum/beginner/09-position-sizing.html" class="btn btn-sm btn-ghost">اقرأ الدرس &larr;</a>
+        </div>
+        <div class="card" style="padding:1rem">
+          <span class="badge">متوسط #33</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">تمييز حالة السوق</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">اختبر استراتيجيتك في كل حالات السوق للتأكّد من متانتها.</p>
+          <a href="/education/curriculum/intermediate/33-volume-oracle-regimes.html" class="btn btn-sm btn-ghost">اقرأ الدرس &larr;</a>
+        </div>
+      </div>
+
+      <div class="callout-info">
+        <h4>⏭️ التالي</h4>
+        <p><strong>الدرس #36: إدارة المخاطر المتقدّمة — الأطر الاحترافية</strong> — تعلّم معيار كيلي، وتحديد حجم المركز ديناميكيًا، وبروتوكولات drawdown.</p>
+      </div>
+
+      <blockquote class="sp-disclaimer"><strong>لأغراض تعليمية فقط.</strong> ينطوي التداول على مخاطر خسارة كبيرة. هذه ليست نصيحة مالية. الأداء السابق لا يضمن النتائج المستقبلية.</blockquote>
+
+      <!-- Discussion Section -->
+      <div class="discussion-section" id="discussion-section">
+        <button class="discussion-toggle" id="discussion-toggle" style="display:none">
+          <span>💬 نقاش (<span id="discussion-count-mobile">0</span>)</span>
+          <span class="discussion-toggle-icon">+</span>
+        </button>
+        <div class="discussion-content">
+          <div class="discussion-header">
+            <h2 class="discussion-title">💬 نقاش <span class="discussion-count" id="discussion-count">(0 تعليق)</span></h2>
+            <div class="discussion-sort">
+              <label for="discussion-sort">الترتيب حسب:</label>
+              <select id="discussion-sort">
+                <option value="recent">الأحدث</option>
+                <option value="top">الأعلى تقييمًا</option>
+                <option value="oldest">الأقدم أولًا</option>
+              </select>
+            </div>
+          </div>
+          <div class="comment-composer" id="comment-composer">
+            <textarea id="comment-input" placeholder="شارك أفكارك أو اطرح سؤالًا أو ناقش هذا الدرس…" maxlength="1000"></textarea>
+            <div class="comment-composer-actions">
+              <span class="comment-char-count" id="comment-char-count">0/1000</span>
+              <button class="btn btn-primary" id="post-comment-btn">إرسال التعليق</button>
+            </div>
+          </div>
+          <div class="comments-list" id="comments-list">
+            <div class="comments-loading">
+              <div class="comments-loading-spinner"></div>
+              <p>جارٍ تحميل التعليقات…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-article">
+        <a class="btn btn-ghost" href="/education/curriculum/intermediate/34-portfolio-construction.html">← الدرس السابق</a>
+        <a class="btn btn-primary" href="/education/curriculum/intermediate/36-advanced-risk-management.html">الدرس التالي ←</a>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <div class="lesson-actions">
+        <button id="bookmark-btn" class="btn btn-secondary btn-sm btn-block" onclick="window.library?.isBookmarked() ? window.library.removeBookmark() : window.library.addBookmark({title:document.title})">🔖 حفظ</button>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm btn-block">📄 حفظ بصيغة PDF</button>
+      </div>
+
+      <div class="sidebar-links" style="margin-top:1.5rem">
+        <a href="https://www.signalpilot.io" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          ⚡ حزمة Signal Pilot
+        </a>
+        <a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💬 ناقش على Discord
+        </a>
+        <a href="https://www.signalpilot.io/affiliates.html" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💰 اربح 15-30 % كشريك
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Back to Signal Pilot CTA -->
+  <div class="wrap" style="margin: 3rem auto 0;">
+    <div style="background: linear-gradient(135deg, rgba(153,102,255,0.15), rgba(138,91,255,0.1)); border: 1px solid rgba(153,102,255,0.3); border-radius: 8px; padding: 2rem; text-align: center;">
+      <h3 style="margin: 0 0 0.75rem 0; font-size: 1.25rem;">هل أنت مستعدّ للتداول مع Signal Pilot؟</h3>
+      <p style="margin: 0 0 1.25rem 0; color: var(--muted);">طبّق ما تعلّمته باستخدام مؤشرات احترافية وأدوات لتحليل السوق في الوقت الفعلي.</p>
+      <a href="https://www.signalpilot.io" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        العودة إلى Signal Pilot →
+      </a>
+    </div>
+  </div>
+</article>
+
+<footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">ناقش على Discord</a><a href="https://www.signalpilot.io/affiliates.html">الشركاء</a><a href="https://www.signalpilot.io/privacy.html">الخصوصية</a><a href="https://www.signalpilot.io/terms.html">الشروط</a></div></div></footer>
+
+<script src="/education/assets/edu.js"></script>
+<script src="/education/assets/edu-enhanced.js"></script>
+<script src="/education/assets/sp-bg.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<!-- SignalPilot Theme Switcher -->
+<script src="/education/assets/signalpilot-theme.js"></script>
+<script src="/education/assets/spaced-repetition.js" defer></script>
+<script src="/education/assets/chatbot.js" defer></script>
+<script src="/education/assets/notes.js" defer></script>
+<script src="/education/assets/analytics.js"></script>
+<script src="/education/assets/quiz-enhanced.js"></script>
+<script src="/education/assets/social-share.js"></script>
+<script src="/education/assets/pwa-init.js"></script>
+<script src="/education/assets/config.js"></script>
+<script src="/education/assets/supabase-client.js"></script>
+<script src="/education/assets/auth-ui.js"></script>
+  <script src="/education/assets/library.js"></script>
+  <script>window.addEventListener('load',function(){if(window.library?.isBookmarked()){var b=document.getElementById('bookmark-btn');if(b)b.innerHTML='⭐ Bookmarked'}})</script>
+    <!-- Enhanced Analytics & A/B Testing -->
+  <script src="/education/assets/enhanced-analytics.js" defer></script>
+  <script src="/education/assets/ab-test-tldr.js" defer></script>
+  <!-- Google Translate -->
+  <script src="/education/assets/lang-switcher.js"></script>
+  <!-- Discussion System -->
+    <script src="/education/assets/trial-cta.js"></script>
+  <script src="/education/assets/blog-links.js"></script>
+  <script src="/education/assets/discussions.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.DiscussionSystem) {
+        window.DiscussionSystem.init('intermediate-32-backtesting-reality');
+      }
+    });
+  </script>
+  <script defer src="/assets/js/view-counter.js"></script>
+</body>
+</html>
