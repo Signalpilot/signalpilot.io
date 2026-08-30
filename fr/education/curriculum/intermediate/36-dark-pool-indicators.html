@@ -463,6 +463,8 @@
         </tbody>
       </table>
 
+      <p>Lisez ces parts comme des parts du volume ATS, pas du volume actions américain total, et comme un ordre de grandeur plutôt que des chiffres fixes. La FINRA publie les vrais chiffres place par place chaque semaine, et le classement bouge. La raison de connaître les noms est que votre fournisseur de données étiquette les impressions par place, et savoir lesquelles sont des réseaux de croisement institutionnels vous dit quelles étiquettes méritent un second regard.</p>
+
       <div class="callout">
         <p><strong>💡 Constat essentiel :</strong></p>
         <p>Les dark pools ne sont NI illégaux NI louches. Ce sont des ATS (Alternative Trading Systems) enregistrés auprès de la SEC, soumis à des obligations de déclaration strictes :</p>
@@ -498,6 +500,7 @@ Heure      Prix     Taille    Place      Condition
       <p><strong>Repères clés :</strong></p>
       <ul>
         <li><strong>Code place « D » ou « ATS »</strong> = transaction en dark pool</li>
+        <li><strong>Le ruban ne vous dit pas le sens.</strong> Une impression porte une heure, un prix, une taille et un code de place. Elle ne porte ni acheteur ni vendeur &mdash; chaque transaction a l'un et l'autre, et rien sur le ruban ne dit quel côté est allé chercher l'autre. Donc partout où cette leçon parle d'"impressions d'achat en dark pool", lisez-le comme le raccourci d'une inférence, jamais d'une observation. C'est toute la raison d'être du DIX : au lieu de lire le sens sur le ruban, il est construit à partir du volume de ventes à découvert FINRA, sur le raisonnement qu'un market maker qui sert un acheteur doit vendre à découvert pour le faire. Raisonnable, et malgré tout une inférence. Traitez une impression comme de la taille qui a changé de mains à un niveau, et laissez la direction venir de ce que fait le prix autour.</li>
         <li><strong>N'utilisez pas la condition « @T » pour les trouver.</strong> Un lieu commun des forums de trading veut que « @T » signale un print de dark pool déclaré tardivement. C'est faux : la condition T (Form T) signifie que la transaction a été exécutée en dehors des heures normales de marché, et c'est pourquoi vous la voyez sur le ruban avant et après séance, à toutes les tailles. L'identifiant, c'est le code place. Filtrez là-dessus.</li>
         <li><strong>Grosse taille :</strong> Plus de 50 000 titres (10 à 100 fois plus qu'une transaction de particulier)</li>
         <li><strong>Prix au point médian du NBBO :</strong> Généralement ni au bid ni à l'ask (p. ex. 150,23 $ quand le bid est à 150,20 $ et l'ask à 150,25 $)</li>
@@ -567,7 +570,7 @@ Heure      Prix     Taille    Place      Condition
               <li><strong>8 h 45 :</strong> 280 000 titres supplémentaires à 246,50 $</li>
               <li><strong>9 h 30 :</strong> TSLA ouvre à 249,00 $ (+4 $ de gap par rapport à la clôture précédente)</li>
               <li><strong>En clôture :</strong> TSLA clôture à 254,50 $ (+3,6 % par rapport à l'entrée moyenne de 245,67 $ avant ouverture)</li>
-              <li><strong>Lecture :</strong> Les institutions se sont placées devant les particuliers et ont accumulé 630 000 titres avant l'ouverture, en amont du rallye</li>
+              <li><strong>Lecture :</strong> 630K actions ont changé de mains hors bourse avant la séance où le rallye a eu lieu. Que ce soit un seul acheteur qui accumulait est une inférence &mdash; les impressions ne le disent pas. Ce que ce n'est certainement pas : du front-running. Cela signifie traiter devant un ordre client que vous traitez vous-même, c'est interdit, et cela n'a rien à voir avec le fait d'être en avance</li>
             </ul>
           </div>
         </details>
@@ -608,17 +611,25 @@ Heure      Prix     Taille    Place      Condition
       </div>
 <h2 id="part-3-dark-pool-sentiment-indicators">Partie 3 : les indicateurs de sentiment des dark pools</h2>
 
-      <p><strong>Dark Pool Index (DIX) :</strong> Mesure la pression acheteuse contre la pression vendeuse dans les dark pools</p>
+      <p><strong>Dark Pool Index (DIX) :</strong> Une estimation de la part du ruban hors bourse qui est de l'achat, reconstruite à partir des données de vente à découvert parce que le ruban lui-même ne le dit pas</p>
 
       <p><strong>Formule (simplifiée) :</strong></p>
       <pre style="background:rgba(139,92,246,.1);padding:1rem;border-radius:6px;overflow-x:auto">
-DIX = volume acheteur en dark pool / volume total en dark pool
+Le DIX est inféré, pas mesuré. Il n'y a aucun indicateur
+achat/vente sur le ruban à additionner. SqueezeMetrics le
+construit à partir du volume de ventes à découvert FINRA, sur le
+raisonnement qu'un market maker qui sert un acheteur doit
+vendre à découvert pour le faire -- donc un fort volume vendeur
+hors bourse implique beaucoup d'achat, pas beaucoup de vente.
 
-DIX > 0,45 = haussier (les institutions accumulent, rallye attendu sous 1 à 5 jours)
-DIX 0,40-0,45 = neutre (sentiment institutionnel mitigé)
-DIX < 0,40 = baissier (les institutions distribuent, faiblesse attendue)
+DIX > 0.45      plus d'achat sur le ruban hors bourse que d'habitude
+DIX 0.40-0.45   ordinaire
+DIX < 0.40      moins d'achat que d'habitude
 
-Moyenne historique : ~0,43 (biais légèrement haussier)
+Moyenne historique : ~0,43
+
+Les bandes décrivent ce que fait le ruban hors bourse maintenant.
+Ce n'est pas une prévision, et aucune durée n'est impliquée.
       </pre>
 
       <p><strong>Comment utiliser le DIX :</strong></p>
@@ -846,7 +857,7 @@ Moyenne historique : ~0,43 (biais légèrement haussier)
           <p><strong>Q4:</strong> Vous voyez des achats continus en dark pool (plus de 100 000 titres par heure) mais le prix ne monte pas. Haussier ou baissier ?</p>
           <details>
             <summary>Afficher la réponse</summary>
-            <p><strong>Réponse :</strong> TRÈS haussier. Les institutions accumulent des tailles énormes sans faire bouger le prix = elles absorbent toute la pression vendeuse. C'est la phase d'accumulation. Quand leurs achats seront terminés, le prix montera nettement (plus de vendeurs, seulement des acheteurs). Attendez-vous à un mouvement de +3 à +8 % dans les 2 à 7 jours suivant la fin de l'accumulation.</p>
+            <p><strong>Réponse :</strong> Haussier, et la raison vaut mieux que l'étiquette. De grosses impressions heure après heure avec un prix plat signifie que la taille est servie : à ce niveau, quelqu'un fournit chaque action que l'acheteur demande. Notez l'inférence &mdash; le ruban ne marque aucun sens, donc "accumulation" est la lecture que vous choisissez, pas quelque chose que vous lisez. Ce que vous pouvez dire sans choisir : beaucoup de titres ont changé de mains dans une fourchette étroite, donc l'offre posée à ce niveau se consomme. Si elle s'épuise, le prix doit bouger pour en trouver davantage. C'est le mécanisme, et c'est toute la réponse. "Plus de vendeurs" n'existe pas &mdash; chacune de ces impressions avait un vendeur dedans. Aucune amplitude ni aucune fenêtre de temps ne sont promises ici, parce que ni l'une ni l'autre ne peuvent l'être.</p>
           </details>
         </div>
 
@@ -878,10 +889,10 @@ Moyenne historique : ~0,43 (biais légèrement haussier)
       <div class="key-takeaway">
         <h4>À retenir</h4>
         <ul>
-          <li><strong>40 % du volume se traite en dark pool</strong> (les institutions cachent leurs ordres aux particuliers et aux HFT)</li>
+          <li><strong>40-50% du volume se traite hors bourse</strong>, et les dark pools proprement dits en sont la plus petite part &mdash; l'internalisation du flux de détail par les grossistes est la plus grande. Seule la première part est le signal institutionnel</li>
           <li><strong>Les impressions en bloc (plus de 50 000 titres)</strong> révèlent le positionnement institutionnel (déclaré en 10 secondes, identifié par le code place « D »/« ATS » — pas par une condition de transaction)</li>
-          <li><strong>DIX (Dark Pool Index)</strong> mesure le sentiment institutionnel (> 0,45 haussier, < 0,40 baissier)</li>
-          <li><strong>Les achats en dark pool avant ouverture</strong> = les institutions prennent les devants sur les particuliers (attendez-vous à un gap haussier à l'ouverture)</li>
+          <li><strong>DIX (indice dark pool)</strong> estime l'achat hors bourse à partir des données de vente à découvert (> 0,45 plus que d'habitude, < 0,40 moins) &mdash; c'est une inférence, pas une lecture</li>
+          <li><strong>Taille hors bourse en pré-marché</strong> = quelqu'un se positionne avant l'ouverture (pas du front-running, qui est un acte interdit précis)</li>
           <li><strong>La divergence (DIX en baisse, prix en hausse)</strong> = distribution dans la force (signal de retournement baissier)</li>
           <li><strong>Le flux continu en dark pool</strong> = accumulation ou distribution par paliers sur des heures ou des jours</li>
           <li><strong>L'absorption en dark pool</strong> = de grosses impressions ne font pas bouger le prix (mains fortes qui absorbent = haussier)</li>

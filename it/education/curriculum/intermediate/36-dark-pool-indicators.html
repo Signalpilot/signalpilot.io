@@ -463,6 +463,8 @@
         </tbody>
       </table>
 
+      <p>Leggi quelle quote come quote del volume ATS, non del volume azionario statunitense totale, e come ordine di grandezza più che come cifre fisse. FINRA pubblica i dati reali sede per sede ogni settimana, e la classifica si sposta. La ragione per conoscere i nomi è che il tuo fornitore di dati etichetta le stampe per sede, e sapere quali sono reti di incrocio istituzionali ti dice quali etichette meritano una seconda occhiata.</p>
+
       <div class="callout">
         <p><strong>💡 Intuizione fondamentale:</strong></p>
         <p>Le dark pool NON sono illegali né losche. Sono ATS (Alternative Trading Systems) registrati presso la SEC, con obblighi di segnalazione rigorosi:</p>
@@ -498,6 +500,7 @@ Ora        Prezzo   Size      Mercato    Condizione
       <p><strong>Elementi chiave da riconoscere:</strong></p>
       <ul>
         <li><strong>Codice mercato «D» o «ATS»</strong> = operazione in dark pool</li>
+        <li><strong>Il nastro non ti dice il lato.</strong> Una stampa porta un orario, un prezzo, una dimensione e un codice di sede. Non porta un compratore né un venditore &mdash; ogni scambio ha uno di ciascuno, e nulla sul nastro dice quale lato è andato a cercare l'altro. Perciò ovunque questa lezione dica "stampe di acquisto in dark pool", leggilo come scorciatoia per un'inferenza, mai per un'osservazione. È tutta la ragione per cui il DIX esiste: invece di leggere il lato sul nastro, è costruito dal volume di vendite allo scoperto FINRA, sul ragionamento che un market maker che serve un compratore deve vendere allo scoperto per farlo. Ragionevole, e comunque un'inferenza. Tratta una stampa come dimensione che ha cambiato mano a un livello, e lascia che la direzione venga da ciò che il prezzo fa attorno a essa.</li>
         <li><strong>Non usare la condizione «@T» per trovarli.</strong> Nei forum di trading si ripete spesso che «@T» segnala un print di dark pool segnalato in ritardo. Non è vero: la condizione T (Form T) significa che lo scambio è avvenuto fuori dall’orario regolare, ed è per questo che la vedi sul nastro pre-apertura e after-hours a qualunque size. L’identificativo è il codice di mercato. Filtra su quello.</li>
         <li><strong>Dimensione grande:</strong> Oltre 50.000 azioni (da 10 a 100 volte più di un'operazione retail)</li>
         <li><strong>Prezzo al punto medio del NBBO:</strong> Di solito né al bid né all'ask (es. 150,23 $ con bid a 150,20 $ e ask a 150,25 $)</li>
@@ -567,7 +570,7 @@ Ora        Prezzo   Size      Mercato    Condizione
               <li><strong>8:45:</strong> Altre 280.000 azioni a 246,50 $</li>
               <li><strong>9:30:</strong> TSLA apre a 249,00 $ (+4 $ di gap rispetto alla chiusura precedente)</li>
               <li><strong>A fine giornata:</strong> TSLA chiude a 254,50 $ (+3,6 % rispetto all'ingresso medio di 245,67 $ in pre-apertura)</li>
-              <li><strong>Lettura:</strong> Le istituzioni si sono messe davanti al retail e hanno accumulato 630.000 azioni in pre-apertura, prima del rally</li>
+              <li><strong>Lettura:</strong> 630K azioni hanno cambiato mano fuori borsa prima della seduta in cui è avvenuto il rally. Che si trattasse di un solo compratore che accumulava è un'inferenza &mdash; le stampe non lo dicono. Ciò che sicuramente non è: front-running. Quello significa operare davanti a un ordine cliente che stai gestendo, è vietato, e non ha nulla a che vedere con l'essere in anticipo</li>
             </ul>
           </div>
         </details>
@@ -608,17 +611,25 @@ Ora        Prezzo   Size      Mercato    Condizione
       </div>
 <h2 id="part-3-dark-pool-sentiment-indicators">Parte 3: indicatori di sentiment delle dark pool</h2>
 
-      <p><strong>Dark Pool Index (DIX):</strong> Misura la pressione in acquisto rispetto a quella in vendita nelle dark pool</p>
+      <p><strong>Dark Pool Index (DIX):</strong> Una stima di quanta parte del nastro fuori borsa sia acquisto, ricostruita dai dati di vendita allo scoperto perché il nastro stesso non lo dice</p>
 
       <p><strong>Formula (semplificata):</strong></p>
       <pre style="background:rgba(139,92,246,.1);padding:1rem;border-radius:6px;overflow-x:auto">
-DIX = volume in acquisto in dark pool / volume totale in dark pool
+Il DIX è inferito, non misurato. Non c'è alcun contrassegno
+di acquisto/vendita sul nastro da sommare. SqueezeMetrics lo
+costruisce dal volume di vendite allo scoperto FINRA, sul
+ragionamento che un market maker che serve un compratore deve
+vendere allo scoperto per farlo -- quindi molto volume scoperto
+fuori borsa implica molto acquisto, non molta vendita.
 
-DIX > 0,45 = rialzista (le istituzioni accumulano, rally atteso in 1-5 giorni)
-DIX 0,40-0,45 = neutro (sentiment istituzionale misto)
-DIX < 0,40 = ribassista (le istituzioni distribuiscono, attesa debolezza)
+DIX > 0.45      più acquisto nel nastro fuori borsa del solito
+DIX 0.40-0.45   ordinario
+DIX < 0.40      meno acquisto del solito
 
-Media storica: ~0,43 (bias leggermente rialzista)
+Media storica: ~0,43
+
+Le fasce descrivono ciò che il nastro fuori borsa sta facendo ora.
+Non sono una previsione, e non implicano alcun periodo.
       </pre>
 
       <p><strong>Come usare il DIX:</strong></p>
@@ -846,7 +857,7 @@ Media storica: ~0,43 (bias leggermente rialzista)
           <p><strong>Q4:</strong> Vedi acquisti continui in dark pool (oltre 100.000 azioni ogni ora) ma il prezzo non sale. Rialzista o ribassista?</p>
           <details>
             <summary>Mostra la risposta</summary>
-            <p><strong>Risposta:</strong> MOLTO rialzista. Le istituzioni stanno accumulando dimensioni enormi senza muovere il prezzo = stanno assorbendo tutta la pressione in vendita. È la fase di accumulazione. Quando i loro acquisti saranno completati, il prezzo salirà nettamente (niente più venditori, solo compratori). Attendi un movimento del +3 / +8 % entro 2-7 giorni dalla fine dell'accumulazione.</p>
+            <p><strong>Risposta:</strong> Rialzista, e la ragione vale più dell'etichetta. Stampe grandi ora dopo ora con il prezzo piatto significa che la dimensione viene servita: a quel livello qualcuno fornisce ogni azione che il compratore chiede. Nota l'inferenza &mdash; il nastro non marca un lato, quindi "accumulazione" è la lettura che scegli, non qualcosa che leggi. Ciò che puoi dire senza scegliere: molta carta ha cambiato mano in un intervallo stretto, quindi l'offerta posata a quel livello si sta consumando. Se si esaurisce, il prezzo deve muoversi per trovarne altra. Questo è il meccanismo, ed è tutta la risposta. "Non restano venditori" non è una cosa che accade &mdash; ognuna di quelle stampe aveva un venditore dentro. Qui non si promette né ampiezza né finestra temporale, perché nessuna delle due può esserlo.</p>
           </details>
         </div>
 
@@ -878,10 +889,10 @@ Media storica: ~0,43 (bias leggermente rialzista)
       <div class="key-takeaway">
         <h4>Punti chiave</h4>
         <ul>
-          <li><strong>Il 40 % del volume passa dalle dark pool</strong> (le istituzioni nascondono gli ordini al retail e agli HFT)</li>
+          <li><strong>Il 40-50% del volume scambia fuori borsa</strong>, e i dark pools propriamente detti ne sono la parte minore &mdash; l'internalizzazione del flusso retail da parte dei wholesaler è la maggiore. Solo la prima parte è il segnale istituzionale</li>
           <li><strong>Le stampe a blocco (oltre 50.000 azioni)</strong> rivelano il posizionamento istituzionale (segnalato entro 10 secondi, identificato dal codice di mercato «D»/«ATS» — non da una condizione di scambio)</li>
-          <li><strong>DIX (Dark Pool Index)</strong> misura il sentiment istituzionale (> 0,45 rialzista, < 0,40 ribassista)</li>
-          <li><strong>Gli acquisti in dark pool in pre-apertura</strong> = le istituzioni si mettono davanti al retail (attendi un gap rialzista in apertura)</li>
+          <li><strong>DIX (indice dark pool)</strong> stima l'acquisto fuori borsa dai dati di vendita allo scoperto (> 0,45 più del solito, < 0,40 meno) &mdash; è un'inferenza, non una lettura</li>
+          <li><strong>Dimensione fuori borsa nel pre-mercato</strong> = qualcuno si posiziona prima dell'apertura (non front-running, che è un atto vietato preciso)</li>
           <li><strong>La divergenza (DIX giù, prezzo su)</strong> = distribuzione nella forza (segnale di inversione ribassista)</li>
           <li><strong>Il flusso continuo in dark pool</strong> = accumulazione o distribuzione a scaglioni su ore o giorni</li>
           <li><strong>L'assorbimento in dark pool</strong> = le stampe grandi non muovono il prezzo (mani forti che assorbono = rialzista)</li>

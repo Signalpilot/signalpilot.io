@@ -450,6 +450,8 @@
         </tbody>
       </table>
 
+      <p>Read those shares as shares of ATS volume, not of total US equity volume, and as a sense of scale rather than fixed numbers. FINRA publishes the real figures venue by venue every week, and the ranking moves. The reason to know the names at all is that your data vendor labels prints by venue, and knowing which venues are institutional crossing networks tells you which labels are worth a second look.</p>
+
       <div class="callout">
         <p><strong>💡 Critical Insight:</strong></p>
         <p>Dark pools are NOT illegal or shady. They're SEC-registered ATSs (Alternative Trading Systems) with strict reporting requirements:</p>
@@ -485,6 +487,7 @@ Time       Price    Size      Exchange   Trade Condition
       <p><strong>Key identifiers:</strong></p>
       <ul>
         <li><strong>Exchange code "D" or "ATS"</strong> = dark pool trade</li>
+        <li><strong>The tape does not tell you the side.</strong> A print carries a time, a price, a size and a venue code. It does not carry a buyer or a seller &mdash; every trade has one of each, and nothing on the tape says which side went looking for the other. So wherever this lesson says "dark pool buy prints", read it as shorthand for an inference, never an observation. That is the whole reason DIX exists: rather than reading a side off the tape, it is built from FINRA short-sale volume, on the reasoning that a market maker filling a buyer has to sell short to do it. Reasonable, and still an inference. Treat a print as size that changed hands at a level, and let the direction come from what price does around it.</li>
         <li><strong>Do not use the "@T" condition to find these.</strong> A widely repeated bit of trading-forum folklore says @T marks a late-reported dark pool print. It does not: the T (Form T) sale condition means the trade executed outside regular market hours, which is why you see it on pre-market and after-hours tape at every size. The exchange code is the identifier. Filter on that.</li>
         <li><strong>Large size:</strong> 50,000+ shares (10-100x larger than retail trades)</li>
         <li><strong>Price at NBBO midpoint:</strong> Usually not at bid or ask (e.g., $150.23 when bid $150.20, ask $150.25)</li>
@@ -554,7 +557,7 @@ Time       Price    Size      Exchange   Trade Condition
               <li><strong>8:45 AM:</strong> Additional 280K shares at $246.50</li>
               <li><strong>9:30 AM:</strong> TSLA opens at $249.00 (+$4 gap from previous close)</li>
               <li><strong>End of day:</strong> TSLA closes at $254.50 (+3.6% from the $245.67 blended pre-market entry)</li>
-              <li><strong>Interpretation:</strong> Institutions front-ran retail, accumulated 630K shares pre-market before the rally</li>
+              <li><strong>Interpretation:</strong> 630K shares changed hands off-exchange before the session the rally happened in. Whether that was one buyer accumulating is an inference &mdash; the prints do not say. What it is definitely not is front-running: that means trading ahead of a customer order you are handling, it is prohibited, and it has nothing to do with being early</li>
             </ul>
           </div>
         </details>
@@ -595,17 +598,24 @@ Time       Price    Size      Exchange   Trade Condition
       </div>
 <h2 id="part-3-dark-pool-sentiment-indicators">Part 3: Dark Pool Sentiment Indicators</h2>
 
-      <p><strong>Dark Pool Index (DIX):</strong> Measures dark pool buying vs selling pressure</p>
+      <p><strong>Dark Pool Index (DIX):</strong> An estimate of how much of the off-exchange tape is buying, reconstructed from short-sale data because the tape itself does not say</p>
 
       <p><strong>Formula (simplified):</strong></p>
       <pre style="background:rgba(139,92,246,.1);padding:1rem;border-radius:6px;overflow-x:auto">
-DIX = Dark Pool Buy Volume / Total Dark Pool Volume
+DIX is inferred, not measured. There is no buy/sell flag on the
+tape to add up. SqueezeMetrics builds it from FINRA short-sale
+volume, on the reasoning that a market maker filling a buyer has
+to sell short to do it -- so heavy off-exchange short volume
+implies heavy buying, not heavy selling.
 
-DIX > 0.45 = Bullish (institutions accumulating, expect rally in 1-5 days)
-DIX 0.40-0.45 = Neutral (mixed institutional sentiment)
-DIX < 0.40 = Bearish (institutions distributing, expect weakness)
+DIX > 0.45      more buying in the off-exchange tape than usual
+DIX 0.40-0.45   ordinary
+DIX < 0.40      less buying than usual
 
-Historical average: ~0.43 (slightly bullish bias)
+Historical average: ~0.43
+
+The bands describe what the off-exchange tape is doing now. They
+are not a forecast, and no holding period is implied by them.
       </pre>
 
       <p><strong>How to use DIX:</strong></p>
@@ -833,7 +843,7 @@ Historical average: ~0.43 (slightly bullish bias)
           <p><strong>Q4:</strong> You see continuous dark pool buying (100K+ shares every hour) but price isn't rising. Bullish or bearish?</p>
           <details>
             <summary>Show Answer</summary>
-            <p><strong>Answer:</strong> VERY bullish. Institutions are accumulating massive size without moving price = they're absorbing all selling pressure. This is accumulation phase. When institutional buying completes, price will mark up significantly (no sellers left, only buyers). Expect +3-8% move within 2-7 days after accumulation ends.</p>
+            <p><strong>Answer:</strong> Bullish, and the reason is worth more than the label. Large prints hour after hour with price flat means the size is being met: at that level, someone is supplying every share the buyer asks for. Note the inference &mdash; the tape does not mark a side, so "accumulation" is the reading you are choosing, not something you read off. What you can say without choosing is that a lot of stock changed hands in a tight range, so the supply sitting at that level is being used up. If it runs out, price has to move to find more. That is the mechanism, and it is the whole answer. "No sellers left" is not a thing that happens &mdash; every one of those prints had a seller in it. No move size and no time window are promised here, because neither can be.</p>
           </details>
         </div>
 
@@ -865,10 +875,10 @@ Historical average: ~0.43 (slightly bullish bias)
       <div class="key-takeaway">
         <h4>Key Takeaways</h4>
         <ul>
-          <li><strong>40% of volume trades in dark pools</strong> (institutions hiding orders from retail and HFTs)</li>
+          <li><strong>40-50% of volume trades off-exchange</strong>, and dark pools proper are the smaller part of that &mdash; wholesaler internalisation of retail flow is the larger. Only the first part is the institutional signal</li>
           <li><strong>Block prints (50k+ shares)</strong> reveal institutional positioning (reported within 10 seconds, identified by the "D"/"ATS" exchange code &mdash; not by any sale condition)</li>
-          <li><strong>DIX (Dark Pool Index)</strong> measures institutional sentiment (> 0.45 bullish, < 0.40 bearish)</li>
-          <li><strong>Pre-market dark pool buys</strong> = institutions front-running retail (expect gap up at open)</li>
+          <li><strong>DIX (Dark Pool Index)</strong> estimates off-exchange buying from short-sale data (> 0.45 more than usual, < 0.40 less) &mdash; it is an inference, not a reading</li>
+          <li><strong>Pre-market off-exchange size</strong> = someone positioning before the open (not front-running, which is a specific prohibited act)</li>
           <li><strong>Divergence (DIX down, price up)</strong> = distribution into strength (bearish reversal signal)</li>
           <li><strong>Continuous dark pool flow</strong> = scaling accumulation/distribution over hours/days</li>
           <li><strong>Dark pool absorption</strong> = large prints don't move price (strong hands absorbing = bullish)</li>

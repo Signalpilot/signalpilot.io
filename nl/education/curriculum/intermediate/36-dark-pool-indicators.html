@@ -463,6 +463,8 @@
         </tbody>
       </table>
 
+      <p>Lees die aandelen als aandelen van het ATS-volume, niet van het totale Amerikaanse aandelenvolume, en als orde van grootte in plaats van vaste getallen. FINRA publiceert de echte cijfers venue voor venue elke week, en de rangorde verschuift. De reden om de namen überhaupt te kennen: je dataleverancier labelt prints per venue, en weten welke venues institutionele crossing-netwerken zijn vertelt je welke labels een tweede blik waard zijn.</p>
+
       <div class="callout">
         <p><strong>💡 Cruciaal inzicht:</strong></p>
         <p>Dark pools zijn NIET illegaal of louche. Het zijn bij de SEC geregistreerde ATS (Alternative Trading Systems) met strenge meldplichten:</p>
@@ -498,6 +500,7 @@ Tijd       Prijs    Omvang    Beurs      Handelsconditie
       <p><strong>Belangrijkste kenmerken:</strong></p>
       <ul>
         <li><strong>Beurscode „D” of „ATS”</strong> = dark pool-transactie</li>
+        <li><strong>De tape vertelt je de kant niet.</strong> Een print draagt een tijd, een prijs, een omvang en een venue-code. Hij draagt geen koper en geen verkoper &mdash; elke transactie heeft er één van elk, en niets op de tape zegt welke kant de andere opzocht. Waar deze les dus spreekt van "dark pool koopprints", lees dat als afkorting voor een gevolgtrekking, nooit voor een waarneming. Dat is de hele reden dat DIX bestaat: in plaats van de kant van de tape af te lezen, wordt hij gebouwd uit FINRA-shortvolume, op de redenering dat een market maker die een koper bedient daarvoor short moet verkopen. Redelijk, en toch een gevolgtrekking. Behandel een print als omvang die op een niveau van eigenaar wisselde, en laat de richting komen uit wat de prijs eromheen doet.</li>
         <li><strong>Gebruik de conditie "@T" niet om ze te vinden.</strong> Op handelsfora wordt vaak beweerd dat "@T" een laat gemelde dark pool-print markeert. Dat klopt niet: de conditie T (Form T) betekent dat de transactie buiten de reguliere handelsuren is uitgevoerd, en daarom zie je hem op de tape vóór en na de sessie in elke omvang. De beurscode is het kenmerk. Filter daarop.</li>
         <li><strong>Grote omvang:</strong> Meer dan 50.000 stuks (10 tot 100 keer groter dan een particuliere transactie)</li>
         <li><strong>Koers op het middenpunt van de NBBO:</strong> Meestal niet op bod of laat (bijv. $150,23 bij een bod van $150,20 en een laat van $150,25)</li>
@@ -567,7 +570,7 @@ Tijd       Prijs    Omvang    Beurs      Handelsconditie
               <li><strong>8.45 uur:</strong> Nog eens 280.000 stuks à $246,50</li>
               <li><strong>9.30 uur:</strong> TSLA opent op $249,00 (+$4 gap ten opzichte van de vorige slotkoers)</li>
               <li><strong>Aan het eind van de dag:</strong> TSLA sluit op $254,50 (+3,6 % ten opzichte van de gemiddelde entry van $245,67 vóór de opening)</li>
-              <li><strong>Lezing:</strong> Instituten gingen voor de particulieren liggen en verzamelden vóór de opening 630.000 stuks, nog vóór de rally</li>
+              <li><strong>Lezing:</strong> 630K aandelen wisselden buiten de beurs van eigenaar, vóór de sessie waarin de rally plaatsvond. Of dat één koper was die accumuleerde is een gevolgtrekking &mdash; de prints zeggen het niet. Wat het beslist niet is: front-running. Dat betekent handelen vóór een klantorder die je zelf uitvoert, het is verboden, en het heeft niets te maken met vroeg zijn</li>
             </ul>
           </div>
         </details>
@@ -608,17 +611,24 @@ Tijd       Prijs    Omvang    Beurs      Handelsconditie
       </div>
 <h2 id="part-3-dark-pool-sentiment-indicators">Deel 3: sentimentindicatoren voor dark pools</h2>
 
-      <p><strong>Dark Pool Index (DIX):</strong> Meet de koopdruk tegenover de verkoopdruk in dark pools</p>
+      <p><strong>Dark Pool Index (DIX):</strong> Een schatting van hoeveel van de buitenbeurstape koop is, gereconstrueerd uit shortverkoopdata omdat de tape het zelf niet zegt</p>
 
       <p><strong>Formule (vereenvoudigd):</strong></p>
       <pre style="background:rgba(139,92,246,.1);padding:1rem;border-radius:6px;overflow-x:auto">
-DIX = koopvolume in dark pools / totaal dark pool-volume
+DIX wordt afgeleid, niet gemeten. Er staat geen koop/verkoop-
+markering op de tape om op te tellen. SqueezeMetrics bouwt hem uit
+FINRA-shortvolume, op de redenering dat een market maker die een
+koper bedient daarvoor short moet verkopen -- veel shortvolume
+buiten de beurs impliceert dus veel koop, niet veel verkoop.
 
-DIX > 0,45 = bullish (instituten accumuleren, verwacht een rally binnen 1-5 dagen)
-DIX 0,40-0,45 = neutraal (gemengd institutioneel sentiment)
-DIX < 0,40 = bearish (instituten distribueren, verwacht zwakte)
+DIX > 0.45      meer koop in de buitenbeurstape dan gebruikelijk
+DIX 0.40-0.45   gewoon
+DIX < 0.40      minder koop dan gebruikelijk
 
-Historisch gemiddelde: ~0,43 (licht bullish bias)
+Historisch gemiddelde: ~0,43
+
+De banden beschrijven wat de buitenbeurstape nu doet. Ze zijn
+geen voorspelling, en impliceren geen houdperiode.
       </pre>
 
       <p><strong>Hoe je de DIX gebruikt:</strong></p>
@@ -846,7 +856,7 @@ Historisch gemiddelde: ~0,43 (licht bullish bias)
           <p><strong>Q4:</strong> Je ziet continue dark pool-aankopen (meer dan 100.000 stuks per uur) maar de koers stijgt niet. Bullish of bearish?</p>
           <details>
             <summary>Antwoord tonen</summary>
-            <p><strong>Antwoord:</strong> ZEER bullish. Instituten accumuleren enorme omvang zonder de koers te bewegen = ze absorberen alle verkoopdruk. Dit is de accumulatiefase. Zodra hun aankopen klaar zijn, gaat de koers fors omhoog (geen verkopers meer, alleen kopers). Verwacht een beweging van +3 tot +8 % binnen 2 tot 7 dagen na het einde van de accumulatie.</p>
+            <p><strong>Antwoord:</strong> Bullish, en de reden is meer waard dan het etiket. Grote prints uur na uur met een vlakke prijs betekent dat de omvang bediend wordt: op dat niveau levert iemand elk aandeel dat de koper vraagt. Let op de gevolgtrekking &mdash; de tape markeert geen kant, dus "accumulatie" is de lezing die jij kiest, niet iets wat je afleest. Wat je zonder te kiezen kunt zeggen: er wisselde veel stuk van eigenaar in een nauwe range, dus het aanbod op dat niveau raakt op. Raakt het echt op, dan moet de prijs bewegen om meer te vinden. Dat is het mechanisme, en dat is het hele antwoord. "Geen verkopers meer" bestaat niet &mdash; elk van die prints had er een verkoper in. Er wordt hier geen bewegingsomvang en geen tijdvenster beloofd, omdat geen van beide beloofd kan worden.</p>
           </details>
         </div>
 
@@ -878,10 +888,10 @@ Historisch gemiddelde: ~0,43 (licht bullish bias)
       <div class="key-takeaway">
         <h4>De belangrijkste punten</h4>
         <ul>
-          <li><strong>40 % van het volume loopt via dark pools</strong> (instituten verbergen hun orders voor particulieren en HFT's)</li>
+          <li><strong>40-50% van het volume handelt buiten de beurs</strong>, en dark pools in strikte zin zijn daarvan het kleinere deel &mdash; internalisatie van retailflow door wholesalers is het grotere. Alleen het eerste deel is het institutionele signaal</li>
           <li><strong>Blokprints (meer dan 50.000 stuks)</strong> onthullen institutionele positionering (binnen 10 seconden gemeld, herkenbaar aan de beurscode "D"/"ATS" — niet aan een handelsconditie)</li>
-          <li><strong>DIX (Dark Pool Index)</strong> meet het institutionele sentiment (> 0,45 bullish, < 0,40 bearish)</li>
-          <li><strong>Dark pool-aankopen vóór de opening</strong> = instituten gaan voor de particulier liggen (verwacht een gap omhoog bij de opening)</li>
+          <li><strong>DIX (dark pool-index)</strong> schat koop buiten de beurs uit shortverkoopdata (> 0,45 meer dan gebruikelijk, < 0,40 minder) &mdash; het is een gevolgtrekking, geen aflezing</li>
+          <li><strong>Buitenbeursomvang in de pre-market</strong> = iemand die zich vóór de opening positioneert (geen front-running, dat is een specifieke verboden handeling)</li>
           <li><strong>Divergentie (DIX omlaag, koers omhoog)</strong> = distributie in de kracht (bearish omkeersignaal)</li>
           <li><strong>Continue dark pool-stroom</strong> = stapsgewijze accumulatie of distributie over uren of dagen</li>
           <li><strong>Dark pool-absorptie</strong> = grote prints bewegen de koers niet (sterke handen absorberen = bullish)</li>
