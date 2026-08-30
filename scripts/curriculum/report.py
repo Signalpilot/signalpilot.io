@@ -31,11 +31,14 @@ def prose(v):
     v = v.strip()
     if len(v) == 1:
         return ''
-    return re.sub(r'^[SABCD]\s*[—\-:]\s*', '', v).strip()
+    v = re.sub(r'^[SABCD]\s*[—\-:]\s*', '', v).strip()
+    return v[:1].upper() + v[1:]
 
 
 def e(t):
-    return html.escape(t, quote=False)
+    """Escape, then honour the *emphasis* the audit notes were written with."""
+    t = html.escape(t, quote=False)
+    return re.sub(r'\*([^*\n]+)\*', r'<em>\1</em>', t)
 
 
 def ul(items, cls):
@@ -63,13 +66,14 @@ def build():
             f'<span class="chip g-{letter(r["dimensions"][k])}" '
             f'title="{lbl}">{letter(r["dimensions"][k])}</span>'
             for k, lbl in DIMS)
+        bare = not any(prose(r['dimensions'][k]) for k, _ in DIMS)
         verdicts = ''.join(
             f'<div class="v"><h4>{lbl}<span class="chip g-{letter(r["dimensions"][k])}">'
             f'{letter(r["dimensions"][k])}</span></h4>'
-            f'<p>{e(prose(r["dimensions"][k])) or "&mdash;"}</p></div>'
+            + ('' if bare else f'<p>{e(prose(r["dimensions"][k]))}</p>') + '</div>'
             for k, lbl in DIMS)
         body = f'''<div class="detail">
-      <div class="verdicts">{verdicts}</div>
+      <div class="verdicts{' bare' if bare else ''}">{verdicts}</div>
       {f'<p class="summary">{e(r["summary"])}</p>' if r['summary'] else ''}
       <div class="cols">
         {f'<section><h5>Holds up</h5>{ul(r["strengths"], "good")}</section>' if r['strengths'] else ''}
