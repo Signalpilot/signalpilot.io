@@ -135,6 +135,7 @@
           <li>The four opening patterns &mdash; Drive, Test-Drive, Rejection and Balance &mdash; and what each one commits you to</li>
           <li>Why fair value gaps tend to fill, and how to trade the reversion rather than chase the continuation</li>
           <li>How to use POC, VAH and VAL to see where the auction has already transacted &mdash; and why that is a map of expected behaviour rather than a judgement about price being cheap or expensive</li>
+          <li>How to compute the base rate a fill statistic has to beat, and how to run the matched control that turns it into a finding</li>
         </ul>
       </div>
 
@@ -266,6 +267,30 @@ R:R: 3.7R</code></pre>
             <p><strong>What to do instead:</strong> mark the gaps, then count your own. Record how wide each one was, how long until price touched its edge, whether it stopped at the midpoint, and what the day type was when it formed. Two months of that will tell you more about your instrument than any percentage in any lesson, and you will very likely find that wide gaps on trend days behave nothing like narrow gaps on balance days &mdash; which is exactly the distinction a single blended figure destroys.</p>
           </div>
         </details>
+      </div>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Compute the base rate before you believe any fill rate</h4>
+        <p>The section above says a high fill percentage is really a statement about how far SPY travels in a day. That is asserted rather than shown, and it is worth showing, because the argument is short and it hands you an exact test.</p>
+
+        <p><strong>First: a fill is a crossing, and crossings inside the range are certain.</strong> Price moves through the ticks continuously &mdash; it cannot teleport past a price at which orders are resting. So to get from the session low to the session high it must trade at every price in between. Any zone lying inside the day's eventual high-low range therefore gets touched with probability 1, not with 78 %. A gap fails to fill only when it ends up outside the range altogether.</p>
+
+        <p><strong>So the real question is not "do gaps fill" but "do gaps land inside the range".</strong> And that is a question about SPY's daily travel, with nothing in it about what created the zone.</p>
+
+        <p><strong>Now put numbers on it, using this lesson's own example.</strong> The gap is $519.80 to $520.20, and you mark it with price at $521.50. Its near edge is $1.30 away. SPY's daily range runs around 1 % of price, which at $520 is about $5.20. So the gap sits a quarter of a typical day's range from where price left it:</p>
+
+<pre><code>gap edge to current price     $521.50 - $520.20  = $1.30
+typical daily range           1 % of $520        = $5.20
+distance as a share of range  1.30 / 5.20        = a quarter</code></pre>
+
+        <p>Asking whether price comes back a quarter of its daily range, having just been there, is not a question about gaps. Answer it with a percentage and you have described the instrument.</p>
+
+        <p><strong>The fix is a control, and it costs one extra column in your log.</strong> Every time you mark a gap, mark a second zone the same width and the same distance from price on the same day, chosen without looking at the shape of the chart &mdash; the same distance in the opposite direction will do. Track whether each one fills. Then the only number that means anything is the difference:</p>
+
+<pre><code>edge = fill rate of real gaps  &#8722;  fill rate of matched control zones</code></pre>
+
+        <p>If your gaps fill 78 % of the time and your controls fill 76 %, the gap is worth two points and you have spent a year trading a base rate. If the gaps fill 78 % and the controls 45 %, you have found something and you can size for it. Either way you now have a finding rather than a figure, which is what the FVG Statistics section was asking for &mdash; this is just that request made exact.</p>
       </div>
 
       <h2 id="emmas-71000-auction-illiteracy-disaster">Emma's $71,000 Auction Illiteracy Disaster: When Random Timing Kills Returns</h2>
@@ -462,6 +487,7 @@ No outcome is reported here. This is a setup, not a trade that happened.</code><
           <li><strong>Opening range (first 30-60 min):</strong> Reveals institutional intent and is your first read on the day type</li>
           <li><strong>Four opening patterns:</strong> Drive (trend day), Test-Drive (reversal), Rejection (trap), Balance (range day)</li>
           <li><strong>Fair Value Gaps mark displacement, not untraded price:</strong> the zone did trade, quickly, in one direction &mdash; that is why it is worth watching, and why no fill rate is quoted for it</li>
+          <li><strong>A fill is a crossing, so any zone inside the day's range fills with certainty:</strong> a fill rate measures how far the instrument travels, not the gap. The number worth having is the difference between your gaps and matched control zones of the same width and distance</li>
           <li><strong>The value area is a map, not a valuation:</strong> VAH and VAL mark where the auction has already done its business &mdash; fade them on balance days, expect them to break on drive days, and never read "above POC" as "expensive"</li>
           <li><strong>Layer with Plutus Flow:</strong> Volume absorption at value extremes = institutional positioning</li>
           <li><strong>Janus + Opening Range:</strong> Sweeps below OR low = liquidity grab before reversal</li>

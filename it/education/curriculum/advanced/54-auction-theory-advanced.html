@@ -148,6 +148,7 @@
           <li>I quattro schemi di apertura &mdash; Drive, Test-Drive, Rejection e Balance &mdash; e a cosa ti impegna ciascuno</li>
           <li>Perché i fair value gap tendono a essere colmati, e come operare il ritorno invece di rincorrere la continuazione</li>
           <li>Come usare POC, VAH e VAL per vedere dove l’asta ha già transatto — e perché questa è una mappa di comportamenti attesi anziché un giudizio sul fatto che il prezzo sia caro o a buon mercato</li>
+          <li>Come calcolare il tasso di base che una statistica di riempimento deve battere, e come impostare il controllo appaiato che la trasforma in un risultato</li>
         </ul>
       </div>
 
@@ -226,7 +227,7 @@ Strategia:
           <summary class="accordion-header">Cosa crea un fair value gap?</summary>
           <div class="accordion-content">
             <p><strong>Uno schema a 3 candele in cui il massimo della prima candela sta sotto il minimo della terza</strong>  (o, per un gap ribassista, il primo minimo sopra il terzo massimo).</p>
-            <p><strong>Ed ecco la cosa che la maggior parte delle descrizioni di questo schema sbaglia, inclusa l’analogia dell’asta qui sotto.</strong> Il prezzo non ha saltato quella zona. L’ha attraversata scambiando — durante la candela 2. Ogni prezzo dell’intervallo è stato stampato e qualcuno è stato eseguito a ciascuno di essi. Quello che la forma a tre candele segna davvero è lo spostamento: un movimento abbastanza rapido perché la candela precedente e quella successiva non si sovrappongano. È una cosa reale e utile da notare, perché i movimenti rapidi e unidirezionali di solito sono spinti da size che doveva essere eseguita, e la size che deve essere eseguita spesso lascia questioni in sospeso. Ma non è un gap non scambiato, e nessun principio d’asta dice che il prezzo debba tornarci. I veri buchi non scambiati esistono eccome: il gap notturno tra la chiusura di ieri e l’apertura di oggi, e il buco attraverso una sospensione delle contrattazioni. Lì nessuno ha davvero transatto, e sono un animale diverso da quello che si disegna su un grafico a 5 minuti. <strong>displacement</strong>: un movimento abbastanza rapido perché la barra precedente e quella successiva non si sovrappongano.</p>
+            <p><strong>Ed ecco la cosa che la maggior parte delle descrizioni di questo schema sbaglia, inclusa l’analogia dell’asta qui sotto.</strong> Il prezzo non ha saltato quella zona. L'ha attraversata trattando &mdash; durante la candela 2. Ogni prezzo del range è stato stampato, e su ciascuno qualcuno è stato eseguito. Ciò che la figura a tre candele segna davvero è il <strong>displacement</strong>: un movimento abbastanza rapido perché la candela precedente e quella successiva non si sovrappongano. È una cosa reale e utile da notare, perché i movimenti rapidi a senso unico sono di solito guidati da size che doveva essere eseguita, e la size che doveva essere eseguita lascia spesso affari in sospeso. Ma non è un gap non trattato, e nessun principio d'asta dice che il prezzo debba tornarci. Gap davvero non trattati esistono &mdash; il gap notturno fra la chiusura di ieri e l'apertura di oggi, e il gap che scavalca una sospensione delle contrattazioni. Quelli sono i casi in cui nessuno ha transatto, e sono un animale diverso da ciò che si disegna su un grafico a 5 minuti.</p>
             <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>FVG rialzista (gap al rialzo):
 
 Candela 1: massimo 519,80 $
@@ -279,6 +280,30 @@ R:R: 3,7R</code></pre>
             <p><strong>Che cosa fare invece:</strong> segna i gap, poi conta i tuoi. Annota quanto era largo ciascuno, quanto tempo è passato prima che il prezzo ne toccasse il bordo, se si è fermato al punto medio e che tipo di giornata era quando si è formato. Due mesi di questo ti diranno del tuo strumento più di qualsiasi percentuale in qualsiasi lezione, e molto probabilmente scoprirai che i gap larghi nelle giornate di trend si comportano in modo del tutto diverso dai gap stretti nelle giornate di equilibrio — esattamente la distinzione che una singola cifra mescolata distrugge.</p>
           </div>
         </details>
+      </div>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Calcola il tasso di base prima di credere a qualsiasi tasso di riempimento</h4>
+        <p>La sezione qui sopra dice che una percentuale di riempimento alta è in realtà un'affermazione su quanta strada fa SPY in una giornata. È affermato, non mostrato, e vale la pena mostrarlo, perché l'argomento è breve e ti consegna un test esatto.</p>
+
+        <p><strong>Primo: un riempimento è un attraversamento, e gli attraversamenti dentro il range sono certi.</strong> Il prezzo si muove con continuità di tick in tick &mdash; non può teletrasportarsi oltre un prezzo su cui ci sono ordini in attesa. Quindi per andare dal minimo di seduta al massimo deve trattare a ogni prezzo intermedio. Qualunque zona che cada dentro il range massimo-minimo finale della giornata viene perciò toccata con probabilità 1, non con il 78 %. Un gap resta non riempito solo se finisce del tutto fuori dal range.</p>
+
+        <p><strong>La domanda vera quindi non è «i gap si riempiono» ma «i gap cadono dentro il range».</strong> Ed è una domanda su quanta strada fa SPY, senza nulla dentro su che cosa abbia creato la zona.</p>
+
+        <p><strong>Ora mettici i numeri, con l'esempio stesso di questa lezione.</strong> Il gap va da 519,80 $ a 520,20 $, e lo segni con il prezzo a 521,50 $. Il suo bordo più vicino dista 1,30 $. Il range giornaliero di SPY si aggira sull'1 % del prezzo, che a 520 $ fa circa 5,20 $. Il gap sta quindi a un quarto di un range giornaliero tipico da dove il prezzo lo ha lasciato:</p>
+
+<pre><code>bordo del gap al prezzo attuale  521,50 $ - 520,20 $  = 1,30 $
+range giornaliero tipico         1 % di 520 $         = 5,20 $
+distanza come quota del range    1,30 / 5,20          = un quarto</code></pre>
+
+        <p>Chiedersi se il prezzo torna indietro di un quarto del suo range giornaliero, essendoci appena stato, non è una domanda sui gap. Rispondici con una percentuale e avrai descritto lo strumento.</p>
+
+        <p><strong>Il rimedio è un controllo, e ti costa una colonna in più nel diario.</strong> Ogni volta che segni un gap, segna una seconda zona della stessa larghezza e alla stessa distanza dal prezzo nello stesso giorno, scelta senza guardare la forma del grafico &mdash; la stessa distanza nella direzione opposta va benissimo. Traccia se ciascuna si riempie. A quel punto l'unico numero che significhi qualcosa è la differenza:</p>
+
+<pre><code>vantaggio = tasso di riempimento dei gap reali  &#8722;  tasso di riempimento delle zone di controllo appaiate</code></pre>
+
+        <p>Se i tuoi gap si riempiono il 78 % delle volte e i tuoi controlli il 76 %, il gap vale due punti e hai passato un anno a operare un tasso di base. Se i gap si riempiono al 78 % e i controlli al 45 %, hai trovato qualcosa e puoi dimensionare di conseguenza. In entrambi i casi ora hai un risultato invece di una cifra, che è quanto chiedeva la sezione sulle statistiche degli FVG &mdash; questo è solo quella richiesta resa esatta.</p>
       </div>
 
       <h2 id="emmas-71000-auction-illiteracy-disaster">Il disastro da 71.000 $ di Emma per analfabetismo d’asta: quando il timing casuale uccide i rendimenti</h2>
@@ -475,6 +500,7 @@ Qui non viene riportato alcun esito. Questo è un setup, non un'operazione che �
           <li><strong>Range di apertura (primi 30-60 min):</strong> Rivela l’intento istituzionale ed è la tua prima lettura del tipo di giornata</li>
           <li><strong>Quattro schemi di apertura:</strong> Drive (giornata di trend), Test-Drive (inversione), Rejection (trappola), Balance (giornata di laterale)</li>
           <li><strong>I Fair Value Gap segnano spostamento, non prezzo non scambiato:</strong> la zona è stata scambiata, in fretta e in una sola direzione: per questo vale la pena osservarla, e per questo non ne viene citato alcun tasso di riempimento</li>
+          <li><strong>Un riempimento è un attraversamento, quindi qualunque zona dentro il range del giorno si riempie con certezza:</strong> un tasso di riempimento misura quanta strada fa lo strumento, non il gap. Il numero che conta è la differenza fra i tuoi gap e zone di controllo appaiate della stessa larghezza e distanza</li>
           <li><strong>La value area è una mappa, non una valutazione:</strong> VAH e VAL segnano dove l’asta ha già fatto i suoi affari: fadeali nelle giornate di equilibrio, aspettati che cedano nelle giornate di drive, e non leggere mai «sopra il POC» come «caro»</li>
           <li><strong>Sovrapponi Plutus Flow:</strong> Assorbimento di volume agli estremi della value area = posizionamento istituzionale</li>
           <li><strong>Janus + range di apertura:</strong> Sweep sotto il minimo del RA = presa di liquidità prima dell’inversione</li>

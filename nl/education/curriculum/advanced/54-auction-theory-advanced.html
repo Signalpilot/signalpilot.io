@@ -148,6 +148,7 @@
           <li>De vier openingspatronen &mdash; Drive, Test-Drive, Rejection en Balance &mdash; en waartoe elk je verplicht</li>
           <li>Waarom fair value gaps de neiging hebben te vullen, en hoe je de terugkeer trade in plaats van de voortzetting na te jagen</li>
           <li>Hoe je POC, VAH en VAL gebruikt om te zien waar de veiling al heeft gehandeld — en waarom dat een kaart van verwacht gedrag is en geen oordeel over of de prijs duur of goedkoop is</li>
+          <li>Hoe je de basiskans berekent die een vulpercentage moet verslaan, en hoe je de gepaarde controle uitvoert die er een bevinding van maakt</li>
         </ul>
       </div>
 
@@ -226,7 +227,7 @@ Strategie:
           <summary class="accordion-header">Wat maakt een fair value gap?</summary>
           <div class="accordion-content">
             <p><strong>Een patroon van 3 candles waarbij de high van de eerste candle onder de low van de derde ligt</strong>  (of, bij een bearish gap, de eerste low boven de derde high).</p>
-            <p><strong>En hier is wat de meeste beschrijvingen van dit patroon fout hebben, inclusief de veilinganalogie hieronder.</strong> De prijs heeft die zone niet overgeslagen. Hij is er dwars doorheen gehandeld — tijdens candle 2. Elke prijs in het bereik heeft geprint, en bij elke prijs is iemand gevuld. Wat de drie-candlevorm werkelijk markeert is displacement: een beweging die snel genoeg is dat de candle ervoor en die erna elkaar niet overlappen. Dat is iets echts en nuttigs om op te merken, want snelle eenrichtingsbewegingen worden meestal gedreven door size die weg moest, en size die weg moet laat vaak onafgemaakte zaken achter. Maar het is geen onverhandelde gap, en geen enkel veilingprincipe zegt dat de prijs erheen terug moet. Echte onverhandelde gaten bestaan wel degelijk: de overnight gap tussen de slotkoers van gisteren en de opening van vandaag, en het gat over een handelsstop heen. Daar heeft niemand gehandeld, en dat is een ander beest dan wat er op een 5-minutengrafiek wordt getekend. <strong>displacement</strong>: een beweging die snel genoeg is dat de bar ervoor en die erna elkaar niet overlappen.</p>
+            <p><strong>En hier is wat de meeste beschrijvingen van dit patroon fout hebben, inclusief de veilinganalogie hieronder.</strong> De prijs heeft die zone niet overgeslagen. Hij is er handelend dwars doorheen gegaan &mdash; tijdens candle 2. Elke prijs in het bereik heeft geprint, en bij elke prijs is iemand gevuld. Wat de drie-candlevorm werkelijk markeert is <strong>displacement</strong>: een beweging die snel genoeg is dat de candle ervoor en die erna elkaar niet overlappen. Dat is iets echts en nuttigs om op te merken, want snelle eenrichtingsbewegingen komen meestal van omvang die weg moest, en omvang die weg moest laat vaak onafgemaakte zaken achter. Maar het is geen onverhandelde gap, en geen enkel veilingprincipe zegt dat de koers er terug moet komen. Echt onverhandelde gaps bestaan wel degelijk &mdash; de overnight gap tussen de slotkoers van gisteren en de opening van vandaag, en de gap over een handelsonderbreking heen. Dat zijn de gaps waar niemand handelde, en ze zijn van een heel andere orde dan wat op een 5-minutengrafiek wordt getekend.</p>
             <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Bullish FVG (gap omhoog):
 
 Candle 1: hoogste $519,80
@@ -279,6 +280,30 @@ R:R: 3,7R</code></pre>
             <p><strong>Wat je in plaats daarvan moet doen:</strong> markeer de gaps en tel dan je eigen. Noteer hoe breed elke was, hoe lang het duurde tot de prijs de rand raakte, of hij bij het middelpunt stopte, en welk dagtype er heerste toen hij ontstond. Twee maanden daarvan vertellen je meer over je instrument dan welk percentage in welke les dan ook, en je zult zeer waarschijnlijk ontdekken dat brede gaps op trenddagen zich totaal anders gedragen dan smalle gaps op balansdagen — precies het onderscheid dat één samengevoegd getal vernietigt.</p>
           </div>
         </details>
+      </div>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Bereken de basiskans voordat je een vulpercentage gelooft</h4>
+        <p>De sectie hierboven zegt dat een hoog vulpercentage eigenlijk een uitspraak is over hoe ver SPY op een dag aflegt. Dat wordt beweerd, niet aangetoond, en het is de moeite waard om het aan te tonen, want het argument is kort en het levert je een exacte toets.</p>
+
+        <p><strong>Eerst: een vulling is een kruising, en kruisingen binnen de range zijn zeker.</strong> De koers beweegt continu door de ticks &mdash; hij kan zich niet voorbij een prijs teleporteren waar orders liggen. Om van de dagbodem naar de dagtop te komen moet hij dus op elke prijs daartussen handelen. Elke zone die binnen de uiteindelijke hoog-laagrange van de dag valt, wordt daarom met kans 1 geraakt, niet met 78 %. Een gap blijft alleen ongevuld als hij helemaal buiten de range eindigt.</p>
+
+        <p><strong>De echte vraag is dus niet „vullen gaps zich” maar „vallen gaps binnen de range”.</strong> En dat is een vraag over hoe ver SPY aflegt, waar niets in zit over wat de zone heeft veroorzaakt.</p>
+
+        <p><strong>Zet er nu cijfers bij, met het eigen voorbeeld van deze les.</strong> De gap loopt van $519,80 tot $520,20, en je markeert hem met de koers op $521,50. De dichtstbijzijnde rand ligt $1,30 verderop. De dagrange van SPY schommelt rond 1 % van de koers, wat bij $520 ongeveer $5,20 is. De gap ligt dus op een kwart van een typische dagrange van waar de koers hem achterliet:</p>
+
+<pre><code>gaprand tot huidige koers      $521,50 - $520,20  = $1,30
+typische dagrange              1 % van $520       = $5,20
+afstand als deel van de range  1,30 / 5,20        = een kwart</code></pre>
+
+        <p>Vragen of de koers een kwart van zijn dagrange terugkomt, terwijl hij daar zojuist nog was, is geen vraag over gaps. Beantwoord haar met een percentage en je hebt het instrument beschreven.</p>
+
+        <p><strong>De oplossing is een controle, en die kost je één extra kolom in je logboek.</strong> Markeer telkens als je een gap markeert een tweede zone van dezelfde breedte en dezelfde afstand tot de koers op dezelfde dag, gekozen zonder naar de vorm van de grafiek te kijken &mdash; dezelfde afstand de andere kant op volstaat. Houd bij of elk zich vult. Dan is het enige getal dat iets betekent het verschil:</p>
+
+<pre><code>edge = vulpercentage van echte gaps  &#8722;  vulpercentage van gepaarde controlezones</code></pre>
+
+        <p>Vullen je gaps zich 78 % van de tijd en je controles 76 %, dan is de gap twee punten waard en heb je een jaar lang een basiskans verhandeld. Vullen de gaps zich voor 78 % en de controles voor 45 %, dan heb je iets gevonden en kun je ernaar sizen. Hoe dan ook heb je nu een bevinding in plaats van een getal, en dat is precies wat de sectie met FVG-statistieken vroeg &mdash; dit is alleen dat verzoek exact gemaakt.</p>
       </div>
 
       <h2 id="emmas-71000-auction-illiteracy-disaster">Emma’s debacle van $71.000 door veilinganalfabetisme: als willekeurige timing je rendement sloopt</h2>
@@ -475,6 +500,7 @@ Er wordt hier geen uitkomst gemeld. Dit is een setup, geen trade die heeft plaat
           <li><strong>Openingsrange (eerste 30-60 min):</strong> Verraadt de institutionele bedoeling en is je eerste lezing van het dagtype</li>
           <li><strong>Vier openingspatronen:</strong> Drive (trenddag), Test-Drive (omkering), Rejection (val), Balance (rangedag)</li>
           <li><strong>Fair Value Gaps markeren displacement, geen onverhandelde prijs:</strong> de zone is wel degelijk verhandeld, snel en in één richting — daarom is hij het bekijken waard, en daarom wordt er geen fill rate voor genoemd</li>
+          <li><strong>Een vulling is een kruising, dus elke zone binnen de dagrange vult zich met zekerheid:</strong> een vulpercentage meet hoe ver het instrument aflegt, niet de gap. Het getal dat telt is het verschil tussen je gaps en gepaarde controlezones van dezelfde breedte en afstand</li>
           <li><strong>De value area is een kaart, geen waardering:</strong> VAH en VAL markeren waar de veiling haar zaken al heeft gedaan — fade ze op balansdagen, verwacht dat ze breken op drive-dagen, en lees "boven POC" nooit als "duur"</li>
           <li><strong>Combineer met Plutus Flow:</strong> Volumeopname aan de randen van de value area = institutionele positionering</li>
           <li><strong>Janus + openingsrange:</strong> Sweeps onder de bodem van de OR = liquiditeitsgreep vóór de omkering</li>

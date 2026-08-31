@@ -148,6 +148,7 @@
           <li>Los cuatro patrones de apertura &mdash; Drive, Test-Drive, Rejection y Balance &mdash; y a qué te compromete cada uno</li>
           <li>Por qué los fair value gaps tienden a cerrarse, y cómo operar la vuelta en lugar de perseguir la continuación</li>
           <li>Cómo usar POC, VAH y VAL para ver dónde ha transaccionado ya la subasta, y por qué eso es un mapa de comportamiento esperado y no un juicio sobre si el precio está caro o barato</li>
+          <li>Cómo calcular la tasa base que cualquier estadística de relleno tiene que superar, y cómo montar el control emparejado que la convierte en un hallazgo</li>
         </ul>
       </div>
 
@@ -226,7 +227,7 @@ Estrategia:
           <summary class="accordion-header">¿Qué crea un hueco de valor justo?</summary>
           <div class="accordion-content">
             <p><strong>Un patrón de 3 velas en el que el máximo de la primera vela queda por debajo del mínimo de la tercera</strong>  (o, en un gap bajista, el primer mínimo por encima del tercer máximo).</p>
-            <p><strong>Y aquí está lo que la mayoría de las descripciones de este patrón se equivocan, incluida la analogía de la subasta de más abajo.</strong> El precio no se saltó esa zona. La negoció de lado a lado, durante la vela 2. Todos los precios del rango se imprimieron y alguien fue ejecutado en cada uno. Lo que la forma de tres velas marca en realidad es desplazamiento: un movimiento lo bastante rápido como para que la vela anterior y la posterior no se solapen. Eso es algo real y útil de observar, porque los movimientos rápidos y unidireccionales suelen venir de tamaño que tenía que ejecutarse, y el tamaño que tiene que ejecutarse suele dejar asuntos pendientes. Pero no es un hueco sin negociar, y ningún principio de subasta dice que el precio deba volver a él. Los huecos verdaderamente sin negociar sí existen: el gap nocturno entre el cierre de ayer y la apertura de hoy, y el hueco a través de una suspensión de cotización. Ahí es donde nadie transaccionó, y son un animal distinto de lo que se dibuja en un gráfico de 5 minutos. <strong>desplazamiento</strong>: un movimiento lo bastante rápido como para que la vela anterior y la posterior no se solapen.</p>
+            <p><strong>Y aquí está lo que la mayoría de las descripciones de este patrón se equivocan, incluida la analogía de la subasta de más abajo.</strong> El precio no se saltó esa zona. La negoció de lado a lado &mdash; durante la vela 2. Todos los precios del rango imprimieron, y en cada uno alguien fue ejecutado. Lo que la figura de tres velas marca en realidad es <strong>desplazamiento</strong>: un movimiento lo bastante rápido como para que la vela anterior y la posterior no se solapen. Eso es algo real y útil de notar, porque los movimientos rápidos en una sola dirección suelen venir de tamaño que tenía que ejecutarse, y el tamaño que tenía que ejecutarse a menudo deja negocio sin terminar. Pero no es un hueco sin negociar, y ningún principio de subasta dice que el precio deba volver a él. Los huecos sin negociar de verdad sí existen &mdash; el hueco nocturno entre el cierre de ayer y la apertura de hoy, y el hueco de una interrupción de la negociación. Esos son los que nadie negoció, y son un animal distinto de lo que se dibuja en un gráfico de 5 minutos.</p>
             <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>FVG alcista (hueco al alza):
 
 Vela 1: máximo 519,80 $
@@ -279,6 +280,30 @@ R:R: 3,7R</code></pre>
             <p><strong>Qué hacer en su lugar:</strong> marca los huecos y luego cuenta los tuyos. Anota lo ancho que era cada uno, cuánto tardó el precio en tocar su borde, si se detuvo en el punto medio y qué tipo de día era cuando se formó. Dos meses de eso te dirán más sobre tu instrumento que cualquier porcentaje de cualquier lección, y muy probablemente descubrirás que los huecos anchos en días de tendencia se comportan de manera completamente distinta que los estrechos en días de equilibrio, que es exactamente la distinción que una única cifra mezclada destruye.</p>
           </div>
         </details>
+      </div>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Calcula la tasa base antes de creerte ninguna tasa de relleno</h4>
+        <p>La sección anterior dice que un porcentaje de relleno alto es en realidad una afirmación sobre cuánto recorre SPY en un día. Eso se afirma, no se demuestra, y vale la pena demostrarlo, porque el argumento es corto y te entrega una prueba exacta.</p>
+
+        <p><strong>Primero: un relleno es un cruce, y los cruces dentro del rango son seguros.</strong> El precio se mueve de forma continua por los ticks: no puede teletransportarse por encima de un precio donde hay órdenes esperando. Así que para ir del mínimo del día al máximo tiene que negociar en cada precio intermedio. Cualquier zona que quede dentro del rango máximo-mínimo final del día se toca, por tanto, con probabilidad 1, no con un 78 %. Un hueco solo deja de rellenarse cuando acaba del todo fuera del rango.</p>
+
+        <p><strong>Así que la pregunta real no es «¿se rellenan los huecos?» sino «¿caen los huecos dentro del rango?».</strong> Y esa es una pregunta sobre cuánto recorre SPY, sin nada dentro sobre qué creó la zona.</p>
+
+        <p><strong>Ahora ponle números, con el propio ejemplo de esta lección.</strong> El hueco va de 519,80 $ a 520,20 $, y lo marcas con el precio en 521,50 $. Su borde más cercano está a 1,30 $. El rango diario de SPY ronda el 1 % del precio, que a 520 $ son unos 5,20 $. El hueco queda, pues, a un cuarto de un rango diario típico de donde el precio lo dejó:</p>
+
+<pre><code>borde del hueco al precio actual  521,50 $ - 520,20 $  = 1,30 $
+rango diario típico               1 % de 520 $         = 5,20 $
+distancia como parte del rango    1,30 / 5,20          = un cuarto</code></pre>
+
+        <p>Preguntar si el precio vuelve un cuarto de su rango diario, habiendo estado allí hace nada, no es una pregunta sobre huecos. Respóndela con un porcentaje y habrás descrito el instrumento.</p>
+
+        <p><strong>El arreglo es un control, y te cuesta una columna más en el diario.</strong> Cada vez que marques un hueco, marca una segunda zona del mismo ancho y a la misma distancia del precio ese mismo día, elegida sin mirar la forma del gráfico: la misma distancia en dirección contraria sirve. Anota si cada una se rellena. Entonces el único número con significado es la diferencia:</p>
+
+<pre><code>ventaja = tasa de relleno de huecos reales  &#8722;  tasa de relleno de zonas de control emparejadas</code></pre>
+
+        <p>Si tus huecos se rellenan el 78 % de las veces y tus controles el 76 %, el hueco vale dos puntos y llevas un año operando una tasa base. Si los huecos se rellenan el 78 % y los controles el 45 %, has encontrado algo y puedes dimensionar en consecuencia. En cualquier caso ya tienes un hallazgo en vez de una cifra, que es lo que pedía la sección de estadísticas de FVG: esto no es más que esa petición hecha exacta.</p>
       </div>
 
       <h2 id="emmas-71000-auction-illiteracy-disaster">El desastre de 71.000 $ de Emma por analfabetismo de subastas: cuando un timing aleatorio mata la rentabilidad</h2>
@@ -475,6 +500,7 @@ Aquí no se informa de ningún resultado. Esto es un setup, no una operación qu
           <li><strong>Rango de apertura (primeros 30-60 min):</strong> Revela la intención institucional y es tu primera lectura del tipo de día</li>
           <li><strong>Cuatro patrones de apertura:</strong> Drive (día de tendencia), Test-Drive (vuelta), Rejection (trampa), Balance (día de rango)</li>
           <li><strong>Los Fair Value Gaps marcan desplazamiento, no precio sin negociar:</strong> la zona sí se negoció, rápido y en una dirección; por eso merece la pena vigilarla, y por eso no se cita ninguna tasa de relleno para ella</li>
+          <li><strong>Un relleno es un cruce, así que cualquier zona dentro del rango del día se rellena con certeza:</strong> una tasa de relleno mide cuánto recorre el instrumento, no el hueco. El número que importa es la diferencia entre tus huecos y zonas de control emparejadas del mismo ancho y la misma distancia</li>
           <li><strong>El área de valor es un mapa, no una valoración:</strong> VAH y VAL marcan dónde la subasta ya ha hecho su trabajo: fadéalos en días de equilibrio, espera que se rompan en días de drive, y nunca leas «por encima del POC» como «caro»</li>
           <li><strong>Superponer Plutus Flow:</strong> Absorción de volumen en los extremos del valor = posicionamiento institucional</li>
           <li><strong>Janus + rango de apertura:</strong> Barridos bajo el mínimo del RA = captura de liquidez antes de la vuelta</li>

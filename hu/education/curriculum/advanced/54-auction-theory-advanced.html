@@ -148,6 +148,7 @@
           <li>A négy nyitási minta &mdash; Drive, Test-Drive, Rejection és Balance &mdash; és hogy melyik mire kötelez</li>
           <li>Miért hajlamosak a fair value gapek betöltődni, és hogyan kereskedd a visszatérést ahelyett, hogy a folytatást kergetnéd</li>
           <li>Hogyan használd a POC-ot, a VAH-ot és a VAL-t annak megnézésére, hol kötött már az árverés – és miért a várható viselkedés térképe ez, nem pedig ítélet arról, hogy az ár drága vagy olcsó</li>
+          <li>Hogyan számolja ki azt az alapgyakoriságot, amelyet egy kitöltési aránynak meg kell vernie, és hogyan futtassa a párosított kontrollt, amely eredménnyé teszi</li>
         </ul>
       </div>
 
@@ -226,7 +227,7 @@ Stratégia:
           <summary class="accordion-header">Mi hoz létre egy fair value gapet?</summary>
           <div class="accordion-content">
             <p><strong>Háromgyertyás mintázat, amelyben az első gyertya csúcsa a harmadik gyertya mélypontja alatt van</strong>  (vagy eső rés esetén az első mélypont a harmadik csúcs fölött).</p>
-            <p><strong>És most jön az, amit e mintázat legtöbb leírása félreért – beleértve az alábbi árverés-hasonlatot is.</strong> Az ár nem ugrotta át azt a zónát. Kereskedve haladt át rajta – a 2. gyertya alatt. A sáv minden ára kinyomódott, és mindegyiken teljesült valaki. Amit a háromgyertyás alakzat valójában jelöl, az az elmozdulás: olyan gyors mozgás, hogy az előtte és utána lévő gyertya nem fedi át egymást. Ez valóságos és érdemes észrevenni, mert a gyors, egyirányú mozgásokat rendszerint olyan méret hajtja, amelyet le kellett tenni, és az ilyen méret gyakran hagy maga után elvarratlan szálakat. De ez nem kereskedés nélküli rés, és semmilyen árverési elv nem mondja, hogy az árnak vissza kell térnie oda. Valóban kereskedés nélküli hézagok léteznek: a tegnapi zárás és a mai nyitás közötti éjszakai rés, és a kereskedési szünetet átugró hézag. Ott tényleg senki nem kötött üzletet, és ez más állat, mint amit egy 5 perces grafikonra rajzolnak. <strong>displacement</strong>: olyan gyors mozgás, hogy az előtte és az utána lévő rúd nem fedi át egymást.</p>
+            <p><strong>És most jön az, amit e mintázat legtöbb leírása félreért – beleértve az alábbi árverés-hasonlatot is.</strong> Az ár nem ugrotta át azt a zónát. Kereskedve haladt át rajta &mdash; a 2. gyertya alatt. A sáv minden ára kinyomódott, és mindegyiken teljesült valaki. Amit a háromgyertyás alakzat valójában jelöl, az a <strong>displacement</strong>: olyan gyors mozgás, hogy az előtte és az utána lévő gyertya nem fedi át egymást. Ez valós és érdemes észrevenni, mert a gyors, egyirányú mozgásokat rendszerint olyan méret hajtja, amelyet le kellett kereskedni, és az ilyen méret gyakran hagy maga után befejezetlen ügyet. De ez nem egy le nem kereskedett rés, és semmilyen aukciós elv nem mondja, hogy az árnak vissza kellene térnie oda. Valóban le nem kereskedett rések léteznek &mdash; a tegnapi zárás és a mai nyitás közötti éjszakai rés, és a kereskedés felfüggesztésén átívelő rés. Ezekben nem kötött senki, és teljesen más állat, mint amit egy 5 perces charton berajzolnak.</p>
             <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Emelkedő FVG (felfelé gap):
 
 1. gyertya: csúcs 519,80 dollár
@@ -279,6 +280,30 @@ R:R: 3,7R</code></pre>
             <p><strong>Mit tegyél helyette:</strong> jelöld be a réseket, aztán számold meg a sajátjaidat. Rögzítsd, mennyire volt széles mindegyik, mennyi idő telt el, míg az ár megérintette a szélét, megállt-e a felezőpontnál, és milyen naptípus volt, amikor kialakult. Ennek két hónapja többet mond majd az instrumentumodról, mint bármely százalék bármely leckében, és nagy valószínűséggel azt találod, hogy a trendnapok széles rései semmiben sem hasonlítanak az egyensúlyi napok szűk réseihez – pontosan ezt a különbséget rombolja szét egyetlen összemosott szám.</p>
           </div>
         </details>
+      </div>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Számolja ki az alapgyakoriságot, mielőtt bármely kitöltési aránynak hinne</h4>
+        <p>A fenti szakasz azt mondja, hogy egy magas kitöltési százalék valójában arról szól, mekkora utat tesz meg a SPY egy nap alatt. Ezt állítja, de nem mutatja meg &mdash; és érdemes megmutatni, mert az érvelés rövid, és pontos tesztet ad a kezébe.</p>
+
+        <p><strong>Először is: a kitöltés egy áthaladás, és a terjedelmen belüli áthaladások biztosak.</strong> Az ár folytonosan halad a tickeken keresztül &mdash; nem tud átteleportálni olyan ár fölött, ahol megbízások várakoznak. Ahhoz tehát, hogy a napi mélypontról a csúcsra jusson, közben minden áron kereskednie kell. Bármely zóna, amely a nap végleges csúcs-mélypont terjedelmén belülre esik, ezért 1 valószínűséggel kap érintést, nem 78 %-kal. Egy rés csak akkor marad kitöltetlen, ha teljes egészében a terjedelmen kívülre kerül.</p>
+
+        <p><strong>A valódi kérdés tehát nem az, hogy „kitöltődnek-e a rések”, hanem az, hogy „a terjedelmen belülre esnek-e a rések”.</strong> Ez pedig arról szól, mekkora utat tesz meg a SPY, és semmit nem tartalmaz arról, mi hozta létre a zónát.</p>
+
+        <p><strong>Most tegyünk mellé számokat, a lecke saját példájával.</strong> A rés 519,80 dollártól 520,20 dollárig tart, és Ön 521,50 dolláros árfolyamnál jelöli be. A közelebbi széle 1,30 dollárra van. A SPY napi terjedelme az ár nagyjából 1 %-a, ami 520 dollárnál körülbelül 5,20 dollár. A rés tehát egy tipikus napi terjedelem egynegyedére van attól a ponttól, ahol az ár elhagyta:</p>
+
+<pre><code>a rés széle a jelenlegi árig       521,50 $ - 520,20 $  = 1,30 $
+tipikus napi terjedelem            520 $ 1 %-a          = 5,20 $
+a távolság a terjedelem arányában  1,30 / 5,20          = egynegyed</code></pre>
+
+        <p>Azt kérdezni, hogy az ár visszatér-e a napi terjedelme egynegyedét, miután épp ott járt, nem a résekről szóló kérdés. Válaszoljon rá egy százalékkal, és az eszközt írta le.</p>
+
+        <p><strong>A gyógymód egy kontroll, és egyetlen többletoszlopba kerül a naplóban.</strong> Valahányszor bejelöl egy rést, jelöljön be ugyanazon a napon egy második zónát is, azonos szélességgel és az ártól azonos távolságra, a chart alakjára rá sem nézve &mdash; ugyanaz a távolság az ellenkező irányba megteszi. Kövesse, kitöltődik-e mindegyik. Ezután az egyetlen értelmes szám a különbség:</p>
+
+<pre><code>előny = a valódi rések kitöltési aránya  &#8722;  a párosított kontrollzónák kitöltési aránya</code></pre>
+
+        <p>Ha a rései az esetek 78 %-ában, a kontrolljai 76 %-ában töltődnek ki, akkor a rés két pontot ér, és egy éven át egy alapgyakoriságot kereskedett. Ha a rések 78 %-ban, a kontrollok 45 %-ban töltődnek ki, talált valamit, és méretezhet rá. Így vagy úgy, most már eredménye van, nem pusztán egy száma &mdash; és pontosan ezt kérte az FVG-statisztikákról szóló szakasz; ez csupán az a kérés, pontosra fogalmazva.</p>
       </div>
 
       <h2 id="emmas-71000-auction-illiteracy-disaster">Emma 71 000 dolláros bukása aukciós analfabetizmus miatt: amikor a véletlenszerű időzítés megöli a hozamot</h2>
@@ -475,6 +500,7 @@ Itt semmilyen kimenetelt nem közlünk. Ez egy beállítás, nem megtörtént ke
           <li><strong>Nyitó sáv (első 30-60 perc):</strong> Elárulja az intézményi szándékot, és ez az első olvasatod a nap típusáról</li>
           <li><strong>Négy nyitási minta:</strong> Drive (trendnap), Test-Drive (fordulat), Rejection (csapda), Balance (oldalazó nap)</li>
           <li><strong>A Fair Value Gap elmozdulást jelöl, nem kereskedés nélküli árat:</strong> a zóna igenis kereskedett, gyorsan és egy irányba – ezért érdemes figyelni, és ezért nem idézünk hozzá kitöltési arányt</li>
+          <li><strong>A kitöltés áthaladás, így a napi terjedelmen belüli bármely zóna biztosan kitöltődik:</strong> a kitöltési arány azt méri, mekkora utat tesz meg az eszköz, nem a rést. Az számít, mekkora a különbség a saját rései és az azonos szélességű, azonos távolságú párosított kontrollzónák között</li>
           <li><strong>Az értékzóna térkép, nem értékítélet:</strong> A VAH és a VAL azt jelöli, hol végezte el az árverés már a dolgát – egyensúlyi napokon fadeld őket, drive napokon számíts arra, hogy elesnek, és soha ne olvasd a „POC fölött"-öt „drágának"</li>
           <li><strong>Rétegezd a Plutus Flow-val:</strong> Forgalomfelszívás a value area szélein = intézményi pozicionálás</li>
           <li><strong>Janus + nyitó sáv:</strong> Sweep a nyitó sáv alja alá = likviditásszerzés a fordulat előtt</li>

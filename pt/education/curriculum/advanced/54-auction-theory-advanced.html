@@ -148,6 +148,7 @@
           <li>Os quatro padrões de abertura &mdash; Drive, Test-Drive, Rejection e Balance &mdash; e aquilo a que cada um o compromete</li>
           <li>Porque é que os fair value gaps tendem a fechar, e como operar o regresso em vez de perseguir a continuação</li>
           <li>Como usar POC, VAH e VAL para ver onde o leilão já transaccionou — e por que isso é um mapa de comportamento esperado e não um juízo sobre o preço estar caro ou barato</li>
+          <li>Como calcular a taxa base que uma estatística de preenchimento tem de bater, e como montar o controlo emparelhado que a transforma num achado</li>
         </ul>
       </div>
 
@@ -226,7 +227,7 @@ Estratégia:
           <summary class="accordion-header">O que cria um fair value gap?</summary>
           <div class="accordion-content">
             <p><strong>Um padrão de 3 velas em que o máximo da primeira vela fica abaixo do mínimo da terceira</strong>  (ou, num gap descendente, o primeiro mínimo acima do terceiro máximo).</p>
-            <p><strong>E aqui está aquilo que a maior parte das descrições deste padrão erra, incluindo a analogia do leilão mais abaixo.</strong> O preço não saltou aquela zona. Negociou através dela — durante a vela 2. Todos os preços do intervalo foram impressos e alguém foi executado em cada um deles. O que a forma de três velas marca na verdade é deslocamento: um movimento suficientemente rápido para que a vela anterior e a seguinte não se sobreponham. Isso é algo real e útil de notar, porque movimentos rápidos e unidirecionais costumam ser impulsionados por size que tinha de ser executada, e size que tem de ser executada costuma deixar assuntos por resolver. Mas não é um gap por negociar, e nenhum princípio de leilão diz que o preço tem de lá voltar. Buracos verdadeiramente por negociar existem: o gap nocturno entre o fecho de ontem e a abertura de hoje, e o buraco através de uma suspensão de negociação. É aí que ninguém transaccionou, e são um animal diferente daquilo que se desenha num gráfico de 5 minutos. <strong>deslocamento</strong>: um movimento suficientemente rápido para que a barra anterior e a seguinte não se sobreponham.</p>
+            <p><strong>E aqui está aquilo que a maior parte das descrições deste padrão erra, incluindo a analogia do leilão mais abaixo.</strong> O preço não saltou aquela zona. Negociou através dela &mdash; durante a vela 2. Todos os preços do intervalo imprimiram, e em cada um deles alguém foi executado. O que a figura de três velas marca na verdade é <strong>deslocamento</strong>: um movimento suficientemente rápido para que a vela anterior e a seguinte não se sobreponham. Isso é uma coisa real e útil de notar, porque os movimentos rápidos num só sentido costumam vir de dimensão que tinha de ser executada, e a dimensão que tinha de ser executada deixa muitas vezes negócio por terminar. Mas não é um gap por negociar, e nenhum princípio de leilão diz que o preço tem de lá voltar. Gaps verdadeiramente por negociar existem &mdash; o gap nocturno entre o fecho de ontem e a abertura de hoje, e o gap que atravessa uma suspensão de negociação. Esses são aqueles em que ninguém transacionou, e são um animal diferente do que se desenha num gráfico de 5 minutos.</p>
             <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>FVG de alta (gap para cima):
 
 Candle 1: máxima 519,80 $
@@ -279,6 +280,30 @@ R:R: 3,7R</code></pre>
             <p><strong>O que fazer em vez disso:</strong> marca os gaps, e depois conta os teus. Anota a largura de cada um, quanto tempo passou até o preço tocar a sua borda, se parou no ponto médio, e que tipo de dia era quando se formou. Dois meses disso vão dizer-te mais sobre o teu instrumento do que qualquer percentagem em qualquer lição, e é muito provável que descubras que gaps largos em dias de tendência se comportam de forma completamente diferente de gaps estreitos em dias de equilíbrio — exactamente a distinção que um único número misturado destrói.</p>
           </div>
         </details>
+      </div>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Calcule a taxa base antes de acreditar em qualquer taxa de preenchimento</h4>
+        <p>A secção acima diz que uma percentagem de preenchimento alta é, na verdade, uma afirmação sobre a distância que o SPY percorre num dia. Isso é afirmado, não demonstrado, e vale a pena demonstrar, porque o argumento é curto e entrega-lhe um teste exato.</p>
+
+        <p><strong>Primeiro: um preenchimento é um cruzamento, e os cruzamentos dentro da amplitude são certos.</strong> O preço move-se continuamente pelos ticks &mdash; não pode teletransportar-se para lá de um preço onde há ordens à espera. Portanto, para ir do mínimo da sessão ao máximo tem de negociar em cada preço pelo meio. Qualquer zona que fique dentro da amplitude máximo-mínimo final do dia é, por isso, tocada com probabilidade 1, e não com 78 %. Um gap só fica por preencher quando acaba inteiramente fora da amplitude.</p>
+
+        <p><strong>A pergunta verdadeira não é, então, «os gaps preenchem-se» mas «os gaps caem dentro da amplitude».</strong> E essa é uma pergunta sobre a distância que o SPY percorre, sem nada lá dentro sobre o que criou a zona.</p>
+
+        <p><strong>Ponha-lhe agora números, com o próprio exemplo desta lição.</strong> O gap vai de 519,80 $ a 520,20 $, e marca-o com o preço em 521,50 $. O seu bordo mais próximo está a 1,30 $. A amplitude diária do SPY ronda 1 % do preço, o que a 520 $ dá cerca de 5,20 $. O gap fica, portanto, a um quarto de uma amplitude diária típica de onde o preço o deixou:</p>
+
+<pre><code>bordo do gap ao preço atual        521,50 $ - 520,20 $  = 1,30 $
+amplitude diária típica            1 % de 520 $         = 5,20 $
+distância como parte da amplitude  1,30 / 5,20          = um quarto</code></pre>
+
+        <p>Perguntar se o preço volta um quarto da sua amplitude diária, tendo lá estado agora mesmo, não é uma pergunta sobre gaps. Responda-lhe com uma percentagem e terá descrito o instrumento.</p>
+
+        <p><strong>A solução é um controlo, e custa-lhe uma coluna a mais no diário.</strong> Sempre que marcar um gap, marque uma segunda zona da mesma largura e à mesma distância do preço no mesmo dia, escolhida sem olhar para a forma do gráfico &mdash; a mesma distância no sentido contrário serve. Registe se cada uma se preenche. Aí o único número com significado é a diferença:</p>
+
+<pre><code>vantagem = taxa de preenchimento dos gaps reais  &#8722;  taxa de preenchimento das zonas de controlo emparelhadas</code></pre>
+
+        <p>Se os seus gaps se preencherem 78 % das vezes e os seus controlos 76 %, o gap vale dois pontos e passou um ano a negociar uma taxa base. Se os gaps se preencherem a 78 % e os controlos a 45 %, encontrou alguma coisa e pode dimensionar em conformidade. Em qualquer dos casos passa a ter um achado em vez de um número, que era o que a secção de estatísticas de FVG pedia &mdash; isto é apenas esse pedido tornado exato.</p>
       </div>
 
       <h2 id="emmas-71000-auction-illiteracy-disaster">O desastre de 71.000 $ de Emma por analfabetismo de leilões: quando o timing aleatório mata o retorno</h2>
@@ -475,6 +500,7 @@ Não é reportado aqui qualquer resultado. Isto é um setup, não uma operação
           <li><strong>Range de abertura (primeiros 30-60 min):</strong> Revela a intenção institucional e é sua primeira leitura do tipo de dia</li>
           <li><strong>Quatro padrões de abertura:</strong> Drive (dia de tendência), Test-Drive (reversão), Rejection (armadilha), Balance (dia lateral)</li>
           <li><strong>Os Fair Value Gaps marcam deslocamento, não preço não negociado:</strong> a zona foi negociada, depressa e numa só direção — é por isso que vale a pena vigiá-la, e por isso não se cita qualquer taxa de preenchimento para ela</li>
+          <li><strong>Um preenchimento é um cruzamento, logo qualquer zona dentro da amplitude do dia preenche-se com certeza:</strong> uma taxa de preenchimento mede a distância que o instrumento percorre, não o gap. O número que interessa é a diferença entre os seus gaps e zonas de controlo emparelhadas da mesma largura e distância</li>
           <li><strong>A área de valor é um mapa, não uma avaliação:</strong> VAH e VAL marcam onde o leilão já fez o seu trabalho — fadeia-os em dias de equilíbrio, espera que cedam em dias de drive, e nunca leias «acima do POC» como «caro»</li>
           <li><strong>Sobreponha o Plutus Flow:</strong> Absorção de volume nos extremos do valor = posicionamento institucional</li>
           <li><strong>Janus + range de abertura:</strong> Sweeps abaixo da mínima do RA = captura de liquidez antes da reversão</li>

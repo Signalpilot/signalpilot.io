@@ -148,6 +148,7 @@
           <li>Les quatre figures d’ouverture &mdash; Drive, Test-Drive, Rejection et Balance &mdash; et ce à quoi chacune vous engage</li>
           <li>Pourquoi les fair value gaps ont tendance à se combler, et comment trader le retour plutôt que courir après la continuation</li>
           <li>Comment utiliser POC, VAH et VAL pour voir où l'enchère a déjà traité — et pourquoi c'est une carte des comportements attendus plutôt qu'un jugement sur la cherté du prix</li>
+          <li>Comment calculer le taux de base qu'un taux de comblement doit battre, et comment mener le contrôle apparié qui en fait un résultat</li>
         </ul>
       </div>
 
@@ -226,7 +227,7 @@ Stratégie :
           <summary class="accordion-header">Qu’est-ce qui crée un fair value gap ?</summary>
           <div class="accordion-content">
             <p><strong>Une figure de 3 bougies où le plus haut de la première se situe sous le plus bas de la troisième</strong>  (ou, pour un gap baissier, le premier plus bas au-dessus du troisième plus haut).</p>
-            <p><strong>Et voici ce que la plupart des descriptions de cette figure se trompent, y compris l'analogie de l'enchère ci-dessous.</strong> Le prix n'a pas sauté cette zone. Il l'a traversée en négociant — pendant la bougie 2. Tous les prix de l'intervalle ont imprimé, et quelqu'un a été exécuté à chacun d'eux. Ce que la forme en trois bougies marque réellement, c'est un déplacement : un mouvement assez rapide pour que la bougie d'avant et celle d'après ne se chevauchent pas. C'est une chose réelle et utile à remarquer, car les mouvements rapides et unidirectionnels sont généralement portés par de la taille qui devait être exécutée, et la taille qui doit être exécutée laisse souvent des affaires inachevées. Mais ce n'est pas un gap non traité, et aucun principe d'enchère n'exige que le prix y revienne. De vrais trous non traités existent bel et bien : le gap de nuit entre la clôture de la veille et l'ouverture du jour, et le trou à travers une suspension de cotation. C'est là que personne n'a transigé, et c'est une bête différente de ce qu'on trace sur un graphique en 5 minutes. <strong>déplacement</strong> : un mouvement assez rapide pour que la bougie d'avant et celle d'après ne se chevauchent pas.</p>
+            <p><strong>Et voici ce que la plupart des descriptions de cette figure se trompent, y compris l'analogie de l'enchère ci-dessous.</strong> Le prix n'a pas sauté cette zone. Il l'a traversée en traitant &mdash; pendant la bougie 2. Chaque prix de la plage a imprimé, et à chacun quelqu'un a été exécuté. Ce que la figure en trois bougies marque réellement, c'est un <strong>déplacement</strong> : un mouvement assez rapide pour que la bougie d'avant et celle d'après ne se chevauchent pas. C'est une chose réelle et utile à remarquer, car les mouvements rapides à sens unique viennent généralement d'une taille qui devait être exécutée, et une taille qui devait être exécutée laisse souvent des affaires en suspens. Mais ce n'est pas un gap non traité, et aucun principe d'enchère ne dit que le prix doit y revenir. De vrais gaps non traités existent bel et bien &mdash; le gap de nuit entre la clôture d'hier et l'ouverture d'aujourd'hui, et le gap qui enjambe une suspension de cotation. Ce sont ceux où personne n'a transigé, et ils n'ont rien à voir avec ce qu'on trace sur un graphique en 5 minutes.</p>
             <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>FVG haussier (gap à la hausse) :
 
 Bougie 1 : plus haut 519,80 $
@@ -279,6 +280,30 @@ R:R : 3,7R</code></pre>
             <p><strong>Que faire à la place :</strong> marquez les gaps, puis comptez les vôtres. Notez la largeur de chacun, le temps mis par le prix pour en toucher le bord, s'il s'est arrêté au milieu, et le type de journée lors de sa formation. Deux mois de cela vous en apprendront davantage sur votre instrument que n'importe quel pourcentage dans n'importe quelle leçon, et vous découvrirez très probablement que les gaps larges des journées de tendance se comportent tout autrement que les gaps étroits des journées d'équilibre — exactement la distinction qu'un chiffre unique et mélangé détruit.</p>
           </div>
         </details>
+      </div>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Calculez le taux de base avant de croire un taux de comblement</h4>
+        <p>La section ci-dessus affirme qu'un pourcentage de comblement élevé est en réalité une affirmation sur la distance que parcourt SPY dans une journée. C'est affirmé, non démontré, et cela vaut la peine de le démontrer : l'argument est court et il vous donne un test exact.</p>
+
+        <p><strong>D'abord : un comblement est un franchissement, et les franchissements à l'intérieur de l'amplitude sont certains.</strong> Le prix se déplace continûment de tick en tick &mdash; il ne peut pas se téléporter au-delà d'un prix où des ordres attendent. Pour aller du plus bas au plus haut de la séance, il doit donc traiter à chaque prix intermédiaire. Toute zone située à l'intérieur de l'amplitude haut-bas finale du jour est donc touchée avec une probabilité de 1, pas de 78 %. Un gap ne reste non comblé que s'il finit entièrement hors de l'amplitude.</p>
+
+        <p><strong>La vraie question n'est donc pas « les gaps se comblent-ils » mais « les gaps tombent-ils dans l'amplitude ».</strong> Et c'est une question sur la distance parcourue par SPY, où rien ne porte sur ce qui a créé la zone.</p>
+
+        <p><strong>Mettons-y des chiffres, avec l'exemple de cette leçon.</strong> Le gap va de 519,80 $ à 520,20 $, et vous le marquez avec le prix à 521,50 $. Son bord le plus proche est à 1,30 $. L'amplitude quotidienne de SPY tourne autour de 1 % du prix, soit environ 5,20 $ à 520 $. Le gap se situe donc à un quart d'une amplitude quotidienne typique de l'endroit que le prix vient de quitter :</p>
+
+<pre><code>bord du gap au prix actuel       521,50 $ - 520,20 $  = 1,30 $
+amplitude quotidienne typique    1 % de 520 $         = 5,20 $
+distance en part de l'amplitude  1,30 / 5,20          = un quart</code></pre>
+
+        <p>Demander si le prix revient d'un quart de son amplitude quotidienne, alors qu'il y était à l'instant, n'est pas une question sur les gaps. Répondez-y par un pourcentage et vous aurez décrit l'instrument.</p>
+
+        <p><strong>Le remède est un contrôle, et il vous coûte une colonne de plus dans le journal.</strong> Chaque fois que vous marquez un gap, marquez une seconde zone de même largeur et à la même distance du prix le même jour, choisie sans regarder la forme du graphique &mdash; la même distance dans l'autre sens fera l'affaire. Notez si chacune se comble. Alors le seul chiffre qui veuille dire quelque chose est l'écart :</p>
+
+<pre><code>avantage = taux de comblement des vrais gaps  &#8722;  taux de comblement des zones témoins appariées</code></pre>
+
+        <p>Si vos gaps se comblent 78 % du temps et vos contrôles 76 %, le gap vaut deux points et vous avez passé un an à trader un taux de base. Si les gaps se comblent à 78 % et les contrôles à 45 %, vous avez trouvé quelque chose et vous pouvez dimensionner en conséquence. Dans les deux cas vous avez désormais un résultat plutôt qu'un chiffre, ce que demandait la section sur les statistiques de FVG &mdash; ceci n'est que cette demande rendue exacte.</p>
       </div>
 
       <h2 id="emmas-71000-auction-illiteracy-disaster">Le désastre à 71 000 $ d’Emma, illettrée des enchères : quand un timing au hasard tue le rendement</h2>
@@ -475,6 +500,7 @@ Aucun résultat n'est rapporté ici. C'est un setup, non un trade qui a eu lieu.
           <li><strong>Range d’ouverture (30-60 premières min) :</strong> Révèle l’intention institutionnelle et donne votre première lecture du type de journée</li>
           <li><strong>Quatre schémas d’ouverture :</strong> Drive (journée de tendance), Test-Drive (retournement), Rejection (piège), Balance (journée de range)</li>
           <li><strong>Les Fair Value Gaps marquent un déplacement, non un prix non traité :</strong> la zone a bien été traitée, rapidement et dans un seul sens — c'est pourquoi elle mérite d'être surveillée, et pourquoi aucun taux de comblement n'est cité</li>
+          <li><strong>Un comblement est un franchissement, donc toute zone à l'intérieur de l'amplitude du jour se comble à coup sûr :</strong> un taux de comblement mesure la distance parcourue par l'instrument, pas le gap. Le chiffre qui compte est l'écart entre vos gaps et des zones témoins appariées de même largeur et de même distance</li>
           <li><strong>La zone de valeur est une carte, non une valorisation :</strong> VAH et VAL marquent l'endroit où l'enchère a déjà fait ses affaires — fadez-les lors des journées d'équilibre, attendez qu'ils cèdent les jours de drive, et ne lisez jamais « au-dessus du POC » comme « cher »</li>
           <li><strong>Superposer Plutus Flow :</strong> Absorption de volume aux extrêmes de la value area = positionnement institutionnel</li>
           <li><strong>Janus + range d’ouverture :</strong> Sweeps sous le plus bas du RO = prise de liquidité avant le retournement</li>
