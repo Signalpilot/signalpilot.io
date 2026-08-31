@@ -29,7 +29,7 @@ still tell whether I read one.
    narrative that needs them, sequences kept consecutive.
 5. **Reword only at seams**, and only where a sentence is *false against the
    lesson's own spine*. A passage already at S stays exactly as written.
-6. **Read it again**, then run `scripts/i18n/checks/run.py <slug>`.
+6. **Read it again from the top, in rendered text** — not a diff, the whole lesson. Then run `scripts/i18n/checks/run.py <slug>`.
 7. **Write the ledger row** — before moving to the next lesson, not afterwards.
 
 ## What to look for — the six classes only reading finds
@@ -146,3 +146,16 @@ to prevent.
 
 The grep hit list for a lesson is carried **into** its read and resolved against
 its spine. Only names, casing and missing disclaimers are fixed ahead of it.
+
+## The step I was skipping
+
+Step 5 ends "read again", and I was going read → cut → save on every lesson.
+The proof arrived on lesson 1: folding Part 2 into Part 3 left the lesson running
+Part 1, Part 3, Part 4, Part 5, and I committed it. Three other lessons had the
+same gap from the same cause (3, 9, and 46 from the earlier structural pass).
+
+So the second read is not optional and it is not a diff review. It is the whole
+lesson in rendered text, after editing, looking for what the edits broke:
+section numbering, a heading left standing over content that moved, a reference
+to a part that no longer exists, a transition into something that is no longer
+there. `python3 /tmp/p39/read.py <NN>` again, top to bottom, before the ledger row.
