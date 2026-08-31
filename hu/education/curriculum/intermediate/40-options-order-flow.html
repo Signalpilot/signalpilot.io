@@ -265,6 +265,7 @@
           <li>Szokatlan opciós aktivitás (UOA): a normális forgalom 10-szerese vagy több = az okos pénz pozíciót épít</li>
           <li>Put/call arány: 1,5 felett = eső irányú szélsőség</li>
           <li>Keret: találd meg az áramlást &rarr; vezesd le, melyik irányba kényszeríti fedezésre a dealereket &rarr; a fedezéssel kereskedj, ne a mögé képzelt véleménnyel</li>
+          <li>Fedezeti pont számítása: kötési árfolyam plusz prémium a spot százalékában &mdash; megmondja, mekkora utat kell megtennie az alapterméknek, mire az általad másolt áramlás egyáltalán nullán áll</li>
         </ul>
       </div>
 
@@ -298,7 +299,7 @@
           <li><strong>Gammakitettség (GEX):</strong> A dealerek fedezési mechanikája, és hogy a pozitív vagy negatív gamma miként erősíti fel vagy fojtja el a mozgásokat</li>
           <li><strong>Nulla gamma (ZG) szintek:</strong> Azoknak a fordulópontoknak az azonosítása, ahol a gamma átfordul, és megváltozik a volatilitási rendszer</li>
           <li><strong>A put/call arány elemzése:</strong> A P/C szélsőségek használata ellentétes irányú indikátorként a piaci tetőkhöz és aljakhoz</li>
-          <li><strong>Max Pain & Pinning:</strong> Hogyan húzza az árat a lejárat közeledtével a legnagyobb nyitott kötésállományú kötési ár</li>
+          <li><strong>Max Pain & Pinning:</strong> Mi valójában a max pain (az az elszámolóár, amely a legkevesebbet fizeti az opciótulajdonosoknak, nem a legnehezebb kötési árfolyam), és meddig érdemes bízni a pinningben</li>
           <li><strong>Áramlás alapú kereskedés:</strong> Az options order flow használata részvény- vagy határidős belépők megerősítésére (anélkül, hogy magad opcióznál)</li>
         </ul>
       </div>
@@ -364,13 +365,14 @@ Legnagyobb blokk: 2 800 kontraktus 1,85 dolláron = 518 000 dollár prémium
 Végrehajtás: ASK ÁRON (agresszív vétel ✓)
 
 <strong>Elemzés:</strong>
-- Az intézmény 518 000 dollárt költött 2 napos call-okra
-- A 450 dolláros kötési ár = pénzben van (nem lottószelvény)
-- Agresszív végrehajtás = meggyőződés
-- A teljes pozíció, ha az egész forgalmat számoljuk = 2,3 millió dolláros fogadás
+- Az intézmény 518 000 $-t költött 2 napos callokra
+- Kötési árfolyam 450 $ = pénzben (nem lottószelvény)
+- Agresszív végrehajtás = sürgősség, nem kimondott vélemény
+- Teljes pozíció, ha ez az egész forgalom = 2,3 millió $
 
-<strong>Olvasat:</strong> Intézményi emelkedő fogadás arra, hogy az SPY +1 %-ot mozdul
-a pénteki zárásig. Vélhetően OpEx vagy makroesemény előtti pozícióépítés.
+<strong>Olvasat:</strong> Valakinek most nagy, rövid futamidejű call-
+kitettsége van, és aki eladta neki, SPY vásárlásával köteles fedezni. Ez a fedezés
+az, ami megfigyelhető. Az nem, hogy miért akarta a kitettséget.
       </pre>
 
       <p><strong>Mi történt ezután:</strong></p>
@@ -396,6 +398,19 @@ Ha szerdán 450,50 dolláron vettél SPY-részvényt:
 Pénteki kilépő 456,00 dolláron = +5,50 dollár = 1,2 % nyereség
 Az 50 000 dolláros pozícióból 50 600 dollár, vagyis 600 dollár nyereség, opciós kockázat NÉLKÜL
       </pre>
+
+      <div class="callout-key">
+    <h4>&#128208; A sáv, amelyben az egész pozíció él</h4>
+    <p>A fenti két eredmény nem tisztességes összehasonlítás, és éppen az a lényeg, hogy tisztességessé tegyük. 518 000 $ ment az opciókba és 50 000 $ a részvénybe, így persze hogy az opció hozott többet. Tegyél ugyanannyi tőkét mindkettőbe: 518 000 $ SPY 450,50 $-on véve és 456,00 $-on eladva 1,22 %-ot, azaz 6 324 $-t hoz. A callok 1 190 000 $-t hoztak. Ugyanaz a tőke, ugyanaz a két nap, ugyanaz a mozgás &mdash; és 188-szoros nyereség.</p>
+
+    <p>Most futtasd le fordítva is, amit a példa nem tesz meg. A call fedezeti pontja lejáratkor a kötési árfolyam plusz a prémium: 450 $ + 1,85 $ = 451,85 $, ami 0,36 %-kal van a szerdai 450,25 $ fölött. 450,00 $ alatt &mdash; a szerdai ár alatt 0,06 %-kal &mdash; a kontraktusok értéktelenül járnak le, és a teljes 518 000 $ elvész. Annak a pozíciónak a teljes kimenetele egy 1,85 $ széles sávon belül dől el, ami egy 450,25 $-os alapterméken 0,41 %.</p>
+
+    <p>Tegyük fel tehát, hogy a péntek 456,10 $ helyett 450,00 $-on zárt volna: 1,33 % különbség a SPY-ban. Ugyanaz az 518 000 $ részvényben, 450,50 $-on véve, 575 $-t vesztett volna. A callok 518 000 $-t vesztettek volna. Ez 901-szer annyi, az ellenkező irányba, 1,33 % különbségért abban, hol zárt az alaptermék.</p>
+
+    <p>188 fölfelé és 901 lefelé nem az opciók elleni érv. Annak leírása, hogy mi a tőkeáttétel, és azoknak a calloknak a vevője ezt tudta: a prémium volt az a padló, amiért fizetett. Arról szóló érv, hogy az áramlás melyik oldalán akarsz állni. Az a fedezés, amelyre az a print kényszerít, az alaptermékben, szokásos részvénykockázattal elérhető a számodra &mdash; sáv nélkül és szakadék nélkül. Pontosan ezért mondja ennek a leckének a kerete, hogy a fedezést kereskedd, ne a véleményt.</p>
+
+    <p style="margin-bottom:0">Végezd el ezt a számítást minden olyan áramlásra, amelyet magukba az opciókba is követnél. A kötési árfolyam plusz prémium, a spot százalékában, az a táv, amelyet az alapterméknek meg kell tennie, mire az általad másolt ügylet egyáltalán nullán áll. Rendszerint hosszabb, mint az általad várt mozgás.</p>
+  </div>
 
       <h3 id="bullish-vs-bearish-uoa-signals">Emelkedő és eső UOA-jelzések</h3>
 
@@ -665,7 +680,7 @@ Az 50 000 dolláros pozícióból 50 600 dollár, vagyis 600 dollár nyereség, 
 
       <p><strong>A pin kereskedése:</strong></p>
       <ol>
-        <li>Péntek reggel keresd meg a max pain kötési árat (a legnagyobb állomány)</li>
+        <li>A max paint péntek reggel olvasd le az eszközödről: ez az az elszámolóár, amely a legkevesebbet fizeti ki &mdash; gyakran, de nem mindig, a legnehezebb kötési árfolyam</li>
         <li>Ha az ár messze van tőle (például 10 dollárra), számíts arra, hogy elsodródik felé</li>
         <li>Kereskedd az átlaghoz való visszatérést: ha az SPY 460 dolláron áll, a max pain pedig 450 dollár, számíts lefelé sodródásra a zárásig</li>
         <li>Szállj ki 15:00 előtt (a pinning hatása az utolsó órában a legerősebb)</li>
@@ -698,7 +713,8 @@ Az 50 000 dolláros pozícióból 50 600 dollár, vagyis 600 dollár nyereség, 
           <li><strong>A gammakitettség szabja meg a volatilitási rendszereket</strong>—negatív GEX = trendelő piac, pozitív GEX = oldalazó piac</li>
           <li><strong>A nulla gamma (ZG) a fordulópont</strong>—a ZG felett szaggatott, alatta táguló volatilitás</li>
           <li><strong>A P/C arány szélsőségeit ellentétesen kell olvasni</strong>—>1,5 = félelemből épült alj (vétel), <0,5 = mohóságból épült tető (eladás)</li>
-          <li><strong>A max pain és a gamma pinning előnyt ad az OpEx-en</strong>—a lejárat napjain az ár a legnagyobb állományú kötési ár felé sodródik</li>
+          <li><strong>A max pain &amp; a gamma-pinning OpEx-előnyt teremt</strong>—az ár afelé az elszámolószint felé sodródik, amely a legkevesebbet fizeti az opciótulajdonosoknak, és ez nem egyszerűen a legnehezebb kötési árfolyam</li>
+          <li><strong>Mielőtt egy áramlást opciókba másolnál, árazd be a sávját</strong>—a spot fölötti kötési árfolyam plusz prémium az a mozgás, amely a nullához kell; a példában ez a sáv 0,41 % széles volt, és a teljes 518 000 $-ról döntött</li>
           <li><strong>Használd az opciós áramlást részvény- és határidős ügyletekhez</strong>—nem kell opciózni; használd az áramlást megerősítő rétegként</li>
         </ul>
       </div>
@@ -743,13 +759,13 @@ Az 50 000 dolláros pozícióból 50 600 dollár, vagyis 600 dollár nyereség, 
       </div>
 
       <div class="quiz-question" style="margin-top:2rem">
-        <p><strong>Csütörtök van. Pénteken OpEx lesz (opciós lejárat). Az SPY jelenleg 448 dolláron forog. Megnézed a max paint: a legnagyobb nyitott kötésállományú kötési ár 455 dollár. A nulla gamma (ZG) szint 452 dolláron van. Milyen árfolyam-viselkedésre lehet számítani a pénteki zárásig?</strong></p>
+        <p><strong>Csütörtök van. Péntek az OpEx (opciós lejárat). A SPY most 448 $-on forog. Az eszközöd 455 $-nál jelzi a max paint. A Zero Gamma (ZG) szint 452 $. Milyen árfolyam-viselkedés várható a pénteki zárásig?</strong></p>
         <div class="quiz-options">
           <div class="quiz-option" data-correct="false">
             A) Az SPY 448 dollár közelében oldalazni fog — a max pain valójában nem hat az árra
           </div>
           <div class="quiz-option" data-correct="true">
-            B) Az SPY valószínűleg 455 dollár (max pain) felé sodródik, ahogy a dealerek leépítik a fedezéseiket, a gamma pinning pedig a legnagyobb állományú kötési árhoz húzza az árat
+            B) A SPY valószínűleg 455 $ (max pain) felé sodródik, ahogy a dealerek bontják a fedezéseiket, a gamma-pinning pedig a pénzben lévő nehéz kötési árfolyamok közelében tartja az árat
           </div>
           <div class="quiz-option" data-correct="false">
             C) Az SPY a negatív gammából fakadó eladások miatt beszakad a ZG (452 dollár) alá
