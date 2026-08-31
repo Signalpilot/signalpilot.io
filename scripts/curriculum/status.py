@@ -45,6 +45,26 @@ def parts_present(path):
     s=open(path,encoding='utf-8').read()
     return [p for p in PARTS if f'data-part="{p}"' in s]
 
+# The reading contract, from SYLLABUS.md. A lesson that breaks it is not finished,
+# however good the prose is.
+BUDGET={'words':1800,'callouts':1,'accordions':0,'tables':2,'emoji_headings':0}
+
+def measure(path):
+    s=open(path,encoding='utf-8').read()
+    m=re.search(r'<div class="wrap article-grid"',s)
+    b=s[m.start():] if m else s
+    i=b.find('<div class="discussion-section"')
+    if i>0: b=b[:i]
+    b=re.sub(r'<script.*?</script>|<style.*?</style>','',b,flags=re.S)
+    return {'words':len(re.findall(r'\w+',html.unescape(re.sub(r'<[^>]+>',' ',b)))),
+            'callouts':len(re.findall(r'class="callout',b)),
+            'accordions':len(re.findall(r'<details',b)),
+            'tables':len(re.findall(r'<table',b)),
+            'emoji_headings':len(re.findall(r'<h[234][^>]*>[^<]*[\U0001F300-\U0001FAFF]',b))}
+
+def overbudget(path):
+    return {k:(v,BUDGET[k]) for k,v in measure(path).items() if v>BUDGET[k]}
+
 def words(path):
     s=open(path,encoding='utf-8').read()
     m=re.search(r'<div class="wrap article-grid"',s)
@@ -75,6 +95,7 @@ def state(row,led):
     if not p: return 'MISSING',None
     got=parts_present(p)
     if len(got)<len(PARTS): return 'PROSE',p          # exists, not yet in academy form
+    if overbudget(p): return 'BLOATED',p              # in form, but breaks the reading contract
     if len(locales_built(p))<11: return 'ENGLISH',p   # in form, not yet translated
     if new not in led: return 'UNLOGGED',p
     return 'DONE',p
@@ -94,6 +115,8 @@ def main():
             print(f"  parts    : {'/'.join(parts_present(p)) or 'none'}")
             print(f"  missing  : {'/'.join(x for x in PARTS if x not in parts_present(p)) or 'none'}")
             print(f"  locales  : {len(locales_built(p))}/11")
+            ob=overbudget(p)
+            print(f"  budget   : " + ('ok' if not ob else ', '.join(f'{k} {v[0]}>{v[1]}' for k,v in ob.items())))
         return
     counts={}; firsts={}
     for r in rows:
@@ -101,10 +124,11 @@ def main():
         counts[st]=counts.get(st,0)+1
         firsts.setdefault(st,r)
     if '--next' in sys.argv:
-        for st in ['TOWRITE','PROSE','ENGLISH','UNLOGGED']:
+        for st in ['TOWRITE','PROSE','BLOATED','ENGLISH','UNLOGGED']:
             if st in firsts:
                 r=firsts[st]
                 verb={'TOWRITE':'write from nothing','PROSE':'rebuild into academy form',
+                      'BLOATED':'cut to the reading contract',
                       'ENGLISH':'translate into 11 locales','UNLOGGED':'add the ledger row'}[st]
                 print(f"NEXT: slot {r['new']} (module {r['module']}) — {verb} — {r['title']}")
                 if r['source']!='-': print(f"      source: old lesson {r['source']}")
