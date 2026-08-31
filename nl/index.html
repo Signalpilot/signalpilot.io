@@ -5080,12 +5080,12 @@
             <button id="hero-btn-after" style="background:none;border:none;margin:0;padding:0;cursor:pointer;font-size:0.85rem;font-weight:500;color:var(--muted);line-height:38px;transition:all 0.2s ease;text-shadow:0 0 20px transparent"><span>Na →</span></button>
           </div>
 
-            <div id="hero-comparison-slider" role="region" aria-label="Voor en na vergelijkingsslider" style="position:relative;max-width:880px;width:100%;margin:0 auto;border-radius:12px;overflow:hidden;border:2px solid rgba(91,138,255,.3);box-shadow:0 20px 60px rgba(0,0,0,.5);touch-action:pan-x;background:#0a0e18">
-              <div class="hero-comparison-image" style="position:relative;width:100%;aspect-ratio:2770/1448;background:#0a0e18">
-                <img src="/assets/showcase/chart-without.jpg" alt="Grafiek zonder Signal Pilot" loading="eager" style="width:100%;height:100%;object-fit:contain;display:block"/>
+            <div id="hero-comparison-slider" role="region" aria-label="Voor en na vergelijkingsslider" style="position:relative;max-width:880px;width:100%;margin:0 auto;border-radius:12px;overflow:hidden;border:1px solid rgba(118,221,255,.28);box-shadow:0 0 70px rgba(91,138,255,.20);touch-action:pan-x;background:transparent">
+              <div id="hero-slider-base" class="hero-comparison-image" style="position:relative;width:100%;aspect-ratio:2770/1430;will-change:clip-path;clip-path:inset(0 0 0 50%)">
+                <picture><source srcset="/assets/showcase/chart-without.webp" type="image/webp"><img src="/assets/showcase/chart-without.jpg" alt="Grafiek zonder Signal Pilot" loading="eager" style="width:100%;height:100%;object-fit:contain;display:block"/></picture>
               </div>
               <div id="hero-slider-overlay" class="hero-comparison-image" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:10;will-change:clip-path;clip-path:inset(0 50% 0 0)">
-                <img id="hero-overlay-image" src="/assets/showcase/chart-with.jpg" alt="Grafiek met Signal Pilot" loading="eager" style="width:100%;height:100%;object-fit:contain;display:block;pointer-events:none"/>
+                <picture><source srcset="/assets/showcase/chart-with.webp" type="image/webp"><img id="hero-overlay-image" src="/assets/showcase/chart-with.jpg" alt="Grafiek met Signal Pilot" loading="eager" style="width:100%;height:100%;object-fit:contain;display:block;pointer-events:none"/></picture>
               </div>
               <div id="hero-slider-handle" role="slider" aria-label="Vergelijkingsslider positie" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0" style="position:absolute;top:0;left:0;width:48px;height:100%;transform:translateX(-50%);z-index:100;cursor:ew-resize;touch-action:pan-x;will-change:transform" data-pos="50">
                 <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:48px;height:100%;cursor:ew-resize"></div>
@@ -5099,12 +5099,12 @@
         </div>
         <script>
         (function() {
-          const slider = document.getElementById('hero-comparison-slider'), handle = document.getElementById('hero-slider-handle'), handleCircle = document.getElementById('hero-handle-circle'), overlay = document.getElementById('hero-slider-overlay');
+          const slider = document.getElementById('hero-comparison-slider'), handle = document.getElementById('hero-slider-handle'), handleCircle = document.getElementById('hero-handle-circle'), overlay = document.getElementById('hero-slider-overlay'), base = document.getElementById('hero-slider-base');
           if (!slider || !handle || !overlay) return;
           let isDragging = false, hasInteracted = false, sliderWidth = slider.offsetWidth;
           handle.style.willChange = 'transform';
           function autoSweep() { let progress = 0; const duration = 2500, startTime = Date.now(); function animate() { const elapsed = Date.now() - startTime; progress = Math.min(elapsed / duration, 1); const eased = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2; setSliderPosition(eased * 100, true); if (progress < 1 && !hasInteracted) requestAnimationFrame(animate); } animate(); }
-          function setSliderPosition(percentage, smooth = false) { percentage = Math.max(0, Math.min(percentage, 100)); if (smooth && !isDragging) { handle.classList.add('smooth-transition'); overlay.classList.add('smooth-transition'); setTimeout(() => { handle.classList.remove('smooth-transition'); overlay.classList.remove('smooth-transition'); }, 300); } handle.style.transform = `translateX(${(percentage / 100) * sliderWidth - 24}px)`; overlay.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`; handle.setAttribute('aria-valuenow', Math.round(percentage)); }
+          function setSliderPosition(percentage, smooth = false) { percentage = Math.max(0, Math.min(percentage, 100)); if (smooth && !isDragging) { handle.classList.add('smooth-transition'); overlay.classList.add('smooth-transition'); setTimeout(() => { handle.classList.remove('smooth-transition'); overlay.classList.remove('smooth-transition'); }, 300); } handle.style.transform = `translateX(${(percentage / 100) * sliderWidth - 24}px)`; overlay.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`; if (base) base.style.clipPath = `inset(0 0 0 ${percentage}%)`; handle.setAttribute('aria-valuenow', Math.round(percentage)); }
           function updateSliderFromPosition(clientX, smooth = false) { const rect = slider.getBoundingClientRect(); const percentage = ((clientX - rect.left) / rect.width) * 100; setSliderPosition(percentage, smooth); }
           function markInteraction() { hasInteracted = true; if (handleCircle) handleCircle.classList.remove('pulse-animate'); }
           handle.addEventListener('mousedown', () => { isDragging = true; markInteraction(); document.body.style.cursor = 'ew-resize'; });
