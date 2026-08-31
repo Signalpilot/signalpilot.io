@@ -4,46 +4,96 @@
   // Theme is now handled by signalpilot-theme.js
   // Keeping only non-theme functionality here
 
-  // 1) Mobile menu - completely rebuilt
+  // 1) Mobile menu — mirrors the page's own <nav>, so it is translated and
+  //    locale-correct without a second hardcoded copy of the link list.
   (function(){
     const menuBtn = document.getElementById('menuToggle');
     if(!menuBtn) return;
 
-    // Create mobile nav structure
+    const LOCALE_RE = /^\/(de|es|fr|it|pt|nl|ru|ja|tr|hu|ar)(?=\/|$)/;
+    const locale = (location.pathname.match(LOCALE_RE) || [null,''])[1];
+
+    // Paths that exist inside every locale directory. Everything else (search,
+    // calculators, the tier hubs) is English-only, so its link is left alone.
+    const LOCALISED = [/^\/education\/curriculum\//, /^\/education\/(index\.html)?$/];
+
+    // Keep the reader inside their language when the target has a translation.
+    function localise(href){
+      if(!locale) return href;
+      let url;
+      try { url = new URL(href, location.origin); } catch(e){ return href; }
+      if(url.origin !== location.origin && url.hostname !== 'www.signalpilot.io') return href;
+      const path = url.pathname.replace(LOCALE_RE, '') || '/';
+      if(!LOCALISED.some(re => re.test(path))) return href;
+      return url.origin + '/' + locale + path + url.search + url.hash;
+    }
+
     const backdrop = document.createElement('div');
     backdrop.className = 'mobile-nav-backdrop';
 
     const mobileNav = document.createElement('div');
     mobileNav.className = 'mobile-nav';
+    mobileNav.setAttribute('role','dialog');
+    mobileNav.setAttribute('aria-modal','true');
+
+    // The toggle already carries a translated label ("Menu ", "Menü ", ...).
+    const label = (menuBtn.querySelector('.menu-toggle-text')?.textContent || 'Menu').trim() || 'Menu';
+    mobileNav.setAttribute('aria-label', label);
 
     const header = document.createElement('div');
     header.className = 'mobile-nav-header';
-    header.innerHTML = '<span style="color:#fff;font-weight:700;font-size:1.1rem">Menu</span><button class="mobile-nav-close">&times;</button>';
+    const title = document.createElement('span');
+    title.style.cssText = 'color:#fff;font-weight:700;font-size:1.1rem';
+    title.textContent = label;
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'mobile-nav-close';
+    closeBtn.type = 'button';
+    closeBtn.setAttribute('aria-label', 'Close');
+    closeBtn.innerHTML = '&times;';
+    header.appendChild(title);
+    header.appendChild(closeBtn);
 
     const links = document.createElement('div');
     links.className = 'mobile-nav-links';
-    links.innerHTML = `
-      <a href="/">Education</a>
-      <a href="/education/my-library.html">My Library</a>
-      <a href="/education/challenges.html">Challenges</a>
-      <a href="/education/search.html">Search</a>
-      <a href="/education/calculators.html">Calculators</a>
-      <a href="https://www.signalpilot.io/blog" target="_blank" rel="noopener">Blog</a>
-    `;
+
+    const source = document.querySelectorAll('#mainnav a');
+    if(source.length){
+      source.forEach(a => {
+        const copy = document.createElement('a');
+        copy.href = localise(a.getAttribute('href'));
+        copy.textContent = a.textContent.trim();
+        if(a.target) copy.target = a.target;
+        if(a.rel) copy.rel = a.rel;
+        if(a.getAttribute('aria-current')) copy.setAttribute('aria-current', a.getAttribute('aria-current'));
+        links.appendChild(copy);
+      });
+    } else {
+      // No nav on this page (shouldn't happen) — fall back to the hub.
+      const a = document.createElement('a');
+      a.href = localise('/education/');
+      a.textContent = 'Education';
+      links.appendChild(a);
+    }
+
+    // The header nav itself points at the English hub on locale pages, so a
+    // German reader clicking "Bildung" lands back in English. Same fix.
+    if(locale) source.forEach(a => {
+      const href = a.getAttribute('href');
+      const fixed = localise(href);
+      if(fixed !== href) a.setAttribute('href', fixed);
+    });
 
     mobileNav.appendChild(header);
     mobileNav.appendChild(links);
     document.body.appendChild(backdrop);
     document.body.appendChild(mobileNav);
 
-    const closeBtn = header.querySelector('.mobile-nav-close');
-
-    // Open/close functions
     function open(){
       backdrop.classList.add('active');
       mobileNav.classList.add('active');
       menuBtn.setAttribute('aria-expanded','true');
       document.body.style.overflow = 'hidden';
+      closeBtn.focus();
     }
 
     function close(){
@@ -51,13 +101,16 @@
       mobileNav.classList.remove('active');
       menuBtn.setAttribute('aria-expanded','false');
       document.body.style.overflow = '';
+      menuBtn.focus();
     }
 
-    // Event listeners
     menuBtn.addEventListener('click', open);
     closeBtn.addEventListener('click', close);
     backdrop.addEventListener('click', close);
     links.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape' && mobileNav.classList.contains('active')) close();
+    });
   })();
 
   // 2) Build ToC from h2/h3
