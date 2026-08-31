@@ -150,6 +150,7 @@
           <li>Több indikátorból álló rezsimfelismerő rendszer építése (ADX, ATR, Bollinger-szélesség)</li>
           <li>A stratégiaválasztás átállítása MIELŐTT felaprítanának</li>
           <li>Rezsimszűrők összekapcsolása a Janus Atlas és a Volume Oracle jelzéseivel</li>
+          <li>Kiszámolni, mennyibe kerül egy rezsimszűrő a mintaméret oldalán, és kiválasztani azt az egy mutatót, amely ezt túléli</li>
         </ul>
       </div>
 
@@ -420,6 +421,22 @@ BB-szélesség > 8 % = széles sáv (magas volatilitás)</code></pre>
 
       
 
+
+      <div class="callout-key">
+        <h4>&#127919; A szűrő rejtett ára: a saját mintája</h4>
+        <p>Ezen az oldalon minden rezsimszabály azt mondja, hagyjon ki ügyleteket. Sarah számai lehetővé teszik, hogy ennek árat adjunk, és nem az jön ki, amire számítani szoktak. A szűrő előtt nyolc hét alatt 38 kötése volt, azaz heti 4,75, évente nagyjából 247. Utána tizenkét hét alatt 17, azaz heti 1,42, évente nagyjából 74. A szűrő a kötési tempójának 1,42 &#247; 4,75 = 30 %-át tartja meg. Tíz kötésből hetet eltávolít.</p>
+
+        <p>Most állítsa ezt szembe azzal, ami ahhoz kell, hogy bármit is megmérjen a saját kereskedéséről. Egy találati arány standard hibája a p(1 &#8722; p) &#247; n négyzetgyöke; 50 % körüli találati aránynál és száz kötésnél ez 5 pont, tehát száz kötés a találati arányát csak nagyjából &#177;10 pontra szorítja le &mdash; ez még mindig elég tág ahhoz, hogy a 45 % és az 55 % is életben maradjon. Ennyi ideig tart száz kötés az egyes tempóknál:</p>
+
+<pre><code>                                   kötés/hét   100 kötés
+Szűrő nélkül          4,75   21 hét  (kb. 5 hónap)
+Rezsimszűrővel        1,42   71 hét  (kb. 16 hónap)</code></pre>
+
+        <p>A szűrő tehát túlélést vesz, és bizonyítékkal fizet érte, körülbelül három az egyhez árfolyamon: egy kérdés, amelyre a kereskedési naplója öt hónap alatt válaszolt volna, most tizenhatot kér. Mindkét fele egyszerre igaz, és mindig csak az elsőt szokták említeni.</p>
+
+        <p>Ez az, ami a Sarah által megtalált mutatót megindokolja, ahelyett hogy szlogenként hagyná. <strong>A Rezsimegyezés %-a a szabálykövetést méri, nem az eredményt</strong> &mdash; az előre meghatározott feltételek mellett vette-e fel az ügyletet, igen vagy nem. Nincs szüksége sem találati arányra, sem mintára, így öt kötés már valódi értéket ad, miközben öt kötés az előnyéről semmit sem mond. A rezsimszűrővel töltött első teljes évben a szabálykövetés az egyetlen visszajelzés, amit a módszer egyáltalán elő tud állítani. Ezért ér többet egy találati aránynál, és nem pusztán másról szól.</p>
+      </div>
+
 <div class="section-break"><span>4. rész: rezsimhez igazított stratégiaválasztás</span></div>
 <h2 id="match-your-weapon-to-the-fight">A fegyvert a küzdelemhez válaszd</h2>
 
@@ -549,7 +566,7 @@ Oldalazó rezsim:
         </div>
 
         <div class="quiz-question" style="margin-top:2rem">
-          <p><strong>Esettanulmány-kvíz: Marcus trendkövető visszahúzódásokkal 2 hónap alatt (2023. szept.-okt.) 75 %-os találati aránnyal +18 420 dollárt keresett. Aztán UGYANAZZAL a stratégiával 3 hónap alatt (2023. nov.-2024. jan.) 43 280 dollárt (-29,4 %) veszített. Nov.: 33 % találati arány, -6840 dollár. Dec.: 20 % találati arány, -18 920 dollár (bosszúügyletek). Jan.: 28 % találati arány, -17 520 dollár (2 %-ra emelte a méretet). A «balszerencsét» hibáztatta, miközben az ADX 32-ről 17-re omlott. A minta: minden visszahúzódás visszapattant, majd elbukott az ellenálláson (hamis kitörések az oldalazásban). Számla: 147 000 dollár → 104 000 dollár. Mi volt Marcus végzetes hibája?</strong></p>
+          <p><strong>Esettanulmány-kérdés: Marcus két hónap trendirányú visszahúzódásos kereskedés alatt 24 kötésből 18 nyertessel +18 420 dollárt keresett. Aztán UGYANAZZAL a stratégiával a következő három hónapban 43 280 dollárt (-29,4 %) veszített. 1. hónap: 12 kötésből 4 nyertes, -6 840 dollár. 2. hónap: 15-ből 3, -18 920 dollár (bosszúkereskedés). 3. hónap: 18-ból 5, -17 520 dollár (kockázat 2 %-ra emelve). A „balszerencsét” hibáztatta, miközben az ADX 32-ről 17-re esett. Minta: minden visszahúzódás visszapattant, majd elbukott az ellenálláson (hamis kitörések egy sávban). Számla: 147 000 dollárról 104 000 dollárra. Mi volt Marcus végzetes hibája?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">
               A) A trendkövető stratégiája leállt (a visszahúzódások már nem működnek)
@@ -561,7 +578,7 @@ Oldalazó rezsim:
               C) Túl szoros stopokat használt (volatilis körülmények között ki kellett volna tágítania őket)
             </div>
             <div class="quiz-option" data-correct="true">
-              D) SOHA nem nézte meg a piaci rezsimet: akkor is a trendstratégiát használta, amikor a piac trendből (ADX 28-35) oldalazásba (ADX 15-18) váltott. Ugyanaz a stratégia, rossz rezsim = 75 % → 27 % találati arány. A SPY 11 héten át oldalra szaggatott, miközben ő trendet követett
+              D) SOHA nem ellenőrizte a piaci rezsimet — akkor is a trendstratégiát használta, amikor a piac trendelőből (ADX 28-35) oldalazóba (ADX 15-18) váltott. Ugyanaz a stratégia, rossz rezsim: a 24 kötésből 18 nyertesből 45-ből 12 lett. Az index tizenegy hétig oldalazott, miközben ő trendkövetéssel kereskedett
             </div>
           </div>
           <div class="quiz-explanation">
@@ -578,6 +595,7 @@ Oldalazó rezsim:
           <li><strong>Rezsimpontszám:</strong> +4 és +5 között = trendstratégiákat kereskedj, -2 és -4 között = várj a kitörésre</li>
           <li><strong>A pozícióméret alkalmazkodik:</strong> trendekben teljes méret, sávokban csökkentett, emelkedett ATR mellett felezett, sűrűsödésben pedig nulla &mdash; vedd észre, hogy a nulla a sűrűsödéshez tartozik, nem a volatilitáshoz. A magas volatilitás ok arra, hogy kicsi légy; egy irány nélküli összenyomott sáv ok arra, hogy egyáltalán ne legyél ott, és a 3. rész valójában ezt a létrát állítja fel</li>
           <li><strong>Rétegezd a Volume Oracle jelzésével:</strong> Csak akkor kereskedj, ha a rezsim ÉS az áramlás egy irányba mutat</li>
+          <li><strong>Egy szűrő bizonyítékba kerül:</strong> a kötési tempó 70 %-os visszavágása megháromszorozza az időt, ami alatt a saját kereskedéséről bármely kérdés megválaszolható &mdash; a száz kötésig tartó öt hónapból tizenhat lesz. Kövesse helyette a Rezsimegyezés %-át, amely a szabálykövetést méri, nem az eredményt, és ezért egyáltalán nem igényel mintát</li>
           <li><strong>Ugyanaz a setup, más rezsim:</strong> mindkét esettanulmány széles találatiarány-szakadékot mutat a feltételek között – és mindkettő egymást követő szakaszokat hasonlít össze, ezért a szakadékot tovább vizsgálandó hipotézisként kezeld, ne mért hatásként</li>
         </ul>
       </div>
@@ -628,7 +646,7 @@ Mai kockázat ügyletenként: _______ dollár</code></pre>
         <p><strong>5. rész: sikerarány elemzése rezsimenként</strong></p>
         <p>Nézd át az utolsó 20 ügyletedet. Sorold be a rezsimet a belépés pillanatában (trend +4 és +5 között, gyenge trend +2 és +3 között, oldalazás -1 és +1 között, összenyomott -4 és -2 között), számold meg rezsimenként az ügyleteket és a nyerőket, és számítsd ki a sikerarányt. <strong>Mit keress, és mi benne a csapda:</strong> Ha a találati arányod az egyik rezsimben sokkal magasabb, mint a másikban, azzal érdemes kezdeni valamit. De nézd meg a dátumokat, mielőtt arra jutnál, hogy a rezsim okozta. A rezsimek hetes tömbökben érkeznek, így a „trendkereskedéseid" és a „range-kereskedéseid" rendszerint a saját előtörténeted két egymást követő szakasza – és bármely stratégia, amelyet egy jó és egy rossz időszak között hasonlítasz össze, megmutatja ezt a szakadékot, akár a rezsim hozta létre, akár nem. A döntetlent úgy bontod fel, hogy folytatod a naplózást, és megnézed, megismétlődik-e a mintázat, amikor a rezsim legközelebb átfordul. Addig kezeld erős hipotézisként, ne bizonyított szűrőként.</p>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>A bevezetés célja:</strong> Építsd meg ezt a rendszert 3 nap alatt. Használd 21 egymást követő kereskedési napon. Rögzítsd a rezsimpontszámot MINDEN ügylet előtt. Ha a pontszám nem támogatja a stratégiádat, NE KERESKEDJ. A várható értéked látványosan javulni fog.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>A bevezetés célja:</strong> Építse fel ezt a rendszert 3 napon belül. Használja 21 egymást követő kereskedési napon. Rögzítse a rezsimpontszámot MINDEN kötés előtt. Ha a pontszám nem támogatja a stratégiáját, ne kereskedjen. Amit 21 nap valójában ad, az egy Rezsimegyezés % és a kihagyott kötések száma &mdash; nem ítélet a várható értékéről, amihez olyan minta kell, amelynek árát a lenti doboz kiszámolja.</p>
       </div>
 
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">

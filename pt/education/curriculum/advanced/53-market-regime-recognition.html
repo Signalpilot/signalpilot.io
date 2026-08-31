@@ -150,6 +150,7 @@
           <li>Construir um sistema de detecção de regime com vários indicadores (ADX, ATR, largura de Bollinger)</li>
           <li>Adaptar sua escolha de estratégia ANTES de ser triturado</li>
           <li>Integrar filtros de regime com Janus Atlas e Volume Oracle</li>
+          <li>Quantificar o que um filtro de regime lhe custa em dimensão da amostra e escolher a única métrica que sobrevive a isso</li>
         </ul>
       </div>
 
@@ -420,6 +421,22 @@ Pontuação total:
 
       
 
+
+      <div class="callout-key">
+        <h4>&#127919; O preço escondido do filtro: a sua própria amostra</h4>
+        <p>Todas as regras de regime desta página lhe dizem para saltar operações. As contagens de Sarah permitem pôr um preço nisso, e não é o que se espera. Antes do filtro fazia 38 operações em oito semanas, ou seja 4,75 por semana, cerca de 247 por ano. Depois, 17 em doze semanas, ou seja 1,42 por semana, cerca de 74 por ano. O filtro conserva 1,42 &#247; 4,75 = 30 % do seu ritmo. Elimina sete em cada dez.</p>
+
+        <p>Ponha agora isso frente ao que é preciso para medir seja o que for sobre o seu próprio trading. O erro-padrão de uma taxa de acerto é a raiz de p(1 &#8722; p) &#247; n; com uma taxa perto dos 50 % e cem operações são 5 pontos, portanto cem operações fixam a sua taxa de acerto em cerca de &#177;10 pontos &mdash; ainda largo o suficiente para 45 % e 55 % continuarem ambos possíveis. Eis quanto demoram cem operações a cada ritmo:</p>
+
+<pre><code>                                         ops./semana   100 ops. em
+Sem filtro                    4,75   21 semanas  (cerca de 5 meses)
+Com filtro de regime          1,42   71 semanas  (cerca de 16 meses)</code></pre>
+
+        <p>Ou seja, o filtro compra sobrevivência e paga-a em evidência, a um câmbio de cerca de três para um: uma pergunta que o seu histórico teria respondido em cinco meses passa a exigir dezasseis. As duas metades são verdadeiras ao mesmo tempo, e só a primeira é alguma vez mencionada.</p>
+
+        <p>É isto que justifica a métrica em que Sarah acabou, em vez de a deixar como um slogan. <strong>A % de correspondência de regime mede o cumprimento, não o resultado</strong> &mdash; tomou a operação nas condições que tinha definido antecipadamente, sim ou não. Não precisa de taxa de acerto nem de amostra, pelo que cinco operações já lhe dão uma leitura real, ao passo que cinco operações nada dizem sobre a sua vantagem. Durante todo o primeiro ano com um filtro de regime, o cumprimento é a única resposta que o método consegue produzir. É por isso que vale mais do que uma taxa de acerto, e não apenas algo diferente.</p>
+      </div>
+
 <div class="section-break"><span>Parte 4: escolha de estratégia adaptada ao regime</span></div>
 <h2 id="match-your-weapon-to-the-fight">Escolha a arma conforme a briga</h2>
 
@@ -549,7 +566,7 @@ Regime lateral:
         </div>
 
         <div class="quiz-question" style="margin-top:2rem">
-          <p><strong>Quiz do estudo de caso: Marcus ganhou +18.420 $ com 75 % de acerto em 2 meses (set-out 2023) usando pullbacks de seguimento de tendência. Depois perdeu 43.280 $ (-29,4 %) em 3 meses (nov 2023-jan 2024) usando A MESMA estratégia. Nov: 33 % de acerto, -6.840 $. Dez: 20 % de acerto, -18.920 $ (operações de vingança). Jan: 28 % de acerto, -17.520 $ (subiu o tamanho para 2 %). Ele culpou o «azar» enquanto o ADX desabava de 32 para 17. O padrão: cada pullback repicava e depois falhava na resistência (rompimentos falsos em lateral). Conta: 147.000 $ → 104.000 $. Qual foi o erro fatal de Marcus?</strong></p>
+          <p><strong>Questionário do caso: Marcus ganhou +18.420 $ com 18 acertos em 24 operações ao longo de dois meses de pullbacks a favor da tendência. Depois perdeu 43.280 $ (-29,4 %) nos três meses seguintes com A MESMA estratégia. Mês 1: 4 acertos em 12 operações, -6.840 $. Mês 2: 3 em 15, -18.920 $ (revenge trading). Mês 3: 5 em 18, -17.520 $ (risco subido para 2 %). Culpou o «azar» enquanto o ADX caía de 32 para 17. Padrão: cada pullback ressaltava e depois falhava na resistência (falsos rompimentos dentro de um intervalo). Conta: de 147.000 $ para 104.000 $. Qual foi o erro fatal de Marcus?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">
               A) A estratégia de seguimento de tendência dele parou de funcionar (pullbacks não funcionam mais)
@@ -561,7 +578,7 @@ Regime lateral:
               C) Ele usou stops apertados demais (deveria tê-los alargado em condições voláteis)
             </div>
             <div class="quiz-option" data-correct="true">
-              D) Ele NUNCA verificou o regime de mercado: continuou usando a estratégia de tendência quando o mercado passou de tendência (ADX 28-35) para lateral (ADX 15-18). Mesma estratégia, regime errado = 75 % → 27 % de acerto. O SPY oscilou de lado por 11 semanas enquanto ele fazia seguimento de tendência
+              D) NUNCA verificou o regime de mercado: continuou a usar a estratégia de tendência quando o mercado passou de direcional (ADX 28-35) para lateral (ADX 15-18). Mesma estratégia, regime errado: 18 acertos em 24 operações passaram a 12 em 45. O índice andou de lado durante onze semanas enquanto ele continuava a operar tendência
             </div>
           </div>
           <div class="quiz-explanation">
@@ -578,6 +595,7 @@ Regime lateral:
           <li><strong>Pontuação de regime:</strong> +4 a +5 = operar estratégias de tendência, -2 a -4 = esperar o rompimento</li>
           <li><strong>O tamanho de posição se adapta:</strong> tamanho pleno em tendências, reduzido em intervalos, a metade quando o ATR está elevado, e zero em compressão &mdash; repare que o zero pertence à compressão, não à volatilidade. Volatilidade alta é razão para ir pequeno; um intervalo comprimido sem direção é razão para não estar lá de todo, que é a escala que a Parte 3 realmente estabelece</li>
           <li><strong>Sobreponha o Volume Oracle:</strong> Opere só quando o regime E o fluxo estiverem alinhados</li>
+          <li><strong>Um filtro custa-lhe evidência:</strong> cortar 70 % do seu ritmo de operações triplica o tempo que qualquer pergunta sobre o seu trading demora a ser respondida &mdash; cinco meses até cem operações passam a dezasseis. Siga antes a % de correspondência de regime, que mede o cumprimento em vez do resultado e por isso não precisa de amostra nenhuma</li>
           <li><strong>Mesmo setup, regime diferente:</strong> ambos os casos mostram uma grande diferença de taxa de acerto entre condições — e ambos comparam trechos consecutivos, por isso trata a diferença como uma hipótese a continuar a testar, não como um efeito medido</li>
         </ul>
       </div>
@@ -628,7 +646,7 @@ Risco por operação hoje: _______ $</code></pre>
         <p><strong>Parte 5: análise da taxa de acerto por regime</strong></p>
         <p>Reveja suas últimas 20 operações. Classifique o regime no momento da entrada (tendência +4 a +5, tendência fraca +2 a +3, lateral -1 a +1, comprimido -4 a -2), conte operações e ganhadoras de cada regime e calcule a taxa de acerto. <strong>O que procurar, e a armadilha que isso tem:</strong> Se a tua taxa de acerto é muito mais alta num regime do que noutro, isso merece que ajas. Mas olha para as datas antes de concluíres que foi o regime a causá-lo. Os regimes vêm em blocos de semanas, por isso as tuas «operações em tendência» e as tuas «operações em range» são normalmente dois trechos consecutivos do teu próprio histórico, e qualquer estratégia comparada entre um bom período e um mau vai mostrar essa diferença, tenha o regime sido a causa ou não. A forma de desempatar é manter o registo e ver se o padrão se repete da próxima vez que o regime virar. Até lá, trata-o como uma hipótese forte, não como um filtro provado.</p>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Objetivo de implementação:</strong> Construa este sistema em 3 dias. Use-o por 21 pregões seguidos. Registre a pontuação de regime ANTES de cada operação. Se a pontuação não sustenta sua estratégia, NÃO OPERE. Sua expectativa vai melhorar bastante.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Objetivo de implementação:</strong> Construa este sistema em 3 dias. Use-o durante 21 sessões consecutivas. Registe a pontuação de regime ANTES de cada operação. Se a pontuação não apoiar a sua estratégia, não opere. O que 21 dias lhe darão de facto é uma % de correspondência de regime e uma contagem das operações que evitou &mdash; não um veredicto sobre a sua esperança matemática, que exige uma amostra cujo preço a caixa abaixo calcula.</p>
       </div>
 
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">

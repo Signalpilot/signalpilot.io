@@ -150,6 +150,7 @@
           <li>Construir un sistema de detección de régimen con varios indicadores (ADX, ATR, ancho de Bollinger)</li>
           <li>Adaptar tu selección de estrategia ANTES de que te trituren</li>
           <li>Integrar filtros de régimen con Janus Atlas y Volume Oracle</li>
+          <li>Cuantificar lo que un filtro de régimen te cuesta en tamaño de muestra y elegir la única métrica que lo sobrevive</li>
         </ul>
       </div>
 
@@ -420,6 +421,22 @@ Puntuación total:
 
       
 
+
+      <div class="callout-key">
+        <h4>&#127919; El precio oculto del filtro: tu propia muestra</h4>
+        <p>Cada regla de régimen de esta página te dice que te saltes operaciones. Las cuentas de Sarah permiten poner precio a eso, y no es el que se espera. Antes del filtro tomó 38 operaciones en ocho semanas, es decir 4,75 por semana, unas 247 al año. Después, 17 en doce semanas, es decir 1,42 por semana, unas 74 al año. El filtro conserva 1,42 &#247; 4,75 = 30 % de su ritmo de operaciones. Elimina siete de cada diez.</p>
+
+        <p>Ahora ponlo frente a lo que hace falta para medir cualquier cosa sobre tu propio trading. El error estándar de una tasa de acierto es la raíz de p(1 &#8722; p) &#247; n; con una tasa cercana al 50 % y cien operaciones son 5 puntos, así que cien operaciones fijan tu tasa de acierto en torno a &#177;10 puntos, todavía lo bastante ancho como para que 45 % y 55 % sigan vivos. Esto es lo que tardan cien operaciones a cada ritmo:</p>
+
+<pre><code>                                          ops./semana   100 ops. en
+Sin filtro                     4,75   21 semanas  (unos 5 meses)
+Con filtro de régimen          1,42   71 semanas  (unos 16 meses)</code></pre>
+
+        <p>Así que el filtro compra supervivencia y la paga con evidencia, a un cambio de unos tres a uno: una pregunta que tu historial habría respondido en cinco meses ahora tarda dieciséis. Las dos mitades son ciertas a la vez, y solo se menciona siempre la primera.</p>
+
+        <p>Esto es lo que justifica la métrica en la que acabó Sarah, en lugar de dejarla como un eslogan. <strong>El % de coincidencia de régimen mide cumplimiento, no resultado</strong> &mdash; ¿tomaste la operación en las condiciones que habías definido de antemano, sí o no? No necesita tasa de acierto ni muestra, así que cinco operaciones ya te dan una lectura real, mientras que cinco operaciones no te dicen nada sobre tu ventaja. Durante todo el primer año con un filtro de régimen, el cumplimiento es la única retroalimentación que el método puede producir. Por eso vale más que una tasa de acierto, y no simplemente algo distinto.</p>
+      </div>
+
 <div class="section-break"><span>Parte 4: selección de estrategia adaptada al régimen</span></div>
 <h2 id="match-your-weapon-to-the-fight">Elige el arma según la pelea</h2>
 
@@ -549,7 +566,7 @@ Régimen de rango:
         </div>
 
         <div class="quiz-question" style="margin-top:2rem">
-          <p><strong>Test del caso práctico: Marcus ganó +18.420 $ con un 75 % de acierto en 2 meses (sep-oct 2023) usando retrocesos con seguimiento de tendencia. Después perdió 43.280 $ (-29,4 %) en 3 meses (nov 2023-ene 2024) usando LA MISMA estrategia. Nov: 33 % de acierto, -6.840 $. Dic: 20 % de acierto, -18.920 $ (operaciones de venganza). Ene: 28 % de acierto, -17.520 $ (subió el tamaño al 2 %). Culpó a la «mala suerte» mientras el ADX se desplomaba de 32 a 17. Patrón: cada retroceso rebotaba y luego fallaba en la resistencia (rupturas falsas en rango). Cuenta: 147.000 $ → 104.000 $. ¿Cuál fue el error fatal de Marcus?</strong></p>
+          <p><strong>Cuestionario del caso: Marcus ganó +18.420 $ con 18 aciertos en 24 operaciones a lo largo de dos meses de pullbacks a favor de la tendencia. Después perdió 43.280 $ (-29,4 %) en los tres meses siguientes con LA MISMA estrategia. Mes 1: 4 aciertos en 12 operaciones, -6.840 $. Mes 2: 3 en 15, -18.920 $ (revenge trading). Mes 3: 5 en 18, -17.520 $ (riesgo subido al 2 %). Culpó a la «mala suerte» mientras el ADX caía de 32 a 17. Patrón: cada pullback rebotaba y luego fallaba en la resistencia (falsas rupturas dentro de un rango). Cuenta: de 147.000 $ a 104.000 $. ¿Cuál fue el error fatal de Marcus?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">
               A) Su estrategia de seguimiento de tendencia dejó de funcionar (los retrocesos ya no funcionan)
@@ -561,7 +578,7 @@ Régimen de rango:
               C) Usó stops demasiado ajustados (debería haberlos ampliado en condiciones volátiles)
             </div>
             <div class="quiz-option" data-correct="true">
-              D) NUNCA comprobó el régimen de mercado: siguió usando la estrategia de tendencia cuando el mercado pasó de tendencia (ADX 28-35) a rango (ADX 15-18). Misma estrategia, régimen equivocado = 75 % → 27 % de acierto. SPY osciló de lado durante 11 semanas mientras él operaba seguimiento de tendencia
+              D) NUNCA comprobó el régimen de mercado: siguió usando la estrategia de tendencia cuando el mercado pasó de tendencial (ADX 28-35) a lateral (ADX 15-18). Misma estrategia, régimen equivocado: 18 aciertos en 24 operaciones se convirtieron en 12 en 45. El índice se movió de lado once semanas mientras él seguía operando tendencia
             </div>
           </div>
           <div class="quiz-explanation">
@@ -578,6 +595,7 @@ Régimen de rango:
           <li><strong>Puntuación de régimen:</strong> +4 a +5 = operar estrategias de tendencia, -2 a -4 = esperar la ruptura</li>
           <li><strong>El tamaño de posición se adapta:</strong> tamaño completo en tendencias, reducido en rangos, a la mitad cuando el ATR está elevado, y cero en compresión &mdash; fíjate en que el cero pertenece a la compresión, no a la volatilidad. Una volatilidad alta es una razón para ir pequeño; un rango comprimido sin dirección es una razón para no estar ahí en absoluto, que es la escala que la Parte 3 realmente establece</li>
           <li><strong>Superponer Volume Oracle:</strong> Operar solo cuando el régimen Y el flujo coinciden</li>
+          <li><strong>Un filtro te cuesta evidencia:</strong> recortar tu ritmo de operaciones un 70 % triplica el tiempo que tarda en responderse cualquier pregunta sobre tu propio trading: cinco meses hasta cien operaciones pasan a ser dieciséis. Sigue el % de coincidencia de régimen, que mide cumplimiento en vez de resultado y por eso no necesita muestra alguna</li>
           <li><strong>Mismo setup, distinto régimen:</strong> los dos casos muestran una gran brecha de tasa de acierto entre condiciones, y ambos comparan tramos consecutivos, así que trata la brecha como una hipótesis que hay que seguir probando, no como un efecto medido</li>
         </ul>
       </div>
@@ -628,7 +646,7 @@ Riesgo por operación hoy: _______ $</code></pre>
         <p><strong>Parte 5: análisis de la tasa de acierto por régimen</strong></p>
         <p>Revisa tus últimas 20 operaciones. Clasifica el régimen en el momento de la entrada (tendencia +4 a +5, tendencia débil +2 a +3, rango -1 a +1, comprimido -4 a -2), cuenta las operaciones y las ganadoras de cada régimen y calcula la tasa de acierto. <strong>Qué buscar, y la trampa que tiene:</strong> Si tu tasa de acierto es mucho más alta en un régimen que en otro, eso merece que actúes. Pero mira las fechas antes de concluir que el régimen fue la causa. Los regímenes vienen en bloques de semanas, así que tus «operaciones en tendencia» y tus «operaciones en rango» suelen ser dos tramos consecutivos de tu propio historial, y cualquier estrategia comparada entre un buen periodo y uno malo mostrará esa brecha, sea o no el régimen lo que la produjo. La forma de deshacer el empate es seguir con el registro y ver si el patrón se repite la próxima vez que el régimen cambie. Hasta entonces, trátalo como una hipótesis fuerte, no como un filtro probado.</p>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Objetivo de implantación:</strong> Construye este sistema en 3 días. Úsalo durante 21 sesiones seguidas. Registra la puntuación de régimen ANTES de cada operación. Si la puntuación no respalda tu estrategia, NO OPERES. Tu esperanza mejorará de forma notable.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Objetivo de implantación:</strong> Construye este sistema en 3 días. Úsalo durante 21 días de mercado consecutivos. Registra la puntuación de régimen ANTES de cada operación. Si la puntuación no respalda tu estrategia, no operes. Lo que 21 días te darán de verdad es un % de coincidencia de régimen y un recuento de las operaciones que te saltaste, no un veredicto sobre tu esperanza matemática, que necesita una muestra cuyo precio calcula el recuadro de abajo.</p>
       </div>
 
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">

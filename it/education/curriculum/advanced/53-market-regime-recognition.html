@@ -150,6 +150,7 @@
           <li>Costruire un sistema di riconoscimento del regime con più indicatori (ADX, ATR, ampiezza delle Bollinger)</li>
           <li>Adattare la scelta della strategia PRIMA di finire tritato</li>
           <li>Integrare i filtri di regime con Janus Atlas e Volume Oracle</li>
+          <li>Quantificare quanto un filtro di regime ti costa in dimensione del campione, e scegliere l'unica metrica che sopravvive</li>
         </ul>
       </div>
 
@@ -420,6 +421,22 @@ Punteggio totale:
 
       
 
+
+      <div class="callout-key">
+        <h4>&#127919; Il prezzo nascosto del filtro: il tuo stesso campione</h4>
+        <p>Ogni regola di regime in questa pagina ti dice di saltare dei trade. I conteggi di Sarah permettono di dare un prezzo a questo, e non è quello che ci si aspetta. Prima del filtro faceva 38 trade in otto settimane, cioè 4,75 a settimana, circa 247 all'anno. Dopo, 17 in dodici settimane, cioè 1,42 a settimana, circa 74 all'anno. Il filtro conserva 1,42 &#247; 4,75 = 30 % del suo ritmo. Ne elimina sette su dieci.</p>
+
+        <p>Ora mettilo di fronte a ciò che serve per misurare qualsiasi cosa sul tuo trading. L'errore standard di un win rate è la radice di p(1 &#8722; p) &#247; n; con un win rate vicino al 50 % e cento trade sono 5 punti, quindi cento trade fissano il tuo win rate entro circa &#177;10 punti &mdash; ancora abbastanza largo perché 45 % e 55 % restino entrambi possibili. Ecco quanto ci vogliono cento trade a ciascun ritmo:</p>
+
+<pre><code>                                         trade/settimana   100 trade in
+Senza filtro                      4,75   21 settimane  (circa 5 mesi)
+Con filtro di regime              1,42   71 settimane  (circa 16 mesi)</code></pre>
+
+        <p>Il filtro compra dunque sopravvivenza e la paga in evidenza, a un cambio di circa tre a uno: una domanda a cui il tuo storico avrebbe risposto in cinque mesi ora ne chiede sedici. Entrambe le metà sono vere insieme, e viene sempre citata solo la prima.</p>
+
+        <p>È questo che giustifica la metrica su cui Sarah è approdata, invece di lasciarla come uno slogan. <strong>La % di corrispondenza di regime misura l'aderenza alla regola, non il risultato</strong> &mdash; hai preso il trade nelle condizioni che avevi definito in anticipo, sì o no. Non ha bisogno né di win rate né di campione, così cinque trade ne danno già una lettura reale, mentre cinque trade non dicono nulla sul tuo edge. Per tutto il primo anno con un filtro di regime, l'aderenza è l'unico feedback che il metodo possa produrre. Ecco perché vale più di un win rate, e non è semplicemente un'altra cosa.</p>
+      </div>
+
 <div class="section-break"><span>Parte 4: scelta della strategia in base al regime</span></div>
 <h2 id="match-your-weapon-to-the-fight">Scegli l’arma adatta allo scontro</h2>
 
@@ -549,7 +566,7 @@ Regime laterale:
         </div>
 
         <div class="quiz-question" style="margin-top:2rem">
-          <p><strong>Quiz del caso studio: Marcus ha guadagnato +18.420 $ con il 75 % di vincenti in 2 mesi (set-ott 2023) usando ritracciamenti in trend following. Poi ha perso 43.280 $ (-29,4 %) in 3 mesi (nov 2023-gen 2024) usando LA STESSA strategia. Nov: 33 % di vincenti, -6.840 $. Dic: 20 % di vincenti, -18.920 $ (operazioni per vendetta). Gen: 28 % di vincenti, -17.520 $ (size portata al 2 %). Ha dato la colpa alla «sfortuna» mentre l’ADX crollava da 32 a 17. Lo schema: ogni ritracciamento rimbalzava e poi falliva sulla resistenza (falsi breakout in laterale). Conto: 147.000 $ → 104.000 $. Qual è stato l’errore fatale di Marcus?</strong></p>
+          <p><strong>Quiz del caso studio: Marcus ha fatto +18.420 $ con 18 vincenti su 24 trade in due mesi di pullback in tendenza. Poi ha perso 43.280 $ (-29,4 %) nei tre mesi successivi con LA STESSA strategia. Mese 1: 4 vincenti su 12 trade, -6.840 $. Mese 2: 3 su 15, -18.920 $ (revenge trading). Mese 3: 5 su 18, -17.520 $ (rischio alzato al 2 %). Ha dato la colpa alla «sfortuna» mentre l'ADX crollava da 32 a 17. Schema: ogni pullback rimbalzava e poi falliva sulla resistenza (falsi breakout dentro un range). Conto: da 147.000 $ a 104.000 $. Qual è stato l'errore fatale di Marcus?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">
               A) La sua strategia trend following ha smesso di funzionare (i ritracciamenti non funzionano più)
@@ -561,7 +578,7 @@ Regime laterale:
               C) Ha usato stop troppo stretti (avrebbe dovuto allargarli in condizioni volatili)
             </div>
             <div class="quiz-option" data-correct="true">
-              D) Non ha MAI controllato il regime di mercato: ha continuato con la strategia di trend quando il mercato è passato dal trend (ADX 28-35) al laterale (ADX 15-18). Stessa strategia, regime sbagliato = 75 % → 27 % di vincenti. SPY ha oscillato di lato per 11 settimane mentre lui faceva trend following
+              D) Non ha MAI controllato il regime di mercato: ha continuato con la strategia di tendenza quando il mercato è passato da direzionale (ADX 28-35) a laterale (ADX 15-18). Stessa strategia, regime sbagliato: 18 vincenti su 24 trade sono diventati 12 su 45. L'indice è andato laterale per undici settimane mentre lui continuava a fare trend following
             </div>
           </div>
           <div class="quiz-explanation">
@@ -578,6 +595,7 @@ Regime laterale:
           <li><strong>Punteggio di regime:</strong> +4 a +5 = opera strategie di trend, -2 a -4 = aspetta il breakout</li>
           <li><strong>Il dimensionamento si adatta:</strong> dimensione piena nei trend, ridotta nei range, dimezzata quando l'ATR è elevato, e zero in compressione &mdash; nota che lo zero appartiene alla compressione, non alla volatilità. Un'alta volatilità è una ragione per essere piccoli; un range compresso senza direzione è una ragione per non esserci affatto, ed è la scala che la Parte 3 effettivamente stabilisce</li>
           <li><strong>Sovrapponi Volume Oracle:</strong> Opera solo quando regime E flusso sono allineati</li>
+          <li><strong>Un filtro ti costa evidenza:</strong> tagliare del 70 % il tuo ritmo di trade triplica il tempo necessario a rispondere a qualsiasi domanda sul tuo trading &mdash; cinque mesi per arrivare a cento trade diventano sedici. Traccia invece la % di corrispondenza di regime, che misura l'aderenza e non il risultato, e per questo non richiede alcun campione</li>
           <li><strong>Stesso setup, regime diverso:</strong> entrambi i casi mostrano un ampio divario di tasso di successo tra le condizioni — ed entrambi confrontano tratti consecutivi, quindi tratta il divario come un’ipotesi da continuare a testare, non come un effetto misurato</li>
         </ul>
       </div>
@@ -628,7 +646,7 @@ Rischio per operazione oggi: _______ $</code></pre>
         <p><strong>Parte 5: analisi del tasso di successo per regime</strong></p>
         <p>Rivedi le tue ultime 20 operazioni. Classifica il regime al momento dell’ingresso (trend +4 a +5, trend debole +2 a +3, laterale -1 a +1, compresso -4 a -2), conta operazioni e vincenti per ciascun regime e calcola il tasso di successo. <strong>Che cosa cercare, e la trappola che contiene:</strong> Se il tuo tasso di successo è molto più alto in un regime che nell’altro, vale la pena agire. Ma guarda le date prima di concludere che sia stato il regime a causarlo. I regimi arrivano a blocchi di settimane, quindi le tue «operazioni in trend» e le tue «operazioni in range» di solito sono due tratti consecutivi della tua stessa storia, e qualsiasi strategia confrontata tra un periodo buono e uno cattivo mostrerà quel divario, che il regime lo abbia prodotto o no. Il modo per sciogliere il dubbio è tenere il registro e vedere se lo schema si ripete la prossima volta che il regime cambia. Fino ad allora, trattalo come un’ipotesi forte, non come un filtro dimostrato.</p>
 
-        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Obiettivo di implementazione:</strong> Costruisci questo sistema entro 3 giorni. Usalo per 21 sedute consecutive. Registra il punteggio di regime PRIMA di ogni operazione. Se il punteggio non sostiene la tua strategia, NON OPERARE. La tua aspettativa migliorerà nettamente.</p>
+        <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Obiettivo di implementazione:</strong> Costruisci questo sistema entro 3 giorni. Usalo per 21 sedute consecutive. Registra il punteggio di regime PRIMA di ogni trade. Se il punteggio non sostiene la tua strategia, non operare. Quello che 21 giorni ti daranno davvero è una % di corrispondenza di regime e un conteggio dei trade saltati &mdash; non un verdetto sulla tua aspettativa, che richiede un campione di cui il riquadro qui sotto calcola il prezzo.</p>
       </div>
 
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
