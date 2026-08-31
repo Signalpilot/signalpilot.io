@@ -25,10 +25,23 @@ HAS_WORDS = re.compile(r'[A-Za-z]{2}')
 SKIP_EXACT = {'Signal Pilot', 'Discord', 'TradingView'}
 
 
+NAME = re.compile(r'</?([a-zA-Z][a-zA-Z0-9]*)')
+VOID = {'area','base','br','col','embed','hr','img','input','link','meta',
+        'param','source','track','wbr'}
+
+
 def segments(html):
-    """Yield (kind, index, text). kind is 'text' or 'attr'."""
+    """Yield (kind, index, text). kind is 'text' or 'attr'.
+
+    An element carrying the standard HTML translate="no" is skipped along with
+    everything inside it. Bibliographies are the reason: an author's name, a
+    book title and a journal title stay in English in every locale, and without
+    this they enter the memory as 85 lessons' worth of strings that a checker
+    then reports as untranslated leaks, once per locale, forever.
+    """
     parts = TAG.split(html)
     protect = False
+    notrans, notrans_tag = 0, None
     for i, seg in enumerate(parts):
         if seg.startswith('<'):
             low = seg.lower()
@@ -36,13 +49,24 @@ def segments(html):
                 protect = True
             elif low.startswith(('</script', '</style')):
                 protect = False
-            if not protect:
+            nm = NAME.match(seg)
+            tag = nm.group(1).lower() if nm else None
+            if notrans:
+                # count nested elements of the same name so the right close ends it
+                if tag == notrans_tag and not low.startswith('<!--'):
+                    if low.startswith('</'):
+                        notrans -= 1
+                    elif tag not in VOID and not seg.rstrip().endswith('/>'):
+                        notrans += 1
+            elif 'translate="no"' in low and not low.startswith('</'):
+                notrans, notrans_tag = 1, tag
+            if not protect and not notrans:
                 for m in ATTR.finditer(seg):
                     v = m.group(2).strip()
                     if v and HAS_WORDS.search(v) and not v.startswith(('http', '/', '#')):
                         yield ('attr', i, m.group(1), v)
             continue
-        if protect:
+        if protect or notrans:
             continue
         v = seg.strip()
         if v and HAS_WORDS.search(v) and v not in SKIP_EXACT:
