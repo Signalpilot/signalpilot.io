@@ -259,11 +259,43 @@
     const menu = createDropdownMenu();
     document.body.appendChild(menu);
 
+    // The menu used to sit at a hard-coded top:70px, which lands underneath the
+    // header whenever anything above it (the translation notice, a banner)
+    // pushes the header down — and the part hidden behind the header cannot be
+    // scrolled to. Anchor it to the button instead, every time it opens.
+    function position() {
+      const r = container.getBoundingClientRect();
+      const gap = 10;
+      const margin = 12;
+      menu.style.top = (r.bottom + gap) + 'px';
+      menu.style.right = Math.max(margin, window.innerWidth - r.right) + 'px';
+      menu.style.bottom = 'auto';
+      menu.style.maxHeight = Math.max(180, window.innerHeight - r.bottom - gap - margin) + 'px';
+    }
+
     container.addEventListener('click', (e) => {
       e.stopPropagation();
       const isActive = menu.classList.contains('active');
+      if (!isActive) {
+        position();
+        menu.scrollTop = 0;
+      }
       menu.classList.toggle('active');
       container.setAttribute('aria-expanded', String(!isActive));
+    });
+
+    window.addEventListener('resize', () => {
+      if (menu.classList.contains('active')) position();
+    });
+    window.addEventListener('scroll', () => {
+      if (menu.classList.contains('active')) position();
+    }, { passive: true });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('active')) {
+        menu.classList.remove('active');
+        container.setAttribute('aria-expanded', 'false');
+        container.focus();
+      }
     });
     container.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
