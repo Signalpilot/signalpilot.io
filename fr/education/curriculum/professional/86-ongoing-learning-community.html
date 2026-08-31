@@ -144,7 +144,7 @@
           <li>Mener une revue trimestrielle de stratégie sur votre propre relevé : quoi mesurer, ce qui compte comme dégradation, et quand retirer un setup plutôt que le défendre</li>
           <li>Bâtir une routine de formation continue que vous tiendrez vraiment, et distinguer une source qui vaut votre temps d'une source qui vous vend quelque chose</li>
           <li>Juger une communauté de trading à sa capacité à vous donner un vrai retour, et mettre en place la revue par les pairs et la responsabilisation qui attrapent ce que vous ne voyez pas seul</li>
-          <li>Tester une idée nouvelle sans y risquer le compte : petite taille, échantillon fixé, et décidé à l'avance quel résultat vous ferait la garder</li>
+          <li>Tester une idée nouvelle sans y risquer le compte : petite taille, échantillon fixé, décidé à l'avance quel résultat vous ferait la garder, et une barre assez haute pour qu'une idée sans valeur ne franchisse pas trois portes par pure chance</li>
         </ul>
       </div>
 
@@ -469,7 +469,7 @@
     <ul>
       <li>Testez l'hypothèse sur 50 à 100 exemples historiques</li>
       <li>Calculez le taux de réussite, le ratio de gain et l'espérance en R (un Sharpe sur 50 à 100 exemples de backtest ne mérite pas encore d'être lu)</li>
-      <li>Si l'espérance est &lt; 0, abandonnez l'idée. Si elle est &gt; 0, passez à l'étape 4</li>
+      <li>Si l'espérance est inférieure à +0,2R, abandonnez l'idée. Au-dessus, passez à l'étape 4</li>
     </ul>
 
     <h4>Étape 4 : trading sur papier en direct (semaines 2 à 4)</h4>
@@ -491,12 +491,25 @@
     <h4>Critères de réussite</h4>
     <p><strong>Intégrez le nouveau setup à votre stratégie SI :</strong></p>
     <ul>
-      <li>✅ L'espérance au backtest est &gt; 0 sur plus de 100 transactions</li>
-      <li>✅ L'espérance sur papier est &gt; 0 sur plus de 10 transactions</li>
-      <li>✅ L'espérance en micro-réel est &gt; 0 sur plus de 20 transactions</li>
+      <li>✅ L'espérance au backtest dépasse +0,2R sur plus de 100 transactions, et pas seulement zéro &mdash; le calcul de cette barre est ci-dessous</li>
+      <li>✅ L'espérance sur papier dépasse +0,2R sur plus de 10 transactions, et lisez cette étape comme un test de l'exécution et non de l'avantage</li>
+      <li>✅ L'espérance en micro-réel dépasse +0,2R sur plus de 20 transactions &mdash; et prenez-en plus de vingt si vous le pouvez, car c'est l'échantillon le moins coûteux à agrandir de toute la page</li>
       <li>✅ Faible corrélation avec les stratégies existantes (apporte de la diversification)</li>
       <li>✅ L'exécution vous semble naturelle (pas d'entorses permanentes aux règles)</li>
     </ul>
+  </div>
+
+  <div class="callout-key">
+    <h4>&#127919; Trois portes à « espérance au-dessus de zéro » laissent passer une idée sans valeur sur huit</h4>
+    <p>Le protocole est solide, sa barre ne l'est pas. Chacune des trois étapes laisse passer une idée dont l'espérance observée ressort au-dessus de zéro, et une idée sans aucun avantage franchit cette barre, par symétrie, environ une fois sur deux à chaque étape. Trois piles d'affilée, c'est une chance sur huit. Relever la barre d'un petit montant positif coûte très peu et change ce chiffre de plus d'un ordre de grandeur &mdash; voici le calcul sur les tailles d'échantillon du protocole lui-même (100 au backtest, 10 sur papier, 20 en micro-réel) avec une dispersion de 1,5R par trade :</p>
+<pre><code>barre à chaque étape                       une idée sans valeur passe les trois   une vraie idée à +0,5R passe les trois   faux survivants sur 12 idées par an
+&gt; 0R (la barre du protocole lui-même)                                 12,5 %                                     80 %                                  1,50
+&gt; +0,1R                                                                4,0 %                                     70 %                                  0,48
+&gt; +0,2R (recommandé)                                                   0,8 %                                     59 %                                  0,10
+&gt; +0,3R                                                                0,1 %                                     44 %                                  0,01</code></pre>
+    <p><strong>À la barre du protocole lui-même, vous devez vous attendre à ce qu'une stratégie et demie sans valeur par an atteigne votre portefeuille réel.</strong> Kevin, plus haut, a fait passer six idées en un an et en a gardé deux, dont il qualifie encore l'une de provisoire &mdash; c'est exactement ce que prédit la première ligne, et c'est pourquoi la version honnête de son histoire est qu'il ne sait pas encore laquelle des deux est réelle.</p>
+    <p>Portez la barre à +0,2R à chaque étape et le taux de faux passages tombe d'une chance sur huit à environ une sur cent vingt. Le coût est de l'autre côté du tableau : une idée réellement bonne, d'espérance vraie +0,5R, franchit désormais les trois portes 59 % du temps au lieu de 80 %. Vous jetterez donc un vrai avantage sur cinq que vous auriez sinon gardé. C'est un échange qui vaut la peine, car une bonne idée rejetée revient &mdash; vous pouvez la retester l'an prochain sur des données fraîches &mdash; tandis qu'une mauvaise intégrée coûte du capital et, pire, la confiance que vous placez dans le reste du portefeuille.</p>
+    <p>Regardez où se trouve le levier. À 100 trades, l'erreur type du backtest vaut 0,15R : une barre à +0,2R y fait donc l'essentiel du travail à elle seule, puisqu'elle écarte une idée sans valeur 91 % du temps. L'étape sur papier, à dix trades, a une erreur type de 0,47R et tient du pile ou face quelle que soit la barre &mdash; ce qui n'est pas grave, car cette étape teste l'exécution et non l'avantage. Si vous voulez resserrer le pipeline, le changement le moins coûteux n'est pas une barre plus haute partout, c'est plus de trades en micro-réel, où chaque trade supplémentaire réduit l'erreur et où la taille de position n'est que de 0,1 %.</p>
   </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Vous êtes à peu près à la moitié de cette leçon.</p>
@@ -803,7 +816,7 @@
       <li><strong>Revues trimestrielles de stratégie :</strong> Vérifier que l'avantage tient encore, détecter les changements de régime, ajuster si besoin</li>
       <li><strong>Formation continue :</strong> 1 livre toutes les 6 à 8 semaines, 1 à 2 articles de recherche par mois, tester de nouvelles idées chaque mois</li>
       <li><strong>Communautés de qualité :</strong> Rejoignez le Discord Signal Pilot, échangez avec des traders centrés sur le processus, fuyez le battage toxique</li>
-      <li><strong>Expérimentation systématique :</strong> Tester de nouveaux setups chaque mois (backtest → papier → micro-réel) et les intégrer s'ils sont rentables</li>
+      <li><strong>Expérimentation systématique :</strong> Tester de nouveaux setups chaque mois (backtest → papier → micro-réel) et placer chaque porte à +0,2R plutôt qu'à zéro — trois portes à zéro laissent passer une idée sans valeur sur huit</li>
       <li><strong>Mentorat et engagement :</strong> Trouvez des traders qui vous poussent, tenez des points hebdomadaires, partagez vos pertes ouvertement</li>
       <li><strong>Objectifs annuels :</strong> fixez des objectifs sur ce que vous contrôlez &mdash; respect des règles, taille d'échantillon, cadence des revues &mdash; plutôt que sur une cible de Sharpe, qui mesure surtout l'année que le marché vous a donnée.</li>
       <li><strong>Habitude quotidienne :</strong> Revoir 1 transaction par jour, consigner immédiatement, lire 1 article par semaine, tester 1 idée par mois</li>

@@ -144,7 +144,7 @@
           <li>Kendi kaydın üzerinde üç aylık bir strateji gözden geçirmesi yapmak: neyi ölçeceğin, neyin bozulma sayıldığı ve bir kurulumu savunmak yerine ne zaman emekliye ayıracağın</li>
           <li>Gerçekten sürdürebileceğin bir öğrenme rutini kurmak ve zamanına değen bir kaynağı, sana bir şey satan bir kaynaktan ayırt etmek</li>
           <li>Bir işlem topluluğunu sana gerçek geri bildirim verip vermediğine göre değerlendirmek ve tek başına göremediğini yakalayan akran incelemesini ve hesap verebilirliği kurmak</li>
-          <li>Yeni bir fikri hesabı riske atmadan denemek: küçük büyüklük, sabit bir örneklem ve hangi sonucun onu tutmanı sağlayacağına önceden karar vermek</li>
+          <li>Yeni bir fikri hesabı riske atmadan denemek: küçük büyüklük, sabit bir örneklem, hangi sonucun onu tutmanı sağlayacağına önceden karar vermek ve değersiz bir fikrin yalnızca şansla üç kapıdan geçmesini engelleyecek kadar yüksek bir çıta</li>
         </ul>
       </div>
 
@@ -469,7 +469,7 @@
     <ul>
       <li>Hipotezi 50-100 tarihsel örnek üzerinde test et</li>
       <li>Kazanma oranını, payoff ratio'yu ve R cinsinden beklentiyi hesapla (50-100 backtest örneği üzerindeki bir Sharpe henüz okumaya değmez)</li>
-      <li>Beklenti &lt; 0 ise fikri bırak. &gt; 0 ise 4. adıma geç</li>
+      <li>Beklenti +0,2R'nin altındaysa fikri bırak. Üstündeyse 4. adıma geç</li>
     </ul>
 
     <h4>Adım 4: Canlı Kâğıt İşlemi (2-4. Haftalar)</h4>
@@ -491,12 +491,25 @@
     <h4>Başarı Ölçütleri</h4>
     <p><strong>Yeni kurulumu stratejine ŞU DURUMDA entegre et:</strong></p>
     <ul>
-      <li>✅ backtest beklentisi 100+ işlemde &gt; 0</li>
-      <li>✅ Kâğıt üzerinde işlem beklentisi 10+ işlemde &gt; 0</li>
-      <li>✅ Mikro canlı beklentisi 20+ işlemde &gt; 0</li>
+      <li>✅ backtest beklentisi 100+ işlemde yalnızca sıfırın değil, +0,2R'nin de üstünde &mdash; bu çıtanın aritmetiği aşağıda</li>
+      <li>✅ Kâğıt üzerinde işlem beklentisi 10+ işlemde +0,2R'nin üstünde, ve bu aşamayı avantajın değil uygulamanın testi olarak oku</li>
+      <li>✅ Mikro canlı beklentisi 20+ işlemde +0,2R'nin üstünde &mdash; ve yapabiliyorsan yirmiden fazlasını al, çünkü bu sayfadaki büyütmesi en ucuz örneklem budur</li>
       <li>✅ Mevcut stratejilerle düşük korelasyon (çeşitlendirme katıyor)</li>
       <li>✅ Uygulama doğal geliyor (sürekli kural ihlali yok)</li>
     </ul>
+  </div>
+
+  <div class="callout-key">
+    <h4>&#127919; «Beklenti sıfırın üstünde» diyen üç kapı, sekiz değersiz fikirden birini olduğu gibi geçirir</h4>
+    <p>Protokol sağlam, çıtası değil. Üç aşamanın her biri, gözlenen beklentisi sıfırın üstünde çıkan bir fikri geçirir; hiç avantajı olmayan bir fikir ise simetri gereği her aşamada bu çıtayı zamanın yaklaşık yarısında aşar. Üst üste üç tura, sekizde birdir. Çıtayı küçük bir pozitif sayıya çıkarmanın maliyeti çok düşüktür ve bu oranı bir büyüklük mertebesinden fazla değiştirir &mdash; işte protokolün kendi örneklem büyüklükleriyle (backtest 100, kâğıt 10, mikro canlı 20) ve işlem başına 1,5R dağılımla hesaplanmış hâli:</p>
+<pre><code>her aşamadaki çıta                  değersiz bir fikir üçünü de geçer   gerçek +0,5R fikir üçünü de geçer   yılda 12 fikirden sahte kurtulan
+&gt; 0R (protokolün kendi çıtası)                               %12,5                                 %80                               1,50
+&gt; +0,1R                                                       %4,0                                 %70                               0,48
+&gt; +0,2R (önerilen)                                            %0,8                                 %59                               0,10
+&gt; +0,3R                                                       %0,1                                 %44                               0,01</code></pre>
+    <p><strong>Protokolün kendi çıtasında, yılda bir buçuk değersiz stratejinin canlı kitabına ulaşmasını beklemelisin.</strong> Yukarıdaki Kevin bir yılda altı fikri sürecinden geçirdi ve ikisini tuttu; birine hâlâ geçici diyor &mdash; ki ilk satırın öngördüğü tam da budur ve bu yüzden hikâyesinin dürüst hâli, ikisinden hangisinin gerçek olduğunu henüz bilmediğidir.</p>
+    <p>Her aşamada çıtayı +0,2R'ye çek; yanlış geçiş oranı sekizde birden yaklaşık yüz yirmide bire iner. Bedeli tablonun öbür tarafında: gerçekten iyi bir fikir, yani gerçek beklentisi +0,5R olan bir fikir, artık üç kapıyı da %80 yerine %59 oranında geçer. Yani başka türlü tutacağın gerçek avantajların beşte birini atmış olursun. Bu, yapmaya değer bir takas, çünkü reddedilen iyi bir fikir geri gelir &mdash; gelecek yıl taze veriyle yeniden test edebilirsin &mdash; oysa entegre edilen kötü bir fikir sermayeye mal olur ve daha kötüsü, kitabın geri kalanına duyduğun güvene.</p>
+    <p>Kaldıracın nerede olduğuna bak. 100 işlemde backtest standart hatası 0,15R'dir; dolayısıyla oradaki +0,2R'lik çıta işin çoğunu tek başına yapar: değersiz bir fikri zamanın %91'inde geri çevirir. On işlemlik kâğıt aşamasının standart hatası 0,47R'dir ve hangi çıtayı koyarsan koy yazı turaya yakındır &mdash; ki bu sorun değil, çünkü o aşama avantajı değil uygulamayı sınar. Hattı daha sıkı istiyorsan en ucuz değişiklik her yerde çıtayı yükseltmek değil, mikro canlıda daha çok işlem yapmaktır; orada her ek işlem hatayı küçültür ve pozisyon büyüklüğü yalnızca %0,1'dir.</p>
   </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Bu dersin yaklaşık yarısındasın.</p>
@@ -803,7 +816,7 @@
       <li><strong>Üç aylık strateji gözden geçirmeleri:</strong> Üstünlüğün hâlâ işlediğini doğrula, rejim değişimlerini yakala, gerekirse ayarla</li>
       <li><strong>Sürekli eğitim:</strong> 6-8 haftada 1 kitap, ayda 1-2 akademik makale, her ay yeni fikirleri test et</li>
       <li><strong>Nitelikli topluluklar:</strong> Signal Pilot Discord'una katıl, sürece odaklı trader'larla etkileşim kur, zehirli gazdan kaçın</li>
-      <li><strong>Sistematik deney:</strong> Yeni kurulumları her ay test et (backtest → kâğıt → mikro canlı), kârlıysa entegre et</li>
+      <li><strong>Sistematik deney:</strong> Yeni kurulumları her ay test et (backtest → kâğıt → mikro canlı) ve her kapıyı sıfıra değil +0,2R'ye ayarla — sıfırdaki üç kapı sekiz değersiz fikirden birini geçirir</li>
       <li><strong>Mentorluk ve hesap verebilirlik:</strong> Seni zorlayan trader'lar bul, haftalık kontroller yap, zararlarını açıkça paylaş</li>
       <li><strong>Yıllık hedef koyma:</strong> kontrol ettiğiniz şeylere hedef koyun &mdash; kurallara uyum, örneklem büyüklüğü, gözden geçirme sıklığı &mdash; bir Sharpe hedefine değil; o rakam çoğunlukla piyasanın size verdiği yılı ölçer.</li>
       <li><strong>Günlük alışkanlık:</strong> Her gün 1 işlem incele, hemen günlüğe yaz, haftada 1 yazı oku, ayda 1 fikir test et</li>

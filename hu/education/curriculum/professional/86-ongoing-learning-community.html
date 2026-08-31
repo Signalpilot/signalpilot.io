@@ -144,7 +144,7 @@
           <li>Negyedéves stratégiai felülvizsgálat elvégzése a saját naplódon: mit mérj, mi számít leromlásnak, és mikor vonj ki egy felállást ahelyett, hogy védenéd</li>
           <li>Olyan folyamatos tanulási rutin felépítése, amelyet valóban tartani fogsz, és az idődet megérő forrás megkülönböztetése attól, amelyik elad neked valamit</li>
           <li>Egy kereskedői közösség megítélése aszerint, ad-e valódi visszajelzést, és annak a társértékelésnek és számonkérhetőségnek a felállítása, amely elkapja azt, amit egyedül nem látsz</li>
-          <li>Új ötlet tesztelése úgy, hogy nem teszed rá a számlát: kis méret, rögzített minta, és előre eldöntve, milyen eredmény mellett tartod meg</li>
+          <li>Új ötlet tesztelése úgy, hogy nem teszed rá a számlát: kis méret, rögzített minta, előre eldöntve, milyen eredmény mellett tartod meg, és olyan magas mérce, hogy egy értéktelen ötlet ne sétáljon át három kapun puszta szerencsével</li>
         </ul>
       </div>
 
@@ -469,7 +469,7 @@
     <ul>
       <li>Teszteld a hipotézist 50-100 történelmi példán</li>
       <li>Számold ki a találati arányt, a payoff ratio értékét és a várható értéket R-ben (egy Sharpe-mutató 50-100 backtest példán még nem olvasható ki érdemben)</li>
-      <li>Ha a várható érték &lt; 0, dobd el az ötletet. Ha &gt; 0, lépj a 4. lépésre</li>
+      <li>Ha a várható érték +0,2R alatt van, dobd el az ötletet. Fölötte lépj a 4. lépésre</li>
     </ul>
 
     <h4>4. lépés: élő papírkereskedés (2-4. hét)</h4>
@@ -491,12 +491,25 @@
     <h4>A siker feltételei</h4>
     <p><strong>Építsd be az új beállítást a stratégiádba, HA:</strong></p>
     <ul>
-      <li>✅ A backtest várható értéke &gt; 0 több mint 100 ügyleten</li>
-      <li>✅ A papírkereskedés várható értéke &gt; 0 több mint 10 ügyleten</li>
-      <li>✅ A mikroméretű éles kereskedés várható értéke &gt; 0 több mint 20 ügyleten</li>
+      <li>✅ A backtest várható értéke +0,2R fölött van több mint 100 ügyleten, nem pusztán nulla fölött &mdash; ennek a mércének a számtana lentebb</li>
+      <li>✅ A papírkereskedés várható értéke +0,2R fölött van több mint 10 ügyleten, és ezt a szakaszt a végrehajtás, nem az előny próbájaként olvasd</li>
+      <li>✅ A mikroméretű éles kereskedés várható értéke +0,2R fölött van több mint 20 ügyleten &mdash; és ha tudsz, csinálj húsznál többet, mert ezen az oldalon ezt a mintát a legolcsóbb növelni</li>
       <li>✅ Alacsony a korreláció a meglévő stratégiákkal (növeli a diverzifikációt)</li>
       <li>✅ A végrehajtás természetesnek hat (nincs folyamatos szabályszegés)</li>
     </ul>
+  </div>
+
+  <div class="callout-key">
+    <h4>&#127919; Három kapu a «nulla fölötti várható érték» mércével nyolcból egy értéktelen ötletet átenged</h4>
+    <p>A protokoll rendben van, a mércéje nincs. Mindhárom szakasz átenged egy ötletet, amelynek megfigyelt várható értéke nulla fölé jön ki, egy előny nélküli ötlet pedig szimmetriából adódóan az esetek nagyjából felében veszi ezt a mércét, szakaszonként. Három fej egymás után egy a nyolchoz. A mércét egy kis pozitív számra emelni alig kerül valamibe, és több nagyságrenddel változtatja ezt az arányt &mdash; itt magának a protokollnak a mintaméretein számolva (100 a backtestben, 10 papíron, 20 mikroméretű élesben), ügyletenként 1,5R szórással:</p>
+<pre><code>mérce minden szakaszban                      egy értéktelen ötlet mindhármat veszi   egy valódi +0,5R ötlet mindhármat veszi   hamis túlélő évi 12 ötletből
+&gt; 0R (magának a protokollnak a mércéje)                                  12,5 %                                      80 %                           1,50
+&gt; +0,1R                                                                   4,0 %                                      70 %                           0,48
+&gt; +0,2R (ajánlott)                                                        0,8 %                                      59 %                           0,10
+&gt; +0,3R                                                                   0,1 %                                      44 %                           0,01</code></pre>
+    <p><strong>Magának a protokollnak a mércéjénél arra kell számítanod, hogy évente másfél értéktelen stratégia jut be az éles könyvedbe.</strong> A fenti Kevin egy év alatt hat ötletet futtatott végig, és kettőt tartott meg, amelyek közül az egyiket még mindig ideiglenesnek nevezi &mdash; pontosan ezt jósolja az első sor, és ezért a története őszinte változata az, hogy még nem tudja, a kettő közül melyik a valódi.</p>
+    <p>Emeld a mércét +0,2R-re minden szakaszban, és a hamis átengedés aránya nyolcból egyről nagyjából százhúszból egyre esik. Az ára a táblázat másik oldalán áll: egy valóban jó ötlet, amelynek valódi várható értéke +0,5R, most az esetek 59 %-ában veszi mindhárom kaput, nem 80 %-ában. Öt valódi előnyből egyet eldobsz, amit különben megtartottál volna. Ez megéri, mert egy elutasított jó ötlet visszatér &mdash; jövőre friss adaton újratesztelheted &mdash;, míg egy beépített rossz tőkébe kerül, és ami rosszabb, a könyv többi részébe vetett bizalmadba.</p>
+    <p>Figyeld, hol van a kar. 100 ügyletnél a backtest standard hibája 0,15R, tehát egy +0,2R-es mérce ott önmagában elvégzi a munka javát: az esetek 91 %-ában elutasít egy értéktelen ötletet. A tízügyletes papírszakasz standard hibája 0,47R, és bármilyen mércét teszel is, közel áll az érmefeldobáshoz &mdash; ami rendben van, mert az a szakasz a végrehajtást vizsgálja, nem az előnyt. Ha szűkíteni akarod a folyamatot, a legolcsóbb változtatás nem a mindenütt magasabb mérce, hanem több ügylet a mikroméretű éles szakaszban, ahol minden további ügylet csökkenti a hibát, a pozícióméret pedig mindössze 0,1 %.</p>
   </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Nagyjából a lecke felénél tartasz.</p>
@@ -803,7 +816,7 @@
       <li><strong>Negyedéves stratégiai felülvizsgálatok:</strong> Igazold, hogy az előnyöd még működik, ismerd fel a rezsimváltásokat, és igazíts, ha kell</li>
       <li><strong>Folyamatos képzés:</strong> 1 könyv 6-8 hetente, havi 1-2 kutatási cikk, új ötletek tesztelése havonta</li>
       <li><strong>Minőségi közösségek:</strong> Csatlakozz a Signal Pilot Discord szerveréhez, kapcsolódj folyamatközpontú kereskedőkhöz, kerüld a mérgező hájpot</li>
-      <li><strong>Rendszerszintű kísérletezés:</strong> Tesztelj új beállításokat havonta (backtest → papír → mikroméretű éles), és építsd be, ha nyereséges</li>
+      <li><strong>Rendszerszintű kísérletezés:</strong> Tesztelj új beállításokat havonta (backtest → papír → mikroméretű éles), és minden kaput +0,2R-re állíts, ne nullára — három nullás kapu nyolcból egy értéktelen ötletet átenged</li>
       <li><strong>Mentorálás és elszámoltathatóság:</strong> Találj kereskedőket, akik kihívás elé állítanak, tarts heti egyeztetéseket, oszd meg nyíltan a veszteségeidet</li>
       <li><strong>Éves célkitűzés:</strong> arra tűzz ki célt, amit te irányítasz &mdash; szabálykövetés, mintaméret, áttekintési ritmus &mdash;, ne Sharpe-célra, ami főként azt méri, milyen évet adott neked a piac.</li>
       <li><strong>Napi szokás:</strong> Nézz át naponta 1 ügyletet, naplózz azonnal, olvass hetente 1 cikket, tesztelj havonta 1 ötletet</li>

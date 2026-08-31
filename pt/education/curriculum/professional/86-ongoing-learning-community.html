@@ -144,7 +144,7 @@
           <li>Fazer uma revisão trimestral de estratégia sobre o seu próprio registo: o que medir, o que conta como degradação e quando retirar um setup em vez de o defender</li>
           <li>Construir uma rotina de formação contínua que consiga mesmo manter, e distinguir uma fonte que vale o seu tempo de outra que lhe está a vender alguma coisa</li>
           <li>Avaliar uma comunidade de trading pelo facto de lhe dar ou não retorno real, e montar a revisão por pares e a prestação de contas que apanham o que sozinho não vê</li>
-          <li>Testar uma ideia nova sem arriscar a conta nela: tamanho pequeno, amostra fixa e decidido de antemão que resultado a faria ficar</li>
+          <li>Testar uma ideia nova sem arriscar a conta nela: tamanho pequeno, amostra fixa, decidido de antemão que resultado a faria ficar, e uma fasquia suficientemente alta para que uma ideia sem valor não atravesse três portas só por sorte</li>
         </ul>
       </div>
 
@@ -469,7 +469,7 @@
     <ul>
       <li>Teste a hipótese em 50 a 100 exemplos históricos</li>
       <li>Calcule a taxa de acerto, o rácio de pagamento e a expectativa em R (um Sharpe sobre 50 a 100 exemplos de backtest ainda não merece leitura)</li>
-      <li>Se a expectativa for &lt; 0, abandone a ideia. Se for &gt; 0, avance para o passo 4</li>
+      <li>Se a expectativa estiver abaixo de +0,2R, abandone a ideia. Acima disso, avance para o passo 4</li>
     </ul>
 
     <h4>Passo 4: operar em papel em tempo real (semanas 2 a 4)</h4>
@@ -491,12 +491,25 @@
     <h4>Critérios de sucesso</h4>
     <p><strong>Integre o setup novo na estratégia SE:</strong></p>
     <ul>
-      <li>✅ A expectativa no backtest for &gt; 0 em mais de 100 operações</li>
-      <li>✅ A expectativa em papel for &gt; 0 em mais de 10 operações</li>
-      <li>✅ A expectativa em micro real for &gt; 0 em mais de 20 operações</li>
+      <li>✅ A expectativa no backtest estiver acima de +0,2R em mais de 100 operações, e não apenas acima de zero &mdash; a aritmética dessa fasquia está abaixo</li>
+      <li>✅ A expectativa em papel estiver acima de +0,2R em mais de 10 operações, e leia esta etapa como um teste de execução e não de vantagem</li>
+      <li>✅ A expectativa em micro real estiver acima de +0,2R em mais de 20 operações &mdash; e faça mais de vinte se puder, porque é a amostra mais barata desta página de ampliar</li>
       <li>✅ Houver baixa correlação com as estratégias existentes (acrescenta diversificação)</li>
       <li>✅ A execução lhe sair natural (sem quebrar regras a toda a hora)</li>
     </ul>
+  </div>
+
+  <div class="callout-key">
+    <h4>&#127919; Três portas com «expectativa acima de zero» deixam passar uma ideia sem valor em cada oito</h4>
+    <p>O protocolo é sólido e a sua fasquia não é. Cada uma das três etapas deixa passar uma ideia cuja esperança observada sai acima de zero, e uma ideia sem vantagem nenhuma supera essa fasquia, por simetria, cerca de metade das vezes em cada etapa. Três caras seguidas são uma em oito. Subir a fasquia para um número positivo pequeno custa muito pouco e muda esse número em mais de uma ordem de grandeza &mdash; aqui calculado sobre as dimensões de amostra do próprio protocolo (100 no backtest, 10 em papel, 20 em micro real) com uma dispersão de 1,5R por operação:</p>
+<pre><code>fasquia em cada etapa                      uma ideia sem valor passa as três   uma ideia real de +0,5R passa as três   falsos sobreviventes de 12 ideias por ano
+&gt; 0R (a fasquia do próprio protocolo)                              12,5 %                                    80 %                                        1,50
+&gt; +0,1R                                                             4,0 %                                    70 %                                        0,48
+&gt; +0,2R (recomendado)                                               0,8 %                                    59 %                                        0,10
+&gt; +0,3R                                                             0,1 %                                    44 %                                        0,01</code></pre>
+    <p><strong>Com a fasquia do próprio protocolo, deve esperar que uma estratégia e meia sem valor por ano chegue à sua carteira real.</strong> O Kevin, acima, passou seis ideias num ano e ficou com duas, uma das quais ainda considera provisória &mdash; que é o que a primeira linha prevê, e é por isso que a versão honesta da história dele é que ainda não sabe qual das duas é real.</p>
+    <p>Suba a fasquia para +0,2R em cada etapa e a taxa de falsas passagens desce de uma em oito para cerca de uma em cento e vinte. O custo está do outro lado da tabela: uma ideia genuinamente boa, com uma esperança verdadeira de +0,5R, passa agora as três portas 59 % das vezes em vez de 80 %. Vai deitar fora uma em cada cinco vantagens reais que de outro modo teria mantido. É uma troca que vale a pena, porque uma boa ideia recusada volta &mdash; pode testá-la de novo no ano seguinte com dados frescos &mdash;, ao passo que uma má integrada custa capital e, pior, a confiança que deposita no resto da carteira.</p>
+    <p>Repare onde está a alavanca. Com 100 operações, o erro-padrão do backtest é 0,15R, portanto uma fasquia de +0,2R aí faz a maior parte do trabalho sozinha: rejeita uma ideia sem valor 91 % das vezes. A etapa em papel, com dez operações, tem um erro-padrão de 0,47R e é quase um cara ou coroa, ponha a fasquia onde puser &mdash; o que não faz mal, porque essa etapa testa a execução e não a vantagem. Se quiser apertar o funil, a mudança mais barata não é subir a fasquia em todo o lado; são mais operações em micro real, onde cada operação extra reduz o erro e o tamanho da posição é apenas 0,1 %.</p>
   </div>
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
   <p>Está mais ou menos a meio desta lição.</p>
@@ -803,7 +816,7 @@
       <li><strong>Revisões trimestrais da estratégia:</strong> Confirmar que a vantagem ainda funciona, detetar mudanças de regime, ajustar se for preciso</li>
       <li><strong>Formação contínua:</strong> 1 livro a cada 6-8 semanas, 1 a 2 artigos de investigação por mês, testar ideias novas todos os meses</li>
       <li><strong>Comunidades de qualidade:</strong> Entre no Discord da Signal Pilot, conviva com traders focados no processo, evite o alarido tóxico</li>
-      <li><strong>Experimentação sistemática:</strong> Testar setups novos todos os meses (backtest → papel → micro real) e integrá-los se forem rentáveis</li>
+      <li><strong>Experimentação sistemática:</strong> Testar setups novos todos os meses (backtest → papel → micro real) e pôr cada porta em +0,2R em vez de zero — três portas em zero deixam passar uma ideia sem valor em cada oito</li>
       <li><strong>Mentoria e responsabilização:</strong> Encontre traders que o desafiem, mantenha pontos semanais, partilhe as perdas abertamente</li>
       <li><strong>Definição de objetivos anuais:</strong> define objetivos sobre o que controlas &mdash; adesão às regras, dimensão da amostra, cadência das revisões &mdash; e não sobre um objetivo de Sharpe, que mede sobretudo o ano que o mercado te deu.</li>
       <li><strong>Hábito diário:</strong> Rever 1 operação por dia, registar de imediato, ler 1 artigo por semana, testar 1 ideia por mês</li>
