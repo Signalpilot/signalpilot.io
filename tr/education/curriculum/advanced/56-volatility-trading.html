@@ -134,9 +134,10 @@
         <p style="margin:0 0 0.75rem 0">Bu dersin sonunda şunları yapabileceksin:</p>
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>VIX ortalamaya döner, ama bir takvime göre değil &mdash; ve ona dayanıp dayanamayacağınıza karar veren şey istisnalardır: 2020'de on dört hafta 30'un üstünde kaldı, 2008'de altı aydan uzun. 15'in altında koruma ucuzdur, ve bunun sabit cevabı olan yarısı budur</li>
-          <li>VIX rejimleri büyüklüğünüzü belirler: <15 = %75, 15-20 = tam büyüklük, 20-25 = %50, 25-30 = %25 ya da kenarda durmak, >30 = yalnızca ortalamaya dönüş işlemleri</li>
+          <li>VIX rejimleri büyüklüğünüzü belirler: <15 = %75, 15-20 = tam büyüklük, 20-25 = %50, 25-30 = %25 ya da dışarıda, >30 = yalnızca dönüş işlemleri &mdash; ve bu bant tablosu avantajınıza dair bir yargıdır; aşağıdaki, aritmetik olan oynaklık boyutlandırmasının üzerine bindirilmiştir</li>
           <li>Gerçekleşen ve zımni: zımni oynaklık gerçekleşeni aşıyorsa opsiyonlar pahalıdır (tanımlı riskle prim satın)</li>
           <li>Çerçeve: VIX seviyesini beklenen bir günlük harekete çevirin &rarr; stopu o genişlikten belirleyin &rarr; stopun her zamanki maliyetine denk gelecek şekilde boyutlandırın. Çerçevenin tamamı budur ve size iki seviyede ne yapacağınızı söylemek yerine her VIX seviyesinde çalışır</li>
+          <li>İki boyutlandırma kuralını ayırın ve tartın: bu dersin kendi vaka çalışmasında oynaklığa göre boyutlandırma sakin ve korkulu piyasalar arasındaki farkın %29’unu, dışarıda kalmak ise kalan %71’ini kapatıyor</li>
         </ul>
       </div>
 
@@ -372,6 +373,27 @@
       <p>Eklediği ikinci şey, 0-DTE gamasının nerede yoğunlaştığına bakmaktı. Mekanizma gerçektir ve aşağıdaki testin 3. sorusunda açıklanıyor: bir kullanım fiyatında gamada long olan aracılar, o fiyatın çevresinde güçlenmeyi satar ve zayıflığı alır; bu da vade yaklaştıkça fiyatı o seviyenin yakınında tutar. Bunu işlemenin sonuçları, yukarıdakiyle aynı nedenle bildirilmiyor. Bunu, bir vade gününde geç saatlerdeki bir kırılıma kuşkuyla bakmak için bir neden olarak gör; isabet oranı olan bir kurulum olarak değil.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; İki boyutlandırma kuralı ve her birinin gerçekte önlediği hasar</h4>
+        <p>Bu ders korkulu bir piyasada boyutlandırmanın iki yolunu veriyor ve bunların birbiriyle nasıl ilişkilendiğini hiç söylemiyor. Biri yukarıdaki dönüşüm: VIX’i 16’ya bölün, stopu o genişlikten belirleyin ve aynı dolar riskini koruyun &mdash; böylece hisse adediniz VIX yükseldikçe kendiliğinden düşer. Diğeri bant tablosu: yarıya, sonra dörtte bire, sonra sıfıra. Bunlardan hangisinin aritmetik hangisinin yargı olduğunu bilmeye değer ve vaka çalışmasında bunu çözecek sayılar var.</p>
+
+        <p>Eric’in dağılımı, sakin piyasalarda 34.800 dolar kazandıran 62 işlem ve korkulu piyasalarda 52.400 dolar kaybettiren 18 işlemdi. Her dönemin oynaklığını bu dersin kendi bantlarından alın: normal bant 17,5 civarında ortalanıyor, yukarıda anılan üç korkulu ay ise ortalama 26,8 veriyor. Şimdi sorun: oynaklığa göre boyutlandırsaydı o 18 işlem ne kadara mal olurdu? Hisselerin 17,5 &#247; 26,8 = %65’ini tutardı ve dolayısıyla zararın da %65’ini üstlenirdi.</p>
+
+<pre><code>sakin piyasadaki işlemler                               34.800 / 62  = 561 $  işlem başına
+korkulu piyasadaki işlemler                             52.400 / 18  = -2.911 $  işlem başına
+aynı işlemler, oynaklığa göre boyutlandırılmış  2.911 × 17,5 / 26,8  = -1.901 $  işlem başına
+
+oynaklık kuralının kapattığı fark                     3.472 - 2.462  = 1.010 $   %29
+avantajın kendisi olan fark                                   2.462  = %71</code></pre>
+
+        <p>Yani oynaklık kuralı, işlem başına 3.472 dolarlık farkın yaklaşık 1.010 dolarını, üçte birinin biraz altını değerinde. Bu kısım saf aritmetik: onun avantajı hakkında bir görüş değil, hareketler genişken aynı pozisyonun daha fazla risk taşıdığı gözlemi ve bunu düzeltmenin hiçbir maliyeti yok.</p>
+
+        <p><strong>Kalan %71 avantajın kendisidir.</strong> Oynaklığa göre boyutlandırıldıktan sonra bile o işlemler, sakin piyasalardaki 561 dolarlık kâra karşı hâlâ tanesi 1.901 dolar kaybettiriyor. Hiçbir stop kuralı oraya erişemez, çünkü bu bir boyutlandırma hatası değil: kurulumu korku içinde basitçe işlemedi. Buna dokunan tek araç işlemi almamaktır ve bant tablosunun asıl işi budur.</p>
+
+        <p>İki kural arasındaki dürüst ilişki budur ve bu sırayla tutmaya değer. Oynaklığa göre her zaman boyutlandırın; bedava ve doğru. Yüksek VIX rejimlerinde büyüklüğü kısın ya da dışarıda kalın, çünkü kendi kaydınız avantajınızın orada eridiğini söylüyor &mdash; ve kanıt isteyenin bu ikinci kural olduğunu unutmayın: bantlara güvenmeden önce aynı ayrımı kendi işlemlerinizde yapın.</p>
+      </div>
+
       <div class="section-break"><span>Sınav: anlayışını test et</span></div>
       <div class="quiz">
 <h4>&#127918; Volatilite rejimi kontrolü</h4>
@@ -393,12 +415,12 @@
           <p><strong>2. VIX üç seansta 14’ten 34’e fırlıyor. Dersin ortalamaya dönüşü ele alış biçimine göre daha güvenilir işlem hangisi?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Volatiliteyi al ve tut &mdash; korku kendini besler</div>
-            <div class="quiz-option" data-correct="true">B) Dönüşe göre pozisyon al, çünkü 30 üzerindeki sıçramalar genelde kısa ömürlüdür</div>
+            <div class="quiz-option" data-correct="true">B) Dayanak varlıkta dönüş için pozisyon alın; büyüklüğü, geri çekilmeyen sıçramaya göre belirleyin</div>
             <div class="quiz-option" data-correct="false">C) Panik daha fazla düşüşün habercisi olduğuna göre, doğrudan endeksi shortla</div>
             <div class="quiz-option" data-correct="false">D) Sıçrama sırasında işlem yapılabilecek hiçbir şey yoktur</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Doğru: B.</strong> Dersin VIX hakkındaki asıl noktası, onun ortalamaya dönmesidir: uç değerler kalıcı olmaz, sönümlenir; sıçramanın kendisini fırsata çeviren de budur. A ucu satın alır ve o çözülürken erimenin bedelini öder. C, volatilite görüşü kılığına girmiş yönlü bir bahistir &mdash; ikisi aynı işlem değildir. D risk yönetimi olarak savunulabilir ama dersin dönüş hakkında öğrettiği şey değildir.
+            <strong>Doğru: B.</strong> Aşırı değerler kalıcı olmaktan çok geri çekilir, dolayısıyla sıçrama bir kurulumdur &mdash; ama B’yi sonuna kadar okuyun, çünkü sizi ödeme gücünde tutan ikinci yarısıdır. 30 üzerindeki sıçramaların çoğu haftalar içinde çözülür; 2020’de VIX on dört hafta 30’un üzerinde kaldı, 2008’de altı aydan fazla, ve 34 gibi bir okumayı zaten tam da bu dönemler üretir. Bu yüzden dönüş bir oynaklık ürününde değil dayanak varlıkta ifade edilir ve sanki bu istisnalardan biriymiş gibi boyutlandırılır. A aşırıyı satın alır ve çözülürken erimeyi öder. C, oynaklık görüşü kılığına girmiş yönlü bir bahistir; aynı işlem değildir. D ise istisnaya göre boyutlandıramadığınızda alınacak pozisyondur &mdash; yanlış değil, aynı riske verilen başka bir cevap.
           </div>
         </div>
 
@@ -425,6 +447,7 @@
           <li><strong>Opsiyon akışı sana korunma hakkında bilgi verir, kanaat hakkında değil:</strong> 10.000 kontratlık bir baskı, karşı taraftaki aracıların korunmak zorunda olduğu anlamına gelir; bu da dayanak varlıkta gerçek alım ya da satımdır. Sana alıcının neye inandığını söylemez — baskı bir spread’in bacağı, yazılmış bir call ya da zaten sahip olunan hisseye karşı bir korunma olabilir — ve hareketten saatler önce gelmez, çünkü korunma anında yapılır.</li>
           <li><strong>VIX ortalamaya döner, ama takvime göre değil:</strong> 30 üzerindeki sıçramaların çoğu haftalar içinde çözülür, ve önemli olan istisnalardır — 2020, 30’un üzerinde on dört hafta kaldı; 2008 ise altı aydan fazla. Bu dersin kendi COVID vaka incelemesi istisnalardan biridir. Dönüş işlemini ortalamaya değil istisnaya göre boyutlandır</li>
           <li><strong>VIX’e göre pozisyon büyüklüğü:</strong> VIX 20-25 = büyüklüğü %50’ye kıs, VIX 25-30 = %25’e kıs ya da kenarda dur, VIX > 30 = kenarda dur ya da yalnızca dönüşleri işle</li>
+          <li><strong>İki kural farklı iş yapar:</strong> VIX’ten türetilmiş bir stopa göre boyutlandırmak dolar riskinizi sabit tutar ve bedava aritmetiktir; yüksek korku bantlarında büyüklüğü kısmak riskinizi düşürür, çünkü avantaj orada erir, ve kanıt ister. Vaka çalışmasında birincisi farkın %29’u, ikincisi %71’i değerindedir</li>
         </ul>
       </div>
 

@@ -134,9 +134,10 @@
         <p style="margin:0 0 0.75rem 0">À la fin de cette leçon, vous saurez :</p>
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Le VIX revient à la moyenne, mais pas selon un calendrier &mdash; et ce sont les exceptions qui décident si vous y survivez : en 2020 il est resté au-dessus de 30 pendant quatorze semaines, en 2008 plus de six mois. Sous 15, la protection est bon marché, et c'est la moitié qui a une réponse fixe</li>
-          <li>Les régimes du VIX fixent votre taille : <15 = 75 %, 15-20 = taille pleine, 20-25 = 50 %, 25-30 = 25 % ou rester à l’écart, >30 = uniquement des trades de retour à la moyenne</li>
+          <li>Les régimes de VIX fixent votre taille : <15 = 75 %, 15-20 = taille pleine, 20-25 = 50 %, 25-30 = 25 % ou hors marché, >30 = uniquement des trades de réversion &mdash; et ce tableau de bandes est un jugement sur votre edge, superposé au dimensionnement par la volatilité ci-dessous, qui est de l'arithmétique</li>
           <li>Réalisée contre implicite : si l’implicite dépasse la réalisée, les options sont chères (vendez de la prime, avec un risque défini)</li>
           <li>Cadre : convertissez le niveau du VIX en mouvement quotidien attendu &rarr; fixez le stop à partir de cette largeur &rarr; dimensionnez pour que le stop coûte ce qu'il coûte toujours. C'est tout le cadre, et il fonctionne à n'importe quel niveau de VIX au lieu de vous dire quoi faire à deux d'entre eux</li>
+          <li>Séparez les deux règles de taille et pesez-les : sur l'étude de cas de cette leçon, le dimensionnement par la volatilité comble 29 % de l'écart entre marchés calmes et craintifs, et rester à l'écart comble les 71 % restants</li>
         </ul>
       </div>
 
@@ -372,6 +373,27 @@
       <p>La deuxième chose qu'il a ajoutée, c'est de regarder où le gamma 0-DTE se concentre. Le mécanisme est réel et il est expliqué à la Question 3 du quiz ci-dessous : les teneurs de marché longs de gamma sur un strike vendent la force et achètent la faiblesse autour de lui, ce qui maintient le prix près de ce strike à l'approche de l'échéance. Aucun résultat n'est rapporté pour son trading, pour la même raison que ci-dessus. Traitez-le comme une raison de se méfier d'une cassure de fin de journée un jour d'échéance, non comme un setup avec un taux de réussite.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; Deux règles de taille, et ce que chacune évite réellement</h4>
+        <p>Cette leçon vous donne deux façons de dimensionner en marché craintif et ne dit jamais comment elles s'articulent. La première est la conversion ci-dessus : divisez le VIX par 16, fixez le stop à partir de cette largeur et gardez le même risque en dollars &mdash; votre nombre de titres baisse alors automatiquement quand le VIX monte. La seconde est le tableau de bandes : moitié, puis quart, puis rien. Il vaut la peine de savoir laquelle des deux est de l'arithmétique et laquelle un jugement, et l'étude de cas a les chiffres pour trancher.</p>
+
+        <p>La répartition d'Eric : 62 trades en marché calme pour 34 800 $ de gain et 18 en marché craintif pour 52 400 $ de perte. Prenez la volatilité de chaque période dans les bandes de cette leçon &mdash; la bande normale est centrée sur 17,5, et les trois mois craintifs cités plus haut font 26,8 en moyenne. Demandez-vous maintenant ce que ces 18 trades auraient coûté s'il avait dimensionné par la volatilité : il aurait détenu 17,5 &#247; 26,8 = 65 % des titres, et donc encaissé 65 % de la perte.</p>
+
+<pre><code>trades en marché calme                             34 800 / 62  = 561 $  par trade
+trades en marché craintif                          52 400 / 18  = -2 911 $  par trade
+les mêmes, dimensionnés par la volatilité  2 911 × 17,5 / 26,8  = -1 901 $  par trade
+
+écart comblé par la règle de volatilité          3 472 - 2 462  = 1 010 $   29 %
+écart qui est l'edge elle-même                           2 462  = 71 %</code></pre>
+
+        <p>La règle de volatilité vaut donc environ 1 010 $ des 3 472 $ d'écart par trade &mdash; un peu moins d'un tiers. Cette part est de l'arithmétique pure : ce n'est pas un avis sur son edge, c'est le constat qu'une même position porte plus de risque quand les mouvements sont plus larges, et la corriger ne coûte rien.</p>
+
+        <p><strong>Les 71 % restants, c'est l'edge elle-même.</strong> Même dimensionnés pour la volatilité, ces trades perdent encore 1 901 $ pièce contre 561 $ de gain en marché calme. Aucune règle de stop n'atteint cela, car ce n'est pas une erreur de taille : son setup ne fonctionnait tout simplement pas dans la peur. Le seul instrument qui y touche est de ne pas prendre le trade, et c'est à cela que sert vraiment le tableau de bandes.</p>
+
+        <p>Voilà la relation honnête entre les deux règles, et elle vaut dans cet ordre. Dimensionnez toujours par la volatilité, car c'est gratuit et c'est juste. Réduisez la taille ou restez à l'écart dans les régimes de VIX élevé parce que votre propre journal dit que votre edge s'y dégrade &mdash; et notez que cette seconde règle est celle qui demande des preuves : faites la même répartition sur vos propres trades avant de faire confiance aux bandes.</p>
+      </div>
+
       <div class="section-break"><span>Quiz : testez votre compréhension</span></div>
       <div class="quiz">
 <h4>&#127918; Contrôle du régime de volatilité</h4>
@@ -393,12 +415,12 @@
           <p><strong>2. Le VIX bondit de 14 à 34 en trois séances. D’après le traitement du retour à la moyenne dans cette leçon, quel est le trade le plus fiable ?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Acheter la volatilité et la garder &mdash; la peur se nourrit d’elle-même</div>
-            <div class="quiz-option" data-correct="true">B) Se positionner pour le retour, car les pics au-dessus de 30 sont généralement brefs</div>
+            <div class="quiz-option" data-correct="true">B) Positionnez-vous pour la réversion sur le sous-jacent, dimensionnée pour le pic qui ne retombe pas</div>
             <div class="quiz-option" data-correct="false">C) Shorter l’indice sans détour, puisque la panique précède d’autres baisses</div>
             <div class="quiz-option" data-correct="false">D) Rien n’est tradable pendant un pic</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Bonne réponse : B.</strong> Le point central de la leçon sur le VIX, c’est qu’il revient à la moyenne : les valeurs extrêmes se dégonflent au lieu de persister, et c’est ce qui fait du pic lui-même l’opportunité. A achète l’extrême et paie la décote pendant qu’il se dénoue. C est un pari directionnel déguisé en vue sur la volatilité &mdash; ce ne sont pas les mêmes trades. D se défend comme gestion du risque, mais ce n’est pas ce que la leçon enseigne sur le retour à la moyenne.
+            <strong>Bonne réponse : B.</strong> Les valeurs extrêmes retombent plus souvent qu'elles ne persistent, le pic est donc un setup &mdash; mais lisez B en entier, car la seconde moitié est ce qui vous garde solvable. La plupart des pics au-dessus de 30 retombent en quelques semaines ; en 2020 le VIX est resté au-dessus de 30 pendant quatorze semaines et en 2008 pendant plus de six mois, et ce sont précisément ces épisodes qui produisent une lecture de 34. C'est pourquoi la réversion s'exprime sur le sous-jacent plutôt que sur un produit de volatilité, et se dimensionne comme si l'on était dans l'une des exceptions. A achète l'extrême et paie la décote pendant qu'il retombe. C est un pari directionnel déguisé en vue sur la volatilité ; ce ne sont pas les mêmes trades. D est la position à prendre quand on ne peut pas dimensionner pour l'exception &mdash; pas faux, juste une autre réponse au même risque.
           </div>
         </div>
 
@@ -425,6 +447,7 @@
           <li><strong>Le flux d'options vous renseigne sur la couverture, non sur la conviction :</strong> un print de 10 000 contrats signifie que les teneurs de marché en face doivent se couvrir, ce qui représente de vrais achats ou ventes du sous-jacent. Il ne vous dit pas ce que croit l'acheteur — le print peut être une jambe de spread, un call couvert, ou la couverture d'actions déjà détenues — et il n'arrive pas des heures avant le mouvement, puisque la couverture se fait immédiatement.</li>
           <li><strong>Le VIX revient à sa moyenne, mais pas selon un calendrier :</strong> la plupart des pics au-dessus de 30 se dénouent en quelques semaines, et ce sont les exceptions qui comptent — 2020 est resté au-dessus de 30 quatorze semaines, 2008 plus de six mois. L'étude de cas COVID de cette leçon même est l'une des exceptions. Dimensionnez le trade de retour pour l'exception, non pour la moyenne</li>
           <li><strong>Dimensionnement selon le VIX :</strong> VIX 20-25 = couper la taille à 50 %, VIX 25-30 = couper à 25 % ou rester à l’écart, VIX > 30 = rester à l’écart ou ne trader que les retours</li>
+          <li><strong>Les deux règles font un travail différent :</strong> dimensionner à partir d'un stop dérivé du VIX maintient votre risque en dollars constant et relève de l'arithmétique gratuite ; réduire la taille dans les bandes de forte peur abaisse votre risque parce que l'edge s'y dégrade, et demande des preuves. Sur l'étude de cas, la première vaut 29 % de l'écart et la seconde 71 %</li>
         </ul>
       </div>
 

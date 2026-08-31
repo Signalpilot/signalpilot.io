@@ -134,9 +134,10 @@
         <p style="margin:0 0 0.75rem 0">Al terminar esta lección podrás:</p>
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>El VIX revierte a la media, pero no según un calendario &mdash; y las excepciones son las que deciden si las sobrevives: en 2020 se mantuvo por encima de 30 catorce semanas, en 2008 más de seis meses. Por debajo de 15 la protección está barata, que es la mitad de esto con respuesta fija</li>
-          <li>Los regímenes del VIX fijan tu tamaño: <15 = 75 %, 15-20 = tamaño completo, 20-25 = 50 %, 25-30 = 25 % o quedarse fuera, >30 = solo operaciones de reversión</li>
+          <li>Los regímenes de VIX fijan tu tamaño: <15 = 75 %, 15-20 = tamaño completo, 20-25 = 50 %, 25-30 = 25 % o fuera, >30 = solo operaciones de reversión &mdash; y esta tabla de bandas es un juicio sobre tu ventaja, superpuesto al dimensionamiento por volatilidad de abajo, que es aritmética</li>
           <li>Realizada frente a implícita: si la implícita supera a la realizada, las opciones están caras (vende prima, con riesgo definido)</li>
           <li>Marco: convierte el nivel del VIX en un movimiento diario esperado &rarr; fija el stop a partir de esa anchura &rarr; dimensiona para que el stop cueste lo que siempre cuesta. Ese es todo el marco, y funciona en cualquier nivel del VIX en vez de decirte qué hacer solo en dos</li>
+          <li>Separa las dos reglas de tamaño y pésalas: en el propio caso de esta lección, el dimensionamiento por volatilidad cierra el 29 % de la brecha entre mercados calmados y temerosos, y quedarse fuera cierra el 71 % restante</li>
         </ul>
       </div>
 
@@ -372,6 +373,27 @@
       <p>Lo segundo que añadió fue mirar dónde se concentraba la gamma de 0-DTE. El mecanismo es real y está explicado en la Pregunta 3 del cuestionario de abajo: los dealers que están largos de gamma en un strike venden la fuerza y compran la debilidad alrededor de él, lo que mantiene el precio cerca de ese strike al acercarse el vencimiento. No se informa de resultados de operarlo, por la misma razón que antes. Trátalo como una razón para desconfiar de una ruptura tardía en un día de vencimiento, no como un setup con tasa de acierto.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; Dos reglas de tamaño, y cuánto daño evita cada una en realidad</h4>
+        <p>Esta lección te da dos formas de dimensionar en un mercado temeroso y nunca dice cómo se relacionan. Una es la conversión de arriba: divide el VIX entre 16, fija el stop con esa anchura y mantén el mismo riesgo en dólares &mdash; con lo que tu número de acciones cae automáticamente cuando sube el VIX. La otra es la tabla de bandas: a la mitad, luego a un cuarto, luego nada. Vale la pena saber cuál de las dos es aritmética y cuál un juicio, y el caso de estudio tiene los números para dirimirlo.</p>
+
+        <p>El reparto de Eric fueron 62 operaciones en mercados calmados con 34.800 $ de beneficio y 18 en mercados temerosos con 52.400 $ de pérdida. Toma la volatilidad de cada tramo de las propias bandas de esta lección: la banda normal se centra en 17,5, y los tres meses temerosos citados arriba promedian 26,8. Ahora pregúntate qué habrían costado esas 18 operaciones si hubiera dimensionado por volatilidad: habría tenido el 17,5 &#247; 26,8 = 65 % de las acciones, y por tanto habría asumido el 65 % de la pérdida.</p>
+
+<pre><code>operaciones en mercados calmados                   34.800 / 62  = 561 $  por operación
+operaciones en mercados temerosos                  52.400 / 18  = -2.911 $  por operación
+las mismas, dimensionadas por volatilidad  2.911 × 17,5 / 26,8  = -1.901 $  por operación
+
+parte que cierra la regla de volatilidad         3.472 - 2.462  = 1.010 $   29 %
+parte que es la ventaja en sí                            2.462  = 71 %</code></pre>
+
+        <p>Así que la regla de volatilidad vale unos 1.010 $ de los 3.472 $ de brecha por operación: algo menos de un tercio. Esa parte es aritmética pura: no es una opinión sobre su ventaja, es la constatación de que la misma posición carga más riesgo cuando los movimientos son más anchos, y corregirlo no cuesta nada.</p>
+
+        <p><strong>El otro 71 % es la ventaja en sí.</strong> Incluso después de dimensionar por volatilidad, esas operaciones siguen perdiendo 1.901 $ cada una frente a 561 $ de beneficio en mercados calmados. Ninguna regla de stop llega ahí, porque no es un error de tamaño: su setup sencillamente no funcionaba con miedo. El único instrumento que toca eso es no tomar la operación, y para eso está realmente la tabla de bandas.</p>
+
+        <p>Esa es la relación honesta entre las dos reglas, y conviene tenerla en este orden. Dimensiona siempre por volatilidad, porque es gratis y es correcto. Recorta tamaño o quédate fuera en regímenes de VIX alto porque tu propio diario dice que tu ventaja se degrada ahí &mdash; y fíjate en que esta segunda regla es la que necesita pruebas, así que haz el mismo reparto con tus propias operaciones antes de fiarte de las bandas.</p>
+      </div>
+
       <div class="section-break"><span>Cuestionario: pon a prueba lo que has entendido</span></div>
       <div class="quiz">
 <h4>&#127918; Comprobación del régimen de volatilidad</h4>
@@ -393,12 +415,12 @@
           <p><strong>2. El VIX salta de 14 a 34 en tres sesiones. Según el tratamiento de la reversión a la media en la lección, ¿cuál es la operación más fiable?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Comprar volatilidad y mantenerla &mdash; el miedo se alimenta a sí mismo</div>
-            <div class="quiz-option" data-correct="true">B) Posicionarse para la reversión, porque los picos por encima de 30 suelen durar poco</div>
+            <div class="quiz-option" data-correct="true">B) Posiciónate para la reversión en el subyacente, dimensionada para el pico que no se deshace</div>
             <div class="quiz-option" data-correct="false">C) Ponerse corto en el índice sin más, ya que el pánico precede a más caídas</div>
             <div class="quiz-option" data-correct="false">D) Durante un pico no hay nada operable</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correcto: B.</strong> El punto central de la lección sobre el VIX es que revierte a la media: las lecturas extremas se deshacen en lugar de persistir, y eso es lo que convierte al propio pico en la oportunidad. A compra el extremo y paga el deterioro mientras se deshace. C es una apuesta direccional disfrazada de opinión sobre volatilidad &mdash; no son la misma operación. D es defendible como gestión del riesgo, pero no es lo que la lección enseña sobre la reversión.
+            <strong>Correcto: B.</strong> Las lecturas extremas se deshacen más a menudo de lo que persisten, así que el pico es un setup &mdash; pero lee B entera, porque la segunda mitad es la parte que te mantiene solvente. La mayoría de los picos por encima de 30 se deshacen en semanas; en 2020 el VIX aguantó por encima de 30 catorce semanas y en 2008 más de seis meses, y son precisamente esos episodios los que producen una lectura de 34. Por eso la reversión se expresa en el subyacente y no en un producto de volatilidad, y se dimensiona como si esta fuera una de las excepciones. A compra el extremo y paga decaimiento mientras se deshace. C es una apuesta direccional disfrazada de visión de volatilidad; no son la misma operación. D es la posición que se toma cuando no puedes dimensionar para la excepción: no está mal, es otra respuesta al mismo riesgo.
           </div>
         </div>
 
@@ -425,6 +447,7 @@
           <li><strong>El flujo de opciones te habla de cobertura, no de convicción:</strong> un print de 10.000 contratos significa que los dealers del otro lado tienen que cubrirse, lo cual es compra o venta real del subyacente. No te dice lo que cree el comprador —el print podría ser una pata de un spread, una call cubierta o la cobertura de acciones que ya posee— y no llega horas antes del movimiento, porque la cobertura ocurre de inmediato.</li>
           <li><strong>El VIX revierte a la media, pero no según un calendario:</strong> la mayoría de los picos por encima de 30 se deshacen en semanas, y las excepciones son las que importan: 2020 se mantuvo por encima de 30 durante catorce semanas, 2008 durante más de seis meses. El caso COVID de esta misma lección es una de las excepciones. Dimensiona la operación de reversión para la excepción, no para la media</li>
           <li><strong>Tamaño de posición según el VIX:</strong> VIX 20-25 = recortar el tamaño al 50 %, VIX 25-30 = recortar al 25 % o quedarse fuera, VIX > 30 = quedarse fuera u operar solo reversiones</li>
+          <li><strong>Las dos reglas hacen trabajos distintos:</strong> dimensionar con un stop derivado del VIX mantiene plano tu riesgo en dólares y es aritmética gratis; recortar tamaño en bandas de miedo alto baja tu riesgo porque la ventaja se degrada ahí, y necesita pruebas. En el caso de estudio la primera vale el 29 % de la brecha y la segunda el 71 %</li>
         </ul>
       </div>
 
