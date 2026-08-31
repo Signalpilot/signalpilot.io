@@ -45,6 +45,8 @@ def parts_present(path):
     s=open(path,encoding='utf-8').read()
     return [p for p in PARTS if f'data-part="{p}"' in s]
 
+# A lesson counts as finished only when the ledger records a second read that
+# found something. See academy-ledger.tsv.
 # The reading contract, from SYLLABUS.md. A lesson that breaks it is not finished,
 # however good the prose is.
 BUDGET={'words':1800,'callouts':1,'accordions':0,'tables':2,'emoji_headings':0}
@@ -98,6 +100,8 @@ def state(row,led):
     if overbudget(p): return 'BLOATED',p              # in form, but breaks the reading contract
     if len(locales_built(p))<11: return 'ENGLISH',p   # in form, not yet translated
     if new not in led: return 'UNLOGGED',p
+    if led[new].get('read2','').strip().lower()!='yes': return 'UNREAD',p
+    if not led[new].get('found','').strip(): return 'UNREAD',p
     return 'DONE',p
 
 def main():
@@ -124,15 +128,20 @@ def main():
         counts[st]=counts.get(st,0)+1
         firsts.setdefault(st,r)
     if '--next' in sys.argv:
-        for st in ['TOWRITE','PROSE','BLOATED','ENGLISH','UNLOGGED']:
-            if st in firsts:
-                r=firsts[st]
-                verb={'TOWRITE':'write from nothing','PROSE':'rebuild into academy form',
-                      'BLOATED':'cut to the reading contract',
-                      'ENGLISH':'translate into 11 locales','UNLOGGED':'add the ledger row'}[st]
-                print(f"NEXT: slot {r['new']} (module {r['module']}) — {verb} — {r['title']}")
-                if r['source']!='-': print(f"      source: old lesson {r['source']}")
-                return
+        # Course order, not state order. Working the easy state first is how a
+        # module ends up with holes in the middle of it.
+        verb={'TOWRITE':'write from nothing','PROSE':'rebuild into academy form',
+              'BLOATED':'cut to the reading contract','MISSING':'find the source file',
+              'UNREAD':'READ IT END TO END and record what that found',
+              'ENGLISH':'translate into 11 locales','UNLOGGED':'add the ledger row'}
+        for r in rows:
+            st,p=state(r,led)
+            if st=='DONE': continue
+            print(f"NEXT: slot {r['new']} (module {r['module']}) - {verb[st]} - {r['title']}")
+            if r['source']!='-':
+                print(f"      source: old lesson {r['source']}  {enfile(r) or ''}")
+                if st=='PROSE': print(f"      READ THE SOURCE FIRST. It is not a rewrite until it has been read.")
+            return
         print('NEXT: nothing outstanding.'); return
     cur=None
     for r in rows:
