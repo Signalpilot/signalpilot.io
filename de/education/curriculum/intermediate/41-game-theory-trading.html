@@ -254,6 +254,7 @@
           <li>Ebene 1: Was macht der Kurs | Ebene 2: Was machen die Trader | Ebene 3: Was glauben sie, was die Trader machen</li>
           <li>Das Liquiditätsspiel: warum Stops sich unter offensichtlichen Levels sammeln und warum ein Käufer mit Größe in diese Tasche hineinhandelt, ohne dass irgendwer dich jagen müsste</li>
           <li>Rahmen: Finde, wo die ruhenden Orders liegen müssen &rarr; nimm an, dass das Level durchgehandelt wird, bevor es hält &rarr; setze deinen Stop dorthin, wo die These bricht, nicht wo der Chart bricht</li>
+          <li>Wie du eine Auszahlungsmatrix nach der Häufigkeit auflöst, ab der der weitere Stopp gewinnt, statt darauf zu warten, dass dir jemand diese Häufigkeit nennt</li>
         </ul>
       </div>
 
@@ -433,8 +434,28 @@
           </tbody>
         </table>
         <p style="margin-top:1rem"><strong>Optimale Strategie:</strong> Optimale Strategie: Stopp weit genug, um einen Durchlauf durch das Niveau zu überstehen, aber nicht so weit, dass ein echter Zusammenbruch stark wehtut. Es wird keine Häufigkeit dafür genannt, wie oft Umkehrungen ein solcher Durchlauf vorausgeht, weil die Antwort ganz vom Instrument, von der Sitzung und davon abhängt, wo Sie die Grenze ziehen, was zählt — und jede kursierende Zahl stammt von jemandem, der diese Grenze gezogen hat, nachdem er die Daten gesehen hatte. Verwenden Sie ATR-basierte Stopps (1,5-2x ATR jenseits der Struktur) und reduzieren Sie die Positionsgröße, um den weiteren Stopp auszugleichen.</p>
-        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Die Rechnung:</strong> Beträgt der ATR 2,00 $, liegt ein Stop von 1,5×ATR 3,00 $ unter dem Einstieg. Läge die normale Positionsgröße bei 100 Aktien, reduzierst du auf 50. Gleiches Dollar-Risiko (300 $), aber 50 % weniger Ausstoppungen durch Sweeps.</p>
+        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Die Rechnung:</strong> Wenn die ATR 2,00 $ beträgt, liegt ein Stopp von 1,5×ATR 3,00 $ unter dem Einstieg &mdash; das Doppelte der 1,50 $, die ein Lehrbuchstopp knapp unter der Unterstützung genutzt hätte. Halbieren Sie die Stückzahl, und das Risiko bleibt gleich: 100 Aktien zu 1,50 $ sind 150 $, und 50 Aktien zu 3,00 $ sind ebenfalls 150 $. Gekauft haben Sie mit demselben Geld Spielraum, nicht eine geringere Wahrscheinlichkeit, ausgestoppt zu werden; wie viel geringer sie ist, hängt davon ab, wie oft das Niveau durchhandelt wird &mdash; und genau das ist als Nächstes zu klären.</p>
       </div>
+      <div class="callout-key">
+    <h4>&#129518; Löse die Matrix, statt sie zu bewundern</h4>
+    <p>Diese vier Felder beantworten die Frage, die der Absatz darüber gerade abgelehnt hat, bereits selbst. Nennen Sie p den Anteil der Fälle, in denen das Niveau durchhandelt und danach zurückerobert wird, statt echt zu brechen. Lesen Sie die Ergebnisse direkt aus der Tabelle ab:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                                           durchhandelt und zurück      echter Bruch
+Stopp bei 178,50 $                        -1,50 $           -1,50 $
+Stopp bei 177,00 $                        +3,00 $           -3,00 $
+
+EW(weit)  = 3p - 3(1 - p)  =  6p - 3
+EW(eng)   = -1,50 $, unabhängig von p
+
+6p - 3 = -1,50   ->   p = 0,25</code></pre>
+
+    <p>Oberhalb eines Viertels ist der weitere Stopp der bessere. Unterhalb eines Viertels der enge. Sie kennen p immer noch nicht, und diese Lektion erfindet es Ihnen auch nicht &mdash; aber Sie müssen es nicht mehr kennen. Sie müssen wissen, auf welcher Seite von 25 % es für das Instrument und die Session liegt, die Sie tatsächlich handeln, und das lässt sich am eigenen Chart auszählen, mit einer vorher aufgeschriebenen Definition.</p>
+
+    <p>Zwei Dinge an diesem Ergebnis lohnen das Verweilen. Die Erwartung des engen Stopps hängt überhaupt nicht von p ab: sie beträgt in beiden Spalten -1,50 $. Er ist keine billigere Wette, er ist die Weigerung zu wetten, und der Preis dieser Weigerung sind die vollen 3,00 $ Aufwärtspotenzial. Nur der weite Stopp hat eine Auszahlung, die variiert, und genau deshalb kann allein er richtig oder falsch sein. Und die Spalte, die die Tabelle weglässt &mdash; das Niveau hält einfach und der Kurs steigt ohne jeden Durchlauf &mdash;, ändert hier nichts: beide Stopps überstehen sie und beide erwischen die Bewegung. Sie ändert, wie oft Sie im Markt sind, nicht welcher Stopp besser ist, wenn Sie es sind.</p>
+
+    <p style="margin-bottom:0">Setzen Sie die beiden nun auf dasselbe Risiko, was der Sizing-Hinweis oben verlangt. Der weite Stopp steht bei 3,00 $ gegen 1,50 $ des engen, nimmt also die halbe Stückzahl. Je Einheit der ursprünglichen Position wird seine Erwartung zu (6p - 3) / 2 = 3p - 1,50, gegen die -1,50 des engen. Gleich sind sie bei p = 0. Sobald beide Positionen dasselbe Geld riskieren, ist der weitere Stopp bei jeder Durchlaufhäufigkeit über null mindestens ebenso gut &mdash; und der Break-even bei 25 % erweist sich als Artefakt eines Vergleichs zweier Positionen, die unterschiedlich viel riskierten. Das ist der ganze Fall für weiten Stopp plus kleinere Größe, und beachten Sie, was er nicht gebraucht hat: keine Schätzung, wie oft Niveaus durchhandelt werden, keine Behauptung darüber, wer das tut, und keine Zahl, die jemand erfinden musste.</p>
+  </div>
+
 <h3 id="game-theory-stop-placement-framework">Ein spieltheoretisches Vorgehen für die Stop-Platzierung</h3>
 
       <p><strong>Ebene 1 (Retail-Denken):</strong> «Stop unter die Unterstützung auf 178,50 $ (laut Lehrbuch 0,50 $ darunter)»</p>
@@ -679,13 +700,14 @@
         <h4>Die wichtigsten Erkenntnisse</h4>
         <ul>
           <li><strong>Nash-Gleichgewicht</strong> = stabiler Zustand, in dem sich niemand allein verbessern kann (der aktuelle Kurs ist das Gleichgewicht)</li>
-          <li><strong>Stops abzuräumen ist die dominante Strategie</strong> für Institutionelle (immer optimal, wird in 60-70 % der Fälle ausgeführt)</li>
+          <li><strong>In den Stopp-Pocket zu handeln schlägt den Handel am Niveau</strong> wenn die drei Bedingungen erfüllt sind &mdash; eine Häufigkeit dafür wird nicht genannt, weil jede kursierende Zahl von jemandem stammt, der im Nachhinein festgelegt hat, was zählt</li>
           <li><strong>Das Gefangenendilemma</strong> erklärt, warum die Liquiditätsbereitstellung scheitert (Risiko der adversen Selektion) → market maker verdienen daran</li>
           <li><strong>Strategische Stop-Platzierung</strong> = Widerlegung der These + ATR-Puffer (nicht willkürliche Unterstützungsmarken)</li>
           <li><strong>Geh davon aus, dass Sweeps KOMMEN</strong> an offensichtlichen Marken (Unterstützung, Widerstand, runde Zahlen)</li>
           <li><strong>Gemischte Strategien</strong> = Zeitpunkt und Tiefe von Durchläufen durch ein Level variieren, weil unkoordinierte Teilnehmer auf verschiedenen Uhren laufen, nicht weil jemand absichtlich randomisiert &mdash; so oder so nicht ausbeutbar, weshalb die Antwort Konstruktion statt Vorhersage lautet</li>
-          <li><strong>Koordinationsversagen</strong> = Retail kann sich nicht abstimmen, Institutionelle schon → die Bündelung bei Retail wird ausgenutzt</li>
-          <li><strong>Robuste Strategie</strong> = funktioniert, ob der Gegner abräumt oder nicht (Limit-Orders in der Sweep-Zone + Stops auf Basis der These)</li>
+          <li><strong>Koordinationsversagen</strong> = niemand koordiniert, auf keiner Seite; alle lesen denselben Chart und erzeugen damit die Ballung, die ein Kartell hätte organisieren müssen</li>
+          <li><strong>Löse nach dem Break-even auf, statt auf die Häufigkeit zu warten</strong> &mdash; in der Matrix oben gewinnt der weite Stopp jenseits von 25 %, und sobald beide auf dasselbe Risiko gesetzt sind, gewinnt er bei jeder Häufigkeit über null</li>
+          <li><strong>Robuste Strategie</strong> = funktioniert, ob das Niveau durchhandelt wird oder nicht (Limitorders in der Durchlaufzone + thesenbasierte Stopps)</li>
         </ul>
       </div>
 

@@ -254,6 +254,7 @@
           <li>Livello 1: che cosa farà il prezzo | Livello 2: che cosa faranno i trader | Livello 3: che cosa pensano che faranno i trader</li>
           <li>Il gioco della liquidità: perché gli stop si addensano sotto i livelli ovvi, e perché un compratore con dimensione opera dentro quella sacca senza che nessuno debba darti la caccia</li>
           <li>Quadro: trova dove devono stare gli ordini in attesa &rarr; assumi che il livello venga attraversato prima di tenere &rarr; metti lo stop dove si rompe la tesi, non dove si rompe il grafico</li>
+          <li>Come risolvere una matrice dei payoff per trovare la frequenza oltre la quale vince lo stop più largo, invece di aspettare che qualcuno ti dia quella frequenza</li>
         </ul>
       </div>
 
@@ -433,8 +434,28 @@
           </tbody>
         </table>
         <p style="margin-top:1rem"><strong>Strategia ottimale:</strong> Strategia ottimale: stop abbastanza largo da sopravvivere a un passaggio attraverso il livello, ma non così largo che una rottura vera faccia molto male. Non viene citata alcuna frequenza su quanto spesso le inversioni siano precedute da uno, perché la risposta dipende interamente dallo strumento, dalla seduta e da dove tracci la linea su che cosa conta — e ogni numero in circolazione è stato prodotto da qualcuno che ha tracciato quella linea dopo aver guardato i dati. Usa stop basati sull’ATR (1,5-2x ATR oltre la struttura) e riduci la size per compensare lo stop più largo.</p>
-        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>I conti:</strong> Se l'ATR è di 2,00 $, uno stop di 1,5×ATR si trova 3,00 $ sotto l'ingresso. Se la tua size normale è di 100 azioni, portala a 50. Stesso rischio in dollari (300 $), ma il 50 % di stop in meno fatti scattare dalle raccolte.</p>
+        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>I conti:</strong> Se l'ATR è 2,00 $, uno stop a 1,5×ATR sta 3,00 $ sotto l'ingresso: il doppio degli 1,50 $ che avrebbe usato uno stop da manuale appena sotto il supporto. Dimezza il numero di azioni e il rischio non cambia: 100 azioni a 1,50 $ fanno 150 $, e 50 azioni a 3,00 $ fanno anche loro 150 $. Con gli stessi soldi hai comprato spazio, non una minore probabilità di essere stoppato; di quanto minore dipende da quanto spesso il livello viene attraversato, che è esattamente la cosa da stabilire adesso.</p>
       </div>
+      <div class="callout-key">
+    <h4>&#129518; Risolvi la matrice invece di ammirarla</h4>
+    <p>Quelle quattro caselle rispondono già alla domanda che il paragrafo qui sopra si è appena rifiutato di risolvere per te. Chiama p la frazione di volte in cui il livello viene attraversato e poi ripreso, invece di rompersi davvero. Leggi gli esiti direttamente dalla tabella:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                                        attraversato e ripreso      rottura vera
+stop a 178,50 $                       -1,50 $           -1,50 $
+stop a 177,00 $                       +3,00 $           -3,00 $
+
+VA(largo)   = 3p - 3(1 - p)  =  6p - 3
+VA(stretto) = -1,50 $, qualunque sia p
+
+6p - 3 = -1,50   ->   p = 0,25</code></pre>
+
+    <p>Sopra un quarto è migliore lo stop largo. Sotto un quarto quello stretto. Continui a non conoscere p, e questa lezione non se lo inventerà per te, ma non hai più bisogno di conoscerlo. Ti serve sapere da quale lato del 25 % cade sullo strumento e sulla sessione che operi davvero, e questo si risolve contando sul tuo grafico, con una definizione scritta prima.</p>
+
+    <p>Due cose in quel risultato meritano di essere guardate. L'attesa dello stop stretto non dipende affatto da p: è -1,50 $ in entrambe le colonne. Non è una scommessa più economica, è il rifiuto di scommettere, e il prezzo del rifiuto sono i 3,00 $ di rialzo per intero. Solo lo stop largo ha un payoff che varia, ed è l'unica ragione per cui può avere ragione o torto. E la colonna che la tabella tralascia &mdash; il livello semplicemente tiene e il prezzo sale senza alcuna incursione &mdash; qui non cambia nulla, perché entrambi gli stop la sopravvivono ed entrambi prendono il movimento. Cambia quante volte sei dentro, non quale stop sia migliore una volta che ci sei.</p>
+
+    <p style="margin-bottom:0">Ora metti i due allo stesso rischio, che è quello che ti chiede la nota sulla size qui sopra. Lo stop largo è a 3,00 $ contro gli 1,50 $ dello stretto, quindi prende metà delle azioni. Per unità della posizione originale la sua attesa diventa (6p - 3) / 2 = 3p - 1,50, contro i -1,50 dello stretto. Sono uguali a p = 0. Appena le due posizioni rischiano gli stessi soldi, lo stop più largo è almeno altrettanto buono per qualsiasi frequenza sopra lo zero, e il pareggio al 25 % si rivela un artefatto del confronto fra due posizioni che rischiavano importi diversi. È tutto l'argomento a favore di stop largo con size ridotta, e nota che cosa non è servito per costruirlo: nessuna stima di quanto spesso i livelli vengano attraversati, nessuna affermazione su chi lo faccia e nessun numero che qualcuno abbia dovuto inventare.</p>
+  </div>
+
 <h3 id="game-theory-stop-placement-framework">Uno schema di collocazione dello stop basato sulla teoria dei giochi</h3>
 
       <p><strong>Livello 1 (ragionamento retail):</strong> «Stop sotto il supporto, a 178,50 $ (il manuale dice 0,50 $ sotto)»</p>
@@ -679,13 +700,14 @@
         <h4>Punti chiave</h4>
         <ul>
           <li><strong>Equilibrio di Nash</strong> = stato stabile in cui nessuno migliora da solo (il prezzo attuale è l'equilibrio)</li>
-          <li><strong>Raccogliere gli stop è la strategia dominante</strong> per le istituzioni (sempre ottimale, eseguita nel 60-70 % dei casi)</li>
+          <li><strong>Operare dentro la sacca di stop batte operare sul livello</strong> quando valgono le tre condizioni &mdash; non viene data alcuna frequenza, perché ogni cifra in circolazione è stata prodotta da qualcuno che ha deciso a posteriori che cosa contasse</li>
           <li><strong>Il dilemma del prigioniero</strong> spiega perché la fornitura di liquidità fallisce (rischio di selezione avversa) → e perché ci guadagnano i market maker</li>
           <li><strong>La collocazione strategica dello stop</strong> = invalidazione della tesi + cuscinetto di ATR (non livelli di supporto arbitrari)</li>
           <li><strong>Dai per scontato che le raccolte CI SARANNO</strong> sui livelli ovvi (supporti, resistenze, numeri tondi)</li>
           <li><strong>Le strategie miste</strong> = il momento e la profondità degli attraversamenti di un livello variano perché partecipanti non coordinati stanno su orologi diversi, non perché qualcuno randomizzi apposta &mdash; inattaccabile in entrambi i casi, ed è per questo che la risposta è costruzione e non previsione</li>
-          <li><strong>Il fallimento di coordinamento</strong> = il retail non può coordinarsi, le istituzioni sì → l'addensamento del retail viene sfruttato</li>
-          <li><strong>Strategia robusta</strong> = funziona sia che l'avversario raccolga sia che non lo faccia (ordini a limite nella zona di raccolta + stop basati sulla tesi)</li>
+          <li><strong>Il fallimento di coordinamento</strong> = nessuno coordina, da nessuna delle due parti; tutti che leggono lo stesso grafico producono l'addensamento che un cartello avrebbe dovuto organizzare</li>
+          <li><strong>Risolvi per il pareggio, non aspettare la frequenza</strong> &mdash; nella matrice qui sopra lo stop largo vince oltre il 25 %, e appena i due sono dimensionati allo stesso rischio vince a qualsiasi frequenza sopra lo zero</li>
+          <li><strong>Strategia robusta</strong> = funziona sia che il livello venga attraversato sia che no (ordini limite nella zona di incursione + stop basati sulla tesi)</li>
         </ul>
       </div>
 

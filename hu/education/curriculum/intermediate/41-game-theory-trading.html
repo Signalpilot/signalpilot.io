@@ -254,6 +254,7 @@
           <li>1. szint: mit csinál az ár | 2. szint: mit csinálnak a kereskedők | 3. szint: szerintük mit csinálnak majd a kereskedők</li>
           <li>A likviditási játék: miért gyűlnek a stopok a nyilvánvaló szintek alá, és miért kereskedik egy mérettel bíró vevő abba a zsebbe anélkül, hogy bárkinek vadásznia kellene rád</li>
           <li>Keret: találd meg, hol kell lenniük a pihenő megbízásoknak &rarr; feltételezd, hogy a szintet átkereskedik, mielőtt tartana &rarr; oda tedd a stopot, ahol a tézis törik, nem ahol a chart</li>
+          <li>Hogyan oldd meg a kifizetési mátrixot arra a gyakoriságra, amelytől kezdve a tágabb stop nyer, ahelyett hogy megvárnád, míg valaki megadja neked ezt a gyakoriságot</li>
         </ul>
       </div>
 
@@ -433,8 +434,28 @@
           </tbody>
         </table>
         <p style="margin-top:1rem"><strong>Optimális stratégia:</strong> Optimális stratégia: elég széles stop ahhoz, hogy túléljen egy áthaladást a szinten, de ne olyan széles, hogy egy valódi letörés nagyot fájjon. Nem közlünk gyakoriságot arról, milyen sűrűn előzi meg ilyen áthaladás a fordulatokat, mert a válasz teljesen az eszköztől, a szakasztól és attól függ, hol húzza meg a határt arra, mi számít – és minden forgalomban lévő szám olyasvalakitől származik, aki ezt a határt az adatok megnézése után húzta meg. Használjon ATR-alapú stopot (1,5-2x ATR a szerkezeten túl), és csökkentse a pozícióméretet a szélesebb stop ellensúlyozására.</p>
-        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>A számolás:</strong> Ha az ATR 2,00 dollár, az 1,5×ATR-es stop 3,00 dollárral a belépő alá kerül. Ha a szokásos pozícióméreted 100 részvény, vidd le 50-re. Ugyanaz a dollárban mért kockázat (300 $), de 50 %-kal kevesebb lesöprés miatti kistoppolás.</p>
+        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>A számolás:</strong> Ha az ATR 2,00 $, akkor egy 1,5×ATR-es stop 3,00 $-ral a belépő alatt ül &mdash; kétszer annyira, mint az az 1,50 $, amit egy tankönyvi, támasz alatti stop használt volna. Felezd meg a darabszámot, és a kockázat változatlan: 100 részvény 1,50 $-on 150 $, és 50 részvény 3,00 $-on szintén 150 $. Ugyanazért a pénzért helyet vettél, nem kisebb esélyt arra, hogy kistopolnak; hogy mennyivel kisebbet, az attól függ, milyen gyakran hajtják át a szintet &mdash; és épp ezt kell most tisztázni.</p>
       </div>
+      <div class="callout-key">
+    <h4>&#129518; Oldd meg a mátrixot, ne csodáld</h4>
+    <p>Az a négy cella már meg is válaszolja azt a kérdést, amelyet a fenti bekezdés épp az imént tagadott meg tőled. Nevezzük p-nek azoknak az eseteknek az arányát, amikor a szintet áthajtják, majd visszaveszik, nem pedig valóban áttörik. Az eredményeket olvasd le közvetlenül a táblázatból:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                                         áthajtva és visszavéve      valódi letörés
+stop 178,50 $-on                       -1,50 $             -1,50 $
+stop 177,00 $-on                       +3,00 $             -3,00 $
+
+VÉ(széles) = 3p - 3(1 - p)  =  6p - 3
+VÉ(szűk)   = -1,50 $, bármennyi is p
+
+6p - 3 = -1,50   ->   p = 0,25</code></pre>
+
+    <p>Egynegyed fölött a tágabb stop a jobb. Egynegyed alatt a szűk. p-t továbbra sem ismered, és ez a lecke sem fogja kitalálni helyetted &mdash; de már nem is kell ismerned. Azt kell tudnod, hogy a 25 % melyik oldalára esik azon az eszközön és abban a szakaszban, amellyel valóban kereskedsz, és ez a saját grafikonodon, előre leírt meghatározással megszámolva eldönthető.</p>
+
+    <p>Ebben az eredményben két dolog érdemli meg, hogy megállj mellette. A szűk stop várható értéke egyáltalán nem függ p-től: mindkét oszlopban -1,50 $. Nem olcsóbb fogadás, hanem a fogadás megtagadása, és ennek a megtagadásnak az ára a teljes 3,00 $ emelkedés. Egyedül a tágabb stopnak van változó kifizetése, és kizárólag ezért lehet igaza vagy tévedhet. Az az oszlop pedig, amelyet a táblázat kihagy &mdash; a szint egyszerűen tart, és az ár mindenféle áthajtás nélkül emelkedik &mdash;, itt semmit nem változtat, mert mindkét stop túléli, és mindkettő elkapja a mozgást. Azt változtatja meg, milyen gyakran vagy pozícióban, nem azt, melyik stop jobb, ha már benne vagy.</p>
+
+    <p style="margin-bottom:0">Most tedd a kettőt azonos kockázatra, ahogy a fenti méretezési megjegyzés kéri. A tág stop 3,00 $, a szűk 1,50 $, tehát a tág fele annyi részvényt visz. Az eredeti pozíció egységére vetítve a várható értéke (6p - 3) / 2 = 3p - 1,50 lesz, a szűk -1,50-jével szemben. Ezek p = 0-nál egyenlők. Amint a két pozíció ugyanannyi pénzt kockáztat, a tágabb stop nullánál nagyobb bármely gyakoriságnál legalább olyan jó &mdash; a 25 %-os fedezeti pont pedig annak a műterméke volt, hogy két, eltérő összeget kockáztató pozíciót hasonlítottunk össze. Ez a teljes érv a tág stop és kisebb méret mellett, és figyeld meg, mi nem kellett a felépítéséhez: sem becslés arról, milyen gyakran hajtják át a szinteket, sem állítás arról, hogy ki teszi, sem egyetlen szám, amit bárkinek ki kellett volna találnia.</p>
+  </div>
+
 <h3 id="game-theory-stop-placement-framework">Játékelméleti keret a stop elhelyezésére</h3>
 
       <p><strong>1. szint (lakossági gondolkodás):</strong> «Stop a támasz alá, 178,50 dollárra (a tankönyv 0,50 dollárt ír alá)»</p>
@@ -679,13 +700,14 @@
         <h4>A lényeg</h4>
         <ul>
           <li><strong>Nash-egyensúly</strong> = stabil állapot, amelyben senki nem javít egyedül (az aktuális ár maga az egyensúly)</li>
-          <li><strong>A stopok lesöprése domináns stratégia</strong> az intézményeknek (mindig optimális, az esetek 60-70 %-ában végre is hajtják)</li>
+          <li><strong>A stopzsebbe kereskedni jobb, mint a szinten kereskedni</strong> ha mindhárom feltétel teljesül &mdash; gyakoriságot nem adunk meg, mert minden forgalomban lévő szám olyasvalakitől származik, aki utólag döntötte el, mi számít</li>
           <li><strong>A fogolydilemma</strong> magyarázza meg, miért akad el a likviditás nyújtása (kontraszelekciós kockázat) → és miért keresnek ezen a market makerek</li>
           <li><strong>Stratégiai stopelhelyezés</strong> = az elképzelés megdőlése + ATR-ráhagyás (nem önkényes támaszszintek)</li>
           <li><strong>Indulj ki abból, hogy LESZ lesöprés</strong> a kézenfekvő szinteken (támasz, ellenállás, kerek számok)</li>
           <li><strong>Kevert stratégiák</strong> = egy szinten való átfutások időzítése és mélysége azért változik, mert össze nem hangolt szereplők különböző órákon vannak, nem mert bárki szándékosan véletlenszerűsít &mdash; így is, úgy is kihasználhatatlan, és ezért a válasz építés, nem jóslás</li>
-          <li><strong>Koordinációs kudarc</strong> = a lakosság nem tud összehangolódni, az intézmények igen → a lakossági torlódást kihasználják</li>
-          <li><strong>Robusztus stratégia</strong> = akkor is működik, ha az ellenfél söpör, és akkor is, ha nem (limitáras megbízások a lesöprési zónában + az elképzelésre alapozott stopok)</li>
+          <li><strong>Koordinációs kudarc</strong> = senki nem koordinál, egyik oldalon sem; mindenki ugyanazt a grafikont olvassa, és ezzel előállítja azt a csoportosulást, amelyet egy kartellnek meg kellett volna szerveznie</li>
+          <li><strong>A fedezeti pontot oldd meg, ne a gyakoriságra várj</strong> &mdash; a fenti mátrixban a tág stop 25 % fölött nyer, és amint mindkettőt azonos kockázatra méretezed, nullánál nagyobb bármely gyakoriságnál nyer</li>
+          <li><strong>Robusztus stratégia</strong> = akkor is működik, ha a szintet áthajtják, és akkor is, ha nem (limitáras megbízások az áthajtási zónában + tézisalapú stopok)</li>
         </ul>
       </div>
 

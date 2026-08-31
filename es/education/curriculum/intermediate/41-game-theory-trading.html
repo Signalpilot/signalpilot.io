@@ -254,6 +254,7 @@
           <li>Nivel 1: qué hará el precio | Nivel 2: qué harán los traders | Nivel 3: qué creen ellos que harán los traders</li>
           <li>El juego de la liquidez: por qué los stops se agrupan bajo los niveles obvios, y por qué un comprador con tamaño opera dentro de ese bolsillo sin que nadie tenga que cazarte</li>
           <li>Marco: encuentra dónde tienen que estar las órdenes en reposo &rarr; asume que el nivel se atravesará antes de aguantar &rarr; pon tu stop donde se rompe la tesis, no donde se rompe el gráfico</li>
+          <li>Cómo resolver una matriz de pagos para hallar la frecuencia a partir de la cual gana el stop más ancho, en vez de esperar a que alguien le dé esa frecuencia</li>
         </ul>
       </div>
 
@@ -433,8 +434,28 @@
           </tbody>
         </table>
         <p style="margin-top:1rem"><strong>Estrategia óptima:</strong> Estrategia óptima: un stop lo bastante ancho para sobrevivir a un recorrido a través del nivel, pero no tan ancho que una ruptura genuina duela mucho. No se cita ninguna frecuencia de con qué asiduidad las vueltas van precedidas de uno, porque la respuesta depende por completo del instrumento, de la sesión y de dónde ponga usted la raya sobre qué cuenta como tal, y cada número en circulación lo produjo alguien que puso esa raya después de mirar los datos. Use stops basados en el ATR (1,5-2x ATR más allá de la estructura) y reduzca el tamaño de la posición para compensar el stop más ancho.</p>
-        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Las cuentas:</strong> Si el ATR es de 2,00 $, un stop de 1,5×ATR queda 3,00 $ por debajo de la entrada. Si tu tamaño normal es de 100 acciones, redúcelo a 50. El mismo riesgo en dólares (300 $), pero un 50 % menos de stops saltados por barridos.</p>
+        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Las cuentas:</strong> Si el ATR es de 2,00 $, un stop de 1,5×ATR queda 3,00 $ por debajo de la entrada, el doble de los 1,50 $ que habría usado un stop de manual justo bajo el soporte. Reduzca a la mitad el número de acciones y el riesgo no cambia: 100 acciones a 1,50 $ son 150 $, y 50 acciones a 3,00 $ también son 150 $. Con el mismo dinero ha comprado margen, no una menor probabilidad de que le salten el stop; cuánto menor depende de cuántas veces se atraviesa el nivel, que es justo lo siguiente que hay que resolver.</p>
       </div>
+      <div class="callout-key">
+    <h4>&#129518; Resuelva la matriz en lugar de admirarla</h4>
+    <p>Esas cuatro casillas ya responden a la pregunta que el párrafo anterior acaba de negarse a responder. Llame p a la fracción de veces en que el nivel se atraviesa y luego se recupera, en lugar de romperse de verdad. Lea los resultados directamente de la tabla:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                                         atravesado y recuperado      ruptura real
+stop en 178,50 $                        -1,50 $           -1,50 $
+stop en 177,00 $                        +3,00 $           -3,00 $
+
+VE(ancho)     = 3p - 3(1 - p)  =  6p - 3
+VE(estrecho)  = -1,50 $, sea cual sea p
+
+6p - 3 = -1,50   ->   p = 0,25</code></pre>
+
+    <p>Por encima de un cuarto, el stop ancho es el mejor. Por debajo de un cuarto, el estrecho. Sigue sin conocer p, y esta lección tampoco se lo va a inventar, pero ya no necesita conocerlo. Necesita saber de qué lado del 25 % cae en el instrumento y la sesión que opera de verdad, y eso se resuelve contando en su propio gráfico con una definición escrita de antemano.</p>
+
+    <p>Dos cosas de ese resultado merecen atención. La esperanza del stop estrecho no depende de p en absoluto: es -1,50 $ en las dos columnas. No es una apuesta más barata, es la negativa a apostar, y el precio de esa negativa son los 3,00 $ de recorrido al alza completos. Solo el stop ancho tiene un pago que varía, que es la única razón por la que puede acertar o fallar. Y la columna que la tabla omite &mdash; el nivel simplemente aguanta y el precio sube sin ningún barrido &mdash; no cambia nada aquí, porque los dos stops la sobreviven y los dos cogen el movimiento. Cambia con qué frecuencia está dentro, no qué stop es mejor cuando lo está.</p>
+
+    <p style="margin-bottom:0">Ahora ponga los dos al mismo riesgo, que es lo que le pide la nota de tamaño de arriba. El stop ancho está a 3,00 $ frente a los 1,50 $ del estrecho, así que lleva la mitad de acciones. Por unidad de la posición original su esperanza pasa a ser (6p - 3) / 2 = 3p - 1,50, frente a los -1,50 del estrecho. Son iguales en p = 0. En cuanto las dos posiciones arriesgan el mismo dinero, el stop más ancho es al menos igual de bueno para cualquier frecuencia por encima de cero, y el punto de equilibrio del 25 % resulta ser un artefacto de comparar dos posiciones que arriesgaban cantidades distintas. Ese es todo el argumento a favor de stop ancho con tamaño menor, y fíjese en lo que no hizo falta para construirlo: ninguna estimación de con qué frecuencia se atraviesan los niveles, ninguna afirmación sobre quién lo hace y ninguna cifra que alguien tuviera que inventar.</p>
+  </div>
+
 <h3 id="game-theory-stop-placement-framework">Marco de colocación del stop con teoría de juegos</h3>
 
       <p><strong>Nivel 1 (pensamiento minorista):</strong> «Stop por debajo del soporte, en 178,50 $ (el manual dice 0,50 $ por debajo)»</p>
@@ -679,13 +700,14 @@
         <h4>Puntos clave</h4>
         <ul>
           <li><strong>Equilibrio de Nash</strong> = estado estable en el que nadie mejora por su cuenta (el precio actual es el equilibrio)</li>
-          <li><strong>Barrer stops es la estrategia dominante</strong> para las instituciones (siempre óptima, se ejecuta entre el 60 y el 70 % de las veces)</li>
+          <li><strong>Operar dentro del bolsillo de stops supera operar en el nivel</strong> cuando se cumplen las tres condiciones &mdash; no se da ninguna frecuencia, porque toda cifra en circulación la produjo alguien que decidió a posteriori qué contaba</li>
           <li><strong>El dilema del prisionero</strong> explica por qué falla la provisión de liquidez (riesgo de selección adversa) → y por qué ganan los market makers</li>
           <li><strong>Colocación estratégica del stop</strong> = invalidación de la tesis + colchón de ATR (no niveles de soporte arbitrarios)</li>
           <li><strong>Da por hecho que HABRÁ barridos</strong> en los niveles evidentes (soportes, resistencias, números redondos)</li>
           <li><strong>Estrategias mixtas</strong> = el momento y la profundidad de los recorridos a través de un nivel varían porque participantes descoordinados van en relojes distintos, no porque nadie aleatorice a propósito &mdash; inexplotable en cualquier caso, y por eso la respuesta es construcción y no predicción</li>
-          <li><strong>Fallo de coordinación</strong> = el minorista no puede coordinarse y las instituciones sí → se explota el agrupamiento minorista</li>
-          <li><strong>Estrategia robusta</strong> = funciona tanto si el adversario barre como si no (órdenes limitadas en la zona de barrido + stops basados en la tesis)</li>
+          <li><strong>Fallo de coordinación</strong> = nadie coordina, en ninguno de los dos lados; todos leyendo el mismo gráfico producen la aglomeración que un cártel habría tenido que organizar</li>
+          <li><strong>Resuelva el punto de equilibrio, no espere la frecuencia</strong> &mdash; en la matriz de arriba el stop ancho gana pasado el 25 %, y en cuanto ambos se dimensionan al mismo riesgo gana a cualquier frecuencia por encima de cero</li>
+          <li><strong>Estrategia robusta</strong> = funciona tanto si el nivel se atraviesa como si no (órdenes limitadas en la zona de barrido + stops basados en la tesis)</li>
         </ul>
       </div>
 

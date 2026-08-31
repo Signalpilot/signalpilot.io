@@ -254,6 +254,7 @@
           <li>Seviye 1: fiyat ne yapacak | Seviye 2: trader'lar ne yapacak | Seviye 3: onlara göre trader'lar ne yapacak</li>
           <li>Likidite oyunu: stoplar neden bariz seviyelerin altında kümelenir, ve büyüklüğü olan bir alıcı neden kimsenin sizi avlamasına gerek kalmadan o cebin içinde işlem yapar</li>
           <li>Çerçeve: bekleyen emirlerin nerede olması gerektiğini bulun &rarr; seviyenin tutmadan önce içinden geçileceğini varsayın &rarr; stopunuzu grafiğin kırıldığı yere değil, tezin kırıldığı yere koyun</li>
+          <li>Birinin size o frekansı vermesini beklemek yerine, geniş stopun kazanmaya başladığı frekansı bulmak için getiri matrisini nasıl çözersiniz</li>
         </ul>
       </div>
 
@@ -433,8 +434,28 @@
           </tbody>
         </table>
         <p style="margin-top:1rem"><strong>En iyi strateji:</strong> En iyi strateji: seviyenin içinden geçen bir hareketi atlatacak kadar geniş, ama gerçek bir kırılımın çok acıtacağı kadar da geniş olmayan bir stop. Dönüşlerin ne sıklıkta böyle bir hareketin ardından geldiğine dair bir oran verilmiyor, çünkü yanıt tamamen enstrümana, seansa ve neyin sayılacağına dair çizgiyi nereye çektiğinize bağlıdır — ve dolaşımdaki her sayı, o çizgiyi veriye baktıktan sonra çeken biri tarafından üretilmiştir. ATR tabanlı stop kullanın (yapının ötesinde 1,5-2x ATR) ve daha geniş stop’u dengelemek için pozisyon büyüklüğünü küçültün.</p>
-        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Hesap:</strong> ATR 2,00 dolarsa, 1,5×ATR'lik stop girişin 3,00 dolar altında olur. Normal pozisyon büyüklüğünüz 100 hisse ise 50'ye indirin. Dolar bazındaki risk aynı (300 $), ama süpürmelerden kaynaklanan stop çıkışları %50 azalır.</p>
+        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Hesap:</strong> ATR 2,00 $ ise, 1,5×ATR'lik bir stop girişin 3,00 $ altında durur; bu, ders kitabının desteğin hemen altına koyacağı 1,50 $'ın iki katıdır. Hisse adedini yarıya indirin, risk değişmez: 1,50 $'dan 100 hisse 150 $, 3,00 $'dan 50 hisse de 150 $ eder. Aynı parayla satın aldığınız şey alan, stop olma olasılığındaki düşüş değil; ne kadar düştüğü ise seviyenin ne sıklıkla geçildiğine bağlı ve sıradaki iş tam olarak bunu belirlemek.</p>
       </div>
+      <div class="callout-key">
+    <h4>&#129518; Matrisi hayranlıkla seyretmek yerine çözün</h4>
+    <p>O dört hücre, hemen yukarıdaki paragrafın az önce cevaplamayı reddettiği soruyu zaten cevaplıyor. Seviyenin gerçekten kırılması yerine geçilip sonra geri alınma oranına p diyelim. Sonuçları doğrudan tablodan okuyun:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                                      geçildi ve geri alındı      gerçek kırılım
+stop 178,50 $                       -1,50 $             -1,50 $
+stop 177,00 $                       +3,00 $             -3,00 $
+
+BD(geniş) = 3p - 3(1 - p)  =  6p - 3
+BD(dar)   = -1,50 $, p ne olursa olsun
+
+6p - 3 = -1,50   ->   p = 0,25</code></pre>
+
+    <p>Dörtte birin üzerinde geniş stop daha iyidir. Dörtte birin altında dar olan. p'yi hâlâ bilmiyorsunuz ve bu ders onu sizin için uydurmayacak &mdash; ama artık bilmenize gerek de yok. Bilmeniz gereken, gerçekten işlem yaptığınız enstrüman ve seansta bunun %25'in hangi tarafına düştüğü; bu da tanımınızı önceden yazıp kendi grafiğinizde sayarak çözülür.</p>
+
+    <p>Bu sonuçta üzerinde durulmaya değer iki şey var. Dar stopun beklentisi p'ye hiç bağlı değil: her iki sütunda da -1,50 $. Daha ucuz bir bahis değil, bahis oynamayı reddetmek; ve bu reddin bedeli 3,00 $'lık yukarı potansiyelin tamamı. Getirisi değişen tek şey geniş stop, ve doğru ya da yanlış olabilmesinin tek sebebi bu. Tablonun dışarıda bıraktığı sütun ise &mdash; seviye öylece tutar ve fiyat hiç geçilmeden yükselir &mdash; burada bir şey değiştirmez, çünkü her iki stop da bunu atlatır ve ikisi de hareketi yakalar. Değiştirdiği şey ne sıklıkla pozisyonda olduğunuzdur, pozisyondayken hangi stopun daha iyi olduğu değil.</p>
+
+    <p style="margin-bottom:0">Şimdi ikisini aynı riske getirin; yukarıdaki boyut notunun sizden istediği de bu. Geniş stop 3,00 $, dar olan 1,50 $ olduğuna göre geniş olan hissenin yarısını alır. Orijinal pozisyonun birimi başına beklentisi (6p - 3) / 2 = 3p - 1,50 olur; dar olanın -1,50'sine karşı. Bunlar p = 0'da eşitlenir. İki pozisyon aynı parayı riske attığı anda, daha geniş stop sıfırın üzerindeki her frekansta en azından o kadar iyidir; %25'lik başabaş noktası da farklı tutarlar riske eden iki pozisyonu karşılaştırmanın bir yan ürünü çıkar. Geniş stop ve küçük boyut savunmasının tamamı budur; ve onu kurmak için nelerin gerekmediğine dikkat edin: seviyelerin ne sıklıkla geçildiğine dair bir tahmin yok, bunu kimin yaptığına dair bir iddia yok, ve kimsenin uydurmak zorunda kaldığı bir sayı yok.</p>
+  </div>
+
 <h3 id="game-theory-stop-placement-framework">Oyun teorisine dayalı stop yerleşimi çerçevesi</h3>
 
       <p><strong>Seviye 1 (bireysel düşünme):</strong> «Stop desteğin altında, 178,50 dolarda (kitap 0,50 dolar altı diyor)»</p>
@@ -679,13 +700,14 @@
         <h4>Temel çıkarımlar</h4>
         <ul>
           <li><strong>Nash dengesi</strong> = hiç kimsenin tek başına iyileşemediği istikrarlı durum (güncel fiyatın kendisi dengedir)</li>
-          <li><strong>Stop süpürmek baskın stratejidir</strong> kurumlar için (her zaman en iyisi, vakaların %60-70'inde uygulanır)</li>
+          <li><strong>Stop cebine işlem yapmak, seviyede işlem yapmayı yener</strong> üç koşul sağlandığında &mdash; frekans verilmiyor, çünkü dolaşımdaki her rakam, neyin sayılacağına sonradan karar veren biri tarafından üretildi</li>
           <li><strong>Mahkûm ikilemi</strong> likidite sağlamanın neden aksadığını açıklar (ters seçim riski) → ve market maker'lar bundan kazanır</li>
           <li><strong>Stratejik stop yerleşimi</strong> = tezin çürümesi + ATR payı (keyfi destek seviyeleri değil)</li>
           <li><strong>Süpürmelerin OLACAĞINI varsayın</strong> bariz seviyelerde (destek, direnç, yuvarlak rakamlar)</li>
           <li><strong>Karma stratejiler</strong> = bir seviyeden geçişlerin zamanlaması ve derinliği, koordine olmayan katılımcılar farklı saatlerde olduğu için değişir; kimse bilerek rastgeleleştirdiği için değil &mdash; her iki hâlde de sömürülemez, ve cevabın öngörü değil kurgu olmasının sebebi budur</li>
-          <li><strong>Koordinasyon eksikliği</strong> = bireysel yatırımcı anlaşamaz, kurumlar anlaşabilir → bireysel kümelenme sömürülür</li>
-          <li><strong>Sağlam strateji</strong> = rakip süpürse de süpürmese de işler (süpürme bölgesinde limitli emirler + teze dayalı stoplar)</li>
+          <li><strong>Koordinasyon eksikliği</strong> = hiç kimse koordine etmiyor, iki tarafta da; aynı grafiği okuyan herkes, bir kartelin örgütlemek zorunda kalacağı kümelenmeyi kendiliğinden üretiyor</li>
+          <li><strong>Frekansı beklemeyin, başabaşı çözün</strong> &mdash; yukarıdaki matriste geniş stop %25'i aştıktan sonra kazanır, ikisi aynı riske ölçeklendiğinde ise sıfırın üzerindeki her frekansta kazanır</li>
+          <li><strong>Sağlam strateji</strong> = seviye geçilse de geçilmese de çalışır (geçiş bölgesinde limit emirler + teze dayalı stoplar)</li>
         </ul>
       </div>
 

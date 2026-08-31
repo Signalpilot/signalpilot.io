@@ -254,6 +254,7 @@
           <li>Nível 1: o que vai fazer o preço | Nível 2: o que vão fazer os traders | Nível 3: o que acham eles que os traders vão fazer</li>
           <li>O jogo da liquidez: porque é que os stops se agrupam sob os níveis óbvios, e porque é que um comprador com tamanho negoceia dentro dessa bolsa sem que ninguém tenha de o caçar</li>
           <li>Enquadramento: encontre onde as ordens em repouso têm de estar &rarr; assuma que o nível será atravessado antes de aguentar &rarr; ponha o stop onde a tese quebra, não onde o gráfico quebra</li>
+          <li>Como resolver uma matriz de payoffs para achar a frequência a partir da qual o stop mais largo ganha, em vez de esperar que alguém lhe dê essa frequência</li>
         </ul>
       </div>
 
@@ -433,8 +434,28 @@
           </tbody>
         </table>
         <p style="margin-top:1rem"><strong>Estratégia ótima:</strong> Estratégia ótima: um stop suficientemente largo para sobreviver a uma passagem através do nível, mas não tão largo que uma rutura genuína doa muito. Não se cita qualquer frequência de com que assiduidade as inversões são precedidas de uma, porque a resposta depende inteiramente do instrumento, da sessão e de onde traça a linha do que conta — e todo o número em circulação foi produzido por alguém que traçou essa linha depois de olhar para os dados. Use stops baseados no ATR (1,5-2x ATR para lá da estrutura) e reduza o tamanho da posição para compensar o stop mais largo.</p>
-        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>As contas:</strong> Se o ATR for de 2,00 $, um stop de 1,5×ATR fica 3,00 $ abaixo da entrada. Se o seu tamanho normal for de 100 ações, reduza para 50. O mesmo risco em dólares (300 $), mas menos 50 % de stops acionados por varreduras.</p>
+        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>As contas:</strong> Se o ATR for 2,00 $, um stop de 1,5×ATR fica 3,00 $ abaixo da entrada &mdash; o dobro dos 1,50 $ que um stop de manual logo abaixo do suporte teria usado. Reduza a metade o número de ações e o risco não muda: 100 ações a 1,50 $ dão 150 $, e 50 ações a 3,00 $ também dão 150 $. Com o mesmo dinheiro comprou espaço, não uma menor probabilidade de levar stop; quanto menor depende de quantas vezes o nível é atravessado, que é justamente o que falta apurar.</p>
       </div>
+      <div class="callout-key">
+    <h4>&#129518; Resolva a matriz em vez de a admirar</h4>
+    <p>Aquelas quatro células já respondem à pergunta que o parágrafo acima acabou de recusar responder. Chame p à fração das vezes em que o nível é atravessado e depois retomado, em vez de romper a sério. Leia os resultados diretamente da tabela:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                                         atravessado e retomado      rutura real
+stop em 178,50 $                       -1,50 $          -1,50 $
+stop em 177,00 $                       +3,00 $          -3,00 $
+
+VE(largo)    = 3p - 3(1 - p)  =  6p - 3
+VE(apertado) = -1,50 $, seja qual for p
+
+6p - 3 = -1,50   ->   p = 0,25</code></pre>
+
+    <p>Acima de um quarto, o stop largo é o melhor. Abaixo de um quarto, o apertado. Continua sem saber p, e esta lição também não o vai inventar, mas já não precisa de o saber. Precisa de saber de que lado dos 25 % ele cai no instrumento e na sessão que negoceia de facto, e isso resolve-se a contar no seu próprio gráfico, com uma definição escrita antes.</p>
+
+    <p>Duas coisas nesse resultado merecem demora. A esperança do stop apertado não depende de p de todo: é -1,50 $ nas duas colunas. Não é uma aposta mais barata, é a recusa de apostar, e o preço dessa recusa são os 3,00 $ de subida por inteiro. Só o stop largo tem um payoff que varia, e é a única razão pela qual pode estar certo ou errado. E a coluna que a tabela deixa de fora &mdash; o nível simplesmente aguenta e o preço sobe sem qualquer incursão &mdash; não muda nada aqui, porque ambos os stops a sobrevivem e ambos apanham o movimento. Muda quantas vezes está dentro, não qual o melhor stop quando está.</p>
+
+    <p style="margin-bottom:0">Ponha agora os dois no mesmo risco, que é o que a nota de tamanho acima lhe pede. O stop largo está em 3,00 $ contra os 1,50 $ do apertado, portanto leva metade das ações. Por unidade da posição original a sua esperança passa a (6p - 3) / 2 = 3p - 1,50, contra os -1,50 do apertado. São iguais em p = 0. Assim que as duas posições arriscam o mesmo dinheiro, o stop mais largo é pelo menos tão bom para qualquer frequência acima de zero, e o ponto de equilíbrio dos 25 % revela-se um artefacto de comparar duas posições que arriscavam quantias diferentes. É todo o argumento a favor de stop largo com tamanho menor, e repare no que não foi preciso para o construir: nenhuma estimativa de quantas vezes os níveis são atravessados, nenhuma afirmação sobre quem o faz e nenhum número que alguém tivesse de inventar.</p>
+  </div>
+
 <h3 id="game-theory-stop-placement-framework">Um método de colocação do stop assente na teoria dos jogos</h3>
 
       <p><strong>Nível 1 (raciocínio de retalho):</strong> «Stop abaixo do suporte, em 178,50 $ (o manual diz 0,50 $ abaixo)»</p>
@@ -679,13 +700,14 @@
         <h4>Pontos principais</h4>
         <ul>
           <li><strong>Equilíbrio de Nash</strong> = estado estável em que ninguém melhora sozinho (o preço atual é o equilíbrio)</li>
-          <li><strong>Varrer stops é a estratégia dominante</strong> das instituições (sempre ótima, executada em 60 a 70 % das vezes)</li>
+          <li><strong>Negociar dentro da bolsa de stops bate negociar no nível</strong> quando as três condições se verificam &mdash; não se dá qualquer frequência, porque todo o número em circulação foi produzido por alguém que decidiu à posteriori o que contava</li>
           <li><strong>O dilema do prisioneiro</strong> explica porque é que o fornecimento de liquidez falha (risco de seleção adversa) → e porque é que os market makers lucram</li>
           <li><strong>A colocação estratégica do stop</strong> = invalidação da tese + folga de ATR (e não níveis de suporte arbitrários)</li>
           <li><strong>Parta do princípio de que VAI haver varreduras</strong> nos níveis óbvios (suportes, resistências, números redondos)</li>
           <li><strong>As estratégias mistas</strong> = o momento e a profundidade das travessias de um nível variam porque participantes descoordenados estão em relógios diferentes, não porque alguém aleatorize de propósito &mdash; inexplorável em qualquer caso, e é por isso que a resposta é construção e não previsão</li>
-          <li><strong>A falha de coordenação</strong> = o retalho não se consegue coordenar e as instituições sim → o agrupamento do retalho é explorado</li>
-          <li><strong>Estratégia robusta</strong> = funciona quer o adversário varra quer não (ordens limitadas na zona de varredura + stops assentes na tese)</li>
+          <li><strong>A falha de coordenação</strong> = ninguém coordena, de nenhum dos lados; toda a gente a ler o mesmo gráfico produz o aglomerado que um cartel teria tido de organizar</li>
+          <li><strong>Resolva o ponto de equilíbrio, não espere pela frequência</strong> &mdash; na matriz acima o stop largo ganha a partir dos 25 %, e assim que ambos são dimensionados ao mesmo risco ganha a qualquer frequência acima de zero</li>
+          <li><strong>Estratégia robusta</strong> = funciona quer o nível seja atravessado quer não (ordens limitadas na zona de incursão + stops baseados na tese)</li>
         </ul>
       </div>
 

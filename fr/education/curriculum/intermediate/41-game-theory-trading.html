@@ -254,6 +254,7 @@
           <li>Niveau 1 : que va faire le prix | Niveau 2 : que vont faire les traders | Niveau 3 : que pensent-ils que les traders vont faire</li>
           <li>Le jeu de la liquidité : pourquoi les stops s'agglutinent sous les niveaux évidents, et pourquoi un acheteur avec de la taille traite dans cette poche sans que personne ait à vous chasser</li>
           <li>Cadre : trouvez où les ordres au repos doivent se trouver &rarr; supposez que le niveau sera traversé avant de tenir &rarr; placez votre stop là où la thèse casse, pas là où le graphique casse</li>
+          <li>Comment résoudre une matrice de gains pour trouver la fréquence à partir de laquelle le stop large l'emporte, au lieu d'attendre que quelqu'un vous donne cette fréquence</li>
         </ul>
       </div>
 
@@ -433,8 +434,28 @@
           </tbody>
         </table>
         <p style="margin-top:1rem"><strong>Stratégie optimale :</strong> Stratégie optimale : un stop assez large pour survivre à un passage à travers le niveau, mais pas si large qu'une vraie cassure fasse très mal. Aucune fréquence n'est citée quant à la proportion de retournements précédés d'un tel passage, parce que la réponse dépend entièrement de l'instrument, de la séance et de l'endroit où vous placez la limite de ce qui compte — et tout chiffre en circulation a été produit par quelqu'un qui a placé cette limite après avoir regardé les données. Utilisez des stops fondés sur l'ATR (1,5-2x ATR au-delà de la structure) et réduisez la taille de position pour compenser le stop plus large.</p>
-        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Le calcul :</strong> Si l'ATR vaut 2,00 $, un stop de 1,5×ATR se situe 3,00 $ sous l'entrée. Si votre taille normale est de 100 actions, ramenez-la à 50. Même risque en dollars (300 $), mais 50 % de stops en moins déclenchés par des balayages.</p>
+        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Le calcul :</strong> Si l'ATR vaut 2,00 $, un stop à 1,5×ATR se place 3,00 $ sous l'entrée &mdash; le double des 1,50 $ qu'aurait pris un stop de manuel juste sous le support. Divisez par deux le nombre de titres et le risque ne change pas : 100 titres à 1,50 $ font 150 $, et 50 titres à 3,00 $ font 150 $ aussi. Avec le même argent vous avez acheté de la marge, pas une moindre probabilité d'être sorti ; de combien elle baisse dépend de la fréquence à laquelle le niveau est traversé, ce qu'il reste justement à établir.</p>
       </div>
+      <div class="callout-key">
+    <h4>&#129518; Résolvez la matrice au lieu de l'admirer</h4>
+    <p>Ces quatre cases répondent déjà à la question que le paragraphe précédent vient de refuser de trancher. Appelez p la fraction des cas où le niveau est traversé puis repris, plutôt que réellement cassé. Lisez les résultats directement dans le tableau :</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                                        traversé puis repris      vraie cassure
+stop à 178,50 $                     -1,50 $            -1,50 $
+stop à 177,00 $                     +3,00 $            -3,00 $
+
+EV(large)  = 3p - 3(1 - p)  =  6p - 3
+EV(serré)  = -1,50 $, quel que soit p
+
+6p - 3 = -1,50   ->   p = 0,25</code></pre>
+
+    <p>Au-dessus d'un quart, le stop large est le meilleur. En dessous d'un quart, le serré. Vous ne connaissez toujours pas p, et cette leçon ne va pas l'inventer pour vous &mdash; mais vous n'avez plus besoin de le connaître. Vous avez besoin de savoir de quel côté de 25 % il tombe pour l'instrument et la séance que vous traitez réellement, et cela se règle en comptant sur votre propre graphique, avec une définition écrite d'avance.</p>
+
+    <p>Deux choses dans ce résultat méritent qu'on s'y arrête. L'espérance du stop serré ne dépend pas du tout de p : elle vaut -1,50 $ dans les deux colonnes. Ce n'est pas un pari moins cher, c'est un refus de parier, et le prix de ce refus, ce sont les 3,00 $ de hausse en entier. Seul le stop large a un gain qui varie, ce qui est la seule raison pour laquelle il peut avoir raison ou tort. Et la colonne que le tableau omet &mdash; le niveau tient tout simplement et le prix monte sans aucune incursion &mdash; ne change rien ici, car les deux stops y survivent et les deux prennent le mouvement. Elle change la fréquence à laquelle vous êtes en position, pas quel stop est le meilleur une fois que vous y êtes.</p>
+
+    <p style="margin-bottom:0">Mettez maintenant les deux au même risque, ce que la note de taille ci-dessus vous demande. Le stop large est à 3,00 $ contre 1,50 $ pour le serré : il prend donc la moitié des titres. Par unité de la position d'origine, son espérance devient (6p - 3) / 2 = 3p - 1,50, contre -1,50 pour le serré. Elles sont égales à p = 0. Dès que les deux positions risquent le même argent, le stop plus large est au moins aussi bon pour n'importe quelle fréquence supérieure à zéro, et le point mort à 25 % se révèle un artefact de la comparaison de deux positions qui ne risquaient pas la même chose. Voilà tout l'argument en faveur du stop large avec une taille réduite, et remarquez ce dont il n'a pas eu besoin : aucune estimation de la fréquence des incursions, aucune affirmation sur qui les provoque, et aucun chiffre que quelqu'un aurait dû inventer.</p>
+  </div>
+
 <h3 id="game-theory-stop-placement-framework">Une méthode de placement du stop fondée sur la théorie des jeux</h3>
 
       <p><strong>Niveau 1 (raisonnement retail) :</strong> « Stop sous le support, à 178,50 $ (le manuel dit 0,50 $ en dessous) »</p>
@@ -679,13 +700,14 @@
         <h4>À retenir</h4>
         <ul>
           <li><strong>Équilibre de Nash</strong> = état stable où personne ne s'améliore seul (le prix actuel est l'équilibre)</li>
-          <li><strong>Balayer les stops est la stratégie dominante</strong> des institutions (toujours optimale, exécutée 60 à 70 % du temps)</li>
+          <li><strong>Traiter dans la poche de stops vaut mieux que traiter au niveau</strong> lorsque les trois conditions sont réunies &mdash; aucune fréquence n'est donnée, parce que tout chiffre en circulation a été produit par quelqu'un qui a décidé après coup de ce qui comptait</li>
           <li><strong>Le dilemme du prisonnier</strong> explique pourquoi l'apport de liquidité échoue (risque de sélection adverse) → et pourquoi les market makers en profitent</li>
           <li><strong>Le placement stratégique du stop</strong> = invalidation de la thèse + marge d'ATR (et non des niveaux de support arbitraires)</li>
           <li><strong>Partez du principe que des balayages AURONT lieu</strong> aux niveaux évidents (support, résistance, chiffres ronds)</li>
           <li><strong>Les stratégies mixtes</strong> = le moment et la profondeur des traversées d'un niveau varient parce que des participants non coordonnés sont sur des horloges différentes, pas parce que quelqu'un randomise exprès &mdash; inexploitable dans les deux cas, c'est pourquoi la réponse est la construction et non la prédiction</li>
-          <li><strong>Le défaut de coordination</strong> = le retail ne peut pas se coordonner, les institutions si → le regroupement du retail est exploité</li>
-          <li><strong>Stratégie robuste</strong> = fonctionne que l'adversaire balaye ou non (ordres à cours limité dans la zone de balayage + stops fondés sur la thèse)</li>
+          <li><strong>Le défaut de coordination</strong> = personne ne coordonne, d'aucun côté ; tout le monde lisant le même graphique produit l'agglomération qu'un cartel aurait dû organiser</li>
+          <li><strong>Résolvez le point mort, n'attendez pas la fréquence</strong> &mdash; dans la matrice ci-dessus le stop large l'emporte au-delà de 25 %, et dès que les deux sont dimensionnés au même risque il l'emporte à toute fréquence supérieure à zéro</li>
+          <li><strong>Stratégie robuste</strong> = fonctionne que le niveau soit traversé ou non (ordres à cours limité dans la zone d'incursion + stops fondés sur la thèse)</li>
         </ul>
       </div>
 

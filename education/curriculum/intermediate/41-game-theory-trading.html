@@ -241,6 +241,7 @@
           <li>Level 1: What will price do | Level 2: What will traders do | Level 3: What will they think traders do</li>
           <li>The liquidity game: why stops cluster under obvious levels, and why a buyer with size trades into that pocket without anybody having to hunt you</li>
           <li>Framework: find where the resting orders must be &rarr; assume the level gets traded through before it holds &rarr; put your stop where the thesis breaks, not where the chart does</li>
+          <li>How to solve a payoff matrix for the frequency at which the wider stop starts winning, instead of waiting for somebody to hand you that frequency</li>
         </ul>
       </div>
 
@@ -420,8 +421,28 @@
           </tbody>
         </table>
         <p style="margin-top:1rem"><strong>Optimal strategy:</strong> stop wide enough to survive a run through the level, but not so wide that a genuine breakdown hurts badly. No frequency is quoted for how often reversals are preceded by one, because the answer depends entirely on the instrument, the session and where you draw the line on what counts — and every number in circulation was produced by someone who chose that line after looking at the data. Use ATR-based stops (1.5-2x ATR beyond structure) + reduce position size to compensate for wider stop.</p>
-        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Math:</strong> If ATR = $2.00, stop 1.5×ATR = $3.00 below entry. If normal position size = 100 shares, reduce to 50 shares. Same dollar risk ($300), but 50% fewer stop-outs from sweeps.</p>
+        <p style="margin-top:0.5rem;padding:1rem;background:rgba(0,0,0,.2);border-radius:6px"><strong>Math:</strong> If ATR = $2.00, a 1.5×ATR stop sits $3.00 below entry &mdash; twice the $1.50 a textbook stop just under support would have used. Halve the share count and the risk is unchanged: 100 shares at $1.50 is $150, and 50 shares at $3.00 is $150 too. What you have bought with the same money is room, not a lower chance of being stopped; how much lower depends on how often the level gets run, which is the next thing to work out.</p>
       </div>
+      <div class="callout-key">
+    <h4>&#129518; Solve the matrix instead of admiring it</h4>
+    <p>Those four cells already answer the question the paragraph above has just declined to answer for you. Call p the fraction of the time the level is run and then reclaimed, rather than genuinely broken. Read the outcomes straight off the table:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                 run and reclaimed     real breakdown
+stop at $178.50       -$1.50              -$1.50
+stop at $177.00       +$3.00              -$3.00
+
+EV(wide)  = 3p - 3(1 - p)  =  6p - 3
+EV(tight) = -1.50, whatever p is
+
+6p - 3 = -1.50   ->   p = 0.25</code></pre>
+
+    <p>Above a quarter, the wider stop is the better one. Below a quarter, the tight one is. You still do not know p and this lesson still will not invent it for you &mdash; but you no longer need to know it. You need to know which side of 25% it falls on for the instrument and session you actually trade, and that is a question you can settle by counting on your own chart with your own definition written down first.</p>
+
+    <p>Two things in that result are worth sitting with. The tight stop's expectation does not depend on p at all: it is -$1.50 in both columns. It is not a cheaper bet, it is a refusal to bet, and the price of the refusal is the whole $3.00 upside. Only the wide stop has a payoff that varies, which is the only reason it can be right or wrong. And the column the table leaves out &mdash; the level simply holds and price rallies with no run at all &mdash; changes nothing here, because both stops survive it and both catch the move. It changes how often you are in a trade, not which stop is better once you are.</p>
+
+    <p style="margin-bottom:0">Now put the two on the same risk, which is what the sizing note above tells you to do. The wide stop is $3.00 against the tight stop's $1.50, so it takes half the shares. Per unit of the original position its expectation becomes (6p - 3) / 2 = 3p - 1.50, against the tight stop's -$1.50. Those are equal at p = 0. Once the two positions risk the same money, the wider stop is at least as good for any run frequency above zero at all, and the 25% break-even turns out to have been an artefact of comparing two positions that were risking different amounts. That is the entire case for wide-stop-and-smaller-size, and notice what building it did not require: no estimate of how often levels get run, no claim about who is running them, and no number anybody had to make up.</p>
+  </div>
+
 <h3 id="game-theory-stop-placement-framework">Game Theory Stop Placement Framework</h3>
 
       <p><strong>Level 1 (Retail thinking):</strong> "Stop below support at $178.50 (textbook says $0.50 below support)"</p>
@@ -666,13 +687,14 @@
         <h4>Key Takeaways</h4>
         <ul>
           <li><strong>Nash equilibrium</strong> = stable state where no player improves alone (current price = equilibrium)</li>
-          <li><strong>Sweeping stops is dominant strategy</strong> for institutions (always optimal, execute 60-70% of time)</li>
+          <li><strong>Trading into the stop pocket beats trading at the level</strong> when the three conditions hold &mdash; no frequency is quoted for how often it happens, because every figure in circulation was produced by someone who chose after the fact what counted</li>
           <li><strong>Prisoner's dilemma</strong> explains why liquidity provision fails (adverse selection risk) → market makers profit</li>
           <li><strong>Strategic stop placement</strong> = thesis invalidation + ATR buffer (not arbitrary support levels)</li>
           <li><strong>Assume sweeps WILL happen</strong> at obvious levels (support, resistance, round numbers)</li>
           <li><strong>Mixed strategies</strong> = the timing and depth of runs through a level vary because uncoordinated participants are on different clocks, not because anyone randomises on purpose &mdash; unexploitable either way, which is why the answer is construction rather than prediction</li>
-          <li><strong>Coordination failure</strong> = retail can't coordinate, institutions can → retail clustering exploited</li>
-          <li><strong>Robust strategy</strong> = works whether opponent sweeps or not (limit orders in sweep zone + thesis-based stops)</li>
+          <li><strong>Coordination failure</strong> = nobody coordinates, on either side; everyone reading the same chart produces the clustering a cartel would have had to organise</li>
+          <li><strong>Solve for the break-even, don't wait for the frequency</strong> &mdash; on the matrix above the wide stop wins past 25%, and once both are sized to the same risk it wins at any frequency above zero</li>
+          <li><strong>Robust strategy</strong> = works whether the level gets run or not (limit orders in the run zone + thesis-based stops)</li>
         </ul>
       </div>
 
