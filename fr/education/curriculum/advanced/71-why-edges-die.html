@@ -148,7 +148,7 @@
         <ul>
           <li>Les quatre façons structurelles dont un edge meurt, et lesquelles trois ne reviennent pas</li>
           <li>Comment calculer votre propre capacité &mdash; la taille de position à laquelle votre propre impact de marché dévore l'edge &mdash; et pourquoi sur des titres illiquides cette taille est assez petite pour être atteinte</li>
-          <li>Pourquoi l'encombrement est invisible dans un backtest par construction, et quelles approximations y donnent tout de même accès</li>
+          <li>Pourquoi l'encombrement est invisible dans un backtest par construction, quels proxys y accèdent malgré tout, et comment le borner durement sans observer personne</li>
           <li>Comment déterminer auquel des quatre votre propre système est réellement exposé, avant que cela ne compte</li>
         </ul>
       </div>
@@ -255,6 +255,28 @@ Y est une constante empirique, proche de 1 pour les actions
         <p>Aucune de ces mesures n'est un verdict. Ensemble, elles valent bien mieux que la courbe de capital, qui ne vous dira rien tant que l'argent n'est pas parti.</p>
       </div>
 
+      <div class="callout-key">
+        <h4>&#127919; Vous ne voyez pas la foule, mais vous pouvez compter combien elle peut contenir</h4>
+        <p>Les proxys ci-dessus sont l'état de l'art honnête et ce sont tous des jugements. Une chose de l'encombrement ne l'est pas, et la partie 2 l'a déjà calculée sans le dire. La capacité a été présentée comme une limite à votre propre taille. Elle ne l'est pas. C'est une limite sur chaque dollar présent dans le trade en même temps, car la mauvaise valorisation se moque de savoir quel ordre la mange.</p>
+
+        <p>La même ligne fait donc double emploi. Un edge de 20 points de base sur un titre à 2 % de volatilité quotidienne est épuisé à 1 % du volume quotidien &mdash; par vous, par vous et un autre, ou par quatre cents personnes à elles toutes. Divisez ce total par la taille que les gens tradent réellement et vous obtenez la population que le trade supporte :</p>
+
+<pre><code>volume quotidien   ce que le trade porte au total   à 10 000 $ par tête   à 100 000 $   à 1M $
+            5M $                         50 000 $                   5,0           0,5      0,1
+           20M $                        200 000 $                    20           2,0      0,2
+           50M $                        500 000 $                    50           5,0      0,5
+          200M $                             2M $                   200            20      2,0
+            1B $                            10M $                 1 000           100       10</code></pre>
+
+        <p><strong>Une small cap qui échange cinq millions de dollars par jour porte cinq participants particuliers à dix mille dollars chacun, et la moitié d'un à cent mille.</strong> Vous n'avez pas besoin de savoir qui d'autre est dans le trade pour le savoir. Si votre position fait cent mille dollars sur cette valeur, le calcul dit que l'edge était déjà parti avant que quiconque n'arrive &mdash; et si elle fait dix mille, il dit que la cinquième personne à trouver votre setup y met fin pour vous tous.</p>
+
+        <p>Cela recadre toute cette section. L'encombrement n'est pas une force mystérieuse qui vous a trouvé ou non ; c'est un nombre de capacité divisé par une taille de position typique, et sur les valeurs illiquides la réponse est un nombre qui se compte sur une main. Les proxys vous disent si la foule est arrivée. Ceci vous dit quelle taille elle devrait atteindre pour compter &mdash; et sur les instruments que la plupart des lecteurs tradent, la réponse est : pas bien grande.</p>
+
+        <p>Cela explique aussi la forme d'août 2007 sans faire appel à quoi que ce soit d'inobservable. Ces fonds n'étaient pas dans un trade qui porte une poignée de gens. Ils étaient dans un trade qui porte plusieurs milliards de dollars, et plusieurs milliards étaient arrivés. La borne était haute, la foule a donc mis des années à l'atteindre &mdash; puis elle a été atteinte, et trois jours ont suffi.</p>
+
+        <p>Faites-le sur votre propre book. Prenez la dernière colonne du tableau de capacité de la partie 2, divisez-la par votre taille de position, et vous avez le nombre de gens qui peuvent se tenir là où vous vous tenez. Si ce nombre est sous une dizaine, traitez l'encombrement comme un risque vivant plutôt que comme un problème de hedge fund &mdash; et traitez toute publication de votre setup comme ce qui y mettra fin.</p>
+      </div>
+
       <div class="section-break"><span>Partie 4 : La course à l'armement &mdash; la mort que vous ne pouvez pas distancer</span></div>
 
       <p>Certains edges sont moins encombrés que pris. L'erreur de valorisation est toujours là ; elle est réclamée avant que votre ordre ne puisse l'atteindre. Les leçons 44 et 56 traitent de la mécanique, et le point ici est plus étroit : ce mode de défaillance est <strong>définitif et à sens unique</strong>. Personne n'est jamais devenu plus lent.</p>
@@ -357,7 +379,7 @@ Y est une constante empirique, proche de 1 pour les actions
         <ul>
           <li><strong>Quatre façons dont un edge meurt, et seules trois sont des morts.</strong> Capacité, encombrement et course à l'armement sont structurels et largement définitifs. Le régime n'est pas une mort, c'est le diagnostic le plus fréquent, et il se renverse tout seul.</li>
           <li><strong>La capacité se calcule à partir de trois nombres que vous avez déjà.</strong> L'impact croît comme la racine carrée de votre taux de participation ; la taille où l'impact égale votre edge est votre plafond. Sur un titre à 5 M$ par jour, un edge de 20 points de base a disparu à 50 000 $ par position.</li>
-          <li><strong>Un backtest ne peut pas voir l'encombrement, et aucune validation n'y remédie</strong> &mdash; l'histoire dans laquelle tous les autres appliquaient vos règles n'a jamais eu lieu. La corrélation factorielle et la composition de vos pires journées en sont les substituts pratiques.</li>
+          <li><strong>Un backtest ne peut pas voir l'encombrement, et aucune validation n'y remédie</strong> &mdash; l'histoire dans laquelle tout le monde faisait tourner vos règles n'a jamais eu lieu. La corrélation aux facteurs et la composition de vos pires journées sont les substituts pratiques, et le nombre de capacité borne le problème de l'autre côté : un trade qui porte 50 000 $ au total ne peut pas être encombré par plus de cinq personnes à 10 000 $ chacune.</li>
           <li><strong>L'encombrement comprime votre edge en silence et inverse vos corrélations avec violence.</strong> Le dénouement d'août 2007 n'était pas un échec de modélisation ; chaque modèle était validé. Ce qu'aucun n'avait modélisé, c'était les autres.</li>
           <li><strong>La course à l'armement ne menace que les edges qui dépendent d'être tôt sur une information publique.</strong> Choisir un horizon plus lent est une défense légitime et durable, pas un lot de consolation.</li>
           <li><strong>Diagnostiquez structurellement, pas statistiquement.</strong> La leçon 55 a montré que la courbe de capital met des années à répondre à cela. Toutes les vérifications de la partie 5 sont plus rapides, et deux d'entre elles sont du calcul sur des relevés que vous tenez déjà.</li>

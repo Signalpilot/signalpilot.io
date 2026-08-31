@@ -148,7 +148,7 @@
         <ul>
           <li>As quatro formas estruturais pelas quais uma vantagem morre, e quais três não voltam</li>
           <li>Como calcular a sua própria capacidade &mdash; o tamanho de posição no qual o seu próprio impacto de mercado devora a vantagem &mdash; e por que em ativos ilíquidos esse tamanho é pequeno o bastante para ser alcançado</li>
-          <li>Por que a aglomeração é invisível num backtest por construção, e quais aproximações chegam nela mesmo assim</li>
+          <li>Por que o crowding é invisível num backtest por construção, que proxies chegam lá na mesma, e como pôr-lhe um limite duro sem observar ninguém</li>
           <li>Como descobrir a qual das quatro o seu próprio sistema está de fato exposto, antes que isso importe</li>
         </ul>
       </div>
@@ -255,6 +255,28 @@ Y e uma constante empirica, proxima de 1 para acoes
         <p>Nenhuma delas é um veredicto. Juntas, são muito melhores do que a curva de capital, que não vai lhe dizer nada até o dinheiro já ter ido embora.</p>
       </div>
 
+      <div class="callout-key">
+        <h4>&#127919; Não consegue ver a multidão, mas consegue contar quantos cabem</h4>
+        <p>Os proxies acima são o estado da arte honesto e são todos juízos. Há uma coisa do crowding que não é, e a parte 2 já a calculou sem o dizer. A capacidade foi apresentada como um limite ao seu próprio tamanho. Não é. É um limite a cada dólar que está na operação ao mesmo tempo, porque ao mispricing é indiferente que ordem o come.</p>
+
+        <p>Portanto a mesma linha faz trabalho duplo. Um edge de 20 pontos base num título com 2 % de volatilidade diária esgota-se a 1 % do volume diário &mdash; por si, por si e outro, ou por quatrocentas pessoas entre todas. Divida esse total pelo tamanho que as pessoas negoceiam de facto e obtém a população que a operação suporta:</p>
+
+<pre><code>volume diário   o que a operação aguenta no total   a 10.000 $ por cabeça   a 100.000 $   a 1M $
+         5M $                            50.000 $                     5,0           0,5      0,1
+        20M $                           200.000 $                      20           2,0      0,2
+        50M $                           500.000 $                      50           5,0      0,5
+       200M $                                2M $                     200            20      2,0
+         1B $                               10M $                   1.000           100       10</code></pre>
+
+        <p><strong>Uma small cap que negoceia cinco milhões de dólares por dia aguenta cinco participantes de retalho de dez mil dólares cada, e meio participante de cem mil.</strong> Não precisa de saber quem mais está na operação para saber isso. Se a sua posição são cem mil dólares nesse título, a aritmética diz que o edge já tinha desaparecido antes de chegar seja quem for &mdash; e se são dez mil, diz que a quinta pessoa a encontrar o seu setup o termina para todos vocês.</p>
+
+        <p>Isso reformula toda esta secção. O crowding não é uma força misteriosa que ou o encontrou ou não; é um número de capacidade dividido por um tamanho de posição típico, e em títulos ilíquidos a resposta é um número que se conta numa mão. Os proxies dizem-lhe se a multidão chegou. Isto diz-lhe quão grande teria de ser para importar &mdash; e nos instrumentos que a maioria dos leitores negoceia a resposta é: não muito.</p>
+
+        <p>Explica também a forma de Agosto de 2007 sem apelar a nada de inobservável. Aqueles fundos não estavam numa operação que aguenta um punhado de pessoas. Estavam numa que aguenta vários milhares de milhões de dólares, e vários milhares de milhões tinham chegado. O limite era alto, por isso a multidão levou anos a alcançá-lo &mdash; e depois foi alcançado, e três dias chegaram.</p>
+
+        <p>Faça-o no seu próprio livro. Pegue na última coluna da tabela de capacidade da parte 2, divida pelo seu tamanho de posição, e tem o número de pessoas que podem estar onde você está. Se esse número for abaixo de uns dez, trate o crowding como um risco vivo e não como um problema de hedge fund &mdash; e trate qualquer publicação do seu setup como aquilo que lhe põe fim.</p>
+      </div>
+
       <div class="section-break"><span>Parte 4: A corrida armamentista &mdash; a morte da qual você não consegue fugir</span></div>
 
       <p>Algumas vantagens não são tanto aglomeradas quanto tomadas. O erro de preço continua lá; ele é reivindicado antes que a sua ordem consiga alcançá-lo. As Lições 44 e 56 cobrem o maquinário, e o ponto aqui é mais estreito: este modo de falha é <strong>permanente e de mão única</strong>. Ninguém nunca ficou mais lento.</p>
@@ -357,7 +379,7 @@ Y e uma constante empirica, proxima de 1 para acoes
         <ul>
           <li><strong>Quatro formas pelas quais uma vantagem morre, e só três são mortes.</strong> Capacidade, aglomeração e corrida armamentista são estruturais e em larga medida permanentes. O regime não é uma morte, é o diagnóstico mais comum e se reverte sozinho.</li>
           <li><strong>A capacidade é calculável a partir de três números que você já tem.</strong> O impacto cresce com a raiz quadrada da sua taxa de participação; o tamanho onde o impacto iguala a sua vantagem é o seu teto. Num ativo de US$5M por dia, uma vantagem de 20 pontos-base acaba em US$50.000 por posição.</li>
-          <li><strong>Um backtest não consegue ver a aglomeração, e nenhuma quantidade de validação conserta isso</strong> &mdash; a história em que todos os outros rodavam as suas regras nunca aconteceu. A correlação com fatores e a composição dos seus piores dias são os substitutos práticos.</li>
+          <li><strong>Um backtest não consegue ver a aglomeração, e nenhuma quantidade de validação conserta isso</strong> &mdash; a história em que toda a gente corria as suas regras nunca aconteceu. A correlação com factores e a composição dos seus piores dias são os substitutos práticos, e o número de capacidade limita o problema pelo outro lado: uma operação que aguenta 50.000 $ no total não pode estar cheia com mais de cinco pessoas a 10.000 $ cada.</li>
           <li><strong>A aglomeração comprime a sua vantagem em silêncio e inverte as suas correlações com violência.</strong> O desmonte de agosto de 2007 não foi uma falha de modelagem; todos os modelos estavam validados. O que nenhum deles modelava era o outro.</li>
           <li><strong>A corrida armamentista só ameaça vantagens que dependem de chegar cedo a informação pública.</strong> Escolher um horizonte mais lento é uma defesa legítima e permanente, não um prêmio de consolação.</li>
           <li><strong>Diagnostique estruturalmente, não estatisticamente.</strong> A Lição 55 mostrou que a curva de capital leva anos para responder isso. Toda verificação da Parte 5 é mais rápida que isso, e duas delas são aritmética sobre registros que você já mantém.</li>

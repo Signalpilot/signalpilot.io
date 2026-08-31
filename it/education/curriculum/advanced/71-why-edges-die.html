@@ -148,7 +148,7 @@
         <ul>
           <li>I quattro modi strutturali in cui un edge muore, e quali tre non tornano</li>
           <li>Come calcolare la tua capacità &mdash; la dimensione di posizione alla quale il tuo stesso impatto di mercato divora l'edge &mdash; e perché su titoli illiquidi quella dimensione è abbastanza piccola da essere raggiunta</li>
-          <li>Perché l'affollamento è invisibile in un backtest per costruzione, e quali approssimazioni ci arrivano lo stesso</li>
+          <li>Perché l'affollamento è invisibile in un backtest per costruzione, quali proxy ci arrivano comunque, e come metterci un limite duro senza osservare nessuno</li>
           <li>Come capire a quale dei quattro il tuo sistema è realmente esposto, prima che conti</li>
         </ul>
       </div>
@@ -255,6 +255,28 @@ Y e una costante empirica, vicina a 1 per le azioni
         <p>Nessuna di queste è un verdetto. Insieme valgono molto più della curva del capitale, che non ti dirà nulla finché i soldi non se ne sono andati.</p>
       </div>
 
+      <div class="callout-key">
+        <h4>&#127919; La folla non la vedi, ma puoi contare quante persone ci stanno</h4>
+        <p>I proxy qui sopra sono lo stato dell'arte onesto e sono tutti giudizi. Una cosa dell'affollamento non lo è, e la parte 2 l'ha già calcolata senza dirlo. La capacità è stata presentata come un limite alla tua dimensione. Non lo è. È un limite su ogni dollaro presente nel trade insieme, perché al mispricing non importa quale ordine se lo mangia.</p>
+
+        <p>Quindi la stessa riga fa doppio lavoro. Un edge di 20 punti base su un titolo con il 2 % di volatilità giornaliera si esaurisce all'1 % del volume giornaliero &mdash; per opera tua, tua e di un altro, o di quattrocento persone insieme. Dividi quel totale per la dimensione che la gente opera davvero e ottieni la popolazione che il trade sostiene:</p>
+
+<pre><code>volume giornaliero   quanto regge il trade in totale   a 10.000 $ a testa   a 100.000 $   a 1M $
+              5M $                          50.000 $                  5,0           0,5      0,1
+             20M $                         200.000 $                   20           2,0      0,2
+             50M $                         500.000 $                   50           5,0      0,5
+            200M $                              2M $                  200            20      2,0
+              1B $                             10M $                1.000           100       10</code></pre>
+
+        <p><strong>Una small cap che scambia cinque milioni di dollari al giorno regge cinque partecipanti retail da diecimila dollari ciascuno, e mezzo partecipante da centomila.</strong> Non ti serve sapere chi altro è nel trade per saperlo. Se la tua posizione è centomila dollari su quel titolo, l'aritmetica dice che l'edge era già sparito prima che arrivasse chiunque altro &mdash; e se è diecimila, dice che la quinta persona a trovare il tuo setup lo chiude per tutti voi.</p>
+
+        <p>Questo riformula tutta questa sezione. L'affollamento non è una forza misteriosa che ti ha trovato o no; è un numero di capacità diviso per una dimensione di posizione tipica, e su titoli illiquidi la risposta è un numero che si conta su una mano. I proxy ti dicono se la folla è arrivata. Questo ti dice quanto grande dovrebbe essere per contare &mdash; e sugli strumenti che la maggior parte dei lettori opera la risposta è: non molto.</p>
+
+        <p>Spiega anche la forma dell'agosto 2007 senza appellarsi a nulla di inosservabile. Quei fondi non erano in un trade che regge una manciata di persone. Erano in uno che regge diversi miliardi di dollari, e diversi miliardi erano arrivati. Il limite era alto, quindi la folla ci ha messo anni ad arrivarci &mdash; poi ci è arrivata, e tre giorni sono bastati.</p>
+
+        <p>Fallo sul tuo book. Prendi l'ultima colonna della tabella di capacità nella parte 2, dividila per la tua dimensione di posizione, e hai il numero di persone che possono stare dove stai tu. Se quel numero è sotto una decina, tratta l'affollamento come un rischio vivo e non come un problema da hedge fund &mdash; e tratta qualunque pubblicazione del tuo setup come la cosa che lo chiude.</p>
+      </div>
+
       <div class="section-break"><span>Parte 4: La corsa agli armamenti &mdash; la morte a cui non puoi sfuggire</span></div>
 
       <p>Alcuni edge non vengono tanto affollati quanto presi. L'errore di prezzo c'è ancora; viene rivendicato prima che il tuo ordine possa raggiungerlo. Le Lezioni 44 e 56 coprono il macchinario, e il punto qui è più stretto: questa modalità di fallimento è <strong>permanente e a senso unico</strong>. Nessuno è mai diventato più lento.</p>
@@ -357,7 +379,7 @@ Y e una costante empirica, vicina a 1 per le azioni
         <ul>
           <li><strong>Quattro modi in cui un edge muore, e solo tre sono morti.</strong> Capacità, affollamento e corsa agli armamenti sono strutturali e in larga parte definitivi. Il regime non è una morte, è la diagnosi più comune e si inverte da solo.</li>
           <li><strong>La capacità è calcolabile da tre numeri che hai già.</strong> L'impatto cresce con la radice quadrata del tuo tasso di partecipazione; la dimensione in cui l'impatto eguaglia il tuo edge è il tuo tetto. Su un titolo da 5 mln $ al giorno, un edge di 20 punti base è finito a 50.000 $ per posizione.</li>
-          <li><strong>Un backtest non può vedere l'affollamento, e nessuna quantità di validazione lo risolve</strong> &mdash; la storia in cui tutti gli altri usavano le tue regole non è mai avvenuta. La correlazione fattoriale e la composizione delle tue giornate peggiori sono i sostituti pratici.</li>
+          <li><strong>Un backtest non può vedere l'affollamento, e nessuna quantità di validazione lo risolve</strong> &mdash; la storia in cui tutti gli altri eseguivano le tue regole non è mai avvenuta. La correlazione ai fattori e la composizione delle tue giornate peggiori sono i sostituti pratici, e il numero di capacità limita il problema dall'altro lato: un trade che regge 50.000 $ in totale non può essere affollato da più di cinque persone da 10.000 $ ciascuna.</li>
           <li><strong>L'affollamento comprime il tuo edge in silenzio e inverte le tue correlazioni con violenza.</strong> Lo smontaggio dell'agosto 2007 non fu un fallimento di modellazione; ogni modello era validato. Ciò che nessuno di essi aveva modellato erano gli altri.</li>
           <li><strong>La corsa agli armamenti minaccia solo gli edge che dipendono dall'arrivare presto su informazioni pubbliche.</strong> Scegliere un orizzonte più lento è una difesa legittima e permanente, non un premio di consolazione.</li>
           <li><strong>Diagnostica in modo strutturale, non statistico.</strong> La Lezione 55 ha mostrato che la curva del capitale impiega anni a rispondere a questo. Ogni verifica della Parte 5 è più rapida, e due di esse sono aritmetica su registri che già tieni.</li>

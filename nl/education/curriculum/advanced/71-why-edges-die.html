@@ -148,7 +148,7 @@
         <ul>
           <li>De vier structurele manieren waarop een edge sterft, en welke drie niet terugkomen</li>
           <li>Hoe je je eigen capaciteit berekent &mdash; de positiegrootte waarbij je eigen market impact de edge opeet &mdash; en waarom die omvang bij illiquide namen klein genoeg is om te bereiken</li>
-          <li>Waarom drukte per constructie onzichtbaar is in een backtest, en welke benaderingen er toch bij komen</li>
+          <li>Waarom crowding per constructie onzichtbaar is in een backtest, welke proxies er toch bij komen, en hoe je er een harde bovengrens op zet zonder ook maar iemand te observeren</li>
           <li>Hoe je uitzoekt aan welke van de vier jouw eigen systeem werkelijk blootstaat, voordat het ertoe doet</li>
         </ul>
       </div>
@@ -255,6 +255,28 @@ Y is een empirische constante, dicht bij 1 voor aandelen
         <p>Geen van deze is een oordeel. Samen zijn ze veel beter dan de equity-curve, die je niets zal vertellen tot het geld weg is.</p>
       </div>
 
+      <div class="callout-key">
+        <h4>&#127919; Je ziet de menigte niet, maar je kunt tellen hoeveel erin passen</h4>
+        <p>De proxies hierboven zijn de eerlijke stand van zaken en het zijn allemaal oordelen. Eén ding aan crowding is dat niet, en deel 2 heeft het al uitgerekend zonder het te zeggen. Capaciteit werd gepresenteerd als een grens aan je eigen omvang. Dat is het niet. Het is een grens aan elke dollar die tegelijk in de trade zit, want de mispricing kan het niet schelen wiens order haar opeet.</p>
+
+        <p>Dezelfde regel doet dus dubbel werk. Een edge van 20 basispunten in een naam met 2 % dagvolatiliteit is uitgeput bij 1 % van het dagvolume &mdash; door jou, door jou en nog iemand, of door vierhonderd mensen samen. Deel dat totaal door de omvang die mensen werkelijk verhandelen en je krijgt de populatie die de trade draagt:</p>
+
+<pre><code>dagvolume   wat de trade in totaal draagt   bij $10.000 per hoofd   bij $100.000   bij $1M
+      $5M                         $50.000                     5,0            0,5       0,1
+     $20M                        $200.000                      20            2,0       0,2
+     $50M                        $500.000                      50            5,0       0,5
+    $200M                             $2M                     200             20       2,0
+      $1B                            $10M                   1.000            100        10</code></pre>
+
+        <p><strong>Een smallcap die vijf miljoen dollar per dag verhandelt draagt vijf particuliere deelnemers van tienduizend dollar elk, en een halve van honderdduizend.</strong> Je hoeft niet te weten wie er nog meer in de trade zit om dat te weten. Is je positie honderdduizend dollar in die naam, dan zegt de rekensom dat de edge al weg was voordat er iemand anders arriveerde &mdash; en is het tienduizend, dan zegt hij dat de vijfde persoon die jouw setup vindt er voor jullie allemaal een eind aan maakt.</p>
+
+        <p>Dat herkadert deze hele sectie. Crowding is geen mysterieuze kracht die je wel of niet heeft gevonden; het is een capaciteitsgetal gedeeld door een typische positiegrootte, en bij illiquide namen is het antwoord een getal dat je op één hand telt. De proxies vertellen je of de menigte is gearriveerd. Dit vertelt je hoe groot ze zou moeten zijn om ertoe te doen &mdash; en op de instrumenten die de meeste lezers verhandelen luidt het antwoord: niet erg.</p>
+
+        <p>Het verklaart ook de vorm van augustus 2007 zonder een beroep te doen op iets onwaarneembaars. Die fondsen zaten niet in een trade die een handvol mensen draagt. Ze zaten in één die meerdere miljarden dollars draagt, en meerdere miljarden waren gearriveerd. De grens lag hoog, dus de menigte deed er jaren over om hem te bereiken &mdash; en toen was hij bereikt, en drie dagen waren genoeg.</p>
+
+        <p>Doe het op je eigen boek. Neem de laatste kolom van de capaciteitstabel in deel 2, deel door je positiegrootte, en je hebt het aantal mensen dat kan staan waar jij staat. Ligt dat getal onder ongeveer tien, behandel crowding dan als een levend risico in plaats van een hedgefondsprobleem &mdash; en behandel elke publicatie van je setup als het ding dat er een eind aan maakt.</p>
+      </div>
+
       <div class="section-break"><span>Deel 4: De wapenwedloop &mdash; de dood waar je niet van weg kunt lopen</span></div>
 
       <p>Sommige edges raken niet zozeer druk als wel afgenomen. De misprijzing is er nog steeds; ze wordt opgeëist voordat jouw order haar kan bereiken. Les 44 en 56 behandelen de machinerie, en het punt hier is smaller: deze faalvorm is <strong>permanent en eenrichting</strong>. Niemand is ooit langzamer geworden.</p>
@@ -357,7 +379,7 @@ Y is een empirische constante, dicht bij 1 voor aandelen
         <ul>
           <li><strong>Vier manieren waarop een edge sterft, en maar drie zijn doden.</strong> Capaciteit, drukte en de wapenwedloop zijn structureel en grotendeels definitief. Regime is geen dood, is de meest voorkomende diagnose, en keert vanzelf om.</li>
           <li><strong>Capaciteit is berekenbaar uit drie getallen die je al hebt.</strong> De impact groeit met de wortel van je participatiegraad; de omvang waarbij impact gelijk is aan je edge is je plafond. Bij een naam van $5M per dag is een edge van 20 basispunten weg bij $50.000 per positie.</li>
-          <li><strong>Een backtest kan drukte niet zien, en geen hoeveelheid validatie lost dat op</strong> &mdash; de geschiedenis waarin alle anderen jouw regels draaiden heeft nooit plaatsgevonden. Factorcorrelatie en de samenstelling van je slechtste dagen zijn de praktische vervangers.</li>
+          <li><strong>Een backtest kan drukte niet zien, en geen hoeveelheid validatie lost dat op</strong> &mdash; de geschiedenis waarin iedereen jouw regels draaide heeft nooit plaatsgevonden. Factorcorrelatie en de samenstelling van je slechtste dagen zijn de praktische vervangers, en het capaciteitsgetal begrenst het probleem van de andere kant: een trade die in totaal $50.000 draagt kan door niet meer dan vijf mensen van $10.000 elk vol worden gezet.</li>
           <li><strong>Drukte comprimeert je edge in stilte en keert je correlaties met geweld om.</strong> De afwikkeling van augustus 2007 was geen modelleringsfout; elk model was gevalideerd. Wat geen van hen had gemodelleerd, was elkaar.</li>
           <li><strong>De wapenwedloop bedreigt alleen edges die afhangen van vroeg zijn bij publieke informatie.</strong> Een tragere horizon kiezen is een legitieme en blijvende verdediging, geen troostprijs.</li>
           <li><strong>Diagnosticeer structureel, niet statistisch.</strong> Les 55 liet zien dat de equity-curve hier jaren over doet. Elke controle uit Deel 5 is sneller, en twee ervan zijn rekenwerk op administratie die je toch al bijhoudt.</li>

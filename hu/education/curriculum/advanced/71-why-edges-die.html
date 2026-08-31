@@ -148,7 +148,7 @@
         <ul>
           <li>A négy strukturális mód, ahogyan egy előny meghal, és hogy melyik három nem jön vissza</li>
           <li>Hogyan számold ki a saját kapacitásodat &mdash; azt a pozícióméretet, amelynél a saját piaci hatásod felemészti az előnyt &mdash; és miért elég kicsi ez a méret illikvid papíroknál ahhoz, hogy elérd</li>
-          <li>Miért láthatatlan a zsúfoltság egy backtest-ben már szerkezeténél fogva, és mely közelítő mutatók férnek mégis hozzá</li>
+          <li>Miért láthatatlan a zsúfoltság egy backtestben már a felépítésénél fogva, mely proxyk jutnak el hozzá mégis, és hogyan lehet kemény korlátot tenni rá anélkül, hogy bárkit megfigyelnél</li>
           <li>Hogyan derítsd ki, a négy közül valójában melyiknek van kitéve a saját rendszered, még mielőtt számítana</li>
         </ul>
       </div>
@@ -255,6 +255,28 @@ Y egy empirikus allando, reszvenyeknel 1 kozeli
         <p>Egyik sem ítélet. Együtt viszont sokkal többet érnek a tőkegörbénél, amely semmit sem fog mondani, amíg a pénz el nem fogy.</p>
       </div>
 
+      <div class="callout-key">
+        <h4>&#127919; A tömeget nem látod, de meg tudod számolni, hányan férnek el</h4>
+        <p>A fenti proxyk a szakma őszinte állása, és mind megítélés kérdése. A zsúfoltságban egy dolog nem az, és a 2. rész ezt már ki is számolta, csak nem mondta ki. A kapacitást a saját méretedre vonatkozó korlátként mutattuk be. Nem az. Az ügyletben lévő minden egyes dollárra vonatkozó korlát, mert a félreárazást nem érdekli, melyik megbízás eszi meg.</p>
+
+        <p>Ugyanaz a sor tehát kettős munkát végez. Egy 20 bázispontos edge egy 2 %-os napi volatilitású papírban a napi forgalom 1 %-ánál kimerül &mdash; általad, általad és még valaki által, vagy négyszáz ember által együtt. Oszd el ezt az összeget azzal a mérettel, amivel az emberek ténylegesen kereskednek, és megkapod azt a népességet, amit az ügylet elbír:</p>
+
+<pre><code>napi forgalom   amennyit az ügylet összesen elbír   fejenként 10 000 $-ral   100 000 $-ral   1M $-ral
+         5M $                            50 000 $                      5,0             0,5        0,1
+        20M $                           200 000 $                       20             2,0        0,2
+        50M $                           500 000 $                       50             5,0        0,5
+       200M $                                2M $                      200              20        2,0
+         1B $                               10M $                    1 000             100         10</code></pre>
+
+        <p><strong>Egy napi ötmillió dollárt forgó small cap fejenként tízezer dollárral öt lakossági résztvevőt bír el, százezerrel pedig fél résztvevőt.</strong> Ehhez nem kell tudnod, ki más van még az ügyletben. Ha a pozíciód százezer dollár abban a papírban, a számtan azt mondja: az edge már azelőtt eltűnt, hogy bárki más megérkezett volna &mdash; ha pedig tízezer, azt mondja: az ötödik ember, aki megtalálja a setupodat, mindannyiótok számára véget vet neki.</p>
+
+        <p>Ez az egész szakaszt átkeretezi. A zsúfoltság nem valami titokzatos erő, amely vagy rád talált, vagy nem; egy kapacitásszám osztva egy tipikus pozíciómérettel, és illikvid papíroknál a válasz egy fél kézen megszámolható szám. A proxyk azt mondják meg, megérkezett-e a tömeg. Ez azt mondja meg, mekkorának kellene lennie ahhoz, hogy számítson &mdash; és azokon az eszközökön, amelyekkel a legtöbb olvasó kereskedik, a válasz: nem túl nagynak.</p>
+
+        <p>Megmagyarázza a 2007. augusztusi alakzatot is anélkül, hogy bármi megfigyelhetetlenre hivatkozna. Azok az alapok nem egy maroknyi embert elbíró ügyletben ültek. Egy több milliárd dollárt elbíróban ültek, és több milliárd dollár meg is érkezett. A korlát magas volt, ezért a tömegnek évekbe telt elérnie &mdash; aztán elérte, és három nap elég volt.</p>
+
+        <p>Futtasd le a saját könyveden. Vedd a 2. rész kapacitástáblájának utolsó oszlopát, oszd el a pozícióméreteddel, és megkapod, hányan állhatnak ott, ahol te állsz. Ha ez a szám tíz alatt van, kezeld a zsúfoltságot élő kockázatként, ne hedge fund-problémaként &mdash; és kezeld a setupod bármely nyilvános leírását annak, ami véget vet neki.</p>
+      </div>
+
       <div class="section-break"><span>4. rész: A fegyverkezési verseny &mdash; a halál, amit nem tudsz lefutni</span></div>
 
       <p>Egyes előnyök nem annyira zsúfolttá válnak, mint inkább elveszik őket. A félreárazás még ott van; már azelőtt lefoglalják, hogy a megbízásod elérhetné. A gépezetet a 44. és 56. lecke tárgyalja, itt a lényeg szűkebb: ez a hibamód <strong>végleges és egyirányú</strong>. Soha senki nem lett még lassabb.</p>
@@ -357,7 +379,7 @@ Y egy empirikus allando, reszvenyeknel 1 kozeli
         <ul>
           <li><strong>Négyféleképpen hal meg egy előny, és csak három ezek közül halál.</strong> A kapacitás, a zsúfoltság és a fegyverkezési verseny strukturális és jórészt végleges. A rezsim nem halál, ez a leggyakoribb diagnózis, és magától megfordul.</li>
           <li><strong>A kapacitás kiszámítható három számból, amelyek már megvannak.</strong> A hatás a részvételi arányod négyzetgyökével nő; az a méret, ahol a hatás egyenlő az előnyöddel, a plafonod. Egy napi 5M$-os papírnál egy 20 bázispontos előny pozíciónként 50 000$-nál elfogy.</li>
-          <li><strong>Egy backtest nem látja a zsúfoltságot, és semennyi validálás nem javítja ezt</strong> &mdash; az a történelem, amelyben mindenki más a te szabályaidat futtatta, sosem történt meg. A faktorkorreláció és a legrosszabb napjaid összetétele a gyakorlati helyettesítők.</li>
+          <li><strong>Egy backtest nem látja a zsúfoltságot, és semennyi validálás nem javítja ezt</strong> &mdash; az a történelem, amelyben mindenki más a te szabályaidat futtatta, sosem történt meg. A faktorkorreláció és a legrosszabb napjaid összetétele a gyakorlati helyettesítők, a kapacitásszám pedig a másik oldalról szorítja be a kérdést: egy ügylet, amely összesen 50 000 $-t bír el, fejenként 10 000 $-ral legfeljebb öt embertől lehet zsúfolt.</li>
           <li><strong>A zsúfoltság csendben nyomja össze az előnyödet, és hevesen fordítja meg a korrelációidat.</strong> A 2007. augusztusi leépülés nem modellezési kudarc volt; minden modellt validáltak. Amit egyikük sem modellezett, az a többiek voltak.</li>
           <li><strong>A fegyverkezési verseny csak azokat az előnyöket fenyegeti, amelyek attól függnek, hogy korán érsz oda egy nyilvános információhoz.</strong> Lassabb időtávot választani jogos és tartós védekezés, nem vigaszdíj.</li>
           <li><strong>Strukturálisan diagnosztizálj, ne statisztikailag.</strong> Az 55. lecke megmutatta, hogy a tőkegörbének évekbe telik erre válaszolni. Az 5. rész minden ellenőrzése gyorsabb ennél, és kettő közülük számtan olyan nyilvántartásokon, amelyeket amúgy is vezetsz.</li>

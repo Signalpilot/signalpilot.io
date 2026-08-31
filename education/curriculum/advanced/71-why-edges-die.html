@@ -135,7 +135,7 @@
         <ul>
           <li>The four structural ways an edge dies, and which three do not come back</li>
           <li>How to compute your own capacity &mdash; the position size at which your own market impact eats the edge &mdash; and why on illiquid names that size is small enough to reach</li>
-          <li>Why crowding is invisible in a backtest by construction, and which proxies get at it anyway</li>
+          <li>Why crowding is invisible in a backtest by construction, which proxies get at it anyway, and how to put a hard bound on it without observing anybody</li>
           <li>How to work out which of the four your own system is actually exposed to, before it matters</li>
         </ul>
       </div>
@@ -242,6 +242,28 @@ Y is an empirical constant, close to 1 for equities
         <p>None of these is a verdict. Together they are far better than the equity curve, which will tell you nothing until the money is gone.</p>
       </div>
 
+      <div class="callout-key">
+        <h4>&#127919; You cannot see the crowd, but you can count how many it can hold</h4>
+        <p>The proxies above are the honest state of the art and they are all judgement calls. There is one thing about crowding that is not, and Part 2 already computed it without saying so. Capacity was presented as a limit on your own size. It is not. It is a limit on every dollar in the trade at once, because the mispricing does not care whose order eats it.</p>
+
+        <p>So the same line does double duty. A 20 basis point edge in a name with 2% daily volatility is exhausted at 1% of daily volume &mdash; by you, by you and one other, or by four hundred people between them. Divide that total by the size people actually trade and you get the population the trade supports:</p>
+
+<pre><code>daily volume   the trade holds in total   at $10K a head   at $100K   at $1M
+         $5M                    $50,000              5.0        0.5      0.1
+        $20M                   $200,000               20        2.0      0.2
+        $50M                   $500,000               50        5.0      0.5
+       $200M                        $2M              200         20      2.0
+         $1B                       $10M            1,000        100       10</code></pre>
+
+        <p><strong>A small cap trading five million dollars a day holds five retail participants at ten thousand dollars each, and half of one at a hundred thousand.</strong> You do not need to know who else is in the trade to know that. If your position is a hundred thousand dollars in that name, the arithmetic says the edge was already gone before anyone else arrived &mdash; and if it is ten thousand, it says the fifth person to find your setup ends it for all of you.</p>
+
+        <p>Which reframes the whole of this section. Crowding is not a mysterious force that either has or has not found you; it is a capacity number divided by a typical position size, and the answer on illiquid names is a number small enough to count on one hand. The proxies tell you whether the crowd has arrived. This tells you how large it would have to be to matter, and on the instruments most readers trade, the answer is: not very.</p>
+
+        <p>It also explains the August 2007 shape without appealing to anything unobservable. Those funds were not in a trade that could hold a handful of people. They were in one that could hold several billion dollars, and several billion dollars had arrived. The bound was large, so the crowd took years to reach it &mdash; and then it was reached, and three days were enough.</p>
+
+        <p>Run it on your own book. Take the last column of the capacity table in Part 2, divide by your position size, and you have the number of people who can stand where you are standing. If that number is under about ten, treat crowding as a live risk rather than a hedge fund problem, and treat any public write-up of your setup as the thing that ends it.</p>
+      </div>
+
       <div class="section-break"><span>Part 4: The Arms Race &mdash; The Death You Cannot Outrun</span></div>
 
       <p>Some edges do not get crowded so much as taken. The mispricing is still there; it is claimed before your order can reach it. Lessons 44 and 56 cover the machinery, and the point here is narrower: this failure mode is <strong>permanent and one-directional</strong>. Nobody has ever got slower.</p>
@@ -344,7 +366,7 @@ Y is an empirical constant, close to 1 for equities
         <ul>
           <li><strong>Four ways an edge dies, and only three are deaths.</strong> Capacity, crowding and the arms race are structural and largely permanent. Regime is not a death, is the most common diagnosis, and reverses on its own.</li>
           <li><strong>Capacity is computable from three numbers you already have.</strong> Impact grows with the square root of your participation rate; the size where impact equals your edge is your ceiling. On a $5M-a-day name a 20 basis point edge is gone by $50,000 a position.</li>
-          <li><strong>A backtest cannot see crowding, and no amount of validation fixes that</strong> &mdash; the history in which everyone else ran your rules never happened. Factor correlation and the composition of your worst days are the practical substitutes.</li>
+          <li><strong>A backtest cannot see crowding, and no amount of validation fixes that</strong> &mdash; the history in which everyone else ran your rules never happened. Factor correlation and the composition of your worst days are the practical substitutes, and the capacity number bounds the problem from the other side: a trade that holds $50,000 in total cannot be crowded by more than five people at $10,000 each.</li>
           <li><strong>Crowding compresses your edge quietly and inverts your correlations violently.</strong> The August 2007 unwind was not a modelling failure; every model was validated. What none of them modelled was each other.</li>
           <li><strong>The arms race only threatens edges that depend on being early to public information.</strong> Choosing a slower horizon is a legitimate and permanent defence, not a consolation prize.</li>
           <li><strong>Diagnose structurally, not statistically.</strong> Lesson 55 showed the equity curve takes years to answer this. Every check in Part 5 is faster than that, and two of them are arithmetic on records you already keep.</li>
