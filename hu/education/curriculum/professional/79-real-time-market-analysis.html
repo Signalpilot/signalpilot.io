@@ -136,7 +136,7 @@
           <li>Valós idejű elemzés: több adatfolyam egyidejű összefésülése</li>
           <li>Információs sorrend: árfolyammozgás → forgalom → order flow → hírek → hangulat</li>
           <li>Döntési keret: megjelenik a setup → megerősítés 3 vagy több indikátoron → végrehajtás 30 másodpercen belül</li>
-          <li>Őszinte korlátok: több adatfolyam összefésülése kontextust és vétójogot ad, nem mérhető százalékos javulást — aki ilyen számot mond, kitalálta</li>
+          <li>Őszinte korlátok: több adatfolyam összefésülése kontextust és vétójogot ad, nem mérhető százalékos javulást — és a vétó megszámolható: öt ellenőrzésnél, amelyek mindegyike tízből kilencszer eltalálja, az «5-ből 3 egyezik» 100 reggelből 99-en megszólal, tehát mindaz, amit a szabály tud, a századikban van</li>
         </ul>
       </div>
 
@@ -346,9 +346,25 @@
   <ul>
     <li><strong>3 vagy több emelkedő jel (SPY fel, TLT le, VIX le, DXY le, emelkedő katalizátor):</strong> LONG elfogultság</li>
     <li><strong>3 vagy több eső jel (SPY le, TLT fel, VIX fel, DXY fel, eső katalizátor):</strong> SHORT elfogultság</li>
-    <li><strong>2 emelkedő, 2 eső, 1 semleges:</strong> SEMLEGES = maradj kint, vagy csak scalpelj</li>
+    <li><strong>2 emelkedő, 2 eső, 1 semleges:</strong> SEMLEGES = maradj kint, vagy csak scalpelj. Ez az az ág, amelyik az információt hordozza; a számítás közvetlenül alatta</li>
   </ul>
   <p>4 hónap alatt 54 000 $ veszteségről jutott oda, hogy a következő 6 hónapban 67 000 $-t keressen. Ne olvasd ezt egy ötperces lista hozamaként: csökkentette a méretet is, abbahagyta az első öt percben a kereskedést, és barátságosabb piacot kapott. A szabály azt a konkrét hibát állította meg; a fordulat többi része a munka többi része volt.</p>
+</div>
+
+<div class="callout-key">
+  <h4>&#127919; A megerősítéseket csak akkor érdemes számolni, ha a jelzések ellent tudnak mondani egymásnak</h4>
+  <p>Ez az oldal két számlálószabályt működtet, és ugyanolyan dolognak kezeli őket. Nem azok, és egyetlen sornyi binomiális számtan elválasztja őket. Tegyük fel, hogy minden ellenőrzött jelzés az esetek valamekkora hányadában eltalálja a nap valódi irányát. Akkor annak a valószínűsége, hogy ötből legalább három egyezik, és annak, hogy háromból mind a három egyezik, kizárólag ettől a hányadtól függ:</p>
+<pre><code>minden jelzés eltalálja a napot   a nyitás előtti «5-ből 3» szabály megszólal   a napon belüli «3-ból 3» szabály megszólal
+50 % (érmefeldobás)                                                    50,0 %                                       12,5 %
+60 %                                                                   68,3 %                                       21,6 %
+70 %                                                                   83,7 %                                       34,3 %
+80 %                                                                   94,2 %                                       51,2 %
+90 %                                                                   99,1 %                                       72,9 %
+95 %                                                                   99,9 %                                       85,7 %</code></pre>
+  <p><strong>Olvasd végig az első oszlopot fentről lefelé, és a nyitás előtti szabály megszűnik szűrőnek lenni.</strong> Egy olyan napon, amikor mind az öt ellenőrzésed tízből kilencszer helyes, a «3 vagy több zöld» 100 reggelből 99-en megszólal. Az a szabály, amelyik a napok 99 %-át átengedi, nem választott ki semmit. A teljes információtartalma abban az egyetlen reggelben van száz közül, amikor elutasít &mdash; ez a rész korábbi divergenciaesete, és pontosan ezt jelenti a «vétó, nem százalék», amint számot teszünk mellé.</p>
+  <p>A redundancia rosszabbá teszi a helyzetet, mint amit a táblázat mutat. SPY fel, TLT le, VIX le és DXY le nem négy független leolvasás; négy hőmérő ugyanabban a szobában, és egy valódi risk-on reggelen a felépítésükből adódóan együtt mozognak. Tökéletes korrelációnál az ötös számlálás egyetlen kérdéssé omlik össze &mdash; feljebb van-e az SPY &mdash;, és a szkennelés azt az egy számot adja vissza, ami már megvolt. Az öt percét pontosan azokon a reggeleken érdemli ki, amikor a hőmérők ellentmondanak egymásnak.</p>
+  <p>A napon belüli háromjelzéses szabály kiállja ugyanezt a számtant, mert a bemenetei valóban ellentmondhatnak egymásnak: az alábbi esetben az ár kitört, miközben a kumulált delta negatív volt, és pontosan ezért veszített az az ügylet. Jelzésenként 90 %-nál a beállítások 73 %-án szólal meg 99 % helyett, vagyis a negyedüket elutasítja. Így néz ki egy szűrő, amelyik dolgozik.</p>
+  <p>Használd hát a számlálást abban az irányban, amerre valóban működik. Egyik szabály sem erősít meg semmit egy hétköznapi napon; mindkettő azért van, hogy a szokatlanon megállítson, és a nyitás előtti szkennelés dolga a kettő a kettő elleni reggel, nem az öt zöldes.</p>
 </div>
 
 <h3>Kulcsszintek, amelyeket a nyitás előtt be kell jelölni</h3>
@@ -813,13 +829,13 @@
         <ul>
           <li><strong>Nyitás előtti szkennelés (5 perc):</strong> Makró, katalizátorok, piacok közötti kapcsolatok, kulcsszintek</li>
           <li><strong>Első 30 perc:</strong> A rés viselkedése + forgalom = intézményi szándék</li>
-          <li><strong>3 jeles megerősítés:</strong> A tape, az order flow és az árfolyammozgás MINDEGYIKÉNEK egyeznie kell</li>
+          <li><strong>3 jeles megerősítés:</strong> A tape, az order flow és az árfolyammozgás MINDEGYIKÉNEK egyeznie kell — és a nyitás előtti számlálással ellentétben ez a szabály valóban elutasít beállításokat, mert a három bemenete tényleg ellentmondhat egymásnak</li>
           <li><strong>Szakaszpivotok:</strong> 10:00 (folytatás/fordulat), 14:00 (késő délutáni lendület), 15:50 (MOC-egyensúlytalanság)</li>
           <li><strong>Türelem > cselekvés.</strong> Várd ki a nagy valószínűségű setupokat. A profik naponta 2-5 kereskedést nyitnak, nem 20-50-et.</li>
         </ul>
       </div>
 
-<p style="font-size:1.1rem;font-weight:500;margin:2rem 0">A valós idejű szintézis az, ami elválasztja a profit az amatőrtől. Nyitás előtti előkészítés, tape reading, order flow, szakaszpivotok: mindezt egyszerre dolgozod fel. Itt fut össze 74 lecke ösztönös végrehajtássá.</p>
+<p style="font-size:1.1rem;font-weight:500;margin:2rem 0">A valós idejű szintézis az, ami elválasztja a profit az amatőrtől. Nyitás előtti előkészítés, tape reading, order flow, szakaszpivotok: mindezt egyszerre dolgozod fel. Itt fut össze 78 lecke ösztönös végrehajtássá.</p>
 
 <h3 style="margin:3rem 0 1.5rem 0">Kapcsolódó leckék</h3>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
