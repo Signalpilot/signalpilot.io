@@ -228,15 +228,32 @@ once, in the order the participants actually interact.*
 
 ## What this changes, in numbers
 
-- **83 lessons** against 86. Fourteen duplicate subjects merge into six; the
-  slots recovered pay for the nine-lesson Module 1 and the constructive lessons
-  at 10, 13, 46 and 60.
-- **Six lessons written from nothing**: 1, 2, 3, 5, 9, 46 — plus substantial new
-  construction inside 10, 13 and 60.
-- **Seven lessons stop existing as separate pages**: 20, 39, 48, 50, 75, 76, 84,
-  and the six-lesson professional capstone becomes one.
-- **Zero dependency violations.** Every concept is taught before it is used, and
-  the ordering above is derived from that constraint, not from perceived
-  difficulty.
-- The three lessons that most badly needed moving: **regime 53 → 36**,
-  **variance 55 → 18**, **record-keeping 37 → 23**.
+Validated against `slotmap.tsv`, which assigns every one of the current 86
+lessons to a destination and is checked so that none is lost or duplicated.
+
+- **85 lessons in 11 modules** against 86 in 20 categories, four of which were
+  buckets rather than subjects.
+- **14 lessons written from nothing** — slots 1, 2, 3, 5, 9, 10, 14, 17, 19, 31,
+  48, 62, 64, 67. Nine of them are the foundation the course has never had; the
+  rest are concepts currently split across lessons that each assume the other.
+- **14 lessons merge** into a sibling rather than standing alone: 39, 40, 48, 54,
+  68, 70, 74, 75, 76, 79, 80, 81, 83, 84, 86. The six-page professional capstone
+  becomes one lesson.
+- **71 lessons keep their content and change position.**
+- **Zero dependency violations.** The ordering is derived from the constraint
+  that a concept is taught before it is used, not from how difficult a topic
+  sounds.
+
+The moves that matter most, by distance:
+
+| old | new | lesson | why it moved |
+|---|---|---|---|
+| 55 | **18** | What an Edge Feels Like | sizing at 20 is meaningless without it |
+| 53 | **36** | Markets Have Modes | 31 lessons used regime before it was taught |
+| 57 | **11** | Slippage and Impact | a cost, and costs precede strategy |
+| 37 | **23** | Keeping the Record | 20 lessons say "record this" before it existed |
+| 1 | **27** | The Liquidity Lie | needs stops, sizing, delta and the book first |
+| 5 | **51** | Oscillators Under Regime | its thesis *is* a regime claim |
+| 4, 6, 8 | **49, 50, 52** | the indicator debunks | teach before you correct |
+| 34 | **71** | Your Positions Are One Position | needs correlation, taught at 45 |
+| 38 | **76** | The Trading Day | an operations lesson, not an intermediate one |
