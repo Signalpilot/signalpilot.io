@@ -257,3 +257,34 @@ The moves that matter most, by distance:
 | 4, 6, 8 | **49, 50, 52** | the indicator debunks | teach before you correct |
 | 34 | **71** | Your Positions Are One Position | needs correlation, taught at 45 |
 | 38 | **76** | The Trading Day | an operations lesson, not an intermediate one |
+
+---
+
+## Notation, and why it is not pedantry
+
+The same six quantities are currently named several ways each, across lessons a
+reader is meant to take in order:
+
+| quantity | names in use | spread across |
+|---|---|---|
+| win rate | "win rate" (67 lessons), "hit rate" (30), "win-rate" (5) | 3 names |
+| average win ÷ average loss | "R:R" (29), "average win" (20), "payoff ratio" (17), "profit factor" (14), "reward-to-risk" (5), "win/loss ratio" (3) | 6 names |
+| one unit of risk | "1R" (20), "R-multiple" (13), "risk/reward" (13), "1:1" (9), "risk:reward" (3), "one unit of risk" (1) | 6 names |
+| expectancy | "expectancy" (35), "expected value" (4), "edge per trade" (3), "EV" (2) | 4 names |
+| volatility | "ATR" (19), "standard deviation" (6), "sigma" (6), "σ" (3) | 4 names |
+| average daily volume | "daily volume" (12), "average daily volume" (4), "ADV" (3), "avg daily volume" (2) | 4 names |
+
+"Profit factor" and "payoff ratio" are not even the same quantity — one is gross
+win ÷ gross loss over a record, the other is average win ÷ average loss per
+trade — and they are used interchangeably in 31 lessons between them. A reader
+who learns the formula in slot 20 and meets it renamed in slot 63 has to
+re-derive that it is the same formula. Fixing this costs nothing and is the
+difference between a set of articles and a course.
+
+**Fixed set, defined in slot 17, never redefined:**
+
+`R` one unit of risk, in currency: entry minus stop, times size · `p` win rate ·
+`b` average win ÷ average loss · `E = p·b − (1−p)` expectancy, in R per trade ·
+`ADV` average daily volume · `σ` volatility, always with its period stated ·
+**profit factor** reserved for gross win ÷ gross loss over a record, and never
+used to mean `b`.
