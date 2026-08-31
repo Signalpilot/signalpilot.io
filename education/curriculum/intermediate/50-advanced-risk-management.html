@@ -105,7 +105,7 @@
           <div style="font-size:.85rem;color:var(--muted)">Keep reading to mark this lesson complete</div>
         </div>
       </div>
-  <p>The difference between professional traders and retail traders isn't win rate—it's risk management. The difference shows up in what a losing streak does to you. At half a percent a trade, twenty losses in a row costs about a tenth of the account and you carry on. At five percent a trade &mdash; or, as this lesson is about to show, at half a percent a trade across six positions that are really one position &mdash; the same streak ends the account. This lesson teaches you how to build institutional-grade risk frameworks.</p>
+  <p>The difference between professional traders and retail traders isn't win rate—it's risk management. The difference shows up in what a losing streak does to you. At half a percent a trade, twenty losses in a row costs about a tenth of the account and you carry on. At five percent a trade &mdash; or, as this lesson is about to show, at half a percent a trade across six positions that are really one position &mdash; the same streak ends the account.</p>
 
 
 
@@ -118,19 +118,7 @@
 
       <p>Most retail traders focus on individual trade risk: "I'll risk 1% per trade." That's fine—but incomplete. What if you're risking 1% on 8 trades that are 85% correlated? You're not risking 8% spread across 8 independent bets — that would cost you about 2.8% on a bad day. You're risking 7.5% on ONE bet (the market or sector move), which is very nearly the whole 8%, and you don't realise it.</p>
 
-      <p>Professional risk management is multi-layered: position sizing, correlation control, portfolio heat limits, and tail risk hedging. This lesson teaches you to think like an institutional risk manager.</p>
-
-      <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
-    <h3 style="margin:0 0 1rem 0">🎯 What You'll Learn</h3>
-    <p style="margin:0 0 0.75rem 0">By the end of this lesson, you'll be able to:</p>
-    <ul style="line-height:1.8;margin:0 0 0 1.5rem">
-      <li>Calculate correlation-adjusted portfolio risk (not just position count)</li>
-      <li>Use VAR (Value at Risk) to measure an ordinary bad day, and see why it is in different units from portfolio heat</li>
-      <li>Build correlation matrices to identify hidden concentration risk</li>
-      <li>Implement portfolio heat limits to survive extreme drawdowns</li>
-      <li>Use Signal Pilot tools for real-time risk monitoring</li>
-    </ul>
-  </div>
+      <p>Professional risk management is multi-layered: position sizing, correlation control, portfolio heat limits, and tail risk hedging. The four layers are treated in that order, cheapest first.</p>
 
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -243,7 +231,7 @@
           </div>
         </div>
         <div class="quiz-explanation">
-          <strong>Correct: D.</strong> This is one of the most insidious risks in trading: correlation blindness. Callum thought he was diversified across 6 different positions, but they were all the SAME bet. The setup: July 2024, Callum held 6 positions thinking "different stocks = diversified": SPY ($1K risk, 0.625%), QQQ ($400, 0.25%), NVDA ($450, 0.28%), TSLA ($270, 0.17%), AAPL ($320, 0.2%), MSFT ($320, 0.2%). Total nominal risk: $2,776, or 1.735% of his $160K account. He thought: "Very conservative, under 2%." The number was fine. What was wrong was what he believed the number meant. The hidden risk: the correlation matrix showed these positions were 82% correlated on average — SPY&#8596;QQQ 0.94 (almost identical), SPY&#8596;NVDA 0.82, SPY&#8596;TSLA 0.76, SPY&#8596;AAPL 0.88, SPY&#8596;MSFT 0.91. Nominal risk is what you lose when every stop fills at once; the point of holding several positions is that they are not all supposed to fill at once. The correlation-adjusted formula tells you how much of that nominal number a bad day actually costs: Effective Risk = Nominal Risk &#215; &#8730;((1 + (N &#8722; 1) &#215; Correlation) / N). With independent positions that factor is 1/&#8730;6 = 0.41, so his bad day would cost 1.735% &#215; 0.41 = 0.71%. At 0.82 correlation the factor is &#8730;((1 + 5 &#215; 0.82) / 6) = 0.92, so his bad day costs 1.60% — essentially the entire budget. In terms of independent bets: Effective N = 6 / (1 + 5 &#215; 0.82) = 1.18. He had one position sized six times. The catastrophe: July 24, 2024, mega-cap tech dumped (QQQ -3.6%, NVDA -6.8%, TSLA -12.3% on earnings). ALL 6 positions stopped in the same session, filling worse than their stops in a fast tape: SPY -$1,140, QQQ -$665, NVDA -$638, TSLA -$354, AAPL -$372, MSFT -$304. Total: -$3,473 (-2.17% of the account) against a $2,776 budget. Callum's reaction: "Bad luck, macro shock. I'll rebuild." Fatal mistake: it wasn't bad luck, it was correlation, and he rebuilt the SAME 6 correlated positions July 25 - August 2. August 5, 2024: the yen-carry unwind gapped SPY down 4.2% at the open with VIX printing above 60. ALL 6 gapped through their stops AGAIN: -$4,890 (-3.12%). Total damage: $160K &#8594; $151.6K (-5.2%, -$8,363) in 9 trading days from TWO correlated events — more than twice what the same risk budget would have cost him spread across independent positions. Why breaking the 5-position rule wasn't the issue: the problem was never 6 positions instead of 5. It was that all 6 were correlated above 0.7, so they moved together. Six UNCORRELATED positions (stocks, bonds, commodities, inverse ETFs, international) would have carried 1.735% &#215; &#8730;((1 + 5 &#215; 0.20) / 6) = 1.735% &#215; 0.58 = 1.00% — and on any given shock only some of them would have stopped. The lesson: different stocks &#8800; diversification. If positions move together above 70%, they're ONE bet. When SPY drops 3%, QQQ drops 2.8%, NVDA drops 2.5%, TSLA drops 2.2%, AAPL drops 2.6%, MSFT drops 2.7%. That's NOT 6 independent positions — that's 1 position sized 6&#215;. The recovery: Callum implemented correlation-adjusted risk management: (1) calculate correlation BEFORE adding positions (if the new position is &gt;0.7 correlated with an existing one, it IS that position — skip it); (2) max 3 correlated positions, forcing real diversification (stocks, bonds, commodities, inverse); (3) recalculate effective risk daily with the formula; (4) stress test: "If SPY drops 3% tomorrow, what happens to ALL my positions?" No return figure is quoted for what followed. The measurable change is in the risk, not the reward: effective risk capped at 1.2%, never more than 3 correlated positions, and the largest drawdown he took afterwards was a fraction of the 5.2% that nine days had cost him. The brutal truth: this $8,363 lesson could have been avoided with 5 minutes of correlation analysis before adding positions. Correlation risk is invisible until a macro event hits and ALL your "diversified" positions stop out at once.</div>
+          <strong>Correct: D.</strong> This is one of the most insidious risks in trading: correlation blindness. Callum thought he was diversified across 6 different positions, but they were all the SAME bet. The setup: July 2024, Callum held 6 positions thinking "different stocks = diversified": SPY ($1K risk, 0.625%), QQQ ($400, 0.25%), NVDA ($450, 0.28%), TSLA ($270, 0.17%), AAPL ($320, 0.2%), MSFT ($320, 0.2%). Total nominal risk: $2,776, or 1.735% of his $160K account. He thought: "Very conservative, under 2%." The number was fine. What was wrong was what he believed the number meant. The hidden risk: the correlation matrix showed these positions were 82% correlated on average — SPY&#8596;QQQ 0.94 (almost identical), SPY&#8596;NVDA 0.82, SPY&#8596;TSLA 0.76, SPY&#8596;AAPL 0.88, SPY&#8596;MSFT 0.91. Nominal risk is what you lose when every stop fills at once; the point of holding several positions is that they are not all supposed to fill at once. The correlation-adjusted formula tells you how much of that nominal number a bad day actually costs: Effective Risk = Nominal Risk &#215; &#8730;((1 + (N &#8722; 1) &#215; Correlation) / N). With independent positions that factor is 1/&#8730;6 = 0.41, so his bad day would cost 1.735% &#215; 0.41 = 0.71%. At 0.82 correlation the factor is &#8730;((1 + 5 &#215; 0.82) / 6) = 0.92, so his bad day costs 1.60% — essentially the entire budget. In terms of independent bets: Effective N = 6 / (1 + 5 &#215; 0.82) = 1.18. He had one position sized six times. The catastrophe: July 24, 2024, mega-cap tech dumped (QQQ -3.6%, NVDA -6.8%, TSLA -12.3% on earnings). ALL 6 positions stopped in the same session, filling worse than their stops in a fast tape: SPY -$1,140, QQQ -$665, NVDA -$638, TSLA -$354, AAPL -$372, MSFT -$304. Total: -$3,473 (-2.17% of the account) against a $2,776 budget. Callum's reaction: "Bad luck, macro shock. I'll rebuild." Fatal mistake: it wasn't bad luck, it was correlation, and he rebuilt the SAME 6 correlated positions July 25 - August 2. August 5, 2024: the yen-carry unwind gapped SPY down 4.2% at the open with VIX printing above 60. ALL 6 gapped through their stops AGAIN: -$4,890 (-3.12%). Total damage: $160K &#8594; $151.6K (-5.2%, -$8,363) in 9 trading days from TWO correlated events — more than twice what the same risk budget would have cost him spread across independent positions. Why breaking the 5-position rule wasn't the issue: the problem was never 6 positions instead of 5. It was that all 6 were correlated above 0.7, so they moved together. Six UNCORRELATED positions (stocks, bonds, commodities, inverse ETFs, international) would have carried 1.735% &#215; &#8730;((1 + 5 &#215; 0.20) / 6) = 1.735% &#215; 0.58 = 1.00% — and on any given shock only some of them would have stopped. The lesson: different stocks &#8800; diversification. If positions move together above 70%, they're ONE bet. When SPY drops 3%, QQQ drops 2.8%, NVDA drops 2.5%, TSLA drops 2.2%, AAPL drops 2.6%, MSFT drops 2.7%. That's NOT 6 independent positions — that's 1 position sized 6&#215;. The recovery: Callum implemented correlation-adjusted risk management: (1) calculate correlation BEFORE adding positions (if the new position is &gt;0.7 correlated with an existing one, it IS that position — skip it); (2) max 3 correlated positions, forcing real diversification (stocks, bonds, commodities, inverse); (3) recalculate effective risk daily with the formula; (4) stress test: "If SPY drops 3% tomorrow, what happens to ALL my positions?" No return figure is quoted for what followed. The measurable change is in the risk, not the reward: effective risk capped at 1.2%, never more than 3 correlated positions, and the largest drawdown he took afterwards was a fraction of the 5.2% that nine days had cost him. The whole of it could have been avoided by five minutes of correlation analysis before the positions went on. Correlation risk is invisible until a macro event hits and ALL your "diversified" positions stop out at once.</div>
       </div>
       </div>
 
@@ -378,10 +366,6 @@ ceiling     every stop fills at once                        8.0%</code></pre>
       <p><strong>Professional approach:</strong> Allocate 0.5-1% of portfolio to tail risk hedges. It's insurance—you hope it expires worthless, but it saves you during black swans.</p>
 
       <div class="section-break"><span>Part 5: Using Signal Pilot for Risk Management</span></div>
-<div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
-  <p>You're about halfway through this lesson.</p>
-  <p style="margin-top:0.5rem;font-size:0.9rem">A good place to pause. What follows builds directly on what you have just read.</p>
-</div>
 
 <h2 id="part-5-using-signal-pilot-for-risk-management">Real-Time Risk Monitoring Tools</h2>
 
@@ -626,18 +610,6 @@ ceiling     every stop fills at once                        8.0%</code></pre>
       </div>
     </details>
   </div>
-      <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-    <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
-    <div style="margin-top:1rem">
-      <p>Don't overwhelm yourself. Start with these 3 actions:</p>
-      <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-        <li><strong>Calculate Your REAL Portfolio Heat Tonight</strong> — List all positions: ticker, dollar risk. Add total. Check correlation (TradingView: 30-day correlation to SPY). Formula: Effective Risk = Nominal Risk × √((1 + (N − 1) × Avg Correlation) / N). Rachel thought her 6 positions × 1% gave her 6% spread across six independent bets — a bad day costing about 2.4%. At 0.85 correlation her six bets behaved like 1.1, so a bad day cost 5.6%. When hawkish Fed comments hit, all 6 tech stocks blew through their stops in the same half hour: -$6,560 (8.2%) against the $4,800 she had budgeted.</li>
-        <li><strong>Set Hard Portfolio Heat Limit (3-5% Max)</strong> &mdash; conservative retail: 3-5%; aggressive retail: 5-8%. The 10-15% figures you will see quoted belong to institutional desks with hedging and balance-sheet depth, per the table below &mdash; they are not your limit. Example: $50K account, 5% limit = $2,500 max. Before ANY new trade, calculate current heat + new position. If over limit, skip trade or close existing position. Prevents the "just one more trade" drift that turns a 5% limit into 8% and then hands you the whole 8% on a single correlated day.</li>
-        <li><strong>Run Correlation Stress Test This Week</strong> — Paper trade 5 positions (1% each). Check correlation. Stress test: "If SPY drops 3%, what happens?" If all tech (0.8+ correlation), ALL stop same day = 5% loss. Repeat with diversification: 2 tech, 1 bonds (TLT), 1 gold (GLD), 1 VIX. Same SPY drop: the two tech positions stop out while bonds and VIX rally, so the net result is roughly -1% instead of -5%. TRUE diversification.</li>
-      </ol>
-    </div>
-  </details>
-
 <h2 id="quiz" style="margin-top:3rem">📝 Knowledge Check</h2>
   <p>Test your understanding of advanced risk management:</p>
 
@@ -759,11 +731,6 @@ ceiling     every stop fills at once                        8.0%</code></pre>
           <a href="/education/curriculum/professional/82-professional-risk-systems.html" class="btn btn-sm btn-ghost">Read Lesson &rarr;</a>
         </div>
       </div>
-
-  <div class="callout-info">
-    <h4>⏭️ Coming Up Next</h4>
-    <p><strong>Lesson #51: Portfolio Construction & Kelly Criterion</strong> — Complete the intermediate track with advanced portfolio theory and optimal position sizing.</p>
-  </div>
 
   <div class="downloads">
     <h4>Downloads</h4>

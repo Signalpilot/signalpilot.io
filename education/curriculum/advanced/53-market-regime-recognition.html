@@ -124,22 +124,7 @@
 
       <p>Sound familiar?</p>
 
-      <p>Here's the uncomfortable truth: Markets shift between regimes—trending, mean-reverting, volatile. And the strategy that worked yesterday can destroy you tomorrow.</p>
-
-      <div class="callout callout-danger">
-        <h4>🚨 Real Talk</h4>
-        <p>Most traders have ONE strategy they try to force on EVERY market condition. It's like showing up to a knife fight with a tennis racket. Wrong tool, wrong time, wrong outcome.</p>
-
-        <h4>🎯 What You'll Gain</h4>
-        <p>After this lesson, you'll be able to:</p>
-        <ul>
-          <li>Identify the four core market regimes in real-time</li>
-          <li>Build a multi-indicator regime detection system (ADX, ATR, Bollinger Width)</li>
-          <li>Adapt your strategy selection BEFORE getting chopped up</li>
-          <li>Integrate regime filters with Janus Atlas and Volume Oracle</li>
-          <li>Price what a regime filter costs you in sample size, and pick the one metric that survives it</li>
-        </ul>
-      </div>
+      <p>Markets shift between regimes &mdash; trending, mean-reverting, volatile &mdash; and a strategy that suits one of them can lose steadily in another without anything about the strategy having changed.</p>
 
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -507,24 +492,24 @@ Integration:
 ONLY trade when Volume Oracle = Trending
 If Ranging → Reduce size 50%, tight targets
 If Volatile → No new trades</code></pre>
-            <p style="margin-top:1rem">Think of Volume Oracle as your regime co-pilot. When it's green, you're cleared for takeoff. Yellow or red? Stay grounded.</p>
+            <p style="margin-top:1rem">The regime reading is a gate, not a signal: it tells you which of your strategies is currently in its conditions, and nothing about whether the next trade wins.</p>
           </div>
           <div class="tab-panel">
             <h3 id="janus-atlas-regime-specific-interpretation">Janus Atlas: Regime-Specific Interpretation</h3>
             <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>Trending Regime + Janus Sweep:
 - Sweep = institutional accumulation
-- High-probability continuation once the pullback completes
-- Trade aggressively (2% risk)
+- Continuation is the base case once the pullback completes
+- Full size (2% risk)
 
 Ranging Regime + Janus Sweep:
 - Sweep = stop hunt, range continuation
 - Lower probability: the sweep is the range defending its edge
-- Trade conservatively (1% risk) or skip
+- Half size (1% risk) or skip
 
 Volatile Regime + Janus Sweep:
 - Ambiguous (could reverse OR continue violently)
 - Skip (too risky)</code></pre>
-            <p style="margin-top:1rem">Same setup, different regime = different edge. Respect that.</p>
+            <p style="margin-top:1rem">Same setup, different regime, different edge.</p>
           </div>
           <div class="tab-panel">
             <h3 id="plutus-flow-vwap-regime">Plutus Flow: VWAP + Regime</h3>
@@ -636,18 +621,6 @@ Risk Per Trade Today: $_______</code></pre>
         <p style="margin-top:1rem;padding:1rem;background:rgba(0,212,170,.15);border-radius:8px"><strong>Implementation Goal:</strong> Build this system within 3 days. Use it for 21 consecutive trading days. Track regime score BEFORE every trade. If the score does not support your strategy, do not trade. What 21 days will actually give you is a Regime Match % and a count of the trades you skipped &mdash; not a verdict on your expectancy, which needs a sample the box below prices for you.</p>
       </div>
 
-                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
-        <div style="margin-top:1rem">
-          <p>Don't overwhelm yourself. Start with these 3 actions:</p>
-          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-            <li><strong>Build Regime Dashboard in TradingView Tonight</strong> — Add 4 indicators: (1) ADX (14-period) with lines at 20 (ranging) and 25 (trending), (2) ATR % with line at average (1.5-2.5% for SPY), (3) Bollinger Bands (20, 2) noting width <4% vs >8%, (4) Volume bars with 20-day MA. Create checklist: "Before EVERY trade, check: ADX [___], ATR ratio [___], BB width [___], Volume regime [___]." Example check: ADX = 18 (ranging), ATR = 1.8 (volatile), BB = 9% (expanded) = REGIME SCORE: NO TRADE for trend strategies. Marcus Chen lost <span style="color:#ff5252;font-weight:700">$43,000</span> over three months because he never checked the regime: 18 winners in 24 trades while the market trended, then 12 in 45 after it stopped. Dashboard takes 20 min to build, 10 sec to check. Master switch: wrong regime = turn off strategy.</li>
-            <li><strong>Backtest Last 20 Trades with Regime Classification</strong> — For each trade, record at entry time: (1) ADX value (>25 = trending, <20 = ranging), (2) ATR ratio (>1.5x = volatile), (3) Strategy type, (4) Result. Create table: Trade # | Date | ADX | ATR | Regime | Strategy | Match? | Result | R. Calculate your win rate when the regime matched your strategy and when it did not. No expected numbers are given here, and that is deliberate: telling you what you will find is a good way to make sure you find it. Marcus's own split was 18 winners in 24 matched trades against 12 in 45 mismatched. Two things about that. It is a real gap and worth taking seriously. It also does not prove that regime beats strategy quality, because those 24 and those 45 were consecutive stretches of one account in one market, not a controlled comparison. Twenty trades will not settle it for you either. Start the log anyway &mdash; it is the only way you will ever have the sample.</li>
-            <li><strong>Create Regime-Based Position Sizing Rules for Next 10 Trades</strong> — Base risk = 2%. Regime multipliers: (1) Strong trend (ADX >30, ATR normal): 1.0× = full 2%, (2) Weak trend (ADX 20-25): 0.75× = 1.5%, (3) Range-bound (ADX <20): 0.5× = 1%, (4) High volatility (ATR >1.5x): 0.5× = 1%, (5) Compression (ADX <15, ATR <0.8x): 0× = ZERO trades. Write rules on sticky note. Example: Monday ADX 28 (trending) = full 2% risk. Tuesday ADX 17 (ranging) = 1% risk or skip. Wednesday ATR 1.7x (FOMC) = 0.5% risk or sit out. No multiple is quoted for how much better a trending regime is than a ranging one, because it depends entirely on your strategy and nobody has measured it for yours. The half of this that is not in dispute is the volatility half: when ATR doubles, a position of the same share count carries roughly twice the risk, so holding your dollar risk constant means halving the size. That is arithmetic. Sizing up in trends is a judgement, and it should follow your own log rather than a number in a lesson. Track 10 trades: smaller losses in wrong regimes, bigger wins in correct regimes, smoother equity curve.</li>
-          </ol>
-        </div>
-      </details>
-
       <div class="section-break"><span>Test Your Knowledge</span></div>
 
       <div class="quiz">
@@ -697,11 +670,6 @@ Risk Per Trade Today: $_______</code></pre>
           <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">The regime above the chart: PMI, CPI and the curve, and why size moves before holdings.</p>
           <a href="/education/curriculum/advanced/68-macro-regime-framework.html" class="btn btn-sm btn-ghost">Read Lesson &rarr;</a>
         </div>
-      </div>
-
-      <div class="callout-info">
-        <h4>⏭️ Coming Up Next</h4>
-        <p><strong>Article #54: Advanced Auction Theory</strong> — Markets are continuous auctions searching for fair value. Learn to trade opening ranges, fair value gaps, and single prints like a professional floor trader.</p>
       </div>
 
       <!-- Discussion Section -->
