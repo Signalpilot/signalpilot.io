@@ -1,62 +1,104 @@
 /**
- * Language Switcher - Clean Dropdown with Google Translate
- * Matches the exact implementation of main signalpilot.io site
+ * Language Switcher
+ *
+ * Two tiers:
+ *   1. Signal Pilot translations — the twelve languages the curriculum is
+ *      actually written in. Picking one navigates to the real translated page
+ *      (/de/education/..., /ja/education/..., and so on) and clears any Google
+ *      Translate cookie so nothing gets translated a second time on top.
+ *   2. Google Translate — every other language Google offers, applied to the
+ *      English original.
  */
 
 (function() {
   'use strict';
 
-  // Use flagcdn.com country codes for cross-platform flag images (Windows compatible)
-  const languages = [
-    { code: 'en', name: 'English', flagCode: 'us' },
-    { code: 'es', name: 'Español', flagCode: 'es' },
-    { code: 'fr', name: 'Français', flagCode: 'fr' },
-    { code: 'de', name: 'Deutsch', flagCode: 'de' },
-    { code: 'it', name: 'Italiano', flagCode: 'it' },
-    { code: 'pt', name: 'Português', flagCode: 'pt' },
-    { code: 'ru', name: 'Русский', flagCode: 'ru' },
+  // Locales we have hand-translated. Order matters: this is the menu order.
+  const NATIVE = [
+    { code: 'en', name: 'English',    flagCode: 'us' },
+    { code: 'de', name: 'Deutsch',    flagCode: 'de' },
+    { code: 'es', name: 'Español',    flagCode: 'es' },
+    { code: 'fr', name: 'Français',   flagCode: 'fr' },
+    { code: 'it', name: 'Italiano',   flagCode: 'it' },
+    { code: 'pt', name: 'Português',  flagCode: 'pt' },
+    { code: 'nl', name: 'Nederlands', flagCode: 'nl' },
+    { code: 'ru', name: 'Русский',    flagCode: 'ru' },
+    { code: 'ja', name: '日本語',      flagCode: 'jp' },
+    { code: 'tr', name: 'Türkçe',     flagCode: 'tr' },
+    { code: 'hu', name: 'Magyar',     flagCode: 'hu' },
+    { code: 'ar', name: 'العربية',     flagCode: 'sa' }
+  ];
+
+  // Everything else Google Translate can reach, applied to the English page.
+  const MACHINE = [
     { code: 'zh-CN', name: '中文 (简体)', flagCode: 'cn' },
     { code: 'zh-TW', name: '中文 (繁體)', flagCode: 'tw' },
-    { code: 'ja', name: '日本語', flagCode: 'jp' },
     { code: 'ko', name: '한국어', flagCode: 'kr' },
-    { code: 'ar', name: 'العربية', flagCode: 'sa' },
     { code: 'hi', name: 'हिन्दी', flagCode: 'in' },
-    { code: 'tr', name: 'Türkçe', flagCode: 'tr' },
     { code: 'pl', name: 'Polski', flagCode: 'pl' },
-    { code: 'nl', name: 'Nederlands', flagCode: 'nl' },
+    { code: 'uk', name: 'Українська', flagCode: 'ua' },
     { code: 'sv', name: 'Svenska', flagCode: 'se' },
     { code: 'no', name: 'Norsk', flagCode: 'no' },
     { code: 'da', name: 'Dansk', flagCode: 'dk' },
     { code: 'fi', name: 'Suomi', flagCode: 'fi' },
     { code: 'cs', name: 'Čeština', flagCode: 'cz' },
+    { code: 'ro', name: 'Română', flagCode: 'ro' },
+    { code: 'bg', name: 'Български', flagCode: 'bg' },
     { code: 'el', name: 'Ελληνικά', flagCode: 'gr' },
     { code: 'iw', name: 'עברית', flagCode: 'il' },
     { code: 'id', name: 'Bahasa Indonesia', flagCode: 'id' },
     { code: 'th', name: 'ไทย', flagCode: 'th' },
-    { code: 'vi', name: 'Tiếng Việt', flagCode: 'vn' },
-    { code: 'uk', name: 'Українська', flagCode: 'ua' },
-    { code: 'ro', name: 'Română', flagCode: 'ro' },
-    { code: 'hu', name: 'Magyar', flagCode: 'hu' },
-    { code: 'bg', name: 'Български', flagCode: 'bg' }
+    { code: 'vi', name: 'Tiếng Việt', flagCode: 'vn' }
   ];
 
-  // Helper: Get flag image HTML (using flagcdn - same as main site)
-  // flagcdn has w20, w40, w80 sizes
+  const LOCALE_RE = /^\/(de|es|fr|it|pt|nl|ru|ja|tr|hu|ar)(?=\/|$)/;
+
+  // Paths that exist in every locale directory. Anything else has no native
+  // translation, so those pages fall back to Google Translate.
+  const NATIVE_PATHS = [
+    /^\/education\/curriculum\//,
+    /^\/education\/(index\.html)?$/,
+    /^\/chronicle\//,
+    /^\/(index\.html)?$/,
+    /^\/(affiliates|faq|manage-subscription|privacy|refund|roadmap|terms|trial-thanks)\.html$/
+  ];
+
   function getFlagImg(flagCode, size = 40) {
-    const displaySize = 26;
-    const displayHeight = 17;
-    return `<img src="https://flagcdn.com/w${size}/${flagCode}.png" width="${displaySize}" height="${displayHeight}" alt="${flagCode.toUpperCase()}" style="vertical-align:middle;border-radius:2px">`;
+    return `<img src="https://flagcdn.com/w${size}/${flagCode}.png" width="26" height="17" alt="${flagCode.toUpperCase()}" loading="lazy" style="vertical-align:middle;border-radius:2px;flex-shrink:0">`;
   }
 
-  let currentLang = 'en';
+  // --- path helpers -------------------------------------------------------
 
-  // Helper: Get base domain (from main site)
+  // '/de/education/index.html' -> 'de'   ;  '/education/index.html' -> 'en'
+  function pathLocale() {
+    const m = location.pathname.match(LOCALE_RE);
+    return m ? m[1] : 'en';
+  }
+
+  // '/de/education/index.html' -> '/education/index.html'
+  function basePath() {
+    const p = location.pathname;
+    const m = p.match(LOCALE_RE);
+    return m ? (p.slice(m[0].length) || '/') : p;
+  }
+
+  function hasNativeVersion(path) {
+    return NATIVE_PATHS.some(re => re.test(path));
+  }
+
+  function nativeUrl(langCode) {
+    const base = basePath();
+    const prefix = langCode === 'en' ? '' : '/' + langCode;
+    return prefix + base + location.search + location.hash;
+  }
+
+  // --- cookies ------------------------------------------------------------
+
   function baseDomain(host) {
     const p = host.split('.');
     return p.length > 2 ? p.slice(-2).join('.') : host;
   }
 
-  // Helper: Set cookie with domain support (from main site)
   function setCookie(name, value, days, domain) {
     let expires = '';
     if (days) {
@@ -68,91 +110,125 @@
     document.cookie = name + '=' + value + expires + '; path=/' + dom;
   }
 
-  // Set Google Translate cookie (from main site)
-  function setGoogTrans(langCode) {
-    const target = (langCode === 'zh') ? 'zh-CN' : langCode;
-    const val = '/en/' + target;
-    setCookie('googtrans', val, 365);
-    const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-    setCookie('googtrans', val, 365, root);
+  function rootDomain() {
+    return '.' + baseDomain(location.hostname.replace(/^www\./, ''));
   }
 
-  // Apply language and direction attributes (from main site)
+  function setGoogTrans(langCode) {
+    const val = '/en/' + (langCode === 'zh' ? 'zh-CN' : langCode);
+    setCookie('googtrans', val, 365);
+    setCookie('googtrans', val, 365, rootDomain());
+  }
+
+  function clearGoogTrans() {
+    setCookie('googtrans', '', -1);
+    setCookie('googtrans', '', -1, rootDomain());
+    try { localStorage.removeItem('sp_lang'); } catch (e) {}
+  }
+
+  function googTransCookie() {
+    const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+    return match && match[1] ? match[1] : null;
+  }
+
   function applyDirLang(langCode) {
     document.documentElement.lang = (langCode === 'zh') ? 'zh-CN' : langCode;
     document.documentElement.dir = (langCode === 'ar' || langCode === 'iw') ? 'rtl' : 'ltr';
   }
 
-  // Get current language from cookie or localStorage
-  function getCurrentLanguage() {
-    // Check localStorage first
-    const stored = localStorage.getItem('sp_lang');
-    if (stored && stored !== 'en') {
-      return stored;
-    }
-
-    // Check cookie
-    const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
-    if (match && match[1]) {
-      return match[1];
-    }
-
-    return 'en';
+  // Which entry should be highlighted. A locale in the URL always wins: we are
+  // reading a real translation, whatever a stale cookie says.
+  function activeCode() {
+    const loc = pathLocale();
+    if (loc !== 'en') return loc;
+    return googTransCookie() || 'en';
   }
 
-  // Change language (from main site approach)
-  function changeLanguage(langCode) {
-    if (langCode === 'en') {
-      // Reset to English
-      localStorage.removeItem('sp_lang');
-      setCookie('googtrans', '', -1);
-      const root = '.' + baseDomain(location.hostname.replace(/^www\./, ''));
-      setCookie('googtrans', '', -1, root);
-      document.documentElement.lang = 'en';
-      document.documentElement.dir = 'ltr';
+  // --- navigation ---------------------------------------------------------
+
+  function goNative(langCode) {
+    clearGoogTrans();
+    const target = nativeUrl(langCode);
+    if (target === location.pathname + location.search + location.hash) {
       location.reload();
     } else {
-      // Save to localStorage
-      localStorage.setItem('sp_lang', langCode);
+      location.href = target;
+    }
+  }
 
-      // Set cookies and attributes
-      setGoogTrans(langCode);
-      applyDirLang(langCode);
-
-      // Reload page
+  function goMachine(langCode) {
+    try { localStorage.setItem('sp_lang', langCode); } catch (e) {}
+    setGoogTrans(langCode);
+    applyDirLang(langCode);
+    // Always machine-translate the English original, never one of our own
+    // translations — layering Google on top of hand-written German is worse
+    // than either on its own.
+    const english = basePath() + location.search + location.hash;
+    if (english !== location.pathname + location.search + location.hash) {
+      location.href = english;
+    } else {
       location.reload();
     }
   }
 
-  // Create dropdown menu
+  function changeLanguage(langCode, isNative) {
+    if (isNative && hasNativeVersion(basePath())) {
+      goNative(langCode);
+      return;
+    }
+    if (isNative && langCode === 'en') {
+      clearGoogTrans();
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      location.href = basePath() + location.search + location.hash;
+      return;
+    }
+    // No hand-translated version of this particular page: fall back to Google.
+    goMachine(langCode);
+  }
+
+  // --- menu ---------------------------------------------------------------
+
+  function makeHeading(text) {
+    const h = document.createElement('div');
+    h.className = 'lang-group-label';
+    h.textContent = text;
+    return h;
+  }
+
+  function makeButton(lang, isNative, current, translated) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('role', 'menuitem');
+    button.setAttribute('data-lang', lang.code);
+    button.innerHTML = `${getFlagImg(lang.flagCode)}<span>${lang.name}</span>`;
+    if (isNative && !translated && lang.code !== 'en') {
+      button.classList.add('lang-approx');
+      button.title = 'This page has no hand-written translation yet — Google Translate will be used.';
+    }
+    if (lang.code === current) {
+      button.classList.add('active');
+      button.setAttribute('aria-current', 'true');
+    }
+    button.addEventListener('click', () => changeLanguage(lang.code, isNative));
+    return button;
+  }
+
   function createDropdownMenu() {
     const menu = document.createElement('div');
     menu.className = 'lang-dropdown-menu';
     menu.setAttribute('role', 'menu');
     menu.setAttribute('aria-label', 'Language selection');
 
-    currentLang = getCurrentLanguage();
+    const current = activeCode();
+    const translated = hasNativeVersion(basePath());
 
-    languages.forEach(lang => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.setAttribute('role', 'menuitem');
-      button.setAttribute('data-lang', lang.code);
-      button.innerHTML = `${getFlagImg(lang.flagCode)} ${lang.name}`;
+    menu.appendChild(makeHeading('Signal Pilot translations'));
+    NATIVE.forEach(lang => menu.appendChild(makeButton(lang, true, current, translated)));
 
-      if (lang.code === currentLang) {
-        button.classList.add('active');
-        button.setAttribute('aria-current', 'true');
-      }
+    menu.appendChild(makeHeading('More languages · Google Translate'));
+    MACHINE.forEach(lang => menu.appendChild(makeButton(lang, false, current, translated)));
 
-      button.addEventListener('click', () => {
-        changeLanguage(lang.code);
-      });
-
-      menu.appendChild(button);
-    });
-
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.lang-dropdown') && menu.classList.contains('active')) {
         menu.classList.remove('active');
@@ -162,16 +238,16 @@
     return menu;
   }
 
-  // Initialize
+  // --- init ---------------------------------------------------------------
+
   function init() {
     const container = document.getElementById('google_translate_element');
     if (!container) return;
 
-    // Get current language info
-    currentLang = getCurrentLanguage();
-    const currentLangObj = languages.find(l => l.code === currentLang) || languages[0];
+    const current = activeCode();
+    const all = NATIVE.concat(MACHINE);
+    const currentLangObj = all.find(l => l.code === current) || NATIVE[0];
 
-    // Turn container itself into the button
     container.id = 'langToggle';
     container.setAttribute('role', 'button');
     container.setAttribute('tabindex', '0');
@@ -180,35 +256,38 @@
     container.setAttribute('aria-expanded', 'false');
     container.innerHTML = getFlagImg(currentLangObj.flagCode);
 
-    // Create dropdown menu and append to body
     const menu = createDropdownMenu();
     document.body.appendChild(menu);
 
-    // Toggle menu
     container.addEventListener('click', (e) => {
       e.stopPropagation();
       const isActive = menu.classList.contains('active');
       menu.classList.toggle('active');
-      container.setAttribute('aria-expanded', !isActive);
+      container.setAttribute('aria-expanded', String(!isActive));
+    });
+    container.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        container.click();
+      }
     });
 
-    // Apply language attributes on page load
-    const lang = getCurrentLanguage();
-    if (lang && lang !== 'en') {
-      applyDirLang(lang);
+    if (pathLocale() !== 'en') {
+      // We are on one of our own translations. Make sure a leftover cookie
+      // cannot machine-translate it a second time.
+      if (googTransCookie()) clearGoogTrans();
+      return;
     }
 
-    // Load Google Translate in background
-    loadGoogleTranslate();
+    if (current !== 'en') {
+      applyDirLang(current);
+      loadGoogleTranslate(current);
+    }
   }
 
-  // Load Google Translate script silently (matches main site approach)
-  function loadGoogleTranslate() {
-    // Only load if we have a non-English language selected
-    const lang = getCurrentLanguage();
+  function loadGoogleTranslate(lang) {
     if (!lang || lang === 'en') return;
 
-    // Add the translate element hidden off-screen (main site approach)
     const hiddenDiv = document.createElement('div');
     hiddenDiv.id = 'google_translate_container';
     hiddenDiv.style.position = 'absolute';
@@ -219,9 +298,9 @@
     window.googleTranslateElementInit = function() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        includedLanguages: languages.map(l => l.code).join(','),
+        includedLanguages: NATIVE.concat(MACHINE).map(l => l.code).join(','),
         layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false  // KEY! Prevents Google's UI from showing
+        autoDisplay: false
       }, 'google_translate_container');
     };
 
@@ -234,19 +313,11 @@
     document.head.appendChild(script);
   }
 
-  // Aggressive banner cleanup
   function cleanupGoogleUI() {
-    // Remove banner frames
     const frames = document.querySelectorAll('.goog-te-banner-frame, iframe.goog-te-banner-frame, .skiptranslate');
-    frames.forEach(f => {
-      if (f.parentNode) f.parentNode.removeChild(f);
-    });
-
-    // Reset body position
+    frames.forEach(f => { if (f.parentNode) f.parentNode.removeChild(f); });
     document.body.style.top = '0';
     document.body.style.position = 'relative';
-
-    // Remove body top attribute that Google adds
     if (document.body.hasAttribute('style')) {
       const style = document.body.getAttribute('style');
       if (style && style.includes('top:')) {
@@ -255,7 +326,6 @@
     }
   }
 
-  // Run cleanup multiple times to catch delayed injections
   window.addEventListener('load', () => {
     cleanupGoogleUI();
     setTimeout(cleanupGoogleUI, 500);
@@ -263,7 +333,6 @@
     setTimeout(cleanupGoogleUI, 2000);
   });
 
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
