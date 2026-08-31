@@ -132,7 +132,7 @@
         <h3 style="margin:0 0 1rem 0">🎯 What You'll Learn</h3>
         <p style="margin:0 0 0.75rem 0">By the end of this lesson, you'll be able to:</p>
         <ul>
-          <li>Decode the <em>quality</em> of volume using delta (buy volume vs sell volume)</li>
+          <li>Turn a bar's delta into a buy/sell share, and read quality from that number</li>
           <li>Spot absorption patterns (strength) vs exhaustion patterns (weakness)</li>
           <li>Use Volume Profile to identify POC, HVN, and LVN zones</li>
           <li>Integrate Plutus Flow for real-time delta tracking and edge</li>
@@ -186,8 +186,8 @@
             <span class="stat-value loss">-$93,000</span>
           </div>
           <div class="stat-box">
-            <span class="stat-label">Avg Delta on Entry</span>
-            <span class="stat-value loss">-74%</span>
+            <span class="stat-label">Avg Sell Share on Entry</span>
+            <span class="stat-value loss">74%</span>
           </div>
         </div>
         <div class="key-insight">
@@ -199,7 +199,7 @@
       <ol style="margin:0.75rem 0 1.5rem 1.5rem;line-height:1.8">
         <li>Stock breaks resistance on 3-6× volume</li>
         <li>Derek enters long: "High volume = institutional buying!"</li>
-        <li>Reality: Delta is negative (-65% to -92% SELL volume)</li>
+        <li>Reality: 65-92% of that volume is selling, which is a delta of -30% to -84%</li>
         <li>Price reverses immediately → Derek stops out</li>
       </ol>
 
@@ -211,25 +211,45 @@
             <span class="stat-value">$786</span>
           </div>
           <div class="stat-box">
-            <span class="stat-label">Volume</span>
-            <span class="stat-value">5.2×</span>
+            <span class="stat-label">Bar volume</span>
+            <span class="stat-value">380,000 (5.2×)</span>
           </div>
           <div class="stat-box">
             <span class="stat-label">Delta</span>
-            <span class="stat-value loss">-8,420</span>
+            <span class="stat-value loss">-212,800</span>
           </div>
           <div class="stat-box">
             <span class="stat-label">Loss</span>
             <span class="stat-value loss">-$1,200</span>
           </div>
         </div>
-        <p>NVDA breaks $785 resistance. Derek: "Institutional buying!" Reality: 78% SELL volume. Exhaustion, not absorption. Institutions were SELLING into retail FOMO. NVDA dropped to $778.</p>
+        <p>NVDA breaks $785 resistance. Derek: "Institutional buying!" Reality: 78% SELL volume. Exhaustion, not absorption. Institutions were SELLING into retail FOMO. NVDA dropped to $778, and $8 a share on his 150 shares is the $1,200.</p>
         <p style="margin-top:0.75rem;font-style:italic">"The 'breakout' was distribution, not accumulation. High volume doesn't mean bullish—it can mean exit liquidity."</p>
       </div>
 
       <div class="callout-warning" style="margin-top:1.5rem">
         <h4>💀 The Breaking Point (May 31, 2024)</h4>
         <p>"I pulled up my 47 failed trades. Almost every one had NEGATIVE delta. High volume, but 70-90% was SELLING. I thought 'institutional buying!' but it was exhaustion — retail buying the top while institutions dumped. I was the FOMO. 47 times."</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#128200; Turning those percentages into one number</h4>
+        <p>The story has quoted two different-looking things and called them both delta: a raw figure like -212,800, and a share like "78% selling". They are one measurement in two units, and a single line converts between them. Every figure below is already on this page.</p>
+
+        <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>delta %      =  delta / bar volume
+             =  -212,800 / 380,000   =  -56%      (the NVDA bar)
+
+sell share   =  (100% - delta %) / 2
+             =  (100% - (-56%)) / 2  =   78%      (which is what he was told)
+
+buy volume   =  (volume + delta) / 2 =  (380,000 + (-212,800)) / 2 =   83,600
+sell volume  =  (volume - delta) / 2 =  (380,000 - (-212,800)) / 2 =  296,400</code></pre>
+
+        <p>The last two lines are worth checking, because they are the reason the first one works: 83,600 and 296,400 add back to the 380,000 the bar traded, and 296,400 of 380,000 is the 78%. Delta and the buy/sell split are the same fact written two ways, so any platform that prints one gives you the other.</p>
+
+        <p>Run it on his average entry and the whole record collapses to one number. Across the 47 trades the entry bar averaged 74% selling, so the average delta was 26% - 74% = -48%. Derek was not entering on thin confirmation; he was entering on bars where sellers were the aggressor by close to three to one.</p>
+
+        <p style="margin-bottom:0">This is also what turns the +40% rule below into a rule rather than a slogan. A delta of +40% means a buy share of (100% + 40%) / 2 = 70%, which is seven of every ten aggressive orders in that bar being buys. Derek's entries averaged a 26% buy share. The rule and his record are the same quantity measured from opposite ends, and you can compute either one from any bar your platform prints.</p>
       </div>
 
       <div class="story-summary" style="margin-top:2rem">
@@ -272,7 +292,7 @@
             A) He should have waited for 5× volume instead of 3× to confirm the breakout
           </div>
           <div class="quiz-option" data-correct="true">
-            B) He never checked volume DELTA (buy vs sell pressure)—his average entry had -74% delta, meaning he was buying exhaustion while institutions were selling
+            B) He never checked volume DELTA (buy vs sell pressure)—his average entry bar ran 74% sell volume, a delta of -48%, meaning he was buying exhaustion while institutions were selling
           </div>
           <div class="quiz-option" data-correct="false">
             C) His stop losses were too tight—he got stopped out of winning trades
@@ -282,7 +302,7 @@
           </div>
         </div>
         <div class="quiz-explanation">
-          <p><strong>Correct: B.</strong>Derek checked volume QUANTITY but not QUALITY (delta). His -74% average delta meant he was buying into selling pressure. High volume can mean absorption (positive delta = real breakout) or exhaustion (negative delta = distribution trap). Fix: require +40% delta before entry.</p>
+          <p><strong>Correct: B.</strong>Derek checked volume QUANTITY but not QUALITY (delta). His entry bars averaged 74% sell volume, a delta of -48%, so he was buying into selling pressure. High volume can mean absorption (positive delta = real breakout) or exhaustion (negative delta = distribution trap). Fix: require +40% delta before entry, which is a 70% buy share.</p>
         </div>
       </div>
 
@@ -540,6 +560,7 @@
         <h4>🎓 Key Takeaways</h4>
         <ul>
           <li><strong>Volume shows quantity, delta shows quality</strong> — Never trade on volume alone</li>
+          <li><strong>Delta is a percentage before it is a signal:</strong> delta / bar volume gives you delta %, and (100% + delta %) / 2 gives you the buy share the rule is really about</li>
           <li><strong>Absorption = strength</strong> — High volume + price holds = Strong hand stepped in</li>
           <li><strong>Exhaustion = weakness</strong> — High volume + price rejects = Move is done</li>
           <li><strong>Volume Profile reveals fair value</strong> — POC is the magnet, HVN is support/resistance, LVN is rejection</li>
@@ -560,7 +581,7 @@
           <li>Identify 2 examples of <strong>Exhaustion</strong>: High volume at resistance, price rejects, negative delta</li>
           <li>For each example, screenshot and note: What happened 1-4 hours later?</li>
           <li>Did absorption lead to continuation UP? Did exhaustion lead to reversal DOWN?</li>
-          <li>Journal your findings: how far from a normal bar does delta have to get, on that instrument, before it seems to matter?</li>
+          <li>Journal your findings as percentages, not raw deltas: divide each bar's delta by that bar's volume, and see how far past +40% or -40% it has to go, on that instrument, before the pattern holds</li>
         </ol>
         <p style="margin-top:1rem"><strong>Goal:</strong> After 20-30 examples, you'll instinctively recognize absorption (bullish) and exhaustion (bearish) patterns, giving you an edge before price shows the move.</p>
       </div>
@@ -591,7 +612,7 @@
 <h4>🎮 Quick Check (No Pressure)</h4>
 
         <div class="quiz-question">
-          <p><strong>BTC prints a bullish candle with 100,000 volume. Delta is -15,000. What's likely to happen next?</strong></p>
+          <p><strong>BTC prints a bullish candle with 100,000 volume. Delta is -60,000. What's likely to happen next?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Continuation up (bullish candle = bullish)</div>
             <div class="quiz-option" data-correct="false">B) Consolidation (mixed signals)</div>
@@ -599,12 +620,12 @@
             <div class="quiz-option" data-correct="false">D) Impossible to tell</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correct!</strong> Negative delta on a bullish candle means aggressive selling is hidden inside that green candle. It's distribution—smart money is selling to retail. Reversal likely.
+            <strong>Correct!</strong> Run the conversion: -60,000 / 100,000 = -60% delta, so the sell share is (100% - (-60%)) / 2 = 80%. Four of every five aggressive orders inside that green candle were sells. The candle closed up while the aggression ran the other way, which is distribution, not a breakout, and it is nowhere near the +40% delta the rule asks for.
           </div>
         </div>
 
         <div class="quiz-question">
-          <p><strong>Price dumps to support with huge volume, but doesn't move much. Delta is +8,500. What pattern is this?</strong></p>
+          <p><strong>Price dumps to support on a bar that trades 17,000 contracts, but doesn't move much. Delta is +8,500. What pattern is this?</strong></p>
           <div class="quiz-options">
             <div class="quiz-option" data-correct="false">A) Exhaustion - weak hands panicking</div>
             <div class="quiz-option" data-correct="false">B) Noise - ignore it</div>
@@ -612,7 +633,7 @@
             <div class="quiz-option" data-correct="true">D) Absorption - strong hands defending the level</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correct!</strong> High volume + small price move + positive delta = Absorption. Strong hands are stepping in and buying everything sellers throw at them. This is institutional accumulation at support.
+            <strong>Correct!</strong> 8,500 / 17,000 = +50% delta, a buy share of (100% + 50%) / 2 = 75%. High volume, small price move, and three of every four aggressive orders on the buy side: that is absorption. Strong hands are taking everything sellers throw at them, and +50% clears the +40% the rule asks for.
           </div>
         </div>
 
