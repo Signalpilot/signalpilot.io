@@ -9,6 +9,7 @@ links to translated siblings only where they exist.
 import re, os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
 from extract import TAG, ATTR, segments
+from numfmt import localise
 
 LANGS = ['de','es','fr','it','pt','nl','ru','ja','tr','hu','ar']
 RTL = {'ar'}
@@ -51,6 +52,14 @@ def inject(src_path, lang, tmap, rel):
         v = tmap.get(f'text:{i}')
         if v:
             parts[i] = seg.replace(seg.strip(), v)
+        else:
+            # The extractor skips a text node with no two consecutive letters,
+            # so a cell reading "66.7%" is not a translatable segment and would
+            # ship English punctuation to every locale. Number formatting is
+            # deterministic; numfmt returns None for anything it is unsure of.
+            n = localise(seg.strip(), lang)
+            if n:
+                parts[i] = seg.replace(seg.strip(), n)
     out = ''.join(parts)
 
     out = re.sub(r'<html[^>]*>', f'<html lang="{lang}"' + (' dir="rtl"' if lang in RTL else '') + '>', out, count=1)
