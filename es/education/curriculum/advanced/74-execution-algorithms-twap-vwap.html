@@ -139,7 +139,7 @@
           <li>TWAP (ponderado por tiempo): repartir la orden de forma uniforme a lo largo del tiempo</li>
           <li>VWAP (ponderado por volumen): seguir el perfil de volumen del mercado</li>
           <li>POV (% del volumen): operar un porcentaje fijo del volumen del mercado</li>
-          <li>Marco: usa VWAP para órdenes grandes (más difíciles de detectar) → TWAP para órdenes más pequeñas</li>
+          <li>Marco: VWAP para órdenes grandes (más difícil de detectar) → TWAP para las pequeñas → y calcula, antes de elegir Implementation Shortfall en lugar de cualquiera de los dos, cuánta deriva tiene que valer tu pronóstico para que adelantar compense</li>
         </ul>
       </div>
 
@@ -388,7 +388,31 @@
 
     <p><strong>Resultado con el algo IS:</strong> Precio medio de 145,28 $ (un 40 % ejecutado de forma agresiva en los primeros 15 minutos a 145,08 $, y después más despacio). Implementation shortfall = 0,28 $ por acción = <strong>56.000 $ de slippage</strong>. Ahorró <strong>$88K</strong> por asegurar pronto la posición.</p>
 
-    <p><strong>Por qué IS lo hizo mejor:</strong> (1) La fuerte convicción era correcta: AMD subió un 1 % hasta el cierre; (2) la agresividad inicial aseguró el 40 % a 145,08 $ y evitó perseguir precios por encima de 146 $; (3) el ritmo adaptativo redujo el impacto una vez asegurada pronto la posición.</p>
+    <p><strong>Por qué IS lo hizo mejor:</strong> (1) La fuerte convicción era correcta — AMD subió un 1 % hasta el cierre, (2) la agresión temprana aseguró un 40 % a 145,08 $ y evitó perseguir fills por encima de 146 $, (3) el ritmo adaptativo redujo el impacto una vez asegurada la posición inicial. El recuadro de abajo convierte la primera razón en un número, porque «la convicción era correcta» describe el resultado y no es un motivo para elegir el algo.</p>
+
+    <div class="callout-key">
+      <h4>&#127919; ¿Cuánta deriva tiene que valer adelantar?</h4>
+        <p>IS le ganó aquí a VWAP por 88.000 $, y la explicación que se da es que la convicción era correcta. Eso es lo que pasó, no un motivo para elegir &mdash; la misma operación con AMD plana habría hecho de IS el algo más caro, y hay que elegir antes de saber cuál de los dos casos toca. Hay un punto de equilibrio, y necesita dos números que puedes estimar de antemano.</p>
+
+        <p>Adelantar una parte de la orden te compra una cosa y te cuesta otra. Saca esa parte de la deriva en la que si no promediarías, lo que con una deriva aproximadamente lineal ahorra la mitad del movimiento sobre esa porción. Y paga impacto extra, porque has operado más rápido de lo que el libro quería. Puestos uno frente al otro:</p>
+
+<pre><code>deriva necesaria  =  2  &#215;  impacto extra de adelantar  &#247;  fracción adelantada</code></pre>
+
+        <p>Los dos inputs están en esta página. La porción agresiva de AMD se ejecutó a 145,08 $ contra un precio de decisión de 145,00 $, así que adelantar costó 8 puntos básicos, y era el 40 % de la orden. El listón quedaba por tanto en un 0,40 % de deriva sobre el horizonte de dos horas. AMD derivó un 1 %. IS ganó porque el pronóstico valía dos veces y media lo que tenía que valer, que es una afirmación más fuerte que «la convicción era correcta» y además comprobable.</p>
+
+<pre><code>impacto extra de adelantar   adelantar 20 %   adelantar 40 %   adelantar 60 %
+                      2 pb           0,20 %           0,10 %           0,07 %
+                      5 pb           0,50 %           0,25 %           0,17 %
+                      8 pb           0,80 %           0,40 %           0,27 %
+                     20 pb           2,00 %           1,00 %           0,67 %
+                     50 pb           5,00 %           2,50 %           1,67 %</code></pre>
+
+        <p><strong>Lee las columnas hacia abajo y la decisión deja de ir sobre convicción.</strong> En un valor líquido, adelantar cuesta un par de puntos básicos e IS necesita una décima de punto porcentual de deriva para compensar &mdash; un listón que casi cualquier señal real supera, así que IS suele ser lo correcto. En un valor estrecho, donde acelerar cuesta cincuenta puntos básicos, la misma elección exige un dos y medio por ciento de deriva sobre tu horizonte de ejecución. Casi ningún pronóstico intradía vale eso, así que VWAP es lo correcto, por muy seguro que te sientas.</p>
+
+        <p><strong>La liquidez elige el algoritmo, y la convicción solo decide el tamaño del adelanto.</strong> Eso es lo contrario de como se suele describir la elección, incluido el párrafo que hay encima de este recuadro. Calcula los dos números antes de que salga la orden: ¿qué me cuesta ir más rápido en este valor, y cuánto vale mi pronóstico sobre la ventana que estoy operando? Si lo segundo es menor que el doble de lo primero dividido por la porción que pensabas acelerar, el algoritmo paciente no es la opción tímida. Es la correcta.</p>
+
+        <p>Y fíjate en lo que la fórmula hace con un cero honesto. Un trader sin visión direccional tiene deriva de nada, así que ningún adelanto compensa, a ninguna liquidez. Si no puedes nombrar el pronóstico que esta orden está expresando, ya has respondido a la pregunta.</p>
+    </div>
 
     <p><strong>Cuándo falla IS:</strong> Si AMD se hubiera dado la vuelta hasta 144 $, el arranque agresivo habría pagado de más. IS exige convicción direccional. Dirección equivocada = pérdidas. En mercados laterales es mejor el enfoque paciente de VWAP.</p>
 

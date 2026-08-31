@@ -139,7 +139,7 @@
           <li>TWAP (ponderato sul tempo): distribuire l'ordine in modo uniforme nel tempo</li>
           <li>VWAP (ponderato sul volume): seguire il profilo di volume del mercato</li>
           <li>POV (% del volume): trattare una percentuale fissa del volume di mercato</li>
-          <li>Schema: VWAP per gli ordini grandi (più difficili da individuare) → TWAP per quelli più piccoli</li>
+          <li>Schema: VWAP per ordini grandi (più difficile da individuare) → TWAP per quelli piccoli → e calcola, prima di scegliere Implementation Shortfall al posto di uno dei due, quanta deriva deve valere la tua previsione perché il front-load convenga</li>
         </ul>
       </div>
 
@@ -388,7 +388,31 @@
 
     <p><strong>Risultato con l'algo IS:</strong> Prezzo medio 145,28 $ (40 % eseguito in modo aggressivo nei primi 15 minuti a 145,08 $, poi rallentando). Implementation shortfall = 0,28 $ per azione = <strong>56.000 $ di slippage</strong>. Sono stati risparmiati <strong>$88K</strong> bloccando presto il prezzo.</p>
 
-    <p><strong>Perché l'IS ha fatto meglio:</strong> (1) La forte convinzione era corretta: AMD ha guadagnato l'1 % fino alla chiusura; (2) l'aggressività iniziale ha bloccato il 40 % a 145,08 $ ed evitato di rincorrere prezzi sopra i 146 $; (3) il ritmo adattivo ha ridotto l'impatto una volta costruita presto la posizione.</p>
+    <p><strong>Perché l'IS ha fatto meglio:</strong> (1) La forte convinzione era corretta — AMD è salita dell'1 % fino alla chiusura, (2) l'aggressività iniziale ha bloccato il 40 % a 145,08 $ ed evitato di inseguire fill sopra i 146 $, (3) il passo adattivo ha ridotto l'impatto una volta presa la posizione iniziale. Il riquadro qui sotto trasforma la prima ragione in un numero, perché «la convinzione era corretta» descrive il risultato e non è un motivo per scegliere l'algo.</p>
+
+    <div class="callout-key">
+      <h4>&#127919; Quanta deriva deve valere il front-load?</h4>
+        <p>Qui IS ha battuto VWAP di 88.000 $, e la spiegazione data è che la convinzione era giusta. Questo è quello che è successo, non un motivo per scegliere &mdash; la stessa operazione con AMD piatta avrebbe reso IS l'algo più caro, e devi scegliere prima di sapere quale dei due casi tocca. Esiste un punto di pareggio, e richiede due numeri che puoi stimare in anticipo.</p>
+
+        <p>Anticipare una frazione dell'ordine ti compra una cosa e te ne costa un'altra. Toglie quella frazione dalla deriva in cui altrimenti avresti mediato, il che con una deriva grosso modo lineare fa risparmiare metà del movimento su quella fetta. E paga impatto extra, perché hai operato più in fretta di quanto il book volesse. Messi uno contro l'altro:</p>
+
+<pre><code>deriva necessaria  =  2  &#215;  impatto extra del front-load  &#247;  frazione anticipata</code></pre>
+
+        <p>Entrambi gli input sono in questa pagina. La fetta aggressiva di AMD è stata eseguita a 145,08 $ contro un prezzo di decisione di 145,00 $, quindi il front-load è costato 8 punti base, ed era il 40 % dell'ordine. L'asticella stava perciò allo 0,40 % di deriva sull'orizzonte di due ore. AMD ha derivato dell'1 %. IS ha vinto perché la previsione valeva due volte e mezza quello che doveva valere, che è un'affermazione più forte di «la convinzione era giusta» e per giunta verificabile.</p>
+
+<pre><code>impatto extra del front-load   front-load 20 %   front-load 40 %   front-load 60 %
+                        2 pb            0,20 %            0,10 %            0,07 %
+                        5 pb            0,50 %            0,25 %            0,17 %
+                        8 pb            0,80 %            0,40 %            0,27 %
+                       20 pb            2,00 %            1,00 %            0,67 %
+                       50 pb            5,00 %            2,50 %            1,67 %</code></pre>
+
+        <p><strong>Leggi le colonne dall'alto in basso e la decisione smette di riguardare la convinzione.</strong> Su un titolo liquido, il front-load costa un paio di punti base e IS ha bisogno di un decimo di punto percentuale di deriva per convenire &mdash; un'asticella che quasi ogni segnale vero supera, quindi IS di solito ha ragione. Su un titolo sottile, dove accelerare costa cinquanta punti base, la stessa scelta pretende due e mezzo per cento di deriva sul tuo orizzonte di esecuzione. Quasi nessuna previsione intraday vale tanto, quindi ha ragione VWAP, per quanto tu ti senta sicuro.</p>
+
+        <p><strong>È la liquidità a scegliere l'algoritmo, e la convinzione decide solo la dimensione del front-load.</strong> Questo è l'opposto di come la scelta viene di solito descritta, compreso il paragrafo sopra questo riquadro. Fai i due conti prima che l'ordine parta: quanto mi costa andare più veloce su questo titolo, e quanto vale la mia previsione sulla finestra che sto operando? Se il secondo è minore del doppio del primo diviso per la fetta che volevi accelerare, l'algoritmo paziente non è la scelta timida. È quella giusta.</p>
+
+        <p>E nota che cosa fa la formula con uno zero onesto. Un trader senza view direzionale ha deriva nulla, quindi nessun front-load conviene, a nessuna liquidità. Se non sai dire quale previsione questo ordine sta esprimendo, hai già risposto alla domanda.</p>
+    </div>
 
     <p><strong>Quando l'IS fallisce:</strong> Se AMD si fosse girato verso 144 $, la partenza aggressiva avrebbe pagato troppo. L'IS richiede una convinzione direzionale. Direzione sbagliata = perdite. I mercati laterali premiano l'approccio paziente del VWAP.</p>
 

@@ -139,7 +139,7 @@
           <li>TWAP (idősúlyozott): a megbízás egyenletes elosztása az időben</li>
           <li>VWAP (forgalomsúlyozott): a piac forgalmi profiljának követése</li>
           <li>POV (a forgalom százaléka): a piaci forgalom rögzített hányadának kereskedése</li>
-          <li>Keret: nagy megbízásokhoz VWAP (nehezebb észrevenni) → kisebbekhez TWAP</li>
+          <li>Keret: nagy megbízásokra VWAP (nehezebb észrevenni) → kisebbekre TWAP → és mielőtt bármelyik helyett Implementation Shortfallt választanál, számold ki, mennyi elsodródást kell érnie az előrejelzésednek ahhoz, hogy az előrehozás megérje</li>
         </ul>
       </div>
 
@@ -388,7 +388,31 @@
 
     <p><strong>Az IS-algó eredménye:</strong> Átlagár 145,28 $ (az első 15 percben 40 % agresszíven, 145,08 $-on teljesült, utána lassított). Implementation shortfall = 0,28 $ részvényenként = <strong>56 000 $ slippage</strong>. A korai rögzítéssel <strong>$88K</strong> megtakarítás született.</p>
 
-    <p><strong>Miért teljesített jobban az IS:</strong> (1) Az erős meggyőződés helyes volt — az AMD zárásig 1 %-ot emelkedett, (2) a korai agresszivitás 40 %-ot rögzített 145,08 $-on, és elkerülte a 146 $ feletti árak kergetését, (3) az adaptív ütemezés csökkentette a hatást, miután a pozíció korán felépült.</p>
+    <p><strong>Miért teljesített jobban az IS:</strong> (1) Az erős meggyőződés helyes volt — az AMD 1 %-ot emelkedett zárásig, (2) a korai agresszió 145,08 $-on rögzítette a 40 %-ot, és megkímélt a 146 $ feletti teljesülések kergetésétől, (3) az adaptív ütemezés csökkentette a hatást, miután a korai pozíció megvolt. Az alábbi doboz számmá alakítja az első okot, mert a «a meggyőződés helyes volt» az eredményt írja le, és nem ok az algoritmus kiválasztására.</p>
+
+    <div class="callout-key">
+      <h4>&#127919; Mennyi elsodródást kell érnie az előrehozásnak?</h4>
+        <p>Az IS itt 88 000 $-ral verte a VWAP-ot, és a megadott magyarázat az, hogy a meggyőződés helyes volt. Ez az, ami történt, nem pedig ok a választásra &mdash; ugyanez az ügylet lapos AMD mellett az IS-t tette volna a drágább algoritmussá, és még azelőtt kell választanod, hogy tudnád, melyik eset jön be. Van fedezeti pont, és két számot kér, amelyeket előre meg tudsz becsülni.</p>
+
+        <p>A megbízás egy hányadának előrehozása egy dolgot vesz meg neked, és egy másikba kerül. Kiveszi azt a hányadot abból az elsodródásból, amibe különben beleátlagoltál volna &mdash; nagyjából lineáris elsodródásnál ez a mozgás felét spórolja meg azon a szeleten. Cserébe többletköltséget fizet, mert gyorsabban kereskedtél, mint ahogy a könyv szerette volna. Egymással szembeállítva:</p>
+
+<pre><code>szükséges elsodródás  =  2  &#215;  az előrehozás többletköltsége  &#247;  az előrehozott hányad</code></pre>
+
+        <p>Mindkét bemenet ezen az oldalon van. Az AMD agresszív szelete 145,08 $-on teljesült a 145,00 $-os döntési árral szemben, tehát az előrehozás 8 bázispontba került, és ez a megbízás 40 %-a volt. A léc így 0,40 % elsodródásnál állt a kétórás időtávon. Az AMD 1 %-ot sodródott. Az IS azért nyert, mert az előrejelzés két és félszer annyit ért, mint amennyit érnie kellett &mdash; ez erősebb állítás, mint hogy «a meggyőződés helyes volt», és ellenőrizhető is.</p>
+
+<pre><code>az előrehozás többletköltsége   20 % előrehozva   40 % előrehozva   60 % előrehozva
+                         2 bp            0,20 %            0,10 %            0,07 %
+                         5 bp            0,50 %            0,25 %            0,17 %
+                         8 bp            0,80 %            0,40 %            0,27 %
+                        20 bp            2,00 %            1,00 %            0,67 %
+                        50 bp            5,00 %            2,50 %            1,67 %</code></pre>
+
+        <p><strong>Olvasd végig az oszlopokat, és a döntés megszűnik a meggyőződésről szólni.</strong> Egy likvid papírban az előrehozás pár bázispontba kerül, és az IS-nek egytized százalék elsodródás kell ahhoz, hogy megérje &mdash; ezt a lécet szinte minden valódi jelzés átugorja, tehát az IS általában jó választás. Egy vékony papírban, ahol a gyorsítás ötven bázispontba kerül, ugyanez a döntés két és fél százalék elsodródást követel a végrehajtási időtávon. Napon belüli előrejelzés szinte soha nem ér ennyit, tehát a VWAP a helyes választás, bármilyen biztos is vagy.</p>
+
+        <p><strong>Az algoritmust a likviditás választja ki, a meggyőződés csak az előrehozott szelet méretéről dönt.</strong> Ez az ellenkezője annak, ahogyan ezt a döntést szokás leírni &mdash; beleértve a doboz feletti bekezdést is. Számold ki a két számot, mielőtt a megbízás kimegy: mibe kerül nekem gyorsabban menni ebben a papírban, és mennyit ér az előrejelzésem azon az ablakon, amelyen kereskedem? Ha a második kisebb, mint az első kétszerese osztva azzal a szelettel, amit sietni akartál, akkor a türelmes algoritmus nem a félénk választás. Hanem a helyes.</p>
+
+        <p>És figyeld meg, mit kezd a képlet egy őszinte nullával. Egy irányvélemény nélküli kereskedőnél az elsodródás nulla, tehát semennyi előrehozás nem térül meg, semmilyen likviditás mellett. Ha nem tudod megnevezni, milyen előrejelzést fejez ki ez a megbízás, akkor a kérdésre már válaszoltál.</p>
+    </div>
 
     <p><strong>Amikor az IS kudarcot vall:</strong> Ha az AMD 144 $-ra fordult volna, az agresszív indítás túlfizetés lett volna. Az IS irányra vonatkozó meggyőződést kíván. Rossz irány = veszteség. A szaggatott piacokon a VWAP türelmes megközelítése nyer.</p>
 

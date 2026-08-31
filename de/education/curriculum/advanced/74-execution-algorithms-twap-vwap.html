@@ -139,7 +139,7 @@
           <li>TWAP (zeitgewichtet): die Order gleichmäßig über die Zeit verteilen</li>
           <li>VWAP (volumengewichtet): dem Volumenprofil des Marktes folgen</li>
           <li>POV (% des Volumens): einen festen Prozentsatz des Marktvolumens handeln</li>
-          <li>Rahmen: VWAP für große Ordern (schwerer zu erkennen) → TWAP für kleinere Ordern</li>
+          <li>Rahmen: VWAP für große Orders (schwerer zu erkennen) → TWAP für kleinere → und rechne aus, bevor du Implementation Shortfall gegenüber beiden wählst, wie viel Drift deine Prognose wert sein muss, damit sich das Vorziehen lohnt</li>
         </ul>
       </div>
 
@@ -388,7 +388,31 @@
 
     <p><strong>Ergebnis mit dem IS-Algo:</strong> Durchschnittskurs 145,28 $ (40 % aggressiv in den ersten 15 Minuten zu 145,08 $, danach langsamer). Implementation Shortfall = 0,28 $ je Aktie = <strong>56.000 $ Slippage</strong>. Damit wurden <strong>$88K</strong> gespart, weil früh gesichert wurde.</p>
 
-    <p><strong>Warum IS besser abschnitt:</strong> (1) Die starke Überzeugung war richtig — AMD legte bis zum Schluss 1 % zu, (2) die frühe Aggressivität sicherte 40 % zu 145,08 $ und vermied das Nachlaufen zu Kursen über 146 $, (3) die adaptive Taktung senkte den Impact, nachdem die Position früh aufgebaut war.</p>
+    <p><strong>Warum IS besser abschnitt:</strong> (1) Die starke Überzeugung war richtig — AMD stieg bis zum Schluss um 1 %, (2) frühe Aggression sicherte 40 % zu 145,08 $ und vermied das Nachlaufen zu 146 $+, (3) adaptives Tempo senkte den Impact, nachdem die frühe Position stand. Der Kasten unten macht aus dem ersten Grund eine Zahl, denn „die Überzeugung war richtig“ beschreibt das Ergebnis und ist kein Grund, den Algo zu wählen.</p>
+
+    <div class="callout-key">
+      <h4>&#127919; Wie viel Drift muss das Vorziehen wert sein?</h4>
+        <p>IS hat VWAP hier um 88.000 $ geschlagen, und als Erklärung steht da, die Überzeugung sei richtig gewesen. Das ist, was passiert ist, und kein Grund, so zu wählen &mdash; derselbe Trade mit flacher AMD hätte IS zum teureren Algo gemacht, und entscheiden musst du, bevor du weißt, welcher Fall eintritt. Es gibt einen Break-even, und er braucht zwei Zahlen, die du vorher schätzen kannst.</p>
+
+        <p>Einen Teil der Order vorzuziehen kauft dir eines und kostet dich ein anderes. Es nimmt diesen Teil aus dem Drift heraus, in den du sonst hineingemittelt hättest, was bei ungefähr linearem Drift die halbe Bewegung auf dieser Tranche spart. Und es kostet zusätzlichen Impact, weil du schneller gehandelt hast, als das Buch es wollte. Beides gegeneinander gestellt:</p>
+
+<pre><code>nötiger Drift  =  2  &#215;  Mehr-Impact des Vorziehens  &#247;  vorgezogener Anteil</code></pre>
+
+        <p>Beide Eingaben stehen auf dieser Seite. Die aggressive Tranche von AMD wurde zu 145,08 $ gegen einen Entscheidungspreis von 145,00 $ ausgeführt, das Vorziehen kostete also 8 Basispunkte, und es waren 40 % der Order. Die Hürde lag damit bei 0,40 % Drift über den Zwei-Stunden-Horizont. AMD driftete 1 %. IS gewann, weil die Prognose zweieinhalbmal so viel wert war wie nötig &mdash; eine stärkere und überprüfbare Aussage als „die Überzeugung war richtig“.</p>
+
+<pre><code>Mehr-Impact des Vorziehens   20 % vorziehen   40 % vorziehen   60 % vorziehen
+                      2 Bp           0,20 %           0,10 %           0,07 %
+                      5 Bp           0,50 %           0,25 %           0,17 %
+                      8 Bp           0,80 %           0,40 %           0,27 %
+                     20 Bp           2,00 %           1,00 %           0,67 %
+                     50 Bp           5,00 %           2,50 %           1,67 %</code></pre>
+
+        <p><strong>Lies die Spalten hinunter, und die Entscheidung handelt nicht mehr von Überzeugung.</strong> In einem liquiden Wert kostet das Vorziehen ein paar Basispunkte, und IS braucht ein Zehntel Prozent Drift, um sich zu lohnen &mdash; eine Hürde, die fast jedes echte Signal nimmt, also ist IS meistens richtig. In einem dünnen Wert, wo Beschleunigen fünfzig Basispunkte kostet, verlangt dieselbe Wahl zweieinhalb Prozent Drift über deinen Ausführungshorizont. Fast keine Intraday-Prognose ist so viel wert, also ist VWAP richtig, so sicher du dich auch fühlst.</p>
+
+        <p><strong>Die Liquidität wählt den Algorithmus, und die Überzeugung entscheidet nur über die Größe des Vorziehens.</strong> Das ist das Gegenteil davon, wie die Wahl üblicherweise beschrieben wird, auch im Absatz über diesem Kasten. Rechne die zwei Zahlen aus, bevor die Order hinausgeht: was kostet es mich in diesem Wert, schneller zu sein, und was ist meine Prognose über das Fenster wert, das ich handle? Ist das Zweite kleiner als das Doppelte des Ersten geteilt durch den Anteil, den du beschleunigen wolltest, dann ist der geduldige Algorithmus nicht die schüchterne Wahl. Er ist die richtige.</p>
+
+        <p>Und beachte, was die Formel mit einer ehrlichen Null macht. Ein Trader ohne Richtungsmeinung hat einen Drift von null, also lohnt sich kein Vorziehen, bei keiner Liquidität. Wenn du die Prognose nicht benennen kannst, die diese Order ausdrückt, hast du die Frage bereits beantwortet.</p>
+    </div>
 
     <p><strong>Wann IS versagt:</strong> Wäre AMD auf 144 $ gedreht, hätte der aggressive Start zu viel gekostet. IS setzt eine Richtungsüberzeugung voraus. Falsche Richtung = Verluste. In seitwärts laufenden Märkten ist der geduldige Ansatz von VWAP besser.</p>
 

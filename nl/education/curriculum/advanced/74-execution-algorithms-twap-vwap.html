@@ -139,7 +139,7 @@
           <li>TWAP (tijdgewogen): de order gelijkmatig over de tijd spreiden</li>
           <li>VWAP (volumegewogen): het volumeprofiel van de markt volgen</li>
           <li>POV (% van het volume): een vast percentage van het marktvolume verhandelen</li>
-          <li>Kader: gebruik VWAP voor grote orders (moeilijker te herkennen) → TWAP voor kleinere orders</li>
+          <li>Kader: VWAP voor grote orders (moeilijker te detecteren) → TWAP voor kleinere → en reken uit, voordat je Implementation Shortfall boven een van beide kiest, hoeveel drift je voorspelling waard moet zijn wil vooraf laden lonen</li>
         </ul>
       </div>
 
@@ -388,7 +388,31 @@
 
     <p><strong>Resultaat met de IS-algo:</strong> Gemiddelde koers $145,28 (40 % agressief uitgevoerd in de eerste 15 minuten op $145,08, daarna langzamer). Implementation shortfall = $0,28 per aandeel = <strong>$56.000 slippage</strong>. Dat scheelde <strong>$88K</strong> door vroeg vast te zetten.</p>
 
-    <p><strong>Waarom IS het beter deed:</strong> (1) De sterke overtuiging klopte — AMD steeg 1 % tot de slotbel; (2) de vroege agressie zette 40 % vast op $145,08 en voorkwam het najagen van koersen boven $146; (3) het adaptieve tempo verlaagde de impact nadat de positie vroeg was opgebouwd.</p>
+    <p><strong>Waarom IS het beter deed:</strong> (1) De sterke overtuiging klopte — AMD steeg 1 % tot de close, (2) vroege agressie legde 40 % vast op $145,08 en vermeed fills van $146+, (3) adaptief tempo verlaagde de impact nadat de vroege positie stond. Het kader hieronder maakt van die eerste reden een getal, want «de overtuiging klopte» beschrijft de uitkomst en is geen reden om het algoritme te kiezen.</p>
+
+    <div class="callout-key">
+      <h4>&#127919; Hoeveel drift moet vooraf laden waard zijn?</h4>
+        <p>IS versloeg VWAP hier met $88.000, en de gegeven verklaring is dat de overtuiging klopte. Dat is wat er gebeurde, geen reden om te kiezen &mdash; dezelfde trade met een vlakke AMD had IS het duurdere algoritme gemaakt, en je moet kiezen voordat je weet welk van beide het wordt. Er is een break-even, en die vraagt twee getallen die je vooraf kunt schatten.</p>
+
+        <p>Een deel van de order vooraf laden koopt je het één en kost je het ander. Het haalt dat deel uit de drift waar je anders in zou middelen, wat bij een ruwweg lineaire drift de helft van de beweging op die schijf bespaart. En het kost extra impact, omdat je sneller handelde dan het boek wilde. De twee tegenover elkaar:</p>
+
+<pre><code>benodigde drift  =  2  &#215;  extra impact van vooraf laden  &#247;  vooraf geladen fractie</code></pre>
+
+        <p>Beide inputs staan op deze pagina. AMD's agressieve schijf werd uitgevoerd op $145,08 tegen een beslisprijs van $145,00, dus vooraf laden kostte 8 basispunten, en het ging om 40 % van de order. De lat lag daarmee op 0,40 % drift over de horizon van twee uur. AMD driftte 1 %. IS won omdat de voorspelling tweeënhalf keer waard was wat ze moest zijn &mdash; een sterkere bewering dan «de overtuiging klopte», en een toetsbare.</p>
+
+<pre><code>extra impact van vooraf laden   20 % vooraf   40 % vooraf   60 % vooraf
+                         2 bp        0,20 %        0,10 %        0,07 %
+                         5 bp        0,50 %        0,25 %        0,17 %
+                         8 bp        0,80 %        0,40 %        0,27 %
+                        20 bp        2,00 %        1,00 %        0,67 %
+                        50 bp        5,00 %        2,50 %        1,67 %</code></pre>
+
+        <p><strong>Lees de kolommen naar beneden en de beslissing gaat niet meer over overtuiging.</strong> In een liquide naam kost vooraf laden een paar basispunten en heeft IS een tiende procent drift nodig om te lonen &mdash; een lat die vrijwel elk echt signaal haalt, dus IS heeft meestal gelijk. In een dunne naam, waar versnellen vijftig basispunten kost, eist dezelfde keuze tweeënhalf procent drift over je uitvoeringshorizon. Vrijwel geen intradayvoorspelling is dat waard, dus VWAP heeft gelijk, hoe zeker je je ook voelt.</p>
+
+        <p><strong>Liquiditeit kiest het algoritme, en overtuiging bepaalt alleen hoe groot je vooraf laadt.</strong> Dat is het omgekeerde van hoe de keuze meestal wordt beschreven, ook in de alinea boven dit kader. Reken de twee getallen uit voordat de order de deur uit gaat: wat kost sneller gaan mij in deze naam, en wat is mijn voorspelling waard over het venster dat ik verhandel? Is het tweede kleiner dan tweemaal het eerste gedeeld door de schijf die je wilde opjagen, dan is het geduldige algoritme niet de timide keuze. Het is de juiste.</p>
+
+        <p>En let op wat de formule met een eerlijke nul doet. Een trader zonder richtingsvisie heeft nul drift, dus geen enkele mate van vooraf laden loont, bij welke liquiditeit dan ook. Kun je de voorspelling die deze order uitdrukt niet benoemen, dan heb je de vraag al beantwoord.</p>
+    </div>
 
     <p><strong>Wanneer IS faalt:</strong> Was AMD teruggedraaid naar $144, dan had de agressieve start te veel betaald. IS vereist een richtingsovertuiging. Verkeerde richting = verlies. In grillige markten wint de geduldige aanpak van VWAP.</p>
 

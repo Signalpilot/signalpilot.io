@@ -139,7 +139,7 @@
           <li>TWAP (zaman ağırlıklı): emri zamana eşit yaymak</li>
           <li>VWAP (hacim ağırlıklı): piyasanın hacim profilini takip etmek</li>
           <li>POV (hacmin yüzdesi): piyasa hacminin sabit bir yüzdesini işlemek</li>
-          <li>Çerçeve: büyük emirlerde VWAP (fark edilmesi daha zor) → küçük emirlerde TWAP</li>
+          <li>Çerçeve: büyük emirlerde VWAP (fark edilmesi daha zor) → küçüklerde TWAP → ve ikisinden birinin yerine Implementation Shortfall seçmeden önce, öne çekmenin karşılığını vermesi için tahmininin ne kadar sürüklenmeye değmesi gerektiğini hesapla</li>
         </ul>
       </div>
 
@@ -388,7 +388,31 @@
 
     <p><strong>IS algosunun sonucu:</strong> Ortalama fiyat 145,28 $ (ilk 15 dakikada %40'ı 145,08 $'dan agresif biçimde alındı, sonra yavaşladı). Implementation shortfall = adet başına 0,28 $ = <strong>56.000 $ slippage</strong>. Erken kilitleyerek <strong>$88K</strong> tasarruf edildi.</p>
 
-    <p><strong>IS neden daha iyi sonuç verdi:</strong> (1) Güçlü kanaat doğruydu — AMD kapanışa kadar %1 yükseldi, (2) erken agresiflik %40'ı 145,08 $'dan kilitledi ve 146 $ üzerindeki fiyatların peşinden koşmayı önledi, (3) pozisyon erken kurulduktan sonra uyarlanabilir tempo etkiyi azalttı.</p>
+    <p><strong>IS neden daha iyi sonuç verdi:</strong> (1) Güçlü kanaat doğruydu — AMD kapanışa kadar %1 yükseldi, (2) erken agresiflik %40'ı 145,08 $'dan kilitledi ve 146 $ üstü gerçekleşmelerin peşinden koşmayı önledi, (3) uyarlanabilir tempo, erken pozisyon alındıktan sonra etkiyi azalttı. Aşağıdaki kutu ilk gerekçeyi bir sayıya çeviriyor; çünkü «kanaat doğruydu» sonucu betimler, algoyu seçmenin gerekçesi değildir.</p>
+
+    <div class="callout-key">
+      <h4>&#127919; Öne çekmek ne kadar sürüklenmeye değmeli?</h4>
+        <p>Burada IS, VWAP'ı 88.000 $ farkla yendi ve verilen açıklama kanaatin doğru olduğu. Bu, olan şeydir; seçme gerekçesi değil &mdash; AMD yatay olsaydı aynı işlemde IS daha pahalı algo olurdu ve hangisinin çıkacağını bilmeden seçmek zorundasın. Bir başabaş noktası var ve önceden tahmin edebileceğin iki sayı istiyor.</p>
+
+        <p>Emrin bir kısmını öne çekmek sana bir şey kazandırır ve bir şeye mal olur. O kısmı, aksi hâlde içine ortalama gireceğin sürüklenmeden çıkarır; kabaca doğrusal bir sürüklenmede bu, o dilim için hareketin yarısını kazandırır. Buna karşılık ek etki öder, çünkü defterin istediğinden hızlı işlem yaptın. İkisini karşı karşıya koyunca:</p>
+
+<pre><code>gereken sürüklenme  =  2  &#215;  öne çekmenin ek etkisi  &#247;  öne çekilen oran</code></pre>
+
+        <p>İki girdi de bu sayfada. AMD'nin agresif dilimi 145,00 $'lık karar fiyatına karşı 145,08 $'dan gerçekleşti; yani öne çekmek 8 baz puana mal oldu ve emrin %40'ıydı. Çıta böylece iki saatlik ufukta %0,40 sürüklenmeye oturdu. AMD %1 sürüklendi. IS kazandı, çünkü tahmin gerekenin iki buçuk katı değerindeydi &mdash; bu, «kanaat doğruydu»dan daha güçlü ve denetlenebilir bir iddia.</p>
+
+<pre><code>öne çekmenin ek etkisi   %20 öne çek   %40 öne çek   %60 öne çek
+            2 baz puan         %0,20         %0,10         %0,07
+            5 baz puan         %0,50         %0,25         %0,17
+            8 baz puan         %0,80         %0,40         %0,27
+           20 baz puan         %2,00         %1,00         %0,67
+           50 baz puan         %5,00         %2,50         %1,67</code></pre>
+
+        <p><strong>Sütunları yukarıdan aşağıya oku; karar artık kanaatle ilgili olmaktan çıkar.</strong> Likit bir hissede öne çekmek birkaç baz puana mal olur ve IS'nin karşılığını vermesi için yüzde birin onda biri kadar sürüklenme yeter &mdash; gerçek herhangi bir sinyalin aştığı bir çıta; yani IS genelde doğrudur. İnce bir hissede, hızlanmanın elli baz puana mal olduğu yerde, aynı seçim işlem ufkunda yüzde iki buçuk sürüklenme ister. Neredeyse hiçbir gün içi tahmin bu kadar etmez; dolayısıyla kendini ne kadar emin hissedersen hisset, doğru olan VWAP'tır.</p>
+
+        <p><strong>Algoritmayı likidite seçer; kanaat yalnızca öne çekilen dilimin büyüklüğüne karar verir.</strong> Bu, seçimin genelde anlatılış biçiminin tam tersi &mdash; bu kutunun hemen üstündeki paragraf da dâhil. Emir çıkmadan önce iki sayıyı hesapla: bu hissede daha hızlı gitmek bana neye mal oluyor ve işlem yaptığım pencerede tahminim ne ediyor? İkincisi, birincinin iki katının hızlandırmayı düşündüğün dilime bölümünden küçükse, sabırlı algoritma çekingen seçim değildir. Doğru seçimdir.</p>
+
+        <p>Ve formülün dürüst bir sıfırla ne yaptığına dikkat et. Yön görüşü olmayan bir trader'ın sürüklenmesi sıfırdır; dolayısıyla hangi likidite olursa olsun hiçbir öne çekme karşılığını vermez. Bu emrin hangi tahmini ifade ettiğini adlandıramıyorsan, soruyu zaten yanıtlamışsındır.</p>
+    </div>
 
     <p><strong>IS ne zaman başarısız olur:</strong> AMD 144 $'a dönseydi, agresif başlangıç fazla ödemek olurdu. IS yön konusunda kanaat ister. Yanlış yön = zarar. Dalgalı piyasalarda VWAP'ın sabırlı yaklaşımı öne çıkar.</p>
 

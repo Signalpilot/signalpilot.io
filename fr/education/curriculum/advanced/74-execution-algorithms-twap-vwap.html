@@ -139,7 +139,7 @@
           <li>TWAP (pondéré par le temps) : étaler l'ordre uniformément dans le temps</li>
           <li>VWAP (pondéré par le volume) : épouser le profil de volume du marché</li>
           <li>POV (% du volume) : traiter un pourcentage fixe du volume de marché</li>
-          <li>Cadre : VWAP pour les gros ordres (plus difficiles à détecter) → TWAP pour les plus petits</li>
+          <li>Cadre : VWAP pour les gros ordres (plus difficile à détecter) → TWAP pour les plus petits → et calculez, avant de choisir Implementation Shortfall plutôt que l'un des deux, combien de dérive votre prévision doit valoir pour que le front-load paie</li>
         </ul>
       </div>
 
@@ -388,7 +388,31 @@
 
     <p><strong>Résultat avec l'algo IS :</strong> Cours moyen de 145,28 $ (40 % exécutés agressivement dans les 15 premières minutes à 145,08 $, puis ralentissement). Implementation shortfall = 0,28 $ par action = <strong>56 000 $ de slippage</strong>. Soit <strong>$88K</strong> économisés en verrouillant tôt.</p>
 
-    <p><strong>Pourquoi l'IS a fait mieux :</strong> (1) La forte conviction était juste — AMD a gagné 1 % jusqu'à la clôture ; (2) l'agressivité initiale a verrouillé 40 % à 145,08 $ et évité de courir après des cours au-dessus de 146 $ ; (3) le rythme adaptatif a réduit l'impact une fois la position prise tôt.</p>
+    <p><strong>Pourquoi l'IS a fait mieux :</strong> (1) La forte conviction était juste — AMD a monté de 1 % jusqu'à la clôture, (2) l'agressivité initiale a bloqué 40 % à 145,08 $ et évité de courir après des fills à 146 $ et plus, (3) le rythme adaptatif a réduit l'impact une fois la position initiale prise. L'encadré ci-dessous transforme la première raison en un nombre, car « la conviction était juste » décrit le résultat et n'est pas une raison de choisir l'algo.</p>
+
+    <div class="callout-key">
+      <h4>&#127919; Combien de dérive le front-load doit-il valoir ?</h4>
+        <p>IS a battu VWAP de 88 000 $ ici, et l'explication donnée est que la conviction était juste. C'est ce qui s'est passé, pas une raison de choisir &mdash; le même trade avec AMD à plat aurait fait d'IS l'algo le plus cher, et il faut choisir avant de savoir lequel des deux cas se présente. Il existe un point mort, et il demande deux nombres que vous pouvez estimer à l'avance.</p>
+
+        <p>Avancer une fraction de l'ordre vous achète une chose et vous en coûte une autre. Cela retire cette fraction de la dérive dans laquelle vous auriez sinon moyenné, ce qui, avec une dérive à peu près linéaire, économise la moitié du mouvement sur cette tranche. Et cela coûte un impact supplémentaire, parce que vous avez tradé plus vite que le carnet ne le voulait. Les deux face à face :</p>
+
+<pre><code>dérive nécessaire  =  2  &#215;  impact supplémentaire du front-load  &#247;  fraction avancée</code></pre>
+
+        <p>Les deux entrées sont sur cette page. La tranche agressive d'AMD a été exécutée à 145,08 $ contre un prix de décision de 145,00 $, le front-load a donc coûté 8 points de base, et il portait sur 40 % de l'ordre. La barre était donc à 0,40 % de dérive sur l'horizon de deux heures. AMD a dérivé de 1 %. IS a gagné parce que la prévision valait deux fois et demie ce qu'elle devait valoir, ce qui est une affirmation plus forte que « la conviction était juste » et vérifiable.</p>
+
+<pre><code>impact supplémentaire du front-load   front-load 20 %   front-load 40 %   front-load 60 %
+                               2 pb            0,20 %            0,10 %            0,07 %
+                               5 pb            0,50 %            0,25 %            0,17 %
+                               8 pb            0,80 %            0,40 %            0,27 %
+                              20 pb            2,00 %            1,00 %            0,67 %
+                              50 pb            5,00 %            2,50 %            1,67 %</code></pre>
+
+        <p><strong>Lisez les colonnes de haut en bas et la décision cesse de porter sur la conviction.</strong> Sur une valeur liquide, le front-load coûte deux ou trois points de base et IS n'a besoin que d'un dixième de pour cent de dérive pour payer &mdash; une barre que presque tout signal réel franchit, donc IS a généralement raison. Sur une valeur étroite, où accélérer coûte cinquante points de base, le même choix exige deux et demi pour cent de dérive sur votre horizon d'exécution. Presque aucune prévision intraday ne vaut cela, donc VWAP a raison, aussi certain que vous vous sentiez.</p>
+
+        <p><strong>C'est la liquidité qui choisit l'algorithme, et la conviction ne décide que de la taille du front-load.</strong> C'est l'inverse de la façon dont ce choix est habituellement décrit, y compris dans le paragraphe au-dessus de cet encadré. Faites les deux calculs avant que l'ordre ne parte : que me coûte d'aller plus vite sur cette valeur, et que vaut ma prévision sur la fenêtre que je trade ? Si le second est inférieur au double du premier divisé par la tranche que vous vouliez presser, l'algorithme patient n'est pas le choix timide. C'est le bon.</p>
+
+        <p>Et notez ce que la formule fait d'un zéro honnête. Un trader sans vue directionnelle a une dérive nulle : aucun front-load ne paie, à aucune liquidité. Si vous ne pouvez pas nommer la prévision que cet ordre exprime, vous avez déjà répondu à la question.</p>
+    </div>
 
     <p><strong>Quand l'IS échoue :</strong> Si AMD s'était retourné vers 144 $, le départ agressif aurait payé trop cher. L'IS suppose une conviction directionnelle. Mauvaise direction = pertes. Les marchés hésitants favorisent l'approche patiente du VWAP.</p>
 
