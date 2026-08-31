@@ -200,34 +200,42 @@ MODULE_NAMES={1:'The Mechanism',2:'The Cost of Trading',3:'Uncertainty, Risk and
  8:'Building a System',9:'Portfolio',10:'The Profession',11:'Electives'}
 
 def fix_index(rows,run):
+    """Rebuild the catalogue from the lesson files themselves.
+
+    An earlier version copied each entry from the previous index.json, keyed by
+    the old lesson number. Run twice, that reads a file whose keys are already
+    the NEW numbers, and every title silently attaches to the wrong lesson --
+    which is what happened. Title, description and word count now come from the
+    page; only the hand-curated fields (tags, indicators) are carried over, and
+    they are matched on href, which is stable.
+    """
+    import html as H
     p='education/curriculum/index.json'
-    old={e['order']:e for e in json.load(open(p,encoding='utf-8'))}
+    prev={}
+    if os.path.exists(p):
+        for e in json.load(open(p,encoding='utf-8')):
+            prev[e['href']]=e
     out=[]
     for r in sorted(rows,key=lambda x:x['new']):
-        tier=r['tier']; lvl=tier.capitalize()
-        if r['source']!='-' and int(r['source']) in old:
-            e=dict(old[int(r['source'])])
-        else:
-            e={'status':'complete','tags':[],'spIndicators':[],
-               'title':r['title'],'description':'','wordCount':1400,'readingTime':'6-8 min'}
-        e['id']=f"{tier}-{r['new']:02d}"
-        e['href']=f"/{r['dest']}"
-        e['level']=lvl
-        e['order']=r['new']
-        e['category']=f"Module {r['module']}: {MODULE_NAMES[int(r['module'])]}"
-        e['lastUpdated']='2026-08-31'
-        if r['source']=='-':
-            f=r['dest']
-            if os.path.exists(f):
-                s=open(f,encoding='utf-8').read()
-                m=re.search(r'<meta name="description" content="(.*?)">',s,re.S)
-                if m: e['description']=m.group(1)
-                m=re.search(r'<h1[^>]*>(.*?)</h1>',s,re.S)
-                if m: e['title']=re.sub(r'<[^>]+>','',m.group(1)).strip()
-        # A slot with no file must not appear in the catalogue: the hub pages and
-        # learning-path render straight from this, and would link to a 404.
-        if not os.path.exists(r['dest']): continue
-        out.append(e)
+        f=r['dest']
+        if not os.path.exists(f): continue      # never advertise a lesson that 404s
+        s=open(f,encoding='utf-8').read()
+        tier=r['tier']; href=f'/{f}'
+        def grab(pat,d=''):
+            m=re.search(pat,s,re.S)
+            return H.unescape(re.sub(r'<[^>]+>','',m.group(1))).strip() if m else d
+        title=grab(r'<h1[^>]*>(.*?)</h1>') or r['title']
+        desc=grab(r'<meta name="description" content="(.*?)">')
+        mins=re.search(r'class="meta">[^<]*?~(\d+)\s*min',s)
+        body=s[s.find('<div class="wrap article-grid"'):]
+        words=len(re.findall(r'\w+',H.unescape(re.sub(r'<[^>]+>',' ',body))))
+        old=prev.get(href,{})
+        out.append({'id':f"{tier}-{r['new']:02d}",'href':href,'title':title,'description':desc,
+            'category':f"Module {r['module']}: {MODULE_NAMES[int(r['module'])]}",
+            'level':tier.capitalize(),'order':r['new'],'status':'complete','wordCount':words,
+            'readingTime':(mins.group(1)+' min') if mins else old.get('readingTime','10 min'),
+            'tags':old.get('tags',[]),'spIndicators':old.get('spIndicators',[]),
+            'lastUpdated':'2026-08-31'})
     if run: json.dump(out,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
     return out
 

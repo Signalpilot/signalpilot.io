@@ -153,6 +153,16 @@ def main():
         loc=len(locales_built(p)) if p else 0
         src=f"<{r['source']}" if r['source']!='-' else " NEW"
         print(f"  {int(r['new']):>2} {src:>5} {st:<9} {w:>5}w {loc:>2}/11  {r['title'][:44]}")
+    # The hub pages are generated from the catalogue; if they have drifted the
+    # site is advertising lessons that do not match what it links to.
+    try:
+        import subprocess
+        rc=subprocess.run([sys.executable,os.path.join(ROOT,'scripts/curriculum/hubs.py'),'--check'],
+                          capture_output=True,text=True).returncode
+        print('\n  hubs: ' + ('education/index.html matches the catalogue' if rc==0
+              else 'STALE -- run python3 scripts/curriculum/hubs.py'))
+    except Exception as e:
+        print('\n  hubs: could not check (%s)' % e)
     print('\n' + "="*66)
     print('  '+'   '.join(f'{k}:{v}' for k,v in sorted(counts.items(),key=lambda kv:-kv[1])))
     print(f'  {len(rows)} slots total')
