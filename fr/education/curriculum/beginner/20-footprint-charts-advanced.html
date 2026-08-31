@@ -136,6 +136,7 @@
           <li>Schéma d'absorption : gros volume acheteur à un prix donné et le prix ne baisse presque pas = des mains solides défendent le niveau (haussier)</li>
           <li>Schéma d'épuisement : gros volume vendeur et le prix chute vite = personne n'achète, les mains faibles paniquent (retournement baissier en approche)</li>
           <li>Cadre : surveille le footprint aux niveaux clés → absorption = entre dans ce sens → épuisement = trade contre le mouvement</li>
+          <li>Comment tester une règle de divergence sur tes propres pertes : note chaque perte face à chaque règle, compte la colonne et regarde à quel point les règles se recouvrent</li>
         </ul>
       </div>
 
@@ -527,7 +528,29 @@ Les institutions NE participent PAS = PIÈGE.
       <div class="example-block">
         <h4>Exemple composite : Derek et une leçon à 28 k$ sur la divergence</h4>
 
-        <p><strong>L'erreur :</strong> Derek (exemple composite ; 12 trades, 0 gagnant, -28 340 $) maîtrisait la mécanique du footprint mais ignorait la divergence. Le schéma s'est répété 12× : le prix faisait de nouveaux sommets, le footprint montrait un volume de -40-60 %, un delta négatif, et le POC ne suivait pas. Exemples : SPY 520 $ (-1 840 $), NVDA 920 $ (-3 180 $), AAPL 177 $ (-2 300 $). <span style="color:#ff5252;font-weight:700">Ce qui aurait sauvé 28 000 $ :</span> volume en baisse de plus de 30 % = on passe (8 fois sur 12), delta négatif sur la cassure = on passe (7 fois sur 12), POC en retard de plus de 2 points = on passe (6 fois sur 12). N'importe laquelle de ces règles aurait arrêté 5 à 8 des douze. Les trois ensemble les arrêtent toutes les douze — mais les règles ont été écrites après avoir regardé ces douze pertes, donc évidemment elles les attrapent. Cela en fait une hypothèse à tester vers l'avant, pas un résultat.</p>
+        <p><strong>L'erreur :</strong> Derek (exemple composite ; 12 trades, 0 gagnant, -28 340 $) maîtrisait la mécanique du footprint mais ignorait la divergence. Le schéma s'est répété 12× : le prix faisait de nouveaux sommets, le footprint montrait un volume de -40-60 %, un delta négatif, et le POC ne suivait pas. Exemples : SPY 520 $ (-1 840 $), NVDA 920 $ (-3 180 $), AAPL 177 $ (-2 300 $). <span style="color:#ff5252;font-weight:700">Ce qui aurait sauvé 28 000 $ :</span> Le volume chute de plus de 30 % = passer, delta négatif sur la cassure = passer, le POC accuse plus de 2 points de retard = passer. Les règles ont été écrites après avoir regardé ces douze pertes, donc bien sûr qu'elles attrapent ces douze-là ; cela en fait une hypothèse à tester en avant, pas un résultat. Ce qui mérite lecture, c'est la façon dont les douze se répartissent entre elles.</p>
+
+        <p>Voici ces mêmes douze pertes, notées une règle à la fois. Volume en baisse de plus de 30 % sur le nouvel extrême ; delta négatif sur la bougie de cassure ; POC à plus de 2 points derrière le prix.</p>
+
+        <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>trade    perte      volume -30%   delta négatif   POC en retard
+  1     -2 140 $        oui             oui             oui
+  2     -3 180 $        oui             oui             oui     NVDA 920 $
+  3     -2 880 $        oui             oui             oui
+  4     -1 960 $        oui             oui             non
+  5     -2 300 $        oui             oui             non     AAPL 177 $
+  6     -1 520 $        oui             non             oui
+  7     -3 440 $        oui             non             non
+  8     -2 050 $        oui             non             non
+  9     -1 840 $        non             oui             non     SPY 520 $
+ 10     -2 760 $        non             oui             non
+ 11     -1 730 $        non             non             oui
+ 12     -2 540 $        non             non             oui
+                       --------        --------        --------
+total  -28 340 $       8 sur 12        7 sur 12        6 sur 12</code></pre>
+
+        <p>Douze pertes, aucun gagnant, un perdant moyen de 2 362 $. Additionne les trois colonnes et tu obtiens 21 drapeaux sur 12 trades : les règles se recouvrent donc, mais seuls les trades 1, 2 et 3 ont déclenché les trois, et les trades 7 à 12 en ont déclenché exactement un chacun. C'est là le constat utile, et ce n'est pas celui que suggère le titre. « Les trois règles ensemble arrêtent les douze » est vrai et presque sans valeur, car les règles ont été écrites après lecture de ces douze pertes. Ce que les colonnes montrent et que l'ajustement ne peut pas truquer, c'est que les douze pertes n'étaient pas un seul phénomène. Le volume qui s'amincit en a attrapé huit, le delta négatif sept, un POC en retard six, et les trois ensembles ne se recoupent guère. La « divergence de footprint », c'est au moins trois choses différentes, et un graphique peut t'en montrer une sans montrer les autres.</p>
+
+        <p>C'est aussi pourquoi la checklist ci-dessous est bien plus stricte que n'importe quelle règle isolée. Elle exige les quatre conditions à la fois, c'est-à-dire l'intersection et non l'union — et une intersection de quatre conditions rejette bien plus de setups qu'on ne l'imagine avant de l'avoir fait tourner.</p>
 
         <p><strong>Le correctif (avril à septembre 2024) :</strong> Checklist de divergence (tout doit passer) : ✓ volume EN HAUSSE, ✓ delta POSITIF, ✓ POC QUI SUIT le prix, ✓ imbalances = ABSORPTION. Ce que la checklist a surtout fait, c'est le tenir à l'écart des setups sur lesquels il perdait : sur cette période, elle a rejeté 28 trades qu'il aurait pris avant, et il n'y a aucun moyen de savoir ce qu'ils auraient donné. Aucun bilan d'après n'est cité ici, parce qu'une série filtrée de quelques dizaines de trades ne peut pas te dire ce que vaut le filtre. Leçon : quand le footprint et le prix se contredisent, fais confiance au footprint — non parce qu'il n'a jamais tort, mais parce que le prix seul ne peut pas te dire si quelqu'un traite réellement sur les nouveaux sommets.</p>
       </div>
@@ -786,6 +809,7 @@ Les institutions sont absentes au nouveau plus haut
           <li><strong>La migration du POC trace où les institutions se repositionnent</strong> – POC qui monte = accumulation, POC qui descend = distribution</li>
           <li><strong>La divergence du footprint (nouveau plus haut ou plus bas sur volume en baisse) signale les pièges</strong> – le particulier pousse seul, les institutions sont absentes</li>
           <li><strong>Combine le footprint avec la structure de marché</strong> – déséquilibres sur order blocks = setups A+, divergence sur résistance = pièges à trader en face</li>
+          <li><strong>Note tes propres pertes une règle à la fois avant de les combiner</strong>—les douze de Derek se répartissent en 8 / 7 / 6 entre trois règles de divergence qui ne s'accordent que sur trois trades, ce qui dit que la divergence recouvre plusieurs défaillances différentes sous un seul nom</li>
           <li><strong>Utilise des footprints en 5 ou 15 minutes pour l'intraday</strong> – la minute est trop bruitée, le journalier trop lent pour des entrées précises</li>
         </ul>
       </div>
@@ -857,6 +881,20 @@ Les institutions sont absentes au nouveau plus haut
           <div class="quiz-explanation" style="display:none">
             <strong>✅ Bonne réponse : B) Absorption = les institutions défendent le niveau (continuation), épuisement = panique des particuliers aux extrêmes (retournement)</strong><br><br>
             Le contexte détermine si un déséquilibre signale une continuation ou un retournement. <strong>Absorption :</strong> Des déséquilibres empilés sur un support (après un repli) ou une résistance (après un rallye), là où les institutions accumulent ou distribuent en silence : attends-toi à une continuation. <strong>Épuisement :</strong> Des déséquilibres empilés à des extrêmes déjà étendus (nouveaux plus hauts ou plus bas après de longs mouvements), là où le particulier panique : attends-toi à un retournement. Le même schéma de déséquilibre, un sens opposé selon sa place dans la structure. Combine toujours le footprint avec la structure de marché pour les distinguer.
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p><strong>Q4 : Les douze pertes de Derek ont marqué 8 sur la règle du volume, 7 sur celle du delta et 6 sur celle du POC, et chaque trade en a déclenché au moins une. Que t'apprend l'addition de ces trois comptes ?</strong></p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q4" value="a"> A) 21 drapeaux sur 12 trades, donc les règles se recouvrent fortement et attrapent pour l'essentiel les mêmes pertes</label>
+            <label><input type="radio" name="q4" value="b"> B) 21 drapeaux sur 12 trades, donc les règles se recouvrent peu et chacune attrape des pertes que les autres manquent</label>
+            <label><input type="radio" name="q4" value="c"> C) Rien—les comptes sont indépendants et ne s'additionnent pas</label>
+            <label><input type="radio" name="q4" value="d"> D) Que les trois règles n'en sont qu'une, mesurée de trois façons</label>
+          </div>
+          <div class="quiz-explanation" style="display:none">
+            <strong>✅ Bonne réponse : B) 21 drapeaux sur 12 trades, donc les règles se recouvrent peu et chacune attrape des pertes que les autres manquent</strong><br><br>
+            8 + 7 + 6 = 21 drapeaux répartis sur 12 trades. Si les règles mesuraient la même chose, les drapeaux s'entasseraient sur quelques trades et le reste serait à zéro — or chaque trade en a déclenché au moins un, et seuls trois les ont tous déclenchés. La moyenne tombe donc à 1,75 drapeau par trade, tout près du plancher de 1. Les trois règles trouvent en grande partie des pertes différentes. C'est ce qu'un ajustement dans l'échantillon ne peut pas fabriquer, et c'est pourquoi la checklist à quatre conditions filtre bien plus durement que n'importe quelle règle isolée : elle exige l'intersection, pas l'union.
           </div>
         </div>
       </div>

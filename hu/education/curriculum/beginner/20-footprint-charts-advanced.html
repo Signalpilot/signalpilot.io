@@ -136,6 +136,7 @@
           <li>Felszívódási minta: nagy vételi forgalom egy adott áron, és az ár alig esik = erős kezek védik a szintet (emelkedő)</li>
           <li>Kimerülési minta: nagy eladási forgalom, és az ár gyorsan zuhan = senki nem vesz, a gyenge kezek pánikolnak (jön a csökkenő fordulat)</li>
           <li>A módszer: nézd a footprintet a kulcsszinteken → felszívódás = szállj be abba az irányba → kimerülés = kereskedj a mozgással szemben</li>
+          <li>Hogyan teszteld a divergenciaszabályt a saját veszteségeiden: pontozz minden veszteséget minden szabály szerint, számold össze az oszlopot, és nézd meg, mennyire fedik egymást a szabályok</li>
         </ul>
       </div>
 
@@ -527,7 +528,29 @@ Az intézmények NEM vesznek részt = CSAPDA.
       <div class="example-block">
         <h4>Összetett példa: Derek és egy 28 ezer $-os lecke a divergenciáról</h4>
 
-        <p><strong>A hiba:</strong> Derek (összetett példa; 12 ügylet, 0 nyerő, -28 340 $) megértette a footprint mechanikáját, de figyelmen kívül hagyta a divergenciát. Az alakzat 12-szer ismétlődött: az ár új csúcsokat ütött, a footprint -40-60% forgalmat és negatív deltát mutatott, a POC pedig nem követte. Példák: SPY 520 $ (-1840 $), NVDA 920 $ (-3180 $), AAPL 177 $ (-2300 $). <span style="color:#ff5252;font-weight:700">Ami megmentett volna 28 000 dollárt:</span> a forgalom 30 %-nál nagyobbat esik = kihagyás (12-ből 8), negatív delta a kitörésnél = kihagyás (12-ből 7), a POC 2 pontnál többel marad le = kihagyás (12-ből 6). Ezek közül bármelyik szabály önmagában megállított volna 5-8-at a tizenkettőből. Mind a három együtt mind a tizenkettőt megállítja – csakhogy a szabályok e tizenkét veszteség megnézése után születtek, így természetes, hogy elkapják őket. Ettől lesznek előre tesztelendő hipotézis, nem eredmény.</p>
+        <p><strong>A hiba:</strong> Derek (összetett példa; 12 ügylet, 0 nyerő, -28 340 $) megértette a footprint mechanikáját, de figyelmen kívül hagyta a divergenciát. Az alakzat 12-szer ismétlődött: az ár új csúcsokat ütött, a footprint -40-60% forgalmat és negatív deltát mutatott, a POC pedig nem követte. Példák: SPY 520 $ (-1840 $), NVDA 920 $ (-3180 $), AAPL 177 $ (-2300 $). <span style="color:#ff5252;font-weight:700">Ami megmentett volna 28 000 dollárt:</span> A volumen több mint 30 %-ot esik = kihagyni, negatív delta a kitörésen = kihagyni, a POC több mint 2 ponttal lemarad = kihagyni. A szabályok azután születtek, hogy megnézte ezt a tizenkét veszteséget, tehát persze hogy elkapják ezt a tizenkettőt; ettől előre tesztelendő hipotézis lesz, nem eredmény. Amit érdemes elolvasni, az az, hogyan oszlik el a tizenkettő közöttük.</p>
+
+        <p>Itt ugyanaz a tizenkét veszteség, szabályonként pontozva. A volumen több mint 30 %-kal alacsonyabb az új szélsőértéknél; a delta negatív a kitörési gyertyán; a POC több mint 2 ponttal az ár mögött.</p>
+
+        <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>kötés   veszteség   volumen -30%   delta negatív   POC lemarad
+  1     -2140 $         igen            igen           igen
+  2     -3180 $         igen            igen           igen     NVDA 920 $
+  3     -2880 $         igen            igen           igen
+  4     -1960 $         igen            igen            nem
+  5     -2300 $         igen            igen            nem     AAPL 177 $
+  6     -1520 $         igen             nem           igen
+  7     -3440 $         igen             nem            nem
+  8     -2050 $         igen             nem            nem
+  9     -1840 $          nem            igen            nem     SPY 520 $
+ 10     -2760 $          nem            igen            nem
+ 11     -1730 $          nem             nem           igen
+ 12     -2540 $          nem             nem           igen
+                       --------        --------       --------
+összes -28 340 $       12-ből 8        12-ből 7       12-ből 6</code></pre>
+
+        <p>Tizenkét veszteség, egyetlen nyertes sem, az átlagos vesztes 2362 $. Add össze a három oszlopot: 21 jelzés jön ki 12 kötésre, tehát a szabályok átfedik egymást — mindhárom csak az 1., 2. és 3. kötésnél csapott be, a 7-től 12-ig terjedők pedig pontosan egyet-egyet fogtak. Ez a hasznos felismerés, és nem az, amit a cím sugall. „A három szabály együtt mind a tizenkettőt megállítja” igaz és szinte értéktelen, mert a szabályok e tizenkét veszteség elolvasása után születtek. Amit az oszlopok megmutatnak, és amit az illesztés nem tud meghamisítani: a tizenkét veszteség nem egyetlen jelenség volt. A vékonyodó volumen nyolcat kapott el, a negatív delta hetet, a lemaradó POC hatot, és a három halmaz alig fedi egymást. A „footprint divergencia” legalább három különböző dolog, és egy chart megmutathatja az egyiket a többi nélkül.</p>
+
+        <p>Ezért is sokkal szigorúbb az alábbi ellenőrzőlista bármelyik egyedi szabálynál. Mind a négy feltételt egyszerre követeli meg, vagyis a metszetet és nem az uniót – és négy feltétel metszete sokkal több setupot dob ki, mint amire az olvasó számít, amíg le nem futtatja.</p>
 
         <p><strong>A javítás (2024. április – szeptember):</strong> Divergencia-ellenőrzőlista (mindnek teljesülnie kell): ✓ a forgalom NŐ, ✓ a delta POZITÍV, ✓ a POC KÖVETI az árat, ✓ az egyenetlenségek = ELNYELÉS. Amit az ellenőrzőlista főként tett: távol tartotta őt azoktól a felállásoktól, amelyeken veszített. Abban az időszakban 28 olyan kötést utasított el, amelyet korábban megcsinált volna, és nincs mód megtudni, mi lett volna belőlük. Utólagos mérleg itt nem szerepel, mert néhány tucat kötésnyi szűrt sorozat nem tudja megmondani, mit ér a szűrő. Tanulság: amikor a footprint és az ár ellentmond egymásnak, a footprintnek higgy – nem azért, mert sosem téved, hanem mert az ár önmagában nem árulja el, hogy az új csúcsokon egyáltalán köt-e valaki.</p>
       </div>
@@ -786,6 +809,7 @@ Az intézmények hiányoznak az új csúcson
           <li><strong>A POC vándorlása azt követi, hová rendeződnek át az intézmények</strong> – emelkedő POC = felhalmozás, süllyedő POC = kiosztás</li>
           <li><strong>A footprint-divergencia (új csúcs vagy alj csökkenő forgalommal) csapdát jelez</strong> – a lakosság egyedül nyomja, az intézmények hiányoznak</li>
           <li><strong>Kösd össze a footprintet a piaci szerkezettel</strong> – egyensúlytalanságok order blockokon = A+ setupok, divergencia az ellenálláson = csapdák, amelyek ellen kereskedsz</li>
+          <li><strong>A saját veszteségeidet szabályonként pontozd, mielőtt összevonnád őket</strong>—Derek tizenkettője 8 / 7 / 6 arányban oszlott meg három divergenciaszabály között, amelyek csak három kötésben értenek egyet; vagyis a divergencia több különböző hiba egyetlen név alatt</li>
           <li><strong>Napon belülre 5 vagy 15 perces footprintet használj</strong> – az 1 perc túl zajos, a napos pedig túl lassú a pontos belépőkhöz</li>
         </ul>
       </div>
@@ -857,6 +881,20 @@ Az intézmények hiányoznak az új csúcson
           <div class="quiz-explanation" style="display:none">
             <strong>✅ Helyes válasz: B) Felszívódás = az intézmények védik a szintet (folytatás), kimerülés = lakossági pánik a szélsőértékeken (fordulat)</strong><br><br>
             A háttér dönti el, hogy egy egyensúlytalanság folytatást vagy fordulatot jelez-e. <strong>Elnyelés:</strong> Egymásra rakódó egyensúlytalanságok a támaszon (visszaesés után) vagy az ellenálláson (emelkedés után), ahol az intézmények csendben felhalmoznak vagy kiosztanak – számíts folytatásra. <strong>Kimerülés:</strong> Egymásra rakódó egyensúlytalanságok már elnyúlt szélsőértékeken (új csúcsok vagy aljak hosszú mozgások után), ahol a lakosság pánikol – számíts fordulatra. Ugyanaz az egyensúlytalansági minta, ellentétes jelentéssel, aszerint hogy hol áll a szerkezetben. A kettő elkülönítéséhez mindig kösd össze a footprintet a piaci szerkezettel.
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p><strong>K4: Derek tizenkét vesztesége a volumenszabályon 8-at, a deltaszabályon 7-et, a POC-szabályon 6-ot ért el, és minden kötés legalább egyet kiváltott. Mit árul el e három szám összeadása?</strong></p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q4" value="a"> A) 21 jelzés 12 kötésre, tehát a szabályok erősen átfednek és nagyrészt ugyanazokat a veszteségeket fogják meg</label>
+            <label><input type="radio" name="q4" value="b"> B) 21 jelzés 12 kötésre, tehát a szabályok alig fednek át, és mindegyik olyan veszteségeket fog meg, amiket a többi elenged</label>
+            <label><input type="radio" name="q4" value="c"> C) Semmit—a számok függetlenek, nem adhatók össze</label>
+            <label><input type="radio" name="q4" value="d"> D) Azt, hogy a három szabály valójában egy, háromféleképpen mérve</label>
+          </div>
+          <div class="quiz-explanation" style="display:none">
+            <strong>✅ Helyes válasz: B) 21 jelzés 12 kötésre, tehát a szabályok alig fednek át, és mindegyik olyan veszteségeket fog meg, amiket a többi elenged</strong><br><br>
+            8 + 7 + 6 = 21 jelzés 12 kötésre szétosztva. Ha a szabályok ugyanazt mérnék, a jelzések ugyanarra a néhány kötésre torlódnának, a többi pedig nullán maradna – ehelyett minden kötés kiváltott legalább egyet, és csak három váltotta ki mindhármat. Az átlag így kötésenként 1,75 jelzés, egészen közel az 1-es alsó határhoz. A három szabály jórészt más-más veszteséget talál meg. Ezt egy mintán belüli illesztés nem tudja előállítani, és emiatt a négyfeltételes ellenőrzőlista sokkal keményebb szűrő bármelyik egyedi szabálynál: a metszetet kéri, nem az uniót.
           </div>
         </div>
       </div>

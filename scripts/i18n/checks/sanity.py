@@ -16,8 +16,11 @@ CORRECTION = re.compile(
 # Japanese corrects itself without a space or a word boundary: "10,000株…では
 # なく15,000株". numcheck caught one of those before this check did.
 CORRECTION_JA = re.compile(r'(?:\.\.\.|…|——)\s*[^。]{0,12}?(?:ではなく|じゃなく|ではなくて)')
-# the same word twice in a row (catches "the the", "de de", "は は")
-DOUBLED = re.compile(r'(?<![\w])([A-Za-zÀ-ÿА-Яа-я]{3,}|[\u0600-\u06ff]{2,})\s+\1(?![\w])', re.I)
+# the same word twice in a row (catches "the the", "de de", "は は").
+# A stutter puts the repeat next to its twin -- one space, or a line wrap.
+# Three or more spaces between them is column alignment inside a <pre> table
+# ("yes            yes"), which is not a stutter, so the gap is bounded.
+DOUBLED = re.compile(r'(?<![\w])([A-Za-zÀ-ÿА-Яа-я]{3,}|[\u0600-\u06ff]{2,})\s{1,2}\1(?![\w])', re.I)
 
 # Reduplication that is simply correct in the language: German pronoun+article
 # pairs ("die die", "sie sie", "der der"), Turkish and Italian intensifiers

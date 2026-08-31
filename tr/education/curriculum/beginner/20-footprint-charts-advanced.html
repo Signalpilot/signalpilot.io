@@ -136,6 +136,7 @@
           <li>Emilim kalıbı: belirli bir fiyatta büyük alım hacmi var ama fiyat neredeyse hiç düşmüyor = güçlü eller seviyeyi savunuyor (yükseliş)</li>
           <li>Tükeniş kalıbı: büyük satış hacmi var ve fiyat hızla düşüyor = kimse almıyor, zayıf eller panikliyor (aşağı dönüş yaklaşıyor)</li>
           <li>Yöntem: kilit seviyelerde footprint'e bak → emilim = o yöne gir → tükeniş = harekete karşı işlem yap</li>
+          <li>Bir ıraksama kuralını kendi zararlarınla nasıl test edersin: her zararı her kurala göre puanla, sütunu say ve kuralların ne kadar örtüştüğünü gör</li>
         </ul>
       </div>
 
@@ -527,7 +528,29 @@ Kurumlar katılmıyor = TUZAK.
       <div class="example-block">
         <h4>Bileşik örnek: Derek ve uyumsuzluk üzerine 28 bin $'lık bir ders</h4>
 
-        <p><strong>Hata:</strong> Derek (birleşik örnek; 12 işlem, 0 kazanan, -28.340 $) footprint mekaniğini öğrenmiş ama uyumsuzluğu yok saymıştı. Aynı örüntü 12 kez tekrarlandı: fiyat yeni zirveler yaparken footprint %-40-60 hacim, negatif delta gösteriyor ve POC takip etmiyordu. Örnekler: SPY 520 $ (-1.840 $), NVDA 920 $ (-3.180 $), AAPL 177 $ (-2.300 $). <span style="color:#ff5252;font-weight:700">28.000 $'ı kurtaracak olan şey:</span> hacim %30'dan fazla düşerse atla (12'de 8), kırılımda delta eksiyse atla (12'de 7), POC 2 puandan fazla geride kalıyorsa atla (12'de 6). Bu kuralların herhangi biri tek başına on ikinin 5 ila 8'ini durdururdu. Üçü birlikte on ikisini birden durdurur — ama kurallar bu on iki kayba bakıldıktan sonra yazıldı, dolayısıyla bunları yakalaması zaten beklenir. Bu da onları bir sonuç değil, ileriye doğru sınanması gereken bir hipotez yapar.</p>
+        <p><strong>Hata:</strong> Derek (birleşik örnek; 12 işlem, 0 kazanan, -28.340 $) footprint mekaniğini öğrenmiş ama uyumsuzluğu yok saymıştı. Aynı örüntü 12 kez tekrarlandı: fiyat yeni zirveler yaparken footprint %-40-60 hacim, negatif delta gösteriyor ve POC takip etmiyordu. Örnekler: SPY 520 $ (-1.840 $), NVDA 920 $ (-3.180 $), AAPL 177 $ (-2.300 $). <span style="color:#ff5252;font-weight:700">28.000 $'ı kurtaracak olan şey:</span> Hacim %30'dan fazla düşüyor = atla, kırılımda delta negatif = atla, POC 2 puandan fazla geride = atla. Kurallar bu on iki zarara bakıldıktan sonra yazıldı, dolayısıyla elbette bu on ikisini yakalıyorlar; bu da onları ileriye doğru test edilecek bir hipotez yapar, sonuç değil. Okumaya değer olan, on ikisinin bunlara nasıl dağıldığı.</p>
+
+        <p>Aynı on iki zarar, bu kez tek tek kurallara göre puanlanmış hâli. Yeni uçta hacim %30'dan fazla düşük; kırılım mumunda delta negatif; POC fiyatın 2 puandan fazla gerisinde.</p>
+
+        <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>işlem   zarar      hacim -30%   delta negatif   POC geride
+  1     -2.140 $       evet           evet           evet
+  2     -3.180 $       evet           evet           evet     NVDA 920 $
+  3     -2.880 $       evet           evet           evet
+  4     -1.960 $       evet           evet          hayır
+  5     -2.300 $       evet           evet          hayır     AAPL 177 $
+  6     -1.520 $       evet          hayır           evet
+  7     -3.440 $       evet          hayır          hayır
+  8     -2.050 $       evet          hayır          hayır
+  9     -1.840 $      hayır           evet          hayır     SPY 520 $
+ 10     -2.760 $      hayır           evet          hayır
+ 11     -1.730 $      hayır          hayır           evet
+ 12     -2.540 $      hayır          hayır           evet
+                     --------       --------       --------
+toplam -28.340 $     12'de 8        12'de 7        12'de 6</code></pre>
+
+        <p>On iki zarar, hiç kazanç yok, ortalama zarar 2.362 $. Üç sütunu topla, 12 işlem üzerinde 21 işaret çıkar; yani kurallar örtüşüyor: üçünü birden yalnızca 1, 2 ve 3 numaralı işlemler tetikledi, 7'den 12'ye kadar olanlar ise tam olarak birer tane. Faydalı bulgu bu ve başlığın ima ettiği bulgu değil. «Üç kural birlikte on ikisini de durdurur» doğrudur ve neredeyse değersizdir, çünkü kurallar bu on iki zarar okunduktan sonra yazıldı. Sütunların gösterdiği ve sonradan uydurmanın taklit edemeyeceği şey şu: on iki zarar tek bir olgu değildi. İncelen hacim sekizini, negatif delta yedisini, geride kalan POC altısını yakaladı ve üç küme neredeyse hiç örtüşmüyor. «Footprint ıraksaması» en az üç ayrı şeydir ve bir grafik bunlardan birini gösterip diğerlerini göstermeyebilir.</p>
+
+        <p>Aşağıdaki kontrol listesinin tek bir kuraldan çok daha katı olmasının sebebi de bu. Dört koşulu aynı anda istiyor, yani birleşim değil kesişim — ve dört koşulun kesişimi, insan çalıştırana kadar sandığından çok daha fazla setup'ı eler.</p>
 
         <p><strong>Düzeltme (Nisan-Eylül 2024):</strong> Uyumsuzluk kontrol listesi (hepsi geçmeli): ✓ hacim ARTIYOR, ✓ delta POZİTİF, ✓ POC fiyatı TAKİP EDİYOR, ✓ dengesizlikler = SOĞURMA. Kontrol listesinin asıl yaptığı şey, onu kaybettiği kurulumlardan uzak tutmaktı: o dönemde daha önce alacağı 28 işlemi eledi ve bunların ne yapacağını bilmenin bir yolu yok. Burada sonrasına dair bir bilanço verilmiyor, çünkü birkaç düzine işlemlik filtrelenmiş bir seri sana filtrenin ne değerde olduğunu söyleyemez. Ders: footprint ile fiyat çeliştiğinde footprint'e güven — asla yanılmadığı için değil, fiyatın tek başına yeni zirvelerde gerçekten birinin işlem yapıp yapmadığını söyleyememesi yüzünden.</p>
       </div>
@@ -786,6 +809,7 @@ Yeni zirvede kurumlar yok
           <li><strong>POC göçü, kurumların nereye yerleştiğini izler</strong> — yükselen POC = birikim, düşen POC = dağıtım</li>
           <li><strong>Footprint uyumsuzluğu (yeni zirve ya da dip, ama hacim düşüyor) tuzakları haber verir</strong> — bireysel yatırımcı tek başına itiyor, kurumlar yok</li>
           <li><strong>Footprint'i piyasa yapısıyla birleştir</strong> — order block'lardaki dengesizlikler = A+ setup'lar, dirençteki uyumsuzluk = tersine işlenecek tuzaklar</li>
+          <li><strong>Kendi zararlarını birleştirmeden önce tek tek kurallara göre puanla</strong>—Derek'in on ikisi, yalnızca üç işlemde birbiriyle uyuşan üç ıraksama kuralına 8 / 7 / 6 diye dağıldı; yani ıraksama, tek bir adı paylaşan birkaç ayrı arıza demek</li>
           <li><strong>Gün içi için 5 ya da 15 dakikalık footprint kullan</strong> — 1 dakika fazla gürültülü, günlük ise isabetli girişler için fazla yavaş</li>
         </ul>
       </div>
@@ -857,6 +881,20 @@ Yeni zirvede kurumlar yok
           <div class="quiz-explanation" style="display:none">
             <strong>✅ Doğru cevap: B) Emilim = kurumlar seviyeyi savunuyor (devam), tükeniş = uçlarda bireysel panik (dönüş)</strong><br><br>
             Bir dengesizliğin devamı mı dönüşü mü işaret ettiğini bağlam belirler. <strong>Emilim:</strong> Destekte (geri çekilmeden sonra) ya da dirençte (yükselişten sonra) üst üste binmiş dengesizlikler, kurumların sessizce biriktirdiği ya da dağıttığı yerlerdir — devam bekle. <strong>Tükenme:</strong> Uzun hareketlerden sonra uzamış uçlarda (yeni zirveler ya da dipler) üst üste binmiş dengesizlikler, bireysel yatırımcının paniklediği yerlerdir — dönüş bekle. Aynı dengesizlik kalıbı, yapıdaki yerine göre taban tabana zıt anlama gelir. İkisini ayırmak için footprint'i her zaman piyasa yapısıyla birleştir.
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <p><strong>S4: Derek'in on iki zararı hacim kuralında 8, delta kuralında 7, POC kuralında 6 puan aldı ve her işlem en az birini tetikledi. Bu üç sayıyı toplamak sana ne anlatır?</strong></p>
+          <div class="quiz-options">
+            <label><input type="radio" name="q4" value="a"> A) 12 işlemde 21 işaret, yani kurallar büyük ölçüde örtüşüyor ve çoğunlukla aynı zararları yakalıyor</label>
+            <label><input type="radio" name="q4" value="b"> B) 12 işlemde 21 işaret, yani kurallar az örtüşüyor ve her biri diğerlerinin kaçırdığı zararları yakalıyor</label>
+            <label><input type="radio" name="q4" value="c"> C) Hiçbir şey—sayılar bağımsızdır, toplanamaz</label>
+            <label><input type="radio" name="q4" value="d"> D) Üç kuralın aslında tek bir kural olduğunu, üç ayrı ölçümle</label>
+          </div>
+          <div class="quiz-explanation" style="display:none">
+            <strong>✅ Doğru cevap: B) 12 işlemde 21 işaret, yani kurallar az örtüşüyor ve her biri diğerlerinin kaçırdığı zararları yakalıyor</strong><br><br>
+            8 + 7 + 6 = 12 işleme yayılmış 21 işaret. Kurallar aynı şeyi ölçseydi işaretler aynı birkaç işlemde yığılır, gerisi sıfırda kalırdı; oysa her işlem en az birini tetikledi ve yalnızca üçü hepsini tetikledi. Yani işlem başına ortalama 1,75 işaret, 1 tabanına çok yakın. Üç kural büyük ölçüde farklı zararlar buluyor. Örneklem içi bir uydurmanın üretemeyeceği bulgu budur ve dört koşullu kontrol listesinin herhangi bir tek kuraldan çok daha sert bir filtre olmasının sebebi de budur: birleşimi değil, kesişimi istiyor.
           </div>
         </div>
       </div>
