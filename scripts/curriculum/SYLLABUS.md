@@ -288,3 +288,63 @@ difference between a set of articles and a course.
 `ADV` average daily volume · `σ` volatility, always with its period stated ·
 **profit factor** reserved for gross win ÷ gross loss over a record, and never
 used to mean `b`.
+
+---
+
+## The reading contract
+
+A visitor arrives on a random lesson from a search result. They owe us nothing.
+Within ten seconds they should know what the page establishes, and within four
+minutes they should have it. Rigour is not length — the best short paper in any
+field is three pages, and it is short *because* it is rigorous.
+
+**What the corpus does now**
+
+| | measured |
+|---|---|
+| total words | 400,926 across 86 lessons |
+| median lesson | 4,461 words, ~20 minutes |
+| emoji headings | 691 — eight per lesson, present in all 86 |
+| callout boxes | 483 — five per lesson |
+| accordions | 277 |
+| headings containing a dollar amount | 107, across 69 lessons |
+
+Lesson 67 carries 21 callouts and 20 emoji headings on one page. When eight
+elements compete for emphasis, nothing has any.
+
+**The budget, per lesson, enforced by `status.py`**
+
+| | limit | now |
+|---|---|---|
+| words | **1,800** (1,200 is fine; over 2,000 fails) | 4,461 median |
+| callouts | **1** | 5 median |
+| emoji in headings | **0** | 8 median |
+| accordions | **0** — if it is worth hiding it is worth cutting | 3 median |
+| tables | 2, and only where the shape is genuinely tabular | 2 median |
+| worked examples | **1**, with reproducible numbers | 1–3 "acts" |
+
+Roughly 136,000 words for 85 lessons against 400,926 for 86. The cut is not
+uniform: it comes almost entirely from repetition the read pass already
+documented (one finding stated four to seven times), from three-act narratives
+about invented traders, and from decoration.
+
+**Rules that follow from the budget**
+
+1. **The claim is the first thing on the page**, in one sentence, before any
+   apparatus. A reader who leaves after ten seconds still got something true.
+2. **One worked example, not a story.** A trader with a name and a dollar figure
+   costs 800–1,200 words and establishes nothing that 150 words of arithmetic
+   does not. Keep the arithmetic. Where a narrative genuinely carries the point,
+   it gets one short paragraph, not three acts.
+3. **Emphasis is scarce.** One callout per lesson, at most. If two things are
+   both the most important thing, neither is.
+4. **No emoji in headings.** A heading earns attention by what it says.
+5. **Nothing hidden behind an accordion.** 277 accordions is 277 decisions
+   deferred to the reader about whether the author's own material matters.
+6. **Say it once.** The single most common defect found in the read pass was the
+   same finding restated in a pull quote, a stats table, a "Reality" box, a
+   realisation list and the quiz. Keep the instance carrying the measurements.
+7. **The seven-part form is not seven sections of prose.** Claim is one sentence.
+   Prerequisites is a line of links with a reason each. Bounds is a short
+   paragraph. Sources is three lines. The Development and the worked example are
+   the lesson; the rest is scaffolding measured in sentences.
