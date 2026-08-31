@@ -74,7 +74,35 @@ def words(path):
     s=re.sub(r'<script.*?</script>|<style.*?</style>','',s,flags=re.S)
     return len(re.findall(r'\w+',html.unescape(re.sub(r'<[^>]+>',' ',s))))
 
-def locales_built(path):
+def locales_fresh(path):
+    """Locales whose build is actually current, not merely present.
+
+    Counting files was wrong: after a lesson is rebuilt in English its locale
+    pages still exist, so the board said 11/11 on a page whose prose had just
+    been replaced. A locale is fresh only if every string in the current
+    English page is in its memory -- which is exactly the condition under
+    which build.py would not SKIP it.
+    """
+    import json
+    sys.path.insert(0,os.path.join(ROOT,'scripts/i18n'))
+    try:
+        from extract import extract
+    except Exception:
+        return locales_present(path)
+    try:
+        _,segs=extract(path)
+    except Exception:
+        return []
+    need={s['en'] for s in segs}
+    out=[]
+    for L in LOCALES:
+        mp=os.path.join(ROOT,f'scripts/i18n/memory/{L}.json')
+        if not os.path.exists(mp): continue
+        mem=json.load(open(mp,encoding='utf-8'))
+        if not (need-set(mem)): out.append(L)
+    return out
+
+def locales_present(path):
     """How many of the 11 locales carry a build of this file."""
     rel=os.path.relpath(path,ROOT)
     return [L for L in LOCALES if os.path.exists(os.path.join(ROOT,L,rel[len('education/'):]))
@@ -98,7 +126,7 @@ def state(row,led):
     got=parts_present(p)
     if len(got)<len(PARTS): return 'PROSE',p          # exists, not yet in academy form
     if overbudget(p): return 'BLOATED',p              # in form, but breaks the reading contract
-    if len(locales_built(p))<11: return 'ENGLISH',p   # in form, not yet translated
+    if len(locales_fresh(p))<11: return 'ENGLISH',p   # in form, not yet translated (or stale after a rebuild)
     if new not in led: return 'UNLOGGED',p
     if led[new].get('read2','').strip().lower()!='yes': return 'UNREAD',p
     if not led[new].get('found','').strip(): return 'UNREAD',p
@@ -118,7 +146,8 @@ def main():
             print(f"  words    : {words(p)}")
             print(f"  parts    : {'/'.join(parts_present(p)) or 'none'}")
             print(f"  missing  : {'/'.join(x for x in PARTS if x not in parts_present(p)) or 'none'}")
-            print(f"  locales  : {len(locales_built(p))}/11")
+            fr=locales_fresh(p)
+            print(f"  locales  : {len(fr)}/11 fresh" + ('' if len(fr)==11 else f"  (stale/missing: {','.join(L for L in LOCALES if L not in fr)})"))
             ob=overbudget(p)
             print(f"  budget   : " + ('ok' if not ob else ', '.join(f'{k} {v[0]}>{v[1]}' for k,v in ob.items())))
         return
@@ -150,7 +179,7 @@ def main():
             print(f"\n--- Module {cur} " + "-"*54)
         st,p=state(r,led)
         w=words(p) if p else 0
-        loc=len(locales_built(p)) if p else 0
+        loc=len(locales_fresh(p)) if p else 0
         src=f"<{r['source']}" if r['source']!='-' else " NEW"
         print(f"  {int(r['new']):>2} {src:>5} {st:<9} {w:>5}w {loc:>2}/11  {r['title'][:44]}")
     # The hub pages are generated from the catalogue; if they have drifted the

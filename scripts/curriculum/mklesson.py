@@ -19,7 +19,10 @@ import re,os,html
 from html.parser import HTMLParser
 
 ROOT=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-TPL=os.path.join(ROOT,'education/curriculum/intermediate/24-futures-mechanics.html')
+# The chrome donor. This used to point at old lesson 24, which the renumber
+# moved out from under it. Slot 1 is an academy lesson already in the target
+# form and its path is fixed by the syllabus, so it will not move again.
+TPL=os.path.join(ROOT,'education/curriculum/beginner/01-what-a-market-solves.html')
 STAGE=os.path.join(ROOT,'education/curriculum/_staging')
 BUDGET={'words':1800,'callouts':1,'accordions':0,'tables':2,'emoji_headings':0}
 PARTS=['claim','prereq','development','worked','problems','bounds','sources']
