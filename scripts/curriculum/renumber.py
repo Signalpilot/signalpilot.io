@@ -84,3 +84,178 @@ if __name__=='__main__':
     print('  ...')
     print(f"\nmerged aside: {[r for r,_,_ in [(x[2]['new'],0,0) for x in merges]][:0] or ''}")
     for src,dst,r in merges: print(f"  old {os.path.basename(src or '?'):<44} -> _merged/, redirect to slot {r['new']}")
+
+
+# ---------------------------------------------------------------- execute ----
+LOCALE_DIRS=LOCALES
+
+def rel(p):  return p[len('education/'):] if p.startswith('education/') else p
+
+def build_pathmap(rows):
+    """old path (relative to education/) -> new path. Includes merged-aside."""
+    pm={}
+    for r in rows:
+        if r['source']!='-':
+            src=oldpath(r['source'])
+            if src: pm[rel(src)]=rel(r['dest'])
+        for m in r['merges']:
+            src=oldpath(m)
+            if src: pm[rel(src)]=f'curriculum/_merged/{m:02d}.html'
+    return pm
+
+def move_all(pm,run):
+    """Move en + every locale copy. Returns list of (src,dst) actually moved."""
+    done=[]
+    for old,new in pm.items():
+        for base in ['education']+[f'{L}/education' for L in LOCALE_DIRS]:
+            s=os.path.join(base,old); d=os.path.join(base,new)
+            if not os.path.exists(s): continue
+            if run:
+                os.makedirs(os.path.dirname(d),exist_ok=True)
+                shutil.move(s,d)
+            done.append((s,d))
+    return done
+
+def place_new(rows,run):
+    placed=[]
+    for r in rows:
+        if r['source']!='-': continue
+        st=glob.glob(f"education/curriculum/_staging/new-{r['new']:02d}-*.html")
+        if not st: continue
+        d=r['dest']
+        if run:
+            os.makedirs(os.path.dirname(d),exist_ok=True)
+            shutil.move(st[0],d)
+        placed.append((st[0],d))
+    return placed
+
+def rewrite_refs(pm,run):
+    """One pass over every file, replacing each old path with its new one.
+
+    Sequential str.replace would double-apply: rewriting 01->27 and then
+    something->01 turns the second into 27 as well. A single regex pass with a
+    lookup function touches each occurrence exactly once.
+    """
+    pat=re.compile(r'curriculum/[a-z]*/[0-9][0-9]-[a-z0-9-]*\.html')
+    files=[]
+    for ext in ('html','json','js','xml','txt','md'):
+        files+=glob.glob(f'**/*.{ext}',recursive=True)
+    files=[f for f in files if '/node_modules/' not in f and not f.startswith('.git')]
+    changed=[]; hits=0
+    for f in files:
+        try: s=open(f,encoding='utf-8').read()
+        except (UnicodeDecodeError,IsADirectoryError): continue
+        n=[0]
+        def sub(m):
+            t=pm.get(m.group(0))
+            if t: n[0]+=1; return t
+            return m.group(0)
+        out=pat.sub(sub,s)
+        if n[0]:
+            hits+=n[0]; changed.append((f,n[0]))
+            if run: open(f,'w',encoding='utf-8').write(out)
+    return changed,hits
+
+def fix_meta(rows,run):
+    """Per-lesson chrome: canonical, sp-order/level, breadcrumb, badge, prev/next."""
+    by=sorted(rows,key=lambda r:r['new'])
+    touched=0
+    for i,r in enumerate(by):
+        f=r['dest']
+        if not os.path.exists(f): continue
+        s=open(f,encoding='utf-8').read(); o=s
+        tier=r['tier']; lvl=tier.capitalize()
+        url=f"https://www.signalpilot.io/{r['dest']}"
+        s=re.sub(r'(rel="canonical" href=")[^"]*"',rf'\g<1>{url}"',s)
+        s=re.sub(r'(property="og:url" content=")[^"]*"',rf'\g<1>{url}"',s)
+        s=re.sub(r'(name="twitter:url" content=")[^"]*"',rf'\g<1>{url}"',s)
+        s=re.sub(r'(<meta name="sp-order" content=")[^"]*"',rf'\g<1>{r["new"]}"',s)
+        s=re.sub(r'(<meta name="sp-level" content=")[^"]*"',rf'\g<1>{lvl}"',s)
+        s=re.sub(r'href="/education/(beginner|intermediate|advanced|professional)\.html"',
+                 f'href="/education/{tier}.html"',s)
+        s=re.sub(r'>(Beginner|Intermediate|Advanced|Professional) Curriculum<',f'>{lvl} Curriculum<',s)
+        s=re.sub(r'(<span class="badge">\s*&?#?[0-9A-Za-z;]*\s*)(Beginner|Intermediate|Advanced|Professional)(\s*&bull;\s*Lesson\s*)\d+(\s*of\s*)\d+',
+                 rf'\g<1>{lvl}\g<3>{r["new"]}\g<4>85',s)
+        s=re.sub(r'(<span class="badge">[^<]*?)(Beginner|Intermediate|Advanced|Professional)([^<]*?Lesson )\d+( of )\d+',
+                 rf'\g<1>{lvl}\g<3>{r["new"]}\g<4>85',s)
+        pv=by[i-1] if i>0 else None; nx=by[i+1] if i+1<len(by) else None
+        s=re.sub(r'<link rel="prev" href="[^"]*"/>',
+                 f'<link rel="prev" href="https://www.signalpilot.io/{pv["dest"]}"/>' if pv else '',s)
+        s=re.sub(r'<link rel="next" href="[^"]*"/>',
+                 f'<link rel="next" href="https://www.signalpilot.io/{nx["dest"]}"/>' if nx else '',s)
+        s=re.sub(r'(<a class="btn btn-ghost" href=")[^"]*(">&larr;)',
+                 rf'\g<1>/{pv["dest"]}\g<2>' if pv else rf'\g<1>/education/{tier}.html\g<2>',s)
+        s=re.sub(r'(<a class="btn btn-primary" href=")[^"]*(">Next Lesson)',
+                 rf'\g<1>/{nx["dest"]}\g<2>' if nx else rf'\g<1>/education/{tier}.html\g<2>',s)
+        if s!=o:
+            touched+=1
+            if run: open(f,'w',encoding='utf-8').write(s)
+    return touched
+
+
+MODULE_NAMES={1:'The Mechanism',2:'The Cost of Trading',3:'Uncertainty, Risk and Ruin',
+ 4:'Reading the Auction',5:'Context',6:'Indicators, Honestly',7:'The Other Side',
+ 8:'Building a System',9:'Portfolio',10:'The Profession',11:'Electives'}
+
+def fix_index(rows,run):
+    p='education/curriculum/index.json'
+    old={e['order']:e for e in json.load(open(p,encoding='utf-8'))}
+    out=[]
+    for r in sorted(rows,key=lambda x:x['new']):
+        tier=r['tier']; lvl=tier.capitalize()
+        if r['source']!='-' and int(r['source']) in old:
+            e=dict(old[int(r['source'])])
+        else:
+            e={'status':'complete','tags':[],'spIndicators':[],
+               'title':r['title'],'description':'','wordCount':1400,'readingTime':'6-8 min'}
+        e['id']=f"{tier}-{r['new']:02d}"
+        e['href']=f"/{r['dest']}"
+        e['level']=lvl
+        e['order']=r['new']
+        e['category']=f"Module {r['module']}: {MODULE_NAMES[int(r['module'])]}"
+        e['lastUpdated']='2026-08-31'
+        if r['source']=='-':
+            f=r['dest']
+            if os.path.exists(f):
+                s=open(f,encoding='utf-8').read()
+                m=re.search(r'<meta name="description" content="(.*?)">',s,re.S)
+                if m: e['description']=m.group(1)
+                m=re.search(r'<h1[^>]*>(.*?)</h1>',s,re.S)
+                if m: e['title']=re.sub(r'<[^>]+>','',m.group(1)).strip()
+        out.append(e)
+    if run: json.dump(out,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
+    return out
+
+def add_redirects(pm,rows,run):
+    p='education/vercel.json'
+    d=json.load(open(p,encoding='utf-8'))
+    have={x['source'] for x in d['redirects']}
+    merged_target={}
+    for r in rows:
+        for m in r['merges']: merged_target[f'curriculum/_merged/{m:02d}.html']=r['dest']
+    added=0
+    for old,new in sorted(pm.items()):
+        src=f'/education/{old}'
+        dst=f"/{merged_target.get(new)}" if new in merged_target else f'/education/{new}'
+        if src==dst or src in have: continue
+        d['redirects'].append({'source':src,'destination':dst,'permanent':True})
+        have.add(src); added+=1
+    if run: json.dump(d,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
+    return added
+
+def execute(run):
+    rows=load()
+    pm=build_pathmap(rows)
+    moved=move_all(pm,run)
+    placed=place_new(rows,run)
+    changed,hits=rewrite_refs(pm,run)
+    meta=fix_meta(rows,run) if run else 0
+    idx=fix_index(rows,run)
+    reds=add_redirects(pm,rows,run)
+    print(f'  files moved       : {len(moved)}   ({len(pm)} lessons x en+11 locales)')
+    print(f'  new lessons placed: {len(placed)}')
+    print(f'  reference rewrites: {hits} in {len(changed)} files')
+    print(f'  lesson chrome fixed: {meta}')
+    print(f'  index.json entries : {len(idx)}')
+    print(f'  redirects added    : {reds}')
+    if run: open('scripts/curriculum/.renumbered','w').write('done\n')
