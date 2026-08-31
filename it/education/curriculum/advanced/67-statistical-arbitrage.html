@@ -151,7 +151,7 @@
           <li>La differenza tra correlazione e cointegrazione (fondamentale!)</li>
           <li>Come individuare coppie valide con il test di Dickey-Fuller aumentato</li>
           <li>Modelli di ingresso e uscita con z-score e edge statistico</li>
-          <li>Il dimensionamento in base alla volatilità dello spread e all'emivita</li>
+          <li>Dimensionamento in base alla volatilità dello spread e all'emivita &mdash; e perché l'emivita decide anche quanto vale il tuo test di cointegrazione</li>
           <li>Le strategie di stat arb che gli hedge fund usano davvero</li>
         </ul>
       </div>
@@ -277,7 +277,7 @@
       <p><strong>Nuovo processo:</strong></p>
       <ol>
         <li><strong>Test ADF su OGNI coppia</strong> — il p-value deve essere &lt;0,05 perché lo spread sia stazionario</li>
-        <li><strong>Calcolare l'emivita</strong> &mdash; Opera solo se il ritorno alla media rientra in 5-30 giorni</li>
+        <li><strong>Calcolare l'emivita</strong> — Opera solo se il ritorno alla media sta dentro i 5-30 giorni, e nota che la parte alta di quella banda è quasi impossibile da testare: vedi il riquadro nella parte 3</li>
         <li><strong>Ingresso con z-score</strong> — |Z| &gt; 2,0 (2+ deviazioni standard dalla media)</li>
         <li><strong>Stop per scointegrazione</strong> — se il p-value ADF supera &gt;0,10, uscire subito</li>
       </ol>
@@ -489,7 +489,7 @@ Conclusione: KO/PEP è una coppia operabile
       <div class="callout-danger">
         <h4>🚨 Errori comuni nei test di cointegrazione</h4>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Finestra storica troppo corta:</strong> per un test ADF affidabile servono almeno 6-12 mesi di dati. 1-3 mesi = inaffidabile.</li>
+          <li><strong>Finestra storica troppo corta:</strong> Servono almeno 6-12 mesi di dati per un test ADF affidabile, e bastano solo se l'emivita è breve. Quello che conta non sono i giorni di calendario ma le escursioni indipendenti, che il riquadro nella parte 3 conta. 1-3 mesi = inaffidabile con qualsiasi emivita.</li>
           <li><strong>Non ricalcolare β con regolarità:</strong> gli hedge ratio derivano nel tempo. Ricalcolali ogni mese o opererai lo spread sbagliato.</li>
           <li><strong>Ignorare la deriva del p-value:</strong> una coppia cointegrata a gennaio può scointegrarsi entro giugno. Ritesta ogni mese.</li>
           <li><strong>Testare una sola volta:</strong> la cointegrazione è dinamica, non statica. I test a finestra mobile (6 mesi) sono indispensabili.</li>
@@ -580,6 +580,30 @@ Conclusione: KO/PEP è una coppia operabile
         <p><strong>Emivita = -log(2) / log(θ)</strong></p>
         <p><strong>Esempio:</strong> Se θ = 0,95, l'emivita ≈ 14 giorni</p>
         <p><strong>Implicazione:</strong> Aspettati il rientro entro ~14 giorni. Se ne servono 30+, il tuo modello si sta forse rompendo.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; I tuoi 252 giorni di dati non sono 252 osservazioni</h4>
+        <p>Tutto quanto sopra poggia su un unico test ADF fatto girare su un anno di chiusure giornaliere, e il riquadro sul p-value più in alto ha già detto di non leggere un singolo test superato come 98 % di confidenza. Ecco la ragione più profonda, e viene direttamente dall'emivita che hai appena calcolato.</p>
+
+        <p>Uno spread AR(1) stazionario è autocorrelato per costruzione &mdash; è esattamente ciò che significa ritorno alla media. Lo spread di oggi è in gran parte quello di ieri, quindi letture giornaliere consecutive non sono prove separate. Per un AR(1) con parametro &theta;, un campione di N giorni porta l'informazione di</p>
+
+<pre><code>osservazioni indipendenti  =  N  &#215;  ( 1 &#8722; &theta; )  &#247;  ( 1 + &theta; )</code></pre>
+
+        <p>e &theta; viene dall'emivita che hai già: &theta; = 2 elevato a meno uno diviso l'emivita. Passalo lungo l'intervallo in cui lavora questa lezione:</p>
+
+<pre><code>emivita dello spread   theta   osservazioni indipendenti in 252 giorni   anni di dati per averne 20
+            2 giorni   0,707                                      43,2                          0,5
+            5 giorni   0,871                                      17,4                          1,1
+          8,2 giorni   0,919                                      10,6                          1,9
+           14 giorni   0,952                                       6,2                          3,2
+           30 giorni   0,977                                       2,9                          6,9</code></pre>
+
+        <p><strong>La coppia SPY/IWM testata sopra ha un'emivita di 8,2 giorni, quindi le sue 252 chiusure giornaliere pesano quanto circa undici osservazioni indipendenti.</strong> Non 252. Undici. È il campione da cui è stato calcolato il tuo p-value di 0,0082, ed è per questo che l'avvertimento sui confronti multipli più in alto morde molto più di quanto sembri: non stai filtrando migliaia di coppie contro prove individuali forti, le stai filtrando contro una dozzina di dati ciascuna.</p>
+
+        <p><strong>Ora leggi la riga in basso contro la regola stessa di questa lezione.</strong> La checklist di ricostruzione dice di operare qualsiasi cosa con emivita fra 5 e 30 giorni. A 30 giorni, un anno intero di prezzi contiene circa tre escursioni indipendenti. Tre. Non si stabilisce una relazione di ritorno alla media da tre osservazioni, e nessun p-value calcolato su quella serie dovrebbe smuoverti. Raccogliere anche solo venti escursioni indipendenti con un'emivita di 30 giorni richiede quasi sette anni &mdash; nei quali le operazioni societarie, i cambi di modello di business e i cambi di regime della parte 5 avranno rotto la coppia più volte.</p>
+
+        <p>Quindi la banda utilizzabile è più stretta di quanto dica la checklist, ed è stretta per una ragione che non ha nulla a che vedere con la pazienza. Sotto i dieci giorni circa, un anno di dati ti dà qualcosa da testare. Sopra i quindici circa no, e quello che hai al suo posto è una storia su due ticker con un numero accanto. L'ultima colonna è il requisito onesto: se non riesci a mostrare la coppia che torna venti volte, non hai mostrato che torna.</p>
       </div>
 
       <div class="callout-warning">

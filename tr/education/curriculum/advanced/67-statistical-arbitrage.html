@@ -151,7 +151,7 @@
           <li>Korelasyon ile eşbütünleşme arasındaki farkı (kritik!)</li>
           <li>Genişletilmiş Dickey-Fuller testiyle işe yarar çiftleri nasıl bulacağını</li>
           <li>İstatistiksel edge'i olan z-score giriş/çıkış modellerini</li>
-          <li>Spread oynaklığına ve yarı ömre dayalı pozisyon büyüklüğünü</li>
+          <li>Spread oynaklığına ve yarılanma süresine dayalı pozisyon boyutlandırma &mdash; ve yarılanma süresinin aynı zamanda eşbütünleşme testinin ne kadar değerli olduğunu neden belirlediği</li>
           <li>Hedge fonların gerçekten kullandığı stat arb stratejilerini</li>
         </ul>
       </div>
@@ -277,7 +277,7 @@
       <p><strong>Yeni süreç:</strong></p>
       <ol>
         <li><strong>HER çifte ADF testi</strong> — spread'in durağan olması için p-değeri &lt;0,05 olmalı</li>
-        <li><strong>Yarı ömrü hesapla</strong> &mdash; Yalnızca ortalamaya dönüş 5-30 gün aralığındaysa işlem yapın</li>
+        <li><strong>Yarı ömrü hesapla</strong> — Yalnızca ortalamaya dönüş 5-30 gün içinde kalıyorsa işlem yap ve şuna dikkat et: bu bandın üst ucu neredeyse test edilemez, bkz. Bölüm 3'teki kutu</li>
         <li><strong>z-score ile giriş</strong> — |Z| &gt; 2,0 (ortalamadan 2+ standart sapma)</li>
         <li><strong>Eşbütünleşme bozulma stopu</strong> — ADF p-değeri &gt;0,10'un üstüne çıkarsa hemen çık</li>
       </ol>
@@ -489,7 +489,7 @@ Sonuç: KO/PEP işlenebilir bir çift
       <div class="callout-danger">
         <h4>🚨 Eşbütünleşme testlerinde yaygın hatalar</h4>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Geriye bakış penceresi çok kısa:</strong> güvenilir bir ADF testi için en az 6-12 aylık veri gerekir. 1-3 ay = güvenilmez.</li>
+          <li><strong>Geriye bakış penceresi çok kısa:</strong> Güvenilir bir ADF testi için en az 6-12 aylık veri gerekir ve bu yalnızca yarılanma süresi kısaysa yeterlidir. Önemli olan takvim günleri değil, bağımsız sapmalardır; onları Bölüm 3'teki kutu sayıyor. 1-3 ay, hangi yarılanma süresinde olursa olsun güvenilmezdir.</li>
           <li><strong>β'yı düzenli olarak yeniden hesaplamamak:</strong> hedge oranları zamanla kayar. Her ay yeniden hesapla, yoksa yanlış spread'i işlersin.</li>
           <li><strong>p-değeri kaymasını yok saymak:</strong> ocakta eşbütünleşik olan bir çift haziranda bozulmuş olabilir. Her ay yeniden test et.</li>
           <li><strong>Yalnızca bir kez test etmek:</strong> eşbütünleşme durağan değil, dinamiktir. Kayan pencere testleri (6 ay) şarttır.</li>
@@ -580,6 +580,30 @@ Sonuç: KO/PEP işlenebilir bir çift
         <p><strong>Yarı ömür = -log(2) / log(θ)</strong></p>
         <p><strong>Örnek:</strong> θ = 0,95 ise yarı ömür ≈ 14 gün</p>
         <p><strong>Anlamı:</strong> Ortalamaya dönüşü ~14 gün içinde bekle. 30+ gün sürüyorsa modelin bozuluyor olabilir.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; 252 günlük verin 252 gözlem değildir</h4>
+        <p>Yukarıdakilerin tamamı, bir yıllık günlük kapanışlar üzerinde çalıştırılmış tek bir ADF testine dayanıyor ve yukarıdaki p-değeri kutusu, tek bir geçen testin %98 güven olarak okunamayacağını zaten söylemişti. İşte daha derin sebep; ve doğrudan az önce hesapladığın yarılanma süresinden çıkıyor.</p>
+
+        <p>Durağan bir AR(1) spread'i yapısı gereği otokorelasyonludur &mdash; ortalamaya dönüş zaten tam olarak bu demektir. Bugünün spread'i büyük ölçüde dünün spread'idir, dolayısıyla ardışık günlük okumalar ayrı kanıtlar değildir. Parametresi &theta; olan bir AR(1) için N günlük bir örneklem şu kadar bilgi taşır:</p>
+
+<pre><code>bağımsız gözlem  =  N  &#215;  ( 1 &#8722; &theta; )  &#247;  ( 1 + &theta; )</code></pre>
+
+        <p>ve &theta;, zaten elindeki yarılanma süresinden gelir: &theta; = 2 üssü eksi bir bölü yarılanma süresi. Bunu bu dersin çalıştığı aralık boyunca hesapla:</p>
+
+<pre><code>spread'in yarılanma süresi   teta    252 günde bağımsız gözlem   bunlardan 20 tanesi için yıl
+                     2 gün   0,707                        43,2                            0,5
+                     5 gün   0,871                        17,4                            1,1
+                   8,2 gün   0,919                        10,6                            1,9
+                    14 gün   0,952                         6,2                            3,2
+                    30 gün   0,977                         2,9                            6,9</code></pre>
+
+        <p><strong>Yukarıda test edilen SPY/IWM çiftinin yarılanma süresi 8,2 gün; dolayısıyla 252 günlük kapanışı yaklaşık on bir bağımsız gözlem ağırlığındadır.</strong> 252 değil. On bir. 0,0082'lik p-değerin işte bu örneklemden hesaplandı ve yukarıdaki çoklu karşılaştırma uyarısının göründüğünden çok daha sert ısırmasının sebebi de bu: binlerce çifti güçlü bireysel kanıta karşı taramıyorsun, her biri için bir düzine veri noktasına karşı tarıyorsun.</p>
+
+        <p><strong>Şimdi en alt satırı bu dersin kendi kuralıyla birlikte oku.</strong> Yeniden kurulum kontrol listesi, yarılanma süresi 5 ile 30 gün arasında olan her şeyin işlem yapılabilir olduğunu söylüyor. 30 günde, bir yıllık fiyatın tamamı yaklaşık üç bağımsız sapma içerir. Üç. Üç gözlemden ortalamaya dönen bir ilişki kurulamaz ve o seri üzerinde hesaplanmış hiçbir p-değeri seni harekete geçirmemeli. 30 günlük yarılanma süresinde yirmi bağımsız sapma toplamak bile neredeyse yedi yıl sürer &mdash; bu süre içinde Bölüm 5'teki şirket işlemleri, iş modeli değişiklikleri ve rejim değişimleri çifti defalarca kırmış olacaktır.</p>
+
+        <p>Yani kullanılabilir bant, kontrol listesinin söylediğinden dardır ve sabırla hiçbir ilgisi olmayan bir sebeple dardır. Yaklaşık on günün altında bir yıllık veri sana test edecek bir şey verir. Yaklaşık on beşin üstünde vermez; onun yerine elinde iki sembol hakkında bir hikâye ve yanına iliştirilmiş bir sayı kalır. Son sütun dürüst gerekliliktir: çiftin yirmi kez geri döndüğünü gösteremiyorsan, geri döndüğünü göstermemişsindir.</p>
       </div>
 
       <div class="callout-warning">

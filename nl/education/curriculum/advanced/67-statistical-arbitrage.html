@@ -151,7 +151,7 @@
           <li>Het verschil tussen correlatie en cointegratie (cruciaal!)</li>
           <li>Hoe je bruikbare paren vindt met de augmented Dickey-Fuller-test</li>
           <li>Z-scoremodellen voor in- en uitstap met statistische edge</li>
-          <li>Positiegrootte op basis van spreadvolatiliteit en halfwaardetijd</li>
+          <li>Positiegrootte op basis van spreadvolatiliteit en halfwaardetijd &mdash; en waarom de halfwaardetijd ook bepaalt wat je cointegratietest waard is</li>
           <li>De stat arb-strategieën die hedgefondsen echt gebruiken</li>
         </ul>
       </div>
@@ -277,7 +277,7 @@
       <p><strong>Nieuw proces:</strong></p>
       <ol>
         <li><strong>ADF-test op ELK paar</strong> — de p-waarde moet &lt;0,05 zijn voor een stationaire spread</li>
-        <li><strong>Halfwaardetijd berekenen</strong> &mdash; Handel alleen als de terugkeer naar het gemiddelde binnen 5-30 dagen valt</li>
+        <li><strong>Halfwaardetijd berekenen</strong> — Trade alleen als de terugkeer naar het gemiddelde binnen 5-30 dagen valt, en let op: de bovenkant van die band is bijna niet te toetsen, zie het kader in deel 3</li>
         <li><strong>Instap op z-score</strong> — |Z| &gt; 2,0 (2+ standaarddeviaties van het gemiddelde)</li>
         <li><strong>Decointegratie-stop</strong> — stijgt de ADF-p-waarde boven &gt;0,10, direct eruit</li>
       </ol>
@@ -489,7 +489,7 @@ Conclusie: KO/PEP is een verhandelbaar paar
       <div class="callout-danger">
         <h4>🚨 Veelgemaakte fouten bij cointegratietests</h4>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Een te korte historische periode:</strong> voor een betrouwbare ADF-test heb je minstens 6-12 maanden data nodig. 1-3 maanden = onbetrouwbaar.</li>
+          <li><strong>Een te korte historische periode:</strong> Je hebt minstens 6-12 maanden data nodig voor een betrouwbare ADF-test, en dat is alleen genoeg als de halfwaardetijd kort is. Wat telt zijn geen kalenderdagen maar onafhankelijke uitstapjes, en die telt het kader in deel 3. 1-3 maanden = onbetrouwbaar bij elke halfwaardetijd.</li>
           <li><strong>β niet regelmatig herberekenen:</strong> hedge ratio's schuiven met de tijd. Herbereken maandelijks, anders trade je de verkeerde spread.</li>
           <li><strong>Drift in de p-waarde negeren:</strong> een paar dat in januari gecointegreerd was, kan in juni gedecointegreerd zijn. Test maandelijks opnieuw.</li>
           <li><strong>Slechts één keer testen:</strong> cointegratie is dynamisch, niet statisch. Tests met een voortschrijdend venster (6 maanden) zijn onmisbaar.</li>
@@ -580,6 +580,30 @@ Conclusie: KO/PEP is een verhandelbaar paar
         <p><strong>Halfwaardetijd = -log(2) / log(θ)</strong></p>
         <p><strong>Voorbeeld:</strong> Bij θ = 0,95 is de halfwaardetijd ≈ 14 dagen</p>
         <p><strong>Wat het betekent:</strong> Verwacht mean reversion binnen ~14 dagen. Duurt het 30+ dagen, dan valt je model misschien uit elkaar.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; Je 252 dagen data zijn geen 252 waarnemingen</h4>
+        <p>Alles hierboven rust op één ADF-test over een jaar dagslotkoersen, en het p-waardekader hierboven zei al dat je één geslaagde test niet als 98 % zekerheid mag lezen. Hier is de diepere reden, en die komt rechtstreeks uit de halfwaardetijd die je net hebt uitgerekend.</p>
+
+        <p>Een stationaire AR(1)-spread is per constructie geautocorreleerd &mdash; dat is precies wat terugkeer naar het gemiddelde betekent. De spread van vandaag is grotendeels die van gisteren, dus opeenvolgende daglezingen zijn geen losse bewijsstukken. Voor een AR(1) met parameter &theta; draagt een steekproef van N dagen de informatie van</p>
+
+<pre><code>onafhankelijke waarnemingen  =  N  &#215;  ( 1 &#8722; &theta; )  &#247;  ( 1 + &theta; )</code></pre>
+
+        <p>en &theta; volgt uit de halfwaardetijd die je al hebt: &theta; = 2 tot de macht min één gedeeld door de halfwaardetijd. Loop het door over het bereik waarin deze les werkt:</p>
+
+<pre><code>halfwaardetijd van de spread   theta   onafhankelijke waarnemingen in 252 dagen   jaren data voor er 20
+                     2 dagen   0,707                                       43,2                     0,5
+                     5 dagen   0,871                                       17,4                     1,1
+                   8,2 dagen   0,919                                       10,6                     1,9
+                    14 dagen   0,952                                        6,2                     3,2
+                    30 dagen   0,977                                        2,9                     6,9</code></pre>
+
+        <p><strong>Het hierboven geteste paar SPY/IWM heeft een halfwaardetijd van 8,2 dagen, dus zijn 252 dagslotkoersen wegen als ongeveer elf onafhankelijke waarnemingen.</strong> Niet 252. Elf. Dat is de steekproef waaruit je p-waarde van 0,0082 is berekend, en daarom bijt de waarschuwing over meervoudige vergelijkingen hierboven veel harder dan ze lijkt: je zeeft geen duizenden paren tegen sterk individueel bewijs, je zeeft ze tegen een dozijn datapunten elk.</p>
+
+        <p><strong>Lees nu de onderste rij tegen de eigen regel van deze les.</strong> De herbouwchecklist zegt: trade alles met een halfwaardetijd tussen 5 en 30 dagen. Bij 30 dagen bevat een heel jaar prijzen ongeveer drie onafhankelijke uitstapjes. Drie. Uit drie waarnemingen stel je geen relatie met terugkeer naar het gemiddelde vast, en geen enkele p-waarde die op die reeks is berekend zou je moeten bewegen. Zelfs maar twintig onafhankelijke uitstapjes verzamelen bij een halfwaardetijd van 30 dagen kost bijna zeven jaar &mdash; waarin de corporate actions, businessmodelwijzigingen en regimewissels uit deel 5 het paar meermaals zullen hebben gebroken.</p>
+
+        <p>De bruikbare band is dus smaller dan de checklist zegt, en hij is smal om een reden die niets met geduld te maken heeft. Onder ongeveer tien dagen geeft een jaar data je iets om te toetsen. Boven ongeveer vijftien niet meer, en wat je dan hebt is een verhaal over twee tickers met een getal ernaast. De laatste kolom is de eerlijke eis: als je het paar niet twintig keer kunt laten terugkeren, heb je niet laten zien dat het terugkeert.</p>
       </div>
 
       <div class="callout-warning">

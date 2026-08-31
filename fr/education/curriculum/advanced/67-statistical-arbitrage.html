@@ -151,7 +151,7 @@
           <li>La différence entre corrélation et cointégration (essentielle !)</li>
           <li>Comment identifier des paires viables avec le test de Dickey-Fuller augmenté</li>
           <li>Des modèles d'entrée et de sortie par z-score avec un edge statistique</li>
-          <li>Le dimensionnement selon la volatilité du spread et la demi-vie</li>
+          <li>Dimensionnement selon la volatilité du spread et la demi-vie &mdash; et pourquoi la demi-vie décide aussi de ce que vaut votre test de cointégration</li>
           <li>Les stratégies de stat arb réellement utilisées par les fonds spéculatifs</li>
         </ul>
       </div>
@@ -277,7 +277,7 @@
       <p><strong>Nouveau processus :</strong></p>
       <ol>
         <li><strong>Tester CHAQUE paire à l'ADF</strong> — la p-valeur doit être &lt;0,05 pour un spread stationnaire</li>
-        <li><strong>Calculer la demi-vie</strong> &mdash; Ne tradez que si le retour à la moyenne tient dans 5 à 30 jours</li>
+        <li><strong>Calculer la demi-vie</strong> — Ne tradez que si le retour à la moyenne tient dans 5-30 jours, et notez que le haut de cette fourchette est quasiment intestable : voir l'encadré de la partie 3</li>
         <li><strong>Entrée par z-score</strong> — |Z| &gt; 2,0 (2+ écarts-types par rapport à la moyenne)</li>
         <li><strong>Stop de décointégration</strong> — si la p-valeur ADF passe &gt;0,10, sortir immédiatement</li>
       </ol>
@@ -489,7 +489,7 @@ Conclusion : KO/PEP est une paire tradable
       <div class="callout-danger">
         <h4>🚨 Erreurs fréquentes dans les tests de cointégration</h4>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Historique trop court :</strong> il faut au moins 6 à 12 mois de données pour un test ADF fiable. 1 à 3 mois = peu fiable.</li>
+          <li><strong>Historique trop court :</strong> Il faut au moins 6-12 mois de données pour un test ADF fiable, et ce n'est suffisant que si la demi-vie est courte. Ce qui compte, ce ne sont pas les jours de calendrier mais les excursions indépendantes, que l'encadré de la partie 3 dénombre. 1-3 mois = non fiable, quelle que soit la demi-vie.</li>
           <li><strong>Ne pas recalculer β régulièrement :</strong> les ratios de couverture dérivent avec le temps. Recalculez chaque mois, sinon vous tradez le mauvais spread.</li>
           <li><strong>Ignorer la dérive de la p-valeur :</strong> une paire cointégrée en janvier peut se décointégrer en juin. Retestez chaque mois.</li>
           <li><strong>Ne tester qu'une fois :</strong> la cointégration est dynamique, pas statique. Les tests à fenêtre glissante (6 mois) sont indispensables.</li>
@@ -580,6 +580,30 @@ Conclusion : KO/PEP est une paire tradable
         <p><strong>Demi-vie = -log(2) / log(θ)</strong></p>
         <p><strong>Exemple :</strong> Si θ = 0,95, la demi-vie ≈ 14 jours</p>
         <p><strong>Ce que ça implique :</strong> Attendez le retour à la moyenne sous ~14 jours. S'il faut plus de 30 jours, votre modèle est peut-être en train de casser.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; Vos 252 jours de données ne font pas 252 observations</h4>
+        <p>Tout ce qui précède repose sur un seul test ADF passé sur un an de clôtures quotidiennes, et l'encadré sur la p-value plus haut a déjà dit qu'un unique test réussi ne se lit pas comme 98 % de confiance. Voici la raison de fond, et elle sort directement de la demi-vie que vous venez de calculer.</p>
+
+        <p>Un spread AR(1) stationnaire est autocorrélé par construction &mdash; c'est précisément ce que veut dire retour à la moyenne. Le spread d'aujourd'hui, c'est essentiellement celui d'hier : des relevés quotidiens consécutifs ne sont donc pas des preuves distinctes. Pour un AR(1) de paramètre &theta;, un échantillon de N jours porte l'information de</p>
+
+<pre><code>observations indépendantes  =  N  &#215;  ( 1 &#8722; &theta; )  &#247;  ( 1 + &theta; )</code></pre>
+
+        <p>et &theta; sort de la demi-vie que vous avez déjà : &theta; = 2 à la puissance moins un sur la demi-vie. Passez-le en revue sur la plage dans laquelle travaille cette leçon :</p>
+
+<pre><code>demi-vie du spread   thêta   observations indépendantes sur 252 jours   années de données pour en avoir 20
+           2 jours   0,707                                       43,2                                  0,5
+           5 jours   0,871                                       17,4                                  1,1
+         8,2 jours   0,919                                       10,6                                  1,9
+          14 jours   0,952                                        6,2                                  3,2
+          30 jours   0,977                                        2,9                                  6,9</code></pre>
+
+        <p><strong>La paire SPY/IWM testée plus haut a une demi-vie de 8,2 jours : ses 252 clôtures quotidiennes pèsent donc à peu près onze observations indépendantes.</strong> Pas 252. Onze. C'est l'échantillon d'où sort votre p-value de 0,0082, et c'est pourquoi l'avertissement sur les comparaisons multiples plus haut mord bien plus fort qu'il n'y paraît : vous ne criblez pas des milliers de paires face à des preuves individuelles solides, vous les criblez face à une douzaine de points de données chacune.</p>
+
+        <p><strong>Lisez maintenant la ligne du bas face à la règle même de cette leçon.</strong> La checklist de reconstruction dit de trader tout ce dont la demi-vie tient entre 5 et 30 jours. À 30 jours, une année entière de prix contient environ trois excursions indépendantes. Trois. On n'établit pas une relation de retour à la moyenne à partir de trois observations, et aucune p-value calculée sur cette série ne devrait vous faire bouger. Rassembler ne serait-ce que vingt excursions indépendantes avec une demi-vie de 30 jours prend près de sept ans &mdash; pendant lesquels les opérations sur titres, les changements de modèle et les changements de régime de la partie 5 auront cassé la paire plusieurs fois.</p>
+
+        <p>La bande utilisable est donc plus étroite que ne le dit la checklist, et elle est étroite pour une raison qui n'a rien à voir avec la patience. En dessous d'une dizaine de jours, un an de données vous donne quelque chose à tester. Au-dessus d'une quinzaine, non, et ce que vous avez à la place, c'est une histoire sur deux tickers avec un nombre à côté. La dernière colonne est l'exigence honnête : si vous ne pouvez pas montrer la paire revenir vingt fois, vous n'avez pas montré qu'elle revient.</p>
       </div>
 
       <div class="callout-warning">

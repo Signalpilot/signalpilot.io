@@ -151,7 +151,7 @@
           <li>Den Unterschied zwischen Korrelation und Kointegration (entscheidend!)</li>
           <li>Wie Sie mit dem Augmented-Dickey-Fuller-Test tragfähige Paare finden</li>
           <li>Z-Score-Modelle für Ein- und Ausstieg mit statistischer Edge</li>
-          <li>Positionsgrößen auf Basis von Spread-Volatilität und Halbwertszeit</li>
+          <li>Positionsgrößen auf Basis von Spread-Volatilität und Halbwertszeit &mdash; und warum die Halbwertszeit auch darüber entscheidet, wie viel Ihr Kointegrationstest wert ist</li>
           <li>Stat-Arb-Strategien, wie Hedgefonds sie in der Praxis einsetzen</li>
         </ul>
       </div>
@@ -277,7 +277,7 @@
       <p><strong>Neuer Prozess:</strong></p>
       <ol>
         <li><strong>JEDES Paar per ADF testen</strong> — p-Wert muss &lt;0,05 sein, damit der Spread stationär ist</li>
-        <li><strong>Halbwertszeit berechnen</strong> &mdash; Nur handeln, wenn die Mean Reversion innerhalb von 5-30 Tagen liegt</li>
+        <li><strong>Halbwertszeit berechnen</strong> — Nur traden, wenn die Mean Reversion innerhalb von 5-30 Tagen liegt, und beachten Sie: das obere Ende dieser Spanne ist praktisch nicht testbar, siehe den Kasten in Teil 3</li>
         <li><strong>Z-Score-Einstieg</strong> — |Z| &gt; 2,0 (2+ Standardabweichungen vom Mittelwert)</li>
         <li><strong>Dekointegrations-Stopp</strong> — steigt der ADF-p-Wert &gt;0,10, sofort raus</li>
       </ol>
@@ -489,7 +489,7 @@ Fazit: KO/PEP ist ein handelbares Paar
       <div class="callout-danger">
         <h4>🚨 Häufige Fehler beim Kointegrationstest</h4>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Zu kurzer Betrachtungszeitraum:</strong> Für einen belastbaren ADF-Test brauchen Sie mindestens 6-12 Monate Daten. 1-3 Monate = unzuverlässig.</li>
+          <li><strong>Zu kurzer Betrachtungszeitraum:</strong> Mindestens 6-12 Monate Daten für einen verlässlichen ADF-Test &mdash; und das reicht nur, wenn die Halbwertszeit kurz ist. Was zählt, sind nicht Kalendertage, sondern unabhängige Ausschläge, und die zählt der Kasten in Teil 3 ab. 1-3 Monate sind bei jeder Halbwertszeit unbrauchbar.</li>
           <li><strong>β nicht regelmäßig neu berechnen:</strong> Hedge Ratios driften über die Zeit. Monatlich neu rechnen, sonst handeln Sie den falschen Spread.</li>
           <li><strong>p-Wert-Drift ignorieren:</strong> Ein Paar, das im Januar kointegriert war, kann bis Juni dekointegrieren. Monatlich nachtesten.</li>
           <li><strong>Nur einmal testen:</strong> Kointegration ist dynamisch, nicht statisch. Rollierende Fenstertests (6 Monate rollierend) sind unverzichtbar.</li>
@@ -580,6 +580,30 @@ Fazit: KO/PEP ist ein handelbares Paar
         <p><strong>Halbwertszeit = -log(2) / log(θ)</strong></p>
         <p><strong>Beispiel:</strong> Bei θ = 0,95 ist die Halbwertszeit ≈ 14 Tage</p>
         <p><strong>Bedeutung:</strong> Erwarten Sie Mean Reversion innerhalb von ~14 Tagen. Dauert es 30+ Tage, bricht Ihr Modell womöglich zusammen.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; Ihre 252 Tage Daten sind keine 252 Beobachtungen</h4>
+        <p>Alles bisher steht auf einem einzigen ADF-Test über ein Jahr Tagesschlusskurse, und der p-Wert-Kasten weiter oben hat schon gesagt, dass man einen einzelnen bestandenen Test nicht als 98 % Sicherheit lesen darf. Hier ist der tiefere Grund, und er folgt direkt aus der Halbwertszeit, die Sie gerade berechnet haben.</p>
+
+        <p>Ein stationärer AR(1)-Spread ist konstruktionsbedingt autokorreliert &mdash; genau das heißt Mean Reversion. Der heutige Spread ist überwiegend der gestrige, also sind aufeinanderfolgende Tageswerte keine getrennten Belege. Für ein AR(1) mit Parameter &theta; trägt eine Stichprobe von N Tagen die Information von</p>
+
+<pre><code>unabhängige Beobachtungen  =  N  &#215;  ( 1 &#8722; &theta; )  &#247;  ( 1 + &theta; )</code></pre>
+
+        <p>und &theta; kommt aus der Halbwertszeit, die Sie schon haben: &theta; = 2 hoch minus eins durch die Halbwertszeit. Rechnen Sie es über die Spanne durch, in der diese Lektion arbeitet:</p>
+
+<pre><code>Halbwertszeit des Spreads   Theta   unabhängige Beobachtungen in 252 Tagen   Jahre Daten für 20 davon
+                   2 Tage   0,707                                     43,2                        0,5
+                   5 Tage   0,871                                     17,4                        1,1
+                 8,2 Tage   0,919                                     10,6                        1,9
+                  14 Tage   0,952                                      6,2                        3,2
+                  30 Tage   0,977                                      2,9                        6,9</code></pre>
+
+        <p><strong>Das oben getestete Paar SPY/IWM hat eine Halbwertszeit von 8,2 Tagen, seine 252 Tagesschlusskurse tragen also das Gewicht von etwa elf unabhängigen Beobachtungen.</strong> Nicht 252. Elf. Das ist die Stichprobe, aus der Ihr p-Wert von 0,0082 berechnet wurde, und deshalb beißt die Warnung zu Mehrfachvergleichen weiter oben deutlich härter, als sie aussieht: Sie screenen nicht Tausende von Paaren gegen starke Einzelbelege, sondern gegen ein Dutzend Datenpunkte pro Paar.</p>
+
+        <p><strong>Und nun lesen Sie die unterste Zeile gegen die eigene Regel dieser Lektion.</strong> Die Rebuild-Checkliste sagt, alles mit einer Halbwertszeit zwischen 5 und 30 Tagen sei handelbar. Bei 30 Tagen enthält ein ganzes Jahr Kurse etwa drei unabhängige Ausschläge. Drei. Aus drei Beobachtungen lässt sich keine mean-reversion-Beziehung belegen, und kein p-Wert, der auf dieser Reihe berechnet wurde, sollte Sie bewegen. Selbst nur zwanzig unabhängige Ausschläge bei 30 Tagen Halbwertszeit zu sammeln dauert fast sieben Jahre &mdash; in denen die Corporate Actions, Geschäftsmodellwechsel und Regimewechsel aus Teil 5 das Paar mehrfach zerbrochen haben werden.</p>
+
+        <p>Das nutzbare Band ist also schmaler, als die Checkliste sagt, und es ist aus einem Grund schmal, der mit Geduld nichts zu tun hat. Unterhalb von etwa zehn Tagen gibt Ihnen ein Jahr Daten etwas zu testen. Oberhalb von etwa fünfzehn nicht mehr, und was Sie stattdessen haben, ist eine Geschichte über zwei Ticker mit einer Zahl daneben. Die letzte Spalte ist die ehrliche Anforderung: Wenn Sie das Paar nicht zwanzigmal zurückkehren zeigen können, haben Sie nicht gezeigt, dass es zurückkehrt.</p>
       </div>
 
       <div class="callout-warning">

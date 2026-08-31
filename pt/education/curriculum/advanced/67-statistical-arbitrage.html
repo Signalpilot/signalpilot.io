@@ -151,7 +151,7 @@
           <li>A diferença entre correlação e cointegração (crítica!)</li>
           <li>Como identificar pares viáveis com o teste de Dickey-Fuller aumentado</li>
           <li>Modelos de entrada e saída por z-score com edge estatística</li>
-          <li>Dimensionamento com base na volatilidade do spread e na meia-vida</li>
+          <li>Dimensionamento com base na volatilidade do spread e na meia-vida &mdash; e por que a meia-vida também decide quanto vale o seu teste de cointegração</li>
           <li>As estratégias de stat arb que os fundos de hedge realmente usam</li>
         </ul>
       </div>
@@ -277,7 +277,7 @@
       <p><strong>Novo processo:</strong></p>
       <ol>
         <li><strong>Teste ADF em TODOS os pares</strong> — o p-valor precisa ser &lt;0,05 para o spread ser estacionário</li>
-        <li><strong>Calcular a meia-vida</strong> &mdash; Só opera se a reversão à média couber em 5-30 dias</li>
+        <li><strong>Calcular a meia-vida</strong> — Só opere se a reversão à média couber dentro de 5-30 dias, e note que o topo dessa banda é quase impossível de testar: veja a caixa na parte 3</li>
         <li><strong>Entrada por z-score</strong> — |Z| &gt; 2,0 (2+ desvios padrão da média)</li>
         <li><strong>Stop por descointegração</strong> — se o p-valor ADF subir acima de &gt;0,10, sair na hora</li>
       </ol>
@@ -489,7 +489,7 @@ Conclusão: KO/PEP é um par operável
       <div class="callout-danger">
         <h4>🚨 Erros comuns nos testes de cointegração</h4>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Janela histórica curta demais:</strong> são precisos pelo menos 6-12 meses de dados para um teste ADF confiável. 1-3 meses = não confiável.</li>
+          <li><strong>Janela histórica curta demais:</strong> São precisos pelo menos 6-12 meses de dados para um teste ADF fiável, e isso só chega se a meia-vida for curta. O que conta não são dias de calendário mas excursões independentes, que a caixa na parte 3 conta. 1-3 meses = pouco fiável com qualquer meia-vida.</li>
           <li><strong>Não recalcular β com regularidade:</strong> os hedge ratios derivam com o tempo. Recalcule todo mês ou vai operar o spread errado.</li>
           <li><strong>Ignorar a deriva do p-valor:</strong> um par cointegrado em janeiro pode se descointegrar até junho. Refaça o teste todo mês.</li>
           <li><strong>Testar uma única vez:</strong> a cointegração é dinâmica, não estática. Testes com janela móvel (6 meses) são indispensáveis.</li>
@@ -580,6 +580,30 @@ Conclusão: KO/PEP é um par operável
         <p><strong>Meia-vida = -log(2) / log(θ)</strong></p>
         <p><strong>Exemplo:</strong> Se θ = 0,95, a meia-vida ≈ 14 dias</p>
         <p><strong>Implicação:</strong> Espere a reversão em ~14 dias. Se levar mais de 30, talvez o seu modelo esteja quebrando.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; Os seus 252 dias de dados não são 252 observações</h4>
+        <p>Tudo o que está acima assenta num único teste ADF corrido sobre um ano de fechos diários, e a caixa do p-valor mais acima já disse para não ler um único teste aprovado como 98 % de confiança. Eis a razão mais funda, e sai directamente da meia-vida que acabou de calcular.</p>
+
+        <p>Um spread AR(1) estacionário é autocorrelacionado por construção &mdash; é exactamente isso que significa reversão à média. O spread de hoje é em grande parte o de ontem, portanto leituras diárias consecutivas não são provas separadas. Para um AR(1) com parâmetro &theta;, uma amostra de N dias carrega a informação de</p>
+
+<pre><code>observações independentes  =  N  &#215;  ( 1 &#8722; &theta; )  &#247;  ( 1 + &theta; )</code></pre>
+
+        <p>e &theta; sai da meia-vida que já tem: &theta; = 2 elevado a menos um a dividir pela meia-vida. Percorra-o ao longo do intervalo em que esta lição trabalha:</p>
+
+<pre><code>meia-vida do spread   theta   observações independentes em 252 dias   anos de dados para 20 delas
+             2 dias   0,707                                    43,2                           0,5
+             5 dias   0,871                                    17,4                           1,1
+           8,2 dias   0,919                                    10,6                           1,9
+            14 dias   0,952                                     6,2                           3,2
+            30 dias   0,977                                     2,9                           6,9</code></pre>
+
+        <p><strong>O par SPY/IWM testado acima tem uma meia-vida de 8,2 dias, portanto os seus 252 fechos diários pesam o mesmo que cerca de onze observações independentes.</strong> Não 252. Onze. É a amostra de onde saiu o seu p-valor de 0,0082, e é por isso que o aviso sobre comparações múltiplas mais acima morde muito mais do que parece: não está a filtrar milhares de pares contra prova individual forte, está a filtrá-los contra uma dúzia de pontos de dados cada um.</p>
+
+        <p><strong>Agora leia a linha de baixo contra a própria regra desta lição.</strong> A checklist de reconstrução diz para operar qualquer coisa com meia-vida entre 5 e 30 dias. A 30 dias, um ano inteiro de preços contém cerca de três excursões independentes. Três. Não se estabelece uma relação de reversão à média a partir de três observações, e nenhum p-valor calculado sobre essa série deveria mexer consigo. Juntar sequer vinte excursões independentes com uma meia-vida de 30 dias leva quase sete anos &mdash; durante os quais as operações societárias, as mudanças de modelo de negócio e as mudanças de regime da parte 5 terão partido o par várias vezes.</p>
+
+        <p>Portanto a banda utilizável é mais estreita do que a checklist diz, e é estreita por uma razão que nada tem a ver com paciência. Abaixo de uns dez dias, um ano de dados dá-lhe algo para testar. Acima de uns quinze não dá, e o que tem em vez disso é uma história sobre dois tickers com um número ao lado. A última coluna é a exigência honesta: se não consegue mostrar o par a reverter vinte vezes, não mostrou que ele reverte.</p>
       </div>
 
       <div class="callout-warning">

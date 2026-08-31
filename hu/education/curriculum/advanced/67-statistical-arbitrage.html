@@ -151,7 +151,7 @@
           <li>A korreláció és a kointegráció közti különbséget (kritikus!)</li>
           <li>Hogyan találsz használható párokat a kiterjesztett Dickey-Fuller-teszttel</li>
           <li>Z-score be- és kilépési modelleket statisztikai edge-dzsel</li>
-          <li>Pozícióméretezést a spread volatilitása és a felezési idő alapján</li>
+          <li>Pozícióméretezés a spread volatilitása és felezési ideje alapján &mdash; és hogy a felezési idő miért dönti el azt is, mennyit ér a kointegrációs teszted</li>
           <li>Azokat a stat arb stratégiákat, amelyeket a fedezeti alapok tényleg használnak</li>
         </ul>
       </div>
@@ -277,7 +277,7 @@
       <p><strong>Új folyamat:</strong></p>
       <ol>
         <li><strong>ADF-teszt MINDEN párra</strong> — a p-értéknek &lt;0,05-nek kell lennie a stacionárius spreadhez</li>
-        <li><strong>Felezési idő számítása</strong> &mdash; Csak akkor kereskedj, ha az átlaghoz való visszatérés 5-30 napon belül van</li>
+        <li><strong>Felezési idő számítása</strong> — Csak akkor kereskedj, ha az átlaghoz való visszatérés 5-30 napon belül van, és vedd figyelembe: ennek a sávnak a teteje gyakorlatilag tesztelhetetlen, lásd a 3. rész dobozát</li>
         <li><strong>Belépés z-score alapján</strong> — |Z| &gt; 2,0 (2+ szórásnyira az átlagtól)</li>
         <li><strong>Kointegrációvesztési stop</strong> — ha az ADF p-érték &gt;0,10 fölé emelkedik, azonnal ki</li>
       </ol>
@@ -489,7 +489,7 @@ Következtetés: a KO/PEP kereskedhető pár
       <div class="callout-danger">
         <h4>🚨 Gyakori hibák a kointegrációs tesztelésben</h4>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Túl rövid visszatekintési időszak:</strong> megbízható ADF-teszthez legalább 6-12 hónap adat kell. 1-3 hónap = megbízhatatlan.</li>
+          <li><strong>Túl rövid visszatekintési időszak:</strong> Megbízható ADF-teszthez legalább 6-12 hónapnyi adat kell, és ez is csak akkor elég, ha rövid a felezési idő. Nem a naptári napok számítanak, hanem a független kilengések, amelyeket a 3. rész doboza megszámol. 1-3 hónap bármely felezési idő mellett megbízhatatlan.</li>
           <li><strong>β nem rendszeres újraszámítása:</strong> a fedezeti arányok idővel elcsúsznak. Számold újra havonta, különben rossz spreadet kereskedsz.</li>
           <li><strong>A p-érték elcsúszásának figyelmen kívül hagyása:</strong> egy januárban kointegrált pár júniusra elveszítheti a kointegrációt. Tesztelj újra havonta.</li>
           <li><strong>Csak egyszer tesztelni:</strong> a kointegráció dinamikus, nem statikus. A gördülő ablakos tesztek (6 hónap) nélkülözhetetlenek.</li>
@@ -580,6 +580,30 @@ Következtetés: a KO/PEP kereskedhető pár
         <p><strong>Felezési idő = -log(2) / log(θ)</strong></p>
         <p><strong>Példa:</strong> Ha θ = 0,95, a felezési idő ≈ 14 nap</p>
         <p><strong>Amit jelent:</strong> Az átlaghoz térést ~14 napon belül várd. Ha 30+ napot vesz igénybe, a modelled talán éppen szétesik.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; A 252 napnyi adatod nem 252 megfigyelés</h4>
+        <p>Minden fenti egyetlen ADF-teszten nyugszik, amelyet egy évnyi napi záróáron futtattál, és a p-értékes doboz már megmondta: egyetlen átment tesztet nem szabad 98 %-os bizonyosságként olvasni. Itt a mélyebb ok, és egyenesen az imént kiszámolt felezési időből következik.</p>
+
+        <p>Egy stacionárius AR(1) spread felépítésénél fogva autokorrelált &mdash; pontosan ezt jelenti az átlaghoz való visszatérés. A mai spread jórészt a tegnapi, tehát az egymást követő napi értékek nem külön bizonyítékok. Egy &theta; paraméterű AR(1) esetén N napnyi minta annyi információt hordoz, mint</p>
+
+<pre><code>független megfigyelés  =  N  &#215;  ( 1 &#8722; &theta; )  &#247;  ( 1 + &theta; )</code></pre>
+
+        <p>a &theta; pedig a már meglévő felezési időből jön: &theta; = 2 a mínusz egy per felezési idő hatványon. Futtasd végig azon a tartományon, amelyben ez a lecke dolgozik:</p>
+
+<pre><code>a spread felezési ideje   théta   független megfigyelés 252 nap alatt   év adat 20 darabhoz
+                  2 nap   0,707                                  43,2                   0,5
+                  5 nap   0,871                                  17,4                   1,1
+                8,2 nap   0,919                                  10,6                   1,9
+                 14 nap   0,952                                   6,2                   3,2
+                 30 nap   0,977                                   2,9                   6,9</code></pre>
+
+        <p><strong>A fent tesztelt SPY/IWM pár felezési ideje 8,2 nap, tehát a 252 napi zárója körülbelül tizenegy független megfigyelés súlyát hordozza.</strong> Nem 252. Tizenegy. Ebből a mintából számolódott a 0,0082-es p-értéked, és ezért harap sokkal nagyobbat a fenti többszörös összehasonlítási figyelmeztetés, mint amilyennek látszik: nem több ezer párt szűrsz erős egyedi bizonyíték ellenében, hanem páronként egy tucat adatpont ellenében.</p>
+
+        <p><strong>Most olvasd az alsó sort a lecke saját szabálya mellé.</strong> Az újjáépítési checklist szerint bármi kereskedhető, aminek a felezési ideje 5 és 30 nap közé esik. 30 napnál egy teljes évnyi ár körülbelül három független kilengést tartalmaz. Hármat. Három megfigyelésből nem lehet átlaghoz visszatérő kapcsolatot megállapítani, és semmilyen, ezen a soron számolt p-érték nem mozdíthat meg. Már húsz független kilengés összegyűjtése is majdnem hét évig tart 30 napos felezési idő mellett &mdash; ezalatt az 5. részben felsorolt vállalati események, üzletimodell-váltások és rezsimváltások többször is szétverik a párt.</p>
+
+        <p>A használható sáv tehát szűkebb, mint a checklist mondja, és olyan okból szűk, aminek semmi köze a türelemhez. Nagyjából tíz nap alatt egy évnyi adat ad valamit, amit tesztelhetsz. Nagyjából tizenöt fölött nem ad, és helyette két tickerről szóló történeted lesz, mellé írt számmal. Az utolsó oszlop az őszinte követelmény: ha nem tudod húszszor megmutatni a párt visszatérni, nem mutattad meg, hogy visszatér.</p>
       </div>
 
       <div class="callout-warning">

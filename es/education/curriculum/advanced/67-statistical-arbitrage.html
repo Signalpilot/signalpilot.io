@@ -151,7 +151,7 @@
           <li>La diferencia entre correlación y cointegración (¡crítica!)</li>
           <li>Cómo identificar pares viables con la prueba de Dickey-Fuller aumentada</li>
           <li>Modelos de entrada y salida por z-score con ventaja estadística</li>
-          <li>Tamaño de posición según la volatilidad del spread y la vida media</li>
+          <li>Dimensionamiento según la volatilidad del spread y la vida media &mdash; y por qué la vida media también decide cuánto vale tu test de cointegración</li>
           <li>Estrategias de stat arb que los fondos de cobertura usan en el mundo real</li>
         </ul>
       </div>
@@ -277,7 +277,7 @@
       <p><strong>Nuevo proceso:</strong></p>
       <ol>
         <li><strong>Prueba ADF a TODOS los pares</strong> — el p-valor debe ser &lt;0,05 para que el spread sea estacionario</li>
-        <li><strong>Calcular la vida media</strong> &mdash; Opera solo si la reversión a la media cae dentro de 5-30 días</li>
+        <li><strong>Calcular la vida media</strong> — Opera solo si la reversión a la media cae dentro de 5-30 días, y ten en cuenta que el extremo alto de esa banda es casi imposible de contrastar: mira el recuadro de la parte 3</li>
         <li><strong>Entrada por z-score</strong> — |Z| &gt; 2,0 (2+ desviaciones típicas de la media)</li>
         <li><strong>Stop por descointegración</strong> — si el p-valor ADF sube por encima de &gt;0,10, salir de inmediato</li>
       </ol>
@@ -489,7 +489,7 @@ Conclusión: KO/PEP es un par operable
       <div class="callout-danger">
         <h4>🚨 Errores habituales al probar la cointegración</h4>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Usar un histórico demasiado corto:</strong> hacen falta al menos 6-12 meses de datos para una prueba ADF fiable. 1-3 meses = poco fiable.</li>
+          <li><strong>Usar un histórico demasiado corto:</strong> Se necesitan al menos 6-12 meses de datos para un test ADF fiable, y eso solo basta si la vida media es corta. Lo que cuenta no son días de calendario sino excursiones independientes, que el recuadro de la parte 3 cuenta. 1-3 meses = poco fiable con cualquier vida media.</li>
           <li><strong>No recalcular β con regularidad:</strong> los ratios de cobertura derivan con el tiempo. Recalcúlalo cada mes o estarás operando el spread equivocado.</li>
           <li><strong>Ignorar la deriva del p-valor:</strong> un par cointegrado en enero puede descointegrarse en junio. Repite la prueba cada mes.</li>
           <li><strong>Probar una sola vez:</strong> la cointegración es dinámica, no estática. Las pruebas con ventana móvil (6 meses) son imprescindibles.</li>
@@ -580,6 +580,30 @@ Conclusión: KO/PEP es un par operable
         <p><strong>Vida media = -log(2) / log(θ)</strong></p>
         <p><strong>Ejemplo:</strong> Si θ = 0,95, la vida media ≈ 14 días</p>
         <p><strong>Implicación:</strong> Espera la reversión en unos 14 días. Si tarda más de 30, puede que tu modelo se esté rompiendo.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; Tus 252 días de datos no son 252 observaciones</h4>
+        <p>Todo lo anterior descansa sobre un único test ADF corrido sobre un año de cierres diarios, y el recuadro del p-valor de más arriba ya dijo que un solo test aprobado no se lee como un 98 % de confianza. Esta es la razón de fondo, y sale directamente de la vida media que acabas de calcular.</p>
+
+        <p>Un spread AR(1) estacionario está autocorrelacionado por construcción &mdash; eso es exactamente lo que significa reversión a la media. El spread de hoy es en su mayor parte el de ayer, así que lecturas diarias consecutivas no son evidencias separadas. Para un AR(1) con parámetro &theta;, una muestra de N días lleva la información de</p>
+
+<pre><code>observaciones independientes  =  N  &#215;  ( 1 &#8722; &theta; )  &#247;  ( 1 + &theta; )</code></pre>
+
+        <p>y &theta; sale de la vida media que ya tienes: &theta; = 2 elevado a menos uno partido por la vida media. Recórrelo a lo largo del rango en el que trabaja esta lección:</p>
+
+<pre><code>vida media del spread   theta   observaciones independientes en 252 días   años de datos para 20 de ellas
+               2 días   0,707                                       43,2                              0,5
+               5 días   0,871                                       17,4                              1,1
+             8,2 días   0,919                                       10,6                              1,9
+              14 días   0,952                                        6,2                              3,2
+              30 días   0,977                                        2,9                              6,9</code></pre>
+
+        <p><strong>El par SPY/IWM contrastado arriba tiene una vida media de 8,2 días, así que sus 252 cierres diarios pesan lo que unas once observaciones independientes.</strong> No 252. Once. Esa es la muestra de la que salió tu p-valor de 0,0082, y por eso la advertencia sobre comparaciones múltiples de más arriba muerde mucho más de lo que parece: no estás cribando miles de pares contra evidencia individual fuerte, los estás cribando contra una docena de datos cada uno.</p>
+
+        <p><strong>Ahora lee la fila de abajo contra la propia regla de esta lección.</strong> La lista de reconstrucción dice que se puede operar cualquier cosa con vida media entre 5 y 30 días. A 30 días, un año entero de precios contiene alrededor de tres excursiones independientes. Tres. No se puede establecer una relación con reversión a la media a partir de tres observaciones, y ningún p-valor calculado sobre esa serie debería moverte. Reunir siquiera veinte excursiones independientes con una vida media de 30 días lleva casi siete años &mdash; durante los cuales las operaciones corporativas, los cambios de modelo de negocio y los cambios de régimen de la parte 5 habrán roto el par varias veces.</p>
+
+        <p>Así que la banda utilizable es más estrecha de lo que dice la lista, y es estrecha por una razón que no tiene nada que ver con la paciencia. Por debajo de unos diez días, un año de datos te da algo que contrastar. Por encima de unos quince no, y lo que tienes en su lugar es una historia sobre dos tickers con un número al lado. La última columna es el requisito honesto: si no puedes enseñar el par revirtiendo veinte veces, no has enseñado que revierta.</p>
       </div>
 
       <div class="callout-warning">
