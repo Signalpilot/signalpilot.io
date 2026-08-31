@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Systeemontwikkeling: idee → backtest → walk-forward → papier → live (klein) → opschalen</li>
           <li>Walk-forward voorkomt overfitting: train op periode 1, test op periode 2, herhaal</li>
+          <li>Zet een prijs op je eigen optimalisatie: vermenigvuldig de standaardfout van je winratio met de wortel uit 2 &#215; ln(doorzochte configuraties) om te zien hoeveel van je backtest zoekwerk is in plaats van edge</li>
           <li>Testen buiten de steekproef: houd ongeveer een derde van de data achter voor de eindvalidatie</li>
           <li>Kader: test het idee &rarr; loop het vooruit over drie of meer vensters &rarr; paper trade tot je gestopt bent met het veranderen van de regels, want daar dient die fase voor &rarr; ga live op een kwart omvang. Let op: de paperfase is geen statistische toets. Vijftig trades kunnen geen edge valideren, en ze als drempel behandelen is precies de fout waar Deel 3 voor waarschuwt. Het is een toets of je je eigen systeem kunt volgen</li>
         </ul>
@@ -491,6 +492,31 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Hoe groot moet een zoektocht zijn om uit het niets een gat van 30 punten te fabriceren?</h4>
+        <p>Deze les zegt dat acht parameters te veel zijn en noemt het curve fitting op ruis. Dat klopt, maar het is een waarschuwing en geen meting &mdash; en de casus geeft je genoeg om het te meten. Toms backtest liet een winratio van 78,4 % zien en zijn live handel 48,2 %. De vraag die de moeite waard is: hoeveel van dat gat van 30,2 punten produceert een zoektocht van zijn omvang zelfs wanneer de strategie helemaal geen edge heeft?</p>
+
+        <p>Twee ingrediënten. Ten eerste, hoe ruizig een winratio op een eindige steekproef is: de standaardfout is de wortel uit p(1 &#8722; p) &#247; n. Bij een winratio rond de helft en, zeg, 250 in-sample trades &mdash; royaal voor drie jaar van een swingsysteem &mdash; is dat 3,2 punten. Ten tweede, wat er gebeurt als je het beste van veel pogingen houdt: de grootste van N ruwweg onafhankelijke trekkingen ligt ongeveer de wortel uit 2 &#215; ln(N) standaardfouten boven het gemiddelde. Vermenigvuldig die twee.</p>
+
+        <p>Let nu op wat de les je al over zijn raster vertelde. Hij rapporteerde drempels van ADX boven 23,4 en RSI onder 38,7 &mdash; één decimaal, wat betekent dat hij in stappen van 0,1 zocht. Over een plausibel bereik zijn dat een paar honderd kandidaatwaarden voor elk van acht parameters:</p>
+
+<pre><code>geteste waarden per parameter   combinaties   verwachte winst door louter toeval
+                            1             1                           0,0 punten
+                            2           2^8                          10,5 punten
+                            5           5^8                          16,0 punten
+                           10          10^8                          19,2 punten
+                          250         250^8                          29,7 punten</code></pre>
+
+        <p>De onderste regel is de zijne. Zo'n fijne zoektocht op zo'n kleine steekproef levert naar verwachting een in-sample winst van 30 punten op <strong>bij een strategie zonder enige edge</strong>. Zijn hele gat past binnen wat de zoektocht alleen al kan genereren. Dat bewijst niet dat zijn idee niets waard was: het bewijst dat de backtest hem dat hoe dan ook niet kon vertellen, wat erger is, want hij sizede alsof die dat wel kon.</p>
+
+        <p>Eén eerlijke kanttekening, want het getal is een plafond en geen schatting: resultaten van een rasterzoektocht zijn sterk met elkaar gecorreleerd en niet onafhankelijk, dus de echte opblazing is kleiner dan de tabel zegt. De orde van grootte blijft staan, en de conclusie ook.</p>
+
+        <p><strong>Doe het nu andersom, en dat is het deel dat je vanavond kunt gebruiken.</strong> Vraag hoeveel zoekwerk je je kunt permitteren voordat toeval een tolerantie overschrijdt &mdash; zeg drie punten, weinig genoeg om je niet voor de gek te houden. Bij 250 trades en een standaardfout van 3,2 punten laat dat een wortel uit 2 &#215; ln(N) onder 1 toe, oftewel minder dan twee configuraties. Niet twee per parameter. Twee in totaal.</p>
+
+        <p>Dat is de echte reden waarom walk-forward geen verfijning is. Bij de steekproefomvang die een particuliere handelaar werkelijk heeft, is er helemaal geen budget voor optimalisatie, en de enige eerlijke manier om er een uit te geven is het achteraf terug te kopen door te testen op data die het fitten nooit heeft aangeraakt. Elke configuratie die je in-sample probeert, is geleend tegen die test.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 De kern</h4>
         <ul>
@@ -499,7 +525,7 @@
           <li><strong>Monte Carlo vertelt je iets over de volgorde, niet over de toekomst:</strong> je trades opnieuw schudden laat zien hoe slecht de volgorde had kunnen uitpakken gegeven de rendementen die je hebt waargenomen. Het kan je niets zeggen over een regime dat rendementen produceert die je niet hebt waargenomen, en dat is het risico dat systemen daadwerkelijk beëindigt.</li>
           <li><strong>Kostprijs de backtest met je eigen fills:</strong> de schade is kosten per round trip gedeeld door brutowinst per round trip. Onder 5% is het je probleem niet; boven 30% tellen de broker en het ordertype zwaarder dan het signaal.</li>
           <li><strong>Neem stapsgewijs in gebruik:</strong> Papier → micro-omvang → klein → volledig (op elke stap valideren)</li>
-          <li><strong>Vermijd overfitting:</strong> Meer parameters = meer curve fitting. Eenvoudige systemen overleven de echte markt</li>
+          <li><strong>Vermijd overfitting, en weet wat het in punten waard is:</strong> de verwachte in-sample winst uit louter zoeken is de standaardfout van je winratio maal de wortel uit 2 &#215; ln(geprobeerde configuraties). Bij 250 trades en acht parameters op een raster van 0,1 is dat ongeveer 30 punten &mdash; het hele gat tussen backtest en live uit de casus, beschikbaar voor een strategie zonder enige edge</li>
         </ul>
       </div>
 

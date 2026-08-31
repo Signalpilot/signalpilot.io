@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Développement de systèmes : idée → backtest → walk-forward → papier → réel (petit) → passage à l’échelle</li>
           <li>Le walk-forward évite le surapprentissage : entraîner sur la période 1, tester sur la période 2, recommencer</li>
+          <li>Chiffrez votre propre optimisation : multipliez l'erreur type de votre taux de réussite par la racine de 2 &#215; ln(configurations testées) pour voir quelle part de votre backtest relève de la recherche et non de l'edge</li>
           <li>Test hors échantillon : gardez environ un tiers des données pour la validation finale</li>
           <li>Cadre : testez l'idée &rarr; faites-la avancer sur trois fenêtres ou plus &rarr; tradez sur papier jusqu'à ce que vous ayez cessé de changer les règles, c'est à cela que sert cette étape &rarr; passez en réel au quart de la taille. Notez que l'étape papier n'est pas un test statistique : cinquante trades ne peuvent pas valider un edge, et les traiter comme un seuil est précisément l'erreur contre laquelle la Partie 3 met en garde. C'est un test de votre capacité à suivre votre propre système</li>
         </ul>
@@ -491,6 +492,31 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Quelle taille de recherche faut-il pour fabriquer un écart de 30 points à partir de rien ?</h4>
+        <p>Cette leçon dit que huit paramètres, c'est trop, et appelle cela de l'ajustement de courbe sur du bruit. C'est exact, mais c'est un avertissement et non une mesure &mdash; or l'étude de cas vous donne de quoi mesurer. Le backtest de Tom affichait 78,4 % de réussite et son trading réel 48,2 %. La question qui vaut la peine est : quelle part de cet écart de 30,2 points une recherche de sa taille produit-elle même quand la stratégie n'a aucune edge ?</p>
+
+        <p>Deux ingrédients. D'abord, le bruit d'un taux de réussite sur un échantillon fini : son erreur type vaut la racine de p(1 &#8722; p) &#247; n. À un taux proche de la moitié et, disons, 250 trades en échantillon &mdash; généreux pour trois ans d'un système de swing &mdash; cela fait 3,2 points. Ensuite, ce qui se passe quand on garde le meilleur de nombreux essais : le plus grand de N tirages à peu près indépendants se situe environ à la racine de 2 &#215; ln(N) erreurs types au-dessus de la moyenne. Multipliez les deux.</p>
+
+        <p>Remarquez maintenant ce que la leçon vous a déjà dit de sa grille. Il rapportait des seuils d'ADX au-dessus de 23,4 et de RSI en dessous de 38,7 &mdash; une décimale, ce qui signifie qu'il a cherché par pas de 0,1. Sur une plage plausible, cela fait quelques centaines de valeurs candidates pour chacun des huit paramètres :</p>
+
+<pre><code>valeurs testées par paramètre   combinaisons   gain attendu par le seul hasard
+                            1              1                        0,0 points
+                            2            2^8                       10,5 points
+                            5            5^8                       16,0 points
+                           10           10^8                       19,2 points
+                          250          250^8                       29,7 points</code></pre>
+
+        <p>La dernière ligne est la sienne. Une recherche aussi fine, sur un échantillon aussi petit, produit en espérance un gain en échantillon de 30 points <strong>à partir d'une stratégie sans la moindre edge</strong>. Tout son écart tient dans ce que la recherche seule peut engendrer. Cela ne prouve pas que son idée ne valait rien : cela prouve que le backtest ne pouvait pas le lui dire dans un sens ni dans l'autre, ce qui est pire, car il a dimensionné comme s'il l'avait pu.</p>
+
+        <p>Une réserve honnête, car le chiffre est un plafond et non une estimation : les résultats d'une recherche en grille sont fortement corrélés entre eux et non indépendants, l'inflation réelle est donc plus faible que ne le dit le tableau. L'ordre de grandeur tient, et la conclusion aussi.</p>
+
+        <p><strong>Faites-le maintenant à l'envers, et c'est la partie utilisable ce soir.</strong> Demandez-vous quelle quantité de recherche vous pouvez vous permettre avant que le hasard ne dépasse une tolérance &mdash; disons trois points, assez peu pour ne pas vous tromper. Sur 250 trades, avec une erreur type de 3,2 points, cela autorise une racine de 2 &#215; ln(N) inférieure à 1, soit moins de deux configurations. Pas deux par paramètre. Deux au total.</p>
+
+        <p>Voilà la vraie raison pour laquelle le walk-forward n'est pas un raffinement. Aux tailles d'échantillon dont dispose réellement un particulier, il n'existe aucun budget d'optimisation, et la seule façon honnête d'en dépenser un est de le racheter ensuite en testant sur des données que l'ajustement n'a jamais touchées. Chaque configuration essayée en échantillon est empruntée contre ce test.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 À retenir</h4>
         <ul>
@@ -499,7 +525,7 @@
           <li><strong>Monte-Carlo vous renseigne sur l'ordre, pas sur l'avenir :</strong> rebattre vos trades montre à quel point l'ordre aurait pu être mauvais compte tenu des rendements que vous avez observés. Cela ne dit rien d'un régime produisant des rendements que vous n'avez pas observés, or c'est ce risque-là qui tue les systèmes.</li>
           <li><strong>Chiffrez le backtest à partir de vos propres exécutions :</strong> les dégâts, c'est le coût par aller-retour divisé par le profit brut par aller-retour. Sous 5 %, ce n'est pas votre problème ; au-dessus de 30 %, le courtier et le type d'ordre comptent plus que le signal.</li>
           <li><strong>Déployez par paliers :</strong> Papier → taille micro → petite → complète (valider à chaque étape)</li>
-          <li><strong>Évitez le surapprentissage :</strong> Plus de paramètres = plus d’ajustement à la courbe. Les systèmes simples survivent au réel</li>
+          <li><strong>Évitez le surajustement, et sachez ce qu'il vaut en points :</strong> le gain en échantillon attendu de la seule recherche vaut l'erreur type de votre taux de réussite multipliée par la racine de 2 &#215; ln(configurations essayées). Sur 250 trades et huit paramètres au pas de 0,1, cela fait environ 30 points &mdash; la totalité de l'écart backtest-réel de l'étude de cas, accessible à une stratégie sans aucune edge</li>
         </ul>
       </div>
 

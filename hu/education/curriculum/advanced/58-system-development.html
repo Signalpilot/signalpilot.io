@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Rendszerfejlesztés: ötlet → backtest → walk-forward → papír → élesben (kicsiben) → skálázás</li>
           <li>A walk-forward megelőzi a túlillesztést: tanítsd az 1. időszakon, teszteld a 2.-on, ismételd</li>
+          <li>Árazza be a saját optimalizálását: szorozza meg a találati arány standard hibáját a 2 &#215; ln(átvizsgált konfiguráció) négyzetgyökével, és látni fogja, mennyi a backtestjéből keresés és nem előny</li>
           <li>Mintán kívüli tesztelés: az adatok nagyjából egyharmadát tartsd meg a végső ellenőrzésre</li>
           <li>Keret: teszteld az ötletet &rarr; futtasd előre három vagy több ablakon &rarr; papíron kereskedj addig, amíg abba nem hagytad a szabályok módosítását &mdash; erre való ez a fázis &rarr; élesben negyed mérettel indulj. Vedd észre, hogy a papírfázis nem statisztikai teszt: ötven ügylet nem tud edge-et validálni, és küszöbként kezelni pontosan az a hiba, amitől a 3. rész óv. Annak a tesztje, hogy tudod-e követni a saját rendszeredet</li>
         </ul>
@@ -491,6 +492,31 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Mekkora kereséssel lehet a semmiből 30 pontos rést gyártani?</h4>
+        <p>Ez a lecke azt mondja, nyolc paraméter sok, és ezt zajra illesztett görbének nevezi. Ez igaz, de figyelmeztetés, nem mérés &mdash; az esettanulmány pedig eleget ad a méréshez. Tom backtestje 78,4 %-os találati arányt mutatott, az éles kereskedés 48,2 %-ot. Az érdemi kérdés az, hogy ebből a 30,2 pontos résből mennyit termel ki egy ekkora keresés akkor is, ha a stratégiának semmilyen előnye nincs.</p>
+
+        <p>Két hozzávaló. Először: mennyire zajos egy találati arány véges mintán &mdash; a standard hibája p(1 &#8722; p) &#247; n négyzetgyöke. Fél körüli találati arány és mondjuk 250 mintán belüli kötés mellett &mdash; ami egy swing rendszer három évére nagyvonalú &mdash; ez 3,2 pont. Másodszor: mi történik, ha sok próbálkozás közül a legjobbat tartja meg &mdash; N nagyjából független húzás közül a legnagyobb körülbelül 2 &#215; ln(N) négyzetgyökével egyenlő számú standard hibával az átlag fölött van. Szorozza össze a kettőt.</p>
+
+        <p>Most figyeljen arra, amit a lecke a rácsáról már elmondott. ADX 23,4 fölötti és RSI 38,7 alatti küszöböt közölt &mdash; egy tizedesjegy, ami azt jelenti, hogy 0,1-es lépésekben keresett. Egy hihető tartományon ez pár száz jelöltérték a nyolc paraméter mindegyikére:</p>
+
+<pre><code>paraméterenként próbált érték   kombináció   a puszta szerencsétől várt többlet
+                            1            1                             0,0 pont
+                            2          2^8                            10,5 pont
+                            5          5^8                            16,0 pont
+                           10         10^8                            19,2 pont
+                          250        250^8                            29,7 pont</code></pre>
+
+        <p>A legalsó sor az övé. Egy ilyen finom keresés ilyen kicsi mintán várhatóan 30 pontos mintán belüli többletet termel &mdash; méghozzá <strong>egy semmilyen előnnyel nem rendelkező stratégiából</strong>. A teljes rése belefér abba, amit önmagában a keresés elő tud állítani. Ez nem bizonyítja, hogy az ötlete értéktelen volt: azt bizonyítja, hogy a backtest sem így, sem úgy nem tudta ezt megmondani neki, ami rosszabb, mert úgy méretezett, mintha meg tudta volna.</p>
+
+        <p>Egy őszinte kikötés, mert a szám plafon és nem becslés: a rácskeresés eredményei erősen korrelálnak egymással, nem függetlenek, tehát a valós felfújódás kisebb a táblázatbelinél. A nagyságrend és a következtetés viszont áll.</p>
+
+        <p><strong>Most futtassa visszafelé &mdash; ez az a rész, amit már ma este használhat.</strong> Kérdezze meg, mennyi keresést engedhet meg magának, mielőtt a szerencse átlép egy tűréshatárt &mdash; mondjuk három pontot, ami elég kicsi ahhoz, hogy ne csapja be. 250 kötésnél, 3,2 pontos standard hibával ez azt engedi meg, hogy a 2 &#215; ln(N) négyzetgyöke 1 alatt maradjon, vagyis kettőnél kevesebb konfigurációt. Nem kettőt paraméterenként. Összesen kettőt.</p>
+
+        <p>Ez az igazi oka annak, hogy a walk-forward nem finomítás. Azokon a mintaméreteken, amelyekkel egy lakossági kereskedő ténylegesen rendelkezik, egyáltalán nincs keret az optimalizálásra, és az egyetlen tisztességes mód, hogy ilyet elköltsön, az, ha utólag visszavásárolja: olyan adaton tesztel, amelyhez az illesztés soha nem ért hozzá. Minden mintán belül kipróbált konfiguráció ezzel a teszttel szemben felvett kölcsön.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 A lényeg</h4>
         <ul>
@@ -499,7 +525,7 @@
           <li><strong>A Monte Carlo a sorrendről mond valamit, nem a jövőről:</strong> a kereskedéseid újrakeverése megmutatja, mennyire lehetett volna rossz a sorrend a megfigyelt hozamok mellett. Semmit nem mond olyan rezsimről, amely a nem megfigyelt hozamokat termeli &mdash; és valójában ez a kockázat vet véget a rendszereknek.</li>
           <li><strong>A backtest költségeit a saját teljesüléseidből számold:</strong> a kár az oda-vissza költség osztva az oda-vissza bruttó nyereséggel. 5% alatt nem a te bajod; 30% fölött a bróker és a megbízástípus többet nyom, mint a jelzés.</li>
           <li><strong>Élesíts lépcsőzetesen:</strong> Papír → mikroméret → kicsi → teljes (minden szakaszban ellenőrizve)</li>
-          <li><strong>Kerüld a túlillesztést:</strong> Több paraméter = több görbére illesztés. Az egyszerű rendszerek élik túl az éles piacot</li>
+          <li><strong>Kerülje a túlillesztést &mdash; és tudja, hány pontot ér:</strong> a pusztán keresésből várt mintán belüli többlet a találati arány standard hibája szorozva 2 &#215; ln(kipróbált konfiguráció) négyzetgyökével. 250 kötésnél és nyolc paraméternél 0,1-es rácson ez körülbelül 30 pont &mdash; az esettanulmány teljes backtest-és-éles rése, olyan stratégia számára is elérhetően, amelynek semmilyen előnye nincs</li>
         </ul>
       </div>
 

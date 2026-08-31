@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Sistem geliştirme: fikir → backtest → walk-forward → kâğıt üzerinde → canlı (küçük) → büyütme</li>
           <li>Walk-forward aşırı uyumu önler: 1. dönemde eğit, 2. dönemde test et, tekrarla</li>
+          <li>Kendi optimizasyonunuzu fiyatlayın: kazanma oranınızın standart hatasını 2 &#215; ln(taranan yapılandırma) karekökü ile çarpın; böylece backtestinizin ne kadarının avantaj değil arama olduğunu görürsünüz</li>
           <li>Örneklem dışı test: son doğrulama için verinin yaklaşık üçte birini ayırın</li>
           <li>Çerçeve: fikri test edin &rarr; üç ya da daha fazla pencerede ileri doğru yürütün &rarr; kuralları değiştirmeyi bırakana kadar kâğıt üzerinde işlem yapın; o aşama zaten bunun içindir &rarr; çeyrek büyüklükle canlıya geçin. Kâğıt aşamasının istatistiksel bir test olmadığına dikkat edin: elli işlem bir edge'i doğrulayamaz ve bunları bir eşik gibi görmek tam da Bölüm 3'ün uyardığı hatadır. O, kendi sisteminizi izleyip izleyemediğinizin testidir</li>
         </ul>
@@ -491,6 +492,31 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Sıfırdan 30 puanlık bir fark imal etmek için ne büyüklükte bir arama gerekir?</h4>
+        <p>Bu ders sekiz parametrenin fazla olduğunu söylüyor ve buna gürültüye eğri uydurma diyor. Doğru, ama bu bir uyarı, ölçüm değil &mdash; ve vaka çalışması ölçmeye yetecek kadarını veriyor. Tom’un backtesti %78,4 kazanma oranı gösteriyordu, canlı işlemleri ise %48,2. Sorulmaya değer soru şu: strateji hiçbir avantaja sahip olmasa bile, onun büyüklüğündeki bir arama o 30,2 puanlık farkın ne kadarını üretir?</p>
+
+        <p>İki bileşen. Birincisi, sonlu bir örneklemde kazanma oranının ne kadar gürültülü olduğu: standart hatası p(1 &#8722; p) &#247; n’nin karekökü. Kazanma oranı yarıya yakınken ve diyelim 250 örneklem içi işlemde &mdash; bir swing sistemin üç yılı için cömert &mdash; bu 3,2 puan eder. İkincisi, çok sayıda denemenin en iyisini tuttuğunuzda ne olduğu: yaklaşık bağımsız N çekilişin en büyüğü, ortalamanın 2 &#215; ln(N) karekökü kadar standart hata üstünde durur. İkisini çarpın.</p>
+
+        <p>Şimdi dersin size onun ızgarası hakkında zaten söylediğine dikkat edin. ADX’in 23,4 üzeri, RSI’ın 38,7 altı eşiklerini bildirmişti &mdash; bir ondalık basamak, yani 0,1 adımlarla aramış. Makul bir aralıkta bu, sekiz parametrenin her biri için birkaç yüz aday değer demektir:</p>
+
+<pre><code>parametre başına denenen değer   kombinasyon   yalnızca şanstan beklenen artış
+                             1             1                          0,0 puan
+                             2           2^8                         10,5 puan
+                             5           5^8                         16,0 puan
+                            10          10^8                         19,2 puan
+                           250         250^8                         29,7 puan</code></pre>
+
+        <p>En alt satır onunki. Bu incelikte bir arama, bu küçüklükte bir örneklem üzerinde, örneklem içinde 30 puanlık bir artış üretmesi beklenen bir şeydir &mdash; hem de <strong>hiçbir avantajı olmayan bir stratejiden</strong>. Onun tüm farkı, yalnızca aramanın üretebileceğinin içine sığıyor. Bu, fikrinin değersiz olduğunu kanıtlamaz: backtestin ona ne öyle ne böyle bir şey söyleyemediğini kanıtlar, ki bu daha kötüdür, çünkü söyleyebilirmiş gibi boyutlandırdı.</p>
+
+        <p>Dürüst bir çekince, çünkü bu sayı bir tahmin değil tavandır: ızgara araması sonuçları birbiriyle güçlü biçimde ilişkilidir, bağımsız değildir; dolayısıyla gerçek şişme tablodakinden küçüktür. Büyüklük mertebesi ayakta kalır, sonuç da.</p>
+
+        <p><strong>Şimdi tersine çevirin; bu akşam kullanabileceğiniz kısım bu.</strong> Şans bir toleransı aşmadan önce ne kadar arama yapabileceğinizi sorun &mdash; diyelim üç puan, sizi kandırmayacak kadar küçük. 250 işlemde, 3,2 puanlık standart hatayla bu, 2 &#215; ln(N) karekökünün 1’in altında olmasını gerektirir; yani ikiden az yapılandırma. Parametre başına iki değil. Toplam iki.</p>
+
+        <p>Walk-forward’un bir incelik olmamasının gerçek nedeni budur. Bireysel bir yatırımcının gerçekte sahip olduğu örneklem büyüklüklerinde optimizasyon için hiç bütçe yoktur; onu harcamanın tek dürüst yolu, uydurmanın hiç dokunmadığı veride test ederek sonradan geri satın almaktır. Örneklem içinde denediğiniz her yapılandırma, o teste karşılık ödünç alınmıştır.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Öne çıkanlar</h4>
         <ul>
@@ -499,7 +525,7 @@
           <li><strong>Monte Carlo sana sıralamayı anlatır, geleceği değil:</strong> işlemlerini yeniden karmak, gözlemlediğin getiriler verildiğinde sıralamanın ne kadar kötü olabileceğini gösterir. Gözlemlemediğin getirileri üreten bir rejim hakkında sana hiçbir şey söyleyemez ve sistemleri asıl bitiren risk odur.</li>
           <li><strong> backtest ’i kendi doldurmalarından maliyetlendir:</strong> hasar, gidiş-dönüş maliyetinin gidiş-dönüş brüt kârına bölümüdür. %5’in altındaysa senin sorunun değil; %30’un üstündeyse aracı kurum ve emir türü sinyalden daha çok önem taşır.</li>
           <li><strong>Kademeli devreye alın:</strong> Kâğıt → mikro büyüklük → küçük → tam (her aşamada doğrulayarak)</li>
-          <li><strong>Aşırı uyumdan kaçın:</strong> Daha çok parametre = daha çok eğriye uydurma. Basit sistemler canlı piyasada ayakta kalır</li>
+          <li><strong>Aşırı uydurmadan kaçının ve bunun kaç puan ettiğini bilin:</strong> yalnızca aramadan beklenen örneklem içi artış, kazanma oranınızın standart hatası çarpı 2 &#215; ln(denenen yapılandırma) karekökü kadardır. 250 işlem ve 0,1 ızgaralı sekiz parametrede bu yaklaşık 30 puan eder &mdash; vaka çalışmasındaki backtest-canlı farkının tamamı, hiçbir avantajı olmayan bir stratejinin bile erişebileceği bir şey</li>
         </ul>
       </div>
 

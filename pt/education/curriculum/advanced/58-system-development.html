@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Desenvolvimento de sistemas: ideia → backtest → walk-forward → papel → ao vivo (pequeno) → escalar</li>
           <li>O walk-forward evita o overfitting: treine no período 1, teste no período 2, repita</li>
+          <li>Ponha um preço na sua própria otimização: multiplique o erro-padrão da sua taxa de acerto pela raiz de 2 &#215; ln(configurações testadas) para ver quanto do seu backtest é busca e não vantagem</li>
           <li>Teste fora da amostra: guarde cerca de um terço dos dados para a validação final</li>
           <li>Enquadramento: teste a ideia &rarr; leve-a para a frente em três ou mais janelas &rarr; negoceie em papel até ter deixado de mudar as regras, que é para isso que essa fase serve &rarr; vá a sério com um quarto do tamanho. Repare que a fase de papel não é um teste estatístico: cinquenta operações não conseguem validar um edge, e tratá-las como um crivo é exatamente o erro contra o qual a Parte 3 avisa. É um teste de se consegue seguir o seu próprio sistema</li>
         </ul>
@@ -491,6 +492,31 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Que tamanho tem de ter uma busca para fabricar do nada uma diferença de 30 pontos?</h4>
+        <p>Esta lição diz que oito parâmetros são demasiados e chama-lhe ajuste de curva ao ruído. É verdade, mas é um aviso e não uma medição &mdash; e o caso de estudo dá-lhe o suficiente para medir. O backtest de Tom mostrava 78,4 % de acerto e a operação real 48,2 %. A pergunta que vale a pena é quanto dessa diferença de 30,2 pontos uma busca daquele tamanho produz mesmo quando a estratégia não tem vantagem nenhuma.</p>
+
+        <p>Dois ingredientes. Primeiro, o ruído de uma taxa de acerto numa amostra finita: o seu erro-padrão é a raiz de p(1 &#8722; p) &#247; n. Com uma taxa perto de metade e, digamos, 250 operações dentro da amostra &mdash; generoso para três anos de um sistema de swing &mdash; dá 3,2 pontos. Segundo, o que acontece quando fica com o melhor de muitas tentativas: o maior de N extrações aproximadamente independentes fica cerca de raiz de 2 &#215; ln(N) erros-padrão acima da média. Multiplique os dois.</p>
+
+        <p>Repare agora no que a lição já lhe disse sobre a grelha dele. Reportava limiares de ADX acima de 23,4 e RSI abaixo de 38,7 &mdash; uma casa decimal, o que significa que procurou em passos de 0,1. Num intervalo plausível são umas centenas de valores candidatos para cada um dos oito parâmetros:</p>
+
+<pre><code>valores testados por parâmetro   combinações   ganho esperado só por sorte
+                             1             1                    0,0 pontos
+                             2           2^8                   10,5 pontos
+                             5           5^8                   16,0 pontos
+                            10          10^8                   19,2 pontos
+                           250         250^8                   29,7 pontos</code></pre>
+
+        <p>A última linha é a dele. Uma busca tão fina, numa amostra tão pequena, produz em esperança um ganho dentro da amostra de 30 pontos <strong>partindo de uma estratégia sem vantagem alguma</strong>. Toda a diferença dele cabe dentro do que só a busca consegue gerar. Isso não prova que a ideia não valesse nada: prova que o backtest não lho podia dizer num sentido nem no outro, o que é pior, porque ele dimensionou como se pudesse.</p>
+
+        <p>Uma ressalva honesta, porque o número é um tecto e não uma estimativa: os resultados de uma busca em grelha estão fortemente correlacionados entre si e não são independentes, portanto a inflação real é menor do que a da tabela. A ordem de grandeza mantém-se, e a conclusão também.</p>
+
+        <p><strong>Agora faça-o ao contrário, que é a parte que pode usar hoje à noite.</strong> Pergunte quanta busca pode dar-se ao luxo de fazer antes de a sorte ultrapassar uma tolerância &mdash; digamos três pontos, pouco o suficiente para não o enganar. Com 250 operações e um erro-padrão de 3,2 pontos, isso permite uma raiz de 2 &#215; ln(N) abaixo de 1, ou seja, menos de duas configurações. Não duas por parâmetro. Duas ao todo.</p>
+
+        <p>É esta a verdadeira razão pela qual o walk-forward não é um refinamento. Com os tamanhos de amostra que um investidor de retalho realmente tem, não existe orçamento nenhum para otimização, e a única forma honesta de gastar um é recomprá-lo depois, testando em dados que o ajuste nunca tocou. Cada configuração que testa dentro da amostra é emprestada contra esse teste.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Pontos essenciais</h4>
         <ul>
@@ -499,7 +525,7 @@
           <li><strong>Monte Carlo fala-te da sequência, não do futuro:</strong> baralhar de novo as tuas operações mostra quão má poderia ter sido a ordenação, dados os retornos que observaste. Não te pode dizer nada sobre um regime que produza retornos que não observaste, e é esse o risco que realmente acaba com os sistemas.</li>
           <li><strong>Custeia o backtest a partir das tuas próprias execuções:</strong> o estrago é o custo por ida e volta dividido pelo lucro bruto por ida e volta. Abaixo de 5% não é problema teu; acima de 30%, o corretor e o tipo de ordem importam mais do que o sinal.</li>
           <li><strong>Implante por etapas:</strong> Papel → tamanho micro → pequeno → cheio (validando em cada etapa)</li>
-          <li><strong>Evite o sobreajuste:</strong> Mais parâmetros = mais ajuste à curva. Os sistemas simples sobrevivem ao mercado de verdade</li>
+          <li><strong>Evite o sobreajuste, e saiba quanto vale em pontos:</strong> o ganho esperado dentro da amostra só pela busca é o erro-padrão da sua taxa de acerto vezes a raiz de 2 &#215; ln(configurações testadas). Com 250 operações e oito parâmetros numa grelha de 0,1 isso dá cerca de 30 pontos &mdash; toda a diferença entre backtest e real do caso de estudo, ao alcance de uma estratégia sem vantagem alguma</li>
         </ul>
       </div>
 

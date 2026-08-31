@@ -111,6 +111,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>System development: Idea → Backtest → Walk-forward → Paper trade → Live (small) → Scale</li>
           <li>Walk-forward prevents overfitting: Train Period 1, test Period 2, iterate</li>
+          <li>Price your own optimisation: multiply the standard error of your win rate by the square root of 2 &#215; ln(configurations searched) to see how much of your backtest is search rather than edge</li>
           <li>Out-of-sample testing: reserve about a third of the data for final validation</li>
           <li>Framework: test the idea &rarr; walk it forward over three or more windows &rarr; paper trade until you have stopped changing the rules, which is what that stage is actually for &rarr; go live at a quarter size. Note that the paper stage is not a statistical test: fifty trades cannot validate an edge, and treating them as a gate is the mistake this lesson spends Part 3 warning about. It is a test of whether you can follow your own system</li>
         </ul>
@@ -478,6 +479,31 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; How big a search does it take to manufacture a 30-point gap out of nothing?</h4>
+        <p>This lesson says eight parameters is too many and calls it curve-fitting to noise. That is right, but it is a warning rather than a measurement, and the case study gives you enough to measure it. Tom's backtest showed a 78.4 % win rate and his live trading showed 48.2 %. The question worth answering is how much of that 30.2-point gap a search of his size produces even when the strategy has no edge at all.</p>
+
+        <p>Two ingredients. First, how noisy a win rate is on a finite sample: its standard error is the square root of p(1 &#8722; p) &#247; n. At a win rate near half and, say, 250 in-sample trades &mdash; generous for three years of a swing system &mdash; that is 3.2 points. Second, what happens when you keep the best of many attempts: the largest of N roughly independent draws sits about the square root of 2 &#215; ln(N) standard errors above the mean. Multiply the two.</p>
+
+        <p>Now note what the lesson already told you about his grid. He reported thresholds of ADX above 23.4 and RSI below 38.7 &mdash; one decimal place, which means he searched in steps of 0.1. Over a plausible range that is a couple of hundred candidate values for each of eight parameters:</p>
+
+<pre><code>values tried per parameter   combinations   expected lift from luck alone
+                         1              1                      0.0 points
+                         2            2^8                     10.5 points
+                         5            5^8                     16.0 points
+                        10           10^8                     19.2 points
+                       250          250^8                     29.7 points</code></pre>
+
+        <p>The bottom row is his. A search that fine, on a sample that small, is expected to produce a 30-point in-sample lift <strong>from a strategy with no edge whatsoever</strong>. His entire gap fits inside what the search alone can generate. That does not prove his idea was worthless &mdash; it proves the backtest could not tell him either way, which is worse, because he sized as though it had.</p>
+
+        <p>One honest qualification, because the number is a ceiling rather than an estimate: grid-search results are heavily correlated with one another, not independent, so the real inflation is smaller than the table says. The order of magnitude survives, and so does the conclusion.</p>
+
+        <p><strong>Now run it backwards, which is the part you can use tonight.</strong> Ask how much searching you can afford before luck exceeds some tolerance &mdash; say three points, small enough not to fool you. On 250 trades, with a standard error of 3.2 points, that allows a square root of 2 &#215; ln(N) of under 1, which means fewer than two configurations. Not two per parameter. Two in total.</p>
+
+        <p>That is the real reason walk-forward is not a refinement. On the sample sizes any retail trader actually has, there is no budget for optimisation at all, so the only honest way to spend one is to buy it back afterwards by testing on data the fitting never touched. Every configuration you try in-sample is borrowed against that test.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Key Takeaways</h4>
         <ul>
@@ -486,7 +512,7 @@
           <li><strong>Monte Carlo tells you about sequence, not about the future:</strong> reshuffling your trades shows how bad the ordering could have been given the returns you observed. It cannot tell you about a regime that produces returns you have not observed, which is the risk that actually ends systems.</li>
           <li><strong>Cost the backtest from your own fills:</strong> the damage is cost per round trip divided by gross profit per round trip. Under 5% and it is not your problem; over 30% and the broker and the order type matter more than the signal.</li>
           <li><strong>Deploy incrementally:</strong> Paper → Micro size → Small → Full (validate at each stage)</li>
-          <li><strong>Avoid overfitting:</strong> More parameters = more curve fitting. Simple systems survive live trading</li>
+          <li><strong>Avoid overfitting, and know what it is worth in points:</strong> the expected in-sample lift from searching alone is the standard error of your win rate times the square root of 2 &#215; ln(configurations tried). On 250 trades and eight parameters at a 0.1 grid, that is about 30 points &mdash; the whole of the case study's backtest-to-live gap, available to a strategy with no edge at all</li>
         </ul>
       </div>
 
