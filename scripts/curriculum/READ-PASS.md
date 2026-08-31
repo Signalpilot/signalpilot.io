@@ -159,3 +159,29 @@ lesson in rendered text, after editing, looking for what the edits broke:
 section numbering, a heading left standing over content that moved, a reference
 to a part that no longer exists, a transition into something that is no longer
 there. `python3 /tmp/p39/read.py <NN>` again, top to bottom, before the ledger row.
+
+## Scope change: from compression to improvement
+
+The brief scoped this as compression — delete or move, never reword, and a reader
+should never notice it was edited. Run that way for nine lessons it produced
+hygiene: duplicate boxes removed, false attributions corrected, restatements cut.
+Correct, and thin.
+
+Scope is now expanded on the client's instruction. The job is to make the lessons
+better, not only shorter. What changes:
+
+- **Where a concept is asserted, teach it.** Most lessons state their mechanism in
+  half a sentence and then spend two thousand words on consequences. Lesson 1 says
+  "a buyer with size goes where the sell orders are" and never explains that a
+  triggered stop *is* a market sell order, which is the entire reason the pocket
+  exists and the entire reason the reclaim is a signal.
+- **Restructure so the argument builds.** If the best passage in a lesson is a
+  callout buried in a case study, the lesson is a story with a box in it. Make the
+  claim lead and the story be evidence for it.
+- **Deepen thin sections rather than deleting them**, where the thinness is the
+  defect. A Part that is four bullets of assertion is not fixed by cutting it to
+  three.
+
+What does not change: correctness. No number, quiz answer or takeaway changes
+meaning, nothing false enters, and the S check runs after every lesson. What is
+dropped is "never notices it was edited" — the lessons will visibly change.
