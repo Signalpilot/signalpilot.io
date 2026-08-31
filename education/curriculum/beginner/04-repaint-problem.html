@@ -124,19 +124,8 @@
       <p>The indicator did not lie about the past. It rewrote it. That is repainting: a signal that moves, or vanishes, after the bar it printed on has closed, so the history shows entries that were never available in real time.</p>
 
       <div class="callout-warning">
-        <h4>🚨 Why this is the most expensive bug in retail trading</h4>
+        <h4>Why it survives a backtest</h4>
         <p>A repainting indicator backtests beautifully, because in the backtest every signal already sits where it should have been. Live, it puts you a few points late on every single trade. A few points is the whole edge.</p>
-      </div>
-
-<div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
-        <h3 style="margin:0 0 1rem 0">🎯 What You'll Learn</h3>
-        <p style="margin:0 0 0.75rem 0">By the end of this lesson, you'll be able to:</p>
-        <ul style="line-height:1.8;margin:0 0 0 1.5rem">
-          <li>Test indicators for repainting (screenshot signal before bar close, verify after)</li>
-          <li>Recognise the indicator categories that repaint most often, and why each one does it</li>
-          <li>Use only non-repainting tools (all Signal Pilot indicators are non-repainting)</li>
-          <li>Audit an indicator four ways &mdash; live watch, Bar Replay, alerts, and the source code &mdash; before it touches real money</li>
-        </ul>
       </div>
 
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -266,42 +255,38 @@ that day                       $800  of displacement, inside $2,400 of losses</c
       <!-- Prerequisites -->
       <h2 id="what-deterministic-means-and-why-it-matters">What "Deterministic" Means (And Why It Matters)</h2>
 
-      <p>Here's the thing: Most indicators are built by hobbyists who don't know about repainting. Or worse, by scammers who <em>do</em> know and don't care.</p>
-
-      <p>Signal Pilot takes a different approach.</p>
+      <p>Most repainting is not malice. It is what you get by default: the convenient way to pull a higher-timeframe value in Pine Script peeks at a bar that has not closed, and the convenient way to plot a pivot needs bars that have not printed yet. Both produce a chart that looks right in history and is wrong live, and neither requires anyone to intend it.</p>
 
       <div class="callout-key">
-        <h4>💡 Signal Pilot's Guarantee</h4>
-        <p><strong>Every Signal Pilot indicator follows strict deterministic rules:</strong></p>
+        <h4>💡 What deterministic means in code</h4>
+        <p><strong>These are the four constraints an indicator has to satisfy, and they are what to check for in anything you use, this suite included:</strong></p>
         <ul style="margin:.5rem 0">
           <li><strong>No future data:</strong> All HTF requests use <code>lookahead_off</code> and <code>[1]</code> offsets</li>
           <li><strong>Fixed signals:</strong> Once a signal prints, it <em>never</em> moves or disappears</li>
           <li><strong>Confirmed bars only:</strong> Signals wait for bar close (no intra-bar magic)</li>
           <li><strong>Open-source auditable:</strong> Code is available for independent review</li>
         </ul>
-        <p style="margin-top:1rem"><strong>Translation:</strong> What you see live is what you'll see in history. No tricks. No lies.</p>
+        <p style="margin-top:1rem"><strong>What the four buy you:</strong> the chart in front of you and the chart in six months are the same chart. That is the whole property, and it is checkable rather than promised &mdash; the bar-replay walkthrough further down is how you check it.</p>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1.5rem;margin:2rem 0">
         <div style="padding:1.5rem;background:rgba(255,107,107,.1);border:2px solid rgba(255,107,107,.3);border-radius:12px">
 <h3 style="margin:0 0 1rem 0" id="repainting-indicator">❌ Repainting Indicator</h3>
-          <p><strong>Backtest:</strong> 3.2R expectancy, 2.8 profit factor</p>
-          <p><strong>Live trading:</strong> -0.8R expectancy, 0.6 profit factor</p>
-          <p><strong>Problem:</strong> Signals change after bar close</p>
-          <p><strong>Result:</strong> Wasted months, blown account</p>
+          <p><strong>Backtest:</strong> flatters, because every signal already sits where it ended up</p>
+          <p><strong>Live:</strong> worse than the backtest by the displacement, on every trade</p>
+          <p><strong>Problem:</strong> signals change after bar close</p>
+          <p><strong>What you cannot tell:</strong> whether the strategy was any good, because the tool moved the entries before you could judge it</p>
         </div>
         <div style="padding:1.5rem;background:rgba(0,212,170,.1);border:2px solid rgba(0,212,170,.3);border-radius:12px">
           <h3 style="margin:0 0 1rem 0" id="deterministic-indicator">✓ Deterministic Indicator</h3>
-          <p><strong>Backtest:</strong> 1.8R expectancy, 1.6 profit factor</p>
-          <p><strong>Live trading:</strong> 1.7R expectancy, 1.5 profit factor</p>
-          <p><strong>Integrity:</strong> Signals never change</p>
-          <p><strong>Result:</strong> Consistent, profitable edge</p>
+          <p><strong>Backtest:</strong> the entries it shows are the entries that were available</p>
+          <p><strong>Live:</strong> the same entries, so the gap is execution rather than the tool</p>
+          <p><strong>Integrity:</strong> signals never change</p>
+          <p><strong>What you get:</strong> a backtest worth arguing with. It may still say the strategy is bad</p>
         </div>
       </div>
 
-      <p>Notice: The deterministic indicator has a <em>lower</em> backtest expectancy. That's because it's honest. It doesn't cheat by using future data.</p>
-
-      <p>But live? It actually <strong>works</strong>.</p>
+      <p>Expect the honest one to backtest worse. It is not using future data, so it cannot show you entries that were not there. A lower backtest number that survives contact with a live market is worth more than a higher one that does not, and that is the whole of the comparison.</p>
 
 <h3 id="visual-repaint-examples">Visual Repaint Examples: Before vs After</h3>
 
@@ -434,14 +419,6 @@ Signal appeared at $519 during live bar formation
 Signal moved to $520 in historical chart (appears earlier, better entry)
 This is future-peeking—indicator adjusts signals after knowing outcome</code></pre>
 
-      <div class="callout-warning">
-        <h4>🚨 Real Talk</h4>
-        <p>This feels like extra work. It is. But consider the alternative:</p>
-        <p>Spend 2 hours testing → Save months of losses and psychological damage.</p>
-        <p>Skip testing → Blow account → Wonder why trading is "impossible."</p>
-        <p><strong>Your choice.</strong></p>
-      </div>
-
 <h3 id="code-audit-deep-dive">Code Audit Deep-Dive: Pine Script Red Flags</h3>
 
       <p>If an indicator provides source code (open-source on TradingView), you can audit it for repainting issues. Here are the exact code patterns to look for:</p>
@@ -478,7 +455,7 @@ pivot_high = ta.pivothigh(high, 5, 5)  // looks back 5 bars, forward 5 bars
 // No forward-looking, signals are delayed but honest</code></pre>
 
       <p style="padding:1rem;background:rgba(0,212,170,0.08);border-radius:8px;border-left:4px solid #00d4aa;margin:1.5rem 0">
-        <strong>Pro tip:</strong> If you can't read Pine Script code, use the visual and replay tests instead. They'll catch 95%+ of repainting indicators without needing to understand the code. But if you CAN read code, this is the fastest detection method—spot repainting in 30 seconds by searching for these patterns.
+        <strong>Pro tip:</strong> If you can't read Pine Script code, use the visual and replay tests instead. Between them they catch the two things that matter &mdash; a signal that moves and a signal that vanishes &mdash; without needing to read anything. But if you CAN read code, this is the fastest detection method—spot repainting in 30 seconds by searching for these patterns.
       </p>
 
       <p><strong>Where Signal Pilot sits in this:</strong> every indicator in the suite is built to be deterministic &mdash; a signal printed on a closed bar stays where it printed. That is a design constraint, not a feature claim, and it is the thing you should verify yourself using the bar-replay walkthrough above rather than take on trust. Run the check on any tool before you let it near a live decision, ours included.</p>
@@ -490,7 +467,7 @@ pivot_high = ta.pivothigh(high, 5, 5)  // looks back 5 bars, forward 5 bars
           <li><strong>Repainting = fake edge</strong> — Perfect backtests, disastrous live results</li>
           <li><strong>Use 4 detection methods</strong> — Visual, Replay, Alert, Code audit</li>
           <li><strong>Deterministic code matters</strong> — A signal printed on a closed bar cannot move</li>
-          <li><strong>Signal Pilot guarantees it</strong> — No future data, no tricks, no lies</li>
+          <li><strong>Which categories to suspect first</strong> — zigzags, dynamic zones, most divergence tools, and anything pulling a higher timeframe: each repaints for a different reason, and each has its own test</li>
           <li><strong>Audit before you trade</strong> — 2 hours testing saves months of losses</li>
         </ul>
       </div>
@@ -513,23 +490,6 @@ pivot_high = ta.pivothigh(high, 5, 5)  // looks back 5 bars, forward 5 bars
       </div>
 
       
-
-              <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
-        <div style="margin-top:1rem">
-
-        <p>Don't overwhelm yourself. Start with these 3 actions:</p>
-        <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Screenshot test 1 indicator</strong> — Take 3 screenshots of live signals, check in 10 mins</li>
-          <li><strong>Set 1 alert</strong> — Pick your main indicator, set an alert, verify it matches after bar close</li>
-          <li><strong>Journal it</strong> — "Indicator: [name]. Test: Screenshot. Result: Signals moved/didn't move."</li>
-        </ol>
-        <p style="margin-top:1rem;font-size:0.9rem;color:var(--muted)">
-          After testing 3 indicators this way, you'll know which ones are lying. Remove the liars immediately.
-        </p>
-      
-        </div>
-      </details>
 
 <div class="section-break"><span>Test Your Knowledge</span></div>
 
@@ -572,7 +532,7 @@ pivot_high = ta.pivothigh(high, 5, 5)  // looks back 5 bars, forward 5 bars
             <div class="quiz-option" data-correct="false">D) He used the wrong timeframe</div>
           </div>
           <div class="quiz-explanation">
-            <strong>Correct!</strong> Jake's indicator showed perfect signals in backtests that never existed live. 91.5% of signals moved after bar close—his 71% backtest win rate became 34% live.
+            <strong>Correct!</strong> Jake's indicator showed signals in the backtest that were never available live. 43 of 47 moved or vanished after the bar closed, which is why a backtest in the seventies traded in the thirties.
           </div>
         </div>
 
@@ -580,7 +540,7 @@ pivot_high = ta.pivothigh(high, 5, 5)  // looks back 5 bars, forward 5 bars
       </div>
 
       <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">
-        If you made it this far, you just saved yourself months (maybe years) of pain. Most traders never learn this. You just did.
+        The test costs an evening and it is the same test every time: screenshot the signal while the bar is live, look again after it closes, multiply the gap by your instrument's point value. Anything you cannot run that on, you cannot judge.
       </p>
 
 <div class="section-break"><span>Related Lessons</span></div>
@@ -604,12 +564,6 @@ pivot_high = ta.pivothigh(high, 5, 5)  // looks back 5 bars, forward 5 bars
           <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Learn how RSI works properly — and why "overbought" doesn't mean sell</p>
           <a href="/education/curriculum/beginner/05-rsi-extremes.html" class="btn btn-sm btn-ghost">Read Lesson &rarr;</a>
         </div>
-      </div>
-
-      <div class="callout-info">
-        <h4>⏭️ Coming Up Next</h4>
-        <p><strong>Lesson #5: RSI Extremes Are Not Reversal Signals</strong></p>
-        <p>Learn why RSI >70 in an uptrend is often a BUY signal, and how regime determines everything.</p>
       </div>
 
       <blockquote class="sp-disclaimer"><strong>Educational only.</strong> Trading involves substantial risk of loss. Not financial advice. Past performance does not guarantee future results.</blockquote>
