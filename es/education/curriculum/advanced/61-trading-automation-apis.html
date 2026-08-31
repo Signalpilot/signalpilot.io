@@ -150,6 +150,7 @@
           <li>Cómo pasar de una idea de trading a código ejecutable contra la API de un bróker</li>
           <li>Cómo es un periodo realista de paper trading antes del dinero real, y por qué abarca varias condiciones de mercado</li>
           <li>El lado operativo: manejo de errores, interruptores de emergencia, alojamiento y la revisión mensual de mantenimiento</li>
+          <li>Con qué rapidez un fallo repetido alcanza toda tu cuenta, y por qué un límite de pérdida diaria no puede detenerlo y un tope de posición sí</li>
         </ul>
       </div>
 
@@ -776,6 +777,29 @@ except Exception as e:
 
       <p><strong>Dónde encaja Signal Pilot en esto:</strong> Los indicadores producen la señal, pero la automatización necesita que esa señal salga del gráfico. En la práctica, eso significa una alerta de TradingView que lleva un payload estructurado al webhook en el que escucha tu bot, para que la condición de entrada sobre la que actúa tu código sea la misma que validaste visualmente &mdash; y no una reimplementación en Python que se aparta del original sin avisar.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Cuánto tarda un fallo repetido en alcanzar toda tu cuenta</h4>
+        <p>El caso de arriba está bien diagnosticado: nada en el código sabía cuánto tenía ya, así que una condición que seguía siendo cierta generaba una orden cada vez que se comprobaba. Lo que falta es la velocidad, y la velocidad es toda la diferencia entre este fallo en un bot y el mismo fallo en una persona.</p>
+
+        <p>Ponlo en la unidad de este temario. Si arriesgas un 2 % por operación, una R es el 2 % de la cuenta, así que <strong>tu cuenta entera son 50 R</strong>. Un fallo repetido añade una R de exposición por sondeo. El número de sondeos hasta tener toda la cuenta en riesgo no es una estimación, es una división:</p>
+
+<pre><code>sondeos hasta la exposición total  =  1  &#247;  riesgo por operación  =  1 &#247; 0,02  =  50</code></pre>
+
+<pre><code>intervalo de sondeo   órdenes hasta arriesgar toda la cuenta   tiempo transcurrido
+                1 s                                       50                  50 s
+                5 s                                       50            4 min 10 s
+               15 s                                       50           12 min 30 s
+               30 s                                       50                25 min
+               60 s                                       50                50 min</code></pre>
+
+        <p>El bucle de esta lección corre cada 60 segundos, lo que te compra cincuenta minutos. Ajústalo a cinco segundos, que es algo perfectamente normal de querer, y entre el fallo y la cuenta entera hay cuatro minutos y diez segundos. Ninguna de las dos cifras basta para que la note alguien que está haciendo otra cosa, y ese es justamente el punto: <strong>tu tiempo de reacción nunca fue la red de seguridad.</strong> Solo lo parecía porque la versión manual de este error exige mandar cuarenta órdenes a mano, y hacia la cuarta habrías parado.</p>
+
+        <p>Mira ahora lo que hace al respecto el interruptor de pérdida diaria, porque la respuesta es casi nada. Un límite del 3 % son 1,5 R. Es una comprobación sobre la <strong>pérdida</strong>, y la pérdida solo aparece después de la exposición: durante la acumulación calla, y cuando habla la posición ya es lo que el bucle construyó. Un límite de pérdida acota un mal día. No puede acotar una mala línea de código.</p>
+
+        <p>El control que actúa a tiempo es una precondición y no una postcondición: antes de mandar cualquier orden, pregunta al bróker qué tienes ya y recházala si la nueva orden te pasaría de un tope duro de posición. Esa comprobación corre en el sondeo uno, no en el cincuenta. En el código de arriba es la razón de que el bucle esté protegido por «solo cuando el bróker dice que no hay posición», y esa protección, no el límite de pérdida, es lo que hace aceptable dejarlo correr sin vigilancia.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Ideas clave</h4>
         <ul>
@@ -783,6 +807,7 @@ except Exception as e:
           <li><strong>Empieza con Alpaca (acciones) o Binance (cripto) para tener acceso fácil a la API</strong></li>
           <li><strong>Opera 3-6 meses en simulado antes de pasar a real</strong></li>
           <li><strong>La gestión de errores es crítica: lógica de reintento, avisos, botón de parada</strong></li>
+          <li><strong>Un límite de pérdida acota un mal día; solo un tope de posición acota una mala línea de código.</strong> Con un 2 % de riesgo por operación tu cuenta son 50 R, así que un fallo que reentra en cada sondeo alcanza la exposición total en 50 sondeos: cincuenta minutos con un bucle de 60 segundos, cuatro minutos con uno de cinco. La comprobación de pérdida diaria calla durante todo el proceso, porque la pérdida solo aparece después de la exposición. Pregunta al bróker qué tienes antes de cada orden, no después</li>
           <li><strong>Aloja en un VPS en la nube (5-20 $/mes)</strong> para que el bot no dependa de tu conexión doméstica. Fíjate en que la disponibilidad que anuncia el proveedor es la suya, no la tuya: tu bot puede estar caído mientras su máquina está en pie, y el fallo para el que de verdad tienes que planificar es tu propio proceso muriendo a las 10:14 con una posición abierta</li>
           <li><strong>Revisa mensualmente: rendimiento, errores, encaje con el régimen</strong></li>
         </ul>

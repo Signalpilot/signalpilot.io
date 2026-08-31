@@ -137,6 +137,7 @@
           <li>How to get from a trading idea to executable code against a broker API</li>
           <li>What a realistic paper-trading period looks like before real money, and why it spans market conditions</li>
           <li>The operational side: error handling, kill switches, hosting and the monthly maintenance check</li>
+          <li>How fast a repeat bug reaches your whole account, and why a daily-loss limit cannot stop it while a position cap can</li>
         </ul>
       </div>
 
@@ -763,6 +764,29 @@ except Exception as e:
 
       <p><strong>Where Signal Pilot sits in this:</strong> the indicators produce the signal, but automation needs that signal to leave the chart. In practice that means a TradingView alert carrying a structured payload into the webhook your bot listens on, so the entry condition your code acts on is the same one you validated visually &mdash; not a reimplementation of it in Python that quietly drifts from the original.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; How long a repeat bug needs to reach your whole account</h4>
+        <p>The case study above is diagnosed correctly &mdash; nothing in the code knew how much he already owned, so a condition that stayed true produced an order every time it was checked. What is missing is the speed, and the speed is the entire difference between this bug in a bot and the same bug in a person.</p>
+
+        <p>Put it in the curriculum's own unit. If you risk 2 % per trade, one R is 2 % of the account, so <strong>your whole account is 50 R</strong>. A repeat bug adds one R of exposure per poll. So the number of polls it takes to have the entire account at risk is not an estimate, it is a division:</p>
+
+<pre><code>polls to reach full exposure  =  1  &#247;  risk per trade  =  1 &#247; 0.02  =  50</code></pre>
+
+<pre><code>poll interval   orders to risk the whole account   wall-clock time
+          1 s                                 50              50 s
+          5 s                                 50        4 min 10 s
+         15 s                                 50       12 min 30 s
+         30 s                                 50            25 min
+         60 s                                 50            50 min</code></pre>
+
+        <p>The loop in this lesson runs every 60 seconds, which buys you fifty minutes. Tighten it to five seconds, which is a perfectly ordinary thing to want, and you have four minutes and ten seconds between the bug and the whole account. Neither number is long enough to be noticed by a person who is doing something else, and that is the point: <strong>your reaction time was never the safety net.</strong> It only felt like one because the manual version of this mistake requires you to place forty orders by hand, and somewhere around the fourth you would have stopped.</p>
+
+        <p>Now look at what the daily-loss switch does about it, because the answer is almost nothing. A limit of 3 % is 1.5 R. It is a check on <strong>loss</strong>, and loss appears only after the exposure does &mdash; so during the accumulation it is silent, and by the time it speaks the position is already whatever the loop built. A loss limit bounds a bad day. It cannot bound a bad line of code.</p>
+
+        <p>The control that acts in time is a precondition rather than a postcondition: before sending any order, ask the broker what you already hold and refuse if the new order would take you past a hard position cap. That check runs at poll one, not at poll fifty. In the code above it is the reason the loop is guarded by "only when the broker says it holds no position" &mdash; and that guard, not the loss limit, is what makes it safe to run unattended.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Key Takeaways</h4>
         <ul>
@@ -770,6 +794,7 @@ except Exception as e:
           <li><strong>Start with Alpaca (stocks) or Binance (crypto) for easy API access</strong></li>
           <li><strong>Paper trade for 3-6 months before going live</strong></li>
           <li><strong>Error handling is critical: retry logic, alerts, kill switch</strong></li>
+          <li><strong>A loss limit bounds a bad day; only a position cap bounds a bad line of code.</strong> At 2 % risk per trade your account is 50 R, so a bug that re-enters on every poll reaches full exposure in 50 polls &mdash; fifty minutes on a 60-second loop, four minutes on a 5-second one. The daily-loss check is silent through all of it, because loss only appears after the exposure does. Ask the broker what you hold before every order, not after</li>
           <li><strong>Host on a cloud VPS ($5-20/month)</strong> so the bot is not depending on your home connection. Note that the uptime figure the provider advertises is theirs, not yours: your bot can be down while their machine is up, and the failure you actually need to plan for is your own process dying at 10:14 with a position open</li>
           <li><strong>Monitor monthly: performance, errors, regime alignment</strong></li>
         </ul>

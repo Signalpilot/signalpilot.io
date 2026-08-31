@@ -150,6 +150,7 @@
           <li>Come passare da un’idea di trading a codice eseguibile contro l’API di un broker</li>
           <li>Come si presenta un periodo realistico di paper trading prima del denaro vero, e perché attraversa più condizioni di mercato</li>
           <li>Il lato operativo: gestione degli errori, interruttori di emergenza, hosting e il controllo di manutenzione mensile</li>
+          <li>Quanto in fretta un bug ripetitivo raggiunge tutto il tuo conto, e perché un limite di perdita giornaliera non può fermarlo mentre un tetto di posizione sì</li>
         </ul>
       </div>
 
@@ -776,6 +777,29 @@ except Exception as e:
 
       <p><strong>Dove si colloca Signal Pilot in tutto questo:</strong> Gli indicatori producono il segnale, ma all’automazione serve che quel segnale esca dal grafico. In pratica significa un alert di TradingView che porta un payload strutturato al webhook su cui il tuo bot è in ascolto, così la condizione di ingresso su cui agisce il codice è la stessa che hai validato a vista &mdash; non una reimplementazione in Python che si allontana in silenzio dall’originale.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Quanto tempo serve a un bug ripetitivo per raggiungere tutto il tuo conto</h4>
+        <p>Il caso qui sopra è diagnosticato correttamente: niente nel codice sapeva quanto già deteneva, quindi una condizione che restava vera produceva un ordine a ogni controllo. Quello che manca è la velocità, e la velocità è tutta la differenza fra questo bug in un bot e lo stesso bug in una persona.</p>
+
+        <p>Mettilo nell'unità di questo percorso. Se rischi il 2 % per trade, un R è il 2 % del conto, quindi <strong>il tuo conto intero è 50 R</strong>. Un bug ripetitivo aggiunge un R di esposizione a ogni polling. Il numero di polling perché l'intero conto sia a rischio non è una stima, è una divisione:</p>
+
+<pre><code>polling fino alla piena esposizione  =  1  &#247;  rischio per trade  =  1 &#247; 0,02  =  50</code></pre>
+
+<pre><code>intervallo di polling   ordini per rischiare tutto il conto   tempo trascorso
+                  1 s                                    50              50 s
+                  5 s                                    50        4 min 10 s
+                 15 s                                    50       12 min 30 s
+                 30 s                                    50            25 min
+                 60 s                                    50            50 min</code></pre>
+
+        <p>Il loop di questa lezione gira ogni 60 secondi, e questo ti compra cinquanta minuti. Portalo a cinque secondi, cosa perfettamente normale da volere, e fra il bug e l'intero conto ci sono quattro minuti e dieci secondi. Nessuno dei due numeri è abbastanza lungo perché se ne accorga qualcuno che sta facendo altro, ed è proprio questo il punto: <strong>il tuo tempo di reazione non è mai stato la rete di sicurezza.</strong> Sembrava esserlo solo perché la versione manuale di questo errore richiede di immettere quaranta ordini a mano, e intorno al quarto avresti smesso.</p>
+
+        <p>Guarda ora che cosa ci fa il blocco sulla perdita giornaliera, perché la risposta è quasi nulla. Un limite del 3 % è 1,5 R. È un controllo sulla <strong>perdita</strong>, e la perdita compare solo dopo l'esposizione: durante l'accumulo tace, e quando parla la posizione è già quella che il loop ha costruito. Un limite di perdita delimita una brutta giornata. Non può delimitare una brutta riga di codice.</p>
+
+        <p>Il controllo che agisce in tempo è una precondizione e non una postcondizione: prima di inviare qualsiasi ordine, chiedi al broker che cosa detieni già e rifiuta se il nuovo ordine ti porterebbe oltre un tetto rigido di posizione. Quel controllo gira al polling uno, non al cinquantesimo. Nel codice sopra è il motivo per cui il loop è protetto da «solo quando il broker dice di non detenere posizioni», e quella protezione, non il limite di perdita, è ciò che rende accettabile lasciarlo girare non presidiato.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Punti chiave</h4>
         <ul>
@@ -783,6 +807,7 @@ except Exception as e:
           <li><strong>Parti con Alpaca (azioni) o Binance (cripto) per un accesso facile all'API</strong></li>
           <li><strong>Fai 3-6 mesi di paper trading prima di passare in reale</strong></li>
           <li><strong>La gestione degli errori è cruciale: riprove, avvisi, pulsante di arresto</strong></li>
+          <li><strong>Un limite di perdita delimita una brutta giornata; solo un tetto di posizione delimita una brutta riga di codice.</strong> Al 2 % di rischio per trade il tuo conto è 50 R, quindi un bug che rientra a ogni polling raggiunge la piena esposizione in 50 polling: cinquanta minuti su un loop da 60 secondi, quattro minuti su uno da cinque. Il controllo sulla perdita giornaliera tace per tutto il tempo, perché la perdita compare solo dopo l'esposizione. Chiedi al broker che cosa detieni prima di ogni ordine, non dopo</li>
           <li><strong>Ospita su un VPS cloud (5-20 $/mese)</strong> perché il bot non dipenda dalla tua connessione di casa. Nota che la disponibilità che il fornitore pubblicizza è la sua, non la tua: il tuo bot può essere giù mentre la loro macchina è su, e il guasto per cui devi davvero pianificare è il tuo processo che muore alle 10:14 con una posizione aperta</li>
           <li><strong>Controlla ogni mese: performance, errori, coerenza con il regime</strong></li>
         </ul>

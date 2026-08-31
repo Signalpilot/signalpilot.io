@@ -150,6 +150,7 @@
           <li>Wie du von einer Trading-Idee zu ausführbarem Code gegen eine Broker-API kommst</li>
           <li>Wie ein realistischer Paper-Trading-Zeitraum vor echtem Geld aussieht und warum er mehrere Marktphasen umspannt</li>
           <li>Die operative Seite: Fehlerbehandlung, Kill Switches, Hosting und der monatliche Wartungscheck</li>
+          <li>Wie schnell ein Wiederholungsfehler dein ganzes Konto erreicht, und warum ein Tagesverlustlimit ihn nicht stoppen kann, eine Positionsobergrenze aber schon</li>
         </ul>
       </div>
 
@@ -776,6 +777,29 @@ except Exception as e:
 
       <p><strong>Wo Signal Pilot hier steht:</strong> Die Indikatoren erzeugen das Signal, aber die Automatisierung braucht dieses Signal außerhalb des Charts. In der Praxis heißt das: ein TradingView-Alarm, der eine strukturierte Nutzlast an den Webhook schickt, auf dem dein Bot lauscht &mdash; damit die Einstiegsbedingung, nach der dein Code handelt, dieselbe ist, die du visuell validiert hast, und nicht eine Nachbildung in Python, die still vom Original abdriftet.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Wie lange ein Wiederholungsfehler braucht, um dein ganzes Konto zu erreichen</h4>
+        <p>Die Fallstudie oben ist richtig diagnostiziert &mdash; nichts im Code wusste, wie viel er bereits hielt, also erzeugte eine Bedingung, die wahr blieb, bei jeder Prüfung eine Order. Was fehlt, ist das Tempo, und das Tempo ist der ganze Unterschied zwischen diesem Fehler in einem Bot und demselben Fehler in einem Menschen.</p>
+
+        <p>Formuliere es in der Einheit dieses Curriculums. Riskierst du 2 % je Trade, ist ein R gleich 2 % des Kontos, also gilt: <strong>Dein ganzes Konto sind 50 R</strong>. Ein Wiederholungsfehler fügt je Poll ein R an Exponierung hinzu. Die Zahl der Polls, bis das gesamte Konto im Risiko steht, ist damit keine Schätzung, sondern eine Division:</p>
+
+<pre><code>Polls bis zur vollen Exponierung  =  1  &#247;  Risiko je Trade  =  1 &#247; 0,02  =  50</code></pre>
+
+<pre><code>Abfrageintervall   Orders bis das ganze Konto im Risiko steht   verstrichene Zeit
+             1 s                                           50                50 s
+             5 s                                           50         4 Min. 10 s
+            15 s                                           50        12 Min. 30 s
+            30 s                                           50             25 Min.
+            60 s                                           50             50 Min.</code></pre>
+
+        <p>Die Schleife in dieser Lektion läuft alle 60 Sekunden, das kauft dir fünfzig Minuten. Stell sie auf fünf Sekunden, was ein völlig gewöhnlicher Wunsch ist, und zwischen dem Fehler und dem ganzen Konto liegen vier Minuten und zehn Sekunden. Keine der beiden Zahlen reicht, um von jemandem bemerkt zu werden, der gerade etwas anderes tut, und genau darum geht es: <strong>Deine Reaktionszeit war nie das Sicherheitsnetz.</strong> Sie fühlte sich nur so an, weil die manuelle Fassung dieses Fehlers verlangt, vierzig Orders von Hand aufzugeben &mdash; und irgendwo bei der vierten hättest du aufgehört.</p>
+
+        <p>Sieh nun, was das Tagesverlust-Limit dagegen ausrichtet, denn die Antwort ist so gut wie nichts. Ein Limit von 3 % sind 1,5 R. Es ist eine Prüfung auf <strong>Verlust</strong>, und Verlust entsteht erst nach der Exponierung &mdash; während der Anhäufung schweigt es also, und wenn es spricht, ist die Position bereits das, was die Schleife gebaut hat. Ein Verlustlimit begrenzt einen schlechten Tag. Eine schlechte Codezeile kann es nicht begrenzen.</p>
+
+        <p>Die Kontrolle, die rechtzeitig wirkt, ist eine Vorbedingung und keine Nachbedingung: Frage vor jeder Order beim Broker, was du bereits hältst, und lehne ab, wenn die neue Order dich über eine harte Positionsobergrenze bringen würde. Diese Prüfung läuft bei Poll eins, nicht bei Poll fünfzig. Im Code oben ist sie der Grund, warum die Schleife durch „nur wenn der Broker sagt, dass keine Position gehalten wird“ abgesichert ist &mdash; und diese Absicherung, nicht das Verlustlimit, macht es vertretbar, sie unbeaufsichtigt laufen zu lassen.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Die wichtigsten Erkenntnisse</h4>
         <ul>
@@ -783,6 +807,7 @@ except Exception as e:
           <li><strong>Starte mit Alpaca (Aktien) oder Binance (Krypto) für einfachen API-Zugang</strong></li>
           <li><strong>Handle 3-6 Monate im Paper Trading, bevor du live gehst</strong></li>
           <li><strong>Fehlerbehandlung ist entscheidend: Wiederholungslogik, Alarme, Not-Aus</strong></li>
+          <li><strong>Ein Verlustlimit begrenzt einen schlechten Tag; nur eine Positionsobergrenze begrenzt eine schlechte Codezeile.</strong> Bei 2 % Risiko je Trade sind 50 R dein Konto, ein Fehler, der bei jedem Poll neu einsteigt, erreicht die volle Exponierung also in 50 Polls &mdash; fünfzig Minuten bei einer 60-Sekunden-Schleife, vier Minuten bei einer mit fünf Sekunden. Die Tagesverlustprüfung schweigt die ganze Zeit, weil Verlust erst nach der Exponierung auftritt. Frage den Broker vor jeder Order, was du hältst, nicht danach</li>
           <li><strong>Hoste auf einem Cloud-VPS (5-20 $/Monat)</strong> , damit der Bot nicht von deinem Heimanschluss abhängt. Beachte: Die Verfügbarkeit, die der Anbieter bewirbt, ist seine, nicht deine. Dein Bot kann liegen, während deren Maschine läuft, und der Ausfall, für den du planen musst, ist dein eigener Prozess, der um 10:14 mit offener Position stirbt</li>
           <li><strong>Prüfe monatlich: Performance, Fehler, Regime-Passung</strong></li>
         </ul>

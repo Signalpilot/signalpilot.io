@@ -150,6 +150,7 @@
           <li>Hoe je van een tradingidee naar uitvoerbare code tegen een broker-API komt</li>
           <li>Hoe een realistische paper-tradingperiode eruitziet vóór echt geld, en waarom die meerdere marktomstandigheden omspant</li>
           <li>De operationele kant: foutafhandeling, noodstopschakelaars, hosting en de maandelijkse onderhoudscheck</li>
+          <li>Hoe snel een herhaalbug je hele rekening bereikt, en waarom een daglimiet op verlies hem niet kan stoppen terwijl een positielimiet dat wel kan</li>
         </ul>
       </div>
 
@@ -776,6 +777,29 @@ except Exception as e:
 
       <p><strong>Waar Signal Pilot hierin staat:</strong> De indicatoren produceren het signaal, maar automatisering heeft nodig dat dat signaal de grafiek verlaat. In de praktijk betekent dat een TradingView-alert die een gestructureerde payload naar de webhook stuurt waar je bot op luistert, zodat de instapvoorwaarde waarop je code handelt dezelfde is die je visueel valideerde &mdash; en niet een herimplementatie in Python die stilletjes van het origineel afdrijft.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Hoe lang een herhaalbug nodig heeft om je hele rekening te bereiken</h4>
+        <p>De casus hierboven is juist gediagnosticeerd: niets in de code wist hoeveel hij al bezat, dus een voorwaarde die waar bleef leverde bij elke controle een order op. Wat ontbreekt is de snelheid, en de snelheid is het hele verschil tussen deze bug in een bot en dezelfde bug bij een mens.</p>
+
+        <p>Zet het in de eenheid van dit curriculum. Riskeer je 2 % per trade, dan is één R gelijk aan 2 % van de rekening, dus <strong>je hele rekening is 50 R</strong>. Een herhaalbug voegt per poll één R aan blootstelling toe. Het aantal polls tot de hele rekening in risico staat is dus geen schatting maar een deling:</p>
+
+<pre><code>polls tot volledige blootstelling  =  1  &#247;  risico per trade  =  1 &#247; 0,02  =  50</code></pre>
+
+<pre><code>polling-interval   orders om de hele rekening te riskeren   verstreken tijd
+             1 s                                       50              50 s
+             5 s                                       50        4 min 10 s
+            15 s                                       50       12 min 30 s
+            30 s                                       50            25 min
+            60 s                                       50            50 min</code></pre>
+
+        <p>De lus in deze les draait elke 60 seconden, wat je vijftig minuten koopt. Zet hem op vijf seconden, wat een volstrekt gewone wens is, en er zitten vier minuten en tien seconden tussen de bug en de hele rekening. Geen van beide getallen is lang genoeg om opgemerkt te worden door iemand die iets anders doet, en dat is nu juist het punt: <strong>je reactietijd was nooit het vangnet.</strong> Het voelde alleen zo, omdat de handmatige versie van deze fout vereist dat je veertig orders met de hand inlegt &mdash; en ergens bij de vierde was je gestopt.</p>
+
+        <p>Kijk nu wat de daglimiet op verlies eraan doet, want het antwoord is bijna niets. Een limiet van 3 % is 1,5 R. Het is een controle op <strong>verlies</strong>, en verlies verschijnt pas ná de blootstelling: tijdens de opbouw zwijgt hij, en als hij spreekt is de positie al wat de lus heeft gebouwd. Een verlieslimiet begrenst een slechte dag. Een slechte regel code kan hij niet begrenzen.</p>
+
+        <p>De controle die op tijd werkt is een preconditie en geen postconditie: vraag vóór elke order aan de broker wat je al aanhoudt en weiger als de nieuwe order je voorbij een harde positielimiet zou brengen. Die controle draait bij poll één, niet bij poll vijftig. In de code hierboven is dat de reden dat de lus wordt bewaakt door „alleen als de broker zegt dat er geen positie is” &mdash; en die bewaking, niet de verlieslimiet, maakt het aanvaardbaar hem onbewaakt te laten draaien.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 De kern</h4>
         <ul>
@@ -783,6 +807,7 @@ except Exception as e:
           <li><strong>Begin met Alpaca (aandelen) of Binance (crypto) voor eenvoudige API-toegang</strong></li>
           <li><strong>Draai 3-6 maanden in papieren modus voordat je live gaat</strong></li>
           <li><strong>Foutafhandeling is cruciaal: herhaallogica, waarschuwingen, noodstop</strong></li>
+          <li><strong>Een verlieslimiet begrenst een slechte dag; alleen een positielimiet begrenst een slechte regel code.</strong> Bij 2 % risico per trade is je rekening 50 R, dus een bug die bij elke poll opnieuw instapt bereikt volledige blootstelling in 50 polls: vijftig minuten bij een lus van 60 seconden, vier minuten bij een van vijf. De daglimietcontrole zwijgt er de hele tijd doorheen, omdat verlies pas na de blootstelling verschijnt. Vraag de broker vóór elke order wat je aanhoudt, niet erna</li>
           <li><strong>Host op een cloud-VPS ($5-20/maand)</strong> zodat de bot niet van je thuisverbinding afhangt. Let op: de beschikbaarheid die de aanbieder adverteert is de hunne, niet de jouwe. Je bot kan plat liggen terwijl hun machine draait, en de storing waarvoor je moet plannen is je eigen proces dat om 10:14 sterft met een open positie</li>
           <li><strong>Controleer maandelijks: prestaties, fouten, aansluiting op het regime</strong></li>
         </ul>

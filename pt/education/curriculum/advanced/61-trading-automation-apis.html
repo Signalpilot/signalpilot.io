@@ -150,6 +150,7 @@
           <li>Como passar de uma ideia de trading para código executável contra a API de uma corretora</li>
           <li>Como é um período realista de paper trading antes do dinheiro real, e porque atravessa várias condições de mercado</li>
           <li>O lado operacional: tratamento de erros, interruptores de emergência, alojamento e a verificação mensal de manutenção</li>
+          <li>Com que rapidez um bug repetitivo chega a toda a sua conta, e porque um limite de perda diária não o consegue travar enquanto um tecto de posição consegue</li>
         </ul>
       </div>
 
@@ -776,6 +777,29 @@ except Exception as e:
 
       <p><strong>Onde é que o Signal Pilot entra nisto:</strong> Os indicadores produzem o sinal, mas a automatização precisa que esse sinal saia do gráfico. Na prática isso significa um alerta do TradingView a levar um payload estruturado até ao webhook onde o seu bot escuta, para que a condição de entrada sobre a qual o código actua seja a mesma que validou visualmente &mdash; e não uma reimplementação em Python que se afasta do original sem dar sinal.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Quanto tempo demora um bug repetitivo a chegar a toda a sua conta</h4>
+        <p>O caso acima está bem diagnosticado: nada no código sabia quanto já detinha, portanto uma condição que continuava verdadeira produzia uma ordem sempre que era verificada. O que falta é a velocidade, e a velocidade é toda a diferença entre este bug num bot e o mesmo bug numa pessoa.</p>
+
+        <p>Ponha-o na unidade deste currículo. Se arrisca 2 % por operação, um R é 2 % da conta, logo <strong>a sua conta inteira são 50 R</strong>. Um bug repetitivo acrescenta um R de exposição por sondagem. O número de sondagens até ter a conta inteira em risco não é uma estimativa, é uma divisão:</p>
+
+<pre><code>sondagens até à exposição total  =  1  &#247;  risco por operação  =  1 &#247; 0,02  =  50</code></pre>
+
+<pre><code>intervalo de sondagem   ordens até arriscar a conta inteira   tempo decorrido
+                  1 s                                    50              50 s
+                  5 s                                    50        4 min 10 s
+                 15 s                                    50       12 min 30 s
+                 30 s                                    50            25 min
+                 60 s                                    50            50 min</code></pre>
+
+        <p>O ciclo desta lição corre a cada 60 segundos, o que lhe compra cinquenta minutos. Ajuste-o para cinco segundos, coisa perfeitamente normal de querer, e entre o bug e a conta inteira há quatro minutos e dez segundos. Nenhum dos dois números chega para ser notado por alguém que está a fazer outra coisa, e é precisamente esse o ponto: <strong>o seu tempo de reação nunca foi a rede de segurança.</strong> Só parecia sê-lo porque a versão manual deste erro exige colocar quarenta ordens à mão, e lá pela quarta teria parado.</p>
+
+        <p>Veja agora o que faz quanto a isso o corte por perda diária, porque a resposta é quase nada. Um limite de 3 % são 1,5 R. É uma verificação sobre a <strong>perda</strong>, e a perda só aparece depois da exposição: durante a acumulação está calada, e quando fala a posição já é aquela que o ciclo construiu. Um limite de perda delimita um mau dia. Não consegue delimitar uma má linha de código.</p>
+
+        <p>O controlo que atua a tempo é uma pré-condição e não uma pós-condição: antes de enviar qualquer ordem, pergunte ao corretor o que já detém e recuse se a nova ordem o levasse além de um tecto rígido de posição. Essa verificação corre na sondagem um, não na quinquagésima. No código acima é a razão de o ciclo estar guardado por «só quando o corretor diz que não detém posição», e é essa guarda, não o limite de perda, que torna aceitável deixá-lo correr sem vigilância.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Pontos essenciais</h4>
         <ul>
@@ -783,6 +807,7 @@ except Exception as e:
           <li><strong>Comece com Alpaca (ações) ou Binance (cripto) para ter acesso fácil à API</strong></li>
           <li><strong>Faça 3-6 meses de simulador antes de ir para o real</strong></li>
           <li><strong>Tratar erros é crítico: repetição, alertas, botão de parada</strong></li>
+          <li><strong>Um limite de perda delimita um mau dia; só um tecto de posição delimita uma má linha de código.</strong> A 2 % de risco por operação a sua conta são 50 R, portanto um bug que volta a entrar em cada sondagem atinge a exposição total em 50 sondagens: cinquenta minutos num ciclo de 60 segundos, quatro minutos num de cinco. A verificação de perda diária está calada durante tudo isso, porque a perda só aparece depois da exposição. Pergunte ao corretor o que detém antes de cada ordem, não depois</li>
           <li><strong>Aloje num VPS na nuvem (5-20 $/mês)</strong> para que o bot não dependa da sua ligação de casa. Repare que a disponibilidade que o fornecedor anuncia é dele, não sua: o seu bot pode estar em baixo enquanto a máquina deles está a funcionar, e a falha para a qual precisa mesmo de planear é o seu processo morrer às 10:14 com uma posição aberta</li>
           <li><strong>Revise todo mês: desempenho, erros, encaixe com o regime</strong></li>
         </ul>

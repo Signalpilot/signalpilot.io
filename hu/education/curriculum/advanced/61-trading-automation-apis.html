@@ -150,6 +150,7 @@
           <li>Hogyan jutsz el egy kereskedési ötlettől a bróker API-ja ellen futtatható kódig</li>
           <li>Hogyan néz ki egy valósághű papírkereskedési időszak az éles pénz előtt, és miért ível át több piaci helyzeten</li>
           <li>Az üzemeltetési oldal: hibakezelés, vészleállítók, hosztolás és a havi karbantartási ellenőrzés</li>
+          <li>Milyen gyorsan ér el egy ismétlődő hiba a teljes számlájáig, és miért nem tudja ezt megállítani egy napi veszteséghatár, míg egy pozíciós plafon igen</li>
         </ul>
       </div>
 
@@ -776,6 +777,29 @@ except Exception as e:
 
       <p><strong>Hol áll ebben a Signal Pilot:</strong> A jelet az indikátorok állítják elő, az automatizálásnak viszont arra van szüksége, hogy ez a jel elhagyja a grafikont. A gyakorlatban ez egy TradingView-riasztást jelent, amely strukturált adatcsomagot visz a webhookra, amit a botod hallgat — így a belépési feltétel, amire a kódod reagál, ugyanaz, amit szemmel validáltál &mdash; nem pedig egy Python-újraimplementáció, ami csendben elsodródik az eredetitől.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Mennyi idő kell egy ismétlődő hibának, hogy elérje a teljes számláját</h4>
+        <p>A fenti esettanulmány diagnózisa helyes: a kódban semmi nem tudta, mennyit tart már, így egy igaz maradó feltétel minden ellenőrzéskor megbízást hozott létre. Ami hiányzik, az a sebesség &mdash; és a sebesség a teljes különbség e hiba között egy botban és ugyanez a hiba között egy emberben.</p>
+
+        <p>Tegye át a tananyag saját egységébe. Ha kötésenként 2 %-ot kockáztat, egy R a számla 2 %-a, tehát <strong>a teljes számlája 50 R</strong>. Egy ismétlődő hiba lekérdezésenként egy R kitettséget ad hozzá. Az, hogy hány lekérdezés kell a teljes számla kockáztatásához, nem becslés, hanem osztás:</p>
+
+<pre><code>lekérdezés a teljes kitettségig  =  1  &#247;  kockázat kötésenként  =  1 &#247; 0,02  =  50</code></pre>
+
+<pre><code>lekérdezési időköz   megbízás a teljes számla kockáztatásáig   eltelt idő
+              1 mp                                        50           50 mp
+              5 mp                                        50    4 perc 10 mp
+             15 mp                                        50   12 perc 30 mp
+             30 mp                                        50         25 perc
+             60 mp                                        50         50 perc</code></pre>
+
+        <p>A leckében szereplő ciklus 60 másodpercenként fut, ami ötven percet vásárol Önnek. Állítsa öt másodpercre &mdash; teljesen szokványos kívánság &mdash; és a hiba meg a teljes számla között négy perc tíz másodperc marad. Egyik szám sem elég hosszú ahhoz, hogy észrevegye valaki, aki éppen mást csinál, és pontosan ez a lényeg: <strong>a reakcióideje sosem volt a biztonsági háló.</strong> Csak annak tűnt, mert e hiba kézi változata negyven megbízás kézi feladását kívánja &mdash; és valahol a negyediknél abbahagyta volna.</p>
+
+        <p>Nézzük most, mit tesz ez ellen a napi veszteségkapcsoló, mert a válasz szinte semmit. A 3 %-os határ 1,5 R. Ez <strong>veszteségre</strong>vonatkozó ellenőrzés, a veszteség pedig csak a kitettség után jelenik meg: a felhalmozódás alatt hallgat, és mire megszólal, a pozíció már az, amit a ciklus felépített. A veszteséghatár egy rossz napot határol be. Egy rossz kódsort nem tud behatárolni.</p>
+
+        <p>Az időben ható kontroll előfeltétel, nem utófeltétel: mielőtt bármely megbízást elküldene, kérdezze meg a brókertől, mit tart már, és utasítsa el, ha az új megbízás egy kemény pozíciós plafon fölé vinné. Ez az ellenőrzés az első lekérdezésnél fut le, nem az ötvenediknél. A fenti kódban ez az oka annak, hogy a ciklust a „csak amikor a bróker azt mondja, nincs pozíciója” feltétel őrzi &mdash; és ez az őrzés, nem a veszteséghatár teszi elfogadhatóvá, hogy felügyelet nélkül fusson.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 A lényeg</h4>
         <ul>
@@ -783,6 +807,7 @@ except Exception as e:
           <li><strong>Kezdd az Alpacával (részvény) vagy a Binance-szal (kripto) az egyszerű API-hozzáférésért</strong></li>
           <li><strong>Éles indulás előtt kereskedj 3-6 hónapot papíron</strong></li>
           <li><strong>A hibakezelés kritikus: újrapróbálkozás, riasztások, vészleállító</strong></li>
+          <li><strong>A veszteséghatár egy rossz napot határol be; egy rossz kódsort csak pozíciós plafon határol be:</strong> kötésenkénti 2 % kockázat mellett a számlája 50 R, tehát egy minden lekérdezésnél újra belépő hiba 50 lekérdezés alatt éri el a teljes kitettséget &mdash; ötven perc egy 60 másodperces cikluson, négy perc egy ötmásodpercesen. A napi veszteségellenőrzés végig hallgat, mert a veszteség csak a kitettség után jelenik meg. Kérdezze meg a brókertől, mit tart, minden megbízás előtt, ne utána</li>
           <li><strong>Hosztolj felhő-VPS-en ($5-20/hó)</strong> hogy a bot ne a otthoni kapcsolatodtól függjön. Vedd észre, hogy a szolgáltató által hirdetett rendelkezésre állás az övék, nem a tiéd: a botod állhat, miközben az ő gépük fut, és az a hiba, amire tényleg készülnöd kell, a saját folyamatod, ami 10:14-kor nyitott pozícióval hal meg</li>
           <li><strong>Havonta ellenőrizd: teljesítmény, hibák, illeszkedés a rezsimhez</strong></li>
         </ul>

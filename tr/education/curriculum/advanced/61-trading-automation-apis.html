@@ -150,6 +150,7 @@
           <li>Bir trading fikrinden, bir aracı kurum API’sine karşı çalışan yürütülebilir koda nasıl geçilir</li>
           <li>Gerçek parayla başlamadan önceki gerçekçi bir paper trading döneminin nasıl göründüğü ve neden farklı piyasa koşullarını kapsadığı</li>
           <li>Operasyonel taraf: hata yönetimi, acil durdurma anahtarları, barındırma ve aylık bakım kontrolü</li>
+          <li>Tekrarlayan bir hatanın tüm hesabınıza ne kadar hızlı ulaştığı ve günlük zarar limitinin bunu neden durduramadığı, bir pozisyon tavanının ise durdurabildiği</li>
         </ul>
       </div>
 
@@ -776,6 +777,29 @@ except Exception as e:
 
       <p><strong>Signal Pilot bu işin neresinde:</strong> Sinyali göstergeler üretir, ama otomasyonun o sinyalin grafikten çıkmasına ihtiyacı vardır. Pratikte bu, yapılandırılmış bir yükü botunun dinlediği webhook’a taşıyan bir TradingView uyarısı demektir; böylece kodunun göre hareket ettiği giriş koşulu, gözle doğruladığın koşulun ta kendisi olur &mdash; sessizce özgününden uzaklaşan bir Python yeniden yazımı değil.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Tekrarlayan bir hatanın tüm hesabınıza ulaşması ne kadar sürer</h4>
+        <p>Yukarıdaki vaka doğru teşhis edilmiş: koddaki hiçbir şey elinde ne kadar bulunduğunu bilmiyordu, dolayısıyla doğru kalmayı sürdüren bir koşul her kontrolde bir emir üretti. Eksik olan hız ve hız, bu hatanın bir botta olmasıyla bir insanda olması arasındaki farkın tamamı.</p>
+
+        <p>Bunu bu müfredatın kendi birimine koyun. İşlem başına %2 riske ediyorsanız bir R hesabın %2’sidir, yani <strong>tüm hesabınız 50 R eder</strong>. Tekrarlayan bir hata her yoklamada bir R maruziyet ekler. Tüm hesabın riske girmesine kaç yoklama kaldığı bir tahmin değil, bir bölmedir:</p>
+
+<pre><code>tam maruziyete kadar yoklama  =  1  &#247;  işlem başına risk  =  1 &#247; 0,02  =  50</code></pre>
+
+<pre><code>yoklama aralığı   tüm hesabı riske atacak emir sayısı   geçen süre
+           1 sn                                    50         50 sn
+           5 sn                                    50    4 dk 10 sn
+          15 sn                                    50   12 dk 30 sn
+          30 sn                                    50         25 dk
+          60 sn                                    50         50 dk</code></pre>
+
+        <p>Bu dersteki döngü her 60 saniyede bir çalışıyor; bu size elli dakika kazandırıyor. Beş saniyeye çekin &mdash; ki istenmesi son derece olağan bir şeydir &mdash; ve hata ile bütün hesap arasında dört dakika on saniye kalır. İki sayı da başka bir işle meşgul birinin fark etmesine yetmez, ve mesele tam da budur: <strong>tepki süreniz zaten hiçbir zaman güvenlik ağı değildi.</strong> Öyle hissettiriyordu, çünkü bu hatanın elle yapılan hâli kırk emri elle girmeyi gerektirir ve dördüncü civarında durmuş olurdunuz.</p>
+
+        <p>Şimdi günlük zarar şalterinin buna ne yaptığına bakın, çünkü cevap neredeyse hiçbir şey. %3’lük bir limit 1,5 R eder. Bu bir <strong>zarar</strong>kontrolüdür ve zarar ancak maruziyetten sonra ortaya çıkar: birikme sürerken sessizdir ve konuştuğunda pozisyon zaten döngünün inşa ettiği şeydir. Zarar limiti kötü bir günü sınırlar. Kötü bir kod satırını sınırlayamaz.</p>
+
+        <p>Zamanında devreye giren denetim bir son koşul değil ön koşuldur: herhangi bir emri göndermeden önce brokera elinizde ne olduğunu sorun ve yeni emir sizi katı bir pozisyon tavanının ötesine taşıyacaksa reddedin. Bu kontrol ellinci yoklamada değil, birinci yoklamada çalışır. Yukarıdaki kodda döngünün «yalnızca broker pozisyon tutmadığını söylediğinde» koşuluyla korunmasının sebebi budur; onu gözetimsiz çalıştırmayı kabul edilebilir kılan da zarar limiti değil, bu korumadır.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Öne çıkanlar</h4>
         <ul>
@@ -783,6 +807,7 @@ except Exception as e:
           <li><strong>Kolay API erişimi için Alpaca (hisse) ya da Binance (kripto) ile başla</strong></li>
           <li><strong>Gerçeğe geçmeden önce 3-6 ay kâğıt üzerinde işlem yap</strong></li>
           <li><strong>Hata yönetimi kritik: yeniden deneme mantığı, uyarılar, acil durdurma</strong></li>
+          <li><strong>Zarar limiti kötü bir günü sınırlar; kötü bir kod satırını yalnızca pozisyon tavanı sınırlar:</strong> işlem başına %2 riskte hesabınız 50 R eder, dolayısıyla her yoklamada yeniden giren bir hata 50 yoklamada tam maruziyete ulaşır &mdash; 60 saniyelik döngüde elli dakika, beş saniyelikte dört dakika. Günlük zarar kontrolü bunun tamamı boyunca sessizdir, çünkü zarar ancak maruziyetten sonra görünür. Elinizde ne olduğunu brokera her emirden sonra değil, önce sorun</li>
           <li><strong>Bir bulut VPS'te barındırın (ayda $5-20)</strong> ki bot evdeki bağlantınıza bağlı olmasın. Sağlayıcının reklamını yaptığı çalışma süresinin onlara ait olduğuna, size değil, dikkat edin: onların makinesi ayaktayken sizin botunuz düşmüş olabilir; ve asıl plan yapmanız gereken arıza, kendi sürecinizin saat 10.14'te açık pozisyonla ölmesidir</li>
           <li><strong>Ayda bir kontrol et: performans, hatalar, rejime uygunluk</strong></li>
         </ul>

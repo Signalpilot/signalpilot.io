@@ -150,6 +150,7 @@
           <li>Comment passer d’une idée de trading à du code exécutable contre l’API d’un courtier</li>
           <li>À quoi ressemble une période réaliste de paper trading avant l’argent réel, et pourquoi elle traverse plusieurs conditions de marché</li>
           <li>Le côté opérationnel : gestion des erreurs, coupe-circuits, hébergement et le contrôle de maintenance mensuel</li>
+          <li>À quelle vitesse un bug répétitif atteint tout votre compte, et pourquoi une limite de perte journalière ne peut pas l'arrêter alors qu'un plafond de position le peut</li>
         </ul>
       </div>
 
@@ -776,6 +777,29 @@ except Exception as e:
 
       <p><strong>La place de Signal Pilot là-dedans :</strong> Les indicateurs produisent le signal, mais l’automatisation a besoin que ce signal quitte le graphique. Concrètement, cela veut dire une alerte TradingView portant une charge utile structurée vers le webhook que votre bot écoute, pour que la condition d’entrée sur laquelle votre code agit soit celle que vous avez validée à l’œil &mdash; et non une réimplémentation en Python qui s’éloigne discrètement de l’original.</p>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Combien de temps il faut à un bug répétitif pour atteindre tout votre compte</h4>
+        <p>L'étude de cas ci-dessus est correctement diagnostiquée : rien dans le code ne savait ce qu'il détenait déjà, donc une condition qui restait vraie produisait un ordre à chaque vérification. Ce qui manque, c'est la vitesse, et la vitesse fait toute la différence entre ce bug dans un bot et le même bug chez une personne.</p>
+
+        <p>Exprimez-le dans l'unité de ce cursus. Si vous risquez 2 % par trade, un R vaut 2 % du compte, donc <strong>votre compte entier vaut 50 R</strong>. Un bug répétitif ajoute un R d'exposition par sondage. Le nombre de sondages avant que tout le compte soit en risque n'est donc pas une estimation, c'est une division :</p>
+
+<pre><code>sondages avant exposition totale  =  1  &#247;  risque par trade  =  1 &#247; 0,02  =  50</code></pre>
+
+<pre><code>intervalle de sondage   ordres avant de risquer tout le compte   temps écoulé
+                  1 s                                       50           50 s
+                  5 s                                       50     4 min 10 s
+                 15 s                                       50    12 min 30 s
+                 30 s                                       50         25 min
+                 60 s                                       50         50 min</code></pre>
+
+        <p>La boucle de cette leçon tourne toutes les 60 secondes, ce qui vous achète cinquante minutes. Réglez-la sur cinq secondes, ce qui est un souhait parfaitement ordinaire, et il y a quatre minutes et dix secondes entre le bug et la totalité du compte. Aucun de ces deux chiffres n'est assez long pour être remarqué par quelqu'un qui fait autre chose, et c'est bien là le point : <strong>votre temps de réaction n'a jamais été le filet de sécurité.</strong> Il en avait seulement l'air, parce que la version manuelle de cette erreur exige de passer quarante ordres à la main &mdash; et vers le quatrième vous auriez arrêté.</p>
+
+        <p>Regardez maintenant ce que fait le coupe-circuit de perte journalière, car la réponse est presque rien. Une limite de 3 % vaut 1,5 R. C'est un contrôle sur la <strong>perte</strong>, et la perte n'apparaît qu'après l'exposition : pendant l'accumulation il se tait, et quand il parle la position est déjà celle que la boucle a construite. Une limite de perte borne une mauvaise journée. Elle ne peut pas borner une mauvaise ligne de code.</p>
+
+        <p>Le contrôle qui agit à temps est une précondition et non une postcondition : avant d'envoyer le moindre ordre, demandez au courtier ce que vous détenez déjà et refusez si le nouvel ordre vous ferait dépasser un plafond de position dur. Ce contrôle s'exécute au sondage un, pas au cinquantième. Dans le code ci-dessus c'est la raison pour laquelle la boucle est gardée par « seulement quand le courtier dit qu'aucune position n'est détenue » &mdash; et c'est cette garde, pas la limite de perte, qui rend acceptable de la laisser tourner sans surveillance.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 À retenir</h4>
         <ul>
@@ -783,6 +807,7 @@ except Exception as e:
           <li><strong>Commence avec Alpaca (actions) ou Binance (crypto) pour un accès facile à l'API</strong></li>
           <li><strong>Trade 3 à 6 mois en simulation avant de passer en réel</strong></li>
           <li><strong>La gestion d'erreurs est critique : réessais, alertes, bouton d'arrêt</strong></li>
+          <li><strong>Une limite de perte borne une mauvaise journée ; seul un plafond de position borne une mauvaise ligne de code.</strong> À 2 % de risque par trade, votre compte vaut 50 R, donc un bug qui rentre à nouveau à chaque sondage atteint l'exposition totale en 50 sondages &mdash; cinquante minutes sur une boucle de 60 secondes, quatre minutes sur une de cinq. Le contrôle de perte journalière reste muet pendant tout ce temps, car la perte n'apparaît qu'après l'exposition. Demandez au courtier ce que vous détenez avant chaque ordre, pas après</li>
           <li><strong>Hébergez sur un VPS cloud (5-20 $/mois)</strong> pour que le bot ne dépende pas de votre connexion domestique. Notez que la disponibilité annoncée par le fournisseur est la sienne, pas la vôtre : votre bot peut être à terre pendant que leur machine tourne, et la panne à anticiper est votre propre processus qui meurt à 10h14 avec une position ouverte</li>
           <li><strong>Contrôle chaque mois : performance, erreurs, alignement au régime</strong></li>
         </ul>
