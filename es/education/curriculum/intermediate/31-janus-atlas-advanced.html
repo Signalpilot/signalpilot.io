@@ -147,6 +147,7 @@
         <li>Confluencia de barridos en varias temporalidades (capturas de liquidez enormes)</li>
         <li>Patrones de barrido y recuperación (confirmación instantánea del giro)</li>
         <li>Barridos fallidos (y cómo operarlos en dirección contraria)</li>
+        <li>Por qué un múltiplo de R medido sobre un movimiento del que te barrieron no es un pago, y qué cuesta ensanchar el stop para sobrevivir al segundo barrido</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -385,6 +386,36 @@
         <p><strong>Fallo fatal:</strong> Solo entendía el patrón BÁSICO de un único barrido. Nunca esperaba al SEGUNDO. En mercados agitados las instituciones usan DOBLES barridos: el primero limpia los stops evidentes, el segundo a los compradores tempranos y ENTONCES llega el movimiento real. Jordan entraba siempre tras el primer barrido y se convertía en combustible del segundo</p>
         <p><strong>Resultado:</strong> 54 operaciones, 7 ganadoras, 64.000 $ perdidos (-59 %). También llevaba una lista corriente de los movimientos por delante de los cuales le saltó el stop. Trata esa columna con recelo: da por hecho que habría aguantado cada una de esas posiciones hasta el final, que es justo la suposición que más le apetece hacer a un trader al que han stopeado. Los 64.000 $ son lo que pasó; el resto es lo que él se cuenta que pasó.</p>
         <p><strong>El patrón (47 de 54 operaciones, 87 %):</strong> Primer barrido → Jordan entra → pequeño rebote (de 10 a 30 min de confianza) → el segundo barrido le salta el stop → el gran movimiento llega SIN él. Ejemplos: (1) 3 de abril, NVDA: soporte 270 $, primer barrido 268,50 $, entrada 269,20 $, stop 268 $. Rebote hasta 271,40 $. El segundo barrido a 267,20 $ le sacó. NVDA se disparó hasta 278,60 $. Se perdió más de 9 $ de movimiento y perdió 600 $. (2) 8 de mayo, BTC: soporte 27.000 $, primer barrido 26.750 $, entrada 26.850 $, stop 26.600 $. Subida hasta 27.400 $. El segundo barrido a 26.350 $ le sacó. BTC explotó hasta 28.800 $. Se perdió más de 2.000 $ de movimiento y perdió 1.250 $. (3) 10 de julio, AMD: soporte 110 $, primer barrido 108,50 $ (50 %), segundo barrido 107,80 $ (otro 50 %), y el TERCER barrido a 106,50 $ le sacó de ambas. AMD subió hasta 116,80 $ y él perdió 1.800 $. Punto de ruptura (21 de agosto): «47 de 54 siguieron EXACTAMENTE el mismo patrón. Entendía el patrón BÁSICO, pero no el AVANZADO: primer barrido → rebote falso → segundo barrido → giro REAL. Yo era la liquidez, no el cazador.»</p>
+        <div class="callout-key">
+          <h4>&#128200; Por qué su historial debería haber funcionado y no lo hizo</h4>
+          <p>Los dos ejemplos citados, acción y cripto, llevan entrada, stop y segundo barrido, así que la geometría se puede medir. Hazlo una vez para cada uno.</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                        entrada    stop     riesgo  2.º barrido  pasado el stop
+NVDA      269,20 $  268,00 $   1,20 $   267,20 $        0,80 $
+BTC       26.850 $  26.600 $     250 $   26.350 $         250 $
+
+el movimiento que citó, en sus propias unidades de riesgo
+NVDA      278,60 $ - 269,20 $  =  9,40 $   /  1,20 $   =  7,8R
+BTC       28.800 $ - 26.850 $  =  1.950 $  /   250 $   =  7,8R
+
+equilibrio a 7,8 a 1       1 / (1 + 7,8)  =  11,3 %
+su tasa de acierto                            13 %</code></pre>
+
+          <p>Lee otra vez esas dos últimas líneas, porque dicen algo extraño. Sobre el papel este historial es <strong>marginalmente rentable.</strong> Un 13 % de acierto a 7,8 a 1 está por encima del equilibrio. Perdió el 59 % de la cuenta.</p>
+
+          <p>Los dos hechos no se contradicen, y la razón es la lección entera. Los 7,8R están medidos sobre un movimiento en el que él no estaba. Un múltiplo de R calculado desde un objetivo del que te barrieron antes de que se imprimiera no es un pago: es una descripción del gráfico. Sus siete ganadoras son las operaciones que te dicen lo que realmente cobró, y fuera lo que fuese, no era 7,8R.</p>
+
+          <p>Ahora calcula el arreglo, porque no es gratis. Un stop que sobrevive al segundo barrido va por debajo de él, no por encima:</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>NVDA   stop 267,00 $   riesgo 2,20 $    9,40 $ / 2,20 $  =  4,3R
+BTC    stop 26.300 $   riesgo  550 $    1.950 $ / 550 $  =  3,5R
+
+equilibrio a 4,3 a 1        1 / (1 + 4,3)  =  19,0 %
+equilibrio a 3,5 a 1        1 / (1 + 3,5)  =  22,0 %</code></pre>
+
+          <p style="margin-bottom:0">Así que el stop más ancho duplica más o menos la distancia, parte la posición por la mitad con el mismo riesgo en dólares y baja el pago de 7,8 a alrededor de 4, lo que sube el acierto que necesita del 11 % a cerca del 20 %. Ese es el listón que la regla del doble barrido tiene que superar, y su historial no puede decirte si lo supera. Que 47 de 54 pérdidas compartan un mismo modo de fallo dice que hay margen. No dice que llegue.</p>
+        </div>
+
         <p><strong>Recuperación (octubre de 2023-marzo de 2024):</strong> Nuevo sistema de barrido doble: (1) comprobar primero el régimen (tendencial = el primer barrido vale, lateral = esperar al segundo). (2) En zonas erráticas, esperar al segundo barrido (0,5-1× ATR más profundo que el primero). (3) Exigir confluencia HTF+LTF (los dos marcos mostrando liquidez al mismo precio). (4) Confirmar +10K de absorción de delta en el footprint en el segundo barrido. (5) Stop POR DEBAJO de la zona del segundo barrido (no en medio). (6) Operar muchos menos setups. Lo que cambió se mide en una sola cifra: tomó 23 setups donde antes tomaba 54, un recorte del 60 % en entradas. Para ese tramo no se cita ni porcentaje de aciertos, ni beneficio, ni saldo. Veintitrés operaciones no pueden medir un filtro, y el filtro es todo el cambio: no está leyendo mejor el gráfico, está rechazando más partes de él.</p>
         <div class="callout callout-purple" style="margin-top:1rem">
           <p><strong>La lección de Jordan:</strong> «Perdí 64.000 $ entrando en los PRIMEROS barridos y siendo stopeado por los SEGUNDOS 47 veces (87 %). Entendía el Janus básico (barrido → vuelta), pero no el patrón AVANZADO en condiciones erráticas: primer barrido limpia los stops obvios → el rebote falso crea stops nuevos → el segundo barrido se lleva AMBAS capas → llega el movimiento REAL. Yo entraba en el rebote falso y me CONVERTÍA en el combustible del segundo barrido. NVDA: primer barrido 268,50 $ (entré en 269,20 $), el segundo en 267,20 $ me sacó, y luego se fue a 278,60 $. BTC: primero 26.750 $ (entré en 26.850 $), el segundo en 26.350 $ me sacó, y luego se fue a 28.800 $. Cuarenta y siete veces. Ahora espero el segundo barrido en condiciones laterales. Confluencia HTF y LTF. Absorción de +10K de delta en el barrido. Tomo muchos menos setups que antes, y todavía no sé si los que tomo son mejores; lo que sí sé es que he dejado de ofrecerme voluntario como combustible. En mercados erráticos, el segundo barrido es la entrada de verdad. Llegar pronto es una forma de equivocarse.»</p>
@@ -407,7 +438,7 @@
             </div>
           </div>
           <div class="quiz-explanation">
-            <p><strong>Correcto: B.</strong> El desastre de Jordan: entender solo el Janus BÁSICO (barrido → giro) sin reconocer el doble barrido AVANZADO en mercados agitados. Lo básico funciona en tendencia: un barrido y arranca el giro. En mercado agitado, las instituciones cazan liquidez en DOS capas. El primer barrido (268,50 $) limpia los stops minoristas evidentes. Genera un rebote. Jordan entra creyendo que el giro ha empezado. Pero el rebote crea stops NUEVOS de los alcistas tempranos. El segundo barrido (267,20 $) se lleva los stops originales Y los de las entradas tempranas. Jordan se convierte en combustible del segundo barrido. ENTONCES empieza el giro real (278,60 $), pero a él ya le han sacado. Le destrozó en 47 de 54 operaciones (87 %). Ejemplo de BTC: primer barrido 26.750 $ → Jordan entró en 26.850 $ → subida hasta 27.400 $ (confianza) → el segundo barrido a 26.350 $ le sacó → BTC explotó hasta 28.800 $. Perdió 1.250 $ y se perdió 2.000 $ de movimiento. Los 64.000 $ de pérdidas son la parte que de verdad ocurrió; los «beneficios perdidos» que sumaba al lado dan por hecho que habría aguantado cada uno de esos movimientos hasta el final, algo que ningún trader stopeado puede afirmar honestamente.600 $ de diferencia. Recuperación: (1) comprobar el régimen (en tendencia = vale el primer barrido, en rango = esperar al segundo), (2) esperar al segundo barrido (entre 0,5 y 1 ATR más abajo), (3) exigir confluencia HTF y LTF, (4) confirmar +10K o más de absorción de delta. La lección: en mercado agitado, el segundo barrido ES la entrada real. El primer barrido es el cebo; el segundo, la trampa. Cada una de esas cuatro reglas resta entradas en vez de mejorarlas, que es justo el objetivo.</p>
+            <p><strong>Correcto: B.</strong> El desastre de Jordan: entender solo el Janus BÁSICO (barrido → giro) sin reconocer el doble barrido AVANZADO en mercados agitados. Lo básico funciona en tendencia: un barrido y arranca el giro. En mercado agitado, las instituciones cazan liquidez en DOS capas. El primer barrido (268,50 $) limpia los stops minoristas evidentes. Genera un rebote. Jordan entra creyendo que el giro ha empezado. Pero el rebote crea stops NUEVOS de los alcistas tempranos. El segundo barrido (267,20 $) se lleva los stops originales Y los de las entradas tempranas. Jordan se convierte en combustible del segundo barrido. ENTONCES empieza el giro real (278,60 $), pero a él ya le han sacado. Le destrozó en 47 de 54 operaciones (87 %). Ejemplo de BTC: primer barrido 26.750 $ → Jordan entró en 26.850 $ → subida hasta 27.400 $ (confianza) → el segundo barrido a 26.350 $ le sacó → BTC explotó hasta 28.800 $. Perdió 1.250 $ y se perdió 2.000 $ de movimiento. Los 64.000 $ de pérdidas son la parte que de verdad ocurrió; los «beneficios perdidos» que sumaba al lado dan por hecho que habría aguantado cada uno de esos movimientos hasta el final, algo que ningún trader stopeado puede afirmar honestamente. Recuperación: (1) comprobar el régimen (en tendencia = vale el primer barrido, en rango = esperar al segundo), (2) esperar al segundo barrido (entre 0,5 y 1 ATR más abajo), (3) exigir confluencia HTF y LTF, (4) confirmar +10K o más de absorción de delta. La lección: en mercado agitado, el segundo barrido ES la entrada real. El primer barrido es el cebo; el segundo, la trampa. Cada una de esas cuatro reglas resta entradas en vez de mejorarlas, que es justo el objetivo.</p>
           </div>
         </div>
       </div>
@@ -506,6 +537,8 @@
           <li><strong>La confluencia entre temporalidades marca los niveles que importan</strong> &mdash; cuando el diario y el intradía barren la misma zona, la liquidez de ahí merecía la pena</li>
           <li><strong>El barrido con recuperación necesita la recuperación</strong> &mdash; el barrido por sí solo no es la entrada; lo es el regreso por encima del nivel</li>
           <li><strong>Un barrido fallido puede desvanecerse o continuar</strong> &mdash; cuál de los dos depende de si el precio acepta volver al rango o lo rechaza</li>
+          <li><strong>Un múltiplo de R del que te sacaron no es un pago</strong> &mdash; las operaciones citadas de Jordan eran 7,8 a 1 medidas desde su propio stop, lo que con un 13 % de acierto está por encima del equilibrio, y aun así perdió el 59 % de la cuenta. El objetivo nunca estuvo a su alcance</li>
+          <li><strong>Un stop colocado por debajo del segundo barrido cuesta la mitad del pago</strong> &mdash; 7,8 a 1 se convierte en unos 4 a 1, así que el acierto que tiene que entregar sube del 11 % a cerca del 20 %. Esperar no es gratis; es otra operación</li>
           <li><strong>Espera al evento de liquidez y opera la reacción</strong> &mdash; no su anticipación</li>
         </ul>
       </div>

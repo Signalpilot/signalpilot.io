@@ -147,6 +147,7 @@
         <li>Confluência de varrimentos em vários tempos gráficos (capturas de liquidez enormes)</li>
         <li>Padrões de varrimento e reconquista (confirmação imediata da inversão)</li>
         <li>Varrimentos falhados (e como operá-los na direcção contrária)</li>
+        <li>Porque um múltiplo de R medido num movimento de que te varreram não é um payoff, e o que custa alargar o stop para sobreviver ao segundo sweep</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -385,6 +386,36 @@
         <p><strong>Falha fatal:</strong> Só percebia o padrão BÁSICO de varrimento único. Nunca esperava pelo SEGUNDO. Em mercados agitados as instituições usam varrimentos DUPLOS: o primeiro limpa os stops óbvios, o segundo os compradores adiantados, e SÓ DEPOIS vem o movimento a sério. O Jordan entrava sempre a seguir ao primeiro varrimento e tornava-se combustível do segundo</p>
         <p><strong>Resultado:</strong> 54 operações, 7 vencedoras, 64.000 $ perdidos (-59 %). Mantinha também uma lista corrente dos movimentos à frente dos quais foi stopado. Trata essa coluna com desconfiança: pressupõe que teria aguentado cada uma dessas posições até ao fim, que é exatamente a suposição que um trader stopado mais gosta de fazer. Os 64.000 $ são o que aconteceu; o resto é o que ele conta a si próprio.</p>
         <p><strong>O padrão (47 de 54 operações, 87 %):</strong> Primeiro varrimento → o Jordan entra → pequeno ressalto (10 a 30 min de confiança) → o segundo varrimento accionou-lhe o stop → o grande movimento arranca SEM ele. Exemplos: (1) 3 de abril, NVDA: suporte 270 $, primeiro varrimento 268,50 $, entrada 269,20 $, stop 268 $. Ressalto até 271,40 $. O segundo varrimento a 267,20 $ tirou-o. A NVDA disparou até 278,60 $. Perdeu mais de 9 $ de movimento e 600 $. (2) 8 de maio, BTC: suporte 27 000 $, primeiro varrimento 26 750 $, entrada 26 850 $, stop 26 600 $. Subida até 27 400 $. O segundo varrimento a 26 350 $ tirou-o. A BTC explodiu até 28 800 $. Perdeu mais de 2000 $ de movimento e 1250 $. (3) 10 de julho, AMD: suporte 110 $, primeiro varrimento 108,50 $ (50 %), segundo varrimento 107,80 $ (mais 50 %), e o TERCEIRO varrimento a 106,50 $ tirou-o das duas. A AMD subiu até 116,80 $ e ele perdeu 1800 $. Ponto de ruptura (21 de agosto): «47 de 54 seguiram EXACTAMENTE o mesmo padrão. Eu percebia o padrão BÁSICO, mas não o AVANÇADO: primeiro varrimento → ressalto falso → segundo varrimento → inversão A SÉRIO. Eu era a liquidez, não o predador.»</p>
+        <div class="callout-key">
+          <h4>&#128200; Porque o registo dele devia ter funcionado, e não funcionou</h4>
+          <p>Ambos os exemplos citados, acção e cripto, trazem entrada, stop e segundo sweep, por isso a geometria é mensurável. Fá-lo uma vez para cada.</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                        entrada    stop     risco   2.º sweep  além do stop
+NVDA      269,20 $  268,00 $   1,20 $   267,20 $       0,80 $
+BTC       26.850 $  26.600 $     250 $   26.350 $        250 $
+
+o movimento que citou, nas unidades de risco dele
+NVDA      278,60 $ - 269,20 $  =  9,40 $   /  1,20 $   =  7,8R
+BTC       28.800 $ - 26.850 $  =  1.950 $  /   250 $   =  7,8R
+
+equilíbrio a 7,8 para 1    1 / (1 + 7,8)  =  11,3 %
+a taxa de acerto dele                         13 %</code></pre>
+
+          <p>Lê outra vez essas duas últimas linhas, porque dizem uma coisa estranha. No papel este registo é <strong>marginalmente lucrativo.</strong> Uma taxa de 13 % a 7,8 para 1 está acima do equilíbrio. Ele perdeu 59 % da conta.</p>
+
+          <p>Os dois factos não se contradizem, e a razão é a lição inteira. Os 7,8R estão medidos num movimento em que ele não estava. Um múltiplo de R calculado a partir de um alvo de que te varreram antes de ele imprimir não é um payoff: é uma descrição do gráfico. As sete ganhadoras dele são as operações que te dizem o que recebeu mesmo, e fosse o que fosse, não eram 7,8R.</p>
+
+          <p>Agora põe preço na correcção, porque não é grátis. Um stop que sobrevive ao segundo sweep fica abaixo dele, não acima:</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>NVDA   stop 267,00 $   risco 2,20 $    9,40 $ / 2,20 $  =  4,3R
+BTC    stop 26.300 $   risco  550 $    1.950 $ / 550 $  =  3,5R
+
+equilíbrio a 4,3 para 1     1 / (1 + 4,3)  =  19,0 %
+equilíbrio a 3,5 para 1     1 / (1 + 3,5)  =  22,0 %</code></pre>
+
+          <p style="margin-bottom:0">Portanto o stop mais largo duplica mais ou menos a distância, corta a posição a meio com o mesmo risco em dólares e baixa o payoff de 7,8 para cerca de 4 &mdash; o que sobe a taxa de acerto de que precisa de 11 % para perto de 20 %. É essa a fasquia que a regra do duplo sweep tem de passar, e o registo dele não te pode dizer se passa. Que 47 de 54 perdas partilhem o mesmo modo de falha diz que há margem. Não diz que ele lá chega.</p>
+        </div>
+
         <p><strong>Recuperação (outubro de 2023-março de 2024):</strong> Novo sistema de varredura dupla: (1) verificar primeiro o regime (tendencial = a primeira varredura serve, lateral = esperar pela segunda). (2) Em mercado irregular, esperar pela segunda varredura (0,5-1× ATR mais funda do que a primeira). (3) Exigir confluência HTF+LTF (ambos os períodos a mostrar liquidez ao mesmo preço). (4) Confirmar +10K de absorção de delta no footprint na segunda varredura. (5) Stop ABAIXO da zona da segunda varredura (não no meio). (6) Operar muitos menos setups. O que mudou mede-se num único número: fez 23 setups onde antes fazia 54, um corte de 60 % nas entradas. Para esse período não se cita taxa de acerto, lucro nem saldo. Vinte e três operações não conseguem medir um filtro, e o filtro é toda a mudança: não está a ler melhor o gráfico, está a recusar mais dele.</p>
         <div class="callout callout-purple" style="margin-top:1rem">
           <p><strong>A lição do Jordan:</strong> «Perdi 64.000 $ a entrar nas PRIMEIRAS varreduras e a ser stopado pelas SEGUNDAS 47 vezes (87 %). Percebia o Janus básico (varredura → inversão) mas não o padrão AVANÇADO em condições irregulares: a primeira varredura limpa os stops óbvios → o ressalto falso cria stops novos → a segunda varredura leva AS DUAS camadas → começa o movimento a SÉRIO. Eu entrava no ressalto falso e TORNAVA-ME o combustível da segunda varredura. NVDA: primeira varredura 268,50 $ (entrei a 269,20 $), a segunda a 267,20 $ tirou-me, e depois foi aos 278,60 $. BTC: primeira a 26.750 $ (entrei a 26.850 $), a segunda a 26.350 $ tirou-me, e depois foi aos 28.800 $. Quarenta e sete vezes. Agora espero pela segunda varredura em condições laterais. Confluência HTF e LTF. Absorção de +10K de delta na varredura. Faço muitos menos setups do que fazia, e ainda não sei se os que faço são melhores — o que sei é que deixei de me oferecer como combustível. Em mercados irregulares, a segunda varredura é a entrada a sério. Chegar cedo é uma forma de estar errado.»</p>
@@ -506,6 +537,8 @@
           <li><strong>A confluência entre temporalidades marca os níveis que interessam</strong> &mdash; quando o diário e o intradiário varrem a mesma zona, a liquidez ali valia a pena</li>
           <li><strong>O varrimento com recuperação precisa da recuperação</strong> &mdash; o varrimento por si só não é a entrada; a entrada é o regresso acima do nível</li>
           <li><strong>Um varrimento falhado pode desvanecer-se ou continuar</strong> &mdash; qual dos dois depende de o preço aceitar ou rejeitar o regresso ao intervalo</li>
+          <li><strong>Um múltiplo de R de que te tiraram não é um payoff</strong> &mdash; as operações citadas do Jordan valiam 7,8 para 1 medidas a partir do stop dele, o que com 13 % de acerto está acima do equilíbrio, e mesmo assim perdeu 59 % da conta. O alvo nunca esteve ao alcance dele</li>
+          <li><strong>Um stop colocado abaixo do segundo sweep custa cerca de metade do payoff</strong> &mdash; 7,8 para 1 passa a cerca de 4 para 1, por isso a taxa de acerto que tem de entregar sobe de 11 % para perto de 20 %. Esperar não é grátis; é outra operação</li>
           <li><strong>Espere pelo evento de liquidez e negoceie a reação</strong> &mdash; não a sua antecipação</li>
         </ul>
       </div>

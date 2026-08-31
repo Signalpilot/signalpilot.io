@@ -147,6 +147,7 @@
         <li>La confluence de balayages sur plusieurs unités de temps (les prises de liquidité massives)</li>
         <li>Les schémas de balayage-reprise (confirmation immédiate du retournement)</li>
         <li>Les balayages ratés (et comment les trader dans le sens inverse)</li>
+        <li>Pourquoi un multiple de R mesuré sur un mouvement dont on vous a balayé n'est pas un rapport gain-risque, et ce que coûte un stop assez large pour survivre au deuxième balayage</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -385,6 +386,36 @@
         <p><strong>Défaut fatal :</strong> Ne comprenait que le schéma de BASE à un seul balayage. N'attendait jamais le DEUXIÈME. Dans les marchés hachés, les institutions utilisent des DOUBLES balayages : le premier nettoie les stops évidents, le second les acheteurs précoces, PUIS le vrai mouvement démarre. Jordan entrait à chaque fois après le premier balayage et devenait le carburant du second</p>
         <p><strong>Résultat :</strong> 54 trades, 7 gagnants, 64 000 $ perdus (-59 %). Il tenait aussi une liste courante des mouvements devant lesquels il s'était fait sortir. Traite cette colonne avec méfiance : elle suppose qu'il aurait tenu chacune de ces positions jusqu'au bout, et c'est précisément la supposition qu'un trader stoppé a le plus envie de faire. Les 64 000 $, c'est ce qui s'est passé ; le reste, c'est ce qu'il se raconte.</p>
         <p><strong>Le schéma (47 positions sur 54, 87 %) :</strong> Premier balayage → Jordan entre → petit rebond (10 à 30 min de confiance) → le deuxième balayage le sort → le grand mouvement part SANS lui. Exemples : (1) 3 avril, NVDA : support 270 $, premier balayage 268,50 $, entrée 269,20 $, stop 268 $. Rebond à 271,40 $. Le deuxième balayage à 267,20 $ l'a sorti. NVDA a bondi à 278,60 $. Plus de 9 $ de mouvement manqués, 600 $ perdus. (2) 8 mai, BTC : support 27 000 $, premier balayage 26 750 $, entrée 26 850 $, stop 26 600 $. Hausse jusqu'à 27 400 $. Le deuxième balayage à 26 350 $ l'a sorti. BTC a explosé à 28 800 $. Plus de 2 000 $ de mouvement manqués, 1 250 $ perdus. (3) 10 juillet, AMD : support 110 $, premier balayage 108,50 $ (50 %), deuxième balayage 107,80 $ (50 % de plus), et le TROISIÈME balayage à 106,50 $ a sorti les deux. AMD est monté à 116,80 $, 1 800 $ perdus. Point de rupture (21 août) : « 47 positions sur 54 ont suivi EXACTEMENT le même schéma. J'avais compris le schéma de BASE, mais pas l'AVANCÉ : premier balayage → faux rebond → deuxième balayage → VRAI retournement. J'étais la liquidité, pas le prédateur. »</p>
+        <div class="callout-key">
+          <h4>&#128200; Pourquoi son relevé aurait dû fonctionner, et n'a pas fonctionné</h4>
+          <p>Les deux exemples cités, action et crypto, portent une entrée, un stop et un deuxième balayage : la géométrie est donc mesurable. Faites le calcul une fois pour chacun.</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                        entrée     stop     risque  2e balayage  au-delà du stop
+NVDA      269,20 $  268,00 $   1,20 $   267,20 $        0,80 $
+BTC       26 850 $  26 600 $     250 $   26 350 $         250 $
+
+le mouvement qu'il cite, dans ses propres unités de risque
+NVDA      278,60 $ - 269,20 $  =  9,40 $   /  1,20 $   =  7,8R
+BTC       28 800 $ - 26 850 $  =  1 950 $  /   250 $   =  7,8R
+
+seuil de rentabilité à 7,8 pour 1   1 / (1 + 7,8)  =  11,3 %
+son taux de réussite                                   13 %</code></pre>
+
+          <p>Relisez ces deux dernières lignes, car elles disent quelque chose d'étrange. Sur le papier, ce relevé est <strong>légèrement rentable.</strong> Un taux de 13 % à 7,8 pour 1 est au-dessus du seuil de rentabilité. Il a perdu 59 % du compte.</p>
+
+          <p>Les deux faits ne se contredisent pas, et la raison tient toute la leçon. Les 7,8R sont mesurés sur un mouvement où il n'était pas. Un multiple de R calculé à partir d'un objectif dont on vous a balayé avant qu'il ne s'imprime n'est pas un rapport gain-risque : c'est une description du graphique. Ses sept gagnants sont les trades qui vous disent ce qu'il a réellement encaissé, et quoi que ce fût, ce n'était pas 7,8R.</p>
+
+          <p>Chiffrez maintenant le correctif, car il n'est pas gratuit. Un stop qui survit au deuxième balayage se place en dessous, pas au-dessus :</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>NVDA   stop 267,00 $   risque 2,20 $    9,40 $ / 2,20 $  =  4,3R
+BTC    stop 26 300 $   risque  550 $    1 950 $ / 550 $  =  3,5R
+
+seuil de rentabilité à 4,3 pour 1    1 / (1 + 4,3)  =  19,0 %
+seuil de rentabilité à 3,5 pour 1    1 / (1 + 3,5)  =  22,0 %</code></pre>
+
+          <p style="margin-bottom:0">Le stop plus large double donc à peu près la distance, réduit de moitié la position à risque en dollars constant, et fait tomber le rapport de 7,8 à environ 4 &mdash; ce qui fait passer le taux de réussite exigé de 11 % à près de 20 %. C'est la barre que la règle du double balayage doit franchir, et son relevé ne peut pas vous dire s'il la franchit. Que 47 pertes sur 54 partagent un même mode d'échec dit qu'il y a de la marge. Cela ne dit pas qu'il y arrive.</p>
+        </div>
+
         <p><strong>Redressement (octobre 2023-mars 2024) :</strong> Nouveau système de double balayage : (1) vérifier d'abord le régime (tendance = premier balayage acceptable, range = attendre le second). (2) En marché haché, attendre le second balayage (0,5-1× ATR plus profond que le premier). (3) Exiger une confluence HTF+LTF (les deux unités de temps montrant de la liquidité au même prix). (4) Confirmer +10K d'absorption de delta au footprint sur le second balayage. (5) Stop SOUS la zone du second balayage (pas entre les deux). (6) Trader beaucoup moins de configurations. Ce qui a changé se mesure à un seul chiffre : il a pris 23 configurations là où il en prenait 54, soit 60 % d'entrées en moins. Aucun taux de réussite, profit ou solde n'est cité pour cette période. Vingt-trois trades ne peuvent pas mesurer un filtre, et le filtre est tout le changement : il ne lit pas mieux le graphique, il en refuse davantage.</p>
         <div class="callout callout-purple" style="margin-top:1rem">
           <p><strong>La leçon de Jordan :</strong> « J'ai perdu 64 000 $ en entrant sur les PREMIERS balayages et en me faisant sortir par les SECONDS 47 fois (87 %). Je comprenais le Janus de base (balayage → retournement) mais pas le schéma AVANCÉ en marché haché : le premier balayage nettoie les stops évidents → le faux rebond crée de nouveaux stops → le second balayage prend LES DEUX couches → le VRAI mouvement démarre. J'entrais sur le faux rebond et je DEVENAIS le carburant du second balayage. NVDA : premier balayage 268,50 $ (je suis entré à 269,20 $), le second à 267,20 $ m'a sorti, puis c'est monté à 278,60 $. BTC : premier à 26 750 $ (entré à 26 850 $), le second à 26 350 $ m'a sorti, puis c'est monté à 28 800 $. Quarante-sept fois. Maintenant j'attends le second balayage en range. Confluence HTF et LTF. Absorption de +10K de delta au balayage. Je prends beaucoup moins de configurations qu'avant, et je ne sais pas encore si celles que je prends sont meilleures — ce que je sais, c'est que j'ai arrêté de me porter volontaire comme carburant. En marché haché, le second balayage est la vraie entrée. Être en avance est une façon d'avoir tort. »</p>
@@ -506,6 +537,8 @@
           <li><strong>La confluence entre unités de temps marque les niveaux qui comptent</strong> &mdash; quand le journalier et l'intraday balaient la même zone, la liquidité qui s'y trouvait valait la peine d'être prise</li>
           <li><strong>Le sweep-and-reclaim exige la reprise</strong> &mdash; le balayage seul n'est pas l'entrée, c'est le retour au-dessus du niveau qui l'est</li>
           <li><strong>Un balayage manqué peut s'effacer ou se prolonger</strong> &mdash; lequel des deux dépend de l'acceptation ou du rejet du retour à l'intérieur du range</li>
+          <li><strong>Un multiple de R dont on vous a sorti n'est pas un rapport gain-risque</strong> &mdash; les trades cités de Jordan valaient 7,8 pour 1 mesurés depuis son propre stop, ce qui, à 13 % de réussite, est au-dessus du seuil de rentabilité, et il a tout de même perdu 59 % du compte. L'objectif ne lui a jamais été accessible</li>
+          <li><strong>Un stop placé sous le deuxième balayage coûte environ la moitié du rapport</strong> &mdash; 7,8 pour 1 devient environ 4 pour 1, donc le taux de réussite qu'il doit livrer passe de 11 % à près de 20 %. Attendre n'est pas gratuit ; c'est un autre trade</li>
           <li><strong>Attendez l'événement de liquidité, puis tradez la réaction</strong> &mdash; pas son anticipation</li>
         </ul>
       </div>

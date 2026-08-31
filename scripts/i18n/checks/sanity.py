@@ -54,10 +54,21 @@ PASSTHROUGH = ['ChoCH', 'BOS', 'OTE',
 # Arabic renders as الخوف من فوات الفرصة in most of its memory.
 
 
+# A sentence-ending period glued straight onto a digit ("gelir.100 $") is a
+# lost space, not punctuation -- three of these survived every other check
+# because they invent no number, lose no term and are not English.
+GLUED = re.compile(r'[a-zA-ZÀ-ÿА-я]\.\d')
+
+
 def run(slug, report=print):
     bad = 0
     for lang, ps in ctx.pairs(slug):
         for k, v in ps:
+            m = GLUED.search(v)
+            if m and not GLUED.search(k):
+                report(f'  {lang}: period glued to a digit {m.group(0)!r}\n'
+                       f'        ...{v[max(0, m.start() - 45):m.start() + 45]}...')
+                bad += 1
             for name, pat in (('correction', CORRECTION),
                               ('correction', CORRECTION_JA),
                               ('doubled word', DOUBLED)):

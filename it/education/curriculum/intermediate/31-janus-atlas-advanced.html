@@ -147,6 +147,7 @@
         <li>La confluenza di sweep su più timeframe (le prese di liquidità enormi)</li>
         <li>Gli schemi di sweep e riconquista (conferma immediata dell'inversione)</li>
         <li>Gli sweep falliti (e come operarli nella direzione opposta)</li>
+        <li>Perché un multiplo di R misurato su un movimento da cui sei stato spazzato via non è un rapporto di payoff, e quanto costa allargare lo stop per sopravvivere al secondo sweep</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -385,6 +386,36 @@
         <p><strong>Difetto fatale:</strong> Aveva capito solo lo schema di BASE a sweep singolo. Non aspettava mai il SECONDO. Nei mercati nervosi le istituzioni usano DOPPI sweep: il primo ripulisce gli stop ovvi, il secondo i compratori anticipati, POI parte il movimento vero. Jordan entrava ogni volta dopo il primo sweep e diventava carburante per il secondo</p>
         <p><strong>Risultato:</strong> 54 operazioni, 7 vincenti, 64.000 $ persi (-59 %). Teneva anche un elenco corrente dei movimenti davanti ai quali era stato stoppato. Tratta quella colonna con sospetto: dà per scontato che avrebbe tenuto ciascuna di quelle posizioni fino in fondo, che è esattamente lʼassunzione che un trader stoppato desidera di più fare. I 64.000 $ sono quello che è successo; il resto è quello che si racconta.</p>
         <p><strong>Lo schema (47 operazioni su 54, 87 %):</strong> Primo sweep → Jordan entra → piccolo rimbalzo (da 10 a 30 min di fiducia) → il secondo sweep lo fa saltare → il movimento grosso parte SENZA di lui. Esempi: (1) 3 aprile, NVDA: supporto 270 $, primo sweep 268,50 $, ingresso 269,20 $, stop 268 $. Rimbalzo a 271,40 $. Il secondo sweep a 267,20 $ lo ha fatto uscire. NVDA è schizzato a 278,60 $. Oltre 9 $ di movimento mancati, 600 $ persi. (2) 8 maggio, BTC: supporto 27.000 $, primo sweep 26.750 $, ingresso 26.850 $, stop 26.600 $. Salita a 27.400 $. Il secondo sweep a 26.350 $ lo ha fatto uscire. BTC è esploso a 28.800 $. Oltre 2.000 $ di movimento mancati, 1.250 $ persi. (3) 10 luglio, AMD: supporto 110 $, primo sweep 108,50 $ (50 %), secondo sweep 107,80 $ (un altro 50 %), e il TERZO sweep a 106,50 $ lo ha fatto uscire da entrambe. AMD è salito a 116,80 $, 1.800 $ persi. Punto di rottura (21 agosto): «47 operazioni su 54 hanno seguito ESATTAMENTE lo stesso schema. Avevo capito lo schema di BASE, ma non quello AVANZATO: primo sweep → falso rimbalzo → secondo sweep → inversione VERA. Ero io la liquidità, non il predatore.»</p>
+        <div class="callout-key">
+          <h4>&#128200; Perché il suo registro avrebbe dovuto funzionare, e non ha funzionato</h4>
+          <p>Entrambi gli esempi citati, azione e cripto, portano un ingresso, uno stop e un secondo sweep, quindi la geometria è misurabile. Fai il conto una volta per ciascuno.</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                        ingresso   stop     rischio  2º sweep   oltre lo stop
+NVDA      269,20 $  268,00 $   1,20 $   267,20 $        0,80 $
+BTC       26.850 $  26.600 $     250 $   26.350 $         250 $
+
+il movimento che cita, nelle sue stesse unità di rischio
+NVDA      278,60 $ - 269,20 $  =  9,40 $   /  1,20 $   =  7,8R
+BTC       28.800 $ - 26.850 $  =  1.950 $  /   250 $   =  7,8R
+
+pareggio a 7,8 a 1         1 / (1 + 7,8)  =  11,3 %
+la sua percentuale                            13 %</code></pre>
+
+          <p>Rileggi quelle ultime due righe, perché dicono una cosa strana. Sulla carta questo registro è <strong>marginalmente in utile.</strong> Una percentuale del 13 % a 7,8 a 1 sta sopra il pareggio. Ha perso il 59 % del conto.</p>
+
+          <p>I due fatti non sono in contraddizione, e il motivo è l'intera lezione. I 7,8R sono misurati su un movimento in cui lui non c'era. Un multiplo di R calcolato da un obiettivo da cui sei stato spazzato via prima che venisse stampato non è un payoff: è una descrizione del grafico. Le sue sette vincenti sono le operazioni che ti dicono quanto ha incassato davvero, e qualunque cosa fosse, non erano 7,8R.</p>
+
+          <p>Ora quantifica la correzione, perché non è gratis. Uno stop che sopravvive al secondo sweep sta sotto di esso, non sopra:</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>NVDA   stop 267,00 $   rischio 2,20 $    9,40 $ / 2,20 $  =  4,3R
+BTC    stop 26.300 $   rischio  550 $    1.950 $ / 550 $  =  3,5R
+
+pareggio a 4,3 a 1          1 / (1 + 4,3)  =  19,0 %
+pareggio a 3,5 a 1          1 / (1 + 3,5)  =  22,0 %</code></pre>
+
+          <p style="margin-bottom:0">Quindi lo stop più largo raddoppia all'incirca la distanza, dimezza la posizione a parità di rischio in dollari e fa scendere il rapporto da 7,8 a circa 4 &mdash; il che alza la percentuale che gli serve dall'11 % a circa il 20 %. È l'asticella che la regola del doppio sweep deve superare, e il suo registro non può dirti se la supera. Che 47 perdite su 54 condividano lo stesso modo di fallire dice che c'è spazio. Non dice che ci arriva.</p>
+        </div>
+
         <p><strong>Ripresa (ottobre 2023-marzo 2024):</strong> Nuovo sistema di doppio sweep: (1) controllare prima il regime (in trend = il primo sweep va bene, in range = aspettare il secondo). (2) Nel nervosismo, aspettare il secondo sweep (0,5-1× ATR più profondo del primo). (3) Richiedere confluenza HTF+LTF (entrambi i timeframe mostrano liquidità allo stesso prezzo). (4) Confermare +10K di assorbimento di delta sul footprint al secondo sweep. (5) Stop SOTTO la zona del secondo sweep (non in mezzo). (6) Operare molti meno setup. Quello che è cambiato si misura con un numero solo: ha preso 23 setup dove ne prendeva 54, un taglio del 60 % negli ingressi. Per quel periodo non viene citata nessuna percentuale, nessun profitto e nessun saldo. Ventitré operazioni non possono misurare un filtro, e il filtro è tutto il cambiamento: non legge meglio il grafico, ne rifiuta di più.</p>
         <div class="callout callout-purple" style="margin-top:1rem">
           <p><strong>La lezione di Jordan:</strong> «Ho perso 64.000 $ entrando sui PRIMI sweep e facendomi stoppare dai SECONDI 47 volte (87 %). Capivo il Janus di base (sweep → inversione) ma non lo schema AVANZATO nelle fasi nervose: il primo sweep ripulisce gli stop ovvi → il falso rimbalzo crea nuovi stop → il secondo sweep prende ENTRAMBI gli strati → parte il movimento VERO. Io entravo sul falso rimbalzo e DIVENTAVO il carburante del secondo sweep. NVDA: primo sweep 268,50 $ (sono entrato a 269,20 $), il secondo a 267,20 $ mi ha stoppato, poi è andata a 278,60 $. BTC: primo a 26.750 $ (entrato a 26.850 $), il secondo a 26.350 $ mi ha stoppato, poi è andata a 28.800 $. Quarantasette volte. Adesso aspetto il secondo sweep nelle fasi laterali. Confluenza HTF e LTF. Assorbimento di +10K di delta allo sweep. Prendo molti meno setup di prima, e non so ancora se quelli che prendo siano migliori — quello che so è che ho smesso di offrirmi come carburante. Nei mercati nervosi il secondo sweep è il vero ingresso. Essere in anticipo è un modo di avere torto.»</p>
@@ -407,7 +438,7 @@
             </div>
           </div>
           <div class="quiz-explanation">
-            <p><strong>Corretto: B.</strong> Il disastro di Jordan: aver capito solo il Janus di BASE (sweep → inversione) senza riconoscere il doppio sweep AVANZATO nei mercati nervosi. La versione di base funziona in trend: uno sweep e l'inversione parte. Nelle fasi nervose, le istituzioni cacciano la liquidità su DUE strati. Il primo sweep (268,50 $) ripulisce gli stop retail ovvi. Genera un rimbalzo. Jordan entra convinto che l'inversione sia partita. Ma il rimbalzo crea stop NUOVI dei rialzisti anticipati. Il secondo sweep (267,20 $) prende gli stop originari E quelli degli ingressi anticipati. Jordan diventa carburante per il secondo sweep. POI parte l'inversione vera (278,60 $), ma lui è già fuori. Lo ha distrutto in 47 operazioni su 54 (87 %). Esempio BTC: primo sweep 26.750 $ → Jordan entra a 26.850 $ → salita a 27.400 $ (fiducia) → il secondo sweep a 26.350 $ lo fa uscire → BTC esplode a 28.800 $. 1.250 $ persi, 2.000 $ di movimento mancati. I 64.000 $ di perdite sono la parte che è davvero successa; i «profitti mancati» che sommava accanto danno per scontato che avrebbe tenuto ciascuno di quei movimenti fino in fondo, cosa che nessun trader stoppato può onestamente sostenere.600 $ di divario. Ripresa: (1) controllare il regime (in trend = va bene il primo sweep, in laterale = aspettare il secondo), (2) aspettare il secondo sweep (da 0,5 a 1 ATR più in basso), (3) pretendere la confluenza HTF e LTF, (4) confermare +10K di delta assorbito o più. La lezione: nelle fasi nervose il secondo sweep È l'ingresso vero. Il primo sweep è l'esca, il secondo la trappola. Ognuna di quelle quattro regole sottrae ingressi invece di migliorarli, ed è esattamente il punto.</p>
+            <p><strong>Corretto: B.</strong> Il disastro di Jordan: aver capito solo il Janus di BASE (sweep → inversione) senza riconoscere il doppio sweep AVANZATO nei mercati nervosi. La versione di base funziona in trend: uno sweep e l'inversione parte. Nelle fasi nervose, le istituzioni cacciano la liquidità su DUE strati. Il primo sweep (268,50 $) ripulisce gli stop retail ovvi. Genera un rimbalzo. Jordan entra convinto che l'inversione sia partita. Ma il rimbalzo crea stop NUOVI dei rialzisti anticipati. Il secondo sweep (267,20 $) prende gli stop originari E quelli degli ingressi anticipati. Jordan diventa carburante per il secondo sweep. POI parte l'inversione vera (278,60 $), ma lui è già fuori. Lo ha distrutto in 47 operazioni su 54 (87 %). Esempio BTC: primo sweep 26.750 $ → Jordan entra a 26.850 $ → salita a 27.400 $ (fiducia) → il secondo sweep a 26.350 $ lo fa uscire → BTC esplode a 28.800 $. 1.250 $ persi, 2.000 $ di movimento mancati. I 64.000 $ di perdite sono la parte che è davvero successa; i «profitti mancati» che sommava accanto danno per scontato che avrebbe tenuto ciascuno di quei movimenti fino in fondo, cosa che nessun trader stoppato può onestamente sostenere. Ripresa: (1) controllare il regime (in trend = va bene il primo sweep, in laterale = aspettare il secondo), (2) aspettare il secondo sweep (da 0,5 a 1 ATR più in basso), (3) pretendere la confluenza HTF e LTF, (4) confermare +10K di delta assorbito o più. La lezione: nelle fasi nervose il secondo sweep È l'ingresso vero. Il primo sweep è l'esca, il secondo la trappola. Ognuna di quelle quattro regole sottrae ingressi invece di migliorarli, ed è esattamente il punto.</p>
           </div>
         </div>
       </div>
@@ -506,6 +537,8 @@
           <li><strong>La confluenza tra timeframe segna i livelli che contano</strong> &mdash; quando il giornaliero e l'intraday spazzano la stessa zona, la liquidità lì valeva la pena di essere presa</li>
           <li><strong>Lo sweep-and-reclaim ha bisogno della riconquista</strong> &mdash; lo sweep da solo non è l'ingresso, lo è il ritorno oltre il livello</li>
           <li><strong>Uno sweep fallito può sfumare o proseguire</strong> &mdash; quale dei due dipende dal fatto che il prezzo accetti o rifiuti il rientro nel range</li>
+          <li><strong>Un multiplo di R da cui sei stato stoppato non è un payoff</strong> &mdash; le operazioni citate di Jordan valevano 7,8 a 1 misurate dal suo stop, il che a una percentuale del 13 % sta sopra il pareggio, e ha comunque perso il 59 % del conto. L'obiettivo non gli è mai stato disponibile</li>
+          <li><strong>Uno stop messo sotto il secondo sweep costa circa metà del payoff</strong> &mdash; 7,8 a 1 diventa circa 4 a 1, quindi la percentuale che deve produrre sale dall'11 % a circa il 20 %. Aspettare non è gratis; è un'altra operazione</li>
           <li><strong>Aspetta l'evento di liquidità e poi opera la reazione</strong> &mdash; non la sua anticipazione</li>
         </ul>
       </div>

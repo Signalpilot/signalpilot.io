@@ -147,6 +147,7 @@
         <li>Sweepsamenloop over meerdere timeframes (enorme liquiditeitsgrepen)</li>
         <li>Sweep-en-heroveringspatronen (directe bevestiging van de omkering)</li>
         <li>Mislukte sweeps (en hoe je ze in de tegenovergestelde richting handelt)</li>
+        <li>Waarom een R-multiple gemeten op een beweging waar je uit geveegd bent geen payoff is, en wat het kost om de stop ruim genoeg te zetten om de tweede sweep te overleven</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -385,6 +386,36 @@
         <p><strong>Fatale fout:</strong> Begreep alleen het BASISPATROON met één sweep. Wachtte nooit op de TWEEDE. In grillige markten gebruiken instituten DUBBELE sweeps: de eerste ruimt de voor de hand liggende stops op, de tweede de vroege kopers, en DAARNA komt de echte beweging. Jordan stapte telkens na de eerste sweep in en werd zo brandstof voor de tweede</p>
         <p><strong>Resultaat:</strong> 54 trades, 7 winnaars, $64.000 verloren (-59 %). Hij hield ook een lopende lijst bij van de bewegingen waarvoor hij was uitgestopt. Behandel die kolom met wantrouwen — ze veronderstelt dat hij elk van die posities helemaal had vastgehouden, en dat is precies de aanname die een uitgestopte trader het liefst maakt. De $64.000 is wat er gebeurde; de rest is wat hij zichzelf vertelt.</p>
         <p><strong>Het patroon (47 van de 54 trades, 87 %):</strong> Eerste sweep → Jordan stapt in → kleine stuiter (10 tot 30 min vertrouwen) → de tweede sweep stopt hem uit → de grote beweging loopt ZONDER hem. Voorbeelden: (1) 3 apr., NVDA: steun $270, eerste sweep $268,50, instap $269,20, stop $268. Stuiter naar $271,40. De tweede sweep op $267,20 stopte hem uit. NVDA schoot naar $278,60. Meer dan $9 beweging gemist, $600 verlies. (2) 8 mei, BTC: steun $27K, eerste sweep $26.750, instap $26.850, stop $26.600. Stijging naar $27.400. De tweede sweep op $26.350 stopte hem uit. BTC explodeerde naar $28.800. Meer dan $2K beweging gemist, $1.250 verlies. (3) 10 juli, AMD: steun $110, eerste sweep $108,50 (50 %), tweede sweep $107,80 (nog eens 50 %), en de DERDE sweep op $106,50 stopte beide uit. AMD liep op naar $116,80, $1.800 verlies. Breekpunt (21 aug.): „47 van de 54 volgden PRECIES hetzelfde patroon. Ik begreep het BASISPATROON, maar niet het GEVORDERDE: eerste sweep → valse stuiter → tweede sweep → ECHTE omkering. Ik was de liquiditeit, niet de jager.”</p>
+        <div class="callout-key">
+          <h4>&#128200; Waarom zijn reeks had moeten werken, en dat niet deed</h4>
+          <p>Beide genoemde voorbeelden, aandeel en crypto, dragen een entry, een stop en een tweede sweep, dus de geometrie is meetbaar. Reken het voor elk één keer uit.</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>                        entry      stop     risico  2e sweep   voorbij de stop
+NVDA      $269,20   $268,00    $1,20    $267,20         $0,80
+BTC       $26.850   $26.600      $250    $26.350          $250
+
+de beweging die hij noemt, in zijn eigen risico-eenheden
+NVDA      $278,60 - $269,20  =  $9,40    /  $1,20   =  7,8R
+BTC       $28.800 - $26.850  =  $1.950   /   $250   =  7,8R
+
+break-even bij 7,8 op 1    1 / (1 + 7,8)  =  11,3 %
+zijn trefkans                                 13 %</code></pre>
+
+          <p>Lees die laatste twee regels nog eens, want ze zeggen iets vreemds. Op papier is deze reeks <strong>marginaal winstgevend.</strong> Een trefkans van 13 % bij 7,8 op 1 ligt boven break-even. Hij verloor 59 % van de rekening.</p>
+
+          <p>De twee feiten spreken elkaar niet tegen, en de reden daarvoor is de hele les. De 7,8R is gemeten op een beweging waar hij niet in zat. Een R-multiple berekend vanaf een target waar je uit geveegd bent voordat het werd afgedrukt, is geen payoff &mdash; het is een beschrijving van de chart. Zijn zeven winnaars zijn de trades die je vertellen wat hij werkelijk incasseerde, en wat het ook was, 7,8R was het niet.</p>
+
+          <p>Reken nu de oplossing door, want gratis is die niet. Een stop die de tweede sweep overleeft, ligt eronder in plaats van erboven:</p>
+
+          <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>NVDA   stop $267,00   risico $2,20    $9,40 / $2,20  =  4,3R
+BTC    stop $26.300   risico  $550    $1.950 / $550  =  3,5R
+
+break-even bij 4,3 op 1     1 / (1 + 4,3)  =  19,0 %
+break-even bij 3,5 op 1     1 / (1 + 3,5)  =  22,0 %</code></pre>
+
+          <p style="margin-bottom:0">De ruimere stop verdubbelt dus ongeveer de afstand, halveert de positie bij gelijk dollarrisico en drukt de payoff van 7,8 naar zo'n 4 &mdash; waardoor de trefkans die hij nodig heeft stijgt van 11 % naar bijna 20 %. Dat is de lat die de dubbele-sweepregel moet halen, en zijn reeks kan je niet vertellen of hij dat doet. Dat 47 van de 54 verliezen dezelfde faalwijze delen, zegt dat er ruimte is. Het zegt niet dat hij er komt.</p>
+        </div>
+
         <p><strong>Herstel (okt. 2023-mrt. 2024):</strong> Nieuw dubbele-sweepsysteem: (1) eerst het regime controleren (trendend = eerste sweep prima, ranging = wachten op de tweede). (2) In grillige markt wachten op de tweede sweep (0,5-1× ATR dieper dan de eerste). (3) HTF+LTF-confluentie eisen (beide tijdframes tonen liquiditeit op dezelfde koers). (4) +10K delta-absorptie op de footprint bij de tweede sweep bevestigen. (5) Stop ONDER de zone van de tweede sweep (niet ertussen). (6) Veel minder opstellingen handelen. Wat er veranderde, is in precies één getal te meten: hij nam 23 opstellingen waar hij er 54 nam, 60 % minder instappen. Voor die periode wordt geen trefferpercentage, winst of saldo genoemd. Drieëntwintig trades kunnen een filter niet meten, en het filter ís de hele verandering: hij leest de grafiek niet beter, hij wijst er meer van af.</p>
         <div class="callout callout-purple" style="margin-top:1rem">
           <p><strong>Jordans les:</strong> „Ik verloor $64K door in te stappen op EERSTE sweeps en 47 keer (87 %) te worden uitgestopt door TWEEDE. Ik begreep de basis-Janus (sweep → omkering) maar niet het GEVORDERDE patroon in grillige markt: eerste sweep ruimt de voor de hand liggende stops op → de valse bounce maakt nieuwe stops → de tweede sweep pakt BEIDE lagen → de ECHTE beweging begint. Ik stapte in op de valse bounce en WERD de brandstof van de tweede sweep. NVDA: eerste sweep $268,50 (ik stapte in op $269,20), de tweede op $267,20 stopte me eruit, daarna ging het naar $278,60. BTC: eerste op $26.750 (ingestapt op $26.850), de tweede op $26.350 stopte me eruit, daarna naar $28.800. Zevenenveertig keer. Nu wacht ik in rangecondities op de tweede sweep. HTF- en LTF-confluentie. +10K delta-absorptie bij de sweep. Ik neem veel minder opstellingen dan vroeger, en ik weet nog niet of die beter zijn — wat ik wel weet, is dat ik me niet langer vrijwillig als brandstof aanbied. In grillige markten is de tweede sweep de echte instap. Te vroeg zijn is een manier om ongelijk te hebben.”</p>
@@ -506,6 +537,8 @@
           <li><strong>Confluentie over timeframes markeert de niveaus die ertoe doen</strong> &mdash; als dag- en intradaychart dezelfde zone wegvegen, was de liquiditeit daar het halen waard</li>
           <li><strong>Sweep-and-reclaim heeft de reclaim nodig</strong> &mdash; de sweep alleen is niet de entry, het herstel terug door het niveau wel</li>
           <li><strong>Een mislukte sweep kan wegzakken of doorlopen</strong> &mdash; welke van de twee hangt ervan af of de prijs de terugkeer in de range accepteert of afwijst</li>
+          <li><strong>Een R-multiple waar je uit gestopt bent, is geen payoff</strong> &mdash; Jordans genoemde trades waren 7,8 op 1 gemeten vanaf zijn eigen stop, wat bij een trefkans van 13 % boven break-even ligt, en toch verloor hij 59 % van de rekening. Het target was nooit voor hem beschikbaar</li>
+          <li><strong>Een stop onder de tweede sweep kost ongeveer de helft van de payoff</strong> &mdash; 7,8 op 1 wordt zo'n 4 op 1, dus de trefkans die hij moet leveren stijgt van 11 % naar bijna 20 %. Wachten is niet gratis; het is een andere trade</li>
           <li><strong>Wacht op het liquiditeitsmoment en handel dan de reactie</strong> &mdash; niet de anticipatie erop</li>
         </ul>
       </div>
