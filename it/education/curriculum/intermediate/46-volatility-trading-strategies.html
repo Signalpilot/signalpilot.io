@@ -138,6 +138,7 @@
           <li>La volatilità torna alla media dagli estremi &mdash; ma "il VIX è a 30, vendi volatilità" è esattamente l'operazione di cui parla il caso studio di questa lezione, e la Parte 5 spiega perché il ritorno alla media non ti salva dal percorso che fa per arrivarci</li>
           <li>Struttura a termine: perché i futures sul VIX stanno di solito in contango, perché quel decadimento è reale, e perché un crollo ribalta la curva in backwardation &mdash; che è esattamente quando l'operazione "vendi il mese vicino" smette di funzionare</li>
           <li>Realizzata contro implicita, nella direzione che è davvero quella giusta: a te pagano l'implicita e tu paghi la realizzata, quindi le opzioni sono care quando l'implicita è SOPRA la realizzata. La versione precedente di questa riga l'aveva al contrario e ti diceva di vendere proprio nelle condizioni in cui vendere perde denaro</li>
+          <li>Come ricavare l'esposizione massima che il tuo tasso di successo può reggere, invece di prendere una cifra tonda da un elenco</li>
           <li>Quadro: converti prima il livello del VIX in un range giornaliero atteso &rarr; dimensiona da quel range invece che da un'opinione &rarr; non portare mai una posizione corta di volatilità senza un'opzione lunga che metta un tetto alla perdita. Nota cosa accoppiava la vecchia versione di questa riga: VIX sopra 30 con il contango e VIX sotto 15 con la backwardation, sbagliato in entrambi i casi &mdash; un panico mette la curva in backwardation e un mercato calmo la mette in contango &mdash; e raccomandava call corte nude, che non hanno perdita massima</li>
         </ul>
       </div>
@@ -765,6 +766,7 @@ sono saltati per aver venduto volatilità senza controlli sul rischio.
           <li><strong>Dispersione: volatilità dell'indice &lt; volatilità media dei componenti, grazie alla diversificazione</strong>—le istituzioni operano il ritorno della correlazione alla media (complesso, non da retail)</li>
           <li><strong>Il contango dei futures sul VIX crea un'erosione strutturale</strong>: in contango il tempo lavora contro chi detiene VXX e a favore dell’altro lato; ma SVXY è un prodotto -0,5× da febbraio 2018, quindi ogni cifra citata dal 2017 descrive uno strumento che non è più quotato</li>
           <li><strong>Conosci il tuo regime prima di operare la volatilità</strong>—<a href="https://www.signalpilot.io/docs/volume-oracle-v10/" target="_blank" rel="noopener">Volume Oracle</a> rileva automaticamente i regimi di tendenza, laterali e volatili, aiutandoti ad adattare la strategia alle condizioni</li>
+          <li><strong>Il tuo tasso di successo compra un rapporto di payoff, non una size</strong> &mdash; il pareggio di quel rapporto è w / (1 - w), quindi l'84 % consente una perdita pari a 5,25 volte una vincita e non di più; la size discende da lì e non da una cifra tonda</li>
           <li><strong>La gestione del rischio è FONDAMENTALE</strong>—la volatilità può saltare del 50-100 % in una seduta; non rischiare mai &gt;1-2 % per operazione e usa sempre gli stop</li>
         </ul>
       </div>
@@ -820,6 +822,24 @@ sono saltati per aver venduto volatilità senza controlli sul rischio.
           <strong>Risposta corretta: C.</strong> Sarah vinceva l’84% delle operazioni e aveva comunque una strategia perdente, perché rischiava circa nove dollari per guadagnarne uno e teneva il 60-80% del conto in posizioni che fallivano tutte insieme. L’aspettativa era già negativa prima che piazzasse la prima operazione, il che porta la dimensione ottimale di Kelly sotto zero — non "più piccola", sotto zero. Un solo evento di coda si è preso 89.000 $. Correzione: rischio massimo del 2% per operazione, esposizione totale alla volatilità al massimo del 10%, copertura con call lunghe su VIX quando il VIX è sotto 12.
         </div>
       </div>
+
+      <div class="callout-key">
+    <h4>&#129518; Tutta la serie è valsa meno del giorno che l'ha chiusa</h4>
+    <p>La spiegazione qui sopra dice che rischiava circa nove dollari per guadagnarne uno. Ecco da dove viene quel numero, usando solo i dati del suo stesso registro, ed è peggio di nove.</p>
+
+    <p>In quattordici mesi, da settembre 2016 a novembre 2017, ha trasformato 50.000 $ in 124.000 $: la serie ha quindi prodotto 74.000 $ su 37 trade vincenti. Questo porta la vincita media a 2.000 $ al massimo &mdash; al massimo, perché le sette perdite sono già sottratte da quei 74.000 $, quindi le vincite lorde erano più grandi e la vincita tipica più piccola di quanto sembri. Poi un solo giorno è costato 89.000 $. Dividi: 89.000 / 2.000 fa circa 44, quindi una sola perdita è costata più di quaranta vincite tipiche. Lei ne aveva fatte 37.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>14 mesi, 37 vincenti      +74.000 $
+un giorno                 -89.000 $
+                           --------
+                          -15.000 $    su un conto da 50.000 $</code></pre>
+
+    <p>Ora il pareggio. Per un trade che rende 2.000 $ e può costarne 89.000, il tasso di successo necessario è 89.000 / 91.000 = 97,8 %. Lei aveva l'84 %. Entrambi i numeri esistevano prima che piazzasse il primo trade &mdash; il 98 % era implicito nella sua size, l'84 % era la statistica di cui andava fiera &mdash; e la distanza fra i due è tutta la storia. Volmageddon non ha reso perdente la strategia. Ne ha fissato la data.</p>
+
+    <p>Ora ribaltalo, perché questa è la versione utilizzabile. Un tasso di successo w va in pari con un rapporto di payoff di w / (1 - w). All'84 % fa 0,84 / 0,16 = 5,25, quindi una perdita può costare al massimo 5,25 volte una vincita: 10.500 $ contro i suoi 2.000 $, che su un conto da 124.000 $ sono l'8,5 %. Il suo tasso di successo giustificava di mettere a rischio circa l'otto per cento del conto. Lei ne aveva dal 60 all'80 % in posizioni che fallivano tutte insieme.</p>
+
+    <p style="margin-bottom:0">È da qui che viene il «massimo 10 % di esposizione totale alla volatilità» della correzione qui sopra, e conviene vederlo ricavato invece di prenderlo come una cifra tonda che è piaciuta a qualcuno. Fai le stesse due divisioni sul tuo registro: vincita media, peggior perdita plausibile e il rapporto fra le due contro il tuo tasso di successo. Un tasso di successo alto non autorizza una size. Autorizza un rapporto di payoff, e la size discende da quello.</p>
+  </div>
 
       <h2 id="quiz" style="margin-top:3rem">📝 Verifica delle conoscenze</h2>
       <p>Metti alla prova quello che hai capito sulle strategie di trading sulla volatilità:</p>

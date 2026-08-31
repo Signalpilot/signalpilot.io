@@ -138,6 +138,7 @@
           <li>Volatilite uçlardan ortalamaya döner &mdash; ama "VIX 30, volatilite sat" tam da bu dersin vaka çalışmasının konusu olan işlemdir, ve Bölüm 5 ortalamaya dönüşün oraya giderken izlediği yoldan sizi neden kurtarmadığını anlatır</li>
           <li>Vade yapısı: VIX vadelilerinin neden genellikle contango'da durduğu, o erimenin neden gerçek olduğu, ve bir çöküşün eğriyi neden backwardation'a çevirdiği &mdash; ki bu tam olarak "yakın vadeyi sat" işleminin çalışmayı bıraktığı andır</li>
           <li>Gerçekleşen ile zımni, gerçekten doğru olan yönüyle: size zımni ödenir, siz gerçekleşeni ödersiniz; dolayısıyla opsiyonlar zımni gerçekleşenin ÜSTÜNDEyken pahalıdır. Bu satırın önceki sürümü bunu tersine yazmıştı ve tam da satmanın para kaybettirdiği koşullarda satmanızı söylüyordu</li>
+          <li>Bir listeden yuvarlak bir sayı almak yerine, kendi isabet oranınızın taşıyabileceği azami maruziyeti nasıl türetirsiniz</li>
           <li>Çerçeve: önce VIX seviyesini beklenen bir günlük aralığa çevirin &rarr; bir görüşten değil, o aralıktan boyutlandırın &rarr; zararı sınırlayan bir uzun opsiyon olmadan asla kısa volatilite pozisyonu taşımayın. Bu satırın eski sürümünün neyi neyle eşlediğine dikkat edin: 30 üstü VIX ile contango, 15 altı VIX ile backwardation &mdash; ikisi de terstir; panik eğriyi backwardation'a, sakin piyasa contango'ya sokar &mdash; ve azami zararı olmayan çıplak kısa call öneriyordu</li>
         </ul>
       </div>
@@ -760,6 +761,7 @@ volatilite satan pek çok fon havaya uçtu.
           <li><strong>Dispersiyon: çeşitlendirme sayesinde endeks volatilitesi &lt; bileşenlerin ortalama volatilitesi</strong>—kurumlar korelasyonun ortalamaya dönüşünü işler (karmaşıktır, bireysele göre değildir)</li>
           <li><strong>VIX vadelilerindeki contango yapısal erime yaratır</strong> — contango’da zaman VXX sahibinin aleyhine, karşı tarafın lehine işler; ama SVXY 2018 Şubat’ından beri -0,5× bir üründür, dolayısıyla 2017’den alıntılanan her rakam artık işlem görmeyen bir enstrümanı anlatır</li>
           <li><strong>Volatilite işlemi yapmadan önce hangi rejimde olduğunu bil</strong>—<a href="https://www.signalpilot.io/docs/volume-oracle-v10/" target="_blank" rel="noopener">Volume Oracle</a> trend, yatay ve volatil rejimleri otomatik olarak ayırt eder ve stratejini koşullara göre seçmene yardımcı olur</li>
+          <li><strong>İsabet oranınız bir getiri oranı satın alır, bir büyüklük değil</strong> &mdash; o oranın başabaşı w / (1 - w)'dir; yani %84, kazancın 5,25 katı kadar bir kayba izin verir, fazlasına değil; maruziyet buradan çıkar, yuvarlak bir sayıdan değil</li>
           <li><strong>Risk yönetimi KRİTİKTİR</strong>—volatilite bir günde %50-100 sıçrayabilir; işlem başına &gt;%1-2 riske girme ve her zaman zarar durdur kullan</li>
         </ul>
       </div>
@@ -815,6 +817,24 @@ volatilite satan pek çok fon havaya uçtu.
           <strong>Doğru: C.</strong> Sarah işlemlerinin %84’ünü kazandı ve yine de kaybeden bir stratejisi vardı; çünkü bir dolar kazanmak için yaklaşık dokuz dolar riske atıyordu ve hesabının %60-80’i hep birlikte başarısız olan pozisyonlardaydı. Beklenen değer, o ilk işlemi girmeden önce zaten negatifti; bu da Kelly’ye göre en uygun büyüklüğü sıfırın altına indirir — "daha küçük" değil, sıfırın altına. Tek bir kuyruk olayı 89.000 $ aldı. Düzeltme: işlem başına azami %2 risk, toplam oynaklık maruziyeti en fazla %10, VIX 12’nin altındayken uzun VIX call’larıyla korunma.
         </div>
       </div>
+
+      <div class="callout-key">
+    <h4>&#129518; Bütün seri, onu bitiren günden daha az değerliydi</h4>
+    <p>Yukarıdaki açıklama, onun bir dolar kazanmak için yaklaşık dokuz dolar riske attığını söylüyor. O sayının nereden geldiği burada, yalnızca kendi kaydındaki rakamlarla &mdash; ve dokuzdan da kötü.</p>
+
+    <p>Eylül 2016'dan Kasım 2017'ye kadar on dört ay boyunca 50.000 $'ı 124.000 $ yaptı; yani seri, 37 kazançlı işlemde 74.000 $ getirdi. Bu, ortalama kazancı en fazla 2.000 $ yapar &mdash; en fazla, çünkü yedi kayıp o 74.000 $'dan zaten düşülmüş durumda; dolayısıyla brüt kazançlar daha büyük, tipik kazanç ise göründüğünden küçüktü. Sonra tek bir gün 89.000 $'a mal oldu. Bölün: 89.000 / 2.000 yaklaşık 44 eder; yani tek bir kayıp, kırktan fazla tipik kazanca mal oldu. Oysa o yalnızca 37 kazanç elde etmişti.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>14 ay, 37 kazanç      +74.000 $
+bir gün               -89.000 $
+                       --------
+                      -15.000 $    50.000 $ hesapta</code></pre>
+
+    <p>Şimdi başabaş. 2.000 $ kazandıran ve 89.000 $'a mal olabilen bir işlem için gereken isabet oranı 89.000 / 91.000 = %97,8'dir. Onunki %84'tü. İki sayı da ilk işlemi açmadan önce vardı &mdash; %98'i pozisyon büyüklüğü ima ediyordu, %84 ise gurur duyduğu istatistikti &mdash; ve aralarındaki fark hikâyenin tamamı. Volmageddon stratejiyi kaybettirmedi. Tarihi belirledi.</p>
+
+    <p>Şimdi tersine çevirin; kullanılabilir sürüm bu. w isabet oranı, w / (1 - w) getiri oranında başabaşa gelir. %84'te bu 0,84 / 0,16 = 5,25 eder; yani bir kayıp en fazla kazancın 5,25 katına mal olabilir: onun 2.000 $'ına karşı 10.500 $, ki 124.000 $'lık bir hesapta %8,5 demektir. İsabet oranı, hesabın yaklaşık yüzde sekizini riske atmayı haklı çıkarıyordu. Onunsa hesabın %60 ila %80'i, hep birlikte çöken pozisyonlardaydı.</p>
+
+    <p style="margin-bottom:0">Yukarıdaki düzeltmedeki «toplam volatilite maruziyeti en fazla %10» buradan gelir ve birinin hoşuna giden yuvarlak bir sayı diye almak yerine türetilişini görmeye değer. Aynı iki bölmeyi kendi kaydınızda yapın: ortalama kazanç, makul en kötü kayıp ve ikisinin oranı, kendi isabet oranınıza karşı. Yüksek isabet oranı büyüklük vermez. Bir getiri oranı verir; büyüklük ondan çıkar.</p>
+  </div>
 
       <h2 id="quiz" style="margin-top:3rem">📝 Bilgi kontrolü</h2>
       <p>Volatilite işlem stratejileri konusunda anladıklarını sına:</p>

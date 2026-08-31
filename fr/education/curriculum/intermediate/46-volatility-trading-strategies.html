@@ -138,6 +138,7 @@
           <li>La volatilité revient à la moyenne depuis les extrêmes &mdash; mais « le VIX est à 30, vendez de la volatilité » est précisément le trade dont parle l'étude de cas de cette leçon, et la Partie 5 explique pourquoi le retour à la moyenne ne vous sauve pas du chemin qu'il emprunte pour y arriver</li>
           <li>Structure par terme : pourquoi les futures VIX sont généralement en contango, pourquoi cette érosion est réelle, et pourquoi un krach bascule la courbe en backwardation &mdash; c'est-à-dire précisément quand le trade « vendre le mois avant » cesse de fonctionner</li>
           <li>Réalisée contre implicite, dans le sens qui est réellement le bon : on vous paie l'implicite et vous réglez la réalisée, donc les options sont chères quand l'implicite est AU-DESSUS de la réalisée. La version précédente de cette ligne l'avait à l'envers et vous disait de vendre exactement dans les conditions où vendre perd de l'argent</li>
+          <li>Comment déduire l'exposition maximale que votre propre taux de réussite peut porter, au lieu de prendre un chiffre rond dans une liste</li>
           <li>Cadre : convertissez d'abord le niveau du VIX en une fourchette quotidienne attendue &rarr; dimensionnez à partir de cette fourchette plutôt que d'une opinion &rarr; ne portez jamais de position vendeuse de volatilité sans une option achetée qui plafonne la perte. Notez ce que l'ancienne version de cette ligne appariait : VIX au-dessus de 30 avec le contango et VIX en dessous de 15 avec la backwardation, ce qui est faux dans les deux cas &mdash; une panique met la courbe en backwardation et un marché calme la met en contango &mdash; et elle recommandait des calls vendus à nu, qui n'ont pas de perte maximale</li>
         </ul>
       </div>
@@ -768,6 +769,7 @@ ont sauté pour avoir vendu de la volatilité sans contrôle du risque.
           <li><strong>Dispersion : volatilité de l'indice &lt; volatilité moyenne des composantes, grâce à la diversification</strong>— les institutions tradent le retour de la corrélation à la moyenne (complexe, pas pour les particuliers)</li>
           <li><strong>Le contango des futures VIX crée une érosion structurelle</strong> : en contango, le temps travaille contre le détenteur de VXX et pour l'autre côté ; mais SVXY est un produit -0,5× depuis février 2018, donc tout chiffre cité de 2017 décrit un instrument qui ne se négocie plus</li>
           <li><strong>Connaissez votre régime avant de trader la volatilité</strong>—<a href="https://www.signalpilot.io/docs/volume-oracle-v10/" target="_blank" rel="noopener">Volume Oracle</a> détecte automatiquement les régimes de tendance, de range et de volatilité, et vous aide à adapter la stratégie aux conditions</li>
+          <li><strong>Votre taux de réussite achète un rapport de gain, pas une taille</strong> &mdash; le point mort de ce rapport vaut w / (1 - w) : 84 % autorisent donc une perte de 5,25 fois un gain et pas davantage ; l'exposition en découle, et non d'un chiffre rond</li>
           <li><strong>La gestion du risque est ESSENTIELLE</strong>— la volatilité peut bondir de 50 à 100 % en une séance ; ne risquez jamais &gt;1-2 % par trade et posez toujours des stops</li>
         </ul>
       </div>
@@ -823,6 +825,24 @@ ont sauté pour avoir vendu de la volatilité sans contrôle du risque.
           <strong>Bonne réponse : C.</strong> Sarah gagnait 84% de ses trades et avait pourtant une stratégie perdante, parce qu'elle risquait environ neuf dollars pour en gagner un et détenait 60-80% du compte dans des positions qui échouaient toutes ensemble. L'espérance était déjà négative avant son premier trade, ce qui place la taille optimale de Kelly sous zéro — pas « plus petite », sous zéro. Un seul événement de queue a emporté 89 000 $. Correction : 2% de risque maximum par trade, 10% d'exposition totale à la volatilité au maximum, couverture par des calls VIX achetés quand le VIX est sous 12.
         </div>
       </div>
+
+      <div class="callout-key">
+    <h4>&#129518; Toute la série a valu moins que la journée qui l'a achevée</h4>
+    <p>L'explication ci-dessus dit qu'elle risquait environ neuf dollars pour en gagner un. Voici d'où vient ce chiffre, à partir des seules données de son propre relevé &mdash; et c'est pire que neuf.</p>
+
+    <p>Sur quatorze mois, de septembre 2016 à novembre 2017, elle a transformé 50 000 $ en 124 000 $ : la série a donc rapporté 74 000 $ sur 37 trades gagnants. Cela place le gain moyen à 2 000 $ au plus &mdash; au plus, parce que les sept pertes sont déjà déduites de ces 74 000 $, si bien que les gains bruts étaient plus grands et le gain typique plus petit qu'il n'y paraît. Puis une seule journée a coûté 89 000 $. Divisez : 89 000 / 2 000 font environ 44, donc une seule perte a coûté plus de quarante gains typiques. Elle n'en avait fait que 37.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>14 mois, 37 gagnants      +74 000 $
+une journée               -89 000 $
+                           --------
+                          -15 000 $    sur un compte de 50 000 $</code></pre>
+
+    <p>Vient le point mort. Pour un trade qui rapporte 2 000 $ et peut coûter 89 000 $, le taux de réussite nécessaire vaut 89 000 / 91 000 = 97,8 %. Elle en avait 84 %. Les deux chiffres existaient avant son premier trade &mdash; les 98 % étaient impliqués par sa taille de position, les 84 % étaient la statistique dont elle était fière &mdash; et l'écart entre les deux, c'est toute l'histoire. Volmageddon n'a pas rendu la stratégie perdante. Il en a fixé la date.</p>
+
+    <p>Renversez maintenant, car c'est la version utilisable. Un taux de réussite w atteint le point mort avec un rapport de gain de w / (1 - w). À 84 %, cela fait 0,84 / 0,16 = 5,25 : une perte ne peut donc coûter plus de 5,25 fois un gain, soit 10 500 $ contre ses 2 000 $, ce qui sur un compte de 124 000 $ représente 8,5 %. Son taux de réussite justifiait de mettre environ huit pour cent du compte en risque. Elle en avait 60 à 80 % dans des positions qui échouaient toutes ensemble.</p>
+
+    <p style="margin-bottom:0">C'est de là que vient le « maximum 10 % d'exposition totale à la volatilité » du correctif ci-dessus, et il vaut mieux le voir démontré que le prendre pour un chiffre rond qui plaisait à quelqu'un. Faites les deux mêmes divisions sur votre propre relevé : gain moyen, pire perte plausible, et le rapport entre les deux face à votre propre taux de réussite. Un taux de réussite élevé n'autorise pas une taille. Il autorise un rapport de gain, et la taille en découle.</p>
+  </div>
 
       <h2 id="quiz" style="margin-top:3rem">📝 Vérification des connaissances</h2>
       <p>Testez votre compréhension des stratégies de trading de volatilité :</p>

@@ -125,6 +125,7 @@
           <li>Volatility mean-reverts from extremes &mdash; but "VIX is 30, sell volatility" is the trade this lesson's case study is about, and Part 5 explains why the mean reverting does not save you from the path it takes getting there</li>
           <li>Term structure: why VIX futures usually sit in contango, why that decay is real, and why a crash flips the curve into backwardation &mdash; which is precisely when the "sell the front month" trade stops working</li>
           <li>Realized against implied, in the direction that is actually right: you are paid implied and you pay out realized, so options are expensive when implied is ABOVE realized. The previous version of this line had it backwards and told you to sell into exactly the conditions that make selling lose money</li>
+          <li>How to derive the maximum exposure your own hit rate can carry, rather than taking a round number from a list</li>
           <li>Framework: convert the VIX level into an expected daily range first &rarr; size from that range rather than from a view &rarr; never carry a short volatility position without a long option capping it. Note what the old version of this line paired: VIX above 30 with contango and VIX below 15 with backwardation, which is backwards on both counts &mdash; a panic puts the curve into backwardation and a calm market puts it into contango &mdash; and it recommended naked short calls, which have no maximum loss</li>
         </ul>
       </div>
@@ -750,6 +751,7 @@ blown up shorting volatility without risk controls.
           <li><strong>Dispersion: Index vol &lt; avg component vol due to diversification</strong>—institutions trade correlation mean reversion (complex, not for retail)</li>
           <li><strong>VIX futures contango creates structural decay</strong>&mdash;in contango, time works against a VXX holder and for the other side; but SVXY has been a -0.5&times; product since February 2018, so any figure quoted from 2017 describes an instrument that no longer trades</li>
           <li><strong>Know your regime before trading volatility</strong>—<a href="https://www.signalpilot.io/docs/volume-oracle-v10/" target="_blank" rel="noopener">Volume Oracle</a> detects trending/ranging/volatile regimes automatically, helping you match strategy to conditions</li>
+          <li><strong>Your hit rate buys a payoff ratio, not a size</strong> &mdash; break-even payoff is w / (1 - w), so 84% permits a loss of 5.25 times a win and nothing more; the exposure follows from that rather than from a round number</li>
           <li><strong>Risk management is CRITICAL</strong>—volatility can spike 50-100% in a day; never risk &gt;1-2% per trade, always use stops</li>
         </ul>
       </div>
@@ -805,6 +807,24 @@ blown up shorting volatility without risk controls.
           <strong>Correct: C.</strong> Sarah won 84% of her trades and still had a losing strategy, because she was risking about nine dollars to make one and had 60-80% of the account in positions that all failed together. The expectancy was negative before she placed the first trade, which puts the Kelly-optimal size below zero &mdash; not "smaller", below zero. One tail event took $89K. Fix: max 2% risk per trade, max 10% total volatility exposure, hedge with long VIX calls when VIX &lt;12.
         </div>
       </div>
+
+      <div class="callout-key">
+    <h4>&#129518; The whole run was worth less than the day that ended it</h4>
+    <p>The explanation above says she was risking about nine dollars to make one. Here is where that comes from, using only the figures in her own record, and it is worse than nine.</p>
+
+    <p>Over fourteen months, September 2016 to November 2017, she turned $50,000 into $124,000, so the run made $74,000 across 37 winning trades. That puts the average win at $2,000 at most &mdash; at most, because the seven losses are already netted out of the $74,000, so the gross wins were larger and the typical win smaller than this makes it look. Then one day cost $89,000. Divide: 89,000 / 2,000 is about 44, so a single loss cost more than forty typical wins. She had only made 37.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>14 months, 37 wins            +$74,000
+one day                       -$89,000
+                              --------
+                              -$15,000    on a $50,000 account</code></pre>
+
+    <p>So the break-even. For a trade that pays $2,000 and can cost $89,000, the win rate you need is 89,000 / 91,000 = 97.8%. She had 84%. Both numbers existed before she placed her first trade &mdash; the 98% was implied by her position sizing and the 84% was the statistic she was proud of &mdash; and the gap between them is the entire story. Volmageddon did not make the strategy lose. It set the date.</p>
+
+    <p>Now invert it, because this is the version you can use. A hit rate of w breaks even at a payoff ratio of w / (1 - w). At 84% that is 0.84 / 0.16 = 5.25, so the most a loss may cost is 5.25 times a win: $10,500 against her $2,000, which on a $124,000 account is 8.5%. Her hit rate justified putting about eight per cent of the account at risk. She had 60 to 80% of it in positions that all failed together.</p>
+
+    <p style="margin-bottom:0">That is where the "max 10% total volatility exposure" in the fix above comes from, and it is worth seeing it derived rather than taking it as a round number someone liked. Run the same two divisions on your own record: average win, worst plausible loss, and the ratio between them against your own hit rate. A high win rate does not permit size. It permits a payoff ratio, and the size follows from that.</p>
+  </div>
 
       <h2 id="quiz" style="margin-top:3rem">📝 Knowledge Check</h2>
       <p>Test your understanding of volatility trading strategies:</p>

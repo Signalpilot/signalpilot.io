@@ -138,6 +138,7 @@
           <li>Volatilität kehrt aus Extremen zum Mittelwert zurück &mdash; aber „VIX steht bei 30, verkauf Volatilität“ ist genau der Trade, um den die Fallstudie dieser Lektion geht, und Teil 5 erklärt, warum die Rückkehr zum Mittelwert dich nicht vor dem Weg dorthin rettet</li>
           <li>Terminstruktur: warum VIX-Futures meist in Contango stehen, warum dieser Verfall real ist, und warum ein Crash die Kurve in Backwardation kippt &mdash; also genau dann, wenn der Trade „verkaufe den Frontmonat“ aufhört zu funktionieren</li>
           <li>Realisierte gegen implizite Volatilität, und zwar in der Richtung, die tatsächlich stimmt: Du bekommst die implizite bezahlt und zahlst die realisierte aus, Optionen sind also teuer, wenn die implizite ÜBER der realisierten liegt. Die vorige Fassung dieser Zeile hatte es umgekehrt und sagte dir, du sollst genau in die Bedingungen hinein verkaufen, in denen Verkaufen Geld verliert</li>
+          <li>Wie du die maximale Exponierung herleitest, die deine eigene Trefferquote tragen kann, statt eine runde Zahl aus einer Liste zu übernehmen</li>
           <li>Rahmen: Wandle zuerst das VIX-Niveau in eine erwartete Tagesspanne um &rarr; dimensioniere aus dieser Spanne statt aus einer Meinung &rarr; trage nie eine Short-Volatilitätsposition ohne eine lange Option, die den Verlust deckelt. Beachte, was die alte Fassung dieser Zeile paarte: VIX über 30 mit Contango und VIX unter 15 mit Backwardation, was in beiden Fällen verkehrt ist &mdash; eine Panik bringt die Kurve in Backwardation, ein ruhiger Markt in Contango &mdash; und sie empfahl nackte Short-Calls, die keinen Maximalverlust haben</li>
         </ul>
       </div>
@@ -770,6 +771,7 @@ flogen auf, weil sie Volatilität ohne Risikokontrolle geshortet hatten.
           <li><strong>Dispersion: Indexvolatilität &lt; durchschnittliche Einzelvolatilität, dank Diversifikation</strong>— Institutionen handeln die Rückkehr der Korrelation zum Mittelwert (komplex, nichts für Privatanleger)</li>
           <li><strong>Contango bei VIX-Futures erzeugt strukturellen Verfall</strong>— im Contango arbeitet die Zeit gegen einen VXX-Halter und für die Gegenseite; SVXY ist allerdings seit Februar 2018 ein -0,5×-Produkt, jede aus 2017 zitierte Zahl beschreibt also ein Instrument, das nicht mehr gehandelt wird</li>
           <li><strong>Kenne dein Regime, bevor du Volatilität handelst</strong>—<a href="https://www.signalpilot.io/docs/volume-oracle-v10/" target="_blank" rel="noopener">Volume Oracle</a> erkennt Trend-, Seitwärts- und Volatilitätsphasen automatisch und hilft dir, die Strategie an die Bedingungen anzupassen</li>
+          <li><strong>Deine Trefferquote kauft ein Auszahlungsverhältnis, keine Größe</strong> &mdash; der Break-even des Verhältnisses ist w / (1 - w), 84 % erlauben also einen Verlust vom 5,25-Fachen eines Gewinns und nicht mehr; die Exponierung folgt daraus und nicht aus einer runden Zahl</li>
           <li><strong>Risikomanagement ist ENTSCHEIDEND</strong>— Volatilität kann an einem Tag um 50-100 % springen; riskiere nie &gt;1-2 % pro Trade und setz immer Stopps</li>
         </ul>
       </div>
@@ -825,6 +827,24 @@ flogen auf, weil sie Volatilität ohne Risikokontrolle geshortet hatten.
           <strong>Richtig: C.</strong> Sarah gewann 84% ihrer Trades und hatte trotzdem eine Verluststrategie, weil sie rund neun Dollar riskierte, um einen zu verdienen, und 60-80% des Kontos in Positionen hielt, die alle gemeinsam scheiterten. Die Erwartung war schon negativ, bevor sie den ersten Trade platzierte, was die Kelly-optimale Größe unter null drückt — nicht "kleiner", unter null. Ein einziges Tail-Ereignis nahm 89.000 $. Korrektur: höchstens 2% Risiko je Trade, höchstens 10% Gesamtexponierung in Volatilität, Absicherung mit long VIX-Calls, wenn der VIX unter 12 steht.
         </div>
       </div>
+
+      <div class="callout-key">
+    <h4>&#129518; Der ganze Lauf war weniger wert als der Tag, der ihn beendete</h4>
+    <p>Die Erklärung oben sagt, sie habe neun Dollar riskiert, um einen zu verdienen. Hier kommt diese Zahl her, allein aus den Angaben ihres eigenen Protokolls &mdash; und sie ist schlimmer als neun.</p>
+
+    <p>Über vierzehn Monate, von September 2016 bis November 2017, machte sie aus 50.000 $ 124.000 $; der Lauf brachte also 74.000 $ über 37 Gewinntrades. Das setzt den durchschnittlichen Gewinn auf höchstens 2.000 $ &mdash; höchstens, weil die sieben Verluste in den 74.000 $ schon abgezogen sind, die Bruttogewinne also größer und der typische Gewinn kleiner waren, als es hier aussieht. Dann kostete ein einziger Tag 89.000 $. Teile: 89.000 / 2.000 sind rund 44, ein einzelner Verlust kostete also mehr als vierzig typische Gewinne. Sie hatte erst 37 gemacht.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>14 Monate, 37 Gewinne      +74.000 $
+ein Tag                    -89.000 $
+                            --------
+                           -15.000 $    auf einem Konto von 50.000 $</code></pre>
+
+    <p>Nun der Break-even. Für einen Trade, der 2.000 $ einbringt und 89.000 $ kosten kann, ist die nötige Trefferquote 89.000 / 91.000 = 97,8 %. Sie hatte 84 %. Beide Zahlen existierten, bevor sie den ersten Trade platzierte &mdash; die 98 % lagen in ihrer Positionsgröße, die 84 % waren die Statistik, auf die sie stolz war &mdash; und der Abstand zwischen ihnen ist die ganze Geschichte. Volmageddon hat die Strategie nicht zum Verlierer gemacht. Es hat das Datum gesetzt.</p>
+
+    <p>Jetzt dreh es um, denn das ist die Version, die du benutzen kannst. Eine Trefferquote w erreicht den Break-even bei einem Auszahlungsverhältnis von w / (1 - w). Bei 84 % sind das 0,84 / 0,16 = 5,25, ein Verlust darf also höchstens das 5,25-Fache eines Gewinns kosten: 10.500 $ gegen ihre 2.000 $, was auf einem Konto von 124.000 $ 8,5 % sind. Ihre Trefferquote rechtfertigte, etwa acht Prozent des Kontos ins Risiko zu stellen. Sie hatte 60 bis 80 % davon in Positionen, die alle gemeinsam scheiterten.</p>
+
+    <p style="margin-bottom:0">Daher kommt das „maximal 10 % Gesamtexponierung in Volatilität“ aus der Korrektur oben, und es lohnt sich, das hergeleitet zu sehen, statt es als runde Zahl zu nehmen, die jemandem gefiel. Rechne dieselben zwei Divisionen auf deinem eigenen Protokoll: durchschnittlicher Gewinn, schlimmster plausibler Verlust und das Verhältnis zwischen beiden gegen deine eigene Trefferquote. Eine hohe Trefferquote erlaubt keine Größe. Sie erlaubt ein Auszahlungsverhältnis, und die Größe folgt daraus.</p>
+  </div>
 
       <h2 id="quiz" style="margin-top:3rem">📝 Wissenscheck</h2>
       <p>Prüfe dein Verständnis der Strategien für den Volatilitätshandel:</p>

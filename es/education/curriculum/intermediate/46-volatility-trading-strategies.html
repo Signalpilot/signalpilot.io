@@ -138,6 +138,7 @@
           <li>La volatilidad revierte a la media desde los extremos &mdash; pero "el VIX está en 30, vende volatilidad" es justo la operación de la que trata el caso práctico de esta lección, y la Parte 5 explica por qué la reversión no te salva del camino que recorre hasta llegar ahí</li>
           <li>Estructura temporal: por qué los futuros del VIX suelen estar en contango, por qué ese desgaste es real, y por qué un crash da la vuelta a la curva hacia backwardation &mdash; que es justo cuando la operación de "vender el mes cercano" deja de funcionar</li>
           <li>Realizada frente a implícita, en la dirección que de verdad es correcta: a ti te pagan la implícita y tú pagas la realizada, así que las opciones están caras cuando la implícita está POR ENCIMA de la realizada. La versión anterior de esta línea lo tenía al revés y te decía que vendieras justo en las condiciones que hacen que vender pierda dinero</li>
+          <li>Cómo deducir la exposición máxima que tu propia tasa de acierto puede soportar, en lugar de tomar una cifra redonda de una lista</li>
           <li>Marco: convierte primero el nivel del VIX en un rango diario esperado &rarr; dimensiona a partir de ese rango y no de una opinión &rarr; nunca lleves una posición corta de volatilidad sin una opción larga que ponga tope a la pérdida. Fíjate en lo que emparejaba la versión antigua de esta línea: VIX por encima de 30 con contango y VIX por debajo de 15 con backwardation, que está al revés en ambos casos &mdash; un pánico pone la curva en backwardation y un mercado tranquilo la pone en contango &mdash; y recomendaba calls cortas desnudas, que no tienen pérdida máxima</li>
         </ul>
       </div>
@@ -768,6 +769,7 @@ saltaron por los aires por estar cortos de volatilidad sin controles de riesgo.
           <li><strong>Dispersión: volatilidad del índice &lt; volatilidad media de los componentes, por la diversificación</strong>—las instituciones operan la reversión de la correlación (complejo, no apto para minoristas)</li>
           <li><strong>El contango de los futuros del VIX genera un desgaste estructural</strong>: en contango, el tiempo trabaja en contra de quien tiene VXX y a favor del otro lado; pero SVXY es un producto de -0,5× desde febrero de 2018, así que cualquier cifra citada de 2017 describe un instrumento que ya no cotiza</li>
           <li><strong>Conoce tu régimen antes de operar volatilidad</strong>—<a href="https://www.signalpilot.io/docs/volume-oracle-v10/" target="_blank" rel="noopener">Volume Oracle</a> detecta automáticamente los regímenes de tendencia, rango y volatilidad, y te ayuda a ajustar la estrategia a las condiciones</li>
+          <li><strong>Tu tasa de acierto compra una relación de pago, no un tamaño</strong> &mdash; el equilibrio de esa relación es w / (1 - w), así que un 84 % permite una pérdida de 5,25 veces una ganancia y nada más; la exposición sale de ahí y no de una cifra redonda</li>
           <li><strong>La gestión del riesgo es CRÍTICA</strong>—la volatilidad puede saltar un 50-100 % en un día; nunca arriesgues &gt;1-2 % por operación y usa siempre stops</li>
         </ul>
       </div>
@@ -823,6 +825,24 @@ saltaron por los aires por estar cortos de volatilidad sin controles de riesgo.
           <strong>Correcta: C.</strong> Sarah ganaba el 84% de sus operaciones y aun así tenía una estrategia perdedora, porque arriesgaba unos nueve dólares para ganar uno y tenía el 60-80% de la cuenta en posiciones que fallaban todas juntas. La esperanza matemática ya era negativa antes de que colocara la primera operación, lo que sitúa el tamaño óptimo de Kelly por debajo de cero: no "más pequeño", por debajo de cero. Un solo evento de cola se llevó 89.000 $. Corrección: máximo 2% de riesgo por operación, máximo 10% de exposición total a volatilidad, cobertura con calls largas de VIX cuando el VIX está por debajo de 12.
         </div>
       </div>
+
+      <div class="callout-key">
+    <h4>&#129518; Toda la racha valió menos que el día que la terminó</h4>
+    <p>La explicación de arriba dice que arriesgaba unos nueve dólares para ganar uno. De aquí sale esa cifra, usando solo los datos de su propio registro, y es peor que nueve.</p>
+
+    <p>A lo largo de catorce meses, de septiembre de 2016 a noviembre de 2017, convirtió 50.000 $ en 124.000 $, así que la racha ganó 74.000 $ en 37 operaciones ganadoras. Eso deja la ganancia media en 2.000 $ como mucho &mdash; como mucho, porque las siete pérdidas ya están restadas de esos 74.000 $, de modo que las ganancias brutas eran mayores y la ganancia típica menor de lo que parece. Luego un solo día costó 89.000 $. Divide: 89.000 / 2.000 son unos 44, así que una única pérdida costó más que cuarenta ganancias típicas. Ella solo había hecho 37.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>14 meses, 37 ganadoras      +74.000 $
+un día                      -89.000 $
+                             --------
+                            -15.000 $    sobre una cuenta de 50.000 $</code></pre>
+
+    <p>Ahora el punto de equilibrio. Para una operación que paga 2.000 $ y puede costar 89.000 $, la tasa de acierto necesaria es 89.000 / 91.000 = 97,8 %. Ella tenía un 84 %. Las dos cifras existían antes de que colocara su primera operación &mdash; el 98 % lo implicaba su tamaño de posición y el 84 % era la estadística de la que estaba orgullosa &mdash; y la distancia entre ambas es toda la historia. Volmageddon no hizo que la estrategia perdiera. Puso la fecha.</p>
+
+    <p>Ahora dale la vuelta, porque esta es la versión que puedes usar. Una tasa de acierto w queda en equilibrio con una relación de pago de w / (1 - w). Al 84 % eso es 0,84 / 0,16 = 5,25, así que lo máximo que puede costar una pérdida son 5,25 veces una ganancia: 10.500 $ frente a sus 2.000 $, que sobre una cuenta de 124.000 $ es el 8,5 %. Su tasa de acierto justificaba poner en riesgo alrededor del ocho por ciento de la cuenta. Ella tenía entre el 60 y el 80 % en posiciones que fallaban todas juntas.</p>
+
+    <p style="margin-bottom:0">De ahí sale el «máximo 10 % de exposición total a volatilidad» de la corrección de arriba, y vale la pena verlo deducido en vez de tomarlo como una cifra redonda que le gustó a alguien. Haz esas mismas dos divisiones sobre tu propio registro: ganancia media, peor pérdida plausible y la relación entre ambas frente a tu propia tasa de acierto. Una tasa de acierto alta no autoriza tamaño. Autoriza una relación de pago, y el tamaño sale de ahí.</p>
+  </div>
 
       <h2 id="quiz" style="margin-top:3rem">📝 Comprobación de conocimientos</h2>
       <p>Comprueba lo que has entendido sobre las estrategias de trading de volatilidad:</p>

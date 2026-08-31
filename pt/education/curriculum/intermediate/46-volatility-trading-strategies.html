@@ -138,6 +138,7 @@
           <li>A volatilidade reverte à média a partir dos extremos &mdash; mas "o VIX está em 30, venda volatilidade" é precisamente o negócio de que trata o estudo de caso desta lição, e a Parte 5 explica porque é que a reversão não o salva do caminho que percorre até lá</li>
           <li>Estrutura a prazo: porque é que os futuros do VIX costumam estar em contango, porque é que esse desgaste é real, e porque é que um crash vira a curva para backwardation &mdash; que é precisamente quando o negócio de "vender o mês próximo" deixa de funcionar</li>
           <li>Realizada contra implícita, na direção que é realmente a correta: pagam-lhe a implícita e você paga a realizada, portanto as opções estão caras quando a implícita está ACIMA da realizada. A versão anterior desta linha tinha-o ao contrário e dizia-lhe para vender exatamente nas condições em que vender perde dinheiro</li>
+          <li>Como deduzir a exposição máxima que a sua própria taxa de acerto consegue suportar, em vez de tirar um número redondo de uma lista</li>
           <li>Enquadramento: converta primeiro o nível do VIX num intervalo diário esperado &rarr; dimensione a partir desse intervalo e não de uma opinião &rarr; nunca carregue uma posição curta de volatilidade sem uma opção longa a limitar a perda. Repare no que a versão antiga desta linha emparelhava: VIX acima de 30 com contango e VIX abaixo de 15 com backwardation, o que está ao contrário nos dois casos &mdash; um pânico põe a curva em backwardation e um mercado calmo põe-na em contango &mdash; e recomendava calls curtas a descoberto, que não têm perda máxima</li>
         </ul>
       </div>
@@ -763,6 +764,7 @@ explodiram por vender volatilidade sem controle de risco.
           <li><strong>Dispersão: volatilidade do índice &lt; volatilidade média dos componentes, por causa da diversificação</strong>—as instituições operam a reversão da correlação (complexo, não é para o varejo)</li>
           <li><strong>O contango dos futuros de VIX cria desgaste estrutural</strong>: em contango, o tempo trabalha contra quem detém VXX e a favor do outro lado; mas o SVXY é um produto de -0,5× desde fevereiro de 2018, por isso qualquer número citado de 2017 descreve um instrumento que já não é negociado</li>
           <li><strong>Conheça o seu regime antes de operar volatilidade</strong>—<a href="https://www.signalpilot.io/docs/volume-oracle-v10/" target="_blank" rel="noopener">Volume Oracle</a> detecta automaticamente regimes de tendência, lateralização e volatilidade, ajudando você a ajustar a estratégia às condições</li>
+          <li><strong>A sua taxa de acerto compra uma relação de payoff, não um tamanho</strong> &mdash; o equilíbrio dessa relação é w / (1 - w), por isso 84 % permitem uma perda de 5,25 vezes um ganho e nada mais; a exposição decorre daí e não de um número redondo</li>
           <li><strong>A gestão de risco é CRÍTICA</strong>—a volatilidade pode saltar de 50 a 100 % num dia; nunca arrisque &gt;1-2 % por operação e use sempre stops</li>
         </ul>
       </div>
@@ -818,6 +820,24 @@ explodiram por vender volatilidade sem controle de risco.
           <strong>Correta: C.</strong> A Sarah ganhava 84% das operações e ainda assim tinha uma estratégia perdedora, porque arriscava cerca de nove dólares para ganhar um e tinha 60-80% da conta em posições que falhavam todas juntas. A esperança matemática já era negativa antes de ela colocar a primeira operação, o que põe o tamanho ótimo de Kelly abaixo de zero — não "mais pequeno", abaixo de zero. Um único evento de cauda levou 89.000 $. Correção: máximo 2% de risco por operação, máximo 10% de exposição total a volatilidade, cobertura com calls compradas de VIX quando o VIX está abaixo de 12.
         </div>
       </div>
+
+      <div class="callout-key">
+    <h4>&#129518; Toda a série valeu menos do que o dia que a terminou</h4>
+    <p>A explicação acima diz que ela arriscava cerca de nove dólares para ganhar um. É daqui que sai esse número, usando apenas os dados do seu próprio registo, e é pior do que nove.</p>
+
+    <p>Ao longo de catorze meses, de setembro de 2016 a novembro de 2017, transformou 50.000 $ em 124.000 $, portanto a série rendeu 74.000 $ em 37 operações ganhadoras. Isso põe o ganho médio em 2.000 $ no máximo &mdash; no máximo, porque as sete perdas já estão descontadas nesses 74.000 $, pelo que os ganhos brutos eram maiores e o ganho típico menor do que parece. Depois um único dia custou 89.000 $. Divida: 89.000 / 2.000 dá cerca de 44, ou seja, uma só perda custou mais do que quarenta ganhos típicos. Ela só tinha feito 37.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>14 meses, 37 ganhadoras      +74.000 $
+um dia                       -89.000 $
+                              --------
+                             -15.000 $    numa conta de 50.000 $</code></pre>
+
+    <p>Agora o ponto de equilíbrio. Para uma operação que rende 2.000 $ e pode custar 89.000 $, a taxa de acerto necessária é 89.000 / 91.000 = 97,8 %. Ela tinha 84 %. Os dois números existiam antes de colocar a primeira operação &mdash; os 98 % estavam implícitos no seu tamanho de posição e os 84 % eram a estatística de que se orgulhava &mdash; e a distância entre eles é toda a história. O Volmageddon não tornou a estratégia perdedora. Marcou-lhe a data.</p>
+
+    <p>Agora inverta, porque é esta a versão que pode usar. Uma taxa de acerto w fica em equilíbrio com uma relação de payoff de w / (1 - w). A 84 % isso dá 0,84 / 0,16 = 5,25, portanto uma perda pode custar no máximo 5,25 vezes um ganho: 10.500 $ contra os 2.000 $ dela, o que numa conta de 124.000 $ é 8,5 %. A taxa de acerto dela justificava pôr em risco cerca de oito por cento da conta. Ela tinha 60 a 80 % em posições que falhavam todas ao mesmo tempo.</p>
+
+    <p style="margin-bottom:0">É daqui que vem o «máximo 10 % de exposição total a volatilidade» da correção acima, e vale a pena vê-lo deduzido em vez de o tomar como um número redondo de que alguém gostou. Faça essas mesmas duas divisões no seu próprio registo: ganho médio, pior perda plausível e a relação entre os dois face à sua própria taxa de acerto. Uma taxa de acerto alta não autoriza tamanho. Autoriza uma relação de payoff, e o tamanho decorre dela.</p>
+  </div>
 
       <h2 id="quiz" style="margin-top:3rem">📝 Verificação de conhecimento</h2>
       <p>Teste o que você entendeu sobre as estratégias de trading de volatilidade:</p>

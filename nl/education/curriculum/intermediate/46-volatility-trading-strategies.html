@@ -138,6 +138,7 @@
           <li>Volatiliteit keert vanuit extremen terug naar het gemiddelde &mdash; maar "de VIX staat op 30, verkoop volatiliteit" is precies de trade waar de casus van deze les over gaat, en Deel 5 legt uit waarom die terugkeer je niet redt van het pad ernaartoe</li>
           <li>Termijnstructuur: waarom VIX-futures meestal in contango staan, waarom die erosie echt is, en waarom een crash de curve in backwardation kantelt &mdash; precies wanneer de "verkoop de voorste maand"-trade ophoudt te werken</li>
           <li>Gerealiseerd tegenover impliciet, in de richting die werkelijk klopt: jij krijgt de impliciete betaald en jij betaalt de gerealiseerde uit, dus opties zijn duur wanneer impliciet BOVEN gerealiseerd ligt. De vorige versie van deze regel had het omgekeerd en zei je te verkopen in precies de omstandigheden waarin verkopen geld verliest</li>
+          <li>Hoe je de maximale blootstelling afleidt die je eigen trefkans kan dragen, in plaats van een rond getal uit een lijstje te nemen</li>
           <li>Kader: zet eerst het VIX-niveau om in een verwachte dagrange &rarr; size vanuit die range in plaats van vanuit een mening &rarr; draag nooit een shortvolatiliteitspositie zonder een longoptie die het verlies aftopt. Let op wat de oude versie van deze regel koppelde: VIX boven 30 met contango en VIX onder 15 met backwardation, wat op beide punten omgekeerd is &mdash; paniek zet de curve in backwardation en een rustige markt in contango &mdash; en ze raadde naakte short calls aan, die geen maximaal verlies kennen</li>
         </ul>
       </div>
@@ -763,6 +764,7 @@ klapten om omdat ze volatiliteit shortten zonder risicobeheersing.
           <li><strong>Dispersie: indexvolatiliteit &lt; gemiddelde volatiliteit van de bestanddelen, dankzij diversificatie</strong>—instituten verhandelen de terugkeer van de correlatie (complex, niets voor particulieren)</li>
           <li><strong>Contango bij VIX-futures veroorzaakt structureel wegzakken</strong> — in contango werkt de tijd tegen een VXX-houder en vóór de andere kant; maar SVXY is sinds februari 2018 een -0,5×-product, dus elk uit 2017 geciteerd cijfer beschrijft een instrument dat niet meer verhandeld wordt</li>
           <li><strong>Ken je regime voordat je volatiliteit verhandelt</strong>—<a href="https://www.signalpilot.io/docs/volume-oracle-v10/" target="_blank" rel="noopener">Volume Oracle</a> herkent trend-, range- en volatiliteitsregimes automatisch en helpt je de strategie op de omstandigheden af te stemmen</li>
+          <li><strong>Je trefkans koopt een uitbetalingsverhouding, geen omvang</strong> &mdash; het break-even van die verhouding is w / (1 - w), dus 84 % staat een verlies toe van 5,25 keer een winst en niet meer; de blootstelling volgt daaruit en niet uit een rond getal</li>
           <li><strong>Risicobeheer is CRUCIAAL</strong>—volatiliteit kan op één dag 50 tot 100 % omhoogschieten; riskeer nooit &gt;1-2 % per trade en gebruik altijd stops</li>
         </ul>
       </div>
@@ -818,6 +820,24 @@ klapten om omdat ze volatiliteit shortten zonder risicobeheersing.
           <strong>Juist: C.</strong> Sarah won 84% van haar trades en had toch een verliesgevende strategie, omdat ze ongeveer negen dollar riskeerde om er één te verdienen en 60-80% van de rekening in posities had die allemaal tegelijk faalden. De verwachtingswaarde was al negatief voordat ze de eerste trade plaatste, waardoor de Kelly-optimale omvang onder nul ligt — niet "kleiner", onder nul. Eén enkele staartgebeurtenis nam $89.000. Correctie: maximaal 2% risico per trade, maximaal 10% totale volatiliteitsblootstelling, hedgen met long VIX-calls als de VIX onder 12 staat.
         </div>
       </div>
+
+      <div class="callout-key">
+    <h4>&#129518; De hele reeks was minder waard dan de dag die hem beëindigde</h4>
+    <p>De uitleg hierboven zegt dat ze ongeveer negen dollar riskeerde om er één te verdienen. Daar komt dat getal vandaan, uitsluitend uit de cijfers van haar eigen verslag &mdash; en het is erger dan negen.</p>
+
+    <p>Over veertien maanden, van september 2016 tot november 2017, maakte ze van $50.000 $124.000, dus de reeks leverde $74.000 op over 37 winnende trades. Dat zet de gemiddelde winst op hooguit $2.000 &mdash; hooguit, want de zeven verliezen zijn al van die $74.000 afgetrokken, zodat de brutowinsten groter waren en de typische winst kleiner dan het hier lijkt. Toen kostte één dag $89.000. Deel: 89.000 / 2.000 is ongeveer 44, dus één verlies kostte meer dan veertig typische winsten. Ze had er pas 37 gemaakt.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>14 maanden, 37 winnaars      +$74.000
+één dag                      -$89.000
+                             --------
+                             -$15.000    op een account van $50.000</code></pre>
+
+    <p>Dan het break-even. Voor een trade die $2.000 oplevert en $89.000 kan kosten, is de vereiste trefkans 89.000 / 91.000 = 97,8 %. Zij had 84 %. Beide getallen bestonden voordat ze haar eerste trade plaatste &mdash; de 98 % lag besloten in haar positiegrootte, de 84 % was de statistiek waar ze trots op was &mdash; en het gat ertussen is het hele verhaal. Volmageddon maakte de strategie niet verliesgevend. Het zette de datum.</p>
+
+    <p>Draai het nu om, want dit is de bruikbare versie. Een trefkans w breekt even bij een uitbetalingsverhouding van w / (1 - w). Bij 84 % is dat 0,84 / 0,16 = 5,25, dus een verlies mag hoogstens 5,25 keer een winst kosten: $10.500 tegen haar $2.000, wat op een account van $124.000 8,5 % is. Haar trefkans rechtvaardigde het riskeren van ongeveer acht procent van het account. Zij had er 60 tot 80 % van in posities die allemaal samen faalden.</p>
+
+    <p style="margin-bottom:0">Daar komt de „maximaal 10 % totale blootstelling aan volatiliteit” uit de correctie hierboven vandaan, en het is de moeite waard dat afgeleid te zien in plaats van het aan te nemen als een rond getal dat iemand mooi vond. Doe dezelfde twee delingen op je eigen verslag: gemiddelde winst, ergst denkbare verlies, en de verhouding daartussen tegenover je eigen trefkans. Een hoge trefkans geeft geen recht op omvang. Hij geeft recht op een uitbetalingsverhouding, en de omvang volgt daaruit.</p>
+  </div>
 
       <h2 id="quiz" style="margin-top:3rem">📝 Kenniscontrole</h2>
       <p>Toets je begrip van de strategieën voor volatiliteitshandel:</p>
