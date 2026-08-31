@@ -265,12 +265,37 @@
 
     <div style="margin-top:1.5rem;padding:1.5rem;background:rgba(34,197,94,0.15);border-radius:12px;border-left:4px solid #22c55e">
       <div style="font-weight:700;font-size:1.1rem;margin-bottom:0.75rem">✅ Después de 2010: el nuevo enfoque de Michael</div>
-      <p style="margin:0;font-size:0.95rem">Convirtió todas las stop de mercado en stop limitadas con una banda del 0,5-1 %. <strong>Balance de diez años (2011-2020):</strong> siete vacíos de aire en valores o índices lo bastante profundos como para disparar un stop; en cinco de ellos el límite bloqueó el fill y el precio se recuperó en la misma sesión. Dos se ejecutaron, y ese es el punto: la banda es lo bastante estrecha como para que una caída real siga sacándolo. Ahorro estimado en esos cinco: <span style="color:#22c55e;font-weight:700">unos 95.000 $</span>, con posiciones del mismo orden de magnitud que en 2010. Contrapartida: una pequeña parte de los stops no se ejecuta y hay que trabajarla a mano.</p>
+      <p style="margin:0;font-size:0.95rem">Convirtió todas las stop de mercado en stop limitadas con una banda del 0,5-1 %. <strong>Balance de diez años (2011-2020):</strong> siete air pockets en valores individuales o índices, lo bastante profundos como para disparar un stop; en cinco de ellos el límite bloqueó la ejecución y el precio se recuperó en la misma sesión. Dos se ejecutaron, que es justamente el punto: la banda es lo bastante estrecha como para que una caída real siga sacándolo. Contrapartida: una pequeña parte de los stops queda sin ejecutar y hay que trabajarla a mano. Lo que ahorraron las cinco ejecuciones bloqueadas no se puede sumar honestamente, porque el ahorro es la diferencia entre lo que pasó y una ejecución que nunca ocurrió; la aritmética que sí se puede hacer está en el recuadro de abajo, y trata del tamaño, no del tipo de orden.</p>
+    </div>
+
+    <div class="callout-key">
+      <h4>&#127919; La distancia a tu stop no es tu riesgo</h4>
+      <p>Todo lo anterior trata de conseguir una mejor ejecución. Debajo hay un error de tamaño que hizo que la ejecución importara, y vale la pena separar las dos cosas porque solo una de ellas está en tus manos el día en cuestión.</p>
+
+      <p>Michael dimensionó su posición a partir de su stop. Entrada 113,20 $, stop 110,00 $, o sea 3,20 por acción de pérdida planificada, y 8.000 acciones hacen 25.600 $. El problema es que 3,20 es la distancia a un precio para el que no tenía contrato. Una orden stop-market garantiza una ejecución y no dice nada sobre dónde, así que el número que corresponde en un cálculo de tamaño no es el stop &mdash; es la peor ejecución que puedes recibir de forma plausible:</p>
+
+<pre><code>acciones  =  presupuesto de riesgo  &#247;  ( entrada  &#8722;  peor ejecución plausible )</code></pre>
+
+      <p>Recórrelo con un presupuesto de riesgo del 1 %, que en su cuenta de 500.000 $ son 5.000 $, contra cada una de las ejecuciones que esta lección ya ha descrito:</p>
+
+<pre><code>lo que realmente se ejecutó                   distancia a la entrada   acciones al 1 % de riesgo   cuánto se pasaba 8.000
+el stop que planeaste, ejecutado a 110,00 $                   3,20 $                       1.562                     5,1x
+un stop hunt, ejecutado a 109,20 $                            4,00 $                       1.250                     6,4x
+el flash crash, ejecutado a 106,20 $                          7,00 $                         714                    11,2x
+el mínimo impreso, 105,88 $                                   7,32 $                         683                    11,7x</code></pre>
+
+      <p><strong>Tenía 8.000 acciones. Contra el stop que había planeado, el uno por ciento de la cuenta eran 1.562. Contra la ejecución que realmente recibió, 714.</strong> El tipo de orden le costó 30.400 $ de slippage. El tamaño le costó el otro orden de magnitud, y se decidió semanas antes, en una hoja de cálculo, en condiciones tranquilas.</p>
+
+      <p>La última columna merece que la mires fijamente, porque la fila del flash crash marca 11,2x y el impacto en la cuenta aquella tarde fue del 11,2 %. Eso no es casualidad y es el hecho más transferible de esta página: <strong>cuando dimensionas contra un presupuesto del uno por ciento, el múltiplo por el que te has pasado de tamaño es el porcentaje de la cuenta que se lleva una mala ejecución.</strong> Once veces demasiado grande y un solo stop cuesta el once por ciento. No hay tipo de orden que arregle eso.</p>
+
+      <p>Así que el orden honesto de los dos arreglos es el contrario del que esta lección venía insinuando. Convierte el stop-market en stop-limit, desde luego: es gratis y bloquea el air pocket. Pero haz primero el tamaño, porque una posición lo bastante pequeña como para sobrevivir a su propia peor ejecución no necesita que el tipo de orden la salve, y una posición once veces demasiado grande no la salva nada.</p>
+
+      <p>La versión práctica necesita un número que puedes consultar: cuánto ha atravesado el instrumento tu nivel en su peor día de los últimos años. Para SPY en este ejemplo son unos siete puntos sobre una acción de 113 $. Divide tu presupuesto de riesgo por eso en vez de por la distancia a tu stop, y la respuesta saldrá más pequeña de lo que te gustaría &mdash; que es justamente el punto.</p>
     </div>
 
     <h5>Cuándo una stop limitada puede no ejecutarse (la contrapartida)</h5>
 
-    <p><strong>El riesgo:</strong> si el precio rompe legítimamente por debajo de tu límite y no se recupera, el stop no se ejecuta (sigues expuesto). Ejemplo: acción en 100 $, stop limitada 95 $/94,50 $, un desastre en resultados abre en 85 $ → sin fill, -15 % frente al -5 % planeado. <strong>Marco:</strong> intradía (banda del 0,5 %), de un día para otro (banda del 1 %), resultados (cerrar antes del evento o aceptar el riesgo de hueco), salida manual si no se ejecuta y el precio sigue cayendo. <strong>En resumen:</strong> los stops sin ejecutar aparecen en un 5-10 % de los casos, pero te ahorran los fills catastróficos de un flash crash.</p>
+    <p><strong>El riesgo:</strong> si el precio rompe legítimamente por debajo de tu límite y no se recupera, el stop no se ejecuta (sigues expuesto). Ejemplo: acción en 100 $, stop limitada 95 $/94,50 $, un desastre en resultados abre en 85 $ → sin fill, -15 % frente al -5 % planeado. <strong>Marco:</strong> intradía (banda del 0,5 %), de un día para otro (banda del 1 %), resultados (cerrar antes del evento o aceptar el riesgo de hueco), salida manual si no se ejecuta y el precio sigue cayendo. <strong>En resumen:</strong> la banda es la segunda decisión. La primera es la del recuadro de abajo, porque una posición dimensionada según la distancia al stop está dimensionada contra un precio que no necesariamente vas a conseguir.</p>
   </div>
 
   <h2 id="how-institutions-exploit-retail-order-types">Cómo explotan las instituciones los tipos de orden del minorista</h2>
