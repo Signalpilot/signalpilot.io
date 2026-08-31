@@ -135,6 +135,7 @@
       <li>Herhangi bir strateji için Kelly kriterine göre pozisyon büyüklüğü hesaplamak</li>
       <li>Tam Kelly’nin neden tehlikeli olduğunu anlamak (ve hangi Kelly kesrini kullanacağınızı)</li>
       <li>Doğru korelasyon düzeltmeleriyle çok stratejili portföyler kurmak</li>
+      <li>Kazanma oranındaki hata payını pozisyon büyüklüğündeki hata payına çevirmek ve fazla ile az bahsin maliyetini hesaplamak</li>
       <li>Sermaye eğrisine dayalı dinamik pozisyon büyüklüğü uygulamak</li>
       <li>Edge’inizi doğrulamak ve dağılımı optimize etmek için Signal Pilot araçlarını kullanmak</li>
     </ul>
@@ -356,6 +357,25 @@
     <p><strong>Ve ikinci bir neden var; bu, sinirlerden daha ağır basar.</strong> Kelly, p ve b’yi bildiğini varsayar. Bilmiyorsun. Onları kendi işlemlerinden oluşan sonlu bir örneklemden tahmin ettin ve o tahmin, formülün asla göremediği hata paylarını taşıyor. İçeri biraz iyimser bir isabet oranı ver; çıkan kesir biraz değil, epeyce büyük olur. Yukarıdaki %60 / 1,67 örneğini al: tam Kelly yaklaşık %36 diyor. Kazananların %60 olduğu yüz işlem, gerçek oranı olağan güven düzeyinde %50 ile %70 arasında bir yere koyar. p = 0,55’te formül %28 der. p = 0,50’de %20 der. Pozisyon büyüklüğün, yüz işlemin çözemeyeceği bir isabet oranı farkı yüzünden neredeyse iki katına varan bir aralıkta salınıyor. Üstelik hata sonuçları bakımından simetrik değil: Kelly’nin üzerinde bahis oynamak büyümeyi, az bahis oynamanın sana mal olduğundan çok daha hızlı yok eder; dolayısıyla fazla yüksek bir tahmin, aynı ölçüde yanlış ama düşük bir tahminden çok daha fazla acıtır. Kesirli Kelly’nin gerçekte satın aldığı şey budur. Ölçtüğün avantaj makul olarak göründüğünün yarısı kadar olabiliyorsa, ölçtüğün sayıların ima ettiğinin dörtte biriyle boyutlandırmak çekingenlik değildir — örneklemin tesadüfen gösterdiği avantaja değil, gerçekten sahip olabileceğin avantaja göre boyutlandırmaktır.</p>
   </div>
 </details>
+
+  <div class="callout-key">
+    <h4>&#129518; Asimetrinin bedeli: iki kat hatanın her iki yöndeki maliyeti</h4>
+    <p>Yukarıdaki paragraf, size hiç doğrulatmadığı bir iddiayla bitiyor: Kelly üzerine fazla bahis oynamak, az bahis oynamanın maliyetinden çok daha hızlı büyümeyi yok eder. Hesabın iki yarısı da bu sayfada zaten var, yalnızca bir araya getirilmeleri gerekiyor. Büyüme formülü maksimumun (2f &#8722; f&#178;) katıdır &mdash; ama f'yi kendi bahsinizin gerçek Kelly'ye bölümü olarak okuyun, örneğinizin gösterdiği Kelly'ye değil.</p>
+
+    <p>Önce iki simetrik hatayı hesaplayın. Gerçek Kelly'nin yarısını oynarsanız 2(0,5) &#8722; 0,25 = %75 kalır. İki katını oynarsanız 2(2) &#8722; 4 = %0 kalır. Aynı iki kat hata bir yönde büyümenizin dörtte birine, diğer yönde tamamına mal olur. Asimetrinin tamamı budur.</p>
+
+    <p>Şimdi bu dersin ölçtüğü aralığı baştan sona geçin. %60 ve 1,67 olan sistem %36 Kelly veriyordu, yüz işlem ise gerçek kazanma oranını %50 ile %70 arasında bir yere koyuyor; yani gerçek Kelly %20 ile %36 arasında. Bu aralık boyunca iki büyüklük seçeneği:</p>
+
+<pre><code>Gerçek Kelly   %36 bahis (tahmin)   %9 bahis (dörtte bir)
+         %36   f = 1,00 -&gt; %100     f = 0,25 -&gt; %44
+         %28   f = 1,29 -&gt;  %92     f = 0,32 -&gt; %54
+         %20   f = 1,80 -&gt;  %36     f = 0,45 -&gt; %70
+         %18   f = 2,00 -&gt;   %0     f = 0,50 -&gt; %75</code></pre>
+
+    <p>Örneğinizin ürettiği sayıya oynamak, ulaşılabilir büyümenin %100'ünden %36'sına kadar iner ve gerçek Kelly %18 olduğunda sıfıra ulaşır; bu, kendi güven aralığınızın alt sınırının iki puan altıdır. Çeyrek Kelly %44 ile %70 arasında kalır ve gerçek Kelly %4,5 olmadıkça, yani ölçtüğünüzün sekizde birine inmedikçe sıfıra ulaşamaz.</p>
+
+    <p>Yani seçim, büyümenin %100'ü ile %44'ü arasında değil. Seçim, %100'den %36'ya inen ve kenarının hemen ötesinde bir uçurum bulunan bir aralık ile %44'ten %70'e uzanan ve yakınında hiç uçurum olmayan bir aralık arasında. Çeyrek Kelly aralık boyunca ortalamada kazanıyor ve ikisinden yalnızca onun en kötü durumundan sağ çıkıyorsunuz.</p>
+  </div>
 
   <div class="callout callout-success">
     <h4>💰 İşlenmiş örnek: Kelly oranı 500.000 $'lık bir defterde ne yapar</h4>
@@ -814,6 +834,7 @@
       <li><strong>Korelasyon önemlidir:</strong> Korelasyonlu stratejilerin payını azaltın (onlar aynı bahistir)</li>
       <li><strong>Dinamik boyutlandırma</strong> riski son performansa göre ölçekler ve yalnızca düşüşler işlem yapışınızı değiştiriyorsa değer taşır. Bağımsız işlemlerde beklenti eklemez ve toparlanma boyunca sizi küçük tutar</li>
       <li><strong>Portföy yükü tavanı:</strong> perakende bir hesap için, tüm açık pozisyonlarda toplam %6 risk. Neredeyse her yerde alıntılanan %10-15 rakamı kurumsal masa limitidir ve sizde olmayan hedge ile bilanço derinliğini varsayar</li>
+      <li><strong>Hata tek yönlü:</strong> gerçek Kelly'nin f kesrinde büyüme, maksimumun (2f &#8722; f&#178;) katıdır; yarısını oynamak %75'ini korur, iki katını oynamak hiçbir şey bırakmaz. Büyüklüğü kazanma oranı aralığınızın orta noktasına göre değil, alt sınırına göre belirleyin</li>
       <li><strong>Aşırı özgüven öldürür:</strong> %60 kazanma + R:R 2:1 = %40 tam Kelly. 7’li bir kayıp serisi (0,4^7 &#8776; %0,16 olasılık, yani kabaca her 600 işlemde bir) tam Kelly’de sizi -%97’ye, çeyrek Kelly’de -%52’ye düşürür. Kelly tavanı söyler, hedefi değil: profesyonellerin çoğu çeyrek Kelly’nin epey altında çalışır ve üstüne toplam yükü de sınırlar.</li>
     </ul>
   </div>

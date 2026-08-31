@@ -135,6 +135,7 @@
       <li>Calcolare la dimensione di posizione secondo Kelly per qualsiasi strategia</li>
       <li>Capire perché il Kelly pieno è pericoloso (e quale frazione di Kelly usare)</li>
       <li>Costruire portafogli multistrategia con le giuste correzioni per la correlazione</li>
+      <li>Trasformare il margine di errore del win rate in un margine di errore sulla dimensione della posizione e quantificare quanto costano puntare troppo e puntare troppo poco</li>
       <li>Applicare una dimensione di posizione dinamica basata sulla curva del capitale</li>
       <li>Usare gli strumenti Signal Pilot per validare il tuo edge e ottimizzare le allocazioni</li>
     </ul>
@@ -356,6 +357,25 @@
     <p><strong>E c’è una seconda ragione, che conta più dei nervi.</strong> Kelly dà per scontato che tu conosca p e b. Non è così. Li hai stimati da un campione finito delle tue operazioni, e quella stima porta con sé barre di errore che la formula non vede mai. Dagli in pasto un tasso di successo appena troppo ottimistico e la frazione che ne esce non è appena troppo grande: è parecchio troppo grande. Prendi l’esempio 60% / 1,67 di sopra, dove il Kelly pieno dice circa il 36%. Cento operazioni con il 60% di vincenti collocano il tasso vero da qualche parte tra il 50% e il 70% alla confidenza abituale. A p = 0,55 la formula dice 28%. A p = 0,50 dice 20%. La tua dimensione di posizione oscilla quasi del doppio per una differenza nel tasso di successo che cento operazioni semplicemente non possono risolvere. E l’errore non è simmetrico nelle conseguenze: puntare sopra Kelly distrugge la crescita molto più in fretta di quanto puntare sotto ti costi, così una stima troppo alta fa molto più male di una altrettanto sbagliata al ribasso. È questo che il Kelly frazionale ti compra davvero. Se il vantaggio che hai misurato potrebbe plausibilmente valere la metà di quello che sembra, dimensionare a un quarto di ciò che i tuoi numeri implicano non è timidezza: è dimensionare per il vantaggio che forse hai davvero, invece che per quello che il tuo campione ha mostrato per caso.</p>
   </div>
 </details>
+
+  <div class="callout-key">
+    <h4>&#129518; L'asimmetria in cifre: quanto costa un errore di un fattore due in ciascuna direzione</h4>
+    <p>Il paragrafo qui sopra si chiude su un'affermazione che non ti fa mai verificare: che puntare più di Kelly distrugge la crescita molto più in fretta di quanto puntare meno ti costi. Entrambe le metà del calcolo sono già in questa pagina, basta metterle insieme. La formula della crescita è (2f &#8722; f&#178;) del massimo &mdash; ma leggi f come la tua puntata divisa per il Kelly vero, non per il Kelly che il tuo campione ha mostrato.</p>
+
+    <p>Fai prima i due errori simmetrici. Punta metà del Kelly vero e conservi 2(0,5) &#8722; 0,25 = 75 %. Punta il doppio e conservi 2(2) &#8722; 4 = 0 %. Lo stesso errore di un fattore due costa un quarto della tua crescita in una direzione e tutta quanta nell'altra. È tutta qui l'asimmetria.</p>
+
+    <p>Ora percorri l'intervallo che questa lezione ha misurato. Il sistema al 60 % con 1,67 dava un Kelly del 36 %, e cento trade collocano il win rate vero fra il 50 % e il 70 %, quindi il Kelly vero sta fra il 20 % e il 36 %. Due scelte di dimensione lungo quell'intervallo:</p>
+
+<pre><code>Kelly vero   Punta 36 % (la stima)   Punta 9 % (un quarto)
+      36 %   f = 1,00 -&gt; 100 %       f = 0,25 -&gt; 44 %
+      28 %   f = 1,29 -&gt;  92 %       f = 0,32 -&gt; 54 %
+      20 %   f = 1,80 -&gt;  36 %       f = 0,45 -&gt; 70 %
+      18 %   f = 2,00 -&gt;   0 %       f = 0,50 -&gt; 75 %</code></pre>
+
+    <p>Puntare il numero prodotto dal tuo campione va dal 100 % della crescita raggiungibile fino al 36 %, e tocca lo zero con un Kelly vero del 18 %, due punti sotto il limite inferiore del tuo stesso intervallo di confidenza. Il quarto di Kelly va dal 44 % al 70 % e può toccare lo zero solo se il Kelly vero è del 4,5 %, un ottavo di quanto hai misurato.</p>
+
+    <p>La scelta quindi non è fra il 100 % della crescita e il 44 % di essa. È fra un intervallo che va dal 100 % al 36 % con un dirupo appena oltre il suo bordo, e un intervallo che va dal 44 % al 70 % senza alcun dirupo nelle vicinanze. Il quarto di Kelly vince in media su tutto l'intervallo, ed è l'unico dei due al cui caso peggiore sopravvivi.</p>
+  </div>
 
   <div class="callout callout-success">
     <h4>💰 Esempio svolto: che cosa fa la frazione di Kelly a un book da 500.000 $</h4>
@@ -814,6 +834,7 @@
       <li><strong>La correlazione conta:</strong> Riduci l’allocazione alle strategie correlate (sono la stessa scommessa)</li>
       <li><strong>Dimensionamento dinamico</strong> scala il rischio alla performance recente, e vale la pena solo se i drawdown cambiano il tuo modo di operare. Su trade indipendenti non aggiunge alcuna attesa e ti tiene piccolo nel recupero</li>
       <li><strong>Tetto al carico del portafoglio:</strong> per un conto retail, 6% di rischio totale su tutte le posizioni aperte. La cifra 10-15% citata quasi ovunque è un limite da desk istituzionale e presuppone coperture e profondità di bilancio che tu non hai</li>
+      <li><strong>L'errore è a senso unico:</strong> la crescita a una frazione f del Kelly vero è (2f &#8722; f&#178;) del massimo, quindi puntarne la metà ne conserva il 75 % e puntarne il doppio non ne conserva nulla. Dimensiona sul limite inferiore del tuo intervallo di win rate, non sul suo punto medio</li>
       <li><strong>L’eccesso di fiducia uccide:</strong> 60 % di successo + R:R 2:1 = 40 % di Kelly pieno. Una serie di 7 perdite (0,4^7 &#8776; 0,16 % di probabilità, cioè circa una volta ogni 600 operazioni) ti lascia a -97 % con il Kelly pieno e a -52 % con un quarto di Kelly. Kelly indica il tetto, non l’obiettivo: la maggior parte dei professionisti opera ben sotto un quarto di Kelly e limita anche il carico complessivo.</li>
     </ul>
   </div>

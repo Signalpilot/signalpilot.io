@@ -135,6 +135,7 @@
       <li>Calcular el tamaño de posición por Kelly para cualquier estrategia</li>
       <li>Entender por qué el Kelly completo es peligroso (y qué fracción de Kelly usar)</li>
       <li>Construir carteras multiestrategia con los ajustes de correlación adecuados</li>
+      <li>Convertir el margen de error de tu tasa de acierto en un margen de error del tamaño de posición y cuantificar lo que cuesta apostar de más y de menos</li>
       <li>Aplicar un tamaño de posición dinámico según la curva de capital</li>
       <li>Usar las herramientas de Signal Pilot para validar tu ventaja y optimizar las asignaciones</li>
     </ul>
@@ -356,6 +357,25 @@
     <p><strong>Y hay una segunda razón, que pesa más que los nervios.</strong> Kelly da por hecho que conoces p y b. No los conoces. Los estimaste a partir de una muestra finita de tus propias operaciones, y esa estimación lleva unos márgenes de error que la fórmula nunca ve. Métele una tasa de acierto ligeramente optimista y la fracción que sale no es ligeramente demasiado grande: es bastante demasiado grande. Toma el ejemplo del 60% / 1,67 de más arriba, donde el Kelly completo dice alrededor del 36%. Cien operaciones con un 60% de ganadoras sitúan la tasa verdadera en algún punto entre el 50% y el 70% con la confianza habitual. Con p = 0,55 la fórmula dice 28%. Con p = 0,50 dice 20%. Tu tamaño de posición oscila casi el doble por una diferencia en la tasa de acierto que cien operaciones sencillamente no pueden resolver. Y el error no es simétrico en sus consecuencias: apostar por encima de Kelly destruye el crecimiento mucho más deprisa de lo que te cuesta apostar por debajo, así que una estimación demasiado alta hace mucho más daño que una igual de equivocada por lo bajo. Esto es lo que de verdad te compra el Kelly fraccional. Si tu ventaja medida podría ser plausiblemente la mitad de lo que aparenta, dimensionar a un cuarto de lo que implican tus números no es timidez: es dimensionar para la ventaja que quizá tengas de verdad, en lugar de para la que tu muestra dio la casualidad de mostrar.</p>
   </div>
 </details>
+
+  <div class="callout-key">
+    <h4>&#129518; La asimetría con números: lo que cuesta un error de un factor de dos en cada dirección</h4>
+    <p>El párrafo anterior termina con una afirmación que nunca te hace comprobar: que pasarse de Kelly destruye el crecimiento mucho más rápido de lo que te cuesta quedarte corto. Las dos mitades del cálculo ya están en esta página y solo hay que juntarlas. La fórmula del crecimiento es (2f &#8722; f&#178;) del máximo &mdash; pero lee f como tu apuesta dividida entre el Kelly verdadero, no entre el Kelly que tu muestra resultó mostrar.</p>
+
+    <p>Haz primero los dos errores simétricos. Apuesta la mitad del Kelly verdadero y conservas 2(0,5) &#8722; 0,25 = 75 %. Apuesta el doble y conservas 2(2) &#8722; 4 = 0 %. El mismo error de un factor de dos cuesta un cuarto de tu crecimiento en una dirección y todo él en la otra. Esa es toda la asimetría.</p>
+
+    <p>Ahora recorre el intervalo que esta lección midió. El sistema de 60 % y 1,67 daba un Kelly del 36 %, y cien operaciones sitúan la tasa de acierto verdadera en cualquier punto entre el 50 % y el 70 %, de modo que el Kelly verdadero está entre el 20 % y el 36 %. Dos decisiones de tamaño a lo largo de ese rango:</p>
+
+<pre><code>Kelly verdadero   Apuesta 36 % (estimación)   Apuesta 9 % (un cuarto)
+           36 %   f = 1,00 -&gt; 100 %           f = 0,25 -&gt; 44 %
+           28 %   f = 1,29 -&gt;  92 %           f = 0,32 -&gt; 54 %
+           20 %   f = 1,80 -&gt;  36 %           f = 0,45 -&gt; 70 %
+           18 %   f = 2,00 -&gt;   0 %           f = 0,50 -&gt; 75 %</code></pre>
+
+    <p>Apostar la cifra que produjo tu muestra va desde el 100 % del crecimiento alcanzable hasta el 36 %, y llega a cero con un Kelly verdadero del 18 %, dos puntos por debajo del extremo inferior de tu propio intervalo de confianza. El cuarto de Kelly va del 44 % al 70 % y no puede llegar a cero salvo que el Kelly verdadero sea del 4,5 %, un octavo de lo que mediste.</p>
+
+    <p>Así que la elección no es entre el 100 % del crecimiento y el 44 % de él. Es entre un rango que va del 100 % al 36 % con un precipicio justo después de su borde, y un rango que va del 44 % al 70 % sin ningún precipicio cerca. El cuarto de Kelly gana en promedio a lo largo del intervalo, y es el único de los dos cuyo peor caso sobrevives.</p>
+  </div>
 
   <div class="callout callout-success">
     <h4>💰 Ejemplo trabajado: qué le hace la fracción de Kelly a un libro de 500.000 $</h4>
@@ -814,6 +834,7 @@
       <li><strong>La correlación importa:</strong> Reduce la asignación a las estrategias correlacionadas (son la misma apuesta)</li>
       <li><strong>Dimensionamiento dinámico</strong> escala el riesgo al rendimiento reciente, y solo merece la pena si los drawdowns cambian cómo operas. En operaciones independientes no añade esperanza matemática y te mantiene pequeño en la recuperación</li>
       <li><strong>Tope de carga de la cartera:</strong> para una cuenta minorista, 6% de riesgo total en todas las posiciones abiertas. La cifra de 10-15% que se cita casi en todas partes es un límite de mesa institucional y supone coberturas y profundidad de balance que tú no tienes</li>
+      <li><strong>El error es asimétrico:</strong> el crecimiento con una fracción f del Kelly verdadero es (2f &#8722; f&#178;) del máximo, de modo que apostar la mitad conserva el 75 % y apostar el doble no conserva nada. Dimensiona por el extremo inferior de tu intervalo de tasa de acierto, no por su punto medio</li>
       <li><strong>El exceso de confianza mata:</strong> 60 % de acierto + R:R 2:1 = 40 % de Kelly completo. Una racha de 7 pérdidas (0,4^7 &#8776; 0,16 % de probabilidad, es decir una vez cada 600 operaciones) te deja un 97 % abajo con el Kelly completo y un 52 % con un cuarto de Kelly. Kelly nombra el techo, no el objetivo: la mayoría de los profesionales opera bastante por debajo de un cuarto de Kelly y encima limita la carga total.</li>
     </ul>
   </div>

@@ -135,6 +135,7 @@
       <li>Die Kelly-Positionsgröße für jede Handelsstrategie berechnen</li>
       <li>Verstehen, warum volles Kelly gefährlich ist (und welchen Kelly-Bruchteil du nutzen solltest)</li>
       <li>Multi-Strategie-Portfolios mit sauberen Korrelationsanpassungen bauen</li>
+      <li>Die Fehlerspanne deiner Trefferquote in eine Fehlerspanne deiner Positionsgröße übersetzen und beziffern, was Über- und Unterwetten jeweils kosten</li>
       <li>Dynamische Positionsgrößen auf Basis der Equity-Kurve umsetzen</li>
       <li>Mit den Tools von Signal Pilot deine Edge prüfen und Allokationen optimieren</li>
     </ul>
@@ -356,6 +357,25 @@
     <p><strong>Und es gibt einen zweiten Grund, der schwerer wiegt als die Nerven.</strong> Kelly setzt voraus, dass du p und b kennst. Tust du nicht. Du hast sie aus einer endlichen Stichprobe deiner eigenen Trades geschätzt, und diese Schätzung trägt Fehlerbalken, die die Formel nie zu sehen bekommt. Gib eine leicht zu optimistische Trefferquote hinein, und der Bruchteil, der herauskommt, ist nicht leicht zu groß, sondern deutlich zu groß. Nimm das Beispiel 60 % / 1,67 von oben, bei dem volles Kelly etwa 36 % sagt. Hundert Trades mit 60 % Gewinnern legen die wahre Quote bei üblicher Konfidenz irgendwo zwischen 50 % und 70 %. Bei p = 0,55 sagt die Formel 28 %. Bei p = 0,50 sagt sie 20 %. Deine Positionsgröße schwankt fast um das Doppelte aufgrund eines Unterschieds in der Trefferquote, den hundert Trades schlicht nicht auflösen können. Und der Fehler ist in seinen Folgen nicht symmetrisch: Über Kelly hinaus zu setzen zerstört Wachstum weit schneller, als zu wenig zu setzen dich kostet, sodass eine zu hohe Schätzung viel mehr schadet als eine gleich falsche zu niedrige. Genau das kauft dir fraktionales Kelly. Wenn dein gemessener Edge plausibel halb so groß sein könnte, wie er aussieht, ist ein Viertel dessen zu setzen, was deine gemessenen Zahlen nahelegen, keine Ängstlichkeit — es ist Sizing für den Edge, den du vielleicht wirklich hast, statt für den, den deine Stichprobe zufällig gezeigt hat.</p>
   </div>
 </details>
+
+  <div class="callout-key">
+    <h4>&#129518; Die Asymmetrie in Zahlen: was ein Irrtum um den Faktor zwei in jede Richtung kostet</h4>
+    <p>Der Absatz oben endet mit einer Behauptung, die er dich nie nachrechnen lässt: dass Überwetten von Kelly das Wachstum weit schneller zerstört, als Unterwetten dich kostet. Beide Hälften der Rechnung stehen bereits auf dieser Seite, sie müssen nur zusammengeführt werden. Die Wachstumsformel lautet (2f &#8722; f&#178;) des Maximums &mdash; aber lies f als deinen Einsatz geteilt durch das wahre Kelly, nicht durch das Kelly, das deine Stichprobe zufällig gezeigt hat.</p>
+
+    <p>Rechne zuerst die beiden symmetrischen Fehler durch. Setze die Hälfte des wahren Kelly und du behältst 2(0,5) &#8722; 0,25 = 75 %. Setze das Doppelte und du behältst 2(2) &#8722; 4 = 0 %. Derselbe Irrtum um den Faktor zwei kostet in der einen Richtung ein Viertel deines Wachstums und in der anderen alles davon. Das ist die ganze Asymmetrie.</p>
+
+    <p>Jetzt das Intervall, das diese Lektion gemessen hat. Das System mit 60 % und 1,67 zeigte ein Kelly von 36 %, und hundert Trades verorten die wahre Trefferquote irgendwo zwischen 50 % und 70 %, das wahre Kelly also irgendwo zwischen 20 % und 36 %. Zwei Größenwahlen über diese Spanne:</p>
+
+<pre><code>Wahres Kelly   Einsatz 36 % (Schätzung)   Einsatz 9 % (ein Viertel)
+        36 %   f = 1,00 -&gt; 100 %          f = 0,25 -&gt; 44 %
+        28 %   f = 1,29 -&gt;  92 %          f = 0,32 -&gt; 54 %
+        20 %   f = 1,80 -&gt;  36 %          f = 0,45 -&gt; 70 %
+        18 %   f = 2,00 -&gt;   0 %          f = 0,50 -&gt; 75 %</code></pre>
+
+    <p>Auf die Zahl zu setzen, die deine Stichprobe geliefert hat, reicht von 100 % des erreichbaren Wachstums bis hinunter auf 36 % und erreicht null bei einem wahren Kelly von 18 % &mdash; zwei Punkte unter der Untergrenze deines eigenen Konfidenzintervalls. Viertel-Kelly reicht von 44 % bis 70 % und kann null erst erreichen, wenn das wahre Kelly bei 4,5 % liegt, einem Achtel dessen, was du gemessen hast.</p>
+
+    <p>Die Wahl steht also nicht zwischen 100 % des Wachstums und 44 % davon. Sie steht zwischen einer Spanne von 100 % bis 36 % mit einer Klippe kurz hinter ihrem Rand und einer Spanne von 44 % bis 70 % ohne Klippe in Reichweite. Viertel-Kelly gewinnt im Mittel über das Intervall, und es ist das einzige der beiden, dessen schlimmsten Fall du überlebst.</p>
+  </div>
 
   <div class="callout callout-success">
     <h4>💰 Durchgerechnetes Beispiel: Was der Kelly-Anteil mit einem 500.000-$-Buch macht</h4>
@@ -814,6 +834,7 @@
       <li><strong>Korrelation zählt:</strong> Die Allokation zu korrelierten Strategien senken (sie sind dieselbe Wette)</li>
       <li><strong>Dynamische Größe</strong> skaliert das Risiko an der jüngsten Performance und lohnt sich nur, wenn Drawdowns dein Handeln verändern. Bei unabhängigen Trades fügt sie keine Erwartung hinzu und hält dich in der Erholung klein</li>
       <li><strong>Deckel für den Portfolio-Heat:</strong> für ein Retail-Konto 6 % Gesamtrisiko über alle offenen Positionen. Die fast überall zitierte Zahl von 10-15 % ist ein Limit für institutionelle Desks und setzt Absicherung und Bilanztiefe voraus, die du nicht hast</li>
+      <li><strong>Der Fehler ist einseitig:</strong> Wachstum bei einem Bruchteil f des wahren Kelly beträgt (2f &#8722; f&#178;) des Maximums, die Hälfte davon zu setzen hält also 75 %, das Doppelte zu setzen hält nichts. Bemiss dich an der Untergrenze deines Trefferquoten-Intervalls, nicht an dessen Mitte</li>
       <li><strong>Selbstüberschätzung tötet:</strong> 60 % TQ + 2:1 R:R = 40 % volles Kelly. Eine Verlustserie von 7 Trades (0,4^7 &#8776; 0,16 % Wahrscheinlichkeit, also etwa alle 600 Trades einmal) lässt dich bei vollem Kelly 97 % im Minus zurück und bei Viertel-Kelly 52 %. Kelly benennt die Obergrenze, nicht das Ziel — die meisten Profis fahren deutlich unter Viertel-Kelly und deckeln zusätzlich den Gesamt-Heat.</li>
     </ul>
   </div>

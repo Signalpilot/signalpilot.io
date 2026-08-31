@@ -135,6 +135,7 @@
       <li>Kelly szerinti pozícióméretet számolni bármelyik kereskedési stratégiára</li>
       <li>Megérteni, miért veszélyes a teljes Kelly (és melyik Kelly-hányadot használd)</li>
       <li>Több stratégiából álló portfóliókat építeni megfelelő korrelációs korrekcióval</li>
+      <li>A találati arány hibahatárát a pozícióméret hibahatárává alakítani, és megbecsülni, mibe kerül a túl nagy és a túl kicsi tét</li>
       <li>Dinamikus pozícióméretet alkalmazni a tőkegörbéd alapján</li>
       <li>A Signal Pilot eszközeivel validálni az edge-edet és optimalizálni az allokációt</li>
     </ul>
@@ -356,6 +357,25 @@
     <p><strong>És van egy második ok is, amely többet nyom a latban, mint az idegek.</strong> A Kelly feltételezi, hogy ismered p-t és b-t. Nem ismered. Saját kereskedéseid véges mintájából becsülted őket, és ez a becslés olyan hibahatárokat hordoz, amelyeket a képlet sosem lát. Adj be egy kicsivel optimistább találati arányt, és a kijövő hányad nem kicsivel lesz túl nagy, hanem jelentősen. Vedd a fenti 60% / 1,67 példát, ahol a teljes Kelly nagyjából 36%-ot mond. Száz kereskedés 60% nyertessel a valódi arányt szokásos konfidencia mellett valahová 50% és 70% közé helyezi. p = 0,55-nél a képlet 28%-ot mond. p = 0,50-nél 20%-ot. A pozícióméreted csaknem kétszeres tartományban ingadozik egy olyan találatiarány-különbség miatt, amelyet száz kereskedés egyszerűen nem tud eldönteni. És a hiba a következményeit tekintve nem szimmetrikus: a Kelly fölé tenni sokkal gyorsabban pusztítja a növekedést, mint amennyibe az alultétel kerül, így egy túl magas becslés jóval többet árt, mint egy ugyanennyire téves alacsony. Ezt veszi meg neked valójában a frakcionális Kelly. Ha a mért előnyöd hihetően a felét is érhetné annak, aminek látszik, akkor a mért számaid által sugallt hányad negyedével méretezni nem félénkség – hanem arra az előnyre méretezni, amellyel talán ténylegesen rendelkezel, nem arra, amelyet a mintád véletlenül megmutatott.</p>
   </div>
 </details>
+
+  <div class="callout-key">
+    <h4>&#129518; Az aszimmetria számokban: mennyibe kerül a kétszeres tévedés mindkét irányban</h4>
+    <p>A fenti bekezdés olyan állítással zárul, amelyet sosem ellenőriztet Önnel: hogy a Kelly fölé fogadás sokkal gyorsabban rombolja a növekedést, mint amennyibe az alálicitálás kerül. A számítás mindkét fele már ezen az oldalon van, csak össze kell tenni őket. A növekedési képlet a maximum (2f &#8722; f&#178;) része &mdash; de f-et a saját tétje osztva a valódi Kellyvel olvassa, nem azzal a Kellyvel, amit a mintája éppen mutatott.</p>
+
+    <p>Számolja végig előbb a két szimmetrikus hibát. Tegye meg a valódi Kelly felét, és megmarad 2(0,5) &#8722; 0,25 = 75 %. Tegye meg a kétszeresét, és megmarad 2(2) &#8722; 4 = 0 %. Ugyanaz a kétszeres tévedés az egyik irányban a növekedés negyedébe, a másikban a teljes növekedésbe kerül. Ennyi az egész aszimmetria.</p>
+
+    <p>Most járja végig azt az intervallumot, amelyet ez a lecke megmért. A 60 %-os, 1,67-es rendszer 36 %-os Kellyt mutatott, száz kötés viszont a valódi találati arányt bárhová 50 % és 70 % közé teszi, tehát a valódi Kelly 20 % és 36 % között van. Két méretezési döntés ezen a tartományon:</p>
+
+<pre><code>Valódi Kelly   36 % tét (a becslés)   9 % tét (negyed)
+        36 %   f = 1,00 -&gt; 100 %      f = 0,25 -&gt; 44 %
+        28 %   f = 1,29 -&gt;  92 %      f = 0,32 -&gt; 54 %
+        20 %   f = 1,80 -&gt;  36 %      f = 0,45 -&gt; 70 %
+        18 %   f = 2,00 -&gt;   0 %      f = 0,50 -&gt; 75 %</code></pre>
+
+    <p>A minta által adott számra fogadni az elérhető növekedés 100 %-ától 36 %-áig terjed, és 18 %-os valódi Kellynél éri el a nullát &mdash; két ponttal a saját konfidenciaintervalluma alsó széle alatt. A negyed Kelly 44 % és 70 % között marad, és csak akkor érhet nullát, ha a valódi Kelly 4,5 %, vagyis a mért érték nyolcada.</p>
+
+    <p>A választás tehát nem a növekedés 100 %-a és annak 44 %-a között van. Egy 100 %-tól 36 %-ig tartó tartomány, amelynek széle mögött rögtön szakadék nyílik, és egy 44 %-tól 70 %-ig tartó tartomány között van, amelynek közelében nincs szakadék. A negyed Kelly az intervallum átlagán nyer, és a kettő közül csak az ő legrosszabb esetét éli túl.</p>
+  </div>
 
   <div class="callout callout-success">
     <h4>💰 Kidolgozott példa: mit tesz a Kelly-hányad egy 500 000 $-os könyvvel</h4>
@@ -814,6 +834,7 @@
       <li><strong>A korreláció számít:</strong> Csökkentsd a korreláló stratégiák allokációját (ugyanaz a fogadás)</li>
       <li><strong>Dinamikus méretezés</strong> a kockázatot a közelmúlt teljesítményéhez igazítja, és csak akkor érdemes, ha a visszaesések megváltoztatják, hogyan kereskedsz. Független ügyleteknél nem ad hozzá várható értéket, és kicsiben tart a helyreállás alatt</li>
       <li><strong>Portfólióterhelési plafon:</strong> lakossági számlán 6% összkockázat az összes nyitott pozícióra. A szinte mindenütt idézett 10-15% intézményi desk-limit, és olyan fedezést és mérlegmélységet feltételez, amivel nem rendelkezel</li>
+      <li><strong>A hiba egyoldalú:</strong> a valódi Kelly f hányadán a növekedés a maximum (2f &#8722; f&#178;) része, így a felét megtenni 75 %-ot őriz meg, a kétszeresét megtenni semmit. A találati arány intervallumának alsó szélére méretezzen, ne a közepére</li>
       <li><strong>A túlzott önbizalom öl:</strong> 60 % találati arány + R:R 2:1 = 40 % teljes Kelly. Egy hetes veszteségszéria (0,4^7 &#8776; 0,16 % valószínűség, azaz nagyjából 600 ügyletenként egyszer) teljes Kellyvel -97 %-on, negyed Kellyvel -52 %-on hagy. A Kelly a plafont nevezi meg, nem a célt: a legtöbb profi jóval a negyed Kelly alatt dolgozik, és ráadásul korlátozza a teljes terhelést is.</li>
     </ul>
   </div>
