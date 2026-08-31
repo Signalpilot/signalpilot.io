@@ -138,7 +138,7 @@
     <p style="margin:0 0 0.75rem 0">Alla fine di questa lezione saprai:</p>
     <ul style="line-height:1.8;margin:0 0 0 1.5rem">
       <li>Calcolare il rischio di portafoglio corretto per la correlazione (non limitarsi a contare le posizioni)</li>
-      <li>Usare il VAR (value at risk) per misurare la peggiore perdita giornaliera</li>
+      <li>Usare il VAR (valore a rischio) per misurare una brutta giornata ordinaria, e vedere perché sta in unità diverse dal carico di portafoglio</li>
       <li>Costruire matrici di correlazione per individuare la concentrazione di rischio nascosta</li>
       <li>Applicare limiti di calore di portafoglio per sopravvivere ai drawdown estremi</li>
       <li>Usare gli strumenti Signal Pilot per monitorare il rischio in tempo reale</li>
@@ -351,6 +351,25 @@
       <p><strong>Esempio:</strong> Un VAR al 95 % di 5.000 dollari significa: «C'è il 95 % di probabilità che la mia perdita giornaliera non superi i 5.000 dollari. Ma nel 5 % dei casi (1 giorno su 20) potrei perdere di PIÙ».</p>
 
       <p><strong>E la domanda a cui il VAR si rifiuta di rispondere:</strong> quanto di più. È a questo che serve il CVAR (VAR condizionale, chiamato anche expected shortfall). Il CVAR chiede: dato che oggi è uno dei 5% di giorni cattivi, qual è la perdita media in quei giorni? Un portafoglio può avere un VAR comodo e un CVAR terrificante, ed è esattamente la forma di una strategia che vince poco quasi tutti i giorni e perde enormemente ogni tanto: cioè la maggior parte dei book corti di volatilità e la maggior parte di quelli fortemente correlati. Se ne calcoli uno solo dei due, calcola questo.</p>
+
+      <div class="callout-key">
+    <h4>&#129518; Completa la piramide: l'unico strato senza aritmetica</h4>
+    <p>Tre dei quattro strati di questa lezione arrivano con un calcolo che puoi rifare. Lo strato 4 no, e quel vuoto conta, perché il VAR e il carico di portafoglio si citano con lo stesso segno di percentuale e rispondono a domande del tutto diverse.</p>
+
+    <p>Prendi il portafoglio a cui questa lezione torna di continuo: otto posizioni all'1 % del conto ciascuna, correlazione media 0,85. La formula di aggregazione dà l'esposizione simultanea effettiva:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>esposizione effettiva  =  r x sqrt(N + N(N-1)p)
+
+p = 0,85    1 % x sqrt(8 + 8x7x0,85)  =  1 % x sqrt(55,6)  =    7,5 %
+p = 0       1 % x sqrt(8)             =                         2,8 %
+ceiling     tutti gli stop scattano insieme                     8,0 %</code></pre>
+
+    <p>Leggi le prime due contro la terza. A una correlazione di 0,85 le tue otto posizioni consegnano 7,5 / 8,0 = 93 % del rischio di una singola posizione all'8 %. Scorrelate, le stesse otto consegnano 2,8 / 8,0 = 35 %. La correlazione vale la differenza fra le due: un fattore 2,6 di rischio realizzato a parità di carico nominale.</p>
+
+    <p>E ora la parte che richiede attenzione. Da quei numeri il VAR non esce, perché r è una distanza di stop e il VAR si costruisce da una deviazione standard giornaliera. Non sono la stessa grandezza, e trattarle come se lo fossero è il modo in cui si finisce per produrre un VAR più grande del proprio tetto. Il ponte è a quante sigma giornaliere sta il tuo stop. Supponine due &mdash; ed enuncia l'ipotesi, perché è lei a reggere il risultato, non la formula. Allora la sigma giornaliera per posizione è 0,5 %, quella del portafoglio è 0,5 % x 7,457 = 3,7 %, e il VAR al 95 % è 1,645 x 3,7 % = 6,1 %.</p>
+
+    <p style="margin-bottom:0">Metti i due numeri uno accanto all'altro e hai tutta la gestione del rischio in una riga. Correlato a 0,85: una brutta giornata ordinaria costa il 6,1 % contro un tetto dell'8,0 %. Scorrelato: 1,645 x 0,5 % x 2,828 = 2,3 % contro lo stesso tetto dell'8,0 %. Lo scarto fra il numero di tutti i giorni e il caso peggiore è ciò che la diversificazione compra davvero, ed è l'unica coppia di cifre che un risk manager ti chiede. Calcolali entrambi. Se sono vicini, non hai otto posizioni.</p>
+  </div>
 
       <h3 id="tail-risk-hedging-strategies">Strategie di copertura del rischio di coda</h3>
 

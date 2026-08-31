@@ -138,7 +138,7 @@
     <p style="margin:0 0 0.75rem 0">Am Ende dieser Lektion kannst du:</p>
     <ul style="line-height:1.8;margin:0 0 0 1.5rem">
       <li>Korrelationsbereinigtes Portfoliorisiko berechnen (nicht bloß Positionen zählen)</li>
-      <li>VAR (Value at Risk) nutzen, um den schlimmsten Tagesverlust zu messen</li>
+      <li>Nutze VAR (Value at Risk), um einen gewöhnlichen schlechten Tag zu messen &mdash; und sieh, warum er in anderen Einheiten steht als die Portfolio-Auslastung</li>
       <li>Korrelationsmatrizen bauen, um verstecktes Klumpenrisiko zu erkennen</li>
       <li>Portfolio-Heat-Limits einführen, um extreme drawdowns zu überstehen</li>
       <li>Signal Pilot Tools für die Risikoüberwachung in Echtzeit nutzen</li>
@@ -351,6 +351,25 @@
       <p><strong>Beispiel:</strong> Ein 95-%-VAR von 5.000 US-Dollar bedeutet: «Mit 95 % Wahrscheinlichkeit übersteigt mein Tagesverlust 5.000 US-Dollar nicht. Aber in 5 % der Fälle (1 von 20 Tagen) kann ich MEHR verlieren.»</p>
 
       <p><strong>Und die Frage, die VAR nicht beantwortet:</strong> wie viel mehr. Genau dafür ist CVAR da (bedingter VAR, auch Expected Shortfall genannt). CVAR fragt: Angenommen, heute ist einer der schlechten 5% — wie hoch ist der durchschnittliche Verlust an diesen Tagen? Ein Portfolio kann einen bequemen VAR und einen erschreckenden CVAR haben, und genau so sieht eine Strategie aus, die an den meisten Tagen klein gewinnt und gelegentlich riesig verliert: also die meisten Short-Volatilitäts-Bücher und die meisten stark korrelierten Bücher. Wenn du von beiden nur eines je berechnest, berechne dieses.</p>
+
+      <div class="callout-key">
+    <h4>&#129518; Vervollständige die Pyramide: die eine Ebene ohne Rechnung</h4>
+    <p>Drei der vier Ebenen dieser Lektion kommen mit einer Rechnung, die du nachvollziehen kannst. Ebene 4 nicht, und diese Lücke ist wichtig, denn VAR und Portfolio-Auslastung werden mit demselben Prozentzeichen notiert und beantworten völlig verschiedene Fragen.</p>
+
+    <p>Nimm das Buch, auf das diese Lektion immer wieder zurückkommt: acht Positionen zu je 1 % des Kontos, durchschnittliche Korrelation 0,85. Die Aggregationsformel liefert die effektive gleichzeitige Exponierung:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>effektive Exponierung  =  r x sqrt(N + N(N-1)p)
+
+p = 0,85    1 % x sqrt(8 + 8x7x0,85)  =  1 % x sqrt(55,6)  =    7,5 %
+p = 0       1 % x sqrt(8)             =                         2,8 %
+ceiling     alle Stopps lösen gleichzeitig aus                  8,0 %</code></pre>
+
+    <p>Lies die ersten beiden gegen die dritte. Bei einer Korrelation von 0,85 liefern deine acht Positionen 7,5 / 8,0 = 93 % des Risikos einer einzigen 8-%-Position. Unkorreliert liefern dieselben acht 2,8 / 8,0 = 35 %. Die Korrelation ist die Differenz zwischen diesen beiden wert &mdash; Faktor 2,6 im realisierten Risiko bei identischer nomineller Auslastung.</p>
+
+    <p>Und nun der Teil, der Sorgfalt verlangt. Aus diesen Zahlen bekommst du keinen VAR, denn r ist ein Stopabstand und der VAR wird aus einer täglichen Standardabweichung gebaut. Das sind nicht dieselben Größen, und sie gleichzusetzen ist der Weg, auf dem Leute einen VAR größer als ihre eigene Obergrenze produzieren. Die Brücke ist, wie viele Tages-Sigma dein Stopp entfernt liegt. Nimm zwei an &mdash; und sprich die Annahme aus, denn sie ist der tragende Teil, nicht die Formel. Dann ist das Tages-Sigma je Position 0,5 %, das des Portfolios 0,5 % x 7,457 = 3,7 %, und der 95-%-VAR ist 1,645 x 3,7 % = 6,1 %.</p>
+
+    <p style="margin-bottom:0">Stelle die beiden Zahlen nebeneinander, und du hast das ganze Risikomanagement in einer Zeile. Korreliert mit 0,85: ein gewöhnlicher schlechter Tag kostet 6,1 % gegen eine Obergrenze von 8,0 %. Unkorreliert: 1,645 x 0,5 % x 2,828 = 2,3 % gegen dieselbe Obergrenze von 8,0 %. Der Abstand zwischen der Alltagszahl und dem schlimmsten Fall ist das, was Diversifikation tatsächlich kauft, und es ist das einzige Zahlenpaar, das ein Risikomanager von dir braucht. Rechne beide aus. Liegen sie nahe beieinander, hast du keine acht Positionen.</p>
+  </div>
 
       <h3 id="tail-risk-hedging-strategies">Strategien zur Absicherung von Tail-Risiken</h3>
 

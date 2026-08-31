@@ -138,7 +138,7 @@
     <p style="margin:0 0 0.75rem 0">No final desta aula vais saber:</p>
     <ul style="line-height:1.8;margin:0 0 0 1.5rem">
       <li>Calcular o risco da carteira ajustado pela correlação (não apenas contar posições)</li>
-      <li>Usar o VAR (valor em risco) para medir a pior perda diária</li>
+      <li>Usar o VAR (valor em risco) para medir um mau dia comum, e ver porque está em unidades diferentes da carga da carteira</li>
       <li>Construir matrizes de correlação para identificar concentração de risco oculta</li>
       <li>Aplicar limites de calor de carteira para sobreviver a drawdowns extremos</li>
       <li>Usar as ferramentas do Signal Pilot para monitorar o risco em tempo real</li>
@@ -351,6 +351,25 @@
       <p><strong>Exemplo:</strong> Um VAR de 95 % de 5.000 dólares significa: «Há 95 % de chance de a minha perda diária não passar de 5.000 dólares. Mas em 5 % das vezes (1 a cada 20 dias) posso perder MAIS».</p>
 
       <p><strong>E a pergunta a que o VAR se recusa a responder:</strong> quanto mais. É para isso que serve o CVAR (VAR condicional, também chamado perda esperada). O CVAR pergunta: dado que hoje é um dos 5% de dias maus, qual é a perda média nesses dias? Uma carteira pode ter um VAR confortável e um CVAR aterrador, e é exatamente essa a forma de uma estratégia que ganha pouco na maioria dos dias e perde enormemente de vez em quando, ou seja, a maioria das carteiras vendidas em volatilidade e a maioria das muito correlacionadas. Se só for calcular um dos dois, calcule este.</p>
+
+      <div class="callout-key">
+    <h4>&#129518; Complete a pirâmide: a única camada sem aritmética</h4>
+    <p>Três das quatro camadas desta lição vêm com uma conta que pode refazer. A camada 4 não, e essa lacuna importa, porque o VAR e a carga da carteira citam-se com o mesmo sinal de percentagem e respondem a perguntas completamente diferentes.</p>
+
+    <p>Pegue na carteira a que esta lição volta sempre: oito posições a 1 % da conta cada, correlação média 0,85. A fórmula de agregação dá a exposição simultânea efetiva:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>exposição efetiva  =  r x sqrt(N + N(N-1)p)
+
+p = 0,85    1 % x sqrt(8 + 8x7x0,85)  =  1 % x sqrt(55,6)  =    7,5 %
+p = 0       1 % x sqrt(8)             =                         2,8 %
+ceiling     todos os stops disparam ao mesmo tempo              8,0 %</code></pre>
+
+    <p>Leia as duas primeiras contra a terceira. Com uma correlação de 0,85, as suas oito posições entregam 7,5 / 8,0 = 93 % do risco de uma única posição de 8 %. Sem correlação, essas mesmas oito entregam 2,8 / 8,0 = 35 %. A correlação vale a diferença entre as duas: um fator de 2,6 de risco realizado com carga nominal idêntica.</p>
+
+    <p>E agora a parte que exige cuidado. Desses números não sai um VAR, porque r é uma distância de stop e o VAR constrói-se a partir de um desvio-padrão diário. Não são a mesma grandeza, e tratá-las como se fossem é como se acaba a produzir um VAR maior do que o próprio tecto. A ponte é a quantas sigmas diárias está o seu stop. Suponha duas, e enuncie o pressuposto, porque é ele que sustenta o resultado, não a fórmula. Então a sigma diária por posição é 0,5 %, a da carteira é 0,5 % x 7,457 = 3,7 %, e o VAR a 95 % é 1,645 x 3,7 % = 6,1 %.</p>
+
+    <p style="margin-bottom:0">Ponha os dois números lado a lado e tem toda a gestão de risco numa linha. Correlacionado a 0,85: um mau dia comum custa 6,1 % contra um tecto de 8,0 %. Sem correlação: 1,645 x 0,5 % x 2,828 = 2,3 % contra o mesmo tecto de 8,0 %. A distância entre o número do dia a dia e o pior caso é o que a diversificação compra de facto, e é o único par de números que um gestor de risco lhe pede. Calcule os dois. Se estiverem perto, não tem oito posições.</p>
+  </div>
 
       <h3 id="tail-risk-hedging-strategies">Estratégias de proteção do risco de cauda</h3>
 

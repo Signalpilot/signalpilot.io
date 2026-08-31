@@ -138,7 +138,7 @@
     <p style="margin:0 0 0.75rem 0">Aan het eind van deze les kun je:</p>
     <ul style="line-height:1.8;margin:0 0 0 1.5rem">
       <li>Bereken je voor correlatie gecorrigeerde portefeuillerisico (niet alleen het aantal posities)</li>
-      <li>Gebruik VAR (Value at Risk) om je dagverlies in het slechtste geval te meten</li>
+      <li>Gebruik VAR (Value at Risk) om een gewone slechte dag te meten, en zie waarom die in andere eenheden staat dan portefeuillebelasting</li>
       <li>Bouw correlatiematrices om verborgen concentratierisico op te sporen</li>
       <li>Stel limieten in voor je portfolio heat om extreme drawdowns te overleven</li>
       <li>Gebruik de tools van Signal Pilot om je risico in realtime te bewaken</li>
@@ -351,6 +351,25 @@
       <p><strong>Voorbeeld:</strong> Een 95%-VAR van $5.000 betekent: «Er is 95% kans dat mijn dagverlies niet boven de $5.000 uitkomt. Maar in 5% van de gevallen (1 op de 20 dagen) kan ik MEER verliezen.»</p>
 
       <p><strong>En de vraag die VAR weigert te beantwoorden:</strong> hoeveel meer. Daar is CVAR voor (conditionele VAR, ook wel expected shortfall genoemd). CVAR vraagt: gegeven dat vandaag een van de slechte 5% is, wat is het gemiddelde verlies op die dagen? Een portefeuille kan een comfortabele VAR hebben en een angstaanjagende CVAR — en dat is precies de vorm van een strategie die de meeste dagen klein wint en af en toe enorm verliest, oftewel de meeste shortvolatiliteitsboeken en de meeste sterk gecorreleerde boeken. Reken je er maar één van de twee uit, reken dan deze uit.</p>
+
+      <div class="callout-key">
+    <h4>&#129518; Maak de piramide af: de enige laag zonder rekenwerk</h4>
+    <p>Drie van de vier lagen in deze les komen met een som die je kunt narekenen. Laag 4 niet, en dat gat telt, want VAR en portefeuillebelasting worden met hetzelfde procentteken genoteerd en beantwoorden totaal verschillende vragen.</p>
+
+    <p>Neem het boek waar deze les steeds op terugkomt: acht posities van elk 1 % van het account, gemiddelde correlatie 0,85. De aggregatieformule geeft de effectieve gelijktijdige blootstelling:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>effectieve blootstelling  =  r x sqrt(N + N(N-1)p)
+
+p = 0,85    1 % x sqrt(8 + 8x7x0,85)  =  1 % x sqrt(55,6)  =    7,5 %
+p = 0       1 % x sqrt(8)             =                         2,8 %
+ceiling     alle stops lopen tegelijk                           8,0 %</code></pre>
+
+    <p>Lees de eerste twee tegen de derde. Bij een correlatie van 0,85 leveren je acht posities 7,5 / 8,0 = 93 % van het risico van één positie van 8 %. Ongecorreleerd leveren diezelfde acht 2,8 / 8,0 = 35 %. Correlatie is het verschil tussen die twee waard: een factor 2,6 in gerealiseerd risico bij identieke nominale belasting.</p>
+
+    <p>En dan het deel dat zorgvuldigheid vraagt. Uit die getallen komt geen VAR, want r is een stopafstand en VAR wordt gebouwd uit een dagelijkse standaarddeviatie. Het zijn niet dezelfde grootheden, en ze gelijkstellen is hoe mensen een VAR produceren die groter is dan hun eigen plafond. De brug is hoeveel dagsigma's je stop verwijderd ligt. Neem er twee aan &mdash; en spreek de aanname uit, want die draagt het resultaat, niet de formule. Dan is de dagsigma per positie 0,5 %, die van de portefeuille 0,5 % x 7,457 = 3,7 %, en de 95 %-VAR 1,645 x 3,7 % = 6,1 %.</p>
+
+    <p style="margin-bottom:0">Zet de twee getallen naast elkaar en je hebt het hele risicobeheer op één regel. Gecorreleerd op 0,85: een gewone slechte dag kost 6,1 % tegen een plafond van 8,0 %. Ongecorreleerd: 1,645 x 0,5 % x 2,828 = 2,3 % tegen datzelfde plafond van 8,0 %. Het gat tussen het alledaagse getal en het slechtste geval is wat spreiding werkelijk koopt, en het is het enige paar cijfers dat een risicomanager van je nodig heeft. Reken ze allebei uit. Liggen ze dicht bij elkaar, dan heb je geen acht posities.</p>
+  </div>
 
       <h3 id="tail-risk-hedging-strategies">Strategieën om staartrisico af te dekken</h3>
 

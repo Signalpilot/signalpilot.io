@@ -138,7 +138,7 @@
     <p style="margin:0 0 0.75rem 0">A lecke végére képes leszel:</p>
     <ul style="line-height:1.8;margin:0 0 0 1.5rem">
       <li>Kiszámolni a korrelációval korrigált portfóliókockázatot (nem csak a pozíciók számát nézni)</li>
-      <li>A VAR (Value at Risk) segítségével megmérni a legrosszabb napi veszteséget</li>
+      <li>A VAR (kockáztatott érték) használata egy szokásos rossz nap mérésére, és annak megértése, miért más egységben van, mint a portfólióterhelés</li>
       <li>Korrelációs mátrixokat építeni a rejtett koncentrációs kockázat felderítéséhez</li>
       <li>Portfólióterhelési korlátokat bevezetni, hogy túléld a szélsőséges drawdown időszakokat</li>
       <li>A Signal Pilot eszközeivel valós időben figyelni a kockázatot</li>
@@ -351,6 +351,25 @@
       <p><strong>Példa:</strong> Az 5000 dolláros 95 %-os VAR azt jelenti: «95 % az esélye, hogy a napi veszteségem nem lépi túl az 5000 dollárt. De az esetek 5 %-ában (20 naponta 1-szer) TÖBBET is veszíthetek.»</p>
 
       <p><strong>És a kérdés, amelyre a VAR nem hajlandó válaszolni:</strong> hogy mennyivel többet. Erre való a CVAR (feltételes VAR, más néven várható hiány). A CVAR azt kérdezi: feltéve, hogy ma a rossz 5% egyike, mekkora az átlagos veszteség az ilyen napokon? Egy portfóliónak lehet kényelmes VAR-ja és rémisztő CVAR-ja – és pontosan ez az alakja annak a stratégiának, amely a legtöbb napon keveset nyer, és alkalmanként hatalmasat veszít, vagyis a legtöbb short volatilitású és a legtöbb erősen korrelált könyvnek. Ha valaha csak az egyiket számolod ki a kettő közül, ezt számold.</p>
+
+      <div class="callout-key">
+    <h4>&#129518; Fejezd be a piramist: az egyetlen réteg, amelyhez nincs számtan</h4>
+    <p>Ennek a leckének a négy rétegéből háromhoz tartozik olyan számítás, amelyet magad is elvégezhetsz. A negyedikhez nem, és ez a hiány számít, mert a VAR és a portfólióterhelés ugyanazzal a százalékjellel szerepel, miközben teljesen más kérdésre felel.</p>
+
+    <p>Vedd azt a portfóliót, amelyhez ez a lecke újra meg újra visszatér: nyolc pozíció, egyenként a számla 1 %-a, átlagos korreláció 0,85. Az összegző képlet megadja a tényleges egyidejű kitettséget:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>tényleges kitettség  =  r x sqrt(N + N(N-1)p)
+
+p = 0,85    1 % x sqrt(8 + 8x7x0,85)  =  1 % x sqrt(55,6)  =    7,5 %
+p = 0       1 % x sqrt(8)             =                         2,8 %
+ceiling     minden stop egyszerre teljesül                      8,0 %</code></pre>
+
+    <p>Olvasd az első kettőt a harmadik ellenében. 0,85-ös korreláció mellett a nyolc pozíciód 7,5 / 8,0 = 93 %-át adja egyetlen 8 %-os pozíció kockázatának. Korrelálatlanul ugyanaz a nyolc 2,8 / 8,0 = 35 %-ot ad. A korreláció e kettő különbségét éri: 2,6-szoros szorzó a megvalósult kockázatban, azonos névleges terhelés mellett.</p>
+
+    <p>Most jön a rész, amely gondosságot kíván. Ezekből a számokból nem jön ki VAR, mert r egy stoptávolság, a VAR pedig napi szórásból épül. Nem ugyanaz a mennyiség, és azonosnak venni őket az az út, amelyen az emberek a saját plafonjuknál nagyobb VAR-t állítanak elő. A híd az, hogy hány napi szigmányira van a stopod. Tegyük fel, kettőre &mdash; és mondd ki a feltevést, mert az a teherhordó elem, nem a képlet. Ekkor a pozíciónkénti napi szigma 0,5 %, a portfólióé 0,5 % x 7,457 = 3,7 %, a 95 %-os VAR pedig 1,645 x 3,7 % = 6,1 %.</p>
+
+    <p style="margin-bottom:0">Tedd egymás mellé a két számot, és az egész kockázatkezelés elfér egy sorban. 0,85-ös korrelációnál egy szokásos rossz nap 6,1 %-ba kerül, a plafon 8,0 %. Korrelálatlanul: 1,645 x 0,5 % x 2,828 = 2,3 %, ugyanazzal a 8,0 %-os plafonnal. A hétköznapi szám és a legrosszabb eset közötti rés az, amit a diverzifikáció valóban megvásárol, és ez az egyetlen számpár, amelyet egy kockázatkezelő kér tőled. Számold ki mindkettőt. Ha közel esnek egymáshoz, nincs nyolc pozíciód.</p>
+  </div>
 
       <h3 id="tail-risk-hedging-strategies">Farokkockázat-fedezési stratégiák</h3>
 

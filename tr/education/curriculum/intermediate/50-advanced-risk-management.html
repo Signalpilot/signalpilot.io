@@ -138,7 +138,7 @@
     <p style="margin:0 0 0.75rem 0">Bu dersin sonunda şunları yapabileceksin:</p>
     <ul style="line-height:1.8;margin:0 0 0 1.5rem">
       <li>Korelasyona göre düzeltilmiş portföy riskini hesaplayın (sadece pozisyon sayısını değil)</li>
-      <li>En kötü günlük zararı ölçmek için VAR (Value at Risk) kullanın</li>
+      <li>Sıradan kötü bir günü ölçmek için VAR'ı (riske maruz değer) kullanmak ve neden portföy yüküyle farklı birimlerde olduğunu görmek</li>
       <li>Gizli yoğunlaşma riskini bulmak için korelasyon matrisleri kurun</li>
       <li>Aşırı drawdown dönemlerini atlatmak için portföy yükü limitleri uygulayın</li>
       <li>Riski gerçek zamanlı izlemek için Signal Pilot araçlarını kullanın</li>
@@ -351,6 +351,25 @@
       <p><strong>Örnek:</strong> 5.000 dolarlık %95 VAR şu demektir: «Günlük zararımın 5.000 doları aşmama ihtimali %95. Ama zamanın %5'inde (20 günde 1) DAHA fazlasını kaybedebilirim.»</p>
 
       <p><strong>Ve VAR'ın yanıtlamayı reddettiği soru:</strong> ne kadar daha fazla olduğunu. CVAR (koşullu VAR, diğer adıyla beklenen kayıp) tam da bunun içindir. CVAR şunu sorar: bugünün kötü %5'ten biri olduğu verildiğinde, o günlerdeki ortalama zarar nedir? Bir portföyün rahat bir VAR'ı ve dehşet verici bir CVAR'ı olabilir; bu da çoğu gün küçük kazanıp arada bir devasa kaybeden bir stratejinin biçimidir, yani çoğu kısa oynaklık defterinin ve çoğu yüksek korelasyonlu defterin. İkisinden yalnızca birini hesaplayacaksanız bunu hesaplayın.</p>
+
+      <div class="callout-key">
+    <h4>&#129518; Piramidi tamamlayın: aritmetiği olmayan tek katman</h4>
+    <p>Bu dersteki dört katmandan üçü, kendiniz yapabileceğiniz bir hesapla birlikte geliyor. Dördüncü katman gelmiyor ve bu boşluk önemli; çünkü VAR ile portföy yükü aynı yüzde işaretiyle yazılır ve bambaşka sorulara yanıt verir.</p>
+
+    <p>Bu dersin sürekli döndüğü portföyü alın: her biri hesabın %1'i olan sekiz pozisyon, ortalama korelasyon 0,85. Toplama formülü, etkin eşzamanlı maruziyeti verir:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>etkin maruziyet  =  r x sqrt(N + N(N-1)p)
+
+p = 0,85    1 % x sqrt(8 + 8x7x0,85)  =  1 % x sqrt(55,6)  =    7,5 %
+p = 0       1 % x sqrt(8)             =                         2,8 %
+ceiling     tüm stoplar aynı anda gerçekleşir                   8,0 %</code></pre>
+
+    <p>İlk ikisini üçüncüye karşı okuyun. 0,85 korelasyonda sekiz pozisyonunuz, tek bir %8'lik pozisyonun riskinin 7,5 / 8,0 = %93'ünü veriyor. Korelasyonsuz olsalar aynı sekizi 2,8 / 8,0 = %35 verir. Korelasyon, bu ikisi arasındaki fark kadar değerlidir: aynı nominal yükte gerçekleşen riskte 2,6 kat.</p>
+
+    <p>Şimdi dikkat isteyen kısım. Bu sayılardan VAR çıkmaz; çünkü r bir stop mesafesidir, VAR ise günlük standart sapmadan kurulur. Aynı büyüklükler değildir ve ikisini bir tutmak, insanların kendi tavanlarından büyük bir VAR üretmesinin yoludur. Köprü, stopunuzun kaç günlük sigma uzakta durduğudur. İki varsayın &mdash; ve varsayımı açıkça söyleyin, çünkü sonucu taşıyan formül değil odur. O zaman pozisyon başına günlük sigma %0,5, portföyünki 0,5 % x 7,457 = %3,7 ve %95 VAR 1,645 x %3,7 = %6,1 olur.</p>
+
+    <p style="margin-bottom:0">İki sayıyı yan yana koyun; bütün risk yönetimi tek satıra sığar. 0,85 korelasyonda sıradan kötü bir gün %8,0'lik tavana karşı %6,1'e mal olur. Korelasyonsuzda: 1,645 x %0,5 x 2,828 = %2,3, aynı %8,0'lik tavana karşı. Gündelik sayı ile en kötü durum arasındaki mesafe, çeşitlendirmenin gerçekten satın aldığı şeydir ve bir risk yöneticisinin sizden istediği tek sayı çiftidir. İkisini de hesaplayın. Birbirine yakınlarsa, sekiz pozisyonunuz yok demektir.</p>
+  </div>
 
       <h3 id="tail-risk-hedging-strategies">Kuyruk riskini hedge etme stratejileri</h3>
 

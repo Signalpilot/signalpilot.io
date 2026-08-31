@@ -138,7 +138,7 @@
     <p style="margin:0 0 0.75rem 0">À la fin de cette leçon, vous saurez :</p>
     <ul style="line-height:1.8;margin:0 0 0 1.5rem">
       <li>Calculer le risque du portefeuille ajusté de la corrélation (pas seulement compter les positions)</li>
-      <li>Utiliser la VAR (value at risk) pour mesurer la pire perte quotidienne</li>
+      <li>Utiliser la VAR (valeur en risque) pour mesurer une mauvaise journée ordinaire, et voir pourquoi elle n'est pas dans la même unité que la charge du portefeuille</li>
       <li>Construire des matrices de corrélation pour repérer une concentration de risque cachée</li>
       <li>Mettre en place des limites de chaleur de portefeuille pour survivre aux drawdowns extrêmes</li>
       <li>Utiliser les outils Signal Pilot pour surveiller le risque en temps réel</li>
@@ -351,6 +351,25 @@
       <p><strong>Exemple :</strong> Une VAR à 95 % de 5 000 dollars signifie : « Il y a 95 % de chances que ma perte quotidienne ne dépasse pas 5 000 dollars. Mais 5 % du temps (1 jour sur 20), je peux perdre PLUS. »</p>
 
       <p><strong>Et la question à laquelle la VAR refuse de répondre :</strong> combien de plus. C'est à cela que sert la CVAR (VAR conditionnelle, aussi appelée perte moyenne au-delà de la VAR). La CVAR demande : étant donné qu'aujourd'hui fait partie des 5% de mauvais jours, quelle est la perte moyenne ces jours-là ? Un portefeuille peut avoir une VAR confortable et une CVAR terrifiante — c'est exactement la forme d'une stratégie qui gagne peu la plupart des jours et perd énormément de temps en temps, soit la plupart des livres vendeurs de volatilité et la plupart des livres fortement corrélés. Si vous ne devez en calculer qu'une, calculez celle-ci.</p>
+
+      <div class="callout-key">
+    <h4>&#129518; Achevez la pyramide : la seule couche sans arithmétique</h4>
+    <p>Trois des quatre couches de cette leçon s'accompagnent d'un calcul que vous pouvez refaire. La couche 4 non, et ce manque compte, car la VAR et la charge du portefeuille se citent avec le même signe pourcentage et répondent à des questions entièrement différentes.</p>
+
+    <p>Reprenez le portefeuille auquel cette leçon revient sans cesse : huit positions à 1 % du compte chacune, corrélation moyenne 0,85. La formule d'agrégation donne l'exposition simultanée effective :</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>exposition effective  =  r x sqrt(N + N(N-1)p)
+
+p = 0,85    1 % x sqrt(8 + 8x7x0,85)  =  1 % x sqrt(55,6)  =    7,5 %
+p = 0       1 % x sqrt(8)             =                         2,8 %
+ceiling     tous les stops sautent en même temps                8,0 %</code></pre>
+
+    <p>Lisez les deux premières contre la troisième. À une corrélation de 0,85, vos huit positions délivrent 7,5 / 8,0 = 93 % du risque d'une seule position à 8 %. Décorrélées, ces mêmes huit délivrent 2,8 / 8,0 = 35 %. La corrélation vaut la différence entre les deux : un facteur 2,6 de risque réalisé pour une charge nominale identique.</p>
+
+    <p>Vient maintenant la partie qui demande de la précision. Ces chiffres ne donnent pas une VAR, car r est une distance de stop et la VAR se construit à partir d'un écart type quotidien. Ce ne sont pas les mêmes grandeurs, et les confondre est la manière dont on finit par produire une VAR supérieure à son propre plafond. Le pont, c'est le nombre de sigmas quotidiens qui vous sépare de votre stop. Supposez-en deux &mdash; et énoncez l'hypothèse, car c'est elle qui porte le résultat, pas la formule. Alors le sigma quotidien par position vaut 0,5 %, celui du portefeuille 0,5 % x 7,457 = 3,7 %, et la VAR à 95 % vaut 1,645 x 3,7 % = 6,1 %.</p>
+
+    <p style="margin-bottom:0">Mettez les deux chiffres côte à côte et vous tenez toute la gestion du risque en une ligne. Corrélé à 0,85 : une mauvaise journée ordinaire coûte 6,1 % contre un plafond de 8,0 %. Décorrélé : 1,645 x 0,5 % x 2,828 = 2,3 % contre le même plafond de 8,0 %. L'écart entre le chiffre de tous les jours et le pire cas, c'est ce que la diversification achète réellement, et c'est le seul couple de nombres qu'un gestionnaire de risque attend de vous. Calculez les deux. S'ils sont proches, vous n'avez pas huit positions.</p>
+  </div>
 
       <h3 id="tail-risk-hedging-strategies">Stratégies de couverture du risque de queue</h3>
 

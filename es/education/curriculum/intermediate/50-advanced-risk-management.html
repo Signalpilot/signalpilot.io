@@ -138,7 +138,7 @@
     <p style="margin:0 0 0.75rem 0">Al terminar esta lección podrás:</p>
     <ul style="line-height:1.8;margin:0 0 0 1.5rem">
       <li>Calcular el riesgo de cartera ajustado por correlación (no solo contar posiciones)</li>
-      <li>Usar el VAR (valor en riesgo) para medir la peor pérdida diaria</li>
+      <li>Usar el VAR (valor en riesgo) para medir un día malo corriente, y ver por qué está en unidades distintas de la carga de cartera</li>
       <li>Construir matrices de correlación para detectar concentración de riesgo oculta</li>
       <li>Aplicar límites de calor de cartera para sobrevivir a drawdowns extremos</li>
       <li>Usar las herramientas de Signal Pilot para vigilar el riesgo en tiempo real</li>
@@ -351,6 +351,25 @@
       <p><strong>Ejemplo:</strong> Un VAR al 95 % de 5.000 dólares significa: «Hay un 95 % de probabilidad de que mi pérdida diaria no supere los 5.000 dólares. Pero el 5 % de las veces (1 de cada 20 días) podría perder MÁS».</p>
 
       <p><strong>Y la pregunta que el VAR se niega a responder:</strong> cuánto más. Para eso está el CVAR (VAR condicional, también llamado déficit esperado). El CVAR pregunta: dado que hoy es uno del 5% de días malos, ¿cuál es la pérdida media en esos días? Una cartera puede tener un VAR cómodo y un CVAR aterrador, y esa es exactamente la forma de una estrategia que gana poco casi todos los días y pierde enormemente de vez en cuando, es decir, la mayoría de las carteras cortas de volatilidad y la mayoría de las muy correlacionadas. Si solo vas a calcular uno de los dos, calcula este.</p>
+
+      <div class="callout-key">
+    <h4>&#129518; Completa la pirámide: la única capa sin aritmética</h4>
+    <p>Tres de las cuatro capas de esta lección vienen con un cálculo que puedes hacer. La capa 4 no, y ese hueco importa, porque el VAR y la carga de cartera se citan con el mismo signo de porcentaje y responden a preguntas completamente distintas.</p>
+
+    <p>Toma la cartera a la que esta lección vuelve una y otra vez: ocho posiciones al 1 % de la cuenta cada una, correlación media 0,85. La fórmula de agregación da la exposición simultánea efectiva:</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>exposición efectiva  =  r x sqrt(N + N(N-1)p)
+
+p = 0,85    1 % x sqrt(8 + 8x7x0,85)  =  1 % x sqrt(55,6)  =    7,5 %
+p = 0       1 % x sqrt(8)             =                         2,8 %
+ceiling     todos los stops saltan a la vez                     8,0 %</code></pre>
+
+    <p>Lee las dos primeras contra la tercera. Con una correlación de 0,85, tus ocho posiciones entregan 7,5 / 8,0 = 93 % del riesgo de una sola posición del 8 %. Sin correlación, esas mismas ocho entregan 2,8 / 8,0 = 35 %. La correlación vale la diferencia entre ambas: un factor de 2,6 en riesgo realizado con idéntica carga nominal.</p>
+
+    <p>Y ahora la parte que exige cuidado. De esas cifras no sale un VAR, porque r es una distancia de stop y el VAR se construye a partir de una desviación típica diaria. No son la misma magnitud, y tratarlas como si lo fueran es como la gente acaba produciendo un VAR mayor que su propio techo. El puente es a cuántas sigmas diarias está tu stop. Supón dos, y enuncia el supuesto, porque es la parte que sostiene el resultado, no la fórmula. Entonces la sigma diaria por posición es 0,5 %, la de la cartera es 0,5 % x 7,457 = 3,7 %, y el VAR al 95 % es 1,645 x 3,7 % = 6,1 %.</p>
+
+    <p style="margin-bottom:0">Pon las dos cifras una al lado de la otra y tienes toda la gestión de riesgo en una línea. Correlacionado al 0,85: un día malo corriente cuesta el 6,1 % frente a un techo del 8,0 %. Sin correlación: 1,645 x 0,5 % x 2,828 = 2,3 % frente al mismo techo del 8,0 %. La distancia entre la cifra cotidiana y el peor caso es lo que la diversificación compra de verdad, y es el único par de números que un gestor de riesgo necesita de ti. Calcula los dos. Si están cerca, no tienes ocho posiciones.</p>
+  </div>
 
       <h3 id="tail-risk-hedging-strategies">Estrategias de cobertura del riesgo de cola</h3>
 
