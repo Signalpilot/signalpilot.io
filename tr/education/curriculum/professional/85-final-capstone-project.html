@@ -143,7 +143,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Gelecekteki kendinin itiraz edemeyeceği bir strateji tanımı yazmak: piyasa, zaman dilimi, giriş, stop, hedef ve işlemi geçersiz kılan filtreler</li>
           <li>Etrafına risk çerçevesini kurmak — pozisyon büyüklüğü, portföy ısısı, günlük zarar limiti, drawdown eşikleri — tek bir işlem bile açılmadan önce</li>
-          <li>Stratejiyi dürüstçe backtest etmek, beklenen değeri ve kâr faktörünü hesaplamak ve örneklemin neyi taşıyıp neyi taşımadığını söylemek</li>
+          <li>Stratejiyi dürüstçe backtest etmek, beklenen değeri ve kâr faktörünü hesaplamak ve örneklemin neyi taşıyıp neyi taşımadığını söylemek — beklenen değerinin standart hatası, işlem başına dağılımın işlem sayısının kareköküne bölümüdür ve hangi iddialarının ayakta kalacağına o karar verir</li>
           <li>Planı kâğıt üzerinde uygulamak ve kurala uyumu P&amp;L'den ayrı ölçmek; çünkü gerçekte ne olacağını haber veren sayı uyumdur</li>
           <li>Beş çıktıyı, gerçekten kontrol edecek birine vermeye razı olacağın tek bir bitirme raporunda toplamak</li>
         </ul>
@@ -853,7 +853,7 @@
 
     <h4>Başarı ölçütleri (HEPSİ sağlanmalı):</h4>
     <ul>
-      <li>✅ 20'den fazla işlemde beklenti &gt; 0</li>
+      <li>✅ 20'den fazla işlemde beklenti &gt; 0 — aşılması gereken bir eşik, bir avantaj kanıtı değil; yirmi işlem, iyi bir sistemi düz bir sistemden ayıramaz, aşağıdaki aritmetiğin gösterdiği gibi</li>
       <li>✅ Kural uyumu %90 ve üzeri (20 işlemin 18'inde ya da fazlasında listeye uyuldu)</li>
       <li>✅ En büyük kayıp = −1R (stop ihlali yok)</li>
       <li>✅ Kâr faktörü &gt; 1,3</li>
@@ -861,6 +861,21 @@
     </ul>
 
     <p style="font-size:0.9rem;color:var(--muted)">Bu listede bilerek yer almayan şey: Sharpe oranı. 20 işlemde o yalnızca gürültüdür. Burada beklentiyi ve kâr faktörünü kullan, 100 işlemi geride bıraktığında Sharpe'a dön.</p>
+
+  <div class="callout-key">
+    <h4>&#127919; Yirmi kâğıt üstü işlemin kanıtlayabildiği ve kanıtlayamadığı şey</h4>
+    <p>Yukarıdaki liste bu örneklem büyüklüğünde Sharpe oranını dışarıda bırakmakla haklı ve aynı akıl yürütme, koruduğu ölçüt için de geçerli. Beklenti bir ortalamadır ve n işlem üzerindeki bir ortalama, işlem başına dağılımın n'in kareköküne bölümü kadar bir standart hata taşır. Makul bir sistem al &mdash; %50 isabet, +2R kazançlar ve &minus;1R kayıplar; yani gerçek beklenti +0,5R ve işlem başına dağılım 1,5R &mdash; ve tam olarak +0,5R gözlemle. O gözlemin her örneklem büyüklüğünde ne değerde olduğu şudur:</p>
+<pre><code>örneklemdeki işlem sayısı            standart hata, R cinsinden   aralığın altı, R cinsinden   aralığın üstü, R cinsinden
+20 (dersin kâğıt üstü işlem eşiği)                         0,34                        -0,16                        +1,16
+50                                                         0,21                        +0,08                        +0,92
+100 (kontrol listesinin çıtası)                            0,15                        +0,21                        +0,79
+200                                                        0,11                        +0,29                        +0,71
+300                                                        0,09                        +0,33                        +0,67
+500                                                        0,07                        +0,37                        +0,63</code></pre>
+    <p><strong>Yirmi işlemde aralık &minus;0,16R ile +1,16R arasında uzanır: sıfırı içerir.</strong> Tam da umduğun beklentiyi üretmiş bir sistem, bu dersin ölçüt aldığı örneklem üzerinde hâlâ hiç avantajı olmayan bir sistemden ayırt edilemez. Bu, çıtayı düşürmek için bir sebep değildir. Çıtanın ne iş gördüğünü net söylemek için bir sebeptir.</p>
+    <p>Listedeki diğer dört ölçüte bak, cevap orada. Kural uyumu %90'ın üstünde, en büyük kayıp tam &minus;1R, intikam işlemi yok, her şey kayıtlı &mdash; bunların hiçbiri bir avantaj testi değildir. Bunlar süreç testleridir ve yirmi işlem onlar için gayet yeterli bir örneklemdir, çünkü piyasanınkini değil kendi davranışını ölçüyorsun. Bölüm 6'nın işi tam budur: sistemi yürütebildiğini kanıtlar, sistemin işe yaradığını değil.</p>
+    <p>Avantaj testi, bitirme kontrol listesindeki 100 işlem satırıdır ve orada bile aralık +0,21R ile +0,79R arasında: uçlar arasında neredeyse dört kat. Faz 1'in 50-100 işlem daha istemesinin ve 2'den 5'e kadarki fazların on sekiz ila yirmi dört ay sürmesinin sebebi tam olarak budur: ölçekleme planı kendi başına bir ihtiyat değil, örneklem büyüklüğünün gelmesidir. Aritmetik de bu sayılarla değil, senin sayılarınla çalışır: kendi backtest'inden işlem başına dağılımını hesapla, işlem sayının kareköküne böl; kaydının neyi iddia etmeye hakkı olduğunu böylece bilirsin.</p>
+  </div>
 
     <p><strong>HERHANGİ bir ölçütü sağlayamazsan:</strong> Sağlayana kadar kâğıtta devam et. Gerçeğe acele etmek = patlamış hesap.</p>
   </div>
@@ -875,7 +890,7 @@
     <ul>
       <li><strong>Süre:</strong> 3-6 ay</li>
       <li><strong>Amaç:</strong> Daha büyük bir örneklemde tutarlılığı kanıtlamak</li>
-      <li><strong>Başarı ölçütü:</strong> beklenti &gt; 0, kâr faktörü &gt; 1,3, kural uyumu %90 ve üzeri (bu örneklem büyüklüğünde Sharpe anlam kazanmaya başlar, o yüzden izlemeye buradan başla)</li>
+      <li><strong>Başarı ölçütü:</strong> beklenti &gt; 0, kâr faktörü &gt; 1,3, kural uyumu %90 ve üzeri (bu örneklem büyüklüğünde Sharpe anlam kazanmaya başlar, o yüzden izlemeye buradan başla). Örneklemin senin disiplinin hakkında değil, avantaj hakkında bir şey söyleyebildiği ilk aşama budur</li>
     </ul>
 
     <h4>2. aşama: mikro boyutta gerçek işlem (boyutun %10'u)</h4>
@@ -1073,7 +1088,7 @@
     </ul>
   </div>
 
-<p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Bitirme projesi oyalanmak değildir: öğrenciden profesyonele giden köprüdür. 80 ders teori, sistematik bir plan olmadan hiçbir şey ifade etmez. Belgele, backtest yap, kâğıt üzerinde işle, yavaş büyüt. Çoğu kişi bunu atlar. Sen atlamayacaksın.</p>
+<p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Bitirme projesi oyalanmak değildir: öğrenciden profesyonele giden köprüdür. 84 ders teori, sistematik bir plan olmadan hiçbir şey ifade etmez. Belgele, backtest yap, kâğıt üzerinde işle, yavaş büyüt. Çoğu kişi bunu atlar. Sen atlamayacaksın.</p>
 
   <div class="final-message">
     <h2 id="final-words-this-is-where-winners-are-made">Son söz: kazananlar burada çıkar</h2>

@@ -143,7 +143,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Olyan stratégiadefiníció megírása, amellyel a jövőbeli önmagad nem tud vitatkozni: piac, időtáv, belépő, stop, cél, és azok a szűrők, amelyek érvénytelenítik az ügyletet</li>
           <li>A kockázati keret felállítása köré — pozícióméret, portfólióhő, napi veszteséghatár, drawdown-küszöbök —, még mielőtt egyetlen ügylet is nyílna</li>
-          <li>A stratégia őszinte backtest-elése, a várható érték és a profitfaktor kiszámítása, és annak kimondása, mit bír el a mintád és mit nem</li>
+          <li>A stratégia őszinte backtest-elése, a várható érték és a profitfaktor kiszámítása, és annak kimondása, mit bír el a mintád és mit nem — a várható értéked standard hibája az ügyletenkénti szórás osztva az ügyletszám gyökével, és ez dönti el, melyik állításod marad meg</li>
           <li>A terv papíron való lekereskedése úgy, hogy a szabálykövetést a P&amp;L-től külön méred — mert élesben azt a szabálykövetés jelzi előre</li>
           <li>Az öt leadandó összeszerelése egyetlen záródolgozattá, amelyet oda mernél adni valakinek, aki tényleg ellenőrizné</li>
         </ul>
@@ -853,7 +853,7 @@
 
     <h4>Sikerkritériumok (MINDET teljesíteni kell):</h4>
     <ul>
-      <li>✅ Várható érték &gt; 0 több mint 20 ügyleten</li>
+      <li>✅ Várható érték &gt; 0 több mint 20 ügyleten — átlépendő küszöb, nem az előny bizonyítéka; húsz ügylet nem tudja megkülönböztetni a jó rendszert a laposaktól, ahogy az alábbi számtan mutatja</li>
       <li>✅ Szabálykövetés legalább 90 % (a listát 20 ügyletből 18-ban vagy többen követted)</li>
       <li>✅ Legnagyobb veszteség = −1R (nincs megszegett stop)</li>
       <li>✅ Profitfaktor &gt; 1,3</li>
@@ -861,6 +861,21 @@
     </ul>
 
     <p style="font-size:0.9rem;color:var(--muted)">Szándékosan hiányzik a listáról a Sharpe-ráta. 20 ügyleten az csak zaj. Itt a várható értéket és a profitfaktort használd, a Sharpe-hoz pedig térj vissza, ha már 100 ügylet van mögötted.</p>
+
+  <div class="callout-key">
+    <h4>&#127919; Mit tud bizonyítani húsz papírkötés, és mit nem</h4>
+    <p>A fenti lista helyesen dobja ki a Sharpe-mutatót ekkora mintánál, és ugyanez az érvelés vonatkozik arra a feltételre is, amelyet megtart. A várható érték egy átlag, és egy n ügyleten vett átlag standard hibája az ügyletenkénti szórás osztva n gyökével. Vegyél egy hihető rendszert &mdash; 50 %-os találati arány, +2R nyereségek és &minus;1R veszteségek, tehát +0,5R valódi várható érték és 1,5R ügyletenkénti szórás &mdash;, és figyelj meg pontosan +0,5R-t. Ennyit ér ez a megfigyelés az egyes mintaméreteknél:</p>
+<pre><code>ügyletek a mintában                     standard hiba, R-ben   intervallum alja, R-ben   intervallum teteje, R-ben
+20 (a lecke papírkereskedési küszöbe)                   0,34                     -0,16                       +1,16
+50                                                      0,21                     +0,08                       +0,92
+100 (az ellenőrzőlista mércéje)                         0,15                     +0,21                       +0,79
+200                                                     0,11                     +0,29                       +0,71
+300                                                     0,09                     +0,33                       +0,67
+500                                                     0,07                     +0,37                       +0,63</code></pre>
+    <p><strong>Húsz ügyletnél az intervallum &minus;0,16R-től +1,16R-ig fut: tartalmazza a nullát.</strong> Az a rendszer, amely pontosan azt a várható értéket produkálta, amit reméltél, azon a mintán, amelyen ez a lecke méri, továbbra sem különböztethető meg egy előny nélküli rendszertől. Ez nem ok arra, hogy leszállítsd a mércét. Arra ok, hogy pontosan megmondd, mit csinál a mérce.</p>
+    <p>Nézd meg a lista másik négy feltételét, és ott a válasz. 90 % feletti szabálykövetés, pontosan &minus;1R legnagyobb veszteség, semmi bosszúkereskedés, minden naplózva &mdash; ezek egyike sem előnyteszt. Folyamattesztek, és húsz ügylet tökéletesen elegendő minta hozzájuk, mert a saját viselkedésedet méred, nem a piacét. Pontosan erre való a 6. rész: azt bizonyítja, hogy tudod működtetni a rendszert, nem azt, hogy a rendszer működik.</p>
+    <p>Az előnyteszt a záró ellenőrzőlista 100 ügyletes sora, és még ott is +0,21R-től +0,79R-ig fut az intervallum: közel négyszeres különbség a két vég között. Pontosan ezért kér az 1. fázis további 50-100 ügyletet, és tart a 2-től 5-ig terjedő fázis tizennyolc-huszonnégy hónapig: a felskálázási terv nem önmagáért való óvatosság, hanem a megérkező mintaméret. A számítás pedig a te számaidon fut, nem ezeken: számold ki az ügyletenkénti szórásodat a saját backtestedből, oszd el az ügyletszámod gyökével, és tudni fogod, mire jogosult a feljegyzésed.</p>
+  </div>
 
     <p><strong>Ha BÁRMELYIK kritériumon elbuksz:</strong> Folytasd papíron, amíg nem teljesíted. Élesbe rohanni = felrobbantott számla.</p>
   </div>
@@ -875,7 +890,7 @@
     <ul>
       <li><strong>Időtartam:</strong> 3-6 hónap</li>
       <li><strong>Cél:</strong> A következetesség bizonyítása nagyobb mintán</li>
-      <li><strong>A siker mércéje:</strong> várható érték &gt; 0, profitfaktor &gt; 1,3, szabálykövetés legalább 90 % (ekkora mintánál a Sharpe kezd jelenteni valamit, úgyhogy innentől kövesd)</li>
+      <li><strong>A siker mércéje:</strong> várható érték &gt; 0, profitfaktor &gt; 1,3, szabálykövetés legalább 90 % (ekkora mintánál a Sharpe kezd jelenteni valamit, úgyhogy innentől kövesd). Ez az első fázis, amelyben a minta nem csak a fegyelmedről, hanem az előnyről is mondhat valamit</li>
     </ul>
 
     <h4>2. szakasz: mikroméretű éles kereskedés (a méret 10 %-a)</h4>
@@ -1073,7 +1088,7 @@
     </ul>
   </div>
 
-<p style="font-size:1.1rem;font-weight:500;margin:2rem 0">A záró projekt nem látszatmunka: ez a híd a tanulótól a profiig. 80 lecke elmélet semmit sem ér rendszerszintű terv nélkül. Dokumentálj, futtass backtestet, kereskedj papíron, növekedj lassan. A legtöbben ezt kihagyják. Te nem.</p>
+<p style="font-size:1.1rem;font-weight:500;margin:2rem 0">A záró projekt nem látszatmunka: ez a híd a tanulótól a profiig. 84 lecke elmélet semmit sem ér rendszerszintű terv nélkül. Dokumentálj, futtass backtestet, kereskedj papíron, növekedj lassan. A legtöbben ezt kihagyják. Te nem.</p>
 
   <div class="final-message">
     <h2 id="final-words-this-is-where-winners-are-made">Zárszó: itt születnek a győztesek</h2>

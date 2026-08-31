@@ -130,7 +130,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Write a strategy definition your future self cannot argue with: market, timeframe, entry, stop, target, and the filters that invalidate the trade</li>
           <li>Set the risk framework around it — position size, portfolio heat, daily loss limit, drawdown thresholds — before a single trade is placed</li>
-          <li>Backtest the strategy honestly, calculate expectancy and profit factor, and state what your sample can and cannot support</li>
+          <li>Backtest the strategy honestly, calculate expectancy and profit factor, and state what your sample can and cannot support — the standard error of your expectancy is your per-trade spread over the square root of your trade count, and it decides which of your claims survive</li>
           <li>Paper trade the plan and measure rule adherence separately from P&amp;L, because adherence is the number that predicts what happens live</li>
           <li>Assemble the five deliverables into one capstone report you would be willing to hand to somebody who would actually check it</li>
         </ul>
@@ -840,7 +840,7 @@
 
     <h4>Success Criteria (Must Pass ALL):</h4>
     <ul>
-      <li>✅ Expectancy &gt; 0 over 20+ trades</li>
+      <li>✅ Expectancy &gt; 0 over 20+ trades — a floor to clear, not evidence of an edge; twenty trades cannot separate a good system from a flat one, as the arithmetic below shows</li>
       <li>✅ Rule adherence 90%+ (followed the checklist on 18 or more of 20 trades)</li>
       <li>✅ Largest loss = -1R (no stop violations)</li>
       <li>✅ Profit factor &gt; 1.3</li>
@@ -848,6 +848,21 @@
     </ul>
 
     <p style="font-size:0.9rem;color:var(--muted)">Deliberately absent from that list: the Sharpe ratio. Over 20 trades it is noise. Use expectancy and profit factor here, and revisit Sharpe once you have 100 trades behind you.</p>
+
+  <div class="callout-key">
+    <h4>&#127919; What twenty paper trades can prove, and what they cannot</h4>
+    <p>The list above is right to throw out the Sharpe ratio at this sample size, and the same reasoning applies to the criterion it keeps. Expectancy is a mean, and a mean over n trades carries a standard error of the per-trade spread divided by the square root of n. Take a plausible system &mdash; 50% win rate, +2R wins and &minus;1R losses, so a true expectancy of +0.5R and a per-trade spread of 1.5R &mdash; and observe exactly +0.5R. Here is what that observation is worth at each sample size:</p>
+<pre><code>trades in the sample                   standard error, in R   interval low, in R   interval high, in R
+20 (the lesson's paper-trading gate)                   0.34                -0.16                 +1.16
+50                                                     0.21                +0.08                 +0.92
+100 (the checklist bar)                                0.15                +0.21                 +0.79
+200                                                    0.11                +0.29                 +0.71
+300                                                    0.09                +0.33                 +0.67
+500                                                    0.07                +0.37                 +0.63</code></pre>
+    <p><strong>At twenty trades the interval runs from &minus;0.16R to +1.16R: it contains zero.</strong> A system that produced exactly the expectancy you hoped for, over the sample this lesson gates on, still cannot be told apart from a system with no edge at all. That is not a reason to lower the bar. It is a reason to be precise about what the bar is doing.</p>
+    <p>Look at the other four criteria in the list and the answer is there. Rule adherence above 90%, a largest loss of exactly &minus;1R, no revenge trading, everything logged &mdash; none of those are edge tests. They are process tests, and twenty trades is a perfectly adequate sample for them, because you are measuring your own behaviour rather than the market's. That is what Part 6 is for: it proves you can run the system, not that the system works.</p>
+    <p>The edge test is the 100-trade line on the completion checklist, and even there the interval is +0.21R to +0.79R &mdash; a factor of nearly four between the ends. Which is exactly why Phase 1 asks for another 50-100 trades and Phases 2 through 5 take eighteen to twenty-four months: the scaling plan is not caution for its own sake, it is the sample size arriving. And the arithmetic runs on your own numbers, not these: compute your per-trade spread from your own backtest, divide by the square root of your trade count, and you will know what your record is entitled to claim.</p>
+  </div>
 
     <p><strong>If you fail ANY criteria:</strong> Continue paper trading until you pass. Rushing to live trading = account blowup.</p>
   </div>
@@ -862,7 +877,7 @@
     <ul>
       <li><strong>Duration:</strong> 3-6 months</li>
       <li><strong>Goal:</strong> Prove consistency over larger sample</li>
-      <li><strong>Success metric:</strong> expectancy &gt; 0, profit factor &gt; 1.3, rule adherence 90%+ (Sharpe becomes meaningful around this sample size, so start tracking it here)</li>
+      <li><strong>Success metric:</strong> expectancy &gt; 0, profit factor &gt; 1.3, rule adherence 90%+ (Sharpe becomes meaningful around this sample size, so start tracking it here). This is the first phase where the sample can say anything about the edge rather than about your discipline</li>
     </ul>
 
     <h4>Phase 2: Micro Live Trading (10% Size)</h4>
@@ -1060,7 +1075,7 @@
     </ul>
   </div>
 
-<p style="font-size:1.1rem;font-weight:500;margin:2rem 0">The capstone isn't busywork—it's the bridge from student to professional. 80 lessons of theory mean nothing without a systematic plan. Document, backtest, paper trade, scale slowly. Most traders skip this. You won't.</p>
+<p style="font-size:1.1rem;font-weight:500;margin:2rem 0">The capstone isn't busywork—it's the bridge from student to professional. 84 lessons of theory mean nothing without a systematic plan. Document, backtest, paper trade, scale slowly. Most traders skip this. You won't.</p>
 
   <div class="final-message">
     <h2 id="final-words-this-is-where-winners-are-made">Final Words: This Is Where Winners Are Made</h2>
