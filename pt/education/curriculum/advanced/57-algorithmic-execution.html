@@ -126,12 +126,13 @@
           <li>Ordens limitadas ganham das ordens a mercado: você troca algumas execuções perdidas por um preço médio melhor</li>
           <li>Entre no tamanho em 2 ou 3 fatias, em vez de uma única execução a um único preço</li>
           <li>Enquadramento: meça o seu slippage &rarr; passe a ordens limitadas e stop-limit &rarr; trate os primeiros quinze minutos como a janela cara e os últimos quinze como a volátil, que são dois problemas diferentes</li>
+          <li>Divida o spread pela distância ao seu stop para saber, num passo, se a execução é uma arrumação ou a razão pela qual a sua estratégia não pode funcionar</li>
         </ul>
       </div>
 
 <p><b>Você tem 70 % de acerto e média de 3R. Deveria estar arrasando.</b></p>
       <p>Mas a sua conta mal subiu 10 %. O que está acontecendo?</p>
-      <p>A execução. Você está perdendo 0,15 % por operação em slippage e custos de spread. Ao longo de 200 operações? São 30 % do seu retorno, evaporados.</p>
+      <p>A execução &mdash; a diferença entre o preço que escolheu e o que obteve, cobrada em cada operação, ganhe ou perca. Se essa diferença é um erro de arredondamento ou toda a sua vantagem depende de uma única divisão, que a caixa mais abaixo faz por si.</p>
       <div class="callout-warning"><h4>🚨 Falando a sério</h4><p>A forma como se entra conta tanto como aquilo em que se entra. As ordens a mercado compram-te a certeza da execução e cobram-te o diferencial por isso. As ordens limitadas custam-te algumas execuções e poupam-te esse diferencial. Ao longo de um ano e com muitas operações, a diferença entre as duas não é um erro de arredondamento — faz a tua própria conta antes de assumires que é.</p></div>
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -154,7 +155,7 @@
       <ul>
         <li><strong>O diferencial.</strong> Uma ordem a mercado compra na oferta de venda e vende na de compra, por isso pagas o diferencial à entrada e outra vez à saída. É a única componente que podes eliminar por completo: usa ordens limitadas e aceita que algumas não serão executadas.</li>
         <li><strong>A profundidade.</strong> A tua ordem é maior do que a dimensão que está no topo do livro, por isso sobe o livro. Resolve-se com pedaços mais pequenos, não com melhor momento.</li>
-        <li><strong>O momento.</strong> Os primeiros e os últimos quinze minutos da sessão trazem os diferenciais mais largos e a menor dimensão no livro. Ou não operas nessas alturas, ou reduzes o tamanho.</li>
+        <li><strong>O momento.</strong> Os primeiros quinze minutos trazem os spreads mais largos e a profundidade mais fina, porque o gap da noite ainda está a ser precificado. Os últimos quinze são o contrário: o leilão de fecho concentra um volume enorme e aí os spreads costumam ser apertados. O que o fecho tem é velocidade, pelo que o risco é ser atropelado, não ser esfolado no spread. Dois problemas diferentes, dois remédios diferentes.</li>
         <li><strong>A urgência.</strong> Uma saída em pânico leva o que houver. Um stop colocado de antemão leva a mesma perda sem o custo acrescido de decidir sob pressão.</li>
       </ul>
 
@@ -278,6 +279,29 @@
       <p>Quase tudo o que está acima importa na proporção em que a tua ordem for maior do que o tamanho que está no toque. Se compras 200 acções de SPY, não estás a percorrer o livro, os icebergs são irrelevantes, e todo o teu custo de execução é o spread — um cêntimo — que uma ordem limitada em repouso elimina e mais nada. Se a tua ordem for várias vezes o tamanho exibido, ou se negoceias algo que cota em incrementos de cinco cêntimos em vez de um, então profundidade, timing e tamanho de parcela começam todos a morder. Descobre qual desses dois traders és antes de decidires quanto desta lição é sobre ti. A auditoria da Parte 1 responde exactamente a essa pergunta, e é por isso que vem primeiro.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; Um rácio decide se esta lição é sobre si</h4>
+        <p>A secção acima diz que a execução importa na proporção do tamanho da sua ordem face ao livro. Há um segundo fator, maior, que não nomeia, e é uma única divisão que pode fazer agora mesmo: <strong>o spread dividido pela distância ao seu stop.</strong></p>
+
+        <p>Atravessar o spread à entrada e outra vez à saída custa-lhe um spread inteiro por ida e volta. Num instrumento cotado ao cêntimo, isso é um cêntimo por ação, seja qual for a sua dimensão. O seu risco nessa operação é a distância ao stop, também por ação. Portanto o custo de atravessar, expresso na única unidade que importa, é:</p>
+
+<pre><code>custo de execução por operação, em R  =  spread de ida e volta  &#247;  distância ao stop</code></pre>
+
+        <p>Aplique-o a um spread de um cêntimo e a um ano ao ritmo de operações da Sarah:</p>
+
+<pre><code>stop por ação   custo como parte de 1R   lastro com 380 operações por ano
+       2,00 $                    0,5 %                              1,9 R
+       1,00 $                      1 %                              3,8 R
+       0,50 $                      2 %                              7,6 R
+       0,20 $                      5 %                               19 R
+       0,05 $                     20 %                               76 R</code></pre>
+
+        <p>Leia a primeira e a última linha lado a lado, porque são duas profissões diferentes. Um swing trader que arrisca 2,00 $ por ação entrega 1,9 R por ano à travessia do spread &mdash; contra um bom ano discricionário de talvez quarenta, isso é ruído, e esta lição é uma arrumação. Um scalper que arrisca cinco cêntimos por ação entrega 76 R por ano, e nenhuma vantagem sobrevive a isso. Esse operador não tem uma execução para melhorar; a aritmética diz que a estratégia não cobre os próprios custos, e nenhuma disciplina no tipo de ordem muda isso.</p>
+
+        <p>Daqui seguem-se duas coisas. Primeira: <strong>calcule o seu próprio número antes de decidir quanto desta lição se aplica a si</strong> &mdash; a resposta vai de «mal se nota» a «fatal», e mais nada na página lhe diz qual. Segunda, o rácio tem duas alavancas e só uma fala de execução. Uma ordem limitada em espera elimina o numerador. Um stop mais largo, ou um horizonte mais longo, encolhe a fração inteira mais depressa do que qualquer decisão de encaminhamento alguma vez fará.</p>
+      </div>
+
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Ganhos rápidos para amanhã (clica para abrir)</summary>
         <div style="margin-top:1rem">
@@ -348,6 +372,7 @@
           <li><strong>A abertura e o fecho são ambos arriscados, por razões opostas</strong>, e a versão anterior desta linha confundia-as. Os primeiros quinze minutos têm de facto os spreads mais largos: o gap noturno está a ser precificado e os market makers cotam defensivamente até verem que dia vai ser. Os últimos quinze não &mdash; o leilão de fecho concentra um volume enorme e os spreads costumam ser apertados. O que o fecho tem é velocidade: o preço pode percorrer muito num minuto com fluxo de desequilíbrio, portanto uma ordem a mercado aí tem mais probabilidade de ser atropelada do que de ser espremida no spread. A sua auditoria abaixo dir-lhe-á qual das duas lhe está realmente a custar</li>
           <li><strong>As ordens iceberg escondem tamanho, onde a tua corretora as ofereça:</strong> a maioria das plataformas de retalho não as oferece, e a tamanho retalhista raramente importa — se a tua ordem é menor do que o que está no toque, não há mão nenhuma para esconder</li>
           <li><strong>Acompanhe o custo efetivo de spread:</strong> Meça (preço de execução - preço médio) / preço médio em cada operação</li>
+          <li><strong>Spread &#247; distância ao stop é todo o diagnóstico:</strong> um spread de um cêntimo contra um stop de 2,00 $ custa 0,5 % de um R e 1,9 R ao longo de um ano de 380 operações; contra um stop de cinco cêntimos custa 20 % de um R e 76 R por ano. O primeiro tem uma arrumação a fazer, o segundo uma estratégia que não cobre os próprios custos. Calcule o seu antes de decidir quanto desta lição é sobre si</li>
         </ul>
       </div>
 

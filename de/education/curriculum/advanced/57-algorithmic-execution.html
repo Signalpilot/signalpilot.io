@@ -126,12 +126,13 @@
           <li>Limit-Orders schlagen Market-Orders: du tauschst ein paar verpasste Ausführungen gegen einen besseren Durchschnittspreis</li>
           <li>Steige in Größe in 2-3 Tranchen ein statt mit einer einzigen Ausführung zu einem Preis</li>
           <li>Rahmen: Miss deinen slippage &rarr; wechsle zu Limit- und Stop-Limit-Orders &rarr; behandle die ersten fünfzehn Minuten als das teure Fenster und die letzten fünfzehn als das volatile &mdash; das sind zwei verschiedene Probleme</li>
+          <li>Teile den Spread durch deinen Stoppabstand, um in einem Schritt zu erfahren, ob Ausführung eine Aufräumarbeit ist oder der Grund, warum deine Strategie nicht funktionieren kann</li>
         </ul>
       </div>
 
 <p><b>Du hast eine Trefferquote von 70 % und im Schnitt 3R. Eigentlich müsstest du abräumen.</b></p>
       <p>Aber dein Konto liegt kaum 10 % im Plus. Was ist da los?</p>
-      <p>Die Ausführung. Du verlierst 0,15 % pro Trade an slippage und Spread-Kosten. Über 200 Trades? Das sind 30 % deiner Rendite, weg.</p>
+      <p>Ausführung &mdash; die Lücke zwischen dem Kurs, den du gewählt hast, und dem, den du bekommen hast, berechnet auf jedem Trade, ob er gewinnt oder verliert. Ob diese Lücke ein Rundungsfehler ist oder deine gesamte Edge, hängt an einer einzigen Division, die der Kasten weiter unten für dich ausführt.</p>
       <div class="callout-warning"><h4>🚨 Klartext</h4><p>Wie jemand einsteigt, zählt so viel wie das, worin er einsteigt. Market-Orders kaufen dir die Sicherheit der Ausführung und stellen dir dafür den Spread in Rechnung. Limit-Orders kosten dich einige Ausführungen und sparen dir genau diesen Spread. Über ein Jahr und bei hoher Trade-Zahl ist der Unterschied zwischen beidem kein Rundungsfehler — rechne deine eigene Zahl aus, bevor du das Gegenteil annimmst.</p></div>
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -154,7 +155,7 @@
       <ul>
         <li><strong>Der Spread.</strong> Eine Market-Order kauft zum Brief und verkauft zum Geld, du zahlst den Spread also beim Einstieg und noch einmal beim Ausstieg. Das ist der einzige Bestandteil, den du ganz beseitigen kannst: Limit-Orders nutzen und hinnehmen, dass ein Teil davon nicht ausgeführt wird.</li>
         <li><strong>Die Tiefe.</strong> Deine Order ist größer als die Größe, die an der Spitze liegt, also läuft sie das Buch hinauf. Kleinere Teilstücke beheben das. Besseres Timing nicht.</li>
-        <li><strong>Der Zeitpunkt.</strong> Die ersten und die letzten fünfzehn Minuten der Sitzung haben die weitesten Spreads und die dünnsten liegenden Größen. Entweder du handelst dann nicht, oder du gehst kleiner rein.</li>
+        <li><strong>Der Zeitpunkt.</strong> Die ersten fünfzehn Minuten tragen die weitesten Spreads und die dünnste ruhende Größe, weil die Übernachtlücke noch eingepreist wird. Die letzten fünfzehn sind das Gegenteil: Die Schlussauktion bündelt enorme Volumen, und die Spreads sind dort meist eng. Was der Schluss hat, ist Tempo, das Risiko ist also, überrollt statt am Spread gerupft zu werden. Zwei verschiedene Probleme, zwei verschiedene Lösungen.</li>
         <li><strong>Die Eile.</strong> Ein Panikausstieg nimmt, was gerade da ist. Ein vorab platzierter Stopp nimmt denselben Verlust, ohne die Zusatzkosten einer Entscheidung unter Druck.</li>
       </ul>
 
@@ -278,6 +279,29 @@
       <p>Fast alles oben zählt in dem Maß, in dem deine Order größer ist als die am Touch liegende Größe. Kaufst du 200 Aktien SPY, läufst du das Buch nicht ab, Icebergs sind irrelevant, und deine gesamten Ausführungskosten sind der Spread — ein Cent —, den eine liegende Limit-Order entfernt und sonst nichts. Ist deine Order ein Vielfaches der angezeigten Größe, oder handelst du etwas, das in Fünfcentschritten notiert statt in Cents, dann beißen Tiefe, Timing und Clipgröße alle. Finde heraus, welcher der beiden Trader du bist, bevor du entscheidest, wie viel dieser Lektion von dir handelt. Die Auswertung in Teil 1 beantwortet genau diese Frage — deshalb kommt sie zuerst.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; Ein Verhältnis entscheidet, ob diese Lektion von dir handelt</h4>
+        <p>Der Abschnitt oben sagt, Ausführung zähle im Verhältnis zu deiner Ordergröße gegenüber dem ruhenden Buch. Es gibt einen zweiten und größeren Faktor, den er nicht nennt, und er ist eine einzige Division, die du sofort ausführen kannst: <strong>der Spread geteilt durch deinen Stoppabstand.</strong></p>
+
+        <p>Den Spread auf dem Hinweg und noch einmal auf dem Rückweg zu überqueren kostet dich pro Runde genau einen vollen Spread. In einem Instrument mit Cent-Spread ist das ein Cent je Aktie, unabhängig von deiner Größe. Dein Risiko auf diesem Trade ist dein Stoppabstand, ebenfalls je Aktie. Die Kosten des Überquerens, ausgedrückt in der einzigen Einheit, die zählt, lauten also:</p>
+
+<pre><code>Ausführungskosten pro Trade, in R  =  Spread hin und zurück  &#247;  Stoppabstand</code></pre>
+
+        <p>Rechne das gegen einen Cent-Spread und ein Jahr von Sarahs Trade-Zahl:</p>
+
+<pre><code>Stopp je Aktie   Kosten als Anteil von 1R   Belastung bei 380 Trades im Jahr
+        2,00 $                      0,5 %                              1,9 R
+        1,00 $                        1 %                              3,8 R
+        0,50 $                        2 %                              7,6 R
+        0,20 $                        5 %                               19 R
+        0,05 $                       20 %                               76 R</code></pre>
+
+        <p>Lies die oberste und die unterste Zeile nebeneinander, denn das sind zwei verschiedene Berufe. Ein Swingtrader, der 2,00 $ je Aktie riskiert, gibt im Jahr 1,9 R an die Spreadüberquerung ab &mdash; gegen ein gutes diskretionäres Jahr von vielleicht vierzig ist das Rauschen, und diese Lektion ist ein Aufräumen. Ein Scalper, der fünf Cent je Aktie riskiert, gibt 76 R im Jahr ab, was keine Edge überlebt. Dieser Trader hat kein Ausführungsproblem zu verbessern; die Arithmetik sagt, dass die Strategie ihre eigenen Kosten nicht decken kann, und keine Disziplin bei der Ordersorte ändert das.</p>
+
+        <p>Zweierlei folgt daraus. Erstens: <strong>Rechne deine eigene Zahl aus, bevor du entscheidest, wie viel von dieser Lektion auf dich zutrifft</strong> &mdash; die Antwort reicht von „kaum“ bis „tödlich“, und nichts sonst auf der Seite sagt dir, welche es ist. Zweitens hat das Verhältnis zwei Hebel, und nur einer davon handelt von Ausführung. Eine ruhende Limitorder entfernt den Zähler. Ein weiterer Stopp oder ein längerer Zeitrahmen verkleinert den ganzen Bruch schneller, als es eine Routing-Entscheidung je könnte.</p>
+      </div>
+
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Schnelle Erfolge für morgen (zum Aufklappen klicken)</summary>
         <div style="margin-top:1rem">
@@ -348,6 +372,7 @@
           <li><strong>Eröffnung und Schluss sind beide riskant &mdash; aus entgegengesetzten Gründen</strong>, und die frühere Fassung dieser Zeile hat sie vermengt. Die ersten fünfzehn Minuten haben tatsächlich die weitesten Spreads: Die Übernachtlücke wird eingepreist, und Market Maker quotieren defensiv, bis sie sehen, was der Tag wird. Die letzten fünfzehn haben das nicht &mdash; die Schlussauktion bündelt enormes Volumen, und die Spreads sind meist eng. Was der Schluss hat, ist Tempo: Preis kann in einer Minute weit laufen auf Imbalance-Flow, eine Market-Order dort wird also eher überrannt als über den Spread gerupft. Dein eigenes Audit unten zeigt dir, welches von beiden dich tatsächlich kostet</li>
           <li><strong>Iceberg-Orders verbergen Größe — sofern dein Broker sie anbietet:</strong> Die meisten Retail-Plattformen bieten sie nicht an, und bei Retail-Größe spielt es selten eine Rolle — wenn deine Order kleiner ist als das, was am Touch liegt, gibt es keine Karten zu verbergen</li>
           <li><strong>Die effektiven Spread-Kosten verfolgen:</strong> Miss bei jedem Trade (Ausführungspreis - Mittelkurs) / Mittelkurs</li>
+          <li><strong>Spread &#247; Stoppabstand ist die ganze Diagnose:</strong> Ein Cent-Spread gegen einen Stopp von 2,00 $ kostet 0,5 % von einem R und 1,9 R über ein Jahr mit 380 Trades; gegen einen Stopp von fünf Cent kostet er 20 % von einem R und 76 R im Jahr. Der erste Trader hat eine Aufräumarbeit, der zweite eine Strategie, die ihre eigenen Kosten nicht decken kann. Rechne deine aus, bevor du entscheidest, wie viel von dieser Lektion von dir handelt</li>
         </ul>
       </div>
 

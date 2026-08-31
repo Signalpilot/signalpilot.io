@@ -113,12 +113,13 @@
           <li>Limit orders beat market orders: you trade a few missed fills for a better average price</li>
           <li>Scale into size in 2-3 tranches instead of taking one fill at one price</li>
           <li>Framework: measure your slippage &rarr; switch to limit and stop-limit orders &rarr; treat the first fifteen minutes as the expensive window, and the last fifteen as the volatile one, which are two different problems</li>
+          <li>Divide the spread by your stop distance to find out, in one step, whether execution is a tidy-up or the reason your strategy cannot work</li>
         </ul>
       </div>
 
 <p><b>You have a 70% win rate and a 3R average. You should be crushing it.</b></p>
       <p>But your account is barely up 10%. What gives?</p>
-      <p>Execution. You're bleeding 0.15% per trade on slippage and spread costs. Over 200 trades? That's 30% of your returns, gone.</p>
+      <p>Execution &mdash; the gap between the price you chose and the price you got, charged on every trade whether it wins or loses. Whether that gap is a rounding error or the whole of your edge comes down to one division, which the box further down does for you.</p>
       <div class="callout-warning"><h4>🚨 Real Talk</h4><p>How a trader enters matters as much as what a trader enters. Market orders buy you certainty of fill and charge you the spread for it. Limit orders cost you some fills and save you that spread. Over a year, on a high trade count, the difference between the two is not a rounding error &mdash; work out your own number before you assume it is.</p></div>
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -141,7 +142,7 @@
       <ul>
         <li><strong>The spread.</strong> A market order buys at the ask and sells at the bid, so you pay the spread on the way in and again on the way out. This is the only component you can remove outright: use limit orders and accept that some of them will not fill.</li>
         <li><strong>Depth.</strong> Your order is larger than the size resting at the touch, so it walks up the book. Smaller clips fix this. Better timing does not.</li>
-        <li><strong>Timing.</strong> The first and last fifteen minutes of the session carry the widest spreads and the thinnest resting size. Either do not trade then, or size down when you do.</li>
+        <li><strong>Timing.</strong> The first fifteen minutes carry the widest spreads and the thinnest resting size, because the overnight gap is still being priced. The last fifteen are the opposite: the closing auction concentrates enormous volume and spreads there are usually tight. What the close has is speed, so the risk is being run over rather than spread-gouged. Two different problems, two different fixes.</li>
         <li><strong>Urgency.</strong> A panic exit takes whatever is there. A stop placed in advance takes the same loss without the extra cost of deciding under pressure.</li>
       </ul>
 
@@ -265,6 +266,29 @@
       <p>Almost everything above matters in proportion to whether your order is larger than the size resting at the touch. If you are buying 200 shares of SPY, you are not walking the book, icebergs are irrelevant, and your entire execution cost is the spread &mdash; one cent &mdash; which a resting limit order removes and nothing else does. If your order is several times the displayed size, or you trade something that quotes in nickels rather than pennies, then depth, timing and clip size all start to bite. Work out which of those two traders you are before deciding how much of this lesson is about you. The audit in Part 1 answers that question directly, which is why it comes first.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; One ratio decides whether this lesson is about you</h4>
+        <p>The section above says execution matters in proportion to your order size against the resting book. There is a second and larger factor it does not name, and it is a single division you can do right now: <strong>the spread divided by your stop distance.</strong></p>
+
+        <p>Crossing the spread on the way in and again on the way out costs you one full spread per round trip. In a penny-wide instrument that is one cent a share, whatever your size. Your risk on that trade is your stop distance, also per share. So the cost of crossing, expressed in the only unit that matters, is:</p>
+
+<pre><code>execution cost per trade, in R  =  round-trip spread  &#247;  stop distance</code></pre>
+
+        <p>Run it against a penny spread and a year of Sarah's trade count:</p>
+
+<pre><code>stop per share   cost as a share of 1R   drag at 380 trades a year
+         $2.00                   0.5 %                       1.9 R
+         $1.00                     1 %                       3.8 R
+         $0.50                     2 %                       7.6 R
+         $0.20                     5 %                        19 R
+         $0.05                    20 %                        76 R</code></pre>
+
+        <p>Read the top and the bottom rows next to each other, because they are two different occupations. A swing trader risking $2.00 a share gives up 1.9 R a year to crossing the spread &mdash; against a good discretionary year of perhaps forty, that is noise, and this lesson is a tidy-up. A scalper risking five cents a share gives up 76 R a year, which no edge survives. That trader does not have an execution problem to improve; the arithmetic says the strategy cannot clear its own costs, and no amount of order-type discipline changes it.</p>
+
+        <p>Two things follow. First, <strong>work out your own number before deciding how much of this lesson applies to you</strong> &mdash; the answer ranges from "barely" to "fatal" and nothing else on the page tells you which. Second, notice that the ratio has two levers and only one of them is about execution. Resting a limit order removes the numerator. Trading a wider stop, or a longer timeframe, shrinks the whole fraction faster than any routing decision ever will.</p>
+      </div>
+
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Quick Wins for Tomorrow (Click to expand)</summary>
         <div style="margin-top:1rem">
@@ -335,6 +359,7 @@
           <li><strong>The opening and the close are both risky, for opposite reasons</strong>, and the earlier version of this line conflated them. The first fifteen minutes genuinely has the widest spreads: the overnight gap is being priced, and market makers quote defensively until they can see what the day is. The last fifteen does not &mdash; the closing auction concentrates enormous volume, and spreads are usually tight. What the close has is speed: price can travel a long way in a minute on imbalance flow, so a market order there is more likely to be run over than to be spread-gouged. Your own audit below will show you which of the two is actually costing you</li>
           <li><strong>Iceberg orders hide size, where your broker offers them:</strong> most retail platforms do not, and at retail size it rarely matters &mdash; if your order is smaller than what is resting at the touch, there is no hand to hide</li>
           <li><strong>Track effective spread cost:</strong> Measure (fill price - mid price) / mid price for every trade</li>
+          <li><strong>Spread &#247; stop distance is the whole diagnosis:</strong> a penny spread against a $2.00 stop costs 0.5 % of one R and 1.9 R across a year of 380 trades; against a five-cent stop it costs 20 % of one R and 76 R a year. The first trader has a tidy-up, the second has a strategy that cannot clear its own costs. Compute yours before deciding how much of this lesson is about you</li>
         </ul>
       </div>
 

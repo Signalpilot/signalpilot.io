@@ -126,12 +126,13 @@
           <li>Les ordres à cours limité battent les ordres au marché : vous échangez quelques exécutions manquées contre un meilleur prix moyen</li>
           <li>Entrez en taille en 2 ou 3 tranches plutôt qu’en une seule exécution à un seul prix</li>
           <li>Cadre : mesurez votre slippage &rarr; passez aux ordres à cours limité et stop-limite &rarr; traitez les quinze premières minutes comme la fenêtre chère et les quinze dernières comme la fenêtre volatile, ce sont deux problèmes distincts</li>
+          <li>Divisez le spread par la distance à votre stop pour savoir, en une étape, si l'exécution est un rangement ou la raison pour laquelle votre stratégie ne peut pas fonctionner</li>
         </ul>
       </div>
 
 <p><b>Vous avez 70 % de réussite et 3R de moyenne. Vous devriez tout écraser.</b></p>
       <p>Mais votre compte est à peine à +10 %. Que se passe-t-il ?</p>
-      <p>L’exécution. Vous perdez 0,15 % par trade en slippage et en coûts de spread. Sur 200 trades ? C’est 30 % de votre performance, envolés.</p>
+      <p>L'exécution &mdash; l'écart entre le prix que vous avez choisi et celui que vous avez obtenu, facturé sur chaque trade, gagnant ou perdant. Que cet écart soit une erreur d'arrondi ou la totalité de votre edge tient à une seule division, que l'encadré plus bas fait pour vous.</p>
       <div class="callout-warning"><h4>🚨 Parlons franchement</h4><p>La manière d'entrer compte autant que ce dans quoi on entre. Les ordres au marché vous achètent la certitude d'être exécuté et vous facturent le spread pour cela. Les ordres à cours limité vous coûtent quelques exécutions et vous épargnent ce spread. Sur une année et avec un nombre élevé de trades, l'écart entre les deux n'est pas une erreur d'arrondi — faites votre propre calcul avant de supposer le contraire.</p></div>
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -154,7 +155,7 @@
       <ul>
         <li><strong>Le spread.</strong> Un ordre au marché achète à la demande et vend à l'offre : vous payez donc le spread à l'entrée puis encore à la sortie. C'est le seul composant que vous pouvez supprimer entièrement : passez à cours limité et acceptez qu'une partie ne soit pas exécutée.</li>
         <li><strong>La profondeur.</strong> Votre ordre dépasse la taille présente au meilleur prix, il remonte donc le carnet. Ce sont des tranches plus petites qui règlent cela, pas un meilleur timing.</li>
-        <li><strong>Le moment.</strong> Les quinze premières et les quinze dernières minutes de la séance ont les spreads les plus larges et la taille affichée la plus mince. Soit vous ne tradez pas à ces moments-là, soit vous réduisez la taille.</li>
+        <li><strong>Le moment.</strong> Les quinze premières minutes portent les spreads les plus larges et la profondeur la plus mince, parce que le gap de la nuit est encore en train d'être valorisé. Les quinze dernières sont l'inverse : l'enchère de clôture concentre un volume énorme et les spreads y sont généralement serrés. Ce qu'a la clôture, c'est la vitesse ; le risque est donc de se faire écraser, pas de se faire tondre au spread. Deux problèmes différents, deux remèdes différents.</li>
         <li><strong>L'urgence.</strong> Une sortie panique prend ce qui se présente. Un stop placé à l'avance encaisse la même perte sans le surcoût d'une décision prise sous pression.</li>
       </ul>
 
@@ -278,6 +279,29 @@
       <p>Presque tout ce qui précède compte en proportion du fait que votre ordre dépasse ou non la taille présente au touch. Si vous achetez 200 actions SPY, vous ne parcourez pas le carnet, les icebergs sont sans objet, et tout votre coût d'exécution est le spread — un cent — qu'un ordre à cours limité au repos supprime et que rien d'autre ne supprime. Si votre ordre vaut plusieurs fois la taille affichée, ou si vous traitez quelque chose qui cote au nickel plutôt qu'au cent, alors profondeur, timing et taille de clip commencent tous à mordre. Déterminez lequel de ces deux traders vous êtes avant de décider quelle part de cette leçon vous concerne. L'audit de la Partie 1 répond exactement à cette question, et c'est pourquoi il vient en premier.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; Un rapport décide si cette leçon vous concerne</h4>
+        <p>La section ci-dessus dit que l'exécution compte en proportion de la taille de votre ordre face au carnet. Il existe un second facteur, plus grand, qu'elle ne nomme pas, et c'est une seule division que vous pouvez faire tout de suite : <strong>le spread divisé par la distance à votre stop.</strong></p>
+
+        <p>Franchir le spread à l'entrée puis de nouveau à la sortie vous coûte un spread complet par aller-retour. Dans un instrument coté au centime, cela fait un centime par titre, quelle que soit votre taille. Votre risque sur ce trade, c'est la distance à votre stop, également par titre. Le coût du franchissement, exprimé dans la seule unité qui compte, est donc :</p>
+
+<pre><code>coût d'exécution par trade, en R  =  spread aller-retour  &#247;  distance au stop</code></pre>
+
+        <p>Appliquez-le à un spread d'un centime et à une année au rythme de trades de Sarah :</p>
+
+<pre><code>stop par titre   coût en part de 1R   frein à 380 trades par an
+        2,00 $                0,5 %                       1,9 R
+        1,00 $                  1 %                       3,8 R
+        0,50 $                  2 %                       7,6 R
+        0,20 $                  5 %                        19 R
+        0,05 $                 20 %                        76 R</code></pre>
+
+        <p>Lisez la première et la dernière ligne côte à côte, car ce sont deux métiers différents. Un swing trader qui risque 2,00 $ par titre cède 1,9 R par an au franchissement du spread &mdash; face à une bonne année discrétionnaire de peut-être quarante, c'est du bruit, et cette leçon est un rangement. Un scalpeur qui risque cinq centimes par titre cède 76 R par an, ce qu'aucune edge ne survit. Ce trader n'a pas une exécution à améliorer ; l'arithmétique dit que la stratégie ne peut pas couvrir ses propres coûts, et aucune discipline sur le type d'ordre n'y change rien.</p>
+
+        <p>Deux conséquences. Premièrement : <strong>calculez votre propre chiffre avant de décider de la part de cette leçon qui vous concerne</strong> &mdash; la réponse va de « à peine » à « fatal », et rien d'autre sur la page ne vous dit laquelle. Deuxièmement, le rapport a deux leviers et un seul relève de l'exécution. Un ordre à cours limité posé supprime le numérateur. Un stop plus large, ou une unité de temps plus longue, réduit toute la fraction plus vite qu'aucune décision de routage ne le fera jamais.</p>
+      </div>
+
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gains rapides pour demain (cliquez pour déplier)</summary>
         <div style="margin-top:1rem">
@@ -348,6 +372,7 @@
           <li><strong>L'ouverture et la clôture sont toutes deux risquées, pour des raisons opposées</strong>, et la version précédente de cette ligne les confondait. Les quinze premières minutes ont bien les spreads les plus larges : le gap de nuit est en train d'être valorisé et les market makers cotent défensivement tant qu'ils ne voient pas la journée. Les quinze dernières, non &mdash; l'enchère de clôture concentre un volume énorme et les spreads y sont généralement serrés. Ce que la clôture a, c'est la vitesse : le prix peut parcourir beaucoup en une minute sur le flux de déséquilibre, un ordre au marché y risque donc plus de se faire écraser que de se faire prendre au spread. Votre propre audit ci-dessous vous dira laquelle des deux vous coûte réellement</li>
           <li><strong>Les ordres iceberg cachent la taille, là où votre courtier les propose :</strong> la plupart des plateformes retail ne les proposent pas, et à taille retail cela importe rarement — si votre ordre est plus petit que ce qui repose au touch, il n'y a aucune main à cacher</li>
           <li><strong>Suivez votre coût de spread effectif :</strong> Mesurez (prix d’exécution - prix milieu) / prix milieu sur chaque trade</li>
+          <li><strong>Spread &#247; distance au stop, c'est tout le diagnostic :</strong> un spread d'un centime face à un stop de 2,00 $ coûte 0,5 % d'un R et 1,9 R sur une année de 380 trades ; face à un stop de cinq centimes il coûte 20 % d'un R et 76 R par an. Le premier a un rangement à faire, le second une stratégie incapable de couvrir ses coûts. Calculez le vôtre avant de décider de la part de cette leçon qui vous concerne</li>
         </ul>
       </div>
 

@@ -126,12 +126,13 @@
           <li>Limit emirler piyasa emirlerini yener: birkaç kaçan gerçekleşmeyi daha iyi bir ortalama fiyata değişirsiniz</li>
           <li>Büyüklüğe tek fiyattan tek gerçekleşmeyle değil, 2-3 dilimde girin</li>
           <li>Çerçeve: kendi slippage'inizi ölçün &rarr; limitli ve stop-limitli emirlere geçin &rarr; ilk on beş dakikayı pahalı pencere, son on beş dakikayı oynak pencere olarak görün; bunlar iki ayrı sorundur</li>
+          <li>Spread’i stop mesafenize bölerek tek adımda anlayın: uygulama küçük bir düzeltme mi, yoksa stratejinizin işleyememesinin sebebi mi</li>
         </ul>
       </div>
 
 <p><b>%70 kazanma oranınız ve 3R ortalamanız var. Ortalığı yıkıyor olmalıydınız.</b></p>
       <p>Ama hesabınız zar zor %10 yukarıda. Ne oluyor?</p>
-      <p>İcra oluyor. Slippage ve spread maliyetleriyle işlem başına %0,15 kaybediyorsunuz. 200 işlemde? Getirinizin %30’u, uçtu gitti.</p>
+      <p>Uygulama &mdash; seçtiğiniz fiyat ile aldığınız fiyat arasındaki fark; kazansın kaybetsin her işlemden alınır. Bu farkın bir yuvarlama hatası mı yoksa avantajınızın tamamı mı olduğu tek bir bölmeye bakar ve aşağıdaki kutu o bölmeyi sizin için yapar.</p>
       <div class="callout-warning"><h4>🚨 Açık konuşalım</h4><p>Nasıl girdiğin, neye girdiğin kadar önemlidir. Piyasa emirleri sana gerçekleşme kesinliğini satar ve bunun bedelini spread olarak alır. Limit emirler bazı gerçekleşmelere mal olur ve o spread'i sana bırakır. Bir yıl boyunca ve yüksek işlem sayısında ikisi arasındaki fark bir yuvarlama hatası değildir — öyle olduğunu varsaymadan önce kendi rakamını çıkar.</p></div>
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -154,7 +155,7 @@
       <ul>
         <li><strong>Spread.</strong> Piyasa emri satış tarafından alır, alış tarafından satar; yani spread'i girerken bir kez, çıkarken bir kez daha ödersin. Tamamen ortadan kaldırabileceğin tek bileşen budur: limit emir kullan ve bir kısmının gerçekleşmeyeceğini kabul et.</li>
         <li><strong>Derinlik.</strong> Emrin, en iyi kademede duran hacimden büyüktür, bu yüzden defteri tırmanır. Bunu daha küçük dilimler çözer, daha iyi zamanlama değil.</li>
-        <li><strong>Zamanlama.</strong> Seansın ilk ve son on beş dakikası, spread'in en geniş, defterde bekleyen hacmin en ince olduğu zamandır. Ya o saatlerde işlem yapma, ya da hacmini küçült.</li>
+        <li><strong>Zamanlama.</strong> İlk on beş dakika en geniş spread’leri ve en ince bekleyen derinliği taşır, çünkü gecelik boşluk hâlâ fiyatlanmaktadır. Son on beş dakika ise tam tersidir: kapanış açık artırması muazzam hacim toplar ve orada spread’ler genelde dardır. Kapanışta olan şey hızdır; dolayısıyla risk spread’de yolunmak değil, ezilmektir. İki farklı sorun, iki farklı çözüm.</li>
         <li><strong>Aceleyle çıkmak.</strong> Panikle çıkış, orada ne varsa onu alır. Önceden konmuş bir stop aynı zararı alır, ama baskı altında karar vermenin ek maliyeti olmadan.</li>
       </ul>
 
@@ -278,6 +279,29 @@
       <p>Yukarıdakilerin neredeyse tamamı, emrinin dokunuştaki bekleyen büyüklükten daha büyük olup olmadığıyla orantılı biçimde önem taşır. 200 hisse SPY alıyorsan defteri yürümüyorsun, buzdağları konu dışı, ve bütün gerçekleşme maliyetin makastır — bir sent — ki bunu bekleyen bir limit emir ortadan kaldırır, başka hiçbir şey değil. Emrin görünen büyüklüğün birkaç katıysa ya da sentle değil beş sentlik adımlarla kote olan bir şey işliyorsan, o zaman derinlik, zamanlama ve parça büyüklüğü hepsi ısırmaya başlar. Bu dersin ne kadarının seninle ilgili olduğuna karar vermeden önce bu iki yatırımcıdan hangisi olduğunu bul. Bölüm 1’deki denetim tam da bu soruyu yanıtlar; ilk sırada olmasının nedeni budur.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; Tek bir oran bu dersin sizinle ilgili olup olmadığını belirler</h4>
+        <p>Yukarıdaki bölüm, uygulamanın emir büyüklüğünüzün defterdeki bekleyen derinliğe oranınca önemli olduğunu söylüyor. Orada adı geçmeyen, daha büyük ikinci bir etken var ve o da hemen şimdi yapabileceğiniz tek bir bölme: <strong>spread’in stop mesafenize bölümü.</strong></p>
+
+        <p>Girişte spread’i geçmek ve çıkışta bir kez daha geçmek, gidiş-dönüş başına tam bir spread’e mal olur. Kuruş aralıklı bir enstrümanda bu, büyüklüğünüz ne olursa olsun hisse başına bir kuruştur. O işlemdeki riskiniz stop mesafenizdir, o da hisse başına. Dolayısıyla geçmenin maliyeti, önemli olan tek birimle ifade edildiğinde şudur:</p>
+
+<pre><code>işlem başına uygulama maliyeti, R cinsinden  =  gidiş-dönüş spread  &#247;  stop mesafesi</code></pre>
+
+        <p>Bunu bir kuruşluk spread’e ve Sarah’ın yıllık işlem sayısına uygulayın:</p>
+
+<pre><code>hisse başına stop   1R içindeki maliyet payı   yılda 380 işlemde yük
+           2,00 $                       %0,5                   1,9 R
+           1,00 $                         %1                   3,8 R
+           0,50 $                         %2                   7,6 R
+           0,20 $                         %5                    19 R
+           0,05 $                        %20                    76 R</code></pre>
+
+        <p>En üst ve en alt satırı yan yana okuyun, çünkü bunlar iki ayrı meslek. Hisse başına 2,00 dolar riske eden bir swing yatırımcısı, spread’i geçmeye yılda 1,9 R veriyor &mdash; belki kırk R’lik iyi bir takdire dayalı yılın yanında bu gürültüdür ve bu ders onun için bir düzeltmedir. Hisse başına beş kuruş riske eden bir scalper yılda 76 R veriyor ve buna hiçbir avantaj dayanmaz. O yatırımcının iyileştirilecek bir uygulama sorunu yoktur; aritmetik, stratejinin kendi maliyetlerini karşılayamadığını söyler ve emir türü disiplini bunu değiştirmez.</p>
+
+        <p>Bundan iki şey çıkar. Birincisi: <strong>bu dersin size ne kadar uyduğuna karar vermeden önce kendi sayınızı hesaplayın</strong> &mdash; cevap «neredeyse hiç» ile «öldürücü» arasında değişir ve sayfadaki başka hiçbir şey hangisi olduğunu söylemez. İkincisi, oranın iki kolu var ve bunlardan yalnızca biri uygulamayla ilgili. Bekleyen bir limit emri payı ortadan kaldırır. Daha geniş bir stop ya da daha uzun bir zaman dilimi ise kesrin tamamını, herhangi bir yönlendirme kararının yapabileceğinden çok daha hızlı küçültür.</p>
+      </div>
+
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Yarın için hızlı kazanımlar (açmak için tıkla)</summary>
         <div style="margin-top:1rem">
@@ -348,6 +372,7 @@
           <li><strong>Açılış da kapanış da risklidir, ama zıt sebeplerle</strong>, ve bu satırın önceki sürümü ikisini birbirine karıştırıyordu. İlk on beş dakikada spreadler gerçekten en geniştir: gecelik boşluk fiyatlanıyordur ve market maker'lar günün ne olacağını görene kadar savunmacı kotasyon verir. Son on beş dakikada değil &mdash; kapanış açık artırması muazzam hacmi toplar ve spreadler genellikle dardır. Kapanışın sahip olduğu şey hızdır: dengesizlik akışıyla fiyat bir dakikada çok yol alabilir, dolayısıyla oradaki bir piyasa emri spreadde yolunmaktan çok ezilme riski taşır. Aşağıdaki kendi denetiminiz, ikisinden hangisinin size gerçekten mal olduğunu gösterecek</li>
           <li><strong>Buzdağı emirleri büyüklüğü gizler — aracı kurumun sunuyorsa:</strong> çoğu perakende platform bunları sunmaz, ve perakende büyüklükte nadiren önem taşır — emrin dokunuşta bekleyenden küçükse, gizlenecek bir el yoktur</li>
           <li><strong>Etkin spread maliyetini izleyin:</strong> Her işlemde (gerçekleşme fiyatı - orta fiyat) / orta fiyat hesaplayın</li>
+          <li><strong>Spread &#247; stop mesafesi teşhisin tamamıdır:</strong> kuruşluk bir spread 2,00 dolarlık stopa karşı bir R’nin %0,5’ine ve 380 işlemlik bir yılda 1,9 R’ye mal olur; beş kuruşluk stopa karşı bir R’nin %20’sine ve yılda 76 R’ye. Birincisinin yapacak bir düzeltmesi vardır, ikincisinin ise kendi maliyetlerini karşılamayan bir stratejisi. Bu dersin ne kadarının sizinle ilgili olduğuna karar vermeden önce kendinizinkini hesaplayın</li>
         </ul>
       </div>
 

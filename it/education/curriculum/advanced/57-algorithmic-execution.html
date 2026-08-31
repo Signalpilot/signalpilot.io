@@ -126,12 +126,13 @@
           <li>Gli ordini limite battono quelli a mercato: scambi qualche esecuzione mancata con un prezzo medio migliore</li>
           <li>Entra in size in 2-3 tranche invece che con una sola esecuzione a un solo prezzo</li>
           <li>Quadro: misura il tuo slippage &rarr; passa a ordini limite e stop-limit &rarr; tratta i primi quindici minuti come la finestra costosa e gli ultimi quindici come quella volatile, che sono due problemi diversi</li>
+          <li>Dividi lo spread per la distanza dal tuo stop per sapere, in un passaggio, se l'esecuzione è una sistemata o il motivo per cui la tua strategia non può funzionare</li>
         </ul>
       </div>
 
 <p><b>Hai il 70 % di operazioni vincenti e una media di 3R. Dovresti stare stravincendo.</b></p>
       <p>Ma il tuo conto è appena sopra il 10 %. Come mai?</p>
-      <p>L’esecuzione. Stai perdendo lo 0,15 % per operazione tra slippage e costi di spread. Su 200 operazioni? Sono il 30 % del tuo rendimento, sparito.</p>
+      <p>L'esecuzione &mdash; la distanza fra il prezzo che hai scelto e quello che hai ottenuto, addebitata su ogni trade, vincente o perdente. Se quella distanza sia un errore di arrotondamento o l'intera tua edge dipende da una sola divisione, che il riquadro più sotto fa per te.</p>
       <div class="callout-warning"><h4>🚨 Parliamoci chiaro</h4><p>Il modo in cui entri conta quanto ciò in cui entri. Gli ordini a mercato ti comprano la certezza dell'esecuzione e ti addebitano lo spread per questo. Gli ordini limite ti costano qualche eseguito e ti risparmiano quello spread. Nell'arco di un anno e con molte operazioni, la differenza fra i due non è un errore di arrotondamento: fatti il tuo conto prima di dare per scontato il contrario.</p></div>
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -154,7 +155,7 @@
       <ul>
         <li><strong>Lo spread.</strong> Un ordine a mercato compra alla lettera e vende al denaro, quindi paghi lo spread all'ingresso e di nuovo all'uscita. È l'unico componente che puoi eliminare del tutto: usa ordini limite e accetta che una parte non venga eseguita.</li>
         <li><strong>La profondità.</strong> Il tuo ordine è più grande della size ferma al primo livello, quindi risale il book. Si risolve con pezzi più piccoli, non con un timing migliore.</li>
-        <li><strong>Il momento.</strong> I primi e gli ultimi quindici minuti di seduta hanno gli spread più larghi e la size a book più sottile. O non operi in quei momenti, o riduci la dimensione.</li>
+        <li><strong>Il momento.</strong> I primi quindici minuti portano gli spread più larghi e la profondità più sottile, perché il gap notturno sta ancora venendo prezzato. Gli ultimi quindici sono l'opposto: l'asta di chiusura concentra un volume enorme e lì gli spread di solito sono stretti. Quello che la chiusura ha è la velocità, quindi il rischio è di essere travolti, non spennati sullo spread. Due problemi diversi, due rimedi diversi.</li>
         <li><strong>La fretta.</strong> Un'uscita in preda al panico prende quello che c'è. Uno stop messo in anticipo prende la stessa perdita senza il costo aggiuntivo di decidere sotto pressione.</li>
       </ul>
 
@@ -278,6 +279,29 @@
       <p>Quasi tutto quello che precede conta in proporzione al fatto che il tuo ordine sia più grande della size presente al touch. Se compri 200 azioni di SPY non stai percorrendo il book, gli iceberg sono irrilevanti, e tutto il tuo costo di esecuzione è lo spread — un centesimo — che un ordine limite a riposo elimina e nient’altro. Se il tuo ordine vale diverse volte la size mostrata, o se operi qualcosa che quota a cinque centesimi invece che a uno, allora profondità, timing e dimensione della clip cominciano tutti a mordere. Scopri quale dei due trader sei prima di decidere quanto di questa lezione riguardi te. L’audit della Parte 1 risponde esattamente a questa domanda, ed è per questo che viene per primo.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; Un rapporto decide se questa lezione parla di te</h4>
+        <p>La sezione qui sopra dice che l'esecuzione conta in proporzione alla dimensione del tuo ordine rispetto al book. C'è un secondo fattore, più grande, che non nomina, ed è una sola divisione che puoi fare subito: <strong>lo spread diviso per la distanza dal tuo stop.</strong></p>
+
+        <p>Attraversare lo spread all'ingresso e di nuovo all'uscita ti costa uno spread pieno per andata e ritorno. In uno strumento quotato al centesimo fa un centesimo per azione, qualunque sia la tua size. Il tuo rischio su quel trade è la distanza dallo stop, anch'essa per azione. Quindi il costo dell'attraversamento, espresso nell'unica unità che conta, è:</p>
+
+<pre><code>costo di esecuzione per trade, in R  =  spread di andata e ritorno  &#247;  distanza dallo stop</code></pre>
+
+        <p>Applicalo a uno spread di un centesimo e a un anno al ritmo di trade di Sarah:</p>
+
+<pre><code>stop per azione   costo come quota di 1R   zavorra con 380 trade all'anno
+         2,00 $                    0,5 %                            1,9 R
+         1,00 $                      1 %                            3,8 R
+         0,50 $                      2 %                            7,6 R
+         0,20 $                      5 %                             19 R
+         0,05 $                     20 %                             76 R</code></pre>
+
+        <p>Leggi la prima e l'ultima riga una accanto all'altra, perché sono due mestieri diversi. Uno swing trader che rischia 2,00 $ per azione cede 1,9 R all'anno all'attraversamento dello spread &mdash; contro un buon anno discrezionale di forse quaranta è rumore, e questa lezione è una sistemata. Uno scalper che rischia cinque centesimi per azione cede 76 R all'anno, e nessuna edge sopravvive. Quel trader non ha un'esecuzione da migliorare; l'aritmetica dice che la strategia non copre i propri costi, e nessuna disciplina sul tipo di ordine lo cambia.</p>
+
+        <p>Ne seguono due cose. Primo: <strong>calcola il tuo numero prima di decidere quanta parte di questa lezione ti riguarda</strong> &mdash; la risposta va da «appena» a «fatale», e nient'altro nella pagina te lo dice. Secondo, il rapporto ha due leve e solo una parla di esecuzione. Un ordine limite in attesa elimina il numeratore. Uno stop più largo, o un timeframe più lungo, riduce l'intera frazione più in fretta di qualunque decisione di routing.</p>
+      </div>
+
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Risultati rapidi per domani (clicca per aprire)</summary>
         <div style="margin-top:1rem">
@@ -348,6 +372,7 @@
           <li><strong>L'apertura e la chiusura sono entrambe rischiose, per ragioni opposte</strong>, e la versione precedente di questa riga le confondeva. I primi quindici minuti hanno davvero gli spread più larghi: il gap notturno viene prezzato e i market maker quotano in difesa finché non vedono che giornata sarà. Gli ultimi quindici no &mdash; l'asta di chiusura concentra un volume enorme e gli spread sono di solito stretti. Quello che la chiusura ha è velocità: il prezzo può viaggiare molto in un minuto sul flusso di sbilanciamento, quindi un ordine a mercato lì rischia più di essere travolto che spennato sullo spread. Il tuo audit qui sotto ti dirà quale delle due ti sta davvero costando</li>
           <li><strong>Gli ordini iceberg nascondono la size, dove il tuo broker li offre:</strong> la maggior parte delle piattaforme retail non li offre, e a taglia retail conta di rado: se il tuo ordine è più piccolo di quello che sta al touch, non c’è nessuna mano da nascondere</li>
           <li><strong>Monitora il costo effettivo di spread:</strong> Misura (prezzo di esecuzione - prezzo medio) / prezzo medio a ogni operazione</li>
+          <li><strong>Spread &#247; distanza dallo stop è tutta la diagnosi:</strong> uno spread di un centesimo contro uno stop di 2,00 $ costa lo 0,5 % di un R e 1,9 R su un anno da 380 trade; contro uno stop di cinque centesimi costa il 20 % di un R e 76 R all'anno. Il primo ha una sistemata da fare, il secondo una strategia che non copre i propri costi. Calcola il tuo prima di decidere quanto questa lezione parli di te</li>
         </ul>
       </div>
 

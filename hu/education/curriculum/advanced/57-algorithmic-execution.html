@@ -126,12 +126,13 @@
           <li>A limitáras megbízás veri a piacit: néhány elszalasztott teljesülésért cserébe jobb átlagárat kapsz</li>
           <li>Méretbe 2-3 részletben szállj be, ne egyetlen teljesüléssel egyetlen áron</li>
           <li>Keret: mérd meg a saját slippage-edet &rarr; válts limitáras és stop-limit megbízásokra &rarr; az első tizenöt percet drága ablakként, az utolsó tizenötöt volatilisként kezeld &mdash; ez két különböző probléma</li>
+          <li>Ossza el a spreadet a stop távolságával, hogy egyetlen lépésben megtudja: a végrehajtás pusztán rendrakás, vagy éppen az az ok, amiért a stratégiája nem működhet</li>
         </ul>
       </div>
 
 <p><b>70 %-os találati arányod van és 3R az átlagod. Tarolnod kellene.</b></p>
       <p>A számlád mégis alig 10 %-kal áll feljebb. Mi történik?</p>
-      <p>A végrehajtás. Ügyletenként 0,15 %-ot veszítesz slippage-en és spreadköltségen. 200 ügyleten? Az a hozamod 30 %-a, elpárologva.</p>
+      <p>A végrehajtás &mdash; a különbség a között az ár között, amit választott, és amit kapott; minden kötésre felszámítják, nyertesre és vesztesre egyaránt. Hogy ez a különbség kerekítési hiba-e vagy a teljes előnye, egyetlen osztáson múlik, amelyet a lenti doboz elvégez Ön helyett.</p>
       <div class="callout-warning"><h4>🚨 Őszintén</h4><p>Az számít, hogyan lépsz be, épp annyira, mint az, mibe. A piaci megbízás megveszi neked a teljesülés bizonyosságát, és ezért felszámolja a spreadet. A limitáras megbízás néhány teljesülésbe kerül, és épp azt a spreadet spórolja meg. Egy év alatt, sok ügyletnél, a kettő közti különbség nem kerekítési hiba — számold ki a saját számodat, mielőtt az ellenkezőjét feltételezed.</p></div>
       <!-- Prerequisites -->
       <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
@@ -154,7 +155,7 @@
       <ul>
         <li><strong>A spread.</strong> A piaci megbízás az eladási oldalon vesz és a vételi oldalon ad el, tehát a spreadet belépéskor is, kilépéskor is megfizeted. Ez az egyetlen összetevő, amit egészen ki lehet iktatni: használj limitárast, és fogadd el, hogy egy részük nem teljesül.</li>
         <li><strong>A mélység.</strong> A megbízásod nagyobb, mint a legjobb áron pihenő mennyiség, ezért felmászik a könyvön. Ezt kisebb szeletek oldják meg, nem a jobb időzítés.</li>
-        <li><strong>Az időzítés.</strong> A kereskedés első és utolsó tizenöt perce hozza a legszélesebb spreadeket és a legvékonyabb kint lévő mennyiséget. Vagy nem kereskedsz akkor, vagy kisebbet lépsz.</li>
+        <li><strong>Az időzítés.</strong> Az első tizenöt perc hordozza a legszélesebb spreadeket és a legvékonyabb várakozó mennyiséget, mert az éjszakai rés árazása még folyik. Az utolsó tizenöt perc ennek az ellenkezője: a záró aukció óriási forgalmat sűrít össze, és ott a spreadek rendszerint szűkek. Amivel a zárás rendelkezik, az a sebesség, tehát a kockázat az, hogy elgázolják, nem az, hogy megkopasztják a spreaden. Két különböző probléma, két különböző megoldás.</li>
         <li><strong>A sietség.</strong> A pánikkilépés azt viszi, ami éppen ott van. Az előre kitett stop ugyanazt a veszteséget viszi, a nyomás alatt hozott döntés felára nélkül.</li>
       </ul>
 
@@ -278,6 +279,29 @@
       <p>Szinte minden, ami fent áll, olyan mértékben számít, amennyire a megbízásod nagyobb, mint az érintésen pihenő méret. Ha 200 darab SPY -t veszel, nem járod végig a könyvet, a jéghegyek irrelevánsak, és a teljes végrehajtási költséged a spread – egy cent –, amelyet egy pihenő limitáras megbízás megszüntet, más semmi. Ha a megbízásod a kijelzett méret többszöröse, vagy olyat kereskedsz, amely nem centes, hanem ötcentes lépésekben jegyződik, akkor a mélység, az időzítés és a részletméret mind harapni kezd. Derítsd ki, e két kereskedő közül melyik vagy, mielőtt eldöntenéd, mennyi szól ebből a leckéből rólad. Az 1. részben lévő audit pontosan erre a kérdésre válaszol – ezért van elöl.</p>
 
 
+
+      <div class="callout-key">
+        <h4>&#127919; Egyetlen arány dönti el, hogy ez a lecke Önről szól-e</h4>
+        <p>A fenti szakasz szerint a végrehajtás annyit számít, amennyi a megbízása mérete a várakozó könyvhöz képest. Van egy második, nagyobb tényező, amelyet nem nevez meg, és ez egyetlen osztás, amelyet azonnal elvégezhet: <strong>a spread osztva a stop távolságával.</strong></p>
+
+        <p>Ha belépéskor és kilépéskor is átlépi a spreadet, az körönként pontosan egy teljes spreadbe kerül. Egy centes jegyzésű eszközben ez részvényenként egy cent, bármekkora is a mérete. A kockázata azon a kötésen a stop távolsága, szintén részvényenként. Az átlépés költsége tehát, az egyetlen számító mértékegységben kifejezve:</p>
+
+<pre><code>végrehajtási költség kötésenként, R-ben  =  oda-vissza spread  &#247;  stop távolsága</code></pre>
+
+        <p>Számoljon vele egy centes spreaddel és Sarah éves kötésszámával:</p>
+
+<pre><code>stop részvényenként   a költség 1R hányadában   teher évi 380 kötésnél
+             2,00 $                     0,5 %                    1,9 R
+             1,00 $                       1 %                    3,8 R
+             0,50 $                       2 %                    7,6 R
+             0,20 $                       5 %                     19 R
+             0,05 $                      20 %                     76 R</code></pre>
+
+        <p>Olvassa el egymás mellett a legfelső és a legalsó sort, mert két külön szakmáról van szó. Egy swing kereskedő, aki részvényenként 2,00 dollárt kockáztat, évi 1,9 R-t ad le a spread átlépésére &mdash; egy jó, talán negyven R-es diszkrecionális évhez képest ez zaj, és ez a lecke számára rendrakás. Egy scalper, aki részvényenként öt centet kockáztat, évi 76 R-t ad le, amit semmilyen előny nem él túl. Neki nincs javítandó végrehajtási problémája; a számtan azt mondja, hogy a stratégia nem fedezi a saját költségeit, és ezen a megbízástípus fegyelme sem változtat.</p>
+
+        <p>Ebből két dolog következik. Először: <strong>számolja ki a saját számát, mielőtt eldönti, mennyi vonatkozik Önre ebből a leckéből</strong> &mdash; a válasz az „alig”-tól a „végzetes”-ig terjed, és az oldalon semmi más nem árulja el, melyik. Másodszor, az aránynak két karja van, és csak az egyik szól a végrehajtásról. Egy várakozó limitáras megbízás eltünteti a számlálót. Egy szélesebb stop vagy egy hosszabb időtáv viszont az egész törtet gyorsabban csökkenti, mint bármilyen útvonalválasztási döntés valaha is.</p>
+      </div>
+
                     <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
         <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Gyors eredmények holnapra (kattints a kinyitáshoz)</summary>
         <div style="margin-top:1rem">
@@ -348,6 +372,7 @@
           <li><strong>A nyitás és a zárás egyaránt kockázatos, ellentétes okokból</strong>, és e sor korábbi változata összemosta a kettőt. Az első tizenöt percben valóban a legszélesebbek a spreadek: az éjszakai rés árazódik be, és a market makerek óvatosan jegyeznek, amíg nem látják, milyen nap lesz. Az utolsó tizenöt percben nem &mdash; a záró aukció óriási forgalmat sűrít össze, és a spreadek rendszerint szűkek. Amivel a zárás rendelkezik, az a sebesség: egyensúlytalansági áramláson az ár egy perc alatt messzire mehet, tehát egy piaci megbízást ott inkább elgázolnak, mint hogy a spreaden megkopasszák. A lenti saját auditod fogja megmutatni, melyik kettő közül kerül neked ténylegesen pénzbe</li>
           <li><strong>A jéghegy-megbízások elrejtik a méretet, ahol a brókered kínálja őket:</strong> a legtöbb lakossági platform nem kínálja őket, és lakossági méretben ritkán számít – ha a megbízásod kisebb, mint ami az érintésen pihen, nincs mit elrejteni</li>
           <li><strong>Kövesd a tényleges spreadköltséget:</strong> Minden ügyletnél mérd a (teljesülési ár - középár) / középár értéket</li>
+          <li><strong>A spread &#247; stop távolsága maga a teljes diagnózis:</strong> egy centes spread egy 2,00 dolláros stoppal szemben egy R 0,5 %-ába és 380 kötéses év alatt 1,9 R-be kerül; egy ötcentes stoppal szemben egy R 20 %-ába és évi 76 R-be. Az elsőnek rendrakása van, a másodiknak olyan stratégiája, amely nem fedezi a saját költségeit. Számolja ki a sajátját, mielőtt eldönti, mennyire szól Önről ez a lecke</li>
         </ul>
       </div>
 
@@ -381,8 +406,8 @@ Teljes slippage-költség (20 ügylet): $______
 Évesítve (100 ügylet): $______
 
 A legrosszabbak (keresd a mintázatot):
-- 9.30 és 9.45 közötti ügyletek: átlagos slippage ____ %
-- 15.45 és 16.00 közötti ügyletek: átlagos slippage ____ %
+- 9:30 és 9:45 közötti ügyletek: átlagos slippage ____ %
+- 15:45 és 16:00 közötti ügyletek: átlagos slippage ____ %
 - Piaci megbízások: átlagos slippage ____ %
 - Limitáras megbízások: átlagos slippage ____ %</code></pre>
 
@@ -470,7 +495,7 @@ Találati arány: ___ / 5 ügylet teljesült maradéktalanul</code></pre>
             <td style="padding:.5rem">Jó idősáv</td>
           </tr>
           <tr>
-            <td style="padding:.5rem">15.45-16.00</td>
+            <td style="padding:.5rem">15:45-16:00</td>
             <td style="padding:.5rem">$___</td>
             <td style="padding:.5rem">____%</td>
             <td style="padding:.5rem">Kerülni (a legszélesebb spreadek)</td>
