@@ -146,7 +146,7 @@
         <h4>🎯 Che cosa imparerai a padroneggiare</h4>
         <p>Alla fine di questa lezione capirai:</p>
         <ul>
-          <li>Come i tassi di finanziamento rivelano le posizioni con leva eccessiva (e anticipano gli squeeze)</li>
+          <li>Come i funding rate rivelano posizioni sovraleveraggiate (e anticipano gli squeeze) &mdash; e quanto ti costa al giorno lo stesso numero se lo tieni</li>
           <li>Meccaniche CEX vs DEX: order book vs AMM vs aste di order flow</li>
           <li>Il MEV (Maximal Extractable Value) e come i bot fanno front-running sui tuoi ordini</li>
           <li>Come individuare il wash trading e i volumi falsi</li>
@@ -226,13 +226,38 @@
         <p><strong>Esempio: la crisi del finanziamento del BTC nel maggio 2021</strong></p>
         <ul style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
           <li>BTC a 58.000 $, tasso di finanziamento +0,15 % ogni 8 ore: sono lo 0,45 % al giorno, ovvero circa <strong>il 164 % all'anno</strong> con un'annualizzazione semplice</li>
-          <li>I long pagavano quel tasso agli short solo per il privilegio di restare in posizione. Al 164 % all'anno il solo finanziamento dimezza un long a leva in meno di cinque mesi, anche se il prezzo non si muove</li>
+          <li>I long pagavano quel tasso agli short solo per il privilegio di restare nella posizione. Allo 0,45 % al giorno, il funding da solo dimezza un long senza leva in 154 giorni anche se il prezzo non si muove mai &mdash; e il margine di un long a 10x in quindici. Il riquadro qui sotto percorre la griglia</li>
           <li>Segnale: posizioni long con leva enormemente eccessiva</li>
           <li>Risultato: il BTC è sceso da 58.000 $ il 12 maggio a 30.000 $ intraday il 19 maggio: una settimana, -48 % sui minimi</li>
           <li>Liquidazioni a cascata: circa 8,6 miliardi di dollari di liquidazioni dichiarate su tutta la cripto nel solo 19 maggio, il singolo giorno più grande mai registrato all'epoca. Tratta ogni cifra di liquidazione di un exchange come un pavimento e non come una misura: diverse piattaforme, Binance compresa, limitano il proprio feed pubblico delle liquidazioni, quindi il numero dichiarato è sistematicamente più piccolo di quello reale</li>
         </ul>
         <p style="margin-top:1rem"><strong>Lezione:</strong> Quando il finanziamento supera +0,10 % per 3 giorni o più, aspettati uno smontaggio violento. Prendi profitto o riduci la leva.</p>
       </div>
+
+      <div class="callout-key">
+        <h4>&#127919; Quanto ti costa il funding rate per restarci seduto sopra</h4>
+        <p>La tabella qui sopra legge il funding come segnale di posizionamento, e lo è. È anche una fattura, esigibile tre volte al giorno, e quella metà è aritmetica anziché interpretazione. Un tasso f ogni otto ore è 3f al giorno sul tuo nozionale, quindi a leva L è 3fL al giorno sui soldi che hai davvero versato.</p>
+
+<pre><code>giorni prima che il funding da solo dimezzi il tuo margine  =  ln(0,5)  &#247;  ln( 1 &#8722; 3 &#215; f &#215; L )</code></pre>
+
+        <p>Il prezzo non ci entra. È quello che paghi perché la posizione stia ferma:</p>
+
+<pre><code>funding ogni 8 h   al giorno   senza leva   3x    10x   20x
+         +0,03 %      0,09 %          770   256    77    38
+         +0,05 %      0,15 %          462   154    46    23
+         +0,10 %      0,30 %          231    77    23    11
+         +0,15 %      0,45 %          154    51    15     7
+         +0,30 %      0,90 %           77    25     7     3</code></pre>
+
+        <p><strong>Leggi la riga a +0,15 %, perché è lì che stava il funding di BTC nella settimana prima del 19 maggio 2021.</strong> Un long senza leva perdeva metà del suo valore in funding su 154 giorni &mdash; abbastanza lentamente da ignorarlo. Un long a 20x perdeva metà del margine in una settimana, a prezzo fermo. La folla liquidata il 19 maggio non aveva soltanto sbagliato direzione. Stava già sanguinando a un ritmo che garantiva che non potesse aspettare.</p>
+
+        <p>Questo è il meccanismo dietro lo squeeze che il segnale annuncia, e si vede meglio come costo che come umore. Un funding alto non provoca un'inversione rendendo nervosi i trader. La provoca mettendo ogni long a leva sotto un orologio: tieni abbastanza a lungo e il funding si prende la posizione, che il prezzo vada contro o no, quindi il long marginale è costretto ad avere ragione in fretta. Quando abbastanza posizioni condividono quell'orologio, scadono insieme.</p>
+
+        <p>L'uso pratico è un orizzonte, non una direzione. Prima di entrare, dividi il tuo periodo di detenzione previsto nella colonna giusta. Uno swing di tre giorni con funding al +0,10 % a 10x costa il 9 % del tuo margine, e quello deve uscire dal movimento che ti aspetti prima di contare qualcosa come edge. Tenerlo tre settimane allo stesso tasso ne costa quasi la metà &mdash; i 23 giorni della tabella &mdash; e a quel punto non stai operando l'asset, sei short funding rate e long biglietto della lotteria.</p>
+
+        <p>E nota l'asimmetria che dà il segno. Quando il funding è negativo ti pagano per tenere il long, e l'orologio gira dall'altra parte. La maggior parte del tempo il tasso è abbastanza piccolo da ignorarlo; tutto il valore di questo riquadro sta nel sapere a quali letture smette di esserlo, e la risposta è intorno al +0,10 % per qualsiasi cosa tu intenda tenere oltre qualche giorno.</p>
+      </div>
+
 
       <div class="section-break"><span>Parte 2: CEX vs DEX, capire le differenze tra gli exchange cripto</span></div>
 
@@ -714,7 +739,7 @@ e ha preso esattamente il 5 % che avevo autorizzato. Ora imposto lo
             <li><strong>Monitora i tassi di finanziamento di BTC/ETH (cattura gli squeeze da leva eccessiva)</strong> — Sarah Martinez (esempio composito) ha perso <span style="color:#ff5252;font-weight:700">89.400 $</span> (-48 %) nel maggio 2021, mentre deteneva 186.000 $ di BTC a pronti comprati a 58.000 $ e il finanziamento sul perpetuo restava a +0,15 % (positivo estremo = troppi long a leva). Lei non aveva leva, quindi nulla l'ha liquidata: ha semplicemente accompagnato lo strumento fino a 30.000 $ in una settimana mentre tutti quelli che, invece, <em>erano</em> a leva venivano liquidati nelle sue mani. È proprio questo il senso del segnale: il finanziamento ti dice qualcosa sulla leva degli altri, e la leva degli altri è ciò che muove il prezzo che possiedi. Stasera: metti nei preferiti la dashboard del finanziamento su coinglass.com. Controlla BTC/ETH ogni 8 ore. Finanziamento &gt;+0,10 % (i long pagano gli short) = long con leva eccessiva, aspettati uno squeeze al ribasso. Finanziamento &lt;-0,05 % = short con leva eccessiva, aspettati uno squeeze al rialzo. E osserva la persistenza oltre al livello: +0,08 % mantenuto per 3 giorni costa a un long circa lo 0,72 % di finanziamento accumulato, più o meno quanto costa un picco breve sopra +0,10 %, quindi trattalo allo stesso modo e riduci l'esposizione.</li>
             <li><strong>Imposta avvisi di arbitraggio tra exchange (cattura gli spread di prezzo)</strong> &mdash; BTC scambia davvero a prezzi diversi su piazze diverse, e lo spread fra una piazza istituzionale e una retail è reale. Prima di inseguirlo, calcola l'intero giro di andata e ritorno anziché il divario da titolo. Poniamo che Coinbase stia 150 $ sopra Binance su un BTC a 30.000 $: è lo 0,5 % lordo. Ora sottrai le commissioni taker su entrambe le gambe (0,1 % ciascuna sui livelli retail, cioè 0,2 %), la commissione di prelievo per spostare l'asset o il costo di prefinanziare entrambe le piazze per non doverlo spostare, e lo spread che attraversi davvero anziché il mid che hai citato. Quel che resta dello 0,5 % è di solito una frazione, ed è disponibile solo finché il divario persiste. Stasera: monitora i prezzi del BTC su Coinbase, Binance e Kraken ogni ora. Spread &gt;150 $ = opportunità di arbitraggio; nota che rispetto al BTC a 26.000-38.000 $ scambiato in quei mesi, 150 $ sono lo 0,4-0,6 %, non lo 0,3 % che otterresti ai prezzi di oggi, quindi ricalcola la soglia in percentuale per il livello a cui si trova il BTC quando leggi questo. Compra sull'exchange più basso, vendi su quello più alto simultaneamente. Chiudi quando lo spread si normalizza. Gli spread di Michael si chiudevano in pochi minuti: a taglia retail, ritardi di trasferimento, limiti di prelievo e rischio di controparte dell'exchange possono divorare l'intero spread. Opera piccolo finché non hai misurato il tuo tasso di esecuzione.</li>
             <li><strong>Leggi una tua transazione in un block explorer</strong> &mdash; guarda che cosa ne era pubblico, e da quando. È su questo che opera il MEV.</li>
-            <li><strong>Usa endpoint RPC protetti dal MEV (ferma il front-running sui DEX)</strong> — Amanda Torres (esempio composito) ha perso <span style="color:#ff5252;font-weight:700">31.800 $</span> in 8 mesi a causa del front-running MEV su Uniswap. Gli swap grossi (>50.000 $) venivano sandwichati: i bot passavano davanti al suo acquisto (spingendo il prezzo di +2-4 %), poi rivendevano dopo. Perdita media: 1.200-2.500 $ a operazione. Confronta questo con la Parte 3 prima di proseguire: 1.200-2.500 $ su uno swap da 50.000 $ sono il 2,4-5 %, il che significa che la sua tolleranza di slippage era in quell'intervallo, perché il contratto non può regolare peggio del numero scritto in quella casella. Il cambio di RPC qui sotto aiuta. È la tolleranza ad aver deciso la dimensione. Stasera: cambia l'RPC del wallet con Flashbots Protect RPC (impedisce ai bot MEV di vedere la transazione). Per gli swap >25.000 $, dividi in 5-10 swap più piccoli distribuiti su 2-6 ore. Evita 30.000 $ e oltre di perdite da estrazione MEV.</li>
+            <li><strong>Usa endpoint RPC protetti dal MEV (ferma il front-running sui DEX)</strong> — Amanda Torres (esempio composito) ha perso <span style="color:#ff5252;font-weight:700">31.800 $</span> in 8 mesi a causa del front-running MEV su Uniswap. Gli swap grossi (>50.000 $) venivano sandwichati: i bot passavano davanti al suo acquisto, poi rivendevano dopo. Perdita media: 1.200-2.500 $ a operazione. Confronta questo con la Parte 3 prima di proseguire: 1.200-2.500 $ su uno swap da 50.000 $ sono il 2,4-5 %, il che significa che la sua tolleranza di slippage era in quell'intervallo, perché il contratto non può regolare peggio del numero scritto in quella casella. Il cambio di RPC qui sotto aiuta. È la tolleranza ad aver deciso la dimensione. Stasera: cambia l'RPC del wallet con Flashbots Protect RPC (impedisce ai bot MEV di vedere la transazione). Per gli swap >25.000 $, dividi in 5-10 swap più piccoli distribuiti su 2-6 ore. Evita 30.000 $ e oltre di perdite da estrazione MEV.</li>
           </ol>
         </div>
       </details>
