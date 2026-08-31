@@ -178,16 +178,16 @@
       <div style="font-size:0.75rem;color:var(--muted)">Perte totale</div>
     </div>
     <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">91.5%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Taux de repaint</div>
+      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">43 sur 47</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Signaux qui ont bougé</div>
     </div>
     <div style="background:rgba(255,107,107,0.12);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#ff6b6b">71% → 34%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Effondrement du taux de réussite</div>
+      <div style="font-size:1.5rem;font-weight:700;color:#ff6b6b">5,3 points</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Décalage moyen</div>
     </div>
-    <div style="background:rgba(0,212,170,0.12);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#00d4aa">+74%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Redressement après correction</div>
+    <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
+      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">$11,400</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Coût du décalage</div>
     </div>
   </div>
 
@@ -219,13 +219,32 @@
 
   <p><strong>Le point de rupture (8 avril 2024) :</strong> Jake a capturé les signaux en direct, puis les a comparés après la clôture de la bougie :</p>
   <ul style="margin:.75rem 0 0 1.5rem">
-    <li><strong>9 h 38 ACHAT :</strong> Signal à 5 186 → après clôture : déplacé à 5 179 (sept points plus bas !) • 680 $ perdus</li>
-    <li><strong>10 h 52 VENTE :</strong> Signal à 5 194 → après clôture : <strong>disparu complètement !</strong> • 520 $ perdus</li>
-    <li><strong>13 h 15 ACHAT :</strong> Signal à 5 201 → après clôture : déplacé à 5 196 (cinq points plus bas) • 440 $ perdus</li>
-    <li><strong>14 h 43 VENTE :</strong> Signal à 5 209 → après clôture : déplacé à 5 213 (quatre points plus haut) • 380 $ perdus</li>
+    <li><strong>9 h 38 ACHAT :</strong> Signal à 5 186 → après la clôture de la bougie : déplacé à 5 179 (7 points plus bas) • il était 7 points trop haut, avec un stop 8 points sous le vrai signal • Perte de 750 $</li>
+    <li><strong>10 h 52 VENTE :</strong> Signal à 5 194 → après clôture : <strong>a complètement disparu</strong> • un trade dont le graphique dit maintenant qu'il n'a jamais existé • Perte de 400 $</li>
+    <li><strong>13 h 15 ACHAT :</strong> Signal à 5 201 → après la clôture de la bougie : déplacé à 5 196 (5 points plus bas) • 5 points trop haut • Perte de 650 $</li>
+    <li><strong>14 h 43 VENTE :</strong> Signal à 5 209 → après la clôture de la bougie : déplacé à 5 213 (4 points plus haut) • vendu 4 points trop bas • Perte de 600 $</li>
   </ul>
 
   <p><strong>L'enquête :</strong> 43 signaux sur 47 avaient bougé (taux de repaint de 91,5 %). L'audit du code a révélé <code>request.security()</code> sans <code>lookahead=barmerge.lookahead_off</code>.</p>
+
+  <div class="callout-key">
+    <h4>&#128200; Ce que ce déplacement a réellement coûté</h4>
+    <p>L'ES vaut 50 $ le point, le décalage ci-dessus se convertit donc directement en argent. C'est le chiffre autour duquel la leçon tourne sans jamais le nommer.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>coût du repaint  =  points parcourus par le signal  x  50 $ le point
+
+9 h 38   ACHAT    7 points trop haut  =  350 $
+13 h 15  ACHAT    5 points trop haut  =  250 $
+14 h 43  VENTE    4 points trop bas   =  200 $
+                                         -----
+ce jour-là                               800 $  de décalage, sur 2 400 $ de pertes</code></pre>
+
+    <p>Un tiers de cette journée, c'est l'indicateur qui a déplacé l'entrée après que Jake l'a prise. Même stratégie, mêmes stops, même marché : sept, cinq et quatre points plus mauvais que ce que le graphique prétend aujourd'hui.</p>
+
+    <p>Sur les dix semaines, 43 des 47 signaux ont bougé ou disparu, et les trois ci-dessus font en moyenne 5,3 points. Si les autres leur ressemblaient, le décalage à lui seul donne 43 x 5,3 x 50 $, soit environ 11 400 $ sur 14 700 $. Ce n'est pas une composante de la perte : c'est la perte.</p>
+
+    <p style="margin-bottom:0">C'est précisément le chiffre qu'un backtest ne peut pas vous montrer, car dans un backtest le décalage est nul par construction : chaque signal se trouve déjà là où il a fini. Tenez vous-même les deux colonnes sur l'outil que vous utilisez &mdash; le prix du signal pendant que la bougie est vivante, le prix du signal une fois close, et l'écart multiplié par la valeur du point de votre instrument. Ce chiffre, c'est ce que l'outil vous coûte avant même que la stratégie ait été jugée.</p>
+  </div>
 
   <p><strong>Redressement :</strong> Jake est passé à des indicateurs dont les signaux ne bougent pas, et a relancé la même stratégie. Ce qui compte n'est pas ce qu'il a gagné ensuite &mdash; les chiffres d'un seul exemple composite ne prouvent rien, dans un sens comme dans l'autre. Ce qui compte, c'est que son résultat en réel et son backtest décrivaient enfin le même système.</p>
 

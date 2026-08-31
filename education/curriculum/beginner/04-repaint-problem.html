@@ -165,16 +165,16 @@
       <div style="font-size:0.75rem;color:var(--muted)">Total Loss</div>
     </div>
     <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">91.5%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Repaint Rate</div>
+      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">43 of 47</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Signals That Moved</div>
     </div>
     <div style="background:rgba(255,107,107,0.12);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#ff6b6b">71% → 34%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Win Rate Collapse</div>
+      <div style="font-size:1.5rem;font-weight:700;color:#ff6b6b">5.3 points</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Average Displacement</div>
     </div>
-    <div style="background:rgba(0,212,170,0.12);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#00d4aa">+74%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Recovery After Fix</div>
+    <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
+      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">$11,400</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Cost of the Displacement</div>
     </div>
   </div>
 
@@ -206,13 +206,32 @@
 
   <p><strong>The breaking point (Apr 8, 2024):</strong> Jake screenshotted live signals, then compared after bar close:</p>
   <ul style="margin:.75rem 0 0 1.5rem">
-    <li><strong>9:38 AM BUY:</strong> Signal at 5,186 → After bar close: moved to 5,179 (7 points lower!) • Lost $680</li>
-    <li><strong>10:52 AM SELL:</strong> Signal at 5,194 → After bar close: <strong>disappeared completely!</strong> • Lost $520</li>
-    <li><strong>1:15 PM BUY:</strong> Signal at 5,201 → After bar close: moved to 5,196 (5 points lower) • Lost $440</li>
-    <li><strong>2:43 PM SELL:</strong> Signal at 5,209 → After bar close: moved to 5,213 (4 points higher) • Lost $380</li>
+    <li><strong>9:38 AM BUY:</strong> Signal at 5,186 → After bar close: moved to 5,179 (7 points lower) • he was 7 points high on a stop 8 points under the real signal • Lost $750</li>
+    <li><strong>10:52 AM SELL:</strong> Signal at 5,194 → After bar close: <strong>disappeared completely</strong> • a trade the chart now says never existed • Lost $400</li>
+    <li><strong>1:15 PM BUY:</strong> Signal at 5,201 → After bar close: moved to 5,196 (5 points lower) • 5 points high • Lost $650</li>
+    <li><strong>2:43 PM SELL:</strong> Signal at 5,209 → After bar close: moved to 5,213 (4 points higher) • sold 4 points too cheap • Lost $600</li>
   </ul>
 
   <p><strong>The investigation:</strong> 43/47 signals moved (91.5% repaint rate). Code audit found <code>request.security()</code> without <code>lookahead=barmerge.lookahead_off</code>.</p>
+
+  <div class="callout-key">
+    <h4>&#128200; What the moving actually cost</h4>
+    <p>ES is $50 a point, so the displacement above converts straight into money. This is the number the lesson has been circling and never named.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>repaint cost  =  points the signal moved  x  $50 a point
+
+9:38 AM   BUY    7 points high  =  $350
+1:15 PM   BUY    5 points high  =  $250
+2:43 PM   SELL   4 points low   =  $200
+                               -----
+that day                       $800  of displacement, inside $2,400 of losses</code></pre>
+
+    <p>A third of that day was the indicator moving the entry after he had taken it. Same strategy, same stops, same market: seven, five and four points worse than the chart now claims they were.</p>
+
+    <p>Across the ten weeks, 43 of the 47 signals moved or vanished, and the three above average 5.3 points. If the rest were like them, the displacement alone comes to 43 x 5.3 x $50, about $11,400 of the $14,700. It is not a component of the loss. It is most of it.</p>
+
+    <p style="margin-bottom:0">This is precisely the number a backtest cannot show you, because in a backtest the displacement is zero by construction: every signal already sits where it ended up. Run the two columns yourself on whatever you are using &mdash; the signal price while the bar is live, the signal price once it has closed, the gap multiplied by your instrument&#39;s point value. That figure is what the tool costs you before the strategy has been judged at all.</p>
+  </div>
 
   <p><strong>Recovery:</strong> Jake switched to indicators whose signals do not move, and re-ran the same strategy. What matters is not what he then made &mdash; one composite trader&#39;s figures prove nothing either way. It is that his live results and his backtest finally described the same system.</p>
 

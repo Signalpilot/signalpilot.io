@@ -178,16 +178,16 @@
       <div style="font-size:0.75rem;color:var(--muted)">Perdita totale</div>
     </div>
     <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">91.5%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Tasso di repaint</div>
+      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">43 su 47</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Segnali che si sono spostati</div>
     </div>
     <div style="background:rgba(255,107,107,0.12);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#ff6b6b">71% → 34%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Crollo della percentuale di successo</div>
+      <div style="font-size:1.5rem;font-weight:700;color:#ff6b6b">5,3 punti</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Scarto medio</div>
     </div>
-    <div style="background:rgba(0,212,170,0.12);padding:0.75rem;border-radius:8px;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:#00d4aa">+74%</div>
-      <div style="font-size:0.75rem;color:var(--muted)">Ripresa dopo la correzione</div>
+    <div style="background:rgba(255,82,82,0.15);padding:0.75rem;border-radius:8px;text-align:center">
+      <div style="font-size:1.5rem;font-weight:700;color:#ff5252">$11,400</div>
+      <div style="font-size:0.75rem;color:var(--muted)">Costo dello scarto</div>
     </div>
   </div>
 
@@ -219,13 +219,32 @@
 
   <p><strong>Il punto di rottura (8 aprile 2024):</strong> Jake ha fatto lo screenshot dei segnali in tempo reale e li ha confrontati dopo la chiusura della candela:</p>
   <ul style="margin:.75rem 0 0 1.5rem">
-    <li><strong>9:38 ACQUISTO:</strong> Segnale a 5.186 → dopo la chiusura: spostato a 5.179 (sette punti più in basso!) • 680 $ persi</li>
-    <li><strong>10:52 VENDITA:</strong> Segnale a 5.194 → dopo la chiusura: <strong>sparito del tutto!</strong> • 520 $ persi</li>
-    <li><strong>13:15 ACQUISTO:</strong> Segnale a 5.201 → dopo la chiusura: spostato a 5.196 (cinque punti più in basso) • 440 $ persi</li>
-    <li><strong>14:43 VENDITA:</strong> Segnale a 5.209 → dopo la chiusura: spostato a 5.213 (quattro punti più in alto) • 380 $ persi</li>
+    <li><strong>9:38 ACQUISTO:</strong> Segnale a 5.186 → dopo la chiusura della candela: spostato a 5.179 (7 punti più in basso) • era 7 punti troppo in alto, con uno stop 8 punti sotto il segnale vero • Perdita di 750 $</li>
+    <li><strong>10:52 VENDITA:</strong> Segnale a 5.194 → dopo la chiusura: <strong>sparito del tutto</strong> • un'operazione che il grafico ora dice non essere mai esistita • Perdita di 400 $</li>
+    <li><strong>13:15 ACQUISTO:</strong> Segnale a 5.201 → dopo la chiusura della candela: spostato a 5.196 (5 punti più in basso) • 5 punti troppo in alto • Perdita di 650 $</li>
+    <li><strong>14:43 VENDITA:</strong> Segnale a 5.209 → dopo la chiusura della candela: spostato a 5.213 (4 punti più in alto) • venduto 4 punti troppo a buon mercato • Perdita di 600 $</li>
   </ul>
 
   <p><strong>L'indagine:</strong> 43 segnali su 47 si erano spostati (tasso di repaint del 91,5 %). L'audit del codice ha trovato <code>request.security()</code> senza <code>lookahead=barmerge.lookahead_off</code>.</p>
+
+  <div class="callout-key">
+    <h4>&#128200; Quanto è costato davvero quello spostamento</h4>
+    <p>L'ES vale 50 $ a punto, quindi lo scarto qui sopra si converte direttamente in denaro. È la cifra attorno a cui gira la lezione senza mai nominarla.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>costo del repaint  =  punti percorsi dal segnale  x  50 $ a punto
+
+9:38   ACQUISTO    7 punti troppo alto   =  350 $
+13:15  ACQUISTO    5 punti troppo alto   =  250 $
+14:43  VENDITA     4 punti troppo basso  =  200 $
+                                            -----
+quel giorno                                 800 $  di scarto, dentro 2.400 $ di perdite</code></pre>
+
+    <p>Un terzo di quella giornata è stato l'indicatore che ha spostato l'ingresso dopo che Jake l'aveva già preso. Stessa strategia, stessi stop, stesso mercato: sette, cinque e quattro punti peggio di quanto il grafico sostenga oggi.</p>
+
+    <p>Nell'arco delle dieci settimane 43 dei 47 segnali si sono spostati o sono spariti, e i tre qui sopra fanno in media 5,3 punti. Se gli altri erano simili, il solo scarto vale 43 x 5,3 x 50 $, cioè circa 11.400 $ su 14.700 $. Non è una componente della perdita: è la perdita.</p>
+
+    <p style="margin-bottom:0">È esattamente la cifra che un backtest non può mostrarti, perché in un backtest lo scarto è zero per costruzione: ogni segnale sta già dove è finito. Tieni tu le due colonne sullo strumento che usi &mdash; il prezzo del segnale mentre la candela è viva, il prezzo del segnale dopo la chiusura, e la differenza moltiplicata per il valore del punto del tuo strumento. Quella cifra è ciò che lo strumento ti costa prima ancora che la strategia sia stata giudicata.</p>
+  </div>
 
   <p><strong>Ripresa:</strong> Jake è passato a indicatori i cui segnali non si spostano e ha rieseguito la stessa strategia. Quello che conta non è quanto abbia poi guadagnato &mdash; le cifre di un singolo esempio composito non provano nulla, in nessuna direzione. Conta che il suo risultato reale e il suo backtest finalmente descrivessero lo stesso sistema.</p>
 
