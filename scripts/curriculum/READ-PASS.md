@@ -108,3 +108,41 @@ did — so a failed edit prints nothing but its error, and no half-applied chang
 can be mistaken for a finished one. Every claimed cut in lessons 1-9 was then
 re-verified against the files by grepping for the cut text; lesson 6 was the only
 one that had silently failed, and it has been applied.
+
+## Restart: the calibration step I skipped
+
+The first attempt at this pass began at lesson 1 and went sequentially. That
+skips step 6 of the brief, which says: run step 5 on two lessons first, the best
+and the worst by the map, and **write the rubric as a file before touching a
+third**. Lessons 1-9 were therefore read against a rubric written from a
+different pass, so they go back into the queue rather than counting as a head
+start. The ledger is reset.
+
+**The pair, by criterion:** rendered words divided by terms introduced, times the
+number of independent clauses in the lesson's claim — how much prose a lesson
+spends per new idea, weighted by how many separate things its one claim is
+holding.
+
+- Best: **lesson 13** (2,735 words, 4 terms, single-clause claim). Lesson 2
+  scores lower but was edited in the abandoned attempt; lesson 14 scores next but
+  is the exemplar, and calibrating against the tuning fork is circular.
+- Worst: **lesson 47** (6,439 words, 3 terms, three-clause claim). Lesson 60 is
+  second-worst but was the structural pass's heavy calibration lesson already.
+
+## Step 5, in the brief's order, not mine
+
+My original six ran sentence → paragraph → voice → structure → residue → read.
+That is backwards and the brief re-sequences it:
+
+    read as the tier's learner  ->  cut and reorder PARAGRAPHS  ->  tune voice at
+    the SEAMS  ->  fix sentences  ->  read again
+
+with "never sentence level before structure" as the rule, and "default is delete
+or move, not reword" over all of it. Two constraints on my original wording that
+I had to be told: hype headers go **unconditionally**, not only where they stopped
+matching the body; and voice work is confined to the seams, because unconstrained
+it converges 86 lessons to my own register — the seventh hand the exemplar exists
+to prevent.
+
+The grep hit list for a lesson is carried **into** its read and resolved against
+its spine. Only names, casing and missing disclaimers are fixed ahead of it.
