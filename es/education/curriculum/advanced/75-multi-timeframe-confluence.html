@@ -312,6 +312,33 @@
         <p style="margin-top:1rem;font-weight:600;color:#00d4aa">Una comprobación de dos minutos en el marco temporal superior redujo su número de operaciones en cuatro quintas partes. Así funciona: no mejorando las operaciones, sino frenando aquellas contra las que el marco superior ya argumentaba.</p>
       </div>
 
+      <div class="callout-key">
+        <h4>&#127919; Hasta dónde llega el filtro y qué necesitaba de verdad</h4>
+        <p>Brian marcó después sus propios perdedores, lo que hace calculable el techo de su propio arreglo. Encontró el muro de la temporalidad superior en 79 de 124 pérdidas. Supón que la comprobación caza cada una de ellas y no le cuesta ni un solo ganador &mdash; la lectura más generosa posible. Le quedan 121 operaciones con los mismos 76 aciertos, así que su tasa de acierto pasa del 38 % al 62,8 %.</p>
+
+        <p>Ahora calcula lo que necesitaba. Su ganancia media era de 700 $ y su pérdida media de 1.080 $ contra unos 1.000 $ de riesgo por operación, así que se llevaba 0,70R en los aciertos y pagaba 1,08R en los fallos. Un sistema con esa forma queda a cero cuando</p>
+
+<pre><code>tasa de acierto para no perder  =  pérdida media  &#247;  ( ganancia media  +  pérdida media )</code></pre>
+
+        <p>es decir 1,08 &#247; 1,78, o sea el 60,7 %. <strong>El mejor caso para el filtro multi-temporal es un 62,8 % contra un requisito del 60,7 %.</strong> El remedio entero, funcionando a la perfección, supera el listón por dos puntos. Eso no tiene nada de reconstrucción; es un sistema que sobrevive suponiendo que una comprobación de dos minutos nunca le quita ni un solo ganador.</p>
+
+        <p>La razón de que el margen sea tan fino no son las entradas. Mira otra vez los dos números: perdía en su perdedor medio más de lo que ganaba en su ganador medio, con una estrategia cuyo stop hacía su trabajo. Perder 1,08R y ganar 0,70R es un ratio de pago de 0,65, y eso es lo que fija el 60,7 %. Cámbialo y todo el problema cambia:</p>
+
+<pre><code>ganador medio          tasa de acierto para no perder   su esperanza con el 38 % que tenía
+0,70R (lo que hacía)                           60,7 %                               -0,40R
+1,00R                                          51,9 %                               -0,29R
+1,50R                                          41,9 %                               -0,10R
+2,00R                                          35,1 %                               +0,09R
+3,00R                                          26,5 %                               +0,47R</code></pre>
+
+        <p><strong>Con ganadores medios de 2R, la tasa de acierto del 38 % que ya tenía es rentable.</strong> Sin filtro, sin temporalidades superiores, sin cambiar una sola entrada &mdash; solo manteniendo las operaciones que funcionaron lo suficiente como para que paguen más que las que no. Su esperanza pasa de menos 0,40R a más 0,09R tocando únicamente la regla de salida, y eso antes de que el filtro elimine nada.</p>
+
+        <p>Nada de esto va contra la comprobación de temporalidad superior. Es gratis, lleva dos minutos, y 79 pérdidas identificadas son un hallazgo real. Pero la lección que enseña es más estrecha de lo que parece: un filtro solo puede quitar operaciones, así que su beneficio está limitado por cuántas malas operaciones hay que quitar, y Brian las contó él mismo. La regla de salida no tiene ese techo.</p>
+
+        <p>Calcula los dos números sobre tu propio historial antes de decidir en qué trabajar. Divide tu pérdida media por la suma de tu ganancia media y tu pérdida media, y compáralo con la tasa de acierto que realmente tienes. Si la brecha es de más de unos pocos puntos, ningún filtro de entrada la va a cerrar, porque el problema aritmético está al otro lado de la operación.</p>
+      </div>
+
+
 <div class="quiz-question" style="margin-top:2rem">
   <p><strong>Cuestionario del caso: Brian perdió 80.720 $ (-44,8 %) en 200 operaciones a lo largo de 2 meses con un 38 % de aciertos, pese a ver setups «perfectos». Era un day trader puro de gráfico de 5 minutos con posiciones de 80.000 a 120.000 $ y stops del 1 %. Su lema: «El gráfico de 5 minutos me dice todo lo que necesito». Operación de ejemplo: TSLA, «ruptura perfecta de 5 minutos» en 178,60 $, largo, barrido en 176,81 $ (-1.002 $). NVDA, «ruptura bajista perfecta de 5 minutos» en 117,90 $, corto, barrido en 119,08 $ (-1.101 $). ¿Cuál fue el error fatal de Brian?</strong></p>
   <div class="quiz-options">
