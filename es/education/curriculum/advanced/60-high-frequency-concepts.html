@@ -144,8 +144,9 @@
       <ul>
         <li>Cómo ganan dinero de verdad las firmas de HFT (es más simple de lo que crees)</li>
         <li>Por qué la latencia es la ventaja definitiva en marcos temporales diminutos</li>
-        <li>El lado oscuro: quote stuffing, anticipación de órdenes y front-running</li>
+        <li>El lado oscuro, y dónde el relato popular se equivoca: quote stuffing, anticipación de órdenes, y qué significa y qué no significa front-running</li>
         <li>Cómo adaptar tu ejecución para no ser la liquidez de las firmas de HFT</li>
+        <li>Cómo decidir si pagar por el control de enrutamiento merece la pena: medio spread menos tu comisión por acción, calculado sobre el instrumento que tienes delante</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -292,24 +293,23 @@
 
       <p>Aquí el HFT cruza la frontera de la manipulación.</p>
 
-      <p><strong>Quote stuffing:</strong> El HFT coloca 10.000 órdenes por segundo y las cancela todas. Objetivo: (1) frenar a los competidores, (2) sondear icebergs, (3) manipular el NBBO. Resultado: caos en el order book y precios parpadeantes. Precios saltando por todos lados = estrategias HFT chocando entre sí.</p>
+      <p><strong>Quote stuffing:</strong> inundar un mercado de órdenes y cancelarlas, para frenar a los competidores o para disfrazar la intención. Hay que distinguir dos cosas. Es un delito perseguido y no una práctica rutinaria, y el historial sancionador es contra operadores por cuenta propia y mesas de bancos, no contra la creación de mercado como actividad. Y no puedes detectarlo desde una pantalla minorista: la mayoría de las órdenes en acciones estadounidenses se cancelan en lugar de ejecutarse, así que un libro que parpadea y cancela mucho es el estado normal del mercado, no prueba de nada. Los precios parpadeantes son el aspecto que tiene un order book moderno.</p>
 
       <div class="section-break"><span>Parte 4: el escándalo del payment for order flow</span></div>
 <h2 id="your-free-broker-is-selling-you-to-hfts">Tu bróker «gratuito» te está vendiendo a los HFT</h2>
 
       <p>Robinhood. Webull. E*TRADE. La mayoría de los brókeres sin comisiones lo hacen, y lo publican: la SEC exige informes trimestrales que nombran a quién compra el flujo y cuánto paga. Consulta el de tu propio bróker: esos números son reales, a diferencia de la mayoría de los que se citan sobre ellos.</p>
 
-      <p><strong>Payment for order flow (PFOF):</strong> Tu bróker vende tus órdenes a firmas de HFT <em>antes</em> de que lleguen a los mercados públicos.</p>
+      <p><strong>Payment for order flow (PFOF):</strong> tu bróker enruta tu orden a un mayorista, que paga por el privilegio. Sé preciso con el mecanismo, porque la descripción habitual está mal: el mayorista <strong>ejecuta</strong> la orden contra su propio inventario. No se le enseña tu orden para luego dejarle adelantarse a ella en un mercado; eso sería front-running, un acto distinto y prohibido.</p>
 
       <h3>Cómo funciona el PFOF (y por qué el producto eres tú)</h3>
 
-      <p><strong>Ejemplo (100 acciones de SPY):</strong> Robinhood vende la orden a Citadel por 0,002 $ por acción (0,20 $ de ingreso). Citadel te ejecuta a 520,01 $, compra a 520,00 $ y gana 0,008 $ por acción (0,80 $). Nunca tienes ocasión de comprar a la demanda. Coste oculto: 0,01 $ por acción = 1 $. Para hacerse una idea: Citadel Securities registró unos 7,5 miles de millones de dólares de ingresos netos de trading en 2022 en todos sus negocios de creación de mercado, y Robinhood ingresó unos 814 millones de dólares por transacciones ese año; la parte de eso que pagan los mayoristas es justo lo que vale tu orden para ellos.</p>
+      <p><strong>Ejemplo (100 acciones de SPY):</strong> al bróker le pagan del orden de 0,002 $ por acción por enrutarla, unos 0,20 $ en esta operación. El mayorista te ejecuta al mejor precio nacional de venta o algo dentro de él, y espera deshacer el otro lado mejor que eso. Lo que cedes no es un céntimo por acción &mdash; todo el mercado mide un céntimo &mdash; es la oportunidad de haber estado puesto en la demanda y haber cobrado el spread en lugar de pagar parte de él. Para dimensionar el sector y no tu orden: Citadel Securities registró unos 7.500 M$ de ingresos netos de negociación en 2022 en todos sus negocios de creación de mercado, y Robinhood ingresó unos 814 M$ de ingresos por transacciones ese año.</p>
 
       <div class="callout-warning">
         <h4>🚨 La mentira de la «mejor ejecución»</h4>
-        <p>Los brókeres afirman ofrecer «mejor ejecución» y «mejora de precio».</p>
-        <p>Traducción: <em>«Te damos el National Best Bid/Offer (NBBO)… pero nunca tienes ocasión de aportar liquidez a la demanda.»</em></p>
-        <p>Tú siempre pagas el spread. Los HFT siempre lo cobran.</p>
+        <p>Los brókeres afirman que dan «best execution» y «price improvement», y en órdenes minoristas a mercado ambas cosas suelen ser reales y se publican trimestralmente.</p>
+        <p>La queja más estrecha y más cierta: te ejecutan, de forma fiable y algo mejor que la cotización, y nunca eres tú quien está puesto en la demanda cobrando el spread. Ese es un coste real, y es el que esta lección sí puede cuantificar. También es mucho menor que las versiones que circulan, por la razón que da la sección siguiente.</p>
       </div>
 <h3>Lo que el pago por order flow te cuesta realmente</h3>
 
@@ -715,6 +715,32 @@ No anualices una sola operacion. Una ejecucion no dice nada sobre un ano, y
 multiplicarla por 104 produce un numero sin pruebas detras -- que es
 exactamente lo que hacia antes este recuadro.
 </code></pre>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Cuándo vale la pena pagar por el control de enrutamiento y cuándo los números se cancelan</h4>
+        <p>El hecho organizador de esta lección es que un instrumento con spread de un céntimo solo puede costarte un céntimo. Llévalo un paso más allá y responde a la pregunta de la que trata en realidad todo el debate del PFOF: <strong>¿merece la pena pagar una comisión para tener control de enrutamiento?</strong></p>
+
+        <p>Lo que el control de enrutamiento te compra es poder quedarte puesto en la demanda en vez de cruzar a la oferta. Si tu límite se ejecuta, te ahorras medio spread. Lo que te cuesta es una comisión por acción. Así que la comparación es una sola resta:</p>
+
+<pre><code>valor del control de enrutamiento  =  medio spread  &#8722;  comisión por acción</code></pre>
+
+        <p>Toma una tarifa típica de enrutamiento directo de medio céntimo por acción:</p>
+
+<pre><code>spread cotizado   medio spread ahorrado al poner orden   comisión   neto por acción
+         0,01 $                               0,0050 $   0,0050 $          0,0000 $
+         0,02 $                               0,0100 $   0,0050 $         +0,0050 $
+         0,05 $                               0,0250 $   0,0050 $         +0,0200 $
+         0,10 $                               0,0500 $   0,0050 $         +0,0450 $</code></pre>
+
+        <p>Lee la primera fila, porque es en la que está casi todo lector de esta lección. En un ETF con spread de un céntimo, medio spread es medio céntimo y la comisión es medio céntimo. <strong>Se cancelan exactamente.</strong> Pagas un coste visible para recuperar otro invisible idéntico, y encima renuncias a la mejora de precio que el mayorista te estaba dando. En SPY, a tamaño minorista, toda la controversia vale para ti aproximadamente nada.</p>
+
+        <p>El control de enrutamiento solo empieza a pagar cuando el spread es más ancho que el doble de tu comisión. Eso no es un ETF; es un small cap, una opción ilíquida o un valor que cotiza en múltiplos de cinco céntimos &mdash; donde la segunda fila ya vale su comisión otra vez y la última vale nueve veces.</p>
+
+        <p>Un término más lo decide para las órdenes pequeñas. Casi todas las tarifas llevan un mínimo de alrededor de un dólar por orden, así que por debajo de unas 200 acciones ese mínimo es la tarifa real: una orden de cien acciones sobre un valor con spread de un céntimo paga un céntimo por acción, el doble del medio spread que intentaba ahorrar. Las órdenes pequeñas en valores líquidos son estrictamente peores en un bróker con comisión, antes de que nadie discuta quién ve qué.</p>
+
+        <p>Así que la versión honesta de la conclusión de esta lección es un umbral y no un bando al que apuntarse: <strong>deja que paguen por el flujo en valores líquidos con spread de un céntimo, y paga por enrutamiento cuando el spread sea lo bastante ancho como para financiarlo.</strong> Haz la resta sobre el instrumento que tienes delante, no sobre el sector.</p>
+      </div>
 
       <div class="key-takeaway">
         <h4>🎓 Ideas clave</h4>

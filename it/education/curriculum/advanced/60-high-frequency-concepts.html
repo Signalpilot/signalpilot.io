@@ -144,8 +144,9 @@
       <ul>
         <li>Come guadagnano davvero le società di HFT (è più semplice di quanto pensi)</li>
         <li>Perché su orizzonti minuscoli la latenza è il vantaggio decisivo</li>
-        <li>Il lato oscuro: quote stuffing, anticipazione degli ordini e front-running</li>
+        <li>Il lato oscuro, e dove il racconto corrente sbaglia: quote stuffing, anticipazione degli ordini, e che cosa significa e non significa front-running</li>
         <li>Come adattare la tua esecuzione per non fare da liquidità alle società di HFT</li>
+        <li>Come decidere se convenga pagare per il controllo del routing: mezzo spread meno la tua commissione per azione, calcolato sullo strumento che hai davanti</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -292,24 +293,23 @@
 
       <p>Qui l'HFT supera il confine della manipolazione.</p>
 
-      <p><strong>Quote stuffing:</strong> L'HFT immette 10.000 ordini al secondo e li cancella tutti. Scopo: (1) rallentare i concorrenti, (2) sondare gli iceberg, (3) manipolare il NBBO. Risultato: caos nell'order book e prezzi che lampeggiano. Prezzi che saltano ovunque = strategie HFT che si scontrano.</p>
+      <p><strong>Quote stuffing:</strong> inondare una sede di ordini e cancellarli, per rallentare i concorrenti o per mascherare l'intenzione. Due cose da tenere distinte. È un reato perseguito e non una prassi ordinaria, e i procedimenti hanno riguardato singoli operatori in proprio e desk bancari, non il market making come attività. E non puoi rilevarlo da uno schermo retail: la maggior parte degli ordini sulle azioni USA viene cancellata anziché eseguita, quindi un book che sfarfalla e cancella molto è lo stato normale del mercato, non la prova di alcunché. Prezzi che sfarfallano sono semplicemente l'aspetto di un order book moderno.</p>
 
       <div class="section-break"><span>Parte 4: lo scandalo del payment for order flow</span></div>
 <h2 id="your-free-broker-is-selling-you-to-hfts">Il tuo broker «gratuito» ti sta vendendo agli HFT</h2>
 
       <p>Robinhood. Webull. E*TRADE. La maggior parte dei broker a zero commissioni lo fa, e lo dichiara: la SEC impone rapporti trimestrali che indicano chi compra il flusso e quanto paga. Guarda quello del tuo broker: quei numeri sono veri, a differenza di quasi tutti i numeri che si citano su di loro.</p>
 
-      <p><strong>Payment for order flow (PFOF):</strong> Il tuo broker vende i tuoi ordini a società di HFT <em>prima</em> che arrivino sulle Borse pubbliche.</p>
+      <p><strong>Payment for order flow (PFOF):</strong> il tuo broker instrada il tuo ordine a un wholesaler, che paga per il privilegio. Sii preciso sul meccanismo, perché la descrizione consueta è sbagliata: il wholesaler <strong>esegue</strong> l'ordine contro il proprio inventario. Non gli viene mostrato il tuo ordine per poi lasciargli precederlo su una borsa; quello sarebbe front-running, un atto diverso e vietato.</p>
 
       <h3>Come funziona il PFOF (e perché il prodotto sei tu)</h3>
 
-      <p><strong>Esempio (100 azioni SPY):</strong> Robinhood vende l'ordine a Citadel per 0,002 $ per azione (0,20 $ di ricavo). Citadel ti esegue a 520,01 $, compra a 520,00 $ e guadagna 0,008 $ per azione (0,80 $). Non hai mai la possibilità di comprare al denaro. Costo nascosto: 0,01 $ per azione = 1 $. Per avere un'idea: Citadel Securities ha registrato circa 7,5 miliardi di dollari di ricavi netti di trading nel 2022 su tutte le sue attività di market making, e Robinhood ha incassato circa 814 milioni di dollari di ricavi da transazioni quell'anno; la fetta pagata dai grossisti è esattamente quanto vale il tuo ordine per loro.</p>
+      <p><strong>Esempio (100 azioni SPY):</strong> al broker vengono pagati nell'ordine di 0,002 $ per azione per l'instradamento, circa 0,20 $ su questo trade. Il wholesaler ti esegue al miglior prezzo nazionale in vendita o appena dentro, e spera di chiudere l'altro lato meglio di così. Quello a cui rinunci non è un centesimo per azione &mdash; l'intero mercato è largo un centesimo &mdash; è la possibilità di essere stato in denaro e di aver incassato lo spread invece di pagarne una parte. Per l'ordine di grandezza del settore e non del tuo ordine: Citadel Securities ha registrato circa 7,5 mld $ di ricavi netti di trading nel 2022 su tutte le sue attività di market making, e Robinhood ha incassato circa 814 mln $ di ricavi da transazioni quell'anno.</p>
 
       <div class="callout-warning">
         <h4>🚨 La bugia della «migliore esecuzione»</h4>
-        <p>I broker sostengono di offrire «migliore esecuzione» e «miglioramento del prezzo».</p>
-        <p>Tradotto: <em>«Ti diamo il National Best Bid/Offer (NBBO)… ma non hai mai la possibilità di fornire liquidità al denaro.»</em></p>
-        <p>Lo spread lo paghi sempre tu. Gli HFT lo incassano sempre.</p>
+        <p>I broker sostengono di fornire «best execution» e «price improvement», e sugli ordini retail a mercato entrambe di solito sono reali e vengono pubblicate ogni trimestre.</p>
+        <p>L'obiezione più stretta e più vera: vieni eseguito, in modo affidabile e leggermente meglio della quotazione, e non sei mai tu quello in denaro che incassa lo spread. È un costo reale, ed è quello a cui questa lezione può mettere un numero. È anche molto più piccolo delle versioni che circolano, per la ragione che dà la sezione seguente.</p>
       </div>
 <h3>Che cosa ti costa davvero il pagamento per order flow</h3>
 
@@ -715,6 +715,32 @@ Non annualizzare una singola operazione. Un fill non dice nulla su un anno, e
 moltiplicarlo per 104 produce un numero senza prove dietro -- che e
 esattamente cio che faceva prima questo riquadro.
 </code></pre>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Quando il controllo del routing vale il suo prezzo, e quando i numeri si annullano</h4>
+        <p>Il fatto che ordina questa lezione è che uno strumento con spread di un centesimo può costarti al massimo un centesimo. Portalo un passo più in là e risponde alla domanda di cui in realtà tratta tutto il dibattito sul PFOF: <strong>conviene pagare una commissione per avere il controllo del routing?</strong></p>
+
+        <p>Quello che il controllo del routing ti compra è la possibilità di restare in denaro invece di attraversare fino alla lettera. Se il tuo limite viene eseguito, risparmi mezzo spread. Quello che ti costa è una commissione per azione. Il confronto è dunque una sola sottrazione:</p>
+
+<pre><code>valore del controllo del routing  =  mezzo spread  &#8722;  commissione per azione</code></pre>
+
+        <p>Prendi una tariffa tipica di routing diretto di mezzo centesimo per azione:</p>
+
+<pre><code>spread quotato   mezzo spread risparmiato mettendosi in coda   commissione   netto per azione
+        0,01 $                                      0,0050 $      0,0050 $           0,0000 $
+        0,02 $                                      0,0100 $      0,0050 $          +0,0050 $
+        0,05 $                                      0,0250 $      0,0050 $          +0,0200 $
+        0,10 $                                      0,0500 $      0,0050 $          +0,0450 $</code></pre>
+
+        <p>Leggi la prima riga, perché è quella in cui si trova quasi ogni lettore di questa lezione. Su un ETF con spread di un centesimo, mezzo spread è mezzo centesimo e la commissione è mezzo centesimo. <strong>Si annullano esattamente.</strong> Paghi un costo visibile per recuperarne uno invisibile identico, e per giunta rinunci al miglioramento di prezzo che il wholesaler ti stava dando. Su SPY, a dimensione retail, l'intera controversia per te vale all'incirca nulla.</p>
+
+        <p>Il controllo del routing comincia a rendere solo quando lo spread è più largo del doppio della tua commissione. Non è un ETF; è una small cap, un'opzione illiquida o un titolo quotato a scatti di cinque centesimi &mdash; dove la seconda riga vale già la sua commissione un'altra volta e l'ultima ne vale nove.</p>
+
+        <p>Un ultimo termine lo decide per gli ordini piccoli. Quasi tutti i tariffari hanno un minimo di circa un dollaro per ordine, quindi sotto le 200 azioni circa quel minimo è la tariffa vera: un ordine da cento azioni su un titolo con spread di un centesimo paga un centesimo per azione, il doppio del mezzo spread che voleva risparmiare. Gli ordini piccoli su titoli liquidi sono strettamente peggiori presso un broker a commissione, prima ancora che qualcuno discuta di chi vede cosa.</p>
+
+        <p>La versione onesta della conclusione di questa lezione è dunque una soglia e non una parte da prendere: <strong>lascia che il flusso venga pagato sui titoli liquidi con spread di un centesimo, e paga per il routing quando lo spread è abbastanza largo da finanziarlo.</strong> Fai la sottrazione sullo strumento che hai davanti, non sul settore.</p>
+      </div>
 
       <div class="key-takeaway">
         <h4>🎓 Punti chiave</h4>

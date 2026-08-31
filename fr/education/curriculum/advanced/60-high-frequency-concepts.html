@@ -144,8 +144,9 @@
       <ul>
         <li>Comment les firmes de HFT gagnent réellement de l'argent (c'est plus simple que tu ne crois)</li>
         <li>Pourquoi la latence est l'avantage ultime sur les horizons minuscules</li>
-        <li>Le côté sombre : quote stuffing, anticipation d'ordres et front-running</li>
+        <li>Le côté sombre, et là où le récit populaire se trompe : quote stuffing, anticipation d'ordres, et ce que front-running veut dire et ne veut pas dire</li>
         <li>Comment adapter ton exécution pour ne pas servir de liquidité aux firmes de HFT</li>
+        <li>Comment décider s'il vaut la peine de payer pour le contrôle du routage : demi-spread moins votre commission par titre, calculé sur l'instrument devant vous</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -292,24 +293,23 @@
 
       <p>Ici, le HFT franchit la frontière de la manipulation.</p>
 
-      <p><strong>Quote stuffing :</strong> Le HFT place 10 000 ordres par seconde et les annule tous. Objectifs : (1) ralentir les concurrents, (2) sonder les icebergs, (3) manipuler le NBBO. Résultat : chaos dans l'order book, prix qui clignotent. Des prix qui sautent partout = des stratégies HFT qui se percutent.</p>
+      <p><strong>Quote stuffing :</strong> inonder une plateforme d'ordres puis les annuler, pour ralentir les concurrents ou masquer une intention. Deux choses à distinguer. C'est une infraction poursuivie et non une pratique courante, et le contentieux vise des opérateurs pour compte propre et des desks bancaires, pas la tenue de marché comme activité. Et vous ne pouvez pas la détecter depuis un écran de particulier : la plupart des ordres sur actions américaines sont annulés plutôt qu'exécutés, donc un carnet qui clignote et annule beaucoup est l'état ordinaire du marché, pas la preuve de quoi que ce soit. Des prix qui clignotent, c'est simplement à quoi ressemble un order book moderne.</p>
 
       <div class="section-break"><span>Partie 4 : le scandale du payment for order flow</span></div>
 <h2 id="your-free-broker-is-selling-you-to-hfts">Ton courtier « gratuit » te revend aux HFT</h2>
 
       <p>Robinhood. Webull. E*TRADE. La plupart des courtiers sans commission le font, et ils le publient : la SEC exige des rapports trimestriels nommant qui achète le flux et combien il paie. Consultez celui de votre courtier : ces chiffres-là sont réels, contrairement à la plupart de ceux qu'on cite à leur sujet.</p>
 
-      <p><strong>Payment for order flow (PFOF) :</strong> Ton courtier vend tes ordres à des firmes de HFT <em>avant</em> qu'ils atteignent les Bourses publiques.</p>
+      <p><strong>Payment for order flow (PFOF) :</strong> votre courtier route votre ordre vers un wholesaler, qui paie pour cela. Soyez précis sur le mécanisme, car la description habituelle est fausse : le wholesaler <strong>exécute</strong> l'ordre contre son propre inventaire. On ne lui montre pas votre ordre pour le laisser ensuite le devancer sur un marché ; ce serait du front-running, un acte différent, et interdit.</p>
 
       <h3>Comment fonctionne le PFOF (et pourquoi le produit, c'est toi)</h3>
 
-      <p><strong>Exemple (100 actions SPY) :</strong> Robinhood vend l'ordre à Citadel pour 0,002 $ par action (0,20 $ de revenu). Citadel t'exécute à 520,01 $, achète à 520,00 $ et gagne 0,008 $ par action (0,80 $). Tu n'as jamais l'occasion d'acheter au cours acheteur. Coût caché : 0,01 $ par action = 1 $. Pour situer : Citadel Securities a enregistré environ 7,5 milliards de dollars de revenus nets de trading en 2022 sur l'ensemble de ses activités de tenue de marché, et Robinhood a encaissé environ 814 millions de dollars de revenus liés aux transactions cette année-là — la part payée par les grossistes, c'est exactement ce que vaut ton ordre à leurs yeux.</p>
+      <p><strong>Exemple (100 actions SPY) :</strong> le courtier reçoit de l'ordre de 0,002 $ par titre pour le routage, soit environ 0,20 $ sur ce trade. Le wholesaler vous exécute au meilleur cours vendeur national ou juste à l'intérieur, et espère déboucler l'autre côté mieux que cela. Ce que vous abandonnez n'est pas un centime par titre &mdash; le marché entier ne fait qu'un centime de large &mdash; c'est la possibilité d'avoir été posé à l'achat et d'avoir encaissé le spread au lieu d'en payer une partie. Pour l'ordre de grandeur du secteur et non de votre ordre : Citadel Securities a comptabilisé environ 7,5 Md$ de revenus nets de trading en 2022 sur l'ensemble de ses activités de tenue de marché, et Robinhood a encaissé environ 814 M$ de revenus liés aux transactions cette année-là.</p>
 
       <div class="callout-warning">
         <h4>🚨 Le mensonge de la « meilleure exécution »</h4>
-        <p>Les courtiers affirment fournir la « meilleure exécution » et une « amélioration de prix ».</p>
-        <p>Traduction : <em>« On te donne le National Best Bid/Offer (NBBO)… mais tu n'as jamais l'occasion d'apporter de la liquidité au cours acheteur. »</em></p>
-        <p>Tu paies toujours le spread. Les HFT l'encaissent toujours.</p>
+        <p>Les courtiers affirment fournir « best execution » et « price improvement », et sur des ordres au marché de particuliers les deux sont généralement réels et publiés chaque trimestre.</p>
+        <p>Le reproche plus étroit et plus vrai : vous êtes exécuté, de façon fiable et légèrement mieux que la cotation, et vous n'êtes jamais celui qui est posé à l'achat en encaissant le spread. C'est un coût réel, et c'est celui que cette leçon peut chiffrer. Il est aussi bien plus petit que les versions qui circulent, pour la raison que donne la section suivante.</p>
       </div>
 <h3>Ce que le paiement pour order flow vous coûte réellement</h3>
 
@@ -715,6 +715,32 @@ N'annualisez pas un trade unique. Une execution ne dit rien d'une annee, et
 la multiplier par 104 produit un chiffre sans aucune preuve derriere --
 ce que faisait exactement cet encadre auparavant.
 </code></pre>
+
+
+      <div class="callout-key">
+        <h4>&#127919; Quand le contrôle du routage vaut son prix, et quand les chiffres s'annulent</h4>
+        <p>Le fait organisateur de cette leçon est qu'un instrument coté au centime ne peut vous coûter qu'un centime. Poussez-le d'un cran et il répond à la question dont traite réellement tout le débat sur le PFOF : <strong>vaut-il la peine de payer une commission pour obtenir le contrôle du routage ?</strong></p>
+
+        <p>Ce que le contrôle du routage vous achète, c'est la possibilité de rester posé à l'achat plutôt que de franchir jusqu'à la vente. Si votre limite est exécutée, vous économisez un demi-spread. Ce qu'il vous coûte, c'est une commission par titre. La comparaison tient donc en une seule soustraction :</p>
+
+<pre><code>valeur du contrôle du routage  =  demi-spread  &#8722;  commission par titre</code></pre>
+
+        <p>Prenez un tarif de routage direct typique d'un demi-centime par titre :</p>
+
+<pre><code>spread coté   demi-spread économisé en postant   commission   net par titre
+     0,01 $                           0,0050 $     0,0050 $        0,0000 $
+     0,02 $                           0,0100 $     0,0050 $       +0,0050 $
+     0,05 $                           0,0250 $     0,0050 $       +0,0200 $
+     0,10 $                           0,0500 $     0,0050 $       +0,0450 $</code></pre>
+
+        <p>Lisez la première ligne, car c'est celle où se trouve presque tout lecteur de cette leçon. Sur un ETF coté au centime, le demi-spread vaut un demi-centime et la commission vaut un demi-centime. <strong>Ils s'annulent exactement.</strong> Vous payez un coût visible pour récupérer un coût invisible identique, et vous abandonnez en prime l'amélioration de prix que le wholesaler vous donnait. Sur SPY, à taille de particulier, toute la controverse ne vaut pour vous à peu près rien.</p>
+
+        <p>Le contrôle du routage ne commence à payer que lorsque le spread dépasse le double de votre commission. Ce n'est pas un ETF ; c'est une small cap, une option illiquide ou un titre coté par pas de cinq centimes &mdash; où la deuxième ligne vaut déjà sa commission une fois de plus et la dernière en vaut neuf fois.</p>
+
+        <p>Un dernier terme tranche pour les petits ordres. La plupart des grilles comportent un minimum d'environ un dollar par ordre, donc en dessous d'environ 200 titres ce minimum est le vrai tarif : un ordre de cent titres sur un nom coté au centime paie un centime par titre, soit le double du demi-spread qu'il cherchait à économiser. Les petits ordres sur des titres liquides sont strictement moins bons chez un courtier à commission, avant même que quiconque discute de qui voit quoi.</p>
+
+        <p>La version honnête de la conclusion de cette leçon est donc un seuil et non un camp à choisir : <strong>laissez le flux être payé sur les noms liquides cotés au centime, et payez pour le routage quand le spread est assez large pour le financer.</strong> Faites la soustraction sur l'instrument devant vous, pas sur le secteur.</p>
+      </div>
 
       <div class="key-takeaway">
         <h4>🎓 À retenir</h4>

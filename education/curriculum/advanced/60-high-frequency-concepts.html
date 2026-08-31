@@ -131,8 +131,9 @@
       <ul>
         <li>How HFT firms actually make money (it's simpler than you think)</li>
         <li>Why latency is the ultimate edge at micro timeframes</li>
-        <li>The dark side: quote stuffing, order anticipation, and front-running</li>
+        <li>The dark side, and where the popular account of it is wrong: quote stuffing, order anticipation, and what front-running does and does not mean</li>
         <li>How to adapt your execution to avoid being HFT liquidity</li>
+        <li>How to decide whether paying for routing control is worth it: half the spread minus your commission per share, run on the instrument in front of you</li>
       </ul>
 
       <!-- Prerequisites -->
@@ -279,24 +280,23 @@
 
       <p>This is where HFT crosses into manipulation territory.</p>
 
-      <p><strong>Quote stuffing:</strong> HFT places 10K orders/second, cancels all. Purpose: (1) Slow competitors, (2) Probe icebergs, (3) Manipulate NBBO. Result: Order book chaos, flickering prices. Prices jumping everywhere = HFT strategies colliding.</p>
+      <p><strong>Quote stuffing:</strong> flooding a venue with orders and cancelling them, to slow competitors or to disguise intent. Two things to keep straight about it. It is a prosecuted offence rather than a routine practice, and the enforcement record is against individual proprietary traders and bank desks rather than against market making as an activity. And you cannot detect it from a retail screen: most orders in US equities are cancelled rather than filled, so a book that flickers and cancels heavily is the ordinary state of the market, not evidence of anything. Flickering prices are what a modern order book looks like.</p>
 
       <div class="section-break"><span>Part 4: The Payment for Order Flow Scandal</span></div>
 <h2 id="your-free-broker-is-selling-you-to-hfts">Your "Free" Broker Is Selling You to HFTs</h2>
 
       <p>Robinhood. Webull. E*TRADE. Most zero-commission brokers do it, and they disclose it &mdash; the SEC requires quarterly reports naming who buys the flow and what they pay. Check your own broker's: the numbers there are real, unlike most of the numbers quoted about them.</p>
 
-      <p><strong>Payment for Order Flow (PFOF):</strong> Your broker sells your orders to HFT firms <em>before</em> they hit public exchanges.</p>
+      <p><strong>Payment for Order Flow (PFOF):</strong> your broker routes your order to a wholesaler, which pays for the privilege. Be precise about the mechanism, because the usual description is wrong: the wholesaler <strong>executes</strong> the order against its own inventory. It is not shown your order and then allowed to trade ahead of it on an exchange, which would be front-running &mdash; a different act, and a prohibited one.</p>
 
       <h3>How PFOF Works (And Why You're the Product)</h3>
 
-      <p><strong>Example (100 shares SPY):</strong> Robinhood sells order to Citadel for $0.002/share ($0.20 revenue). Citadel fills you @ $520.01, buys @ $520.00, profits $0.008/share ($0.80). You never get chance to buy @ bid. Hidden cost: $0.01/share = $1. For scale: Citadel Securities booked about $7.5B of net trading revenue in 2022 across all its market-making businesses, and Robinhood took about $814M in transaction-based revenue that year — the slice of it paid by wholesalers is what your order is worth to them.</p>
+      <p><strong>Example (100 shares SPY):</strong> the broker is paid on the order of $0.002 a share for routing it, so about $0.20 on this trade. The wholesaler fills you at or just inside the national best offer and hopes to unwind the other side better than that. What you give up is not a penny a share — the whole market is only a penny wide — it is the chance to have rested at the bid and been paid the spread rather than paying part of it. For scale on the industry rather than on your order: Citadel Securities booked about $7.5B of net trading revenue in 2022 across all its market-making businesses, and Robinhood took about $814M in transaction-based revenue that year.</p>
 
       <div class="callout-warning">
         <h4>🚨 The "Best Execution" Lie</h4>
-        <p>Brokers claim they provide "best execution" and "price improvement."</p>
-        <p>Translation: <em>"We give you the National Best Bid/Offer (NBBO)... but you never get a chance to provide liquidity at the bid."</em></p>
-        <p>You always pay the spread. HFTs always collect it.</p>
+        <p>Brokers claim they provide "best execution" and "price improvement", and on marketable retail orders both are usually real and are disclosed quarterly.</p>
+        <p>The narrower and truer complaint: you are filled, reliably and slightly better than the quote, and you are never the one resting at the bid collecting the spread. That is a genuine cost, and it is the one this lesson can put a number on. It is also much smaller than the versions that circulate, for the reason the next section gives.</p>
       </div>
 <h3>What Payment for Order Flow Actually Costs You</h3>
 
@@ -702,6 +702,32 @@ Do not annualise a single trade. One fill tells you nothing about a
 year, and multiplying it by 104 produces a number with no evidence
 behind it -- which is exactly what this box used to do.
 </code></pre>
+
+
+      <div class="callout-key">
+        <h4>&#127919; When routing control is worth paying for, and when the numbers cancel</h4>
+        <p>The lesson's organising fact is that a penny-wide instrument can only cost you a penny. Push it one step further and it answers the question the whole PFOF argument is really about: <strong>is it worth paying a commission to get routing control?</strong></p>
+
+        <p>What routing control buys you is the ability to rest at the bid rather than cross to the offer. If your limit fills, you save half the spread. What it costs you is a commission per share. So the comparison is one subtraction:</p>
+
+<pre><code>value of routing control  =  half the spread  &#8722;  commission per share</code></pre>
+
+        <p>Take a typical direct-routing rate of half a cent a share:</p>
+
+<pre><code>quoted spread   half-spread saved by posting   commission   net per share
+        $0.01                        $0.0050      $0.0050         $0.0000
+        $0.02                        $0.0100      $0.0050        +$0.0050
+        $0.05                        $0.0250      $0.0050        +$0.0200
+        $0.10                        $0.0500      $0.0050        +$0.0450</code></pre>
+
+        <p>Read the top row, because it is the one nearly every reader of this lesson is in. On a penny-wide ETF, half the spread is half a cent and the commission is half a cent. <strong>They cancel exactly.</strong> You pay a visible cost to recover an identical invisible one, and you additionally give up the price improvement the wholesaler was handing you. On SPY, at retail size, the entire controversy is worth approximately nothing to you.</p>
+
+        <p>Routing control starts to pay only when the spread is wider than twice your commission. That is not an ETF; it is a small-cap, an illiquid option, or a name quoting in nickels &mdash; where the second row is already worth its commission over again and the bottom row is worth nine times it.</p>
+
+        <p>One more term decides it for small orders. Most commission schedules carry a minimum of about a dollar per order, so below roughly 200 shares that minimum is the real rate: a hundred-share order on a penny-wide name pays a cent a share, twice the half-spread it was trying to save. Small orders on liquid names are strictly worse at a commission broker, before anyone argues about who sees what.</p>
+
+        <p>So the honest version of this lesson's conclusion is a threshold rather than a side to be on: <strong>let the flow be paid for on liquid penny-wide names, and pay for routing when the spread is wide enough to fund it.</strong> Run the subtraction on the instrument in front of you rather than on the industry.</p>
+      </div>
 
       <div class="key-takeaway">
         <h4>🎓 Key Takeaways</h4>
