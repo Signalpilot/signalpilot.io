@@ -130,7 +130,7 @@
           <li>Strategia quantitativa: basata su regole, sistematica, sottoponibile a backtest</li>
           <li>Componenti: regole di ingresso, regole di uscita, dimensionamento delle posizioni, gestione del rischio</li>
           <li>Evitare l'adattamento alla curva: usare walk-forward, test fuori campione e ipotesi realistiche</li>
-          <li>Schema: definire le regole → backtest → walk-forward → carta → dal vivo</li>
+          <li>Schema: calcola il rendimento di backtest che ti servirebbe prima di costruirne uno → Definisci le regole → Backtest → Walk-forward → Paper trading → Live</li>
         </ul>
       </div>
 
@@ -298,7 +298,7 @@
       <tr>
         <td>CAGR</td>
         <td>(Fine / Inizio)^(1/Anni) - 1</td>
-        <td>&gt; 15 % (al netto dei costi)</td>
+        <td>&gt; 15 % al netto dei costi, e sopra l'asticella della parte 4 &mdash; il 15 % su uno strumento che ha reso il 12 % non è un buon valore, è uno peggiore</td>
       </tr>
       <tr>
         <td>Indice di Sharpe</td>
@@ -502,6 +502,7 @@
         <p><strong>Ora fai i conti su quanto costa tornare indietro.</strong> Anche se la nuova strategia consegna il suo 18 % annuo pieno, recuperare 18.400 $ sui 56.600 $ che gli restano richiede circa venti mesi. Questo è il prezzo vero di tre mesi di curve-fitting: non i 18.400 $, ma i quasi due anni di capitalizzazione che costa tornare al punto di partenza. Chi ti racconta di aver «recuperato tutto» in sei mesi con una strategia al 18 % sta descrivendo un'altra strategia.</p>
 
         <p><strong>La lezione di Marcus:</strong> «Una strategia al 18 % che funziona batte un backtest al 32 % che fallisce. La chiave non è trovare i parametri perfetti, ma costruire qualcosa di abbastanza robusto da sopravvivere ai mercati veri.»</p>
+        <p>Mezzo vero, e la metà che manca è il riquadro qui sotto. Robusto abbastanza da sopravvivere è la prima asticella; la seconda è se ciò che sopravvive batte l'indice che avrebbe potuto comprare al suo posto. Fai passare il 18 % nell'aritmetica della parte 4 e non ce la fa.</p>
       </div>
 
       <p>Una strategia quantitativa progettata bene elimina l'emotività, valida l'edge statisticamente e compone i rendimenti in modo sistematico. Questa lezione ti insegna a progettare, backtestare e mettere in produzione sistemi di trading di livello istituzionale — e a evitare l'errore da 18.000 $ di Marcus.</p>
@@ -511,6 +512,29 @@
         <p>Un fondo quantitativo backtesta 10.000 combinazioni di parametri e trova una strategia «perfetta»: 45 % di rendimento annuo, uno Sharpe di 2,6 e il 12 % di drawdown massimo dal 2010 al 2020. A gennaio 2021 impiega 50 milioni di dollari.</p>
         <p>A dicembre 2021 il fondo è in calo del 28 %. La strategia era adattata al rumore storico, non a un vero edge di mercato.</p>
         <p><strong>Lezione:</strong> il tasso di fallimento delle strategie passate al backtest è abbastanza alto da far ricadere l'onere della prova sulla strategia e non sullo scettico. Sentirai spesso citare «il 95 % fallisce»; nessuno l'ha mai misurato, perché nessuno possiede la popolazione delle strategie abbandonate in silenzio. Quello che si può misurare è più stretto e più utile: quando i ricercatori ritestano anomalie pubblicate su dati raccolti dopo la pubblicazione, i rendimenti medi si dimezzano circa e una quota consistente smette del tutto di funzionare. Dai per scontato che il tuo backtest sia almeno altrettanto ottimista e progetta di conseguenza.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; Il rendimento di backtest che ti serve, calcolato prima di aprire un backtest</h4>
+        <p>Il paragrafo qui sopra contiene il numero misurato più utile di questa lezione e poi ci passa accanto. Quando i ricercatori ritestano anomalie pubblicate su dati raccolti dopo la pubblicazione, i rendimenti medi si dimezzano circa. Prendilo come tuo prior: qualunque cosa mostri un backtest, metti in conto di tenerne circa la metà.</p>
+
+        <p>Ora impila le altre due cose che una strategia live deve pagare. I costi che il tuo backtest non ha modellato escono in cima, e tutto l'esercizio aveva senso solo se batteva il semplice tenere lo strumento. Quindi, prima di scrivere una riga di codice:</p>
+
+<pre><code>backtest necessario  =  2  &#215;  ( rendimento del benchmark  +  costi non modellati )</code></pre>
+
+        <p>Tutto ciò che contiene è noto in anticipo. Il benchmark è quello che la cosa che operi ha reso storicamente; i costi non modellati sono quelli che la versione onesta dell'aritmetica di Amanda, più avanti in questa lezione, ti costringe a scrivere. Fai passare le quattro strategie di questa pagina, usando il dieci per cento annuo come benchmark ovunque:</p>
+
+<pre><code>strategia di questa pagina      backtest   costi non modellati   backtest necessario   margine
+l'RSI di Sarah su QQQ             28,4 %    nessuno dichiarato                  20 %    +8,4 %
+il breakout di Michael su SPY     24,7 %    nessuno dichiarato                  20 %    +4,7 %
+il redesign di Marcus su SPY        18 %    nessuno dichiarato                  20 %      -2 %
+il VWAP di Amanda su AAPL         19,8 %                  19 %                  58 %   -38,2 %</code></pre>
+
+        <p><strong>Due delle quattro non passano, e una delle due è la storia di successo di questa lezione.</strong> Marcus ha ricostruito la sua strategia come si deve &mdash; walk-forward, fuori campione, costi realistici, un plateau di parametri &mdash; e atterra al 18 % di backtest. È una strategia robusta che comunque non supera l'asticella, perché la metà di 18 è 9 e l'indice pagava 10. Tutto nel suo processo è migliorato e la risposta è rimasta no. Robustezza e redditività sono davvero due domande distinte, ed ecco che aspetto ha una strategia che passa la prima e fallisce la seconda.</p>
+
+        <p><strong>Quella di Amanda è quella che non sarebbe mai dovuta arrivare a un broker.</strong> Diciannove punti di costi non modellati portano la sua asticella al 58 % mentre il suo backtest mostrava il 19,8 %. Era sotto di un fattore di quasi tre, e ogni numero necessario per accorgersene era disponibile a giugno, prima dei 50.100 $. Non le serviva una validazione migliore. Le serviva una riga di aritmetica.</p>
+
+        <p>Superare l'asticella da solo non dimostra nulla &mdash; il fondo nel riquadro qui sopra mostrava il 45 % contro un'asticella al 20 % e ha perso il 28 % di cinquanta milioni di dollari. Questo è un filtro, non una previsione. Serve a uccidere a poco prezzo le strategie che non avrebbero mai potuto funzionare, prima che tu ci spenda sei mesi &mdash; e a giudicare da questa pagina sono la metà.</p>
       </div>
 
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">

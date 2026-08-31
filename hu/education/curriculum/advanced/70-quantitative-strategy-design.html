@@ -130,7 +130,7 @@
           <li>Kvantitatív stratégia: szabályalapú, szisztematikus, backtestelhető</li>
           <li>Összetevők: belépési szabályok, kilépési szabályok, pozícióméretezés, kockázatkezelés</li>
           <li>Kerüld a görbeillesztést: használj walk-forwardot, mintán kívüli tesztelést, reális feltevéseket</li>
-          <li>Keretrendszer: szabályok meghatározása → backtest → walk-forward → papírkereskedés → éles</li>
+          <li>Keret: számold ki a szükséges backtest-hozamot, mielőtt backtestet építenél → Szabályok meghatározása → Backteszt → Walk-forward → Papírkereskedés → Éles</li>
         </ul>
       </div>
 
@@ -298,7 +298,7 @@
       <tr>
         <td>CAGR</td>
         <td>(Vég / Kezdet)^(1/évek) - 1</td>
-        <td>&gt; 15 % (költségek után)</td>
+        <td>&gt; 15 % költségek után, és a 4. rész léce fölött &mdash; 15 % egy 12 %-ot hozó eszközön nem jó érték, hanem rosszabb</td>
       </tr>
       <tr>
         <td>Sharpe-mutató</td>
@@ -502,6 +502,7 @@
         <p><strong>Most számold ki, mibe kerül visszakapaszkodni.</strong> Még ha az új stratégia a teljes évi 18 %-át hozza is, a maradék 56 600 $-on 18 400 $-t visszakeresni nagyjából húsz hónapig tart. Ez a három hónapnyi görbeillesztés valódi ára: nem a 18 400 $, hanem az a majdnem két év kamatos kamat, amibe kerül visszajutni oda, ahonnan indult. Aki azt mondja, hogy egy 18 %-os stratégiával fél év alatt „mindent visszahozott", az másik stratégiáról beszél.</p>
 
         <p><strong>Marcus tanulsága:</strong> «Egy működő 18 %-os stratégia veri a bukó 32 %-os backtestet. A lényeg nem a tökéletes paraméterek megtalálása — hanem valami olyan megépítése, ami elég robusztus ahhoz, hogy túlélje a valódi piacokat.»</p>
+        <p>Félig igaz, és a hiányzó fele az alábbi doboz. A túléléshez elég robusztus az első léc; a második az, hogy ami túléli, veri-e azt az indexet, amit helyette megvehetett volna. Futtasd át a 18 %-ot a 4. rész számításán, és nem megy át.</p>
       </div>
 
       <p>A jól megtervezett kvantitatív stratégia kiiktatja az érzelmet, statisztikailag igazolja az edge-et, és szisztematikusan kamatoztatja a hozamot. Ez a lecke megtanítja, hogyan tervezz, backtestelj és állíts éles üzembe intézményi színvonalú kereskedési rendszereket — és hogyan kerüld el azt a 18 ezer dolláros hibát, amit Marcus elkövetett.</p>
@@ -511,6 +512,29 @@
         <p>Egy kvantitatív alap 10 000 paraméterkombinációt backtestel, és talál egy «tökéletes» stratégiát: 2010-2020 között évi 45 % hozam, 2,6-os Sharpe és 12 % maximális drawdown. 2021 januárjában 50 millió dollárt helyeznek ki.</p>
         <p>2021 decemberére az alap 28 %-os mínuszban van. A stratégiát a múlt zajára illesztették, nem valódi piaci edge-re.</p>
         <p><strong>Tanulság:</strong> a backtesten átment stratégiák bukási aránya elég magas ahhoz, hogy a bizonyítási teher a stratégián legyen, ne a kételkedőn. Sokat fogod látni azt, hogy «95 % megbukik»; ezt soha senki nem mérte meg, mert senkinek nincs meg azoknak a stratégiáknak a sokasága, amelyeket az emberek csendben elhagytak. Ami mérhető, az szűkebb és hasznosabb: amikor a kutatók publikált anomáliákat a publikálás után gyűjtött adaton újrateszteltek, az átlagos hozamok nagyjából a felére esnek, és egy jelentős részük teljesen leáll. Feltételezd, hogy a saját backtested legalább ennyire optimista, és eszerint tervezz.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; A szükséges backtesthozam, kiszámolva még mielőtt backtestet nyitnál</h4>
+        <p>A fenti bekezdés tartalmazza a lecke leghasznosabb mért számát, aztán elmegy mellette. Amikor kutatók publikált anomáliákat a publikáció után gyűjtött adaton újrateszteltek, az átlagos hozamok nagyjából a felére estek. Vedd ezt priornak: bármit mutat is egy backtest, számolj azzal, hogy körülbelül a fele marad meg.</p>
+
+        <p>Most rakd rá a másik két dolgot, amit egy éles stratégiának ki kell fizetnie. A backtested által nem modellezett költségek felülről jönnek le, és az egész gyakorlatnak csak akkor volt értelme, ha veri az eszköz egyszerű tartását. Tehát mielőtt egy sor kódot írnál:</p>
+
+<pre><code>szükséges backtest  =  2  &#215;  ( benchmark hozam  +  nem modellezett költségek )</code></pre>
+
+        <p>Minden benne lévő adat előre ismert. A benchmark az, amit a kereskedett eszköz történelmileg hozott; a nem modellezett költségek pedig azok, amelyeket Amanda számításának őszinte változata a lecke későbbi részében leírat veled. Futtasd át rajta a lap négy stratégiáját, benchmarkként végig évi tíz százalékkal:</p>
+
+<pre><code>a lap stratégiája             backtest   nem modellezett költség   szükséges backtest   ráhagyás
+Sarah RSI-je QQQ-n              28,4 %             nincs megadva                 20 %     +8,4 %
+Michael kitörése SPY-on         24,7 %             nincs megadva                 20 %     +4,7 %
+Marcus újratervezése SPY-on       18 %             nincs megadva                 20 %       -2 %
+Amanda VWAP-ja AAPL-en          19,8 %                      19 %                 58 %    -38,2 %</code></pre>
+
+        <p><strong>A négyből kettő megbukik, és a kettő egyike a lecke sikertörténete.</strong> Marcus rendesen újraépítette a stratégiáját &mdash; walk-forward, mintán kívüli teszt, reális költségek, paraméterplató &mdash; és 18 %-os backtesten landolt. Ez robusztus stratégia, amely mégsem viszi át a lécet, mert 18 fele 9, az index pedig 10-et fizetett. A folyamatában minden javult, a válasz mégis nem maradt. A robusztusság és a jövedelmezőség valóban külön kérdés, és így néz ki, amikor egy stratégia az elsőn átmegy, a másodikon pedig elbukik.</p>
+
+        <p><strong>Amandáé az, amelynek soha nem lett volna szabad brókerhez eljutnia.</strong> Tizenkilenc pontnyi nem modellezett költség 58 %-ra emeli a lécét, miközben a backtestje 19,8 %-ot mutatott. Csaknem háromszoros hiánnyal maradt alatta, és minden szám, ami ehhez kellett, júniusban rendelkezésre állt &mdash; az 50 100 $ előtt. Nem jobb validációra volt szüksége. Egy sor számtanra.</p>
+
+        <p>A léc megugrása önmagában semmit sem bizonyít &mdash; a fenti dobozban szereplő alap 45 %-ot mutatott egy 20 %-os léc mellett, és ötvenmillió dollár 28 %-át veszítette el. Ez szűrő, nem előrejelzés. Az a dolga, hogy olcsón megölje azokat a stratégiákat, amelyek soha nem működhettek volna, mielőtt hat hónapot töltenél velük &mdash; és e lap tanúsága szerint ez a felük.</p>
       </div>
 
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">

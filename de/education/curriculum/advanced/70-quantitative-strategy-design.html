@@ -130,7 +130,7 @@
           <li>Quant-Strategie: regelbasiert, systematisch, backtestbar</li>
           <li>Bestandteile: Einstiegsregeln, Ausstiegsregeln, Positionsgrößen, Risikomanagement</li>
           <li>Curve-Fitting vermeiden: Walk-Forward, Out-of-Sample-Tests und realistische Annahmen nutzen</li>
-          <li>Rahmen: Regeln definieren → Backtest → Walk-Forward → Paper Trading → live</li>
+          <li>Rahmen: Rechnen Sie die nötige Backtest-Rendite aus, bevor Sie einen bauen → Regeln definieren → Backtest → Walk-Forward → Paper Trading → Live</li>
         </ul>
       </div>
 
@@ -298,7 +298,7 @@
       <tr>
         <td>CAGR</td>
         <td>(Ende / Start)^(1/Jahre) - 1</td>
-        <td>&gt; 15 % (nach Kosten)</td>
+        <td>&gt; 15 % nach Kosten, und über der Hürde in Teil 4 &mdash; 15 % auf einem Instrument, das 12 % gebracht hat, ist kein guter Wert, sondern ein schlechterer</td>
       </tr>
       <tr>
         <td>Sharpe Ratio</td>
@@ -502,6 +502,7 @@
         <p><strong>Rechne jetzt aus, was Zurückkommen bedeutet.</strong> Selbst wenn die neue Strategie ihre vollen 18 % im Jahr liefert, dauert es rund zwanzig Monate, 18.400 $ auf den verbliebenen 56.600 $ zurückzuverdienen. Das ist der wahre Preis von drei Monaten Curve-Fitting: nicht die 18.400 $, sondern die knapp zwei Jahre Zinseszins, die es kostet, wieder dort zu stehen, wo er begonnen hat. Wer dir erzählt, er habe „alles in sechs Monaten zurückgeholt" &mdash; mit einer 18-%-Strategie &mdash;, beschreibt eine andere Strategie.</p>
 
         <p><strong>Marcus' Lektion:</strong> „Eine 18-%-Strategie, die funktioniert, schlägt einen 32-%-Backtest, der scheitert. Der Schlüssel liegt nicht darin, die perfekten Parameter zu finden — sondern etwas zu bauen, das robust genug ist, um echte Märkte zu überleben.“</p>
+        <p>Halb richtig, und die fehlende Hälfte ist der Kasten unten. Robust genug zum Überleben ist die erste Hürde; die zweite ist, ob das Überlebende den Index schlägt, den er stattdessen hätte kaufen können. Schicken Sie 18 % durch die Rechnung in Teil 4, und es reicht nicht.</p>
       </div>
 
       <p>Eine sauber entworfene quantitative Strategie schaltet Emotionen aus, validiert den Edge statistisch und lässt Renditen systematisch wachsen. Diese Lektion zeigt Ihnen, wie Sie Handelssysteme auf institutionellem Niveau entwerfen, im Backtest prüfen und ausrollen — und den 18.000-$-Fehler von Marcus vermeiden.</p>
@@ -511,6 +512,29 @@
         <p>Ein Quant-Fonds backtestet 10.000 Parameterkombinationen und findet eine „perfekte“ Strategie: 45 % Jahresrendite, ein Sharpe von 2,6 und 12 % maximaler drawdown von 2010 bis 2020. Im Januar 2021 setzt er 50 Mio. $ ein.</p>
         <p>Bis Dezember 2021 liegt der Fonds 28 % im Minus. Die Strategie war auf historisches Rauschen kurvenangepasst, nicht auf einen echten Marktedge.</p>
         <p><strong>Lektion:</strong> Die Ausfallquote von Strategien aus dem Backtest ist hoch genug, dass die Beweislast bei der Strategie liegt und nicht beim Skeptiker. Sie werden oft „95 % scheitern“ lesen; gemessen hat das nie jemand, weil niemand die Grundgesamtheit der still beerdigten Strategien besitzt. Messbar ist etwas Engeres und Nützlicheres: Wenn Forschende veröffentlichte Anomalien auf Daten nachtesten, die erst nach der Veröffentlichung entstanden sind, halbieren sich die Durchschnittsrenditen ungefähr, und ein erheblicher Teil hört ganz auf zu funktionieren. Gehen Sie davon aus, dass Ihr Backtest mindestens so optimistisch ist, und planen Sie entsprechend.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; Die Backtest-Rendite, die Sie brauchen &mdash; ausgerechnet, bevor Sie einen Backtest öffnen</h4>
+        <p>Der Absatz oben enthält die nützlichste gemessene Zahl dieser Lektion und geht dann an ihr vorbei. Wenn Forscher veröffentlichte Anomalien auf Daten nachtesten, die nach der Veröffentlichung entstanden sind, halbieren sich die Durchschnittsrenditen ungefähr. Nehmen Sie das als Ihren Prior: Was ein Backtest auch zeigt, rechnen Sie damit, dass Ihnen etwa die Hälfte davon bleibt.</p>
+
+        <p>Legen Sie jetzt die beiden anderen Dinge obendrauf, die eine Live-Strategie bezahlen muss. Kosten, die Ihr Backtest nicht modelliert hat, gehen oben ab, und die ganze Übung ergab nur Sinn, wenn sie schlägt, das Instrument einfach zu halten. Also, bevor Sie eine Zeile Code schreiben:</p>
+
+<pre><code>nötiger Backtest  =  2  &#215;  ( Benchmark-Rendite  +  nicht modellierte Kosten )</code></pre>
+
+        <p>Alles darin ist im Voraus bekannt. Die Benchmark ist das, was das Ding, das Sie handeln, historisch gebracht hat; die nicht modellierten Kosten sind die, die Sie durch die ehrliche Fassung von Amandas Rechnung weiter unten in dieser Lektion aufschreiben müssen. Schicken Sie die vier Strategien dieser Seite hindurch, mit zehn Prozent im Jahr als Benchmark durchgehend:</p>
+
+<pre><code>Strategie auf dieser Seite   Backtest   nicht modellierte Kosten   nötiger Backtest   Marge
+Sarahs RSI auf QQQ             28,4 %              keine genannt               20 %    +8,4 %
+Michaels Breakout auf SPY      24,7 %              keine genannt               20 %    +4,7 %
+Marcus’ Redesign auf SPY         18 %              keine genannt               20 %      -2 %
+Amandas VWAP auf AAPL          19,8 %                       19 %               58 %   -38,2 %</code></pre>
+
+        <p><strong>Zwei der vier fallen durch, und eine der beiden ist die Erfolgsgeschichte dieser Lektion.</strong> Marcus hat seine Strategie sauber neu gebaut &mdash; Walk-Forward, Out-of-Sample, realistische Kosten, ein Parameter-Plateau &mdash; und landete bei 18 % im Backtest. Das ist eine robuste Strategie, die die Hürde trotzdem nicht nimmt, denn die Hälfte von 18 ist 9, und der Index zahlte 10. An seinem Prozess wurde alles besser, und die Antwort blieb nein. Robustheit und Profitabilität sind wirklich getrennte Fragen, und so sieht es aus, wenn eine Strategie die erste besteht und an der zweiten scheitert.</p>
+
+        <p><strong>Amandas ist diejenige, die niemals bei einem Broker hätte ankommen dürfen.</strong> Neunzehn Punkte nicht modellierter Kosten setzen ihre Hürde auf 58 %, während ihr Backtest 19,8 % zeigte. Sie lag um fast das Dreifache daneben, und jede Zahl, die man brauchte, um das zu sehen, lag im Juni vor &mdash; vor den 50.100 $. Sie brauchte keine bessere Validierung. Sie brauchte eine Zeile Arithmetik.</p>
+
+        <p>Die Hürde zu nehmen beweist für sich genommen nichts &mdash; der Fonds im Kasten oben zeigte 45 % gegen eine Hürde von 20 % und verlor 28 % von fünfzig Millionen Dollar. Das hier ist ein Filter, keine Prognose. Es tötet die Strategien, die nie hätten funktionieren können, und zwar billig, bevor Sie sechs Monate darauf verwenden &mdash; und nach dem Befund dieser Seite ist das die Hälfte von ihnen.</p>
       </div>
 
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">

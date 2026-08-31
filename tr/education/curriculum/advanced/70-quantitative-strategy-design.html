@@ -130,7 +130,7 @@
           <li>Kantitatif strateji: kural tabanlı, sistematik, backtest edilebilir</li>
           <li>Bileşenler: giriş kuralları, çıkış kuralları, pozisyon boyutlandırma, risk yönetimi</li>
           <li>Eğri uydurmadan kaçının: walk-forward, örneklem dışı sınama, gerçekçi varsayımlar kullanın</li>
-          <li>Çerçeve: kuralları tanımla → backtest → walk-forward → paper trading → gerçek</li>
+          <li>Çerçeve: bir backtest kurmadan önce ihtiyacın olacak backtest getirisini hesapla → Kuralları tanımla → Backtest → Walk-forward → Kâğıt üzerinde işlem → Canlı</li>
         </ul>
       </div>
 
@@ -298,7 +298,7 @@
       <tr>
         <td>CAGR</td>
         <td>(Son / İlk)^(1/Yıl) - 1</td>
-        <td>&gt; %15 (maliyetlerden sonra)</td>
+        <td>&gt; maliyet sonrası %15 ve Bölüm 4'teki çıtanın üstü &mdash; %12 getiren bir enstrümanda %15 iyi bir değer değil, daha kötü bir değerdir</td>
       </tr>
       <tr>
         <td>Sharpe oranı</td>
@@ -502,6 +502,7 @@
         <p><strong>Şimdi başa dönmenin hesabını yapın.</strong> Yeni strateji yıllık %18'in tamamını verse bile, elinde kalan 56.600 $ üzerinden 18.400 $'ı geri kazanmak yaklaşık yirmi ay sürer. Üç aylık eğri uydurmanın gerçek bedeli budur: 18.400 $ değil, başladığı yere dönmenin maliyeti olan neredeyse iki yıllık bileşik büyüme. Size %18'lik bir stratejiyle altı ayda "hepsini geri aldığını" anlatan biri, başka bir stratejiden söz ediyordur.</p>
 
         <p><strong>Marcus'un dersi:</strong> «Çalışan %18'lik bir strateji, çöken %32'lik bir backtest'i yener. Mesele kusursuz parametreleri bulmak değil — gerçek piyasada hayatta kalacak kadar sağlam bir şey kurmak.»</p>
+        <p>Yarısı doğru; eksik yarısı da aşağıdaki kutu. Hayatta kalacak kadar sağlam olmak ilk çıtadır; ikincisi, hayatta kalanın onun yerine satın alabileceği endeksi yenip yenmediğidir. %18'i Bölüm 4'teki hesaba sok, geçemiyor.</p>
       </div>
 
       <p>İyi tasarlanmış bir kantitatif strateji duyguyu devre dışı bırakır, edge'i istatistiksel olarak doğrular ve getiriyi sistematik biçimde bileşikleştirir. Bu ders size kurumsal seviyede alım satım sistemlerini nasıl tasarlayacağınızı, backtest edeceğinizi ve devreye alacağınızı öğretir — ve Marcus'un yaptığı 18 bin dolarlık hatadan nasıl kaçınacağınızı.</p>
@@ -511,6 +512,29 @@
         <p>Bir kantitatif fon 10.000 parametre bileşimini backtest ediyor ve «kusursuz» bir strateji buluyor: 2010-2020 arasında yılda %45 getiri, 2,6 Sharpe ve %12 azami drawdown. Ocak 2021'de 50 milyon dolar koyuyorlar.</p>
         <p>Aralık 2021'e gelindiğinde fon %28 aşağıda. Strateji gerçek bir piyasa edge'ine değil, geçmişin gürültüsüne uydurulmuştu.</p>
         <p><strong>Ders:</strong> backtest'ten geçmiş stratejilerin başarısızlık oranı, ispat yükünü kuşkucuya değil stratejiye yükleyecek kadar yüksektir. «%95'i çöker» ifadesini çok göreceksiniz; bunu kimse ölçmedi, çünkü insanların sessizce bıraktığı stratejilerin evreni kimsede yok. Ölçülebilir olan daha dar ve daha yararlı: araştırmacılar yayımlanmış anomalileri yayın sonrası toplanan veriyle yeniden sınadığında ortalama getiriler kabaca yarıya iniyor ve önemli bir kısmı tamamen çalışmayı bırakıyor. Kendi backtest'inizin en az bu kadar iyimser olduğunu varsayın ve buna göre tasarlayın.</p>
+      </div>
+
+      <div class="callout-key">
+        <h4>&#127919; İhtiyacın olan backtest getirisi, bir backtest açmadan önce hesaplanmış hâliyle</h4>
+        <p>Yukarıdaki paragraf bu dersteki en faydalı ölçülmüş sayıyı içeriyor ve sonra yanından geçip gidiyor. Araştırmacılar yayımlanmış anomalileri, yayından sonra toplanan veriyle yeniden test ettiğinde ortalama getiriler kabaca yarıya iniyor. Bunu önselin olarak al: backtest ne gösterirse göstersin, elinde yaklaşık yarısının kalacağını planla.</p>
+
+        <p>Şimdi canlı bir stratejinin ödemek zorunda olduğu diğer iki şeyi üst üste koy. Backtest'inin modellemediği maliyetler tepeden düşer ve bütün bu uğraş, ancak enstrümanı düpedüz elde tutmayı yendiğinde anlamlıydı. O hâlde tek satır kod yazmadan önce:</p>
+
+<pre><code>gereken backtest  =  2  &#215;  ( benchmark getirisi  +  modellenmemiş maliyetler )</code></pre>
+
+        <p>İçindeki her şey önceden bilinebilir. Benchmark, işlem yaptığın şeyin tarihsel olarak getirdiğidir; modellenmemiş maliyetler ise bu dersin ilerisindeki Amanda hesabının dürüst hâlinin sana yazdırdıklarıdır. Bu sayfadaki dört stratejiyi buradan geçir; benchmark olarak baştan sona yılda yüzde on kullan:</p>
+
+<pre><code>bu sayfadaki strateji              backtest   modellenmemiş maliyet   gereken backtest   pay
+Sarah’ın QQQ’daki RSI’si              %28,4           belirtilmemiş                %20    +%8,4
+Michael’ın SPY’daki breakout’u        %24,7           belirtilmemiş                %20    +%4,7
+Marcus’ın SPY’daki yeni tasarımı        %18           belirtilmemiş                %20      -%2
+Amanda’nın AAPL’deki VWAP’ı           %19,8                     %19                %58   -%38,2</code></pre>
+
+        <p><strong>Dördün ikisi kalıyor ve o ikisinden biri bu dersin başarı hikâyesi.</strong> Marcus stratejisini kurallara uygun yeniden kurdu &mdash; walk-forward, örneklem dışı, gerçekçi maliyetler, bir parametre platosu &mdash; ve backtest'te %18'e indi. Bu, sağlam bir strateji ama yine de çıtayı geçmiyor; çünkü 18'in yarısı 9'dur ve endeks 10 ödüyordu. Sürecindeki her şey iyileşti, cevap yine hayır kaldı. Sağlamlık ile kârlılık gerçekten ayrı sorulardır ve birincisini geçip ikincisinde kalan bir strateji işte böyle görünür.</p>
+
+        <p><strong>Amanda'nınki, bir aracı kuruma hiç ulaşmaması gereken olan.</strong> On dokuz puanlık modellenmemiş maliyet onun çıtasını %58'e çıkarıyor; backtest'i ise %19,8 gösteriyordu. Neredeyse üç kat eksikti ve bunu görmek için gereken her sayı haziranda, 50.100 $'dan önce elindeydi. Ona daha iyi bir doğrulama gerekmiyordu. Bir satır aritmetik gerekiyordu.</p>
+
+        <p>Çıtayı geçmek tek başına hiçbir şey kanıtlamaz &mdash; yukarıdaki kutudaki fon %20'lik çıtaya karşı %45 gösteriyordu ve elli milyon doların %28'ini kaybetti. Bu bir filtredir, bir tahmin değil. Yaptığı şey, hiçbir zaman işleyemeyecek stratejileri, sen onlara altı ay harcamadan önce ucuza öldürmektir &mdash; ve bu sayfanın kanıtına bakılırsa bu, onların yarısı.</p>
       </div>
 
 <div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
