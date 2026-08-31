@@ -122,6 +122,10 @@ Full tier words, reading-time and module-name patterns: `chrome_i18n.py`.
   German is verb-final; Hungarian and Turkish put the counter between the two
   numbers; Japanese needs the modifier before the number. Restructure the two
   fragments together rather than translating each in isolation.
+- **A formula still needs a memory entry.** Registering it in `reviewed.json`
+  only silences the leak check; `build.py` requires *every* string to be in
+  memory, so an untranslated formula must be stored mapping to itself. Both
+  spellings are needed: the reviewed entry and the memory entry.
 - **`build.py` SKIPs a whole locale if any string is untranslated**, leaving the
   previous build in place. A SKIP is invisible on the page, which is why
   `status.py` checks memory rather than file existence.
