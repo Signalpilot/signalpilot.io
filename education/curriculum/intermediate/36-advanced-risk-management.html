@@ -209,6 +209,7 @@
           <li>Risk-adjusted returns: Track Sharpe ratio (return ÷ volatility)</li>
           <li>Drawdown management: -10% = reduce 25%, -15% = reduce 50%, -20% = stop</li>
           <li>Framework: Calculate Kelly → Use 25-50% Kelly → Scale down in drawdowns</li>
+          <li>Pricing a drawdown: how much gain each further percent of loss costs you to undo</li>
         </ul>
       </div>
 
@@ -353,6 +354,26 @@ Higher volatility = smaller position (same $ risk)</code></pre>
         <tr><td>20-25%</td><td>Critical (reduce size 75% or stop trading)</td></tr>
         <tr><td>&gt; 25%</td><td>Shutdown (stop trading, full strategy review)</td></tr>
       </table>
+
+      <div class="callout-key">
+    <h4>&#128207; What each further percent of drawdown costs to undo</h4>
+    <p>The tiers above say what to do. They do not say what the tier you are in is worth, and that is one division: the gain you need to get back is D / (1 &minus; D), where D is the drawdown. Nothing in it is about psychology.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>drawdown    gain needed to get back    penalty multiplier
+ -10%               +11.1%                    1.11x
+ -15%               +17.6%                    1.18x
+ -20%               +25.0%                    1.25x   &lt;- the hard stop
+ -25%               +33.3%                    1.33x
+ -32%               +47.1%                    1.47x   &lt;- Kevin, week 5-6
+ -52%              +108.3%                    2.08x   &lt;- Kevin, week 8
+ -69.2%            +225.0%                    3.25x   &lt;- Kevin, week 15</code></pre>
+
+    <p>Read the third column, which is just 1 / (1 &minus; D). Down to about 20% the gain you need is within a quarter of the loss you took, and that is a bad stretch you can trade your way out of. Past that the multiplier runs away from you: at 52% the market has to hand back more than twice what it took, and at 69.2% more than three times.</p>
+
+    <p>Now price Kevin's decision with it. The protocol he was eventually shown stops at -20%: $50,000 becomes $40,000 and he needs +25% to be whole again. He kept going to -69.2%: $50,000 becomes $15,400 and he needs +225%. His loss got 3.5 times bigger ($34,600 against $10,000), and the work required to undo it got nine times bigger (225 / 25 = 9). The gap between 3.5 and 9 is the entire argument for a hard stop.</p>
+
+    <p style="margin-bottom:0">Notice what the table does not claim. There is no corner in the curve, so it does not say that -20% is survivable and -25% is not; the level is a convention. What it does say is that the price of every further percent keeps rising, so the case for stopping gets stronger the longer you have failed to stop &mdash; which is exactly backwards from how it feels at the time.</p>
+  </div>
 
       <h3 id="recovery-protocol">Recovery Protocol</h3>
       <p><strong>Don't immediately scale back to full size after recovery.</strong></p>
@@ -587,7 +608,7 @@ Position: $400 / $500 ATR = 0.8 BTC (~$36,000 notional)</code></pre>
         <li><strong>3-tier risk: Per-trade (1-2%), Portfolio heat (6-8%), Drawdown (&lt; 20%)</strong></li>
         <li><strong>Kelly Criterion: Use 1/4 to 1/2 Kelly (NOT full Kelly)</strong></li>
         <li><strong>Dynamic sizing: Adjust for equity, volatility, setup quality</strong></li>
-        <li><strong>Drawdown protocol: 15% = reduce size, 20% = stop trading</strong></li>
+        <li><strong>Drawdown protocol: 15% = reduce size, 20% = stop trading</strong> — getting back from -20% needs +25%; getting back from -69% needs +225%</li>
         <li><strong>Regime-based risk: Volatile = reduce or sit out</strong></li>
       </ul>
 

@@ -222,6 +222,7 @@
           <li>Retorno ajustado ao risco: acompanhe o índice de Sharpe (retorno ÷ volatilidade)</li>
           <li>Gestão do drawdown: -10 % = reduzir 25 %, -15 % = reduzir 50 %, -20 % = parar</li>
           <li>O modelo: calcule Kelly → use 25-50 % de Kelly → diminua o tamanho nos drawdowns</li>
+          <li>Pôr preço a um drawdown: quanto ganho lhe custa desfazer cada ponto percentual de perda adicional</li>
         </ul>
       </div>
 
@@ -366,6 +367,26 @@ Mais volatilidade = posição menor (mesmo risco em dólares)</code></pre>
         <tr><td>20-25%</td><td>Crítico (reduzir o tamanho em 75 % ou parar de operar)</td></tr>
         <tr><td>&gt; 25 %</td><td>Desligamento (parar de operar, revisão completa da estratégia)</td></tr>
       </table>
+
+      <div class="callout-key">
+    <h4>&#128207; Quanto custa desfazer cada ponto percentual adicional de drawdown</h4>
+    <p>Os patamares acima dizem o que fazer. Não dizem quanto vale o patamar em que está, e isso é uma única divisão: o ganho de que precisa para voltar é D / (1 &minus; D), em que D é o drawdown. Nada disto tem a ver com psicologia.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>Drawdown      ganho necessário    multiplicador de castigo
+-10 %                  +11,1 %                       1,11x
+-15 %                  +17,6 %                       1,18x
+-20 %                  +25,0 %                       1,25x   &lt;- o limite duro
+-25 %                  +33,3 %                       1,33x
+-32 %                  +47,1 %                       1,47x   &lt;- Kevin, semana 5-6
+-52 %                 +108,3 %                       2,08x   &lt;- Kevin, semana 8
+-69,2 %               +225,0 %                       3,25x   &lt;- Kevin, semana 15</code></pre>
+
+    <p>Leia a terceira coluna, que é apenas 1 / (1 &minus; D). Até cerca de 20 %, o ganho necessário não excede a perda sofrida em mais de um quarto, e essa é uma má fase de que se consegue sair a operar. A partir daí o multiplicador foge-lhe: aos 52 % o mercado tem de devolver mais do dobro do que levou, e aos 69,2 % mais do triplo.</p>
+
+    <p>Ponha agora preço à decisão do Kevin. O protocolo que lhe acabaram por mostrar pára aos -20 %: 50 000 $ passam a 40 000 $ e ele precisa de +25 % para ficar inteiro. Ele seguiu até aos -69,2 %: 50 000 $ passam a 15 400 $ e ele precisa de +225 %. A perda ficou 3,5 vezes maior (34 600 $ contra 10 000 $) e o trabalho para a desfazer ficou nove vezes maior (225 / 25 = 9). A distância entre 3,5 e 9 é todo o argumento a favor de um limite duro.</p>
+
+    <p style="margin-bottom:0">Repare no que a tabela não afirma. A curva não tem qualquer cotovelo, por isso não diz que -20 % é sobrevivível e -25 % não; o nível é uma convenção. O que diz é que o preço de cada ponto adicional continua a subir, de modo que o argumento para parar fica mais forte quanto mais tempo passa sem que tenha parado, o que é exatamente o contrário do que se sente na altura.</p>
+  </div>
 
       <h3 id="recovery-protocol">Protocolo de retorno</h3>
       <p><strong>Não volte de uma vez ao tamanho cheio depois de se recuperar.</strong></p>
@@ -600,7 +621,7 @@ Posição: 400 $ / 500 $ de ATR = 0,8 BTC (~36.000 $ de nocional)</code></pre>
         <li><strong>Risco em 3 camadas: por operação (1-2 %), carga da carteira (6-8 %), drawdown (&lt; 20 %)</strong></li>
         <li><strong>Critério de Kelly: use de 1/4 a 1/2 de Kelly (NÃO o Kelly cheio)</strong></li>
         <li><strong>Dimensionamento dinâmico: ajuste ao patrimônio, à volatilidade e à qualidade do setup</strong></li>
-        <li><strong>Protocolo de drawdown: 15 % = reduzir o tamanho, 20 % = parar de operar</strong></li>
+        <li><strong>Protocolo de drawdown: 15 % = reduzir o tamanho, 20 % = parar de operar</strong> — voltar de -20 % exige +25 %; voltar de -69 % exige +225 %</li>
         <li><strong>Risco pelo regime: volátil = reduzir ou ficar de fora</strong></li>
       </ul>
 

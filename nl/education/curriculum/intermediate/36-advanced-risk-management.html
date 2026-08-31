@@ -222,6 +222,7 @@
           <li>Voor risico gecorrigeerd rendement: volg de Sharpe-ratio (rendement ÷ volatiliteit)</li>
           <li>Drawdown-beheer: -10 % = 25 % kleiner, -15 % = 50 % kleiner, -20 % = stoppen</li>
           <li>Het kader: bereken Kelly → gebruik 25-50 % van Kelly → schaal terug in een drawdown</li>
+          <li>Een drawdown beprijzen: hoeveel winst elke extra procentpunt verlies je kost om ongedaan te maken</li>
         </ul>
       </div>
 
@@ -366,6 +367,26 @@ Meer volatiliteit = kleinere positie (zelfde risico in dollars)</code></pre>
         <tr><td>20-25%</td><td>Kritiek (grootte 75 % kleiner of stoppen met handelen)</td></tr>
         <tr><td>&gt; 25 %</td><td>Uitschakelen (stoppen met handelen, strategie volledig herzien)</td></tr>
       </table>
+
+      <div class="callout-key">
+    <h4>&#128207; Wat elke extra procentpunt drawdown kost om ongedaan te maken</h4>
+    <p>De niveaus hierboven zeggen wat je moet doen. Ze zeggen niet wat het niveau waarin je zit waard is, en dat is één deling: de winst die je nodig hebt om terug te komen is D / (1 &minus; D), waarbij D de drawdown is. Er zit niets psychologisch in.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>Drawdown      benodigde winst    strafvermenigvuldiger
+-10 %                 +11,1 %                    1,11x
+-15 %                 +17,6 %                    1,18x
+-20 %                 +25,0 %                    1,25x   &lt;- de harde stop
+-25 %                 +33,3 %                    1,33x
+-32 %                 +47,1 %                    1,47x   &lt;- Kevin, week 5-6
+-52 %                +108,3 %                    2,08x   &lt;- Kevin, week 8
+-69,2 %              +225,0 %                    3,25x   &lt;- Kevin, week 15</code></pre>
+
+    <p>Lees de derde kolom, die niet meer is dan 1 / (1 &minus; D). Tot ongeveer 20 % ligt de benodigde winst hooguit een kwart boven het verlies dat je nam, en dat is een slechte periode waar je je uit kunt handelen. Daarna loopt de vermenigvuldiger van je weg: bij 52 % moet de markt meer dan het dubbele teruggeven van wat ze nam, en bij 69,2 % meer dan het drievoudige.</p>
+
+    <p>Beprijs nu Kevins beslissing ermee. Het protocol dat hem uiteindelijk werd getoond stopt bij -20 %: $50.000 wordt $40.000 en hij heeft +25 % nodig om weer heel te zijn. Hij ging door tot -69,2 %: $50.000 wordt $15.400 en hij heeft +225 % nodig. Zijn verlies werd 3,5 keer zo groot ($34.600 tegen $10.000), en het werk om het ongedaan te maken werd negen keer zo groot (225 / 25 = 9). Het gat tussen 3,5 en 9 is het hele argument voor een harde stop.</p>
+
+    <p style="margin-bottom:0">Let op wat de tabel niet beweert. De curve heeft geen knik, dus hij zegt niet dat -20 % overleefbaar is en -25 % niet; het niveau is een afspraak. Wat hij wél zegt is dat de prijs van elke extra procentpunt blijft stijgen, zodat het argument om te stoppen sterker wordt naarmate je langer niet gestopt bent, en dat is precies andersom dan hoe het op dat moment voelt.</p>
+  </div>
 
       <h3 id="recovery-protocol">Herstelprotocol</h3>
       <p><strong>Schaal na herstel niet meteen terug naar volle grootte.</strong></p>
@@ -600,7 +621,7 @@ Positie: 400 $ / 500 $ ATR = 0,8 BTC (~36.000 $ nominaal)</code></pre>
         <li><strong>Risico in 3 lagen: per trade (1-2 %), portefeuillebelasting (6-8 %), drawdown (&lt; 20 %)</strong></li>
         <li><strong>Kelly-criterium: gebruik 1/4 tot 1/2 Kelly (NIET de volledige Kelly)</strong></li>
         <li><strong>Dynamische grootte: pas aan op vermogen, volatiliteit en setupkwaliteit</strong></li>
-        <li><strong>Drawdown-protocol: 15 % = grootte verkleinen, 20 % = stoppen met handelen</strong></li>
+        <li><strong>Drawdown-protocol: 15 % = grootte verkleinen, 20 % = stoppen met handelen</strong> — terugkomen vanaf -20 % vraagt +25 %; terugkomen vanaf -69 % vraagt +225 %</li>
         <li><strong>Risico per regime: volatiel = verkleinen of eruit blijven</strong></li>
       </ul>
 

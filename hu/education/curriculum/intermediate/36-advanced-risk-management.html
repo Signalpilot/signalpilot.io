@@ -222,6 +222,7 @@
           <li>Kockázattal súlyozott hozam: kövesd a Sharpe-mutatót (hozam ÷ volatilitás)</li>
           <li>drawdown-kezelés: -10 % = 25 %-kal kisebb, -15 % = 50 %-kal kisebb, -20 % = leállás</li>
           <li>A keret: számold ki a Kellyt → használd a Kelly 25-50 %-át → drawdownban vedd vissza a méretet</li>
+          <li>Egy visszaesés beárazása: mennyi nyereségbe kerül visszacsinálni a veszteség minden további százalékpontját</li>
         </ul>
       </div>
 
@@ -366,6 +367,26 @@ Nagyobb volatilitás = kisebb pozíció (ugyanakkora dolláros kockázat)</code>
         <tr><td>20-25%</td><td>Kritikus (75 %-kal kisebb méret, vagy a kereskedés leállítása)</td></tr>
         <tr><td>&gt; 25 %</td><td>Leállítás (nincs kereskedés, teljes stratégiai felülvizsgálat)</td></tr>
       </table>
+
+      <div class="callout-key">
+    <h4>&#128207; Mennyibe kerül visszacsinálni a visszaesés minden további százalékpontját</h4>
+    <p>A fenti sávok megmondják, mit tegyél. Azt nem mondják meg, mennyit ér az a sáv, amelyikben vagy, és ez egyetlen osztás: a visszatéréshez szükséges nyereség D / (1 &minus; D), ahol D a visszaesés. Semmi köze a lélektanhoz.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>Visszaesés      szükséges nyereség    büntetőszorzó
+-10 %                      +11,1 %            1,11x
+-15 %                      +17,6 %            1,18x
+-20 %                      +25,0 %            1,25x   &lt;- a kemény leállítás
+-25 %                      +33,3 %            1,33x
+-32 %                      +47,1 %            1,47x   &lt;- Kevin, 5-6. hét
+-52 %                     +108,3 %            2,08x   &lt;- Kevin, 8. hét
+-69,2 %                   +225,0 %            3,25x   &lt;- Kevin, 15. hét</code></pre>
+
+    <p>Olvasd el a harmadik oszlopot, ami nem más, mint 1 / (1 &minus; D). Nagyjából 20 %-ig a szükséges nyereség legfeljebb egynegyeddel haladja meg az elszenvedett veszteséget, és ez még olyan rossz szakasz, amelyből ki tudod kereskedni magad. Utána a szorzó elszalad: 52 %-nál a piacnak több mint a kétszeresét kell visszaadnia annak, amit elvitt, 69,2 %-nál pedig több mint a háromszorosát.</p>
+
+    <p>Most árazd be ezzel Kevin döntését. Az a protokoll, amit végül megmutattak neki, -20 %-nál megáll: 50 000 $-ból 40 000 $ lesz, és +25 % kell, hogy egészben legyen. Ő elment -69,2 %-ig: 50 000 $-ból 15 400 $ lesz, és +225 % kell. A vesztesége 3,5-szer akkora lett (34 600 $ a 10 000 $-ral szemben), a visszacsinálásához szükséges munka pedig kilencszer akkora (225 / 25 = 9). A 3,5 és a 9 közötti szakadék a kemény leállítás melletti teljes érv.</p>
+
+    <p style="margin-bottom:0">Figyeld meg, mit nem állít a táblázat. A görbén nincs törés, tehát nem azt mondja, hogy a -20 % túlélhető, a -25 % pedig nem; az a szint megegyezés kérdése. Azt mondja, hogy minden további százalékpont ára tovább nő, vagyis a megállás melletti érv annál erősebb, minél régebb óta nem álltál meg &mdash; ami pontosan fordítva van, mint ahogy az adott pillanatban érződik.</p>
+  </div>
 
       <h3 id="recovery-protocol">Visszatérési eljárás</h3>
       <p><strong>Ne térj vissza azonnal a teljes mérethez, miután talpra álltál.</strong></p>
@@ -600,7 +621,7 @@ Pozíció: 400 $ / 500 $ ATR = 0,8 BTC (~36 000 $ névérték)</code></pre>
         <li><strong>3 szintű kockázat: ügyletenként (1-2 %), portfólióterhelés (6-8 %), drawdown (&lt; 20 %)</strong></li>
         <li><strong>Kelly-kritérium: használj 1/4 és 1/2 Kelly közöttit (NEM a teljes Kellyt)</strong></li>
         <li><strong>Dinamikus méret: igazítsd a tőkéhez, a volatilitáshoz és a szetup minőségéhez</strong></li>
-        <li><strong>drawdown-eljárás: 15 % = csökkentsd a méretet, 20 % = hagyd abba a kereskedést</strong></li>
+        <li><strong>drawdown-eljárás: 15 % = csökkentsd a méretet, 20 % = hagyd abba a kereskedést</strong> — a -20 %-ról visszajönni +25 %-ot kíván; a -69 %-ról visszajönni +225 %-ot</li>
         <li><strong>Kockázat rezsim szerint: volatilisben csökkents vagy maradj ki</strong></li>
       </ul>
 

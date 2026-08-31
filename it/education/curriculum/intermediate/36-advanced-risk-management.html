@@ -222,6 +222,7 @@
           <li>Rendimento corretto per il rischio: segui l'indice di Sharpe (rendimento ÷ volatilità)</li>
           <li>Gestione del drawdown: -10 % = ridurre del 25 %, -15 % = ridurre del 50 %, -20 % = fermarsi</li>
           <li>Lo schema: calcola Kelly → usa il 25-50 % di Kelly → riduci la taglia nei drawdown</li>
+          <li>Dare un prezzo a un drawdown: quanto guadagno ti costa annullare ogni punto percentuale di perdita in più</li>
         </ul>
       </div>
 
@@ -366,6 +367,26 @@ Più volatilità = posizione più piccola (stesso rischio in dollari)</code></pr
         <tr><td>20-25%</td><td>Critico (ridurre la taglia del 75 % o smettere di operare)</td></tr>
         <tr><td>&gt; 25 %</td><td>Spegnimento (smettere di operare, revisione completa della strategia)</td></tr>
       </table>
+
+      <div class="callout-key">
+    <h4>&#128207; Quanto costa annullare ogni punto percentuale di drawdown in più</h4>
+    <p>Le fasce qui sopra dicono cosa fare. Non dicono quanto vale la fascia in cui ti trovi, e quella è una sola divisione: il guadagno che ti serve per tornare indietro è D / (1 &minus; D), dove D è il drawdown. Non c'è nulla di psicologico dentro.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>Drawdown      guadagno necessario    moltiplicatore di penalità
+-10 %                     +11,1 %                         1,11x
+-15 %                     +17,6 %                         1,18x
+-20 %                     +25,0 %                         1,25x   &lt;- lo stop rigido
+-25 %                     +33,3 %                         1,33x
+-32 %                     +47,1 %                         1,47x   &lt;- Kevin, settimana 5-6
+-52 %                    +108,3 %                         2,08x   &lt;- Kevin, settimana 8
+-69,2 %                  +225,0 %                         3,25x   &lt;- Kevin, settimana 15</code></pre>
+
+    <p>Leggi la terza colonna, che è semplicemente 1 / (1 &minus; D). Fino a circa il 20 % il guadagno necessario supera la perdita subita al massimo di un quarto, ed è un brutto tratto da cui puoi uscire operando. Oltre, il moltiplicatore ti scappa: al 52 % il mercato deve restituire più del doppio di quello che ha preso, e al 69,2 % più del triplo.</p>
+
+    <p>Ora dai un prezzo alla decisione di Kevin. Il protocollo che alla fine gli hanno mostrato si ferma a -20 %: 50.000 $ diventano 40.000 $ e gli serve un +25 % per tornare intero. Lui è andato avanti fino a -69,2 %: 50.000 $ diventano 15.400 $ e gli serve un +225 %. La sua perdita è diventata 3,5 volte più grande (34.600 $ contro 10.000 $), e il lavoro per annullarla è diventato nove volte più grande (225 / 25 = 9). Lo scarto fra 3,5 e 9 è tutto l'argomento a favore di uno stop rigido.</p>
+
+    <p style="margin-bottom:0">Nota che cosa la tabella non sostiene. La curva non ha alcun gomito, quindi non dice che a -20 % si sopravvive e a -25 % no; la soglia è una convenzione. Quello che dice è che il prezzo di ogni punto in più continua a salire, per cui la ragione per fermarsi si rafforza quanto più a lungo non ti sei fermato, ed è esattamente il contrario di come lo si vive sul momento.</p>
+  </div>
 
       <h3 id="recovery-protocol">Protocollo di rientro</h3>
       <p><strong>Non tornare subito a piena taglia dopo il recupero.</strong></p>
@@ -600,7 +621,7 @@ Posizione: 400 $ / 500 $ di ATR = 0,8 BTC (~36.000 $ di nozionale)</code></pre>
         <li><strong>Rischio su 3 livelli: per operazione (1-2 %), carico di portafoglio (6-8 %), drawdown (&lt; 20 %)</strong></li>
         <li><strong>Criterio di Kelly: usa da 1/4 a 1/2 Kelly (NON il Kelly pieno)</strong></li>
         <li><strong>Dimensionamento dinamico: adegualo al capitale, alla volatilità e alla qualità del setup</strong></li>
-        <li><strong>Protocollo di drawdown: 15 % = ridurre la taglia, 20 % = smettere di operare</strong></li>
+        <li><strong>Protocollo di drawdown: 15 % = ridurre la taglia, 20 % = smettere di operare</strong> — tornare da -20 % richiede +25 %; tornare da -69 % richiede +225 %</li>
         <li><strong>Rischio in base al regime: volatile = ridurre o stare fuori</strong></li>
       </ul>
 

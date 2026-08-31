@@ -222,6 +222,7 @@
           <li>Rentabilidad ajustada al riesgo: sigue el ratio de Sharpe (rentabilidad ÷ volatilidad)</li>
           <li>Gestión del drawdown: -10 % = reducir 25 %, -15 % = reducir 50 %, -20 % = parar</li>
           <li>Marco: calcula Kelly → usa el 25-50 % de Kelly → baja el tamaño en los drawdowns</li>
+          <li>Poner precio a un drawdown: cuánta ganancia te cuesta deshacer cada punto porcentual de pérdida adicional</li>
         </ul>
       </div>
 
@@ -366,6 +367,26 @@ Más volatilidad = posición más pequeña (mismo riesgo en dólares)</code></pr
         <tr><td>20-25%</td><td>Crítico (reducir el tamaño un 75 % o dejar de operar)</td></tr>
         <tr><td>&gt; 25 %</td><td>Apagado (dejar de operar, revisión completa de la estrategia)</td></tr>
       </table>
+
+      <div class="callout-key">
+    <h4>&#128207; Lo que cuesta deshacer cada punto porcentual adicional de drawdown</h4>
+    <p>Los niveles de arriba dicen qué hacer. No dicen cuánto vale el nivel en el que estás, y eso es una sola división: la ganancia que necesitas para volver es D / (1 &minus; D), donde D es el drawdown. Nada de eso va de psicología.</p>
+
+    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>Drawdown      ganancia necesaria    multiplicador de castigo
+-10 %                    +11,1 %                       1,11x
+-15 %                    +17,6 %                       1,18x
+-20 %                    +25,0 %                       1,25x   &lt;- el tope duro
+-25 %                    +33,3 %                       1,33x
+-32 %                    +47,1 %                       1,47x   &lt;- Kevin, semana 5-6
+-52 %                   +108,3 %                       2,08x   &lt;- Kevin, semana 8
+-69,2 %                 +225,0 %                       3,25x   &lt;- Kevin, semana 15</code></pre>
+
+    <p>Lee la tercera columna, que no es más que 1 / (1 &minus; D). Hasta alrededor del 20 %, la ganancia que necesitas no supera en más de un cuarto la pérdida que sufriste, y esa es una mala racha de la que puedes salir operando. A partir de ahí el multiplicador se te escapa: al 52 % el mercado tiene que devolverte más del doble de lo que se llevó, y al 69,2 % más del triple.</p>
+
+    <p>Ponle ahora precio a la decisión de Kevin. El protocolo que acabaron enseñándole se detiene en el -20 %: 50.000 $ pasan a 40.000 $ y necesita un +25 % para quedar entero. Él siguió hasta el -69,2 %: 50.000 $ pasan a 15.400 $ y necesita un +225 %. Su pérdida se hizo 3,5 veces mayor (34.600 $ frente a 10.000 $) y el trabajo de deshacerla se hizo nueve veces mayor (225 / 25 = 9). La distancia entre 3,5 y 9 es todo el argumento a favor de un tope duro.</p>
+
+    <p style="margin-bottom:0">Fíjate en lo que la tabla no afirma. La curva no tiene ningún codo, así que no dice que un -20 % sea sobrevivible y un -25 % no; el nivel es una convención. Lo que sí dice es que el precio de cada punto adicional sigue subiendo, así que el argumento para parar se hace más fuerte cuanto más tiempo llevas sin parar, que es justo al revés de como se siente en el momento.</p>
+  </div>
 
       <h3 id="recovery-protocol">Protocolo de recuperación</h3>
       <p><strong>No vuelvas de golpe al tamaño completo después de recuperarte.</strong></p>
@@ -600,7 +621,7 @@ Posición: 400 $ / 500 $ de ATR = 0,8 BTC (~36.000 $ de nocional)</code></pre>
         <li><strong>Riesgo en 3 niveles: por operación (1-2 %), carga de cartera (6-8 %), drawdown (&lt; 20 %)</strong></li>
         <li><strong>Criterio de Kelly: usa entre 1/4 y 1/2 de Kelly (NO el Kelly completo)</strong></li>
         <li><strong>Tamaño dinámico: ajústalo al capital, a la volatilidad y a la calidad del setup</strong></li>
-        <li><strong>Protocolo de drawdown: 15 % = reducir el tamaño, 20 % = dejar de operar</strong></li>
+        <li><strong>Protocolo de drawdown: 15 % = reducir el tamaño, 20 % = dejar de operar</strong> — volver desde el -20 % exige un +25 %; volver desde el -69 % exige un +225 %</li>
         <li><strong>Riesgo según el régimen: volátil = reducir o quedarse fuera</strong></li>
       </ul>
 
