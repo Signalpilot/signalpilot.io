@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17835897996"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-440EJBMYST');
+  gtag('config', 'AW-17835897996');
+</script>
+  <link rel="manifest" href="/education/manifest.json">
+  <link rel="icon" type="image/x-icon" href="/education/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/education/assets/icons/icon-180x180.png">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover"/>
+  <meta name="robots" content="index,follow"/>
+  <!-- AGGRESSIVE CACHE PREVENTION: Forces fresh load every time -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Backtesting ve gerçeklik: o kusursuz beklenti sana yalan söylüyor — Signal Pilot Education</title>
+  <meta name="description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta name="sp-level" content="Intermediate"><meta name="sp-order" content="32">
+  <meta name="theme-color" content="#05070d">
+  <link rel="canonical" href="https://www.signalpilot.io/tr/education/curriculum/advanced/63-backtesting.html">
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.signalpilot.io/education/curriculum/advanced/63-backtesting.html">
+  <meta property="og:title" content="Backtesting Reality: That Perfect Expectancy Is Lying to You — Signal Pilot Education">
+  <meta property="og:description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Signal Pilot Education">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.signalpilot.io/education/curriculum/advanced/63-backtesting.html">
+  <meta name="twitter:title" content="Backtesting Reality: That Perfect Expectancy Is Lying to You — Signal Pilot Education">
+  <meta name="twitter:description" content="Perfect backtest. Terrible forward results. Learn why overfitting kills strategies, how to model realistic slippage, and validation methods that actually work.">
+  <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
+  <link rel="prev" href="https://www.signalpilot.io/education/curriculum/professional/71-positions-are-one-position.html"/>
+  <link rel="next" href="https://www.signalpilot.io/education/curriculum/beginner/22-risk-of-ruin.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gugi&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <!-- SignalPilot Theme System -->
+  <link rel="stylesheet" href="/education/assets/signalpilot-theme.css">
+  <link rel="stylesheet" href="/education/assets/edu.css">
+  <link rel="stylesheet" href="/education/assets/chatbot.css">
+  <link rel="stylesheet" href="/education/assets/lang-switcher.css">
+  <link rel="stylesheet" href="/education/assets/notes.css">
+  <link rel="stylesheet" href="/education/assets/auth-ui.css">
+  <link rel="stylesheet" href="/education/assets/trial-cta.css">
+  <link rel="stylesheet" href="/education/assets/blog-links.css">
+  <link rel="stylesheet" href="/education/assets/discussions.css">
+  <!-- Logger must load first, before other scripts that use it -->
+  <script src="/education/assets/logger.js"></script>
+  <script src="/education/assets/dev-utils.js" defer></script>
+<script src="/education/assets/structured-data.js" defer></script>
+<script src="/education/assets/lazy-load.js" defer></script>
+<script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
+  <style>
+    /* Mobile-friendly code blocks and tables - prevent horizontal scroll */
+    @media (max-width: 768px) {
+      .prose pre {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        white-space: pre;
+        max-width: 100%;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        padding: 0.75rem;
+      }
+      .prose pre code {
+        white-space: pre;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+      /* Tabs content code blocks */
+      .tab-panel pre {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        white-space: pre;
+        max-width: 100%;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        padding: 0.75rem !important;
+      }
+      .tab-panel pre code {
+        white-space: pre;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+      .prose table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+        font-size: 0.8rem;
+      }
+      .prose table th,
+      .prose table td {
+        padding: 0.5rem !important;
+        min-width: 80px;
+      }
+    }
+  </style>
+  <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="de" href="https://www.signalpilot.io/de/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="fr" href="https://www.signalpilot.io/fr/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="it" href="https://www.signalpilot.io/it/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="pt" href="https://www.signalpilot.io/pt/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="nl" href="https://www.signalpilot.io/nl/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="ru" href="https://www.signalpilot.io/ru/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="ja" href="https://www.signalpilot.io/ja/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="tr" href="https://www.signalpilot.io/tr/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="hu" href="https://www.signalpilot.io/hu/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="ar" href="https://www.signalpilot.io/ar/education/curriculum/advanced/63-backtesting.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/curriculum/advanced/63-backtesting.html">
+</head>
+<body class="table-accordions-mobile">
+  <div class="bg-stars" aria-hidden="true"></div>
+  <canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
+  <div class="bg-aurora" aria-hidden="true"></div>
+
+<header class="sp-header">
+  <div class="wrap">
+    <a href="https://www.signalpilot.io" class="brand">
+      <span>Signal Pilot</span>
+    </a>
+    <nav id="mainnav" aria-label="Ana içerik"><ul>
+      <li><a href="/education/">Eğitim</a></li>
+      <li><a href="/education/search.html">Ara</a></li>
+      <li><a href="/education/my-library.html">Kitaplığım</a></li>
+      <li><a href="https://www.signalpilot.io/blog" target="_blank" rel="noopener">Blog</a></li>
+    </ul></nav>
+    <div class="header-ctls">
+      <div id="google_translate_element"></div><button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Temayı değiştir">
+        <span id="theme-icon">☽</span>
+      </button><button id="menuToggle" class="menu-toggle" aria-expanded="false"><span class="menu-toggle-text">Menü </span>☰</button></div>
+  </div>
+</header>
+
+<article class="article">
+  <header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Gezinme yolu">
+        <a href="/education/">Ana sayfa</a> › <a href="/education/intermediate.html">Orta seviye müfredat</a> › <span>Backtesting'in gerçeği</span>
+      </nav>
+      <span class="badge">🟡 Orta seviye • 86 dersten 35'incisi</span>
+      <h1 class="headline xl">Backtesting ve gerçeklik: o kusursuz beklenti sana yalan söylüyor</h1>
+      <div class="meta">16 dakikalık okuma • Strateji doğrulama<span class="view-count" data-view-count style="display:none"> • <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> <span data-view-num></span></span></div>
+
+      <!-- Author Byline -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(118,221,255,0.2); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-2);">
+        <div>
+          <div style="font-weight: 600; color: var(--text-1);">Signal Pilot</div>
+          <div>Profesyonel trading eğitimi</div>
+        </div>
+      </div>
+
+      <!-- Article Progress Indicator -->
+      <div class="article-progress" style="--progress:0%">
+        <div class="progress-circle"><span>%0</span></div>
+        <div class="progress-text">
+          <strong>İlerliyorsun!</strong>
+          <div style="font-size:.85rem;color:var(--muted)">Bu dersi tamamlamak için okumaya devam et</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap article-grid">
+    <div class="prose">
+      <p><b>Senin backtest'in: 8R beklenti. Kâr faktörü 3,5. 10.000 $'lık hesapta 50.000 $ kâr.</b></p>
+
+      <p>Canlıya geçiyorsun. İlk hafta: -2R beklenti. Kâr faktörü 0,4. Hesap %12 aşağıda.</p>
+
+      <p>Ne oldu? backtest'in yalan söyledi.</p>
+
+      <div class="callout-warning">
+        <h4>🚨 Açık konuşalım</h4>
+        <p>backtest'lerin çoğu düpedüz hayal ürünüdür. Kusursuz gerçekleşmeleri, sıfır slippage'ı, spread'siz bir dünyayı ve canlı piyasada var olmayan sihirli girişleri varsayarlar.</p>
+        <p>backtest'in gerçek olamayacak kadar iyi görünüyorsa, gerçekten de öyledir. Sinyale değil, gürültüye uydurmuşsun.</p>
+      </div>
+
+      <p><strong>Bu derste öğreneceklerin:</strong></p>
+      <ul>
+        <li>Bir backtest aritmetik olarak doğruyken bile neden işlenemeyecek bir stratejiyi anlatıyor olabilir</li>
+        <li>4 ölümcül günah: aşırı uyum, ileriye bakma yanlılığı, gerçekçi olmayan maliyetler, hayatta kalan yanlılığı</li>
+        <li>slippage ve spread'leri gerçeği yansıtacak biçimde nasıl modellersin</li>
+        <li>Örneklem içi ile örneklem dışı (önemi olan tek doğrulama)</li>
+      </ul>
+
+      <!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Ön koşullar</h4>
+        <p>Bu ders şu derslerdeki kavramların üzerine kurulu:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/intermediate/37-detecting-a-regime-change.html" style="color:#00d4aa;text-decoration:underline">Ders 33: Volume Oracle</a> &mdash; Signal Pilot ustalığı</li>
+            <li><a href="/education/curriculum/professional/71-positions-are-one-position.html" style="color:#00d4aa;text-decoration:underline">Ders 34: Portföy kurulumu</a> &mdash; Signal Pilot ustalığı</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Bunları tamamladıysan hazırsın. Tamamlamadıysan önce temel derslerle başla.</p>
+      </div>
+
+      <div class="section-break"><span>Bölüm 1: backtest'lerin yalan söylediği dört yol</span></div>
+
+      <div class="blog-callout">
+        📖 <a href="https://www.signalpilot.io/blog/articles/why-backtesting-results-are-worthless/">
+          Derinlemesine: backtesting sonuçları neden hiçbir işe yaramaz (ve onun yerine ne yapmalı) →
+        </a>
+      </div>
+<h2 id="why-your-perfect-strategy-will-fail-live">Kusursuz stratejin canlıda neden çökecek</h2>
+
+      <p>Rahatsız edici gerçekten başlayalım: bir stratejiyi tarihsel veriye uysun diye optimize ettiysen, bir üstünlük bulmadın. Gürültü buldun.</p>
+
+      <div class="tabs">
+        <div class="tabs-nav">
+          <button class="active">Sorun 1: aşırı uyum</button>
+          <button>Sorun 2: ileriye bakma yanlılığı</button>
+          <button>Sorun 3: uygulama hayali</button>
+          <button>Sorun 4: hayatta kalan yanlılığı</button>
+        </div>
+        <div class="tabs-content">
+          <div class="tab-panel active">
+            <h3 id="curve-fitting-to-random-noise">Eğriyi rastgele gürültüye uydurmak</h3>
+            <p><strong>Nedir:</strong> backtest kusursuz görünene kadar parametreleri optimize etmek</p>
+            <p><strong>Örnek:</strong></p>
+            <ul>
+              <li>100 farklı EMA periyodu deniyorsun (10, 11, 12… 110)</li>
+              <li>EMA(47), backtest'te 4,2R beklenti veriyor</li>
+              <li>«Sihirli sayıyı» bulduğunu sanıyorsun</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> EMA(47) yalnızca o veri kümesine tesadüfen oturmuştu. İleriye dönük sınamada? -0,8R beklenti. Sinyali değil, gürültüyü öğrendin.</p>
+            <p><strong>Daha iyisi:</strong> Optimizasyonu sınırla. Standart parametreler kullan. Görülmemiş veride sına.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="using-future-data-impossible-in-live-trading">Geleceğin verisini kullanmak (canlıda imkânsız)</h3>
+            <p><strong>Nedir:</strong> Bugünkü kararı vermek için gelecekteki mumlara «göz atan» kod</p>
+            <p><strong>Örnek:</strong></p>
+            <pre style="background:rgba(0,0,0,.3);padding:1rem;border-radius:8px;overflow-x:auto"><code>if close[0] > high[5]:  # GELECEKTEKİ 5 mumu kullanıyor
+    enter_long()</code></pre>
+            <p><strong>Sorun:</strong> backtesting'de geleceğin verisi elinde olur. Canlı işlemde olmaz.</p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Bu kod canlıda düpedüz çalışamaz. backtest'in, var olmayan bir stratejiyi sınıyor.</p>
+            <p><strong>Daha iyisi:</strong> Yalnızca karar anında elinde olan veriyi kullan.</p>
+          </div>
+          <div class="tab-panel">
+            <h3 id="assuming-perfect-fills-at-perfect-prices">Kusursuz fiyatlardan kusursuz gerçekleşme varsaymak</h3>
+<p><strong>backtest'in varsayımı:</strong> «Tam 100,00 $'dan alıyorum»</p>
+            <p><strong>Gerçek:</strong> Piyasa emri 100,12 $'dan gerçekleşiyor (spread + slippage)</p>
+            <p><strong>100 işlemdeki etkisi:</strong></p>
+            <ul>
+              <li>backtest kârı: 5.000 $</li>
+              <li>Spread maliyeti (işlem başına 0,10 $): -1.000 $</li>
+              <li>slippage (işlem başına 0,05 $): -500 $</li>
+              <li>Komisyonlar (işlem başına 2 $): -200 $</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Gerçek kâr = 3.300 $ (backtest'ten %34 az)</p>
+          </div>
+          <div class="tab-panel"><h3 id="testing-only-on-survivors">Yalnızca hayatta kalanlarda sınamak</h3>
+            <p><strong>Nedir:</strong> backtesting'i yalnızca bugünkü S&P 500 hisseleriyle yapmak</p>
+            <p><strong>Sorun:</strong> Endeks on yıl önceki aynı 500 şirket değil. İsimler sürekli çıkar — çoğu satın alma yoluyla ya da büyüklük bandından düştüğü için, bir kısmı da sıfıra gittiği için — ve sıfıra gidenler tam olarak, ortalamaya dönüş kuralının almayı sürdüreceği isimlerdir</p>
+            <p><strong>Örnek:</strong></p>
+            <ul>
+              <li>2024 S&P 500 listesiyle backtest: 1,8R beklenti, 2,1 kâr faktörü</li>
+              <li>Ama o dönem boyunca Hertz'te (2020'de battı), SVB Financial'da (2023'te çöktü) ve sıfıra giden diğer bütün isimlerde uzun pozisyonda olurdun.</li>
+            </ul>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,107,107,.15);border-radius:8px"><strong>Gerçek:</strong> Beklentin, kottan çıkmaların yol açtığı yıkıcı kayıpları dışarıda bırakıyor. Gerçek beklenti: -0,2R (kaybettiren bir sistem).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-key">
+        <h4>💡 jeton düşme anı</h4>
+        <p>backtest gerçeklik değildir. Bir benzetimdir. Ve benzetimin imkânsız varsayımlar içeriyorsa, canlı sonuçların da aynı ölçüde imkânsız olur.</p>
+      </div>
+
+      <div class="section-break"><span>Bölüm 2: gerçekçi maliyetleri modellemek</span></div>
+<h2 id="the-hidden-costs-that-kill-strategies">Stratejileri öldüren gizli maliyetler</h2>
+
+      <p>Çoğu backtestin göz ardı ettiği şey şudur. Sana kaça mal olacağı enstrümanına, büyüklüğüne ve tutma süresine bağlıdır; dolayısıyla dürüst tek cevap, aşağıda kendi rakamlarınla hesaplayacağın cevaptır:</p>
+
+      <div class="accordion">
+        <details class="accordion-item">
+          <summary class="accordion-header">Adım 1: alış-satış farkını modelle</summary>
+          <div class="accordion-content">
+            <p><strong>Nedir:</strong> Alış fiyatı ile satış fiyatı arasındaki fark</p>
+            <p><strong>Örnek:</strong></p>
+            <ul>
+              <li>SPY alış: 450,00 $ / satış: 450,01 $ → spread = 0,01 $</li>
+              <li>Alıyorsun: 450,01 $ ödüyorsun (farkın yarısı = 0,005 $)</li>
+              <li>Satıyorsun: 450,00 $ alıyorsun (farkın yarısı = 0,005 $)</li>
+            </ul>
+            <p><strong>Gidiş dönüş başına maliyet:</strong> 0,01 $</p>
+            <p><strong>1.000 hisse için:</strong> 0,01 $ × 1.000 = işlem başına 10 $</p>
+            <p><strong>100 işlem:</strong> 1.000 $ spread maliyeti</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Adım 2: slippage'ı modelle</summary>
+          <div class="accordion-content">
+            <p><strong>Nedir:</strong> Hedeflenen fiyat ile gerçek gerçekleşme arasındaki fark</p>
+            <p><strong>Koşullara göre gerçekçi slippage:</strong></p>
+            <ul>
+              <li><strong>Normal likidite:</strong> 0.01-0.02%</li>
+              <li><strong>Oynak piyasalar:</strong> 0.05-0.10%</li>
+              <li><strong>İnce likidite:</strong> 0.10-0.30%</li>
+              <li><strong>Büyük pozisyon:</strong> 0.20-0.50%</li>
+            </ul>
+            <p><strong>Temkinli varsayım:</strong> İşlem başına %0,05</p>
+            <p>10.000 $'lık pozisyon × %0,05 = yön başına 5 $ slippage = gidiş dönüş 10 $</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Adım 3: komisyonları modelle</summary>
+          <div class="accordion-content">
+            <p><strong>Örnek: Interactive Brokers</strong></p>
+            <ul>
+              <li>Hisse başına 0,005 $, en az 1 $</li>
+              <li>200 hisse × 0,005 $ = yön başına 1 $</li>
+              <li>Gidiş dönüş = 2 $</li>
+            </ul>
+            <p><strong>100 işlem:</strong> 200 $ komisyon</p>
+          </div>
+        </details>
+
+        <details class="accordion-item">
+          <summary class="accordion-header">Adım 4: toplam gerçekçi maliyet</summary>
+          <div class="accordion-content">
+            <p><strong>İşlem başına (gidiş dönüş):</strong></p>
+            <ul>
+              <li>Spread: 10 $</li>
+              <li>slippage: 10 $</li>
+              <li>Komisyon: 2 $</li>
+            </ul>
+            <p><strong>Toplam: işlem başına 22 $</strong></p>
+            <p style="margin-top:1rem;padding:1rem;background:rgba(255,193,7,.15);border-radius:8px">Stratejin işlem başına 50 $ brüt kazandırıyorsa → net 28 $ (%44 azalma!)</p>
+          </div>
+        </details>
+      </div>
+<h3 id="backtest-adjustment-example">backtest'i düzeltme örneği</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(91,138,255,.08);border-radius:12px">
+        <h4>Gerçekçi maliyetlerden önce ve sonra</h4>
+        <p><strong>Strateji: 100 işlem, işlem başına ortalama 50 $ kâr</strong></p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>backtest (hayal):</strong></p>
+        <p>100 işlem × 50 $ = 5.000 $ kâr</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Gerçekçi maliyetlerden sonra:</strong></p>
+        <ul>
+          <li>Brüt: 5.000 $</li>
+          <li>Spread: -1.000 $</li>
+          <li>slippage: -1.000 $</li>
+          <li>Komisyonlar: -200 $</li>
+        </ul>
+        <p style="margin-top:1rem;font-weight:700;color:#00d4aa">Net kâr: 2.800 $ (%44 azalma)</p>
+      </div>
+
+<div class="example-block">
+        <h4>Bileşik örnek: 1,3R beklentili «kusursuz» bir backtest'in canlıda -0,45R'ye dönüşmesi</h4>
+
+        <p><strong>Arka plan:</strong> Mart 2024'te Chris (bileşik örnek), 6 aylık optimizasyonun ardından bir kırılım stratejisi geliştirdi. backtest inanılmaz görünüyordu: 1,3R beklenti, 4,9 kâr faktörü, %67 kazanma oranı, 2 yıllık SPY verisiyle (2022-2023) sınanmış. Nisan 2024'te 50.000 $ sahaya sürüldü. Haziran 2024'e gelindiğinde hesap 8.400 $ eksideydi (-%16,8). İşte tam otopsi.</p>
+
+        <h5>«Kusursuz» backtest (2022-2023 verisi)</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">backtest sonuçları (Oca. 2022 - Ara. 2023, 2 yıl)</caption>
+          <tr style="background:rgba(34,197,94,0.15);border-bottom:2px solid rgba(34,197,94,0.3)">
+            <th style="padding:0.75rem;text-align:left">Ölçüt</th>
+            <th style="padding:0.75rem;text-align:right">Değer</th>
+            <th style="padding:0.75rem;text-align:left">Chris ne düşündü</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Toplam işlem</td>
+            <td style="padding:0.75rem;text-align:right">156</td>
+            <td style="padding:0.75rem">İyi bir örneklem</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Kazanma oranı</td>
+            <td style="padding:0.75rem;text-align:right">67.3% (105W / 51L)</td>
+            <td style="padding:0.75rem">«İnanılmaz! Ortalamanın çok üstünde.»</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Ort. kazanç / ort. kayıp</td>
+            <td style="padding:0.75rem;text-align:right">+2.4R / -1R</td>
+            <td style="padding:0.75rem">«R:R harika, kazananlar kaybedenlerin 2,4 katı.»</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Kâr faktörü</td>
+            <td style="padding:0.75rem;text-align:right">4,9</td>
+            <td style="padding:0.75rem">«Profesyonel düzeyde bir sayı.»</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Beklenti değeri</td>
+            <td style="padding:0.75rem;text-align:right">İşlem başına +1,3R</td>
+            <td style="padding:0.75rem">«Kutsal kâse toprakları.»</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem">Azami drawdown</td>
+            <td style="padding:0.75rem;text-align:right">-%8,2</td>
+            <td style="padding:0.75rem">«Minicik bir drawdown. Son derece güvenli.»</td>
+          </tr>
+          <tr style="background:rgba(34,197,94,0.2)">
+            <td style="padding:0.75rem">Toplam getiri (2 yıl, 10.000 dolarlık test hesabı, işlem başına %2 risk)</td>
+            <td style="padding:0.75rem;text-align:right"><strong>+$40,600 (+406%)</strong></td>
+            <td style="padding:0.75rem"><strong>«Bu o. İşimi bırakıyorum.»</strong></td>
+          </tr>
+        </table>
+        </div>
+
+        <p><strong>Chris'in optimizasyon süreci:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>50 farklı EMA periyodu denedi (EMA(34)'ü «kusursuz» buldu)</li>
+          <li>Stoplar için 20 ATR çarpanı denedi (1,47× ATR'yi «en uygun» buldu)</li>
+          <li>15 kâr hedefi seviyesi denedi (2,8R'yi «en iyi» buldu)</li>
+          <li>Nihai strateji: EMA(34) kesişimi + 1,47× ATR stop + 2,8R hedef</li>
+          <li><strong>Denenen toplam bileşim:</strong> 50 × 20 × 15 = 15.000 varyasyon</li>
+        </ul>
+
+        <p><strong>Chris'in backtest'e koymadıkları:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>slippage (tam fiyattan kusursuz gerçekleşme varsaydı)</li>
+          <li>Alış-satış farkı (spread'i sıfır varsaydı)</li>
+          <li>Komisyonlar (modellemeyi unuttu)</li>
+          <li>Emrin reddi (%100 gerçekleşme varsaydı)</li>
+          <li>Örneklem dışı sınama (hiç görülmemiş veride hiç denemedi)</li>
+        </ul>
+
+        <h5>Canlı işlemin gerçeği (Nisan-Haziran 2024, 10 hafta)</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">Canlı sonuçlar (10 hafta, 50.000 $'lık hesap)</caption>
+          <tr style="background:rgba(255,82,82,0.15);border-bottom:2px solid rgba(255,82,82,0.3)">
+            <th style="padding:0.75rem;text-align:left">Ölçüt</th>
+            <th style="padding:0.75rem;text-align:right">backtest</th>
+            <th style="padding:0.75rem;text-align:right">Canlıdaki gerçek</th>
+            <th style="padding:0.75rem;text-align:right">Fark</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Kazanma oranı</td>
+            <td style="padding:0.75rem;text-align:right">%67,3</td>
+            <td style="padding:0.75rem;text-align:right">51.4% (19W / 18L)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">15,9 puan daha kötü</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Ort. kazanç</td>
+            <td style="padding:0.75rem;text-align:right">+2.4R (+$1,200)</td>
+            <td style="padding:0.75rem;text-align:right">+1.8R (+$900)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">%25 daha küçük</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Ort. kayıp</td>
+            <td style="padding:0.75rem;text-align:right">-1R (-$500)</td>
+            <td style="padding:0.75rem;text-align:right">-1.3R (-$650)</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">%30 daha büyük</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Kâr faktörü</td>
+            <td style="padding:0.75rem;text-align:right">4,9</td>
+            <td style="padding:0.75rem;text-align:right">1,46</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">%70'lik çöküş</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Beklenti değeri</td>
+            <td style="padding:0.75rem;text-align:right">+1,3R</td>
+            <td style="padding:0.75rem;text-align:right">maliyetler düşülünce -0,45R</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-1,75R EKSİDE</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,82,82,0.1)">
+            <td style="padding:0.75rem">Azami drawdown</td>
+            <td style="padding:0.75rem;text-align:right">-%8,2</td>
+            <td style="padding:0.75rem;text-align:right">-%21,4</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">2,6 kat daha kötü</span></td>
+          </tr>
+          <tr style="background:rgba(255,82,82,0.25)">
+            <td style="padding:0.75rem">Toplam getiri (10 hafta)</td>
+            <td style="padding:0.75rem;text-align:right">+9.600 $ öngörülen</td>
+            <td style="padding:0.75rem;text-align:right"><strong>-$8,400 (-16.8%)</strong></td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252;font-weight:bold">18.000 $'lık uçurum</span></td>
+          </tr>
+        </table>
+        </div>
+
+        <h5>Eksiksiz maliyet dökümü: 18.000 $ nereye gitti</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <caption style="text-align:left;font-weight:bold;margin-bottom:0.5rem">Performans farkının anatomisi (37 işlem, 10 hafta)</caption>
+          <tr style="background:rgba(118,221,255,0.15);border-bottom:2px solid rgba(118,221,255,0.3)">
+            <th style="padding:0.75rem;text-align:left">Maliyet kalemi</th>
+            <th style="padding:0.75rem;text-align:left">Açıklama</th>
+            <th style="padding:0.75rem;text-align:right">Etki</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>1. Aşırı uyum (eğriye uydurma)</strong></td>
+            <td style="padding:0.75rem">EMA(34) + 1,47× ATR, 2022-2023 verisinde kusursuz çalışıyordu ama tarihsel gürültüye optimize edilmişti. 2024'ün piyasa koşulları = başka bir gürültü.</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-6.200 $</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>2. slippage (modellenmedi)</strong></td>
+            <td style="padding:0.75rem">İşlem başına ortalama %0,08 slippage × 25.000 $ ortalama pozisyon × 37 işlemin gidiş dönüşü = 1.480 $ slippage maliyeti</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-1.480 $</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>3. Alış-satış farkı</strong></td>
+            <td style="padding:0.75rem">SPY spread'i 0,01 $ × ortalama 500 hisse × 37 işlem = 185 $. Opsiyonlar (kaldıraç için kullanıldı) spread = hisse başına 0,03 $ × sözleşme başına 100 hisse × 20 sözleşme × 37 işlem = 2.220 $ toplam spread maliyeti</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-2.405 $</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>4. Komisyonlar</strong></td>
+            <td style="padding:0.75rem">Opsiyonlar: sözleşme başına 0,65 $ × 20 sözleşme × 37 işlem × 2 (gidiş dönüş) = 962 $</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-962 $</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>5. Emrin reddi</strong></td>
+            <td style="padding:0.75rem">8 işlemde limitli emirler hiç gerçekleşmedi (5 kazanan, 3 kaybeden kaçtı). Net fırsat maliyeti: kaçan 5 kazanan × +1,8R (-9R) eksi kaçınılan 3 kaybeden × -1,3R (+3,9R) = -5,1R = 2.550 $</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-2.550 $</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>6. İleriye bakma yanlılığı</strong></td>
+            <td style="padding:0.75rem">backtest kodu girişi close[0] ile hesaplıyor ama aynı mumun kapanışında giriyordu (canlıda imkânsız). Canlı girişler bir sonraki mumun açılışında olur. Ortalama %0,3 daha kötü giriş = 2.775 $ bozulma</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-2.775 $</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(118,221,255,0.1)">
+            <td style="padding:0.75rem"><strong>7. Uygulama gecikmeleri</strong></td>
+            <td style="padding:0.75rem">Platform gecikmesi + emri gözden geçirme süresi = 2-8 saniyelik gecikme. Hızlı kırılımlar gerçekleşmeden önce ortalama %0,15 kaçtı = gecikmelerden 1.387 $ slippage</td>
+            <td style="padding:0.75rem;text-align:right"><span style="color:#ff5252">-1.387 $</span></td>
+          </tr>
+          <tr style="background:rgba(255,82,82,0.2)">
+            <td colspan="2" style="padding:0.75rem;text-align:right;font-weight:bold">BACKTEST'E GÖRE TOPLAM BOZULMA:</td>
+            <td style="padding:0.75rem;text-align:right;font-weight:bold"><span style="color:#ff5252;font-size:1.1rem">-17.759 $</span></td>
+          </tr>
+        </table>
+        </div>
+
+        <p><strong>Matematiği:</strong></p>
+        <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>backtest'in öngördüğü kâr (10 hafta): +9.600 $</li>
+          <li>Eksi bozulma maliyetleri: -17.759 $</li>
+          <li>Beklenen canlı sonuç: -8.159 $</li>
+          <li>Gerçekleşen canlı sonuç: -8.400 $ — hesap, gerçekte olanla 250 $ farkla örtüşüyor</li>
+        </ul>
+
+        <h5>Ne yapılmalıydı: doğru doğrulama</h5>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <tr style="background:rgba(34,197,94,0.15);border-bottom:2px solid rgba(34,197,94,0.3)">
+            <th style="padding:0.75rem;text-align:left">Adım</th>
+            <th style="padding:0.75rem;text-align:left">Chris ne yaptı (yanlış)</th>
+            <th style="padding:0.75rem;text-align:left">Ne yapılmalı (doğru)</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>1. Verinin bölünmesi</strong></td>
+            <td style="padding:0.75rem">2022-2023 verisinin tamamını optimizasyonda kullandı</td>
+            <td style="padding:0.75rem">2022'yi optimizasyonda kullan, 2023'ü örneklem dışı sınama için ayır</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>2. Optimizasyon</strong></td>
+            <td style="padding:0.75rem">15.000 parametre bileşimi denedi</td>
+            <td style="padding:0.75rem">Standart parametreler kullan (EMA 20/50, 2× ATR stop). Denemeyi 10 varyasyonun altında tut</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>3. Maliyet modellemesi</strong></td>
+            <td style="padding:0.75rem">Maliyetleri sıfır varsaydı</td>
+            <td style="padding:0.75rem">İşlem başına %0,10 slippage + 0,01 $ spread + 2 $ komisyon modelle = en az -30 $</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>4. İleriye bakma denetimi</strong></td>
+            <td style="padding:0.75rem">Hem sinyal hem uygulama için aynı mumun kapanışını kullandı</td>
+            <td style="padding:0.75rem">Sinyal close[0]'da, uygulama open[1]'de (bir sonraki mum). Gerçekçi zamanlama.</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(34,197,94,0.1)">
+            <td style="padding:0.75rem"><strong>5. Örneklem dışı sınama</strong></td>
+            <td style="padding:0.75rem">Hiç görülmemiş veride hiç denemedi</td>
+            <td style="padding:0.75rem">2023 verisinde sına (el sürülmemiş). Performans %30'dan fazla bozuluyorsa strateji aşırı uyumludur</td>
+          </tr>
+          <tr>
+            <td style="padding:0.75rem"><strong>6. Walk-forward</strong></td>
+            <td style="padding:0.75rem">Tek bir backtest dönemi</td>
+            <td style="padding:0.75rem">6 aylık optimizasyon pencereleri, sonraki 3 ayda sınama. Kaydırarak yinele. Tutarlılığa bak.</td>
+          </tr>
+        </table>
+        </div>
+
+        <h5>Chris'in yapması gereken örneklem dışı sınama</h5>
+
+        <p><strong>Doğru yöntem:</strong></p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>Örneklem içi dönem:</strong> Yalnızca 2022 verisinde optimize et (2023'e dokunma)</li>
+          <li><strong>Parametreleri bul:</strong> EMA(34) + 1,47× ATR (aynı sonuç, ama yalnızca 2022 kullanılarak)</li>
+          <li><strong>Parametreleri kilitle:</strong> ARTIK DEĞİŞİKLİK YOK. Parametreler donduruldu.</li>
+          <li><strong>Örneklem dışı sınama:</strong> Tam olarak aynı parametreleri 2023 verisinde çalıştır</li>
+          <li><strong>Sonuçları karşılaştır:</strong> 2023 performansı 2022'nin %70'inin altına düşüyorsa strateji aşırı uyumludur</li>
+        </ol><p><strong>Ne olurdu:</strong></p>
+
+        <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.9rem">
+          <tr style="background:rgba(255,193,7,0.15);border-bottom:2px solid rgba(255,193,7,0.3)">
+            <th style="padding:0.75rem;text-align:left">Dönem</th>
+            <th style="padding:0.75rem;text-align:right">Beklenti değeri</th>
+            <th style="padding:0.75rem;text-align:right">Kâr faktörü</th>
+            <th style="padding:0.75rem;text-align:left">Karar</th>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,193,7,0.1)">
+            <td style="padding:0.75rem">2022 (örneklem içi)</td>
+            <td style="padding:0.75rem;text-align:right">+1,4R</td>
+            <td style="padding:0.75rem;text-align:right">3,1</td>
+            <td style="padding:0.75rem">Optimize edilmiş performans</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,193,7,0.1)">
+            <td style="padding:0.75rem">2023 (örneklem dışı)</td>
+            <td style="padding:0.75rem;text-align:right">+0,4R</td>
+            <td style="padding:0.75rem;text-align:right">1,4</td>
+            <td style="padding:0.75rem"><span style="color:#fbbf24">⚠️ %71 bozulma</span></td>
+          </tr>
+          <tr style="background:rgba(255,193,7,0.2)">
+            <td colspan="4" style="padding:0.75rem;font-weight:bold">
+              <strong>Sonuç:</strong> Strateji fena hâlde aşırı uyumlu. 2023 beklentisi 2022'nin %29'u. Gerçekçi maliyetlerle (işlem başına -30 $ = -0,15R) net beklenti +0,25R'de kalıyor (sıfırın az üstü). <span style="color:#ff5252">SAHAYA SÜRME.</span>
+            </td>
+          </tr>
+        </table>
+        </div>
+
+        <p><b>Ders: Chris'in backtest'i bir hayaldi. 15.000 parametre bileşimi denersen, tarihsel gürültüye kusursuzca oturan birini bulman garantidir. O «kusursuz» 1,3R beklenti, eğriye uydurulmuş çöptü. Örneklem dışı bir sınama, 8.400 $ kaybedilmeden önce bunu ortaya çıkarırdı. backtesting, geçmişin en iyi performansını bulmak değil, bundan sonra tutacak olanı bulmaktır. Bunun için de görülmemiş veri, gerçekçi maliyetler ve sıfır ileriye bakma yanlılığı gerekir.</b></p>
+      </div>
+
+      <div class="section-break"><span>Bölüm 3: örneklem içi ile örneklem dışı</span></div>
+<h2 id="the-only-validation-that-matters">Önemi olan tek doğrulama</h2>
+
+      <p>Profesyoneller bir stratejiyi şöyle doğrular:</p>
+
+      <p><strong>Verini iki döneme böl.</strong></p>
+
+      <ol>
+        <li><strong>Örneklem içi (%60-70):</strong> Stratejini burada geliştirip optimize edersin</li>
+        <li><strong>Örneklem dışı (%30-40):</strong> GÖRÜLMEMİŞ veride doğrulama</li>
+      </ol>
+
+      <div class="callout-tip">
+        <h4>🎯 Örnek: 6 yıllık veri (2018-2024)</h4>
+        <p><strong>Örneklem içi:</strong> 2018-2022 (burada optimize et)</p>
+        <ul>
+          <li>Farklı parametreler dene</li>
+          <li>En iyi sonuç veren kuralları bul</li>
+          <li>Giriş ve çıkış mantığını incelt</li>
+        </ul>
+        <p style="margin-top:1rem"><strong>Örneklem dışı:</strong> 2023-2024 (burada doğrula)</p>
+        <ul>
+          <li>Stratejiyi HİÇBİR değişiklik yapmadan çalıştır</li>
+          <li>Performansı örneklem içiyle karşılaştır</li>
+          <li>Benzerse → aşırı uyumlu değil!</li>
+          <li>Çok daha kötüyse → örneklem içi gürültüye uydurulmuş</li>
+        </ul>
+      </div>
+<h3 id="red-flags-of-overfitting">Aşırı uyumun kırmızı bayrakları</h3>
+<div style="margin:2rem 0;padding:1.5rem;background:rgba(255,107,107,.12);border-radius:12px">
+        <h4>🚩 Stratejinin eğriye uydurulduğuna dair işaretler</h4>
+        <ul>
+          <li><strong>Sharpe 3,0 üstü:</strong> Gerçek olamayacak kadar iyi</li>
+          <li><strong>İşlem başına yaklaşık +0,5R üzerinde beklenti:</strong> bir açıklama gerektirecek kadar nadirdir. +1R’nin üzerinde neredeyse kesinlikle bir uygulama varsayımı yanlıştır — yukarıdaki Chris’in "kutsal kâse" backtesti +1,3R idi</li>
+          <li><strong>Yalnızca 20-30 işlem:</strong> Örneklem fazla küçük (istatistiksel olarak anlamsız)</li>
+          <li><strong>Kusursuz sermaye eğrisi:</strong> drawdown'sız pürüzsüz bir çizgi (imkânsız)</li>
+          <li><strong>Yalnızca tek bir varlıkta sınanmış:</strong> Muhtemelen o rejime uydurulmuş</li>
+          <li><strong>10 ya da daha fazla optimize edilmiş parametre:</strong> Sinyale değil, gürültüye uydurmuşsun</li>
+        </ul>
+      </div>
+
+      <div class="section-break"><span>Bölüm 4: walk-forward analizi</span></div>
+<h2 id="the-professional-validation-method">Profesyonel doğrulama yöntemi</h2>
+
+      <p>Örneklem içi ile örneklem dışı iyidir. Walk-forward daha iyidir.</p>
+
+      <p><strong>Nasıl çalışır:</strong></p>
+
+      <div style="margin:2rem 0;padding:1.5rem;background:linear-gradient(135deg, rgba(91,138,255,.12), rgba(118,221,255,.08));border-radius:16px">
+        <h4 style="margin-top:0">📊 Walk-forward çerçevesi</h4>
+        <p><strong>Dönem 1:</strong> 2018-2019'da eğit → 2020'de sına</p>
+        <p><strong>Dönem 2:</strong> 2019-2020'de eğit → 2021'de sına</p>
+        <p><strong>Dönem 3:</strong> 2020-2021'de eğit → 2022'de sına</p>
+        <p><strong>Dönem 4:</strong> 2021-2022'de eğit → 2023'te sına</p>
+        <hr style="margin:1rem 0;opacity:.3">
+        <p><strong>Bütün dönemlerde tutarlıysa:</strong> Sağlam strateji</p>
+        <p><strong>Performans bozuluyorsa:</strong> Aşırı uyumlu ya da rejime bağımlı</p>
+      </div>
+
+      <div class="key-takeaway">
+        <h4>🎓 Öne çıkanlar</h4>
+        <ul>
+          <li><strong>Gerçekçi maliyetleri modelle:</strong> Spread, slippage, komisyonlar (%20-40 daha az kâr)</li>
+          <li><strong>Aşırı uyumdan kaçın:</strong> Parametreleri sınırla, birden çok piyasada sına</li>
+          <li><strong>Örneklem içi ile örneklem dışı:</strong> %60-70'inde geliştir, %30-40'ında doğrula</li>
+          <li><strong>Walk-forward sınaması:</strong> Zaman içindeki tutarlılığı doğrula</li>
+          <li><strong>Kırmızı bayraklar:</strong> Sharpe 3,0 üstü, beklenti 5R üstü, 30'dan az işlem</li>
+          <li><strong>Canlıdan önce ileriye dönük sına:</strong> En az 3-6 ay kâğıt üzerinde</li>
+        </ul>
+      </div>
+<div class="section-break"><span>Uygulama</span></div>
+
+      <div class="callout-key">
+        <h4>🎯 backtest doğrulama alıştırması</h4>
+        <p><strong>Alıştırma: stratejini kırmızı bayrak dedektöründen geçir</strong></p>
+        <p>Şu anki stratejini (ya da düşündüğün bir stratejiyi) al ve doğrulamadan geçir:</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li>Verinin %60'ında backtest yap (örneklem içi). Kaydet: işlem sayısı, beklenti, Sharpe, azami DD</li>
+          <li>Kullanılan parametreleri yaz (EMA'lar, eşikler vb.). Bunları birden çok değer deneyerek mi seçtin?</li>
+          <li>Kalan %40'lık veride sına (örneklem dışı). Sonuçları örneklem içiyle karşılaştır.</li>
+          <li>Stratejiyi aşağıdaki sekiz kontrolde puanla, her biri 0 ile 5 arası (en çok 40 puan)</li>
+          <li>Topla: 32 ve üzeri = kâğıt üzerinde işleme geç, 24-31 = gözden geçir ve yeniden test et, 24’ün altı = çöpe at</li>
+          <li>32 ve üzeri aldıysan: canlıya çıkmadan önce 30-60 işlem kâğıt üzerinde yap</li>
+        </ol>
+
+        <p style="margin-top:1rem;font-weight:600">Sekiz kontrol (0 = hiç yapılmadı, 5 = gereğince yapıldı)</p>
+        <ol style="margin:.75rem 0 .75rem 1.5rem;line-height:1.8">
+          <li><strong>Veri bölme.</strong> Gerçek bir örneklem dışı dönem ayrılıp geliştirme boyunca hiç dokunulmadan bırakıldı mı? Elindeki her şeyin üzerinde optimize ettiysen 0 puan.</li>
+          <li><strong>Optimizasyonda ölçülülük.</strong> Kaç parametre kombinasyonu denedin? 10’un altı 5 puan; binlercesi, sonuç nasıl görünürse görünsün, 0 puan.</li>
+          <li><strong>Maliyet modelleme.</strong> Spread, slippage (kayma) ve komisyon sermaye eğrisinin içinde mi, hem de bir aracı kuruma karşı savunabileceğin değerlerle? Sıfır maliyet 0 puan.</li>
+          <li><strong>İleriye bakma kontrolü.</strong> Giriş mantığını, her girdinin karar anında var olup olmadığını özellikle sorarak yeniden okudun mu? Sinyal bu mumda, uygulama bir sonrakinde ise 5 puan.</li>
+          <li><strong>Örneklem dışı sonuç.</strong> Dokunulmamış veride performans ne kadar bozuldu? %30’un altında bozulma 5 puan; Chris’teki gibi %70’in üzeri 0 puan.</li>
+          <li><strong>Walk-forward tutarlılığı.</strong> Optimizasyon penceresini ileri kaydırıp bir sonraki dönemi test ettin mi, birkaç kez? Tek dönem 1 puan; tutarlı dört dönem 5 puan.</li>
+          <li><strong>Örneklem büyüklüğü.</strong> 30’dan az işlem, ne kadar iyi görünürse görünsün 0 puan; 100 ve üzeri 5 puan.</li>
+          <li><strong>Kapsam genişliği.</strong> Birden fazla enstrümanda ya da birden fazla piyasa rejiminde tutuyor mu? Tek rejimde tek varlık 1 puan.</li>
+        </ol>
+        <p style="margin-top:1rem">Chris'in stratejisini buradan geçir, 40 üzerinden 2 alır — biri örneklem büyüklüğü, biri de hiç değilse bir walk-forward dönemi bulunduğu için. Bu puan tablosu onu bir öğleden sonrada, bedavaya yakalardı.</p>
+        <p style="margin-top:1rem"><strong>Amaç:</strong> Eğriye uydurmayı, ileriye bakma yanlılığını ve gerçekçi olmayan varsayımları, gerçek hesabını yıkmadan ÖNCE yakala. Kötü bir stratejiyi backtesting aşamasında çöpe atmak, gerçek para kaybetmekten iyidir.</p>
+      </div>
+
+                    <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Yarın için hızlı kazanımlar (açmak için tıkla)</summary>
+        <div style="margin-top:1rem">
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>backtest'ine gerçekçi maliyetleri ekle</strong> — İşlem başına %0,03-0,05 slippage artı gerçek spread'i hesaba kat. Sonuç çöküyorsa üstünlüğün sahteydi.</li>
+            <li><strong>Verini 70/30 böl</strong> — Verinin %70'inde optimize et, hiç görmediğin %30'unda doğrula. Örneklem dışı tutmuyorsa eğriye uydurmuşsun.</li>
+            <li><strong>Canlıdan önce 30 gün kâğıt üzerinde işle</strong> — Kâğıt üzerindeki sonuçlar backtest'ten belirgin biçimde ayrılıyorsa bir şeyler ters. Örtüşene kadar canlıya çıkma.</li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="section-break"><span>Anladığını sına</span></div>
+
+      <div class="quiz">
+<h4>🎮 Hızlı kontrol</h4>
+
+        <div class="quiz-question">
+          <p><strong>S: Bir stratejiyi backtest ediyorsun: 5,2R beklenti, 4,2 Sharpe oranı, 25 işlemde sınanmış, 100 farklı periyot denendikten sonra en iyi sonucu verdiği için EMA(47) kullanılmış. Burada ne yanlış?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">A) Hiçbir şey — harika bir strateji!</div>
+            <div class="quiz-option" data-correct="false">B) Yalnızca beklenti fazla yüksek</div>
+            <div class="quiz-option" data-correct="true">C) Hepsi yanlış: örneklem fazla küçük, Sharpe da beklenti de fazla yüksek, EMA(47) eğriye uydurulmuş</div>
+            <div class="quiz-option" data-correct="false">D) Yalnızca örneklem fazla küçük</div>
+          </div>
+          <div class="quiz-explanation">
+            <strong>Doğru!</strong> Üç büyük tehlike işareti: (1) yalnızca 25 işlem = istatistiksel olarak anlamsız, (2) Sharpe 4,2 = şüpheli derecede yüksek (büyük olasılıkla aşırı uyarlanmış), (3) 100 periyot denenerek bulunan EMA(47) = gürültüye uydurulmuş. Gereken: 100+ işlem, standart parametreler ve savunurken utanmayacağın bir Sharpe — 2’nin üzeri profesyonel sistematik fonlar için bile istisnaidir ve 4,2 gösteren bireysel bir backtest, bir üstünlüğü değil bir uygulama varsayımını anlatıyordur.
+          </div>
+        </div>
+
+        <div class="quiz-question" style="margin-top:2rem">
+          <p><strong>2010-2024 arası SPY üzerinde ortalamaya dönüş stratejisini backtest ediyorsun. Sonuçlar: 2,8R beklenti, %68 kazanma oranı, 120.000 $ kâr. Veri yalnızca bugünkü S&P 500 bileşenlerini içeriyor (bugün endekste olan hisseler). 2025'te canlıya çıkıyorsun ve tutmuyor. Ne ters gitti?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">A) Hiçbir şey — 2025'te piyasa koşulları değişti, öngörülemezdi</div>
+            <div class="quiz-option" data-correct="false">B) Beklenti fazla yüksek — ortalamaya dönüş için 2,8R gerçekçi değil</div>
+            <div class="quiz-option" data-correct="false">C) Örneklem fazla küçük — 14 yıldan uzun veri gerekir</div>
+            <div class="quiz-option" data-correct="true">D) Hayatta kalan yanlılığı — backtest yalnızca 2024'te hâlâ endekste olan şirketleri içeriyor; dolayısıyla 2010 ile 2024 arasında endeksten çıkan her isim eksik</div>
+          </div>
+          <div class="quiz-explanation">
+            <strong>Doğru!</strong> Klasik hayatta kalan yanlılığı tuzağı. "Bugünkü S&P 500 bileşenleri" üzerinde test etmek, yalnızca KAZANANLARI test etmiş olmak demektir: 14 yıl ayakta kalıp bugünkü endekse girebilmiş hisseleri. Testin dışında kalanlar: o on dört yılda satın alınan, endeksten düşen ya da sıfıra giden her şirket. Burada önemli olanlar sıfıra gidenlerdir; çünkü ortalamaya dönüş kuralı zayıflığı satın alır — onları aşağı inen yolun her adımında alır ve karşılığını hiç göremezdi. Bunun belirli bir backtesti ne kadar şişirdiği tamamen evrene ve kurala bağlıdır, bu yüzden hiçbir yüzde verilmiyor; kesin olan tek şey yöndür ve o yön asla senin lehine değildir. Çözüm: her tarihte var olan TÜM hisseleri, sonradan borsadan çıkanlar dâhil, içeren zaman-anı (point-in-time) verisi kullan.
+          </div>
+        </div>
+
+        <div class="quiz-question" style="margin-top:2rem">
+          <p><strong>Stratejini walk-forward ile sınıyorsun: 2018-2020'de eğit, 2021'de sına (geçti). 2018-2021'de eğit, 2022'de sına (geçti). 2018-2022'de eğit, 2023'te sına (geçti). Ne slippage'ı ne de komisyonları modelledin. Bu stratejiyi canlıda işlemeli misin?</strong></p>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="true">A) Hayır — önce gerçekçi maliyetleri eklemeli (%0,2-0,4 slippage artı komisyonlar) ve yeniden sınamalısın. Yine kârlıysa, o zaman evet.</div>
+            <div class="quiz-option" data-correct="false">B) Evet — bütün walk-forward sınamalarını geçti, sağlam bir strateji</div>
+            <div class="quiz-option" data-correct="false">C) Evet — walk-forward doğrulaması yeterli, maliyetler pek etkilemez</div>
+            <div class="quiz-option" data-correct="false">D) Hayır — doğrulamak için en az 10 walk-forward dönemi gerekir</div>
+          </div>
+          <div class="quiz-explanation">
+            <strong>Doğru!</strong> Walk-forward testleri sağlamlığı kanıtlar (tek bir döneme aşırı uyarlanmadığını), ama canlıya çıkmadan önce gerçekçi maliyetleri MODELLEMEK zorundasın. Slippage (kayma) (taraf başına %0,1-0,2 = gidiş-dönüş %0,2-0,4) artı komisyonlar (işlem başına 2-5 dolar) her işlemin tepesinden gider ve R cinsinden de gider: 500 dolar riske atan bir işlemde 150 dolarlık maliyet, piyasa daha hiçbir şey yapmadan gitmiş 0,3R demektir. +0,5R’lik bir backtest, bu gerçek olduğunda sıfıra yakın bir yere düşebilir. Yukarıdaki Chris vakası tam da bu başarısızlıktır — maliyetler gerçek olunca canlıda −0,45R’ye gelen +1,3R’lik bir backtest. Maliyetleri EN SON ekle (walk-forward’dan sonra), sonra da beklentinin savunabileceğin bir payla hâlâ pozitif olup olmadığını ve onu neyin ürettiğini söyleyebilip söyleyemediğini sor. Maliyetleri atlatan küçük ve açıklanabilir bir üstünlük, atlatamayan büyük bir üstünlükten iyidir.
+          </div>
+        </div>
+
+        <button class="btn btn-primary quiz-submit">Cevapları gör</button>
+      </div>
+
+      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">backtesting'de kusursuzluk şüphe uyandırır. Üstünlüğü getiren gerçekçiliktir. Maliyetleri modelle, aşırı uyumdan kaçın, ileriye dönük sına — yoksa canlıda çökersin.</p>
+
+      <h3 style="margin-bottom:1.5rem">İlgili dersler</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
+        <div class="card" style="padding:1rem">
+          <span class="badge">Orta seviye #37</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Trade günlüğünde ustalık</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Canlı performansı takip et ve backtest sonuçlarıyla karşılaştır.</p>
+          <a href="/education/curriculum/beginner/23-keeping-the-record.html" class="btn btn-sm btn-ghost">Dersi oku &rarr;</a>
+        </div>
+        <div class="card" style="padding:1rem">
+          <span class="badge">Başlangıç #9</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Pozisyon büyüklüğü</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">backtest'lerde doğru pozisyon büyüklüğü kullan ki sonuçlar gerçekçi olsun.</p>
+          <a href="/education/curriculum/beginner/20-position-sizing.html" class="btn btn-sm btn-ghost">Dersi oku &rarr;</a>
+        </div>
+        <div class="card" style="padding:1rem">
+          <span class="badge">Orta seviye #33</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Rejimi tanıma</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Sağlamlığı için stratejini bütün rejimlerde sına.</p>
+          <a href="/education/curriculum/intermediate/37-detecting-a-regime-change.html" class="btn btn-sm btn-ghost">Dersi oku &rarr;</a>
+        </div>
+      </div>
+
+      <div class="callout-info">
+        <h4>⏭️ Sırada</h4>
+        <p><strong>Ders #36: İleri risk yönetimi — profesyonel çerçeveler</strong> — Kelly ölçütünü, dinamik pozisyon büyüklüğünü ve drawdown protokollerini öğren.</p>
+      </div>
+
+      <blockquote class="sp-disclaimer"><strong>Yalnızca eğitim amaçlıdır.</strong> İşlem yapmak önemli ölçüde kayıp riski taşır. Finansal tavsiye değildir. Geçmiş performans gelecekteki sonuçları garanti etmez.</blockquote>
+
+      <!-- Discussion Section -->
+      <div class="discussion-section" id="discussion-section">
+        <button class="discussion-toggle" id="discussion-toggle" style="display:none">
+          <span>💬 Tartışma (<span id="discussion-count-mobile">0</span>)</span>
+          <span class="discussion-toggle-icon">+</span>
+        </button>
+        <div class="discussion-content">
+          <div class="discussion-header">
+            <h2 class="discussion-title">💬 Tartışma <span class="discussion-count" id="discussion-count">(0 yorum)</span></h2>
+            <div class="discussion-sort">
+              <label for="discussion-sort">Sırala:</label>
+              <select id="discussion-sort">
+                <option value="recent">En yeni</option>
+                <option value="top">En beğenilen</option>
+                <option value="oldest">En eski</option>
+              </select>
+            </div>
+          </div>
+          <div class="comment-composer" id="comment-composer">
+            <textarea id="comment-input" placeholder="Düşüncelerini paylaş, soru sor ya da bu dersi tartış…" maxlength="1000"></textarea>
+            <div class="comment-composer-actions">
+              <span class="comment-char-count" id="comment-char-count">0/1000</span>
+              <button class="btn btn-primary" id="post-comment-btn">Yorumu gönder</button>
+            </div>
+          </div>
+          <div class="comments-list" id="comments-list">
+            <div class="comments-loading">
+              <div class="comments-loading-spinner"></div>
+              <p>Yorumlar yükleniyor…</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-article">
+        <a class="btn btn-ghost" href="/education/curriculum/professional/71-positions-are-one-position.html">← Önceki ders</a>
+        <a class="btn btn-primary" href="/education/curriculum/beginner/22-risk-of-ruin.html">Sonraki ders →</a>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <div class="lesson-actions">
+        <button id="bookmark-btn" class="btn btn-secondary btn-sm btn-block" onclick="window.library?.isBookmarked() ? window.library.removeBookmark() : window.library.addBookmark({title:document.title})">🔖 Kaydet</button>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm btn-block">📄 PDF olarak kaydet</button>
+      </div>
+
+      <div class="sidebar-links" style="margin-top:1.5rem">
+        <a href="https://www.signalpilot.io" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          ⚡ Signal Pilot paketi
+        </a>
+        <a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💬 Discord'da konuş
+        </a>
+        <a href="https://www.signalpilot.io/affiliates.html" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💰 Ortaklıkla %15-30 kazan
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Back to Signal Pilot CTA -->
+  <div class="wrap" style="margin: 3rem auto 0;">
+    <div style="background: linear-gradient(135deg, rgba(153,102,255,0.15), rgba(138,91,255,0.1)); border: 1px solid rgba(153,102,255,0.3); border-radius: 8px; padding: 2rem; text-align: center;">
+      <h3 style="margin: 0 0 0.75rem 0; font-size: 1.25rem;">Signal Pilot ile işlem yapmaya hazır mısın?</h3>
+      <p style="margin: 0 0 1.25rem 0; color: var(--muted);">Öğrendiklerini profesyonel göstergeler ve gerçek zamanlı piyasa analizi araçlarıyla uygula.</p>
+      <a href="https://www.signalpilot.io" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        Signal Pilot'a dön →
+      </a>
+    </div>
+  </div>
+</article>
+
+<footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Discord'da konuş</a><a href="https://www.signalpilot.io/affiliates.html">Ortaklık</a><a href="https://www.signalpilot.io/privacy.html">Gizlilik</a><a href="https://www.signalpilot.io/terms.html">Koşullar</a></div></div></footer>
+
+<script src="/education/assets/edu.js"></script>
+<script src="/education/assets/edu-enhanced.js"></script>
+<script src="/education/assets/sp-bg.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+<!-- SignalPilot Theme Switcher -->
+<script src="/education/assets/signalpilot-theme.js"></script>
+<script src="/education/assets/spaced-repetition.js" defer></script>
+<script src="/education/assets/chatbot.js" defer></script>
+<script src="/education/assets/notes.js" defer></script>
+<script src="/education/assets/analytics.js"></script>
+<script src="/education/assets/quiz-enhanced.js"></script>
+<script src="/education/assets/social-share.js"></script>
+<script src="/education/assets/pwa-init.js"></script>
+<script src="/education/assets/config.js"></script>
+<script src="/education/assets/supabase-client.js"></script>
+<script src="/education/assets/auth-ui.js"></script>
+  <script src="/education/assets/library.js"></script>
+  <script>window.addEventListener('load',function(){if(window.library?.isBookmarked()){var b=document.getElementById('bookmark-btn');if(b)b.innerHTML='⭐ Bookmarked'}})</script>
+    <!-- Enhanced Analytics & A/B Testing -->
+  <script src="/education/assets/enhanced-analytics.js" defer></script>
+  <script src="/education/assets/ab-test-tldr.js" defer></script>
+  <!-- Google Translate -->
+  <script src="/education/assets/lang-switcher.js"></script>
+  <!-- Discussion System -->
+    <script src="/education/assets/trial-cta.js"></script>
+  <script src="/education/assets/blog-links.js"></script>
+  <script src="/education/assets/discussions.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.DiscussionSystem) {
+        window.DiscussionSystem.init('intermediate-32-backtesting-reality');
+      }
+    });
+  </script>
+  <script defer src="/assets/js/view-counter.js"></script>
+</body>
+</html>

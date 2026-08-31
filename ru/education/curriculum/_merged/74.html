@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17835897996"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-440EJBMYST');
+  gtag('config', 'AW-17835897996');
+</script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover"/>
+  <meta name="robots" content="index,follow"/>
+  <title>Алгоритмы исполнения: TWAP, VWAP, POV, Implementation Shortfall — Signal Pilot Education</title>
+  <meta name="theme-color" content="#05070d">
+  <link rel="canonical" href="https://www.signalpilot.io/ru/education/curriculum/_merged/74.html">
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.signalpilot.io/education/curriculum/_merged/74.html">
+  <meta property="og:title" content="Execution Algorithms: TWAP, VWAP, POV, Implementation Shortfall — Signal Pilot Education">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Signal Pilot Education">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.signalpilot.io/education/curriculum/_merged/74.html">
+  <meta name="twitter:title" content="Execution Algorithms: TWAP, VWAP, POV, Implementation Shortfall — Signal Pilot Education">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
+  <link rel="prev" href="https://www.signalpilot.io/education/curriculum/advanced/58-professional-order-types.html"/>
+  <link rel="next" href="https://www.signalpilot.io/education/curriculum/_merged/75.html"/>
+  <meta name="sp-level" content="Advanced"><meta name="sp-order" content="70">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Gugi&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/education/assets/signalpilot-theme.css">
+  <link rel="stylesheet" href="/education/assets/edu.css">
+  <link rel="stylesheet" href="/education/assets/notes.css">
+  <link rel="stylesheet" href="/education/assets/auth-ui.css">
+  <link rel="stylesheet" href="/education/assets/trial-cta.css">
+  <link rel="stylesheet" href="/education/assets/blog-links.css">
+  <link rel="stylesheet" href="/education/assets/discussions.css">
+  <link rel="stylesheet" href="/education/assets/chatbot.css">
+  <link rel="stylesheet" href="/education/assets/lang-switcher.css">
+  <!-- Logger must load first, before other scripts that use it -->
+  <script src="/education/assets/logger.js"></script>
+  <script src="/education/assets/dev-utils.js" defer></script>
+  <script src="/education/assets/notes.js" defer></script>
+  <script src="/education/assets/library.js"></script>
+  <script>window.addEventListener('load',function(){if(window.library?.isBookmarked()){var b=document.getElementById('bookmark-btn');if(b)b.innerHTML='⭐ Bookmarked'}})</script>
+    <script src="/education/assets/quiz-enhanced.js" defer></script>
+  <script src="/education/assets/social-share.js" defer></script>
+  <script src="/education/assets/pwa-init.js"></script>
+  <link rel="manifest" href="/education/manifest.json">
+  <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="de" href="https://www.signalpilot.io/de/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="fr" href="https://www.signalpilot.io/fr/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="it" href="https://www.signalpilot.io/it/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="pt" href="https://www.signalpilot.io/pt/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="nl" href="https://www.signalpilot.io/nl/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="ru" href="https://www.signalpilot.io/ru/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="ja" href="https://www.signalpilot.io/ja/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="tr" href="https://www.signalpilot.io/tr/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="hu" href="https://www.signalpilot.io/hu/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="ar" href="https://www.signalpilot.io/ar/education/curriculum/_merged/74.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/curriculum/_merged/74.html">
+</head>
+<body class="table-accordions-mobile">
+<div class="bg-stars" aria-hidden="true"></div>
+<canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
+<div class="bg-aurora" aria-hidden="true"></div>
+<header class="sp-header">
+  <div class="wrap">
+    <a href="https://www.signalpilot.io" class="brand">
+      <span>Signal Pilot</span>
+    </a>
+    <nav id="mainnav" aria-label="Основное содержимое"><ul>
+      <li><a href="/education/">Обучение</a></li>
+      <li><a href="/education/search.html">Поиск</a></li>
+      <li><a href="/education/my-library.html">Моя библиотека</a></li>
+      <li><a href="https://www.signalpilot.io/blog" target="_blank" rel="noopener">Блог</a></li>
+    </ul></nav>
+    <div class="header-ctls">
+      <div id="google_translate_element"></div><button id="themeToggle" class="btn btn-ghost btn-sm" type="button" aria-label="Сменить тему">
+        <span id="theme-icon">☽</span>
+      </button><button id="menuToggle" class="menu-toggle" aria-expanded="false"><span class="menu-toggle-text">Меню </span>☰</button></div>
+  </div>
+</header>
+<article class="article">
+  <header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Навигационная цепочка">
+        <a href="/education/">Главная</a> › <a href="/education/advanced.html">Продвинутая программа</a> › <span>Алгоритмы исполнения TWAP VWAP</span>
+      </nav>
+      <span class="badge">🔴 Продвинутый уровень • Урок 74 из 86</span>
+      <h1 class="headline xl">Алгоритмы исполнения: как снизить slippage на больших заявках</h1>
+      <div class="meta">Время чтения ~40-45 мин • Стратегии алгоритмического исполнения<span class="view-count" data-view-count style="display:none"> • <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> <span data-view-num></span></span></div>
+
+      <!-- Author Byline -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(118,221,255,0.2); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-2);">
+        <div>
+          <div style="font-weight: 600; color: var(--text-1);">Signal Pilot</div>
+          <div>Профессиональное обучение трейдингу</div>
+        </div>
+      </div>
+
+      <!-- Article Progress Indicator -->
+      <div class="article-progress" style="--progress:0%">
+        <div class="progress-circle"><span>0 %</span></div>
+        <div class="progress-text">
+          <strong>Вы продвигаетесь!</strong>
+          <div style="font-size:.85rem;color:var(--muted)">Читайте дальше, чтобы завершить урок</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap article-grid">
+    <div class="prose">
+
+      <p>Алгоритмы исполнения (алго) — секретное оружие институциональных трейдеров. Они дробят крупные заявки на тысячи мелких кусков, подбирают моменты исполнения так, чтобы минимизировать влияние на цену, и подстраиваются под рынок в реальном времени. Этот урок объясняет, как они работают — и как использовать их закономерности.</p>
+
+      <div class="callout callout-danger">
+        <h4>💸 Провал исполнения с slippage на 710 000 $</h4>
+        <p>В 2018 году управляющий портфелем в хедж-фонде средних размеров хотел купить 1,2 млн акций компании средней капитализации, торговавшейся по 38 $ (ADV = 3 млн акций). Это 40 % оборота обычного дня — заявка на 45,6 млн долларов. Вместо того чтобы разложить её на несколько дней, он отправил <strong>одну рыночную заявку на 1,2 млн акций</strong> в 9:35.</p>
+        <p><strong>Итог:</strong> Заявка вымела стакан. Цена выросла на 6,2 % примерно за 90 секунд, задела верхнюю границу LULD и вызвала пятиминутную паузу. Исполнено было только <strong>640 000 акций</strong>, в среднем по 39,11 $ — на 1,11 $ (2,9 %) выше цены решения в 38,00 $. <strong>Суммарные потери на slippage: 710 400 $</strong>, а 560 000 акций не исполнились вовсе. После паузы бумага вернулась к 37,60 $.</p>
+        <p><strong>Что ему следовало сделать:</strong> Понять, что при участии 10 % бумага с ADV в 3 млн впитывает около 300 000 акций в день, — то есть это с самого начала была заявка <strong>на четыре дня</strong> а не на четыре часа. Четыре сессии с лимитом 10 % обычно стоят 0,15-0,30 % номинала: примерно 68 000-137 000 $, то есть в 5-10× дешевле того, что он заплатил.</p>
+      </div>
+
+      <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
+        <h3 style="margin:0 0 1rem 0">🎯 Чему вы научитесь</h3>
+        <p style="margin:0 0 0.75rem 0">К концу урока вы сможете:</p>
+        <ul style="line-height:1.8;margin:0 0 0 1.5rem">
+          <li>TWAP (взвешенный по времени): равномерно распределить заявку во времени</li>
+          <li>VWAP (взвешенный по объёму): повторить профиль объёма рынка</li>
+          <li>POV (% объёма): торговать фиксированный процент рыночного объёма</li>
+          <li>Схема: VWAP для крупных заявок (труднее заметить) → TWAP для мелких → и посчитайте, прежде чем выбирать Implementation Shortfall вместо любого из них, какого дрейфа должен стоить ваш прогноз, чтобы опережение окупилось</li>
+        </ul>
+      </div>
+
+<!-- Prerequisites -->
+      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
+        <h4>&#128203; Что нужно знать заранее</h4>
+        <p>Этот урок опирается на понятия из:</p>
+        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
+            <li><a href="/education/curriculum/advanced/59-market-impact.html" style="color:#00d4aa;text-decoration:underline">Урок 69: Модели рыночного воздействия</a> &mdash; Продвинутое мастерство</li>
+            <li><a href="/education/curriculum/advanced/58-professional-order-types.html" style="color:#00d4aa;text-decoration:underline">Урок 73: Институциональные типы заявок</a> &mdash; Продвинутое мастерство</li>
+        </ul>
+        <p style="margin-top:0.75rem">&#9989; Если ты их прошёл, можно начинать. Если нет, сначала пройди базовые уроки.</p>
+      </div>
+
+<h2 id="part-1-why-execution-algos-exist">Часть 1: зачем нужны алгоритмы исполнения</h2>
+
+  <h3>Проблема крупной заявки</h3>
+  <p><strong>Ситуация:</strong> Хедж-фонд хочет купить 500 000 акций AAPL по 220 $ (ADV = 55 млн акций). Это 0,9 % дневного оборота и заявка на 110 млн долларов.</p>
+  <p><strong>Наивный подход:</strong> Отправить одну рыночную заявку на 500 000 акций → около 10 б. п. влияния в такой ликвидной бумаге → потери на slippage ≈ 110 000 $</p>
+  <p><strong>Умный подход:</strong> Взять алго VWAP на 4 часа с участием около 4 % → 2-4 б. п. → издержки 22 000-44 000 $, экономия 70 000-90 000 $</p>
+
+  <div class="callout">
+    <p><strong>📊 Масштаб:</strong> Мегакапы — лёгкий случай. Перенесите ту же заявку на 75 млн долларов в бумагу, где она составляет 20 % дневного оборота, и 0,5 % влияния — 375 000 $ — окажется оптимистичной оценкой, а не пессимистичной. Захватывающие дух цифры берутся из тонких бумаг, и именно поэтому институты вкладывают миллионы в технологии исполнения.</p>
+  </div>
+<h3>Компромисс: скорость против влияния на цену</h3>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Скорость исполнения</th>
+        <th>Рыночное воздействие</th>
+        <th>Риск исполнения</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Мгновенно (рыночная заявка)</td>
+        <td>Высокое (1-5 % — растёт вместе с долей заявки в дневном обороте)</td>
+        <td>Низкий (нет сноса цены)</td>
+      </tr>
+      <tr>
+        <td>Быстро (1 час)</td>
+        <td>Среднее (0,2-0,5 %)</td>
+        <td>Средний (небольшой снос)</td>
+      </tr>
+      <tr>
+        <td>Медленно (весь день)</td>
+        <td>Низкое (0,05-0,1 %)</td>
+        <td>Высокий (цена может уйти)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="part-2-twap-time-weighted-average-price">Часть 2: TWAP (Time-Weighted Average Price)</h2>
+
+  <h3>Как работает TWAP</h3>
+  <p><strong>Идея:</strong> Разделить заявку равномерно во времени (постоянный темп)</p>
+  <p><strong>Формула:</strong> Размер ломтика = вся заявка / число интервалов</p>
+
+  <p><strong>Пример:</strong></p>
+  <ul>
+    <li>Заявка: купить 120 000 акций</li>
+    <li>Длительность: с 9:30 до 15:30 (6 часов = 360 минут)</li>
+    <li>Темп TWAP: 120 000 / 360 = 333 акции в минуту</li>
+  </ul>
+
+  <p><strong>Схема исполнения:</strong> Каждую минуту алго выставляет лимитную заявку на 333 акции по текущей цене или рядом с ней</p>
+
+  <h3>Плюсы TWAP</h3>
+  <ul>
+    <li><strong>Просто:</strong> Легко объяснить комплаенсу и клиентам («мы торговали равномерно весь день»)</li>
+    <li><strong>Предсказуемо:</strong> Темп исполнения постоянный</li>
+    <li><strong>Малый след:</strong> Мелкие ломтики не двигают рынок</li>
+  </ul>
+
+  <h3>Минусы TWAP</h3>
+  <ul>
+    <li><strong>Игнорирует объём:</strong> В обед (мало объёма) торгует столько же, сколько на открытии (много объёма)</li>
+    <li><strong>Неоптимально:</strong> Высокое влияние в периоды низкого объёма</li>
+    <li><strong>Заметно:</strong> HFT умеют распознавать схему TWAP и вставать впереди</li>
+  </ul>
+
+  <div class="example-block">
+    <h4>Пример из практики: разбор исполнения через TWAP</h4>
+    <p><strong>Ситуация:</strong> Взаимный фонд продаёт 360 000 акций MSFT (средний дневной объём 20 млн) через TWAP за 6 часов с постоянным темпом 1 000 акций в минуту. Средняя цена: 379,93 $. Это <em>продажа</em>, поэтому более низкая цена хуже: она оказалась на 0,07 $ <strong>ниже</strong> цены решения в 380,00 $ и на 0,15 $ ниже дневного VWAP, равного 380,08 $.</p>
+
+    <p><strong>В чём проблема TWAP:</strong> В обеденные часы (с 11:30 до 13:30) алго продолжал перемалывать 1 000 акций в минуту — 120 000 акций в двухчасовое окно, через которое прошло всего 1,5-1,8 млн акций. Это <strong>6,7-8 % оборота</strong>, причём в самый неликвидный час дня. Это придавило цену и стоило около 25 000 $. Алго VWAP, дозирующий объём по кривой, провёл бы в этом окне около <strong>30 000 акций</strong> (на обед приходится примерно 8,25 % дневного объёма), сэкономив 15 000-20 000 $.</p>
+
+    <p><strong>Когда TWAP всё ещё уместен:</strong> Очень ликвидные бумаги (SPY, AAPL), где участие в 1 % почти не влияет на цену, простые требования комплаенса или заявки &lt;0,5 % дневного объёма.</p>
+  </div>
+<h2 id="part-3-vwap-volume-weighted-average-price">Часть 3: VWAP (Volume-Weighted Average Price)</h2>
+
+  <h3>Как работает VWAP</h3>
+  <p><strong>Идея:</strong> Торговать пропорционально рыночному объёму (больше при высоком объёме, меньше при низком)</p>
+  <p><strong>Цель:</strong> Повторить распределение объёма рынка → получить среднюю цену исполнения близко к VWAP</p>
+
+  <h3>Расчёт VWAP</h3>
+  <p><strong>Рыночный VWAP = Σ (цена × объём) / Σ объём</strong></p>
+
+  <p><strong>Пример:</strong></p>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Время</th>
+        <th>Цена</th>
+        <th>Объём</th>
+        <th>Цена × объём</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>9:30-10:00</td>
+        <td>150,00 $</td>
+        <td>5M</td>
+        <td>$750M</td>
+      </tr>
+      <tr>
+        <td>10:00-11:00</td>
+        <td>150,20 $</td>
+        <td>8M</td>
+        <td>$1,201.6M</td>
+      </tr>
+      <tr>
+        <td>11:00-12:00</td>
+        <td>150,10 $</td>
+        <td>4M</td>
+        <td>$600.4M</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>VWAP = (750 млн $ + 1 201,6 млн $ + 600,4 млн $) / (5 млн + 8 млн + 4 млн) = 2 552 млн $ / 17 млн = 150,12 $</strong></p>
+
+  <h3>Стратегия исполнения алго VWAP</h3>
+
+  <details class="accordion">
+    <summary>Исполнение VWAP шаг за шагом</summary>
+    <div class="accordion-content">
+      <p><strong>Шаг 1: спрогнозировать распределение объёма</strong></p>
+      <ul>
+        <li>Проанализировать исторические профили объёма (например, 9:30-10:00 = 15 % дневного объёма)</li>
+        <li>Скорректировать под текущие условия (день отчётности = больше объёма)</li>
+      </ul>
+
+      <p><strong>Шаг 2: разложить заявку по временным корзинам</strong></p>
+      <ul>
+        <li>Заявка: 100 000 акций</li>
+        <li>Прогноз на 9:30-10:00: 15 % объёма → провести 15 000 акций (15 % заявки)</li>
+        <li>Прогноз на 10:00-11:00: 20 % объёма → провести 20 000 акций</li>
+        <li>И так далее...</li>
+      </ul>
+
+      <p><strong>Шаг 3: исполнять внутри каждой корзины</strong></p>
+      <ul>
+        <li>С 9:30 до 10:00 провести 15 000 акций постоянным темпом (500 акций в минуту)</li>
+        <li>ИЛИ подстраиваться в реальном времени (объём подскочил — торгуем быстрее; иссяк — замедляемся)</li>
+      </ul>
+
+      <p><strong>Шаг 4: измерить качество исполнения</strong></p>
+      <ul>
+        <li>Если ваша средняя цена = 150,10 $, а рыночный VWAP = 150,12 $ → вы обыграли VWAP на 0,02 $ (хорошее исполнение)</li>
+        <li>Если ваша средняя цена = 150,20 $ → вы отстали от VWAP на 0,08 $ (плохое исполнение, алго слишком агрессивен)</li>
+        <li>Эти знаки верны для покупки. При продаже они переворачиваются: цена исполнения <em>выше</em> VWAP — вот хороший результат</li>
+      </ul>
+    </div>
+  </details>
+
+  <h3>Сравнение VWAP и TWAP</h3>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Признак</th>
+        <th>TWAP</th>
+        <th>VWAP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Темп исполнения</td>
+        <td>Постоянный</td>
+        <td>Меняется вместе с объёмом</td>
+      </tr>
+      <tr>
+        <td>Сложность</td>
+        <td>Просто</td>
+        <td>Нужен прогноз объёма</td>
+      </tr>
+      <tr>
+        <td>Влияние на цену</td>
+        <td>Выше (торгует и в периоды низкого объёма)</td>
+        <td>Ниже (торгует больше, когда ликвидности много)</td>
+      </tr>
+      <tr>
+        <td>Область применения</td>
+        <td>Мелкие заявки, простое исполнение</td>
+        <td>Крупные заявки, минимизация slippage</td>
+      </tr>
+      <tr>
+        <td>Эталон</td>
+        <td>Средняя цена, взвешенная по времени</td>
+        <td>Средняя цена, взвешенная по объёму</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="part-4-pov-percentage-of-volume">Часть 4: POV (Percentage of Volume)</h2>
+
+  <h3>Как работает POV</h3>
+  <p><strong>Идея:</strong> Торговать фиксированный процент рыночного объёма (ставка участия)</p>
+
+
+  <h3>Как POV ведёт себя при исполнении</h3>
+  <p><strong>Период высокого объёма:</strong> Рынок торгует 5 000 акций в минуту → POV торгует 500 акций в минуту</p>
+  <p><strong>Период низкого объёма:</strong> Рынок торгует 500 акций в минуту → POV торгует 50 акций в минуту</p>
+  <p><strong>Итог:</strong> Алго сам замедляется в неликвидные периоды и ускоряется в ликвидные</p><h3>Настройки POV</h3>
+  <ul>
+    <li><strong>Консервативный POV (5-10 %):</strong> Слабое влияние на цену, медленное исполнение</li>
+    <li><strong>Умеренный POV (10-20 %):</strong> Сбалансировано</li>
+    <li><strong>Агрессивный POV (20-30 %):</strong> Быстрое исполнение, больше влияния (риск быть замеченным)</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>⚠️ Риск POV:</strong> В бумагах с низким объёмом POV может не добить заявку, если объём иссякнет. Задайте максимальную длительность (например, «POV 10 %, но закончить за 4 часа в любом случае»).</p>
+  </div>
+<h2 id="part-5-implementation-shortfall-is">Часть 5: Implementation Shortfall (IS)</h2>
+
+  <h3>Какую задачу решает IS</h3>
+  <p><strong>Ситуация:</strong> Управляющий решает купить AAPL в 10:00 (цена решения = 150,00 $)</p>
+  <p><strong>Исполнение завершается в 14:00 (средняя цена = 150,40 $)</strong></p>
+  <p><strong>Implementation shortfall = 0,40 $ на акцию = цена задержки исполнения</strong></p>
+
+  <h3>Стратегия алго IS</h3>
+  <p><strong>Цель:</strong> Свести к минимуму разрыв между ценой решения и итоговой ценой исполнения</p>
+  <p><strong>Подход:</strong></p>
+  <ul>
+    <li><strong>Фаза 1 (первые 20 %):</strong> Торговать агрессивно (зафиксировать текущую цену, высокая срочность)</li>
+    <li><strong>Фаза 2 (следующие 60 %):</strong> Торговать терпеливо (снижать влияние на цену, в стиле VWAP)</li>
+    <li><strong>Фаза 3 (последние 20 %):</strong> Повышать срочность при отставании (гарантировать завершение)</li>
+  </ul>
+
+  <div class="example-block">
+    <h4>Пример из практики: Implementation Shortfall против VWAP</h4>
+    <p><strong>Ситуация:</strong> Управляющий хедж-фондом видит бычью формацию в AMD в 14:00. Цена решения: 145,00 $. Заявка: купить 200 000 акций.</p>
+
+
+    <p><strong>Результат с VWAP:</strong> Средняя цена 145,72 $ (равномерно за 2 часа). Implementation shortfall = 0,72 $ на акцию = <strong>144 000 $ slippage</strong>. Терпеливое исполнение, но он бежал за ралли.</p>
+
+    <p><strong>Результат с алго IS:</strong> Средняя цена 145,28 $ (40 % набрано агрессивно в первые 15 минут по 145,08 $, дальше медленнее). Implementation shortfall = 0,28 $ на акцию = <strong>56 000 $ slippage</strong>. Сэкономлено <strong>$88K</strong> за счёт ранней фиксации.</p>
+
+    <p><strong>Почему IS оказался лучше:</strong> (1) Сильная убеждённость оказалась верной — AMD выросла на 1 % к закрытию, (2) ранняя агрессия зафиксировала 40 % по 145,08 $ и избавила от погони за 146 $+, (3) адаптивный темп снизил влияние после того, как ранняя позиция была взята. Блок ниже превращает первую причину в число, потому что «убеждённость оказалась верной» описывает исход, а не является основанием выбирать алгоритм.</p>
+
+    <div class="callout-key">
+      <h4>&#127919; Какого дрейфа должно стоить опережение?</h4>
+        <p>Здесь IS обыграл VWAP на 88 000 $, и в качестве объяснения дано, что убеждённость была верной. Это то, что случилось, а не основание для выбора &mdash; та же сделка при плоской AMD сделала бы IS более дорогим алгоритмом, а выбирать приходится до того, как узнаешь, какой случай выпал. Точка безубыточности есть, и ей нужны две величины, которые можно оценить заранее.</p>
+
+        <p>Опережение части заявки покупает вам одно и стоит другого. Оно выводит эту часть из дрейфа, в который вы иначе усреднялись бы, что при примерно линейном дрейфе экономит половину движения на этом куске. И оно платит лишним влиянием, потому что вы торговали быстрее, чем хотел стакан. Поставим одно против другого:</p>
+
+<pre><code>нужный дрейф  =  2  &#215;  лишнее влияние от опережения  &#247;  опережённая доля</code></pre>
+
+        <p>Обе величины есть на этой странице. Агрессивный кусок AMD исполнился по 145,08 $ против решающей цены 145,00 $, то есть опережение стоило 8 базисных пунктов, и это было 40 % заявки. Планка, значит, стояла на 0,40 % дрейфа за двухчасовой горизонт. AMD продрейфовала на 1 %. IS выиграл потому, что прогноз стоил в два с половиной раза больше требуемого — утверждение более сильное, чем «убеждённость была верной», и притом проверяемое.</p>
+
+<pre><code>лишнее влияние от опережения   опередить 20 %   опередить 40 %   опередить 60 %
+                      2 б.п.           0,20 %           0,10 %           0,07 %
+                      5 б.п.           0,50 %           0,25 %           0,17 %
+                      8 б.п.           0,80 %           0,40 %           0,27 %
+                     20 б.п.           2,00 %           1,00 %           0,67 %
+                     50 б.п.           5,00 %           2,50 %           1,67 %</code></pre>
+
+        <p><strong>Прочитайте столбцы сверху вниз — и решение перестаёт быть про убеждённость.</strong> В ликвидной бумаге опережение стоит пару базисных пунктов, и IS хватает одной десятой процента дрейфа, чтобы окупиться, — планка, которую берёт почти любой настоящий сигнал, так что IS обычно прав. В тонкой бумаге, где ускорение стоит пятьдесят базисных пунктов, тот же выбор требует двух с половиной процентов дрейфа за ваш горизонт исполнения. Почти никакой внутридневной прогноз этого не стоит, так что прав VWAP, как бы уверенно вы себя ни чувствовали.</p>
+
+        <p><strong>Алгоритм выбирает ликвидность, а убеждённость решает лишь, насколько большим будет опережение.</strong> Это противоположно тому, как выбор обычно описывают, в том числе в абзаце над этим блоком. Посчитайте две величины до того, как заявка уйдёт: во что мне обходится идти быстрее в этой бумаге и чего стоит мой прогноз на том окне, которое я торгую? Если второе меньше удвоенного первого, делённого на кусок, который вы собирались ускорить, то терпеливый алгоритм — не робкий выбор. Он правильный.</p>
+
+        <p>И обратите внимание, что формула делает с честным нулём. У трейдера без направленного взгляда дрейф равен нулю, так что никакое опережение не окупается ни при какой ликвидности. Если вы не можете назвать прогноз, который эта заявка выражает, вы уже ответили на вопрос.</p>
+    </div>
+
+    <p><strong>Когда IS подводит:</strong> Развернись AMD к 144 $, агрессивный старт означал бы переплату. IS требует уверенности в направлении. Ошиблись с направлением — получили убыток. На дёрганых рынках выигрывает терпеливый подход VWAP.</p>
+
+    <p><strong>Используйте IS, когда:</strong> есть направленная сделка с высокой убеждённостью (катализатор, пробой, новость), импульс ускоряется или поджимает время (нужно набрать позицию до закрытия или до события).</p>
+
+    <p><strong>Читайте цифру правильно:</strong> 200 000 акций AMD — заметно меньше половины процента обычного дневного оборота. Те 0,72 $, что отдал алго VWAP, — это почти целиком <em>снос цены</em>—бумага уходила от цены решения—а вовсе не влияние заявки на рынок. Именно для такого случая IS и создан. На заявке размером в 20 % дневного оборота та же агрессия сама породила бы то влияние, от которого пыталась убежать.</p>
+  </div>
+<h3>IS против VWAP</h3>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>Алго</th>
+        <th>Эталон</th>
+        <th>Лучше всего для</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>VWAP</td>
+        <td>Повторить взвешенную по объёму цену рынка</td>
+        <td>Пассивное исполнение (без взгляда на направление)</td>
+      </tr>
+      <tr>
+        <td>IS</td>
+        <td>Минимизировать slippage относительно цены решения</td>
+        <td>Активная убеждённость (нельзя дать цене уйти)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="part-6-adaptive-algos-next-generation">Часть 6: адаптивные алго (следующее поколение)</h2>
+
+  <h3>Smart Order Routing (SOR)</h3>
+  <p><strong>Проблема:</strong> Американская акция торгуется на 16 зарегистрированных биржах (NYSE, Nasdaq, четыре книги Cboe — BZX, BYX, EDGA, EDGX, — IEX, MEMX и остальные) плюс десятки внебиржевых площадок</p>
+  <p><strong>Решение:</strong> Алго SOR направляет каждый ломтик на площадку с лучшей ценой и наименьшими сборами</p>
+  <p><strong>Пример:</strong> Бид на NYSE = 100,00 $, бид на IEX = 100,01 $ → SOR продаёт на IEX (плюс 0,01 $ на акцию)</p>
+
+  <h3>Алго на машинном обучении</h3>
+  <p><strong>Идея:</strong> Использовать ML для прогноза краткосрочного движения цены и объёма и подстраивать исполнение в реальном времени</p>
+  <p><strong>Пример:</strong> ML замечает ускорение импульса → алго ускоряет исполнение, чтобы опередить движение</p>
+  <p><strong>Риск:</strong> Переобучение (алго работает на backtest и подводит вживую)</p>
+
+<div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
+  <p>Вы примерно на середине этого урока.</p>
+  <p style="margin-top:0.5rem;font-size:0.9rem">Хороший момент, чтобы сделать паузу. Дальше идёт то, что напрямую опирается на только что прочитанное.</p>
+</div>
+
+  <h2 id="part-7-detecting-algos-with-signal-pilot">Часть 7: как находить алго с помощью Signal Pilot</h2>
+
+  <h3>Pentarch Pilot Line: сигнатура VWAP</h3>
+  <p><strong>Схема:</strong> Ровные, размеренные покупки в течение 2-4 часов (без внезапных всплесков)</p>
+  <p><strong>Пропорциональность объёму:</strong> Больше покупок в периоды высокого объёма (9:30-11:00, 14:00-16:00)</p>
+  <p><strong>Сигнал:</strong> Работает алго VWAP → плановая институциональная заявка (а не дискреционная сделка по убеждению)</p>
+
+  <h3>Volume Oracle: сигнатура TWAP</h3>
+  <p><strong>Схема:</strong> Сделки одинакового размера через равные интервалы (например, 300 акций каждые 2 минуты)</p>
+  <p><strong>Часовая точность:</strong> Сделки на :02, :04, :06, :08 (каждые 2 минуты)</p>
+  <p><strong>Сигнал:</strong> Алго TWAP → менее изощрённое исполнение (старый алго или небольшой институт)</p>
+
+  <h3>Harmonic Oscillator: как заметить усталость алго</h3>
+  <p><strong>Схема:</strong> Покупки VWAP шли 3 часа, потом резко прекратились</p>
+  <p><strong>Что это значит:</strong> Алго закончил, значит постоянный источник спроса ушёл из стакана. Это убирает поддержку — но само по себе не предсказывает разворот. И прочтение что-то значит только если алго был заметной долей оборота: посчитайте его ставку участия, прежде чем торговать против него.</p>
+
+          <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
+        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Быстрые шаги на завтра (нажмите, чтобы раскрыть)</summary>
+        <div style="margin-top:1rem">
+          <p>Не перегружайтесь. Начните с трёх действий:</p>
+          <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
+            <li><strong>Используйте алго VWAP, как только заявка превышает примерно 1 % ADV</strong> &mdash; VWAP (средневзвешенная по объёму цена) режет крупные заявки на мелкие куски, исполняемые в течение дня по профилю объёма рынка. Часто цитируемые цифры &mdash; с 1,5 % до 0,2 % &mdash; действуют лишь тогда, когда заявка составляет серьёзную долю дневного объёма; на тикете в мегакапе не применима ни одна из них, потому что вы и не платили 1,5 % изначально. Аманда Парк (составной пример) потеряла <span style="color:#ff5252;font-weight:700">127 300 $</span> за 7 месяцев на десяти заявках в среднем по 1 000 000 $ каждая, все отправленные одиночными рыночными ордерами &mdash; в среднем 1,27 % на сделку. Обратите внимание, чего вам никто не скажет: сколько она сэкономила потом. Это была бы разница между полученными исполнениями и исполнениями по заявкам, которых она так и не отправила. Измерить она может вход &mdash; собственный реализованный slippage на заявку, до и после, &mdash; а 1,27 % против полосы 0,1-0,3 %, к которой стремится хорошо настроенный алгоритм, это разрыв, который стоит поискать в собственном отчёте об исполнении. Позвоните брокеру сегодня же (Interactive Brokers, TradeStation и Fidelity предлагают VWAP). Завтра: посчитайте ADV, прежде чем отправлять. Одна лишь долларовая сумма не значит ничего &mdash; 250 000 $ невидимы в мегакапе и составляют всю ленту в тонкой бумаге.</li>
+            <li><strong>Используйте TWAP для срочных выходов (спасает от slippage при паническом сбросе)</strong> — TWAP (Time-Weighted Average Price) равномерно распределяет заявку по заданному интервалу (например, продать 70 000 акций за 2 часа = 583 акции/мин). Не даёт смять бид и аск и пройти вниз по стакану. Дерек Чен (собирательный пример) потерял <span style="color:#ff5252;font-weight:700">78 400 $</span> на паническом сбросе 70 000 акций компании средней капитализации по 40 $ (ADV 1,75 млн) рыночной заявкой во время падения на 5 %: заявка на 2,8 млн долларов, около 4 % дневного оборота, и 2,8 % лишнего slippage. Двухчасовой TWAP обошёлся бы в 0,3-0,5 % (примерно 11 200 $) и сэкономил бы около 67 200 $. Обратите внимание на проверку масштаба: те же 70 000 акций в мегакапе были бы ошибкой округления и не стоили бы ему ничего. Освойте TWAP сегодня вечером на платформе брокера. Завтра: выходите из позиции, которая стоит больше примерно 1 % ADV бумаги? Возьмите TWAP на 1-4 часа вместо сброса по рынку.</li>
+            <li><strong>Сравнивайте качество исполнения VWAP с эталоном (так ловят плохие алго)</strong> — После каждой сделки через VWAP сравнивайте свою среднюю цену с официальным VWAP дня (TradingView/Yahoo Finance). Цель: в пределах ±10 б. п. Систематически хуже ±20 б. п. = плохо настроенный алго или плохой брокер. Майкл Торрес (собирательный пример) полгода пользовался VWAP, но ни разу не измерял результат: алго его брокера был слишком агрессивным и стоил ему дополнительно <span style="color:#ff5252;font-weight:700">42 600 $</span> на 14,2 млн долларов номинала по сравнению с настоящим эталоном VWAP. Это 30 б. п.: втрое больше его цели в ±10 б. п. и далеко за границей ±20 б. п. Заведите сегодня таблицу: дата, тикер, ваша цена, официальный VWAP, отклонение (б. п.). Записывайте каждую сделку. Плохие результаты? Меняйте брокера или снижайте ставку участия.</li>
+          </ol>
+        </div>
+      </details>
+      <h2 id="quiz-test-your-understanding">Тест: проверьте своё понимание</h2>
+<div class="quiz">
+    <div class="quiz-question">
+      <p><strong>Вопрос 1:</strong> Вам нужно купить 100 000 акций. Прогноз рыночного VWAP: 9:30-10:00 = 20 % объёма. Сколько акций стоит наметить на этот период?</p>
+      <details>
+        <summary>Показать ответ</summary>
+        <p><strong>Ответ:</strong> 20 000 акций (20 % от 100 000). Алго VWAP раскладывает заявку пропорционально прогнозу объёма. Если 20 % дневного объёма проходит с 9:30 до 10:00, проведите в этот отрезок 20 % своей заявки.</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Вопрос 2:</strong> TWAP против VWAP: у какого влияние на цену меньше и почему?</p>
+      <details>
+        <summary>Показать ответ</summary>
+        <p><strong>Ответ:</strong> У VWAP влияние меньше. TWAP идёт постоянным темпом (в тихий обед торгует столько же, сколько на насыщенном открытии → больше влияния в середине дня). VWAP подстраивается под объём (торгует больше, когда ликвидности много → ниже среднее влияние).</p>
+      </details>
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>Вопрос 3:</strong> Вы видите схему покупок VWAP в AAPL в течение 3 часов. В 13:00 покупки прекращаются. Какая у вас сделка?</p>
+      <details>
+        <summary>Показать ответ</summary>
+        <p><strong>Ответ:</strong> Алго закончил, значит постоянный спрос ушёл из стакана. Если цена росла на этих покупках, теперь она застопорится или отойдёт назад — поддержки больше нет. Но всё это верно, только если алго был реальной долей оборота. Сначала посчитайте его ставку участия: пара сотен акций в минуту в AAPL — это шум. Зафиксировать прибыль по лонгам разумно; шорт здесь — ставка на отсутствие покупателя, а не на присутствие продавца, и это куда более слабый сигнал.</p>
+      </details>
+    </div>
+  </div>
+<h2 id="practice-exercise-algo-selection-detection">Практическое упражнение: выбор и обнаружение алго</h2>
+
+  <div class="practice-section">
+    <h3>Упражнение 1: выберите подходящий алго</h3>
+    <p><strong>Цель:</strong> Для заданных торговых сценариев подберите оптимальный алгоритм исполнения и его параметры.</p>
+
+    <p><strong>Сценарий A:</strong> Вам нужно купить 450 000 акций COST (Costco). Текущая цена: 520 $. Средний дневной объём: 2,5 млн акций. Спешки нет, вы хотите лучшую цену исполнения. Какой алго?</p>
+    <details>
+      <summary>Показать ответ</summary>
+      <p><strong>Ответ: алго VWAP с лимитом участия 10 %, отработанный за две сессии.</strong></p>
+      <p><strong>Обоснование:</strong></p>
+      <ul>
+        <li>450 000 акций = 18 % дневного объёма (крупная заявка)</li>
+        <li>VWAP подстраивается под профиль объёма → влияние меньше, чем у TWAP</li>
+        <li>10 % от ADV в 2,5 млн — это 250 000 акций в день, значит 450 000 акций — это заявка <strong>на два дня</strong> и об этом стоит сказать сразу, а не обещать исполнение за один день</li>
+        <li>Участие в 10 % не даёт доминировать в обороте в периоды низкого объёма</li>
+        <li>Ожидаемый slippage по закону квадратного корня из урока 69: дневная волатильность около 1,3 % × √0,18 ≈ 0,55 %, поэтому закладывайте <strong>0.3-0.6%</strong> — примерно 1,56-3,12 $ на акцию, то есть <strong>$700K-$1.4M</strong> на заявке в 234 млн долларов. Заявка такого размера в столь плотной бумаге — это не задача на 5 б. п.</li>
+      </ul>
+      <p><strong>Почему не альтернативы?</strong></p>
+      <ul>
+        <li><strong>TWAP:</strong> Ровный темп продолжает продавливать тот же объём в обеденное затишье, когда оборот самый тонкий, — это повышает влияние без всякой пользы</li>
+        <li><strong>Алго IS:</strong> Ни срочности, ни направленной убеждённости (не нужен)</li>
+        <li><strong>POV 5 %:</strong> 125 000 акций в день — это почти четыре сессии: риска исполнения больше, чем стоит экономия на влиянии</li>
+      </ul>
+    </details>
+
+    <p><strong>Сценарий B:</strong> По NVDA только что вышел бычий отчёт, в 16:05. Вы хотите купить 150 000 акций на завтрашнем открытии (сделка по убеждению, ждёте гэп вверх). Какой алго?</p>    <details>
+      <summary>Показать ответ</summary>
+      <p><strong>Ответ: алго Implementation Shortfall (IS), 50 % в первые 30 минут, завершить за 2 часа.</strong></p>
+      <p><strong>Обоснование:</strong></p>
+      <ul>
+        <li>150 000 акций — это около 0,06 % дневного объёма NVDA: влияние на цену здесь попросту не проблема. Весь аргумент в пользу IS — это <strong>риск тайминга</strong>: цена может убежать от вас.</li>
+        <li>Высокая убеждённость + катализатор = цена, скорее всего, убежит</li>
+        <li>IS быстро фиксирует цену решения (агрессивный старт)</li>
+        <li>Первые 30 минут: набрать 75 000 акций (50 %) рядом с ценой открытия</li>
+        <li>Следующие 90 минут: добрать оставшиеся 75 000 терпеливее</li>
+        <li>Риск: если вы ошиблись, агрессивный старт означает переплату. Но убеждённость оправдывает риск.</li>
+      </ul>
+      <p><strong>Почему не VWAP?</strong> VWAP растягивает заявку равномерно → если бумага откроется гэпом на 3-5 % вверх, вы будете догонять её весь день и в среднем заплатите на 4-8 $ дороже.</p>
+    </details>
+
+    <p><strong>Сценарий C:</strong> Вы замечаете покупки TWAP в бумаге средней капитализации по 60 $ (ADV 1,2 млн): 400 акций каждые 90 секунд последние 2 часа. Какая у вас сделка?</p>
+    <details>
+      <summary>Показать ответ</summary>
+      <p><strong>Ответ: купить сейчас, держать до окончания работы алго TWAP, затем выйти.</strong></p>
+      <p><strong>Обоснование:</strong></p>
+      <ul>
+        <li>TWAP = плановая институциональная заявка (ребалансировка, пассивный поток)</li>
+        <li>400 акций за 90 секунд = 16 000 акций в час против оборота примерно в 185 000 акций в час — это около <strong>8,6 % участия</strong>. Посчитайте это число, прежде чем действовать: те же 16 000 в час в мегакапе не поддерживают ровным счётом ничего.</li>
+        <li>Прошло 2 часа = 32 000 акций. Ещё 1-2 часа доводят всю заявку до <strong>50-65K</strong></li>
+        <li>Когда алго остановится (сделок по 400 акций больше нет), покупательское давление исчезнет → ждите отката</li>
+      </ul>
+      <p><strong>Вход:</strong> Купить по текущей цене. <strong>Выход:</strong> Когда схема TWAP сломается (ни одной сделки по 400 акций дольше 5 минут).</p>
+    </details>
+  </div>
+
+  <div class="practice-section">
+    <h3>Упражнение 2: посчитайте качество исполнения</h3>
+    <p><strong>Ситуация:</strong> Вы исполнили заявку на покупку 200 000 акций через алго VWAP. Посчитайте качество относительно эталона.</p>
+
+    <p><strong>Ваше исполнение:</strong></p>
+    <ul>
+      <li>9:30-10:30: куплено 40 000 акций в среднем по 100,15 $</li>
+      <li>10:30-12:00: куплено 60 000 акций в среднем по 100,25 $</li>
+      <li>12:00-14:00: куплено 50 000 акций в среднем по 100,10 $</li>
+      <li>14:00-16:00: куплено 50 000 акций в среднем по 100,30 $</li>
+    </ul>
+
+    <p><strong>Рыночный VWAP за день: 100,22 $</strong></p>
+
+    <p><strong>Вопросы:</strong></p>
+    <ol>
+      <li>Какой у вас получилась средняя цена исполнения, взвешенная по объёму?</li>
+      <li>Вы обыграли VWAP или отстали? На сколько?</li>
+      <li>Общая экономия или издержки относительно эталона VWAP?</li>
+    </ol>
+
+    <details>
+      <summary>Показать ответ</summary>
+      <p><strong>1. Ваш расчёт VWAP:</strong></p>
+      <ul>
+        <li>(40 000 × 100,15 $) + (60 000 × 100,25 $) + (50 000 × 100,10 $) + (50 000 × 100,30 $) = всего потрачено долларов</li>
+        <li>= $4,006K + $6,015K + $5,005K + $5,015K = $20,041K</li>
+        <li>Ваша средняя цена = 20,041 млн долларов / 200 000 акций = <strong>100,205 $</strong></li>
+      </ul>
+      <p><strong>2. Качество относительно VWAP:</strong></p>
+      <ul>
+        <li>Рыночный VWAP = 100,22 $</li>
+        <li>Ваша средняя = 100,205 $</li>
+        <li><strong>VWAP обыгран на 0,015 $ (1,5 цента)</strong></li>
+      </ul>
+      <p><strong>3. Общая экономия:</strong></p>
+      <ul>
+        <li>0,015 $ × 200 000 акций = <strong>сэкономлено 3 000 $</strong></li>
+      </ul>
+      <p><strong>Чтение:</strong> Хорошее исполнение. Вы обыграли VWAP, сместив покупки в более дешёвые отрезки (12:00-14:00 по 100,10 $). Именно так и должен вести себя алго.</p>
+    </details>
+  </div>
+<h2 id="practical-checklist">Практический чек-лист</h2>
+  <div class="checklist">
+    <h4>Как выбрать алго исполнения:</h4>
+    <ul>
+      <li>Заявка &lt; 1 % ADV: обычные лимитные заявки (алго не нужен)</li>
+      <li>Заявка 1-5 % ADV: VWAP (минимум влияния, исполнение за 2-4 часа)</li>
+      <li>Заявка &gt; 5 % ADV: POV 5-10 % (очень терпеливо, растянуть на столько дней, сколько потребует лимит)</li>
+      <li>Сделка с высокой убеждённостью: алго IS (быстро зафиксировать цену решения)</li>
+      <li>Неликвидная бумага: POV с ограничением максимальной длительности (чтобы не застрять)</li>
+    </ul>
+    <h4>Как находить институциональные алго:</h4>
+    <ul>
+      <li>Ищите схему VWAP через Pentarch Pilot Line от Signal Pilot (ровный поток на 2-4 часа)</li>
+      <li>Ищите TWAP через Volume Oracle (одинаковые сделки через равные интервалы)</li>
+      <li>Когда алгоритм останавливается, из стакана уходит постоянный источник спроса. Это убирает поддержку; сам по себе разворот он не предсказывает и не значит вообще ничего, если алгоритм не был заметной долей ленты &mdash; сначала посчитайте долю участия.</li>
+      <li>Если принты POV-алгоритма становятся крупнее, читайте это в правильную сторону: POV торгует фиксированный процент от того, что торгуется, поэтому более крупные куски означают, что лента оживилась, а не что институционал стал бычьим. Сигнал в объёме; алгоритм лишь его отражает.</li>
+    </ul>
+  </div>
+
+  <div class="key-takeaway">
+    <h4>Главное из урока</h4>
+    <ul>
+      <li><strong>TWAP = исполнение постоянным темпом</strong> (просто, но игнорирует объём)</li>
+      <li><strong>VWAP = исполнение пропорционально объёму</strong> (меньше влияния, институциональный стандарт)</li>
+      <li><strong>POV = % рыночного объёма</strong> (подстраивается под ликвидность)</li>
+      <li><strong>IS = минимизировать slippage относительно цены решения</strong> (сделки с высокой убеждённостью)</li>
+      <li><strong>Находите алго через Signal Pilot:</strong> VWAP = ровный поток, TWAP = сделки как по часам</li>
+    </ul>
+  </div>
+
+  <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Алгоритмы исполнения снижают влияние на цену и slippage на крупных заявках. Стратегии TWAP, VWAP и POV — профессиональные инструменты, экономящие тысячи на издержках исполнения.</p>
+
+  <h3 style="margin:3rem 0 1.5rem 0">Связанные уроки</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
+    <div class="card" style="padding:1rem">
+      <span class="badge">Продвинутый уровень №69</span>
+      <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Модели рыночного воздействия</h4>
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Моделируйте влияние на цену, чтобы выбирать оптимальные алгоритмы исполнения.</p>
+      <a href="/education/curriculum/advanced/59-market-impact.html" class="btn btn-sm btn-ghost">Читать урок &rarr;</a>
+    </div>
+    <div class="card" style="padding:1rem">
+      <span class="badge">Продвинутый уровень #73</span>
+      <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Институциональные типы заявок</h4>
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Сочетайте алгоритмы с институциональными типами заявок ради оптимального исполнения.</p>
+      <a href="/education/curriculum/advanced/58-professional-order-types.html" class="btn btn-sm btn-ghost">Читать урок &rarr;</a>
+    </div>
+    <div class="card" style="padding:1rem">
+      <span class="badge">Средний уровень #49</span>
+      <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Теория аукциона и рыночные дисбалансы</h4>
+      <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Разберитесь в механике аукционов, чтобы точнее выбирать время для алгоритмов.</p>
+      <a href="/education/curriculum/intermediate/42-opening-and-closing-auctions.html" class="btn btn-sm btn-ghost">Читать урок &rarr;</a>
+    </div>
+  </div>
+
+  <div class="callout-info">
+    <h4>⏭️ Дальше</h4>
+    <p><strong>Урок №75: конфлюэнция нескольких таймфреймов</strong> — Сведите вместе несколько таймфреймов, чтобы находить сетапы с высокой вероятностью и конфлюэнцией.</p>
+  </div>
+
+  <!-- Discussion Section -->
+  <div class="discussion-section" id="discussion-section">
+    <button class="discussion-toggle" id="discussion-toggle" style="display:none">
+      <span>💬 Обсуждение (<span id="discussion-count-mobile">0</span>)</span>
+      <span class="discussion-toggle-icon">+</span>
+    </button>
+    <div class="discussion-content">
+      <div class="discussion-header">
+        <h2 class="discussion-title">💬 Обсуждение <span class="discussion-count" id="discussion-count">(0 комментариев)</span></h2>
+        <div class="discussion-sort">
+          <label for="discussion-sort">Сортировать:</label>
+          <select id="discussion-sort">
+            <option value="recent">Сначала новые</option>
+            <option value="top">По оценкам</option>
+            <option value="oldest">Сначала старые</option>
+          </select>
+        </div>
+      </div>
+      <div class="comment-composer" id="comment-composer">
+        <textarea id="comment-input" placeholder="Поделитесь мыслями, задайте вопрос или обсудите урок…" maxlength="1000"></textarea>
+        <div class="comment-composer-actions">
+          <span class="comment-char-count" id="comment-char-count">0/1000</span>
+          <button class="btn btn-primary" id="post-comment-btn">Отправить комментарий</button>
+        </div>
+      </div>
+      <div class="comments-list" id="comments-list">
+        <div class="comments-loading">
+          <div class="comments-loading-spinner"></div>
+          <p>Загрузка комментариев…</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="downloads">
+    <h4>Загрузки</h4>
+    <ul>
+      <li><a href="/education/resources/checklists/algorithmic-execution-checklist.pdf" download>Руководство по выбору алго исполнения (PDF)</a></li>
+      <li><a href="/education/resources/checklists/volume-analysis-checklist.pdf" download>Руководство по анализу объёма и VWAP (PDF)</a></li>
+    </ul>
+  </div>
+
+      <div class="nav-article">
+        <a class="btn btn-ghost" href="/education/curriculum/advanced/58-professional-order-types.html">← Предыдущий урок</a>
+        <a class="btn btn-primary" href="/education/curriculum/_merged/75.html">Следующий урок →</a>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <div class="lesson-actions">
+        <button id="bookmark-btn" class="btn btn-secondary btn-sm btn-block" onclick="window.library?.isBookmarked() ? window.library.removeBookmark() : window.library.addBookmark({title:document.title})">🔖 В закладки</button>
+        <button onclick="window.print()" class="btn btn-secondary btn-sm btn-block">📄 Сохранить в PDF</button>
+      </div>
+
+      <div class="sidebar-links" style="margin-top:1.5rem">
+        <a href="https://www.signalpilot.io" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          ⚡ Набор Signal Pilot
+        </a>
+        <a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💬 Обсудить в Discord
+        </a>
+        <a href="https://www.signalpilot.io/affiliates.html" target="_blank" rel="noopener" style="display:block;color:var(--muted);text-decoration:none;padding:0.5rem 0">
+          💰 Зарабатывайте 15-30 % по партнёрской программе
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Back to Signal Pilot CTA -->
+  <div class="wrap" style="margin: 3rem auto 0;">
+    <div style="background: linear-gradient(135deg, rgba(153,102,255,0.15), rgba(138,91,255,0.1)); border: 1px solid rgba(153,102,255,0.3); border-radius: 8px; padding: 2rem; text-align: center;">
+      <h3 style="margin: 0 0 0.75rem 0; font-size: 1.25rem;">Готовы торговать с Signal Pilot?</h3>
+      <p style="margin: 0 0 1.25rem 0; color: var(--muted);">Примените полученные знания с профессиональными индикаторами и инструментами анализа рынка в реальном времени.</p>
+      <a href="https://www.signalpilot.io" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        Вернуться в Signal Pilot →
+      </a>
+    </div>
+  </div>
+  <blockquote class="sp-disclaimer"><strong>Только в образовательных целях.</strong> Торговля сопряжена со значительным риском убытков. Это не финансовая консультация. Прошлые результаты не гарантируют будущих.</blockquote>
+</article>
+<footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Обсудить в Discord</a><a href="https://www.signalpilot.io/affiliates.html">Партнёрам</a><a href="https://www.signalpilot.io/privacy.html">Конфиденциальность</a><a href="https://www.signalpilot.io/terms.html">Условия</a></div></div></footer>
+<script src="/education/assets/edu.js"></script>
+<script src="/education/assets/edu-enhanced.js"></script>
+<script src="/education/assets/signalpilot-theme.js"></script>
+<script>
+document.getElementById('theme-toggle')?.addEventListener('click', () => {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+});
+const canvas = document.getElementById('constellations');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const stars = Array.from({ length: 80 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.2,
+    vy: (Math.random() - 0.5) * 0.2
+  }));
+  function drawConstellations() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = 'rgba(139, 92, 246, 0.15)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < stars.length; i++) {
+      for (let j = i + 1; j < stars.length; j++) {
+        const dx = stars[i].x - stars[j].x;
+        const dy = stars[i].y - stars[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.moveTo(stars[i].x, stars[i].y);
+          ctx.lineTo(stars[j].x, stars[j].y);
+          ctx.stroke();
+        }
+      }
+      stars[i].x += stars[i].vx;
+      stars[i].y += stars[i].vy;
+      if (stars[i].x < 0 || stars[i].x > canvas.width) stars[i].vx *= -1;
+      if (stars[i].y < 0 || stars[i].y > canvas.height) stars[i].vy *= -1;
+    }
+    requestAnimationFrame(drawConstellations);
+  }
+  drawConstellations();
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+</script>
+<script src="/education/assets/config.js"></script>
+<script src="/education/assets/supabase-client.js"></script>
+<script src="/education/assets/auth-ui.js"></script>
+  <script src="/education/assets/chatbot.js" defer></script>
+  <!-- Enhanced Analytics & A/B Testing -->
+  <script src="/education/assets/enhanced-analytics.js" defer></script>
+  <script src="/education/assets/ab-test-tldr.js" defer></script>
+  <!-- Google Translate -->
+  <script src="/education/assets/lang-switcher.js"></script>
+  <!-- Discussion System -->
+    <script src="/education/assets/trial-cta.js"></script>
+  <script src="/education/assets/blog-links.js"></script>
+  <script src="/education/assets/discussions.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.DiscussionSystem) {
+        window.DiscussionSystem.init('advanced-70-execution-algorithms-twap-vwap');
+      }
+    });
+  </script>
+  <script defer src="/assets/js/view-counter.js"></script>
+</body>
+</html>

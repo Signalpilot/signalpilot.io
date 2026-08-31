@@ -125,7 +125,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             rsi: `**RSI Lessons:**
 
-**Main Lesson:** [Lesson 5: RSI >70 Is Often a BUY Signal](/education/curriculum/beginner/05-rsi-extremes.html)
+**Main Lesson:** [Lesson 5: RSI >70 Is Often a BUY Signal](/education/curriculum/intermediate/51-oscillators-under-regime.html)
 
 **Key Concepts:**
 • RSI >70 in uptrends = continuation (not reversal)
@@ -144,7 +144,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             spread: `**Bid-Ask Spread Lessons:**
 
-**Main Lesson:** [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/intermediate/22-bid-ask-spread-dynamics.html)
+**Main Lesson:** [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/beginner/04-the-spread.html)
 
 **Key Concepts:**
 • Spread is a tax on impatience (not a fixed cost)
@@ -164,7 +164,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             automation: `**Trading Automation:**
 
-**Main Lesson:** [Lesson 57: Trading Automation & APIs](/education/curriculum/advanced/61-trading-automation-apis.html)
+**Main Lesson:** [Lesson 57: Trading Automation & APIs](/education/curriculum/advanced/69-automation.html)
 
 **Key Concepts:**
 • Automation amplifies mistakes (1 bug = 47 orders in 90 sec)
@@ -214,11 +214,11 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 **Recommended Learning Path:**
 
 **Week 1-3: Beginner Foundations** (20 lessons)
-→ Start: [Lesson 1: The Liquidity Lie](/education/curriculum/beginner/01-the-liquidity-lie.html)
+→ Start: [Lesson 1: The Liquidity Lie](/education/curriculum/intermediate/27-the-liquidity-lie.html)
 → Focus: Debunking retail myths, understanding liquidity engineering
 
 **Week 4-7: Intermediate Microstructure** (27 lessons)
-→ [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/intermediate/22-bid-ask-spread-dynamics.html)
+→ [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/beginner/04-the-spread.html)
 → Order flow, order books, footprint charts, institutional flow
 
 **Week 8-11: Advanced Implementation** (27 lessons)

@@ -259,7 +259,7 @@ Let's see clearly. Together.
 |-------|-------|
 | Pillar | P1: The Liquidity Lie |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/27-the-liquidity-lie.html |
 | CTA | Lead Magnet (Liquidity Lie Cheatsheet) |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -748,7 +748,7 @@ Enter the Chronicle. Link in bio.
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/08-volume-and-delta.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -1360,7 +1360,7 @@ Small: #tradingmythology #signalpilot #eliteseven
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/03-price-action-is-dead.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/06-the-candle-is-a-summary.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -1405,7 +1405,7 @@ Price action isn't dead dead. But it's incomplete.
 
 5,700 words on what candles are hiding:
 
-https://education.signalpilot.io/curriculum/beginner/03-price-action-is-dead.html
+https://education.signalpilot.io/curriculum/beginner/06-the-candle-is-a-summary.html
 
 #trading #orderflow #priceaction
 ```
@@ -1680,7 +1680,7 @@ Save this. 📌
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/04-repaint-problem.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/49-repainting.html |
 | CTA | Lead Magnet (Repainting Checklist) |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -1724,7 +1724,7 @@ Never be fooled again.
 
 Full lesson on repainting detection:
 
-https://education.signalpilot.io/curriculum/beginner/04-repaint-problem.html
+https://education.signalpilot.io/curriculum/intermediate/49-repainting.html
 
 Free checklist: signalpilot.io/free
 
@@ -1780,7 +1780,7 @@ Have you ever tested if your indicator repaints? Share what you found 🔍
 |-------|-------|
 | Pillar | P1: Liquidity Lie |
 | Type | Education Hub Lesson (Deep Dive) |
-| Source | https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/27-the-liquidity-lie.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -1821,7 +1821,7 @@ Institutions know exactly where to look.
 ```
 The lesson teaches how to stop being liquidity.
 
-https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html
+https://education.signalpilot.io/curriculum/intermediate/27-the-liquidity-lie.html
 
 #stophunting #liquidity #smartmoney
 ```
@@ -2017,7 +2017,7 @@ But don't take our word for it — try it yourself.
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson (Deep Dive) |
-| Source | https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/08-volume-and-delta.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -2108,7 +2108,7 @@ The candle lies. Delta tells the truth.
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/05-rsi-extremes.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/51-oscillators-under-regime.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -2150,7 +2150,7 @@ Context determines everything.
 
 Full lesson on when RSI extremes matter:
 
-https://education.signalpilot.io/curriculum/beginner/05-rsi-extremes.html
+https://education.signalpilot.io/curriculum/intermediate/51-oscillators-under-regime.html
 
 #RSI #indicators #trading
 ```
@@ -2703,7 +2703,7 @@ Independence > Dependence.
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/50-moving-averages.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -2742,7 +2742,7 @@ How to actually use MAs:
 ```
 Full lesson on moving averages:
 
-https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html
+https://education.signalpilot.io/curriculum/intermediate/50-moving-averages.html
 
 #movingaverages #technicalanalysis #trading
 ```
@@ -2791,7 +2791,7 @@ How to actually use MAs:
 |-------|-------|
 | Pillar | P1: Liquidity Lie |
 | Type | Education Hub Lesson (Deep Dive) |
-| Source | https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/27-the-liquidity-lie.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -2827,7 +2827,7 @@ The sweep IS the signal.
 ```
 Learn to recognize sweeps:
 
-https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html
+https://education.signalpilot.io/curriculum/intermediate/27-the-liquidity-lie.html
 
 #liquiditysweep #smartmoney #trading
 ```
@@ -3438,7 +3438,7 @@ No complex setup. No coding. No confusion.
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/07-revenge-trading.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/24-when-the-drawdown-arrives.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -3484,7 +3484,7 @@ You need SYSTEMS:
 ```
 Full lesson with actionable systems:
 
-https://education.signalpilot.io/curriculum/beginner/07-revenge-trading.html
+https://education.signalpilot.io/curriculum/beginner/24-when-the-drawdown-arrives.html
 
 #revengetrading #tradingpsychology #trading
 ```
@@ -3543,7 +3543,7 @@ The solution is SYSTEMS:
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/08-confirmation-bias.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/52-confirmation-bias.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -3584,7 +3584,7 @@ If you can't find any — you're not looking hard enough.
 ```
 Full lesson on trading psychology:
 
-https://education.signalpilot.io/curriculum/beginner/08-confirmation-bias.html
+https://education.signalpilot.io/curriculum/intermediate/52-confirmation-bias.html
 
 #confirmationbias #tradingpsychology #trading
 ```
@@ -3805,7 +3805,7 @@ See the difference in bio 🔗
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson (Deep Dive) |
-| Source | https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/08-volume-and-delta.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -3844,7 +3844,7 @@ The crowd sells the bottom. Someone has to buy it.
 ```
 Full lesson on volume analysis:
 
-https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html
+https://education.signalpilot.io/curriculum/beginner/08-volume-and-delta.html
 
 #volume #absorption #smartmoney
 ```
@@ -4029,7 +4029,7 @@ Meet Plutus in bio 🔗
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/09-position-sizing.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/20-position-sizing.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -4062,7 +4062,7 @@ Position = $200 ÷ $5 = 40 shares
 ```
 Full lesson on position sizing:
 
-https://education.signalpilot.io/curriculum/beginner/09-position-sizing.html
+https://education.signalpilot.io/curriculum/beginner/20-position-sizing.html
 
 #positionsizing #riskmanagement #trading
 ```
@@ -4445,7 +4445,7 @@ Link in bio 🔗
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/10-stop-losses.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/21-where-the-stop-goes.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -4482,7 +4482,7 @@ Every. Single. Time.
 ```
 Full lesson on risk-reward math:
 
-https://education.signalpilot.io/curriculum/beginner/10-stop-losses.html
+https://education.signalpilot.io/curriculum/beginner/21-where-the-stop-goes.html
 
 #riskreward #tradingmath #trading
 ```
@@ -4730,7 +4730,7 @@ How many symbols are on your watchlist? More than you can watch at once? 👁️
 |-------|-------|
 | Pillar | P4: Trading Psychology |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/11-timeframe-illusion.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/38-what-a-timeframe-is.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -4769,7 +4769,7 @@ It's how MUCH you'll lose.
 ```
 Full lesson on stop strategies:
 
-https://education.signalpilot.io/curriculum/beginner/11-timeframe-illusion.html
+https://education.signalpilot.io/curriculum/intermediate/38-what-a-timeframe-is.html
 
 #stoploss #riskmanagement #trading
 ```
@@ -4971,7 +4971,7 @@ Meet The Arbiter in bio 🔗
 |-------|-------|
 | Pillar | P3: Market Mechanics |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/12-paper-trading.html |
+| Source | https://education.signalpilot.io/curriculum/beginner/16-sim-against-live.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -5001,7 +5001,7 @@ Don't fight the trend. Identify it first.
 ```
 Full lesson on trend identification:
 
-https://education.signalpilot.io/curriculum/beginner/12-paper-trading.html
+https://education.signalpilot.io/curriculum/beginner/16-sim-against-live.html
 
 #trendtrading #marketstructure #trading
 ```
@@ -5895,7 +5895,7 @@ Meet The Watchman in bio 🔗
 |-------|-------|
 | Pillar | P2: Indicator Truth |
 | Type | Education Hub Lesson |
-| Source | https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html |
+| Source | https://education.signalpilot.io/curriculum/intermediate/50-moving-averages.html |
 | CTA | Lead Magnet |
 | Format | Twitter: Thread | Instagram: Carousel |
 
@@ -5926,7 +5926,7 @@ The media hypes crosses. Smart traders see them as confirmations, not signals.
 ```
 Full lesson on moving averages:
 
-https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html
+https://education.signalpilot.io/curriculum/intermediate/50-moving-averages.html
 
 #goldencross #deathcross #movingaverages
 ```

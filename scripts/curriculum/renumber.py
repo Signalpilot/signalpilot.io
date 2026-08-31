@@ -70,7 +70,7 @@ def plan():
             merges.append((oldpath(m),f'education/curriculum/_merged/{int(m):02d}.html',r))
     return rows,moves,merges,news
 
-if __name__=='__main__':
+def main():
     rows,moves,merges,news=plan()
     print(f'{len(moves)} moves, {len(merges)} merged-aside, {len(news)} new slots\n')
     dests=[d for _,d,_ in moves]+[d for _,d,_ in news]
@@ -84,6 +84,8 @@ if __name__=='__main__':
     print('  ...')
     print(f"\nmerged aside: {[r for r,_,_ in [(x[2]['new'],0,0) for x in merges]][:0] or ''}")
     for src,dst,r in merges: print(f"  old {os.path.basename(src or '?'):<44} -> _merged/, redirect to slot {r['new']}")
+
+
 
 
 # ---------------------------------------------------------------- execute ----
@@ -222,6 +224,9 @@ def fix_index(rows,run):
                 if m: e['description']=m.group(1)
                 m=re.search(r'<h1[^>]*>(.*?)</h1>',s,re.S)
                 if m: e['title']=re.sub(r'<[^>]+>','',m.group(1)).strip()
+        # A slot with no file must not appear in the catalogue: the hub pages and
+        # learning-path render straight from this, and would link to a 404.
+        if not os.path.exists(r['dest']): continue
         out.append(e)
     if run: json.dump(out,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
     return out
@@ -259,3 +264,47 @@ def execute(run):
     print(f'  index.json entries : {len(idx)}')
     print(f'  redirects added    : {reds}')
     if run: open('scripts/curriculum/.renumbered','w').write('done\n')
+
+
+if __name__=='__main__':
+    if '--execute' in sys.argv:
+        print('EXECUTING'); execute(True)
+    else:
+        main(); print('\nDRY RUN. Pass --execute to apply.')
+
+
+BADGE_EMOJI={'beginner':'\U0001F7E2','intermediate':'\U0001F7E1',
+             'advanced':'\U0001F7E0','professional':'\U0001F534'}
+
+def fix_badges(rows,run):
+    """Tier emoji on the lesson badge, and the tier/number on related-lesson cards.
+
+    The chrome pass rewrote the level word and the lesson number but left the
+    coloured dot in front of it, so moved lessons read '\U0001F7E1 Beginner'. And the
+    related cards still carried old-scheme labels ('Intermediate #25') even
+    though their hrefs had been rewritten -- so the label and the link disagreed.
+    The href is now the source of truth for the label.
+    """
+    by={r['new']:r for r in rows}
+    href_re=re.compile(r'href="/education/curriculum/([a-z]+)/(\d\d)-')
+    fixed=0
+    for r in rows:
+        f=r['dest']
+        if not os.path.exists(f): continue
+        s=open(f,encoding='utf-8').read(); o=s
+        # the page's own badge
+        s=re.sub(r'(<span class="badge">)\s*[\U0001F300-\U0001FAFF]?\s*(Beginner|Intermediate|Advanced|Professional)(\s*&bull;)',
+                 rf'\g<1>{BADGE_EMOJI[r["tier"]]} \g<2>\g<3>',s)
+        # related cards: label follows the link
+        def card(m):
+            block=m.group(0)
+            h=href_re.search(block)
+            if not h: return block
+            tier,num=h.group(1),int(h.group(2))
+            return re.sub(r'<span class="badge">[^<]*</span>',
+                          f'<span class="badge">{tier.capitalize()} #{num}</span>',block,count=1)
+        s=re.sub(r'<div class="card"[^>]*>.*?</div>',card,s,flags=re.S)
+        if s!=o:
+            fixed+=1
+            if run: open(f,'w',encoding='utf-8').write(s)
+    return fixed

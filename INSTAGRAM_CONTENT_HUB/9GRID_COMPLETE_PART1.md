@@ -1025,7 +1025,7 @@ Price action isn't dead dead. But it's incomplete.
 
 5,700 words on what candles are hiding:
 
-https://education.signalpilot.io/curriculum/beginner/03-price-action-is-dead.html
+https://education.signalpilot.io/curriculum/beginner/06-the-candle-is-a-summary.html
 
 #trading #orderflow #priceaction
 ```
@@ -1273,7 +1273,7 @@ Never be fooled again.
 
 Full lesson on repainting detection:
 
-https://education.signalpilot.io/curriculum/beginner/04-repaint-problem.html
+https://education.signalpilot.io/curriculum/intermediate/49-repainting.html
 
 Free checklist: signalpilot.io/free
 
@@ -1499,7 +1499,7 @@ Institutions know exactly where to look.
 ```
 The lesson teaches how to stop being liquidity.
 
-https://education.signalpilot.io/curriculum/beginner/01-the-liquidity-lie.html
+https://education.signalpilot.io/curriculum/intermediate/27-the-liquidity-lie.html
 
 #stophunting #liquidity #smartmoney
 ```
@@ -1693,7 +1693,7 @@ Context determines everything.
 
 Full lesson on when RSI extremes matter:
 
-https://education.signalpilot.io/curriculum/beginner/05-rsi-extremes.html
+https://education.signalpilot.io/curriculum/intermediate/51-oscillators-under-regime.html
 
 #RSI #indicators #trading
 ```
@@ -2219,7 +2219,7 @@ How to actually use MAs:
 ```
 Full lesson on moving averages:
 
-https://education.signalpilot.io/curriculum/beginner/06-moving-averages.html
+https://education.signalpilot.io/curriculum/intermediate/50-moving-averages.html
 
 #movingaverages #technicalanalysis #trading
 ```
@@ -2389,7 +2389,7 @@ You need SYSTEMS:
 ```
 Full lesson with actionable systems:
 
-https://education.signalpilot.io/curriculum/beginner/07-revenge-trading.html
+https://education.signalpilot.io/curriculum/beginner/24-when-the-drawdown-arrives.html
 
 #revengetrading #tradingpsychology #trading
 ```
@@ -2615,7 +2615,7 @@ If you can't find any — you're not looking hard enough.
 ```
 Full lesson on trading psychology:
 
-https://education.signalpilot.io/curriculum/beginner/08-confirmation-bias.html
+https://education.signalpilot.io/curriculum/intermediate/52-confirmation-bias.html
 
 #confirmationbias #tradingpsychology #trading
 ```
@@ -2825,7 +2825,7 @@ Position = $200 ÷ $5 = 40 shares
 ```
 Full lesson on position sizing:
 
-https://education.signalpilot.io/curriculum/beginner/09-position-sizing.html
+https://education.signalpilot.io/curriculum/beginner/20-position-sizing.html
 
 #positionsizing #riskmanagement #trading
 ```
@@ -3026,7 +3026,7 @@ The crowd sells the bottom. Someone has to buy it.
 ```
 Full lesson on volume analysis:
 
-https://education.signalpilot.io/curriculum/beginner/02-volume-doesnt-lie.html
+https://education.signalpilot.io/curriculum/beginner/08-volume-and-delta.html
 
 #volume #absorption #smartmoney
 ```
@@ -3219,7 +3219,7 @@ Every. Single. Time.
 ```
 Full lesson on risk-reward math:
 
-https://education.signalpilot.io/curriculum/beginner/10-stop-losses.html
+https://education.signalpilot.io/curriculum/beginner/21-where-the-stop-goes.html
 
 #riskreward #tradingmath #trading
 ```
@@ -3612,7 +3612,7 @@ It's how MUCH you'll lose.
 ```
 Full lesson on stop strategies:
 
-https://education.signalpilot.io/curriculum/beginner/11-timeframe-illusion.html
+https://education.signalpilot.io/curriculum/intermediate/38-what-a-timeframe-is.html
 
 #stoploss #riskmanagement #trading
 ```
@@ -3779,7 +3779,7 @@ Don't fight the trend. Identify it first.
 ```
 Full lesson on trend identification:
 
-https://education.signalpilot.io/curriculum/beginner/12-paper-trading.html
+https://education.signalpilot.io/curriculum/beginner/16-sim-against-live.html
 
 #trendtrading #marketstructure #trading
 ```

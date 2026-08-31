@@ -17,7 +17,7 @@
    * Get lesson metadata from page
    */
   function getLessonMetadata() {
-    // Extract lesson ID from URL: /curriculum/beginner/01-the-liquidity-lie.html → beginner-01
+    // Extract lesson ID from URL: /curriculum/intermediate/27-the-liquidity-lie.html → beginner-01
     // Now supports all 7 tiers including bridges and mastery tiers
     const path = window.location.pathname;
     const match = path.match(/curriculum\/(beginner|intermediate|advanced|professional)\/(\d+)-/);
