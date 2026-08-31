@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>ML para el trading: ingeniería de características (qué entradas), selección de modelo (random forest, redes neuronales), prevención del sobreajuste</li>
           <li>Sobreajuste = el modelo memoriza el histórico en lugar de aprender patrones</li>
+          <li>Calcula la precisión que un filtro tiene que superar antes de construir uno: PF &#247; (PF + 1), donde PF es el factor de beneficio que ya tienes</li>
           <li>Por qué la validación cruzada ordinaria está mal aquí: barajar una serie temporal mete el mañana en el conjunto de entrenamiento y el ayer en el de prueba, lo cual es fuga y no validación. Las ventanas rodantes, siempre avanzando, son la versión que responde a la pregunta que estás haciendo</li>
           <li>Marco: construye pocas variables &rarr; valida en ventanas rodantes hacia adelante &rarr; lee la brecha entre dentro y fuera de muestra, no solo la puntuación fuera de muestra &rarr; sal en vivo pequeño. "Consistente en todas las pruebas, despliega" es la trampa: si estuviste ajustando hasta que fue consistente, la consistencia es algo que seleccionaste, no algo que encontraste</li>
         </ul>
@@ -489,11 +490,42 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; La precisión que un filtro tiene que superar antes de merecer la pena</h4>
+        <p>Esta lección dice que a un modelo se le juzga por la esperanza y no por la precisión. Es cierto, y ahí es donde se detienen casi todos los tratamientos. Pero las dos están unidas por una línea de álgebra, y resolverla te da un umbral con el que probar cualquier modelo antes de desplegarlo.</p>
+
+        <p>Un filtro hace dos cosas a la vez. Elimina perdedoras, lo que ayuda en una unidad cada una. Y elimina algunas ganadoras, lo que perjudica en tu ratio de pago cada una. Toma una estrategia con tasa de acierto p, pago b, y un filtro equilibrado que conserva correctamente una fracción a de las ganadoras y rechaza correctamente esa misma fracción a de las perdedoras. Filtrar solo compensa cuando</p>
+
+<pre><code>p &#215; a &#215; b  &#8722;  (1 &#8722; p)(1 &#8722; a)   &#8805;   p &#215; b  &#8722;  (1 &#8722; p)</code></pre>
+
+        <p>lo cual se reordena en algo lo bastante corto como para recordarlo. Escribiendo PF para el factor de beneficio que ya tienes, p&#215;b dividido entre (1 &#8722; p):</p>
+
+<pre><code>precisión de equilibrio  =  PF &#247; (PF + 1)</code></pre>
+
+        <p>Es un resultado extraño y útil, así que lee lo que dice antes de leer la tabla. <strong>Cuanto mejor sea ya tu estrategia, más preciso tiene que ser un filtro para que ayude siquiera.</strong> Una buena estrategia tiene más que perder con cada ganadora que el modelo tira.</p>
+
+<pre><code>factor de beneficio sin el filtro   precisión que el filtro debe superar
+                              1,0                                   50 %
+                              1,2                                   55 %
+                              1,5                                   60 %
+                              2,0                                   67 %
+                              3,0                                   75 %
+                              4,0                                   80 %</code></pre>
+
+        <p>Ahora compáralo con lo que un modelo sobre unos cientos de operaciones consigue honestamente fuera de muestra. No el 85 % o el 94 % que esta lección empieza llamando un bug: la cifra real, sobre datos no vistos, suele estar en la mitad de los cincuenta. Vuelve a leer la tabla con eso en la mano. Un filtro al 55 % merece la pena en una estrategia con factor de beneficio 1,2 y está <strong>destruyendo dinero</strong> en cualquiera de 1,5 en adelante, porque descarta ganadoras más deprisa de lo que esquiva perdedoras.</p>
+
+        <p>Así que el uso honesto del ML aquí es más estrecho de lo que sugiere el campo, y el enfoque de esta lección era acertado por una razón que no dio: un filtro ayuda a una estrategia marginal y perjudica a una buena. Si tu factor de beneficio ya es 2, necesitas un clasificador genuinamente preciso al 67 % fuera de muestra sobre datos financieros, y es casi seguro que no lo tienes.</p>
+
+        <p>Dos simplificaciones, dichas para que puedas tenerlas en cuenta. La cota supone un modelo equilibrado y supone que las operaciones que el filtro conserva tienen el mismo ratio de pago que las que descarta. Un modelo desequilibrado &mdash; mucho mejor rechazando perdedoras que reteniendo ganadoras &mdash; puede superar este umbral, y esa es exactamente la dirección en la que merece la pena construir. Ajusta para las perdedoras que evitas, no para la puntuación de precisión.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Ideas clave</h4>
         <ul>
           <li><strong>El ML es un filtro, no una estrategia:</strong> Úsalo para predecir qué setups tienen mayor esperanza, no para generar operaciones</li>
           <li><strong>La elección de variables importa más que la de modelo:</strong> y elegir menos variables es lo que más importa. Cada variable que añades es otra vía para que el modelo ajuste tu muestra en lugar de tu ventaja.</li>
+          <li><strong>Un filtro tiene que superar PF &#247; (PF + 1) para merecer la pena:</strong> con un factor de beneficio de 1,5 eso es un 60 % de precisión fuera de muestra, y con 3,0 es un 75 %. Como la precisión honesta fuera de muestra sobre unos cientos de operaciones suele estar en la mitad de los cincuenta, el filtrado con ML ayuda a una estrategia marginal y destruye una buena: cuanto mejor tu ventaja, más cuesta cada ganadora descartada</li>
           <li><strong>La validación walk-forward es obligatoria:</strong> Una división de entrenamiento y prueba sobre series temporales = fuga de datos. Usa ventanas móviles</li>
           <li><strong>Optimiza la esperanza:</strong> Un 80% de acierto con mal ratio de pago pierde dinero; un 55% con 3R no. La precisión es la métrica que un clasificador reporta por defecto y casi nunca aquella por la que te pagan.</li>
           <li><strong>Evita el sesgo de anticipación:</strong> Las características deben usar SOLO datos disponibles en el momento de la predicción</li>

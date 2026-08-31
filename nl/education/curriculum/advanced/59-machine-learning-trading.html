@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>ML voor trading: feature engineering (welke inputs), modelkeuze (random forest, neurale netwerken), overfitting voorkomen</li>
           <li>Overfitting = het model onthoudt de historie in plaats van patronen te leren</li>
+          <li>Bereken de nauwkeurigheid die een filter moet verslaan voordat je er een bouwt: PF &#247; (PF + 1), waarbij PF de profit factor is die je al hebt</li>
           <li>Waarom gewone kruisvalidatie hier fout is: een tijdreeks schudden zet morgen in de trainingsset en gisteren in de testset, wat lekkage is en geen validatie. Rollende vensters, altijd vooruit, zijn de versie die de vraag beantwoordt die je stelt</li>
           <li>Kader: bouw weinig features &rarr; valideer op rollende voorwaartse vensters &rarr; lees het gat tussen in-sample en out-of-sample in plaats van alleen de out-of-samplescore &rarr; ga klein live. "Consistent over alle tests, uitrollen" is de val: als je bleef bijstellen tot het consistent was, is de consistentie iets wat je selecteerde en niet iets wat je vond</li>
         </ul>
@@ -489,11 +490,42 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; De nauwkeurigheid die een filter moet verslaan voordat het de moeite waard is</h4>
+        <p>Deze les zegt dat je een model beoordeelt op verwachting en niet op nauwkeurigheid. Dat klopt, en daar houden de meeste behandelingen op. Maar de twee hangen samen via één regel algebra, en die uitwerken geeft je een drempel waaraan je elk model kunt toetsen voordat je het inzet.</p>
+
+        <p>Een filter doet twee dingen tegelijk. Het verwijdert verliezers, wat per stuk één eenheid helpt. En het verwijdert een aantal winnaars, wat per stuk je payoffratio kost. Neem een strategie met winratio p, payoff b, en een gebalanceerd filter dat een fractie a van de winnaars correct behoudt en diezelfde fractie a van de verliezers correct afwijst. Filteren loont alleen wanneer</p>
+
+<pre><code>p &#215; a &#215; b  &#8722;  (1 &#8722; p)(1 &#8722; a)   &#8805;   p &#215; b  &#8722;  (1 &#8722; p)</code></pre>
+
+        <p>wat zich laat herschrijven tot iets dat kort genoeg is om te onthouden. Schrijf PF voor de profit factor die je al hebt, p&#215;b gedeeld door (1 &#8722; p):</p>
+
+<pre><code>break-evennauwkeurigheid  =  PF &#247; (PF + 1)</code></pre>
+
+        <p>Dat is een vreemd en nuttig resultaat, dus lees wat het zegt voordat je de tabel leest. <strong>Hoe beter je strategie al is, hoe nauwkeuriger een filter moet zijn voordat het überhaupt helpt.</strong> Een goede strategie heeft bij elke winnaar die het model weggooit meer te verliezen.</p>
+
+<pre><code>profit factor zonder het filter   nauwkeurigheid die het filter moet verslaan
+                            1,0                                          50 %
+                            1,2                                          55 %
+                            1,5                                          60 %
+                            2,0                                          67 %
+                            3,0                                          75 %
+                            4,0                                          80 %</code></pre>
+
+        <p>Zet dat nu naast wat een model op een paar honderd trades eerlijk buiten de steekproef haalt. Niet de 85 % of 94 % die deze les meteen een bug noemt &mdash; het echte getal, op ongeziene data, ligt meestal midden in de vijftig. Lees de tabel daarmee opnieuw. Een filter op 55 % is de moeite waard bij een strategie met profit factor 1,2 en is <strong>geld aan het vernietigen</strong> bij alles vanaf 1,5, omdat het sneller winnaars weggooit dan het verliezers ontwijkt.</p>
+
+        <p>Het eerlijke gebruik van ML is hier dus smaller dan het vakgebied suggereert, en de framing van deze les klopte om een reden die zij niet gaf: een filter helpt een marginale strategie en schaadt een goede. Is je profit factor al 2, dan heb je een werkelijk 67 % nauwkeurige out-of-sample classificatie op financiële data nodig, en die heb je vrijwel zeker niet.</p>
+
+        <p>Twee vereenvoudigingen, uitgesproken zodat je ze kunt meewegen. De grens veronderstelt een gebalanceerd model, en veronderstelt dat de trades die het filter behoudt dezelfde payoffratio hebben als die het weggooit. Een ongebalanceerd model &mdash; veel beter in het afwijzen van verliezers dan in het behouden van winnaars &mdash; kan deze drempel verslaan, en dat is precies de richting waarin het loont te bouwen. Stem af op de verliezers die je vermijdt, niet op de nauwkeurigheidsscore.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 De kern</h4>
         <ul>
           <li><strong>ML is een filter, geen strategie:</strong> Gebruik het om te voorspellen welke setups een hogere verwachting hebben, niet om trades te genereren</li>
           <li><strong>De keuze van kenmerken telt zwaarder dan de keuze van model:</strong> en minder kenmerken kiezen telt het zwaarst. Elk kenmerk dat je toevoegt is weer een manier voor het model om je steekproef te fitten in plaats van je edge.</li>
+          <li><strong>Een filter moet PF &#247; (PF + 1) verslaan om de moeite waard te zijn:</strong> bij een profit factor van 1,5 is dat 60 % out-of-sample nauwkeurigheid, bij 3,0 is het 75 %. Omdat eerlijke out-of-sample nauwkeurigheid op een paar honderd trades meestal midden in de vijftig ligt, helpt ML-filtering een marginale strategie en vernietigt zij een goede &mdash; hoe beter je edge, hoe duurder elke weggegooide winnaar</li>
           <li><strong>Walk-forward-validatie is verplicht:</strong> Een trainings-/testsplitsing op tijdreeksen = datalekkage. Gebruik rollende vensters</li>
           <li><strong>Optimaliseer op verwachting:</strong> 80% nauwkeurigheid bij een slechte payoffverhouding verliest geld; 55% bij 3R niet. Nauwkeurigheid is de maatstaf die een classifier standaard rapporteert en vrijwel nooit die waarop je wordt betaald.</li>
           <li><strong>Vermijd look-ahead bias:</strong> Features mogen ALLEEN data gebruiken die op het moment van de voorspelling beschikbaar is</li>

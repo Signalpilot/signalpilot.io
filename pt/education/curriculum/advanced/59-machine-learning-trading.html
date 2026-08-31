@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>ML para trading: engenharia de features (quais entradas), escolha do modelo (random forest, redes neurais), prevenção de overfitting</li>
           <li>Overfitting = o modelo memoriza o histórico em vez de aprender padrões</li>
+          <li>Calcule a precisão que um filtro tem de bater antes de construir um: PF &#247; (PF + 1), onde PF é o fator de lucro que já tem</li>
           <li>Porque é que a validação cruzada comum está errada aqui: baralhar uma série temporal põe o amanhã no conjunto de treino e o ontem no de teste, o que é fuga e não validação. As janelas rolantes, sempre a avançar, são a versão que responde à pergunta que está a fazer</li>
           <li>Enquadramento: construa poucas variáveis &rarr; valide em janelas rolantes para a frente &rarr; leia a diferença entre dentro e fora da amostra, não só a pontuação fora da amostra &rarr; entre em produção pequeno. "Consistente em todos os testes, implementa" é a armadilha: se andou a ajustar até ficar consistente, a consistência é algo que selecionou, não algo que encontrou</li>
         </ul>
@@ -489,11 +490,42 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; A precisão que um filtro tem de bater antes de valer a pena</h4>
+        <p>Esta lição diz para julgar um modelo pela esperança e não pela precisão. É correto, e é onde quase todos os tratamentos param. Mas as duas estão ligadas por uma linha de álgebra, e resolvê-la dá-lhe um limiar contra o qual testar qualquer modelo antes de o pôr a correr.</p>
+
+        <p>Um filtro faz duas coisas ao mesmo tempo. Remove perdedoras, o que ajuda em uma unidade cada. E remove algumas vencedoras, o que prejudica no seu rácio de ganho cada. Tome uma estratégia com taxa de acerto p, ganho b, e um filtro equilibrado que retém corretamente uma fração a das vencedoras e rejeita corretamente essa mesma fração a das perdedoras. Filtrar só compensa quando</p>
+
+<pre><code>p &#215; a &#215; b  &#8722;  (1 &#8722; p)(1 &#8722; a)   &#8805;   p &#215; b  &#8722;  (1 &#8722; p)</code></pre>
+
+        <p>o que se reorganiza em algo curto o suficiente para memorizar. Escrevendo PF para o fator de lucro que já tem, p&#215;b dividido por (1 &#8722; p):</p>
+
+<pre><code>precisão de equilíbrio  =  PF &#247; (PF + 1)</code></pre>
+
+        <p>É um resultado estranho e útil, portanto leia o que ele diz antes de ler a tabela. <strong>Quanto melhor já for a sua estratégia, mais preciso um filtro tem de ser antes sequer de ajudar.</strong> Uma boa estratégia tem mais a perder com cada vencedora que o modelo deita fora.</p>
+
+<pre><code>fator de lucro sem o filtro   precisão que o filtro tem de bater
+                        1,0                                 50 %
+                        1,2                                 55 %
+                        1,5                                 60 %
+                        2,0                                 67 %
+                        3,0                                 75 %
+                        4,0                                 80 %</code></pre>
+
+        <p>Agora ponha isso ao lado do que um modelo sobre umas centenas de operações consegue honestamente fora da amostra. Não os 85 % ou 94 % que esta lição começa por chamar um bug: o número verdadeiro, em dados nunca vistos, costuma andar a meio dos cinquenta. Releia a tabela com isso na mão. Um filtro a 55 % vale a pena numa estratégia com fator de lucro 1,2 e está a <strong>destruir dinheiro</strong> em qualquer uma a partir de 1,5, porque descarta vencedoras mais depressa do que evita perdedoras.</p>
+
+        <p>O uso honesto do ML aqui é, portanto, mais estreito do que a área sugere, e o enquadramento desta lição estava certo por uma razão que não deu: um filtro ajuda uma estratégia marginal e prejudica uma boa. Se o seu fator de lucro já é 2, precisa de um classificador genuinamente preciso a 67 % fora da amostra em dados financeiros, e é quase certo que não o tem.</p>
+
+        <p>Duas simplificações, ditas para que as possa ter em conta. O limite pressupõe um modelo equilibrado e pressupõe que as operações que o filtro retém têm o mesmo rácio de ganho das que descarta. Um modelo desequilibrado &mdash; muito melhor a rejeitar perdedoras do que a reter vencedoras &mdash; pode bater este limiar, e é exatamente essa a direção que vale a pena construir. Afine para as perdedoras que evita, não para a pontuação de precisão.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Pontos essenciais</h4>
         <ul>
           <li><strong>ML é um filtro, não uma estratégia:</strong> Use para prever quais setups têm expectativa maior, não para gerar trades</li>
           <li><strong>A escolha das variáveis importa mais do que a escolha do modelo:</strong> e escolher menos variáveis é o que mais importa. Cada variável que acrescentas é mais uma via para o modelo ajustar a tua amostra em vez da tua vantagem.</li>
+          <li><strong>Um filtro tem de bater PF &#247; (PF + 1) para valer a pena:</strong> num fator de lucro de 1,5 isso são 60 % de precisão fora da amostra, em 3,0 são 75 %. Como a precisão honesta fora da amostra em umas centenas de operações costuma andar a meio dos cinquenta, filtrar com ML ajuda uma estratégia marginal e destrói uma boa &mdash; quanto melhor a sua vantagem, mais custa cada vencedora descartada</li>
           <li><strong>A validação walk-forward é obrigatória:</strong> Divisão treino/teste em séries temporais = vazamento de dados. Use janelas móveis</li>
           <li><strong>Otimize a expectativa:</strong> 80% de acerto com um rácio de payoff mau perde dinheiro; 55% a 3R não. A exactidão é a métrica que um classificador reporta por omissão e quase nunca aquela pela qual és pago.</li>
           <li><strong>Evite o viés de antecipação:</strong> As features devem usar SOMENTE dados disponíveis no momento da previsão</li>

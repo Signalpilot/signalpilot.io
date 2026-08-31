@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>ML pour le trading : ingénierie des variables (quelles entrées), choix du modèle (random forest, réseaux de neurones), prévention du surapprentissage</li>
           <li>Surapprentissage = le modèle mémorise l'historique au lieu d'apprendre des schémas</li>
+          <li>Calculez la précision qu'un filtre doit dépasser avant d'en construire un : PF &#247; (PF + 1), où PF est le facteur de profit que vous avez déjà</li>
           <li>Pourquoi la validation croisée ordinaire est fausse ici : mélanger une série temporelle met demain dans l'ensemble d'entraînement et hier dans l'ensemble de test, ce qui est de la fuite et non de la validation. Les fenêtres glissantes, toujours vers l'avant, sont la version qui répond à la question que vous posez</li>
           <li>Cadre : construisez peu de variables &rarr; validez sur des fenêtres glissantes vers l'avant &rarr; lisez l'écart entre l'in-sample et l'out-of-sample plutôt que le seul score out-of-sample &rarr; passez en réel petit. « Cohérent sur tous les tests, on déploie » est le piège : si vous avez ajusté jusqu'à ce que ce soit cohérent, la cohérence est quelque chose que vous avez sélectionné, pas trouvé</li>
         </ul>
@@ -489,11 +490,42 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; La précision qu'un filtre doit dépasser avant d'en valoir la peine</h4>
+        <p>Cette leçon dit qu'un modèle se juge à l'espérance et non à la précision. C'est exact, et c'est là que la plupart des exposés s'arrêtent. Or les deux sont reliées par une ligne d'algèbre, et la résoudre donne un seuil auquel tester n'importe quel modèle avant de le déployer.</p>
+
+        <p>Un filtre fait deux choses à la fois. Il retire des perdants, ce qui aide d'une unité chacun. Et il retire quelques gagnants, ce qui coûte votre ratio de gain chacun. Prenez une stratégie de taux de réussite p, de gain b, et un filtre équilibré qui conserve correctement une fraction a des gagnants et rejette correctement la même fraction a des perdants. Filtrer ne vaut la peine que si</p>
+
+<pre><code>p &#215; a &#215; b  &#8722;  (1 &#8722; p)(1 &#8722; a)   &#8805;   p &#215; b  &#8722;  (1 &#8722; p)</code></pre>
+
+        <p>ce qui se réarrange en quelque chose d'assez court pour être retenu. En écrivant PF pour le facteur de profit dont vous disposez déjà, p&#215;b divisé par (1 &#8722; p) :</p>
+
+<pre><code>précision d'équilibre  =  PF &#247; (PF + 1)</code></pre>
+
+        <p>C'est un résultat étrange et utile, alors lisez ce qu'il dit avant de lire le tableau. <strong>Meilleure est déjà votre stratégie, plus un filtre doit être précis avant d'aider en quoi que ce soit.</strong> Une bonne stratégie a davantage à perdre à chaque gagnant que le modèle jette.</p>
+
+<pre><code>facteur de profit sans le filtre   précision que le filtre doit dépasser
+                             1,0                                    50 %
+                             1,2                                    55 %
+                             1,5                                    60 %
+                             2,0                                    67 %
+                             3,0                                    75 %
+                             4,0                                    80 %</code></pre>
+
+        <p>Comparez maintenant avec ce qu'un modèle sur quelques centaines de trades atteint honnêtement hors échantillon. Pas les 85 % ou 94 % que cette leçon commence par qualifier de bug &mdash; le vrai chiffre, sur des données jamais vues, se situe généralement au milieu des cinquante. Relisez le tableau avec cela en tête. Un filtre à 55 % vaut la peine sur une stratégie de facteur de profit 1,2 et <strong>détruit de l'argent</strong> sur tout ce qui est à 1,5 ou mieux, parce qu'il écarte des gagnants plus vite qu'il n'évite des perdants.</p>
+
+        <p>L'usage honnête du ML est donc ici plus étroit que le domaine ne le laisse croire, et le cadrage de cette leçon était juste pour une raison qu'elle n'a pas donnée : un filtre aide une stratégie marginale et nuit à une bonne. Si votre facteur de profit est déjà de 2, il vous faut un classifieur réellement précis à 67 % hors échantillon sur des données financières, et vous ne l'avez presque certainement pas.</p>
+
+        <p>Deux simplifications, énoncées pour que vous puissiez en tenir compte. La borne suppose un modèle équilibré, et elle suppose que les trades conservés par le filtre ont le même ratio de gain que ceux qu'il écarte. Un modèle déséquilibré &mdash; bien meilleur pour rejeter des perdants que pour retenir des gagnants &mdash; peut battre ce seuil, et c'est précisément la direction où il vaut la peine de construire. Réglez sur les perdants évités, pas sur le score de précision.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 À retenir</h4>
         <ul>
           <li><strong>Le ML est un filtre, pas une stratégie :</strong> Sers-t'en pour prédire quels setups ont la meilleure espérance, pas pour générer des trades</li>
           <li><strong>Le choix des variables compte plus que le choix du modèle :</strong> et choisir moins de variables compte plus que tout. Chaque variable ajoutée est un moyen de plus pour le modèle d'ajuster votre échantillon plutôt que votre avantage.</li>
+          <li><strong>Un filtre doit dépasser PF &#247; (PF + 1) pour en valoir la peine :</strong> à un facteur de profit de 1,5 cela fait 60 % de précision hors échantillon, à 3,0 cela fait 75 %. Comme la précision honnête hors échantillon sur quelques centaines de trades se situe généralement au milieu des cinquante, le filtrage par ML aide une stratégie marginale et détruit une bonne &mdash; meilleure est votre edge, plus chaque gagnant écarté coûte cher</li>
           <li><strong>La validation walk-forward est obligatoire :</strong> Un découpage entraînement/test sur des séries temporelles = fuite de données. Utilise des fenêtres glissantes</li>
           <li><strong>Optimise l'espérance :</strong> 80 % de précision avec un mauvais rapport de gain perd de l'argent ; 55 % à 3R non. La précision est la métrique qu'un classifieur affiche par défaut et presque jamais celle sur laquelle vous êtes payé.</li>
           <li><strong>Évite le biais d'anticipation :</strong> Les variables ne doivent utiliser QUE les données disponibles au moment de la prédiction</li>

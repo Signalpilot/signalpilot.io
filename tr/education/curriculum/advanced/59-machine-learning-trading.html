@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>Trading için ML: öznitelik mühendisliği (hangi girdiler), model seçimi (random forest, sinir ağları), aşırı öğrenmeyi önleme</li>
           <li>Aşırı öğrenme = model örüntü öğrenmek yerine geçmişi ezberler</li>
+          <li>Bir filtre kurmadan önce onun aşması gereken doğruluğu hesaplayın: PF &#247; (PF + 1); burada PF zaten sahip olduğunuz kâr faktörüdür</li>
           <li>Sıradan çapraz doğrulamanın burada neden yanlış olduğu: bir zaman serisini karıştırmak yarını eğitim kümesine, dünü test kümesine koyar; bu doğrulama değil sızıntıdır. Her zaman ileri giden kayan pencereler, sorduğunuz soruya cevap veren sürümdür</li>
           <li>Çerçeve: az sayıda öznitelik üretin &rarr; ileri yönlü kayan pencerelerde doğrulayın &rarr; yalnızca örneklem dışı skoru değil, örneklem içi ile dışı arasındaki farkı okuyun &rarr; küçük başlayarak canlıya geçin. "Tüm testlerde tutarlı, yayına al" tuzaktır: tutarlı olana kadar ayar yaptıysanız, o tutarlılık bulduğunuz değil, seçtiğiniz bir şeydir</li>
         </ul>
@@ -489,11 +490,42 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Bir filtrenin değer taşıması için aşması gereken doğruluk</h4>
+        <p>Bu ders bir modeli doğruluğa göre değil beklentiye göre yargılamayı söylüyor. Doğru, ve çoğu anlatım tam orada duruyor. Oysa ikisi tek satırlık bir cebirle birbirine bağlı ve onu çözmek, herhangi bir modeli devreye almadan önce sınayabileceğiniz bir eşik veriyor.</p>
+
+        <p>Bir filtre aynı anda iki iş yapar. Kaybedenleri eler; her biri bir birim fayda sağlar. Ve bir miktar kazananı da eler; her biri ödeme oranınız kadar zarar verir. Kazanma oranı p, ödemesi b olan bir strateji ile, kazananların a oranını doğru tutan ve kaybedenlerin aynı a oranını doğru reddeden dengeli bir filtre alın. Filtrelemek yalnızca şu durumda değer:</p>
+
+<pre><code>p &#215; a &#215; b  &#8722;  (1 &#8722; p)(1 &#8722; a)   &#8805;   p &#215; b  &#8722;  (1 &#8722; p)</code></pre>
+
+        <p>Bu, akılda tutulacak kadar kısa bir şeye dönüşüyor. Zaten sahip olduğunuz kâr faktörünü, yani p&#215;b bölü (1 &#8722; p), PF olarak yazarsak:</p>
+
+<pre><code>başabaş doğruluk  =  PF &#247; (PF + 1)</code></pre>
+
+        <p>Tuhaf ve kullanışlı bir sonuç; tabloyu okumadan önce ne dediğini okuyun. <strong>Stratejiniz hâlihazırda ne kadar iyiyse, bir filtrenin yardımcı olabilmesi için o kadar doğru olması gerekir.</strong> İyi bir stratejinin, modelin çöpe attığı her kazanandan kaybedeceği daha çoktur.</p>
+
+<pre><code>filtresiz kâr faktörü   filtrenin aşması gereken doğruluk
+                  1,0                                 %50
+                  1,2                                 %55
+                  1,5                                 %60
+                  2,0                                 %67
+                  3,0                                 %75
+                  4,0                                 %80</code></pre>
+
+        <p>Şimdi bunu, birkaç yüz işlemlik bir modelin örneklem dışında dürüstçe elde ettiğiyle yan yana koyun. Bu dersin daha başında hata diye adlandırdığı %85 ya da %94 değil &mdash; görülmemiş veride gerçek sayı genelde ellilerin ortasındadır. Tabloyu bununla birlikte yeniden okuyun. %55’lik bir filtre kâr faktörü 1,2 olan bir stratejide değerlidir ve 1,5 ve üzeri her şeyde <strong>para yok ediyordur</strong> , çünkü kazananları, kaybedenlerden kaçındığından daha hızlı atmaktadır.</p>
+
+        <p>Dolayısıyla makine öğrenmesinin buradaki dürüst kullanımı, alanın ima ettiğinden daha dardır; ve bu dersin çerçevesi, dile getirmediği bir sebeple doğruydu: bir filtre sınırdaki bir stratejiye yardım eder, iyi olanına zarar verir. Kâr faktörünüz zaten 2 ise, finansal veride örneklem dışı gerçekten %67 doğrulukta bir sınıflandırıcıya ihtiyacınız var ve neredeyse kesinlikle ona sahip değilsiniz.</p>
+
+        <p>Hesaba katabilmeniz için iki basitleştirme. Sınır, dengeli bir model varsayar ve filtrenin tuttuğu işlemlerin, attıklarıyla aynı ödeme oranına sahip olduğunu varsayar. Dengesiz bir model &mdash; kaybedenleri reddetmekte, kazananları tutmaktan çok daha iyi olan &mdash; bu eşiği aşabilir ve inşa etmeye değer yön tam olarak budur. Doğruluk puanına değil, kaçındığınız kaybedenlere göre ayarlayın.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Öne çıkanlar</h4>
         <ul>
           <li><strong>ML bir filtredir, strateji değil:</strong> İşlem üretmek için değil, hangi setup’ların beklentisinin daha yüksek olduğunu tahmin etmek için kullan</li>
           <li><strong>Öznitelik seçimi model seçiminden daha önemlidir:</strong> ve en çok önemli olan, daha az öznitelik seçmektir. Eklediğin her öznitelik, modelin avantajın yerine örneklemine uymasının bir yolu daha demektir.</li>
+          <li><strong>Bir filtrenin değer taşıması için PF &#247; (PF + 1) değerini aşması gerekir:</strong> kâr faktörü 1,5 iken bu %60 örneklem dışı doğruluk, 3,0 iken %75 demektir. Birkaç yüz işlemde dürüst örneklem dışı doğruluk genelde ellilerin ortasında olduğundan, ML ile filtreleme sınırdaki bir stratejiye yardım eder ve iyi olanı yok eder &mdash; avantajınız ne kadar iyiyse, atılan her kazanan o kadar pahalıya patlar</li>
           <li><strong>Walk-forward doğrulama zorunludur:</strong> Zaman serilerinde eğitim/test bölmesi = veri sızıntısı. Kayan pencereler kullan</li>
           <li><strong>Beklentiyi optimize et:</strong> Kötü bir ödül oranında %80 isabet para kaybettirir; 3R’de %55 kaybettirmez. İsabet, bir sınıflandırıcının varsayılan olarak raporladığı ölçüdür ve neredeyse hiçbir zaman senin para kazandığın ölçü değildir.</li>
           <li><strong>İleriye bakma yanlılığından kaçın:</strong> Öznitelikler YALNIZCA tahmin anında elde olan veriyi kullanmalı</li>

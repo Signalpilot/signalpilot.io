@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>ML per il trading: ingegneria delle feature (quali input), scelta del modello (random forest, reti neurali), prevenzione dell'overfitting</li>
           <li>Overfitting = il modello memorizza lo storico invece di imparare gli schemi</li>
+          <li>Calcola l'accuratezza che un filtro deve battere prima di costruirne uno: PF &#247; (PF + 1), dove PF è il profit factor che hai già</li>
           <li>Perché la cross-validation ordinaria qui è sbagliata: mescolare una serie storica mette il domani nel set di training e lo ieri nel set di test, il che è leakage e non validazione. Le finestre mobili, sempre in avanti, sono la versione che risponde alla domanda che stai facendo</li>
           <li>Quadro: costruisci poche feature &rarr; valida su finestre mobili in avanti &rarr; leggi il divario fra in-sample e out-of-sample invece del solo punteggio out-of-sample &rarr; vai live piccolo. "Coerente su tutti i test, si va in produzione" è la trappola: se hai continuato ad aggiustare finché non era coerente, la coerenza è qualcosa che hai selezionato, non trovato</li>
         </ul>
@@ -489,11 +490,42 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; L'accuratezza che un filtro deve battere prima di valere la pena</h4>
+        <p>Questa lezione dice di giudicare un modello sull'aspettativa e non sull'accuratezza. È giusto, ed è dove quasi tutte le trattazioni si fermano. Ma le due sono legate da una riga di algebra, e risolverla ti dà una soglia con cui provare qualsiasi modello prima di metterlo in produzione.</p>
+
+        <p>Un filtro fa due cose insieme. Toglie perdenti, e ciascuna aiuta di un'unità. E toglie qualche vincente, e ciascuna danneggia del tuo rapporto di payoff. Prendi una strategia con win rate p, payoff b e un filtro bilanciato che trattiene correttamente una frazione a delle vincenti e rifiuta correttamente la stessa frazione a delle perdenti. Filtrare conviene solo quando</p>
+
+<pre><code>p &#215; a &#215; b  &#8722;  (1 &#8722; p)(1 &#8722; a)   &#8805;   p &#215; b  &#8722;  (1 &#8722; p)</code></pre>
+
+        <p>che si riordina in qualcosa di abbastanza breve da ricordare. Scrivendo PF per il profit factor che hai già, p&#215;b diviso (1 &#8722; p):</p>
+
+<pre><code>accuratezza di pareggio  =  PF &#247; (PF + 1)</code></pre>
+
+        <p>È un risultato strano e utile, quindi leggi che cosa dice prima di leggere la tabella. <strong>Più la tua strategia è già buona, più un filtro deve essere accurato prima di aiutare in qualcosa.</strong> Una buona strategia ha di più da perdere a ogni vincente che il modello butta via.</p>
+
+<pre><code>profit factor senza il filtro   accuratezza che il filtro deve battere
+                          1,0                                     50 %
+                          1,2                                     55 %
+                          1,5                                     60 %
+                          2,0                                     67 %
+                          3,0                                     75 %
+                          4,0                                     80 %</code></pre>
+
+        <p>Ora mettilo a confronto con quello che un modello su qualche centinaio di trade ottiene onestamente fuori campione. Non l'85 % o il 94 % che questa lezione chiama subito un bug: il numero vero, su dati mai visti, sta di solito a metà dei cinquanta. Rileggi la tabella con quello in mano. Un filtro al 55 % vale la pena su una strategia con profit factor 1,2 e sta <strong>distruggendo denaro</strong> su qualsiasi cosa da 1,5 in su, perché scarta vincenti più in fretta di quanto eviti perdenti.</p>
+
+        <p>L'uso onesto del ML qui è dunque più stretto di quanto il settore lasci intendere, e l'impostazione di questa lezione era giusta per una ragione che non ha dato: un filtro aiuta una strategia marginale e danneggia una buona. Se il tuo profit factor è già 2, ti serve un classificatore davvero accurato al 67 % fuori campione su dati finanziari, e quasi certamente non ce l'hai.</p>
+
+        <p>Due semplificazioni, dette perché tu possa tenerne conto. Il limite presuppone un modello bilanciato e presuppone che i trade tenuti dal filtro abbiano lo stesso rapporto di payoff di quelli scartati. Un modello sbilanciato &mdash; molto migliore nel rifiutare perdenti che nel trattenere vincenti &mdash; può battere questa soglia, ed è esattamente la direzione in cui vale la pena costruire. Ottimizza sulle perdenti evitate, non sul punteggio di accuratezza.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Punti chiave</h4>
         <ul>
           <li><strong>Il ML è un filtro, non una strategia:</strong> Usalo per prevedere quali setup hanno l'aspettativa più alta, non per generare trade</li>
           <li><strong>La scelta delle variabili conta più della scelta del modello:</strong> e scegliere meno variabili conta più di tutto. Ogni variabile che aggiungi è un modo in più perché il modello adatti il tuo campione invece del tuo vantaggio.</li>
+          <li><strong>Un filtro deve battere PF &#247; (PF + 1) per valere la pena:</strong> a un profit factor di 1,5 sono il 60 % di accuratezza fuori campione, a 3,0 sono il 75 %. Poiché l'accuratezza onesta fuori campione su qualche centinaio di trade sta di solito a metà dei cinquanta, il filtro ML aiuta una strategia marginale e distrugge una buona: migliore è la tua edge, più costa ogni vincente scartata</li>
           <li><strong>La validazione walk-forward è obbligatoria:</strong> Una divisione addestramento/test su serie storiche = data leakage. Usa finestre mobili</li>
           <li><strong>Ottimizza l'aspettativa:</strong> L'80% di accuratezza con un cattivo rapporto di payoff perde denaro; il 55% a 3R no. L'accuratezza è la metrica che un classificatore riporta di default e quasi mai quella su cui vieni pagato.</li>
           <li><strong>Evita il look-ahead bias:</strong> Le feature devono usare SOLO dati disponibili al momento della previsione</li>

@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>ML fürs Trading: Feature Engineering (welche Inputs), Modellauswahl (Random Forest, neuronale Netze), Vermeidung von Overfitting</li>
           <li>Overfitting = das Modell merkt sich die Historie, statt Muster zu lernen</li>
+          <li>Berechne die Genauigkeit, die ein Filter schlagen muss, bevor du einen baust: PF &#247; (PF + 1), wobei PF der Profitfaktor ist, den du schon hast</li>
           <li>Warum gewöhnliche Kreuzvalidierung hier falsch ist: Eine Zeitreihe zu mischen packt morgen in die Trainings- und gestern in die Testmenge, was Leakage ist statt Validierung. Rollierende Fenster, die stets vorwärts laufen, sind die Variante, die deine tatsächliche Frage beantwortet</li>
           <li>Rahmen: Konstruiere wenige Merkmale &rarr; validiere auf rollierenden Vorwärtsfenstern &rarr; lies die Lücke zwischen In-Sample und Out-of-Sample statt nur des Out-of-Sample-Werts &rarr; geh klein live. „Über alle Tests konsistent, also ausrollen“ ist die Falle: Wenn du so lange nachjustiert hast, bis es konsistent war, ist die Konsistenz etwas, wonach du selektiert hast, nicht etwas, das du gefunden hast</li>
         </ul>
@@ -489,11 +490,42 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; Die Genauigkeit, die ein Filter schlagen muss, bevor er sich lohnt</h4>
+        <p>Diese Lektion sagt, ein Modell sei an der Erwartung zu messen und nicht an der Genauigkeit. Das stimmt, und dort hören die meisten Darstellungen auf. Die beiden hängen aber über eine Zeile Algebra zusammen, und wenn man sie ausrechnet, bekommt man eine Schwelle, an der sich jedes Modell vor dem Einsatz prüfen lässt.</p>
+
+        <p>Ein Filter tut zweierlei zugleich. Er entfernt Verlierer, was je Stück um eine Einheit hilft. Und er entfernt einige Gewinner, was je Stück um dein Auszahlungsverhältnis schadet. Nimm eine Strategie mit Trefferquote p, Auszahlung b und einen ausgewogenen Filter, der einen Anteil a der Gewinner korrekt behält und denselben Anteil a der Verlierer korrekt abweist. Zu filtern lohnt sich nur, wenn</p>
+
+<pre><code>p &#215; a &#215; b  &#8722;  (1 &#8722; p)(1 &#8722; a)   &#8805;   p &#215; b  &#8722;  (1 &#8722; p)</code></pre>
+
+        <p>Das lässt sich zu etwas umstellen, das kurz genug ist, um es sich zu merken. Schreibe PF für den Profitfaktor, den du bereits hast, also p&#215;b geteilt durch (1 &#8722; p):</p>
+
+<pre><code>Break-even-Genauigkeit  =  PF &#247; (PF + 1)</code></pre>
+
+        <p>Das ist ein merkwürdiges und nützliches Ergebnis, lies also erst, was es sagt, bevor du die Tabelle liest. <strong>Je besser deine Strategie ohnehin ist, desto genauer muss ein Filter sein, bevor er überhaupt hilft.</strong> Eine gute Strategie hat bei jedem Gewinner, den das Modell wegwirft, mehr zu verlieren.</p>
+
+<pre><code>Profitfaktor ohne den Filter   Genauigkeit, die der Filter schlagen muss
+                         1,0                                        50 %
+                         1,2                                        55 %
+                         1,5                                        60 %
+                         2,0                                        67 %
+                         3,0                                        75 %
+                         4,0                                        80 %</code></pre>
+
+        <p>Halte das nun gegen das, was ein Modell auf ein paar hundert Trades ehrlich außerhalb der Stichprobe erreicht. Nicht die 85 % oder 94 %, die diese Lektion eingangs einen Bug nennt &mdash; die echte Zahl auf ungesehenen Daten liegt meist in der Mitte der Fünfziger. Lies die Tabelle damit noch einmal. Ein Filter bei 55 % lohnt sich bei einer Strategie mit Profitfaktor 1,2 und <strong>vernichtet Geld</strong> bei allem ab 1,5 aufwärts, weil er Gewinner schneller wegwirft, als er Verlierern ausweicht.</p>
+
+        <p>Der ehrliche Einsatz von ML ist hier also schmaler, als das Feld nahelegt, und die Einordnung dieser Lektion war aus einem Grund richtig, den sie nicht genannt hat: Ein Filter hilft einer knappen Strategie und schadet einer guten. Liegt dein Profitfaktor schon bei 2, brauchst du einen tatsächlich zu 67 % genauen Klassifikator außerhalb der Stichprobe auf Finanzdaten &mdash; und den hast du mit ziemlicher Sicherheit nicht.</p>
+
+        <p>Zwei Vereinfachungen, ausgesprochen, damit du sie einrechnen kannst. Die Schranke unterstellt ein ausgewogenes Modell, und sie unterstellt, dass die vom Filter behaltenen Trades dasselbe Auszahlungsverhältnis haben wie die verworfenen. Ein unausgewogenes Modell &mdash; viel besser darin, Verlierer abzuweisen, als darin, Gewinner zu halten &mdash; kann diese Schwelle schlagen, und genau in diese Richtung lohnt es sich zu bauen. Stimme auf die vermiedenen Verlierer ab, nicht auf den Genauigkeitswert.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 Die wichtigsten Erkenntnisse</h4>
         <ul>
           <li><strong>ML ist ein Filter, keine Strategie:</strong> Nutze es, um vorherzusagen, welche Setups den höheren Erwartungswert haben, nicht um Trades zu erzeugen</li>
           <li><strong>Die Merkmalswahl zählt mehr als die Modellwahl:</strong> und weniger Merkmale zu wählen zählt am meisten. Jedes Merkmal, das du hinzufügst, ist ein weiterer Weg für das Modell, deine Stichprobe statt deines Edge zu fitten.</li>
+          <li><strong>Ein Filter muss PF &#247; (PF + 1) schlagen, um sich zu lohnen:</strong> Bei einem Profitfaktor von 1,5 sind das 60 % Genauigkeit außerhalb der Stichprobe, bei 3,0 sind es 75 %. Da die ehrliche Out-of-Sample-Genauigkeit auf ein paar hundert Trades meist in der Mitte der Fünfziger liegt, hilft ML-Filterung einer knappen Strategie und zerstört eine gute &mdash; je besser deine Edge, desto teurer jeder verworfene Gewinner</li>
           <li><strong>Walk-Forward-Validierung ist Pflicht:</strong> Eine Trainings-/Test-Aufteilung auf Zeitreihen = Data Leakage. Nutze rollierende Fenster</li>
           <li><strong>Auf den Erwartungswert optimieren:</strong> 80 % Genauigkeit bei schlechtem Auszahlungsverhältnis verlieren Geld; 55 % Genauigkeit bei 3R nicht. Genauigkeit ist die Kennzahl, die ein Klassifikator standardmäßig ausgibt, und fast nie die, nach der du bezahlt wirst.</li>
           <li><strong>Look-Ahead-Bias vermeiden:</strong> Features dürfen NUR Daten nutzen, die zum Prognosezeitpunkt verfügbar sind</li>

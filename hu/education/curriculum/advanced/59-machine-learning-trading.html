@@ -124,6 +124,7 @@
         <ul style="line-height:1.8;margin:0 0 0 1.5rem">
           <li>ML a kereskedéshez: jellemzőtervezés (milyen bemenetek), modellválasztás (random forest, neurális hálók), a túltanulás megelőzése</li>
           <li>Túltanulás = a modell bemagolja a múltat ahelyett, hogy mintázatokat tanulna</li>
+          <li>Számolja ki azt a pontosságot, amelyet egy szűrőnek meg kell vernie, mielőtt egyáltalán építene egyet: PF &#247; (PF + 1), ahol PF a már meglévő profitfaktora</li>
           <li>Miért téves itt a hagyományos keresztvalidáció: egy idősort megkeverni azt jelenti, hogy a holnap a tanítóhalmazba, a tegnap a teszthalmazba kerül &mdash; ez szivárgás, nem validáció. A mindig előre haladó gördülő ablakok az a változat, ami a feltett kérdésre válaszol</li>
           <li>Keret: kevés jellemzőt építs &rarr; előre gördülő ablakokon validálj &rarr; a mintán belüli és mintán kívüli közti rést olvasd, ne csak a mintán kívüli pontszámot &rarr; élesben kicsiben indulj. A „minden teszten konzisztens, indítsuk” a csapda: ha addig igazgattad, amíg konzisztens nem lett, a konzisztencia olyasmi, amit kiválasztottál, nem amit találtál</li>
         </ul>
@@ -489,11 +490,42 @@
         </div>
       </div>
 
+
+      <div class="callout-key">
+        <h4>&#127919; A pontosság, amelyet egy szűrőnek meg kell vernie, hogy egyáltalán megérje</h4>
+        <p>Ez a lecke azt mondja, a modellt a várható értéke alapján kell megítélni, nem a pontossága alapján. Ez helyes, és a legtöbb tárgyalás itt meg is áll. A kettőt viszont egyetlen sor algebra köti össze, és ha ezt megoldjuk, olyan küszöböt kapunk, amelyhez bármely modell hozzámérhető, mielőtt élesbe kerülne.</p>
+
+        <p>Egy szűrő két dolgot tesz egyszerre. Kiszűr vesztes kötéseket, ami darabonként egy egységnyit segít. És kiszűr néhány nyertest is, ami darabonként a kifizetési arányával árt. Vegyen egy p találati arányú, b kifizetésű stratégiát és egy kiegyensúlyozott szűrőt, amely helyesen tartja meg a nyertesek a hányadát, és helyesen utasítja el a vesztesek ugyanazon a hányadát. A szűrés csak akkor éri meg, ha</p>
+
+<pre><code>p &#215; a &#215; b  &#8722;  (1 &#8722; p)(1 &#8722; a)   &#8805;   p &#215; b  &#8722;  (1 &#8722; p)</code></pre>
+
+        <p>Ez átrendezhető valami olyanná, ami elég rövid ahhoz, hogy megjegyezze. PF-fel jelölve a már meglévő profitfaktort, azaz p&#215;b osztva (1 &#8722; p)-vel:</p>
+
+<pre><code>nullszaldós pontosság  =  PF &#247; (PF + 1)</code></pre>
+
+        <p>Furcsa és hasznos eredmény, ezért olvassa el, mit mond, mielőtt a táblázatot nézné. <strong>Minél jobb már most a stratégiája, annál pontosabbnak kell lennie egy szűrőnek ahhoz, hogy egyáltalán segítsen.</strong> Egy jó stratégiának minden eldobott nyertesen több a vesztenivalója.</p>
+
+<pre><code>profitfaktor szűrő nélkül   pontosság, amit a szűrőnek meg kell vernie
+                      1,0                                         50 %
+                      1,2                                         55 %
+                      1,5                                         60 %
+                      2,0                                         67 %
+                      3,0                                         75 %
+                      4,0                                         80 %</code></pre>
+
+        <p>Most állítsa ezt szembe azzal, amit egy néhány száz kötésen tanított modell mintán kívül becsületesen elér. Nem a 85 % vagy a 94 %, amelyet ez a lecke rögtön hibának nevez &mdash; a valódi szám nem látott adaton rendszerint az ötvenes évek közepén jár. Olvassa újra a táblázatot ezzel a kezében. Egy 55 %-os szűrő megéri egy 1,2-es profitfaktorú stratégián, és <strong>pénzt semmisít meg</strong> minden 1,5-ös vagy jobb stratégián, mert gyorsabban dobja el a nyerteseket, mint ahogy kikerüli a veszteseket.</p>
+
+        <p>A gépi tanulás becsületes felhasználása tehát szűkebb, mint amit a terület sugall, és e lecke keretezése olyan okból volt helyes, amelyet nem mondott ki: a szűrő a határeset stratégiának segít, a jónak árt. Ha a profitfaktora már 2, akkor valóban 67 %-os mintán kívüli pontosságú osztályozóra van szüksége pénzügyi adaton, és szinte biztosan nincs ilyenje.</p>
+
+        <p>Két egyszerűsítés, kimondva, hogy számolhasson velük. A korlát kiegyensúlyozott modellt feltételez, és feltételezi, hogy a szűrő által megtartott kötések kifizetési aránya megegyezik az eldobottakéval. Egy kiegyensúlyozatlan modell &mdash; amely sokkal jobb a vesztesek elutasításában, mint a nyertesek megtartásában &mdash; megverheti ezt a küszöböt, és pontosan ebbe az irányba érdemes építeni. A kikerült vesztesekre hangoljon, ne a pontossági pontszámra.</p>
+      </div>
+
       <div class="key-takeaway">
         <h4>🎓 A lényeg</h4>
         <ul>
           <li><strong>Az ML szűrő, nem stratégia:</strong> Arra használd, hogy megjósold, mely setupok várható értéke magasabb, ne arra, hogy ügyleteket generálj</li>
           <li><strong>A jellemzők megválasztása többet számít, mint a modellé:</strong> és a legtöbbet az számít, hogy kevesebb jellemzőt válassz. Minden hozzáadott jellemző egy újabb módja annak, hogy a modell a mintádra illeszkedjen, ne az előnyödre.</li>
+          <li><strong>Egy szűrőnek meg kell vernie a PF &#247; (PF + 1) értéket, hogy megérje:</strong> 1,5-ös profitfaktornál ez 60 % mintán kívüli pontosság, 3,0-nál 75 %. Mivel a becsületes mintán kívüli pontosság néhány száz kötésen általában az ötvenes évek közepén jár, a gépi tanulásos szűrés a határeset stratégiának segít, a jót pedig tönkreteszi &mdash; minél jobb az előnye, annál drágább minden eldobott nyertes</li>
           <li><strong>A walk-forward validálás kötelező:</strong> Tanító/teszt felosztás idősoron = adatszivárgás. Használj gördülő ablakokat</li>
           <li><strong>Optimalizálj a várható értékre:</strong> Rossz kifizetési aránynál a 80%-os pontosság pénzt veszít; 3R mellett az 55% nem. A pontosság az a mérőszám, amelyet egy osztályozó alapból jelent, és szinte soha nem az, amiért fizetnek.</li>
           <li><strong>Kerüld az előretekintési torzítást:</strong> A jellemzők KIZÁRÓLAG az előrejelzés pillanatában elérhető adatot használhatják</li>
