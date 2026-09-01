@@ -106,15 +106,23 @@ def build(meta,prose,related):
     head=re.sub(r'(<meta name="sp-level" content=").*?"',rf'\g<1>{lvl}"',head)
     head=re.sub(r'(<meta name="sp-order" content=").*?"',rf'\g<1>{m["slot"]}"',head)
 
+    # An appendix is a lesson in form -- same seven parts, same reading
+    # contract -- but it is not one of the numbered 85, so it must not claim a
+    # slot in the badge or a place in the linear path. Everything else, the
+    # dead-link guard included, applies to it unchanged.
+    apx = bool(m.get('appendix'))
+    badge = (f"&#128218; Appendix &bull; {m['module']}" if apx
+             else f"{BADGE[lvl]} {lvl} &bull; Lesson {m['slot']} of 85")
+    modline = m['module'] if apx else f"Module {m['module']}"
     hdr=f'''<article class="article">
   <header>
     <div class="wrap">
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="/education/">Home</a> &rsaquo; <a href="/education/{tier}.html">{lvl} Curriculum</a> &rsaquo; <span>{m['title']}</span>
       </nav>
-      <span class="badge">{BADGE[lvl]} {lvl} &bull; Lesson {m['slot']} of 85</span>
+      <span class="badge">{badge}</span>
       <h1 class="headline xl">{m['title']}</h1>
-      <div class="meta">Reading time ~{m['minutes']} min &bull; Module {m['module']}<span class="view-count" data-view-count style="display:none"> &bull; <span data-view-num></span></span></div>
+      <div class="meta">Reading time ~{m['minutes']} min &bull; {modline}<span class="view-count" data-view-count style="display:none"> &bull; <span data-view-num></span></span></div>
 
       <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(118,221,255,0.2); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-2);">
         <div>
@@ -166,13 +174,16 @@ def build(meta,prose,related):
                              f"(prev {n_prev}, next {n_next}) -- the template changed")
     if not m.get('prev'):
         tail = re.sub(r'((?:&larr;|\u2190)\s*)Previous Lesson', r'\g<1>Curriculum', tail)
+    if not m.get('next'):
+        tail = re.sub(r'Next Lesson(\s*(?:&rarr;|\u2192))', r'Curriculum\g<1>', tail)
 
     # The tail also carries the donor's own identity in two script blocks: the
     # "continue reading" record and the discussion thread key. Copied verbatim,
     # every rebuilt lesson claims to be the donor -- slots 1-5 shipped sharing
     # one comment thread, so a reader commenting on the spread lesson posted
     # into old lesson 24's thread.
-    disc = f"{tier}-{int(m['slot']):02d}-{m['slug'].split('-', 1)[1]}"
+    disc = (m['slug'] if apx
+            else f"{tier}-{int(m['slot']):02d}-{m['slug'].split('-', 1)[1]}")
     rec = ("sp_edu_last_article', JSON.stringify({ title: '%s', level: '%s', order: '%s', "
            "url: window.location.pathname, progress: 0 }"
            % (m['title'].replace("'", "\\'"), lvl, m['slot']))
@@ -199,7 +210,8 @@ def build(meta,prose,related):
     over={k:(v,BUDGET[k]) for k,v in mm.items() if k in BUDGET and v>BUDGET[k]}
     if over: raise AssertionError(f"slot {m['slot']}: breaks the reading contract: {over}")
     os.makedirs(STAGE,exist_ok=True)
-    p=os.path.join(STAGE,f"new-{int(m['slot']):02d}-{m['slug'].split('-',1)[1]}.html")
+    p=os.path.join(STAGE, f"new-{m['slug']}.html" if apx
+                  else f"new-{int(m['slot']):02d}-{m['slug'].split('-',1)[1]}.html")
     open(p,'w',encoding='utf-8').write(out)
     note=''
     print(f"slot {m['slot']:>2}  {mm['words']:>5}w  {os.path.relpath(p,ROOT)}{note}")
