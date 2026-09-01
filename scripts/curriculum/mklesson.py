@@ -122,11 +122,22 @@ def build(meta,prose,related):
 
       '''
     tail=s[s.index('<blockquote class="sp-disclaimer">'):]
-    tail=tail.replace('/education/curriculum/intermediate/22-bid-ask-spread-dynamics.html',
-                      f"/education/curriculum/{tier}/{m['prev'][0]}.html" if m.get('prev') else f'/education/{tier}.html')
-    tail=tail.replace('/education/curriculum/intermediate/26-market-making-hft.html',
-                      f"/education/curriculum/{tier}/{m['next'][0]}.html" if m.get('next') else f'/education/{tier}.html')
-    if not m.get('prev'): tail=tail.replace('&larr; Previous Lesson','&larr; Curriculum')
+    # Repoint the previous/next links STRUCTURALLY, by the anchor they sit on.
+    # These used to be replaced by the donor's own two hrefs, which stopped
+    # matching the moment the donor changed -- so slots 4, 6 and 7 shipped with
+    # slot 1's navigation: "Next Lesson" went to lesson 2 from every one of them.
+    pv = f"/education/curriculum/{tier}/{m['prev'][0]}.html" if m.get('prev') else f'/education/{tier}.html'
+    nx = f"/education/curriculum/{tier}/{m['next'][0]}.html" if m.get('next') else f'/education/{tier}.html'
+    # The donor writes the arrows as literal characters, not entities.
+    tail, n_prev = re.subn(r'(<a class="btn btn-ghost" href=")[^"]*(">\s*(?:&larr;|←))',
+                           lambda mm: mm.group(1) + pv + mm.group(2), tail)
+    tail, n_next = re.subn(r'(<a class="btn btn-primary" href=")[^"]*(">\s*Next Lesson)',
+                           lambda mm: mm.group(1) + nx + mm.group(2), tail)
+    if n_prev != 1 or n_next != 1:
+        raise AssertionError(f"slot {m['slot']}: navigation anchors not found "
+                             f"(prev {n_prev}, next {n_next}) -- the template changed")
+    if not m.get('prev'):
+        tail = re.sub(r'((?:&larr;|\u2190)\s*)Previous Lesson', r'\g<1>Curriculum', tail)
 
     # The tail also carries the donor's own identity in two script blocks: the
     # "continue reading" record and the discussion thread key. Copied verbatim,
@@ -142,6 +153,15 @@ def build(meta,prose,related):
                   f"DiscussionSystem.init('{disc}')", tail)
 
     out=head+hdr+prose+rel+tail
+
+    # No lesson ships a link to a page that does not exist. Ten slots are still
+    # unwritten, and their slugs are exactly the ones a neighbouring lesson
+    # wants to point at, so this has to be checked rather than remembered.
+    dead=[u for u in sorted(set(re.findall(r'href="(/education/curriculum/[^"]+)"',out)))
+          if not os.path.exists(os.path.join(ROOT,u.lstrip('/')))]
+    if dead:
+        raise AssertionError(f"slot {m['slot']}: links to pages that do not exist: {dead}")
+
     errs=wellformed(out)
     if errs: raise AssertionError(f"slot {m['slot']}: HTML not well-formed: {errs}")
     got=[p for p in PARTS if f'data-part="{p}"' in out]
