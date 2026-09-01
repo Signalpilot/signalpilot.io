@@ -46,8 +46,17 @@ the last time round.
    it has been read. Look for what the new module has already taken over —
    duplication with neighbouring lessons is the commonest finding.
 3. **Write it** with `mklesson.build()`. That refuses to write anything that is
-   not well-formed HTML, is missing one of the seven parts, or breaks the
-   budget. See `/tmp`-free examples in git history (`l04.py` pattern).
+   not well-formed HTML, is missing one of the seven parts, links to a page that
+   does not exist, or breaks the *structural* contract (1 callout, 0 accordions,
+   2 tables, 0 emoji headings). See `/tmp`-free examples in git history
+   (`l04.py` pattern).
+
+   **There is no word ceiling.** There was one, at 1,800, and it refused to
+   write anything longer; slot 15 was refused three times and trimmed to fit,
+   which is cutting a lesson to satisfy a number. Completeness beats brevity:
+   the expensive failure is a student who needed something and did not get it.
+   `mklesson` prints an advisory over 2,500 words, and the advisory means
+   *check the read for anything said twice* — it does not mean cut.
 4. **Read it again, end to end.** Every single time. This is where the errors
    are: an arithmetic slip, a claim the lesson contradicts three paragraphs
    later, a sentence doing a neighbouring lesson's job.
@@ -203,3 +212,6 @@ reports `hubs: STALE` if they drift.
 - **No hype headers, no emoji in headings, no accordions.**
 - **Numbers are checked, never carried over on trust.**
 - **When unsure, leave it and log it.**
+- **Completeness beats brevity.** Say it once, then say all of it. If material
+  is being moved to another slot rather than deleted, record the destination in
+  the ledger's `deferred` column and verify it landed before the module closes.

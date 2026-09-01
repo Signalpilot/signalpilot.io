@@ -312,16 +312,31 @@ field is three pages, and it is short *because* it is rigorous.
 Lesson 67 carries 21 callouts and 20 emoji headings on one page. When eight
 elements compete for emphasis, nothing has any.
 
-**The budget, per lesson, enforced by `status.py`**
+**The contract, per lesson, enforced by `status.py`**
 
 | | limit | now |
 |---|---|---|
-| words | **1,800** (1,200 is fine; over 2,000 fails) | 4,461 median |
 | callouts | **1** | 5 median |
 | emoji in headings | **0** | 8 median |
 | accordions | **0** — if it is worth hiding it is worth cutting | 3 median |
 | tables | 2, and only where the shape is genuinely tabular | 2 median |
 | worked examples | **1**, with reproducible numbers | 1–3 "acts" |
+| words | **advisory only, 2,500** — reported, never refused | 4,461 median |
+
+**Why words are not a gate.** They were, at 1,800, and `mklesson.build()` refused
+to write anything longer. That is the wrong instrument. Of the first eighteen
+rebuilds seventeen came in under it untouched, median 1,594 — so for those the
+ceiling did nothing, because what actually removes length is the *say it once*
+rule and the ban on invented-trader narratives. But slot 15 was refused three
+times, at 1,898, 1,810 and 1,802, and landed at exactly 1,800. That lesson was
+cut to satisfy a number rather than because it repeated itself, and that is the
+one failure this course cannot afford: a student who needed something and did
+not get it. A long lesson is a much cheaper mistake than an incomplete one.
+
+So length is now settled by the second read, which asks *is any of this said
+twice?* — not by arithmetic. The 2,500-word advisory is a prompt to look
+harder at that question, not a limit. The structural rules above stay hard,
+because they are the ones that were actually doing the work.
 
 Roughly 136,000 words for 85 lessons against 400,926 for 86. The cut is not
 uniform: it comes almost entirely from repetition the read pass already

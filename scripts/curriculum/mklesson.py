@@ -13,7 +13,9 @@ metadata and the prose are supplied per lesson.
           prose=..., related=[(slot,title,slug,why), ...])
 
 Writes to education/curriculum/_staging/ and refuses to write anything that is
-not well-formed or that breaks the reading contract.
+not well-formed, is missing one of the seven parts, links to a page that does
+not exist, or breaks the structural half of the reading contract. Word count is
+reported, never enforced.
 """
 import re,os,html
 from html.parser import HTMLParser
@@ -24,7 +26,19 @@ ROOT=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # form and its path is fixed by the syllabus, so it will not move again.
 TPL=os.path.join(ROOT,'education/curriculum/beginner/01-what-a-market-solves.html')
 STAGE=os.path.join(ROOT,'education/curriculum/_staging')
-BUDGET={'words':1800,'callouts':1,'accordions':0,'tables':2,'emoji_headings':0}
+# The structural half of the reading contract, and it is HARD: these are the
+# things that made the old corpus unreadable -- one finding restated in a pull
+# quote, a stats table, a callout and a quiz; material hidden behind an
+# accordion; emphasis spent until none of it means anything.
+BUDGET={'callouts':1,'accordions':0,'tables':2,'emoji_headings':0}
+
+# Words are NOT a gate. The ceiling used to be 1800 and it refused to write
+# anything longer; slot 15 was refused three times and trimmed to fit, which is
+# cutting a lesson to satisfy a number rather than because it repeated itself.
+# A student missing something they needed is the expensive failure here, and a
+# long lesson is not. So this reports and never refuses. Length is settled by
+# the second read -- 'is any of this said twice?' -- not by arithmetic.
+WORDS_ADVISORY=2500
 PARTS=['claim','prereq','development','worked','problems','bounds','sources']
 TIERDIR={'Beginner':'beginner','Intermediate':'intermediate','Advanced':'advanced','Professional':'professional'}
 BADGE={'Beginner':'&#128994;','Intermediate':'&#128993;','Advanced':'&#128992;','Professional':'&#128308;'}
@@ -176,10 +190,11 @@ def build(meta,prose,related):
     if len(got)<len(PARTS):
         raise AssertionError(f"slot {m['slot']}: missing parts: {[p for p in PARTS if p not in got]}")
     mm=measure(out)
-    over={k:(v,BUDGET[k]) for k,v in mm.items() if v>BUDGET[k]}
-    if over: raise AssertionError(f"slot {m['slot']}: over budget: {over}")
+    over={k:(v,BUDGET[k]) for k,v in mm.items() if k in BUDGET and v>BUDGET[k]}
+    if over: raise AssertionError(f"slot {m['slot']}: breaks the reading contract: {over}")
     os.makedirs(STAGE,exist_ok=True)
     p=os.path.join(STAGE,f"new-{int(m['slot']):02d}-{m['slug'].split('-',1)[1]}.html")
     open(p,'w',encoding='utf-8').write(out)
-    print(f"slot {m['slot']:>2}  {mm['words']:>5}w  {os.path.relpath(p,ROOT)}")
+    note='' if mm['words']<=WORDS_ADVISORY else f"  [over {WORDS_ADVISORY}w -- check the read for anything said twice]"
+    print(f"slot {m['slot']:>2}  {mm['words']:>5}w  {os.path.relpath(p,ROOT)}{note}")
     return p
