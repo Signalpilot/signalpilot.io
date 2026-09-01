@@ -40,15 +40,29 @@ def keys(slug):
     return out
 
 
+# Shared memory is about thirty-four thousand entries per locale and does not
+# change while a process runs, but tables() is called once per check per lesson
+# -- seven checks across seventy-six lessons reloaded eleven files each, which
+# is nearly six thousand loads of two and a half megabytes, and is why
+# run.py --all never finished in a usable time. Load each one once.
+_MEM = {}
+
+
+def _memory(lang):
+    if lang not in _MEM:
+        p = f'{I18N}/memory/{lang}.json'
+        _MEM[lang] = json.load(open(p, encoding='utf-8')) if os.path.exists(p) else {}
+    return _MEM[lang]
+
+
 def tables(slug):
     """{lang: {english: translation}} merged the way the builder merges it."""
     out = {}
     for lang in LANGS:
-        mem_p = f'{I18N}/memory/{lang}.json'
         les_p = f'{I18N}/lessons/{slug}/{lang}.json'
-        mem = json.load(open(mem_p, encoding='utf-8')) if os.path.exists(mem_p) else {}
         les = json.load(open(les_p, encoding='utf-8')) if os.path.exists(les_p) else {}
-        out[lang] = {**mem, **les}
+        mem = _memory(lang)
+        out[lang] = {**mem, **les} if les else mem
     return out
 
 
