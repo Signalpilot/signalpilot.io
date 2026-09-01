@@ -73,8 +73,16 @@ def build(meta,prose,related):
         head=re.sub(re.escape(a)+r'.*?"',a+b+'"',head)
     nx=f"https://www.signalpilot.io/education/curriculum/{tier}/{m['next'][0]}.html" if m.get('next') else ''
     pv=f"https://www.signalpilot.io/education/curriculum/{tier}/{m['prev'][0]}.html" if m.get('prev') else ''
-    head=re.sub(r'<link rel="prev"[^>]*/>',f'<link rel="prev" href="{pv}"/>' if pv else '',head)
-    head=re.sub(r'<link rel="next" href=".*?"',f'<link rel="next" href="{nx}"',head)
+    # The donor is slot 1, which has no previous lesson and so carries no
+    # <link rel="prev"> at all. Substituting into a tag that is not there is a
+    # silent no-op, which is how slots 4 and 6-10 shipped with no prev link in
+    # the head while the visible navigation was correct. Drop whatever the
+    # donor had and write both tags at an anchor that is always present.
+    head = re.sub(r'\s*<link rel="prev"[^>]*/>', '', head)
+    tags = (f'<link rel="prev" href="{pv}"/>\n  ' if pv else '') + f'<link rel="next" href="{nx}"/>'
+    head, n_rel = re.subn(r'<link rel="next"[^>]*/>', lambda _: tags, head)
+    if n_rel != 1:
+        raise AssertionError(f'slot {m["slot"]}: <link rel="next"> not found in the donor head')
     head=re.sub(r'(<meta name="sp-level" content=").*?"',rf'\g<1>{lvl}"',head)
     head=re.sub(r'(<meta name="sp-order" content=").*?"',rf'\g<1>{m["slot"]}"',head)
 

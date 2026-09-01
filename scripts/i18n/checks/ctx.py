@@ -17,8 +17,11 @@ sys.path.insert(0, I18N)
 LANGS = ['ar', 'de', 'es', 'fr', 'hu', 'it', 'ja', 'nl', 'pt', 'ru', 'tr']
 
 
+TIERS = ('beginner', 'intermediate', 'advanced', 'professional')
+
+
 def lesson_path(slug):
-    for tier in ('beginner', 'intermediate', 'advanced', 'professional'):
+    for tier in TIERS:
         p = os.path.join(ROOT, 'education', 'curriculum', tier, slug + '.html')
         if os.path.exists(p):
             return p
@@ -57,5 +60,11 @@ def pairs(slug):
 
 
 def slugs():
+    # Only the four tier directories. The glob used to be curriculum/*/*.html,
+    # which also swept in curriculum/_merged/ and curriculum/_staging/ -- and
+    # lesson_path() looks in the tiers only, so the first of those raised
+    # SystemExit and run.py --all died before it had checked anything. The
+    # corpus-wide sweep has to walk the same set lesson_path() can resolve.
     return sorted(os.path.basename(p)[:-5]
-                  for p in glob.glob(os.path.join(ROOT, 'education/curriculum/*/*.html')))
+                  for tier in TIERS
+                  for p in glob.glob(os.path.join(ROOT, 'education/curriculum', tier, '*.html')))
