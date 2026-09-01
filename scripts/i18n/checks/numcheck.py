@@ -198,18 +198,37 @@ def licensed(t, ok):
     return False
 
 
+ENDS = re.compile(r'[.?!:;\u3002][\'")\]\u201d\u300d\u00bb]*\s*$')
+
+
+def window(ps, i, span=4):
+    """The segments that belong to the same sentence as segment i.
+
+    An inline tag cuts a sentence into pieces -- "the S&P 500 gained an average
+    of" | "0.4%" | "in the 24 hours before FOMC" -- and word order moves a
+    figure from one piece to another, so a figure's licence has to come from
+    the whole sentence rather than from the piece it landed in. Walking out
+    while the join is mid-sentence is what makes that safe: two pieces are the
+    same sentence only when the left one does not end on a full stop. A fixed
+    +/-1 window was too narrow -- a one-word <strong> between the halves
+    ("25% of the" | "risk" | ", which is the number...") puts three segments
+    between the number and where Japanese word order needs it.
+    """
+    lo, hi = max(0, i - 1), min(len(ps) - 1, i + 1)
+    while lo > 0 and i - lo < span and not ENDS.search(ps[lo - 1][0]):
+        lo -= 1
+    while hi + 1 < len(ps) and hi - i < span and not ENDS.search(ps[hi][0]):
+        hi += 1
+    return range(lo, hi + 1)
+
+
 def run(slug, report=print):
     bad = 0
     for lang, ps in ctx.pairs(slug):
-        # An inline tag can cut a sentence in half -- "the S&P 500 gained an
-        # average of" | "0.4%" | "in the 24 hours before FOMC" -- and word
-        # order moves a figure from one half to the other. Licensing the
-        # neighbouring segments keeps that from reading as an invented number.
         for i, (k, v) in enumerate(ps):
             ok = set()
-            for j in (i - 1, i, i + 1):
-                if 0 <= j < len(ps):
-                    ok |= allowed(ps[j][0])
+            for j in window(ps, i):
+                ok |= allowed(ps[j][0])
             extra = {t for t in toks(v)
                      if len(t) > 1 and t.strip('0') and not licensed(t, ok)}
             if extra:

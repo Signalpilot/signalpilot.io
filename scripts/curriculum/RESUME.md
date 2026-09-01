@@ -129,6 +129,19 @@ Full tier words, reading-time and module-name patterns: `chrome_i18n.py`.
 - **`build.py` SKIPs a whole locale if any string is untranslated**, leaving the
   previous build in place. A SKIP is invisible on the page, which is why
   `status.py` checks memory rather than file existence.
+- **A per-lesson override file is not local.** `scripts/i18n/lessons/<slug>/<lang>.json`
+  wins over memory while building, but on a successful write `build.py` merges it
+  *into* memory. So overriding a shared word for one lesson silently rewrites it
+  for every other lesson. Restructure the sentence instead.
+- **The chrome donor's identity rides along in the tail.** `mklesson` lifts the
+  footer from a real lesson, and two script blocks in it name that lesson: the
+  `sp_edu_last_article` record and `DiscussionSystem.init(...)`. Slots 1-5
+  shipped sharing one comment thread before a read caught it. `mklesson` now
+  stamps both; check them on anything generated another way.
+- **Reading the built page catches what the checkers cannot.** The number check,
+  the leak check and the glossary check all passed on slot 4 while the Hungarian
+  changed currency style mid-sentence and the Arabic read as a calque. Read the
+  rendered locale text, not just the checker output.
 
 ## After changing lesson files
 

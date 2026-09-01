@@ -128,6 +128,19 @@ def build(meta,prose,related):
                       f"/education/curriculum/{tier}/{m['next'][0]}.html" if m.get('next') else f'/education/{tier}.html')
     if not m.get('prev'): tail=tail.replace('&larr; Previous Lesson','&larr; Curriculum')
 
+    # The tail also carries the donor's own identity in two script blocks: the
+    # "continue reading" record and the discussion thread key. Copied verbatim,
+    # every rebuilt lesson claims to be the donor -- slots 1-5 shipped sharing
+    # one comment thread, so a reader commenting on the spread lesson posted
+    # into old lesson 24's thread.
+    disc = f"{tier}-{int(m['slot']):02d}-{m['slug'].split('-', 1)[1]}"
+    rec = ("sp_edu_last_article', JSON.stringify({ title: '%s', level: '%s', order: '%s', "
+           "url: window.location.pathname, progress: 0 }"
+           % (m['title'].replace("'", "\\'"), lvl, m['slot']))
+    tail = re.sub(r"sp_edu_last_article', JSON\.stringify\(\{[^}]*\}", lambda _: rec, tail)
+    tail = re.sub(r"DiscussionSystem\.init\('[^']*'\)",
+                  f"DiscussionSystem.init('{disc}')", tail)
+
     out=head+hdr+prose+rel+tail
     errs=wellformed(out)
     if errs: raise AssertionError(f"slot {m['slot']}: HTML not well-formed: {errs}")
