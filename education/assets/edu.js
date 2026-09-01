@@ -4,29 +4,48 @@
   // Theme is now handled by signalpilot-theme.js
   // Keeping only non-theme functionality here
 
+  const LOCALE_RE = /^\/(de|es|fr|it|pt|nl|ru|ja|tr|hu|ar)(?=\/|$)/;
+  const locale = (location.pathname.match(LOCALE_RE) || [null,''])[1];
+
+  // Paths that exist inside every locale directory. Everything else (search,
+  // calculators, the tier hubs) is English-only, so its link is left alone.
+  const LOCALISED = [/^\/education\/curriculum\//, /^\/education\/(index\.html)?$/];
+
+  // Keep the reader inside their language when the target has a translation.
+  // Idempotent: the locale prefix is stripped before it is put back, so an
+  // href that is already localised comes out unchanged.
+  function localise(href){
+    if(!locale) return href;
+    let url;
+    try { url = new URL(href, location.origin); } catch(e){ return href; }
+    if(url.origin !== location.origin && url.hostname !== 'www.signalpilot.io') return href;
+    const path = url.pathname.replace(LOCALE_RE, '') || '/';
+    if(!LOCALISED.some(re => re.test(path))) return href;
+    return url.origin + '/' + locale + path + url.search + url.hash;
+  }
+
+  // 0) Keep every in-page link inside the reader's language.
+  //    The locale pages are generated from the English original, so every
+  //    internal href in them is written without a locale prefix: previous and
+  //    next lesson, the related-lesson cards, the cross-references in the
+  //    prose and the "Home" breadcrumb all pointed at the English page. A
+  //    reader who finished a Turkish lesson and clicked "Sonraki ders" landed
+  //    in English and had to pick their language again. Rewriting here rather
+  //    than in the 825 generated files keeps one copy of the rule.
+  if(locale){
+    document.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if(!href || href.charAt(0) === '#') return;
+      const fixed = localise(href);
+      if(fixed !== href) a.setAttribute('href', fixed);
+    });
+  }
+
   // 1) Mobile menu — mirrors the page's own <nav>, so it is translated and
   //    locale-correct without a second hardcoded copy of the link list.
   (function(){
     const menuBtn = document.getElementById('menuToggle');
     if(!menuBtn) return;
-
-    const LOCALE_RE = /^\/(de|es|fr|it|pt|nl|ru|ja|tr|hu|ar)(?=\/|$)/;
-    const locale = (location.pathname.match(LOCALE_RE) || [null,''])[1];
-
-    // Paths that exist inside every locale directory. Everything else (search,
-    // calculators, the tier hubs) is English-only, so its link is left alone.
-    const LOCALISED = [/^\/education\/curriculum\//, /^\/education\/(index\.html)?$/];
-
-    // Keep the reader inside their language when the target has a translation.
-    function localise(href){
-      if(!locale) return href;
-      let url;
-      try { url = new URL(href, location.origin); } catch(e){ return href; }
-      if(url.origin !== location.origin && url.hostname !== 'www.signalpilot.io') return href;
-      const path = url.pathname.replace(LOCALE_RE, '') || '/';
-      if(!LOCALISED.some(re => re.test(path))) return href;
-      return url.origin + '/' + locale + path + url.search + url.hash;
-    }
 
     const backdrop = document.createElement('div');
     backdrop.className = 'mobile-nav-backdrop';
@@ -74,14 +93,6 @@
       a.textContent = 'Education';
       links.appendChild(a);
     }
-
-    // The header nav itself points at the English hub on locale pages, so a
-    // German reader clicking "Bildung" lands back in English. Same fix.
-    if(locale) source.forEach(a => {
-      const href = a.getAttribute('href');
-      const fixed = localise(href);
-      if(fixed !== href) a.setAttribute('href', fixed);
-    });
 
     mobileNav.appendChild(header);
     mobileNav.appendChild(links);
