@@ -153,6 +153,22 @@ Full tier words, reading-time and module-name patterns: `chrome_i18n.py`.
   `.` after `</strong>` or `</a>` is punctuation-only, so it is never
   extracted and never translated -- Japanese gets `0.30ドル.` instead of `。`.
   Keep at least one word of the sentence after every inline element.
+- **A fragment after an inline element inherits the source's spacing, not the
+  target language's.** `<em>L</em>, an adverse move` gives the next fragment NO
+  leading space, so a German translation opening on a letter rendered `List`.
+  `<strong>maintenance</strong> requirement` gives it one, so a fragment that
+  adds its own produced a double space, and German and Dutch -- which close
+  the compound -- got `Mindesteinschuss -Anforderung` and `onderhouds eis`.
+  Check which case you are in before writing the fragment: supply the space
+  yourself only where the source has none, and where the source does have one,
+  restructure so the bolded word is a standalone noun rather than half a
+  compound. Russian, which has no article, also has to drop the `The` that the
+  preceding fragment ends on, or it doubles the adjective.
+- **A locked term must not abut a digit.** `verify.py` bounds the short codes
+  on Latin letters and digits, not on `\b` (kana are word characters, so `\b`
+  would never match `ATR` in `ATRの`). That guard is correct and it means
+  Japanese `ETF100株分` does not count as `ETF` -- the build fails the glossary
+  check. Write `ETFの100株分`.
 - **Changing the English after you have started translating shifts every key
   index.** `translate.py keys` renumbers from scratch, so a locale written
   against the old list lands one place out from the insertion point onward.
