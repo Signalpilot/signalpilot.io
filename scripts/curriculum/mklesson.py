@@ -32,13 +32,14 @@ STAGE=os.path.join(ROOT,'education/curriculum/_staging')
 # accordion; emphasis spent until none of it means anything.
 BUDGET={'callouts':1,'accordions':0,'tables':2,'emoji_headings':0}
 
-# Words are NOT a gate. The ceiling used to be 1800 and it refused to write
-# anything longer; slot 15 was refused three times and trimmed to fit, which is
-# cutting a lesson to satisfy a number rather than because it repeated itself.
-# A student missing something they needed is the expensive failure here, and a
-# long lesson is not. So this reports and never refuses. Length is settled by
-# the second read -- 'is any of this said twice?' -- not by arithmetic.
-WORDS_ADVISORY=2500
+# There is NO word rule here, of any kind. There was a ceiling at 1800 that
+# refused to write anything longer -- slot 15 was refused three times and
+# trimmed to fit, which is cutting a lesson to satisfy a number. That was
+# removed. An advisory at 2500 was left in its place, and that was removed too:
+# it never refused anything, but it printed a verdict on length, and a verdict
+# is a ceiling that argues instead of blocking. It also did nothing the second
+# read does not already do, which is ask whether anything is said twice.
+# The count is printed below as a fact, with nothing attached to it.
 PARTS=['claim','prereq','development','worked','problems','bounds','sources']
 TIERDIR={'Beginner':'beginner','Intermediate':'intermediate','Advanced':'advanced','Professional':'professional'}
 BADGE={'Beginner':'&#128994;','Intermediate':'&#128993;','Advanced':'&#128992;','Professional':'&#128308;'}
@@ -195,6 +196,6 @@ def build(meta,prose,related):
     os.makedirs(STAGE,exist_ok=True)
     p=os.path.join(STAGE,f"new-{int(m['slot']):02d}-{m['slug'].split('-',1)[1]}.html")
     open(p,'w',encoding='utf-8').write(out)
-    note='' if mm['words']<=WORDS_ADVISORY else f"  [over {WORDS_ADVISORY}w -- check the read for anything said twice]"
+    note=''
     print(f"slot {m['slot']:>2}  {mm['words']:>5}w  {os.path.relpath(p,ROOT)}{note}")
     return p

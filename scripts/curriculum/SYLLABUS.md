@@ -321,7 +321,7 @@ elements compete for emphasis, nothing has any.
 | accordions | **0** — if it is worth hiding it is worth cutting | 3 median |
 | tables | 2, and only where the shape is genuinely tabular | 2 median |
 | worked examples | **1**, with reproducible numbers | 1–3 "acts" |
-| words | **advisory only, 2,500** — reported, never refused | 4,461 median |
+| words | **no rule, of any kind** — the count is reported as a fact | 4,461 median |
 
 **Why words are not a gate.** They were, at 1,800, and `mklesson.build()` refused
 to write anything longer. That is the wrong instrument. Of the first eighteen
@@ -333,10 +333,15 @@ cut to satisfy a number rather than because it repeated itself, and that is the
 one failure this course cannot afford: a student who needed something and did
 not get it. A long lesson is a much cheaper mistake than an incomplete one.
 
-So length is now settled by the second read, which asks *is any of this said
-twice?* — not by arithmetic. The 2,500-word advisory is a prompt to look
-harder at that question, not a limit. The structural rules above stay hard,
-because they are the ones that were actually doing the work.
+So length is settled by the second read, which asks *is any of this said
+twice?* — not by arithmetic. There was an advisory at 2,500 words for a while,
+left behind when the ceiling went. It has been removed too. It never refused
+anything, but it printed a verdict on length every time a lesson passed it, and
+a verdict is a ceiling that argues instead of blocking — the same pull toward
+cutting, wearing a softer word. It also did nothing the second read does not
+already do. `mklesson` and `status.py` now print the word count with nothing
+attached to it. The structural rules above stay hard, because they are the ones
+that were actually doing the work.
 
 Roughly 136,000 words for 85 lessons against 400,926 for 86. The cut is not
 uniform: it comes almost entirely from repetition the read pass already

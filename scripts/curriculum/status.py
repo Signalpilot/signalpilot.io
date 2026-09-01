@@ -48,11 +48,11 @@ def parts_present(path):
 # A lesson counts as finished only when the ledger records a second read that
 # found something. See academy-ledger.tsv.
 # The reading contract, from SYLLABUS.md. A lesson that breaks it is not finished,
-# however good the prose is. Words are deliberately not in here: a word ceiling
-# cuts lessons to satisfy a number, and a student missing something they needed
-# costs more than a long page. status.py reports the count and judges the rest.
+# however good the prose is. Words are deliberately not in here and there is no
+# advisory either: a word rule cuts lessons to satisfy a number, and a student
+# missing something they needed costs more than a long page ever does.
+# status.py reports the count as a fact and judges the rest.
 BUDGET={'callouts':1,'accordions':0,'tables':2,'emoji_headings':0}
-WORDS_ADVISORY=2500
 
 def measure(path):
     s=open(path,encoding='utf-8').read()
@@ -154,7 +154,7 @@ def main():
             ob=overbudget(p)
             w=measure(p)['words']
             print(f"  contract : " + ('ok' if not ob else ', '.join(f'{k} {v[0]}>{v[1]}' for k,v in ob.items()))
-                  + f"   ({w}w{'' if w<=WORDS_ADVISORY else f', over the {WORDS_ADVISORY}w advisory'})")
+                  + f"   ({w}w)")
         return
     counts={}; firsts={}
     for r in rows:

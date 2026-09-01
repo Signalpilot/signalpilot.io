@@ -51,12 +51,15 @@ the last time round.
    2 tables, 0 emoji headings). See `/tmp`-free examples in git history
    (`l04.py` pattern).
 
-   **There is no word ceiling.** There was one, at 1,800, and it refused to
-   write anything longer; slot 15 was refused three times and trimmed to fit,
-   which is cutting a lesson to satisfy a number. Completeness beats brevity:
-   the expensive failure is a student who needed something and did not get it.
-   `mklesson` prints an advisory over 2,500 words, and the advisory means
-   *check the read for anything said twice* — it does not mean cut.
+   **There is no word rule at all.** There was a ceiling at 1,800 that refused
+   to write anything longer; slot 15 was refused three times and trimmed to
+   fit, which is cutting a lesson to satisfy a number. There was then an
+   advisory at 2,500, which refused nothing but printed a verdict on length —
+   a ceiling that argues rather than blocks — and it has gone too. `mklesson`
+   prints the word count and attaches nothing to it. Completeness beats
+   brevity: the expensive failure is a student who needed something and did
+   not get it. Whether a lesson is too long is answered by step 4, by finding
+   something said twice, and by nothing else.
 4. **Read it again, end to end.** Every single time. This is where the errors
    are: an arithmetic slip, a claim the lesson contradicts three paragraphs
    later, a sentence doing a neighbouring lesson's job.
