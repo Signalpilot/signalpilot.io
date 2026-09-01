@@ -180,20 +180,71 @@ def allowed(en):
     for w, v in WORDS.items():
         if re.search(r'(?<![A-Za-z])' + w + r'(?![A-Za-z])', en, re.I):
             a.add(str(v))
+    a |= spelled(en)
     return a
 
 
-def licensed(t, ok):
+_UNITS = {'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
+          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11,
+          'twelve': 12, 'thirteen': 13, 'fourteen': 14, 'fifteen': 15,
+          'sixteen': 16, 'seventeen': 17, 'eighteen': 18, 'nineteen': 19}
+_TENS = {'twenty': 20, 'thirty': 30, 'forty': 40, 'fifty': 50, 'sixty': 60,
+         'seventy': 70, 'eighty': 80, 'ninety': 90}
+_SCALE = {'thousand': 1000, 'million': 1000000, 'billion': 1000000000}
+
+
+def spelled(en):
+    """Every integer the English writes out in words.
+
+    The WORDS table below maps single words, so a compound produced its parts
+    and never itself: "forty-seven" gave 40 and 7, "two hundred" gave 2 and 100,
+    "twenty-three" gave 20 and 3. Locales that write the digits then read as
+    inventing a number. Only compounds above nine are returned; the single words
+    are already covered.
+    """
+    out, cur, total, started = set(), 0, 0, False
+
+    def flush():
+        nonlocal cur, total, started
+        if started and total + cur > 9:
+            out.add(str(total + cur))
+        cur = total = 0
+        started = False
+
+    for w in re.findall(r'[a-z]+', en.lower()):
+        if w in _UNITS:
+            cur += _UNITS[w]; started = True
+        elif w in _TENS:
+            cur += _TENS[w]; started = True
+        elif w == 'hundred' and started:
+            cur = (cur or 1) * 100
+        elif w in _SCALE and started:
+            total += (cur or 1) * _SCALE[w]; cur = 0
+        elif w != 'and':
+            flush()
+    flush()
+    return out
+
+
+def licensed(t, ok, own=None):
     if t in ok or (t.lstrip('0') or '0') in ok:
         return True
     # French, Russian and Hungarian group thousands with a space, so two
     # numbers either side of a space fuse into one run: "15h30 450,80 $"
     # tokenises as 3045080. Allow a run that splits cleanly into two figures
     # the English already licenses, and only that -- one split, both halves.
+    #
+    # The halves must come from THIS segment, not from the neighbour window.
+    # Fusion is a rendering artefact inside one string, so both figures have to
+    # be in that string; drawing them from a neighbour licenses almost any
+    # digit run. A Hungarian typo, "100,02 helyett 50,02", passed because the
+    # next segment began "Five thousand" and contained a 2, so 10002 split into
+    # 1000 + 2 and neither half came from the string being checked.
+    src = ok if own is None else own
     for i in range(1, len(t)):
         lo, hi = t[:i], t[i:]
-        if ((lo in ok or (lo.lstrip('0') or '0') in ok)
-                and (hi in ok or (hi.lstrip('0') or '0') in ok)):
+        if ((lo in src or (lo.lstrip('0') or '0') in src)
+                and (hi in src or (hi.lstrip('0') or '0') in src)):
             return True
     return False
 
@@ -229,8 +280,9 @@ def run(slug, report=print):
             ok = set()
             for j in window(ps, i):
                 ok |= allowed(ps[j][0])
+            own = allowed(k)
             extra = {t for t in toks(v)
-                     if len(t) > 1 and t.strip('0') and not licensed(t, ok)}
+                     if len(t) > 1 and t.strip('0') and not licensed(t, ok, own)}
             if extra:
                 report(f'  {lang}: {sorted(extra)} | {k[:62]}\n         -> {v[:82]}')
                 bad += 1

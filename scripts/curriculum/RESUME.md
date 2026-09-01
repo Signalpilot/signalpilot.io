@@ -138,6 +138,10 @@ Full tier words, reading-time and module-name patterns: `chrome_i18n.py`.
   `sp_edu_last_article` record and `DiscussionSystem.init(...)`. Slots 1-5
   shipped sharing one comment thread before a read caught it. `mklesson` now
   stamps both; check them on anything generated another way.
+- **A cross-reference to a slot that is not written yet is a dead link.** Ten
+  slots have no page (`status.py` lists them as `TOWRITE`), and the slug of a
+  slot that *is* written still carries its old title, so `54-` is not
+  Off-Exchange. Check every `href` against a file on disk before installing.
 - **Reading the built page catches what the checkers cannot.** The number check,
   the leak check and the glossary check all passed on slot 4 while the Hungarian
   changed currency style mid-sentence and the Arabic read as a calque. Read the
