@@ -142,6 +142,21 @@ Full tier words, reading-time and module-name patterns: `chrome_i18n.py`.
   slots have no page (`status.py` lists them as `TOWRITE`), and the slug of a
   slot that *is* written still carries its old title, so `54-` is not
   Off-Exchange. Check every `href` against a file on disk before installing.
+- **A link's text carries its own article in most locales.** `Lesson 26` is
+  `la lección 26` / `a aula 26` / `la lezione 26`, so a sentence that *starts*
+  on the link renders with no article, and a fragment ending in a preposition
+  renders with two (`della la lezione 9`) or an impossible contraction
+  (`de a aula`). Russian and Hungarian need a case the fixed link text cannot
+  take. Write the English so every link sits mid-sentence, after a verb rather
+  than a preposition, and let each locale supply its own article.
+- **An inline element at the end of a sentence orphans the full stop.** The
+  `.` after `</strong>` or `</a>` is punctuation-only, so it is never
+  extracted and never translated -- Japanese gets `0.30ドル.` instead of `。`.
+  Keep at least one word of the sentence after every inline element.
+- **Changing the English after you have started translating shifts every key
+  index.** `translate.py keys` renumbers from scratch, so a locale written
+  against the old list lands one place out from the insertion point onward.
+  Re-print the list and check an index in the middle before the next `put`.
 - **Reading the built page catches what the checkers cannot.** The number check,
   the leak check and the glossary check all passed on slot 4 while the Hungarian
   changed currency style mid-sentence and the Arabic read as a calque. Read the
