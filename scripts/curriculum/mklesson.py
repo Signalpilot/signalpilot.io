@@ -86,8 +86,13 @@ def build(meta,prose,related):
                 ('property="og:description" content="',m['desc']),('name="twitter:description" content="',m['desc']),
                 ('rel="canonical" href="',url),('property="og:url" content="',url),('name="twitter:url" content="',url)]:
         head=re.sub(re.escape(a)+r'.*?"',a+b+'"',head)
-    nx=f"https://www.signalpilot.io/education/curriculum/{tier}/{m['next'][0]}.html" if m.get('next') else ''
-    pv=f"https://www.signalpilot.io/education/curriculum/{tier}/{m['prev'][0]}.html" if m.get('prev') else ''
+    # A module boundary is also a tier boundary: slot 24 is the last Beginner
+    # lesson and slot 25 lives in intermediate/. Resolving "next" against this
+    # lesson's own tier would have produced beginner/25-..., which the dead-link
+    # check below catches -- so the tier of each neighbour can be named.
+    ptier=m.get('prev_tier',tier); ntier=m.get('next_tier',tier)
+    nx=f"https://www.signalpilot.io/education/curriculum/{ntier}/{m['next'][0]}.html" if m.get('next') else ''
+    pv=f"https://www.signalpilot.io/education/curriculum/{ptier}/{m['prev'][0]}.html" if m.get('prev') else ''
     # The donor is slot 1, which has no previous lesson and so carries no
     # <link rel="prev"> at all. Substituting into a tag that is not there is a
     # silent no-op, which is how slots 4 and 6-10 shipped with no prev link in
@@ -149,8 +154,8 @@ def build(meta,prose,related):
     # These used to be replaced by the donor's own two hrefs, which stopped
     # matching the moment the donor changed -- so slots 4, 6 and 7 shipped with
     # slot 1's navigation: "Next Lesson" went to lesson 2 from every one of them.
-    pv = f"/education/curriculum/{tier}/{m['prev'][0]}.html" if m.get('prev') else f'/education/{tier}.html'
-    nx = f"/education/curriculum/{tier}/{m['next'][0]}.html" if m.get('next') else f'/education/{tier}.html'
+    pv = f"/education/curriculum/{ptier}/{m['prev'][0]}.html" if m.get('prev') else f'/education/{tier}.html'
+    nx = f"/education/curriculum/{ntier}/{m['next'][0]}.html" if m.get('next') else f'/education/{tier}.html'
     # The donor writes the arrows as literal characters, not entities.
     tail, n_prev = re.subn(r'(<a class="btn btn-ghost" href=")[^"]*(">\s*(?:&larr;|←))',
                            lambda mm: mm.group(1) + pv + mm.group(2), tail)
