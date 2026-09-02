@@ -102,6 +102,11 @@ def inject(src_path, lang, tmap, rel):
     out = re.sub(r'("inLanguage":\s*")[a-z-]+(")', lambda m: m.group(1)+lang+m.group(2), out)
 
     url = f'https://www.signalpilot.io/{lang}/education/{rel}'
+    # og:url and twitter:url are attribute values the extractor never touches,
+    # so without this every locale page tells a crawler it lives at the English
+    # address -- the one thing a canonical link is there to contradict.
+    out = re.sub(r'(<meta (?:property|name)="(?:og|twitter):url" content=")[^"]*(")',
+                 lambda m: m.group(1) + url + m.group(2), out)
     if re.search(r'<link rel="canonical"[^>]*>', out):
         out = re.sub(r'<link rel="canonical"[^>]*>', f'<link rel="canonical" href="{url}">', out, count=1)
     else:
