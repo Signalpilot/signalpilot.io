@@ -61,6 +61,19 @@ def part_span(body, name):
     return body[start:end]
 
 
+# A paragraph counts as checkable if it carries a quantity, and English prose
+# spells small ones. "one" alone is excluded: it is usually a pronoun here.
+NUMWORD = re.compile(
+    r'\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|'
+    r'fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|'
+    r'fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|'
+    r'half|third|quarter|fifth|sixth|tenth|twice|dozen)\b', re.I)
+
+
+def has_figure(t):
+    return bool(re.search(r'\d', t) or NUMWORD.search(t))
+
+
 def check(path, slot=0):
     s = io.open(path, encoding='utf-8').read()
     body = prose(s)
@@ -102,7 +115,7 @@ def check(path, slot=0):
     where = ''
     span = part_span(body, 'development') + part_span(body, 'worked')
     for attrs, frag, t_ in paragraphs(span):
-        if re.search(r'\d', t_):
+        if has_figure(t_):
             run = 0
         else:
             run += 1
