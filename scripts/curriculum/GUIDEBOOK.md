@@ -40,11 +40,13 @@ arithmetic, and a reader who agrees with it has something to do tonight.**
 
 ## Anatomy of a lesson
 
-The craft used to be written down three times over: a list of tests, a list of
-pull moves, a list of curiosity moves. Thirty-one rules for about fifteen
-ideas, and nothing said which were the same rule wearing different clothes.
-This section says each thing once, filed under the part of the lesson you are
-standing in when you need it.
+Every rule is filed under the part of the lesson you are standing in when you
+need it, and each is said once.
+
+When two rules pull against each other, the order of precedence is: the hard
+rules, then the frame, then the anatomy, then the shape. So "numbers that
+matter go in a table" never buys a third table, and a lesson that needs three
+tables to be honest is two lessons.
 
 ### The frame every lesson shares
 
@@ -71,10 +73,9 @@ travel.
 Numbers that matter go in a table or on their own line. A measurement buried
 mid-sentence is a measurement nobody checks.
 
-The rebuilt lessons run from about 1,500 to about 4,900 words, and the median
-is close to 2,500. That is a description, not a target. A lesson is as long as
-its arithmetic and no longer; the legacy lessons run nearly twice that and are
-not better for it.
+A lesson is as long as its arithmetic and no longer. There is no target
+length; the range the rebuilt lessons have actually landed in is in **Where
+the work stands**, and it is a description, not a quota.
 
 ### 1. The claim
 
@@ -122,8 +123,9 @@ could be read in any order is a blog post with a number on it.
 
 **Must contain.** The inputs, printed in full. The rule, in one sentence. The
 rule run at every ordinary setting, so the reader can get our answer without
-asking us anything. Where the module has a running object, the development
-names it and says which lesson adds which column.
+asking us anything. The module's running object, named, with a
+sentence saying which lesson adds which column and which lesson spends them
+all.
 
 **How it reads.** Evidence above conclusion, every time. Lay the arithmetic
 out so the conclusion is visible one line before the page states it; that
@@ -269,8 +271,8 @@ Two is a floor, not a quota. What counts as a source changes with the shape:
 for a claim under test it is usually a paper or an enforcement record; for a
 mechanism or a procedure lesson the load-bearing document is an exchange rule
 book, a regulatory filing or a broker agreement, and those count fully.
-Forcing three journal papers onto *Keeping the Record* produces padding, which
-this document forbids two parts above.
+Forcing three journal papers onto *Keeping the Record* produces padding, which the
+development forbids in part 3.
 
 Never invent a paper, never invent a finding, never cite something you have
 not confirmed exists.
@@ -308,13 +310,16 @@ object rather than a list.
 *Ask: does every "as we saw earlier" carry the figure, and does the reader
 touch it?*
 
-**Every module has a serial, and the last lesson makes it pay.** A module's
-running object gains a column per lesson: lessons 32 to 36 add highs and lows,
-then opens and closes, then the missing forty, then the ratio. Until the last
-lesson those columns are a habit. The module's last lesson has to run a
-calculation that needs all of them at once, one the reader could not have done
-at the module's first lesson, and that is the moment the serial becomes a
-build. Nothing motivates the next module like having just felt the last one
+**Every module has a serial, and its last lesson makes it pay.** A module's
+running object gains a column per lesson. Module 4's is a sixty-bar series:
+lesson 32 gives the first twenty highs and lows, lesson 33 adds their opens
+and closes, lesson 34 carries the closes out to sixty and lesson 35, the
+module's last, supplies the forty highs and lows still missing. Until that
+last lesson the columns are a habit. Lesson 35 has to run a calculation
+needing all of them at once, one the reader could not have done at lesson 25,
+and that is the moment the serial becomes a build. Lesson 36 then opens module
+5 by spending the finished series, which is the previous rule working across a
+module boundary rather than a second serial starting. Nothing motivates the next module like having just felt the last one
 add up. Module 1's serial is the two notices at $46 and $48; the reader is
 told so in lesson 1.
 *Ask: could the module's last lesson be moved to first without losing
@@ -324,8 +329,9 @@ anything? If yes, the serial has not paid out.*
 lesson carries a quiz; the three problems are a lesson's assessment. A module
 ends with one quiz, and every question in it hands the reader numbers and asks
 for a number back, or hands them two settings and asks which count follows.
-A question that asks what a term means is testing vocabulary, and vocabulary
-is not capability, which is the first thing this document says. The quiz is
+A question that asks what a term means is testing vocabulary, and the whole
+point of printing the numbers is that a reader ends able to do something
+rather than able to define something. The quiz is
 also the natural place to make the serial pay out a second time, because by
 then the reader has all the columns.
 *Ask: could any question be answered correctly by somebody who had only read
@@ -463,15 +469,20 @@ Six steps. All six, every time, in this order.
 
 ### Step four: the checklist
 
+Generated from the Ask lines in **Anatomy** and **Between the pages** by
+`scripts/curriculum/checklist.py`. Change a rule there and regenerate; never
+retype this section, because a hand-kept copy drifts from its original
+inside a day.
+
 **Claim**
 - What observation would have made this lesson wrong?
-- What does the reader think they already know, and what is the number inside
-  it that they have never checked?
-- Write the reader's question in one sentence. If you needed "and", it is two
-  lessons.
+- What does the reader think they already know, and what is the number
+  inside it that they have never checked?
+- Write the reader's question in one sentence. If you needed the word
+  "and", it is two lessons.
 - Can the claim be read as a sentence about the reader's own trading?
-- Are there more than one sentence between the surprising result and its
-  explanation?
+- Count the sentences between the surprising result and its explanation. If
+  the answer is one, move the explanation.
 
 **Prerequisites**
 - What does this lesson spend, and what will it leave owed?
@@ -479,40 +490,50 @@ Six steps. All six, every time, in this order.
 **Development**
 - Could a reader reproduce every number without asking us anything?
 - What is the longest run of paragraphs with no figure in them?
-- For every conclusion, is its evidence above it or below it?
-- What is the one word the reader leaves with, and which later lesson spends
-  it?
-- Read it aloud. Where did you get bored?
-- Would the asymmetry sentence survive being read by the people it is about?
+- For every conclusion on the page, is its evidence above it or below it?
+- What is the one word the reader leaves with, and which later lesson
+  spends it?
+- Read it aloud. Wherever you got bored, two sentences in a row have the
+  same length and shape. Change one.
+- Find the asymmetry sentence. Would it survive being read by the people it
+  is about?
 
 **Worked example**
 - Name the sentence where the reader's expectation breaks.
-- What is the sentence they will still have a week later? Directly after the
-  surprise, and said exactly once?
+- What is the sentence they will still have a week later? Does it sit
+  directly after the surprise, and is it said exactly once?
 - What can the reader now do, in one sentence beginning with a verb?
 
 **Bounds**
-- Which of the five concessions would you rather have left out? If none, you
-  have not conceded anything.
-- Does the last line name something the reader now wants and cannot yet have?
-- Does the tease name a finding, with the figure the next lesson will carry?
+- Which item here would you rather have left out? If none, you have not
+  conceded anything yet.
+- Does the last line before the problems name something the reader now
+  wants and cannot yet have?
+- Does the tease name a finding, with the figure the next lesson's claim
+  will carry?
 
 **Problems**
-- Could a skimming reader finish problem one in ten minutes?
-- Which problem costs an evening, and what number do they hold at the end?
-- Does each produce exactly one number?
+- Could a reader who only skimmed the lesson finish problem one in ten
+  minutes? If not, it is problem two.
+- Which problem costs an evening, and what number is the reader holding at
+  the end of it?
+- Does each problem produce exactly one number?
 
 **Sources**
-- Does the lesson lean on each one, and does the text say how?
-- Have you confirmed each one exists?
+- Does the lesson actually lean on each source, and does the text say how?
+- Have you confirmed that each one exists?
 
 **Between the pages**
-- Does the previous lesson's tease get paid in this lesson's claim?
-- Does every backward reference carry its figure rather than a lesson number?
-- Is the title a thing rather than a promise, and does the description carry
-  the claim's current sharpest figure?
-- If this is a module's last lesson, does it use every column of the serial at
-  once?
+- Does the next lesson's claim contain the figure this lesson's tease
+  promised?
+- Does every "as we saw earlier" carry the figure, and does the reader
+  touch it?
+- Could the module's last lesson be moved to first without losing anything?
+  If yes, the serial has not paid out.
+- Could any question be answered correctly by somebody who had only read
+  the definitions?
+- Read the title cold. Is it a thing or a promise? Does the description
+  carry the figure the claim currently prints?
 
 ### Step five is where the grade was actually won
 
@@ -624,8 +645,9 @@ corpus, and the corpus is on disk.
 - Where a locale has an index it is built from that locale's lesson files, not
   translated on its own, so it cannot say anything the lessons do not.
 
-The check is test three applied one level up: could a reader reproduce every
-number on the index from the lesson files, without asking us anything?
+The check is the development's first question asked one level up: could a
+reader reproduce every number on the index from the lesson files, without
+asking us anything?
 
 ---
 
@@ -666,13 +688,14 @@ is a rule, and rules do not go stale.
 | 5. Context | 36&ndash;47 | Intermediate |
 | 6. Indicators, Honestly | 48&ndash;52 | Intermediate |
 | 7. The Other Side | 53&ndash;61 | Advanced |
-| 8. Building a System | 63&ndash;70 | Advanced |
+| 8. Building a System | 62&ndash;70 | Advanced |
 | 9. Portfolio | 71&ndash;75 | Professional |
 | 10. The Profession | 76&ndash;81 | Professional |
 | 11. Electives | 82&ndash;85 | Professional |
 
-Slots 62, 64 and 67 are planned and unwritten, so 82 lessons exist against 85
-numbered slots. Fifteen orphaned `_merged` files sit alongside the corpus and
+Slots 62, 64 and 67 are planned and unwritten, all three inside module 8, so
+82 lessons exist against 85 numbered slots. The rebuilt lessons run from about
+1,500 to about 4,900 words, median close to 2,500. Fifteen orphaned `_merged` files sit alongside the corpus and
 are linked from nowhere.
 
 ### What "done" means

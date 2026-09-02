@@ -84,6 +84,8 @@ def check(path, slot=0):
 
     # -- prose hygiene -----------------------------------------------------
     for attrs, frag, t_ in paragraphs(body):
+        if 'monospace' in attrs:
+            continue          # a calculation block is display, not prose
         stripped = frag.strip()
         whole = re.match(r'<(strong|em)\b[^>]*>.*</\1>$', stripped, re.S)
         if whole and text(whole.group(0)) == t_:
@@ -98,7 +100,8 @@ def check(path, slot=0):
     # -- nothing uncheckable for three paragraphs --------------------------
     run = worst = 0
     where = ''
-    for attrs, frag, t_ in paragraphs(body):
+    span = part_span(body, 'development') + part_span(body, 'worked')
+    for attrs, frag, t_ in paragraphs(span):
         if re.search(r'\d', t_):
             run = 0
         else:
