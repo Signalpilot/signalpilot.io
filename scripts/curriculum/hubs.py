@@ -83,7 +83,91 @@ def render():
                                     title=H.escape(e['title'], quote=False))
                           for e in by[tier])
         s = s[:m.start()] + '<ul class="lesson-list">\n' + items + '\n            </ul>' + s[m.end():]
+
+    # Every other count on the page. There is one number, and it is the length
+    # of the listing; the page used to carry three different ones because each
+    # was typed where it stood.
+    s = re.sub(r'Free trading course: \d+ lessons',
+               f'Free trading course: {total} lessons', s)
+    s = re.sub(r'<strong>\d+ free lessons</strong>',
+               f'<strong>{total} free lessons</strong>', s)
+    s = re.sub(r'through all \d+ lessons', f'through all {total} lessons', s)
+    s = re.sub(r'>\d+ interactive lessons', f'>{total} interactive lessons', s)
+
+    # Start buttons and prerequisite lines. A Start button is the lowest slot in
+    # its tier; a prerequisite is the previous tier's last slot. Typed by hand,
+    # all four buttons opened the wrong lesson and one opened an orphan file.
+    for i, tier in enumerate(TIERS):
+        first = by[tier][0]
+        pat = re.compile(r'<a href="[^"]*" class="btn btn-primary">Start '
+                         + tier.capitalize() + r' Tier')
+        m = pat.search(s)
+        if not m:
+            raise AssertionError(f'no Start button for {tier}')
+        s = (s[:m.start()] + f'<a href="{first["href"]}" class="btn btn-primary">'
+             f'Start {tier.capitalize()} Tier' + s[m.end():])
+        if i == 0:
+            continue
+        prev = TIERS[i - 1]
+        last = by[prev][-1]['order']
+        want = (f'<strong>Prerequisites:</strong> Complete the {prev.capitalize()} '
+                f'tier first (lessons 1&ndash;{last})')
+        pat = re.compile(r'<strong>Prerequisites:</strong>[^<]*')
+        for m in list(re.finditer(pat, s))[i - 1:i]:
+            s = s[:m.start()] + want + s[m.end():]
+
+    # The four "What You'll Learn" panels. These were typed, and each described
+    # a different tier from the one it sat under; one of them was a list of
+    # indicator names. They are now that tier's own modules and lesson titles.
+    for tier, m in zip(reversed(TIERS), reversed(_panels(s))):
+        s = s[:m[0]] + _panel(by[tier]) + s[m[1]:]
     return s
+
+
+def _panels(s):
+    """Byte spans of the four `grid two-col` blocks, matched by balancing divs."""
+    out = []
+    for m in re.finditer(r'<div class="grid two-col">', s):
+        i, depth = m.end(), 1
+        for t in re.finditer(r'<div\b|</div>', s[m.end():]):
+            depth += 1 if t.group(0) != '</div>' else -1
+            if depth == 0:
+                i = m.end() + t.end()
+                break
+        out.append((m.start(), i))
+    if len(out) != len(TIERS):
+        raise AssertionError(f'expected {len(TIERS)} learn panels, found {len(out)}')
+    return out
+
+
+CAP = 4  # titles shown per module; the remainder is named, never dropped silently
+
+
+def _panel(rows):
+    mods, order = {}, []
+    for e in rows:
+        if e['category'] not in mods:
+            mods[e['category']] = []
+            order.append(e['category'])
+        mods[e['category']].append(e)
+    out = ['<div class="grid two-col">']
+    for cat in order:
+        es = mods[cat]
+        lo, hi = es[0]['order'], es[-1]['order']
+        items = [f'                  <li>{H.escape(e["title"], quote=False)}</li>'
+                 for e in es[:CAP]]
+        if len(es) > CAP:
+            items.append(f'                  <li>and {len(es) - CAP} more</li>')
+        out.append('              <div>')
+        out.append(f'                <h4 style="margin:0 0 .25rem 0">{H.escape(cat, quote=False)}</h4>')
+        out.append('                <div style="font-size:.8rem;color:var(--muted);'
+                   f'margin-bottom:.5rem">Lessons {lo}&ndash;{hi}</div>')
+        out.append('                <ul style="margin:0;padding-left:1.5rem;list-style:disc">')
+        out.extend(items)
+        out.append('                </ul>')
+        out.append('              </div>')
+    out.append('            </div>')
+    return '\n'.join(out)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-# The Signal Pilot Academy Guidebook
+# The Signal Pilot Learn Guidebook
 
 *Everything a lesson has to be, and everything it must never do. If the work
 starts drifting, this is the document that pulls it back.*
@@ -210,83 +210,386 @@ it earns, and credibility is the only thing we are actually selling.
 
 ## Why anyone reads the next one
 
-Rigour and pull are things you can put into a page. Curiosity is a thing that
-happens inside a person, and it does not respond to being told to happen. You
-cannot write “fascinatingly” and make a paragraph fascinating.
+The floor says what a lesson must contain. Pull says how it should open and
+close. This section is about the one thing you cannot put into a page
+directly: whether the reader wants to keep going. That happens inside the
+reader, and you cannot make it happen by asking. Writing "interestingly" has
+never made a paragraph interesting.
 
-Curiosity is mechanical. It is what somebody feels on becoming aware of a
-specific gap between what they know and what they could know in the next two
-minutes. No gap, no curiosity. Vague gap, no curiosity either. The whole job
-is digging the gap precisely and then not filling it too early.
+What you can do is understand the mechanism and work it. Curiosity is the
+feeling of noticing a specific gap between what you know and what you could
+know in the next two minutes. It has three conditions. The gap has to be
+specific: "what is the count at the other setting?" works, and "market
+structure is complicated" does not. The gap has to be about the reader: "your
+platform picked one setting and you have never seen the other two" pulls
+harder than "counts depend on settings". And the gap has to stay open long
+enough to be felt: a question answered in the next sentence never becomes a
+question.
 
-Nine moves. These are writing moves rather than structural ones, which means
-they live in sentences and cannot be checked by a script.
+The moves below are ways of digging that gap, holding it open, and paying it
+off so that the reader wants the next one. Each is written the same way: the
+rule, why it works, what it looks like when it fails, what it looks like when
+it works, and one question to ask of the finished page. The failing version is
+written out every time because it is always the version that felt fine while
+you were writing it. Thirteen moves work inside a lesson; four more work
+between lessons. Two of the seventeen can be checked by a script, and they say
+so. The rest need a reader.
 
-**Break “I already know this” inside the first two hundred words.**
-This is the largest single reason a reader stops, and it never announces
-itself. Nobody thinks *I am bored*. They think *yes, fine, order blocks, I
-know this one*. The counter is to take the thing they are confident about and
-put a number inside it they have never checked. They know what an order block
-is. They have never counted how many sit in a chart they have already looked
-at, and they have never seen that number come out ten, then five, then two, on
-the same bars. Confidence broken in the first paragraph is attention bought
-for the whole page.
+**Break "I already know this" inside the first two hundred words.**
+Before the reader reaches the prerequisites, take something they are certain
+they understand and put a number inside it that they have never checked.
 
-**Dig one gap, and let the reader hold it.** By the end of the claim, the
-reader should be able to say in their own words what question the rest of the
-page answers. One question, not three. If you cannot write it as a sentence
-ending in a question mark, the reader cannot hold it either, and a reader
-holding nothing carries on out of politeness for about a paragraph and a half.
+This matters because the commonest reason a reader leaves is not boredom but
+recognition. Nobody thinks "I am bored". They think "yes, fine, order blocks,
+I know this one", and from that sentence on they are skimming, and a skimming
+reader does not come back for the table. A number they cannot account for is
+the one thing that stops a skim.
 
-**Make the gap theirs.** A general question is curiosity about the world. A
-personal one is curiosity about yourself, and it is stronger by an order of
-magnitude. *Divergence counts depend on settings* is a fact. *Whichever count
+It fails like this: the lesson opens by defining an order block, correctly, in
+roughly the words the reader has met elsewhere. They nod, and they are gone by
+the second paragraph. It works like this: the lesson opens by saying that the
+same sixty bars contain ten order blocks, or five, or four, or two, depending
+on a number nobody displays. The reader knew what an order block was. They had
+never counted one, and now they cannot not.
+*Ask: what does the reader think they already know, and what is the number
+inside it that they have never checked?*
+
+**Dig one gap, and make sure the reader can say it.**
+By the end of the claim the reader should be able to state, in one sentence
+ending in a question mark, what the rest of the page is going to answer. One
+question, not three.
+
+A reader carries one open question easily and three not at all. A reader
+carrying no question keeps reading out of politeness for roughly a paragraph
+and a half, and then finds something else to do.
+
+It fails like this: a claim that raises the setting question, the timeframe
+question and the confirmation question in three successive sentences. Each is
+a good question. Together they cancel, and the reader holds none of them. It
+works like this: "how many order blocks are in these sixty bars?" Everything
+up to the bounds serves that one question. The timeframe question and the
+confirmation question are owed to later lessons, and the page says so.
+*Ask: write the reader's question in one sentence. If you needed the word
+"and", it is two lessons.*
+
+**Make the gap about the reader, not about the market.**
+Phrase the claim so that it describes what the reader has been doing, not what
+markets do.
+
+Curiosity about the world is mild. Curiosity about yourself is not; it is
+stronger by something like an order of magnitude, and switching from the first
+to the second costs one rewrite of one sentence.
+
+It fails like this: "divergence counts depend on settings." True, general,
+easy to agree with and easier to forget. It works like this: "whichever count
 you have been trading is the one your platform chose for you, and you have
-never seen the other two* is an accusation, gently made, and a reader cannot
-leave it alone.
+never seen the other two." Same fact. Now it is an accusation, gently made,
+and a reader cannot leave it alone.
+*Ask: can the claim be read as a sentence about the reader's own trading? If
+it is only about markets, rewrite it until it is about them.*
 
-**Withhold the why.** Put the surprising result up front and keep the
-explanation back until the arithmetic has been watched. RSI fell fifteen
-points with nobody selling harder on any bar: say that in the claim, and do
-not explain it until the reader has seen the fourteen slots fill. Explaining
-in the second sentence what you promised in the first is the commonest way a
-page kills itself.
+**Say the surprising result early and explain it late.**
+The claim states the result. The development shows the arithmetic. The reason
+it happened comes only after the reader has watched the arithmetic produce it.
 
-**Let the reader arrive half a beat before you do.** Lay the arithmetic out so
-the conclusion is obvious one line before we state it. That half-beat is the
-entire physical sensation of learning something, and it is ours to give or to
-steal. State the conclusion and then show the work, and it is stolen every
-time: the reader still gets the information and never gets the feeling, and
-the feeling is the reason they open the next lesson.
+An explanation given before the evidence is an opinion, and a reader can
+dismiss an opinion in the time it takes to read it. The same explanation given
+after they have watched the numbers is the answer to a question they now have,
+and nobody dismisses the answer to their own question. Explaining in the
+second sentence what the first sentence promised is the commonest way a page
+kills itself, and it is the commonest because it feels helpful while you are
+doing it.
 
-**Charge for it.** People do not finish easy things. They finish things that
-were slightly too hard and that they got through anyway. A lesson that asks
-nothing of a reader is worth nothing to have read, and the third problem
-should cost a real evening — a base rate over forty trades, a recount at
-a setting we deliberately did not run. A reader who has paid for a result owns
-it in a way that no amount of reading produces.
+It fails like this: "RSI fell fifteen points with nobody selling harder on any
+bar, because a large gain dropped out of the fourteen-slot window." Correct,
+and fatal: the reader now has no reason to look at the slots. It works like
+this: the claim says RSI fell fifteen points with nobody selling harder on any
+bar, and stops. The development fills the fourteen slots one at a time.
+Somewhere near slot ten the reader sees it, and when the explanation arrives
+it confirms something they have already worked out.
+*Ask: count the sentences between the surprising result and its explanation.
+If the answer is one, move the explanation.*
 
-**Write it in a voice.** Sentences of the same length in the same construction
-read as a machine, and a machine cannot be trusted about anything, which means
-flat prose spends the credibility the arithmetic just earned. Vary the length.
-A short sentence after a long one lands. Prefer the concrete noun to the
-category: not *a trader*, but a trader taking forty trades a month at eight
-tenths of a point. Cut every *it is important to note*. Nobody in the history
-of reading has been made curious by a hedge.
+**Let the reader get there one line before you do.**
+Lay out the arithmetic so that the conclusion is visible one line before the
+page states it.
 
-**Show that the knowledge is scarce and cheap.** Curiosity asks *what is the
-answer*. The desire to learn asks *is this worth an evening of mine*, and it
-is answered by asymmetry: almost nobody the reader trades against has ever
-checked this, and checking it costs one evening and a spreadsheet. Say that
-once per lesson, in passing, without flattering the reader and without
-sneering at anyone else. An asymmetry stated plainly is the most motivating
-sentence available to us.
+That half-beat, in which the reader sees where this is going before being
+told, is the physical sensation of learning something, and it is the reason
+people open the next lesson. It is ours to give or to take away. State the
+conclusion and then show the work, and it is taken away every time: the reader
+gets the information and never gets the feeling.
 
-**Spend trust on purpose.** Curiosity carries a reader through a page. Trust
-is what carries them to lesson twelve. Every concession in the bounds section
-is a deposit, and the reason our bounds run to five items where the rest of
-the internet has none is not modesty. A writer who tells you what they have
-not shown is the only kind worth believing about what they have.
+It fails like this: "One bar of confirmation halves the number of changes you
+declare. Here is the table." The table is now proof of something already
+accepted, and the reader skips it. It works like this: the table first, the
+unconfirmed count beside the confirmed count, row by row. By the fourth row
+the reader has seen the halving. The sentence after the table says what they
+have just seen, and they agree with it before they finish reading it.
+*Ask: for every conclusion on the page, is its evidence above it or below it?
+Evidence goes above.*
+
+**Charge for it.**
+Ask something real of the reader, and make the third problem cost an evening:
+a base rate over forty trades, or a recount at a setting we deliberately did
+not run.
+
+People do not finish easy things. They finish things that were slightly too
+hard and that they got through anyway. A result the reader paid an evening for
+is one they own. A result they read is one they borrowed, and borrowed results
+are returned by the weekend.
+
+It fails like this: three problems that can each be done in five minutes from
+the lesson's own table. Nothing left the page, and nothing was learned that a
+second reading would not have given. It works like this: problem three says
+"count the same event across your last forty trades and write down the share
+that did what this lesson says it does." That number is theirs. Nobody else
+has it, and nobody can take it off them.
+*Ask: which of the three problems costs the reader an evening, and what number
+are they holding at the end of it?*
+
+**Write it in a voice.**
+Vary the length of the sentences. Prefer the concrete noun to the category.
+Cut every hedge.
+
+Prose in which every sentence has the same length and the same shape reads as
+machine output, and readers do not trust machines about anything, so flat
+prose spends the credibility the arithmetic just earned. A short sentence
+after a long one lands. "A trader" is a category; "a trader taking forty
+trades a month at eight tenths of a point" is a person, and readers follow
+people. And nobody in the history of reading has been made curious by "it is
+important to note that".
+
+It fails like this: "It is important to note that in many cases traders may
+find that their results vary depending on the settings that they choose to
+use." Twenty-five words, one idea, no person, no number, and a hedge at each
+end. It works like this: "Your platform chose a setting. You have never seen
+the other two."
+*Ask: read the development aloud. Wherever you got bored, the sentence is the
+same length and shape as the one before it. Change one of them.*
+
+**Say once that this is worth an evening.**
+Once per lesson, in passing, state the asymmetry: almost nobody the reader
+trades against has ever checked this, and checking it costs one evening and a
+spreadsheet.
+
+Curiosity asks "what is the answer". The wish to learn asks a different
+question, "is this worth an evening of mine", and the honest answer is the
+asymmetry. It is the most motivating sentence available to us. It only works
+if it is true and said plainly, without flattering the reader and without
+sneering at anyone else, and it stops working the second time it is said.
+
+It fails like this: "Most retail traders never bother to do this, which is why
+they lose." A sneer, an unprovable one, and a sentence the reader has met a
+hundred times on pages they no longer trust. It works like this: "This count
+takes one evening. Almost nobody who trades this pattern has ever done it."
+*Ask: find the asymmetry sentence. Would it survive being read by the people
+it is about?*
+
+**Spend trust on purpose.**
+The bounds section concedes real things, five of them where the rest of the
+internet concedes none, and at least one of the five costs us something we
+would rather have kept.
+
+Curiosity carries a reader through a page. Trust is what carries them to
+lesson twelve. A writer who tells you what they have not shown is the only
+kind worth believing about what they have, and every honest concession is a
+deposit that the next lesson's claim can draw on.
+
+It fails like this: bounds that concede "this was one instrument on one day".
+True of every lesson, therefore free, and a reader can feel that it cost
+nothing. It works like this: bounds that concede the count was run at one
+displacement threshold and would come out differently at another, and that we
+did not run the other because it is the reader's third problem.
+*Ask: which item in the bounds would you rather have left out? If none, you
+have not conceded anything yet.*
+
+**Do not go three paragraphs without something the reader can check.**
+At the latest every third paragraph, put down something a reader could verify
+or recompute: a price, a count, a bar number, a date, a figure from a record.
+
+Our reader came for the numbers. Prose on its own does not hold them, and each
+checkable thing restarts their attention because it is a small promise kept:
+this page really does show its work. Three paragraphs of plain assertion is
+roughly the distance at which a reader decides the page is like every other
+page, and starts to skim. What counts as checkable changes with the shape. In
+a mechanism lesson it is a real price on the one order being followed. In a
+claim under test it is a date, a case number, a figure from an enforcement
+record. In a pattern with dials it is a count at a stated setting. In a cost
+lesson it is a cost in the reader's own units. What does not change is the
+distance.
+
+It fails like this: a development that explains what an order block is, why it
+forms and why price returns to it, for six paragraphs, before the first count.
+All of it true, none of it checkable, and the reader stopped at paragraph
+four. It works like this: the development opens with the count at the first
+setting, and only then explains. The explanation is now something the reader
+wants, because they are holding a number they cannot yet account for. A script
+can check this one: count the paragraphs between figures.
+*Ask: what is the longest run of paragraphs on the page with no figure in
+them?*
+
+**One new word per lesson, at most.**
+A lesson introduces at most one term. The term names something the reader can
+point at on their own screen tonight. Once introduced it is settled: every
+later lesson uses the same word, and every locale uses one word for it.
+
+Once you have a word for a thing you start seeing it everywhere, and seeing it
+everywhere is the reader's own curiosity working for us between lessons, at no
+cost. It works for one word at a time. A reader handed three new terms in one
+lesson remembers none of them and files the page as jargon, and jargon is how
+a reader can tell that we have stopped showing and started sounding.
+
+It fails like this: a sweeps lesson that introduces "sweep", "liquidity pool",
+"stop run" and "inducement" in one development. Four words, three of them for
+nearly the same thing, and the reader leaves with vocabulary and no
+capability, which is test one failing. It works like this: the lesson uses
+"sweep", defines it in one sentence, and counts. "Displacement", "dial" and
+"base rate" were introduced this way and are now one word per language across
+the corpus. That is the standard for a new one: if you cannot name the later
+lesson that will spend the term, it is not a name.
+*Ask: what is the one word the reader leaves with, and which later lesson
+spends it?*
+
+**Write the sentence they will still have a week later.**
+Every lesson contains one sentence built to be remembered and repeated. It is
+short, it has no figure in it, it states the claim after the arithmetic has
+proved it, and it appears once, directly after the surprise.
+
+Readers do not retain lessons. They retain one line, and if we do not write
+that line they will make one up, usually a worse one. A line with no number in
+it can be repeated to a friend, and a reader who repeats a lesson to a friend
+has learned it twice.
+
+It works like this: the order blocks lesson's line is "the count is a fact
+about your settings, not about the market." Twelve words, the whole lesson,
+and it sits after the table rather than before it, because before the table it
+is an opinion and after the table it is a finding. It fails in two ways. The
+sentence appears three times, in the claim, the development and the bounds,
+and by the third time it is a slogan, and a reader can hear the difference
+between a conclusion and a slogan. Or there is no such sentence, so the
+reader's takeaway is "settings matter", which is true of everything and
+therefore of nothing.
+*Ask: what is the sentence, where does it sit, and is it said exactly once?*
+
+**Make the first problem easy enough to win.**
+The three problems are a ladder. The first takes ten minutes and is nearly
+impossible to get wrong. The second takes half an hour and changes one
+setting. The third takes an evening and collects a base rate. Always in that
+order.
+
+A reader holding one number of their own does the second problem. A reader who
+failed the first closes the tab, does not come back for the base rate, and
+does not open lesson twelve. Wanting to learn is not a mood a reader arrives
+with. It is what a small success feels like from the inside, and it has to be
+felt before anything larger is asked.
+
+It fails like this: problem one asks for a base rate over forty trades.
+Ambitious, correct, and the last thing most readers do for this course. It
+works like this: problem one says "mark the swing highs on your last twenty
+bars at a lookback of three, and count them." One number, ten minutes, and no
+way to get it wrong that matters.
+*Ask: could a reader who only skimmed the lesson finish problem one in ten
+minutes? If not, it is problem two.*
+
+### Between the pages
+
+The thirteen moves above work inside one lesson. The course is a different
+object. A reader who finishes a lesson has to be carried into the next one,
+and the promises that carry them are made on one page and kept on another.
+These four moves live in that gap. They are cheap to check, because each one
+is checked by reading two pages side by side.
+
+**Every tease is a promise, and the next lesson's claim keeps it.**
+When the bounds of one lesson tease the finding of the next, the next lesson's
+claim delivers that finding in its first two hundred words, with the same
+figure.
+
+A tease works because the reader trusts it. The first time one is not kept,
+quickly and exactly, every later tease reads as decoration and the reader
+stops reading the bounds at all. We get to break this once.
+
+It works like this: lesson 36 ends by promising that one bar of confirmation
+halves the number of changes you declare, and lesson 37 opens on that halving,
+the count with confirmation beside the count without, in its claim. It fails
+like this: the halving turns up in lesson 37's development, or comes out as
+"roughly a third fewer", or arrives in lesson 38. Each of those is a promise
+not kept, and the reader keeps the score even when we do not. To check it,
+read one lesson's last paragraph before the problems and the next lesson's
+claim side by side.
+*Ask: does the next lesson's claim contain the figure this lesson's tease
+promised?*
+
+**Spend the number, not the lesson number.**
+When a lesson uses an earlier result, put the result on the page rather than a
+reference to it, and have the reader do one line of arithmetic with it before
+we do.
+
+"As lesson 36 showed" is a reference, and references are skipped. "The 0.22
+from the sixty closes" is the result itself, and a result gets used, and using
+a number is the only thing that fixes it in memory. A reader who recomputes a
+piece of lesson 36 while reading lesson 38 has learned lesson 36 twice, and
+the second time is the one that lasts. It is also how a reader discovers that
+the course is one object rather than a list: the same number keeps coming back
+and keeps being useful.
+
+It fails like this: "recall from lesson 36 that the ratio was small." The
+reader does not recall, does not go back, and the sentence has taught nothing.
+It works like this: "twenty steps of the sixty closes gave 0.22; run the same
+twenty steps on this lesson's column and compare," and the reader is doing
+lesson 36's arithmetic on lesson 38's data before they notice they are
+revising.
+*Ask: does every "as we saw earlier" carry the figure, and does the reader
+touch it?*
+
+**The last lesson of a module uses every column at once.**
+A module's serial gains a column per lesson. The module's last lesson runs a
+calculation that needs all of the columns together, one the reader could not
+have done at the module's first lesson.
+
+This is where the serial pays out. Until that lesson the columns are a habit.
+At that lesson they become a build, and the reader feels in one calculation
+what five lessons of columns can do. Nothing motivates the next module like
+having just felt the last one add up.
+
+It works like this: lessons 32 to 36 add highs and lows, then opens and
+closes, then the missing forty, then the ratio, and the last of them needs all
+four at once. It fails like this: the last lesson of the run could have been
+written with the ratio alone, and the reader was right to wonder what the
+other columns were for. The failing version has one reliable property: the
+lesson could have been placed first.
+*Ask: could the module's last lesson be moved to first without losing
+anything? If yes, the serial has not paid out.*
+
+**Title in the plain register, sharpest number in the description.**
+A title is a short noun phrase naming the object: *What a Fill Actually Is*,
+*Markets Have Modes*, *Order Blocks and Displacement*. No colon, no promise,
+no figure. The meta description is the sharpest sentence of the claim with its
+figures kept, and it is rewritten every time the claim is.
+
+The reader meets a lesson twice before reading it, once on the index and once
+in a search result, and both decisions take a couple of seconds. A plain title
+says "this is a reference you will come back to". A promising title says "this
+is content", and a reader who has spent any time on the internet recognises
+content and knows what it is worth. The number goes in the description because
+that is where the reader is deciding whether to click, and a specific figure
+is the most persuasive honest thing we have. It does not go in the title
+because titles are expensive to change: the index, the sitemap, the
+cross-links and eleven locales all carry them, and a figure corrected in the
+claim will still be wrong in the title a year later. A stale figure has
+already reached a meta description once; it would have reached a title just as
+easily.
+
+It fails like this: "RSI >70 Is Often a BUY Signal (Yes, Really)". A promise,
+a verdict, and a register that tells the reader this lesson is like the ones
+that have already disappointed them. It works like this: the title is *Order
+Blocks and Displacement*, and the description says that the same sixty bars
+contain ten order blocks, or five, or four, or two, depending on a number
+nobody displays. A script can check the title for a colon or a digit. Only a
+reader can check the description.
+*Ask: read the title cold. Is it a thing or a promise? Read the description.
+Does it carry the lesson's sharpest figure, and is that figure the one the
+claim currently prints?*
 
 ---
 
@@ -343,6 +646,81 @@ travel.
 
 Numbers that matter go in a table or on their own line. A measurement buried
 in the middle of a sentence is a measurement nobody checks.
+
+---
+
+## The front door
+
+Everything above is about a lesson. This section is about the pages around the
+lessons, because they are the first thing a reader sees and they were held to
+no standard at all.
+
+There are three of them: the education index, the four tier pages and the
+learning path. Between them they tell a reader how many lessons there are,
+which lesson to start with, what each tier assumes, what each lesson is called
+and what each tier will teach. Every one of those is a fact about the corpus.
+Every one of them was typed by hand.
+
+Read as a reader, the way step one reads a lesson, the index failed on five
+counts. The list is written out in full because the list is what shows the
+failure mode; no single item on it was hard to fix.
+
+- **Four different lesson counts in eight places.** The meta description and
+  the learning path card said 75. The hero and the closing section said 86.
+  The curriculum header said 81, which is what the listed tiers added up to,
+  and there were 82 lessons on disk. The listing had quietly dropped slot 48.
+- **Every Start button opened the wrong lesson.** Beginner opened an
+  intermediate lesson, Intermediate opened a beginner lesson, Advanced opened
+  the fifth lesson of its tier rather than the first, and Professional opened
+  one of the orphaned `_merged` files, which is not a lesson at all.
+- **Every prerequisite line named the wrong last lesson** for the tier before
+  it, three, one and eight slots away from where those tiers actually end.
+- **The four tier summaries each described a different tier.** Beginner
+  promised sweeps, repainting and regime-based RSI, which are intermediate
+  lessons. Advanced promised tax and career paths, which are professional
+  ones. One of Intermediate's four boxes was a list of indicator names, which
+  is the pitch this document says to make once, in a problems section, and
+  never as a promise.
+- **From slot 35 onward the index showed the old titles**, while the slugs
+  under them were already the rebuilt ones.
+
+The diagnosis matters more than the list, and it is not the obvious one. The
+catalogue was right. Every rebuilt title, and the lesson at slot 48, were
+already sitting in it. A generator existed and owned the listing. What had
+gone wrong is that everything *around* the listing was still typed, so each
+rebuilt lesson pushed the page a little further from the truth, and nothing on
+the page ever said so.
+
+So the rule for the front door is not a checklist. It is that the hub pages
+are built, never typed: one script reads the corpus and writes the index, the
+tier pages and the learning path from what it finds. In practice:
+
+- The lesson count is the length of the listing. It is computed once and
+  written wherever a count appears: hero, curriculum header, meta description,
+  learning path card, closing section.
+- A tier's Start button links to the lowest slot in that tier. A tier's
+  prerequisite line names the highest slot in the tier before it. Neither is
+  ever typed.
+- A lesson's title on the index is read from the lesson's own page. Rebuild a
+  lesson and the index corrects itself on the next build, with nobody having
+  to remember.
+- A tier's summary boxes are written from that tier's own modules and lesson
+  titles, and contain no indicator names. The index is not a pitch, for the
+  same reason the problems section is not. Where a box shows only some of a
+  module's lessons it says how many it left out, because a silent cap reads as
+  completeness.
+- A missing slot is shown as a gap. An orphaned `_merged` file is never linked
+  from anywhere. A gap is a fact; a broken link is a claim.
+- Where a locale has an index it is built from that locale's lesson files
+  rather than translated on its own, so it cannot say anything the lessons do
+  not.
+
+The check is test three applied one level up: could a reader reproduce every
+number on the index from the lesson files, without asking us anything? All of
+the above is now true of `education/index.html`, which `scripts/curriculum/hubs.py`
+regenerates and `--check` verifies. It is not yet true of the four tier pages
+or the learning path, which read the catalogue in the browser and are the next
+thing to bring under the same rule.
 
 ---
 
@@ -453,7 +831,7 @@ translatable string and the literal `·` does not.
 
 ## Where the work stands
 
-Slots 1 to 49 are rebuilt into the academy form. Slots 50 to 85 are still the
+Slots 1 to 49 are rebuilt into the Learn form. Slots 50 to 85 are still the
 old lessons, and eight orphaned `_merged` files sit alongside them.
 
 Modules 1 through 5 are complete. Module 6 is two lessons of five. Modules 7
@@ -461,3 +839,6 @@ through 10 and the electives have not been started.
 
 The prose pass has reached slot 36. Module 1's teases have been rewritten.
 Everything else in the plan is ahead of us.
+
+The index is a build artifact. The four tier pages and the learning path are
+not yet.
