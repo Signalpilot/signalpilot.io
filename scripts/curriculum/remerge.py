@@ -10,7 +10,8 @@ join defects, which is the whole reason the tags are going.
     nodes  a list, one entry per key in scripts/curriculum/.keys.json order,
            of either an int (the index of the <p> or <li> in the built page,
            counting from the claim) or a (index, cut) pair, where cut is
-           'after:<tag>' or 'before:<tag>' to keep one side of a split node.
+           'after:<tag>' or 'before:<tag>', or a list of those applied in order,
+           to keep one piece of a node split by more than one tag.
     edits  {lang: [(key_index, old, new), ...]} applied after extraction, for
            the places where the English wording genuinely changed.
 
@@ -31,8 +32,9 @@ def _nodes(path):
 
 
 def _one(raw, cut):
-    if cut:
-        how, tag = cut.split(':', 1)
+    # a node split by two tags needs two cuts, applied in order
+    for c in ([cut] if isinstance(cut, str) else (cut or [])):
+        how, tag = c.split(':', 1)
         # cut before stripping: STRIP would remove the tag we are cutting on
         raw = raw.split(tag, 1)[1] if how == 'after' else raw.split(tag, 1)[0]
     return STRIP.sub('', raw).strip()
