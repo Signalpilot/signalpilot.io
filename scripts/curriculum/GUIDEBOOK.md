@@ -200,6 +200,12 @@ forming. At least one of the five must cost us something we would rather have
 kept. A bound that is true of every lesson — "this was one instrument on one
 day" — is free, and a reader can feel that it cost nothing.
 
+The five are paragraphs, in continuous prose, inside a
+`<div data-part="bounds">`. Nine lessons concede in a bulleted list of bolded
+assertions instead, and that is the wrong shape: a list reads as a disclaimer
+somebody's lawyer wrote, and the whole force of this part is that the lesson
+is talking about itself. Convert on contact.
+
 **How it reads.** This is counter-intuitive and it is the single largest
 reason the lessons are trusted: the concessions are what make the remaining
 claims worth believing. A writer who tells you what they have not shown is the
