@@ -40,9 +40,23 @@ def _one(raw, cut):
     return STRIP.sub('', raw).strip()
 
 
+def _guard(rel, keys):
+    # .keys.json is regenerated per lesson and is easy to forget. Merging with a
+    # previous lesson's key file writes this lesson's text under those keys and
+    # silently corrupts them, so refuse unless every key is in this lesson.
+    en = open(os.path.join(HERE, '..', '..', 'education', 'curriculum',
+                           rel + '.html'), encoding='utf-8').read()
+    missing = [k for k in keys if k not in en]
+    if missing:
+        raise SystemExit('.keys.json does not belong to %s: %d of %d keys absent, '
+                         'first is %r\nRun translate.py keys <slug> first.'
+                         % (rel, len(missing), len(keys), missing[0][:70]))
+
+
 def merge(rel, nodes, edits=None, extra=None, langs=None):
     """rel e.g. 'beginner/05-why-anyone-quotes'. extra: {lang: [values]} appended."""
     keys = json.load(open(os.path.join(HERE, '.keys.json'), encoding='utf-8'))
+    _guard(rel, keys)
     edits, extra = edits or {}, extra or {}
     for lang in (langs or LANGS):
         vals = []
