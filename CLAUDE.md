@@ -19,6 +19,38 @@ wrong:
 - **Translate per lesson, immediately after the rebuild, by hand.** Never
   batch translation across lessons.
 
+## The loop, per lesson
+
+This is the sequence, in order. It survives compaction because it lives here.
+Do not reorder it and do not skip step 2 or step 6.
+
+1. **Read the whole lesson.** `python3 /tmp/rds.py <path>` or cat it. As a
+   reader, not a checker.
+2. **Rebuild every figure in Python** from the inputs the page prints. Reading
+   the arithmetic finds nothing; recomputing finds the defect.
+3. **Run the checker** and take what it says:
+   `python3 scripts/curriculum/craft.py <slot>`
+4. **Write.** Edit the English with a Python script that asserts on every
+   `old` string before replacing, so a bad anchor aborts before the file is
+   written. Never hand-edit the HTML.
+5. **Translate immediately, by hand, all eleven.** Never batch across lessons.
+   - `python3 scripts/curriculum/translate.py keys <slug>` writes
+     `scripts/curriculum/.keys.json`
+   - Where a key is an edit of an existing one, splice the stored locale value
+     rather than retranslating it.
+   - `python3 scripts/i18n/build.py curriculum/<tier>/<slug>.html`
+   - `python3 scripts/i18n/checks/run.py <slug>`
+   - Read the rendered locale pages as prose.
+6. **Close out.** `python3 scripts/curriculum/hubs.py`, then
+   `python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>`, then a ledger
+   row in `scripts/curriculum/academy-ledger.tsv` saying what was *found*,
+   then commit, then push to both branches.
+
+Two traps that have bitten: the memory stores apostrophes as `&rsquo;` in most
+locales and as the bare character in Turkish, so match both when splicing; and
+the builder silently skips a locale if any string is untranslated, so a page
+that "builds" may still be English.
+
 ## The corpus
 
 - Lessons: `education/curriculum/<tier>/<slot>-<slug>.html`, tiers `beginner`,
