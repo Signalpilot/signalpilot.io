@@ -14,6 +14,37 @@ from numfmt import localise
 LANGS = ['de','es','fr','it','pt','nl','ru','ja','tr','hu','ar']
 RTL = {'ar'}
 
+# A translated text node keeps the English node's surrounding whitespace, which
+# is usually what you want: the space in "This is why <a>lesson 12</a> asks" is
+# the sentence's, not the tag's. It is wrong in two places, and both are visible
+# on the page. A locale whose translation of that node opens with a comma gets
+# "Lektion 12 , was du"; and Japanese, which sets no space between a word and
+# the particle that follows it, gets "レッスン12 は".
+NO_SPACE_BEFORE = ',.;:!?)]}\u00bb\u2026\u060c\u061b\u061f'
+# French sets a space before the high punctuation marks, so only the low ones
+# and the closers count there.
+NO_SPACE_BEFORE_FR = ',.)]}\u2026'
+_CJK = '\u3000-\u303f\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uff00-\uffef'
+# Spaces on either side of a tag run with Japanese text on both sides. Only
+# literal spaces, never newlines, so the indentation between block elements is
+# left alone.
+# Two rules, both about a space that sits next to a tag boundary. A space is
+# right between Latin and Japanese ("market maker であり") and wrong everywhere
+# else, so each rule checks the character on the far side and leaves a Latin
+# one alone.
+CJK_AFTER_TAG = re.compile(r'([^ \nA-Za-z])[ ]*((?:<[^>]+>)+)[ ]+(?=[%s0-9])' % _CJK)
+CJK_BEFORE_TAG = re.compile(r'([%s])[ ]+((?:<[^>]+>)+)(?=[^ A-Za-z])' % _CJK)
+
+
+def _rejoin(seg, v, lang):
+    """Put the translation back inside the English node's whitespace."""
+    lead = seg[:len(seg) - len(seg.lstrip())]
+    tail = seg[len(seg.rstrip()):]
+    stop = NO_SPACE_BEFORE_FR if lang == 'fr' else NO_SPACE_BEFORE
+    if lead == ' ' and v[:1] in stop:
+        lead = ''
+    return lead + v + tail
+
 DISCLAIMER = {
  'en': ("Educational only.", "Trading involves substantial risk of loss. Not financial advice. Past performance does not guarantee future results."),
  'de': ("Nur zu Bildungszwecken.", "Der Handel ist mit erheblichem Verlustrisiko verbunden. Keine Finanzberatung. Vergangene Wertentwicklung ist keine Garantie für zukünftige Ergebnisse."),
@@ -51,7 +82,7 @@ def inject(src_path, lang, tmap, rel):
             continue
         v = tmap.get(f'text:{i}')
         if v:
-            parts[i] = seg.replace(seg.strip(), v)
+            parts[i] = _rejoin(seg, v, lang)
         else:
             # The extractor skips a text node with no two consecutive letters,
             # so a cell reading "66.7%" is not a translatable segment and would
@@ -61,6 +92,11 @@ def inject(src_path, lang, tmap, rel):
             if n:
                 parts[i] = seg.replace(seg.strip(), n)
     out = ''.join(parts)
+    if lang == 'ja':
+        b = out.find('<body')
+        if b > 0:
+            body = CJK_AFTER_TAG.sub(r'\1\2', out[b:])
+            out = out[:b] + CJK_BEFORE_TAG.sub(r'\1\2', body)
 
     out = re.sub(r'<html[^>]*>', f'<html lang="{lang}"' + (' dir="rtl"' if lang in RTL else '') + '>', out, count=1)
     out = re.sub(r'("inLanguage":\s*")[a-z-]+(")', lambda m: m.group(1)+lang+m.group(2), out)
