@@ -36,12 +36,17 @@ CJK_AFTER_TAG = re.compile(r'([^ \nA-Za-z])[ ]*((?:<[^>]+>)+)[ ]+(?=[%s0-9])' % 
 CJK_BEFORE_TAG = re.compile(r'([%s])[ ]+((?:<[^>]+>)+)(?=[^ A-Za-z])' % _CJK)
 
 
+# Turkish attaches a case suffix to a number or a name with an apostrophe, so a
+# translation of the node after a link opens with one: "ders 12'in konusudur".
+APOSTROPHE_FIRST = ('&rsquo;', '&#8217;', '&apos;', '\u2019')
+
+
 def _rejoin(seg, v, lang):
     """Put the translation back inside the English node's whitespace."""
     lead = seg[:len(seg) - len(seg.lstrip())]
     tail = seg[len(seg.rstrip()):]
     stop = NO_SPACE_BEFORE_FR if lang == 'fr' else NO_SPACE_BEFORE
-    if lead == ' ' and v[:1] in stop:
+    if lead == ' ' and (v[:1] in stop or v.startswith(APOSTROPHE_FIRST)):
         lead = ''
     return lead + v + tail
 
