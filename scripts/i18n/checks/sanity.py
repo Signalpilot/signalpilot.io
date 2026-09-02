@@ -36,7 +36,8 @@ OK_DOUBLES = {
     # Russian "что что-то" (that something) and Arabic case-marked repeats
     # ("سوق سوقًا" = one market ... another market) are grammar, not stutters.
     'ru': {'что что'},
-    'ar': {'سوق سوق', 'صفاً صفاً', 'صفا صفا', 'أمراً أمراً', 'أمرا أمرا'},
+    'ar': {'سوق سوق', 'صفاً صفاً', 'صفا صفا', 'أمراً أمراً', 'أمرا أمرا',
+           'اثنتين اثنتين', 'اثنين اثنين', 'ثلاثاً ثلاثاً', 'أربعاً أربعاً', 'شمعة شمعة', 'يوماً يوماً'},
     # Hungarian forms "one X after another" by repeating the noun:
     # "ügylet ügylet után" is trade after trade, not a stutter.
     'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés', 'melyik melyik', 'felállás felállás', 'kitörés kitörés'},
