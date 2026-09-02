@@ -1,5 +1,13 @@
 # Signal Pilot
 
+> **Read this before doing anything, and read it again after any context
+> reset.** If you are about to touch the Learn curriculum and you have not
+> read `scripts/curriculum/GUIDEBOOK.md` in this context window, stop and read
+> it now, end to end. Working from a summary of it produces lessons that pass
+> the checker and fail the reader, which is the exact failure this whole
+> project exists to prevent. This is not optional and it does not expire.
+
+
 ## Curriculum work: read the guidebook first
 
 Any work on the Learn curriculum — writing a lesson, editing one, translating
