@@ -126,7 +126,7 @@ def check(path, slot=0):
 
     # -- the claim ---------------------------------------------------------
     claim = text(part_span(body, 'claim'))
-    if not re.search(r'\d', claim):
+    if not has_figure(claim):
         f.append('claim carries no number')
 
     # -- the bounds --------------------------------------------------------
