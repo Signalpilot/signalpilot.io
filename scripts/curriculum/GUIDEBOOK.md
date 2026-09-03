@@ -432,6 +432,13 @@ what somebody made, it does not go on the page.
 because the convention was twenty *steps* and the page never said so. A figure
 a reader cannot reproduce is a defect even when it is correct.
 
+**A simulated figure names its seed, its run count and its length.** Lesson 22
+printed five ruin probabilities to two decimals from two hundred thousand
+careers and never said which stream produced them, so nothing on the page could
+be checked, only approximately agreed with. Every other simulation in the module
+states its seed; this one now does too. A number nobody can land on exactly is
+an assertion wearing a decimal point.
+
 **Recompute; do not read.** Rebuild every number in Python from the stated
 inputs. Reading the arithmetic finds nothing. Recomputing found that lesson 34
 claimed an advance "occupied half as many of the fourteen slots" when ten
