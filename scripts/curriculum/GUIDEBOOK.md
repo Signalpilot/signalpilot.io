@@ -685,7 +685,12 @@ corpus, and the corpus is on disk.
 - A missing slot is shown as a gap. An orphaned `_merged` file is never a link
   target. A gap is a fact; a broken link is a claim.
 - Where a locale has an index it is built from that locale's lesson files, not
-  translated on its own, so it cannot say anything the lessons do not.
+  translated on its own, so it cannot say anything the lessons do not. This was
+  a rule before it was true: `hubs.py` built only the English page, and for as
+  long as it did, every locale index sat on the pre-renumber course with
+  English titles, English links and one Start button opening an orphan. A rule
+  nothing enforces is a wish. It builds all twelve now, and `--check` fails on
+  any of them.
 
 The check is the development's first question asked one level up: could a
 reader reproduce every number on the index from the lesson files, without
@@ -744,26 +749,26 @@ are linked from nowhere.
 ### What "done" means
 
 A slot is **rebuilt** when it exists in the Learn form: seven parts, the
-reading contract held, every figure recomputed. Slots 1 to 62 are rebuilt.
-Slots 63 to 85 are still the old lessons, except 64 and 67, which do not exist
+reading contract held, every figure recomputed. Slots 1 to 63 are rebuilt.
+Slots 64 to 85 are still the old lessons, except 64 and 67, which do not exist
 at all.
 
 A slot has had its **full treatment** when it has additionally passed the step
 four checklist end to end, in English and in all eleven locales, and carries a
-ledger row saying what that found. Slots 1 to 62 have.
+ledger row saying what that found. Slots 1 to 63 have.
 
 A module is **complete** when every slot in it is rebuilt. Modules 1 to 7 are
-complete, which is slots 1 to 61. Module 8 is one of nine: slot 62 is written,
-63, 65, 66, 68, 69 and 70 are still legacy, and 64 and 67 have never been
+complete, which is slots 1 to 61. Module 8 is two of nine: slots 62 and 63 are
+written, 65, 66, 68, 69 and 70 are still legacy, and 64 and 67 have never been
 written. Modules 9 to 11 have not been started.
 
 ### Open
 
-- Full treatment of slots 63 to 85, and writing 64 and 67 from nothing.
+- Full treatment of slots 64 to 85, and writing 64 and 67 from nothing.
 - Eleven module quizzes. None exists; the legacy per-lesson quizzes are being
   dropped, not carried.
-- The four tier pages and the learning path are still typed by hand. Only the
-  index is a build artifact.
+- The four tier pages and the learning path are still typed by hand. All
+  twelve indexes are build artifacts.
 - Ledger debts: percent spacing in five locales, Japanese inline-emphasis
   whitespace, English meta descriptions on locale pages, second-person
   register per locale, composite trader names, price display on localised
