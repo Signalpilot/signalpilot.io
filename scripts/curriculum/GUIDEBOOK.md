@@ -740,30 +740,29 @@ is a rule, and rules do not go stale.
 | 10. The Profession | 76&ndash;81 | Professional |
 | 11. Electives | 82&ndash;85 | Professional |
 
-Slot 67 is planned and unwritten, inside module 8, so 84 lessons exist against
-85 numbered slots. Slots 62 and 64 were two of the three such holes and were
-written from nothing on 3 September 2026. The rebuilt lessons run from about
+All 85 numbered slots now exist. The three holes in module 8 &mdash; slots 62,
+64 and 67 &mdash; were written from nothing on 3 September 2026. The rebuilt lessons run from about
 1,500 to about 4,900 words, median close to 2,500. Fifteen orphaned `_merged` files sit alongside the corpus and
 are linked from nowhere.
 
 ### What "done" means
 
 A slot is **rebuilt** when it exists in the Learn form: seven parts, the
-reading contract held, every figure recomputed. Slots 1 to 66 are rebuilt.
-Slots 68 to 85 are still the old lessons, and 67 does not exist at all.
+reading contract held, every figure recomputed. Slots 1 to 67 are rebuilt.
+Slots 68 to 85 are still the old lessons.
 
 A slot has had its **full treatment** when it has additionally passed the step
 four checklist end to end, in English and in all eleven locales, and carries a
-ledger row saying what that found. Slots 1 to 66 have.
+ledger row saying what that found. Slots 1 to 67 have.
 
 A module is **complete** when every slot in it is rebuilt. Modules 1 to 7 are
-complete, which is slots 1 to 61. Module 8 is five of nine: slots 62 to 66 are
-written, 68, 69 and 70 are still legacy, and 67 has never been written.
+complete, which is slots 1 to 61. Module 8 is six of nine: slots 62 to 67 are
+written and 68, 69 and 70 are still legacy.
 Modules 9 to 11 have not been started.
 
 ### Open
 
-- Full treatment of slots 68 to 85, and writing 67 from nothing.
+- Full treatment of slots 68 to 85.
 - Eleven module quizzes. None exists; the legacy per-lesson quizzes are being
   dropped, not carried.
 - The four tier pages and the learning path are still typed by hand. All
