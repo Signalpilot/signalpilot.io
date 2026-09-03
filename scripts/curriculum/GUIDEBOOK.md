@@ -749,22 +749,21 @@ are linked from nowhere.
 ### What "done" means
 
 A slot is **rebuilt** when it exists in the Learn form: seven parts, the
-reading contract held, every figure recomputed. Slots 1 to 65 are rebuilt.
-Slots 66 to 85 are still the old lessons, except 67, which does not exist at
-all.
+reading contract held, every figure recomputed. Slots 1 to 66 are rebuilt.
+Slots 68 to 85 are still the old lessons, and 67 does not exist at all.
 
 A slot has had its **full treatment** when it has additionally passed the step
 four checklist end to end, in English and in all eleven locales, and carries a
-ledger row saying what that found. Slots 1 to 65 have.
+ledger row saying what that found. Slots 1 to 66 have.
 
 A module is **complete** when every slot in it is rebuilt. Modules 1 to 7 are
-complete, which is slots 1 to 61. Module 8 is four of nine: slots 62 to 65 are
-written, 66, 68, 69 and 70 are still legacy, and 67 has never been written.
+complete, which is slots 1 to 61. Module 8 is five of nine: slots 62 to 66 are
+written, 68, 69 and 70 are still legacy, and 67 has never been written.
 Modules 9 to 11 have not been started.
 
 ### Open
 
-- Full treatment of slots 66 to 85, and writing 67 from nothing.
+- Full treatment of slots 68 to 85, and writing 67 from nothing.
 - Eleven module quizzes. None exists; the legacy per-lesson quizzes are being
   dropped, not carried.
 - The four tier pages and the learning path are still typed by hand. All
@@ -772,4 +771,5 @@ Modules 9 to 11 have not been started.
 - Ledger debts: percent spacing in five locales, Japanese inline-emphasis
   whitespace, English meta descriptions on locale pages, second-person
   register per locale, composite trader names, price display on localised
-  commercial pages.
+  commercial pages, and seventeen stored Japanese values still using a
+  minority synonym for "net".
