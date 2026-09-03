@@ -10,8 +10,9 @@ English source of truth the locale files are translated from.
     python3 scripts/soro/fetch.py            # fetch and write
     python3 scripts/soro/fetch.py --check    # report new slugs, write nothing
 
-A post already in the file is left alone: its body is not refetched and the
-translations keyed to it stay valid. Only new slugs are added.
+A post already in the file is left alone: its body is not refetched, the
+translations keyed to it stay valid, and a cover adopted by covers.py is not
+replaced by Soro's. Only new slugs are added.
 """
 import json
 import os
