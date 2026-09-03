@@ -735,29 +735,31 @@ is a rule, and rules do not go stale.
 | 10. The Profession | 76&ndash;81 | Professional |
 | 11. Electives | 82&ndash;85 | Professional |
 
-Slots 62, 64 and 67 are planned and unwritten, all three inside module 8, so
-82 lessons exist against 85 numbered slots. The rebuilt lessons run from about
+Slots 64 and 67 are planned and unwritten, both inside module 8, so 83 lessons
+exist against 85 numbered slots. Slot 62 was the third such hole and was
+written from nothing on 3 September 2026. The rebuilt lessons run from about
 1,500 to about 4,900 words, median close to 2,500. Fifteen orphaned `_merged` files sit alongside the corpus and
 are linked from nowhere.
 
 ### What "done" means
 
 A slot is **rebuilt** when it exists in the Learn form: seven parts, the
-reading contract held, every figure recomputed. Slots 1 to 49 are rebuilt.
-Slots 50 to 85 are still the old lessons.
+reading contract held, every figure recomputed. Slots 1 to 62 are rebuilt.
+Slots 63 to 85 are still the old lessons, except 64 and 67, which do not exist
+at all.
 
 A slot has had its **full treatment** when it has additionally passed the step
 four checklist end to end, in English and in all eleven locales, and carries a
-ledger row saying what that found. Slot 1 has. Nothing else has yet.
+ledger row saying what that found. Slots 1 to 62 have.
 
-A module is **complete** when every slot in it is rebuilt. Modules 1 to 5 are
-complete, which is slots 1 to 47. Module 6 is two of five: slots 48 and 49 are
-rebuilt, and 50, 51 and 52 are still legacy. Modules 7 to 11 have not been
-started.
+A module is **complete** when every slot in it is rebuilt. Modules 1 to 7 are
+complete, which is slots 1 to 61. Module 8 is one of nine: slot 62 is written,
+63, 65, 66, 68, 69 and 70 are still legacy, and 64 and 67 have never been
+written. Modules 9 to 11 have not been started.
 
 ### Open
 
-- Full treatment of slots 2 to 85.
+- Full treatment of slots 63 to 85, and writing 64 and 67 from nothing.
 - Eleven module quizzes. None exists; the legacy per-lesson quizzes are being
   dropped, not carried.
 - The four tier pages and the learning path are still typed by hand. Only the
