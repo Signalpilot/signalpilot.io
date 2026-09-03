@@ -61,8 +61,9 @@
     '.soro-rail-btn:hover{border-color:rgba(118,221,255,.55)}',
     '.soro-rail-btn:focus-visible{outline:2px solid #76ddff;outline-offset:2px}',
     '.soro-rail-btn[disabled]{opacity:0;pointer-events:none}',
-    '.soro-rail-prev{left:-8px}',
-    '.soro-rail-next{right:-8px}',
+    '.soro-rail-prev{inset-inline-start:-8px}',
+    '.soro-rail-next{inset-inline-end:-8px}',
+    '[dir="rtl"] .soro-rail-btn svg{transform:scaleX(-1)}',
     '@media (max-width:720px){.soro-rail-btn{display:none}}',
     '@media (prefers-reduced-motion:reduce){',
     '  #' + MOUNT + ' ' + LIST + '{scroll-behavior:auto}',
@@ -84,11 +85,20 @@
     document.head.appendChild(el);
   }
 
+  /* The locale blogs render their own cards and put the reader's own wording
+     for these two controls on the mount, so a screen reader on the Japanese
+     page is not told "Next articles" in English. */
+  function railLabel(dir) {
+    var mount = document.getElementById(MOUNT);
+    var own = mount && mount.getAttribute(dir < 0 ? 'data-rail-prev' : 'data-rail-next');
+    return own || (dir < 0 ? 'Previous articles' : 'Next articles');
+  }
+
   function arrow(dir) {
     var b = document.createElement('button');
     b.type = 'button';
     b.className = 'soro-rail-btn soro-rail-' + (dir < 0 ? 'prev' : 'next');
-    b.setAttribute('aria-label', dir < 0 ? 'Previous articles' : 'Next articles');
+    b.setAttribute('aria-label', railLabel(dir));
     b.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" '
       + 'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
       + 'stroke-linejoin="round" aria-hidden="true"><polyline points="'
@@ -102,6 +112,17 @@
     var card = list.querySelector(CARD);
     var w = card ? card.getBoundingClientRect().width + 16 : 336;
     return Math.max(w, list.clientWidth - w);
+  }
+
+  function rtl(list) {
+    return getComputedStyle(list).direction === 'rtl';
+  }
+
+  /* On a right-to-left rail scrollLeft counts down from 0 to minus the
+     overflow, so both the arrows and the end tests work on this instead: how
+     far the reader has moved, always 0 at the start and max at the end. */
+  function moved(list) {
+    return rtl(list) ? -list.scrollLeft : list.scrollLeft;
   }
 
   function attach(list) {
@@ -123,16 +144,17 @@
       // widths leave a sliver at the far end, so both ends need slack.
       var SLACK = 8;
       var max = list.scrollWidth - list.clientWidth;
-      prev.disabled = list.scrollLeft <= SLACK;
-      next.disabled = list.scrollLeft >= max - SLACK;
+      prev.disabled = moved(list) <= SLACK;
+      next.disabled = moved(list) >= max - SLACK;
     }
 
-    prev.addEventListener('click', function () {
-      list.scrollBy({ left: -step(list), behavior: 'smooth' });
-    });
-    next.addEventListener('click', function () {
-      list.scrollBy({ left: step(list), behavior: 'smooth' });
-    });
+    function go(forward) {
+      var d = step(list) * (forward ? 1 : -1);
+      list.scrollBy({ left: rtl(list) ? -d : d, behavior: 'smooth' });
+    }
+
+    prev.addEventListener('click', function () { go(false); });
+    next.addEventListener('click', function () { go(true); });
 
     list.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
