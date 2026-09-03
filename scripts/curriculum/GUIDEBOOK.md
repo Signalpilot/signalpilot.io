@@ -439,6 +439,13 @@ against seven is not half; that lesson 35's tightest count was one window too
 wide and the stale figure had spread to the opening claim and the meta
 description; and that lesson 36 was not reproducible at all.
 
+**A figure changed in one lesson can falsify a figure in another.** Correcting
+the micro-cap's spread in lesson 12 silently broke lesson 16, four lessons
+later, which had computed a breakeven win rate from the old quote. Reading
+would never have found it; only recomputing did. So when a shared figure
+changes, grep the corpus for the instrument or the quantity and recompute
+every lesson that spends it, in the same sitting, before committing.
+
 **When a defect turns out to be systemic, sweep it corpus-wide in the same
 sitting.** Reading one Japanese lesson found one character doing duty for both
 a price gap and a computational window. That was 113 memory values across the
