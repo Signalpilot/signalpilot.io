@@ -446,6 +446,13 @@ would never have found it; only recomputing did. So when a shared figure
 changes, grep the corpus for the instrument or the quantity and recompute
 every lesson that spends it, in the same sitting, before committing.
 
+It has now happened twice. Correcting lesson 18's drawdown columns broke
+lesson 20's sizing table and lesson 24's recovery table, both of which are
+the same simulation read in a different direction. So the sweep is not a
+precaution, it is a step: after any table cell changes, search every lesson
+for the old numerals themselves, not for the subject. The search is what
+found both breaks; reading did not, and neither did the checker.
+
 **When a defect turns out to be systemic, sweep it corpus-wide in the same
 sitting.** Reading one Japanese lesson found one character doing duty for both
 a price gap and a computational window. That was 113 memory values across the
