@@ -39,10 +39,12 @@ LOCALE = {
     'ar': dict(dec='.', grp=',',  cur='{n} دولار',  pct='{n} %', grp_min=4),
 }
 
-# ~ approx, sign, $, digits with English separators, R/x multiplier, percent.
+# ~ approx, sign, $, digits with English separators, an optional space, R/x
+# multiplier, percent. The space is captured and re-emitted so "0.0700 R"
+# comes back as "0,0700 R" rather than losing its gap.
 # Anything else -- ':', '-' between digits, '/', '>', '=', an arrow, a K/M/B
 # suffix -- fails to match and is left alone.
-PURE = re.compile(r'^(~?)([-+−]?)(\$?)(\d[\d,]*(?:\.\d+)?)([Rx]?)\s?(%?)$')
+PURE = re.compile(r'^(~?)([-+−]?)(\$?)(\d[\d,]*(?:\.\d+)?)(\s?)([Rx]?)\s?(%?)$')
 
 
 def _regroup(digits, grp, grp_min):
@@ -64,7 +66,7 @@ def localise(text, lang):
     m = PURE.match(text)
     if not m:
         return None
-    approx, sign, cur, number, suffix, pct = m.groups()
+    approx, sign, cur, number, gap, suffix, pct = m.groups()
 
     # A bare integer with no grouping, no currency and no percent reads the
     # same in every locale -- and a four-digit one is as likely to be a year
@@ -78,7 +80,7 @@ def localise(text, lang):
     body = _regroup(intpart, conf['grp'], conf['grp_min']) if grouped else intpart
     if has_dec:
         body += conf['dec'] + frac
-    body += suffix
+    body += gap + suffix
 
     if cur:
         body = conf['cur'].format(n=body)
