@@ -30,13 +30,13 @@ OK_DOUBLES = {
     'tr': {'sik sik', 'adim adim', 'çok çok', 'uzun uzun', 'mum mum', 'ciddi ciddi', 'topu topu', 'sık sık', 'adım adım', 'yavaş yavaş', 'kat kat', 'yer yer', 'tek tek', 'tekrar tekrar', 'bir bir', 'ayrı ayrı', 'teker teker', 'kademe kademe', 'dilim dilim', 'dakika dakika', 'saat saat', 'gün gün', 'parça parça', 'azar azar', 'satır satır', 'satir satir', 'emir emir', 'fiyat fiyat', 'zaman zaman', 'fersah fersah', 'döne döne', 'birer birer', 'ikişer ikişer', 'üçer üçer', 'dörder dörder', 'beşer beşer', 'altışar altışar'},
     # French reflexives put the subject and object pronoun side by side:
     # "vous vous battez", "nous nous attendons". Grammar, not a stutter.
-    'fr': {'vous vous', 'nous nous', 'se se', 'reste reste'},
+    'fr': {'vous vous', 'nous nous', 'se se', 'reste reste', 'sont sont'},
     'it': {'via via','passo passo','man mano','piano piano'},
-    'nl': {'dat dat', 'die die', 'aan aan', 'wat wat', 'verliezers verliezers'},
+    'nl': {'dat dat', 'die die', 'aan aan', 'wat wat', 'verliezers verliezers', 'het het', 'je je'},
     # Russian "что что-то" (that something) and Arabic case-marked repeats
     # ("سوق سوقًا" = one market ... another market) are grammar, not stutters.
     'ru': {'что что'},
-    'ar': {'سوق سوق', 'صفاً صفاً', 'صفا صفا', 'أمراً أمراً', 'أمرا أمرا',
+    'ar': {'سوق سوق', 'صفاً صفاً', 'صفا صفا', 'أمراً أمراً', 'أمرا أمرا', 'أمرًا أمرًا',
            'واحداً واحداً', 'واحدا واحدا', 'اثنتين اثنتين', 'اثنين اثنين', 'ثلاثاً ثلاثاً', 'أربعاً أربعاً', 'شمعة شمعة', 'يوماً يوماً'},
     # Hungarian forms "one X after another" by repeating the noun:
     # "ügylet ügylet után" is trade after trade, not a stutter.

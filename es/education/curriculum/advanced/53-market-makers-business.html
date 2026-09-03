@@ -16,20 +16,19 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, viewport-fit=cover"/>
   <meta name="robots" content="index,follow"/>
-  <!-- AGGRESSIVE CACHE PREVENTION -->
+  <!-- AGGRESSIVE CACHE PREVENTION: Forces fresh load every time -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
-  <title>Algoritmos de los market makers: cómo ganan dinero contigo — Signal Pilot Education</title>
-  <meta name="description" content="Market Maker Algorithms: How They Profit From You">
-  <meta name="sp-level" content="Intermediate"><meta name="sp-order" content="40">
+  <title>Qué paga el diferencial &mdash; Signal Pilot Education</title>
+  <meta name="description" content="A break-even spread is twice the chance the next order knows something, times what it knows. That line prices a penny spread at one informed order in a thousand, refuses to price a fifty-cent one at all, and says your own crossing costs $453,600 a year at sixty round trips in dime-wide markets.">
   <meta name="theme-color" content="#05070d">
   <link rel="canonical" href="https://www.signalpilot.io/es/education/curriculum/advanced/53-market-makers-business.html">
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.signalpilot.io/es/education/curriculum/advanced/53-market-makers-business.html">
-  <meta property="og:title" content="Market Maker Algorithms: How They Profit From You — Signal Pilot Education">
-  <meta property="og:description" content="Market Maker Algorithms: How They Profit From You">
+  <meta property="og:title" content="What the Spread Is Paying For &mdash; Signal Pilot Education">
+  <meta property="og:description" content="A break-even spread is twice the chance the next order knows something, times what it knows. That line prices a penny spread at one informed order in a thousand, refuses to price a fifty-cent one at all, and says your own crossing costs $453,600 a year at sixty round trips in dime-wide markets.">
   <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -37,11 +36,13 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.signalpilot.io/es/education/curriculum/advanced/53-market-makers-business.html">
-  <meta name="twitter:title" content="Market Maker Algorithms: How They Profit From You — Signal Pilot Education">
-  <meta name="twitter:description" content="Market Maker Algorithms: How They Profit From You">
+  <meta name="twitter:title" content="What the Spread Is Paying For &mdash; Signal Pilot Education">
+  <meta name="twitter:description" content="A break-even spread is twice the chance the next order knows something, times what it knows. That line prices a penny spread at one informed order in a thousand, refuses to price a fifty-cent one at all, and says your own crossing costs $453,600 a year at sixty round trips in dime-wide markets.">
   <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
-  <link rel="prev" href="https://www.signalpilot.io/education/curriculum/advanced/60-options-dealers.html"/>
-  <link rel="next" href="https://www.signalpilot.io/education/curriculum/intermediate/47-macro-cycle.html"/>
+  <link rel="prev" href="https://www.signalpilot.io/education/curriculum/intermediate/52-confirmation-bias.html"/>
+  <link rel="next" href="https://www.signalpilot.io/education/curriculum/advanced/54-where-your-order-goes.html"/>
+  <meta name="sp-level" content="Advanced">
+  <meta name="sp-order" content="53">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Gugi&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <!-- SignalPilot Theme System -->
@@ -53,139 +54,13 @@
   <link rel="stylesheet" href="/education/assets/auth-ui.css">
   <link rel="stylesheet" href="/education/assets/trial-cta.css">
   <link rel="stylesheet" href="/education/assets/blog-links.css">
-  <!-- Logger must load first -->
+  <link rel="stylesheet" href="/education/assets/discussions.css">
+  <!-- Logger must load first, before other scripts that use it -->
   <script src="/education/assets/logger.js"></script>
   <script src="/education/assets/dev-utils.js" defer></script>
-  <script src="/education/assets/structured-data.js" defer></script>
-  <script src="/education/assets/lazy-load.js" defer></script>
-  <script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
-  <style>
-    /* Mobile-friendly responsive layout - prevent horizontal scroll */
-    @media (max-width: 768px) {
-      .prose pre,
-      pre {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        white-space: pre;
-        max-width: 100%;
-        font-size: 0.75rem !important;
-        line-height: 1.4;
-        padding: 0.75rem !important;
-      }
-      .prose pre code,
-      pre code {
-        white-space: pre;
-        word-break: normal;
-        overflow-wrap: normal;
-        font-size: 0.75rem !important;
-      }
-      /* Prevent body horizontal scroll */
-      body {
-        overflow-x: hidden;
-      }
-      .wrap,
-      .prose {
-        max-width: 100vw;
-        overflow-x: hidden;
-      }
-
-      /* Convert grid layouts to single column on mobile */
-      div[style*="display:grid"] {
-        display: block !important;
-        grid-template-columns: unset !important;
-      }
-
-      div[style*="display:grid"] > div {
-        margin-bottom: 1.5rem !important;
-        max-width: 100% !important;
-      }
-
-      /* Mobile table styling - convert to stacked cards (NO horizontal scroll) */
-      table {
-        border: 0;
-        width: 100% !important;
-        font-size: 0.85rem !important;
-      }
-
-      table caption {
-        display: block !important;
-        font-size: 0.95rem !important;
-        text-align: left !important;
-        margin-bottom: 1rem !important;
-        font-weight: 600 !important;
-        color: inherit !important;
-        width: 100% !important;
-      }
-
-      table thead {
-        display: none;
-      }
-
-      table tbody,
-      table tr {
-        display: block;
-        width: 100%;
-      }
-
-      table th {
-        display: none;
-      }
-
-      table tr {
-        margin-bottom: 1.25rem;
-        padding: 0.875rem;
-        border-radius: 6px;
-        background: rgba(255, 255, 255, 0.04) !important;
-        border-left: 3px solid rgba(91, 138, 255, 0.6);
-        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-      }
-
-      table td {
-        display: block !important;
-        text-align: left !important;
-        padding: 0.375rem 0 !important;
-        padding-left: 0 !important;
-        border: none;
-        font-size: 0.85rem;
-        width: 100% !important;
-      }
-
-      table td span {
-        font-size: 0.8rem !important;
-      }
-
-      table td br {
-        display: block;
-        content: "";
-        margin: 0.25rem 0;
-      }
-
-      /* Color coding for winning/losing trades */
-      table tr[style*="rgba(255,82,82"] {
-        border-left-color: #ff5252 !important;
-        background: rgba(255, 82, 82, 0.1) !important;
-      }
-
-      table tr[style*="rgba(34,197,94"] {
-        border-left-color: #22c55e !important;
-        background: rgba(34, 197, 94, 0.1) !important;
-      }
-
-      table tr[style*="rgba(251,191,36"] {
-        border-left-color: #fbbf24 !important;
-        background: rgba(251, 191, 36, 0.1) !important;
-      }
-
-      /* Prevent callout boxes from breaking */
-      .callout-info,
-      .callout-warning,
-      .callout-key {
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-      }
-    }
-  </style>
-  <link rel="stylesheet" href="/education/assets/discussions.css">
+<script src="/education/assets/structured-data.js" defer></script>
+<script src="/education/assets/lazy-load.js" defer></script>
+<script defer data-domain="signalpilot.io" src="https://plausible.io/js/script.js"></script>
   <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/curriculum/advanced/53-market-makers-business.html">
   <link rel="alternate" hreflang="de" href="https://www.signalpilot.io/de/education/curriculum/advanced/53-market-makers-business.html">
   <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/education/curriculum/advanced/53-market-makers-business.html">
@@ -201,6 +76,7 @@
   <link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/curriculum/advanced/53-market-makers-business.html">
 </head>
 <body class="table-accordions-mobile">
+
   <div class="bg-stars" aria-hidden="true"></div>
   <canvas id="constellations" class="sp-constellations" aria-hidden="true"></canvas>
   <div class="bg-aurora" aria-hidden="true"></div>
@@ -224,17 +100,15 @@
 </header>
 
 <article class="article">
-
   <header>
     <div class="wrap">
       <nav class="breadcrumb" aria-label="Ruta de navegación">
-        <a href="/education/">Inicio</a> › <a href="/education/advanced.html">Currículo avanzado</a> › <span>Algoritmos de market maker</span>
+        <a href="/education/">Inicio</a> &rsaquo; <a href="/education/advanced.html">Currículo avanzado</a> &rsaquo; <span>Qué paga el diferencial</span>
       </nav>
-      <span class="badge">🟠 Avanzado &bull; Lección 53 de 85</span>
-      <h1 class="headline xl">Algoritmos de los market makers: cómo ganan dinero contigo</h1>
-      <div class="meta">Lectura de unos 30 min &bull; Módulo 7: El otro lado<span class="view-count" data-view-count style="display:none"> • <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg> <span data-view-num></span></span></div>
+      <span class="badge">&#128992; Avanzado &bull; Lección 53 de 85</span>
+      <h1 class="headline xl">Qué paga el diferencial</h1>
+      <div class="meta">Lectura de unos 15 min &bull; Módulo 7: El otro lado<span class="view-count" data-view-count style="display:none"> &bull; <span data-view-num></span></span></div>
 
-      <!-- Author Byline -->
       <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(118,221,255,0.2); margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-2);">
         <div>
           <div style="font-weight: 600; color: var(--text-1);">Signal Pilot</div>
@@ -242,11 +116,10 @@
         </div>
       </div>
 
-      <!-- Article Progress Indicator -->
       <div class="article-progress" style="--progress:0%">
         <div class="progress-circle"><span>0 %</span></div>
         <div class="progress-text">
-          <strong>¡Vas avanzando!</strong>
+          <strong>¡Estás progresando!</strong>
           <div style="font-size:.85rem;color:var(--muted)">Sigue leyendo para completar esta lección</div>
         </div>
       </div>
@@ -255,637 +128,125 @@
 
   <div class="wrap article-grid">
     <div class="prose">
-      <div style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)"><h3 style="margin:0 0 1rem 0">🎯 Lo que aprenderás</h3>
-        <p style="margin:0 0 0.75rem 0">Al terminar esta lección sabrás:</p>
-        <ul style="line-height:1.8;margin:0 0 0 1.5rem">
-          <li>Algoritmos de los market makers: cotizan a la compra y a la venta, y ajustan según inventario y riesgo</li>
-          <li>Por qué un market maker sesga sus cotizaciones cuando se le acumula inventario &mdash; y por qué eso es algo que ocurre dentro de su libro, no una señal que puedas leer en una pantalla</li>
-          <li>Qué son realmente el spoofing, el layering y el quote stuffing, y contra quién va realmente el historial sancionador: operadores por cuenta propia y mesas bancarias, no los mayoristas que ejecutan tus órdenes</li>
-          <li>Marco: tu coste de ejecución es la parte de esto que controlas &rarr; órdenes limitadas, horas líquidas, y saber cómo enruta tu bróker &rarr; medido contra tus propias ejecuciones, no contra una historia sobre quién está al otro lado</li>
-          <li>Cómo convertir un spread en el ganador medio que te obliga a encontrar, que es la única unidad en la que un coste de ejecución se puede comparar con una ventaja</li>
-        </ul>
-      </div>
+      <p data-part="claim" style="font-size:1.05rem;font-weight:500;margin-bottom:1.5rem">Un diferencial que apenas cubre costes es el doble de la probabilidad de que la siguiente orden sepa algo, multiplicada por cuánto sabe. Eso es una línea de álgebra, es la mitad informativa de lo que la lección 5 nombró y no supo poner en precio, y basta para leer casi toda una pantalla. Pásale el diferencial de un céntimo de una acción muy negociada y el mercado está poniendo en precio una orden informada de cada mil frente a un movimiento del tamaño de unos resultados. Pásale un diferencial de cincuenta céntimos de una empresa pequeña y la misma aritmética exige una orden informada de cada veinte, y con un movimiento menor exige que todas y cada una de las órdenes estén informadas, lo cual es imposible y es la línea que te dice que el resto de ese diferencial no va de información en absoluto. La misma ecuación pone precio al otro lado de la pantalla. Dice cuánto te cuesta cruzarla a ti, y con trescientas acciones y sesenta idas y vueltas al día, en los minutos en que el diferencial es de diez céntimos, son 1.800 dólares al día y el 324 por ciento de una cuenta de 140.000 dólares en un año.</p>
 
-<!-- Prerequisites Warning -->
-      <div class="callout-warning" style="margin:2rem 0;background:rgba(255,193,7,0.1);border-left:4px solid #ffc107">
-        <h4>📋 Requisitos previos</h4>
-        <p>Esta lección se apoya en conceptos de:</p>
-        <ul style="margin:0.5rem 0 0.75rem 1.5rem;line-height:1.8">
-            <li><a href="/education/curriculum/intermediate/27-the-liquidity-lie.html" style="color:#00d4aa;text-decoration:underline">Lección 1: la mentira de la liquidez</a>  — Entiende cómo las instituciones fabrican liquidez</li>
-            <li><a href="/education/curriculum/beginner/08-volume-and-delta.html" style="color:#00d4aa;text-decoration:underline">Lección 2: el volumen no miente</a>  — Domina el análisis de delta y los patrones de absorción</li>
-            <li><a href="/education/curriculum/beginner/06-the-candle-is-a-summary.html" style="color:#00d4aa;text-decoration:underline">Lección 03: La price action está muerta</a>  — Aprende los fundamentos del order flow y del tape reading</li>
-        </ul>
-        <p style="margin-top:0.75rem">✅ Si ya las has completado, estás listo. Si no, empieza por las lecciones de base.</p>
-      </div>
+      <p data-part="prereq" style="font-size:.9rem;color:var(--muted);margin-bottom:2rem"><strong>Requisitos previos:</strong> <a href="/education/curriculum/beginner/05-why-anyone-quotes.html">La lección 5</a>, que nombró el riesgo de inventario y la selección adversa y no puso precio a ninguno, y cuyo céntimo sobre 2.000 acciones convertido en cuatro céntimos sobre 300 es el caso al que esta lección por fin le pone un número, <a href="/education/curriculum/beginner/04-the-spread.html">la lección 4</a>, por la tasa de acierto de equilibrio de uno más s partido por dos y por qué el diferencial no significa nada hasta que se pone frente a tu stop, y <a href="/education/curriculum/beginner/10-every-trade-starts-negative.html">la lección 10</a>, que situó el diferencial en 2,00 dólares de una factura de 9,29 y es el recordatorio de que el diferencial es uno de cuatro cargos, así que cada cifra de la segunda tabla de abajo es un suelo y no un total.</p>
 
-      <p><b>Casi toda orden de mercado que colocas la ejecuta un mayorista, no una bolsa. No ganan en cada transacción &mdash; la Parte 2 trata de las órdenes que les cuestan dinero, y la razón entera de que existan los spreads es que parte del flujo está informado. Lo que sí es cierto, y basta, es que ganan en promedio, y ese promedio se paga con la diferencia entre lo que conseguiste y lo que podrías haber conseguido.</b></p>
+      <div data-part="development">
 
-      <p>Cuando pulsas «comprar a mercado», alguien está al otro lado: Citadel, Virtu, Jane Street. Estas firmas ganan miles de millones siendo la contraparte de las operaciones minoristas, suba, baje o se quede lateral el mercado.</p>
+      <h3>Despejar el diferencial</h3>
 
-      <div class="callout-warning">
-        <h4>🚨 La cruda realidad</h4>
-        <p><strong>Citadel Securities ingresó 7.500 millones de dólares en 2022.</strong> No ganan dinero esperando que las acciones suban. Lo ganan en <em>cada operación</em> que intermedian.</p>
-        <p><strong>¿Cómo?</strong> Captura del spread, gestión de la selección adversa, gestión de inventario &mdash; la palabra es gestión, y la Parte 3 trata de coberturas y sesgo de cotizaciones, no de nada impropio &mdash; y Payment for Order Flow (PFOF).</p>
-      </div>
+      <p>Coge el trabajo tal como lo describió la lección 5. Publicas una demanda y una oferta antes de saber cuál se va a tomar. La mayoría de quienes llegan operan por razones que no tienen nada que ver con lo que la cosa vale, y con ellos ganas medio diferencial. Una minoría llega porque ha averiguado que tu precio está mal, y con ella pierdes. El diferencial tiene que ser lo bastante ancho para que el primer grupo pague al segundo.</p>
 
-      <div class="section-break"><span>Parte 1: la captura de la horquilla, el modelo de negocio básico</span></div>
-<h2 id="buy-the-bid-sell-the-ask-repeat">Comprar a la compra, vender a la venta, repetir</h2>
+      <p>Esa frase es una ecuación en cuanto nombras tres cosas. Sea s el diferencial, de modo que el punto medio queda a la mitad de distancia de cada lado. Sea a la parte de las órdenes que llegan que están informadas. Sea D cuánto se moverá el precio en cuanto lo que sabe la orden informada lo sepa todo el mundo. Cada orden es una acción, quien cotiza es neutral al riesgo, quien cotiza no tiene otros costes, y todo operador informado sabe lo mismo. Esas cuatro suposiciones son el modelo entero, y cada una es falsa de una manera que dirán las concesiones de abajo.</p>
 
-      <p>La estrategia central de beneficio del market maker es la <strong>captura de la horquilla</strong>: comprar al precio de compra, vender al de venta y quedarse con la diferencia.</p>
+      <p>Una orden no informada paga medio diferencial, por cualquiera de los dos lados. Una informada compra a tu oferta, y el precio se asienta luego D por encima del punto medio, así que vendiste al punto medio más medio diferencial algo que vale el punto medio más D y te faltan D menos medio diferencial. Iguala lo que ganas con lo que pierdes:</p>
 
-      <p><strong>Ejemplo:</strong></p>
-      <ul>
-        <li><strong>Compra:</strong> 100,00 $ (el precio que los compradores están dispuestos a pagar)</li>
-        <li><strong>Venta:</strong> 100,05 $ (el precio que piden los vendedores)</li>
-        <li><strong>Spread:</strong> 0,05 $</li>
-      </ul>
+      <p>(1 &minus; a) &times; s/2 = a &times; (D &minus; s/2)</p>
 
-      <p><strong>Cómo funciona:</strong></p>
-      <ol>
-        <li>Citadel publica la compra: 100,00 $ (dispuesto a comprar 10.000 acciones)</li>
-        <li>Citadel publica la venta: 100,05 $ (dispuesto a vender 10.000 acciones)</li>
-        <li>Lanzas una orden de venta a mercado por 500 acciones → ejecutada a 100,00 $</li>
-        <li>Otro trader lanza una compra a mercado → ejecutada a 100,05 $</li>
-        <li><strong>Beneficio de Citadel: 25 $, en segundos</strong> (solo cargan con el inventario entre una ejecución y la otra)</li>
-      </ol>
+      <p>Multiplica y los dos términos que llevan a la vez a y s se cancelan, exactamente igual que en el equilibrio de la lección 4. Lo que sobrevive es s = 2aD y, dado la vuelta, a = s / (2D). El diferencial cotizado es la estimación que hace el mercado de lo probable que es que sepas algo, multiplicada por el doble de lo que sabes.</p>
 
-      <p><strong>Escala:</strong> Un mayorista de este tamaño gestiona algo así como la cuarta parte de todo el volumen de acciones de EE. UU. Pero cuidado con la aritmética que verá en todas partes, incluida la versión anterior de este párrafo: multiplicar un centavo entero por cada acción da unos 6.000 millones de dólares al año solo de renta variable estadounidense, más de lo que la firma declara en todas las clases de activos que negocia. Lo que se captura de verdad por acción es una fracción de la horquilla, porque buena parte se devuelve como mejora de precio y otra parte se pierde con las órdenes informadas de la Parte 2. El negocio es real y enorme. No es "toda la horquilla, siempre".</p>
+      <h3>Qué están diciendo las cotizaciones de tu pantalla</h3>
 
-      <h3 id="why-the-spread-exists">Por qué existe la horquilla</h3>
+      <p>La fórmula solo es interesante si le pasas números de verdad. Abajo hay cinco diferenciales que puedes encontrar en cualquier pantalla, frente a tres tamaños de ventaja informada: un cuarto de dólar, un dólar y cinco dólares, que es aproximadamente lo que una sorpresa de resultados le hace a una acción de precio medio. Cada celda es la parte de las órdenes que llegan que tendría que estar informada para que ese diferencial cubriera costes, escrita como una orden de cada tantas.</p>
 
-      <p>La horquilla compensa a los market makers por dos riesgos:</p>
-      <ul>
-        <li><strong>Riesgo de inventario:</strong> mantener las acciones segundos o minutos hasta encontrar contraparte</li>
-        <li><strong>Riesgo de selección adversa:</strong> operar con traders informados que saben algo que el market maker no sabe</li>
-      </ul>
-
-      <div class="tabs">
-        <div class="tabs-nav">
-          <button class="active">Valores líquidos (horquillas estrechas)</button>
-          <button>Valores ilíquidos (horquillas anchas)</button>
-        </div>
-        <div class="tabs-content">
-          <div class="tab-panel active">
-            <h3 id="high-liquidity-narrow-spreads">Mucha liquidez = horquillas estrechas</h3>
-            <p><strong>Ejemplo: AAPL (Apple)</strong></p>
-            <ul>
-              <li>Compra: 175,00 $, venta: 175,01 $</li>
-              <li><strong>Horquilla: 0,01 $ (0,006 %)</strong></li>
-            </ul>
-            <p><strong>¿Por qué tan estrecha?</strong> Se negocian millones de acciones por minuto → es fácil encontrar contraparte. Los market makers compiten en precio.</p>
-            <p><strong>Estrategia del market maker:</strong> Márgenes minúsculos, volumen enorme. Fíjese en que la horquilla de un centavo es el máximo teórico por acción y no lo que realmente se captura: en un valor tan líquido, las cotizaciones que compiten y la mejora de precio devuelven buena parte, y la selección adversa se lleva más.</p>
-          </div>
-          <div class="tab-panel">
-            <h3 id="low-liquidity-wide-spreads">Poca liquidez = horquillas anchas</h3>
-            <p><strong>Ejemplo: un valor de pequeña capitalización</strong></p>
-            <ul>
-              <li>Compra: 10,00 $, venta: 10,50 $</li>
-              <li><strong>Horquilla: 0,50 $ (5 %)</strong></li>
-            </ul>
-            <p><strong>¿Por qué tan ancha?</strong> Poco volumen → cuesta encontrar contraparte. Alto riesgo de inventario → el market maker puede quedarse con las acciones horas o días.</p>
-            <div class="callout-warning">
-              <h4>⚠️ La trampa minorista: órdenes a mercado en valores ilíquidos</h4>
-              <p>Ves un penny stock caliente que se promociona en Reddit. Lanzas una compra a mercado de 1.000 acciones. Te ejecutan al <strong>precio de venta (10,50 $)</strong>, pero el punto medio está en 10,25 $. Acabas de pagar un 2,4 % por encima del valor justo.</p>
-              <p><strong>Lección:</strong> Usa siempre órdenes limitadas en valores ilíquidos.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-break"><span>Parte 2: la selección adversa</span></div>
-<h2 id="when-smart-money-trades-market-makers-lose">Cuando opera el dinero inteligente, los market makers pierden</h2>
-
-      <p><strong>La selección adversa</strong> se produce cuando traders informados (hedge funds, firmas propietarias, insiders) operan con market makers porque tienen información que estos no tienen.</p>
-
-      <p><strong>Ejemplo:</strong></p>
-      <ul>
-        <li>Un hedge fund sabe que Apple va a superar las expectativas</li>
-        <li>Compra AAPL agresivamente al precio de venta (175,01 $) segundos antes del anuncio</li>
-        <li>Los market makers ejecutan esas órdenes (están aportando liquidez)</li>
-        <li>Se publican los resultados: AAPL salta a 180 $</li>
-        <li>Ahora los market makers están <em>cortos</em> en AAPL a 175 $, sangrando pérdidas</li>
-      </ul>
-
-      <div class="callout-danger"><h4>⚠️ Por qué los market makers odian el order flow informado</h4>
-        <p>La horquilla que ganaron (0,01 $) queda borrada por el movimiento en contra (5,00 $). Están <strong>recogiendo monedas delante de una apisonadora</strong>.</p>
-        <p><strong>Solución:</strong> Los market makers usan algoritmos para <em>detectar</em> el order flow informado y <em>ampliar las horquillas</em> o <em>o retirar liquidez</em> cuando huelen el peligro.</p>
-      </div>
-<h3 id="how-market-makers-detect-informed-traders">Cómo detectan los market makers a los traders informados</h3>
-
-      <p><strong>Señal n.º 1: el tamaño de la orden</strong></p>
-      <p>Los minoristas compran de 10 a 100 acciones. Las instituciones compran de 10.000 a 100.000. Cuando entra una compra a mercado de 50.000 acciones, el algoritmo del market maker:</p>
-      <ul>
-        <li>Amplía la horquilla (la venta salta de 100,05 $ a 100,10 $)</li>
-        <li>Ejecuta parte de la orden a precios más altos (slippage)</li>
-        <li>Se cubre de inmediato (compra futuros para compensar el riesgo)</li>
-      </ul>
-
-      <p><strong>Señal n.º 2: la velocidad de las órdenes</strong></p>
-      <p>Si las órdenes de compra se disparan de golpe, alguien sabe algo. Ejemplo: AAPL negocia normalmente 100.000 acciones por minuto. De pronto se compran 500.000 en 10 segundos.</p>
-      <p><strong>Respuesta del market maker:</strong> el algoritmo detecta «toxicidad» → retira liquidez → recotiza más alto.</p>
-
-      <p><strong>Señal n.º 3: la hora del día</strong></p>
-      <p>Los minoristas duermen. Mucha actividad a las 6:00 = instituciones reaccionando a noticias de la noche.</p>
-      <p><strong>Respuesta del market maker:</strong> Las horquillas son <em>más anchas</em> en el premercado. Ejemplo: horquilla de AAPL en horario normal: 0,01 $. A las 7:00: 0,10 $ (10 veces más ancha).</p>
-
-      <div class="section-break"><span>Parte 3: la gestión de inventario</span></div>
-<h2 id="market-makers-dont-want-directional-risk">Los market makers no quieren riesgo direccional</h2>
-<p>Los market makers son <strong>no inversores</strong>. Quieren ser <strong>delta neutrales</strong>: ganar con la horquilla, no con el movimiento del precio.</p>
-
-      <p><strong>Problema:</strong> El order flow es aleatorio. A veces hay más compradores (el market maker se queda corto). A veces más vendedores (se queda largo).</p>
-
-      <p><strong>Solución:</strong> Los market makers usan <strong>algoritmos de gestión de inventario</strong> para soltar rápido las posiciones que no quieren.</p>
-
-      <h3 id="how-mms-rebalance-inventory">Cómo reequilibran su inventario</h3>
-
-      <p><strong>Cuando el market maker está largo (demasiado inventario):</strong></p>
-      <ul>
-        <li><strong>Táctica n.º 1:</strong> sesgar las cotizaciones (bajar la venta para animar las compras)</li>
-        <li><strong>Táctica n.º 2:</strong> cruzar en dark pools (colocarlo a instituciones)</li>
-        <li><strong>Táctica n.º 3:</strong> cubrirse con futuros (ponerse corto en futuros del SPY para neutralizar)</li>
-      </ul>
-
-      <p><strong>Cuando el market maker está corto (inventario negativo):</strong></p>
-      <ul>
-        <li><strong>Táctica n.º 1:</strong> sesgar las cotizaciones (subir la compra para animar las ventas)</li>
-        <li><strong>Táctica n.º 2:</strong> internalizar con otras órdenes minoristas (casarlas internamente)</li>
-        <li><strong>Táctica n.º 3:</strong> comprar en dark pools</li>
-      </ul>
-<h2 id="the-dark-side-of-market-making">El lado oscuro del market making</h2>
-
-      <p>La manipulación del libro de órdenes es real, se persigue y merece la pena entenderla. Lea esta sección con una corrección en mente, eso sí, porque la versión anterior de esta lección se equivocaba de un modo que importa: el historial sancionador por spoofing y layering apunta abrumadoramente a firmas de negociación por cuenta propia, operadores individuales y mesas de bancos, no a los mayoristas registrados que ejecutan las órdenes minoristas. Esas firmas están entre los participantes más vigilados del mercado, y acusarlas de hacer spoofing de forma rutinaria es algo serio si no hay pruebas. Lo que sigue describe las técnicas y a quién se ha perseguido realmente por ellas.</p>
-<h3 id="tactic-1-spoofing">Táctica n.º 1: spoofing</h3>
-
-      <p><strong>Qué es:</strong> Colocar órdenes falsas de gran tamaño para crear la <em>ilusión</em> de oferta o demanda, y cancelarlas antes de que se ejecuten.</p>
-
-      <p><strong>Ejemplo:</strong></p>
-      <ol>
-        <li>Un operador coloca una orden de venta grande que no piensa ejecutar: <strong>50.000 acciones a 100,10 $</strong></li>
-        <li>El minorista ve un muro de venta enorme → piensa «ahí hay resistencia»</li>
-        <li>El minorista vende sus acciones a 100,00 $</li>
-        <li>Cancela la orden de venta de 50.000 acciones antes de que pueda ejecutarse</li>
-        <li>Compra las acciones que se vendieron en 100,00 $</li>
-        <li>El precio se recupera hasta 100,20 $</li>
-        <li><strong>Beneficio: comprado a 100 $, vendido después a 100,20 $</strong></li>
-      </ol>
-
-      <p><strong>Legalidad:</strong> Ilegal, y perseguido. Dodd-Frank convirtió el spoofing en delito explícito en 2010, y desde entonces ha habido condenas y acuerdos de nueve cifras, contra mesas de metales y de deuda pública de bancos y contra operadores por cuenta propia. Lo difícil es el requisito de intención: cancelar una orden es legal y normal, así que la acusación tiene que demostrar que se introdujo sin intención alguna de que se ejecutara, lo que suele significar reconstruir un patrón a lo largo de miles de órdenes en vez de señalar una.</p>
-
-      <h3 id="tactic-2-layering">Táctica n.º 2: layering</h3>
-
-      <p><strong>Qué es:</strong> Colocar varias órdenes en un lado del libro para crear presión falsa y luego operar en el otro lado.</p>
-
-<p><strong>Ejemplo:</strong> Ejemplo: un operador coloca diez órdenes de compra en 99,90 $, 99,85 $ y 99,80 $ que no quiere que se ejecuten, creando la apariencia de soporte. Otros leen "fuerte interés comprador" y compran a 100,05 $. El operador vende contra eso y luego cancela las órdenes de compra.</p>
-
-      <div class="callout-danger">
-        <h4>⚠️ Caso real: Navinder Singh Sarao (flash crash de 2010)</h4>
-        <p><strong>Quién:</strong> un trader solitario que operaba desde la casa de sus padres en Londres</p>
-        <p><strong>Táctica:</strong> usó layering y spoofing para manipular los futuros del S&P 500</p>
-        <p><strong>Efecto:</strong> Contribuyó al flash crash del 6 de mayo de 2010 (el Dow cayó 1.000 puntos en minutos)</p>
-        <p><strong>Castigo:</strong> detenido en 2015, condenado a 1 año de arresto domiciliario</p>
-        <p><strong>Lo que este caso muestra y lo que no:</strong> Sarao se declaró culpable de spoofing y de fraude electrónico, y su layering estaba funcionando aquella mañana. Pero el informe conjunto oficial de la SEC y la CFTC atribuyó el movimiento inicial a un gran programa automatizado de venta en futuros E-mini, no a él, y cuánto contribuyó sigue siendo objeto de disputa entre quienes lo han estudiado. Lo que el caso sí establece es que una sola persona decidida con un front-end modificado pudo distorsionar un libro de futuros importante durante meses antes de que nadie la detuviera, lo cual dice más sobre lo difícil que es detectarlo que sobre quién lo hace.</p>
-      </div>
-<h3 id="tactic-3-quote-stuffing">Táctica n.º 3: quote stuffing</h3>
-
-      <p><strong>Qué es:</strong> Colocar y cancelar miles de órdenes a toda velocidad para inundar el order book y frenar a los competidores.</p>
-
-      <p><strong>Por qué lo hacen los market makers:</strong></p>
-      <ul>
-        <li>Crea «ruido» que confunde a los algoritmos de HFT de las firmas rivales</li>
-        <li>Ralentiza las fuentes de datos → da a sus propios algoritmos una ventaja de latencia</li>
-        <li>Hace más difícil leer el order book → el minorista duda → el market maker consigue mejores ejecuciones</li>
-      </ul>
-
-      <p><strong>La escala del asunto:</strong> La inmensa mayoría de las órdenes introducidas en la renta variable estadounidense se cancelan en vez de ejecutarse, y así es al menos desde 2010. La mayor parte de eso es creación de mercado corriente: cotizaciones que se actualizan según se mueve el mercado. El quote stuffing es un subconjunto deliberado de ello, y separar ambas cosas a partir de datos públicos no es algo que un minorista pueda hacer.</p>
-
-<div class="section-break"><span>Parte 4: arbitraje de latencia y las ventajas de velocidad del HFT</span></div>
-
-<h2 id="the-speed-game">El juego de la velocidad</h2>
-
-      <p>Los market makers que son más rápidos aunque sea <strong>1 milisegundo</strong> (0,001 segundos) pueden ver el order flow antes que la competencia y sacar partido de esa ventaja informativa.</p>
-
-      <h3 id="what-is-latency-arbitrage">¿Qué es el arbitraje de latencia?</h3>
-
-      <div class="callout-info" style="background:rgba(118,221,255,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid var(--accent)">
-        <h4>⚡ El arbitraje de latencia, explicado</h4>
-        <p><strong>Escenario:</strong> La acción XYZ cotiza en varios mercados (NYSE, Nasdaq, BATS, etc.)</p>
-        <ol style="margin:0.5rem 0 0 1.5rem;line-height:1.8">
-          <li>En la NYSE, XYZ está a 100,00 $ a la compra / 100,05 $ a la venta</li>
-          <li>Un vendedor grande golpea la NYSE con una orden a mercado → XYZ cae a 99,95 $</li>
-          <li>El market maker de HFT lo ve en <strong>50 microsegundos</strong> (0,00005 segundos)</li>
-          <li>El HFT vende de inmediato en el Nasdaq (que aún muestra 100,00 $) antes de que llegue la actualización de precio</li>
-          <li>Recompra en la NYSE a 99,95 $ → se asegura 0,05 $ de beneficio por acción</li>
-          <li>Y repite esto miles de veces al día</li>
-        </ol>
-        <p style="margin-top:1rem;font-weight:600;color:#22c55e">Resultado: el market maker de HFT gana millones solo por ser más rápido que los minoristas y que las instituciones lentas.</p>
-      </div>
-
-      <h3 id="how-fast-are-we-talking">¿De qué velocidades hablamos?</h3>
-
-      <div style="overflow-x:auto;margin:1.5rem 0">
-      <table style="width:100%;border-collapse:collapse">
-        <thead>
-          <tr style="background:rgba(255,255,255,0.03)">
-            <th style="padding:0.75rem;text-align:left">Comparación de velocidades</th>
-            <th style="padding:0.75rem;text-align:right">Tiempo (milisegundos)</th>
-            <th style="padding:0.75rem;text-align:left">Notas</th>
-          </tr>
-        </thead>
+      <table>
+        <thead><tr><th>Diferencial cotizado</th><th>Ventaja de 0,25</th><th>Ventaja de 1,00</th><th>Ventaja de 5,00</th></tr></thead>
         <tbody>
-          <tr>
-            <td style="padding:0.75rem"><strong>Un parpadeo humano</strong></td>
-            <td style="padding:0.75rem;text-align:right">300-400 ms</td>
-            <td style="padding:0.75rem">la referencia más lenta</td>
-          </tr>
-          <tr style="background:rgba(118,221,255,0.05)">
-            <td style="padding:0.75rem"><strong>Un minorista pulsa «comprar»</strong></td>
-            <td style="padding:0.75rem;text-align:right">150-300 ms</td>
-            <td style="padding:0.75rem">tiempo medio de reacción humana</td>
-          </tr>
-          <tr>
-            <td style="padding:0.75rem"><strong>Enrutamiento estándar de un bróker</strong></td>
-            <td style="padding:0.75rem;text-align:right">10-50 ms</td>
-            <td style="padding:0.75rem">Robinhood, TD Ameritrade</td>
-          </tr>
-          <tr style="background:rgba(118,221,255,0.05)">
-            <td style="padding:0.75rem"><strong>Algoritmo institucional (lento)</strong></td>
-            <td style="padding:0.75rem;text-align:right">1-5 ms</td>
-            <td style="padding:0.75rem">hedge funds, fondos de inversión</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.08)">
-            <td style="padding:0.75rem"><strong>Market maker de HFT</strong></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:600;color:#22c55e">0,05-0,5 ms</td>
-            <td style="padding:0.75rem;font-weight:600">Citadel, Virtu, Jump Trading</td>
-          </tr>
-          <tr style="background:rgba(34,197,94,0.12)">
-            <td style="padding:0.75rem"><strong>El HFT más rápido (colocalizado)</strong></td>
-            <td style="padding:0.75rem;text-align:right;font-weight:600;color:#22c55e">0,01-0,03 ms</td>
-            <td style="padding:0.75rem;font-weight:600">servidores físicamente pegados al mercado</td>
-          </tr>
+          <tr><td>0,01 $</td><td>1 de cada 50</td><td>1 de cada 200</td><td>1 de cada 1.000</td></tr>
+          <tr><td>0,02 $</td><td>1 de cada 25</td><td>1 de cada 100</td><td>1 de cada 500</td></tr>
+          <tr><td>0,05 $</td><td>1 de cada 10</td><td>1 de cada 40</td><td>1 de cada 200</td></tr>
+          <tr><td>0,10 $</td><td>1 de cada 5</td><td>1 de cada 20</td><td>1 de cada 100</td></tr>
+          <tr><td>0,50 $</td><td>todas las órdenes</td><td>1 de cada 4</td><td>1 de cada 20</td></tr>
         </tbody>
       </table>
+
+      <p>Lee primero la fila de arriba. Un diferencial de un céntimo en una acción donde los informados saben algo que vale cinco dólares está poniendo en precio una orden informada de cada mil. Eso no es una afirmación sobre cuánta gente lista hay en el mercado; es lo que implica la cotización si quien cotiza cubre costes, y es la razón de que un céntimo sea cotizable siquiera. Todo el negocio se apoya en la relación entre una ventaja muy pequeña ganada muy a menudo y una pérdida muy grande sufrida muy rara vez.</p>
+
+      <p>Lee ahora la fila de abajo, porque es la que se rompe. Con un diferencial de cincuenta céntimos y una ventaja de veinticinco, la fórmula devuelve uno, o sea que todas las órdenes tendrían que estar informadas, cosa que no puede ser cierta en ningún mercado que negocie. Al modelo le han dado un diferencial que no puede explicar, y la lectura honesta no es que quien cotiza sea codicioso sino que la selección adversa no es lo que paga la mayor parte de ese diferencial. El resto es el primer riesgo de la lección 5 y los costes fijos que hay debajo: una posición mantenida horas en vez de segundos, en algo que tampoco quiere nadie más. Un diferencial ancho en un valor delgado es sobre todo el precio de quedarse con ello.</p>
+
+      <p>Ese es el reparto que la lección 5 dijo que existía y no pudo medir. La aritmética no se acerca más: la fórmula te da lo máximo de diferencial que la información podría explicar, y lo que sobra pertenece al inventario y a los costes fijos.</p>
+
+      <h3>Por qué alguien paga por el order flow de gente como tú</h3>
+
+      <p>La misma línea explica el arreglo que hay debajo de las operaciones sin comisión, y lo explica sin que nadie sea engañado. Las órdenes minoristas son, como grupo, el lado no informado del modelo. Llegan porque alguien leyó algo, o cobró, o llevaba una semana con la idea. El valor de a es mucho más bajo para ese flujo que para la mezcla anónima que llega a un mercado público, y s = 2aD dice de inmediato cuánto vale eso: un flujo diez veces menos informado se puede cotizar a la décima parte del diferencial y seguir cubriendo costes.</p>
+
+      <p>Ponle números. Un céntimo de diferencial público frente a un dólar de ventaja implica una orden informada de cada doscientas. Si el flujo minorista está diez veces menos informado que eso, el diferencial que cubre costes sobre él es la décima parte de un céntimo. La diferencia, nueve décimas de céntimo por acción, es real y es grande, y se reparte en tres: una parte vuelve a ti como una ejecución mejor que la cotización, otra va a tu bróker como pago por haber mandado la orden, y otra se queda en la firma que la ejecutó.</p>
+
+      <p>Lo que significa que la discusión sobre el pago por order flow no es la discusión que tiene casi todo el mundo. No te están ejecutando fuera del diferencial cotizado; te suelen ejecutar dentro de él, y el modelo dice por qué. La pregunta es cómo se reparten esas nueve décimas de céntimo, y esa es una pregunta sobre un número que nadie publica y no sobre una norma que se esté rompiendo.</p>
+
       </div>
 
-      <p><strong>Traducción:</strong> Para cuando pulsas «comprar», los market makers de HFT ya han visto tu orden, la han analizado y han ejecutado de 10 a 20 operaciones por delante de ti.</p>
+      <h3 data-part="worked">La misma ecuación, apuntada hacia ti</h3>
 
-      <h3 id="colocation-the-ultimate-advantage">Colocalización: la ventaja definitiva</h3>
+      <p>Dale la vuelta al modelo. Cada vez que cruzas un diferencial tú eres la orden no informada que hay en él, y lo que pagas no es una estimación: es s, el diferencial entero, por ida y vuelta, porque lo cruzas al entrar y otra vez al salir. Multiplica.</p>
 
-      <p><strong>Colocalización</strong> = alquilar espacio de servidor dentro del centro de datos del mercado (literalmente a un par de metros de su motor de casación).</p>
+      <p>Trescientas acciones por operación y 252 días de mercado. Las columnas son tres diferenciales: un céntimo, que es lo que cotiza un fondo cotizado grande en medio de una sesión líquida; cinco céntimos, que es el mismo instrumento en los primeros minutos tras la apertura; y diez céntimos, que es lo que encuentras en una acción suelta alrededor de un anuncio o en una opción que nadie está cotizando estrecha.</p>
 
-      <div class="callout-warning">
-        <h4>💰 Lo que cuesta la velocidad</h4>
-        <p><strong>Tarifas de colocalización (NYSE):</strong></p>
-        <ul style="margin:0.5rem 0 0 1.5rem">
-          <li>Espacio de armario y potencia: decenas de miles de dólares al mes por un armario completo de alto consumo, menos por uno parcial</li>
-          <li>Acceso a la fuente de datos: <strong>de 10.000 a 30.000 $ al mes</strong></li>
-          <li>Conectividad de red: <strong>de 5.000 a 15.000 $ al mes</strong></li>
-        </ul>
-        <p style="margin-top:1rem"><strong>Total: de 480.000 a 1,14 millones de dólares al año</strong> solo en infraestructura</p>
-        <p style="margin-top:0.75rem;font-weight:600;color:#ff6b6b">Solo los market makers institucionales pueden permitírselo. Que un minorista compita contra eso es como llevar un cuchillo a un tiroteo.</p>
-      </div>
+      <table>
+        <thead><tr><th>Idas y vueltas al día</th><th>Diferencial 0,01 $</th><th>Diferencial 0,05 $</th><th>Diferencial 0,10 $</th></tr></thead>
+        <tbody>
+          <tr><td>6, al día</td><td>18 $</td><td>90 $</td><td>180 $</td></tr>
+          <tr><td>6, al año</td><td>4.536 $</td><td>22.680 $</td><td>45.360 $</td></tr>
+          <tr><td>20, al día</td><td>60 $</td><td>300 $</td><td>600 $</td></tr>
+          <tr><td>20, al año</td><td>15.120 $</td><td>75.600 $</td><td>151.200 $</td></tr>
+          <tr><td>60, al día</td><td>180 $</td><td>900 $</td><td>1.800 $</td></tr>
+          <tr><td>60, al año</td><td>45.360 $</td><td>226.800 $</td><td>453.600 $</td></tr>
+        </tbody>
+      </table>
 
-      <h3 id="microwave-towers">Torres de microondas: arañar microsegundos</h3>
+      <p>La celda de abajo a la derecha es con la que hay que quedarse un rato. Sesenta idas y vueltas al día en mercados de diez céntimos son 453.600 dólares al año, que sobre una cuenta de 140.000 dólares son el 324 por ciento de ella. Eso no es un resultado de trading. Es una factura, pagadera con independencia de si cada decisión fue correcta, y es conocible la primera mañana en vez de descubierta en la séptima semana.</p>
 
-      <p>Varias firmas construyeron redes de torres de microondas entre Chicago (CME) y Nueva Jersey para recortar el trayecto de ida y vuelta Chicago-Nueva Jersey de unos 14,5 milisegundos por fibra a unos 8,5 por microondas. La cifra de 300 millones de dólares que esta lección atribuía a las torres pertenece en realidad a la línea de FIBRA dedicada de Spread Networks, tendida unos años antes, y que los enlaces de microondas dejaron obsoleta casi de inmediato, a una fracción del coste. Ese es el dato más interesante: lo caro fue batido por lo barato en unos tres años.</p>
+      <p>Toda la tabla es una multiplicación, y leer una columna hacia abajo enseña cuál de las dos entradas está haciendo el trabajo. Pasar de seis idas y vueltas a sesenta multiplica la factura por diez. Pasar de un céntimo a diez la multiplica por diez también. Es la misma palanca tirada dos veces, y la segunda suele ser la que nadie considera una elección: quien mueve esas mismas sesenta operaciones fuera de los minutos de apertura y hacia el medio de la sesión ha recortado de la factura lo mismo que quien baja a seis operaciones al día y sigue operando la apertura.</p>
 
-      <p><strong>¿Por qué?</strong> La luz viaja alrededor de un tercio más despacio por fibra óptica que por el aire. Esos 6 milisegundos de ventaja = millones en beneficios de arbitraje.</p>
+      <p>Pásalo por la lección 4 para ver qué exige. Con un diferencial de un céntimo y 300 acciones, una ida y vuelta cuesta 3 dólares, así que cada ganador tiene que ser 3 dólares mayor de lo pequeño que sea cada perdedor antes de que quede nada. Con diez céntimos son 30 dólares por ida y vuelta. Nada en ese párrafo va de acertar; es la entrada, y la lección 10 ya enseñó que es solo uno de cuatro cargos.</p>
 
-      <div class="callout-success">
-        <h4>✅ Cómo puede competir el minorista (aviso: en velocidad, no puede)</h4>
-        <p><strong>Acepta la realidad:</strong> NUNCA vas a ganar a los market makers de HFT en velocidad. Ni lo intentes.</p>
-        <p style="margin-top:0.75rem"><strong>Lo que SÍ puedes hacer:</strong></p>
-        <ul style="margin:0.5rem 0 0 1.5rem">
-          <li><strong>Operar en marcos temporales más amplios:</strong> en gráficos de 4 horas o diarios la latencia no importa</li>
-          <li><strong>Evitar los scalps ajustados:</strong> no compitas por 1 o 2 ticks de beneficio (ahí ganan los market makers)</li>
-          <li><strong>Usar órdenes limitadas en niveles clave:</strong> deja que los market makers vengan a ti (no persigas el precio)</li>
-          <li><strong>NO opere en horas ilíquidas.</strong> Una versión anterior de esta lista decía que el pre-mercado y el after-hours tienen menos actividad de HFT, lo cual es cierto y completamente irrelevante: también tienen horquillas mucho más anchas, y la horquilla es el coste que usted paga de verdad. La Estrategia 2, más abajo, dice lo mismo, y las dos se contradecían. Horas líquidas, siempre.</li>
-        </ul>
-        <p style="margin-top:1rem;font-weight:600;color:#22c55e">En resumen: juega a otro juego. Céntrate en el reconocimiento de patrones, el análisis del order flow y los swings de varios días, donde la velocidad no importa.</p>
-      </div>
+      <h3 data-part="bounds">Lo que esto no resuelve</h3>
 
-<div class="callout callout-danger">
-  <h4>📉 CASO DE ESTUDIO: la espiral de 68.000 $ de Eric con los market makers (7 semanas)</h4>
-  <p><strong>Operador:</strong> Eric Thompson (ejemplo compuesto), 32 años, ingeniero de software convertido en day trader (4 años de experiencia, cuenta de 140.000 $), julio-agosto de 2024</p>
-  <p><strong>Estrategia:</strong> Estrategia: scalping de alta frecuencia en SPY/TSLA/NVDA, 60-80 operaciones al día, mantenidas 1-3 minutos. Ya había operado igual durante un año y daba el enfoque por resuelto, que es la parte que conviene notar: el coste de ejecución estuvo ahí todo el tiempo y solo se hizo visible cuando subió el número de operaciones. No se da ninguna cifra de beneficio del año anterior: un buen año antes de uno malo no es evidencia sobre el método, y citarla convertiría esto en una historia sobre una racha en vez de sobre un coste. Después subió la frecuencia usando solo órdenes de mercado "por velocidad".</p>
-  <p><strong>Fallo fatal:</strong> Nunca usó órdenes limitadas, nunca miró el nivel 2 y operaba en los tramos de horquilla más ancha (apertura de 9:30 a 9:45, cierre de 15:50 a 16:00, días de la Fed). «Con órdenes limitadas puedo perderme el movimiento.»</p>
-  <p><strong>Resultado:</strong> Aciertos 52 %. Coste medio de ejecución 0,10 $ por acción × 300 acciones por operación × 60 operaciones al día = 1.800 $ al día = 63.000 $ en 7 semanas. Perdió 68.000 $ (-48,6 %). De 140.000 $ a 72.000 $: es decir, 63.000 $ de los 68.000 $ eran ejecución y la operativa en sí quedó más o menos plana.</p>
+      <p>Que el modelo describa a un market maker real. Describe a un cotizador, frente a órdenes de una acción, neutral al riesgo, sin costes, contra operadores informados que saben todos lo mismo. Una firma de verdad cotiza miles de instrumentos a la vez, compensa sus exposiciones entre ellos, paga tarifas y cobra devoluciones que difieren según el mercado, y mantiene inventario que cubre en un producto completamente distinto. Cada una de esas cosas hace que el diferencial que de verdad necesita sea distinto de 2aD, y casi siempre mayor. Lo que sobrevive a la simplificación es la forma: el diferencial sube con lo probable que sea que la siguiente orden esté informada y con cuánto sepa esa orden, y lo hace proporcionalmente.</p>
 
-  <p><strong>El desastre del slippage (julio-agosto de 2024):</strong> Las configuraciones de Eric eran sólidas, pero cada operación sangraba dinero hacia los market makers. Ejemplos: 9 de julio, compra a mercado de SPY durante la volatilidad de las 9:32, horquilla NBBO 549,50 $/549,58 $ (8 centavos), ejecutado a 549,63 $ (5 centavos de slippage) = -86 $ de pérdida. 30 de julio, día de la Fed, compra a mercado de calls 0DTE del SPY, medio 2,50 $, horquilla 2,35 $/2,65 $ (30 centavos de ancho), ejecutado a 2,68 $ (18 centavos de más × 300 contratos = 5.400 $ extra). El beneficio fue de 4.500 $, cuando debería haber sido 9.900 $. 1 de agosto, resultados de NVDA, compra a mercado durante la volatilidad, horquilla 127,50 $/128,20 $ (¡70 centavos!), ejecutado a 128,35 $ (85 centavos de slippage) = -470 $ frente a -300 $ con límite. La revelación del 23 de agosto: «52 % de aciertos, configuraciones sólidas, y aun así 68.000 $ menos en 7 semanas. El informe de ejecución mostraba 0,10 $ de slippage medio por acción. Opero 60 veces al día con 300 acciones. 30 $ por operación perdidos en slippage = 1.800 $ al día = 63.000 $ en 7 semanas. No soy un trader. Soy el cajero automático de Citadel.»</p>
+      <p>Que a sea medible. No lo es, y esta lección no finge lo contrario: cada cifra de la primera tabla es una implicación de un D supuesto, no una observación. Cambia la ventaja de un dólar a cinco y la parte implícita de órdenes informadas cae en un factor de cinco sin que cambie ni una cotización. Así que la tabla es una manera de preguntar qué tendría que creer un diferencial, no una manera de averiguar qué cree, y quien cite el uno de cada mil como un hecho sobre el mercado se ha llevado justo lo contrario de lo que hay.</p>
 
-  <p><strong>La recuperación (septiembre-octubre de 2024):</strong> Recuperación (sep.-oct. 2024): nuevo sistema de ejecución: (1) solo órdenes limitadas al punto medio del NBBO (repartir la horquilla con los MM), (2) mirar el Level 2 en busca de spoofing y muros falsos antes de entrar, (3) evitar 9:30-9:45 y 15:50-16:00 (horquillas más anchas), (4) saltarse la operación si la horquilla supera el 10 % del stop, (5) registrar los slippage a diario, (6) reducir a 15-20 operaciones al día. El cambio medible: su propio informe de ejecución mostró que la diferencia media entre la cotización en el momento del clic y el precio recibido caía en la mayor parte de su tamaño en cuanto dejó de usar órdenes de mercado en las ventanas más anchas. No se informa de ningún resultado de cuenta para las diez semanas siguientes. Diez semanas no pueden producirlo, y una mejora de la tasa de acierto del 52 % al 67 % en unos cientos de operaciones describiría el mercado en el que operó, no el cambio que hizo.</p>
+      <p>Que el flujo minorista no esté informado. Está menos informado de media, que es todo lo que el modelo necesita, y la media esconde la parte que a ti te importa. Las firmas que compran order flow lo clasifican, y las cuentas contra las que es más difícil operar se cotizan de manera distinta que aquellas contra las que es más fácil. En cuál de los dos grupos estás no es algo que esta página pueda decirte, y el dato agregado no ayuda en absoluto a responderlo para una cuenta.</p>
 
-  <div class="callout callout-purple" style="margin-top:1rem">
-    <p><strong>La aritmética que merece la pena llevarse de aquí, con una corrección:</strong> 0,10 $ por acción × 300 acciones × 60 operaciones al día son 1.800 $ al día y 63.000 $ en siete semanas. Ese es el número que importa y es una multiplicación simple. Pero cuidado con qué eran esos 0,10 $. En un ETF líquido a media sesión, la horquilla es de un centavo y cruzarla cuesta un centavo; no se puede perder un dime por acción en SPY a las 11 de la mañana por mucha impaciencia que se tenga. La cifra de Eric venía de los sitios concretos en los que operaba: los primeros quince minutos, los últimos diez, los días de la Fed y opciones del mismo día cuyas horquillas sí son de 20 a 30 centavos. La lección es por tanto más estrecha y más útil que "las órdenes de mercado te cuestan un dime": el coste de cruzar la horquilla es lo que la horquilla sea en ese momento, así que toda la cuestión está en qué momentos elige operar. Sesenta operaciones al día le meten en todos ellos.</p>
-  </div>
-</div>
+      <p>Que una ejecución dentro del diferencial cotizado sea una buena ejecución. La mejora de precio se mide contra la mejor demanda y oferta nacional, y la firma que da la mejora es también una de las firmas cuyas cotizaciones forman ese punto de referencia. Batir un número que ayudas a fijar es una afirmación más débil de lo que suena, y la discusión viva en este terreno va del hueco entre la mejora que recibes y la que habría producido una subasta orden por orden de verdad. Ese hueco aquí no está medido y esta lección no tiene cifra para él.</p>
 
-      <div class="quiz">
-      <div class="quiz-question" style="margin-top:2rem">
-        <p><strong>Cuestionario del caso de estudio: Eric tenía un 52 % de aciertos (estrategia rentable) y operaba 60 veces al día, y aun así perdió 68.000 $ en 7 semanas. Su slippage medio era de 0,10 $ por acción en posiciones de 300 acciones. ¿Cuál fue el error fatal de Eric?</strong></p>
-        <div class="quiz-options">
-          <div class="quiz-option" data-correct="false">
-            A) Su tasa de acierto era demasiado baja: con tantas operaciones necesitaba al menos un 60 %
-          </div>
-          <div class="quiz-option" data-correct="true">
-            B) Usó órdenes a mercado al 100 % y operó en los tramos de horquilla más ancha (9:30-9:45, 15:50-16:00, días de la Fed), sangrando 1.800 $ diarios de slippage hacia los market makers
-          </div>
-          <div class="quiz-option" data-correct="false">
-            C) Operaba demasiados valores: debería haberse centrado solo en el SPY en lugar de SPY, TSLA y NVDA
-          </div>
-          <div class="quiz-option" data-correct="false">
-            D) Mantenía las posiciones demasiado tiempo: entre 1 y 3 minutos es demasiado lento para el scalping de alta frecuencia
-          </div>
-        </div>
-        <div class="quiz-explanation">
-          <strong>Correcto: B.</strong> Esta es la realidad brutal de los slippage. Eric acertaba el 52 %, lo que por sí solo no dice si tenía ventaja, y su método de ejecución fue lo bastante grande como para zanjar la cuestión. La cuenta: Eric operaba 60 veces al día con 300 acciones por operación. Su coste medio por acción era de unos 0,10 $, y conviene ser exacto sobre qué es eso, porque la lección lo llamaba "slippage" en todas partes y eso solo es medio cierto. La mayor parte era simplemente la horquilla, que una orden de mercado paga por definición, y era grande por CUÁNDO operaba, no porque algo saliera mal: minutos de apertura y de cierre, días de la Fed y opciones del mismo día cuya horquilla cotizada es realmente de decenas de centavos. Un resto pequeño era slippage de verdad: la orden ejecutándose peor que la cotización cuando el tamaño superaba lo mostrado. Coste diario de slippage: 0,10 $ × 300 acciones = 30 $ por operación × 60 operaciones = 1.800 $ al día. En 35 sesiones (7 semanas): 63.000 $ de slippage. Perdió 68.000 $ en total: 63.000 $ eran ejecución y los 5.000 $ restantes fueron la operativa, unos 2,38 $ por operación en 2.100 operaciones, es decir plano y no rentable. Los costes no destruyeron una ventaja; enterraron una estrategia que no tenía ninguna. Los tres errores: (1) 100 % órdenes de mercado en vez de limitadas. (2) Operar en las ventanas más anchas. (3) No mirar nunca el order book. También leía órdenes grandes en reposo como muros y operaba contra ellas, para luego verlas desaparecer. Fíjese en que esto le cuesta con independencia de que alguien quisiera engañar: una orden que se retira cuando el precio se acerca tiene el mismo efecto sobre su decisión en cualquiera de los dos casos, y esa es la razón práctica para no apoyarse en ninguna. Lo que cambió: órdenes limitadas en vez de a mercado, nada de operar en los primeros quince ni en los últimos diez minutos, y aproximadamente un tercio de las operaciones. El último de esos tres puntos hace casi todo el trabajo: pasar de sesenta a dieciocho operaciones al día recorta el coste diario en dos tercios antes de haber mejorado una sola ejecución. No se informa de ningún resultado de cuenta para las semanas siguientes: el sentido de este caso es un coste que puede calcular por adelantado, y pegarle una cifra de recuperación sustituiría un argumento comprobable por una anécdota que no lo es. La lección: una estrategia con esperanza positiva antes de costes puede tenerla negativa después, y nada en la estrategia le dice cuál es su caso. Calcule su coste por operación —horquilla pagada, por acciones, por operaciones al día— antes que ninguna otra cosa. Si ese número es una fracción apreciable de su ganadora media, la estrategia no funciona a esa frecuencia, y ningún acierto sobre la dirección lo arreglará.
-        </div>
-      </div>
-      </div>
+      <p>Que la segunda tabla sea el coste de operar. Es el coste de tomar liquidez, que es una manera concreta de operar, y la lección 4 ya enseñó que el mismo diferencial significa cosas distintas contra stops distintos. Diez céntimos son fatales contra un stop de cincuenta céntimos e irrelevantes contra uno de diez puntos, y la tabla no muestra ninguno de los dos a propósito, porque cuenta dólares en vez de la proporción que decide algo.</p>
 
-<div class="callout-info" style="background:rgba(0,212,170,0.1);border-left:4px solid #00d4aa;margin:2rem 0">
-  <p>Vas más o menos por la mitad de esta lección.</p>
-  <p style="margin-top:0.5rem;font-size:0.9rem">Buen momento para hacer una pausa. Lo que viene se apoya directamente en lo que acabas de leer.</p>
-</div>
+      <p>Y la omisión mayor es la que la propia aritmética invita a hacer. Si cruzar te cuesta el diferencial, entonces publicar lo gana, y quien se pasa a órdenes limitadas en reposo deja de pagar s y empieza a cobrarlo. Eso es cierto y es exactamente lo que toda la primera mitad de esta lección describe como el oficio de otro. También es el intercambio al que esta página no ha puesto precio: en el momento en que eres tú quien está quieto, has asumido el segundo riesgo del modelo, y las órdenes informadas que eran un error de redondeo cuando cruzabas son ahora la contraparte que no ves venir. Una orden limitada que nunca se ejecuta no te ha costado nada ni te ha dado nada; las que sí se ejecutan son, de manera desproporcionada, aquellas que alguien quería golpear. Esta lección pone precio al coste de la impaciencia con exactitud y al de la paciencia no le pone ninguno, y el segundo no es cero.</p>
 
-      <div class="section-break"><span>Parte 5: Payment for Order Flow (PFOF)</span></div>
-<h2 id="why-free-trading-isnt-free">Por qué operar «gratis» no es gratis</h2>
-<p><strong>El Payment for Order Flow (PFOF)</strong> es la práctica por la cual los brókeres (Robinhood, Webull) venden tu orden a los market makers (Citadel, Virtu) en lugar de enviarla a los mercados públicos.</p>
-
-      <p><strong>El trato:</strong></p>
-      <ul>
-        <li>Lanzas una operación en Robinhood (sin comisiones)</li>
-        <li>El bróker enruta su orden a un mayorista y cobra por ello. En renta variable ese pago es pequeño: normalmente una pequeña fracción de centavo por acción, no los 0,002 $ que esta lección imprimía, que eran unas diez veces demasiado. El dinero está en las opciones: las bonificaciones por contrato son mucho mayores, y las opciones son la mayor parte del total.</li>
-        <li>Citadel ejecuta tu orden y se queda con la horquilla</li>
-      </ul>
-
-      <h3 id="how-robinhood-makes-money">Cómo gana dinero Robinhood</h3>
-
-      <p><strong>Fuente de ingresos:</strong> Fuente de ingresos: los ingresos por transacciones —bonificaciones por flujo de órdenes en acciones, opciones y cripto— fueron alrededor de tres cuartas partes de los ingresos totales de Robinhood en su pico de 2021. Las opciones y las cripto eran el grueso; las bonificaciones de renta variable, la porción más pequeña.</p>
-
-      <p><strong>Las cuentas:</strong></p>
-      <ul>
-        <li>Robinhood tiene 15 millones de usuarios</li>
-        <li>Cada usuario negocia una media de 100 acciones al mes</li>
-        <li>Total: 1.500 millones de acciones al mes</li>
-        <li>El mayorista paga una pequeña fracción de centavo por acción en renta variable</li>
-        <li><strong>La parte de renta variable es la pequeña.</strong> Aquí no se calcula ningún total, porque la tarifa por acción no se publica de una forma que se pueda multiplicar, y las cifras que circulan suelen aplicar la tarifa de opciones a recuentos de acciones. Para el argumento importa la dirección, no el total: al bróker le pagan más cuando usted opera más, y por eso la aplicación está construida como está.</li>
-      </ul>
-
-      <p><strong>Por qué a Robinhood le encanta el PFOF:</strong> Cobran <em>más</em> cuanto más operas <em>más</em> (animaciones de confeti, notificaciones push, promociones de «acción gratis»).</p>
-
-      <h3 id="how-citadel-makes-money">Cómo gana dinero Citadel</h3>
-
-      <p><strong>Por qué Citadel paga por el order flow:</strong> El order flow minorista es <strong>no informado</strong> (bajo riesgo de selección adversa), lo que lo hace muy rentable.</p>
-
-      <p><strong>Las cuentas:</strong></p>
-      <ul>
-        <li>Citadel compra a Robinhood 1.500 millones de acciones al mes</li>
-        <li>Horquilla media capturada: 0,01 $ por acción</li>
-        <li><strong>No calculable a partir de estos números.</strong> Capturar un centavo entero por acción es el techo, no el resultado: la mejora de precio devuelve buena parte, y eso es precisamente lo que el mayorista vende a los brókeres. La afirmación honesta es que el flujo minorista es rentable porque no está informado, no porque rinda toda la horquilla.</li>
-        <li>La economía que sí se sostiene: el flujo no informado se puede cotizar más ajustado que el flujo anónimo de bolsa, porque es muy improbable que quien está al otro lado sepa algo que usted no sepa. Esa es toda la razón por la que merece la pena pagar por él.</li>
-      </ul>
-
-      <h3 id="how-you-lose-money">Cómo pierdes tú el dinero</h3>
-
-      <p><strong>El coste oculto:</strong> No pagas comisiones, pero pagas mediante la <strong>falta de mejora de precio</strong>.</p>
-
-      <p><strong>Ejemplo:</strong></p>
-      <ul>
-        <li>NBBO: compra 100,00 $, venta 100,02 $</li>
-        <li>Lanzas una compra a mercado en Robinhood</li>
-        <li>Robinhood la enruta a Citadel (no la manda al mercado público)</li>
-        <li>Citadel te ejecuta a 100,02 $ (el precio de venta)</li>
-        <li><strong>Sino:</strong> En el mercado público había un vendedor a 100,01 $</li>
-        <li><strong>Pagaste 0,01 $ de más por acción</strong></li>
-      </ul>
-
-      <p><strong>Escala:</strong> 1.000 acciones = 10 $ pagados de más. En 100 operaciones al año, son <strong>1.000 $ al año en costes ocultos</strong>.</p>
-
-      <div class="callout-danger">
-        <h4>⚠️ Lo que dice realmente la evidencia sobre el PFOF</h4>
-        <p>El "estudio de la SEC de 2020 que encontró 1.500 millones de dólares al año en costes" que esta lección citaba no existe, y se ha eliminado. Esto es lo que sí existe. Trabajos académicos que enviaron órdenes idénticas a través de varios brókeres minoristas en el mismo instante encontraron diferencias grandes y persistentes en los precios que devolvían: diferencias mucho mayores que las comisiones que el sector acababa de abolir. Los brókeres publican informes de calidad de ejecución conforme a las normas de la SEC, y esos informes muestran que la mayoría de las órdenes minoristas ejecutables reciben alguna mejora de precio sobre la horquilla cotizada. Ambas cosas son ciertas a la vez, y el argumento real trata de la brecha entre la mejora que usted obtiene y la que podría haber producido una subasta orden a orden. Es una discusión sobre cuánto mejor podría ser, no sobre si le están ejecutando fuera de la horquilla.</p>
-        <p><strong>Qué hacer con eso:</strong> Qué hacer con eso: la conclusión práctica no cambia y no necesita ninguna cifra de titular. Su bróker publica un informe de calidad de ejecución. Lea el de su bróker en vez de un agregado del sector, y compárelo con otro. Esa comparación es específica de usted y es la única versión de esta pregunta que puede resolver de verdad.</p>
-      </div>
-<h3 id="latency-arbitrage-via-pfof">Arbitraje de latencia vía PFOF</h3>
-
-      <p>Una afirmación que encontrará constantemente, y que la versión anterior de esta lección repetía: que el mayorista ve su orden primero y se le adelanta. Sea preciso aquí, porque la parte verdadera y la falsa están muy cerca. Operar por delante de una orden de cliente está prohibido, y una firma que comprara acciones delante de su compra y luego se las vendiera estaría cometiendo una infracción sin más, no aprovechando un resquicio. Lo cierto es más sutil y aun así merece saberse.</p>
-
-      <p><strong>Ejemplo:</strong></p>
+      <h3 data-part="problems">Problemas</h3>
       <ol>
-        <li>Compras 1.000 acciones de AAPL a mercado en Robinhood</li>
-        <li>Robinhood envía la orden a Citadel (no a la NYSE)</li>
-        <li>El mayorista ve su orden antes que el resto del mercado: es quien la ejecuta</li>
-        <li>El algoritmo de Citadel ve venir tu compra de 1.000 acciones</li>
-        <li>Citadel compra 1.000 AAPL en la NYSE a 175,00 $ (el precio de compra)</li>
-        <li>Después Citadel te las vende a ti a 175,02 $ (el de venta)</li>
-        <li><strong>Beneficio de Citadel: 20 $</strong>, con la posición mantenida durante milisegundos</li>
+        <li><strong>Lee tu propio diferencial a dos horas del día.</strong> Coge el instrumento que operas de verdad. Anota la demanda y la oferta a las 9:31 y otra vez a las 11:00, todos los días durante una semana. Diez lecturas. Ya tienes tu propia versión de las columnas de la segunda tabla, y descubrirás que la proporción entre ellas es un hecho sobre tu instrumento y no una cifra de ninguna lección. Diez minutos en total, repartidos en cinco mañanas.</li>
+        <li><strong>Calcula tu propia factura antes de la siguiente operación, no después.</strong> Coge tu diferencial típico del problema 1, multiplícalo por tu número habitual de acciones, multiplícalo por las idas y vueltas al día, multiplícalo por 252. Divide después entre tu cuenta. Si sale 3 por ciento has encontrado algo por lo que puedes dejar de preocuparte; si sale 100 por ciento has encontrado lo que está mal, y ninguna mejora en tus entradas lo va a tocar. Media hora, y es el cálculo más valioso de todo este módulo.</li>
+        <li><strong>Compara dos brókeres con tu propio tamaño de orden.</strong> Todo bróker publica un informe de calidad de ejecución bajo las normas de la SEC, desglosado por tamaño de orden y por valor. Saca el informe de tu bróker y el de otro, busca el tramo en el que caen de verdad tus órdenes, y compara la proporción entre diferencial efectivo y diferencial cotizado. Una proporción por debajo de uno significa que la orden media de ese tramo se ejecutó dentro de la cotización, y lo lejos que quede por debajo te dice por cuánto. Hazlo para los tres instrumentos que más operas. Una tarde, y al final habrás sustituido toda afirmación general sobre el pago por order flow, incluidas las de esta página, por dos números que van de ti.</li>
       </ol>
 
-      <p><strong>Por qué es legal:</strong> Citadel alega que «aportó liquidez» y que tú pagaste el precio de venta del NBBO (no peor). Pero ellos <em>sabían</em> que tu orden venía de camino:<strong>asimetría de información</strong>.</p>
+      <p data-part="sources" style="font-size:.9rem;color:var(--muted);margin-top:2rem"><strong>Fuentes.</strong> <span translate="no">Harold Demsetz</span>, &laquo;The Cost of Transacting&raquo; (<em translate="no">The Quarterly Journal of Economics</em>, 1968), por el diferencial como precio de la inmediatez y no como una tarifa, que es el marco que tomó la lección 4 y bajo el que esta lección pone una ecuación. <span translate="no">Lawrence R. Glosten</span> y <span translate="no">Paul R. Milgrom</span>, &laquo;Bid, Ask and Transaction Prices in a Specialist Market with Heterogeneously Informed Traders&raquo; (<em translate="no">Journal of Financial Economics</em>, 1985), por la condición de beneficio nulo despejada arriba y por el resultado de que la selección adversa sola basta para producir un diferencial, sin inventario ninguno y sin costes. <span translate="no">Maureen O&rsquo;Hara</span>, <em translate="no">Market Microstructure Theory</em> (Blackwell, 1995), por los modelos de inventario que explican la parte de la fila de abajo que la fórmula de arriba no puede. <span translate="no">Christopher Schwarz</span>, <span translate="no">Brad M. Barber</span>, <span translate="no">Xing Huang</span>, <span translate="no">Philippe Jorion</span> y <span translate="no">Terrance Odean</span>, &laquo;The &lsquo;Actual Retail Price&rsquo; of Equity Trades&raquo; (2024), por lo de que órdenes idénticas mandadas por varios brókeres en el mismo momento vuelven con precios claramente distintos, que es la evidencia que el problema 3 te pide reproducir para tu propia cuenta.</p>
 
-      <div class="section-break"><span>Parte 6: cómo operar frente a los market makers</span></div>
-<h2 id="defense-strategies-for-retail-traders">Estrategias de defensa para el trader minorista</h2>
-<p>No puedes eliminar la ventaja del market maker, pero sí puedes <strong>reducirla</strong> .</p>
-<h3 id="strategy-1-always-use-limit-orders">Estrategia n.º 1: usa siempre órdenes limitadas</h3>
+      <p>Un diferencial no es una tarifa y no es una cortesía. Es un precio con dos componentes, y el que viene de la negociación informada se despeja exacto: un diferencial de equilibrio es el doble de la probabilidad de que la siguiente orden sepa algo, por lo que sabe. Esa sola línea pone el céntimo de una acción líquida en una orden informada de cada mil, se niega a poner precio a un diferencial de cincuenta céntimos y con ello te dice que el resto es inventario, y explica por qué el flujo no informado merece que se pague por él sin que nadie haga nada indebido. Apuntada al revés, dice que una ida y vuelta de 30 dólares es una ida y vuelta de 30 dólares tanto si la operación fue brillante como si fue estúpida. Lo que no dice es adónde va tu orden después de que pulses el botón, y la respuesta no es el mercado que estás mirando. La lección 54 sigue una orden por los centros que compiten por ella, y encuentra que la velocidad de la que todo el mundo se queja es lo de menos de lo que allí se decide.</p>
 
-      <p><strong>Regla:</strong> No uses nunca órdenes a mercado, salvo que la velocidad de ejecución te importe más que el precio.</p>
+<div class="section-break"><span>Lecciones relacionadas</span></div>
 
-      <p><strong>Por qué:</strong> Con las órdenes limitadas el precio lo pones <em>tú</em> , no el market maker.</p>
-
-      <p><strong>Ejemplo:</strong></p>
-      <ul>
-        <li>NBBO: compra 100,00 $, venta 100,05 $</li>
-        <li><strong>Mal:</strong> Compra a mercado → ejecutada a 100,05 $</li>
-        <li><strong>Bien:</strong> Compra limitada a 100,02 $ → esperas a un vendedor y ahorras 0,03 $ por acción</li>
-      </ul>
-
-      <div class="callout-success">
-        <h4>💡 Consejo pro: usa órdenes limitadas al punto medio</h4>
-        <p><strong>Táctica:</strong> Coloca las órdenes limitadas en el <em>precio medio</em> de la horquilla.</p>
-        <p>Compra 100,00 $, venta 100,04 $ → punto medio = 100,02 $. Pon la compra limitada en 100,02 $.</p>
-        <p><strong>Ventaja:</strong> repartes la horquilla con el market maker en vez de regalarle toda la ventaja.</p>
-      </div>
-<h3 id="strategy-2-trade-during-liquid-hours">Estrategia n.º 2: opera en las horas líquidas</h3>
-
-      <p><strong>Regla:</strong> Opera entre las 10:00 y las 15:00 ET (evita la primera y la última hora, y el fuera de horas).</p>
-
-      <p><strong>Por qué:</strong> Por qué: las horquillas son más estrechas cuando la liquidez es más profunda y la volatilidad más baja, porque los dos riesgos por los que se paga una horquilla —inventario y selección adversa— son entonces mínimos. La apertura y el cierre son anchos por una razón, no por oportunismo: se está poniendo precio a las noticias de la noche, los volúmenes son irregulares y la probabilidad de que quien opera contra usted sepa algo está en su máximo.</p>
-
-      <p><strong>Ejemplo:</strong></p>
-      <ul>
-        <li>Horquilla de AAPL a las 10:00: 0,01 $</li>
-        <li>Horquilla de AAPL en los primeros minutos: más ancha, aunque cuánto varía de un día a otro. Fíjese en que esta lección citaba aquí 5x y más abajo 8x, para la misma acción la misma mañana: si dos cifras de una lección no coinciden, ninguna fue medida. Compruebe su propio instrumento a las 9:31 y a las 11:00 durante una semana; es un ejercicio de diez minutos y le dará una cifra en la que pueda confiar.</li>
-        <li>Horquilla de AAPL a las 18:00 (fuera de horas): 0,15 $ (15 veces más ancha)</li>
-      </ul>
-
-      <h3 id="strategy-3-avoid-pfof-brokers-or-route-to-iex">Estrategia n.º 3: evita los brókeres con PFOF (o enruta a IEX)</h3>
-
-      <p><strong>Regla:</strong> Regla: sepa si su bróker acepta pago por su order flow, y en qué productos. La lista general que esta lección imprimía —"Fidelity, Vanguard, Interactive Brokers no lo hacen"— se equivoca en los detalles con los tres. Algunos brókeres lo rechazan en acciones y lo aceptan en opciones. Otros tienen dos niveles, uno que lo acepta y otro que no, y hay que estar en el correcto. Consulte la divulgación actual de su propia cuenta en lugar de fiarse de una lista en una lección, incluida esta, que estará desactualizada antes de que la lea.</p>
-
-      <p><strong>Por qué importa:</strong> Por qué importa: no por una ventaja de latencia —el mayorista le está ejecutando, no compitiendo con usted—. Importa porque enrutar según quién paga por el flujo es una decisión distinta de enrutar según dónde se ejecuta mejor la orden, y las dos pueden apuntar al mismo sitio o a sitios distintos. Cuando divergen, la diferencia la paga usted, y nunca la verá como una partida.</p>
-
-      <p><strong>Alternativa:</strong> Si estás atado a Robinhood, enruta tus órdenes a <strong>IEX (Investors Exchange)</strong>, un mercado público diseñado para eliminar el arbitraje de latencia.</p>
-
-      <p><strong>Cómo enrutar a IEX en Interactive Brokers:</strong></p>
-      <ol>
-        <li>Abre la ventana de introducción de órdenes</li>
-        <li>Haz clic en el desplegable «Route»</li>
-        <li>Selecciona «IEX» (Investors Exchange)</li>
-        <li>Lanza una orden limitada</li>
-      </ol>
-
-      <p><strong>Lo que hace realmente el badén de velocidad:</strong> IEX retrasa los mensajes entrantes 350 microsegundos, lo que impide que una orden en reposo en IEX sea barrida a un precio que ya se ha movido en otro sitio. Es una protección real, y es una protección para PROVEEDORES DE LIQUIDEZ: para sus órdenes limitadas puestas en el libro. No hace nada por una orden de mercado que usted envíe allí, y describirla como algo que impide el front-running del minorista es una exageración que verá en todas partes.</p><h3 id="strategy-4-dont-chaselet-the-market-come-to-you">Estrategia n.º 4: no persigas, deja que el mercado venga a ti</h3>
-
-      <p><strong>Regla:</strong> Si tu orden limitada no se ejecuta enseguida, no la persigas subiendo el precio límite.</p>
-
-      <p><strong>Por qué:</strong> Los market makers <em>quieren</em> que persigas el precio. Retiran liquidez a propósito para obligarte a pagar más.</p>
-
-      <p><strong>Ejemplo:</strong></p>
-      <ul>
-        <li>Colocas una compra limitada en 100,02 $</li>
-        <li>La venta salta a 100,10 $ (el market maker ha retirado liquidez)</li>
-        <li><strong>Mal movimiento:</strong> cancelar y recomprar a 100,10 $ (te la han jugado)</li>
-        <li><strong>Buen movimiento:</strong> espera 30 segundos. Lo más probable es que la venta vuelva a 100,05 $</li>
-      </ul>
-
-                  <details style="background:rgba(0,212,170,0.08);padding:1.5rem;border-radius:8px;margin:2rem 0;border-left:4px solid #00d4aa">
-        <summary style="cursor:pointer;font-weight:600;font-size:1.1rem">⚡ Logros rápidos para mañana (haz clic para desplegar)</summary>
-        <div style="margin-top:1rem">
-
-        <p>No te satures. Empieza por estas tres acciones:</p>
-        <ol style="margin:0.75rem 0 0 1.5rem;line-height:1.8">
-          <li><strong>Pasa a órdenes limitadas en tus próximas 10 operaciones (la regla del 100 %)</strong> — Comprométete para mañana: «Las próximas 10 operaciones, SOLO órdenes limitadas, aunque me pierda el movimiento». Al comprar, mira la horquilla. ¿Compra 100,00 $, venta 100,05 $? Pon el límite en 100,02 $ (el punto medio). Espera 10 segundos. Si no hay ejecución, ajusta 0,01 $ si hace falta. Anota las ejecuciones: ¿cuánto mejor que el precio de venta? Ejemplo: 50,00 $/50,05 $, límite en 50,02 $, ejecutado a 50,02 $ = 0,03 $ por acción ahorrados frente a una orden a mercado. 200 acciones = 6 $ ahorrados. 10 operaciones = 60 $. 100 operaciones al año = 600 $. 1.000 operaciones = 6.000 $. Mide lo que ahorras en slippage: «precio de ejecución menos precio de venta». No vuelvas nunca a las órdenes a mercado.</li>
-          <li><strong>Mira el order book de nivel 2 antes de tu próxima entrada (identifica los muros falsos)</strong> — Abra la ventana de Level 2 de su bróker ("Profundidad de mercado" u "order book"). Antes de entrar, mire las órdenes de compra y venta. ¿Ve una orden ENORME que empequeñece a las demás? Ejemplo: 50.000 acciones a la venta en 100,10 $, mientras los otros niveles solo muestran 500-2.000. Pero lea la corrección sobre el spoofing de la explicación del cuestionario antes de sacar conclusiones: la mayoría de las órdenes en acciones estadounidenses se cancelan en vez de ejecutarse, así que una orden grande que desaparece es el caso normal y no prueba nada. La versión útil de este ejercicio es más estrecha y sigue mereciendo la pena: observe con qué frecuencia una orden grande en reposo sigue ahí cuando el precio llega de verdad. Aprender que no se puede uno apoyar en ella es lo importante.</li>
-          <li><strong>Evita operar los primeros 15 minutos (9:30-9:45) y los últimos 10 (15:50-16:00) durante una semana</strong> — El mayor cambio de comportamiento que separa a los operadores rentables de los perdedores. En estas ventanas las horquillas son más anchas, y por una razón real: la volatilidad está en su máximo y la probabilidad de estar del lado equivocado de flujo informado es la mayor, así que cotizar sale más caro. Eric Thompson perdió <span style="color:#ff5252;font-weight:700">68.000 $</span> (-48,6 %) en 7 semanas, con un 52 % de aciertos (estrategia rentable), pero los slippage destruyeron la ventaja. Slippage media 0,10 $ por acción × 300 acciones × 60 operaciones al día = 1.800 $ al día = 63.000 $ en 7 semanas, usando órdenes de mercado en esas mismas ventanas de market maker. Mídalo usted en lugar de tomar una cifra de una lección: anote la horquilla de su instrumento a las 9:32 y otra vez a las 11:00, todos los días, durante una semana. No importa el múltiplo; importa que verá el coste con sus propios ojos y dejará de discutir con él. Regla de una semana: nada de operaciones antes de las 9:45, todo cerrado a las 15:50. No se promete ninguna cifra de mejora. Lo que tendrá tras una semana es un registro de lo que le estaban costando los primeros quince minutos, que es lo que cambia el comportamiento.</li>
-        </ol>
-      
-        </div>
-      </details>
-
-      <div class="section-break"><span>Cuestionario: pon a prueba lo que has entendido</span></div>
-
-      <h2 id="quiz" style="margin-top:3rem">📝 Comprobación de conocimientos</h2>
-      <p>Pon a prueba lo que has entendido sobre los algoritmos de los market makers:</p>
-
-<div class="quiz">
-      <div class="quiz-question">
-        <p><strong>La horquilla de AAPL es 175,00 $ / 175,05 $. Lanzas una orden de venta a mercado por 500 acciones. ¿A qué precio te ejecutan?</strong></p>
-        <div class="quiz-options">
-          <div class="quiz-option" data-correct="true">
-            A) 175,00 $ (el precio de compra)
-          </div>
-          <div class="quiz-option" data-correct="false">
-            B) 175,05 $ (el precio de venta)
-          </div>
-          <div class="quiz-option" data-correct="false">
-            C) 175,025 $ (el punto medio)
-          </div>
-        </div>
-        <div class="quiz-explanation">
-          <strong>Correcto: A</strong> es la respuesta que cabe esperar, aunque "siempre" es demasiado fuerte y las excepciones importan. Una orden ejecutable puede llenarse ENTRE las cotizaciones: la mejora de precio en órdenes minoristas ejecutables es habitual, y es lo que los mayoristas venden a los brókeres que enrutan hacia ellos, así que una ejecución en 175,01 $ o 175,02 $ es un resultado normal y no una sorpresa. En la otra dirección, una orden mayor que el tamaño mostrado en la demanda recorre el libro y promedia peor que 175,00 $. Es decir: la demanda es lo que usted acepta, y es la respuesta correcta entre estas tres, pero trátela como precio de referencia y no como garantía. El mecanismo: los market makers publican dos cotizaciones a la vez, la demanda (el precio al que compran) y la oferta (al que venden). Cuando usted lanza una venta a mercado, está aceptando su demanda. Le compran las acciones a 175,00 $ y se las venden al siguiente comprador a 175,05 $, capturando la horquilla de 0,05 $ (25 $ sobre sus 500 acciones, en milisegundos: solo mantienen el inventario hasta que llega el siguiente comprador). Esto se llama "captura de la horquilla" y es el negocio central del market maker. La horquilla entre demanda y oferta es el margen del market maker, y su coste. Las órdenes de mercado garantizan que usted paga el coste máximo. Las limitadas al punto medio reparten la diferencia. Compruebe siempre el tamaño de la horquilla antes de operar: horquilla &gt; 0,1 % del precio de la acción = solo órdenes limitadas.
-        </div>
-      </div>
-
-      <div class="quiz-question" style="margin-top:2rem">
-        <p><strong>Ves aparecer en el nivel 2 una orden de venta enorme (50.000 acciones) en 100,10 $, pero desaparece en 20 segundos sin que nadie llegue a ejecutarla. ¿Qué acaba de pasar?</strong></p>
-        <div class="quiz-options">
-          <div class="quiz-option" data-correct="false">
-            A) Una gran institución cambió de idea sobre la venta
-          </div>
-          <div class="quiz-option" data-correct="true">
-            B) Spoofing: un market maker colocó una orden falsa para manipular la percepción del precio
-          </div>
-          <div class="quiz-option" data-correct="false">
-            C) Un operador de alta frecuencia probando las condiciones de liquidez
-          </div>
-        </div>
-        <div class="quiz-explanation">
-          <strong>Correcto: B</strong> es lo que la pregunta está evaluando, y la secuencia de abajo es el aspecto que tiene el spoofing. Pero lea la salvedad del final antes de empezar a aplicarlo, porque la regla de detección que daba esta tarjeta era errónea y le haría ver manipulación en todas partes. La secuencia completa: (1) Un operador quiere comprar acciones a 100,00 $, la demanda actual. (2) Coloca una orden de venta de 50.000 acciones a 100,10 $ que no piensa dejar ejecutar, creando la apariencia de mucha oferta. (3) Otros leen el order book y piensan: "vendedor enorme en 100,10 $, esto no puede romper al alza, mejor vendo a 100,00 $ antes de que caiga". (4) Esas acciones se venden a 100,00 $ y el spoofer las compra. (5) La orden de 50.000 acciones se cancela antes de poder ejecutarse. (6) El precio sube a 100,20 $, porque la oferta nunca estuvo ahí, y el spoofer vende contra ello. Por qué es ilegal: la Dodd-Frank de 2010 prohibió el spoofing, pero la intención es casi imposible de probar. Cómo detectarlo, y aquí va la corrección: no puede, no desde una pantalla de Level 2. La gran mayoría de las órdenes introducidas en acciones estadounidenses se cancelan en vez de ejecutarse, y así lleva más de una década. Eso no es manipulación; es cotización ordinaria, actualizada continuamente conforme se mueve el mercado, más algoritmos que ponen y retiran mientras trabajan órdenes grandes. Una orden grande que aparece y desaparece sin ejecutarse es el caso normal, no una señal al 80 % de nada. La prueba de "sigue diez y si ocho desaparecen lo has confirmado" que había aquí no confirma nada, porque ocho de cada diez desapareciendo es lo que vería en un mercado sin nada de spoofing. Lo que sí puede llevarse de esta sección: no trate una orden grande en reposo como un muro en el que apoyarse. Puede retirarse en cuanto el precio se acerque, sea cual sea la intención detrás.
-        </div>
-      </div>
-
-      <div class="quiz-question" style="margin-top:2rem">
-        <p><strong>Operas en Robinhood (bróker con PFOF). El NBBO es 100,00 $ / 100,02 $. Lanzas una compra a mercado de 1.000 acciones. Citadel te ejecuta a 100,02 $. ¿Has conseguido un precio justo?</strong></p>
-        <div class="quiz-options">
-          <div class="quiz-option" data-correct="false">
-            A) Sí, pagaste el precio de venta del NBBO, así que por normativa es justo
-          </div>
-          <div class="quiz-option" data-correct="false">
-            B) Sí, Robinhood no cobra comisiones, así que en conjunto has ahorrado
-          </div>
-          <div class="quiz-option" data-correct="true">
-            C) No, puede que hubiera precios mejores (100,01 $) en mercados públicos a los que no tuviste acceso
-          </div>
-        </div>
-        <div class="quiz-explanation">
-          <strong>Correcta: C.</strong> Este es el coste oculto del pago por order flow. Lo que ocurrió de verdad: cuando pulsó "comprar", su orden no fue a NYSE ni a Nasdaq, sino a un mayorista que pagó al bróker por ella. Le ejecutaron a 100,02 $, la oferta del NBBO, lo cual es legal. La versión de esta explicación que había aquí antes no se sostiene, y merece la pena ver por qué. Decía que en NYSE había un vendedor a 100,01 $ que le fue negado. Si eso fuera cierto, 100,01 $ SERÍA la mejor oferta nacional, y ejecutarle a 100,02 $ sería un trade-through: una infracción, no un resquicio. Un precio mejor mostrado no se puede ignorar; para eso existe la regla de protección de órdenes. La respuesta real es más sutil. Le ejecutaron a la oferta cotizada, que es legal y es lo que le prometieron. Lo que no obtuvo es la mejora de precio que la misma orden podría haber conseguido en otro sitio: en el modelo mayorista, cuánto de la horquilla vuelve a usted lo fija la política de precios de esa firma, y nadie más tuvo ocasión de pujar por el derecho a ejecutarle. Esa es la queja de verdad, y la razón por la que se discute desde hace años sobre la competencia orden a orden. Fíjese también en qué resuelve el argumento de la comisión cero y qué no: cero comisión es dinero real ahorrado. Si las ejecuciones lo compensan es algo que responde el informe de calidad de ejecución de su propio bróker, y la respuesta no será la misma para cada bróker ni para cada tamaño de orden, y por eso aquí no se da ninguna cifra. Lo que sí ayuda: un bróker que le deje dirigir el enrutamiento, y órdenes limitadas, que sacan de manos ajenas la cuestión de dónde se sitúa usted en la horquilla. Cuidado especialmente con la afirmación sobre IEX: su retraso de 350 microsegundos protege a las órdenes que REPOSAN en IEX de ser barridas a un precio caducado; no hace nada por una orden ejecutable que envíe allí, y no "impide el front-running" de una compra minorista. No se cita ninguna cifra de mejora, porque no se ha medido ninguna para usted en concreto.
-        </div>
-      </div>
-      </div>
-
-      <div class="callout-key">
-    <h4>&#129518; Convierte el spread en el ganador que te obliga a encontrar</h4>
-    <p>Un spread se cotiza en centavos y una ventaja se mide en resultados, así que no se pueden comparar hasta convertir uno de los dos. La conversión es una sola división, y las dos cifras del propio Eric bastan para hacerla.</p>
-
-    <p>Tome una tasa de acierto w con ganadoras y perdedoras del mismo tamaño W. La esperanza por acción es wW - (1 - w)W, es decir (2w - 1) x W. Para sobrevivir a un coste de c por acción, eso tiene que superar a c, así que el ganador medio que necesita es:</p>
-
-    <pre style="background:rgba(0,0,0,.3);padding:1.5rem;border-radius:8px;overflow-x:auto"><code>ganador medio necesario  =  c / (2w - 1)
-
-con w = 52 %:   2(0,52) - 1 = 0,04   ->   c x 25
-con w = 55 %:   2(0,55) - 1 = 0,10   ->   c x 10
-con w = 60 %:   2(0,60) - 1 = 0,20   ->   c x 5</code></pre>
-
-    <p>Ese multiplicador es todo el asunto. Con la tasa de acierto del 52 % de Eric, un coste de un centavo por acción le obliga a encontrar ganadoras de 25 centavos de media. Su coste real era de diez centavos, lo que le obliga a encontrar ganadoras de 2,50 $ de media, sesenta veces al día, en posiciones de 300 acciones, en los primeros quince minutos y en días de Fed. Entre esas dos cifras no cambió nada de su estrategia. Solo cambió el momento que eligió para operar, y eso multiplicó por diez la ventaja que necesitaba.</p>
-
-    <p>Ahora reste, porque los totales de la propia página resuelven una cuestión que el caso deja abierta. Perdió 68.000 $ y 63.000 $ fueron ejecución, de modo que la operativa en sí perdió unos 5.000 $ en 60 x 35 = 2.100 operaciones, es decir 2,38 $ por operación. Su registro antes de costes no era rentable: era plano, que es exactamente lo que produce una tasa de acierto del 52 % con ganadoras y perdedoras simétricas. El coste de ejecución no destruyó una ventaja. Enterró una estrategia que no tenía ninguna.</p>
-
-    <p style="margin-bottom:0">Así que haga la división antes de hacer la estrategia. Su coste por acción es el spread que realmente paga, y eso lo lee en un mes de sus propias ejecuciones en vez de estimarlo. Divídalo por (2w - 1) con su propia tasa de acierto y tendrá el ganador medio que su método debe producir a la frecuencia con la que opera. Si esa cifra es mayor que los movimientos que sus setups están diseñados para capturar, la aritmética ya le ha respondido, y ningún acierto de dirección lo cambiará.</p>
-  </div>
-
-      <div class="section-break"><span>Puntos clave</span></div>
-
-      <div class="callout-key">
-        <h4>💡 Entender a los market makers = mejores ejecuciones</h4>
-        <ul>
-          <li><strong>La captura de la horquilla</strong> es el beneficio central del market maker: comprar a la compra, vender a la venta y repetirlo miles de millones de veces.</li>
-          <li><strong>La selección adversa</strong> = los traders informados les cuestan dinero, así que amplían las horquillas cuando detectan flujo «tóxico».</li>
-          <li><strong>Gestión de inventario:</strong> sesgan cotizaciones, usan dark pools y se cubren con futuros para mantenerse delta neutrales.</li>
-          <li><strong>El spoofing y el layering son ilegales y se persiguen</strong> —y el historial sancionador apunta a operadores por cuenta propia y mesas de bancos, no a los mayoristas que ejecutan sus órdenes. No puede identificar ninguno de los dos desde una pantalla de Level 2: la mayoría de las órdenes en acciones estadounidenses se cancelan en vez de ejecutarse, así que una orden que desaparece no prueba nada.</li>
-          <li><strong>PFOF</strong> = operar «gratis» no es gratis. Lo pagas con peores ejecuciones y arbitraje de latencia.</li>
-          <li><strong>Convierte el spread antes de discutir con él</strong> &mdash; ganador medio necesario = coste por acción ÷ (2w − 1). Con un 52 % de aciertos eso multiplica el coste por 25, así que diez centavos de spread exigen ganadoras de 2,50 $.</li>
-          <li><strong>Defensa:</strong> Usa órdenes limitadas, opera en horas líquidas, evita los brókeres con PFOF y enruta a IEX.</li>
-        </ul>
-      </div>
-
-      <p><strong>📥 Descarga la lista de comprobación:</strong> <a href="/education/resources/checklists/market-making-hft-checklist.pdf" download>Lista de defensa frente al market making y el HFT (PDF)</a></p>
-
-      <p style="font-size:1.1rem;font-weight:500;margin:2rem 0">Los market makers no son villanos: maximizan beneficios. Conoce su manual, evita sus trampas y opera con disciplina.</p>
-
-      <h3 style="margin-bottom:1.5rem">Lecciones relacionadas</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 280px),1fr));gap:1rem;margin:1.5rem 0">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%, 250px),1fr));gap:1rem;margin:1.5rem 0">
         <div class="card" style="padding:1rem">
-          <span class="badge">Principiante #4</span>
-          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Por qué las órdenes a mercado te cuestan dinero</h4>
-          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Fundamentos de las órdenes limitadas frente a las de mercado, y por qué estas últimas favorecen al market maker.</p>
-          <a href="/education/curriculum/intermediate/49-repainting.html" class="btn btn-sm btn-ghost">Leer la lección &rarr;</a>
+          <span class="badge">La lección 5</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Por qué alguien cotiza siquiera</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Los dos riesgos bajo los que esta lección por fin pone una ecuación.</p>
+          <a href="/education/curriculum/beginner/05-why-anyone-quotes.html" class="btn btn-sm btn-ghost">Leer la lección &rarr;</a>
         </div>
         <div class="card" style="padding:1rem">
-          <span class="badge">Intermedio #25</span>
-          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Análisis del order book</h4>
-          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Leer los datos de Time & Sales para detectar desequilibrios de inventario en los market makers.</p>
-          <a href="/education/curriculum/intermediate/26-order-book-is-theater.html" class="btn btn-sm btn-ghost">Leer la lección &rarr;</a>
+          <span class="badge">Lección 4</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">El spread es el precio de la inmediatez</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Por qué una cifra en dólares no significa nada hasta que se pone frente a tu stop.</p>
+          <a href="/education/curriculum/beginner/04-the-spread.html" class="btn btn-sm btn-ghost">Leer la lección &rarr;</a>
         </div>
         <div class="card" style="padding:1rem">
-          <span class="badge">Avanzado #52</span>
-          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Order flow institucional</h4>
-          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Análisis de dark pools y cómo evitan las instituciones que los detecten los market makers.</p>
-          <a href="/education/curriculum/advanced/57-how-institutions-execute.html" class="btn btn-sm btn-ghost">Leer la lección &rarr;</a>
+          <span class="badge">Lección 10</span>
+          <h4 style="margin:.5rem 0 .5rem 0;font-size:1rem">Toda operación empieza en negativo</h4>
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:.75rem">Los otros tres cargos que la segunda tabla de arriba deja fuera.</p>
+          <a href="/education/curriculum/beginner/10-every-trade-starts-negative.html" class="btn btn-sm btn-ghost">Leer la lección &rarr;</a>
         </div>
-      </div>
-
-      <div class="callout-info">
-        <h4>⏭️ A continuación</h4>
-        <p><strong>Lección n.º 44: política de la Fed y liquidez</strong> — Aprende las operaciones de los bancos centrales, la mecánica del FOMC y cómo operar los cambios de liquidez macro.</p>
       </div>
 
       <blockquote class="sp-disclaimer"><strong>Solo con fines educativos.</strong> Operar conlleva un riesgo sustancial de pérdida. No es asesoramiento financiero. Los resultados pasados no garantizan resultados futuros.</blockquote>
@@ -962,13 +323,30 @@ con w = 60 %:   2(0,60) - 1 = 0,20   ->   c x 5</code></pre>
   </div>
 </article>
 
-<footer class="sp-footer"><div class="wrap"><div>© <span id="year"></span> Signal Pilot Labs, Inc.</div><div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Comentar en Discord</a><a href="https://www.signalpilot.io/affiliates.html">Afiliados</a><a href="https://www.signalpilot.io/privacy.html">Privacidad</a><a href="https://www.signalpilot.io/terms.html">Términos</a></div></div></footer>
+<footer class="sp-footer">
+  <div class="wrap">
+    <div>© <span id="year"></span> Signal Pilot Labs, Inc. Todos los derechos reservados.</div>
+    <div class="links"><a href="https://discord.gg/5guVbGEyj8" target="_blank" rel="noopener">Comentar en Discord</a><a href="https://www.signalpilot.io/affiliates.html">Afiliados</a><a href="https://www.signalpilot.io/privacy.html">Privacidad</a><a href="https://www.signalpilot.io/terms.html">Términos</a></div>
+  </div>
+</footer>
 
 <script src="/education/assets/edu.js"></script>
 <script src="/education/assets/edu-enhanced.js"></script>
-<script src="/education/assets/sp-bg.js"></script>
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+  window.addEventListener('scroll', () => {
+    const winHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    const scrolled = window.scrollY;
+    const percent = Math.min(Math.round((scrolled / (docHeight - winHeight)) * 100), 100);
+
+    const circle = document.querySelector('.progress-circle');
+    if (circle) {
+      circle.style.setProperty('--progress', percent + '%');
+      circle.querySelector('span').textContent = percent + '%';
+    }
+  }, { passive: true });
+
+  localStorage.setItem('sp_edu_last_article', JSON.stringify({ title: 'What the Spread Is Paying For', level: 'Advanced', order: '53', url: window.location.pathname, progress: 0 }));
 </script>
 <!-- SignalPilot Theme Switcher -->
 <script src="/education/assets/signalpilot-theme.js"></script>
@@ -982,9 +360,9 @@ document.getElementById('year').textContent = new Date().getFullYear();
 <script src="/education/assets/config.js"></script>
 <script src="/education/assets/supabase-client.js"></script>
 <script src="/education/assets/auth-ui.js"></script>
-<script src="/education/assets/library.js"></script>
-<script>window.addEventListener('load',function(){if(window.library?.isBookmarked()){var b=document.getElementById('bookmark-btn');if(b)b.innerHTML='⭐ Bookmarked'}})</script>
-  <!-- Enhanced Analytics & A/B Testing -->
+  <script src="/education/assets/library.js"></script>
+  <script>window.addEventListener('load',function(){if(window.library?.isBookmarked()){var b=document.getElementById('bookmark-btn');if(b)b.innerHTML='⭐ Bookmarked'}})</script>
+    <!-- Enhanced Analytics & A/B Testing -->
   <script src="/education/assets/enhanced-analytics.js" defer></script>
   <script src="/education/assets/ab-test-tldr.js" defer></script>
   <!-- Google Translate -->
@@ -996,7 +374,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       if (window.DiscussionSystem) {
-        window.DiscussionSystem.init('intermediate-40-market-maker-algorithms');
+        window.DiscussionSystem.init('advanced-53-market-makers-business');
       }
     });
   </script>
