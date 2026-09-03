@@ -40,7 +40,10 @@ OK_DOUBLES = {
            'واحداً واحداً', 'واحدا واحدا', 'اثنتين اثنتين', 'اثنين اثنين', 'ثلاثاً ثلاثاً', 'أربعاً أربعاً', 'شمعة شمعة', 'يوماً يوماً'},
     # Hungarian forms "one X after another" by repeating the noun:
     # "ügylet ügylet után" is trade after trade, not a stutter.
-    'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés', 'melyik melyik', 'felállás felállás', 'kitörés kitörés'},
+    'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés', 'melyik melyik', 'felállás felállás', 'kitörés kitörés',
+           # "hatra hatra" is six against six; "a választás választás" is
+           # "the choice is a choice", predicate repeating its subject.
+           'hatra hatra', 'választás választás'},
 }
 
 
