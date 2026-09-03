@@ -432,6 +432,18 @@ what somebody made, it does not go on the page.
 because the convention was twenty *steps* and the page never said so. A figure
 a reader cannot reproduce is a defect even when it is correct.
 
+**Implement the rule; do not trust the prose.** The commonest defect in a
+rebuilt lesson is not a wrong number, it is a right number that nobody else
+can land on. Five lessons in modules 3 and 4 printed tables whose figures were
+correct and whose method was underspecified: a simulation with no seed (22, 24),
+"two other plausible shapes" that were never named (25), a structure walk that
+silently required a first break to count as a change of character (32), and a
+sweep count that silently required an excursion to consume its own reclaim bar
+(35). Every one was found by writing the rule out in Python and failing to
+match, and none of them would have been found by reading. So: implement, and
+when the implementation disagrees, do not assume the page is wrong. Find the
+convention that closes the gap, then put it on the page.
+
 **A simulated figure names its seed, its run count and its length.** Lesson 22
 printed five ruin probabilities to two decimals from two hundred thousand
 careers and never said which stream produced them, so nothing on the page could
