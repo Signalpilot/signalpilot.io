@@ -444,6 +444,15 @@ match, and none of them would have been found by reading. So: implement, and
 when the implementation disagrees, do not assume the page is wrong. Find the
 convention that closes the gap, then put it on the page.
 
+**Check boundary cases in exact arithmetic.** Twice now a published figure has
+failed to reproduce in floating point and been right: lesson 37's bar 43 is
+exactly two fifths and comes out 0.3999999999999988, and three of lesson 40's
+nineteen gap multiples are exactly three halves and one of them lands a hair
+short. Both times the page was correct and the check was wrong. When a value
+sits on its own threshold, redo it with `fractions.Fraction` before concluding
+anything &mdash; and say so on the page, because the reader running it in a
+spreadsheet will hit the same edge.
+
 **A simulated figure names its seed, its run count and its length.** Lesson 22
 printed five ruin probabilities to two decimals from two hundred thousand
 careers and never said which stream produced them, so nothing on the page could
