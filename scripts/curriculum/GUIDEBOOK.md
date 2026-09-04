@@ -748,20 +748,20 @@ are linked from nowhere.
 ### What "done" means
 
 A slot is **rebuilt** when it exists in the Learn form: seven parts, the
-reading contract held, every figure recomputed. Slots 1 to 84 are rebuilt.
-Slot 85 is still the old lesson.
+reading contract held, every figure recomputed. Slots 1 to 85 are rebuilt. Every slot in the curriculum has been through the
+full treatment.
 
 A slot has had its **full treatment** when it has additionally passed the step
 four checklist end to end, in English and in all eleven locales, and carries a
-ledger row saying what that found. Slots 1 to 84 have.
+ledger row saying what that found. All 85 have.
 
 A module is **complete** when every slot in it is rebuilt. Modules 1 to 10 are
-complete, which is slots 1 to 81. Module 11 is three of four: slots 82, 83 and 84
-are written and 85 is still legacy.
+complete, which is slots 1 to 81, and module 11 is complete, which is slots 82 to
+85. There is no legacy lesson left.
 
 ### Open
 
-- Full treatment of slot 85.
+- Audit and review pass over all 85 slots.
 - Eleven module quizzes. None exists; the legacy per-lesson quizzes are being
   dropped, not carried.
 - The four tier pages and the learning path are still typed by hand. All
