@@ -332,12 +332,11 @@
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
       // Check if user is logged in
-      if (window.supabaseAuth) {
-        window.supabaseAuth.getCurrentUser().then(user => {
-          if (user) {
-            loadUserStats();
-          }
-        });
+      // getCurrentUser() returns the user or null, not a promise. Calling
+      // .then() on it threw on every page load, signed in or out, so the
+      // stats never loaded for anyone.
+      if (window.supabaseAuth && window.supabaseAuth.getCurrentUser()) {
+        loadUserStats();
       }
     });
   </script>
