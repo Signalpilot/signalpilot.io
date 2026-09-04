@@ -795,13 +795,22 @@ A module is **complete** when every slot in it is rebuilt. Modules 1 to 10 are
 complete, which is slots 1 to 81, and module 11 is complete, which is slots 82 to
 85. There is no legacy lesson left.
 
+The **audit** is done. All 85 lessons were read, every figure recomputed
+rather than trusted, and `audit.py` reports nothing across its six checks:
+cross references and links, the handoff chain, printed arithmetic, claim
+support, repeated words, and locale completeness. The chain reads 45
+handoffs carrying the next claim's own figure and 39 stating a finding whose
+claim has no numeral to hand over. Nothing is topic-only.
+
 ### Open
 
-- Audit and review pass over all 85 slots.
 - Eleven module quizzes. None exists; the legacy per-lesson quizzes are being
   dropped, not carried.
 - The four tier pages and the learning path are still typed by hand. All
   twelve indexes are build artifacts.
+- The `_merged/` and `_staging/` working directories still sit in the
+  curriculum tree. They are in neither the catalogue nor the sitemap, and
+  `audit.py` skips them, but they build nothing and should go.
 - Ledger debts: percent spacing in five locales, Japanese inline-emphasis
   whitespace, English meta descriptions on locale pages, second-person
   register per locale, composite trader names, price display on localised
