@@ -952,4 +952,256 @@ dict(
           'it is in.</p>\n',
 ),
 
+# ---------------------------------------------------------------- module 5
+dict(
+    mod=5, tier='intermediate', slug='module-5-quiz',
+    slots=[36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47],
+    title='Module 5 Quiz: Context',
+    desc='Six computations from the context module. Read a regime off one ratio, '
+         'find the two break-even points of a filter, clear an opening auction by '
+         'hand, take three numbers out of one straddle, scale a volatility and a '
+         'hedge, and regroup the module&rsquo;s own twenty bars.',
+    intro='This module asked when a reading means anything, and answered with '
+          'measurements rather than impressions: a regime is a ratio, a timeframe '
+          'is a grouping rule with two settings, a filter is an exchange with a '
+          'price, an auction is one equation solved once, and an announcement is '
+          'quoted out loud by the option chain. Six questions, all arithmetic. The '
+          'last regroups the twenty bars this course has carried since lesson 32 and '
+          'watches a summary move eight-fold while the highest price in the '
+          'sample never moves at all.',
+    covers='Lessons 36 to 47, and the twenty bars the last two modules have been '
+           'built on.',
+    related=[(36, 'the ratio the first question computes'),
+             (38, 'the two settings the sixth question changes'),
+             (39, 'the filter the second question prices'),
+             (42, 'the auction the third question clears'),
+             (43, 'the straddle the fourth question reads'),
+             (44, 'the volatility the fifth question scales'),
+             (45, 'the hedge and the book the fifth question sizes'),
+             (47, 'the release that moves every position at once')],
+    questions=[
+        dict(
+            title='One ratio, three windows',
+            setup='      <p>Eleven closes: 100.0, 100.8, 100.3, 101.4, 100.9, 102.2, '
+                  '101.6, 102.8, 102.1, 103.4 and 102.9. Lesson 36&rsquo;s ratio is '
+                  'the distance travelled that ended up as net progress: the absolute '
+                  'change from first close to last, divided by the sum of the '
+                  'absolute changes between consecutive closes.</p>\n',
+            ask='What is the ratio over all eleven, over the first six, and over the '
+                'last six?',
+            result='0.34 over all eleven, 0.52 over the first six and 0.16 over the '
+                   'last six.',
+            answer='      <p>The path is the same in every case: add up every step '
+                   'without regard to sign. The net is one subtraction.</p>\n'
+                   + table(['Window', 'Net progress', 'Distance travelled', 'Ratio'],
+                           [['All eleven closes', '2.9', '8.5', '0.34'],
+                            ['First six', '2.2', '4.2', '0.52'],
+                            ['Last six', '0.7', '4.3', '0.16']]) +
+                   '      <p>The two halves travelled almost exactly the same '
+                   'distance, 4.2 against 4.3, and kept three times as much of it in '
+                   'the first as in the second. That is the whole content of the '
+                   'measurement: not how far price went, but how much of the going '
+                   'it held on to.</p>\n'
+                   '      <p>And notice that the eleven-close reading sits between '
+                   'the two, which is what an average of two regimes looks like and '
+                   'is not a regime anything was ever in. Lesson 36 changed a window '
+                   'from ten closes to thirty and got two readings that disagreed '
+                   'about the state of the market on twenty-two bars out of thirty. '
+                   'This is the same effect on eleven closes.</p>\n'),
+        dict(
+            title='What a filter has to clear, twice',
+            setup='      <p>A method takes 100 trades, wins 40 of them, and its '
+                  'winners pay 2.5 times its losers. You are considering a filter '
+                  'that would have removed 40 per cent of the losing trades. It also '
+                  'removes some winners, because every filter does.</p>\n',
+            ask='What does the method make now? What happens to the expectancy per '
+                'trade and to the total if the filter takes 20 per cent of the '
+                'winners, and what if it takes 30? At what share of winners does the '
+                'money stop improving?',
+            result='40R now at 0.40R a trade. At 20 per cent the filter makes 44R at '
+                   '0.65R; at 30 per cent it makes 34R at 0.53R. The money stops '
+                   'improving at 24 per cent.',
+            answer='      <p>Unfiltered the method wins 40 &times; 2.5 = 100R and '
+                   'loses 60R, so it makes 40R over 100 trades, or 0.40R a trade.'
+                   '</p>\n' + table(
+                       ['Filter removes', 'Trades kept', 'Total', 'Per trade'],
+                       [['Nothing', '100.0', '40.0R', '0.40R'],
+                        ['40% of losers, 20% of winners', '68.0', '44.0R', '0.65R'],
+                        ['40% of losers, 30% of winners', '64.0', '34.0R', '0.53R']]) +
+                   '      <p>Both filters raise the expectancy per trade, and they '
+                   'raise it for the same trivial reason: they remove a higher share '
+                   'of losers than of winners. That test is easy to pass and it is '
+                   'the one every filter is sold on.</p>\n'
+                   '      <p>The second test is the one that decides whether you have '
+                   'more money. The gross win is 100R and the gross loss is 60R, so '
+                   'the profit factor is 100 &divide; 60 = 1.67, and the money only '
+                   'improves while the share of winners removed divided by the share '
+                   'of losers removed stays under 1 &divide; 1.67 = 0.60. The first '
+                   'filter is at 20 &divide; 40 = 0.50 and passes. The second is at '
+                   '30 &divide; 40 = 0.75 and fails, and it fails while its '
+                   'expectancy per trade still looks better than it started.</p>\n'
+                   '      <p>The exact break-even is 24 per cent of the winners: '
+                   '30.4 winners and 36 losers is 30.4 &times; 2.5 &minus; 36 = 40R, '
+                   'the same money on 66 trades instead of 100. Between 24 and 30 per '
+                   'cent the filter is charging you trades for a better-looking '
+                   'average and no more money at all.</p>\n'),
+        dict(
+            title='Clearing an opening auction by hand',
+            setup='      <p>An opening auction. At each price, how much wants to buy '
+                  'at that price or better, and how much wants to sell at that price '
+                  'or better.</p>\n' + table(
+                      ['Price', 'Demand at or above', 'Supply at or below'],
+                      [['50.00', '5,000', '400'], ['50.10', '4,400', '900'],
+                       ['50.20', '3,800', '1,600'], ['50.30', '3,200', '2,400'],
+                       ['50.40', '2,800', '3,000'], ['50.50', '2,200', '3,800']]) +
+                  '      <p>Two thousand of the demand is one market-on-open '
+                  'buy.</p>\n',
+            ask='Where does it clear, how much matches, what does the market buyer '
+                'pay, and what would the same 2,000 shares have cost walking a '
+                'continuous ladder made of the identical offers?',
+            result='50.40, with 2,800 matched. The buyer pays $100,800. The same '
+                   'shares walking the ladder cost $100,310, an average of 50.155.',
+            answer='      <p>At each price the auction can match the smaller of the '
+                   'two sides, and it picks the price where that is largest.</p>\n'
+                   + table(['Price', 'Shares that can trade', 'Leftover'],
+                           [['50.00', '400', '+4,600'], ['50.10', '900', '+3,500'],
+                            ['50.20', '1,600', '+2,200'], ['50.30', '2,400', '+800'],
+                            ['50.40', '2,800', '−200'],
+                            ['50.50', '2,200', '−1,600']]) +
+                   '      <p>2,800 is the most that can trade, so the auction clears '
+                   'at 50.40 with 200 shares left unfilled on the sell side. Every '
+                   'filled order gets that one price, so the market buyer pays '
+                   '2,000 &times; 50.40 = $100,800.</p>\n'
+                   '      <p>Now walk the identical offers as a continuous ladder. '
+                   '400 rest at 50.00, another 500 at 50.10, another 700 at 50.20 and '
+                   'another 800 at 50.30. The order takes 400, 500, 700 and 400, '
+                   'which is $100,310, an average of 50.155.</p>\n'
+                   '      <p>The auction charged 24.5 cents a share more, $490 in '
+                   'total, on the same orders in the same book. It did not save the '
+                   'buyer the walk. It charged him the top of the walk on every share, '
+                   'because the rule solves for the marginal order rather than for '
+                   'where trading has been. His 2,000 shares were 71 per cent of '
+                   'everything that matched, so the marginal order was very nearly '
+                   'his own.</p>\n'),
+        dict(
+            title='Three numbers inside one straddle',
+            setup='      <p>A stock at 80.00 reports after the close. The call is '
+                  '2.90 and the put is 2.70, so the straddle costs 5.60.</p>\n',
+            ask='What move is being quoted, where does the long call break even, and '
+                'what do the call, the put and the straddle make on a five per cent '
+                'move each way?',
+            result='A 7.0 per cent move. The call breaks even at 3.6 per cent, about '
+                   'half. Five per cent either way pays one leg 1.10 or 1.30 and '
+                   'loses the straddle 1.60.',
+            answer='      <p>The straddle costs 5.60 on an 80.00 stock, so the '
+                   'quoted move is 5.60 &divide; 80 = 7.0 per cent. That is the '
+                   'number everyone repeats, and it is the break-even of the straddle '
+                   'rather than of anything inside it.</p>\n'
+                   '      <p>The call alone breaks even at 2.90 &divide; 80 = 3.6 per '
+                   'cent and the put alone at 2.70 &divide; 80 = 3.4 per cent. So the '
+                   'usual warning &mdash; that you have to beat the implied move '
+                   '&mdash; overstates a single option&rsquo;s hurdle by nearly a '
+                   'factor of two.</p>\n' + table(
+                       ['Realised move', 'Long call', 'Long put', 'Long straddle'],
+                       [['+5%', '+1.10', '−2.70', '−1.60'],
+                        ['−5%', '−2.90', '+1.30', '−1.60']]) +
+                   '      <p>A five per cent move is well past either single '
+                   'option&rsquo;s break-even and still loses the straddle 1.60, '
+                   'because the straddle paid for both sides and only one of them '
+                   'happened.</p>\n'
+                   '      <p>And read the last figure against a stop. A stop one per '
+                   'cent away, into a print the market has publicly priced at seven '
+                   'per cent, is a stop inside a move quoted at seven times its own '
+                   'distance. That is the arithmetic behind trading the reaction '
+                   'rather than the announcement.</p>\n'),
+        dict(
+            title='Scaling a volatility, a hedge and a book',
+            setup='      <p>An instrument whose daily returns have a standard '
+                  'deviation of 1.20 per cent. A hedge whose correlation with your '
+                  'position is 0.60. And a book of twelve positions of the same '
+                  'size.</p>\n',
+            ask='What is the annualised volatility, how much of the standard '
+                'deviation does the hedge leave standing, and how many independent '
+                'positions is the book at an average pairwise correlation of 0.40 and '
+                'of 0.15?',
+            result='19.0 per cent a year. The hedge leaves 80 per cent standing. The '
+                   'book is 2.22 independent positions at 0.40 and 4.53 at 0.15.',
+            answer='      <p>There are 252 trading days in a year and volatility '
+                   'scales with the square root of time, so 1.20 &times; &radic;252 = '
+                   '1.20 &times; 15.87 = 19.0 per cent. That 15.87 is also the entire '
+                   'origin of the habit of dividing a volatility index by sixteen to '
+                   'get a daily figure.</p>\n'
+                   '      <p>The hedge is the one most people get backwards. A hedge '
+                   'removes the square of the correlation from the variance, not the '
+                   'correlation from the standard deviation. At 0.60 it removes 0.36 '
+                   'of the variance and leaves &radic;0.64 = 0.80, so 80 per cent of '
+                   'the standard deviation is still there after a hedge most people '
+                   'would describe as taking out well over half the risk.</p>\n'
+                   + table(['Average pairwise correlation', 'Positions',
+                            'Independent positions'],
+                           [['0.40', '12', '2.22'], ['0.15', '12', '4.53']]) +
+                   '      <p>The book comes from n &divide; (1 + (n &minus; 1)&rho;). '
+                   'Twelve positions at 0.40 carry the risk of 2.22 of them, and '
+                   'dropping the average correlation to 0.15 doubles that to 4.53. '
+                   'Not one position size changed in between.</p>\n'
+                   '      <p>One thing survives all of this untouched, and lesson 44 '
+                   'is right to end on it: share count is inversely proportional to '
+                   'volatility, exactly. Double the volatility, halve the size, and '
+                   'no square root or correlation enters it.</p>\n'),
+        dict(
+            title='The same twenty bars, grouped three ways',
+            setup='      <p>The series this course has carried since lesson 32, with '
+                  'its closes. The closes are 100.7, 101.5, 100.4, 102.8, 101.5, '
+                  '104.1, 102.6, 102.1, 105.3, 103.7, 106.7, 104.6, 103.0, 105.7, '
+                  '102.2, 104.9, 100.8, 103.2, 99.4 and 101.6. The highs reach 106.8 '
+                  'at bar 11 and the lows reach 99.2 at bar 19.</p>\n',
+            ask='What is lesson 36&rsquo;s ratio on the twenty closes? Now group the '
+                'bars four at a time from bar 1 and compute it again, along with the '
+                'sample high and low. Then keep the width and start at bar 2 instead.',
+            result='0.021 on the twenty closes, 0.176 grouped from bar 1, and 0.084 '
+                   'grouped from bar 2. The sample high never moves.',
+            answer='      <p>On the twenty closes the net progress is 101.6 &minus; '
+                   '100.7 = 0.9 and the distance travelled is 43.1, so the ratio is '
+                   '0.021. On this measurement the series barely went anywhere.</p>\n'
+                   '      <p>Group the bars four at a time from bar 1 and the closes '
+                   'become 102.8, 102.1, 104.6, 104.9 and 101.6 &mdash; the last '
+                   'close of each group. Net progress 1.2, distance travelled 6.8, '
+                   'ratio 0.176.</p>\n' + table(
+                       ['How the tape is grouped', 'Ratio', 'Sample high',
+                        'Sample low'],
+                       [['Bar by bar', '0.021', '106.8', '99.2'],
+                        ['Four at a time, from bar 1', '0.176', '106.8', '99.2'],
+                        ['Four at a time, from bar 2', '0.084', '106.8', '100.2']]) +
+                   '      <p>Nothing about the tape changed. The same trades printed '
+                   'in the same order, and the highest and lowest prices in the sample '
+                   'are identical, because a group&rsquo;s high is the highest of the '
+                   'four highs inside it. What moved by a factor of eight is the '
+                   'summary, and it moved because the intermediate wiggles stopped '
+                   'being counted as distance travelled.</p>\n'
+                   '      <p>Then the setting nobody quotes. Keep the width at four '
+                   'and start one bar later, and the ratio halves to 0.084 on '
+                   'identical tape. It also drops bar 1 and bars 18 to 20 out of any '
+                   'complete group, which is why the sample low reads 100.2 instead '
+                   'of 99.2: where the first group starts decides which bars are in '
+                   'the sample at all.</p>\n'
+                   '      <p>Every chart you have ever read was one of these three, '
+                   'and the platform told you the width and never told you the offset.'
+                   '</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can put a number on the context before you read '
+          'anything into it. Handed eleven closes, you produce a regime; handed a '
+          'filter, you produce both of its break-even points and notice they are not '
+          'the same one; handed a book of limit orders, you produce a clearing price '
+          'and the money the auction charged over the ladder; handed a straddle, you '
+          'produce the move the market has quoted out loud; handed a correlation, you '
+          'produce how much of the risk is genuinely still there.</p>\n'
+          '      <p>Module 6 turns to the instruments people put on the chart '
+          'instead, and lesson 48 opens with the fact that governs all of them: every '
+          'indicator is a function of prices you already have, so none of them adds '
+          'information. The only questions worth asking are what it discards, how '
+          'long it takes to discard it, and whether it quietly rewrites its own '
+          'history.</p>\n',
+),
+
 ]
