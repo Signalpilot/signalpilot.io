@@ -660,6 +660,7 @@ python3 scripts/curriculum/craft.py [<slot>]          # one lesson, or all 85
 python3 scripts/curriculum/audit.py [<check> ...]     # the cross-lesson checks
 python3 scripts/curriculum/site.py                    # every page around the lessons
 python3 scripts/curriculum/sitejs.py                  # the education JavaScript
+python3 scripts/curriculum/locales.py                 # all 946 built locale pages
 python3 scripts/curriculum/translate.py keys <slug>   # writes .keys.json
 python3 scripts/i18n/build.py curriculum/<tier>/<slug>.html [lang]
 python3 scripts/i18n/checks/run.py <slug>
@@ -796,6 +797,20 @@ ledger row saying what that found. All 85 have.
 A module is **complete** when every slot in it is rebuilt. Modules 1 to 10 are
 complete, which is slots 1 to 81, and module 11 is complete, which is slots 82 to
 85. There is no legacy lesson left.
+
+The **locale trees** were audited as well, and carried the largest single
+defect found in any of these passes: every one of the 946 built lesson pages
+linked out of its own language. A German reader following a prerequisite
+landed on the English page, and the only way back was the language switcher.
+`inject.py` now rewrites every curriculum and education-index link into the
+reader's own tree, and `locales.py` checks it.
+
+The **marketing site** claimed 86 lessons in twelve languages, on home pages,
+FAQs, roadmaps, affiliate and thank-you pages, indicator pages, 24 blog
+articles and the social carousels, in twelve spellings including hyphenated
+and Japanese counter forms. It claimed 375,000 words on every home page and
+250,000 elsewhere against an actual 217,027, and every FAQ listed quizzes
+among the features. All corrected.
 
 The pages **around** the lessons were audited too, and had drifted further
 than the lessons ever did: four mutually inconsistent lesson counts across
