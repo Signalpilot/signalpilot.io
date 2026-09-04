@@ -695,4 +695,261 @@ dict(
           'find out whether they were right.</p>\n',
 ),
 
+# ---------------------------------------------------------------- module 4
+dict(
+    mod=4, tier='intermediate', slug='module-4-quiz',
+    slots=[25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+    title='Module 4 Quiz: Reading the Auction',
+    desc='Six computations from the auction module. Price a stop buffer against '
+         'the probe, turn a wall read into a posterior, find a point of control at '
+         'three bin widths, sign two identical footprints, count what a hidden-size '
+         'detector could not have seen, and run the fractal over the module&rsquo;s '
+         'own twenty bars.',
+    intro='Eleven lessons, and every one of them ended at the same place: the '
+          'number you were about to act on belonged to a setting you had not '
+          'written down. A buffer, a base rate, a bin width, an aggressor rule, a '
+          'displayed quantity, a swing lookback. Six questions, all arithmetic. The '
+          'last runs the fractal over the twenty bars this module has been carrying '
+          'since lesson 32 and turns the swing it finds into a stop and a payoff.',
+    covers='Lessons 25 to 35, and the twenty bars that lesson 32 stated in full, '
+           'lesson 33 gave bodies, and lessons 34 and 35 carried out to sixty.',
+    related=[(25, 'the buffer the first question prices'),
+             (26, 'the posterior the second question computes'),
+             (28, 'the two footprints the fourth question signs'),
+             (29, 'the point of control the third question moves'),
+             (30, 'the value area the third question reads instead'),
+             (31, 'the tests the fifth question counts'),
+             (32, 'the swing rule the sixth question runs'),
+             (35, 'the levels that swing rule decides exist')],
+    questions=[
+        dict(
+            title='What the buffer buys, and what it costs',
+            setup='      <p>A long taken on the reclaim of a level. The entry is 0.3 '
+                  'average ranges above the level and the target is 4.0 above it. The '
+                  'method works 45 per cent of the time when it is left alone, and a '
+                  'probe past the level travels on average 0.4 average ranges before '
+                  'turning, so the chance a stop d below the level survives one is '
+                  '1 &minus; e raised to the power &minus;d &divide; 0.4.</p>\n',
+            ask='Put the stop 0.20 average ranges below the level, then 0.80. Give '
+                'the payoff, the breakeven win rate, the survival chance and the '
+                'expectancy for each.',
+            result='At 0.20 the payoff is 7.40, the breakeven 11.9 per cent, survival '
+                   '39.3 per cent and the expectancy +0.49R. At 0.80 they are 3.36, '
+                   '22.9 per cent, 86.5 per cent and +0.70R.',
+            answer='      <p>The risk is the entry offset plus the buffer and the '
+                   'reward is 4.0 &minus; 0.3 = 3.7 average ranges either way.</p>\n'
+                   + table(['Stop below the level', 'Risk', 'Payoff',
+                            'Breakeven win rate', 'Survives the probe', 'Expectancy'],
+                           [['0.20', '0.50', '7.40', '11.9%', '39.3%', '+0.49R'],
+                            ['0.80', '1.10', '3.36', '22.9%', '86.5%', '+0.70R']]) +
+                   '      <p>The expectancy is where the two halves meet. When the '
+                   'probe removes you, you lose a whole R and the trade never finds '
+                   'out whether it was right; when it does not, you have a 45 per '
+                   'cent shot at the payoff. So at 0.20 that is 0.393 &times; (0.45 '
+                   '&times; 7.40 &minus; 0.55) &minus; 0.607 = +0.49R, and at 0.80 it '
+                   'is 0.865 &times; (0.45 &times; 3.36 &minus; 0.55) &minus; 0.135 = '
+                   '+0.70R.</p>\n'
+                   '      <p>Read the first two columns of the tighter stop and it '
+                   'wins outright: more than twice the payoff and eleven fewer points '
+                   'of win rate needed. It is still the worse trade, by a fifth of an '
+                   'R, and the whole of the difference is the six trades in ten that '
+                   'never got to be right or wrong.</p>\n'),
+        dict(
+            title='What a wall read is worth on two instruments',
+            setup='      <p>You have a way of telling, from how a large resting order '
+                  'behaves, whether it will still be there when price arrives. Tested '
+                  'against what actually happened, it is right 75 per cent of the '
+                  'time when the wall holds and right 75 per cent of the time when it '
+                  'does not. On one instrument 8 walls in 100 hold. On another, 30 do. '
+                  'Take 200 tests on each.</p>\n',
+            ask='When it says the wall will hold, what is the chance it holds, on '
+                'each instrument?',
+            result='20.7 per cent on the first and 56.3 per cent on the second, from '
+                   'the same read.',
+            answer='      <p>The read is only ever a multiplier on what was already '
+                   'true. On the first instrument 16 of the 200 hold and the '
+                   'detector calls 75 per cent of them, so 12 true calls; of the 184 '
+                   'that do not hold it wrongly calls a quarter, so 46 false '
+                   'ones.</p>\n'
+                   + table(['Walls that hold', 'Hold, out of 200', 'True calls',
+                            'False calls', 'Chance it holds when the read says so'],
+                           [['8 in 100', '16', '12', '46', '20.7%'],
+                            ['30 in 100', '60', '45', '35', '56.3%']]) +
+                   '      <p>So 12 &divide; 58 = 20.7 per cent and 45 &divide; 80 = '
+                   '56.3 per cent. The same eye, the same book, the same 75 per cent, '
+                   'and a read that is wrong four times in five on one instrument and '
+                   'right more often than not on the other.</p>\n'
+                   '      <p>Notice what never entered it. Not the size of the wall. '
+                   'Ten thousand and forty thousand give the same answer, because the '
+                   'two quantities that decide it are the base rate and the accuracy, '
+                   'and neither of them is on the screen.</p>\n'),
+        dict(
+            title='Where the point of control is, at three settings',
+            setup='      <p>A session, one tick at a time.</p>\n' + table(
+                      ['Price', 'Volume'],
+                      [['100.20', '300'], ['100.19', '420'], ['100.18', '900'],
+                       ['100.17', '640'], ['100.16', '560'], ['100.15', '480'],
+                       ['100.14', '520'], ['100.13', '860'], ['100.12', '780'],
+                       ['100.11', '340'], ['100.10', '260'], ['100.09', '220']]),
+            ask='Find the point of control at one tick, at two ticks with the grid on '
+                'the even cent, and at two ticks with the grid shifted one cent. How '
+                'far apart are they?',
+            result='100.18 at one tick, 100.12 to 100.13 on the even grid, and 100.17 '
+                   'to 100.18 shifted &mdash; six ticks of a twelve-tick session.',
+            answer='      <p>At one tick it is simply the tallest bar: 900 at 100.18. '
+                   'Then pair the prices up, twice, starting one cent apart.</p>\n'
+                   + table(['Bin width', 'Point of control', 'Volume in it',
+                            'Runner-up', 'Margin'],
+                           [['1 tick', '100.18', '900', '860 at 100.13', '40'],
+                            ['2 ticks, grid on the even cent', '100.12 to 100.13',
+                             '1,640', '1,320', '320'],
+                            ['2 ticks, grid shifted one cent', '100.17 to 100.18',
+                             '1,540', '1,380', '160']]) +
+                   '      <p>The one-tick reading and the shifted two-tick reading '
+                   'both land at the top of the session. The even-cent grid, which is '
+                   'the one most platforms ship, lands six ticks lower &mdash; not a '
+                   'neighbouring price, the other half of the range. It gets there by '
+                   'pairing 100.13 with 100.12 and separating 100.18 from 100.17, and '
+                   'nothing about that pairing came from the market.</p>\n'
+                   '      <p>The session is 6,280 contracts and the margin on the '
+                   'shifted grid is 160 of them, about two and a half per cent. Lesson '
+                   '19 would call a difference that size unmeasured rather than '
+                   'measured. This is the reason lesson 30 reads a value area instead: '
+                   'an interval moves far less than a mode does when you change the '
+                   'bin width underneath it.</p>\n'),
+        dict(
+            title='Two footprints that cannot be told apart',
+            setup='      <p>Two bars. Both open at 100.05, both high at 100.65, both '
+                  'low at 99.85, both close at 100.35, and both trade 10,380 '
+                  'contracts. Here is what each did at each price.</p>\n' + table(
+                      ['Price', 'A buys', 'A sells', 'B buys', 'B sells'],
+                      [['100.60', '160', '180', '70', '270'],
+                       ['100.50', '340', '300', '160', '480'],
+                       ['100.40', '720', '520', '360', '880'],
+                       ['100.30', '980', '580', '570', '990'],
+                       ['100.20', '1,020', '620', '720', '920'],
+                       ['100.10', '1,440', '620', '980', '1,080'],
+                       ['100.00', '1,440', '620', '1,030', '1,030'],
+                       ['99.90', '520', '320', '410', '430']]),
+            ask='What is each bar&rsquo;s delta, and what does the footprint settle '
+                'about which one to fade?',
+            result='+2,860 for A and &minus;1,780 for B, on identical bars. The '
+                   'footprint settles nothing.',
+            answer='      <p>Add the columns. A bought 6,620 and sold 3,760, so its '
+                   'delta is +2,860. B bought 4,300 and sold 6,080, so its delta is '
+                   '&minus;1,780. Both traded 10,380 contracts in total, and both '
+                   'printed the same four prices.</p>\n'
+                   '      <p>So bar B closed thirty cents above its open on net '
+                   'aggressive selling. One school calls that absorption and buys it: '
+                   'sellers hit the bid all the way up and price rose anyway, so '
+                   'somebody large was taking the other side. The other calls it '
+                   'exhaustion and fades it: the buying that lifted the bar came from '
+                   'nowhere the tape can see, and a close near the high on negative '
+                   'delta is a bar that ran out of fuel.</p>\n'
+                   '      <p>Both readings are internally consistent, both are widely '
+                   'taught, and the footprint contains nothing that decides between '
+                   'them. It is a second measurement with its own error rate, not the '
+                   'truth behind the candle. And the delta itself is a classification '
+                   'rather than a count &mdash; lesson 8 bounded how wide that '
+                   'interval gets when the trades between the quotes are signed by a '
+                   'rule.</p>\n'),
+        dict(
+            title='What the detector could not have seen',
+            setup='      <p>One price level, displaying 300, tested a hundred times '
+                  'over a fortnight. A reserve can only reveal itself if the display '
+                  'is cleared and something is still there, so here is what actually '
+                  'happened on each test.</p>\n' + table(
+                      ['What happened at the level', 'Tests', 'Refill seen'],
+                      [['Under half the displayed 300 traded', '64', '0'],
+                       ['Over half traded, display not cleared', '19', '0'],
+                       ['Display cleared, price moved on', '5', '0'],
+                       ['Display cleared and refilled at the price', '12', '12']]),
+            ask='On how many of the hundred tests could the detector have fired at '
+                'all, and what does a quiet book prove?',
+            result='Seventeen. It fired on twelve of those. A quiet book proves '
+                   'nothing, because 83 tests could not have shown a reserve however '
+                   'much was hidden.',
+            answer='      <p>Only the last two rows are tests. On the first 83 the '
+                   'displayed quantity was never exhausted, so a reserve of any size '
+                   'sitting behind it would have gone unobserved &mdash; the '
+                   'measurement was never made.</p>\n'
+                   '      <p>Of the 17 tests that could have fired, 12 did: the '
+                   'display cleared and was replaced at the same price. That is 70.6 '
+                   'per cent of the tests that count and 12 per cent of all of them, '
+                   'and the second figure is the one people quote.</p>\n'
+                   '      <p>Which makes hidden size a different object from lesson '
+                   '26&rsquo;s wall. When the detector fires it is an observation, not '
+                   'a read, and no posterior is needed: something refilled, so '
+                   'something was there. What it cannot do is the negative. A book '
+                   'that never fires is 83 tests that were never run, and every '
+                   'measurement of how much was hidden is a floor rather than a '
+                   'figure.</p>\n'
+                   '      <p>Twelve episodes is also a small number in lesson '
+                   '19&rsquo;s sense. It is enough to establish that reserves exist '
+                   'on this level and nothing like enough to say how often they '
+                   'hold.</p>\n'),
+        dict(
+            title='The twenty bars, one last time',
+            setup='      <p>The series lesson 32 stated in full, which lesson 33 gave '
+                  'bodies and lessons 34 and 35 carried out to sixty. The highs are '
+                  '100.8, 101.6, 101.1, 102.9, 102.4, 104.2, 103.5, 103.0, 105.4, '
+                  '104.7, 106.8, 106.1, 104.3, 105.9, 103.6, 105.1, 102.2, 103.4, '
+                  '100.9 and 101.8. The lows are 100.0, 100.7, 100.2, 101.5, 101.3, '
+                  '102.8, 102.4, 101.9, 103.8, 103.5, 105.0, 104.4, 102.9, 103.9, '
+                  '102.0, 103.0, 100.6, 101.4, 99.2 and 100.1. The average bar range '
+                  'is 1.46 points.</p>\n',
+            ask='Run the fractal at two bars either side: which bars are swing highs '
+                'and lows? A swing is confirmed two bars after it forms, so when '
+                'could you first act on the top, and where was price by then? Then '
+                'put a stop half an average range below the swing low, enter 0.4 '
+                'above it, target the series high, and give the payoff.',
+            result='Swing highs at bars 6 and 11, one swing low at bar 8. The top is '
+                   'actionable at bar 13, by which point price is 3.9 points off it. '
+                   'The trade is 102.48 with a stop at 101.17, a payoff of 3.28 and a '
+                   '23.3 per cent breakeven.',
+            answer='      <p>A bar is a swing high if its high beats the two on each '
+                   'side of it. Bar 6 at 104.2 beats 102.9, 102.4, 103.5 and 103.0. '
+                   'Bar 11 at 106.8 beats everything near it. Nothing else survives: '
+                   'bar 9 at 105.4 loses to bar 11, bar 14 at 105.9 loses to bar 12, '
+                   'and bar 16 at 105.1 loses to bar 14. On the lows only bar 8 at '
+                   '101.9 beats its four neighbours.</p>\n' + table(
+                       ['Swing rule', 'Swing highs', 'Swing lows', 'At bars'],
+                       [['1 bar either side', '8', '8', 'every other turn'],
+                        ['2 bars either side', '2', '1', 'highs 6 and 11, low 8'],
+                        ['3 bars either side', '1', '0', 'high 11 only']]) +
+                   '      <p>Now the lag, which is the part that does not appear on '
+                   'anybody&rsquo;s marked-up chart. The high at bar 11 is not a swing '
+                   'high until bar 13 has closed, so the earliest you could act on it '
+                   'is bar 13 &mdash; and bar 13&rsquo;s low is 102.9, which is 3.9 '
+                   'points below the 106.8 you would be reacting to. The chart in the '
+                   'screenshot and the chart you were looking at are two bars '
+                   'apart.</p>\n'
+                   '      <p>Then the trade. Lesson 32 said the stop belongs beyond '
+                   'the swing that defined the break, and lesson 25 priced how far '
+                   'beyond. Half an average range below 101.9 is 101.9 &minus; 0.73 = '
+                   '101.17, and 0.4 above it is 102.48, so the risk is 1.31 points. '
+                   'The target at 106.8 is 4.32 away, so the payoff is 4.32 &divide; '
+                   '1.31 = 3.28 and the breakeven win rate is 1 &divide; 4.28 = 23.3 '
+                   'per cent.</p>\n'
+                   '      <p>Every number in that paragraph came from a rule with a '
+                   'setting in it. Change the lookback to three and there is no swing '
+                   'low at all, so there is no stop, so there is no trade. That is the '
+                   'module in one line: the level was never on the chart, it was in '
+                   'the settings.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can say which of your numbers is a measurement and '
+          'which is a choice. The volume at a price is a count and every venue agrees '
+          'on it; the point of control computed from it moved six ticks when a grid '
+          'shifted one cent. A refill is an observation; a wall read is a posterior '
+          'that swings from 21 to 56 per cent on the base rate alone. A swing high '
+          'looks like a thing on the chart and is the output of a number nobody says '
+          'out loud. None of that makes the tools useless. It makes the setting part '
+          'of the claim.</p>\n'
+          '      <p>Module 5 asks the question this one has been carefully not '
+          'asking: whether any of it predicts anything, and it starts by finding that '
+          'the same instrument is two different instruments depending on which regime '
+          'it is in.</p>\n',
+),
+
 ]
