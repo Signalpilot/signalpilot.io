@@ -438,4 +438,261 @@ dict(
           'win rate is not the thing.</p>\n',
 ),
 
+# ---------------------------------------------------------------- module 3
+dict(
+    mod=3, tier='beginner', slug='module-3-quiz',
+    slots=[17, 18, 19, 20, 21, 22, 23, 24],
+    title='Module 3 Quiz: Uncertainty, Risk and Ruin',
+    desc='Six computations from the uncertainty module. Read an edge off a '
+         'six-trade log, find when a losing run is due, size the evidence, place '
+         'a stop beyond the level, price ruin at two fractions, and run the '
+         'module&rsquo;s own system through the recovery arithmetic.',
+    intro='This module never once looked at a chart. It turned a method into two '
+          'numbers, said what a run of them feels like, how long before the record '
+          'can settle anything, how much of the account to put behind each one, '
+          'where the stop belongs, what the tail costs, and which ten fields make '
+          'any of it answerable. Six questions. The last takes the 45 per cent '
+          'system the module has carried since lesson 17 and prices what trying to '
+          'get the money back would cost.',
+    covers='Lessons 17 to 24, and the system winning 45 per cent of the time at a '
+           'payoff of 2 that every table in the module was computed on.',
+    related=[(17, 'the two numbers every other lesson took on credit'),
+             (18, 'the run the second question times'),
+             (19, 'the sample size the third question computes'),
+             (20, 'the fraction, and the tax the sixth question prices'),
+             (21, 'the buffer the fourth question puts beyond the level'),
+             (22, 'the ruin formula the fifth question applies'),
+             (23, 'the ten fields the first question reads'),
+             (24, 'the recovery arithmetic the sixth question finishes')],
+    questions=[
+        dict(
+            title='An edge, read off six rows',
+            setup='      <p>Six trades from one record. The account stood at $50,000 '
+                  'throughout, and the stop column is the price as it was first '
+                  'placed.</p>\n' + table(
+                      ['Entry', 'Stop as placed', 'Size', 'Exit', 'Why out'],
+                      [['84.00', '82.50', '400', '87.60', 'target'],
+                       ['85.20', '83.80', '430', '83.80', 'stop'],
+                       ['61.50', '60.30', '500', '60.20', 'stop'],
+                       ['86.40', '85.00', '425', '85.55', 'manual'],
+                       ['62.80', '61.30', '400', '66.10', 'target'],
+                       ['88.10', '86.60', '900', '87.20', 'manual']]),
+            ask='What are p, b and the expectancy, and what payoff ratio would a '
+                'broker statement have reported instead?',
+            result='p = 33.3 per cent, b = 2.80, and +0.22R a trade in planned R. '
+                   'The money view gives 2.28.',
+            answer='      <p>Each row carries its own R, because R is the distance '
+                   'from the entry to the stop as placed. Divide the move by that '
+                   'distance and the size drops out.</p>\n' + table(
+                       ['Risk a share', 'Money at risk', 'Result', 'In R'],
+                       [['$1.50', '$600.00', '+$1,440.00', '+2.40R'],
+                        ['$1.40', '$602.00', '−$602.00', '−1.00R'],
+                        ['$1.20', '$600.00', '−$650.00', '−1.08R'],
+                        ['$1.40', '$595.00', '−$361.25', '−0.61R'],
+                        ['$1.50', '$600.00', '+$1,320.00', '+2.20R'],
+                        ['$1.50', '$1,350.00', '−$810.00', '−0.60R']]) +
+                   '      <p>Two of six won, so p = 33.3 per cent. The winners '
+                   'average 2.30R and the losers average 0.82R, so b = 2.30 &divide; '
+                   '0.82 = 2.80, and the expectancy is 0.333 &times; 2.30 &minus; '
+                   '0.667 &times; 0.82 = +0.22R a trade.</p>\n'
+                   '      <p>Lesson 17 wrote the same thing as p &times; b &minus; '
+                   '(1 &minus; p), which gives +0.27 here. That is not a '
+                   'contradiction, it is a different unit: lesson 17 measures in '
+                   'average losses and this measures in the R you planned, and the '
+                   'log says the average loss came to 0.82 of a planned R. Multiply '
+                   '0.27 by 0.82 and you have 0.22 back. Only the record knows the '
+                   'two units differ.</p>\n'
+                   '      <p>Now the broker&rsquo;s view of the same six trades. '
+                   'The winners average $1,380 and the losers average $605.81, so '
+                   'the payoff ratio is 2.28 rather than 2.80, wrong by about a '
+                   'fifth. The cause is the last row: five trades risked around $600 '
+                   'and one risked $1,350. Money mixes how good the trades were with '
+                   'how large the bets were. R separates them, and that separation '
+                   'is the only reason the stop column exists.</p>\n'
+                   '      <p>One thing the six rows cannot tell you is whether any '
+                   'of this is real. Lesson 19 puts the sample needed at hundreds. '
+                   'Six rows give you the method, not the answer.</p>\n'),
+        dict(
+            title='When the run is due',
+            setup='      <p>A method wins 38 per cent of the time, its winners pay '
+                  '2.6 times its losers, and you take four trades a week. A run of '
+                  'seven losses would genuinely worry you.</p>\n',
+            ask='How many trades until the first run of seven, roughly how long is '
+                'that in months, and how much does the payoff of 2.6 change the '
+                'answer?',
+            result='72 trades, about four months, and the payoff changes nothing at '
+                   'all.',
+            answer='      <p>Lesson 18&rsquo;s closed form is (1 &minus; q^k) '
+                   '&divide; (p &times; q^k), with q the loss rate and k the run '
+                   'length. Here q = 0.62 and k = 7, so q^k = 0.0352.</p>\n'
+                   '      <p>That gives (1 &minus; 0.0352) &divide; (0.38 &times; '
+                   '0.0352) = 0.9648 &divide; 0.0134 = 72 trades. At four a week '
+                   'that is 18 weeks, a little over four months.</p>\n'
+                   '      <p>Now look at what never entered the calculation. Not b, '
+                   'not the expectancy, not a single thing about how much a winner '
+                   'pays. A run is a property of the win rate and of the length of '
+                   'the sample, and of nothing else, which is why the run you are '
+                   'living through carries no information about whether the method '
+                   'is any good.</p>\n'
+                   '      <p>And read the answer as a rate rather than an event. Not '
+                   'once in a career: once every 72 trades, for as long as you keep '
+                   'trading. Over five years at four a week you should expect about '
+                   'fourteen of them, and be surprised by none.</p>\n'),
+        dict(
+            title='How much record it would take',
+            setup='      <p>The same method: it wins 38 per cent of the time at a '
+                  'payoff of 2.6. Lesson 10&rsquo;s charges come to s = 0.12 on this '
+                  'instrument.</p>\n',
+            ask='What is the expectancy before and after costs, how much noise sits '
+                'on one trade, and how many trades would it take to establish that '
+                'the edge exists at all in each case?',
+            result='+0.37R before costs and +0.25R after. One trade carries 1.75R of '
+                   'noise. 177 trades before costs, 390 after.',
+            answer='      <p>The expectancy is 0.38 &times; 2.6 &minus; 0.62 = '
+                   '+0.37R, and lesson 17&rsquo;s breakeven of (1 + s) &divide; '
+                   '(b + 1) = 1.12 &divide; 3.6 = 31.1 per cent confirms that 38 per '
+                   'cent clears the bar. Subtract the charges and the edge is +0.25R '
+                   'a trade.</p>\n'
+                   '      <p>The noise comes from the same two inputs: '
+                   '&sigma;&sup2; = p&middot;b&sup2; + (1 &minus; p) &minus; '
+                   'E&sup2; = 0.38 &times; 6.76 + 0.62 &minus; 0.37&sup2; = 3.053, '
+                   'so &sigma; = 1.75R. One trade in a good method carries nearly '
+                   'five times as much noise as signal.</p>\n' + table(
+                       ['What you are establishing', 'The edge to catch', 'Trades',
+                        'At four a week'],
+                       [['There is an edge at all, before costs', '0.37R', '177',
+                         '10 months'],
+                        ['There is an edge at all, after costs', '0.25R', '390',
+                         '1.9 years']]) +
+                   '      <p>Both come from n = 7.85 &times; &sigma;&sup2; &divide; '
+                   '&Delta;&sup2;, and the second row is the one worth keeping. '
+                   'Subtracting the same charge from every trade moves the average '
+                   'and leaves the spread exactly where it was, so the charges did '
+                   'not merely take a third of the edge. They more than doubled the '
+                   'record you need to prove you have one.</p>\n'),
+        dict(
+            title='Where the stop goes, and what it buys',
+            setup='      <p>You are long at $124.00. You entered because $121.50 '
+                  'held, so $121.50 is the price at which the reason is gone. The '
+                  'average true range is $0.90. The next level in your favour is '
+                  '$131.00. Your account is $40,000 and you risk 1.5 per cent a '
+                  'trade.</p>\n',
+            ask='Put the stop one average bar beyond the level. How many shares, '
+                'what is b, and what win rate does that need? Then do the same for a '
+                'stop 2 per cent below the entry and say which one is wrong.',
+            result='176 shares, b = 2.06, and a 32.7 per cent breakeven. The 2 per '
+                   'cent stop looks better in every column and is the wrong one.',
+            answer='      <p>One average bar beyond $121.50 puts the stop at $120.60, '
+                   'so the risk is $3.40 a share. One R is $40,000 &times; 1.5% = '
+                   '$600, and $600 &divide; $3.40 = 176 shares, a position worth '
+                   '$21,824. The target is $7.00 away, so b = 7.00 &divide; 3.40 = '
+                   '2.06 and the breakeven win rate is 1 &divide; 3.06 = 32.7 per '
+                   'cent.</p>\n'
+                   '      <p>Now the percentage stop, which is where the trap '
+                   'is.</p>\n' + table(
+                       ['Where the stop goes', 'Distance', 'Shares at $600 risk',
+                        'Reward to risk, b', 'Win rate to break even'],
+                       [['2% below the entry, $121.52', '$2.48', '241', '2.82',
+                         '26.2%'],
+                        ['One average bar beyond the level, $120.60', '$3.40', '176',
+                         '2.06', '32.7%']]) +
+                   '      <p>The first row wins every column. It buys 65 more shares, '
+                   'it shows the better reward to risk, and it needs six and a half '
+                   'fewer points of win rate. It is also the one that is certainly '
+                   'wrong: $121.52 sits two cents above $121.50, which is on the '
+                   'level rather than beyond it. The ordinary probe that tests the '
+                   'level takes you out, and it takes you out while the reason you '
+                   'entered is exactly as true as it was when you entered.</p>\n'
+                   '      <p>The extra 6.5 points of win rate is what a real stop '
+                   'costs. It is not an upgrade. It is a worse-looking trade that is '
+                   'an actual one.</p>\n'),
+        dict(
+            title='What the fraction does to the tail',
+            setup='      <p>A method wins 56 per cent of the time at even money, so '
+                  'every winner and every loser is the same size. Lesson 22&rsquo;s '
+                  'classical result applies exactly: ruin is ((1 &minus; p) &divide; '
+                  'p) raised to the power of how many bets your purse holds.</p>\n',
+            ask='What is the risk of ruin at 2 per cent a trade and at 1 per cent, '
+                'and what happens to both if the win rate turns out to be exactly 50 '
+                'per cent?',
+            result='0.00058 per cent at 2 per cent risk and about three in a hundred '
+                   'billion at 1 per cent. At a 50 per cent win rate both are 100 '
+                   'per cent.',
+            answer='      <p>Risking 2 per cent means the purse holds 50 bets, so '
+                   'u = 50 and the base is 0.44 &divide; 0.56 = 0.7857. Raised to the '
+                   '50th power that is 0.0000058, or 0.00058 per cent.</p>\n'
+                   '      <p>Halve the risk and u doubles to 100, which does not '
+                   'halve the answer. It squares it: 0.0000058&sup2; = 3.4 &times; '
+                   '10&#8315;&sup1;&sup1;, about three chances in a hundred billion. '
+                   'Every halving of the fraction squares the odds of survival, '
+                   'which is why the distance between risking 2 per cent and risking '
+                   '10 per cent is nothing like a factor of five.</p>\n'
+                   '      <p>Now set p to exactly 0.50. The base becomes 0.50 '
+                   '&divide; 0.50 = 1, and 1 raised to any power at all is 1. Ruin is '
+                   'certain however large the purse, and the size of the bet decides '
+                   'only how long it takes to arrive.</p>\n'
+                   '      <p>That is the sentence the whole module rests on. Sizing '
+                   'converts an edge into survival and cannot manufacture one. '
+                   'Without an edge you are not managing risk, you are choosing a '
+                   'pace.</p>\n'),
+        dict(
+            title='The system this module carried, and the way out of the hole',
+            setup='      <p>Back to the system every table in this module was '
+                  'computed on: it wins 45 per cent of the time and its winners pay '
+                  'twice its losers. You are in an ordinary drawdown, the 9R median '
+                  'that half of all careers on this system meet. Lesson 24 simulated '
+                  'the next twenty trades: risking 1 per cent leaves the '
+                  'one-in-twenty career at 0.867 of its starting equity, and risking '
+                  '5 per cent leaves it at 0.681.</p>\n',
+            ask='What is the expectancy? What do one winner and two losers cost the '
+                'account at 1 per cent and at 5 per cent, given that they come to '
+                'exactly nothing in R? And what gain does each of those two '
+                'one-in-twenty careers need to get back to where it started?',
+            result='+0.35R a trade. The three trades cost 0.030 per cent at 1 per '
+                   'cent risk and 0.725 per cent at 5, a ratio of 24. And the two '
+                   'careers need 15.3 per cent and 46.8 per cent to get back.',
+            answer='      <p>The expectancy is 0.45 &times; 2 &minus; 0.55 = +0.35R '
+                   'a trade, which is the number the whole module has been spending. '
+                   'The sequence +2R, &minus;1R, &minus;1R sums to zero in R and '
+                   'does not sum to zero in the account.</p>\n' + table(
+                       ['Risk a trade', 'The three trades', 'Left with',
+                        'Cost of standing still'],
+                       [['1%', '1.02 &times; 0.99 &times; 0.99', '0.99970',
+                         '0.030%'],
+                        ['5%', '1.10 &times; 0.95 &times; 0.95', '0.99275',
+                         '0.725%']]) +
+                   '      <p>Nothing about the trades changed and none of the three '
+                   'was a mistake. Only the fraction moved, and the cost of standing '
+                   'still grew 24 times, because it goes with the square of the '
+                   'fraction. Double what you risk and you very nearly quadruple '
+                   'what standing still costs you.</p>\n'
+                   '      <p>Then the way back. A career left at 0.867 needs 1 '
+                   '&divide; 0.867 &minus; 1 = 15.3 per cent to reach its old high. '
+                   'One left at 0.681 needs 1 &divide; 0.681 &minus; 1 = 46.8 per '
+                   'cent. The first is a good quarter and the second is a year.</p>\n'
+                   '      <p>Read the two together and the module closes on itself. '
+                   'The 5 per cent career was sizing up to get the money back, and '
+                   'it works: it reaches a new high inside twenty trades nine times '
+                   'in ten against fewer than half at 1 per cent. What it also does '
+                   'is turn a 13 per cent hole into a 32 per cent one in the '
+                   'one-in-twenty case, and 46.8 per cent is not a plan. The edge '
+                   'was identical in both. Everything that differs is a fraction you '
+                   'chose before any of it began.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can get a number out of your own record and then say '
+          'what it is entitled to settle. Handed six rows, you produce an '
+          'expectancy; handed a win rate, you produce the run and when to expect it; '
+          'handed an edge and its noise, you produce the sample that would prove it; '
+          'handed a level and a volatility, you produce a share count; handed a win '
+          'rate and a fraction, you produce a probability of being finished. Nothing '
+          'in the module asked what the market was doing, and nothing in it needed '
+          'to.</p>\n'
+          '      <p>Which is exactly the gap module 4 opens on. It starts with a '
+          'stop placed a tenth of an average bar below the level: it shows the best '
+          'reward to risk on the page at 9.2 to one, it needs a win rate of only 9.8 '
+          'per cent, and it still loses money, because four trades in five never '
+          'find out whether they were right.</p>\n',
+),
+
 ]
