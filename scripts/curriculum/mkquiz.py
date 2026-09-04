@@ -14,6 +14,11 @@ filename. It carries the same chrome as a lesson so a reader does not feel
 they have left the course.
 
     python3 scripts/curriculum/mkquiz.py <module number>|all
+
+Build order matters. inject.py points a locale page's links at the same
+locale only where that file already exists, so build and translate the quiz
+BEFORE rebuilding the lesson that links to it, or eleven locale pages ship a
+link out of their own language and locales.py reports it.
 """
 import html as H
 import json

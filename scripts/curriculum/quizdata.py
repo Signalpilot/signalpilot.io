@@ -218,4 +218,224 @@ dict(
           'cent.</p>\n',
 ),
 
+# ---------------------------------------------------------------- module 2
+dict(
+    mod=2, tier='beginner', slug='module-2-quiz',
+    slots=[10, 11, 12, 13, 14, 15, 16],
+    title='Module 2 Quiz: The Cost of Trading',
+    desc='Six computations from the cost module. Add four charges into one bill, '
+         'walk a thin book, rank two instruments by friction, turn a deposit into a '
+         'leverage ratio, find the price at which your broker sells, and hold lesson '
+         '10&rsquo;s trade for a month, which moves its breakeven win rate from 53.9 '
+         'to 66.2 per cent.',
+    intro='This module priced a seat. Four charges, the one of them that grows with '
+          'your size, the ratio that ranks an instrument before you trade it, the '
+          'four legal objects, the collateral that is not a loss, and the five rules '
+          'under which somebody else acts in your account. Six questions, every one '
+          'of them arithmetic. The last takes the trade lesson 10 priced at minus '
+          '$9.29 and holds it for a month instead of three nights.',
+    covers='Lessons 10 to 16, and the 200 shares of a $50 stock stopped $0.60 away '
+           'that lesson 10 costed and this quiz costs again.',
+    related=[(10, 'the four charges and the ratio they go into'),
+             (11, 'the walk the second question prices'),
+             (12, 'the friction ratio the third question computes'),
+             (13, 'the contract the fourth question sizes'),
+             (14, 'leverage as a consequence rather than a setting'),
+             (15, 'the call price the fifth question finds'),
+             (16, 'the flattery the sixth question undoes')],
+    questions=[
+        dict(
+            title='Four charges, one bill',
+            setup='      <p>Buy 400 shares of a $25 stock, a $10,000 position, with a '
+                  'stop $0.40 away. The stock is quoted two cents wide. Your broker '
+                  'charges half a cent a share each way, with a $1.00 minimum. The '
+                  'entry filled a cent past the quote and the exit filled at the '
+                  'quote. You bought on 2:1 margin, so $5,000 of it is borrowed at 9 '
+                  'per cent a year, and you held it five nights.</p>\n',
+            ask='What is the whole bill, what is s, and what win rate does the trade '
+                'need just to break even?',
+            result='$22.16, s = 13.9 per cent, and a 56.9 per cent breakeven win rate.',
+            answer='      <p>The money at risk is the denominator for everything '
+                   'below: 400 &times; $0.40 = $160.</p>\n' + table(
+                       ['Charge', 'Arithmetic', 'Cost'],
+                       [['Spread', '$0.02 &times; 400, once for the round trip',
+                         '$8.00'],
+                        ['Commission', '$0.005 &times; 400 each way, above the $1.00 '
+                         'floor', '$4.00'],
+                        ['Slippage', '$0.01 &times; 400, on the entry only', '$4.00'],
+                        ['Financing', '$5,000 &times; 9% &times; 5 &divide; 365',
+                         '$6.16'],
+                        ['Total', '', '$22.16']]) +
+                   '      <p>Then s = $22.16 &divide; $160 = 0.1385, and lesson 10 '
+                   'showed that the breakeven formula never cared that s was a '
+                   'spread: (1 + 0.1385) &divide; 2 = 56.9 per cent.</p>\n'
+                   '      <p>The spread is $8.00 of $22.16, so the only charge on the '
+                   'chart is about a third of the bill. And the floor did nothing '
+                   'here, because 400 shares at half a cent is $2.00 a side. Run the '
+                   'same schedule at 100 shares and the $1.00 minimum binds on both '
+                   'sides, so the round trip costs two cents a share instead of one. '
+                   'The smaller account pays double.</p>\n'),
+        dict(
+            title='What the walk costs in a thin name',
+            setup='      <p>A $20 small cap is quoted 19.95 bid, 20.00 ask. The offer '
+                  'side of its book:</p>\n' + table(
+                      ['Price', 'Shares resting'],
+                      [['20.00', '400'], ['20.05', '400'], ['20.10', '500']]) +
+                  '      <p>You send a market order to buy 1,200 shares, and you would '
+                  'stop out 1 per cent of price away.</p>\n',
+            ask='What is the average fill, what does the entry cost against the '
+                'midpoint, how much of that is the walk rather than the spread, and '
+                'what share of the risk has the entry alone spent?',
+            result='$20.05 average, $90.00 against the midpoint, of which $60.00 is '
+                   'the walk, and the entry has spent 37.5 per cent of the risk.',
+            answer='      <p>The order takes 400 at 20.00, 400 at 20.05, and 400 of '
+                   'the 500 at 20.10.</p>\n' + table(
+                       ['Price', 'Shares', 'Cost'],
+                       [['20.00', '400', '$8,000.00'],
+                        ['20.05', '400', '$8,020.00'],
+                        ['20.10', '400', '$8,040.00'],
+                        ['Total', '1,200', '$24,060.00']]) +
+                   '      <p>So the average fill is $24,060 &divide; 1,200 = $20.05. '
+                   'The midpoint was 19.975, so the entry cost 1,200 &times; $0.075 = '
+                   '$90.00.</p>\n'
+                   '      <p>Split it the way lesson 11 splits it. Half a spread on '
+                   '1,200 shares is 1,200 &times; $0.025 = $30.00, and you would have '
+                   'paid that at any size. The remaining $60.00 is the walk, and it '
+                   'exists only because 1,200 was three times the 400 resting in front '
+                   'of you.</p>\n'
+                   '      <p>A 1 per cent stop is $0.20 a share, so the risk is 1,200 '
+                   '&times; $0.20 = $240. The entry alone has spent $90 &divide; $240 '
+                   '= 37.5 per cent of it, before commission, before financing and '
+                   'before the exit.</p>\n'),
+        dict(
+            title='Which of the two is cheaper to be in',
+            setup='      <p>Two candidates, measured over sixty sessions.</p>\n' +
+                  table(['Instrument', 'Price', 'Spread', 'Average daily range'],
+                        [['X', '$80.00', '2 cents', '1.6 per cent of close'],
+                         ['Y', '$3.00', '6 cents', '7.0 per cent of close']]),
+            ask='What is each friction ratio, and what is the factor between them?',
+            result='1.56 per cent for X and 28.6 per cent for Y, a factor of 18.',
+            answer='      <p>Both quantities go into basis points so that two '
+                   'instruments at different prices become comparable. One full '
+                   'spread is the round trip: half going in and half coming out.</p>\n'
+                   + table(['Instrument', 'Round trip (bps)', 'Daily range (bps)',
+                            'Friction ratio'],
+                           [['X', '$0.02 &divide; $80 &times; 10,000 = 2.5', '160',
+                             '1.56%'],
+                            ['Y', '$0.06 &divide; $3 &times; 10,000 = 200', '700',
+                             '28.6%']]) +
+                   '      <p>So X hands over 1.56 per cent of a typical day&rsquo;s '
+                   'movement for the right to participate and Y hands over 28.6 per '
+                   'cent, a factor of 18.</p>\n'
+                   '      <p>Read where the factor comes from. Y moves 4.4 times as '
+                   'much as X, which is the part a chart shows you. It also costs 80 '
+                   'times as much to cross as a fraction of its own price, which no '
+                   'chart shows you at all. The second number is the larger one, and '
+                   'that is the whole of lesson 12 in one line: the ranking a chart '
+                   'suggests runs backwards.</p>\n'),
+        dict(
+            title='One contract, and the move that ends it',
+            setup='      <p>The S&amp;P 500 is at 5,200 and the Micro E-mini is worth '
+                  '$5 an index point. You hold one contract with $3,250 of equity '
+                  'behind it, and you are trading it with a 12-point stop.</p>\n',
+            ask='What leverage are you carrying, what move takes the whole deposit, '
+                'how many index points is that, and how many times the risk is the '
+                'money standing behind the trade?',
+            result='8 times leverage, wiped by a 12.5 per cent move, which is 650 '
+                   'index points, against a trade risking $60 &mdash; so the deposit '
+                   'is 54.2 times the risk.',
+            answer='      <p>One contract controls 5,200 &times; $5 = $26,000, and '
+                   'that notional does not change with your deposit. Leverage is '
+                   'notional over the equity behind it: $26,000 &divide; $3,250 = 8 '
+                   'times.</p>\n'
+                   '      <p>Lesson 14&rsquo;s consequence follows exactly, with no '
+                   'estimation in it. At leverage L an adverse move of 1 &divide; L '
+                   'is the whole deposit, so 1 &divide; 8 = 12.5 per cent, and 12.5 '
+                   'per cent of 5,200 is 650 index points.</p>\n'
+                   '      <p>Now the other number. A 12-point stop at $5 a point '
+                   'risks 12 &times; $5 = $60, so the money standing behind the trade '
+                   'is $3,250 &divide; $60 = 54.2 times what the trade actually '
+                   'risks.</p>\n'
+                   '      <p>Neither figure tells you the other, and only one of them '
+                   'is yours. The clearing house set the collateral without ever '
+                   'seeing your stop.</p>\n'),
+        dict(
+            title='The price at which somebody else sells',
+            setup='      <p>You buy $30,000 of a stock, putting up $15,000 of your own '
+                  'money and borrowing the other $15,000, which is the most the '
+                  'initial rule allows. It is a volatile name, so your broker holds '
+                  'you to a 40 per cent house maintenance requirement rather than the '
+                  '25 per cent floor.</p>\n',
+            ask='At what position value does the call arrive, what fall from $30,000 '
+                'is that, and how many average days is it for the small cap of lesson '
+                '12&rsquo;s table?',
+            result='$25,000, a fall of 16.7 per cent, which is 3.3 average days.',
+            answer='      <p>The loan is $15,000 and it does not fall with the '
+                   'position. Only your equity absorbs the loss, which is why the '
+                   'threshold arrives sooner than the requirement suggests: the call '
+                   'comes at $15,000 &divide; (1 &minus; 0.40) = $25,000, where your '
+                   '$10,000 of remaining equity is exactly 40 per cent of the '
+                   'position.</p>\n'
+                   '      <p>From $30,000 that is a fall of 1 &minus; $25,000 '
+                   '&divide; $30,000 = 16.7 per cent. Note what is not in the '
+                   'arithmetic: not your entry, not your reasoning, and not your '
+                   'stop.</p>\n'
+                   '      <p>Lesson 12 gave the small cap a daily range of 500 basis '
+                   'points, so 16.7 per cent is 16.7 &divide; 5 = 3.3 average days. '
+                   'Three ordinary sessions in one direction and the decision stops '
+                   'being yours &mdash; their timing, and whichever position is '
+                   'easiest to sell rather than the one you would have picked.</p>\n'),
+        dict(
+            title='The same trade, held for a month',
+            setup='      <p>Back to the trade lesson 10 priced: 200 shares of a $50 '
+                  'stock, a stop $0.60 away, so $120 at risk. Spread $2.00, commission '
+                  '$2.00, slippage $2.00, and $5,000 borrowed at 8 per cent a year. '
+                  'Lesson 10 held it three nights and the bill came to $9.29. Hold it '
+                  'thirty instead. A simulator then reports 80 of these trades at a '
+                  '57.5 per cent win rate, wins and losses both one unit of risk, and '
+                  'puts you up $1,440.</p>\n',
+            ask='On which night does financing alone pass the other three put '
+                'together, what is the thirty-night bill, what breakeven win rate does '
+                'it demand, and what do the simulator&rsquo;s 80 trades actually net?',
+            result='The sixth night. $38.88 a round trip, a 66.2 per cent breakeven '
+                   'win rate, and the 80 trades net &minus;$1,670.40.',
+            answer='      <p>Three of the four charges are paid per trip and do not '
+                   'care how long you stay: $2.00 + $2.00 + $2.00 = $6.00. The fourth '
+                   'is paid for the staying, at $5,000 &times; 8% &divide; 365 = '
+                   '$1.0959 a night. So financing equals the other three after $6.00 '
+                   '&divide; $1.0959 = 5.5 nights, which means the sixth night is '
+                   'where the column you cannot see becomes the larger one.</p>\n'
+                   '      <p>Thirty nights of it is 30 &times; $1.0959 = $32.88, so '
+                   'the bill is $6.00 + $32.88 = $38.88.</p>\n' + table(
+                       ['Held', 'Financing', 'Whole bill', 's', 'Breakeven win rate'],
+                       [['Three nights, as lesson 10 held it', '$3.29', '$9.29',
+                         '7.7%', '53.9%'],
+                        ['Thirty nights', '$32.88', '$38.88', '32.4%', '66.2%']]) +
+                   '      <p>Nothing about the setup changed. The instrument is the '
+                   'same, the stop is the same, the entry technique is rounding error '
+                   'at this holding period, and the win rate the trade needs has gone '
+                   'from 53.9 to 66.2 per cent because of a decision that felt like '
+                   'patience.</p>\n'
+                   '      <p>Which is what the simulator declined to charge. Eighty '
+                   'round trips at $38.88 is $3,110.40, so the $1,440 it reported is '
+                   'really $1,440 &minus; $3,110.40 = &minus;$1,670.40. And 57.5 per '
+                   'cent never cleared 66.2 per cent, so the strategy did not stop '
+                   'working somewhere between the simulator and the broker. It was '
+                   'losing money the whole time.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can put a number on the seat before you sit in it. '
+          'Handed a schedule and a holding period, you produce a bill; handed a book '
+          'and an order, you produce the walk; handed a price and a range, you produce '
+          'the share of the day&rsquo;s movement the instrument takes for itself; '
+          'handed a loan and a requirement, you produce the price at which the '
+          'decision stops being yours. Every one of those was available before the '
+          'trade, and every one of them was arithmetic.</p>\n'
+          '      <p>Notice what the module never did. It never told you what to buy. '
+          'Cost sets the bar and clearing it is a different subject, which is where '
+          'module 3 starts: a setup winning seven times in ten can lose 0.125 units of '
+          'risk on every trade, while one winning four times in ten makes 1.40. The '
+          'win rate is not the thing.</p>\n',
+),
+
 ]
