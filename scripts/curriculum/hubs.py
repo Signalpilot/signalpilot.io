@@ -200,9 +200,15 @@ def render(lang=None):
     # Every other count on the English page. There is one number, and it is the
     # length of the listing; the page used to carry three different ones because
     # each was typed where it stood. The locale pages were swept above.
+    # The meta and social descriptions are English on every page, locale
+    # pages included, so this one runs everywhere. The locale copies were
+    # left at 86 lessons and still advertised quizzes the course does not
+    # have.
+    s = re.sub(r'Free trading course: \d+ lessons',
+               f'Free trading course: {total} lessons', s)
+    s = s.replace('institutional trading with quizzes and progress tracking.',
+                  'institutional trading with problems to work and progress tracking.')
     if not lang:
-        s = re.sub(r'Free trading course: \d+ lessons',
-                   f'Free trading course: {total} lessons', s)
         s = re.sub(r'<strong>\d+ free lessons</strong>',
                    f'<strong>{total} free lessons</strong>', s)
         s = re.sub(r'through all \d+ lessons', f'through all {total} lessons', s)
