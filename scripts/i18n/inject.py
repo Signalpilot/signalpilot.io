@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 """Write a translated lesson from the English page plus a translation map.
 
-Only the segments the extractor found are replaced, so markup, scripts,
-styles and every href survive untouched. Lesson links stay absolute to
-/education/..., which is where the English pages live; a translated lesson
-links to translated siblings only where they exist.
+Only the segments the extractor found are replaced, so markup, scripts and
+styles survive untouched. Links do not: a lesson link is rewritten into the
+locale's own tree wherever that page exists, because a reader who follows a
+prerequisite out of German and into English has been quietly dropped out of
+their language, and the only way back is the switcher. Every one of the 86
+curriculum pages and the education index exists in all eleven locales, so
+those are rewritten; the tier pages, the search and the library do not, so
+those stay English.
 """
 import re, os, sys, json
 sys.path.insert(0, os.path.dirname(__file__))
@@ -102,6 +106,17 @@ def inject(src_path, lang, tmap, rel):
         if b > 0:
             body = CJK_AFTER_TAG.sub(r'\1\2', out[b:])
             out = out[:b] + CJK_BEFORE_TAG.sub(r'\1\2', body)
+
+    # In-locale links. The href is rewritten only when the locale actually has
+    # that page, so a link to a tier page or the library still resolves.
+    def _localise_href(m):
+        target = m.group(2)
+        local = '%s/education/%s' % (lang, target.split('/education/', 1)[1])
+        return m.group(1) + '/' + local + m.group(3) if os.path.exists(local) else m.group(0)
+
+    out = re.sub(r'(href=")(/education/curriculum/[\w./-]+\.html)(")', _localise_href, out)
+    out = out.replace('href="/education/"', f'href="/{lang}/education/"')
+    out = re.sub(r'href="/education/index\.html"', f'href="/{lang}/education/index.html"', out)
 
     out = re.sub(r'<html[^>]*>', f'<html lang="{lang}"' + (' dir="rtl"' if lang in RTL else '') + '>', out, count=1)
     out = re.sub(r'("inLanguage":\s*")[a-z-]+(")', lambda m: m.group(1)+lang+m.group(2), out)
