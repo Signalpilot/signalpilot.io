@@ -287,7 +287,9 @@ not confirmed exists.
 The anatomy works inside one lesson. A course is a different object: a reader
 who finishes a lesson has to be carried into the next, and the promises that
 carry them are made on one page and kept on another. These are the only rules
-that need two pages open at once, which is also how you check them.
+that need two pages open at once, which is also how you check them. They are
+also the rules `scripts/curriculum/audit.py` checks, which is the tool for
+everything craft.py cannot see because craft.py only ever has one page open.
 
 **Every tease is a promise, and the next lesson's claim keeps it.** If lesson
 36 ends by promising that one bar of confirmation halves the number of changes
@@ -298,6 +300,32 @@ stiffed once reads every later tease as decoration and stops reading the
 bounds at all. We get to break this once.
 *Ask: does the next lesson's claim contain the figure this lesson's tease
 promised?*
+
+The rule has a floor and a ceiling, and the corpus holds both. The floor is
+that a tease must name what the next lesson **finds**, never only what it is
+about. *Lesson 48 is about what an indicator is, and why, and which ones* is a
+table of contents; a reader skips it, because it promises nothing that could
+turn out to be false. The ceiling is that where the finding is numeric, the
+tease carries the number and the next claim prints the same one. Between the
+two sits the case the corpus accepts without complaint: a finding stated
+qualitatively, because the lesson's result is qualitative. *The next lesson
+finds that the book answers a question you did not ask* is a promise and can
+be broken; it is allowed to stand without a figure.
+
+`audit.py chain` sorts every handoff into those bands. PAID is the ceiling,
+FINDING-NO-FIGURE is the middle, and TOPIC-ONLY is the floor failing. Only
+TOPIC-ONLY, FIGURE-UNPAID and NOHANDOFF are reported as findings.
+
+**The tease lives in one of two places, and both are correct.** Slots 1 to 61
+carry it in the unmarked bold paragraph that follows the sources, which recaps
+the lesson and then turns the page. Slots 62 to 85 carry it in the last
+paragraph of the bounds, and have no trailing paragraph at all. The second
+shape came in with the professional tier and reads better, because the last
+thing a reader sees is the promise rather than a recap they have just lived
+through. The first shape is not drift and is not to be converted: the recap
+does real work in the early tiers, where a reader is still learning that the
+course is one object. Write a new lesson in the shape of its neighbours.
+*Ask: does the tease sit where the neighbouring lessons put theirs?*
 
 **Spend the number, not the lesson number.** *As lesson 36 showed* is a
 reference, and references are skipped. *The 0.22 from the sixty closes* is the
@@ -568,6 +596,7 @@ inside a day.
 **Between the pages**
 - Does the next lesson's claim contain the figure this lesson's tease
   promised?
+- Does the tease sit where the neighbouring lessons put theirs?
 - Does every "as we saw earlier" carry the figure, and does the reader
   touch it?
 - Could the module's last lesson be moved to first without losing anything?
@@ -627,6 +656,8 @@ corpus and align the rest — this is how "displacement", the swing lookback,
 ## The build machinery
 
 ```
+python3 scripts/curriculum/craft.py [<slot>]          # one lesson, or all 85
+python3 scripts/curriculum/audit.py [<check> ...]     # the cross-lesson checks
 python3 scripts/curriculum/translate.py keys <slug>   # writes .keys.json
 python3 scripts/i18n/build.py curriculum/<tier>/<slug>.html [lang]
 python3 scripts/i18n/checks/run.py <slug>
@@ -635,7 +666,12 @@ python3 scripts/curriculum/hubs.py --check            # exit 1 if stale
 python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>
 ```
 
-Run from the repo root; lesson paths are relative to `education/`.
+Run from the repo root; lesson paths are relative to `education/`. Both
+checkers exit with their finding count by design, so a red label in a shell is
+a count and not a crash. `audit.py` takes any of `xref`, `chain`, `arith`,
+`claim` and `dupes`, and runs all five when given none. It reads only the
+English pages, because a defect in the relations between lessons is in the
+English or it is nowhere.
 
 `scripts/curriculum/remerge.py` carries a merged paragraph back off the built
 locale page rather than retranslating it. Three traps: `_nodes` slices at
