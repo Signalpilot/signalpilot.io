@@ -1622,4 +1622,480 @@ dict(
           'expecting.</p>\n',
 ),
 
+
+# ---------------------------------------------------------------- module 7
+dict(
+    mod=7, tier='advanced', slug='module-7-quiz',
+    slots=[53, 54, 55, 56, 57, 58, 59, 60, 61],
+    title='Module 7 Quiz: The Other Side',
+    desc='Seven computations from the counterparty module. Solve a spread for '
+         'what it believes, price the routing decision you never see, find the '
+         'delay at which speed starts to matter, balance a schedule against its '
+         'own impact, take the derivative of a hedge, and add the row every '
+         'stop-hunting table leaves out.',
+    intro='This module turned round and looked at the people taking the other '
+          'side of your fills, and found every one of them under an obligation '
+          'rather than an opinion: a quoter who must cover adverse selection, a '
+          'router steered by a published fee, a firm whose quote is an option it '
+          'has written, a desk that owns a schedule rather than an order, and a '
+          'dealer whose trading is the derivative of a hedge. Seven questions, all '
+          'arithmetic. The last one takes the single 300-share round trip this '
+          'module has been adding charges to since lesson 53 and finishes '
+          'counting it.',
+    covers='Lessons 53 to 61, and the 300-share penny-wide round trip that lesson '
+           '53 priced at $3.00 and lesson 54 raised to $4.80.',
+    related=[(53, 'the equation the first question inverts'),
+             (54, 'the fee schedule the second question reads'),
+             (55, 'the threshold the third question computes'),
+             (57, 'the schedule the fourth question costs'),
+             (59, 'the impact the fourth and last questions estimate'),
+             (60, 'the hedge whose derivative the fifth question takes'),
+             (61, 'the row the sixth question puts back')],
+    questions=[
+        dict(
+            title='What a spread would have to believe',
+            setup='      <p>Lesson 53&rsquo;s zero-profit condition says a '
+                  'break-even spread is twice the share of arriving orders that '
+                  'are informed, multiplied by how far the price moves once what '
+                  'they know is public: s = 2aD. Turned round, a = s &divide; '
+                  '(2D).</p>\n'
+                  '      <p>Four spreads you can find on any screen: two cents, '
+                  'four cents, twenty cents and a dollar. Three sizes of informed '
+                  'edge: fifty cents, two dollars and eight dollars.</p>\n',
+            ask='For each of the twelve pairs, what share of arriving orders would '
+                'have to be informed for that spread to break even? Which cell '
+                'refuses to answer, and what is it telling you?',
+            result='From 1 in 800 at the top to 1 in 4 at the bottom, and the '
+                   'dollar spread against a fifty-cent edge returns every order, '
+                   'which is not a number about information at all.',
+            answer='''      <table>
+        <thead><tr><th>Quoted spread</th><th>Edge of 0.50</th><th>Edge of 2.00</th><th>Edge of 8.00</th></tr></thead>
+        <tbody>
+          <tr><td>$0.02</td><td>1 in 50</td><td>1 in 200</td><td>1 in 800</td></tr>
+          <tr><td>$0.04</td><td>1 in 25</td><td>1 in 100</td><td>1 in 400</td></tr>
+          <tr><td>$0.20</td><td>1 in 5</td><td>1 in 20</td><td>1 in 80</td></tr>
+          <tr><td>$1.00</td><td>every order</td><td>1 in 4</td><td>1 in 16</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Every cell is one division. Two cents against an eight-'
+                   'dollar edge is 0.02 &divide; 16 = 0.00125, which is one order in '
+                   'eight hundred. That is not a claim about how many clever people '
+                   'are in the market; it is what the quote implies if the quoter is '
+                   'breaking even, and it is why two cents is quotable against an '
+                   'earnings-sized move at all. The whole business is a very small '
+                   'edge earned very often against a very large loss taken very '
+                   'rarely.</p>\n'
+                   '      <p>Now the cell that refuses. A dollar spread against a '
+                   'fifty-cent edge gives a = 1.00 &divide; 1.00 = 1, meaning every '
+                   'single arriving order would have to be informed, which cannot be '
+                   'true of any market that trades at all. The model has been handed '
+                   'a spread it cannot explain, and the honest reading is not that '
+                   'the quoter is greedy. It is that adverse selection is not what '
+                   'most of that spread is paying for.</p>\n'
+                   '      <p>Which is the useful thing the formula does. It gives '
+                   'the most of a spread that information could possibly account '
+                   'for, and whatever is left over belongs to inventory risk and to '
+                   'fixed cost &mdash; the split lesson 5 said existed and could not '
+                   'measure. A wide spread in a thin name is mostly the price of '
+                   'being stuck with it.</p>\n'
+                   '      <p>One caution the table carries in its own headings. '
+                   'Every figure is an implication of an assumed edge, not an '
+                   'observation of one. Move along a row and the implied share of '
+                   'informed orders changes by a factor of sixteen without a single '
+                   'quote changing. The table asks what a spread would have to '
+                   'believe. It does not find out what it does believe.</p>\n'),
+        dict(
+            title='The decision you never see and never pay for',
+            setup='      <p>A 500-share order. Taking liquidity is capped by rule '
+                  'at three tenths of a cent a share; assume the maker-taker venue '
+                  'sits at the cap and rebates 0.0022 to the resting side, and that '
+                  'an inverted venue pays 0.0020 to take and charges 0.0028 to '
+                  'rest. A wholesaler filling the order internally involves no '
+                  'exchange and no exchange fee.</p>\n'
+                  '      <p>Then the same 500 shares as an ordinary round trip: in '
+                  'and out with marketable orders, on an instrument quoted a penny '
+                  'wide, and again on one quoted two cents wide.</p>\n',
+            ask='What does each of the five outcomes pay or cost on 500 shares, and '
+                'how far apart are the best and the worst? What does the round trip '
+                'cost once the access fee is added at each spread, and at what '
+                'spread does the fee stop adding more than a fifth?',
+            result='A swing of $2.60 on one side of one trade; $8.00 and $13.00 for '
+                   'the round trips; and the fee adds a fifth at a three-cent '
+                   'spread.',
+            answer='''      <table>
+        <thead><tr><th>Where the order ends up</th><th>Per share</th><th>On 500 shares</th></tr></thead>
+        <tbody>
+          <tr><td>Maker-taker venue, order crosses</td><td>−0.0030</td><td>−$1.50</td></tr>
+          <tr><td>Maker-taker venue, order rests and is hit</td><td>+0.0022</td><td>+$1.10</td></tr>
+          <tr><td>Inverted venue, order crosses</td><td>+0.0020</td><td>+$1.00</td></tr>
+          <tr><td>Inverted venue, order rests and is hit</td><td>−0.0028</td><td>−$1.40</td></tr>
+          <tr><td>Internalised by a wholesaler</td><td>0.0000</td><td>$0.00</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>The top and the bottom of that column are 0.0052 apart, '
+                   'which is $2.60 on 500 shares, on one side of one trade. Notice '
+                   'which two rows are furthest apart. It is not a fast row against '
+                   'a slow row, because no such distinction appears anywhere in the '
+                   'table. It is the crossing row against the resting row, and then '
+                   'the venue type on top of that, and a fee schedule published '
+                   'months in advance settled all of it.</p>\n'
+                   '      <p>Then the round trip. A penny spread means half a cent a '
+                   'share crossed, which is $2.50 a side and $5.00 for the round '
+                   'trip; the access fee at the cap is $1.50 a side and $3.00 for '
+                   'the round trip, so the true bill is $8.00 and the fee has added '
+                   '60 per cent. At two cents the spread cost doubles to $10.00 '
+                   'while the fee stays at $3.00, so the same fee adds 30 per '
+                   'cent.</p>\n'
+                   '      <p>That gives the crossover directly, because the fee is '
+                   'fixed per share and the spread is not. The fee adds a fifth when '
+                   '0.0030 is a fifth of the half-spread, which puts the half-spread '
+                   'at 1.5 cents and the spread at three cents. At six cents it adds '
+                   'a tenth. So this is a penny-and-two-cent-instrument problem, and '
+                   'a reader who trades wider things has just found out that lesson '
+                   '54 is not about them.</p>\n'
+                   '      <p>And the reason the schedule decides rather than you: on '
+                   'a commission-free account you neither pay the take fee nor '
+                   'receive the make rebate. The whole first table is somebody '
+                   'else&rsquo;s profit and loss, which is exactly why it cannot '
+                   'move your behaviour and can move your broker&rsquo;s '
+                   'completely.</p>\n'),
+        dict(
+            title='The delay at which speed starts to matter',
+            setup='      <p>A resting quote is an option written by whoever posted '
+                  'it, and its life is the time between the world changing and the '
+                  'cancellation landing. So the value of a delay is the value of an '
+                  'option with that life, which lesson 44 already taught you to '
+                  'compute: annual volatility divided by the square root of 252 '
+                  'gives a day, divided by the square root of 23,400 gives a '
+                  'second, and multiplied by the square root of the delay gives the '
+                  'rest.</p>\n'
+                  '      <p>Three instruments. One at $250 with 20 per cent annual '
+                  'volatility quoted a penny wide. The same instrument quoted five '
+                  'cents wide. And a small company at $12 with 55 per cent annual '
+                  'volatility quoted twenty-five cents wide.</p>\n',
+            ask='What does each move in a second, and at what delay does a typical '
+                'move reach the half-spread?',
+            result='2.060 cents and 0.272 cents a second; and thresholds of 58.9 '
+                   'milliseconds, 1.47 seconds and 35.2 minutes.',
+            answer='      <p>The first instrument moves 250 &times; 0.20 &divide; '
+                   '15.87 = $3.1506 in a day, and $3.1506 &divide; the square root '
+                   'of 23,400 = $0.0206 in a second. Setting that equal to the '
+                   'half-cent half-spread and solving for the delay gives '
+                   '(0.005 &divide; 0.0206) squared = 0.0589 seconds, or 58.9 '
+                   'milliseconds. The third instrument moves 12 &times; 0.55 '
+                   '&divide; 15.87 = $0.4159 a day, which is 0.272 cents a second, '
+                   'and against a 12.5-cent half-spread that is 2,114 seconds.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Instrument</th><th>Move in one second</th><th>Delay at which it equals the half-spread</th></tr></thead>
+        <tbody>
+          <tr><td>$250, 20 per cent, penny spread</td><td>2.060 cents</td><td>58.9 milliseconds</td></tr>
+          <tr><td>$250, 20 per cent, five cents wide</td><td>2.060 cents</td><td>1.47 seconds</td></tr>
+          <tr><td>$12, 55 per cent, twenty-five cents wide</td><td>0.272 cents</td><td>35.2 minutes</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Read the first two rows against each other. Nothing '
+                   'about the instrument changed except the quoted spread, and the '
+                   'threshold moved by a factor of twenty-five, because the '
+                   'threshold goes as the square of the half-spread. Then read the '
+                   'third row: on a twelve-dollar company quoted a quarter wide, a '
+                   'typical move reaches the half-spread after thirty-five minutes. '
+                   'Nobody needs to be fast there and nobody is, because the entire '
+                   'quoting problem is inventory rather than latency.</p>\n'
+                   '      <p>Now place the participants on that scale. A retail '
+                   'order leaving a home connection takes somewhere between 50 and '
+                   '200 milliseconds; a machine in the same building as the matching '
+                   'engine measures its round trip in tens of microseconds. On the '
+                   'first row the threshold sits between those two, which is the '
+                   'only row where the race is a race. On the third it sits eleven '
+                   'thousand times past the slowest participant, and the whole '
+                   'question stops being about speed.</p>\n'
+                   '      <p>What none of this says is that being faster wins more. '
+                   'The most that can be taken from a stale quote is the amount by '
+                   'which it is stale, and a quote standing for a few hundred '
+                   'microseconds is stale by hundredths of a cent. Speed buys a '
+                   'larger share of a fixed number of small prizes, not a larger '
+                   'prize.</p>\n'),
+        dict(
+            title='The clock, and where the two costs are equal',
+            setup='      <p>A desk has 400,000 shares to buy of a $60 stock that '
+                  'trades 2,000,000 shares a day at 35 per cent annual volatility '
+                  'and is quoted three cents wide. Lesson 57&rsquo;s convention is '
+                  'to run at ten per cent of the day&rsquo;s volume.</p>\n'
+                  '      <p>Two costs work against each other. The timing exposure '
+                  'is the daily standard deviation times the square root of the '
+                  'sessions used. The impact, by lesson 59&rsquo;s square-root law, '
+                  'is that same daily standard deviation times the square root of '
+                  'the order&rsquo;s days of volume divided by the sessions used. '
+                  'Add a willingness number for how much certain cost you will pay '
+                  'to shed a dollar of exposure, and the sum has one minimum.</p>\n',
+            ask='How many sessions does the convention take, and what is the '
+                'typical move over that span? Where is the minimum at a dollar of '
+                'certain cost for a dollar of risk, what participation does it ask '
+                'for, and what is true of the two terms there? And what willingness '
+                'does the ten-per-cent convention imply?',
+            result='Two sessions and $1.8714, against an optimum at 0.4472 sessions '
+                   'and 44.7 per cent participation where both terms are $0.8849; '
+                   'and the convention implies a willingness of 0.2236.',
+            answer='      <p>The order is 400,000 &divide; 2,000,000 = 0.20 days of '
+                   'volume, and at ten per cent participation the sessions are the '
+                   'days of volume divided by the rate, which is 2.00. The daily '
+                   'standard deviation is 60 &times; 0.35 &divide; 15.87 = $1.3233, '
+                   'so the typical move over two sessions is $1.3233 times the '
+                   'square root of two, which is $1.8714, or 3.12 per cent of the '
+                   'price. Set that against the 1.5-cent half-spread and it is 125 '
+                   'times larger. At this size the spread is a rounding error and '
+                   'the clock is the bill.</p>\n'
+                   '      <p>Now the minimum. Differentiating the sum gives an '
+                   'optimum of the square root of the days of volume divided by the '
+                   'willingness, which at a dollar for a dollar is the square root '
+                   'of 0.20, or 0.4472 sessions. The participation that asks for is '
+                   'the days of volume divided by the sessions, which is 44.7 per '
+                   'cent &mdash; four and a half times the convention.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Schedule</th><th>Sessions</th><th>Impact a share</th><th>Exposure a share</th><th>Sum</th></tr></thead>
+        <tbody>
+          <tr><td>Ten per cent participation</td><td>2.0000</td><td>$0.4184</td><td>$1.8714</td><td>$2.2898</td></tr>
+          <tr><td>The optimum at a dollar for a dollar</td><td>0.4472</td><td>$0.8849</td><td>$0.8849</td><td>$1.7698</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Look at the two middle columns in the second row. The '
+                   'impact and the exposure are equal, at $0.8849 each, and that is '
+                   'not a property of these particular numbers. Whatever the '
+                   'volatility, whatever the volume, whatever the willingness, the '
+                   'schedule that minimises the sum is the one where the impact you '
+                   'pay equals the risk-weighted exposure you carry. You do not need '
+                   'either constant to use it: estimate both terms for the schedule '
+                   'you are running and the larger one says which way to move.</p>\n'
+                   '      <p>Notice also what the optimum does not contain. The '
+                   'volatility cancels and so does the price. The order enters only '
+                   'through its ratio to the day&rsquo;s volume, which is the same '
+                   'quantity the schedule reduced to in the first place.</p>\n'
+                   '      <p>Then run it backwards. Two sessions is the optimum when '
+                   'the square root of 0.20 divided by the willingness equals 2.00, '
+                   'which puts the willingness at 0.2236. The convention is optimal '
+                   'for a desk that values a dollar of timing risk at twenty-two '
+                   'cents, and weighting the raw $1.8714 exposure by that figure '
+                   'gives $0.4184, which is exactly the impact in the same row. The '
+                   'convention is not the model&rsquo;s answer. It is a choice, and '
+                   'anybody presenting ten per cent as the output of an optimisation '
+                   'is presenting a preference as a calculation.</p>\n'),
+        dict(
+            title='A hedge is a position and its trading is the derivative',
+            setup='      <p>A dealer has sold options and holds shares against '
+                  'them. The hedge is a function of the price, so it cannot change '
+                  'until the price has. Here is the hedge, in shares, at ten '
+                  'successive rebalances: 440,000, 310,000, 520,000, 380,000, '
+                  '660,000, 450,000, 720,000, 540,000, 830,000 and '
+                  '1,000,000.</p>\n'
+                  '      <p>Then the rate at which it changes. On the same book, a '
+                  'one-dollar move obliges 46,000 shares of rehedging with twenty '
+                  'bars to expiry, 94,000 with five, and 212,000 with one. The '
+                  'underlying trades 8,000,000 shares a day at 1.5 per cent daily '
+                  'volatility and sits at 103.</p>\n',
+            ask='How many shares did holding the hedge trade, how large did the '
+                'position ever get, and how far did it end from where it started? '
+                'And what impact does each of the three rehedges cause, as a share '
+                'of the move that caused it?',
+            result='1,880,000 traded against a largest position of 1,000,000 and a '
+                   'net change of 560,000; and impacts of 11.7, 16.7 and 25.2 per '
+                   'cent of the move.',
+            answer='      <p>The nine differences are 130,000, 210,000, 140,000, '
+                   '280,000, 210,000, 270,000, 180,000, 290,000 and 170,000, which '
+                   'total 1,880,000 shares. The largest position the hedge ever '
+                   'holds is 1,000,000, and the net change from first reading to '
+                   'last is 560,000. So the trading was 1.88 times the largest '
+                   'position and 3.36 times the net change.</p>\n'
+                   '      <p>That ratio answers every headline of the form: dealers '
+                   'have eleven billion dollars of hedges to unwind. Eleven billion '
+                   'is a position. What reaches the market is its derivative, and a '
+                   'hedge that does not move trades nothing at all.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Bars to expiry</th><th>Shares rehedged by a $1 move</th><th>Impact</th><th>Share of the move</th></tr></thead>
+        <tbody>
+          <tr><td>20</td><td>46,000</td><td>0.1137%</td><td>11.7%</td></tr>
+          <tr><td>5</td><td>94,000</td><td>0.1626%</td><td>16.7%</td></tr>
+          <tr><td>1</td><td>212,000</td><td>0.2442%</td><td>25.2%</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Now the second half. A dollar on a 103 instrument is a '
+                   '0.97 per cent move. Lesson 59&rsquo;s law puts the impact of '
+                   'rehedging at the daily volatility times the square root of the '
+                   'shares over the day&rsquo;s volume, so 212,000 shares against '
+                   '8,000,000 gives 0.015 times the square root of 0.0265, which is '
+                   '0.2442 per cent &mdash; a quarter of the move that caused '
+                   'it.</p>\n'
+                   '      <p>Read the column downwards and the honest statement is a '
+                   'range with an input in it: hedging flow adds something between a '
+                   'ninth and a quarter of a move here, and the figure moves with '
+                   'the volume, the distance to expiry and the distance from the '
+                   'strike. It does not create the move. It cannot, because it '
+                   'arrives afterwards.</p>\n'
+                   '      <p>And one thing the arithmetic cannot supply. Reverse the '
+                   'sign &mdash; a dealer long the options rather than short &mdash; '
+                   'and the same 212,000 shares damp the move instead of amplifying '
+                   'it, because rehedging a long position sells into strength. Open '
+                   'interest counts contracts, not sides, so a strike showing a '
+                   'large number tells you the last hour will be busy near it and '
+                   'tells you nothing whatever about the direction.</p>\n'),
+        dict(
+            title='The row every stop-hunting table leaves out',
+            setup='      <p>You are long at 240 with support at 239. The tight stop '
+                  'goes at 237, just under the level; the wide stop goes at 234, a '
+                  'volatility buffer below it. Three things can happen. The level '
+                  'holds and the price rallies to 246. Or the price runs to 236 and '
+                  'is reclaimed, then rallies to 246. Or the level genuinely breaks '
+                  'and the price goes to 232.</p>\n'
+                  '      <p>Then a count on your own instrument: 24 approaches, of '
+                  'which 18 held, 6 ran through the level, and 5 of those 6 were '
+                  'reclaimed.</p>\n',
+            ask='Take both stops at 200 shares and use only the second and third '
+                'states: at what run-and-reclaim rate are they equal? Now size them '
+                'to the same risk and ask again. Then put the first state back and '
+                'find the condition in full. And what does the count say?',
+            result='0.25 unsized on two states, zero when they are sized to the same '
+                   'risk, and p greater than q over 2 once the third state is there '
+                   '&mdash; which the count fails, 0.208 against 0.375.',
+            answer='      <p>Start where the literature starts. At 200 shares each, '
+                   'the tight stop loses $600 in both of the two states drawn, '
+                   'because 236 is below 237 either way. The wide stop makes 200 '
+                   '&times; 6 = $1,200 if the run is reclaimed and loses 200 &times; '
+                   '6 = $1,200 if it breaks. Setting &minus;600 equal to 2,400p '
+                   '&minus; 1,200 gives p = 0.25, and that is the familiar '
+                   'answer.</p>\n'
+                   '      <p>It is also an artefact of the sizing. The tight stop '
+                   'risks $600 and the wide one risks $1,200, so they are not the '
+                   'same bet. Lesson 9 says to compare them at the same risk, which '
+                   'puts the wide stop at 100 shares. Its payoffs halve to +$600 and '
+                   '&minus;$600, and it now beats the tight stop at any run-and-'
+                   'reclaim rate above zero at all. The tight stop&rsquo;s '
+                   'expectation contains no p, because it loses $600 in both '
+                   'columns, which makes it a refusal to bet rather than a cheaper '
+                   'bet.</p>\n'
+                   '      <p>Which proves too much, and that is the tell. A rule '
+                   'that is right whatever the world does has usually been asked the '
+                   'wrong question, and the wrong question is that the table has two '
+                   'columns.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Outcome</th><th>Tight stop, 200 shares</th><th>Wide stop, 100 shares</th></tr></thead>
+        <tbody>
+          <tr><td>Level holds</td><td>+$1,200</td><td>+$600</td></tr>
+          <tr><td>Run, then reclaimed</td><td>−$600</td><td>+$600</td></tr>
+          <tr><td>Real breakdown</td><td>−$600</td><td>−$600</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>The missing state is the one where nothing happens: the '
+                   'price approaches, the level holds, no run occurs, and the rally '
+                   'arrives with neither stop touched. There the tight stop is long '
+                   '200 shares into a six-point rally and makes $1,200 while the '
+                   'wide stop is long 100 and makes $600. It is the state in which '
+                   'being tight pays, and it is left out of the literature because '
+                   'the literature is about being hunted.</p>\n'
+                   '      <p>Write q for a clean hold and p for a run and reclaim. '
+                   'The tight stop is worth 1,800q &minus; 600 and the wide one '
+                   '1,200q + 1,200p &minus; 600. Subtract, and the difference is '
+                   '1,200p &minus; 600q, so the wide stop wins when p is greater '
+                   'than q over 2. Not a quarter, not zero, but half the probability '
+                   'that the level simply holds &mdash; and both terms are countable '
+                   'on your own instrument.</p>\n'
+                   '      <p>So count them. Eighteen holds in 24 approaches is q = '
+                   '0.750, and five reclaimed runs is p = 0.208. The threshold is '
+                   '0.375 and p does not reach it, so on these counts the tight stop '
+                   'is the better of the two. Notice which term decided it. Not the '
+                   'run-and-reclaim rate the whole argument fixates on, but the hold '
+                   'rate, which the argument never mentions.</p>\n'),
+        dict(
+            title='One order, priced by every lesson in the module',
+            setup='      <p>The trade this module has been adding charges to. Three '
+                  'hundred shares of a $100 stock quoted a penny wide, in and out '
+                  'with marketable orders. The stock trades 2,000,000 shares a day '
+                  'and its daily standard deviation is 1.5 per cent. The access fee '
+                  'sits at the Rule 610 cap of three tenths of a cent.</p>\n'
+                  '      <p>Then the same trade at a hundred times the size: 30,000 '
+                  'shares, which is 1.5 per cent of the day&rsquo;s volume.</p>\n'
+                  '      <p>Price the impact of the entry alone, because lesson 59 '
+                  'says part of the exit&rsquo;s impact reverts and this page has no '
+                  'way to split it.</p>\n',
+            ask='What does each trade cost in spread and access fee, what does the '
+                'square-root law estimate for the impact, and at what order size do '
+                'the two meet?',
+            result='$4.80 against $5.51 at 300 shares and $480 against $5,511 at '
+                   '30,000; the crossover is 228 shares at a coefficient of one and '
+                   '910 at a half.',
+            answer='      <p>The two charges with published numbers are the ones '
+                   'lessons 53 and 54 counted. Half a cent a share crossed, twice, '
+                   'is a cent a share, or $3.00 on 300; the access fee at the cap, '
+                   'twice, is 0.006 a share, or $1.80. Both scale exactly with size, '
+                   'so at 30,000 shares they are $300.00 and $180.00.</p>\n'
+                   '      <p>The impact does not scale that way, and that is the '
+                   'whole of the result. The law puts the fractional move at the '
+                   'daily volatility times the square root of the order over the '
+                   'day&rsquo;s volume, so 300 shares against 2,000,000 gives 0.015 '
+                   'times the square root of 0.00015, which is 0.0184 per cent. On a '
+                   '$100 stock that is 1.84 cents a share, or $5.51. At 30,000 '
+                   'shares the fraction is ten times larger and the shares are a '
+                   'hundred times more numerous, so the dollar cost is a thousand '
+                   'times larger: $5,511.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Charge</th><th>300 shares</th><th>30,000 shares</th></tr></thead>
+        <tbody>
+          <tr><td>Spread, both crossings</td><td>$3.00</td><td>$300.00</td></tr>
+          <tr><td>Access fee at the cap, both crossings</td><td>$1.80</td><td>$180.00</td></tr>
+          <tr><td>Subtotal, the two charges with published numbers</td><td>$4.80</td><td>$480.00</td></tr>
+          <tr><td>Estimated impact of the entry alone</td><td>$5.51</td><td>$5,511.35</td></tr>
+          <tr><td>Impact as a multiple of the subtotal</td><td>1.15</td><td>11.48</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Set the two per-share figures equal and the crossover '
+                   'falls out. The spread and the fee come to 1.6 cents a share for '
+                   'the round trip; the impact is 100 &times; 0.015 times the square '
+                   'root of the order over 2,000,000. They meet at 228 shares, which '
+                   'is below the trade in the left-hand column. On the numbers as '
+                   'written, this order is already past the point where the law says '
+                   'impact is the larger charge.</p>\n'
+                   '      <p>Which is exactly where lesson 59&rsquo;s concession has '
+                   'to be taken seriously rather than skipped. The law carries a '
+                   'coefficient that published calibrations put anywhere between a '
+                   'half and one and a half, and the crossover moves as the inverse '
+                   'square of it: at a coefficient of a half the two charges meet at '
+                   '910 shares instead of 228. So the answer to whether impact is '
+                   'your largest charge depends on a constant nobody publishes, and '
+                   'a reader who takes the 228 as a fact has taken the wrong thing '
+                   'from the arithmetic. What is not in doubt is the shape: the '
+                   'first two charges are linear in size and the third goes as size '
+                   'to the power of one and a half, so there is a crossover, and '
+                   'above it the two charges this module could price stop being the '
+                   'bill.</p>\n'
+                   '      <p>And when the fill prints, lesson 56 has the last word '
+                   'on what anyone else can read from it. The tape carries the '
+                   'price, the size and whether it happened away from an exchange. '
+                   'The one field it never carries is the side. Every charge on this '
+                   'page was paid by somebody whose direction the print does not '
+                   'record.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can read the other side as a set of obligations '
+          'with numbers attached. Handed a spread, you invert it and find what it '
+          'would have to believe, and notice when it refuses to answer; handed a '
+          'fee schedule, you price a decision that is made about you and paid for '
+          'by somebody else; handed a price and a volatility, you find the delay '
+          'at which speed is a factor and the instruments where it is not; handed '
+          'an order too large for a day, you balance the clock against the impact '
+          'and find the two equal at the bottom; handed a hedge, you take its '
+          'derivative; and handed a payoff table, you check whether a state is '
+          'missing from it before you solve it.</p>\n'
+          '      <p>Module 8 turns all of it inward. Lesson 62 takes one ordinary '
+          'observation and judges it twice: six wins in nine trades beats a coin '
+          'and gets adopted, and the same six in nine against a base rate of 54.24 '
+          'per cent settles nothing whatever. The difference is not the data. It '
+          'is what the observation was compared against, and naming that in '
+          'advance is what turns a noticing into a hypothesis.</p>\n',
+),
+
 ]
