@@ -210,6 +210,11 @@ def lastbound(s):
     return tight(ps[-1]) if ps else ''
 
 
+# A tease clears the floor when it says what the next lesson FINDS. Naming the
+# subject is not a promise, because nothing about it could turn out to be false.
+FIND = re.compile(r'\b(finds?|found|shows?|proves?|turns out|measures?|counts?|'
+                  r'prices?|costs?|comes to|works out|ends up|is worth|does not|'
+                  r'never|cannot|fails?|answers? it|puts a number)\b', re.I)
 TOPIC = re.compile(
     r'\b(is about|is where|asks what|asks who|asks how|asks the question|takes up|'
     r'looks at|covers|explores|turns to|moves to|is the subject|goes into|deals with|'
@@ -223,22 +228,30 @@ def handoffs():
     for s in SLOTS[:-1]:
         n = SLOTS[SLOTS.index(s) + 1]
         blob = trailing(s) + ' || ' + lastbound(s)
-        m = re.search(r'(?:next lesson|next module|next one|next two|lesson %d\b|module \d+)' % n, blob, re.I)
-        seg = ''
-        if m:
-            seg = ' '.join(re.split(r'(?<=[.!?])\s+(?=[A-Z])', blob[m.start():])[:2])
+        # The promise is everything from the first time the next lesson is
+        # named to the end of the paragraph: a tease often names it, sets the
+        # scene, and only then states what it finds.
+        m = re.search(r'(?:next lesson|next module|next one|next two|'
+                      r'lesson %d\b)' % n, blob, re.I)
+        if not m:
+            # A tease that opens a module names it by number. Take the last
+            # such mention: the first is usually the module being closed.
+            ms = list(re.finditer(r'module \d+', blob, re.I))
+            m = ms[-1] if ms else None
+        seg = blob[m.start():] if m else ''
         promised = figures(seg)
         carried = figures(claim_text(n))
         if not seg:
             kind = 'NOHANDOFF'
         elif promised & carried:
             kind = 'PAID'
+        elif FIND.search(seg):
+            # a finding is stated; it just travels without its number
+            kind = 'FINDING-NO-FIGURE'
         elif promised:
             kind = 'FIGURE-UNPAID'
-        elif TOPIC.search(seg):
-            kind = 'TOPIC-ONLY'
         else:
-            kind = 'FINDING-NO-FIGURE'
+            kind = 'TOPIC-ONLY'
         rows.append((kind, s, n, seg[:150]))
     return rows
 
