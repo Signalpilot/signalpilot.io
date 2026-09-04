@@ -18,13 +18,13 @@
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
   <title>Advanced Curriculum — Signal Pilot Education</title>
-  <meta name="description" content="Advanced trading curriculum: 27 articles covering institutional trading, algorithmic execution, ML/automation, portfolio theory, and professional infrastructure.">
+  <meta name="description" content="Advanced trading curriculum: 18 lessons covering institutional trading, algorithmic execution, ML/automation, portfolio theory, and professional infrastructure.">
   <link rel="canonical" href="https://www.signalpilot.io/education/advanced.html">
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.signalpilot.io/education/advanced.html">
   <meta property="og:title" content="Advanced Curriculum — Signal Pilot Education">
-  <meta property="og:description" content="Advanced trading curriculum: 27 articles covering institutional trading, algorithmic execution, ML/automation, portfolio theory, and professional infrastructure.">
+  <meta property="og:description" content="Advanced trading curriculum: 18 lessons covering institutional trading, algorithmic execution, ML/automation, portfolio theory, and professional infrastructure.">
   <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.signalpilot.io/education/advanced.html">
   <meta name="twitter:title" content="Advanced Curriculum — Signal Pilot Education">
-  <meta name="twitter:description" content="Advanced trading curriculum: 27 articles covering institutional trading, algorithmic execution, ML/automation, portfolio theory, and professional infrastructure.">
+  <meta name="twitter:description" content="Advanced trading curriculum: 18 lessons covering institutional trading, algorithmic execution, ML/automation, portfolio theory, and professional infrastructure.">
   <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
   <meta name="theme-color" content="#05070d">
   <link rel="manifest" href="/education/manifest.json">
@@ -103,9 +103,9 @@
     <div class="wrap">
       <span class="badge">🔴 ADVANCED TIER</span>
       <h1 class="headline xl">Institutional-Grade Trading</h1>
-      <p class="lead measure">27 comprehensive articles covering institutional trading mechanics, algorithmic execution, machine learning, automation, portfolio theory, and professional infrastructure.</p>
+      <p class="lead measure">18 lessons covering institutional trading mechanics, algorithmic execution, machine learning, automation, portfolio theory, and professional infrastructure.</p>
       <div style="margin-top: 2rem;">
-        <a class="btn btn-primary" href="/education/curriculum/advanced/57-how-institutions-execute.html">Start Article #52 →</a>
+        <a class="btn btn-primary" href="/education/curriculum/advanced/53-market-makers-business.html">Start Lesson #53 →</a>
         <a class="btn btn-ghost" href="/education/" style="margin-left: 1rem;">All Tiers</a>
       </div>
     </div>
@@ -115,7 +115,7 @@
     <div class="wrap">
       <div class="card">
         <h2 class="headline md">What You'll Learn</h2>
-        <p style="margin-bottom: 1.5rem;"><strong>Articles 48-74</strong> • ~77,000 words • 10-15 weeks</p>
+        <p style="margin-bottom: 1.5rem;"><strong>Lessons 53&ndash;70</strong> • ~77,000 words • 10-15 weeks</p>
         <div class="grid auto-300" style="margin-top: 1.5rem;">
           <div>
             <h4>🏦 Institutional Trading</h4>
@@ -156,14 +156,14 @@
             </ul>
           </div>
         </div>
-        <p style="margin-top: 2rem;"><strong>Prerequisites:</strong> Complete <a href="/education/beginner.html">Beginner</a> and <a href="/education/intermediate.html">Intermediate</a> tiers first. These articles assume advanced understanding of order flow, Signal Pilot indicators, and professional trading frameworks.</p>
+        <p style="margin-top: 2rem;"><strong>Prerequisites:</strong> Complete <a href="/education/beginner.html">Beginner</a> and <a href="/education/intermediate.html">Intermediate</a> tiers first. These lessons assume advanced understanding of order flow, Signal Pilot indicators, and professional trading frameworks.</p>
       </div>
     </div>
   </section>
 
   <section class="grid-sec">
     <div class="wrap">
-      <h2 class="headline md" style="margin-bottom: 1.5rem;">Complete Curriculum (27 Articles)</h2>
+      <h2 class="headline md" style="margin-bottom: 1.5rem;">Complete Curriculum (18 Lessons)</h2>
       <div id="curriculum-list"></div>
     </div>
   </section>
@@ -173,40 +173,37 @@
     const list = document.getElementById('curriculum-list');
     try {
       const res = await fetch('/education/curriculum/index.json', { cache: 'no-store' });
-      const allArticles = await res.json();
+      const all = await res.json();
 
-      // Filter for advanced articles (orders 48-74)
-      const articles = allArticles.filter(a => a.level === 'Advanced' && a.order >= 48 && a.order <= 74);
+      // The catalogue owns the tier, the modules and their order. Nothing on
+      // this page names a module, so a renamed module cannot empty the page.
+      const lessons = all.filter(a => a.level === 'Advanced')
+                         .sort((a, b) => a.order - b.order);
 
-      // Group by category
-      const categories = {
-        'Institutional Trading': [],
-        'Algorithmic Trading': [],
-        'Professional Edge': [],
-        'Advanced Mastery': []
-      };
+      if (lessons.length === 0) {
+        list.innerHTML = '<div class="card"><p class="note">No lessons found for this tier.</p></div>';
+        return;
+      }
 
-      articles.forEach(a => {
-        if (categories[a.category]) {
-          categories[a.category].push(a);
-        }
+      const modules = [];
+      lessons.forEach(a => {
+        let m = modules.find(x => x.name === a.category);
+        if (!m) { m = { name: a.category, lessons: [] }; modules.push(m); }
+        m.lessons.push(a);
       });
 
       let html = '';
-      Object.keys(categories).forEach(cat => {
-        const catArticles = categories[cat];
-        if (catArticles.length > 0) {
-          html += `
+      modules.forEach(m => {
+        html += `
             <div class="card" style="margin-bottom: 2rem;">
-              <h3 class="headline sm" style="color: var(--primary); margin-bottom: 1rem;">${cat}</h3>
+              <h3 class="headline sm" style="color: var(--primary); margin-bottom: 1rem;">${m.name}</h3>
               <div class="grid auto-300">
-          `;
-
-          catArticles.forEach(a => {
-            const statusBadge = a.status === 'complete' ? '✅' : '📝';
-            html += `
+        `;
+        m.lessons.forEach(a => {
+          const statusBadge = a.status === 'complete' ? '✅' : '📝';
+          html += `
               <article class="card post" style="background: var(--surface-2);">
-                <div class="kicker">${statusBadge} Article ${a.order}</div>
+                <div class="kicker">${statusBadge} Lesson ${a.order}</div>
                 <h4 style="font-size: 1.1rem; margin: 0.5rem 0;">${a.title}</h4>
                 <p class="note">${a.description}</p>
                 <div style="font-size: 0.85rem; color: var(--text-2); margin: 0.5rem 0;">
@@ -219,11 +216,9 @@
                 <a class="btn btn-primary btn-sm" href="${a.href}">Read Now →</a>
                 <blockquote class="sp-disclaimer"><strong>Educational only.</strong> Trading involves substantial risk of loss. Not financial advice. Past performance does not guarantee future results.</blockquote>
 </article>
-            `;
-          });
-
-          html += `</div></div>`;
-        }
+          `;
+        });
+        html += `</div></div>`;
       });
 
       list.innerHTML = html;
@@ -237,9 +232,9 @@
     <div class="wrap">
       <div class="card" style="text-align: center; padding: 3rem 2rem; margin-bottom: 2rem;">
         <h2 class="headline md">Start Advanced Tier</h2>
-        <p class="lead">Begin with Article #52: Institutional Order Flow</p>
+        <p class="lead">Begin with lesson 53: What the Spread Is Paying For</p>
         <p>Learn how institutions execute massive orders via VWAP, TWAP, and iceberg orders without moving price—and how to trade alongside them.</p>
-        <a class="btn btn-primary" href="/education/curriculum/advanced/57-how-institutions-execute.html" style="margin-top: 1.5rem;">Start Learning →</a>
+        <a class="btn btn-primary" href="/education/curriculum/advanced/53-market-makers-business.html" style="margin-top: 1.5rem;">Start Learning →</a>
       </div>
     </div>
   </section>

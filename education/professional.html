@@ -17,13 +17,13 @@
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
   <title>Complete Integration — Signal Pilot Education</title>
-  <meta name="description" content="Real-time market analysis, live case studies, building your edge, professional risk systems, and your complete trading system. 8 lessons (#79-86).">
+  <meta name="description" content="Real-time market analysis, live case studies, building your edge, professional risk systems, and your complete trading system. 15 lessons (#79-86).">
   <link rel="canonical" href="https://www.signalpilot.io/education/professional.html">
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.signalpilot.io/education/professional.html">
   <meta property="og:title" content="Complete Integration — Signal Pilot Education">
-  <meta property="og:description" content="Real-time market analysis, live case studies, building your edge, professional risk systems, and your complete trading system. 8 lessons (#79-86).">
+  <meta property="og:description" content="Real-time market analysis, live case studies, building your edge, professional risk systems, and your complete trading system. 15 lessons (#79-86).">
   <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -32,7 +32,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.signalpilot.io/education/professional.html">
   <meta name="twitter:title" content="Complete Integration — Signal Pilot Education">
-  <meta name="twitter:description" content="Real-time market analysis, live case studies, building your edge, professional risk systems, and your complete trading system. 8 lessons (#79-86).">
+  <meta name="twitter:description" content="Real-time market analysis, live case studies, building your edge, professional risk systems, and your complete trading system. 15 lessons (#79-86).">
   <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
   <meta name="theme-color" content="#05070d">
   <link rel="manifest" href="/education/manifest.json">
@@ -96,7 +96,7 @@
       <h1 class="headline xl">Complete Integration</h1>
       <p class="lead measure">Real-time market analysis, live case studies, building your edge, professional risk systems, and your complete trading system.</p>
       <div style="margin-top: 2rem;">
-        <a class="btn btn-primary" href="/education/curriculum/_merged/79.html">Start Lesson #79 →</a>
+        <a class="btn btn-primary" href="/education/curriculum/professional/71-positions-are-one-position.html">Start Lesson #71 →</a>
         <a class="btn btn-ghost" href="/education/" style="margin-left: 1rem;">All Tiers</a>
       </div>
     </div>
@@ -114,37 +114,53 @@
     const list = document.getElementById('curriculum-list');
     try {
       const res = await fetch('/education/curriculum/index.json', { cache: 'no-store' });
-      const articles = await res.json();
+      const all = await res.json();
 
-      // Filter lessons for this tier
-      const tierLessons = articles.filter(a => a.level === 'Professional-Capstone');
+      // The catalogue owns the tier, the modules and their order. Nothing on
+      // this page names a module, so a renamed module cannot empty the page.
+      const lessons = all.filter(a => a.level === 'Professional')
+                         .sort((a, b) => a.order - b.order);
 
-      if (tierLessons.length === 0) {
+      if (lessons.length === 0) {
         list.innerHTML = '<div class="card"><p class="note">No lessons found for this tier.</p></div>';
         return;
       }
 
-      let html = '<div class="grid auto-300">';
-      tierLessons.forEach(a => {
-        const statusBadge = a.status === 'complete' ? '✅' : '📝';
-        html += `
-          <article class="card post" style="background: var(--surface-2);">
-            <div class="kicker">${statusBadge} Lesson ${a.order}</div>
-            <h4 style="font-size: 1.1rem; margin: 0.5rem 0;">${a.title}</h4>
-            <p class="note">${a.description}</p>
-            <div style="font-size: 0.85rem; color: var(--text-2); margin: 0.5rem 0;">
-              📖 ${a.readingTime} • ${a.wordCount.toLocaleString()} words
-            </div>
-            ${a.spIndicators && a.spIndicators.length > 0 ?
-              `<div style="font-size: 0.85rem; color: var(--primary); margin: 0.5rem 0;">
-                🔧 ${a.spIndicators.join(', ')}
-              </div>` : ''}
-            <a class="btn btn-primary btn-sm" href="${a.href}">Read Now →</a>
-            <blockquote class="sp-disclaimer"><strong>Educational only.</strong> Trading involves substantial risk of loss. Not financial advice. Past performance does not guarantee future results.</blockquote>
-</article>
-        `;
+      const modules = [];
+      lessons.forEach(a => {
+        let m = modules.find(x => x.name === a.category);
+        if (!m) { m = { name: a.category, lessons: [] }; modules.push(m); }
+        m.lessons.push(a);
       });
-      html += '</div>';
+
+      let html = '';
+      modules.forEach(m => {
+        html += `
+            <div class="card" style="margin-bottom: 2rem;">
+              <h3 class="headline sm" style="color: var(--primary); margin-bottom: 1rem;">${m.name}</h3>
+              <div class="grid auto-300">
+        `;
+        m.lessons.forEach(a => {
+          const statusBadge = a.status === 'complete' ? '✅' : '📝';
+          html += `
+              <article class="card post" style="background: var(--surface-2);">
+                <div class="kicker">${statusBadge} Lesson ${a.order}</div>
+                <h4 style="font-size: 1.1rem; margin: 0.5rem 0;">${a.title}</h4>
+                <p class="note">${a.description}</p>
+                <div style="font-size: 0.85rem; color: var(--text-2); margin: 0.5rem 0;">
+                  📖 ${a.readingTime} • ${a.wordCount.toLocaleString()} words
+                </div>
+                ${a.spIndicators && a.spIndicators.length > 0 ?
+                  `<div style="font-size: 0.85rem; color: var(--primary); margin: 0.5rem 0;">
+                    🔧 ${a.spIndicators.join(', ')}
+                  </div>` : ''}
+                <a class="btn btn-primary btn-sm" href="${a.href}">Read Now →</a>
+                <blockquote class="sp-disclaimer"><strong>Educational only.</strong> Trading involves substantial risk of loss. Not financial advice. Past performance does not guarantee future results.</blockquote>
+</article>
+          `;
+        });
+        html += `</div></div>`;
+      });
 
       list.innerHTML = html;
     } catch (err) {
@@ -157,8 +173,8 @@
     <div class="wrap">
       <div class="card" style="text-align: center; padding: 3rem 2rem;">
         <h2 class="headline md">Ready to Start?</h2>
-        <p class="lead">Begin this tier with Lesson #79</p>
-        <a class="btn btn-primary" href="/education/curriculum/_merged/79.html" style="margin-top: 1.5rem;">Start Learning →</a>
+        <p class="lead">Begin this tier with lesson 71: How Many Bets You Are Carrying</p>
+        <a class="btn btn-primary" href="/education/curriculum/professional/71-positions-are-one-position.html" style="margin-top: 1.5rem;">Start Learning →</a>
       </div>
     </div>
   </section>

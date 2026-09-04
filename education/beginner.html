@@ -18,13 +18,13 @@
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
   <title>Beginner Curriculum — Signal Pilot Education</title>
-  <meta name="description" content="Complete beginner trading curriculum: 20 articles covering market structure, order flow, indicators, psychology, and risk management.">
+  <meta name="description" content="Complete beginner trading curriculum: 24 lessons covering market structure, order flow, indicators, psychology, and risk management.">
   <link rel="canonical" href="https://www.signalpilot.io/education/beginner.html">
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.signalpilot.io/education/beginner.html">
   <meta property="og:title" content="Beginner Curriculum — Signal Pilot Education">
-  <meta property="og:description" content="Complete beginner trading curriculum: 20 articles covering market structure, order flow, indicators, psychology, and risk management.">
+  <meta property="og:description" content="Complete beginner trading curriculum: 24 lessons covering market structure, order flow, indicators, psychology, and risk management.">
   <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.signalpilot.io/education/beginner.html">
   <meta name="twitter:title" content="Beginner Curriculum — Signal Pilot Education">
-  <meta name="twitter:description" content="Complete beginner trading curriculum: 20 articles covering market structure, order flow, indicators, psychology, and risk management.">
+  <meta name="twitter:description" content="Complete beginner trading curriculum: 24 lessons covering market structure, order flow, indicators, psychology, and risk management.">
   <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
   <meta name="theme-color" content="#05070d">
   <link rel="manifest" href="/education/manifest.json">
@@ -103,9 +103,9 @@
     <div class="wrap">
       <span class="badge">🟢 BEGINNER TIER</span>
       <h1 class="headline xl">Beyond Retail Thinking</h1>
-      <p class="lead measure">20 comprehensive articles teaching you to think like a market maker. Complete this tier to build a professional foundation in trading.</p>
+      <p class="lead measure">24 lessons teaching you to think like a market maker. Complete this tier to build a professional foundation in trading.</p>
       <div style="margin-top: 2rem;">
-        <a class="btn btn-primary" href="/education/curriculum/intermediate/27-the-liquidity-lie.html">Start Article #1 →</a>
+        <a class="btn btn-primary" href="/education/curriculum/beginner/01-what-a-market-solves.html">Start Lesson #1 →</a>
         <a class="btn btn-ghost" href="/education/" style="margin-left: 1rem;">All Tiers</a>
       </div>
     </div>
@@ -155,7 +155,7 @@
 
   <section class="grid-sec">
     <div class="wrap">
-      <h2 class="headline md" style="margin-bottom: 1.5rem;">Complete Curriculum (20 Articles)</h2>
+      <h2 class="headline md" style="margin-bottom: 1.5rem;">Complete Curriculum (24 Lessons)</h2>
       <div id="curriculum-list"></div>
     </div>
   </section>
@@ -165,39 +165,37 @@
     const list = document.getElementById('curriculum-list');
     try {
       const res = await fetch('/education/curriculum/index.json', { cache: 'no-store' });
-      const articles = await res.json();
+      const all = await res.json();
 
-      // Group by category
-      const categories = {
-        'Market Structure Reality': [],
-        'Indicator Truth': [],
-        'Psychology Foundations': [],
-        'Risk Reality': [],
-        'Bonus Beginner': [],
-        'Beginner-Intermediate Bridge': []
-      };
+      // The catalogue owns the tier, the modules and their order. Nothing on
+      // this page names a module, so a renamed module cannot empty the page.
+      const lessons = all.filter(a => a.level === 'Beginner')
+                         .sort((a, b) => a.order - b.order);
 
-      articles.forEach(a => {
-        if (categories[a.category]) {
-          categories[a.category].push(a);
-        }
+      if (lessons.length === 0) {
+        list.innerHTML = '<div class="card"><p class="note">No lessons found for this tier.</p></div>';
+        return;
+      }
+
+      const modules = [];
+      lessons.forEach(a => {
+        let m = modules.find(x => x.name === a.category);
+        if (!m) { m = { name: a.category, lessons: [] }; modules.push(m); }
+        m.lessons.push(a);
       });
 
       let html = '';
-      Object.keys(categories).forEach(cat => {
-        const catArticles = categories[cat];
-        if (catArticles.length > 0) {
-          html += `
+      modules.forEach(m => {
+        html += `
             <div class="card" style="margin-bottom: 2rem;">
-              <h3 class="headline sm" style="color: var(--primary); margin-bottom: 1rem;">${cat}</h3>
+              <h3 class="headline sm" style="color: var(--primary); margin-bottom: 1rem;">${m.name}</h3>
               <div class="grid auto-300">
-          `;
-
-          catArticles.forEach(a => {
-            const statusBadge = a.status === 'complete' ? '✅' : '📝';
-            html += `
+        `;
+        m.lessons.forEach(a => {
+          const statusBadge = a.status === 'complete' ? '✅' : '📝';
+          html += `
               <article class="card post" style="background: var(--surface-2);">
-                <div class="kicker">${statusBadge} Article ${a.order}</div>
+                <div class="kicker">${statusBadge} Lesson ${a.order}</div>
                 <h4 style="font-size: 1.1rem; margin: 0.5rem 0;">${a.title}</h4>
                 <p class="note">${a.description}</p>
                 <div style="font-size: 0.85rem; color: var(--text-2); margin: 0.5rem 0;">
@@ -210,11 +208,9 @@
                 <a class="btn btn-primary btn-sm" href="${a.href}">Read Now →</a>
                 <blockquote class="sp-disclaimer"><strong>Educational only.</strong> Trading involves substantial risk of loss. Not financial advice. Past performance does not guarantee future results.</blockquote>
 </article>
-            `;
-          });
-
-          html += `</div></div>`;
-        }
+          `;
+        });
+        html += `</div></div>`;
       });
 
       list.innerHTML = html;
@@ -229,8 +225,8 @@
       <div class="card">
         <h2 class="headline md">How to Use This Curriculum</h2>
         <ol>
-          <li><strong>Sequential Learning:</strong> Complete articles 1-20 in order. Each builds on previous concepts.</li>
-          <li><strong>Do the Exercises:</strong> Every article has checklists, templates, and actionable frameworks. Actually use them.</li>
+          <li><strong>Sequential Learning:</strong> Complete lessons 1 to 24 in order. Each builds on previous concepts.</li>
+          <li><strong>Do the Exercises:</strong> Every lesson has checklists, templates, and actionable frameworks. Actually use them.</li>
           <li><strong>Paper Trade First:</strong> Apply concepts in simulation before risking real capital.</li>
           <li><strong>Track Progress:</strong> Use the provided journal templates to monitor your improvement.</li>
           <li><strong>Community Support:</strong> Join Discord to discuss concepts and share observations.</li>
@@ -244,9 +240,9 @@
     <div class="wrap">
       <div class="card" style="text-align: center; padding: 3rem 2rem;">
         <h2 class="headline md">Ready to Start?</h2>
-        <p class="lead">Begin with Article #1: The Liquidity Lie</p>
+        <p class="lead">Begin with lesson 1: What a Market Solves</p>
         <p>Learn how smart money uses retail stop clusters and why traditional support/resistance fails.</p>
-        <a class="btn btn-primary" href="/education/curriculum/intermediate/27-the-liquidity-lie.html" style="margin-top: 1.5rem;">Start Learning →</a>
+        <a class="btn btn-primary" href="/education/curriculum/beginner/01-what-a-market-solves.html" style="margin-top: 1.5rem;">Start Learning →</a>
       </div>
     </div>
   </section>

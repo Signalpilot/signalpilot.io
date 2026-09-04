@@ -19,6 +19,8 @@ pattern that merely looks odd to a regex:
     dupes   a word repeated back to back in the English prose
     locale  a string the builder will need that some locale does not have,
             which is how a page builds green and still reads English
+    hub     the four tier pages against the catalogue: counts, the lesson
+            each one opens on, and the level its listing selects
 
 Like craft.py this exits with the finding count, so a red label in a shell is
 a count and not a crash.
@@ -418,14 +420,63 @@ def check_locale():
                           sorted(missing)[0][:70]))
 
 
+# --------------------------------------------------------------------- 7. hub
+
+TIER_PAGES = {'beginner': 'Beginner', 'intermediate': 'Intermediate',
+              'advanced': 'Advanced', 'professional': 'Professional'}
+
+
+def check_hub():
+    """The four tier pages still type their counts and their opening link.
+    Check both against the catalogue, because a typed fact drifts and this set
+    had drifted so far that every one of the four opened the wrong lesson and
+    one of them opened a file that no longer exists."""
+    import json
+    cat_path = os.path.join(ROOT, 'education', 'curriculum', 'index.json')
+    if not os.path.exists(cat_path):
+        print('hub check unavailable: no catalogue')
+        return
+    catalogue = json.load(open(cat_path, encoding='utf-8'))
+    for page, level in TIER_PAGES.items():
+        path = os.path.join(ROOT, 'education', '%s.html' % page)
+        if not os.path.exists(path):
+            continue
+        rows = sorted([x for x in catalogue if x.get('level') == level],
+                      key=lambda x: x['order'])
+        if not rows:
+            print('hub: no catalogue rows at level %r' % level)
+            continue
+        src = open(path, encoding='utf-8').read()
+        # the reader's half of the page: no scripts, no attributes
+        prose = flat(re.sub(r'<script[\s\S]*?</script>', ' ', src))
+        first, n = rows[0], len(rows)
+        slot = first['order']
+        if ('%d lessons' % n) not in src:
+            report(slot, 'hub', '%s.html never says %d lessons, which is what '
+                   'the catalogue holds at this level' % (page, n))
+        if ('href="%s"' % first['href']) not in src:
+            report(slot, 'hub', '%s.html does not open on %s, the first lesson '
+                   'of its tier' % (page, first['href']))
+        if ("a.level === '%s'" % level) not in src:
+            report(slot, 'hub', '%s.html does not select its listing by level %r'
+                   % (page, level))
+        for m in re.finditer(r'(?:Start|Begin)[^<]{0,40}?(?:Lesson|lesson)\D{0,12}(\d+)', prose):
+            if int(m.group(1)) != slot:
+                report(slot, 'hub', '%s.html says %r, and its tier starts at %d'
+                       % (page, m.group(0).strip()[:50], slot))
+        for m in re.finditer(r'\b[Aa]rticles?\b', prose):
+            report(slot, 'hub', '%s.html still calls a lesson an article' % page)
+            break
+
+
 # -------------------------------------------------------------------- driver
 
 CHECKS = collections.OrderedDict([
     ('xref', check_xref), ('chain', check_chain), ('arith', check_arith),
-    ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale),
+    ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale), ('hub', check_hub),
 ])
 ORDER = ['xref', 'href', 'title', 'prereq', 'tease', 'arith', 'claim', 'dupes',
-         'locale', 'figure']
+         'locale', 'hub', 'figure']
 
 
 def main(argv):
