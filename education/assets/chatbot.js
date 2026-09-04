@@ -99,24 +99,24 @@ Your learning progress is automatically tracked as you read lessons!
 
 **4-Tier Progressive System:**
 
-🟢 **Tier 1: Beginner** (20 lessons)
-→ Foundations, debunking myths, core concepts
+🟢 **Tier 1: Beginner** (24 lessons)
+→ How a market works, what it costs, and what risk is
 
-🟡 **Tier 2: Intermediate** (27 lessons)
-→ Order flow, microstructure, volume analysis
+🟡 **Tier 2: Intermediate** (28 lessons)
+→ Reading the auction, and when the reading applies
 
-🔴 **Tier 3: Advanced** (27 lessons)
-→ Institutional tactics, automation, algorithms
+🔴 **Tier 3: Advanced** (18 lessons)
+→ Who else is in the book, and building a system
 
-⚫ **Tier 4: Professional** (8 lessons)
-→ Trading business, career paths, mastery
+⚫ **Tier 4: Professional** (15 lessons)
+→ Portfolio, profession and specialisms
 
-**Total:** 86 comprehensive lessons
+**Total:** 85 comprehensive lessons
 
 📚 [View Full Curriculum](/)
 
 **Recommended path:**
-1. Start with Beginner (Lessons 1-20)
+1. Start with Beginner (Lessons 1-24)
 2. Move to Intermediate when comfortable
 3. Advanced tier for implementation
 4. Professional tier for career development
@@ -187,7 +187,7 @@ Your learning progress is automatically tracked as you read lessons!
 
             chatbot: `**About This Chatbot:**
 
-I'm a pattern-matching assistant (no AI API needed!) built to help you navigate the 86 lessons.
+I'm a pattern-matching assistant (no AI API needed!) built to help you navigate the 85 lessons.
 
 **I can help with:**
 • Lesson recommendations ("What should I learn first?")
@@ -203,7 +203,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 
 **How I work:**
 • Pattern matching (instant responses)
-• Knowledge base from all 86 lessons
+• Knowledge base from all 85 lessons
 • No data sent to external APIs
 • Conversation history saved locally
 
@@ -250,7 +250,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 
 **Style:** Professional trading education (institutional concepts, not retail hype)
 
-**Total:** 86 comprehensive lessons across 4 tiers
+**Total:** 85 comprehensive lessons across 4 tiers
 
 **What makes them different:**
 ✅ Story-driven (real trader mistakes)
@@ -295,7 +295,7 @@ Try asking about:
 
 Type **"help"** to see all available topics!
 
-💡 **Tip:** Use the search bar at the top to search all 86 lessons, or browse by tier on the homepage.
+💡 **Tip:** Use the search bar at the top to search all 85 lessons, or browse by tier on the homepage.
 
 **Quick links:**
 • [Beginner Lessons](/education/beginner.html)
@@ -392,7 +392,7 @@ Type **"help"** to see all available topics!
                             </div>
                             <div class="sp-chatbot-message-content">
                                 <p><strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.</p>
-                                <p>I can help you navigate our 86 trading lessons, explain concepts, and guide your learning path!</p>
+                                <p>I can help you navigate our 85 trading lessons, explain concepts, and guide your learning path!</p>
                                 <p><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em></p>
                             </div>
                         </div>
@@ -645,7 +645,7 @@ Type **"help"** to see all available topics!
 
             // Re-add welcome message
             this.addMessage(
-                `<strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.<br><br>I can help you navigate our 86 trading lessons, explain concepts, and guide your learning path!<br><br><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em>`,
+                `<strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.<br><br>I can help you navigate our 85 trading lessons, explain concepts, and guide your learning path!<br><br><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em>`,
                 'bot'
             );
         }

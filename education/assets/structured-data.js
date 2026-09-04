@@ -33,7 +33,7 @@
     "@type": "EducationalOrganization",
     "name": "Signal Pilot Education Hub",
     "url": BASE,
-    "description": "Learn institutional trading concepts from Signal Pilot. 86 comprehensive lessons covering order flow, liquidity engineering, and professional trading frameworks.",
+    "description": "Learn institutional trading concepts from Signal Pilot. 85 comprehensive lessons covering order flow, liquidity engineering, and professional trading frameworks.",
     "provider": {
       "@type": "Organization",
       "name": "Signal Pilot"
@@ -45,7 +45,7 @@
     "@context": "https://schema.org",
     "@type": "Course",
     "name": "Signal Pilot Trading Education",
-    "description": "Interactive trading course with 86 lessons across 4 tiers: Beginner, Intermediate, Advanced, and Professional. Learn market structure, institutional order flow, and professional trading frameworks.",
+    "description": "Interactive trading course with 85 lessons across 4 tiers: Beginner, Intermediate, Advanced, and Professional. Learn market structure, institutional order flow, and professional trading frameworks.",
     "provider": {
       "@type": "Organization",
       "name": "Signal Pilot",
@@ -400,7 +400,7 @@
     "@type": "WebSite",
     "name": "Signal Pilot Education Hub",
     "url": BASE,
-    "description": "Interactive trading education platform with 86 lessons, quizzes, and progress tracking.",
+    "description": "Interactive trading education platform with 85 lessons, quizzes, and progress tracking.",
     "publisher": {
       "@type": "Organization",
       "name": "Signal Pilot"
@@ -572,38 +572,38 @@
       var tierCourses = {
         'beginner': {
           name: 'Beginner Curriculum — Signal Pilot Trading Education',
-          description: 'Complete beginner trading curriculum: 20 articles covering market structure, order flow, indicators, psychology, and risk management.',
+          description: 'Complete beginner trading curriculum: 24 lessons on how a market works, what trading costs, and what risk actually is.',
           courseCode: 'SP-EDU-101',
           educationalLevel: 'Beginner',
-          numberOfLessons: 20,
+          numberOfLessons: 24,
           timeToComplete: 'PT8W',
           url: BASE + '/education/beginner.html'
         },
         'intermediate': {
           name: 'Intermediate Curriculum — Signal Pilot Trading Education',
-          description: 'Advanced institutional trading concepts: 22 articles covering deep order flow analysis, multi-timeframe trading, and professional frameworks.',
+          description: 'Reading the auction: 28 lessons on order flow, market structure, volatility and the context that decides when a reading applies.',
           courseCode: 'SP-EDU-102',
           educationalLevel: 'Intermediate',
-          numberOfLessons: 22,
+          numberOfLessons: 28,
           timeToComplete: 'PT10W',
           url: BASE + '/education/intermediate.html'
         },
         'advanced': {
           name: 'Advanced Curriculum — Signal Pilot Trading Education',
-          description: 'Elite trading strategies: 20 articles on market microstructure, institutional tactics, and professional trading systems.',
+          description: 'Who else is in the book: 18 lessons on market makers, execution, machine learning and building a system that survives testing.',
           courseCode: 'SP-EDU-103',
           educationalLevel: 'Advanced',
-          numberOfLessons: 20,
+          numberOfLessons: 18,
           timeToComplete: 'PT10W',
           url: BASE + '/education/advanced.html'
         },
         'professional': {
           name: 'Professional Curriculum — Signal Pilot Trading Education',
-          description: 'Institutional trading mastery: 6 articles on professional trading operations, career development, and advanced trading systems.',
+          description: 'Portfolio and profession: 15 lessons on correlation, institutional risk controls, infrastructure, tax, careers and two capstones.',
           courseCode: 'SP-EDU-104',
           educationalLevel: 'Professional',
-          numberOfLessons: 6,
-          timeToComplete: 'PT4W',
+          numberOfLessons: 15,
+          timeToComplete: 'PT6W',
           url: BASE + '/education/professional.html'
         }
       };

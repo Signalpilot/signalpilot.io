@@ -2,12 +2,12 @@
 (function() {
   'use strict';
 
-  // Check if user has completed all 86 lessons
+  // Check if user has completed all 85 lessons
   function checkCompletion() {
     try {
       const progress = JSON.parse(localStorage.getItem('sp_progress') || '{}');
       const completed = Object.keys(progress).filter(key => progress[key].completed).length;
-      return completed >= 82;
+      return completed >= 85;
     } catch (e) {
       return false;
     }
@@ -43,7 +43,7 @@
       };
     } catch (e) {
       return {
-        completed: 82,
+        completed: 85,
         bestStreak: 0,
         completionDate: new Date().toLocaleDateString('en-US', {
           year: 'numeric',
@@ -131,7 +131,7 @@
     pdf.setFontSize(14);
     pdf.setTextColor(183, 194, 217);
     pdf.setFont('helvetica', 'normal');
-    pdf.text('has successfully completed all 86 lessons of the', 148.5, 105, { align: 'center' });
+    pdf.text('has successfully completed all 85 lessons of the', 148.5, 105, { align: 'center' });
     pdf.text('Signal Pilot Institutional Trading Curriculum', 148.5, 113, { align: 'center' });
 
     // Stats
@@ -206,7 +206,7 @@
         <div style="font-size: 4rem; margin-bottom: 1rem;">🎓</div>
         <h2 class="headline md" style="margin: 0 0 1rem 0;">Congratulations!</h2>
         <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--muted);">
-          You've completed all 86 lessons of the Signal Pilot Education curriculum!
+          You've completed all 85 lessons of the Signal Pilot Education curriculum!
         </p>
         <button id="certificate-button" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">
           📜 Download Your Certificate

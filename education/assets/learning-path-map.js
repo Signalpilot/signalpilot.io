@@ -6,52 +6,55 @@
 (function() {
   'use strict';
 
-  // Lesson structure by tier
-  const CURRICULUM = {
-    beginner: {
-      title: 'Beginner',
-      icon: '🌱',
-      color: '#5b8aff',
-      lessons: Array.from({ length: 20 }, (_, i) => i + 1),
-      baseUrl: '/education/curriculum/beginner/lesson'
-    },
-    intermediate: {
-      title: 'Intermediate',
-      icon: '📈',
-      color: '#76ddff',
-      lessons: Array.from({ length: 27 }, (_, i) => i + 21),
-      baseUrl: '/education/curriculum/intermediate/lesson'
-    },
-    advanced: {
-      title: 'Advanced',
-      icon: '🎯',
-      color: '#a855f7',
-      lessons: Array.from({ length: 27 }, (_, i) => i + 48),
-      baseUrl: '/education/curriculum/advanced/lesson'
-    },
-    professional: {
-      title: 'Professional',
-      icon: '🏆',
-      color: '#ec4899',
-      lessons: Array.from({ length: 8 }, (_, i) => i + 75),
-      baseUrl: '/education/curriculum/professional/lesson'
-    }
+  // The tiers, their lesson numbers and their URLs all come from the
+  // catalogue. They used to be typed here against the pre-renumber
+  // curriculum: tiers of 20/27/27/8 running 1-20, 21-47, 48-74 and 75-82,
+  // a total of 86, and URLs of the form beginner/lesson3.html, which has
+  // never been a filename in this repo.
+  const TIER_META = {
+    beginner:     { title: 'Beginner',     level: 'Beginner',     icon: '\u{1F331}', color: '#5b8aff' },
+    intermediate: { title: 'Intermediate', level: 'Intermediate', icon: '\u{1F4C8}', color: '#76ddff' },
+    advanced:     { title: 'Advanced',     level: 'Advanced',     icon: '\u{1F3AF}', color: '#a855f7' },
+    professional: { title: 'Professional', level: 'Professional', icon: '\u{1F3C6}', color: '#ec4899' }
   };
 
+  const CURRICULUM = {};   // filled by loadCurriculum()
+  const HREF = {};         // slot number -> lesson URL
+  const LEVEL = {};        // slot number -> level, for the storage key
+  let TOTAL = 0;
+  let loaded = null;
+
+  function loadCurriculum() {
+    if (loaded) return loaded;
+    loaded = fetch('/education/curriculum/index.json', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(cat => {
+        Object.entries(TIER_META).forEach(([tier, meta]) => {
+          const rows = cat.filter(e => e.level === meta.level)
+                          .sort((a, b) => a.order - b.order);
+          if (!rows.length) return;
+          CURRICULUM[tier] = { ...meta, lessons: rows.map(e => e.order) };
+          rows.forEach(e => { HREF[e.order] = e.href; LEVEL[e.order] = e.level; });
+        });
+        TOTAL = cat.length;
+        return CURRICULUM;
+      })
+      .catch(err => {
+        console.log('[LearningPathMap] catalogue unavailable', err);
+        return CURRICULUM;
+      });
+    return loaded;
+  }
+
   /**
-   * Convert lesson number to level and articleId
+   * The storage key a lesson page writes. A lesson page stores its own
+   * sp-level and sp-order, and sp-order is the global slot, not an index
+   * within the tier -- this used to subtract the tier offset, so no key it
+   * built ever matched one that had been written.
    */
   function getLessonKey(lessonNum) {
-    if (lessonNum >= 1 && lessonNum <= 20) {
-      return { level: 'Beginner', articleId: lessonNum };
-    } else if (lessonNum >= 21 && lessonNum <= 47) {
-      return { level: 'Intermediate', articleId: lessonNum - 20 };
-    } else if (lessonNum >= 48 && lessonNum <= 74) {
-      return { level: 'Advanced', articleId: lessonNum - 47 };
-    } else if (lessonNum >= 75 && lessonNum <= 82) {
-      return { level: 'Professional', articleId: lessonNum - 74 };
-    }
-    return null;
+    const level = LEVEL[lessonNum];
+    return level ? { level, articleId: lessonNum } : null;
   }
 
   /**
@@ -98,12 +101,11 @@
    * Find current lesson (first incomplete lesson)
    */
   function findCurrentLesson() {
-    for (let i = 1; i <= 82; i++) {
-      if (!isLessonCompleted(i)) {
-        return i;
-      }
+    const slots = Object.keys(HREF).map(Number).sort((a, b) => a - b);
+    for (const slot of slots) {
+      if (!isLessonCompleted(slot)) return slot;
     }
-    return 82; // All completed
+    return slots.length ? slots[slots.length - 1] : 0;  // all completed
   }
 
   /**
@@ -148,8 +150,8 @@
     if (!locked) {
       node.style.cursor = 'pointer';
       node.addEventListener('click', () => {
-        const url = `${CURRICULUM[tier].baseUrl}${lessonNum}.html`;
-        window.location.href = url;
+        const url = HREF[lessonNum];
+        if (url) window.location.href = url;
       });
     }
 
@@ -230,7 +232,7 @@
     indicator.className = 'current-position-indicator';
     indicator.innerHTML = `
       <span style="font-size: 1.2rem;">📍</span>
-      <span>You are ${currentLesson <= 86 ? `on lesson ${currentLesson}` : 'all done! 🎉'}</span>
+      <span>You are ${isLessonCompleted(currentLesson) ? 'all done! 🎉' : `on lesson ${currentLesson}`}</span>
     `;
     container.appendChild(indicator);
   }
@@ -243,7 +245,7 @@
     if (!container) return;
 
     let totalCompleted = 0;
-    let totalLessons = 86;
+    const totalLessons = TOTAL;
 
     let html = '<div class="progress-overview">';
 
@@ -265,7 +267,7 @@
       `;
     });
 
-    const overallProgress = Math.round((totalCompleted / totalLessons) * 100);
+    const overallProgress = totalLessons ? Math.round((totalCompleted / totalLessons) * 100) : 0;
 
     html += `
       <div class="overall-progress">
@@ -285,27 +287,19 @@
    * Initialize learning path map
    */
   function init() {
-    if (document.getElementById('learningPathMap')) {
-      renderLearningPath('learningPathMap');
-    }
-
-    if (document.getElementById('progressOverview')) {
-      renderProgressOverview('progressOverview');
-    }
+    const draw = () => {
+      if (document.getElementById('learningPathMap')) renderLearningPath('learningPathMap');
+      if (document.getElementById('progressOverview')) renderProgressOverview('progressOverview');
+    };
+    loadCurriculum().then(draw);
 
     // Listen for lesson completion events to update the map
-    window.addEventListener('sp:lessonCompleted', () => {
-      if (document.getElementById('learningPathMap')) {
-        renderLearningPath('learningPathMap');
-      }
-      if (document.getElementById('progressOverview')) {
-        renderProgressOverview('progressOverview');
-      }
-    });
+    window.addEventListener('sp:lessonCompleted', () => loadCurriculum().then(draw));
   }
 
   // Expose public API
   window.LearningPathMap = {
+    load: loadCurriculum,
     render: renderLearningPath,
     renderOverview: renderProgressOverview,
     getTierProgress,

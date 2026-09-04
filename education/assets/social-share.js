@@ -76,6 +76,23 @@
     }, 3000);
   }
 
+  // Tier sizes, refreshed from the catalogue so a renumber cannot leave a
+  // milestone that never fires.
+  const TIER_TOTALS = { Beginner: 24, Intermediate: 28, Advanced: 18, Professional: 15, all: 85 };
+
+  function loadTotals() {
+    return fetch('/education/curriculum/index.json', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(cat => {
+        ['Beginner', 'Intermediate', 'Advanced', 'Professional'].forEach(level => {
+          const n = cat.filter(e => e.level === level).length;
+          if (n) TIER_TOTALS[level] = n;
+        });
+        if (cat.length) TIER_TOTALS.all = cat.length;
+      })
+      .catch(() => {});
+  }
+
   /**
    * Check for completion milestones and offer sharing
    */
@@ -85,33 +102,39 @@
       k.startsWith('sp_edu_') && k.endsWith('_completed') && !k.includes('_ach_')
     ).length;
 
-    // Count tier-specific completions
-    const beginnerCompleted = Object.keys(localStorage).filter(k =>
-      k.startsWith('sp_edu_beginner_') && k.endsWith('_completed')
+    // Count tier-specific completions.
+    //
+    // A lesson page writes sp_edu_<Level>_<slot>_completed, with the level
+    // capitalised, so the lowercase prefixes this used never matched a key
+    // that had been written and every tier count was zero. The totals were
+    // typed too, at 20/27/35/86 against a curriculum of 24/28/18/15 and 85,
+    // with no professional milestone at all.
+    const countTier = level => Object.keys(localStorage).filter(k =>
+      k.startsWith(`sp_edu_${level}_`) && k.endsWith('_completed')
     ).length;
 
-    const intermediateCompleted = Object.keys(localStorage).filter(k =>
-      k.startsWith('sp_edu_intermediate_') && k.endsWith('_completed')
-    ).length;
+    const beginnerCompleted     = countTier('Beginner');
+    const intermediateCompleted = countTier('Intermediate');
+    const advancedCompleted     = countTier('Advanced');
+    const professionalCompleted = countTier('Professional');
 
-    const advancedCompleted = Object.keys(localStorage).filter(k =>
-      k.startsWith('sp_edu_advanced_') && k.endsWith('_completed')
-    ).length;
-
-    // Tier thresholds
-    const BEGINNER_TOTAL = 20;
-    const INTERMEDIATE_TOTAL = 27;
-    const ADVANCED_TOTAL = 35;
-    const TOTAL_LESSONS = 86;
+    // Tier sizes come from the catalogue; TIER_TOTALS is refreshed by
+    // loadTotals() below and falls back to the sizes at time of writing.
+    const BEGINNER_TOTAL     = TIER_TOTALS.Beginner;
+    const INTERMEDIATE_TOTAL = TIER_TOTALS.Intermediate;
+    const ADVANCED_TOTAL     = TIER_TOTALS.Advanced;
+    const PROFESSIONAL_TOTAL = TIER_TOTALS.Professional;
+    const TOTAL_LESSONS      = TIER_TOTALS.all;
 
     // Define milestones with tier-specific tracking
     const milestones = [
       { count: 1, key: 'first', name: 'your first lesson', type: 'total' },
       { count: 5, key: '5_lessons', name: '5 lessons', type: 'total' },
-      { count: BEGINNER_TOTAL, key: 'beginner_tier', name: 'Beginner Tier Complete (all 20 beginner lessons)', type: 'tier', tier: 'beginner', tierCount: beginnerCompleted, tierTotal: BEGINNER_TOTAL },
-      { count: INTERMEDIATE_TOTAL, key: 'intermediate_tier', name: 'Intermediate Tier Complete (all 27 intermediate lessons)', type: 'tier', tier: 'intermediate', tierCount: intermediateCompleted, tierTotal: INTERMEDIATE_TOTAL },
-      { count: ADVANCED_TOTAL, key: 'advanced_tier', name: 'Advanced Tier Complete (all 35 advanced lessons)', type: 'tier', tier: 'advanced', tierCount: advancedCompleted, tierTotal: ADVANCED_TOTAL },
-      { count: TOTAL_LESSONS, key: 'complete_mastery', name: 'all 86 lessons - Complete Mastery', type: 'total' }
+      { count: BEGINNER_TOTAL, key: 'beginner_tier', name: `Beginner Tier Complete (all ${BEGINNER_TOTAL} beginner lessons)`, type: 'tier', tier: 'beginner', tierCount: beginnerCompleted, tierTotal: BEGINNER_TOTAL },
+      { count: INTERMEDIATE_TOTAL, key: 'intermediate_tier', name: `Intermediate Tier Complete (all ${INTERMEDIATE_TOTAL} intermediate lessons)`, type: 'tier', tier: 'intermediate', tierCount: intermediateCompleted, tierTotal: INTERMEDIATE_TOTAL },
+      { count: ADVANCED_TOTAL, key: 'advanced_tier', name: `Advanced Tier Complete (all ${ADVANCED_TOTAL} advanced lessons)`, type: 'tier', tier: 'advanced', tierCount: advancedCompleted, tierTotal: ADVANCED_TOTAL },
+      { count: PROFESSIONAL_TOTAL, key: 'professional_tier', name: `Professional Tier Complete (all ${PROFESSIONAL_TOTAL} professional lessons)`, type: 'tier', tier: 'professional', tierCount: professionalCompleted, tierTotal: PROFESSIONAL_TOTAL },
+      { count: TOTAL_LESSONS, key: 'complete_mastery', name: `all ${TOTAL_LESSONS} lessons - Complete Mastery`, type: 'total' }
     ];
 
     // Check each milestone
@@ -363,7 +386,7 @@
   // Initialize
   function init() {
     addShareButtons();
-    checkCompletionMilestones();
+    loadTotals().then(checkCompletionMilestones);
     logger.log('[Social Share] Initialized');
   }
 

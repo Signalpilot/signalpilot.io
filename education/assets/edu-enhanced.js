@@ -164,7 +164,7 @@
         { count: 20, name: 'Beginner Master', icon: '🏅' },
         { count: 47, name: 'Intermediate Pro', icon: '⭐' },
         { count: 74, name: 'Advanced Scholar', icon: '🏆' },
-        { count: 82, name: 'Complete Mastery', icon: '🔥' }
+        { count: 85, name: 'Complete Mastery', icon: '🔥' }
       ];
 
       // Check each achievement level

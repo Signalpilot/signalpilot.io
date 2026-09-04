@@ -182,10 +182,10 @@
       name: 'Graduate Scholar',
       icon: '&#127891;', // graduation cap
       emoji: '\u{1F393}',
-      description: 'Complete all 86 lessons',
+      description: 'Complete all 85 lessons',
       category: 'completion',
       check: function(stats) {
-        return stats.lessonsCompleted >= 82;
+        return stats.lessonsCompleted >= 85;
       }
     },
 
@@ -431,7 +431,7 @@
           break;
         case 'graduateScholar':
           current = stats.lessonsCompleted || 0;
-          needed = 82;
+          needed = 85;
           message = `${Math.max(0, needed - current)} more lesson${needed - current !== 1 ? 's' : ''} to unlock`;
           break;
 

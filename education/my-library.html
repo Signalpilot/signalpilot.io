@@ -715,28 +715,35 @@
           <div class="certificate-card" data-tier="beginner">
             <div class="certificate-icon">🟢</div>
             <div class="certificate-title">Beginner Tier</div>
-            <div class="certificate-progress" id="cert-beginner-progress">0/20 lessons</div>
+            <div class="certificate-progress" id="cert-beginner-progress">0 lessons</div>
             <button class="btn btn-primary btn-sm" id="cert-beginner-btn" disabled>Download Certificate</button>
             <button class="btn btn-ghost btn-sm" id="share-beginner-btn" disabled style="margin-left:0.5rem">📤 Share</button>
           </div>
           <div class="certificate-card" data-tier="intermediate">
             <div class="certificate-icon">🟡</div>
             <div class="certificate-title">Intermediate Tier</div>
-            <div class="certificate-progress" id="cert-intermediate-progress">0/27 lessons</div>
+            <div class="certificate-progress" id="cert-intermediate-progress">0 lessons</div>
             <button class="btn btn-primary btn-sm" id="cert-intermediate-btn" disabled>Download Certificate</button>
             <button class="btn btn-ghost btn-sm" id="share-intermediate-btn" disabled style="margin-left:0.5rem">📤 Share</button>
           </div>
           <div class="certificate-card" data-tier="advanced">
             <div class="certificate-icon">🔴</div>
             <div class="certificate-title">Advanced Tier</div>
-            <div class="certificate-progress" id="cert-advanced-progress">0/27 lessons</div>
+            <div class="certificate-progress" id="cert-advanced-progress">0 lessons</div>
             <button class="btn btn-primary btn-sm" id="cert-advanced-btn" disabled>Download Certificate</button>
             <button class="btn btn-ghost btn-sm" id="share-advanced-btn" disabled style="margin-left:0.5rem">📤 Share</button>
+          </div>
+          <div class="certificate-card" data-tier="professional">
+            <div class="certificate-icon">🔥</div>
+            <div class="certificate-title">Professional Tier</div>
+            <div class="certificate-progress" id="cert-professional-progress">0 lessons</div>
+            <button class="btn btn-primary btn-sm" id="cert-professional-btn" disabled>Download Certificate</button>
+            <button class="btn btn-ghost btn-sm" id="share-professional-btn" disabled style="margin-left:0.5rem">📤 Share</button>
           </div>
           <div class="certificate-card" data-tier="master">
             <div class="certificate-icon">🏆</div>
             <div class="certificate-title">Master Trader</div>
-            <div class="certificate-progress" id="cert-master-progress">0/86 lessons</div>
+            <div class="certificate-progress" id="cert-master-progress">0 lessons</div>
             <button class="btn btn-primary btn-sm" id="cert-master-btn" disabled>Download Certificate</button>
             <button class="btn btn-ghost btn-sm" id="share-master-btn" disabled style="margin-left:0.5rem">📤 Share</button>
           </div>
@@ -1258,72 +1265,60 @@
   }
 
   // Render Certificates
-  function renderCertificates(completedCount) {
-    const tiers = {
-      beginner: { completed: 0, total: 20 },
-      intermediate: { completed: 0, total: 27 },
-      advanced: { completed: 0, total: 27 },
-      master: { completed: completedCount, total: 86 }
+  //
+  // The tiers, their sizes and their boundaries all come from the catalogue.
+  // They used to be typed here, and had drifted to 20/27/27/86 against a
+  // curriculum of 24/28/18/15 with a professional tier that had no card.
+  const TIER_CERTS = [
+    { key: 'beginner',     level: 'Beginner',     label: 'Beginner' },
+    { key: 'intermediate', level: 'Intermediate', label: 'Intermediate' },
+    { key: 'advanced',     level: 'Advanced',     label: 'Advanced' },
+    { key: 'professional', level: 'Professional', label: 'Professional' },
+  ];
+
+  async function renderCertificates(completedCount) {
+    let catalogue;
+    try {
+      const res = await fetch('/education/curriculum/index.json', { cache: 'no-store' });
+      catalogue = await res.json();
+    } catch (err) {
+      console.log('Certificates: catalogue unavailable', err);
+      return;
+    }
+
+    // Progress is tracked as a count, so a tier is credited in slot order.
+    let consumed = 0;
+    const tiers = TIER_CERTS.map(t => {
+      const rows = catalogue.filter(a => a.level === t.level);
+      const total = rows.length;
+      const completed = Math.max(0, Math.min(completedCount - consumed, total));
+      consumed += total;
+      return { ...t, total, completed };
+    });
+    const grandTotal = catalogue.length;
+
+    const unlock = (key, label, completed, total) => {
+      const el = document.getElementById(`cert-${key}-progress`);
+      if (el) el.textContent = `${completed}/${total} lessons`;
+      const card = document.querySelector(`[data-tier="${key}"]`);
+      const btn = document.getElementById(`cert-${key}-btn`);
+      const shareBtn = document.getElementById(`share-${key}-btn`);
+      if (!card || !btn || !shareBtn) return;
+      if (total > 0 && completed >= total) {
+        card.classList.add('unlocked');
+        btn.disabled = false;
+        shareBtn.disabled = false;
+        btn.onclick = () => generateCertificate(label);
+        shareBtn.onclick = () => shareCertificate(label);
+      } else {
+        card.classList.remove('unlocked');
+        btn.disabled = true;
+        shareBtn.disabled = true;
+      }
     };
 
-    // Count completed by tier (simplified - you can enhance this)
-    // For now, assume sequential completion
-    if (completedCount >= 20) tiers.beginner.completed = 20;
-    else tiers.beginner.completed = Math.min(completedCount, 20);
-
-    if (completedCount > 20) tiers.intermediate.completed = Math.min(completedCount - 20, 27);
-    if (completedCount > 47) tiers.advanced.completed = Math.min(completedCount - 47, 27);
-
-    // Update progress displays
-    document.getElementById('cert-beginner-progress').textContent = `${tiers.beginner.completed}/${tiers.beginner.total} lessons`;
-    document.getElementById('cert-intermediate-progress').textContent = `${tiers.intermediate.completed}/${tiers.intermediate.total} lessons`;
-    document.getElementById('cert-advanced-progress').textContent = `${tiers.advanced.completed}/${tiers.advanced.total} lessons`;
-    document.getElementById('cert-master-progress').textContent = `${tiers.master.completed}/${tiers.master.total} lessons`;
-
-    // Enable/unlock certificates
-    if (tiers.beginner.completed >= tiers.beginner.total) {
-      const card = document.querySelector('[data-tier="beginner"]');
-      const btn = document.getElementById('cert-beginner-btn');
-      const shareBtn = document.getElementById('share-beginner-btn');
-      card.classList.add('unlocked');
-      btn.disabled = false;
-      shareBtn.disabled = false;
-      btn.onclick = () => generateCertificate('Beginner');
-      shareBtn.onclick = () => shareCertificate('Beginner');
-    }
-
-    if (tiers.intermediate.completed >= tiers.intermediate.total) {
-      const card = document.querySelector('[data-tier="intermediate"]');
-      const btn = document.getElementById('cert-intermediate-btn');
-      const shareBtn = document.getElementById('share-intermediate-btn');
-      card.classList.add('unlocked');
-      btn.disabled = false;
-      shareBtn.disabled = false;
-      btn.onclick = () => generateCertificate('Intermediate');
-      shareBtn.onclick = () => shareCertificate('Intermediate');
-    }
-
-    if (tiers.advanced.completed >= tiers.advanced.total) {
-      const card = document.querySelector('[data-tier="advanced"]');
-      const btn = document.getElementById('cert-advanced-btn');
-      const shareBtn = document.getElementById('share-advanced-btn');
-      card.classList.add('unlocked');
-      btn.disabled = false;
-      shareBtn.disabled = false;
-      btn.onclick = () => generateCertificate('Advanced');
-      shareBtn.onclick = () => shareCertificate('Advanced');
-    }
-
-    if (tiers.master.completed >= tiers.master.total) {
-      const card = document.querySelector('[data-tier="master"]');
-      const btn = document.getElementById('cert-master-btn');
-      const shareBtn = document.getElementById('share-master-btn');
-      card.classList.add('unlocked');
-      btn.disabled = false;
-      shareBtn.disabled = false;
-      btn.onclick = () => generateCertificate('Master Trader');
-      shareBtn.onclick = () => shareCertificate('Master Trader');
-    }
+    tiers.forEach(t => unlock(t.key, t.label, t.completed, t.total));
+    unlock('master', 'Master Trader', Math.min(completedCount, grandTotal), grandTotal);
   }
 
   // Share Certificate on Social Media
