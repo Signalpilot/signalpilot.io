@@ -1204,4 +1204,422 @@ dict(
           'history.</p>\n',
 ),
 
+
+# ---------------------------------------------------------------- module 6
+dict(
+    mod=6, tier='intermediate', slug='module-6-quiz',
+    slots=[48, 49, 50, 51, 52],
+    title='Module 6 Quiz: Indicators, Honestly',
+    desc='Six computations from the indicator module. Reorder a window and watch '
+         'five statistics refuse to move, price four weight lists, solve an '
+         'oscillator for its own level, separate a drawn record from a knowable '
+         'one, and count how much of a hold rate is really a tolerance.',
+    intro='This module took the lines off the chart and reduced each of them to '
+          'arithmetic: an indicator is a function of prices you already hold, so '
+          'what it discards is countable, how late it is falls out of its weight '
+          'list, the level it is read against can be solved for, and whether it '
+          'used bars that had not printed can be tested in a minute. Six questions, '
+          'all arithmetic. The last one hands back the twenty bars that close this '
+          'module&rsquo;s own series and asks four instruments what they see in '
+          'them, which is four answers about the same twenty numbers.',
+    covers='Lessons 48 to 52, and the last twenty of the sixty closes this course '
+           'has carried since lesson 34.',
+    related=[(48, 'the weight list the second question prices'),
+             (49, 'the displacement the fourth question signs'),
+             (50, 'the tolerance the fifth question moves'),
+             (51, 'the level the third question solves for'),
+             (52, 'the base rate every column has to clear')],
+    questions=[
+        dict(
+            title='One window, three orderings',
+            setup='      <p>Ten closes, in this order: 101.0, 102.4, 100.6, 102.9, '
+                  '101.3, 103.5, 102.1, 104.2, 102.8 and 103.6.</p>\n'
+                  '      <p>Compute eight things about them. The average. The sample '
+                  'standard deviation, dividing by nine. The band two standard '
+                  'deviations either side of the average. The highest and the lowest. '
+                  'The net change, last less first. Lesson 36&rsquo;s efficiency '
+                  'ratio, which is the absolute net change divided by the sum of the '
+                  'absolute changes between consecutive closes. And a simple '
+                  'oscillator over the nine changes inside the window: a hundred '
+                  'times the average rise over the average rise plus the average '
+                  'fall.</p>\n'
+                  '      <p>Then do all eight again on the same ten numbers read '
+                  'backwards, and a third time on the same ten numbers sorted into '
+                  'ascending order.</p>\n',
+            ask='Which of the eight change when the ordering changes, and by how '
+                'much?',
+            result='Five never move. The net change goes +2.6, &minus;2.6, +3.6; the '
+                   'ratio 0.173, 0.173, 1.000; the oscillator 58.67, 41.33, 100.00.',
+            answer='      <p>The average is 1,024.4 &divide; 10 = 102.440. The '
+                   'deviations from it, squared and summed, come to 12.784, and '
+                   '12.784 &divide; 9 = 1.4204, whose square root is 1.1918. So the '
+                   'band runs from 102.440 &minus; 2.384 = 100.056 to '
+                   '102.440 + 2.384 = 104.824.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Statistic</th><th>As printed</th><th>Reversed</th><th>Sorted up</th></tr></thead>
+        <tbody>
+          <tr><td>Average</td><td>102.440</td><td>102.440</td><td>102.440</td></tr>
+          <tr><td>Standard deviation</td><td>1.1918</td><td>1.1918</td><td>1.1918</td></tr>
+          <tr><td>Two standard deviations below</td><td>100.056</td><td>100.056</td><td>100.056</td></tr>
+          <tr><td>Two standard deviations above</td><td>104.824</td><td>104.824</td><td>104.824</td></tr>
+          <tr><td>Highest and lowest</td><td>104.2 / 100.6</td><td>104.2 / 100.6</td><td>104.2 / 100.6</td></tr>
+          <tr><td>Net change, last less first</td><td>+2.6</td><td>−2.6</td><td>+3.6</td></tr>
+          <tr><td>Efficiency ratio</td><td>0.173</td><td>0.173</td><td>1.000</td></tr>
+          <tr><td>Oscillator</td><td>58.67</td><td>41.33</td><td>100.00</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Five of the eight are the same number in all three '
+                   'columns, and they are the five every band, channel and envelope '
+                   'is built out of. Sorting ten closes into ascending order is the '
+                   'most violent thing you can do to a window short of replacing the '
+                   'numbers, and the average, the deviation, the band and the two '
+                   'extremes do not notice. They are symmetric functions: all '
+                   '3,628,800 orderings of these ten closes give each of them the '
+                   'same answer.</p>\n'
+                   '      <p>The three that move are the three that look at the '
+                   'order. Reversing the window rearranges the same nine steps, so '
+                   'the path stays 15.0 points and only the net flips sign: the ten '
+                   'closes travel 15.0 to arrive 2.6 higher, which is a ratio of '
+                   '0.173, and read backwards they travel 15.0 to arrive 2.6 lower, '
+                   'which is the same 0.173. Sorting does something else entirely, '
+                   'because a sorted window has no steps back: every one of its nine '
+                   'changes is a rise, the path collapses from 15.0 to 3.6, and the '
+                   'ratio is 1.000 by construction rather than by anything the market '
+                   'did.</p>\n'
+                   '      <p>And the oscillator has an exact relation worth carrying. '
+                   'Reversing a window swaps every rise for a fall of the same size, '
+                   'so the reading becomes 100 minus itself: 58.67 forwards and '
+                   '41.33 backwards. Those are not two readings of anything. They are '
+                   'one statement about direction, written twice.</p>\n'),
+        dict(
+            title='Four weight lists, priced',
+            setup='      <p>Every smoothing indicator is a weighted sum of past bars, '
+                  'whatever the menu calls it. Here are four, all with weights adding '
+                  'to one, all reading eight bars.</p>\n'
+                  '      <p>The first gives every one of the eight bars a weight of '
+                  'one eighth. The second is an exponential average with a smoothing '
+                  'constant of two ninths, whose weight on the bar k back is two '
+                  'ninths times seven ninths to the power k. The third weights the '
+                  'most recent bar 8/36, the one before it 7/36, and so on down to '
+                  '1/36 on the oldest. The fourth is sold as low-lag: 0.6 on the most '
+                  'recent bar, 0.6 on the one before it, nothing on the next five, '
+                  'and &minus;0.2 on the eighth.</p>\n'
+                  '      <p>Two numbers fall out of any weight list, and neither needs '
+                  'a backtest. The average delay is the sum of each weight times how '
+                  'many bars back it sits. The share of the input&rsquo;s noise that '
+                  'survives, when the errors in the input are independent, is the sum '
+                  'of the squared weights.</p>\n',
+            ask='What is the delay and the surviving noise share of each? Which two '
+                'are the same filter by both measures, what does the fast one pay, '
+                'and what did the fourth buy its speed with?',
+            result='3.5000 and 0.1250 for the first two, 2.3333 and 0.1574 for the '
+                   'third, &minus;0.8000 and 0.7600 for the fourth.',
+            answer='''      <table>
+        <thead><tr><th>Filter</th><th>Mean lag, bars</th><th>Share of input variance surviving</th></tr></thead>
+        <tbody>
+          <tr><td>Simple average, eight bars</td><td>3.5000</td><td>0.1250</td></tr>
+          <tr><td>Exponential average, smoothing constant 2/9</td><td>3.5000</td><td>0.1250</td></tr>
+          <tr><td>Linearly weighted, eight bars</td><td>2.3333</td><td>0.1574</td></tr>
+          <tr><td>Low-lag, with one negative weight</td><td>−0.8000</td><td>0.7600</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Take the first two together. The simple average&rsquo;s '
+                   'delay is the average of 0 through 7, which is 3.5000, and its '
+                   'sum of squares is eight copies of one sixty-fourth, which is '
+                   '0.1250. For the exponential average the two sums have closed '
+                   'forms: the delay is (1 &minus; a) &divide; a, which at a = 2/9 is '
+                   '(7/9) &divide; (2/9) = 3.5000, and the sum of squares is '
+                   'a &divide; (2 &minus; a) = (2/9) &divide; (16/9) = 0.1250. '
+                   'Identical in both numbers. The claim that the exponential average '
+                   'is the faster of the two is not true in either sense that can be '
+                   'made precise.</p>\n'
+                   '      <p>The linearly weighted one is genuinely faster. Its delay '
+                   'is (n &minus; 1) &divide; 3 = 2.3333 bars, which is 1.1667 bars '
+                   'of speed, and its sum of squares is 17/108 = 0.1574. That is 25.9 '
+                   'per cent more of the input&rsquo;s noise arriving at the output. '
+                   'The trade is the whole design: nothing buys delay back for '
+                   'free.</p>\n'
+                   '      <p>Then the fourth, and the point is not that it is bad but '
+                   'that its price is printed on its own weight list. Its delay is '
+                   '0 &times; 0.6 + 1 &times; 0.6 + 7 &times; (&minus;0.2) = 0.6 '
+                   '&minus; 1.4 = &minus;0.8000 bars, which is a filter claiming to '
+                   'sit ahead of the data it is made of. It pays 0.36 + 0.36 + 0.04 = '
+                   '0.7600, six times the simple average&rsquo;s noise for eight '
+                   'tenths of a bar of lean. A negative weight is what buys a delay '
+                   'below what a positive-weight filter can reach, and a filter with '
+                   'a negative weight amplifies rather than suppresses at some '
+                   'frequencies, which on a chart is the overshoot after a fast move '
+                   'when the line goes further than the price did.</p>\n'),
+        dict(
+            title='Solve the oscillator for its own level',
+            setup='      <p>The oscillator is a hundred times the average rise over '
+                  'the average rise plus the average fall, taken across the last '
+                  'fourteen changes. Nothing in that sentence is a judgement except '
+                  'the word average.</p>\n'
+                  '      <p>Then a specific window. Fourteen changes, nine of them '
+                  'rises averaging 0.80 each and five falls averaging 1.10 '
+                  'each.</p>\n',
+            ask='What ratio of average rise to average fall does a reading of 65 '
+                'require, and of 75, and of 25? If every bar in the window moved the '
+                'same distance, how many of twenty bars would have to close up to '
+                'read 65? And what does the specific window above read?',
+            result='1.8571, 3.0000 and 0.3333; thirteen bars of twenty; and the '
+                   'window reads 56.69.',
+            answer='      <p>Set the reading to R and solve. A hundred times G over '
+                   'G plus L equals R exactly when G &divide; L = R &divide; '
+                   '(100 &minus; R). At 65 that is 65 &divide; 35 = 1.8571. At 75 it '
+                   'is 75 &divide; 25 = 3.0000. At 25 it is 25 &divide; 75 = '
+                   '0.3333.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Reading</th><th>Average rise over average fall</th><th>Up bars in twenty, at equal sizes</th></tr></thead>
+        <tbody>
+          <tr><td>25</td><td>0.3333</td><td>5</td></tr>
+          <tr><td>65</td><td>1.8571</td><td>13</td></tr>
+          <tr><td>75</td><td>3.0000</td><td>15</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Now put a size on the moves. If every rise and every '
+                   'fall in the window is the same distance, the averages reduce to '
+                   'counts and the reading becomes a hundred times the share of bars '
+                   'that closed up. So a reading of 65 is 65 per cent of the bars up, '
+                   'and on twenty bars that is thirteen. Not a spike, not an extreme, '
+                   'not a market that has run too far: thirteen bars up and seven '
+                   'down.</p>\n'
+                   '      <p>The specific window is the reason the shortcut has to be '
+                   'stated with its condition attached. Nine rises at 0.80 total 7.20 '
+                   'and five falls at 1.10 total 5.50, so the reading is 100 &times; '
+                   '7.20 &divide; 12.70 = 56.69. Nine up bars in fourteen is 64.3 per '
+                   'cent of the bars, and the reading comes in nearly eight points '
+                   'below that, because the falls are 37.5 per cent bigger than the '
+                   'rises. Counting bars and reading the oscillator are the same '
+                   'thing only when the bars are the same size, and they never '
+                   'are.</p>\n'
+                   '      <p>One consequence for the level you were handed. Eleven '
+                   'rises and three falls at those same two sizes reads 100 &times; '
+                   '8.80 &divide; 12.10 = 72.73, so on this window it takes eleven up '
+                   'bars in fourteen to print an overbought reading. Which is a '
+                   'description of an ordinary advance, arriving after it has '
+                   'happened.</p>\n'),
+        dict(
+            title='The record as drawn and the record as knowable',
+            setup='      <p>Twenty-four closes: 100.0, 101.4, 100.6, 102.2, 101.0, '
+                  '100.2, 100.9, 99.7, 100.8, 102.1, 103.4, 102.5, 101.8, 103.0, '
+                  '104.2, 103.6, 102.9, 103.2, 103.5, 104.4, 105.6, 106.8, 106.1 and '
+                  '105.4.</p>\n'
+                  '      <p>A bar is a pivot low if its close is below the closes of '
+                  'the two bars before it and below the closes of the two bars after '
+                  'it, and a pivot high if it is above all four. Buy at each pivot '
+                  'low, sell at the next pivot high.</p>\n'
+                  '      <p>The drawn version does what a finished chart does: it '
+                  'enters and exits at the pivot bar&rsquo;s own close. The knowable '
+                  'version enters and exits two bars later, at that bar&rsquo;s '
+                  'close, which is the first moment the pivot could be identified '
+                  'without consulting bars that had not printed.</p>\n',
+            ask='How many bars carry a low marker at some point and how many keep it? '
+                'What do the round trips total in each version, and how many of them '
+                'win? And does the difference between the two totals account for '
+                'itself?',
+            result='Four markers, three survive. +10.00 with three winners as drawn, '
+                   '+0.30 with one as knowable, and the 9.70 gap is exactly the '
+                   'displacement at the six entries and exits.',
+            answer='      <p>Take the flicker first. A bar becomes a candidate as '
+                   'soon as it is below the two closes before it, and a provisional '
+                   'marker appears on it the moment one later bar closes higher. Bars '
+                   '6, 8, 13 and 17 all reach that state. Bar 6 loses it: its close '
+                   'of 100.2 is undercut by bar 8 at 99.7 before the second '
+                   'confirming bar arrives, so the marker vanishes. The other three '
+                   'survive to become pivot lows at 99.7, 101.8 and 102.9. One '
+                   'marker in four on this series is not there afterwards, and the '
+                   'rule leaves every signal provisional for exactly one bar beyond '
+                   'its first appearance, because it looks two ahead.</p>\n'
+                   '      <p>The pivot highs are bars 4, 11, 15 and 22, at 102.2, '
+                   '103.4, 104.2 and 106.8. Pairing each low with the next high gives '
+                   'three round trips.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Entry bar</th><th>Exit bar</th><th>As drawn</th><th>As knowable</th></tr></thead>
+        <tbody>
+          <tr><td>8</td><td>11</td><td>+3.70</td><td>−0.30</td></tr>
+          <tr><td>13</td><td>15</td><td>+2.40</td><td>−1.30</td></tr>
+          <tr><td>17</td><td>22</td><td>+3.90</td><td>+1.90</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>As drawn the strategy makes 10.00 points on three trades '
+                   'and wins all three. As knowable it makes 0.30 on the same three '
+                   'trades and wins one. Nothing about the rule changed and nothing '
+                   'about the series changed; the only difference is when the signal '
+                   'was allowed to be known.</p>\n'
+                   '      <p>Now the reconciliation, which is the part that shows the '
+                   'gap is not noise. A pivot low is a bar the next two closes are '
+                   'above, so the price two bars later is above it necessarily, and '
+                   'the entry displacement cannot have the other sign. Here those '
+                   'three are 2.4, 2.4 and 0.6, totalling 5.40. A pivot high is a bar '
+                   'the next two closes are below, so selling it in hindsight sells '
+                   'above what was available, and those three are 1.6, 1.3 and 1.4, '
+                   'totalling 4.30. Together 9.70, which is the whole difference '
+                   'between 10.00 and 0.30, with nothing left over.</p>\n'
+                   '      <p>And the tell is not the win rate. Measure how far each '
+                   'trade goes against its entry in the first two bars: on the drawn '
+                   'entries that figure is exactly zero all three times, because a '
+                   'pivot low is the lowest close in its neighbourhood and there is '
+                   'nothing below it to trade to. On the knowable entries one of the '
+                   'three goes 0.60 against you. A record with no adverse excursion '
+                   'anywhere in it has usually not found a way to avoid pain. It has '
+                   'usually chosen its entries from the far side of the '
+                   'outcome.</p>\n'),
+        dict(
+            title='How near counts as near',
+            setup='      <p>Twenty closes and their five-bar simple average, drawn at '
+                  'the bar each window ends on.</p>\n'
+                  + '''      <table>
+        <thead><tr><th>Bar</th><th>Close</th><th>Five-bar average</th></tr></thead>
+        <tbody>
+          <tr><td>5</td><td>101.5</td><td>101.04</td></tr>
+          <tr><td>6</td><td>102.7</td><td>101.58</td></tr>
+          <tr><td>7</td><td>102.0</td><td>101.86</td></tr>
+          <tr><td>8</td><td>101.4</td><td>101.76</td></tr>
+          <tr><td>9</td><td>102.3</td><td>101.98</td></tr>
+          <tr><td>10</td><td>103.6</td><td>102.40</td></tr>
+          <tr><td>11</td><td>102.9</td><td>102.44</td></tr>
+          <tr><td>12</td><td>103.2</td><td>102.68</td></tr>
+          <tr><td>13</td><td>102.4</td><td>102.88</td></tr>
+          <tr><td>14</td><td>103.8</td><td>103.18</td></tr>
+          <tr><td>15</td><td>104.5</td><td>103.36</td></tr>
+          <tr><td>16</td><td>103.9</td><td>103.56</td></tr>
+          <tr><td>17</td><td>104.2</td><td>103.76</td></tr>
+          <tr><td>18</td><td>103.1</td><td>103.90</td></tr>
+          <tr><td>19</td><td>103.7</td><td>103.88</td></tr>
+          <tr><td>20</td><td>104.9</td><td>103.96</td></tr>
+        </tbody>
+      </table>
+      <p>The first four closes, which the average needs and the table does not test, are 100.0, 100.6, 101.9 and 101.2.</p>
+''' +
+                  '      <p>An approach is a close within some stated distance of the '
+                  'average at that same bar. It held if the close two bars later is '
+                  'further from the line, on the side the close approached from. Bars '
+                  '19 and 20 have no close two bars later, so the fourteen bars from '
+                  '5 to 18 are the whole of the evidence.</p>\n',
+            ask='How many approaches are there at a tolerance of 0.2, 0.4, 0.7 and '
+                '1.0, and what share of each held? And on the same fourteen bars, '
+                'what share of bars that closed up or down continued in that '
+                'direction two bars later?',
+            result='1, 4, 10 and 11 approaches, holding 100, 50, 50 and 45 per cent, '
+                   'against a base rate of 43.',
+            answer='''      <table>
+        <thead><tr><th>An approach means within</th><th>Approaches</th><th>Continued away</th><th>Share</th></tr></thead>
+        <tbody>
+          <tr><td>0.2 points</td><td>1</td><td>1</td><td>100%</td></tr>
+          <tr><td>0.4 points</td><td>4</td><td>2</td><td>50%</td></tr>
+          <tr><td>0.7 points</td><td>10</td><td>5</td><td>50%</td></tr>
+          <tr><td>1.0 points</td><td>11</td><td>5</td><td>45%</td></tr>
+          <tr><td>No level at all: every bar with a direction</td><td>14</td><td>6</td><td>43%</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>The first column is the whole of the difference between '
+                   'the rows. The bars are the same bars, the average is the same '
+                   'average, and the series did not change while the table was being '
+                   'computed. Widen the tolerance from two tenths of a point to one '
+                   'point and the same twenty closes go from one approach to eleven, '
+                   'which is an eleven-fold change in how much evidence you appear to '
+                   'have.</p>\n'
+                   '      <p>The share column is the part to be careful with. At two '
+                   'tenths the line held every approach it got, which sounds like a '
+                   'perfect record and is one observation. At four tenths and at '
+                   'seven tenths it holds half of them. At one point it holds 45 per '
+                   'cent. The column moves between 100 and 45 without pattern, which '
+                   'is what a column of small samples looks like rather than a '
+                   'finding about the line.</p>\n'
+                   '      <p>Then the number that decides whether any of it means '
+                   'anything. On the same fourteen bars, a bar that has just closed '
+                   'up closes higher again two bars later, or a bar that has just '
+                   'closed down closes lower, on 6 of the 14, which is 43 per cent, '
+                   'with no line drawn and nothing to touch. That is the price of '
+                   'admission. The widest reading clears it by two points on eleven '
+                   'observations, which is not a gap anybody can act on, and lesson '
+                   '50 priced telling a 50 per cent hold rate apart from a 43 per '
+                   'cent one at hundreds of approaches in each condition.</p>\n'),
+        dict(
+            title='The same twenty bars, asked four times',
+            setup='      <p>The closes of bars 41 to 60 of the series this course has '
+                  'carried since lesson 34: 101.7, 102.1, 103.1, 104.4, 104.8, 105.6, '
+                  '106.6, 106.1, 106.7, 105.9, 106.7, 105.9, 106.9, 106.6, 105.8, '
+                  '107.1, 106.8, 106.0, 107.0 and 106.5.</p>\n'
+                  '      <p>Four instruments, all of them functions of exactly these '
+                  'numbers. Lesson 36&rsquo;s efficiency ratio over all twenty. The '
+                  'ten-bar simple average at bar 50 and at bar 60, and which side of '
+                  'it the close sits on. The oscillator over the last fourteen '
+                  'changes, and how many of those fourteen bars closed up. And the '
+                  'side of the ten-bar average the close takes at every one of bars '
+                  '50 to 60.</p>\n',
+            ask='What does each of the four say, and how many times does the last one '
+                'change its mind before and after you require two closes on the same '
+                'side?',
+            result='0.3333; 104.70 and 106.53, above then below; 54.29 on six up '
+                   'bars in fourteen; and six declared sides collapsing to one.',
+            answer='      <p>The ratio first. The twenty closes travel 14.4 points '
+                   'step by step and arrive 4.8 higher than they started, so the '
+                   'ratio is 4.8 &divide; 14.4 = 0.3333 exactly. A third of the '
+                   'walking ended up as progress.</p>\n'
+                   '      <p>The average next. Bars 41 to 50 sum to 1,047.0, so the '
+                   'ten-bar average at bar 50 is 104.70 and the close of 105.9 sits '
+                   '1.20 above it. Bars 51 to 60 sum to 1,065.3, so at bar 60 the '
+                   'average is 106.53 and the close of 106.5 sits 0.03 below it. Two '
+                   'readings ten bars apart, and the second one is on the other side '
+                   'of the line by three hundredths of a point.</p>\n'
+                   '      <p>The oscillator third, and it is the one that catches '
+                   'people. Six of the last fourteen bars closed up and eight closed '
+                   'down, so 43 per cent of the bars went the reader&rsquo;s way. The '
+                   'reading is 54.29, which is above the middle. The rises total 5.70 '
+                   'and the falls 4.80, and the oscillator weighs the sizes rather '
+                   'than counting the bars, so a minority of larger rises outvotes a '
+                   'majority of smaller falls. The shortcut from the third question '
+                   'holds only when the bars are the same size, and here they are '
+                   'not.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Instrument</th><th>Reading</th><th>What it is a function of</th></tr></thead>
+        <tbody>
+          <tr><td>Efficiency ratio, twenty bars</td><td>0.3333</td><td>All twenty closes</td></tr>
+          <tr><td>Ten-bar average at bar 50</td><td>104.70</td><td>Bars 41 to 50</td></tr>
+          <tr><td>Ten-bar average at bar 60</td><td>106.53</td><td>Bars 51 to 60</td></tr>
+          <tr><td>Oscillator at bar 60</td><td>54.29</td><td>The last fourteen changes</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Then the sides, which is where the description stops '
+                   'being a signal. Across bars 50 to 60 the close changes which side '
+                   'of its own average it is on five times, so the line declares six '
+                   'sides in eleven bars, with a median run of one bar. Ask for two '
+                   'consecutive closes on the same side before declaring anything and '
+                   'the six become one: above, from bar 51, and nothing else ever '
+                   'qualifies. The cost is exactly one more bar of lateness at every '
+                   'turn, on top of the 4.50 the ten-bar average already carries by '
+                   'the second question&rsquo;s arithmetic.</p>\n'
+                   '      <p>Four instruments and one series. They do not disagree '
+                   'about anything, because they cannot: every one of them is a '
+                   'function of the same twenty numbers, and applying a function '
+                   'cannot add what the numbers did not contain. What the four differ '
+                   'in is which part of those twenty numbers each of them throws '
+                   'away.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can price a line instead of believing it. Handed a '
+          'window, you produce the statistics that cannot see its ordering and the '
+          'ones that can; handed a weight list, you produce a delay and a noise '
+          'share without touching a backtest; handed a level, you solve it for the '
+          'balance of bars it actually asks for; handed a record, you separate what '
+          'was drawn from what was knowable and reconcile the difference to the '
+          'point; handed a hold rate, you ask what tolerance produced it and what '
+          'the tape does with no line drawn at all.</p>\n'
+          '      <p>Module 7 leaves the chart entirely. Lesson 53 starts from the '
+          'other side of your own fills and prices what the person taking them is '
+          'doing: a spread that just breaks even is twice the chance the next order '
+          'knows something, multiplied by how much it knows, which turns a quoted '
+          'penny into a statement about how many informed orders the quoter is '
+          'expecting.</p>\n',
+),
+
 ]
