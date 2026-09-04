@@ -828,8 +828,18 @@ claim has no numeral to hand over. Nothing is topic-only.
 
 ### Open
 
-- Eleven module quizzes. None exists; the legacy per-lesson quizzes are being
-  dropped, not carried.
+- Two module quizzes are still to write: module 10, slots 76 to 81, and
+  module 11, slots 82 to 85. Nine exist, one per module from 1 to 9. Each is
+  built by `scripts/curriculum/mkquiz.py` from `quizdata.py`, lives beside its
+  module in the tier folder as `module-N-quiz.html`, and is linked from the
+  last lesson of its module. Build and translate a quiz page before rebuilding
+  the lesson that links to it, or `inject.py` leaves the locale link pointing
+  at the English page. The legacy per-lesson quizzes are being dropped, not
+  carried.
+- Lessons 73 and 74 carry simulated figures with no stated seed: the
+  estimation-error table and the four thousand weight resamples in 73, and the
+  half-split null in 74. Every deterministic figure in both reproduces
+  exactly; those do not, and the hard rule says they must name a seed.
 - The four tier pages still type their counts and their opening link,
   though `site.py` and `audit.py hub` now check both. Their listings, and
   the learning path, read the catalogue. All twelve indexes are build

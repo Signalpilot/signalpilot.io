@@ -2622,5 +2622,294 @@ dict(
           'together, and the number of independent bets in a book is not the '
           'number of lines in it.</p>\n',
 ),
+# ---------------------------------------------------------------- module 9
+dict(
+    mod=9, tier='professional', slug='module-9-quiz',
+    slots=[71, 72, 73, 74, 75],
+    title='Module 9 Quiz: Portfolio',
+    desc='Six computations from the portfolio module. Turn three medians into '
+         'three ceilings on the bets you can carry, run the divisor to its wall, '
+         'count the days on which a book is entirely red, solve two rules for '
+         'their minimum-variance weights, correct a correlation for the '
+         'volatility it was measured in, and find which limit binds first.',
+    intro='This module filled in a card, one column per lesson: the highest '
+          'correlation a rule shows against the rest, the heat the book carries '
+          'and how often all of it arrives, the weight the optimiser gives each '
+          'rule with the short forbidden, and how far that correlation moves when '
+          'you measure it on half the record instead of all of it. Six questions, '
+          'all arithmetic. The last one spends the whole card at once and finds '
+          'that the column which binds is the one nobody argues about.',
+    covers='Lessons 71 to 75, and the four-column card the module has been '
+           'filling in since lesson 71.',
+    related=[(71, 'the divisor the first two questions run'),
+             (72, 'the all-against day the third question counts'),
+             (73, 'the two weights the fourth question solves'),
+             (74, 'the two windows the fifth question corrects'),
+             (75, 'the limit the sixth question finds binding')],
+    questions=[
+        dict(
+            title='Three medians, three ceilings',
+            setup='      <p>Lesson 71 correlated all 31,878 pairs of lesson '
+                  '63&rsquo;s 253 rules over the twenty-nine moves on which every '
+                  'rule in the grid is defined. The median pair came to 0.9464 and '
+                  '8.93 per cent of the pairs were the same series to the last '
+                  'decimal.</p>\n'
+                  '      <p>Lesson 74 measured the same 31,878 pairs on each half '
+                  'of that window separately. Over the first fifteen moves the '
+                  'median is 0.8835 and 9.37 per cent of pairs are identical. Over '
+                  'the last fourteen the median is exactly 1.0000 and 72.90 per '
+                  'cent are identical.</p>\n',
+            ask='How many pairs are identical in each of the three windows, and '
+                'what ceiling does each median put on the bets a book of these '
+                'rules can carry, however many of them you run?',
+            result='2,847, 2,987 and 23,239 identical pairs, against ceilings of '
+                   '1.0566, 1.1319 and exactly 1.',
+            answer='      <p>The counts are one multiplication each. '
+                   '0.0893 &times; 31,878 = 2,847 over the full window, '
+                   '0.0937 &times; 31,878 = 2,987 over the first fifteen moves, and '
+                   '0.7290 &times; 31,878 = 23,239 over the last fourteen.</p>\n'
+                   '      <p>The ceiling is one division. The bets a book carries '
+                   'are N over one plus N minus one times r, and as N grows without '
+                   'limit that goes to one over r. At 0.9464 the ceiling is 1.0566, '
+                   'at 0.8835 it is 1.1319, and at exactly one it is exactly one.</p>\n'
+                   '      <p>Read the third window twice. A median of 1.0000 does not '
+                   'mean the rules are similar. It means more than half of the '
+                   'pairs in the grid produced the same fourteen numbers as each '
+                   'other, so the ceiling is not approached from below, it is '
+                   'reached: no number of rules from that family, run over that '
+                   'fortnight, carries more than one bet. And the middle window '
+                   'holds fewer identical pairs than the first even though it '
+                   'contains the fortnight in which almost everything tied, because '
+                   'agreeing on twenty-nine numbers is harder than agreeing on '
+                   'fifteen.</p>\n'),
+        dict(
+            title='The divisor, run to its wall',
+            setup='      <p>A trader runs several rules whose average pairwise '
+                  'correlation is 0.8800, which is what lesson 74 measured on the '
+                  'worse of its two fortnights. Lesson 67 needed 589 trades to '
+                  'settle whether an edge of a tenth of an R was real, and lesson '
+                  '65 fixed the pace at forty trades a month.</p>\n'
+                  '      <p>The bets a book carries are N over one plus N minus one '
+                  'times r, and a rule run alongside others needs the 589 divided '
+                  'by that number.</p>\n',
+            ask='What are the bets, the trades and the months at two rules, at '
+                'four, at six, and in the limit? What correlation would six rules '
+                'need in order to carry three bets? And what would six independent '
+                'rules have cost in months?',
+            result='1.0638, 1.0989, 1.1111 and 1.1364 bets; 554, 536, 530 and 518 '
+                   'trades; 13.84, 13.40, 13.25 and 12.96 months; a correlation of '
+                   '0.2000 for three bets; and 2.45 months if they were '
+                   'independent.',
+            answer='      <p>Four divisions and a table.</p>\n'
+                   + table(['Rules run in parallel', 'Bets you are carrying',
+                            'Trades each still needs', 'Months'],
+                           [['Two', '1.0638', '553.7', '13.84'],
+                            ['Four', '1.0989', '536.0', '13.40'],
+                            ['Six', '1.1111', '530.1', '13.25'],
+                            ['As many as you like', '1.1364', '518.3', '12.96']])
+                   + '      <p>The limit is one over 0.8800, which is 1.1364, and '
+                   'the wait it leaves is 0.8800 of the original: 0.88 &times; 589 '
+                   'is 518.3 trades and 12.96 months. There is no number of rules '
+                   'at this correlation that gets the wait below thirteen months, '
+                   'because the limit does not contain N at all.</p>\n'
+                   '      <p>The correlation that would buy three bets from six '
+                   'rules is the divisor solved backwards: 6 over one plus five r '
+                   'equals 3 gives 1 + 5r = 2 and r = 0.2000. That is not a '
+                   'correlation this course has measured anywhere, on any window, '
+                   'between any two rules of this family.</p>\n'
+                   '      <p>And six independent rules would have needed 589 '
+                   '&divide; 6 = 98.2 trades each, which is 2.45 months. The '
+                   'distance between 2.45 and 13.25 is the whole of what the word '
+                   'diversification is usually carrying, and it is bought with a '
+                   'number nobody measures.</p>\n'),
+        dict(
+            title='The day the whole book is red',
+            setup='      <p>Six positions, each risking 1.5 per cent of the '
+                  'account, at lesson 71&rsquo;s measured correlation of 0.9464. '
+                  'The variance of a sum of N positions of equal size is the '
+                  'single-position variance multiplied by N times one plus N minus '
+                  'one times r.</p>\n'
+                  '      <p>Lesson 72 evaluated the one-factor integral for the day '
+                  'on which every position goes against you: at six positions it is '
+                  '0.3829 at this correlation and 0.0156 if the six were '
+                  'independent. Take a month as 21 trading days, and take lesson '
+                  '18&rsquo;s median worst drawdown of 9R.</p>\n',
+            ask='What is the heat and what is the day&rsquo;s standard deviation? '
+                'How many all-against days does a month contain under each '
+                'assumption, and what is the ratio between them? And how many '
+                'trading days of all-against days does it take to reach 9R?',
+            result='9.0 per cent of heat, a day of 8.80 per cent, 8.04 all-against '
+                   'days a month against 0.33, a ratio of 24.5, and 9R in 3.9 '
+                   'trading days.',
+            answer='      <p>Heat is the sum of the stops: six positions at 1.5 per '
+                   'cent is 9.0 per cent, and that is the maximum rather than a '
+                   'summary.</p>\n'
+                   '      <p>The summary is the standard deviation. One plus five '
+                   'times 0.9464 is 5.7320, six times that is 34.3920, its square '
+                   'root is 5.8645, and at 1.5 per cent a position that is 8.80 per '
+                   'cent. So the day sits 96.2 per cent of the way from the 3.67 '
+                   'per cent six independent positions would give to the 9.0 per '
+                   'cent that arrives when the six move as one.</p>\n'
+                   '      <p>The frequencies are one multiplication each. '
+                   '0.3829 &times; 21 = 8.04 days a month, against '
+                   '0.0156 &times; 21 = 0.33, which is one such day every three '
+                   'months. The ratio is 0.3829 &divide; 0.0156 = 24.5, and it is '
+                   'bought with no change to any position size, any stop or any '
+                   'rule.</p>\n'
+                   '      <p>And the depth. Six positions hand you 6R on the '
+                   'all-against day, so 9R is 1.5 of those days, and at one day in '
+                   '2.61 they arrive in 3.9 trading days. Four working days for the '
+                   'ingredient of a career-worst drawdown, on a book any checklist '
+                   'would call diversified.</p>\n'),
+        dict(
+            title='Two rules, and the weights you can hold',
+            setup='      <p>Lesson 73 forbade the short and the optimiser put '
+                  'everything into two of the four rules. Here are those two, with '
+                  'the standard deviations and the correlation lesson 71 measured '
+                  'over the same twenty-nine moves: the 2-and-5 rule at 0.6015, the '
+                  '8-and-30 rule at 0.7082, and a correlation between them of '
+                  '0.6254.</p>\n'
+                  '      <p>For two assets the minimum-variance weight on the first '
+                  'is the second&rsquo;s variance minus the covariance, over the '
+                  'sum of the two variances minus twice the covariance.</p>\n',
+            ask='What are the two weights, what standard deviation do they deliver, '
+                'and what is the cut against equal weights? And above what '
+                'correlation would the optimiser want to short the noisier of the '
+                'two?',
+            result='0.7114 and 0.2886, delivering 0.57816 against 0.59080 equally '
+                   'weighted, a cut of 2.14 per cent; and the short arrives above a '
+                   'correlation of 0.8493.',
+            answer='      <p>The covariance is 0.6254 &times; 0.6015 &times; 0.7082 '
+                   '= 0.26641. The two variances are 0.36180 and 0.50155.</p>\n'
+                   '      <p>The weight on the 2-and-5 rule is '
+                   '(0.50155 &minus; 0.26641) &divide; '
+                   '(0.36180 + 0.50155 &minus; 2 &times; 0.26641) = '
+                   '0.23514 &divide; 0.33053 = 0.7114, so the other weight is '
+                   '0.2886. Those are the 0.711 and 0.289 on the card, arrived at '
+                   'from two standard deviations and one correlation rather than '
+                   'from a matrix inversion.</p>\n'
+                   '      <p>The variance they deliver is '
+                   '0.7114&sup2; &times; 0.36180 + 0.2886&sup2; &times; 0.50155 + '
+                   '2 &times; 0.7114 &times; 0.2886 &times; 0.26641 = 0.33427, '
+                   'whose square root is 0.57816. Equal weights give 0.59080, so '
+                   'the whole prize on this pair is 2.14 per cent of the day.</p>\n'
+                   '      <p>The short is a comparison rather than a calculation. '
+                   'The weight on the second rule is its own variance minus the '
+                   'covariance, so it turns negative when the covariance exceeds '
+                   'the first rule&rsquo;s variance, which is when r exceeds '
+                   '0.6015 &divide; 0.7082 = 0.8493. Below that the optimiser holds '
+                   'both. Above it, it wants to sell the noisier rule to hedge the '
+                   'quieter one, and the correlations lesson 74 measured on its '
+                   'worse fortnight sit above it.</p>\n'),
+        dict(
+            title='The window decides, and the correction that does not save it',
+            setup='      <p>Lesson 74 measured the four rules&rsquo; average '
+                  'pairwise correlation three ways: 0.5966 over the first fifteen '
+                  'moves, 0.7695 over all twenty-nine, and 0.8800 over the last '
+                  'fourteen. The instrument&rsquo;s own standard deviation over the '
+                  'second fortnight is 1.240 times its standard deviation over the '
+                  'first.</p>\n'
+                  '      <p>The standard correction for that bias divides the '
+                  'measured correlation by the square root of one plus delta times '
+                  'one minus the correlation squared, where delta is the ratio of '
+                  'variances minus one. The book is four positions at two per cent '
+                  'each in every case, and the all-against frequencies are 0.2323 '
+                  'at the lowest correlation and 0.3567 at the highest.</p>\n',
+            ask='What does the correction do to the 0.8800? What are the bets and '
+                'the day&rsquo;s standard deviation at each of the three '
+                'correlations? And how much more often does the all-against day '
+                'arrive on the second fortnight than on the first?',
+            result='The 0.8800 corrects to 0.8310; the bets are 1.4338, 1.2090 and '
+                   '1.0989 and the days 6.68, 7.28 and 7.63 per cent; and the '
+                   'all-against day arrives 1.54 times more often.',
+            answer='      <p>Delta is 1.240&sup2; &minus; 1 = 0.5376. One minus '
+                   '0.8800&sup2; is 0.2256, so the denominator is the square root '
+                   'of 1 + 0.5376 &times; 0.2256 = 1.12128, which is 1.05891, and '
+                   '0.8800 &divide; 1.05891 = 0.8310.</p>\n'
+                   '      <p>That is a real correction and it does not rescue the '
+                   'measurement: 0.8310 still sits far above the first '
+                   'fortnight&rsquo;s 0.5966, so the volatility explains part of '
+                   'the move and not most of it.</p>\n'
+                   + table(['Correlation measured on', 'Average pairwise',
+                            'Independent bets', 'Standard deviation of the day'],
+                           [['First fifteen moves', '0.5966', '1.4338', '6.68%'],
+                            ['All twenty-nine', '0.7695', '1.2090', '7.28%'],
+                            ['Last fourteen moves', '0.8800', '1.0989', '7.63%']])
+                   + '      <p>And the frequency is one division: '
+                   '0.3567 &divide; 0.2323 = 1.54. The same four positions, sized '
+                   'identically, hand you a day on which everything goes against '
+                   'you half again as often, and nothing about the book changed. '
+                   'Only the fortnight the correlation was measured in did.</p>\n'),
+        dict(
+            title='Which limit binds, and the card spent',
+            setup='      <p>An account runs a four per cent daily-loss limit and '
+                  'risks one per cent a trade. A daily-loss limit means nothing '
+                  'unless the whole heat fits inside it, so the position count is '
+                  'the limit divided by the risk per trade.</p>\n'
+                  '      <p>Take lesson 74&rsquo;s worst-window correlation of '
+                  '0.8800, at which the all-against day arrives on 35.67 per cent '
+                  'of days for four positions. Compare the permitted book against a '
+                  'single position carrying the same four per cent of heat, which '
+                  'loses its whole heat whenever it loses at all.</p>\n',
+            ask='How many positions does the limit permit, what is the day&rsquo;s '
+                'standard deviation for that book against the single position, and '
+                'by how much does spreading the risk shrink the day and the '
+                'full-heat day? Then read the card: which rule does the correlation '
+                'column delete, and which does the weights column zero as well?',
+            result='Four positions, a day of 3.82 per cent against 4.00, which is '
+                   '4.61 per cent smaller, and a full-heat day 28.7 per cent rarer; '
+                   'and the card deletes 5-and-20 and zeroes 3-and-10 as well.',
+            answer='      <p>The count is one division: 4 &divide; 1 = 4 positions. '
+                   'Not four rules chosen and then sized around, four because that '
+                   'is what one per cent a trade leaves room for under a four per '
+                   'cent limit.</p>\n'
+                   '      <p>The single position at four per cent has a day of 4.00 '
+                   'per cent and pays its whole heat whenever it loses, which is '
+                   'half the time. Four positions at one per cent give '
+                   '1 + 3 &times; 0.8800 = 3.64, four times that is 14.56, and the '
+                   'square root is 3.8158, so the day is 3.82 per cent and the '
+                   'whole heat arrives 35.67 per cent of the time.</p>\n'
+                   '      <p>So the day is (4.00 &minus; 3.82) &divide; 4.00 = 4.61 '
+                   'per cent smaller and the full-heat day is '
+                   '(0.5000 &minus; 0.3567) &divide; 0.5000 = 28.7 per cent rarer. '
+                   'That is the entire benefit of running four rules rather than '
+                   'one, after five lessons of measurement, and it costs a '
+                   'quartering of the size per trade to collect. Independent, the '
+                   'same swap would have given a day 50 per cent smaller and a '
+                   'full-heat day 87.5 per cent rarer.</p>\n'
+                   '      <p>And the card, for the four rules the module has '
+                   'carried since lesson 71:</p>\n'
+                   + table(['Rule', 'Highest correlation, full window',
+                            'Highest on any window', 'Weight, short forbidden'],
+                           [['2-and-5', '0.7326', '0.7599', '0.711'],
+                            ['3-and-10', '0.8287', '1.0000', '0'],
+                            ['5-and-20', '0.9648', '1.0000', '0'],
+                            ['8-and-30', '0.9648', '1.0000', '0.289']])
+                   + '      <p>The first column says delete 5-and-20, because it is '
+                   'a duplicate of 8-and-30 at 0.9648 and carries less that the '
+                   'others do not already have. The second says the first column '
+                   'was the optimistic version: on the fortnight that matters, '
+                   'three of the four rules are the same series. The third says the '
+                   'same thing in a different currency, putting nothing at all in '
+                   '3-and-10 and 5-and-20. Three columns, two rules left, and a cap '
+                   'that had already decided the count before any of them was '
+                   'computed.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can tell a book from a list of positions. Handed a '
+          'median correlation, you turn it into a ceiling and notice that the '
+          'ceiling does not contain the number of rules; handed a book, you compute '
+          'both the heat and how often the whole of it arrives, and act on the '
+          'second; handed two rules, you solve them for weights and find the '
+          'correlation at which the answer stops being holdable; handed a record, '
+          'you split it in half and size on the worse half; and handed a loss '
+          'limit, you divide it by your risk per trade before you argue about which '
+          'rules to run, because that division has already fixed the count.</p>\n'
+          '      <p>Module 10 leaves the arithmetic and starts on the day, and '
+          'finds the day is not short of hours but short of decisions: of the 253 '
+          'rules on the grid, 203 produce exactly one entry over the stretch they '
+          'are defined on, and the busiest cell in the whole grid works out at '
+          'seventy entries a year.</p>\n',
+),
 
 ]
