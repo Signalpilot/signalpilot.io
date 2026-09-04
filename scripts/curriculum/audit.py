@@ -17,6 +17,8 @@ pattern that merely looks odd to a regex:
     arith   every explicit a x b = c printed anywhere in the corpus, recomputed
     claim   figures asserted in a claim that the lesson body never supports
     dupes   a word repeated back to back in the English prose
+    locale  a string the builder will need that some locale does not have,
+            which is how a page builds green and still reads English
 
 Like craft.py this exits with the finding count, so a red label in a shell is
 a count and not a crash.
@@ -381,13 +383,49 @@ def check_dupes():
             report(s, 'dupes', 'repeated word: %s' % m.group(0))
 
 
+# ------------------------------------------------------------------ 6. locale
+
+
+def check_locale():
+    """Every string the builder will ask for exists in every locale. The
+    builder skips a locale silently when one string is missing, so a page can
+    build, pass its own checks, and still be short a paragraph in eleven
+    languages. That happened once, to lesson 63's closing bound."""
+    sys.path.insert(0, os.path.join(ROOT, 'scripts', 'i18n'))
+    try:
+        from extract import extract
+        from inject import LANGS
+    except ImportError as exc:
+        print('locale check unavailable: %s' % exc)
+        return
+    import json
+    memory = {}
+    for lang in LANGS:
+        path = os.path.join(ROOT, 'scripts', 'i18n', 'memory', '%s.json' % lang)
+        memory[lang] = json.load(open(path, encoding='utf-8')) if os.path.exists(path) else {}
+    for s in SLOTS:
+        slug = os.path.basename(PAGES[s]).replace('.html', '')
+        wanted = {seg['en'] for seg in extract(PAGES[s])[1]}
+        for lang in LANGS:
+            per = os.path.join(ROOT, 'scripts', 'i18n', 'lessons', slug, '%s.json' % lang)
+            table = dict(memory[lang])
+            if os.path.exists(per):
+                table.update(json.load(open(per, encoding='utf-8')))
+            missing = [e for e in wanted if e not in table]
+            if missing:
+                report(s, 'locale', '%s is short %d string%s, first is %r'
+                       % (lang, len(missing), '' if len(missing) == 1 else 's',
+                          sorted(missing)[0][:70]))
+
+
 # -------------------------------------------------------------------- driver
 
 CHECKS = collections.OrderedDict([
     ('xref', check_xref), ('chain', check_chain), ('arith', check_arith),
-    ('claim', check_claim), ('dupes', check_dupes),
+    ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale),
 ])
-ORDER = ['xref', 'href', 'title', 'prereq', 'tease', 'arith', 'claim', 'dupes', 'figure']
+ORDER = ['xref', 'href', 'title', 'prereq', 'tease', 'arith', 'claim', 'dupes',
+         'locale', 'figure']
 
 
 def main(argv):
