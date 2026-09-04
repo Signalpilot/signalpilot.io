@@ -18,65 +18,65 @@ class SignalPilotChatbot {
     initKnowledgeBase() {
         return {
             // Lesson tiers
-            beginner: `**Beginner Tier** (20 lessons) - Essential foundations for trading
+            beginner: `**Beginner Tier** (24 lessons) - How a market works, what it costs, what risk is
 
 📚 [View All Beginner Lessons](/education/beginner.html)
 
 **What you'll learn:**
-• Why RSI >70 isn't always overbought
-• The truth about liquidity (it's engineered, not natural)
-• Order flow basics and market microstructure
-• Volume analysis fundamentals
-• Regime-based indicator interpretation
+• The order book, the spread and the market maker, derived from one problem
+• What a fill is, and the five numbers a candle keeps out of its interval
+• Why every position opens at a loss, and what the four charges are
+• Expectancy, and how long before your own record can settle anything
+• Position sizing, where the stop goes, and risk of ruin
 
 **Key Lessons:**
-• Lesson 1: The Liquidity Lie
-• Lesson 2: Volume Doesn't Lie
-• Lesson 5: RSI >70 Is Often a BUY Signal
-• Lesson 6: Moving Averages Truth
+• Lesson 1: What a Market Solves
+• Lesson 10: Every Trade Starts Negative
+• Lesson 17: Expectancy
+• Lesson 22: Risk of Ruin
 
-**Duration:** 12-15 min per lesson
-**Best for:** New traders or those learning institutional concepts`,
+**Duration:** 6-12 min per lesson
+**Best for:** Anyone who has not yet priced a round trip`,
 
-            intermediate: `**Intermediate Tier** (27 lessons) - Market microstructure & order flow
+            intermediate: `**Intermediate Tier** (28 lessons) - Reading the auction, and when the reading applies
 
 📚 [View All Intermediate Lessons](/education/intermediate.html)
 
 **What you'll learn:**
-• Bid-ask spread dynamics as a leading indicator
-• Order book analysis (absorption vs exhaustion)
-• Footprint charts and volume profiling
-• Dark pool activity and institutional flow
-• Market making and HFT mechanics
+• Where liquidity rests, and why the displayed book is an advertisement
+• Absorption, exhaustion, volume at price and hidden size
+• Structure, order blocks and sweeps, with the definitions written down
+• Regimes, timeframes, sessions, volatility, correlation and the macro cycle
+• What an indicator is, and what it discards to be one
 
 **Key Lessons:**
-• Lesson 21: Bid-Ask Spread Dynamics
-• Lesson 22: Order Book Analysis
-• Lesson 24: Footprint Charts
-• Lesson 25: Dark Pool Detection
+• Lesson 25: Where Liquidity Rests
+• Lesson 32: Market Structure
+• Lesson 36: Markets Have Modes
+• Lesson 48: What an Indicator Is
 
-**Duration:** 12-15 min per lesson
-**Best for:** Traders ready for advanced order flow concepts`,
+**Duration:** 8-14 min per lesson
+**Best for:** Traders who can already price their own costs`,
 
-            advanced: `**Advanced Tier** (27 lessons) - Implementation & automation
+            advanced: `**Advanced Tier** (18 lessons) - Who else is in the book, and building a system
 
 📚 [View All Advanced Lessons](/education/advanced.html)
 
 **What you'll learn:**
-• Trading automation (APIs, bots, execution)
-• Backtesting systems and walk-forward optimization
-• Position sizing and risk management frameworks
-• Kill switches and circuit breakers
-• Multi-timeframe analysis
+• What the spread pays for, and the fee that routes your order
+• What a millisecond is worth, and what a million shares takes
+• What would have to happen, and backtesting treated as evidence
+• The price of looking, the horizon you fix, the benchmark you chose
+• Drawdown, capacity, the delay you remove, machine learning as a filter
 
 **Key Lessons:**
-• Lesson 57: Trading Automation & APIs
-• Advanced Risk Management
-• System Development & Testing
-• Professional Trading Infrastructure
+• Lesson 53: What the Spread Is Paying For
+• Lesson 63: Backtesting as Evidence
+• Lesson 64: The Price of Looking
+• Lesson 67: The Drawdown You Should Expect
 
-**Duration:** 15-20 min per lesson
-**Best for:** Experienced traders building systematic strategies`,
+**Duration:** 10-16 min per lesson
+**Best for:** Traders building something they intend to test`,
 
             progress: `**Your Progress:**
 
@@ -93,7 +93,8 @@ Your learning progress is automatically tracked as you read lessons!
 • Each tier page shows lessons completed
 • Green checkmarks = completed lessons
 
-**Pro tip:** Complete at least 1 lesson/day to build a learning streak! 🔥`,
+**Pro tip:** Work one lesson a day, in order, and do the problems. Retrieval
+is the only rehearsal that fixes anything. 🔥`,
 
             curriculum: `**SignalPilot Education Hub Curriculum:**
 
@@ -115,75 +116,52 @@ Your learning progress is automatically tracked as you read lessons!
 
 📚 [View Full Curriculum](/)
 
-**Recommended path:**
-1. Start with Beginner (Lessons 1-24)
-2. Move to Intermediate when comfortable
-3. Advanced tier for implementation
-4. Professional tier for career development
+**Recommended path:** in order, 1 to 85. Each lesson spends a figure an
+earlier one measured, so the sequence is the argument.
 
-**Time commitment:** ~12-20 min per lesson`,
+**Time commitment:** ~6-16 min per lesson`,
 
-            rsi: `**RSI Lessons:**
+            rsi: `**Oscillators and RSI:**
 
-**Main Lesson:** [Lesson 5: RSI >70 Is Often a BUY Signal](/education/curriculum/intermediate/51-oscillators-under-regime.html)
+**Main Lesson:** [Lesson 51: Oscillators Under Regime](/education/curriculum/intermediate/51-oscillators-under-regime.html)
 
 **Key Concepts:**
-• RSI >70 in uptrends = continuation (not reversal)
-• RSI <30 in downtrends = continuation (not reversal)
-• Regime determines interpretation (trending vs ranging)
-• Harmonic Oscillator = 7-component voting system
+• An oscillator is a function of prices you already have, so it adds no information
+• The same reading means different things in a trend and in a range
+• What matters is what the oscillator discards, and how long it takes to discard it
+• A threshold is a setting, not a measurement, and it has to be stated
 
-**Real example:** Sarah lost $11,400 selling "overbought" RSI in trends, then made +$13,000 back using regime-based RSI interpretation
+**Related:** [Lesson 48: What an Indicator Is](/education/curriculum/intermediate/48-what-an-indicator-is.html), [Lesson 36: Markets Have Modes](/education/curriculum/intermediate/36-markets-have-modes.html)
 
-**Practical framework:**
-1. Identify regime FIRST (trending or ranging)
-2. Trending: RSI >70 = stay long, RSI pullback to 40-50 = add
-3. Ranging: RSI >70 = sell, RSI <30 = buy
+**Common mistake:** Reading an extreme as a signal without first stating the regime, and without ever measuring how often the reading was right`,
 
-**Common mistake:** Fading RSI extremes without checking market regime`,
+            spread: `**The Spread:**
 
-            spread: `**Bid-Ask Spread Lessons:**
-
-**Main Lesson:** [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/beginner/04-the-spread.html)
+**Main Lesson:** [Lesson 4: The Spread Is the Price of Immediacy](/education/curriculum/beginner/04-the-spread.html)
 
 **Key Concepts:**
-• Spread is a tax on impatience (not a fixed cost)
-• Spread changes predict price moves (leading indicator)
-• Spread widening = market makers see hidden flow
-• Spread must be <10% of stop loss
+• The spread is what immediacy costs, not a fee somebody charges you
+• It is one of four charges, and lesson 10 prices all four on one trade
+• Ranked against what an instrument moves in a day, the cost runs from a fifth of one per cent to 52 per cent
+• Posting instead of crossing earns the spread, and lesson 58 prices what that gives away
 
-**Real example:** Nina paid $45K in spread costs over 18 weeks (18 trades/day × $25/round-trip) without tracking it
+**Related:** [Lesson 10: Every Trade Starts Negative](/education/curriculum/beginner/10-every-trade-starts-negative.html), [Lesson 53: What the Spread Is Paying For](/education/curriculum/advanced/53-market-makers-business.html)
 
-**Practical rules:**
-1. Calculate: Spread ÷ Stop Loss = % (must be <10%)
-2. Use limit orders (save 85% on spread costs)
-3. Reduce frequency if spread >10% of stop
-4. Never trade illiquid hours (spread 4-8× wider)
+**Where the numbers are:** Lesson 12 ranks instruments by cost as a share of daily movement`,
 
-**Spread as signal:** Widening without news = something's coming (market makers protecting themselves)`,
+            automation: `**Automation and Execution:**
 
-            automation: `**Trading Automation:**
-
-**Main Lesson:** [Lesson 57: Trading Automation & APIs](/education/curriculum/advanced/69-automation.html)
+**Main Lesson:** [Lesson 69: The Delay You Remove](/education/curriculum/advanced/69-automation.html)
 
 **Key Concepts:**
-• Automation amplifies mistakes (1 bug = 47 orders in 90 sec)
-• Kill switches are mandatory (max loss, volatility filters, remote stop)
-• Paper trading REQUIRED before live (2-4 weeks minimum)
-• Slippage must be in backtests (real-world friction)
+• Automation removes a delay; the question is what that delay was costing
+• Slippage and fees belong in the backtest, because they are in the result
+• A hard daily-loss limit binds before any other limit you set
+• The pace you actually trade at is measurable, and it is slower than most plans assume
 
-**Real example:** Mike lost $97K in 4 months due to: runaway loop ($23K), API bans ($15K), no kill switches ($38K), overfitting ($8K), slippage ($11K)
+**Related:** [Lesson 75: Which Limit Binds First](/education/curriculum/professional/75-institutional-risk-controls.html), [Lesson 76: The Pace You Actually Trade At](/education/curriculum/professional/76-trading-day.html)
 
-**7-Step Framework:**
-1. Paper trade 2-4 weeks (find bugs with fake money)
-2. Multi-layer kill switches (5 circuit breakers)
-3. Order management (track IDs, prevent duplicates)
-4. Rate limit management (stay at 70% of API max)
-5. Walk-forward optimization (not curve-fitting)
-6. Slippage/fees in backtest (-0.15% market orders)
-7. Monitoring dashboard + alerts
-
-**Rule:** Never deploy without kill switches`,
+**Rule:** Deploy nothing whose failure you have not priced`,
 
             chatbot: `**About This Chatbot:**
 
@@ -213,51 +191,54 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 
 **Recommended Learning Path:**
 
-**Week 1-3: Beginner Foundations** (20 lessons)
-→ Start: [Lesson 1: The Liquidity Lie](/education/curriculum/intermediate/27-the-liquidity-lie.html)
-→ Focus: Debunking retail myths, understanding liquidity engineering
+**Weeks 1-4: Beginner** (24 lessons, slots 1-24)
+→ Start: [Lesson 1: What a Market Solves](/education/curriculum/beginner/01-what-a-market-solves.html)
+→ Focus: the mechanism, what trading costs, and what risk actually is
 
-**Week 4-7: Intermediate Microstructure** (27 lessons)
-→ [Lesson 21: Bid-Ask Spread Dynamics](/education/curriculum/beginner/04-the-spread.html)
-→ Order flow, order books, footprint charts, institutional flow
+**Weeks 5-9: Intermediate** (28 lessons, slots 25-52)
+→ [Lesson 25: Where Liquidity Rests](/education/curriculum/intermediate/25-where-liquidity-rests.html)
+→ Focus: reading the auction, and the context that decides when a reading applies
 
-**Week 8-11: Advanced Implementation** (27 lessons)
-→ Automation, backtesting, algorithms, professional systems
+**Weeks 10-13: Advanced** (18 lessons, slots 53-70)
+→ [Lesson 53: What the Spread Is Paying For](/education/curriculum/advanced/53-market-makers-business.html)
+→ Focus: who else is in the book, and building a system that survives testing
 
-**Week 12+: Professional Development** (8 lessons)
-→ Trading business, career pathways, ongoing mastery
+**Weeks 14+: Professional** (15 lessons, slots 71-85)
+→ [Lesson 71: How Many Bets You Are Carrying](/education/curriculum/professional/71-positions-are-one-position.html)
+→ Focus: portfolio, the arithmetic of the profession, and four specialisms
 
-**Time commitment:** 12-20 min/lesson
-**Goal:** 1 lesson per day (build a streak!)
+**Time commitment:** 6-16 min per lesson
+**Goal:** one lesson a day, in order. Each one spends what the last one measured.
 
 **Quick actions:**
 • [Browse All Lessons](/)
-• [Search Lessons](/education/search.html)
-• [View Progress](/) (homepage shows completion %)`,
+• [Search Lessons](/education/search.html)`,
 
             lessons: `**About Our Lessons:**
 
-**Structure:** Each lesson includes:
-• TL;DR Summary (3-minute version)
-• Real trader case study (with P&L numbers)
-• Multi-part content (5-7 sections)
-• Checkpoints every 5-10 minutes
-• Practice exercise (hands-on)
-• Interactive quiz
-• Downloadable checklist (PDF)
+**Structure:** every lesson has the same seven parts, in this order:
+• The claim - what the lesson finds, in its first 200 words, with a figure
+• Prerequisites - what it spends, and which lesson measured it
+• Development - the argument, built rather than asserted
+• Worked example - one, with every number recomputable from the page
+• Bounds - where the finding stops being true
+• Problems - what to go and measure on your own data
+• Sources - what the lesson leans on, and how
 
-**Length:** 12-20 minutes per lesson (900-1000 lines)
+**Length:** 1,400 to 5,000 words. Length is an output, never a target.
 
-**Style:** Professional trading education (institutional concepts, not retail hype)
+**Style:** every figure on the page is derived on the page. No composite
+trader, no invented track record, no P&L story. If a number is quoted from
+an earlier lesson, that lesson printed it.
 
-**Total:** 85 comprehensive lessons across 4 tiers
+**Total:** 85 lessons across 4 tiers, in 11 modules
 
 **What makes them different:**
-✅ Story-driven (real trader mistakes)
-✅ Data-heavy (actual P&L tables, metrics)
-✅ Mistake-focused (learn from failures)
-✅ Implementation details (checklists, frameworks)
-✅ No fluff (institutional-grade content)
+✅ Every claim is falsifiable, and says what would disprove it
+✅ Every figure is recomputed, not repeated
+✅ Each lesson ends by promising what the next one finds, with its number
+✅ The bounds are as long as the argument
+✅ Available in 11 languages besides English
 
 📚 [Browse All Lessons](/)`,
 
