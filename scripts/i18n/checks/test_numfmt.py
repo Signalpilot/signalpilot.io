@@ -35,6 +35,11 @@ print('--- left alone: no separator, no currency, no percent')
 for t in ['200','90','0','2024','1','800']:
     eq(t, 'de', None)
 
+print('--- a quote pair is two numbers, not a ratio')
+eq('50.03 / 50.04', 'de', '50,03 / 50,04'); eq('50.03 / 50.04', 'fr', '50,03 / 50,04')
+eq('50.03 / 50.04', 'ja', None);            eq('$1.48 / $1.55', 'de', '1,48 $ / 1,55 $')
+eq('50 / 51', 'de', None);                  eq('a / b', 'de', None)
+
 print('--- left alone: shapes the formatter must not touch')
 for t in ['2:1','10-15%','2010-2019','$250K','$10M-100M+','0/1000','Q1:',
           '$180 → $178.20 → $183','1% = $1,000','>25 = +1, <20 = -1.','20-25','> 40','$235.6K']:

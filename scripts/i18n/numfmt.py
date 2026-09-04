@@ -63,6 +63,17 @@ def localise(text, lang):
     conf = LOCALE.get(lang)
     if not conf:
         return None
+    # A quote pair -- "50.03 / 50.04" -- is two numbers, not a ratio, and a
+    # German table that prints 50,04 in one column and 50.03 / 50.04 in the
+    # next is inconsistent with itself. Localise it only when both halves are
+    # numbers this module is already sure about.
+    if ' / ' in text:
+        halves = text.split(' / ')
+        if len(halves) == 2 and all(PURE.match(h) for h in halves):
+            done = [localise(h, lang) or h for h in halves]
+            out = ' / '.join(done)
+            return out if out != text else None
+        return None
     m = PURE.match(text)
     if not m:
         return None

@@ -23,7 +23,21 @@ def residue(s):
     # prose; likewise '&times;' inside a formula.
     s = re.sub(r'&(?:[a-zA-Z][a-zA-Z0-9]*|#[0-9]+|#x[0-9A-Fa-f]+);', ' ', s)
     for t in NOTRANS:
-        s = re.sub(r'(?<![A-Za-z0-9])' + re.escape(t) + r'(?![A-Za-z0-9])', ' ', s)
+        # A term written lowercase in the glossary is ordinary trade vocabulary,
+        # and verify.py already matches it case-insensitively because German
+        # capitalises nouns and a table label capitalises its first word. Strip
+        # it the same way here, or "Market makers" leaves a residue and a
+        # correctly locked term reads as an untranslated one. Codes and product
+        # names carry uppercase and stay case-sensitive, so "CAP" is never
+        # stripped by the word "cap".
+        # An English plural of a locked term is still the locked term, so
+        # "Market makers" and "backtests" must strip as cleanly as their
+        # singulars. Only lowercase trade vocabulary takes the plural; a code
+        # like CAP or a product name does not.
+        tail = r's?' if t.islower() else r''
+        flags = re.IGNORECASE if t.islower() else 0
+        s = re.sub(r'(?<![A-Za-z0-9])' + re.escape(t) + tail + r'(?![A-Za-z0-9])',
+                   ' ', s, flags=flags)
     return re.sub(r'[^A-Za-z]', '', s)
 
 
