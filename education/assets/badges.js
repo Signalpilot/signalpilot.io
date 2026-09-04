@@ -41,15 +41,15 @@
     },
 
     // Achievement badges
-    quizMaster: {
-      id: 'quizMaster',
-      name: 'Quiz Master',
+    moduleFinisher: {
+      id: 'moduleFinisher',
+      name: 'Module Finisher',
       icon: '&#129504;', // brain
       emoji: '\u{1F9E0}',
-      description: 'Score 100% on 10 quizzes',
+      description: 'Complete 9 lessons, the size of the first module',
       category: 'achievement',
       check: function(stats) {
-        return stats.perfectQuizzes >= 10;
+        return stats.lessonsCompleted >= 9;
       }
     },
     speedReader: {
@@ -160,10 +160,10 @@
       name: 'Halfway There',
       icon: '&#11088;', // star
       emoji: '\u{2B50}',
-      description: 'Complete 41 lessons',
+      description: 'Complete 43 lessons',
       category: 'completion',
       check: function(stats) {
-        return stats.lessonsCompleted >= 41;
+        return stats.lessonsCompleted >= 43;
       }
     },
     almostThere: {
@@ -201,15 +201,15 @@
         return stats.totalTimeMinutes >= 600;
       }
     },
-    perfectionist: {
-      id: 'perfectionist',
-      name: 'Perfectionist',
+    tierFinisher: {
+      id: 'tierFinisher',
+      name: 'Tier Finisher',
       icon: '&#10024;', // sparkles
       emoji: '\u{2728}',
-      description: 'Score 100% on 5 quizzes in a row',
+      description: 'Complete 24 lessons, the size of the beginner tier',
       category: 'special',
       check: function(stats) {
-        return stats.perfectQuizStreak >= 5;
+        return stats.lessonsCompleted >= 24;
       }
     }
   };
@@ -249,6 +249,8 @@
 
       return {
         lessonsCompleted: completed.length,
+        // Kept for older stored progress; the rebuilt curriculum has no quizzes,
+        // so nothing writes these any more and no badge depends on them.
         perfectQuizzes: parseInt(localStorage.getItem('sp_perfect_quizzes') || '0'),
         perfectQuizStreak: parseInt(localStorage.getItem('sp_perfect_quiz_streak') || '0'),
         weekendLessons: weekendLessons,
@@ -453,10 +455,10 @@
           break;
 
         // Achievement badges
-        case 'quizMaster':
-          current = stats.perfectQuizzes || 0;
-          needed = 10;
-          message = `${Math.max(0, needed - current)} more perfect quiz${needed - current !== 1 ? 'zes' : ''} to unlock`;
+        case 'moduleFinisher':
+          current = stats.lessonsCompleted || 0;
+          needed = 9;
+          message = `${Math.max(0, needed - current)} more lesson${needed - current !== 1 ? 's' : ''} to finish a module`;
           break;
         case 'speedReader':
           current = (stats.fastestLesson || 0) > 0 && (stats.fastestLesson || 0) < 300 ? 1 : 0;
@@ -503,10 +505,10 @@
           const hoursNeeded = Math.ceil((needed - current) / 60 * 10) / 10;
           message = `${hoursNeeded > 0 ? hoursNeeded + ' more hours' : 'Almost there!'} to unlock`;
           break;
-        case 'perfectionist':
-          current = stats.perfectQuizStreak || 0;
-          needed = 5;
-          message = `${Math.max(0, needed - current)} more perfect quiz${needed - current !== 1 ? 'zes' : ''} in a row to unlock`;
+        case 'tierFinisher':
+          current = stats.lessonsCompleted || 0;
+          needed = 24;
+          message = `${Math.max(0, needed - current)} more lesson${needed - current !== 1 ? 's' : ''} to finish a tier`;
           break;
 
         default:
