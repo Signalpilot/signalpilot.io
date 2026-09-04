@@ -3234,4 +3234,319 @@ dict(
           'cross-correlation of zero that is 2.13 bets rather than four.</p>\n',
 ),
 
+# --------------------------------------------------------------- module 11
+dict(
+    mod=11, tier='professional', slug='module-11-quiz',
+    slots=[82, 83, 84, 85],
+    title='Module 11 Quiz: The Electives',
+    desc='Six computations from the electives. Run the divisor on a second '
+         'instrument and then on a short leg, split a round trip into the part a '
+         'second venue can reach and the part it cannot, price two habits at a '
+         'base rate the course never printed, measure the unit twice, reprice a '
+         'seven-trade record in three units, and rank the four freedoms by what '
+         'each is worth.',
+    intro='This module kept a list of the degrees of freedom the course did not '
+          'have: a rule that may be short, a second place to trade the same thing, '
+          'the person who has to sit through all of it, and the unit itself. Six '
+          'questions, all arithmetic, and every one of them runs on a number an '
+          'earlier lesson measured. The last one puts the four freedoms on one '
+          'scale and finds that the two largest are the two that are free.',
+    covers='Lessons 82 to 85, and the four-item list of missing freedoms the '
+           'module has been keeping since lesson 82.',
+    related=[(82, 'the divisor and the difference the first question runs twice'),
+             (83, 'the round trip the second question takes apart'),
+             (84, 'the two habits the third question compounds'),
+             (85, 'the unit the last three questions measure twice')],
+    questions=[
+        dict(
+            title='What a second instrument buys, and what a short leg buys',
+            setup='      <p>Lesson 71&rsquo;s divisor takes a count of positions '
+                  'and their average correlation and returns the independent bets '
+                  'they amount to: the count over one plus the count less one '
+                  'times the average. Two rules on one instrument at lesson '
+                  '74&rsquo;s 0.88 carry 1.0638 bets.</p>\n'
+                  '      <p>Put the same two rules on a second instrument. Four '
+                  'positions make six pairs: two of them sit within an instrument '
+                  'and carry the 0.88, and four cross between the instruments and '
+                  'carry whatever the two instruments correlate at. Take that '
+                  'cross-correlation as 0.35.</p>\n'
+                  '      <p>Then the other arithmetic. Two equal positions each of '
+                  'standard deviation one have a pair standard deviation of the '
+                  'square root of one plus the correlation over two when both are '
+                  'long, and the plus becomes a minus when one is short.</p>\n',
+            ask='At 0.35, how many bets do the four positions carry and what is '
+                'that against the 1.0638 you already had? What cross-correlation '
+                'would four long positions need to carry a bet and a half? And at '
+                '0.35, what are the two pair standard deviations and the factor '
+                'between them, and how alike would two instruments have to be '
+                'before turning one leg over made the pair ten times quieter?',
+            result='1.5504 bets, which is 1.46 times the 1.0638 and 0.49 of a bet '
+                   'bought with two more positions; 0.3933 for a bet and a half; '
+                   '0.8216 against 0.5701, a factor of 1.44; and a correlation of '
+                   '0.9802 before a short leg is worth ten times.',
+            answer='      <p>The first is one average and one division. Six pairs, '
+                   'two at 0.88 and four at 0.35, average (2 &times; 0.88 + 4 '
+                   '&times; 0.35) &divide; 6 = 0.5267, and four positions at that '
+                   'average carry 4 &divide; (1 + 3 &times; 0.5267) = 1.5504 bets. '
+                   'Against the 1.0638 you carried on one instrument that is 1.46 '
+                   'times, or 0.49 of a bet for two more positions, two more '
+                   'spreads and two more lots of impact.</p>\n'
+                   '      <p>Running the division backwards gives the '
+                   'cross-correlation a target implies. A bet and a half needs an '
+                   'average of (4 &divide; 1.5 &minus; 1) &divide; 3 = 0.5556, and '
+                   'since two of the six pairs are stuck at 0.88, the four crossing '
+                   'pairs have to come in at (6 &times; 0.5556 &minus; 1.76) '
+                   '&divide; 4 = 0.3933. Two full bets need 0.0600, and the ceiling '
+                   'at a cross-correlation of exactly zero is 2.1277 &mdash; so the '
+                   'whole distance between two bets and the best case a second '
+                   'instrument can ever offer is six hundredths of a '
+                   'correlation.</p>\n'
+                   '      <p>The short leg is the other formula on the same 0.35. '
+                   'Both long is the square root of 1.35 &divide; 2 = 0.8216, one '
+                   'short is the square root of 0.65 &divide; 2 = 0.5701, and the '
+                   'factor is 1.44. Solve the factor for the correlation and ten '
+                   'times quieter needs (1 + r) &divide; (1 &minus; r) = 100, which '
+                   'is r = 0.9802. The two arithmetics point in opposite '
+                   'directions down the same column, and that is the whole of '
+                   'lesson 82: the correlation that ruins a long-only book is the '
+                   'correlation a spread is made of.</p>\n'),
+        dict(
+            title='The part of the bill a second venue cannot reach',
+            setup='      <p>Lesson 83 split lesson 63&rsquo;s 0.1230 round trip '
+                  'into a spread, slippage and a commission, and found that a '
+                  'second venue competes for the first and the third and cannot '
+                  'touch the second, because slippage is lesson 69&rsquo;s delay '
+                  'and a delay does not care where the order is sent.</p>\n'
+                  '      <p>Run the same split on a different instrument. A '
+                  'two-cent spread, eight basis points of slippage a side, and one '
+                  'cent of commission a side, on a price near 48. Lesson 69 priced '
+                  'five minutes between the signal and the order at 32.10 basis '
+                  'points.</p>\n',
+            ask='What is this round trip in cash and in basis points, what share of '
+                'it does the slippage carry, and what share can a second venue ever '
+                'reach? How far apart would two venues have to quote this '
+                'instrument before you kept half the difference? And how many whole '
+                'round trips does one five-minute delay cost?',
+            result='0.1168 a share and 24.33 basis points, slippage carrying 65.75 '
+                   'per cent, a second venue reaching 34.25 per cent, a difference '
+                   'of 0.2336 or 48.67 basis points before you keep half, and one '
+                   'five-minute delay costing 1.32 whole round trips.',
+            answer='      <p>Three additions and one division a row.</p>\n'
+                   + table(['Part of the round trip', 'A share',
+                            'Basis points at 48', 'Share of the bill',
+                            'A second venue?'],
+                           [['Spread, two cents', '0.0200', '4.17', '17.12%',
+                             'Yes'],
+                            ['Slippage, eight basis points a side', '0.0768',
+                             '16.00', '65.75%', 'No'],
+                            ['Commission, one cent a side', '0.0200', '4.17',
+                             '17.12%', 'Yes'],
+                            ['The whole round trip', '0.1168', '24.33', '100%',
+                             'A third of it']])
+                   + '      <p>The reachable part is 0.0400 of 0.1168, which is '
+                   '34.25 per cent, against the 16.26 per cent a second venue '
+                   'reaches on lesson 83&rsquo;s own instrument. A wider spread and '
+                   'a fatter commission on a cheaper share make the second account '
+                   'worth twice as much here, and the reason is arithmetic rather '
+                   'than anything about the venues: the part a venue can reach is '
+                   'the part that is quoted, and the part it cannot is the part '
+                   'that is a delay.</p>\n'
+                   '      <p>Keeping half a difference means the difference is '
+                   'twice the round trip, because you pay to enter on one side and '
+                   'to exit on the other: 2 &times; 0.1168 = 0.2336 a share, or '
+                   '48.67 basis points. And the delay is the number to hold this '
+                   'against. Five minutes at 32.10 basis points on a 48 price is '
+                   '0.1541 a share, which is 0.1541 &divide; 0.1168 = 1.32 whole '
+                   'round trips. One late order costs more than a second venue '
+                   'gives back on a whole round trip here, and lesson 83 found '
+                   'the same ordering on its own instrument, which is why the '
+                   'evening goes on the delay rather than on the '
+                   'paperwork.</p>\n'),
+        dict(
+            title='A hundred candidates at a base rate the course did not print',
+            setup='      <p>Lesson 84&rsquo;s test over 156 trades has a power of '
+                  '0.3461 against lesson 67&rsquo;s tenth of an R, and a dead '
+                  'system passes 5.05 per cent of the time judged once and 24.25 '
+                  'per cent if you judge after every trade from trade 20. Lesson '
+                  '67&rsquo;s eight-R line switches off 59.5 per cent of the '
+                  'systems that genuinely work.</p>\n'
+                  '      <p>Take a hundred candidate rules of which one in '
+                  'twenty-five is genuinely alive.</p>\n',
+            ask='How many rules does each of the two procedures accept, what share '
+                'of each set is real, and what is the ratio? Then, for each '
+                'procedure, at what base rate does half of what it accepts turn out '
+                'to be real?',
+            result='6.23 accepted rules of which 22.21 per cent are real, against '
+                   '23.84 of which 2.35 per cent are; a ratio of 9.44; and half '
+                   'real at a base rate of 12.73 per cent judged once and 63.37 per '
+                   'cent with the two habits.',
+            answer='      <p>Four alive and ninety-six dead. Judged once, the test '
+                   'accepts 4 &times; 0.3461 = 1.3844 of the live ones and 96 '
+                   '&times; 0.0505 = 4.8480 of the dead, so 6.23 rules are accepted '
+                   'and 1.3844 &divide; 6.2324 = 22.21 per cent of them are '
+                   'real.</p>\n'
+                   '      <p>Now peek and abandon. The dead pass at 0.2425 rather '
+                   'than 0.0505, so 96 &times; 0.2425 = 23.2800 get through; the '
+                   'eight-R line removes 59.5 per cent of the live ones, so 1.3844 '
+                   'becomes 0.5607. You accept 23.84 rules of which 2.35 per cent '
+                   'are real. Nearly four times as many rules, two fifths as many '
+                   'true ones, and a tenth the chance that any one of them is '
+                   'real, on the same candidates and the same market.</p>\n'
+                   '      <p>The last part is the same equation solved for the base '
+                   'rate. Half real means the live ones passing equal the dead ones '
+                   'passing: p &times; 0.3461 = (1 &minus; p) &times; 0.0505 gives '
+                   'p = 12.73 per cent, and p &times; 0.1402 = (1 &minus; p) '
+                   '&times; 0.2425 gives p = 63.37 per cent. A disciplined test '
+                   'reaches a coin flip when one candidate in eight is alive. With '
+                   'two ordinary habits it needs nearly two in three, which is a '
+                   'population nobody searching for a rule has ever been in.</p>\n'),
+        dict(
+            title='Every distance in the course, measured twice',
+            setup='      <p>Lesson 85 measured one bar&rsquo;s dispersion on all '
+                  'sixty closes at 1.5443, on the first thirty moves at 2.0446 and '
+                  'on the last twenty-nine at 0.7543. Every figure after lesson 63 '
+                  'is quoted in the first of those.</p>\n'
+                  '      <p>Three of the course&rsquo;s numbers are distances '
+                  'rather than ratios: lesson 67&rsquo;s eight-R line, lesson '
+                  '65&rsquo;s tenth of an R and lesson 64&rsquo;s 0.317 of an R a '
+                  'trade. Lesson 75 sizes a position by dividing the money at risk '
+                  'by the distance to the stop; take an account of 250,000 risking '
+                  'two per cent.</p>\n',
+            ask='What is the eight-R line in cash, and what is it in each '
+                'half&rsquo;s own unit? By what single factor does every distance '
+                'in the course move into each half, and by what factor between the '
+                'two halves? How many shares does the sizing rule buy at each '
+                'dispersion? And what happens to lesson 63&rsquo;s t of 3.65?',
+            result='12.3544 a share, which is 6.04 of the loud half&rsquo;s R and '
+                   '16.38 of the quiet half&rsquo;s; every distance multiplied by '
+                   '0.7553 and 2.0474 and therefore by 2.711 between the halves; '
+                   '2,446 shares against 6,629; and the t unchanged at 3.65.',
+            answer='      <p>One multiplication converts the lot. Eight times '
+                   '1.5443 is 12.3544 a share, and dividing by each half&rsquo;s '
+                   'own dispersion gives 12.3544 &divide; 2.0446 = 6.04 and 12.3544 '
+                   '&divide; 0.7543 = 16.38. The two divisions are the same two '
+                   'divisions for every distance on the course, because the cash '
+                   'value cancels: 1.5443 &divide; 2.0446 = 0.7553 and 1.5443 '
+                   '&divide; 0.7543 = 2.0474, so lesson 65&rsquo;s tenth of an R is '
+                   '0.0755 and 0.2047 of one, and lesson 64&rsquo;s 0.317 is 0.2394 '
+                   'and 0.6490. Between the two halves the factor is 2.0446 '
+                   '&divide; 0.7543 = 2.711.</p>\n'
+                   '      <p>The sizing rule is the one thing that repairs itself. '
+                   'Two per cent of 250,000 is 5,000, and 5,000 &divide; 2.0446 = '
+                   '2,446 shares against 5,000 &divide; 0.7543 = 6,629 &mdash; the '
+                   'ratio is 2.711 again, and the risk carried is the same in both. '
+                   'It only repairs itself if you re-measure the input, which is '
+                   'the thing the course did once and then spent for twenty-two '
+                   'lessons.</p>\n'
+                   '      <p>And the t does not move at all. A t is a mean over a '
+                   'standard error and both are in the same units, so a constant '
+                   'divisor cancels out of it exactly: 3.65 in dollars is 3.65 in '
+                   'R and 3.65 in either half&rsquo;s R. Every ratio the course '
+                   'built survives this page and every distance it set has to be '
+                   'measured again.</p>\n'),
+        dict(
+            title='The same seven trades in three units',
+            setup='      <p>Lesson 63&rsquo;s winner took seven trades on the sixty '
+                  'closes for a gross of 10.70 a share, paid seven round trips at '
+                  '0.1230 each, and netted 9.84.</p>\n'
+                  '      <p>Two of the seven ran wholly inside the first thirty '
+                  'moves, four ran wholly inside the last twenty-nine, and one '
+                  'crossed the split. The three dispersions are 1.5443, 2.0446 and '
+                  '0.7543.</p>\n',
+            ask='What does the record average per trade if you price every trade at '
+                'the single R, at the loud half&rsquo;s R and at the quiet '
+                'half&rsquo;s? What is the bill as a share of the gross in each of '
+                'those three? And what are the honest mixed figures, where each '
+                'trade is priced in the unit of the window it lived through?',
+            result='0.910, 0.687 and 1.863 R a trade; 8.05 per cent of the gross in '
+                   'all three, because it is a ratio; and a mixed 1.101 R a trade '
+                   'on a bill of 0.852 R, with the t moving from 3.65 to 3.68.',
+            answer='      <p>The record nets 9.839 over seven trades, which is '
+                   '1.4056 a share, and each unit is one division.</p>\n'
+                   + table(['Priced in', 'The unit', 'Net per trade, in R'],
+                           [['The single R', '1.5443', '0.910'],
+                            ['The loud half&rsquo;s R', '2.0446', '0.687'],
+                            ['The quiet half&rsquo;s R', '0.7543', '1.863']])
+                   + '      <p>The bill does not move, and that is the half of the '
+                   'page most readers miss. Seven round trips at 0.1230 is 0.861 a '
+                   'share against a gross of 10.70, which is 8.05 per cent whatever '
+                   'unit you write it in, because a share of a gross is a ratio and '
+                   'the divisor cancels. Only when you write the bill as 0.557 of '
+                   'an R does it start to move, because that is a distance.</p>\n'
+                   '      <p>The honest answer prices each trade in the window it '
+                   'lived through, and the two figures move in opposite directions. '
+                   'The record averages 1.101 R a trade rather than 0.910, because '
+                   'four of the seven were earned in the quiet half; and the bill '
+                   'rises from 0.557 to 0.852 of an R, a factor of 1.53, because '
+                   'four of the seven were paid there too. The t goes from 3.65 to '
+                   '3.68, which is to say nowhere. The verdict is exactly as safe '
+                   'as module 8 said, and every number underneath it was two '
+                   'numbers.</p>\n'),
+        dict(
+            title='Four freedoms on one scale',
+            setup='      <p>This module named four things the course did not have, '
+                  'and priced each of them against something it had already '
+                  'measured: a rule that may be short, a second venue for the same '
+                  'instrument, the person who has to sit through all of it, and the '
+                  'unit itself.</p>\n'
+                  '      <p>The four numbers are lesson 82&rsquo;s 0.9695 against '
+                  '0.2449 at a correlation of 0.88, lesson 83&rsquo;s edge over '
+                  'holding of 4.16 a share going to 4.30, lesson 84&rsquo;s 43.2 '
+                  'per cent going to 6.0 at a base rate of one in ten, and lesson '
+                  '85&rsquo;s 2.0446 against 0.7543.</p>\n',
+            ask='Turn each of the four into a factor on the quantity its own lesson '
+                'measured, rank them, and then say which of the four cost something '
+                'to take and which are free.',
+            result='7.16, 3.96, 2.71 and 1.03, and the two largest are the two that '
+                   'cost nothing.',
+            answer='      <p>One division a row, and they land in an order nobody '
+                   'would guess from how much each is written about.</p>\n'
+                   + table(['The freedom', 'What it moves', 'The factor'],
+                           [['Not breaking two habits',
+                             '43.2% of accepted rules real against 6.0%', '7.16'],
+                            ['A rule that may be short',
+                             'a pair&rsquo;s day of 0.9695 against 0.2449', '3.96'],
+                            ['Measuring the unit twice',
+                             'a dispersion of 2.0446 against 0.7543', '2.71'],
+                            ['A second venue for the same thing',
+                             'an edge over holding of 4.16 against 4.30', '1.03']])
+                   + '      <p>Now the bill for each. The short leg needs a '
+                   'security borrowed, which costs a fee this course has never '
+                   'priced and can be recalled, and it carries a loss with no '
+                   'ceiling to size against. The second venue needs an account, a '
+                   'second set of paperwork and a measured difference that clears '
+                   'twelve basis points often enough to be worth having. Those are '
+                   'the two that are paid for, and they are the two smallest '
+                   'factors on the list.</p>\n'
+                   '      <p>The other two cost nothing at all. Writing the horizon '
+                   'down before the first trade, the depth you will sit through, '
+                   'the count of settings you searched and the position limit is a '
+                   'decision made once instead of a decision made every time you '
+                   'look, and it is worth 7.16. Measuring one bar&rsquo;s standard '
+                   'deviation on each half of your own record is one line of '
+                   'arithmetic, and it is the difference between a distance and two '
+                   'distances wearing one name. The two largest freedoms in the '
+                   'whole module are free, and both of them are things you do '
+                   'before the market opens rather than things you buy.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can price a freedom before you take it. Handed a '
+          'second instrument, you run the divisor on it and find it buys half a '
+          'bet rather than two; handed a short leg, you run the variance of a '
+          'difference on the same correlation and find it buys more on half the '
+          'positions; handed a round trip, you split it into the part that is '
+          'quoted and the part that is a delay; handed a habit, you put it through '
+          'the same test twice and read the share of your accepted rules that '
+          'survives; and handed a unit, you measure it on each half of your record '
+          'and divide, because a distance in a unit that moved is two distances '
+          'wearing one name.</p>\n'
+          '      <p>That is the last question in the course. The professional tier '
+          'priced a book, then the day it takes to run one, then the profession '
+          'that would have to pay for it, and then the freedoms none of it had, '
+          'and every figure in all eighty-five lessons came out of a record small '
+          'enough to hold in one hand. What you take away is not a system. It is '
+          'the habit of dividing, of asking what a number is a number of, and of '
+          'measuring the answer twice.</p>\n',
+),
+
 ]
