@@ -2098,4 +2098,529 @@ dict(
           'advance is what turns a noticing into a hypothesis.</p>\n',
 ),
 
+
+# ---------------------------------------------------------------- module 8
+dict(
+    mod=8, tier='advanced', slug='module-8-quiz',
+    slots=[62, 63, 64, 65, 66, 67, 68, 69, 70],
+    title='Module 8 Quiz: Building a System',
+    desc='Eight computations from the system-building module. Turn a count into '
+         'an interval, subtract a backtest four times, price a search from its '
+         'configuration count, price the act of looking, split a return into '
+         'three parts, draw two lines on an equity curve, size at four ninths of '
+         'capacity, and find the accuracy a filter has to beat.',
+    intro='This module built one sheet, one column at a time: a sentence that can '
+          'be refused, a backtest set against what the same search finds in '
+          'nothing, a bar computed from a configuration count, a horizon fixed '
+          'before the first trade, an exposure share, a stopping depth, a '
+          'capacity, and a position cap. Eight questions, all arithmetic. The '
+          'last one takes the rule this module has followed since lesson 63 and '
+          'fills in the three columns lesson 70 left blank, which turn out to '
+          'fill themselves from the rule&rsquo;s own numbers.',
+    covers='Lessons 62 to 70, and the eight-column sheet the module has been '
+           'filling in since lesson 62.',
+    related=[(62, 'the four-part sentence the first question writes'),
+             (63, 'the four subtractions the second question performs'),
+             (64, 'the configuration count the third question prices'),
+             (65, 'the horizon the fourth question fixes'),
+             (66, 'the exposure share the fifth question needs'),
+             (67, 'the two lines the sixth question draws'),
+             (68, 'the four ninths the seventh question sizes at'),
+             (70, 'the inequality the eighth question solves')],
+    questions=[
+        dict(
+            title='A count, an interval, and the counts that could have decided',
+            setup='      <p>A series of eighty closes. The seventy-nine moves that '
+                  'join them are 44 up and 35 down, so the baseline &mdash; what '
+                  'happens with no condition attached at all &mdash; is 0.557.</p>\n'
+                  '      <p>Define a condition and an outcome. After one down '
+                  'close, the next close finishes higher on 11 of 16 occurrences. '
+                  'Sharpen it to two consecutive down closes and it is 7 of 10. '
+                  'Sharpen it again to three and it is 3 of 4.</p>\n'
+                  '      <p>The intervals are the ones lesson 19 computes, at 95 '
+                  'per cent.</p>\n',
+            ask='Which of the three rates clears the baseline? On sixteen '
+                'occurrences, which counts could have cleared it at all, and what '
+                'was the chance of landing on one if the effect were real at ten '
+                'points? And how many occurrences would a ten-point lift need?',
+            result='None of the three. Only 13, 14, 15 and 16 of 16 could have '
+                   'cleared it, the chance of reaching one was 0.147, and a '
+                   'ten-point lift needs 99 occurrences.',
+            answer='''      <table>
+        <thead><tr><th>Condition</th><th>Occurrences</th><th>Next close up</th><th>Rate</th><th>Interval low</th><th>Interval high</th></tr></thead>
+        <tbody>
+          <tr><td>One down close</td><td>16</td><td>11</td><td>0.688</td><td>0.444</td><td>0.858</td></tr>
+          <tr><td>Two down closes</td><td>10</td><td>7</td><td>0.700</td><td>0.397</td><td>0.892</td></tr>
+          <tr><td>Three down closes</td><td>4</td><td>3</td><td>0.750</td><td>0.301</td><td>0.954</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Read the rate column and the idea is holding up: '
+                   '0.688, then 0.700, then 0.750, and every one of them is above '
+                   'the baseline. Read the two interval columns and the evidence is '
+                   'evaporating. The interval is 0.414 wide on sixteen occurrences, '
+                   '0.495 wide on ten, and 0.654 wide on four, so by the last row it '
+                   'covers two thirds of everything a probability is allowed to be. '
+                   'All three contain 0.557. Sharpening the condition felt like '
+                   'precision and bought nothing, because the rate barely moved and '
+                   'the sample fell from 16 to 4.</p>\n'
+                   '      <p>Now the harder question, which is what the sixteen '
+                   'could ever have said. Walk the counts and take the interval&rsquo;s '
+                   'lower end each time: 11 of 16 has a low of 0.444, 12 has 0.505, '
+                   'and 13 has 0.570. So 13 is the first count whose interval clears '
+                   '0.557, and only 13, 14, 15 and 16 could have cleared it. Of the '
+                   'seventeen counts the afternoon could have produced, four were '
+                   'capable of telling you anything.</p>\n'
+                   '      <p>Then price that. If the effect were real at the full '
+                   'ten points, the true rate would be 0.657, and the chance of '
+                   'sixteen occurrences landing on 13 or more is 0.147, or about one '
+                   'in seven. The test had a one-in-seven chance of detecting the '
+                   'thing it was built to detect, and any of 9 through 12 would have '
+                   'been called a confirmation by somebody not computing the '
+                   'interval.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Lift over the baseline</th><th>Occurrences needed</th></tr></thead>
+        <tbody>
+          <tr><td>0.05</td><td>395</td></tr>
+          <tr><td>0.10</td><td>99</td></tr>
+          <tr><td>0.15</td><td>44</td></tr>
+          <tr><td>0.20</td><td>25</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>The sample the lift needs is four times the '
+                   'baseline&rsquo;s variance over the square of the lift: 4 &times; '
+                   '0.557 &times; 0.443 &divide; 0.01 = 98.7, so 99 occurrences. At '
+                   'the rate the condition fires here, one down close in every five, '
+                   'that is 495 bars. The idea formed in twenty minutes needs two '
+                   'years to be refused.</p>\n'),
+        dict(
+            title='The same result, subtracted four times',
+            setup='      <p>A rule is picked as the best of a grid and makes 14.60 '
+                  'a share gross on 9 trades. A round trip costs 0.1230 a share. '
+                  'Buying at the first close and selling at the last makes 7.40 net '
+                  'over the same window. One bar&rsquo;s standard deviation on the '
+                  'series is 1.5443.</p>\n'
+                  '      <p>Then the fourth subtraction. Shuffle the bar-to-bar '
+                  'moves so that the drift and the volatility survive and no time '
+                  'structure does, rerun the identical grid, and 61 per cent of '
+                  'those structureless series produce a best cell that beats '
+                  'holding by at least what this one did.</p>\n',
+            ask='What is the rule worth after each of the four subtractions, what '
+                'do the costs come to in R, and what is the verdict?',
+            result='13.49 net, 6.09 over the benchmark, and a search of the same '
+                   'width finds that or more in nothing 61 per cent of the time. '
+                   'Nothing has been established.',
+            answer='''      <table>
+        <thead><tr><th>Stage</th><th>What the rule is worth</th></tr></thead>
+        <tbody>
+          <tr><td>Gross</td><td>14.60</td></tr>
+          <tr><td>Net of costs</td><td>13.49</td></tr>
+          <tr><td>Over the benchmark</td><td>6.09</td></tr>
+          <tr><td>Against a search of the same width on nothing</td><td>beaten 61 per cent of the time</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>The first subtraction is the only certain one. Nine '
+                   'round trips at 0.1230 come to 1.11, so the gross of 14.60 nets '
+                   '13.49. In R that is 0.1230 &divide; 1.5443 = 0.0796 of an R a '
+                   'round trip, so the rule pays 0.717R in costs while holding pays '
+                   'one round trip, 0.0796R. The frequent rule starts seven tenths '
+                   'of an R behind before either of them is right about '
+                   'anything.</p>\n'
+                   '      <p>The second is the one almost always missing. The rule '
+                   'made 13.49 and holding made 7.40, so the rule&rsquo;s '
+                   'contribution is 6.09, not 13.49. A series that rose hands its '
+                   'rise to anything that spends time long, whether or not the rule '
+                   'understood a thing. A backtest that prints its own equity curve '
+                   'and never the benchmark&rsquo;s has hidden the larger of the two '
+                   'numbers.</p>\n'
+                   '      <p>The third changes the verdict rather than the size. '
+                   'Sixty-one per cent of series with nothing in them produce a best '
+                   'cell that beats holding by 6.09 or more. The measured result is '
+                   'not merely unimpressive against that distribution; it sits below '
+                   'its median. The number 6.09 was produced by a procedure that '
+                   'produces numbers like 6.09 anyway, so it cannot be used as '
+                   'evidence about the market.</p>\n'
+                   '      <p>Notice what that does not say. It does not say the rule '
+                   'is bad and it does not say the series has nothing in it. It is a '
+                   'statement about the measurement. And notice what a backtest '
+                   'still does: a rule that loses in-sample, before costs, is dead, '
+                   'and finding that out in an afternoon is most of what the '
+                   'technique is for. What it cannot do alone is promote one.</p>\n'),
+        dict(
+            title='What a search costs before it has seen a price',
+            setup='      <p>Suppose every configuration you are about to test is '
+                  'worthless, in the exact sense that its true edge is zero. Each '
+                  'still returns a t-statistic, because a finite record of trades is '
+                  'a sample and samples wobble, and a search keeps the largest '
+                  'wobble it found.</p>\n'
+                  '      <p>The expected largest of N standard normal draws has a '
+                  'closed form: (1 &minus; &gamma;) times the normal value at 1 '
+                  '&minus; 1/N, plus &gamma; times the normal value at 1 &minus; '
+                  '1/(Ne), with &gamma; = 0.5772156649. The bar that only five '
+                  'worthless searches in a hundred would clear is the normal value '
+                  'of 0.95 raised to the power 1/N, one-sided, because a rule that '
+                  'loses is not a discovery.</p>\n',
+            ask='For 20, 500, 2,500 and 30,000 configurations, what is the expected '
+                'best t, what is the bar, and how much edge per trade does the '
+                'search manufacture over 200 trades? And what does the shape of the '
+                'first column say?',
+            result='Bars of 2.799, 3.713, 4.102 and 4.644, manufacturing 0.134, '
+                   '0.216, 0.248 and 0.291 of an R a trade; and the penalty grows '
+                   'with the logarithm of the count.',
+            answer='      <p>One substitution in full, so nothing has to be taken on '
+                   'trust. At 2,500 configurations, 1 divided by N is 0.0004000, and '
+                   'the standard normal value leaving that much in the upper tail is '
+                   '3.35279. Then N times e is 6,796, 1 divided by that is 0.0001472, '
+                   'and its normal value is 3.62026. Weighting the two by 0.4228 and '
+                   '0.5772 gives 3.50718. That is a t-statistic; divide by the square '
+                   'root of 200, which is 14.14, and the manufactured edge is 0.248 '
+                   'of an R a trade. No market entered that calculation at any '
+                   'point.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Configurations</th><th>Expected best t</th><th>Bar at five per cent</th><th>R a trade, 200 trades</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>0.000</td><td>1.645</td><td>0.000</td></tr>
+          <tr><td>20</td><td>1.901</td><td>2.799</td><td>0.134</td></tr>
+          <tr><td>500</td><td>3.053</td><td>3.713</td><td>0.216</td></tr>
+          <tr><td>2,500</td><td>3.507</td><td>4.102</td><td>0.248</td></tr>
+          <tr><td>30,000</td><td>4.121</td><td>4.644</td><td>0.291</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Read the first column and the shape is the useful part. '
+                   'Going from one configuration to 500 raises the bar from 1.645 to '
+                   '3.713, which is most of the damage. Going from 500 to 30,000 is '
+                   'sixty times as much searching and raises it by 0.931 more. The '
+                   'penalty grows with the logarithm of the count, so a modest search '
+                   'is expensive and an enormous one is barely worse than a large '
+                   'one.</p>\n'
+                   '      <p>Which cuts the way nobody mentions. You do not need a '
+                   'grid of thirty thousand to be badly exposed: twenty '
+                   'configurations already put the bar at 2.799, which is 70 per cent '
+                   'above where a single test sits, and twenty is a morning of trying '
+                   'things.</p>\n'
+                   '      <p>And the count is knowable in advance, which is the '
+                   'entire point of the arithmetic. It costs one integer written down '
+                   'before the search rather than remembered after it, and the reason '
+                   'it is so rarely there is that it can only ever make a result look '
+                   'worse.</p>\n'),
+        dict(
+            title='What it costs to be allowed to look',
+            setup='      <p>A live record cannot be searched, so its configuration '
+                  'count is one and its bar is 1.645. Clearing that bar with an edge '
+                  'of d in R a trade takes 1.645 divided by d, all squared, because '
+                  'the t-statistic is d times the square root of the trade '
+                  'count.</p>\n'
+                  '      <p>Then the thing that undoes it. A record judged once, at '
+                  'a fixed trade count, passes a dead system 5 per cent of the time, '
+                  'which is what the bar was chosen for. A record judged after every '
+                  'trade, and stopped the first time it clears, passes a dead system '
+                  '24.25 per cent of the time. Restoring five per cent under that '
+                  'watching takes a threshold of 2.569.</p>\n',
+            ask='How many trades does each edge need, and how many months at thirty '
+                'trades a month? What does the peeking threshold do to the trade '
+                'count, and what kind of number is 2.569?',
+            result='1,083, 271, 121 and 44 trades; peeking multiplies the count by '
+                   '2.44; and 2.569 is the bar for eleven configurations.',
+            answer='''      <table>
+        <thead><tr><th>Edge, R a trade</th><th>Trades to clear 1.645</th><th>Months at thirty a month</th></tr></thead>
+        <tbody>
+          <tr><td>0.05</td><td>1,083</td><td>36.1</td></tr>
+          <tr><td>0.10</td><td>271</td><td>9.0</td></tr>
+          <tr><td>0.15</td><td>121</td><td>4.0</td></tr>
+          <tr><td>0.25</td><td>44</td><td>1.4</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Read the first two rows and the shape of the problem is '
+                   'visible. Halving the edge you will accept quadruples the wait, '
+                   'because the bar is fixed and only the square root of the count '
+                   'grows to meet it. The edges people actually find, once costs and '
+                   'the benchmark have been subtracted, live in the top half of that '
+                   'table, and the top half is measured in years.</p>\n'
+                   '      <p>Now the peeking. Trades needed scale as the square of '
+                   'the bar, so raising it from 1.645 to 2.569 multiplies the count '
+                   'by (2.569 &divide; 1.645) squared, which is 2.44. The 271 trades '
+                   'a tenth of an R needed become 661, and nine months become '
+                   'twenty-two.</p>\n'
+                   '      <p>And 2.569 is not a new kind of number. It is exactly '
+                   'the bar the third question&rsquo;s formula gives for eleven '
+                   'configurations. Watching one live record as it accumulates is '
+                   'worth searching eleven, because a record you are allowed to stop '
+                   'is a search over stopping times, and it can be priced the same '
+                   'way.</p>\n'
+                   '      <p>So the column this puts on the sheet is the shortest '
+                   'one: the number of trades the test will run for, written down '
+                   'before the first trade. It costs one integer and an act of '
+                   'self-restraint, and committing to it in advance is the only '
+                   'version that can cost you anything.</p>\n'),
+        dict(
+            title='The three parts of one return',
+            setup='      <p>A rule takes 8 trades over a fifty-nine-move window and '
+                  'makes 12.40 a share gross. A round trip costs 0.1230. Buying at '
+                  'the first close and selling at the last makes 6.20 gross and 6.08 '
+                  'net.</p>\n'
+                  '      <p>And the number a backtest report almost never carries: '
+                  'walk the rule bar by bar and it actually held a position over 24 '
+                  'of the 59 bars.</p>\n',
+            ask='What are the three components of the return, do they sum, and what '
+                'share of the net was the market under each of the two benchmarks?',
+            result='2.52 of market, 9.88 of selection and 0.98 of costs, summing to '
+                   '11.42; and the market is 22.1 per cent of the net at the '
+                   'rule&rsquo;s own exposure and 53.2 per cent fully invested.',
+            answer='      <p>The exposure share is 24 &divide; 59 = 0.4068. The rule '
+                   'was in the market two fifths of the time and flat for the rest, '
+                   'so it was not a competitor to buying and holding. It was a '
+                   'two-fifths-sized position in the same instrument, taken at chosen '
+                   'moments, and charging it for the whole of the market&rsquo;s move '
+                   'charges it for a return it could not have collected.</p>\n'
+                   '      <p>That gives three parts that can be computed rather than '
+                   'argued about. The market part is the exposure times the move: '
+                   '0.4068 &times; 6.20 = 2.52. The selection part is whatever is '
+                   'left of the gross: 12.40 &minus; 2.52 = 9.88, and it is the '
+                   'return that came from being long at those particular bars rather '
+                   'than at an average selection of bars. The cost part is 8 round '
+                   'trips at 0.1230, which is 0.98, and it is the only one of the '
+                   'three that is certain.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Component</th><th>Dollars a share</th><th>Share of the net</th></tr></thead>
+        <tbody>
+          <tr><td>Market: exposure of 0.4068 times a move of 6.20</td><td>+2.52</td><td>0.221</td></tr>
+          <tr><td>Selection: being long at those bars rather than at any bars</td><td>+9.88</td><td>0.865</td></tr>
+          <tr><td>Costs: 8 round trips at 0.1230</td><td>−0.98</td><td>−0.086</td></tr>
+          <tr><td>Net</td><td>+11.42</td><td>1.000</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>They sum to the net exactly, which is the only property '
+                   'a decomposition has to have and is worth checking every time, '
+                   'because an attribution whose parts do not sum has a fourth part '
+                   'in it that somebody has not named.</p>\n'
+                   '      <p>Now the two benchmarks against each other. Charge the '
+                   'rule the fully invested 6.08 and the market supplied 53.2 per '
+                   'cent of its net; charge it the market at its own exposure and the '
+                   'market supplied 22.1 per cent. Neither is a mistake. They are '
+                   'answers to two different questions, and the sentence &ldquo;most '
+                   'of the return was the market&rdquo; is true under one and false '
+                   'under the other. The exposure share is what decides which '
+                   'sentence you are entitled to, and it takes one pass over the '
+                   'position history.</p>\n'),
+        dict(
+            title='The depth that is not evidence, and the lines that are',
+            setup='      <p>Being some number of R down is the moment almost every '
+                  'system gets switched off, so price the moment. Over a fixed run, '
+                  'a system with no edge at all reaches a depth of eight R on 87.2 '
+                  'per cent of runs and one with a genuine tenth of an R reaches it '
+                  'on 59.5 per cent. At twelve R those figures are 58.5 and 22.6; at '
+                  'twenty R they are 18.2 and 2.3.</p>\n'
+                  '      <p>Then the test that does accumulate. Wald&rsquo;s '
+                  'sequential test keeps a running number and adds d x &minus; '
+                  'd&sup2;/2 after each trade with outcome x, declaring the system '
+                  'alive at +2.9444 and dead at &minus;2.9444. On the running total '
+                  'in R the two boundaries are the total equal to n times d over '
+                  'two, minus and plus 2.9444 divided by d.</p>\n',
+            ask='What does each depth multiply the odds of the system being dead by? '
+                'How many trades does Wald take at each edge, and where do the two '
+                'lines sit at 200 trades on an edge of 0.15?',
+            result='Ratios of 1.47, 2.59 and 7.78; verdicts in 2,356, 589, 262 and '
+                   '95 trades; and lines at &minus;4.6R and +34.6R while a live edge '
+                   'expects +30.0R.',
+            answer='      <p>The ratio is one division. At eight R it is 87.2 '
+                   '&divide; 59.5 = 1.47, at twelve R it is 58.5 &divide; 22.6 = '
+                   '2.59, and at twenty R it is 18.2 &divide; 2.3 = 7.78. A ratio of '
+                   '1.47 means that being eight R down multiplies whatever odds you '
+                   'already held on the system being dead by 1.47 and by no more '
+                   'than that. It is evidence, faintly, and it is the strongest thing '
+                   'a reader has in the moment they usually act.</p>\n'
+                   '      <p>The depth that would settle something is twenty R, at '
+                   'which the ratio finally reaches 7.78 &mdash; and twenty R arrives '
+                   'to two live systems in a hundred and to eighteen dead ones, so '
+                   'waiting for it means most of your genuinely dead systems never '
+                   'trip it either. Depth fails as evidence because depth is bounded '
+                   'and evidence is not.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Edge you are testing for</th><th>Step per trade</th><th>Trades to a verdict</th><th>Months at thirty a month</th></tr></thead>
+        <tbody>
+          <tr><td>0.05</td><td>0.00125</td><td>2,356</td><td>78.5</td></tr>
+          <tr><td>0.10</td><td>0.00500</td><td>589</td><td>19.6</td></tr>
+          <tr><td>0.15</td><td>0.01125</td><td>262</td><td>8.7</td></tr>
+          <tr><td>0.25</td><td>0.03125</td><td>95</td><td>3.1</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Wald&rsquo;s trade count is one division. A live '
+                   'system&rsquo;s average step is d times d minus d&sup2;/2, which '
+                   'is d&sup2;/2, and it has 2.9444 to travel: at an edge of 0.10 the '
+                   'step is 0.005 and the verdict takes 589 trades. At 0.05 it takes '
+                   'four times as long, because the step goes as the square of the '
+                   'edge.</p>\n'
+                   '      <p>Then draw the lines where a trader can see them. At an '
+                   'edge of 0.15 over 200 trades, the dead line sits at 200 &times; '
+                   '0.075 &minus; 2.9444 &divide; 0.15 = &minus;4.6R and the alive '
+                   'line at +34.6R, while a live edge expects to have made +30.0R. '
+                   'Both are worth a second read. The test will not call the system '
+                   'alive at +30.0R, which is exactly what a real edge was supposed '
+                   'to deliver. And the dead line reaches zero at 2 &times; 2.9444 '
+                   '&divide; 0.15&sup2; = 262 trades, so until then a system that has '
+                   'made you nothing at all has not yet failed.</p>\n'),
+        dict(
+            title='Four ninths, and the orders that finish the account',
+            setup='      <p>An instrument turns over 90 million dollars a day at a '
+                  'daily standard deviation of 2.12 per cent. A rule has a round-trip '
+                  'edge of thirty basis points in it. Lesson 59&rsquo;s law says the '
+                  'fraction the price moves against you on one crossing is the daily '
+                  'volatility times the square root of your order over the '
+                  'day&rsquo;s volume, and a round trip pays it twice.</p>\n'
+                  '      <p>Then a separate machine. An account risks 1.5 per cent of '
+                  'itself a trade, so one R is 1.5 per cent of the account. A loop '
+                  'polls a condition that stays true and adds one R of exposure every '
+                  'time it looks.</p>\n',
+            ask='What is the capacity, what is the best single position and what does '
+                'it earn, what does the round trip cost there as a share of the edge, '
+                'and how many people sizing correctly does the trade support? And how '
+                'many orders take the whole account?',
+            result='450,561 dollars of capacity, a best position of 200,249 earning '
+                   '200.25 a trade at two thirds of the edge spent, 2.25 people, and '
+                   '67 orders.',
+            answer='      <p>Capacity is where the round trip costs the whole edge, '
+                   'so twice the volatility times the square root of the '
+                   'participation equals 0.0030, which puts the participation at '
+                   '(0.0030 &divide; 0.0424) squared = 0.005006 and the capacity at '
+                   '90,000,000 &times; 0.005006 = 450,561 dollars.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Position, as a share of capacity</th><th>Dollars</th><th>Round trip, basis points</th><th>Edge kept</th><th>Dollars a trade</th></tr></thead>
+        <tbody>
+          <tr><td>A tenth</td><td>45,056</td><td>9.49</td><td>20.51</td><td>92.42</td></tr>
+          <tr><td>A quarter</td><td>112,640</td><td>15.00</td><td>15.00</td><td>168.96</td></tr>
+          <tr><td>Four ninths</td><td>200,249</td><td>20.00</td><td>10.00</td><td>200.25</td></tr>
+          <tr><td>Three fifths</td><td>270,336</td><td>23.24</td><td>6.76</td><td>182.80</td></tr>
+          <tr><td>Four fifths</td><td>360,449</td><td>26.83</td><td>3.17</td><td>114.16</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>Read the fourth row against the third. Three fifths of '
+                   'capacity is 35 per cent more money on the table and it comes back '
+                   'with less. The fifth row is worse still: 80 per cent more money '
+                   'returns 57 per cent as much. There is a point past which putting '
+                   'more on takes money off, and it arrives long before the edge runs '
+                   'out.</p>\n'
+                   '      <p>Where it arrives is a pure number. Differentiate size '
+                   'times what survives of the edge, set to zero, and the square root '
+                   'of the best participation is the edge over three times the '
+                   'volatility, where capacity had a two. Square both and divide, and '
+                   'the best position is four ninths of capacity &mdash; in every '
+                   'instrument, at every edge, at every volatility. Put four ninths '
+                   'back into the impact and the second identity falls out: the round '
+                   'trip at the best size costs exactly two thirds of the edge, and '
+                   'you keep one third. Two thirds of your edge is the price of '
+                   'collecting the other third.</p>\n'
+                   '      <p>And the crowd follows from the same two numbers. If '
+                   'everybody in the trade sizes at four ninths of capacity, the '
+                   'trade holds nine quarters of them: 2.25 people, in this '
+                   'instrument and in any other, because the ratio of two pure '
+                   'numbers cannot know what instrument it is in. The third person to '
+                   'size correctly takes it below breakeven for all three.</p>\n'
+                   '      <p>Then the loop, which is a different kind of ceiling '
+                   'entirely. The number of orders that puts the whole account at '
+                   'risk is one divided by the risk per trade: at 1.5 per cent that '
+                   'is 67, and at half a per cent it is 200. Sizing smaller does buy '
+                   'time against your own code, and it buys it in the least useful '
+                   'currency there is, because what runs out first is not your money '
+                   'but your attention. What acts in time is a check that reads the '
+                   'position before sending, not one that reads a profit-and-loss '
+                   'figure afterwards.</p>\n'),
+        dict(
+            title='The filter, and the sheet spent',
+            setup='      <p>A record of 12 trades: 8 winners averaging 0.90R and 4 '
+                  'losers averaging 0.55R. A filter does not create trades, it '
+                  'removes them, so the honest comparison is total profit over the '
+                  'same original opportunities. Let it keep a share s of the winners '
+                  'and correctly reject a share t of the losers; it is worth having '
+                  'when (1 &minus; p) t is at least p (1 &minus; s) b.</p>\n'
+                  '      <p>Then the sheet. Lesson 70 spent all eight columns on the '
+                  'rule this module has followed since lesson 63 &mdash; 7 trades, '
+                  '9.84 a share net, an average trade of 0.9101R &mdash; and left '
+                  'three of them blank.</p>\n',
+            ask='What is the profit factor, what accuracy must an equally good filter '
+                'beat, and what is the most a perfect one could add? Then fill in the '
+                'three blank columns from the rule&rsquo;s own average trade, and say '
+                'what they show.',
+            result='A profit factor of 3.27, a threshold of 76.6 per cent, and a '
+                   'ceiling of 44.0 per cent; and the rule&rsquo;s own edge implies a '
+                   'four-trade horizon and a verdict at trade 7.11.',
+            answer='      <p>Gross profit is 8 &times; 0.90 = 7.20R and gross loss is '
+                   '4 &times; 0.55 = 2.20R, so the net is 5.00R and the profit factor '
+                   'is 3.2727. Check it the other way: p is 0.6667 and b is 0.90 '
+                   '&divide; 0.55 = 1.6364, and p b over 1 &minus; p is 3.2727 '
+                   'again.</p>\n'
+                   '      <p>Divide the inequality by 1 &minus; p and the right-hand '
+                   'side becomes the profit factor, so a filter equally good in both '
+                   'directions needs an accuracy of at least the profit factor over '
+                   'one more than it: 3.2727 &divide; 4.2727 = 0.766. Turned round, a '
+                   'filter of accuracy a earns its place on any strategy whose profit '
+                   'factor is below a over 1 &minus; a: 1.22 at 55 per cent accuracy, '
+                   '1.50 at 60, 1.86 at 65. And divide the inequality the other way '
+                   'and it says something you can test on a trade log with two '
+                   'counts: the losers the filter drops must outnumber the winners it '
+                   'drops by at least 1.64, your payoff ratio.</p>\n'
+                   '      <p>Then the ceiling, which is the number that ends most of '
+                   'these projects. A perfect filter removes every loser and keeps '
+                   'every winner, so the most it can add is the whole gross loss, '
+                   'which as a share of what the strategy already nets is one over '
+                   'the profit factor minus one: 1 &divide; 2.2727 = 44.0 per cent. '
+                   'Not 44 per cent if the model is good. Forty-four per cent if it '
+                   'is flawless.</p>\n'
+                   '      <p>Now the three blanks, and they fill themselves from one '
+                   'number. The rule&rsquo;s average trade is 0.9101R.</p>\n'
+                   + '''      <table>
+        <thead><tr><th>Column</th><th>What it now says</th></tr></thead>
+        <tbody>
+          <tr><td>The trades fixed in advance, from lesson 65</td><td>4</td></tr>
+          <tr><td>The quit depth, from lesson 67</td><td>the dead line reaches zero at trade 7.11</td></tr>
+          <tr><td>The position cap, from lesson 69</td><td>618,020 dollars, checked before every order</td></tr>
+        </tbody>
+      </table>
+''' +
+                   '      <p>The horizon is (1.645 &divide; 0.9101) squared = 3.27, '
+                   'so four trades. Wald&rsquo;s step is 0.9101&sup2; &divide; 2 = '
+                   '0.4141 and the verdict arrives after 2.9444 &divide; 0.4141 = '
+                   '7.11 trades, which is also where the dead line crosses zero. The '
+                   'position cap is four ninths of the capacity the sheet already '
+                   'carries.</p>\n'
+                   '      <p>Read the first two against the record. If the '
+                   'rule&rsquo;s edge were real at 0.9101R, four trades would have '
+                   'settled it and seven would have produced a verdict. It took '
+                   'seven. The horizon and the sample are the same number, and that '
+                   'is what a sample not fixed in advance looks like from the inside: '
+                   'the test finished exactly when the data ran out, which is not '
+                   'evidence about the rule but a description of the '
+                   'afternoon.</p>\n'
+                   '      <p>And the filter column closes the loop. That rule&rsquo;s '
+                   'seven trades have a profit factor of 24.26, so a filter would '
+                   'need 96.0 per cent accuracy and a perfect one could add 4.3 per '
+                   'cent. There is one loser in the record and it is worth 0.423 out '
+                   'of 9.839. A filter can only give you back your losers, and a '
+                   'strategy that looks this good has almost none.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can hold an idea to the four things a sentence has '
+          'to carry and then keep subtracting. Handed a count, you produce an '
+          'interval and the counts that could ever have decided; handed a '
+          'backtest, you subtract costs, then the benchmark, then what the same '
+          'search finds in nothing; handed a grid, you price it before it sees a '
+          'price; handed a live record, you fix its length before the first trade '
+          'and refuse to read it early; handed a return, you split it three ways '
+          'and check that the parts sum; handed a drawdown, you compute what it '
+          'multiplies the odds by and find the answer is 1.47; handed an edge, you '
+          'size at four ninths of what it can hold; and handed a model, you divide '
+          'gross profit by gross loss before you build anything.</p>\n'
+          '      <p>Module 9 takes the finished system and puts it next to the '
+          'others. Lesson 71 opens with the arithmetic that makes that necessary: '
+          'positions that look separate are one position whenever they move '
+          'together, and the number of independent bets in a book is not the '
+          'number of lines in it.</p>\n',
+),
+
 ]
