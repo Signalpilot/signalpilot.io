@@ -2911,5 +2911,327 @@ dict(
           'are defined on, and the busiest cell in the whole grid works out at '
           'seventy entries a year.</p>\n',
 ),
+# --------------------------------------------------------------- module 10
+dict(
+    mod=10, tier='professional', slug='module-10-quiz',
+    slots=[76, 77, 78, 79, 80, 81],
+    title='Module 10 Quiz: The Profession',
+    desc='Seven computations from the profession module. Turn an order count '
+         'into a pace and a pace into a wait, price a quiet week against a busy '
+         'one, multiply a chain, tax an edge with and without relief, size the '
+         'capital a wage requires, spread one fixed cost across the trades there '
+         'actually are, and put a seven-trade record against the bars the course '
+         'wrote.',
+    intro='This module kept a list of what the day contains that is not the '
+          'decision: twelve operations, a chain, a rate, a wage and an overhead. '
+          'Seven questions, all arithmetic, and every one of them starts from a '
+          'count the earlier modules produced rather than from a number anybody '
+          'assumed. The last one puts the whole list beside a record of seven '
+          'trades.',
+    covers='Lessons 76 to 81, and the five-item list of subtractions the module '
+           'has been keeping since lesson 76.',
+    related=[(76, 'the pace the first two questions run on'),
+             (77, 'the chain the third question multiplies'),
+             (78, 'the relief the fourth question solves for'),
+             (79, 'the capital the fifth question sizes'),
+             (80, 'the overhead the sixth question spreads'),
+             (81, 'the eleven bars the last question ranks')],
+    questions=[
+        dict(
+            title='A pace, and the wait it buys',
+            setup='      <p>Lesson 76 ran lesson 71&rsquo;s four rules over the '
+                  'twenty-nine moves on which all of them are defined. The '
+                  '2-and-5 rule asked for 9 orders, the 3-and-10 for 2, and the '
+                  '5-and-20 and 8-and-30 for 1 each.</p>\n'
+                  '      <p>Take a year as 252 trading days. Two orders make a '
+                  'round trip. Lesson 67 needs 589 trades to settle whether an '
+                  'edge of a tenth of an R is real, and lesson 65 assumed forty '
+                  'trades a month.</p>\n',
+            ask='How many orders and how many round trips a year does the book '
+                'ask for, what share of its workload does the fastest rule carry, '
+                'and how long does lesson 67&rsquo;s verdict take at that pace? '
+                'How long would it take at the assumed pace?',
+            result='113 orders and 56.5 round trips a year, 69.23 per cent of the '
+                   'workload on one rule, and a verdict 10.42 years away against '
+                   '1.23 at the assumed pace.',
+            answer='      <p>Thirteen orders in twenty-nine days is a rate: '
+                   '13 &divide; 29 &times; 252 = 113 orders a year, which is 56.5 '
+                   'round trips. The fastest rule asked for 9 of the 13, which is '
+                   '9 &divide; 13 = 69.23 per cent of every order the book '
+                   'sent.</p>\n'
+                   '      <p>The verdict is one division: 589 &divide; 56.5 = '
+                   '10.42 years. Forty trades a month is 480 round trips a year, '
+                   'so the same 589 would have taken 589 &divide; 480 = 1.23 '
+                   'years, and at the 240 round trips a mid-table pace gives, '
+                   '2.45.</p>\n'
+                   '      <p>The gap between 10.42 and 1.23 is not a disagreement '
+                   'about patience. It is a count that was assumed against a count '
+                   'that was made, on the same rule family, and the assumed one is '
+                   'eight and a half times the measured one. A reader carrying '
+                   'lesson 65&rsquo;s wait in their head is carrying somebody '
+                   'else&rsquo;s numerator.</p>\n'),
+        dict(
+            title='The quiet week and the busy one',
+            setup='      <p>On the same twenty-nine moves the 2-and-5 rule had a '
+                  'six-day stretch, moves 44 to 49, in which the position never '
+                  'changed and no order was sent, and it earned 1.90 in the '
+                  'instrument&rsquo;s units. It then had five consecutive days, '
+                  'moves 50 to 54, of exit, entry, exit, entry, exit, and it '
+                  'earned 0.20 while the price moved 0.40 across the whole '
+                  'stretch.</p>\n'
+                  '      <p>A typical daily move over those twenty-nine is 0.7172. '
+                  'Five orders are two and a half round trips. Lesson 12 priced a '
+                  'round trip at a fifth of one per cent of a typical day&rsquo;s '
+                  'movement on its index ETF and at 52 per cent of one on its '
+                  'micro cap.</p>\n',
+            ask='What is each stretch worth in typical daily moves, what is the '
+                'ratio between them, and what do the five orders cost on each of '
+                'the two instruments as a share of what the busy week made?',
+            result='2.65 typical daily moves against 0.28, a ratio of 9.5, and '
+                   'five orders costing 0.0036 on the index ETF against 0.93 on '
+                   'the micro cap, which is 1.8 per cent of the gain against 4.7 '
+                   'times it.',
+            answer='      <p>Two divisions. 1.90 &divide; 0.7172 = 2.65 typical '
+                   'daily moves for the six days that asked for nothing, and '
+                   '0.20 &divide; 0.7172 = 0.28 for the five days that asked for '
+                   'an order every session. The ratio is '
+                   '1.90 &divide; 0.20 = 9.5.</p>\n'
+                   '      <p>Then the bill. Two and a half round trips at a fifth '
+                   'of one per cent of 0.7172 is '
+                   '2.5 &times; 0.002 &times; 0.7172 = 0.0036, which is 1.8 per '
+                   'cent of the 0.20. The same two and a half round trips at 52 '
+                   'per cent of 0.7172 is 0.93, which is 4.7 times the whole '
+                   'gain.</p>\n'
+                   '      <p>Identical rule, identical week, identical orders. The '
+                   'only thing that changed is the instrument, and the six days '
+                   'that felt like a system that had stopped working made nine and '
+                   'a half times what the week that felt like work made, before '
+                   'either bill.</p>\n'),
+        dict(
+            title='The link you do not own',
+            setup='      <p>An order reaches the market through your equipment and '
+                  'then through the broker, and availability along a chain '
+                  'multiplies. Take the broker at 99.9 per cent and a year as '
+                  '8,760 hours. The book asks for 113 orders a year.</p>\n'
+                  '      <p>A second connection is not two independent links. With '
+                  'a share c of failures common to both, a pair of links each down '
+                  'a fraction q of the time is down c q + (1 &minus; c) q&sup2;. '
+                  'Take q as one per cent and c as one in five.</p>\n',
+            ask='What is the chain&rsquo;s availability and its downtime a year at '
+                'your side of 99.0, 99.9, 99.99 and 99.999 per cent, and how many '
+                'orders a year does your own side alone cost you at each? Then: '
+                'what does a second connection do to your side, and what does a '
+                'stop resting at the broker do to the hours a position spends '
+                'unprotected?',
+            result='98.901, 99.800, 99.890 and 99.899 per cent, which is 96.3, '
+                   '17.5, 9.6 and 8.8 hours a year and 1.13, 0.11, 0.011 and 0.001 '
+                   'orders missed; the second connection takes your side to 99.792 '
+                   'per cent and the position to 27.0 unprotected hours, and the '
+                   'resting stop takes it to 8.8 for nothing.',
+            answer='      <p>The chain is one multiplication a row.</p>\n'
+                   + table(['Your side', 'Chain, at a broker of 99.9%',
+                            'Chain down a year', 'Orders missed a year'],
+                           [['99.0%', '98.901%', '96.3 hours', '1.13'],
+                            ['99.9%', '99.800%', '17.5 hours', '0.11'],
+                            ['99.99%', '99.890%', '9.6 hours', '0.011'],
+                            ['99.999%', '99.899%', '8.8 hours', '0.001']])
+                   + '      <p>Read the third column down and the purchases price '
+                   'themselves. The first, from 99.0 to 99.9, is worth 78.8 hours '
+                   'a year. The second is worth 7.9. The third is worth 0.8, and '
+                   'there is no fourth, because the 8.8 hours that remain belong '
+                   'to the broker and no equipment of yours can reach them.</p>\n'
+                   '      <p>The second connection: at one failure in five common '
+                   'to both, the pair is down '
+                   '0.2 &times; 0.01 + 0.8 &times; 0.0001 = 0.00208, so your side '
+                   'goes to 99.792 per cent, the chain to 99.692, and a position '
+                   'spends 8,760 &times; 0.00308 = 27.0 hours a year unprotected '
+                   'rather than 96.3.</p>\n'
+                   '      <p>The resting stop: a submitted order is executed by the '
+                   'machine holding it, so the position is protected at the '
+                   'broker&rsquo;s 99.9 per cent whatever your equipment does, '
+                   'which is 8.8 hours. The free move is worth 87.5 hours a year '
+                   'and the paid one 69.3, and the free one is larger before the '
+                   'bill is subtracted rather than after.</p>\n'),
+        dict(
+            title='The rate that changes nothing, and the relief that does',
+            setup='      <p>Lesson 67&rsquo;s trade outcome has a mean of a tenth '
+                  'of an R and a standard deviation of one R. Split it and the '
+                  'winning part averages 0.4509 R a trade and the losing part '
+                  '0.3509 R, and the edge is the difference.</p>\n'
+                  '      <p>A rate takes a slice off the first number and relief '
+                  'gives a slice back on the second. Write the share of a loss '
+                  'that actually reduces what you pay as a fraction of the full '
+                  'rate. Lesson 67&rsquo;s verdict takes 589 trades on an edge of '
+                  'a tenth of an R and a standard deviation of one.</p>\n',
+            ask='Why does the verdict stay at 589 trades at every rate when relief '
+                'is full? At what rate does the edge vanish with no relief at all? '
+                'What share of losses must be relieved at a rate of thirty per cent '
+                'and at forty? And what is the edge, the standard deviation and the '
+                'trade count at thirty per cent with half the losses relieved?',
+            result='Full relief multiplies the mean and the standard deviation by '
+                   'the same factor and the test is a ratio, so 589 stands; with no '
+                   'relief the edge vanishes at 22.18 per cent; thirty per cent '
+                   'needs 33.5 per cent of losses relieved and forty needs 57.3; and '
+                   'at half relief the edge is +0.0174 R on a standard deviation of '
+                   '0.7703, which is 11,596 trades.',
+            answer='      <p>The first part is one observation. A proportional rate '
+                   'with full relief multiplies every outcome by one minus the rate, '
+                   'so the mean becomes 0.0700 and the standard deviation 0.7000 at '
+                   'thirty per cent. The test runs on the mean divided by the '
+                   'standard deviation, and a factor that multiplies both cancels: '
+                   '0.0700 &divide; 0.7000 = 0.10, unchanged, and the verdict stays '
+                   'at 589 trades at any rate short of confiscation.</p>\n'
+                   '      <p>With no relief the edge is what the rate leaves of the '
+                   'winning part after the whole losing part is subtracted, so it '
+                   'vanishes when the rate times 0.4509 equals 0.10: '
+                   '0.10 &divide; 0.4509 = 22.18 per cent.</p>\n'
+                   '      <p>Between the two, the relief needed is the winning part '
+                   'minus the edge over the rate, all over the losing part. At '
+                   'thirty per cent that is '
+                   '(0.4509 &minus; 0.3333) &divide; 0.3509 = 33.5 per cent, and at '
+                   'forty it is (0.4509 &minus; 0.2500) &divide; 0.3509 = 57.3 per '
+                   'cent. The question to ask about a tax system is therefore not '
+                   'what the rate is but how much of a loss comes back.</p>\n'
+                   '      <p>And at thirty per cent with half the losses relieved '
+                   'the mean is 0.10 &minus; 0.30 &times; '
+                   '(0.4509 &minus; 0.5 &times; 0.3509) = +0.0174 R against a '
+                   'standard deviation of 0.7703, so the drift per trade falls from '
+                   '0.10 to 0.0225 and the verdict takes 11,596 trades. The rate '
+                   'did not change the shape. The relief did.</p>\n'),
+        dict(
+            title='The capital a wage requires',
+            setup='      <p>In a year an account takes some number of round trips, '
+                  'each worth the edge in R, and each R is the risk per trade as a '
+                  'fraction of the account. Set the expected annual gain equal to a '
+                  'wage and the capital falls out: the capital, in years of that '
+                  'wage, is one divided by the round trips times the edge times the '
+                  'risk per trade.</p>\n'
+                  '      <p>Use lesson 76&rsquo;s 56.5 round trips a year, lesson '
+                  '67&rsquo;s edge of a tenth of an R and its 589 trades and median '
+                  'worst drawdown of 8.82R, and the one and a half per cent a trade '
+                  'lesson 75 licenses.</p>\n',
+            ask='What capital does the wage require, how far away is the verdict, '
+                'what share of that capital is drawn as wages before it lands, and '
+                'why does the pace not appear in that share? At what risk per trade '
+                'does the share reach the whole account, and what do the wages and '
+                'the drawdown come to together?',
+            result='11.80 years of wage, a verdict 10.42 years away, 88.3 per cent '
+                   'drawn as wages, a share the pace cancels out of, the whole '
+                   'account reached at 1.70 per cent a trade, and 101.6 per cent '
+                   'with the drawdown added.',
+            answer='      <p>The capital is one division: '
+                   '1 &divide; (56.5 &times; 0.10 &times; 0.015) = 11.80 years of '
+                   'the wage. The verdict is another: 589 &divide; 56.5 = 10.42 '
+                   'years. The two horizons are the same horizon.</p>\n'
+                   '      <p>The share drawn is where the pace disappears. Wages '
+                   'drawn before the verdict are 589 over n years, and the capital '
+                   'is one over n times the edge times the risk per trade, so the '
+                   'ratio is 589 &times; 0.10 &times; 0.015 = 88.3 per cent and the '
+                   'n has cancelled. Trading four times as often does not reduce '
+                   'what the wait costs you, because a faster pace shrinks the '
+                   'capital by exactly the factor it shortens the wait.</p>\n'
+                   '      <p>Which leaves the risk per trade as the only lever, and '
+                   'it runs out quickly: the share reaches the whole account at '
+                   '1 &divide; (589 &times; 0.10) = 1.70 per cent a trade. Lesson '
+                   '67&rsquo;s median worst drawdown of 8.82R at one and a half per '
+                   'cent is another 13.23 per cent of the account, arriving during '
+                   'the same years rather than instead of them, and 88.3 + 13.23 = '
+                   '101.6 per cent is not a number an account can hold.</p>\n'),
+        dict(
+            title='The cost that does not scale',
+            setup='      <p>Every cost the course has priced so far arrives with a '
+                  'trade. A fixed cost does not: it arrives in a year you traded '
+                  'four hundred times and in a year you traded none.</p>\n'
+                  '      <p>Lesson 79 sized the capital so that the expected annual '
+                  'gain equals the wage, which means a cost base measured as a '
+                  'share of the wage is the same share of the edge. Take a cost '
+                  'base of a quarter of the wage on the book lesson 79 priced: '
+                  '11.80 years of capital, 56.5 round trips a year, a tenth of an R, '
+                  'and lesson 67&rsquo;s verdict at 5.8888 divided by the edge '
+                  'squared.</p>\n',
+            ask='What capital does the wage plus the cost base require, what edge '
+                'is left, how many trades does the verdict take, and how many years '
+                'is that at 56.5 round trips a year against 480? And why does the '
+                'wait move so much faster than the capital?',
+            result='14.75 years of wage, an edge of 0.075 R, 1,047 trades, and 18.53 '
+                   'years at the measured pace against 1.30 at the assumed one; the '
+                   'wait moves faster because it goes as one over the edge squared.',
+            answer='      <p>The capital is the wage and the cost base together: '
+                   '11.80 &times; 1.25 = 14.75 years of wage, an extra 2.95. The '
+                   'edge is the same fraction gone: a quarter of the wage is a '
+                   'quarter of the edge, so 0.10 becomes 0.075.</p>\n'
+                   '      <p>The verdict is 5.8888 &divide; 0.075&sup2; = 1,047 '
+                   'trades, and at 56.5 round trips a year that is 18.53 years '
+                   'rather than 10.42. The same bill on the same account at 480 '
+                   'round trips a year takes 0.0029 R from each trade rather than '
+                   '0.0250, leaves an edge of 0.0971, and costs 1.30 years against '
+                   '1.23. Eight years at the pace you actually trade at, and a month '
+                   'at the pace you assumed.</p>\n'
+                   '      <p>The reason the wait moves so much faster than the '
+                   'capital is the square. The capital grows in proportion to the '
+                   'cost base and the trade count goes as one over the edge squared, '
+                   'so leaving three quarters of the edge multiplies the trades by '
+                   'sixteen ninths and leaving a quarter multiplies them by sixteen. '
+                   'A fixed cost is not a bill the account settles out of its '
+                   'profits. It is a piece of the edge, and the pace decides how big '
+                   'a piece.</p>\n'),
+        dict(
+            title='Seven trades against the bars the course wrote',
+            setup='      <p>The book module 9 licensed has one record: the seven '
+                  'trades lesson 63&rsquo;s winning cell took on sixty closes. '
+                  'Three bars ask for a count of trades and each names a different '
+                  'one. Lesson 65 fixes a horizon of 156 before the first trade. '
+                  'Lesson 67 wants 589. Lesson 80&rsquo;s quarter-wage cost base '
+                  'wants 1,047.</p>\n'
+                  '      <p>The pace is lesson 76&rsquo;s 56.5 round trips a '
+                  'year.</p>\n',
+            ask='What is each of those four in years at that pace, and what is each '
+                'as a multiple of the record the book actually has? Which of them is '
+                'the one to work on, and what do the five items on this '
+                'module&rsquo;s list have in common?',
+            result='0.12, 2.76, 10.42 and 18.53 years, which is 1, 22.3, 84.1 and '
+                   '149.6 times the record; the fixed horizon at 22.3 times is the '
+                   'reachable one; and every item on the list is a subtraction.',
+            answer='      <p>Two divisions a row.</p>\n'
+                   + table(['What it takes', 'Trades', 'Years at 56.5 a year',
+                            'Times the record'],
+                           [['The book&rsquo;s whole record', '7', '0.12', '1'],
+                            ['Lesson 65&rsquo;s fixed horizon', '156', '2.76', '22.3'],
+                            ['Lesson 67&rsquo;s verdict', '589', '10.42', '84.1'],
+                            ['Lesson 80&rsquo;s cost base', '1,047', '18.53', '149.6']])
+                   + '      <p>The last column is what ranks the work. A record '
+                   'twenty-two times the one you have is two years and nine months '
+                   'of trading the rule you already have, which is a plan. A record '
+                   'eighty-four times the one you have is a decade, and one a '
+                   'hundred and fifty times is a working life. The reachable bar is '
+                   'the one to start on, and it is reachable precisely because it is '
+                   'the one that was fixed before the first trade rather than '
+                   'demanded after it.</p>\n'
+                   '      <p>And the list this module kept has one property worth '
+                   'saying out loud. Twelve operations, a chain, a rate, a wage, an '
+                   'overhead: every entry on it is a subtraction. Nothing the day '
+                   'contains outside the decision adds to the edge. The whole of '
+                   'what a profession does with the arithmetic is to find out how '
+                   'much of the edge survives the things that are not the '
+                   'trade.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can put a count where an assumption was. Handed a '
+          'grid, you count the orders it actually asked for and turn that into a '
+          'pace; handed a quiet stretch and a busy one, you price both and find '
+          'the quiet one worth nine and a half times the other; handed a chain, '
+          'you multiply it and stop buying at the link you do not own; handed a '
+          'rate, you ask what share of a loss comes back rather than what the rate '
+          'is; handed a wage, you divide it by the edge, the pace and the risk per '
+          'trade and read the years off; handed a fixed cost, you divide it among '
+          'the trades there actually are; and handed a record, you set it against '
+          'every bar the course wrote and work on the smallest gap that is not '
+          'already closed.</p>\n'
+          '      <p>Module 11 is where the candidates come from, and it starts '
+          'where this book is weakest. This one carries 1.06 independent bets on a '
+          'single instrument, and lesson 82 asks what a second instrument does to '
+          'it: two rules on each of two instruments is four positions, and at a '
+          'cross-correlation of zero that is 2.13 bets rather than four.</p>\n',
+),
 
 ]
