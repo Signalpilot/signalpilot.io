@@ -701,14 +701,18 @@ python3 scripts/curriculum/hubs.py                    # regenerate the index
 python3 scripts/curriculum/hubs.py --check            # exit 1 if stale
 python3 scripts/curriculum/catalogue.py               # sync index.json to the lessons
 python3 scripts/curriculum/catalogue.py --check       # exit with the drift count
+python3 scripts/curriculum/terms.py                   # build education/glossary.html
+python3 scripts/curriculum/terms.py --check           # exit with the finding count
+python3 scripts/curriculum/lessonterms.py             # refresh each lesson's terms block
+python3 scripts/curriculum/lessonterms.py --check     # exit with the count stale
 python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>
 ```
 
 Run from the repo root; lesson paths are relative to `education/`. Both
 checkers exit with their finding count by design, so a red label in a shell is
 a count and not a crash. `audit.py` takes any of `xref`, `chain`, `arith`,
-`claim`, `dupes`, `locale`, `hub` and `cat`, and runs all eight when given
-none. It reads only the
+`claim`, `dupes`, `locale`, `hub`, `cat` and `terms`, and runs all nine when
+given none. It reads only the
 English pages, because a defect in the relations between lessons is in the
 English or it is nowhere.
 
@@ -779,6 +783,40 @@ corpus, and the corpus is on disk.
 The check is the development's first question asked one level up: could a
 reader reproduce every number on the index from the lesson files, without
 asking us anything?
+
+### The glossary
+
+The same inversion, one page further out. `education/curriculum/glossary.json`
+holds a term, a definition and the slots it belongs to; `terms.py` renders
+`education/glossary.html`, reading each lesson's link, number and title from
+the catalogue, so the only thing anyone types is the definition. `audit.py
+terms` fails on a lesson no entry names, and the page opens by promising a
+definition for every term the lessons use, so that check is the promise.
+
+Two rules the entries are held to, both learned by reading the sixty-five
+that were there first:
+
+- **An entry says what its lesson found, not what the term means elsewhere.**
+  A quarter of them stated as fact the folklore a lesson measures and
+  rejects &mdash; positive delta meaning more buying than selling, the
+  aggressor side being reported rather than inferred, market structure
+  without the swing dial. A reader who checks a definition against the
+  lesson it cites and finds them disagreeing has learned that neither can be
+  trusted.
+- **Every figure in a definition reproduces from a lesson the entry cites.**
+  This is checkable rather than editorial: pull every numeral out of the
+  definition and look for it in the rendered text of those lessons. Six
+  entries carried figures no cited lesson prints, and three more were caught
+  by the check on its first run.
+
+`lessonterms.py` closes the loop from the other end, putting each lesson's
+terms at its foot, generated from the same file so the two can never disagree
+about which lesson a term belongs to. Term names carry `translate="no"`,
+because they are the headwords of an English page and the link points at it;
+only the two sentences around them translate, and they are the same two
+sentences on all eighty-five lessons. Use the literal `·` between them and
+never `&middot;`: the entity spells two ASCII letters, which is enough to make
+the separator a translatable key in every locale.
 
 ---
 
