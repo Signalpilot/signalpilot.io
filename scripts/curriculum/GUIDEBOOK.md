@@ -509,6 +509,17 @@ precaution, it is a step: after any table cell changes, search every lesson
 for the old numerals themselves, not for the subject. The search is what
 found both breaks; reading did not, and neither did the checker.
 
+It has now happened three times, and the third one showed the sweep itself
+had a hole in it. Settling the grid convention moved lesson 76's window from
+twenty-nine moves to twenty-eight, and lessons 77 to 81 and the module 10
+quiz all went on spending the old one for a full commit afterwards, because
+those pages spell their counts out: *sixteen quiet days*, *the same
+twenty-nine moves*, *fifty-six round trips*, *two years and nine months*.
+A numeral sweep cannot see any of them. So search for both forms, in the
+English and in all eleven locale trees, and remember that the locales spell
+out different words again. The figures that hide longest are the ones a page
+was careful enough to write as words.
+
 **When a defect turns out to be systemic, sweep it corpus-wide in the same
 sitting.** Reading one Japanese lesson found one character doing duty for both
 a price gap and a computational window. That was 113 memory values across the
