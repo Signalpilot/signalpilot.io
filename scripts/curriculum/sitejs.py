@@ -13,12 +13,15 @@ CAT = json.load(open('education/curriculum/index.json', encoding='utf-8'))
 HREFS = {x['href'] for x in CAT}
 SLOTS = {x['order'] for x in CAT}
 SLUGS = {os.path.basename(x['href']).replace('.html','') for x in CAT}
+# A module quiz lives in the curriculum folders and is not a lesson, so it is
+# not in the catalogue. It is still a real page and the indexes link it.
+QUIZZES = {'/' + q for q in glob.glob('education/curriculum/*/module-*-quiz.html')}
 
 F = collections.defaultdict(list)
 for p in sorted(glob.glob('education/assets/*.js')) + sorted(glob.glob('education/*.html')):
     s = open(p, encoding='utf-8', errors='replace').read()
     for m in re.finditer(r'["\'](/education/curriculum/\w+/[\w-]+\.html)["\']', s):
-        if m.group(1) not in HREFS:
+        if m.group(1) not in HREFS and m.group(1) not in QUIZZES:
             F[p].append(('href', m.group(1)))
     for m in re.finditer(r'["\'](\d{2}-[a-z0-9-]{4,})["\']', s):
         if m.group(1) not in SLUGS:

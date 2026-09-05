@@ -202,7 +202,23 @@
 </article>
           `;
         });
-        html += `</div></div>`;
+        // Every module ends in a quiz, and until now nothing linked one: a
+        // reader reached it only by finishing the module's last lesson. The
+        // module number comes out of the catalogue's own category string and
+        // the tier folder out of a lesson's own href, so nothing here is typed.
+        const num = (m.name.match(/Module\s+(\d+)/) || [])[1];
+        const folder = (m.lessons[0].href.match(/\/curriculum\/([a-z]+)\//) || [])[1];
+        if (num && folder) {
+          html += `
+              </div>
+              <a class="btn btn-ghost btn-sm" style="margin-top:1rem"
+                 href="/education/curriculum/${folder}/module-${num}-quiz.html">
+                Module ${num} quiz &rarr;
+              </a>
+            </div>`;
+        } else {
+          html += `</div></div>`;
+        }
       });
 
       list.innerHTML = html;

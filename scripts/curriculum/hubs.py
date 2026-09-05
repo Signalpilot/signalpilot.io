@@ -261,7 +261,7 @@ def render(lang=None):
     # a different tier from the one it sat under; one of them was a list of
     # indicator names. They are now that tier's own modules and lesson titles.
     for tier, m in zip(reversed(TIERS), reversed(_panels(s))):
-        s = s[:m[0]] + _panel(by[tier], loc) + s[m[1]:]
+        s = s[:m[0]] + _panel(by[tier], loc, lang) + s[m[1]:]
     return s
 
 
@@ -317,7 +317,7 @@ def _panels(s):
 CAP = 4  # titles shown per module; the remainder is named, never dropped silently
 
 
-def _panel(rows, loc=None):
+def _panel(rows, loc=None, lang=None):
     mods, order = {}, []
     for e in rows:
         if e['category'] not in mods:
@@ -343,6 +343,22 @@ def _panel(rows, loc=None):
         out.append('                <ul style="margin:0;padding-left:1.5rem;list-style:disc">')
         out.extend(items)
         out.append('                </ul>')
+        # Until now nothing linked a quiz from here, so a reader reached one
+        # only by finishing the module's last lesson. The module number comes
+        # out of the catalogue's category string and the folder out of a
+        # lesson's own href, so neither is typed.
+        n = re.search(r'(\d+)', cat)
+        folder = re.search(r'/curriculum/([a-z]+)/', es[0]['href'])
+        if n and folder:
+            label = (loc['quiz'].format(n=n.group(1)) if loc
+                     else 'Module %s quiz' % n.group(1))
+            # Into the reader's own tree. A locale index that links the
+            # English quiz is the defect inject.py exists to prevent, and
+            # locales.py catches it the moment it appears.
+            pre = '' if not lang else '/' + lang
+            out.append('                <a style="font-size:.8rem;display:inline-block;'
+                       'margin-top:.5rem" href="%s/education/curriculum/%s/module-%s-quiz.html">'
+                       '%s &rarr;</a>' % (pre, folder.group(1), n.group(1), label))
         out.append('              </div>')
     out.append('            </div>')
     return '\n'.join(out)

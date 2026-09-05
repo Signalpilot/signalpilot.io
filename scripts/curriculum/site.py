@@ -37,11 +37,17 @@ for p in PAGES:
     s = open(p, encoding='utf-8').read()
     t = flat(s)
 
-    # 1. every local href resolves
+    # 1. every local href resolves. A path built inside a JavaScript template
+    # literal is not a path -- ${folder} is filled in at render time -- so it
+    # is skipped rather than reported as a file nobody can find.
     for m in re.finditer(r'href="(/[^"#?]*\.(?:html|json|pdf|csv|xml|txt))[^"]*"', s):
+        if '${' in m.group(1):
+            continue
         if not os.path.exists('.' + m.group(1)):
             rep(p, 'dead', m.group(1))
     for m in re.finditer(r'src="(/[^"#?]*\.(?:js|css|png|jpg|jpeg|webp|svg|ico))[^"]*"', s):
+        if '${' in m.group(1):
+            continue
         if not os.path.exists('.' + m.group(1)):
             rep(p, 'dead-src', m.group(1))
 

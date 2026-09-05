@@ -58,7 +58,8 @@ L['de'] = dict(
   prereq=['<strong>Voraussetzungen:</strong> Zuerst die Anfänger-Stufe abschließen (Lektionen 1&ndash;{last})',
           '<strong>Voraussetzungen:</strong> Zuerst die Mittelstufe abschließen (Lektionen 1&ndash;{last})',
           '<strong>Voraussetzungen:</strong> Zuerst die Fortgeschrittenen-Stufe abschließen (Lektionen 1&ndash;{last})'],
-  range='Lektionen {lo}&ndash;{hi}', more='und {k} weitere')
+  range='Lektionen {lo}&ndash;{hi}', more='und {k} weitere',
+  quiz='Modul-{n}-Quiz')
 
 L['es'] = dict(
   tiers=['Principiante', 'Intermedio', 'Avanzado', 'Profesional'],
@@ -86,7 +87,8 @@ L['es'] = dict(
   prereq=['<strong>Requisitos previos:</strong> Completa primero el nivel principiante (lecciones 1&ndash;{last})',
           '<strong>Requisitos previos:</strong> Completa primero el nivel intermedio (lecciones 1&ndash;{last})',
           '<strong>Requisitos previos:</strong> Completa primero el nivel avanzado (lecciones 1&ndash;{last})'],
-  range='Lecciones {lo}&ndash;{hi}', more='y {k} más')
+  range='Lecciones {lo}&ndash;{hi}', more='y {k} más',
+  quiz='Cuestionario del módulo {n}')
 
 L['fr'] = dict(
   tiers=['Débutant', 'Intermédiaire', 'Avancé', 'Professionnel'],
@@ -115,7 +117,8 @@ L['fr'] = dict(
   prereq=['<strong>Prérequis&nbsp;:</strong> Terminez d&rsquo;abord le niveau débutant (leçons 1&ndash;{last})',
           '<strong>Prérequis&nbsp;:</strong> Terminez d&rsquo;abord le niveau intermédiaire (leçons 1&ndash;{last})',
           '<strong>Prérequis&nbsp;:</strong> Terminez d&rsquo;abord le niveau avancé (leçons 1&ndash;{last})'],
-  range='Leçons {lo}&ndash;{hi}', more='et {k} autres')
+  range='Leçons {lo}&ndash;{hi}', more='et {k} autres',
+  quiz='Quiz du module {n}')
 
 L['it'] = dict(
   tiers=['Principiante', 'Intermedio', 'Avanzato', 'Professionale'],
@@ -143,7 +146,8 @@ L['it'] = dict(
   prereq=['<strong>Prerequisiti:</strong> Completa prima il livello principiante (lezioni 1&ndash;{last})',
           '<strong>Prerequisiti:</strong> Completa prima il livello intermedio (lezioni 1&ndash;{last})',
           '<strong>Prerequisiti:</strong> Completa prima il livello avanzato (lezioni 1&ndash;{last})'],
-  range='Lezioni {lo}&ndash;{hi}', more='e altre {k}')
+  range='Lezioni {lo}&ndash;{hi}', more='e altre {k}',
+  quiz='Quiz del modulo {n}')
 
 L['pt'] = dict(
   tiers=['Iniciante', 'Intermédio', 'Avançado', 'Profissional'],
@@ -171,7 +175,8 @@ L['pt'] = dict(
   prereq=['<strong>Pré-requisitos:</strong> Conclui primeiro o nível iniciante (aulas 1&ndash;{last})',
           '<strong>Pré-requisitos:</strong> Conclui primeiro o nível intermédio (aulas 1&ndash;{last})',
           '<strong>Pré-requisitos:</strong> Conclui primeiro o nível avançado (aulas 1&ndash;{last})'],
-  range='Aulas {lo}&ndash;{hi}', more='e mais {k}')
+  range='Aulas {lo}&ndash;{hi}', more='e mais {k}',
+  quiz='Questionário do módulo {n}')
 
 L['nl'] = dict(
   tiers=['Beginner', 'Gevorderd', 'Expert', 'Professioneel'],
@@ -199,7 +204,8 @@ L['nl'] = dict(
   prereq=['<strong>Vereisten:</strong> Rond eerst het beginnersniveau af (lessen 1&ndash;{last})',
           '<strong>Vereisten:</strong> Rond eerst het gevorderde niveau af (lessen 1&ndash;{last})',
           '<strong>Vereisten:</strong> Rond eerst het expertniveau af (lessen 1&ndash;{last})'],
-  range='Lessen {lo}&ndash;{hi}', more='en {k} meer')
+  range='Lessen {lo}&ndash;{hi}', more='en {k} meer',
+  quiz='Quiz module {n}')
 
 L['ru'] = dict(
   tiers=['Начальный уровень', 'Средний уровень', 'Продвинутый уровень', 'Профессиональный уровень'],
@@ -228,7 +234,8 @@ L['ru'] = dict(
   prereq=['<strong>Требования:</strong> Сначала пройди начальный уровень (уроки 1&ndash;{last})',
           '<strong>Требования:</strong> Сначала пройди средний уровень (уроки 1&ndash;{last})',
           '<strong>Требования:</strong> Сначала пройди продвинутый уровень (уроки 1&ndash;{last})'],
-  range='Уроки {lo}&ndash;{hi}', more='и ещё {k}')
+  range='Уроки {lo}&ndash;{hi}', more='и ещё {k}',
+  quiz='Тест по модулю {n}')
 
 L['ja'] = dict(
   tiers=['初級', '中級', '上級', 'プロフェッショナル'],
@@ -253,7 +260,8 @@ L['ja'] = dict(
   prereq=['<strong>前提条件:</strong> 先に初級ティアを修了してください（レッスン1〜{last}）',
           '<strong>前提条件:</strong> 先に中級ティアを修了してください（レッスン1〜{last}）',
           '<strong>前提条件:</strong> 先に上級ティアを修了してください（レッスン1〜{last}）'],
-  range='レッスン{lo}〜{hi}', more='ほか{k}件')
+  range='レッスン{lo}〜{hi}', more='ほか{k}件',
+  quiz='モジュール{n}のクイズ')
 
 L['tr'] = dict(
   tiers=['Başlangıç', 'Orta seviye', 'İleri seviye', 'Profesyonel'],
@@ -281,7 +289,8 @@ L['tr'] = dict(
   prereq=['<strong>Ön koşullar:</strong> Önce başlangıç seviyesini tamamla (ders 1&ndash;{last})',
           '<strong>Ön koşullar:</strong> Önce orta seviyeyi tamamla (ders 1&ndash;{last})',
           '<strong>Ön koşullar:</strong> Önce ileri seviyeyi tamamla (ders 1&ndash;{last})'],
-  range='Ders {lo}&ndash;{hi}', more='ve {k} tane daha')
+  range='Ders {lo}&ndash;{hi}', more='ve {k} tane daha',
+  quiz='Modül {n} testi')
 
 L['hu'] = dict(
   tiers=['Kezdő', 'Középhaladó', 'Haladó', 'Profi'],
@@ -310,7 +319,8 @@ L['hu'] = dict(
   prereq=['<strong>Előfeltételek:</strong> Előbb végezd el a kezdő szintet (1&ndash;{last}. lecke)',
           '<strong>Előfeltételek:</strong> Előbb végezd el a középhaladó szintet (1&ndash;{last}. lecke)',
           '<strong>Előfeltételek:</strong> Előbb végezd el a haladó szintet (1&ndash;{last}. lecke)'],
-  range='{lo}&ndash;{hi}. lecke', more='és további {k}')
+  range='{lo}&ndash;{hi}. lecke', more='és további {k}',
+  quiz='{n}. modul kvíze')
 
 L['ar'] = dict(
   tiers=['مبتدئ', 'متوسط', 'متقدّم', 'احترافي'],
@@ -335,4 +345,5 @@ L['ar'] = dict(
   prereq=['<strong>المتطلبات المسبقة:</strong> أكمل مستوى المبتدئ أولًا (الدروس 1&ndash;{last})',
           '<strong>المتطلبات المسبقة:</strong> أكمل المستوى المتوسط أولًا (الدروس 1&ndash;{last})',
           '<strong>المتطلبات المسبقة:</strong> أكمل المستوى المتقدّم أولًا (الدروس 1&ndash;{last})'],
-  range='الدروس {lo}&ndash;{hi}', more='و{k} غير ذلك')
+  range='الدروس {lo}&ndash;{hi}', more='و{k} غير ذلك',
+  quiz='اختبار الوحدة {n}')

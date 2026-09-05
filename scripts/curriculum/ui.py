@@ -113,6 +113,11 @@ def audit(page):
             if len(h) > 1 and h[1:] not in ids:
                 out['anchor'].append(h)
         elif h.startswith('/'):
+            # A path built inside a JavaScript template literal is not a path:
+            # ${folder} is filled in at render time, so there is no file to
+            # look for and reporting one is a false alarm.
+            if '${' in h:
+                continue
             f = h.split('#')[0].split('?')[0].lstrip('/')
             f = f + 'index.html' if f.endswith('/') else f
             if f and not os.path.exists(os.path.join(ROOT, f)):
