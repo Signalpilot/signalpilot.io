@@ -5,17 +5,17 @@
     python3 scripts/i18n/checks/run.py --all
 
 Each check answers one question the others cannot see the answer to, which is
-why there are seven rather than one. verify.py (run by the builder) covers an
-eighth: locked terms, banned claims and segment counts.
+why there are eight rather than one. verify.py (run by the builder) covers a
+ninth: locked terms, banned claims and segment counts.
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ctx
-import scripts_check, numcheck, sanity, persona, labels, leak, invisible
+import scripts_check, numcheck, sanity, persona, labels, leak, invisible, pct
 
 CHECKS = [('script', scripts_check), ('numbers', numcheck), ('sanity', sanity),
           ('persona', persona), ('labels', labels), ('leak', leak),
-          ('invisible', invisible)]
+          ('invisible', invisible), ('percent', pct)]
 
 
 def one(slug, verbose=True):

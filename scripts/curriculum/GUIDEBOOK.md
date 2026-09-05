@@ -646,6 +646,16 @@ Portuguese is post-1990 orthography. Spanish uses *centavo*, not *céntimo*.
 Turkish stores apostrophes as the bare character where most locales store the
 entity, which matters when matching a stored value in order to edit it.
 
+The percent sign takes a space in German, Spanish, French, Portuguese and
+Russian, binds to the number in Italian, Dutch, Hungarian, Arabic and
+Japanese, and leads it in Turkish. The rule lives once, in `numfmt.py`, which
+has always formatted the numeric-only table cells and now formats the prose
+around them through `set_percent`. Two exceptions it already knows: the sign
+binds even in a spacing locale when a suffix follows (`20%ige`, `1%-a`,
+`2%-й`, `2%-stops`), and a Turkish sign never moves across a list, so
+`%2, %5` stays two percentages. `checks/pct.py` reports a sentence that
+disagrees with its cells and `pctsweep.py` rewrites one.
+
 Terminology is settled per locale and must not split across lessons. Where a
 reading finds two words for one thing, pick the one already dominant in the
 corpus and align the rest — this is how "displacement", the swing lookback,
@@ -845,20 +855,15 @@ claim has no numeral to hand over. Nothing is topic-only.
   though `site.py` and `audit.py hub` now check both. Their listings, and
   the learning path, read the catalogue. All twelve indexes are build
   artifacts.
-- The **scenario database behind `education/challenges.html` was written for
-  the old course and contradicts the new one.** The page itself works: it
-  loads a Supabase client, queries an active `scenarios` table and finds 150
-  rows across four skill categories. The rows are the problem. Six
-  explanations assert a specific price outcome as fact &mdash; one has AAPL
-  pulling back to $140.20 the next day and rallying to $148.50 over the next
-  three, with a +5.9 per cent against +4.2 per cent comparison &mdash; which is
-  the class of invented record stripped from 32 lessons in an earlier pass.
-  Forty-three rows name a real ticker, several titles are duplicated four
-  times, and the reasoning taught is the RSI-at-72-means-overbought style
-  that module 6 was written to refute. None of it is in this repository, so
-  it cannot be fixed from here: rewriting it needs write access to the
-  `scenarios` table, and the rows should be rewritten against the current
-  lessons rather than edited.
+- The **150 old scenario rows are still in the Supabase `scenarios` table**,
+  and nothing serves them any more. They were written for the old course:
+  six explanations asserted a specific price outcome as fact, forty-three
+  named a real ticker, several titles repeated four times, and the reasoning
+  was the RSI-at-72-means-overbought style module 6 exists to refute.
+  `education/curriculum/scenarios.json` replaced them with 21 scenarios
+  anchored to current lessons, and `challenges.js` reads that file first and
+  never reaches the database. Deleting the old rows needs write access to the
+  table and is a call for the site owner.
 - The **gamification stack works now and did not before**. `window.currentUser`
   was never assigned by anything, and both `gamification.js` and `badges.js`
   gated on it, so no XP was ever awarded and no badge ever unlocked, signed in
@@ -872,28 +877,13 @@ claim has no numeral to hand over. Nothing is topic-only.
   was loaded by none either. Both are wired into the homepage and My Library.
   Two checkers guard this: `scripts/curriculum/ui.py` for anything clickable and
   `scripts/curriculum/browse.cjs` for what only a real browser sees.
-- Four scripts under `education/assets/` are loaded by nothing and are obsolete
-  rather than switched off. `toc-active.js` highlights the active entry in a
-  `.toc`, and the lesson pages' `.toc-sidebar` is a button rail with no
-  in-page navigation in it. `lesson-notes.js` is a near-duplicate of the
-  `notes.js` that lesson pages actually load, which is a trap for whoever edits
-  the wrong one next. `aurora.js` and `constellations.js` are background effects
-  superseded by `sp-bg.js`. Deleting them is a call for the site owner.
-- Forty-three pre-rebuild checklist PDFs sit orphaned under
-  `education/resources/checklists/`. Nothing links them since the six
-  worksheets replaced them, but they are still served and they teach the old
-  course under indicator brand names. Removing them is a call for the site
-  owner rather than a build step.
 - `education/free/index.html` links the other five resource directories
   (cheatsheets, guides, indicator-guides, quick-start, support) and has not
   been audited against the rebuilt curriculum.
-- The `_merged/` and `_staging/` working directories still sit in the
-  curriculum tree. They are in neither the catalogue nor the sitemap, and
-  `audit.py` skips them, but they build nothing and should go.
-- Ledger debts: percent spacing in five locales, Japanese inline-emphasis
-  whitespace, English meta descriptions on locale pages, second-person
-  register per locale, composite trader names, price display on localised
-  commercial pages, seventeen stored Japanese values still using a
+- Ledger debts: Japanese inline-emphasis whitespace, English meta descriptions
+  on locale pages, second-person register per locale, composite trader names,
+  price display on localised commercial pages, seventeen stored Japanese
+  values still using a
   minority synonym for "net", the word for "exposure" split across two or
   three variants in German, Japanese, Dutch and Russian, Hungarian split
   between two words for "trade", and the Italian "pavimento" / Spanish

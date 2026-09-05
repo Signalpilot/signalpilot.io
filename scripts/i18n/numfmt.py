@@ -26,17 +26,18 @@ LOCALE = {
     'de': dict(dec=',', grp='.',  cur='{n} $',      pct='{n} %', grp_min=4),
     'es': dict(dec=',', grp='.',  cur='{n} $',      pct='{n} %', grp_min=4),
     'fr': dict(dec=',', grp=' ',  cur='{n} $',      pct='{n} %', grp_min=4),
-    'it': dict(dec=',', grp='.',  cur='{n} $',      pct='{n} %', grp_min=4),
+    'it': dict(dec=',', grp='.',  cur='{n} $',      pct='{n}%', grp_min=4),
     'pt': dict(dec=',', grp='.',  cur='{n} $',      pct='{n} %', grp_min=4),
-    'nl': dict(dec=',', grp='.',  cur='${n}',       pct='{n} %', grp_min=4),
+    'nl': dict(dec=',', grp='.',  cur='${n}',       pct='{n}%', grp_min=4),
     'ru': dict(dec=',', grp=' ',  cur='{n} $',      pct='{n} %', grp_min=4),
     # Japanese punctuates numbers exactly as English does, so only the
     # currency word changes.
     'ja': dict(dec='.', grp=',',  cur='{n}ドル',     pct='{n}%', grp_min=4),
     'tr': dict(dec=',', grp='.',  cur='{n} $',      pct='%{n}', grp_min=4),
-    # Hungarian leaves four-digit integers unseparated and groups from five.
-    'hu': dict(dec=',', grp=' ',  cur='{n} $',      pct='{n} %', grp_min=5),
-    'ar': dict(dec='.', grp=',',  cur='{n} دولار',  pct='{n} %', grp_min=4),
+    # Hungarian leaves four-digit integers unseparated and groups from five,
+    # and binds the percent sign to the number it suffixes: 50%-os.
+    'hu': dict(dec=',', grp=' ',  cur='{n} $',      pct='{n}%', grp_min=5),
+    'ar': dict(dec='.', grp=',',  cur='{n} دولار',  pct='{n}%', grp_min=4),
 }
 
 # ~ approx, sign, $, digits with English separators, an optional space, R/x
@@ -100,3 +101,54 @@ def localise(text, lang):
 
     out = approx + sign + body
     return out if out != text else None
+
+
+# ---------------------------------------------------------------------------
+# The same convention, applied to the prose around the cells.
+#
+# LOCALE['pct'] above formats a numeric-only table cell. Nothing ever applied
+# it to the translated sentences beside those cells, so a page could print
+# "66,7 %" in a cell and "66,7%" in the paragraph under it, and did -- German,
+# Spanish, French and Italian were close to evenly split. These two functions
+# put the rule in one place: checks/pct.py reports a sentence that disagrees
+# with it and pctsweep.py rewrites one.
+#
+# The exception is the bound suffix: German "20%ige", Hungarian "1%-a",
+# Russian "2%-й", Dutch "2%-stops". The sign binds to the number it suffixes
+# in every one of those languages, so a spacing locale keeps it tight when a
+# letter follows, or a hyphen and a letter. A hyphen and a *digit* is a range,
+# "61,8 %-78,6 %", and takes the ordinary form on both sides.
+#
+# The space is an ordinary one, not a non-breaking one, because the cells it
+# has to match are plain text nodes that cannot carry an entity.
+GAP = r'[  ]|&nbsp;'
+OCCURRENCE = re.compile(r'(\d)(?:%s)?([%%％])' % GAP)
+BOUND = re.compile(r'^-?[^\W\d_]')
+# The number a Turkish percent sign moves in front of has to stop at its own
+# last digit. '[\d.,]*' does not: in "%2, %5 ya da" it ran from the 2 through
+# the comma and the space to the second sign, and turned a list of two
+# percentages into one number with a doubled sign. And a sign with a digit
+# behind it is already leading that digit's number, so "53/55 %96" is a
+# fraction beside a percentage, not a percentage of 55.
+LEADING = re.compile(r'(\d+(?:[.,]\d+)*)(?:%s)?%%(?!\d)' % GAP)
+
+
+def percent_form(lang):
+    """'space', 'tight' or 'lead' -- how `lang` sets the percent sign."""
+    pct = LOCALE[lang]['pct']
+    return 'lead' if pct.startswith('%') else 'space' if ' ' in pct else 'tight'
+
+
+def set_percent(text, lang):
+    """Rewrite every percent sign in `text` into `lang`'s form."""
+    form = percent_form(lang)
+    if form == 'lead':
+        return LEADING.sub(lambda m: '%' + m.group(1), text)
+
+    def one(m):
+        if form == 'space' and not BOUND.match(text[m.end():]):
+            return m.group(1) + ' %'
+        return m.group(1) + '%'
+
+    out = OCCURRENCE.sub(one, text)
+    return out.replace('％', '%') if form == 'tight' else out
