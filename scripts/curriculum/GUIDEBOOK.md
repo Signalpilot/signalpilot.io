@@ -859,10 +859,6 @@ claim has no numeral to hand over. Nothing is topic-only.
   dropped, not carried. Still open on them: nothing links a quiz from the tier
   pages or the index, so a reader reaches one only by finishing the module's
   last lesson.
-- Lessons 73 and 74 carry simulated figures with no stated seed: the
-  estimation-error table and the four thousand weight resamples in 73, and the
-  half-split null in 74. Every deterministic figure in both reproduces
-  exactly; those do not, and the hard rule says they must name a seed.
 - The four tier pages still type their counts and their opening link,
   though `site.py` and `audit.py hub` now check both. Their listings, and
   the learning path, read the catalogue. All twelve indexes are build
