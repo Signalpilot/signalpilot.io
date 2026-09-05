@@ -181,6 +181,48 @@ def files():
     return sorted(out)
 
 
+
+MEM = 'scripts/i18n/memory/%s.json'
+
+
+def _memory(old, new, write=True):
+    """The lesson badge is a translated string, so it lives in the translation
+    memory as well as on the built pages. Rewriting only the pages leaves the
+    memory one total behind, and the next time a locale page is rebuilt it
+    silently regresses. The old entries are kept rather than replaced: memory
+    is shared across every lesson and deleting from it is how a page loses a
+    string it still needs."""
+    added = 0
+    pat = re.compile(r'(Lesson\s+\d+\s+of\s+)' + str(old) + r'\b')
+    for lang in LANGS:
+        path = MEM % lang
+        if not os.path.exists(path):
+            continue
+        m = json.load(open(path, encoding='utf-8'))
+        new_pairs = {}
+        for k, v in m.items():
+            if not pat.search(k):
+                continue
+            k2 = pat.sub(lambda mm: mm.group(1) + str(new), k)
+            if k2 in m:
+                continue
+            nums = list(re.finditer(r'\d+', _mask(v)))
+            if not nums or nums[-1].group(0) != str(old):
+                continue
+            last = nums[-1]
+            v2 = v[:last.start()] + str(new) + v[last.end():]
+            if lang == 'hu':
+                v2 = re.sub(r'(\d+)-b[őo]l',
+                            lambda mm: '%s-%s' % (mm.group(1), hu_suffix(int(mm.group(1)))), v2)
+            new_pairs[k2] = v2
+        if new_pairs:
+            added += len(new_pairs)
+            if write:
+                m.update(new_pairs)
+                json.dump(m, open(path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    return added
+
+
 def main(argv):
     check = '--check' in argv
     new, old = catalogue_total(), stated()
@@ -196,6 +238,7 @@ def main(argv):
             touched.append((p, h1 + h2))
             if not check:
                 open(p, 'w', encoding='utf-8').write(s)
+    mem = _memory(old, new, write=not check)
     if not check:
         open(STATE, 'w', encoding='utf-8').write('%d\n' % new)
     for p, h in touched[:25]:
@@ -203,9 +246,10 @@ def main(argv):
     if len(touched) > 25:
         print('... and %d more' % (len(touched) - 25))
     print()
-    print('course total %d was %d; %d files %s'
-          % (new, old, len(touched), 'stale' if check else 'rewritten'))
-    return len(touched) if check else 0
+    print('course total %d was %d; %d files %s, %d memory entries %s'
+          % (new, old, len(touched), 'stale' if check else 'rewritten',
+             mem, 'stale' if check else 'added'))
+    return (len(touched) + mem) if check else 0
 
 
 if __name__ == '__main__':
