@@ -143,18 +143,20 @@ def render(lang=None):
         # The locale pages say "86 Lektionen" and "~375.000 Wörter" in four
         # places each, in wording this file does not own. Only the numbers are
         # replaced, matched by the noun that follows them.
-        lw, ww, pre = _nouns(loc['meta'])
+        lw, ww, pre, (ngap, wgap) = _nouns(loc['meta'])
         # The lesson noun is matched on its stem, because Russian inflects it
         # (83 урока in one sentence, 83 уроков in the next) and a full-word
         # match silently left one of the two counts at the pre-renumber 86.
         stem = loc.get('stem', lw)
-        s = re.sub(r'\d[\d' + GROUPS + r']*(?=\s*' + re.escape(stem) + r')',
-                   num(total, lang) + ' ', s)
+        # The whitespace between the count and the noun is part of the match,
+        # so the locale's own gap replaces whatever the page happened to carry.
+        s = re.sub(r'\d[\d' + GROUPS + r']*[ ]*(?=' + re.escape(stem) + r')',
+                   num(total, lang) + ngap, s)
         # The approximation marker is re-emitted rather than prepended: Japanese
         # writes 約 and Arabic نحو, and prepending a tilde gave 約~260,000.
-        s = re.sub(r'(?:[~\u2248]|' + re.escape(pre.strip()) + r')?\s*\d[\d' + GROUPS + r']*'
-                   r'(?=\s*' + re.escape(ww) + r')',
-                   pre + num(tw // 1000 * 1000, lang) + ' ', s)
+        s = re.sub(r'(?:[~\u2248]|' + re.escape(pre.strip()) + r')?[ ]*\d[\d' + GROUPS + r']*[ ]*'
+                   r'(?=' + re.escape(ww) + r')',
+                   pre + num(tw // 1000 * 1000, lang) + wgap, s)
 
     # Per-tier heading and counters. Back to front so earlier offsets stay valid.
     metas = list(re.finditer(r'<h3>([^<]*)</h3>\s*<div class="module-meta">([^<]*)</div>', s))
@@ -265,11 +267,16 @@ def render(lang=None):
 
 def _nouns(meta):
     """What a locale puts around its lesson count and its word count: the noun
-    after each, and the approximation marker before the word count."""
+    after each, the approximation marker before the word count, and the gap
+    between a count and its noun. The gap is the locale's own: the format says
+    "{n} Lektionen" and "{n}レッスン", and a space emitted into the
+    second is a gap Japanese does not set."""
     lw = meta.split('{n}')[1].split('&bull;')[0].strip()
     ww = meta.split('{w}')[1].split('&bull;')[0].strip()
     pre = meta.split('{w}')[0].split('&bull;')[-1].lstrip()
-    return lw, ww, pre
+    gaps = (' ' if meta.split('{n}')[1][:1] == ' ' else '',
+            ' ' if meta.split('{w}')[1][:1] == ' ' else '')
+    return lw, ww, pre, gaps
 
 
 def _label(fmt):

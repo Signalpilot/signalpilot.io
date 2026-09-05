@@ -138,7 +138,11 @@ def inject(src_path, lang, tmap, rel):
     out = out.replace('</head>', '  ' + '\n  '.join(alts) + '\n</head>', 1)
 
     lead, rest = DISCLAIMER[lang]
-    block = f'<blockquote class="sp-disclaimer"><strong>{lead}</strong> {rest}</blockquote>'
+    # The gap between the two sentences is a space in every language that sets
+    # one between words. Japanese does not, and this block is written after the
+    # CJK whitespace pass above, so the space survived on 97 pages.
+    gap = '' if lang == 'ja' else ' '
+    block = f'<blockquote class="sp-disclaimer"><strong>{lead}</strong>{gap}{rest}</blockquote>'
     if 'sp-disclaimer' not in out:
         if '</article>' in out: out = out.replace('</article>', f'  {block}\n</article>', 1)
         elif '</main>' in out:  out = out.replace('</main>',    f'  {block}\n</main>', 1)

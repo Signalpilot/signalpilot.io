@@ -646,6 +646,12 @@ Portuguese is post-1990 orthography. Spanish uses *centavo*, not *céntimo*.
 Turkish stores apostrophes as the bare character where most locales store the
 entity, which matters when matching a stored value in order to edit it.
 
+Japanese sets no space between a word and what follows it. `inject.py` closes
+the ones the English node carried around an inline emphasis, and `locales.py`
+checks every `ja` page for one that got through, including the pages nothing
+builds. A space beside Latin text, a number or an operator is correct and is
+not flagged.
+
 The percent sign takes a space in German, Spanish, French, Portuguese and
 Russian, binds to the number in Italian, Dutch, Hungarian, Arabic and
 Japanese, and leads it in Turkish. The rule lives once, in `numfmt.py`, which
@@ -880,7 +886,7 @@ claim has no numeral to hand over. Nothing is topic-only.
 - `education/free/index.html` links the other five resource directories
   (cheatsheets, guides, indicator-guides, quick-start, support) and has not
   been audited against the rebuilt curriculum.
-- Ledger debts: Japanese inline-emphasis whitespace, English meta descriptions
+- Ledger debts: English meta descriptions
   on locale pages, second-person register per locale, composite trader names,
   price display on localised commercial pages, seventeen stored Japanese
   values still using a

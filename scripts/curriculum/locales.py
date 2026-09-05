@@ -77,6 +77,26 @@ for lang in LANGS:
                 # the claim paragraph is the tell
                 m = re.search(r'data-part="claim"', s)
 
+# 7. Japanese sets no space between a word and what follows it, and a space
+# next to a tag boundary is the one the English node carried. inject.py closes
+# those on the pages it builds; this catches the hand-maintained pages it never
+# sees, and any regression in the rule itself. The classes are narrow on
+# purpose: a space beside Latin text, a number or an operator is correct, and
+# only kana, kanji and the Japanese marks count on both sides.
+KANA = 'ぁ-ゟァ-ヿ一-鿿々〆〤ヶ'
+SHUT = '。、，．」』）】〉》〕｝］！？…‥〟”’％：；'
+OPENQ = '「『（【〈《〔｛［“‘'
+_L, _R = KANA + SHUT, KANA + OPENQ
+JA_GAP = re.compile(r'[%s][ ][%s]' % (_L, _R))
+JA_TAG = re.compile(r'[%s][ ]*(?:<[^>]+>)+[ ]+[%s]|[%s][ ]+(?:<[^>]+>)+[ ]*[%s]'
+                    % (_L, _R, _L, _R))
+for p in sorted(glob.glob('ja/**/*.html', recursive=True)):
+    s = open(p, encoding='utf-8').read()
+    body = s[s.find('<body'):] if '<body' in s else s
+    for rx in (JA_GAP, JA_TAG):
+        for m in rx.finditer(body):
+            rep('ja', 'space inside Japanese on %s: %r' % (p, m.group(0)))
+
 for lang in LANGS:
     rows = sorted(set(F[lang]))
     print('%-3s %d findings' % (lang, len(rows)))
