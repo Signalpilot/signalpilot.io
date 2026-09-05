@@ -381,7 +381,7 @@
         const safe = query.replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
         results.innerHTML = '<p style="text-align:center;color:var(--muted);padding:2rem">' +
           'No lesson matches &ldquo;' + safe + '&rdquo;. ' +
-          '<a href="/education/">Browse all 85 lessons</a> or try a broader word.</p>';
+          '<a href="/education/">Browse all 90 lessons</a> or try a broader word.</p>';
         return;
       }
 

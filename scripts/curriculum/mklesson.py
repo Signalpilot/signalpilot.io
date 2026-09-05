@@ -99,8 +99,13 @@ def build(meta,prose,related):
     # the head while the visible navigation was correct. Drop whatever the
     # donor had and write both tags at an anchor that is always present.
     head = re.sub(r'\s*<link rel="prev"[^>]*/>', '', head)
-    tags = (f'<link rel="prev" href="{pv}"/>\n  ' if pv else '') + f'<link rel="next" href="{nx}"/>'
-    head, n_rel = re.subn(r'<link rel="next"[^>]*/>', lambda _: tags, head)
+    # The last lesson of the course has no next, and an empty href is a link to
+    # the page itself: slot 85 carries no next tag at all, so a new last lesson
+    # must not carry an empty one.
+    tags = ((f'<link rel="prev" href="{pv}"/>' if pv else '')
+            + ('\n  ' if pv and nx else '')
+            + (f'<link rel="next" href="{nx}"/>' if nx else ''))
+    head, n_rel = re.subn(r'\s*<link rel="next"[^>]*/>', lambda _: ('\n  ' + tags) if tags else '', head)
     if n_rel != 1:
         raise AssertionError(f'slot {m["slot"]}: <link rel="next"> not found in the donor head')
     head=re.sub(r'(<meta name="sp-level" content=").*?"',rf'\g<1>{lvl}"',head)

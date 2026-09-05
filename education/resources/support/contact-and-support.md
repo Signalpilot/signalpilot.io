@@ -11,7 +11,7 @@
 
 | Resource | Best for | Where |
 |---|---|---|
-| Education Hub | The curriculum itself, 85 lessons in twelve languages | signalpilot.io/education |
+| Education Hub | The curriculum itself, 90 lessons in twelve languages | signalpilot.io/education |
 | Glossary | A term you met mid-lesson, defined against the arithmetic it came from | /education/glossary.html |
 | Quick Start | Getting an indicator on a chart | /education/resources/quick-start/ |
 | Indicator guides | Settings for each of the seven indicators | /education/resources/indicator-guides/ |
