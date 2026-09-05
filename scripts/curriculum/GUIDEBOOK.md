@@ -705,6 +705,8 @@ python3 scripts/curriculum/terms.py                   # build education/glossary
 python3 scripts/curriculum/terms.py --check           # exit with the finding count
 python3 scripts/curriculum/lessonterms.py             # refresh each lesson's terms block
 python3 scripts/curriculum/lessonterms.py --check     # exit with the count stale
+python3 scripts/curriculum/tiers.py                   # tier-page summary lines
+python3 scripts/curriculum/pdfs.py                    # the 36 free-resource PDFs
 python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>
 ```
 
@@ -946,9 +948,17 @@ claim has no numeral to hand over. Nothing is topic-only.
   was loaded by none either. Both are wired into the homepage and My Library.
   Two checkers guard this: `scripts/curriculum/ui.py` for anything clickable and
   `scripts/curriculum/browse.cjs` for what only a real browser sees.
-- `education/free/index.html` links the other five resource directories
-  (cheatsheets, guides, indicator-guides, quick-start, support) and has not
-  been audited against the rebuilt curriculum.
+- The **36 free-resource PDFs have been audited and they are the pre-rebuild
+  course**. `education/free/index.html` itself was rewritten for the new
+  curriculum and describes each download in the course's own terms; the files
+  behind it were not, so the page promises a lesson's finding and the file
+  delivers the folklore, under one brand. `pdfs.py` extracts the text and
+  reports 24 findings across 17 of the 36: eleven assertions a lesson measures
+  and rejects, nine references to lesson numbers and titles that no longer
+  exist, and four tier counts from the old shape. The three worst are
+  documents whose whole thesis is the one lesson 27 exists to refute. Fixing
+  them means regenerating the files, which is authoring rather than editing:
+  there is no source, only the PDFs.
 - Ledger debts: second-person register per locale, composite trader names, and
   price display on localised commercial pages. Two entries were withdrawn on
   inspection rather than fixed: Spanish *suelo* is not a calque &mdash; *suelo*
