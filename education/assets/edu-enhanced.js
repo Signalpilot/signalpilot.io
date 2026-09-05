@@ -158,13 +158,17 @@
         completedArticles: completed
       });
 
+      // Tier boundaries are the catalogue's cumulative lesson counts. They used
+      // to read 20 / 47 / 74 against tiers that end at 24 / 52 / 70, so
+      // "Beginner Master" fired four lessons before the beginner tier ended and
+      // "Advanced Scholar" four lessons after the advanced tier had.
       const achievements = [
-        { count: 1, name: 'First Steps', icon: '🎯' },
-        { count: 5, name: 'Dedicated Learner', icon: '📚' },
-        { count: 20, name: 'Beginner Master', icon: '🏅' },
-        { count: 47, name: 'Intermediate Pro', icon: '⭐' },
-        { count: 74, name: 'Advanced Scholar', icon: '🏆' },
-        { count: 85, name: 'Complete Mastery', icon: '🔥' }
+        { count: 1,  name: 'First Steps',        icon: '\u{1F3AF}' },
+        { count: 5,  name: 'Dedicated Learner',  icon: '\u{1F4DA}' },
+        { count: 24, name: 'Beginner Master',    icon: '\u{1F3C5}', tier: 'Beginner' },
+        { count: 52, name: 'Intermediate Pro',   icon: '\u2B50',    tier: 'Intermediate' },
+        { count: 70, name: 'Advanced Scholar',   icon: '\u{1F3C6}', tier: 'Advanced' },
+        { count: 85, name: 'Complete Mastery',   icon: '\u{1F525}', tier: 'Professional' }
       ];
 
       // Check each achievement level
@@ -176,9 +180,18 @@
         // 1. User has reached this milestone (>=)
         // 2. Achievement hasn't been unlocked yet
         if (count >= ach.count && !alreadyUnlocked) {
-          logger.log('[Achievements] 🏆 Unlocking achievement:', ach.name);
+          logger.log('[Achievements] Unlocking achievement:', ach.name);
           localStorage.setItem(achKey, new Date().toISOString());
           this.showAchievement(ach);
+
+          // gamification.js has listened for sp:tierCompleted since it was
+          // written and nothing had ever dispatched it. A tier achievement is
+          // the moment a tier is finished, so it is dispatched here.
+          if (ach.tier) {
+            window.dispatchEvent(new CustomEvent('sp:tierCompleted', {
+              detail: { tier: ach.tier, count: ach.count }
+            }));
+          }
         }
       });
     },

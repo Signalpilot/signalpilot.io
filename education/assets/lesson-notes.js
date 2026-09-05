@@ -65,6 +65,12 @@
     localStorage.setItem(NOTES_KEY, JSON.stringify(allNotes));
     logger.log('[Notes] Saved for lesson:', currentLessonId);
 
+    if (content.trim()) {
+      window.dispatchEvent(new CustomEvent('sp:noteSaved', {
+        detail: { lessonId: currentLessonId, length: content.trim().length }
+      }));
+    }
+
     // Trigger cloud sync
     if (window.supabaseAuth?.onProgressChange) {
       window.supabaseAuth.onProgressChange();

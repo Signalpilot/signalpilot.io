@@ -1040,7 +1040,17 @@
     }
 
     const streak = { current: currentStreak, longest: longestStreak, lastActivity: dates[dates.length - 1] };
+    const previous = JSON.parse(localStorage.getItem('sp_learning_streak') || '{}');
     localStorage.setItem('sp_learning_streak', JSON.stringify(streak));
+
+    // This is the only place the streak is computed. gamification.js, badges.js
+    // and daily-challenges.js all listened for sp:streakUpdated and nothing had
+    // ever dispatched it, so a streak never awarded anything.
+    if (streak.current !== previous.current) {
+      window.dispatchEvent(new CustomEvent('sp:streakUpdated', {
+        detail: { streak: streak.current, longest: streak.longest }
+      }));
+    }
     return streak;
   }
 

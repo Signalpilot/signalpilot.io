@@ -263,16 +263,6 @@
         this.updateProgress('streak', 1); // Streak maintained by completing a lesson
       });
 
-      window.addEventListener('sp:quizCompleted', (e) => {
-        const score = e.detail?.score || 0;
-        if (score >= 70) {
-          this.updateProgress('quizzes', 1);
-        }
-        if (score === 100) {
-          this.updateProgress('perfectQuiz', 1);
-        }
-      });
-
       window.addEventListener('sp:noteSaved', () => {
         this.updateProgress('notes', 1);
       });

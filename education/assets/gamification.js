@@ -41,7 +41,12 @@
     init() {
       this.loadUserXP();
       this.renderXPDisplay();
-      this.listenForEvents();
+      // init() is public on window.Gamification. Binding twice would double
+      // every award, so the listeners are bound once.
+      if (!this._bound) {
+        this._bound = true;
+        this.listenForEvents();
+      }
       console.log('[Gamification] Initialized - Level:', this.level, 'XP:', this.totalXP);
     },
 
@@ -76,11 +81,9 @@
     awardXP(amount, reason) {
       if (amount <= 0) return;
 
-      // Skip XP for non-logged-in users - no point showing popup if it won't save to account
-      if (typeof window.currentUser === 'undefined' || !window.currentUser) {
-        console.log('[Gamification] Skipped XP (not logged in):', amount, reason);
-        return;
-      }
+      // XP is kept in localStorage like every other progress signal on this
+      // site, so it works signed out. syncToCloud() below is a no-op without a
+      // user, and loadProgressFromCloud merges it on sign-in.
 
       const oldLevel = this.level;
       this.totalXP += amount;
@@ -216,12 +219,16 @@
       document.body.appendChild(popup);
 
       // Close on outside click
+      // The header XP element this used to exclude was removed when
+      // renderXPDisplay() was disabled, so getElementById returned null and the
+      // popup could never be dismissed: the handler threw before popup.remove().
       setTimeout(() => {
         document.addEventListener('click', function closePopup(e) {
-          if (!popup.contains(e.target) && !document.getElementById('xp-display').contains(e.target)) {
-            popup.remove();
-            document.removeEventListener('click', closePopup);
-          }
+          const trigger = document.getElementById('xp-display');
+          if (popup.contains(e.target)) return;
+          if (trigger && trigger.contains(e.target)) return;
+          popup.remove();
+          document.removeEventListener('click', closePopup);
         });
       }, 100);
     },
@@ -231,16 +238,6 @@
       // Lesson completed
       window.addEventListener('sp:lessonCompleted', (e) => {
         this.awardXP(XP_CONFIG.lessonComplete, 'Lesson completed!');
-      });
-
-      // Quiz passed
-      window.addEventListener('sp:quizCompleted', (e) => {
-        const score = e.detail?.score || 0;
-        if (score === 100) {
-          this.awardXP(XP_CONFIG.quizPerfect, 'Perfect quiz score!');
-        } else if (score >= 70) {
-          this.awardXP(XP_CONFIG.quizPass, 'Quiz passed!');
-        }
       });
 
       // Streak maintained

@@ -303,11 +303,8 @@
     unlockBadge(badge) {
       if (this.unlockedBadges.includes(badge.id)) return;
 
-      // Skip badge unlocks for non-logged-in users
-      if (typeof window.currentUser === 'undefined' || !window.currentUser) {
-        console.log('[Badges] Skipped unlock (not logged in):', badge.name);
-        return;
-      }
+      // Badges are earned locally like the rest of the progress signals; the
+      // cloud sync below is a no-op without a signed-in user.
 
       this.unlockedBadges.push(badge.id);
       localStorage.setItem('sp_earned_badges', JSON.stringify(this.unlockedBadges));
@@ -529,21 +526,6 @@
           localStorage.setItem('sp_weekend_lessons', (count + 1).toString());
         }
         this.checkBadges({ event: 'lessonCompleted' });
-      });
-
-      window.addEventListener('sp:quizCompleted', (e) => {
-        if (e.detail?.score === 100) {
-          const count = parseInt(localStorage.getItem('sp_perfect_quizzes') || '0');
-          localStorage.setItem('sp_perfect_quizzes', (count + 1).toString());
-
-          // Track perfect quiz streak
-          const streak = parseInt(localStorage.getItem('sp_perfect_quiz_streak') || '0');
-          localStorage.setItem('sp_perfect_quiz_streak', (streak + 1).toString());
-        } else {
-          // Reset perfect quiz streak
-          localStorage.setItem('sp_perfect_quiz_streak', '0');
-        }
-        this.checkBadges({ event: 'quizCompleted', score: e.detail?.score });
       });
 
       window.addEventListener('sp:streakUpdated', () => {

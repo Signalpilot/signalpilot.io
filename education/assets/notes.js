@@ -104,6 +104,12 @@ Tips:
       lessonUrl: window.location.href
     };
     localStorage.setItem(key, JSON.stringify(data));
+
+    // daily-challenges.js counts notes towards a daily goal and listened for
+    // this event; nothing had ever dispatched it.
+    window.dispatchEvent(new CustomEvent('sp:noteSaved', {
+      detail: { lessonId: lessonId, length: content.length }
+    }));
     return data;
   }
 

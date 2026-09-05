@@ -75,6 +75,12 @@
   // Notify all listeners of auth state change
   function notifyAuthStateChange(user) {
     currentUser = user;
+
+    // Publish the signed-in user on window. gamification.js and badges.js both
+    // gate on window.currentUser, and nothing had ever assigned it, so XP and
+    // badges were skipped for every visitor including signed-in ones.
+    window.currentUser = user || null;
+
     authStateListeners.forEach(callback => callback(user));
 
     // Update UI
