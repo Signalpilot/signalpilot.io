@@ -706,6 +706,8 @@ python3 scripts/curriculum/terms.py --check           # exit with the finding co
 python3 scripts/curriculum/lessonterms.py             # refresh each lesson's terms block
 python3 scripts/curriculum/lessonterms.py --check     # exit with the count stale
 python3 scripts/curriculum/tiers.py                   # tier-page summary lines
+python3 scripts/curriculum/paths.py                   # build education/paths.html
+python3 scripts/curriculum/paths.py --check           # exit with the finding count
 python3 scripts/curriculum/pdfs.py                    # the 36 free-resource PDFs
 python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>
 ```
@@ -713,8 +715,8 @@ python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>
 Run from the repo root; lesson paths are relative to `education/`. Both
 checkers exit with their finding count by design, so a red label in a shell is
 a count and not a crash. `audit.py` takes any of `xref`, `chain`, `arith`,
-`claim`, `dupes`, `locale`, `hub`, `cat` and `terms`, and runs all nine when
-given none. It reads only the
+`claim`, `dupes`, `locale`, `hub`, `cat`, `terms`, `topics` and `paths`, and
+runs all eleven when given none. It reads only the
 English pages, because a defect in the relations between lessons is in the
 English or it is nowhere.
 
@@ -819,6 +821,40 @@ only the two sentences around them translate, and they are the same two
 sentences on all eighty-five lessons. Use the literal `·` between them and
 never `&middot;`: the entity spells two ASCII letters, which is enough to make
 the separator a translatable key in every locale.
+
+
+### Reading paths
+
+The tier pages enter the course by difficulty and the modules enter it by
+sequence. Neither serves a reader who arrived for one subject, because the
+subjects cut across both: risk is taught in three modules and evidence in
+three more. `education/curriculum/paths.json` names a subject, a blurb, the
+one finding that subject turns out to carry, and the slots on it;
+`paths.py` renders `education/paths.html`, reading every title and href from
+the catalogue so a retitle cannot leave a path naming something that no longer
+exists. `audit.py paths` fails on a path shorter than five lessons, on a slot
+that does not exist, and on a page that no longer matches its data.
+
+Three rules the paths are held to:
+
+- **A path is routing, not a second copy of the course.** Every lesson on one
+  is a lesson in the curriculum at its own number, and the page says so in its
+  own first paragraph. A lesson may sit on more than one path; none is
+  duplicated to make a path work.
+- **The finding is recomputed, not summarised.** Each card states one
+  measured result from the lessons on it, and that result is checked against
+  the lesson that prints it before the card is written &mdash; the same rule
+  the glossary entries are held to, for the same reason.
+- **Coverage is stated, not implied.** The page opens with how many of the
+  eighty-five lessons the paths reach. Nine paths reach seventy-five; the
+  remaining ten are on no path yet and the number says so rather than hiding
+  it.
+
+One trap: `site.py` checks every lesson count asserted in prose against the
+four tier sizes and the course total, and each path card states its own
+length. The rule reads those lengths from `paths.json` for that page only, so
+a card saying "9 lessons" is checked against the data rather than allowed by
+name.
 
 ---
 

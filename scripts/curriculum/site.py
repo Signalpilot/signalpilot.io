@@ -21,6 +21,14 @@ CAT = json.load(open('education/curriculum/index.json', encoding='utf-8'))
 BY_HREF = {x['href']: x for x in CAT}
 BY_SLOT = {x['order']: x for x in CAT}
 
+# The four tier sizes and the whole-course total are the only counts most pages
+# may assert. The paths page is the exception: each card states the length of
+# its own path, and those lengths are data rather than prose, so they are read
+# from the file that defines them and go stale only if that file does.
+PATHLEN = {len(x['lessons'])
+           for x in json.load(open('education/curriculum/paths.json',
+                                   encoding='utf-8'))}
+
 def flat(s):
     s = re.sub(r'<script[\s\S]*?</script>', ' ', s)
     s = re.sub(r'<style[\s\S]*?</style>', ' ', s)
@@ -72,7 +80,10 @@ for p in PAGES:
     for m in re.finditer(r'\b(\d{1,3})\s+(?:lessons|articles|comprehensive lessons|comprehensive articles)\b', t, re.I):
         if m.group(1) == '0':
             continue  # an empty progress placeholder that script fills in
-        if int(m.group(1)) not in (24, 28, 18, 15, 85):
+        ok = {24, 28, 18, 15, 85}
+        if p.endswith('education/paths.html'):
+            ok |= PATHLEN
+        if int(m.group(1)) not in ok:
             rep(p, 'count', '%r' % t[max(0,m.start()-70):m.end()+30].strip()[:120])
 
     # 4. the old register

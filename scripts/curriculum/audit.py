@@ -569,16 +569,43 @@ def check_topics():
                    'search chip %r returns %d lessons' % (m.group(1), n))
 
 
+def check_paths():
+    """A reading path names lessons by number, so a retitle or a renumber can
+    leave one pointing at a title the curriculum no longer carries. The builder
+    reads every title and href from the catalogue; this says whether the page on
+    disk is what the builder would write, and whether the data behind it names a
+    lesson that exists."""
+    sys.path.insert(0, os.path.join(ROOT, 'scripts', 'curriculum'))
+    try:
+        import paths as _paths
+    except Exception as e:
+        print('paths check unavailable: %s' % e)
+        return
+    finally:
+        os.chdir(ROOT)
+    cat = _paths.catalogue()
+    P = _paths.paths()
+    first = min(cat)
+    for f in _paths.findings(P, cat):
+        report(first, 'paths', f)
+    page = open(os.path.join(ROOT, _paths.PAGE), encoding='utf-8').read()
+    i = page.index(_paths.OPEN)
+    j = page.index(_paths.CLOSE) + len(_paths.CLOSE)
+    if page[i:j] != _paths.render(P, cat):
+        report(first, 'paths',
+               'education/paths.html does not match paths.json; run paths.py')
+
+
 # -------------------------------------------------------------------- driver
 
 CHECKS = collections.OrderedDict([
     ('xref', check_xref), ('chain', check_chain), ('arith', check_arith),
     ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale),
     ('hub', check_hub), ('cat', check_cat), ('terms', check_terms),
-    ('topics', check_topics),
+    ('topics', check_topics), ('paths', check_paths),
 ])
 ORDER = ['xref', 'href', 'title', 'prereq', 'tease', 'arith', 'claim', 'dupes',
-         'locale', 'hub', 'cat', 'terms', 'topics', 'figure']
+         'locale', 'hub', 'cat', 'terms', 'topics', 'paths', 'figure']
 
 
 def main(argv):
