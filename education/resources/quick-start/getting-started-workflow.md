@@ -176,7 +176,8 @@ what you will read next month.
 Lesson 65 asks you to fix the number of trades at which you will judge the
 record, before the first one. Lesson 67 needs 589 of them to settle whether an
 edge of a tenth of an R is real. At the pace lesson 76 measures for a four-rule
-book — 117 orders a year — that is a wait of years, not a month.
+book, which lesson 79 turns into 117 orders a year, that is a wait of years
+rather than a month.
 
 That is not a reason to stop. It is the reason to keep the record properly from
 day one, because the record is the only thing that will ever answer the question.

@@ -44,8 +44,18 @@ REFUTED = [
      8, 'delta as a count of buyers, where lesson 8 bounds the buy share between 50.0 and 62.5 per cent'),
     (r'aggressor side \((?:buy/sell|buy, sell)\)|showing time, price, volume, and aggressor side',
      7, 'the aggressor side as reported, where lesson 7 finds it inferred and right four times in five'),
-    (r'>\s*70\s*=\s*overbought|overbought\b(?![^.]{0,80}(?:myth|not|regime))',
-     51, 'a fixed oscillator level as a signal, where lesson 51 finds two implementations disagreeing 13 to 0'),
+    # Only the prescriptive form. Naming an indicator's own zones is a
+    # description, and six files were flagged for rows like "Overbought
+    # boundary" in a settings table or "overbought/oversold zones
+    # highlighted" in a legend. One of them, the context matrix, was warning
+    # that an oscillator stays overbought in a trend, which is lesson 51's
+    # own point. A checker that cries wolf on those is worse than none.
+    (r'buy (?:the )?oversold|sell (?:the )?overbought'
+     r'|overbought\s*=\s*sell|oversold\s*=\s*buy'
+     r'|>\s*70\s*=\s*sell|<\s*30\s*=\s*buy'
+     r'|overbought\s+means\s+sell|oversold\s+means\s+buy',
+     51, 'a fixed oscillator level as an instruction, where lesson 51 finds two '
+         'implementations of one oscillator printing thirteen readings above 70 and none'),
 ]
 TIERPAT = re.compile(r'/curriculum/(beginner|intermediate|advanced|professional)/\s*\((\d+)\s*lessons\)', re.I)
 LESSONPAT = re.compile(r'Lesson (\d+)\s*[:—-]\s*([A-Z][^\n]{3,60})')
@@ -55,12 +65,26 @@ def files():
     return sorted(glob.glob('education/resources/**/*.pdf', recursive=True))
 
 
+QUOTED = re.compile(r'"[^"\n]{2,200}"|\u201c[^\u201d\n]{2,200}\u201d')
+
+
 def scan(path):
     t = pdftext.text(path)
     out = []
+    # Spans that are quotations. A claim inside one is being described rather
+    # than made: the RSI guide opens by quoting "buy oversold, sell
+    # overbought" in order to call it the commonest way the indicator is
+    # misused, and flagging that would be flagging the refutation.
+    quoted = [(m.start(), m.end()) for m in QUOTED.finditer(t)]
     for pat, slot, why in REFUTED:
-        if re.search(pat, t, re.I):
+        for m in re.finditer(pat, t, re.I):
+            # A claim in quotation marks is being described, not made. The RSI
+            # guide opens by quoting "buy oversold, sell overbought" in order
+            # to say it is the commonest way the indicator is misused.
+            if any(a < m.start() and m.end() <= b for a, b in quoted):
+                continue
             out.append(('refuted', 'asserts %s (lesson %d)' % (why, slot)))
+            break
     for m in LESSONPAT.finditer(t):
         n, shown = int(m.group(1)), m.group(2).strip()
         row = BY_SLOT.get(n)

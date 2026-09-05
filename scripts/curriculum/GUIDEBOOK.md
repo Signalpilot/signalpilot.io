@@ -948,17 +948,23 @@ claim has no numeral to hand over. Nothing is topic-only.
   was loaded by none either. Both are wired into the homepage and My Library.
   Two checkers guard this: `scripts/curriculum/ui.py` for anything clickable and
   `scripts/curriculum/browse.cjs` for what only a real browser sees.
-- The **36 free-resource PDFs have been audited and they are the pre-rebuild
-  course**. `education/free/index.html` itself was rewritten for the new
-  curriculum and describes each download in the course's own terms; the files
-  behind it were not, so the page promises a lesson's finding and the file
-  delivers the folklore, under one brand. `pdfs.py` extracts the text and
-  reports 24 findings across 17 of the 36: eleven assertions a lesson measures
-  and rejects, nine references to lesson numbers and titles that no longer
-  exist, and four tier counts from the old shape. The three worst are
-  documents whose whole thesis is the one lesson 27 exists to refute. Fixing
-  them means regenerating the files, which is authoring rather than editing:
-  there is no source, only the PDFs.
+- The **free-resource PDFs are rebuilt and clean**. All 24 findings are closed
+  and `pdfs.py` reports nothing across 42 files. The audit found them to be the
+  pre-rebuild course while `education/free/index.html` in front of them had
+  already been rewritten, so the page promised a lesson's finding and the file
+  delivered the folklore. Three of the six factually wrong files already had
+  correct Markdown sources nobody had rendered, and six worksheets were in the
+  same state with no PDF and no link. Every resource is now a build artifact:
+  `mkpdf.cjs` renders eighteen Markdown sources with Chromium.
+
+  Two rules the resources are held to, both learned here. **A figure in a
+  resource reproduces from a lesson it cites**, checked the same mechanical way
+  the glossary is. And **a checker that cries wolf is worse than none**: the
+  first oscillator rule flagged nine files, six of which were describing an
+  indicator's own zones in a settings table and one of which was quoting the
+  claim in order to refute it. The rule now fires only on the prescriptive form
+  and skips anything inside quotation marks, which took it to three files, all
+  three genuinely wrong.
 - Ledger debts: second-person register per locale, composite trader names, and
   price display on localised commercial pages. Two entries were withdrawn on
   inspection rather than fixed: Spanish *suelo* is not a calque &mdash; *suelo*
