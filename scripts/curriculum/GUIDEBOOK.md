@@ -640,6 +640,40 @@ turned up a dozen real defects per lesson:
 
 None of that is visible to a checker. All of it is obvious on a read.
 
+### The figures inside a translation
+
+Reading a locale page as prose finds wrong sense, collisions, reversed agency
+and register. The one defect it does not find is a figure that drifted, because
+the words around it still read correctly: a Hungarian 9,84 typed as 9,64 is
+grammatical, idiomatic and wrong, and no amount of proofreading catches it.
+`scripts/i18n/checks/numerals.py <slug>` holds every measured figure in an
+English string against each of its translations. Run it beside
+`checks/run.py`, on every lesson you touch.
+
+It reports only **measured** figures: anything with a decimal part, or a count
+of three digits or more that is not a year. That restriction is the whole
+design. Held to every numeral, the corpus reports 272 findings and all of them
+are correct prose &mdash; Spanish writes the 1990s as *los a&ntilde;os noventa*,
+Arabic writes a $1 minimum as *one dollar*, and a count under a hundred is
+exactly where a language reaches for a word. Held to the measurements, the
+same corpus reports four, and all four are a locale declining to repeat a
+figure the English states twice.
+
+Two notations it had to be taught, both of them correct and both of them
+invisible to a digit-by-digit comparison. Japanese groups by the myriad, so
+358 million is `3&#20740;5,800&#19975;` and 24,300 is `2&#19975;4,300`; the check
+normalises those before reading them. And an English `800k` is written out in
+full in every other language, so a numeral also matches its own thousand- and
+million-fold forms.
+
+What it found on its first full run, beyond the Hungarian 9,64: eleven places
+where a locale spelled a measurement in words inside a sentence that kept every
+other figure in digits &mdash; Japanese &#19977;&#21313;&#22235;&#19975;&#19968;&#21315; for 341,000 beside a
+digit 14.06, Arabic spelling 253 beside a digit 9.84, Russian spelling three
+thousand beside 24 000. Each is grammatical and each is inconsistent with its
+own sentence. All eleven are now digits.
+
+
 ### Locale conventions
 
 Quotation marks: German `&bdquo;…&ldquo;`; Dutch and Hungarian
@@ -697,6 +731,7 @@ python3 scripts/curriculum/locales.py                 # all 946 built locale pag
 python3 scripts/curriculum/translate.py keys <slug>   # writes .keys.json
 python3 scripts/i18n/build.py curriculum/<tier>/<slug>.html [lang]
 python3 scripts/i18n/checks/run.py <slug>
+python3 scripts/i18n/checks/numerals.py <slug>   # figures held across translations
 python3 scripts/curriculum/hubs.py                    # regenerate the index
 python3 scripts/curriculum/hubs.py --check            # exit 1 if stale
 python3 scripts/curriculum/catalogue.py               # sync index.json to the lessons

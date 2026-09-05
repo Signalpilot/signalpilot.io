@@ -32,16 +32,109 @@ NUM = re.compile('\\d{1,3}(?:[\\u00a0\\u202f ]\\d{3})+(?:[.,]\\d+)?'
                  '|\\d+(?:[.,]\\d+)*')
 
 
-def numerals(s):
+YEAR = re.compile(r'^\d{4}$')
+DECPART = re.compile(r'[.,]\d{1,6}$')
+
+
+def measured(tok):
+    """Whether a numeral is one of this course's measurements.
+
+    Only these are held across translations. A count under a hundred, and a
+    year, are exactly where a locale legitimately writes words instead of
+    digits: Spanish renders the 1990s as los a\u00f1os noventa, Arabic renders a
+    $1 minimum as one dollar, and holding those to the digit reports a hundred
+    findings that are all correct prose. A figure with a decimal part, or a
+    count of three digits or more that is not a year, is a measurement, and a
+    measurement that drifts is the defect this file is for.
+    """
+    if DECPART.search(tok):
+        return True
+    flat = re.sub('[.,\u00a0\u202f ]', '', tok)
+    return len(flat) >= 3 and not (YEAR.match(flat) and 1800 <= int(flat) <= 2100)
+
+
+def forms(tok):
+    """The shapes one numeral may legitimately take across locales.
+
+    Separators are removed, so 1.5443, 1,5443 and 1 5443 are one token. A
+    decimal part may also lose trailing zeros, because 100.0 and 100 are the
+    same figure written to different precision -- but only the decimal part.
+    Stripping trailing zeros from the whole token, which an earlier version did,
+    made 10 and 1 the same numeral and 90 and 9 the same, which is exactly the
+    kind of drift this file exists to catch.
+    """
+    flat = re.sub('[.,\u00a0\u202f ]', '', tok)
+    out = {flat}
+    m = re.search('[.,](\\d{1,2})$', tok)
+    if m:
+        head = re.sub('[.,\u00a0\u202f ]', '', tok[:m.start()])
+        out.add(head + m.group(1).rstrip('0'))
+        out.add(head)
+    # A k or m suffix in the English is written out in every other language,
+    # and Japanese groups by the myriad, so 800k, 800 000 and 80\u4e07 are one
+    # figure wearing three notations.
+    if flat.isdigit():
+        n = int(flat)
+        for mult in (1000, 1000000):
+            out.add(str(n * mult))
+            if n % mult == 0:
+                out.add(str(n // mult))
+        if n % 10000 == 0:
+            out.add(str(n // 10000))
+        out.add(str(n * 10000))
+    return out
+
+
+JA_MYRIAD = re.compile(
+    '(?:(\\d[\\d,]*)\u5104)?(?:(\\d[\\d,]*)\u4e07)?(\\d[\\d,]*)?')
+
+
+def _ja_myriad(text):
+    """Rewrite Japanese myriad groupings as plain integers.
+
+    Japanese groups by ten thousand, so 358 million is written 3\u5104 5,800\u4e07 and
+    24,300 is written 2\u4e07 4,300. Read digit by digit those are 3 and 5800 and
+    2 and 4300, none of which is the figure, and holding them to the English
+    reports every large number in the language as missing.
+    """
+    def sub(m):
+        oku, man, rest = m.group(1), m.group(2), m.group(3)
+        if not (oku or man):
+            return m.group(0)
+        n = 0
+        if oku:
+            n += int(oku.replace(',', '')) * 100000000
+        if man:
+            n += int(man.replace(',', '')) * 10000
+        if rest:
+            n += int(rest.replace(',', ''))
+        return str(n)
+    return JA_MYRIAD.sub(sub, text)
+
+
+def numerals(s, lang=None):
     s = ENT.sub(' ', s)
+    if lang == 'ja':
+        s = _ja_myriad(s)
     out = collections.Counter()
     for m in NUM.finditer(s):
-        t = re.sub('[.,\\u00a0\\u202f ]', '', m.group(0))
-        # Trailing zeros after a separator are a locale convention (100.0
-        # against 100), not the drift this looks for.
-        t = t.rstrip('0') or '0'
-        out[t] += 1
+        out[frozenset(forms(m.group(0)))] += 1
     return out
+
+
+def _match(want, got):
+    """A wanted numeral is present if any of its forms is any of a present
+    numeral's forms."""
+    pool = list(got.elements())
+    missing = []
+    for w in want.elements():
+        for i, g in enumerate(pool):
+            if w & g:
+                pool.pop(i)
+                break
+        else:
+            missing.append(sorted(w)[0])
+    return missing
 
 
 def lesson_path(slug):
@@ -63,23 +156,25 @@ def check(slug):
                              encoding='utf-8')) for L in LOCALES}
     findings = 0
     for en in order:
-        want = numerals(en)
+        want = collections.Counter(
+            frozenset(forms(m.group(0)))
+            for m in NUM.finditer(ENT.sub(' ', en)) if measured(m.group(0)))
         if not want:
             continue
         for L in LOCALES:
             tr = mem[L].get(en)
             if tr is None:
                 continue
-            got = numerals(tr)
+            got = numerals(tr, L)
             # Only a numeral the English carries and the translation does not
             # is reported. A translation may legitimately carry numerals of its
             # own -- Japanese counts shares as 1株 where English writes "a
             # share" -- and reporting those buries the defect this looks for.
-            miss = want - got
+            miss = _match(want, got)
             if miss:
                 findings += 1
                 print('  %s  %r' % (L, en[:70]))
-                print('       missing: %s' % ', '.join(sorted(miss.elements())))
+                print('       missing: %s' % ', '.join(sorted(miss)))
     print('%-46s %s' % (slug, 'clean' if not findings else '%d findings' % findings))
     return findings
 
