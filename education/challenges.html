@@ -275,25 +275,44 @@
   </style>
 
   <script>
-    // Challenge starter functions
-    function startRandomChallenge() {
+    // Challenge starter functions.
+    //
+    // These used to call straight through. If the reader clicked before the
+    // Supabase library had finished loading from its CDN, the query returned an
+    // empty array and the button did nothing at all, with the reason only in the
+    // console. They now wait for the client and say what they are doing.
+    async function startChallenge(difficulty = null, skillCategory = null) {
       const container = document.getElementById('challengeContainer');
       container.scrollIntoView({ behavior: 'smooth' });
 
-      window.ScenarioChallenges.loadNextChallenge({
-        containerId: 'challengeContainer'
-      });
-    }
-
-    function startChallenge(difficulty = null, skillCategory = null) {
-      const container = document.getElementById('challengeContainer');
-      container.scrollIntoView({ behavior: 'smooth' });
+      try {
+        if (window.ScenarioChallenges.ready) {
+          if (!window.supabase) {
+            container.innerHTML =
+              '<p style="text-align:center;padding:3rem;color:var(--muted)">Loading challenges&hellip;</p>';
+          }
+          await window.ScenarioChallenges.ready();
+        }
+      } catch (err) {
+        container.innerHTML =
+          '<div style="text-align:center;padding:3rem;color:var(--muted)">' +
+          '<div style="font-size:3rem;margin-bottom:1rem">&#9888;&#65039;</div>' +
+          '<h3 style="color:var(--text);margin-bottom:.5rem">Connection Error</h3>' +
+          '<p>Unable to reach the challenge library. Check your connection and reload.</p>' +
+          '<button class="btn btn-primary" onclick="location.reload()" style="margin-top:1rem">Reload</button>' +
+          '</div>';
+        return;
+      }
 
       window.ScenarioChallenges.loadNextChallenge({
         containerId: 'challengeContainer',
         difficulty,
         skillCategory
       });
+    }
+
+    function startRandomChallenge() {
+      return startChallenge();
     }
 
     // Load user stats if logged in

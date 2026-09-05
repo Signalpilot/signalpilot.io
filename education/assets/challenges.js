@@ -557,7 +557,10 @@
   /**
    * Wait for Supabase to be ready
    */
-  function waitForSupabase(callback, maxAttempts = 20) {
+  // 20 attempts at 100ms gave up after two seconds, which is not long enough
+  // for a CDN-loaded library on a cold cache or a slow connection: a working
+  // site showed "Connection Error". 150 attempts is fifteen seconds.
+  function waitForSupabase(callback, maxAttempts = 150) {
     let attempts = 0;
     const checkInterval = setInterval(() => {
       attempts++;
@@ -584,6 +587,23 @@
         }
       }
     }, 100); // Check every 100ms
+  }
+
+  /**
+   * Resolve once the Supabase client exists, or reject after the same budget.
+   * The quick-start buttons used to call straight through and log "Supabase
+   * client not initialized" into an empty result, so the button did nothing.
+   */
+  function ready() {
+    if (window.supabase) return Promise.resolve();
+    return new Promise((resolve, reject) => {
+      let attempts = 0;
+      const t = setInterval(() => {
+        attempts++;
+        if (window.supabase) { clearInterval(t); resolve(); }
+        else if (attempts >= 150) { clearInterval(t); reject(new Error('supabase unavailable')); }
+      }, 100);
+    });
   }
 
   /**
@@ -618,6 +638,7 @@
     loadNextChallenge,
     getUserStats,
     getLeaderboard,
+    ready,
     init
   };
 
