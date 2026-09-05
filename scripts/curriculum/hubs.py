@@ -97,6 +97,13 @@ def corpus(lang):
         href = e['href']
         title, group = e['title'], e['category']
         if lang:
+            # A lesson that has not been translated yet has no page in this
+            # tree. Listing it would put an English title and an English link
+            # on a locale index, which is the defect hubs.py exists to prevent,
+            # so the lesson is left out and the index's own count falls with
+            # it. The index then says what that language actually has.
+            if not os.path.exists(os.path.join(ROOT, lang + href)):
+                continue
             title, group = _read(lang + href)
             href = '/' + lang + href
         rows.append(dict(order=e['order'], level=e['level'].lower(), href=href,
@@ -349,6 +356,15 @@ def _panel(rows, loc=None, lang=None):
         # lesson's own href, so neither is typed.
         n = re.search(r'(\d+)', cat)
         folder = re.search(r'/curriculum/([a-z]+)/', es[0]['href'])
+        quiz_rel = 'education/curriculum/%s/module-%s-quiz.html' % (
+            folder.group(1), n.group(1)) if (n and folder) else None
+        # A quiz that has not been translated yet has no page in this tree, and
+        # linking it would be a dead link on the index rather than a link out.
+        # locales.py catches both, so the link is simply left off until the
+        # page exists.
+        if quiz_rel and not os.path.exists(
+                os.path.join(ROOT, (lang + '/' if lang else '') + quiz_rel)):
+            n = None
         if n and folder:
             label = (loc['quiz'].format(n=n.group(1)) if loc
                      else 'Module %s quiz' % n.group(1))

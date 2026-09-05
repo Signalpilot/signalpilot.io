@@ -32,6 +32,18 @@ def flat(s):
     s = re.sub(r'<style[\s\S]*?</style>', ' ', s)
     return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', s)))
 
+# What each locale tree actually holds: one entry per tier size plus the
+# total. A lesson written but not yet translated is absent from these, which
+# is exactly why the locale index may state a smaller number than the
+# catalogue does without that being drift.
+HAVE = {}
+for _lang in LANGS:
+    _c = collections.Counter()
+    for _x in CAT:
+        if os.path.exists(_lang + _x['href']):
+            _c[_x['level']] += 1
+    HAVE[_lang] = set(_c.values()) | {sum(_c.values())}
+
 F = collections.defaultdict(list)
 def rep(k, m): F[k].append(m)
 
@@ -71,8 +83,13 @@ for lang in LANGS:
         # 5. no pre-rebuild counts
         # "lesson 37 spent a lesson" in Arabic reads as 37 followed by the
         # word for lesson, so require a plural or a counter, not the bare noun.
+        # A locale index is built from that language's own lesson files, so
+        # while a module is part-translated it legitimately counts fewer
+        # lessons than the catalogue holds. The counts it may state are the
+        # ones that tree actually contains, per tier and in total.
+        legal = LEGAL_COUNTS | HAVE[lang]
         for m in re.finditer(r'\b(\d{2,3})\s*(?:lessons|Lektionen|lecciones|leçons|lezioni|aulas|lessen|уроков|レッスン|ders|leckéből|دروس)', t):
-            if int(m.group(1)) not in LEGAL_COUNTS:
+            if int(m.group(1)) not in legal:
                 rep(lang, '%s claims %s lessons' % (base, m.group(1)))
 
         # 6. English left in a locale page's own prose is a build fallback
