@@ -646,6 +646,12 @@ Portuguese is post-1990 orthography. Spanish uses *centavo*, not *céntimo*.
 Turkish stores apostrophes as the bare character where most locales store the
 entity, which matters when matching a stored value in order to edit it.
 
+A lesson's `<meta name="description">` is a translatable segment like any
+other: `extract.py` yields it and the memory carries it. The `og:` and
+`twitter:` copies of the title and the description are not &mdash; `inject.py`
+fills those from the page it has just translated, because they repeat the
+`<title>` and the description word for word.
+
 Japanese sets no space between a word and what follows it. `inject.py` closes
 the ones the English node carried around an inline emphasis, and `locales.py`
 checks every `ja` page for one that got through, including the pages nothing
@@ -886,8 +892,7 @@ claim has no numeral to hand over. Nothing is topic-only.
 - `education/free/index.html` links the other five resource directories
   (cheatsheets, guides, indicator-guides, quick-start, support) and has not
   been audited against the rebuilt curriculum.
-- Ledger debts: English meta descriptions
-  on locale pages, second-person register per locale, composite trader names,
+- Ledger debts: second-person register per locale, composite trader names,
   price display on localised commercial pages, seventeen stored Japanese
   values still using a
   minority synonym for "net", the word for "exposure" split across two or
