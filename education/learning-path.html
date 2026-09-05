@@ -17,13 +17,13 @@
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
   <title>Learning Path — Signal Pilot Education</title>
-  <meta name="description" content="Visual roadmap of the complete trading curriculum across 4 tiers, from how a market works to institutional-grade practice.">
+  <meta name="description" content="The 85 lessons in the eleven modules they were built as, each module ending in the quiz that checks it.">
   <link rel="canonical" href="https://www.signalpilot.io/education/learning-path.html">
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.signalpilot.io/education/learning-path.html">
   <meta property="og:title" content="Learning Path — Signal Pilot Education">
-  <meta property="og:description" content="Visual roadmap of the complete trading curriculum across 4 tiers, from how a market works to institutional-grade practice.">
+  <meta property="og:description" content="The 85 lessons in the eleven modules they were built as, each module ending in the quiz that checks it.">
   <meta property="og:image" content="https://www.signalpilot.io/education/preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -32,7 +32,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.signalpilot.io/education/learning-path.html">
   <meta name="twitter:title" content="Learning Path — Signal Pilot Education">
-  <meta name="twitter:description" content="Visual roadmap of the complete trading curriculum across 4 tiers, from how a market works to institutional-grade practice.">
+  <meta name="twitter:description" content="The 85 lessons in the eleven modules they were built as, each module ending in the quiz that checks it.">
   <meta name="twitter:image" content="https://www.signalpilot.io/education/preview.png">
   <meta name="theme-color" content="#05070d">
   <link rel="manifest" href="/education/manifest.json">
@@ -248,7 +248,27 @@
         grid-template-columns: 1fr;
       }
     }
-  </style>
+  
+    /* Module grouping inside a tier, and the quiz that closes each module */
+    .module-block { margin: 1.75rem 0 2.25rem; }
+    .module-head {
+      display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap;
+      padding: .35rem 0 .75rem; border-bottom: 1px solid var(--border, rgba(255,255,255,.08));
+      margin-bottom: 1rem;
+    }
+    .module-label {
+      font-size: .72rem; letter-spacing: .09em; text-transform: uppercase;
+      font-weight: 700; color: var(--accent, #76ddff);
+    }
+    .module-name { font-weight: 600; }
+    .module-count { margin-left: auto; font-size: .82rem; color: var(--muted); }
+    .lesson-card.quiz-card {
+      border-style: dashed;
+      background: linear-gradient(180deg, rgba(118,221,255,.07), transparent);
+    }
+    .lesson-card.quiz-card .lesson-number { background: transparent; font-size: 1.4rem; }
+    @media (max-width: 640px) { .module-count { margin-left: 0; width: 100%; } }
+</style>
 </head>
 <body>
   <div class="bg-stars" aria-hidden="true"></div>
@@ -284,7 +304,7 @@
   <section class="hero" style="padding: 2rem 0 1rem;">
     <div class="wrap" style="text-align: center;">
       <h1 class="headline xl">🗺️ Complete Learning Path</h1>
-      <p class="lead">Visual roadmap of <span id="total-lessons">the</span> lessons, from how a market works to institutional-grade practice</p>
+      <p class="lead"><span id="total-lessons">The</span> lessons in the eleven modules they were built as. Each module ends in a quiz that hands you numbers and asks for a number back.</p>
     </div>
   </section>
 
@@ -342,6 +362,13 @@
     };
     let learningPath = {};
     let TOTAL = 0;
+    let TOTAL_QUIZZES = 0;
+
+    // A module's quiz lives beside the module's last lesson, so its URL is
+    // derived rather than listed: nothing here goes stale when a module grows.
+    function quizFor(moduleNumber, lastHref) {
+      return lastHref.replace(/[^/]+$/, 'module-' + moduleNumber + '-quiz.html');
+    }
 
     function buildPath(catalogue) {
       const out = {};
@@ -349,19 +376,51 @@
         const rows = catalogue.filter(e => (e.level || '').toLowerCase() === tier)
                               .sort((a, b) => a.order - b.order);
         if (!rows.length) continue;
+
+        // Group the tier's lessons by the module they belong to, keeping the
+        // catalogue's order. The category reads "Module N: Name".
+        const modules = [];
+        for (const e of rows) {
+          const m = /^Module\s+(\d+)\s*:\s*(.+)$/.exec(e.category || '');
+          const num = m ? parseInt(m[1], 10) : 0;
+          const name = m ? m[2] : (e.category || 'Lessons');
+          let mod = modules.find(x => x.num === num);
+          if (!mod) { mod = { num: num, name: name, lessons: [] }; modules.push(mod); }
+          mod.lessons.push({
+            num: e.order, title: e.title, desc: e.description || '',
+            time: e.readingTime || '', url: e.href
+          });
+        }
+        for (const mod of modules) {
+          if (!mod.num) continue;
+          const last = mod.lessons[mod.lessons.length - 1];
+          mod.quiz = {
+            num: mod.num,
+            title: 'Module ' + mod.num + ' Quiz',
+            desc: mod.lessons.length + ' lessons, then ' +
+                  'questions that hand you numbers and ask for a number back.',
+            url: quizFor(mod.num, last.url)
+          };
+          TOTAL_QUIZZES += 1;
+        }
+
         const words = rows.reduce((t, e) => t + (e.wordCount || 0), 0);
         out[tier] = {
           title: meta.title, subtitle: meta.subtitle, icon: meta.icon,
-          description: `${rows.length} lessons \u2022 ~${Math.round(words / 1000)},000 words`,
-          lessons: rows.map(e => ({
-            num: e.order, title: e.title, desc: e.description || '',
-            time: e.readingTime || '', url: e.href
-          }))
+          description: rows.length + ' lessons in ' + modules.filter(m => m.num).length +
+                       ' modules \u2022 ~' + Math.round(words / 1000) + ',000 words',
+          modules: modules,
+          lessons: rows.map(e => ({ num: e.order, url: e.href }))
         };
       }
       TOTAL = catalogue.length;
       return out;
     }
+
+  // The completion key a lesson is stored under
+  function keyFor(tier, url) {
+    return `sp_edu_${tier}_${url.split('/').pop().replace('.html', '')}_completed`;
+  }
 
   // Get completed lessons
   function getCompletedLessons() {
@@ -379,16 +438,12 @@
     document.getElementById('overall-progress-text').textContent = `${completedCount} of ${TOTAL} lessons completed (${percentage}%)`;
     document.getElementById('overall-progress-bar').style.width = percentage + '%';
     const tl = document.getElementById('total-lessons');
-    if (tl) tl.textContent = `all ${TOTAL}`;
+    if (tl) tl.textContent = `All ${TOTAL}`;
 
-    // Render each tier
+    // Render each tier, module by module, with the module's quiz last
     let html = '';
     for (const [tier, data] of Object.entries(learningPath)) {
-      const tierCompleted = data.lessons.filter(l => {
-        const key = `sp_edu_${tier}_${l.url.split('/').pop().replace('.html', '')}_completed`;
-        return completed.includes(key);
-      }).length;
-
+      const tierCompleted = data.lessons.filter(l => completed.includes(keyFor(tier, l.url))).length;
       const tierPercentage = Math.round((tierCompleted / data.lessons.length) * 100);
 
       html += `
@@ -397,7 +452,7 @@
             <div class="tier-icon">${data.icon}</div>
             <div class="tier-info">
               <h2>${data.title}</h2>
-              <div class="tier-meta">${data.subtitle} • ${data.description}</div>
+              <div class="tier-meta">${data.subtitle} \u2022 ${data.description}</div>
             </div>
           </div>
 
@@ -410,34 +465,45 @@
               <div class="progress-bar-fill" style="width: ${tierPercentage}%"></div>
             </div>
           </div>
+      `;
 
-          <div class="lessons-grid">
-            ${data.lessons.map(lesson => {
-              const lessonKey = `sp_edu_${tier}_${lesson.url.split('/').pop().replace('.html', '')}_completed`;
-              const isCompleted = completed.includes(lessonKey);
-
-              let prereqText = '';
-              if (lesson.prereq && lesson.prereq.length > 0) {
-                prereqText = `<div class="prerequisites"><strong>⚠️ Prerequisites:</strong> Complete lesson${lesson.prereq.length > 1 ? 's' : ''} ${lesson.prereq.join(', ')} first</div>`;
-              }
-
-              return `
+      for (const mod of data.modules) {
+        const done = mod.lessons.filter(l => completed.includes(keyFor(tier, l.url))).length;
+        html += `
+          <div class="module-block">
+            <div class="module-head">
+              <span class="module-label">${mod.num ? 'Module ' + mod.num : ''}</span>
+              <span class="module-name">${mod.name}</span>
+              <span class="module-count">${done} of ${mod.lessons.length} read</span>
+            </div>
+            <div class="lessons-grid">
+              ${mod.lessons.map(lesson => {
+                const isCompleted = completed.includes(keyFor(tier, lesson.url));
+                return `
                 <div class="lesson-card ${isCompleted ? 'completed' : ''}" onclick="window.location.href='${lesson.url}'">
-                  ${isCompleted ? '<div class="completion-badge">✓</div>' : ''}
+                  ${isCompleted ? '<div class="completion-badge">\u2713</div>' : ''}
                   <div class="lesson-number">${lesson.num}</div>
                   <div class="lesson-title">${lesson.title}</div>
                   <div class="lesson-description">${lesson.desc}</div>
                   <div class="lesson-meta">
-                    <span>📖 ${lesson.time}</span>
-                    <span>${isCompleted ? '✅ Completed' : '⏳ Not started'}</span>
+                    <span>\u{1F4D6} ${lesson.time}</span>
+                    <span>${isCompleted ? '\u2705 Completed' : '\u23F3 Not started'}</span>
                   </div>
-                  ${prereqText}
-                </div>
-              `;
-            }).join('')}
+                </div>`;
+              }).join('')}
+              ${mod.quiz ? `
+                <div class="lesson-card quiz-card" onclick="window.location.href='${mod.quiz.url}'">
+                  <div class="lesson-number">\u{1F4DD}</div>
+                  <div class="lesson-title">${mod.quiz.title}</div>
+                  <div class="lesson-description">${mod.quiz.desc}</div>
+                  <div class="lesson-meta"><span>Checkpoint</span><span>Work it with a calculator</span></div>
+                </div>` : ''}
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      }
+
+      html += `</div>`;
     }
 
     container.innerHTML = html;
