@@ -375,7 +375,13 @@
       });
 
       if (filtered.length === 0) {
-        results.innerHTML = '<p style="text-align:center;color:var(--muted);padding:2rem">No results found</p>';
+        // Say what was searched and offer a way on. A bare "No results found"
+        // reads as a broken page, which is how five dead topic chips went
+        // unnoticed: pressing one looked identical to the search being broken.
+        const safe = query.replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+        results.innerHTML = '<p style="text-align:center;color:var(--muted);padding:2rem">' +
+          'No lesson matches &ldquo;' + safe + '&rdquo;. ' +
+          '<a href="/education/">Browse all 85 lessons</a> or try a broader word.</p>';
         return;
       }
 

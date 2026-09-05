@@ -25,6 +25,7 @@ pattern that merely looks odd to a regex:
             description, which is where a figure the grid moved hides
     terms   the glossary against the corpus: every lesson named by an entry,
             and the built page matching its data file
+    topics  the search page's chips: every one returns lessons
 
 Like craft.py this exits with the finding count, so a red label in a shell is
 a count and not a crash.
@@ -543,15 +544,41 @@ def check_terms():
                'education/glossary.html does not match glossary.json; run terms.py')
 
 
+def check_topics():
+    """The search page's topic chips are a claim that pressing one returns
+    lessons. Five of the eight returned nothing: order flow, risk management,
+    psychology, institutional and algorithmic are vocabulary from the
+    pre-rebuild course, and pressing one looked exactly like a broken page."""
+    import json as _json
+    sys.path.insert(0, os.path.join(ROOT, 'scripts', 'curriculum'))
+    try:
+        import topics
+    except Exception as e:
+        print('topics check unavailable: %s' % e)
+        return
+    finally:
+        os.chdir(ROOT)
+    cat = _json.load(open(os.path.join(ROOT, topics.CAT), encoding='utf-8'))
+    page = open(os.path.join(ROOT, topics.PAGE), encoding='utf-8').read()
+    i = page.index(topics.OPEN)
+    j = page.index('</div>', i) + len('</div>')
+    for m in re.finditer(r'data-query="([^"]+)"', page[i:j]):
+        n = len(topics.matches(m.group(1), cat))
+        if n < topics.MIN:
+            report(min(x['order'] for x in cat), 'topics',
+                   'search chip %r returns %d lessons' % (m.group(1), n))
+
+
 # -------------------------------------------------------------------- driver
 
 CHECKS = collections.OrderedDict([
     ('xref', check_xref), ('chain', check_chain), ('arith', check_arith),
     ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale),
     ('hub', check_hub), ('cat', check_cat), ('terms', check_terms),
+    ('topics', check_topics),
 ])
 ORDER = ['xref', 'href', 'title', 'prereq', 'tease', 'arith', 'claim', 'dupes',
-         'locale', 'hub', 'cat', 'terms', 'figure']
+         'locale', 'hub', 'cat', 'terms', 'topics', 'figure']
 
 
 def main(argv):
