@@ -3922,5 +3922,151 @@ dict(
             'per rule and one for the book, and a deletion test that asks whether any member '
             'beats the whole. On this data one of them does, on every column at once, and it '
             'is the rule that trades least.</p>\n'),
+# --------------------------------------------------------------- module 14
+dict(
+    mod=14, tier='professional', slug='module-14-quiz',
+    slots=[96, 97, 98, 99, 100],
+    title='Module 14 Quiz: The Business',
+    desc='Six computations from the module that measured the business rather than the '
+         'rule. Turn thirteen orders into a month, price a losing month, subtract the '
+         'round trip from the edge, size a withdrawal, and find the row that binds.',
+    intro='Every module before this one measured what a rule does. This one measured what '
+          'a person living off it can take out. Six questions, all arithmetic on the pace '
+          'lesson 76 counted and the tenth of an R lesson 67 defined, and the last one '
+          'puts five numbers in the order they fail.',
+    covers='Lessons 96 to 100, and the two inputs the whole module rests on: thirteen '
+           'orders in twenty-eight days, and a tenth of an R a trade.',
+    related=[(96, 'the pace and the losing month the first two questions use'),
+             (97, 'the withdrawal the fourth question sizes'),
+             (98, 'the round trip the third question subtracts'),
+             (99, 'the trial length the fifth question runs'),
+             (100, 'the card the last question reads')],
+    questions=[
+        dict(
+            title='Thirteen orders, one month',
+            setup='      <p>Lesson 76 counted the four-rule book&rsquo;s orders over the '
+                  'twenty-eight moves every lesson since 71 has used, and found thirteen of '
+                  'them. A month holds twenty-one trading days. A completed trade is two '
+                  'position changes, an entry and an exit.</p>\n',
+            ask='How many completed trades a month is that, and how does it compare with the '
+                'forty a month lesson 65 assumed?',
+            result='4.875 trades a month, which is an eighth of lesson 65&rsquo;s forty.',
+            answer='      <p>Thirteen changes in twenty-eight days is 13 &divide; 28 = 0.4643 '
+                   'a day. Over twenty-one trading days that is 9.75 position changes a '
+                   'month, and 9.75 &divide; 2 = 4.875 completed trades.</p>\n'
+                   '      <p>Against forty: 4.875 &divide; 40 = 0.1219, so the measured pace is '
+                   '12.2 per cent of the assumed one. Lesson 65 said in the same breath that '
+                   'its forty was stated rather than derived, and lesson 76 derived it. The '
+                   'gap is a factor of eight.</p>\n'
+                   '      <p>Everything in this module is that one number multiplied by '
+                   'something. It is worth writing down before the rest.</p>\n'),
+        dict(
+            title='The month that loses',
+            setup='      <p>Lesson 67 fixed one R as one standard deviation of a trade&rsquo;s '
+                  'outcome and called a tenth of an R a trade a genuine edge. At 4.875 trades a '
+                  'month, each trade is an independent draw with a mean of 0.10 R and a '
+                  'standard deviation of 1 R.</p>\n',
+            ask='What does the month earn, how much does it move, and how often does it lose '
+                'money?',
+            result='0.4875 R earned against 2.2079 R of movement, so 41.3 per cent of months '
+                   'lose.',
+            answer='      <p>The mean adds: 0.10 &times; 4.875 = 0.4875 R. The standard '
+                   'deviation adds in quadrature, so it is the square root: &radic;4.875 = '
+                   '2.2079 R.</p>\n'
+                   '      <p>A month loses money when the draw falls more than its own mean '
+                   'below zero, which is 0.4875 &divide; 2.2079 = 0.2208 standard deviations. '
+                   'The normal distribution puts 41.26 per cent of its weight below '
+                   '&minus;0.2208.</p>\n'
+                   '      <p>Twelve months at that rate expect 4.95 losing months, and the '
+                   'chance of twelve clean ones is 0.5874 to the twelfth power, which is 0.169 '
+                   'per cent. A year with no losing month in it is a once-in-six-hundred-years '
+                   'event at this pace.</p>\n'),
+        dict(
+            title='What the round trip leaves',
+            setup='      <p>Module 13 charged 0.1230 a share for a round trip. Lesson 63 '
+                  'measured one bar&rsquo;s standard deviation at 1.5443 a share, and this '
+                  'module takes that as one R. The gross edge is a tenth of an R a '
+                  'trade.</p>\n',
+            ask='What is the cost in R, what share of the edge is it, and what is left?',
+            result='0.0796 R, which is 79.7 per cent of the edge, leaving 0.0204.',
+            answer='      <p>0.1230 &divide; 1.5443 = 0.0796 of an R for a round trip.</p>\n'
+                   '      <p>Against the edge: 0.0796 &divide; 0.10 = 0.7965, so the round trip '
+                   'takes 79.7 per cent of a tenth-of-an-R edge and the net edge is 0.10 '
+                   '&minus; 0.0796 = 0.0204 R a trade.</p>\n'
+                   '      <p>Now put it through lesson 19&rsquo;s sample size, which is 7.85 '
+                   'divided by the square of the edge. At 0.10 that is 785 trades; at 0.0204 it '
+                   'is 18,952. The cost did not reduce the verdict by four fifths. It '
+                   'multiplied the wait by twenty-four, because the formula squares.</p>\n'),
+        dict(
+            title='What the account supports',
+            setup='      <p>An account of 100,000 risks one per cent a trade, so one R is 1,000. '
+                  'The pace is 4.875 trades a month and the gross edge is a tenth of an R. A '
+                  'household takes 500 a month out of it.</p>\n',
+            ask='What does the account earn a month, and what balance would that withdrawal '
+                'actually need?',
+            result='487.50 a month earned against 500 taken, so the balance needed is 102,564.',
+            answer='      <p>The month earns 0.4875 R, and one R is 1,000, so it earns '
+                   '487.50.</p>\n'
+                   '      <p>The withdrawal is 500, which is 500 &divide; 487.50 = 1.0256 of the '
+                   'whole edge. The account that breaks even is the one whose monthly earning is '
+                   '500: the earning is 0.004875 of the balance, so the balance is 500 &divide; '
+                   '0.004875 = 102,564.</p>\n'
+                   '      <p>And the withdrawal cannot be seen while it happens. One month moves '
+                   '2.2079 R, which is 2,207.94 on this account, so the 500 is 0.227 of one '
+                   'month&rsquo;s noise. Withdrawals grow with the months and noise grows with '
+                   'their square root, so they cross at (2,207.94 &divide; 500)&sup2; = 19.5 '
+                   'months.</p>\n'),
+        dict(
+            title='The trial, and what leaves during it',
+            setup='      <p>Lesson 65 fixes 156 trades as a fair trial before you start. Lesson '
+                  '67 puts the median worst drawdown of a genuine tenth-of-an-R system over 156 '
+                  'trades at 8.82 R. The account is the same 100,000 at one per cent, and the '
+                  'same 500 a month leaves it.</p>\n',
+            ask='How long is the trial, what does the market take at the median, and what does '
+                'the household take?',
+            result='32 months, in which the market takes 8,820 and the household takes 16,000.',
+            answer='      <p>156 &divide; 4.875 = 32.00 months exactly.</p>\n'
+                   '      <p>The market&rsquo;s median worst take is 8.82 R, and one R is 1,000, '
+                   'so 8,820. The household&rsquo;s take is 32 &times; 500 = 16,000.</p>\n'
+                   '      <p>16,000 &divide; 8,820 = 1.81. The withdrawal is nearly twice the '
+                   'drawdown over the same stretch, and it is the one that never comes back. '
+                   'Every plan models the first of those two and almost none model the '
+                   'second.</p>\n'),
+        dict(
+            title='The row that binds',
+            setup='      <p>Here is the finished card, with the figures each row came '
+                  'from.</p>\n'
+                  + table(['Row', 'Figure'],
+                          [['Pace', '4.875 trades a month'],
+                           ['Cost', '0.0796 R of a 0.10 R edge'],
+                           ['Net earning', '99 a month on 100,000'],
+                           ['Withdrawal', '500 a month'],
+                           ['Verdict', '18,952 trades']]),
+            ask='Which row fails first, and what does repairing it do to the rest?',
+            result='Row two. Halving the cost in R triples the net earning, from 99 to 294, and '
+                   'still leaves the business unviable.',
+            answer='      <p>Read down and stop at the first row that is worse than the one '
+                   'below it can survive. Row one sets frequency and cannot fail on its own. Row '
+                   'two takes 79.7 per cent of the edge, and everything below it is arithmetic '
+                   'on what is left, so row two binds.</p>\n'
+                   '      <p>Repair it and nothing else. Hold each trade long enough that one R '
+                   'is two bars rather than one, 3.0886 rather than 1.5443, and the cost falls '
+                   'to 0.1230 &divide; 3.0886 = 0.0398 R, which is 39.8 per cent of the edge. '
+                   'The net edge rises from 0.0204 to 0.0602, and the monthly earning from 99 to '
+                   '0.0602 &times; 4.875 &times; 1,000 = 294.</p>\n'
+                   '      <p>The withdrawal is still 500, and 7.85 &divide; 0.0602&sup2; = 2,168 '
+                   'trades is still 37 years at this pace. Tripling the best row on the card '
+                   'moves the business from impossible to infeasible, which is the answer this '
+                   'module was written to be able to give.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether a rule and a business are the same object. They are not, and the six '
+            'questions above are the arithmetic that separates them: a pace, a month, a cost, a '
+            'withdrawal, a trial and a card. None of them is about whether the rule works. All of '
+            'them are about how often it gets to, and what leaves the account while it does.</p>\n'
+            '<p>What you take away is the order of the rows. The account arithmetic in questions '
+            'four and five is the arresting part, and it is downstream: it describes a business '
+            'whose edge was already reduced by four fifths in question three. Fix the row that '
+            'binds, not the row that frightens you.</p>\n'),
 
 ]
