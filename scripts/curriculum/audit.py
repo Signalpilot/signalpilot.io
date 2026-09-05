@@ -471,6 +471,26 @@ def check_hub():
         for m in re.finditer(r'\b[Aa]rticles?\b', prose):
             report(slot, 'hub', '%s.html still calls a lesson an article' % page)
             break
+    # The summary line on each tier page is a fact about the corpus, and all
+    # four had drifted: one carried no line, one no word count, and two word
+    # counts from a tier shape that no longer exists.
+    sys.path.insert(0, os.path.join(ROOT, 'scripts', 'curriculum'))
+    try:
+        import tiers
+    except Exception as e:
+        print('tier-line check unavailable: %s' % e)
+        return
+    finally:
+        os.chdir(ROOT)
+    F = tiers.facts()
+    for page, level in tiers.TIERS:
+        src = open('education/%s.html' % page, encoding='utf-8').read()
+        lo, hi, kw = F[level]
+        m = tiers.LINE.search(src)
+        if not m or ('Lessons %d&ndash;%d' % (lo, hi)) not in m.group(0) \
+                or ('~%d,000 words' % kw) not in m.group(0):
+            report(lo, 'hub', '%s.html summary line disagrees with the catalogue; '
+                              'run tiers.py' % page)
 
 
 def check_cat():
