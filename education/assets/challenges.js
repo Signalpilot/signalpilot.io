@@ -16,7 +16,35 @@
   /**
    * Fetch scenarios from Supabase
    */
+  // Scenarios ship with the site. The database this used to read exclusively
+  // still holds rows written for the pre-rebuild curriculum, including six that
+  // assert a price history as fact, so the file is authoritative and the
+  // database is the fallback rather than the source.
+  let localScenarios = null;
+
+  async function loadLocalScenarios() {
+    if (localScenarios !== null) return localScenarios;
+    try {
+      const res = await fetch('/education/curriculum/scenarios.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('status ' + res.status);
+      localScenarios = await res.json();
+    } catch (err) {
+      (window.logger || console).log('[Challenges] scenarios.json unavailable, falling back:', err.message);
+      localScenarios = [];
+    }
+    return localScenarios;
+  }
+
   async function fetchScenarios(options = {}) {
+    const local = await loadLocalScenarios();
+    if (local.length) {
+      let rows = local.filter(s => s.is_active !== false);
+      if (options.difficulty) rows = rows.filter(s => s.difficulty === options.difficulty);
+      if (options.skillCategory) rows = rows.filter(s => s.skill_category === options.skillCategory);
+      if (options.limit) rows = rows.slice(0, options.limit);
+      return rows;
+    }
+
     if (!window.supabase) {
       console.error('Supabase client not initialized');
       return [];
@@ -594,8 +622,11 @@
    * The quick-start buttons used to call straight through and log "Supabase
    * client not initialized" into an empty result, so the button did nothing.
    */
-  function ready() {
-    if (window.supabase) return Promise.resolve();
+  async function ready() {
+    // The shipped scenarios need no client at all.
+    const local = await loadLocalScenarios();
+    if (local.length) return;
+    if (window.supabase) return;
     return new Promise((resolve, reject) => {
       let attempts = 0;
       const t = setInterval(() => {
@@ -609,9 +640,11 @@
   /**
    * Initialize challenges system
    */
-  function init() {
-    // Wait for Supabase to be ready before loading challenges
-    waitForSupabase(() => {
+  async function init() {
+    // If the scenarios ship with the site there is nothing to wait for.
+    const local = await loadLocalScenarios();
+    const start = (fn) => local.length ? fn() : waitForSupabase(fn);
+    start(() => {
       // Auto-load challenge if container exists
       const challengeContainer = document.getElementById('challengeContainer');
       if (challengeContainer && !challengeContainer.hasChildNodes()) {
