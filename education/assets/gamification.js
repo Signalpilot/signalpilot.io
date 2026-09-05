@@ -6,14 +6,15 @@
   // XP rewards configuration
   const XP_CONFIG = {
     lessonComplete: 50,
-    quizPass: 30,
-    quizPerfect: 50,
     dailyStreak: 20,
     weekStreak: 100,
     tierComplete: 500,
     dailyChallenge: 100,
-    badgeUnlock: 25
+    badgeUnlock: 25,
+    commentPosted: 15
   };
+  // quizPass and quizPerfect are gone with the event that drove them: the
+  // module quizzes are prose with worked answers and produce no score.
 
   // Level thresholds (XP needed for each level)
   const LEVELS = [
@@ -238,6 +239,12 @@
       // Lesson completed
       window.addEventListener('sp:lessonCompleted', (e) => {
         this.awardXP(XP_CONFIG.lessonComplete, 'Lesson completed!');
+      });
+
+      // Comment posted. discussions.js dispatches this with the note "Dispatch
+      // event for XP reward" and nothing had ever awarded it.
+      window.addEventListener('sp:commentPosted', () => {
+        this.awardXP(XP_CONFIG.commentPosted, 'Joined the discussion!');
       });
 
       // Streak maintained

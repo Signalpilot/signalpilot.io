@@ -8,10 +8,15 @@
     { type: 'lessons', target: 1, xp: 50, text: 'Complete 1 lesson today', icon: '&#128218;' },
     { type: 'lessons', target: 2, xp: 75, text: 'Complete 2 lessons today', icon: '&#128218;' },
     { type: 'lessons', target: 3, xp: 100, text: 'Complete 3 lessons today', icon: '&#128218;' },
-    { type: 'quizzes', target: 2, xp: 75, text: 'Pass 2 quizzes today', icon: '&#127919;' },
-    { type: 'quizzes', target: 3, xp: 100, text: 'Pass 3 quizzes today', icon: '&#127919;' },
-    { type: 'perfectQuiz', target: 1, xp: 75, text: 'Score 100% on a quiz', icon: '&#11088;' },
-    { type: 'perfectQuiz', target: 2, xp: 125, text: 'Score 100% on 2 quizzes', icon: '&#11088;' },
+    // These four used to read "Pass 2 quizzes today" and score out of a
+    // hundred, driven by an event the rebuilt curriculum has no source for:
+    // the module quizzes are prose with worked answers. A reader could be
+    // handed a goal that was impossible. The scenario challenges are the
+    // thing the site can actually score, so the goals point at those.
+    { type: 'scenarios', target: 2, xp: 75, text: 'Answer 2 scenario challenges', icon: '&#127919;' },
+    { type: 'scenarios', target: 3, xp: 100, text: 'Answer 3 scenario challenges', icon: '&#127919;' },
+    { type: 'scenariosCorrect', target: 1, xp: 75, text: 'Get a scenario challenge right', icon: '&#11088;' },
+    { type: 'scenariosCorrect', target: 2, xp: 125, text: 'Get 2 scenario challenges right', icon: '&#11088;' },
     { type: 'notes', target: 1, xp: 50, text: 'Take notes on a lesson', icon: '&#128221;' },
     { type: 'notes', target: 2, xp: 75, text: 'Take notes on 2 lessons', icon: '&#128221;' },
     { type: 'streak', target: 1, xp: 50, text: 'Maintain your streak today', icon: '&#128293;' },
@@ -265,6 +270,13 @@
 
       window.addEventListener('sp:noteSaved', () => {
         this.updateProgress('notes', 1);
+      });
+
+      // challenges.js has dispatched this since it was written and nothing had
+      // ever listened for it.
+      window.addEventListener('sp:scenarioCompleted', (e) => {
+        this.updateProgress('scenarios', 1);
+        if (e.detail && e.detail.isCorrect) this.updateProgress('scenariosCorrect', 1);
       });
     },
 
