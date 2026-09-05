@@ -845,6 +845,35 @@ claim has no numeral to hand over. Nothing is topic-only.
   though `site.py` and `audit.py hub` now check both. Their listings, and
   the learning path, read the catalogue. All twelve indexes are build
   artifacts.
+- The **scenario database behind `education/challenges.html` was written for
+  the old course and contradicts the new one.** The page itself works: it
+  loads a Supabase client, queries an active `scenarios` table and finds 150
+  rows across four skill categories. The rows are the problem. Six
+  explanations assert a specific price outcome as fact &mdash; one has AAPL
+  pulling back to $140.20 the next day and rallying to $148.50 over the next
+  three, with a +5.9 per cent against +4.2 per cent comparison &mdash; which is
+  the class of invented record stripped from 32 lessons in an earlier pass.
+  Forty-three rows name a real ticker, several titles are duplicated four
+  times, and the reasoning taught is the RSI-at-72-means-overbought style
+  that module 6 was written to refute. None of it is in this repository, so
+  it cannot be fixed from here: rewriting it needs write access to the
+  `scenarios` table, and the rows should be rewritten against the current
+  lessons rather than edited.
+- Three handlers in `gamification.js`, `badges.js` and `daily-challenges.js`
+  still listen for `sp:quizCompleted` and score it out of a hundred. Nothing
+  fires that event any more: `quiz-enhanced.js`, its only source, was removed
+  because the legacy per-lesson quizzes it drove no longer exist. The eleven
+  module quizzes are prose with worked answers, so there is no score to award
+  without inventing one. The listeners are harmless and are the wiring point
+  if a checkpoint is ever added.
+- Forty-three pre-rebuild checklist PDFs sit orphaned under
+  `education/resources/checklists/`. Nothing links them since the six
+  worksheets replaced them, but they are still served and they teach the old
+  course under indicator brand names. Removing them is a call for the site
+  owner rather than a build step.
+- `education/free/index.html` links the other five resource directories
+  (cheatsheets, guides, indicator-guides, quick-start, support) and has not
+  been audited against the rebuilt curriculum.
 - The `_merged/` and `_staging/` working directories still sit in the
   curriculum tree. They are in neither the catalogue nor the sitemap, and
   `audit.py` skips them, but they build nothing and should go.
