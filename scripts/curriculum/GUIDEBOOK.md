@@ -980,8 +980,9 @@ is a rule, and rules do not go stale.
 | 11. Electives | 82&ndash;85 | Professional |
 | 12. The Trader | 86&ndash;90 | Professional |
 | 13. The Book | 91&ndash;95 | Professional |
+| 14. The Business | 96&ndash;100 | Professional |
 
-All 95 numbered slots now exist. The three holes in module 8 &mdash; slots 62,
+All 100 numbered slots now exist. The three holes in module 8 &mdash; slots 62,
 64 and 67 &mdash; were written from nothing on 3 September 2026. The rebuilt lessons run from about
 1,500 to about 4,900 words, median close to 2,500. Fifteen orphaned `_merged` files sit alongside the corpus and
 are linked from nowhere.
@@ -989,16 +990,17 @@ are linked from nowhere.
 ### What "done" means
 
 A slot is **rebuilt** when it exists in the Learn form: seven parts, the
-reading contract held, every figure recomputed. Slots 1 to 95 are rebuilt. Every slot in the curriculum has been through the
+reading contract held, every figure recomputed. Slots 1 to 100 are rebuilt. Every slot in the curriculum has been through the
 full treatment.
 
 A slot has had its **full treatment** when it has additionally passed the step
 four checklist end to end, in English and in all eleven locales, and carries a
-ledger row saying what that found. All 95 have.
+ledger row saying what that found. All 100 have.
 
 A module is **complete** when every slot in it is rebuilt. Modules 1 to 11 are
 complete, which is slots 1 to 85, module 12 is complete, which is slots 86 to
-90, and module 13 is complete, which is slots 91 to 95. There is no legacy lesson left.
+90, module 13 is complete, which is slots 91 to 95, and module 14 is complete,
+which is slots 96 to 100. There is no legacy lesson left.
 
 Module 12 is the one module whose object is the reader rather than the market.
 It holds lesson 63's seven trades still and prices four things a trader does to
@@ -1017,6 +1019,18 @@ the run is (1.85 against 2.10). Lesson 95 spends all four at once on a
 leave-one-out test and finds three of the four deletions improve the book, and
 that the 8-and-30 run alone beats the book and every three-rule book inside it
 on net return, on turnover and on depth at the same time.
+
+Module 14 is the one module whose object is a business rather than a book. It
+rests on two inputs and multiplies them: lesson 76's thirteen orders in
+twenty-eight days, which is 4.875 completed trades a month, and lesson 67's
+tenth-of-an-R edge. From those come a month that earns 0.4875R against 2.2079R
+of movement and loses 41.26 per cent of the time; a 500 withdrawal that needs a
+balance of 102,564 to be free; a round trip that takes 79.65 per cent of the
+edge and moves the verdict from 785 trades to 18,952; ten-year paths whose
+median ends at 46,526 with 58.67 per cent halving; and a card of five rows in
+the order they bind. The finding is the order: the business fails at row two,
+the cost, and every account figure after it is arithmetic on an edge that has
+already gone.
 
 The **locale trees** were audited as well, and carried the largest single
 defect found in any of these passes: every one of the 946 built lesson pages
@@ -1048,7 +1062,7 @@ claim has no numeral to hand over. Nothing is topic-only.
 
 ### Open
 
-- All thirteen module quizzes exist, one per module, in all twelve languages.
+- All fourteen module quizzes exist, one per module, in all twelve languages.
   Each is built by `scripts/curriculum/mkquiz.py` from `quizdata.py`, lives
   beside its module in the tier folder as `module-N-quiz.html`, and is linked
   from the last lesson of its module. Build and translate a quiz page before
