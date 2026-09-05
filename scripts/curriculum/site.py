@@ -29,6 +29,14 @@ PATHLEN = {len(x['lessons'])
            for x in json.load(open('education/curriculum/paths.json',
                                    encoding='utf-8'))}
 
+# The four tier sizes and the whole-course total, read from the catalogue
+# rather than typed. They were typed, as (24, 28, 18, 15, 85), and the first
+# lesson added after that turned every one of them into a false finding at
+# once -- which is the same defect this checker exists to catch on the pages.
+import collections as _c
+TIERSIZE = _c.Counter(x['level'] for x in CAT)
+COUNTS = set(TIERSIZE.values()) | {len(CAT)}
+
 def flat(s):
     s = re.sub(r'<script[\s\S]*?</script>', ' ', s)
     s = re.sub(r'<style[\s\S]*?</style>', ' ', s)
@@ -80,7 +88,7 @@ for p in PAGES:
     for m in re.finditer(r'\b(\d{1,3})\s+(?:lessons|articles|comprehensive lessons|comprehensive articles)\b', t, re.I):
         if m.group(1) == '0':
             continue  # an empty progress placeholder that script fills in
-        ok = {24, 28, 18, 15, 85}
+        ok = set(COUNTS)
         if p.endswith('education/paths.html'):
             ok |= PATHLEN
         if int(m.group(1)) not in ok:

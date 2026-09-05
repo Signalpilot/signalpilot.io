@@ -3549,4 +3549,206 @@ dict(
           'measuring the answer twice.</p>\n',
 ),
 
+
+# --------------------------------------------------------------- module 12
+dict(
+    mod=12, tier='professional', slug='module-12-quiz',
+    slots=[86, 87, 88, 89, 90],
+    title='Module 12 Quiz: The Trader',
+    desc='Six computations from the module that measured the reader. Re-exit seven '
+         'trades at a target, find the widest stop that never fires, size a record '
+         'by its last result and reprice it flat, add up what was showing, and put '
+         'two habits together to find they do not add.',
+    intro='Every other module measured the market. This one held lesson 63&rsquo;s '
+          'seven trades still and measured four things a trader does to them. Six '
+          'questions, all arithmetic on the same sheet, and the last one spends every '
+          'column at once to find that two costs of 2.20 and 5.90 come to 5.40 '
+          'together rather than 8.10.',
+    covers='Lessons 86 to 90, and the sheet of seven trades the module has been '
+           'adding a column to since its first page.',
+    related=[(86, 'the profit target the first two questions turn'),
+             (87, 'the excursions the third question reads'),
+             (88, 'the sizing rule the fourth question runs'),
+             (89, 'the best closes the fifth question adds up'),
+             (90, 'the two habits the last question runs together')],
+    questions=[
+        dict(
+            title='Seven trades, re-exited at the first sign of green',
+            setup='      <p>Lesson 63&rsquo;s rule takes seven trades on this '
+                  'course&rsquo;s sixty closes. Their entries and the rule&rsquo;s own '
+                  'exits are below, and a round trip costs 0.1230 a share.</p>\n'
+                  + table(['Trade', 'Entry', 'Rule exit', 'Gross'],
+                          [['1', '102.6', '105.3', '+2.70'],
+                           ['2', '103.7', '105.7', '+2.00'],
+                           ['3', '98.8', '101.3', '+2.50'],
+                           ['4', '104.4', '105.9', '+1.50'],
+                           ['5', '106.9', '106.6', '&minus;0.30'],
+                           ['6', '105.8', '107.1', '+1.30'],
+                           ['7', '106.0', '107.0', '+1.00']])
+                  + '      <p>Now close each trade instead at the first close above its '
+                    'entry. Those closes are 105.3, 106.7, 99.2, 104.8, none, 107.1 and '
+                    '107.0 respectively.</p>\n',
+            ask='What does the record net, and how many of the seven finish positive?',
+            result='7.64 a share, and six of seven &mdash; the same six.',
+            answer='      <p>Subtract each entry from its new exit: +2.70, +3.00, +0.40, '
+                   '+0.40, &minus;0.30 (the fifth never shows a profit, so it leaves '
+                   'where the rule would have), +1.30 and +1.00. That is 8.50 gross.</p>\n'
+                   '      <p>The trade count has not changed, so the costs have not '
+                   'changed: 7 &times; 0.1230 = 0.861. Net is 8.50 &minus; 0.861 = '
+                   '7.639, or 7.64 a share, against the rule&rsquo;s own 9.84.</p>\n'
+                   '      <p>Six of the seven finish positive, exactly as before, and '
+                   'the one that does not is the same one. The habit removed 2.20 a '
+                   'share and left no trace in the number a journal reports. Against '
+                   'buying and holding, which nets 5.68, the rule was worth 4.16 and is '
+                   'now worth 1.96.</p>\n'),
+        dict(
+            title='Why two rows of the table are identical',
+            setup='      <p>Lesson 85 measured R at 1.5443 a share. Lesson 86 runs the '
+                  'same seven trades at a target of nothing, a quarter of an R, a half, '
+                  'one, one and a half and two, and the first two rows come out '
+                  'identical in every column.</p>\n'
+                  '      <p>The first profitable close on each of the seven trades is '
+                  '+2.70, +3.00, +0.40, +0.40, none, +1.30 and +1.00 above the '
+                  'entry.</p>\n',
+            ask='Show that the two rows must be identical, and give the target above '
+                'which they would stop being so.',
+            result='0.386 a share against a smallest profitable move of 0.40, so any '
+                   'target under 0.40 fills identically; 0.2590 R is where it breaks.',
+            answer='      <p>A quarter of an R is 0.25 &times; 1.5443 = 0.3861 a share. '
+                   'The smallest profitable move any of the seven trades makes is 0.40, '
+                   'on trades 3 and 4. Since 0.3861 is below 0.40, every trade fills at '
+                   'the same close under both rules, so every figure in the two rows '
+                   'agrees.</p>\n'
+                   '      <p>The rows separate the moment the target exceeds 0.40, which '
+                   'is 0.40 &divide; 1.5443 = 0.2590 of an R. At a target of 0.26 R '
+                   'trades 3 and 4 would have to wait for a later close, and the row '
+                   'would move.</p>\n'
+                   '      <p>This is the check that tells you whether you have '
+                   'reproduced the table correctly. Two identical top rows are the '
+                   'arithmetic working, not a mistake.</p>\n'),
+        dict(
+            title='The widest stop that never fires',
+            setup='      <p>Here is how far each of the seven trades went against its '
+                  'entry, measured as the worst close inside the trade and quoted in R '
+                  'at 1.5443 a share.</p>\n'
+                  + table(['Trade', 'Worst close inside', 'In R'],
+                          [['1', '102.1', '&minus;0.324'],
+                           ['2', '103.0', '&minus;0.453'],
+                           ['3', '99.2', '+0.259'],
+                           ['4', '104.8', '+0.259'],
+                           ['5', '106.6', '&minus;0.194'],
+                           ['6', '107.1', '+0.842'],
+                           ['7', '107.0', '+0.648']]),
+            ask='Which stop distances never fire at all, how many trades does a stop at '
+                'a third of an R fire on, and what does that tell you about the four '
+                'trades whose worst close is a gain?',
+            result='Anything wider than 0.453 R never fires; a third of an R fires once; '
+                   'four of the seven can never be stopped at any distance.',
+            answer='      <p>A stop fires when the worst close inside a trade reaches it, '
+                   'so a stop wider than the deepest excursion on the sheet can never '
+                   'fire. The deepest is 0.453 of an R, on trade 2, so every stop from '
+                   '0.46 R outward leaves all seven trades exactly as the rule left '
+                   'them: 9.84 a share, six winners.</p>\n'
+                   '      <p>A stop at a third of an R, 0.333, sits between 0.324 and '
+                   '0.453, so it fires on trade 2 alone. That single firing takes a '
+                   '+2.00 winner to a &minus;0.70 loser and the record from 9.84 to '
+                   '7.14.</p>\n'
+                   '      <p>Trades 3, 4, 6 and 7 have a gain as their worst close: they '
+                   'never trade below their entry on any close in their life. No stop at '
+                   'any distance can touch them, which means four of the seven trades '
+                   'are entirely outside the reach of the setting most traders think is '
+                   'doing the most work.</p>\n'),
+        dict(
+            title='A sizing rule, and the flat position it should be compared with',
+            setup='      <p>The seven trades net, after the round trip, 2.577, 1.877, '
+                  '2.377, 1.377, &minus;0.423, 1.177 and 0.877 a share, in that order. '
+                  'Start at one unit; after a trade that finishes positive, double; '
+                  'after one that does not, halve.</p>\n',
+            ask='What does the rule return, what average position does it carry, and '
+                'what would a flat position of that same average size have returned?',
+            result='43.535 on an average of 7.8571 units, against 77.306 flat &mdash; a '
+                   'ratio of 0.5631.',
+            answer='      <p>The sizes are 1, 2, 4, 8, 16, 8 and 16, because the first '
+                   'four trades win, the fifth loses and the last two win. Multiply each '
+                   'by its result: +2.577, +3.754, +9.508, +11.016, &minus;6.768, +9.416 '
+                   'and +14.032, which totals 43.535.</p>\n'
+                   '      <p>The average position is (1 + 2 + 4 + 8 + 16 + 8 + 16) '
+                   '&divide; 7 = 55 &divide; 7 = 7.8571 units.</p>\n'
+                   '      <p>Flat sizing returns the sum of the seven results, 9.839, '
+                   'whatever the order. At 7.8571 units that is 9.839 &times; 7.8571 = '
+                   '77.306, so the rule returned 43.535 &divide; 77.306 = 0.5631 of what '
+                   'its own exposure earned. The comparison against 9.839 flatters it by '
+                   'a factor of nearly eight and is the wrong comparison: a rule '
+                   'carrying eight units is not competing with a rule carrying one.</p>\n'),
+        dict(
+            title='What was showing, and what arrived',
+            setup='      <p>The best close inside each of the seven trades, against the '
+                  'entry, is +2.70, +3.00, +4.60, +2.30, &minus;0.30, +1.30 and +1.00. '
+                  'The realised results are +2.70, +2.00, +2.50, +1.50, &minus;0.30, '
+                  '+1.30 and +1.00.</p>\n',
+            ask='How much was given back in total, what share of what showed is that, '
+                'and how many trades give back nothing?',
+            result='3.90 a share, 26.7 per cent of the 14.60 that showed, and four of '
+                   'the seven give back nothing.',
+            answer='      <p>The showing total is 2.70 + 3.00 + 4.60 + 2.30 &minus; 0.30 '
+                   '+ 1.30 + 1.00 = 14.60. The realised total is 10.70. The difference '
+                   'is 3.90 a share, which is 3.90 &divide; 14.60 = 0.2671, or '
+                   '26.7 per cent.</p>\n'
+                   '      <p>Trades 1, 5, 6 and 7 give back nothing: their best close is '
+                   'the close they exited on. Three of them lasted one bar, and one '
+                   'lasted two and peaked on the second. The whole 3.90 comes from the '
+                   'three trades that lasted four bars or more, and 2.10 of it from '
+                   'trade 3 alone, which is 53.8 per cent of the total.</p>\n'
+                   '      <p>That is the shape of the quantity: it is not spread across '
+                   'a record, it is concentrated in whichever positions were open '
+                   'longest, and those are the ones a trader can name a year later.</p>\n'),
+        dict(
+            title='Two habits, run together',
+            setup='      <p>On these seven trades, taking the profit at the first close '
+                  'in profit nets 7.64 a share against the rule&rsquo;s 9.84. A stop at '
+                  'a quarter of an R, which is 0.3861 a share, nets 3.94.</p>\n'
+                  '      <p>Run both at once, taking whichever exit is reached first on '
+                  'each trade. Trade 1 reaches its stop at bar 7 before any profitable '
+                  'close, for &minus;0.50. Trade 2 closes at 106.7 on bar 10, three '
+                  'dollars up, before reaching its stop at bar 12. The other five behave '
+                  'as they did under the target alone: +0.40, +0.40, &minus;0.30, +1.30 '
+                  'and +1.00.</p>\n',
+            ask='What do the two habits cost separately, what would they cost added, and '
+                'what do they actually cost together?',
+            result='2.20 and 5.90 separately, 8.10 added, and 5.40 together &mdash; a '
+                   'gap of 2.70 a share.',
+            answer='      <p>Separately: 9.84 &minus; 7.64 = 2.20 for the target, and '
+                   '9.84 &minus; 3.94 = 5.90 for the stop. Added, 8.10, which would '
+                   'leave the record at 1.74.</p>\n'
+                   '      <p>Together the seven results are &minus;0.50, +3.00, +0.40, '
+                   '+0.40, &minus;0.30, +1.30 and +1.00, totalling 5.30 gross and '
+                   '5.30 &minus; 0.861 = 4.439 net. So the pair costs '
+                   '9.84 &minus; 4.44 = 5.40, and the gap between the addition and the '
+                   'measurement is 2.70 a share.</p>\n'
+                   '      <p>The whole of the gap is trade 2. The target leaves it at '
+                   '106.7 for +3.00 on bar 10, so when the stop is reached on bar 12 '
+                   'there is no position to close. Against the stop running alone, which '
+                   'takes it to &minus;0.70, the target saved 3.70 on that trade.</p>\n'
+                   '      <p>Costs of this kind do not add, because a habit that changes '
+                   'an exit does not take money off a trade &mdash; it replaces the '
+                   'trade with a different one, and two of them cannot both replace the '
+                   'same trade. The pair is bounded by the worse of the two rather than '
+                   'by their sum, and the record ends at 4.44, which is 1.24 below '
+                   'simply buying and holding.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether you can hold the entries still. Every question above changed '
+          'one thing about what a trader does with seven fixed signals and asked what it '
+          'cost, and each answer came out of a column that is not on any statement: the '
+          'close after the one you took, the worst close while you held, the size the '
+          'previous result chose for you, and the best price that ever showed. The '
+          'course spent eighty-five lessons measuring markets on a record small enough '
+          'to hold in one hand. This module used the same record and the same arithmetic '
+          'to measure the person holding it.</p>\n'
+          '      <p>That is the last question in the course. What you take away is not a '
+          'system. It is the habit of dividing, of asking what a number is a number of, '
+          'of measuring the answer twice &mdash; and of asking, before you believe any '
+          'number about your own trading, which column it came from and what the '
+          'statement does not print.</p>\n'),
+
 ]
