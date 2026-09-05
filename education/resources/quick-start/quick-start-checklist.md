@@ -93,7 +93,7 @@ NanoFlow crosses for?
 
 ## Phase 7: The first lessons
 
-The curriculum is 90 lessons in four tiers. These five are Module 1, and every
+The curriculum is 95 lessons in four tiers. These five are Module 1, and every
 figure in them is reproducible from the numbers printed on the page.
 
 - [ ] Lesson 1: What a Market Solves

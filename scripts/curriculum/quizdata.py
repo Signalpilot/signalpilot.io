@@ -3577,7 +3577,7 @@ dict(
             setup='      <p>Lesson 63&rsquo;s rule takes seven trades on this '
                   'course&rsquo;s sixty closes. Their entries and the rule&rsquo;s own '
                   'exits are below, and a round trip costs 0.1230 a share.</p>\n'
-                  + table(['Trade', 'Entry', 'Rule exit', 'Gross'],
+                  + table(['Trade no.', 'Entry', 'Rule exit', 'Gross'],
                           [['1', '102.6', '105.3', '+2.70'],
                            ['2', '103.7', '105.7', '+2.00'],
                            ['3', '98.8', '101.3', '+2.50'],
@@ -3631,7 +3631,7 @@ dict(
             setup='      <p>Here is how far each of the seven trades went against its '
                   'entry, measured as the worst close inside the trade and quoted in R '
                   'at 1.5443 a share.</p>\n'
-                  + table(['Trade', 'Worst close inside', 'In R'],
+                  + table(['Trade no.', 'Worst close inside', 'In R'],
                           [['1', '102.1', '&minus;0.324'],
                            ['2', '103.0', '&minus;0.453'],
                            ['3', '99.2', '+0.259'],
@@ -3750,5 +3750,177 @@ dict(
           'of measuring the answer twice &mdash; and of asking, before you believe any '
           'number about your own trading, which column it came from and what the '
           'statement does not print.</p>\n'),
+
+# --------------------------------------------------------------- module 13
+dict(
+    mod=13, tier='professional', slug='module-13-quiz',
+    slots=[91, 92, 93, 94, 95],
+    title='Module 13 Quiz: The Book',
+    desc='Six computations from the module that measured a book instead of a rule. '
+         'Average four rules, sort a year by its best days, subtract the turnover, '
+         'measure a worst run, and delete one member to find the book improves.',
+    intro='Module 9 measured how alike a book&rsquo;s rules are. This one measured what '
+          'the book does: what it earns, where that came from, what it costs to run '
+          'and how deep it goes. Six questions, all arithmetic on the same twenty-eight '
+          'moves, and the last one spends every column at once to find that three of '
+          'the four deletions improve the book.',
+    covers='Lessons 91 to 95, and the card of four rules the module has been adding a '
+           'column to since its first page.',
+    related=[(91, 'the returns the first question averages'),
+             (92, 'the sorted year the second question reads'),
+             (93, 'the turnover the third question subtracts'),
+             (94, 'the worst run the fourth question measures'),
+             (95, 'the deletion the last question runs')],
+    questions=[
+        dict(
+            title='Four rules, one book',
+            setup='      <p>Lesson 71 picked four moving-average rules chosen not to look '
+                  'alike, and lesson 91 ran them over the twenty-eight moves on which every '
+                  'rule in lesson 63&rsquo;s grid is defined. This is what each of them made, '
+                  'gross, a share.</p>\n'
+                  + table(['Rule', 'What it made'],
+                          [['2 and 5', '4.90'],
+                           ['3 and 10', '3.90'],
+                           ['5 and 20', '3.50'],
+                           ['8 and 30', '4.10']])
+                  + '      <p>The book puts a quarter of the money in each. Over the same '
+                    'twenty-eight moves, buying at the first close and selling at the last '
+                    'makes 6.60 a share.</p>\n',
+            ask='What does the book make, what share of the best member is that, and how '
+                'does it compare with holding?',
+            result='4.10 a share, 83.7 per cent of the best member&rsquo;s 4.90, and 62.1 '
+                   'per cent of holding&rsquo;s 6.60.',
+            answer='      <p>An equal-weight book of four is the average of the four: '
+                   '(4.90 + 3.90 + 3.50 + 4.10) &divide; 4 = 16.40 &divide; 4 = 4.10 a '
+                   'share.</p>\n'
+                   '      <p>Against the best of its own members, 4.10 &divide; 4.90 = '
+                   '0.8367, so the book kept 83.7 per cent of what the single best rule '
+                   'earned. Against the benchmark, 4.10 &divide; 6.60 = 0.6212.</p>\n'
+                   '      <p>The averaging is the whole point and it is why lesson 91 found '
+                   'the median return flat at every book size from one rule to 253. A book of '
+                   'one family cannot earn more than its members average, and the only thing '
+                   'it can do is narrow the range around that average.</p>\n'),
+        dict(
+            title='The three moves',
+            setup='      <p>The book&rsquo;s twenty-eight moves, sorted largest first, begin '
+                  '1.30, 1.00, 1.00. Its total is 4.10. Seventeen of the twenty-eight are '
+                  'positive and total 10.15; eleven are negative and total minus 6.05.</p>\n',
+            ask='What share of the result is the best three moves, and what do the other '
+                'twenty-five make between them?',
+            result='80.5 per cent, and the other twenty-five make 0.80.',
+            answer='      <p>The best three sum to 1.30 + 1.00 + 1.00 = 3.30, and 3.30 '
+                   '&divide; 4.10 = 0.8049, so 80.5 per cent.</p>\n'
+                   '      <p>The rest is subtraction: 4.10 &minus; 3.30 = 0.80 across '
+                   'twenty-five moves, which is 0.032 a move against a bar-to-bar standard '
+                   'deviation of 1.5443.</p>\n'
+                   '      <p>The check worth doing is the benchmark&rsquo;s. Holding&rsquo;s '
+                   'best three moves are 3.80 of its 6.60, which is 57.6 per cent, so the '
+                   'undiversified single position is the less concentrated of the two. Four '
+                   'rules did not spread the result over more days; they shrank the total the '
+                   'same good days are measured against.</p>\n'),
+        dict(
+            title='What the turnover takes',
+            setup='      <p>A round trip costs 0.1230 a share. Over the twenty-eight moves the '
+                  'four rules change position this many times, and each carries a quarter of '
+                  'the book.</p>\n'
+                  + table(['Rule', 'Gross', 'Position changes'],
+                          [['2 and 5', '4.90', '9'],
+                           ['3 and 10', '3.90', '2'],
+                           ['5 and 20', '3.50', '1'],
+                           ['8 and 30', '4.10', '1']]),
+            ask='What does each rule net, which of the four finishes first, and what does '
+                'the book net?',
+            result='3.79, 3.65, 3.38 and 3.98. The 8-and-30 finishes first, and the book '
+                   'nets 3.7002.',
+            answer='      <p>Charge each rule its own turnover at the full round trip: 9 '
+                   '&times; 0.1230 = 1.1070, 2 &times; 0.1230 = 0.2460, and 0.1230 for each '
+                   'of the two that change once. Subtract from the gross: 3.7930, 3.6540, '
+                   '3.3770 and 3.9770.</p>\n'
+                   '      <p>The ranking inverts. The 2-and-5 is the best of the four gross by '
+                   'a full dollar and finishes second, because it makes nine of the '
+                   'book&rsquo;s thirteen changes, which is 69.2 per cent of the turnover for '
+                   '29.9 per cent of the gross return. The 8-and-30 was third gross and '
+                   'finishes first, keeping 97.0 per cent of what it earned against the fast '
+                   'rule&rsquo;s 77.4 per cent.</p>\n'
+                   '      <p>The book pays the same thirteen changes on a quarter of the money '
+                   'each: 13 &times; 0.1230 &divide; 4 = 0.3997, so 4.10 &minus; 0.3997 = '
+                   '3.7002.</p>\n'),
+        dict(
+            title='The worst run',
+            setup='      <p>The book&rsquo;s worst three consecutive moves run from bar 36 to '
+                  'bar 39, where the price goes 103.4, 103.1, 102.4, 101.3. On the first two '
+                  'the 8-and-30 rule is flat and the other three are long; on the third all '
+                  'four are long.</p>\n',
+            ask='What is the book&rsquo;s worst run, what is a fully long position&rsquo;s, '
+                'and what did the diversification buy?',
+            result='1.85 a share against 2.10, so the whole benefit is 0.25.',
+            answer='      <p>The three moves lose 0.30, 0.70 and 1.10, so anything long '
+                   'throughout loses 2.10, which is 1.360 of an R at 1.5443 a share. That is '
+                   'what holding loses, what the best rule in the whole grid loses, and what '
+                   'three of the four members lose.</p>\n'
+                   '      <p>The book has three quarters of its money long for the first two '
+                   'moves and all of it for the third: 0.75 &times; 0.30 = 0.225, then 0.75 '
+                   '&times; 0.70 = 0.525, then the full 1.100. That totals 1.85, or 1.198 of '
+                   'an R.</p>\n'
+                   '      <p>So the entire diversification benefit is 2.10 &minus; 1.85 = 0.25 '
+                   'a share, and it is one rule being out of the market for two days. Set that '
+                   'beside what it cost: the book kept 88.1 per cent of the pain and 83.7 per '
+                   'cent of the return.</p>\n'),
+        dict(
+            title='The rule that does not trade',
+            setup='      <p>Across all 253 rules over the same twenty-eight moves, the best on '
+                  'gross return is a 9-bar average against a 10, at 7.00 a share, and it '
+                  'changes position six times. One rule in the grid, a 3-bar average against a '
+                  '12, changes position not at all: it is long from the first move to the last. '
+                  'It makes 6.60 gross.</p>\n',
+            ask='Which of the two is better after costs, and what is the second one '
+                'equivalent to?',
+            result='6.60 against 6.262, so the rule that never trades wins, and it is '
+                   'buying and holding.',
+            answer='      <p>The 9-and-10 pays 6 &times; 0.1230 = 0.738, so 7.00 &minus; 0.738 '
+                   '= 6.262. The 3-and-12 pays nothing at all inside the window and keeps its '
+                   '6.60.</p>\n'
+                   '      <p>A rule that is long from bar 31 to bar 59 and never changes is '
+                   'holding a position from bar 31 to bar 59, which is exactly the benchmark. '
+                   'Its 6.60 is the benchmark&rsquo;s 6.60 because it is the same trade.</p>\n'
+                   '      <p>The point is about the accounting rather than about that rule. A '
+                   'grid searched on gross return hands you the rule with the most turnover in '
+                   'it, because on this data turnover and gross return move together and only '
+                   'one of the two is being maximised.</p>\n'),
+        dict(
+            title='Delete one member',
+            setup='      <p>Here is the finished card for the four-rule book and for the book '
+                  'with the 5-and-20 removed, over the same twenty-eight moves.</p>\n'
+                  + table(['Book', 'Net', 'Worst run'],
+                          [['All four', '3.7002', '1.85'],
+                           ['Without 5 and 20', '3.8080', '1.77']]),
+            ask='What does each book return for each unit of depth, how much does the '
+                'deletion improve it, and what does the 8-and-30 alone return on the same '
+                'measure?',
+            result='2.000 and 2.155, an improvement of 7.8 per cent, against 3.615 for the '
+                   'single rule.',
+            answer='      <p>Divide the net by the worst run: 3.7002 &divide; 1.85 = 2.000 and '
+                   '3.8080 &divide; 1.77 = 2.155. The deletion raises the ratio by 2.155 '
+                   '&divide; 2.000 &minus; 1 = 7.8 per cent, and it raises the net return at '
+                   'the same time, so nothing was traded away for it.</p>\n'
+                   '      <p>The 8-and-30 run alone nets 3.9770 on a worst run of 1.10, which '
+                   'is 3.615. It beats the four-rule book and every three-rule book you can '
+                   'make out of it, on net return, on turnover and on depth at once.</p>\n'
+                   '      <p>Three of the four deletions improve the book and the fourth, '
+                   'removing the 8-and-30, is the only one that makes it worse, at 1.718. The '
+                   'member the return column ranked third is the one the book cannot afford to '
+                   'lose, and it takes all four columns to see it.</p>\n'),
+    ],
+    close_head='What this quiz was testing',
+    close='      <p>Whether a book can be told apart from its parts. Every question above handed '
+            'you the same four rules and asked one more thing of them, and the answer changed '
+            'each time: the return column preferred the fastest rule, the turnover column '
+            'reversed that, the depth column reversed it again, and the concentration column '
+            'said the whole ranking rests on three moves out of twenty-eight. A single number '
+            'about a book cannot survive any of those four questions being asked.</p>\n'
+            '<p>What you take away is the card rather than the verdict. Four columns, one row '
+            'per rule and one for the book, and a deletion test that asks whether any member '
+            'beats the whole. On this data one of them does, on every column at once, and it '
+            'is the rule that trades least.</p>\n'),
 
 ]

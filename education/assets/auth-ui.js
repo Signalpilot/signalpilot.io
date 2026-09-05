@@ -97,7 +97,7 @@
             <li><strong>☁️ Cloud Sync</strong> — Access your progress from any device</li>
             <li><strong>📊 Track Progress</strong> — See your completion stats and learning streaks</li>
             <li><strong>📝 Save Notes</strong> — Keep your lesson notes synced across devices</li>
-            <li><strong>🎓 Get Certificate</strong> — Earn a completion certificate for all 90 lessons</li>
+            <li><strong>🎓 Get Certificate</strong> — Earn a completion certificate for all 95 lessons</li>
           </ul>
         </div>
 

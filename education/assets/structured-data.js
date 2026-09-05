@@ -33,7 +33,7 @@
     "@type": "EducationalOrganization",
     "name": "Signal Pilot Education Hub",
     "url": BASE,
-    "description": "Learn institutional trading concepts from Signal Pilot. 90 comprehensive lessons covering order flow, liquidity engineering, and professional trading frameworks.",
+    "description": "Learn institutional trading concepts from Signal Pilot. 95 comprehensive lessons covering order flow, liquidity engineering, and professional trading frameworks.",
     "provider": {
       "@type": "Organization",
       "name": "Signal Pilot"
@@ -45,7 +45,7 @@
     "@context": "https://schema.org",
     "@type": "Course",
     "name": "Signal Pilot Trading Education",
-    "description": "Interactive trading course with 90 lessons across 4 tiers: Beginner, Intermediate, Advanced, and Professional. Learn market structure, institutional order flow, and professional trading frameworks.",
+    "description": "Interactive trading course with 95 lessons across 4 tiers: Beginner, Intermediate, Advanced, and Professional. Learn market structure, institutional order flow, and professional trading frameworks.",
     "provider": {
       "@type": "Organization",
       "name": "Signal Pilot",
@@ -400,7 +400,7 @@
     "@type": "WebSite",
     "name": "Signal Pilot Education Hub",
     "url": BASE,
-    "description": "Interactive trading education platform with 90 lessons, quizzes, and progress tracking.",
+    "description": "Interactive trading education platform with 95 lessons, quizzes, and progress tracking.",
     "publisher": {
       "@type": "Organization",
       "name": "Signal Pilot"
