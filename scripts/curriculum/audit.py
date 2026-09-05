@@ -23,6 +23,8 @@ pattern that merely looks odd to a regex:
             each one opens on, and the level its listing selects
     cat     the catalogue against the lessons: title, href and the meta
             description, which is where a figure the grid moved hides
+    terms   the glossary against the corpus: every lesson named by an entry,
+            and the built page matching its data file
 
 Like craft.py this exits with the finding count, so a red label in a shell is
 a count and not a crash.
@@ -496,13 +498,40 @@ def check_cat():
 
 # -------------------------------------------------------------------- driver
 
+# ------------------------------------------------------------ the glossary
+
+def check_terms():
+    """The glossary promises a definition for every term the lessons use, and
+    names a lesson under each one. A lesson no entry points at is that promise
+    quietly unkept, and a page built from a data file can say so."""
+    sys.path.insert(0, os.path.join(ROOT, 'scripts', 'curriculum'))
+    try:
+        import terms
+    except Exception as e:
+        print('terms check unavailable: %s' % e)
+        return
+    finally:
+        os.chdir(ROOT)
+    data, cat = terms.entries(), terms.catalogue()
+    named = set(n for e in data for n in e['lessons'])
+    for slot in sorted(set(cat) - named):
+        report(slot, 'terms', 'no glossary entry names this lesson')
+    page = open(terms.PAGE, encoding='utf-8').read()
+    i, j = terms.region(page)
+    if page[i:j] != terms.render(data, cat):
+        report(min(cat), 'terms',
+               'education/glossary.html does not match glossary.json; run terms.py')
+
+
+# -------------------------------------------------------------------- driver
+
 CHECKS = collections.OrderedDict([
     ('xref', check_xref), ('chain', check_chain), ('arith', check_arith),
     ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale),
-    ('hub', check_hub), ('cat', check_cat),
+    ('hub', check_hub), ('cat', check_cat), ('terms', check_terms),
 ])
 ORDER = ['xref', 'href', 'title', 'prereq', 'tease', 'arith', 'claim', 'dupes',
-         'locale', 'hub', 'cat', 'figure']
+         'locale', 'hub', 'cat', 'terms', 'figure']
 
 
 def main(argv):
