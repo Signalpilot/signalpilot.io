@@ -859,13 +859,26 @@ claim has no numeral to hand over. Nothing is topic-only.
   it cannot be fixed from here: rewriting it needs write access to the
   `scenarios` table, and the rows should be rewritten against the current
   lessons rather than edited.
-- Three handlers in `gamification.js`, `badges.js` and `daily-challenges.js`
-  still listen for `sp:quizCompleted` and score it out of a hundred. Nothing
-  fires that event any more: `quiz-enhanced.js`, its only source, was removed
-  because the legacy per-lesson quizzes it drove no longer exist. The eleven
-  module quizzes are prose with worked answers, so there is no score to award
-  without inventing one. The listeners are harmless and are the wiring point
-  if a checkpoint is ever added.
+- The **gamification stack works now and did not before**. `window.currentUser`
+  was never assigned by anything, and both `gamification.js` and `badges.js`
+  gated on it, so no XP was ever awarded and no badge ever unlocked, signed in
+  or out. `supabase-client.js` publishes it now and the login gates are gone:
+  progress is kept in localStorage like every other signal here and syncs when
+  a user appears. Four events had listeners and no sender and now have one
+  (`sp:streakUpdated`, `sp:noteSaved`, `sp:tierCompleted`, `sp:socialShare`);
+  `sp:quizCompleted` had no possible sender since the module quizzes are prose,
+  so its three listeners were removed with `quiz-enhanced.js`. `gamification.css`
+  was loaded by no page at all, and `daily-challenges.js`, a finished feature,
+  was loaded by none either. Both are wired into the homepage and My Library.
+  Two checkers guard this: `scripts/curriculum/ui.py` for anything clickable and
+  `scripts/curriculum/browse.cjs` for what only a real browser sees.
+- Four scripts under `education/assets/` are loaded by nothing and are obsolete
+  rather than switched off. `toc-active.js` highlights the active entry in a
+  `.toc`, and the lesson pages' `.toc-sidebar` is a button rail with no
+  in-page navigation in it. `lesson-notes.js` is a near-duplicate of the
+  `notes.js` that lesson pages actually load, which is a trap for whoever edits
+  the wrong one next. `aurora.js` and `constellations.js` are background effects
+  superseded by `sp-bg.js`. Deleting them is a call for the site owner.
 - Forty-three pre-rebuild checklist PDFs sit orphaned under
   `education/resources/checklists/`. Nothing links them since the six
   worksheets replaced them, but they are still served and they teach the old
