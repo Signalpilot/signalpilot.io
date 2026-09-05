@@ -21,6 +21,8 @@ pattern that merely looks odd to a regex:
             which is how a page builds green and still reads English
     hub     the four tier pages against the catalogue: counts, the lesson
             each one opens on, and the level its listing selects
+    cat     the catalogue against the lessons: title, href and the meta
+            description, which is where a figure the grid moved hides
 
 Like craft.py this exits with the finding count, so a red label in a shell is
 a count and not a crash.
@@ -469,14 +471,38 @@ def check_hub():
             break
 
 
+def check_cat():
+    """Three catalogue fields are facts about the corpus rather than opinions:
+    the title is the lesson's h1, the href is where the file sits, and the
+    description is the lesson's own meta description. All three were typed, so
+    all three could drift, and the description had: 52 of the 85 rows
+    disagreed with their lesson, six of them still carrying figures the
+    settled grid had moved. The catalogue renders on the four tier pages and
+    in search results, where nothing recomputes anything, so a stale figure
+    there survives every other check on this page."""
+    sys.path.insert(0, os.path.join(ROOT, 'scripts', 'curriculum'))
+    import catalogue
+    try:
+        _, _, rows = catalogue.drift()
+    except SystemExit as e:
+        print('cat check unavailable: %s' % e)
+        return
+    finally:
+        os.chdir(ROOT)
+    for slot, field, was, now in rows:
+        report(slot, 'cat', 'catalogue %s is %r and the lesson says %r'
+               % (field, was[:70], now[:70]))
+
+
 # -------------------------------------------------------------------- driver
 
 CHECKS = collections.OrderedDict([
     ('xref', check_xref), ('chain', check_chain), ('arith', check_arith),
-    ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale), ('hub', check_hub),
+    ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale),
+    ('hub', check_hub), ('cat', check_cat),
 ])
 ORDER = ['xref', 'href', 'title', 'prereq', 'tease', 'arith', 'claim', 'dupes',
-         'locale', 'hub', 'figure']
+         'locale', 'hub', 'cat', 'figure']
 
 
 def main(argv):

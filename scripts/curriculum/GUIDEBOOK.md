@@ -688,13 +688,16 @@ python3 scripts/i18n/build.py curriculum/<tier>/<slug>.html [lang]
 python3 scripts/i18n/checks/run.py <slug>
 python3 scripts/curriculum/hubs.py                    # regenerate the index
 python3 scripts/curriculum/hubs.py --check            # exit 1 if stale
+python3 scripts/curriculum/catalogue.py               # sync index.json to the lessons
+python3 scripts/curriculum/catalogue.py --check       # exit with the drift count
 python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>
 ```
 
 Run from the repo root; lesson paths are relative to `education/`. Both
 checkers exit with their finding count by design, so a red label in a shell is
 a count and not a crash. `audit.py` takes any of `xref`, `chain`, `arith`,
-`claim` and `dupes`, and runs all five when given none. It reads only the
+`claim`, `dupes`, `locale`, `hub` and `cat`, and runs all eight when given
+none. It reads only the
 English pages, because a defect in the relations between lessons is in the
 English or it is nowhere.
 
@@ -739,6 +742,15 @@ corpus, and the corpus is on disk.
 - A Start button resolves to the lowest slot in its tier. A prerequisite line
   is the previous tier's last slot. Neither is typed.
 - A lesson's title on the index is read from the lesson's own page.
+- So is its description, and that one had drifted furthest. The catalogue at
+  `education/curriculum/index.json` is not the index, but it is what the four
+  tier pages and the search box print, and its title, href and description
+  were all typed. Fifty-two of the eighty-five descriptions disagreed with
+  their own lesson, six of them still carrying figures the settled grid had
+  moved a commit earlier. `catalogue.py` rewrites the three from the lesson
+  files and `audit.py cat` fails on any drift. Nothing on a tier page
+  recomputes anything, which is exactly why a stale figure lives there
+  longest.
 - A tier's summary boxes are drawn from that tier's own modules and lesson
   titles, and carry no indicator names. Where a box shows only some of a
   module's lessons it says how many it left out, because a silent cap reads as
