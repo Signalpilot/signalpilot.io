@@ -1,6 +1,6 @@
 # Position Sizing Calculator Template
 
-*Signal Pilot Education — companion to Lesson 9.*
+*Signal Pilot Education — companion to Lesson 20: Position Sizing.*
 
 Work top to bottom. Every line is arithmetic on numbers you supply; nothing
 here decides whether to take a trade.

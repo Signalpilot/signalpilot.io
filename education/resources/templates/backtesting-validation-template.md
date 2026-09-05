@@ -1,6 +1,6 @@
 # Backtesting Validation Template
 
-*Signal Pilot Education — companion to Lesson 24.*
+*Signal Pilot Education — companion to Lesson 63: Backtesting as Evidence.*
 
 A backtest is a hypothesis about a set of rules. This template is for
 attacking that hypothesis before you trust it.

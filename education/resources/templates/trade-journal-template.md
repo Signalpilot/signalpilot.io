@@ -1,6 +1,6 @@
 # Trade Journal Template
 
-*Signal Pilot Education — companion to Lesson 26.*
+*Signal Pilot Education — companion to Lesson 23: Keeping the Record.*
 
 Copy one **Trade Record** block per trade. Fill the pre-trade section
 **before** you enter; if you cannot complete it, that is the signal to skip
