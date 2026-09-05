@@ -25,7 +25,6 @@ const STATIC_ASSETS = [
   '/education/assets/social-share.js',
   '/education/assets/analytics.js',
   '/education/assets/certificate.js',
-  '/education/assets/quiz-enhanced.js',
   '/education/offline.html'
 ];
 
