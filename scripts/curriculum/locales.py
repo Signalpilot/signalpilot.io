@@ -19,6 +19,12 @@ LANGS = ['de','es','fr','it','pt','nl','ru','ja','tr','hu','ar']
 CAT = json.load(open('education/curriculum/index.json', encoding='utf-8'))
 BY_HREF = {x['href']: x for x in CAT}
 SLOTS = {x['order'] for x in CAT}
+# The counts a page is allowed to claim: one per tier plus the course total.
+# Typed literals here went stale the moment module 12 was written, so they are
+# derived. TOTAL is the same file mklesson.py stamps into every lesson badge.
+TOTAL = int(open('education/curriculum/total.txt', encoding='utf-8').read().strip())
+_per_tier = collections.Counter(x['level'] for x in CAT)
+LEGAL_COUNTS = set(_per_tier.values()) | {TOTAL}
 SLUGS = {os.path.basename(x['href']).replace('.html',''): x for x in CAT}
 
 def flat(s):
@@ -66,7 +72,7 @@ for lang in LANGS:
         # "lesson 37 spent a lesson" in Arabic reads as 37 followed by the
         # word for lesson, so require a plural or a counter, not the bare noun.
         for m in re.finditer(r'\b(\d{2,3})\s*(?:lessons|Lektionen|lecciones|leçons|lezioni|aulas|lessen|уроков|レッスン|ders|leckéből|دروس)', t):
-            if int(m.group(1)) not in (24, 28, 18, 15, 85):
+            if int(m.group(1)) not in LEGAL_COUNTS:
                 rep(lang, '%s claims %s lessons' % (base, m.group(1)))
 
         # 6. English left in a locale page's own prose is a build fallback
