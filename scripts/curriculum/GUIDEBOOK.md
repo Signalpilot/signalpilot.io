@@ -708,6 +708,8 @@ python3 scripts/curriculum/lessonterms.py --check     # exit with the count stal
 python3 scripts/curriculum/tiers.py                   # tier-page summary lines
 python3 scripts/curriculum/paths.py                   # build education/paths.html
 python3 scripts/curriculum/paths.py --check           # exit with the finding count
+python3 scripts/curriculum/total.py                   # move the course total
+python3 scripts/curriculum/total.py --check           # exit with the stale-file count
 python3 scripts/curriculum/pdfs.py                    # the 36 free-resource PDFs
 python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>
 ```
@@ -715,8 +717,8 @@ python3 scripts/curriculum/touch_sitemap.py <tier>/<slug>
 Run from the repo root; lesson paths are relative to `education/`. Both
 checkers exit with their finding count by design, so a red label in a shell is
 a count and not a crash. `audit.py` takes any of `xref`, `chain`, `arith`,
-`claim`, `dupes`, `locale`, `hub`, `cat`, `terms`, `topics` and `paths`, and
-runs all eleven when given none. It reads only the
+`claim`, `dupes`, `locale`, `hub`, `cat`, `terms`, `topics`, `paths` and
+`total`, and runs all twelve when given none. It reads only the
 English pages, because a defect in the relations between lessons is in the
 English or it is nowhere.
 
@@ -821,6 +823,49 @@ only the two sentences around them translate, and they are the same two
 sentences on all eighty-five lessons. Use the literal `·` between them and
 never `&middot;`: the entity spells two ASCII letters, which is enough to make
 the separator a translatable key in every locale.
+
+
+### The course total
+
+The number of lessons is asserted in about a thousand places: the badge on
+every lesson page in twelve languages, the meta descriptions and schema on the
+pages around them, six JavaScript assets, and the marketing site in twelve
+languages again. It was typed there because for years it did not move, and
+then it moved twice and the corpus spent weeks disagreeing with itself.
+
+`education/curriculum/total.txt` records the figure the corpus currently
+asserts. `total.py` moves every page from that figure to `len(index.json)` and
+rewrites the record; `audit.py total` reports the gap. Adding a lesson is now
+three steps rather than a sweep: write it, register it, run `total.py`.
+
+Three things the obvious version of this tool gets wrong, all of them found by
+running it:
+
+- **Only the number the corpus last agreed on may move.** A rule that rewrote
+  every "N lessons" it found rewrote the four tier counts, the reading paths'
+  own lengths, and six badge thresholds in `badges.js` &mdash; every one of them
+  a legitimate lesson count that is not this one. That is why the tool is
+  driven by a recorded old value rather than by a pattern.
+- **A word count reads exactly like a lesson count.** Portuguese writes
+  `~217.000 palavras` beside `85.000`, so no rule matches a bare figure: the
+  locale's own lesson noun must follow the number, immediately.
+- **A citation reads like a count where the noun comes first.** Arabic writes
+  &ldquo;lesson 37 spent a lesson&rdquo; with the numeral between two forms of
+  the same word, and German writes `Lektionen 82&ndash;85` for a slot range.
+  A match preceded by the language's citation form is skipped, and the noun is
+  required to follow rather than merely to be nearby.
+
+Two more, quieter: entity references carry digits of their own, so the badge on
+every quiz page opens with `&#128221;` and must be masked before any number in
+a badge is read; and `<lang>/assets` is a symlink to `assets`, so the social
+slides are one file reached through twelve paths and are in English inside a
+locale tree, which is why each file is read twice, once in its own language and
+once in English. The twelve education indexes are `hubs.py`'s and this tool
+leaves them alone. `INSTAGRAM_CONTENT_HUB` and `content-plan` are working
+material rather than pages, and are skipped.
+
+The test that proved it: move the corpus to a different total and back, and
+compare. All 1,088 files it touches come back byte-identical.
 
 
 ### Reading paths

@@ -596,16 +596,36 @@ def check_paths():
                'education/paths.html does not match paths.json; run paths.py')
 
 
+def check_total():
+    """The number of lessons the course says it has, held against the number
+    it has. It is typed in about a thousand places across twelve languages, so
+    total.py owns it and records the figure the corpus currently asserts; this
+    reports the gap between that record and the catalogue."""
+    sys.path.insert(0, os.path.join(ROOT, 'scripts', 'curriculum'))
+    try:
+        import total as _total
+    except Exception as e:
+        print('total check unavailable: %s' % e)
+        return
+    finally:
+        os.chdir(ROOT)
+    want, have = _total.catalogue_total(), _total.stated()
+    if want != have:
+        report(min(SLOTS) if SLOTS else 1, 'total',
+               'the corpus says %d lessons and the catalogue has %d; run total.py'
+               % (have, want))
+
+
 # -------------------------------------------------------------------- driver
 
 CHECKS = collections.OrderedDict([
     ('xref', check_xref), ('chain', check_chain), ('arith', check_arith),
     ('claim', check_claim), ('dupes', check_dupes), ('locale', check_locale),
     ('hub', check_hub), ('cat', check_cat), ('terms', check_terms),
-    ('topics', check_topics), ('paths', check_paths),
+    ('topics', check_topics), ('paths', check_paths), ('total', check_total),
 ])
 ORDER = ['xref', 'href', 'title', 'prereq', 'tease', 'arith', 'claim', 'dupes',
-         'locale', 'hub', 'cat', 'terms', 'topics', 'paths', 'figure']
+         'locale', 'hub', 'cat', 'terms', 'topics', 'paths', 'total', 'figure']
 
 
 def main(argv):
