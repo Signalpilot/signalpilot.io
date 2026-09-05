@@ -40,6 +40,14 @@ BUDGET={'callouts':1,'accordions':0,'tables':2,'emoji_headings':0}
 # is a ceiling that argues instead of blocking. It also did nothing the second
 # read does not already do, which is ask whether anything is said twice.
 # The count is printed below as a fact, with nothing attached to it.
+def TOTAL():
+    """The course total, read from the file total.py keeps. It used to be typed
+    here as 85, and every rebuild of a lesson written after the course grew put
+    the old total back into that lesson's badge."""
+    return int(open(os.path.join(ROOT, 'education/curriculum/total.txt'),
+                    encoding='utf-8').read().strip())
+
+
 PARTS=['claim','prereq','development','worked','problems','bounds','sources']
 TIERDIR={'Beginner':'beginner','Intermediate':'intermediate','Advanced':'advanced','Professional':'professional'}
 BADGE={'Beginner':'&#128994;','Intermediate':'&#128993;','Advanced':'&#128992;','Professional':'&#128308;'}
@@ -117,7 +125,7 @@ def build(meta,prose,related):
     # dead-link guard included, applies to it unchanged.
     apx = bool(m.get('appendix'))
     badge = (f"&#128218; Appendix &bull; {m['module']}" if apx
-             else f"{BADGE[lvl]} {lvl} &bull; Lesson {m['slot']} of 85")
+             else f"{BADGE[lvl]} {lvl} &bull; Lesson {m['slot']} of {TOTAL()}")
     modline = m['module'] if apx else f"Module {m['module']}"
     hdr=f'''<article class="article">
   <header>
