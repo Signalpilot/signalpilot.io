@@ -3,6 +3,18 @@
   'use strict';
 
   /**
+   * Announce a share. badges.js counts these towards the Social Butterfly
+   * badge, which needs five; nothing had ever dispatched the event, so the
+   * badge could not be earned.
+   * @param {string} platform - where it was shared
+   */
+  function announceShare(platform) {
+    window.dispatchEvent(new CustomEvent('sp:socialShare', {
+      detail: { platform: platform }
+    }));
+  }
+
+  /**
    * Share on Twitter
    * @param {string} text - Text to share
    * @param {string} url - URL to share
@@ -15,6 +27,7 @@
     if (window.trackEvent) {
       window.trackEvent('social_share', { platform: 'twitter', type: text.includes('completed') ? 'completion' : 'lesson' });
     }
+    announceShare('twitter');
   }
 
   /**
@@ -29,6 +42,7 @@
     if (window.trackEvent) {
       window.trackEvent('social_share', { platform: 'linkedin' });
     }
+    announceShare('linkedin');
   }
 
   /**
@@ -42,7 +56,8 @@
       // Track analytics
       if (window.trackEvent) {
         window.trackEvent('social_share', { platform: 'clipboard' });
-      }
+    }
+    announceShare('clipboard');
     }).catch(() => {
       showShareToast('❌ Could not copy link');
     });
@@ -359,21 +374,26 @@
             break;
           case 'reddit':
             window.open(`https://reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`, '_blank');
+            announceShare('reddit');
             break;
           case 'linkedin':
             shareOnLinkedIn(url);
             break;
           case 'facebook':
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=550,height=420');
+            announceShare('facebook');
             break;
           case 'whatsapp':
             window.open(`https://wa.me/?text=${encodeURIComponent(`${title} - ${url}`)}`, '_blank');
+            announceShare('whatsapp');
             break;
           case 'telegram':
             window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
+            announceShare('telegram');
             break;
           case 'email':
             window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this lesson: ${title}\n\n${url}`)}`;
+            announceShare('email');
             break;
           case 'copy':
             copyToClipboard(url);
