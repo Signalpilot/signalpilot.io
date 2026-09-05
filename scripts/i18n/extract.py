@@ -22,6 +22,13 @@ ATTR = re.compile(r'\b(title|alt|aria-label|placeholder)="([^"]*)"')
 # Two letters is enough: a lone "or" between two <strong> tags is a
 # segment like any other, and a 3-letter floor silently left it in English.
 HAS_WORDS = re.compile(r'[A-Za-z]{2}')
+# The page's own description is the sentence a search result shows, and it is
+# the only value in the head worth translating: the rest are URLs, dimensions
+# and a colour. og:description and twitter:description repeat it word for word,
+# and og:title and twitter:title repeat the <title>, so inject.py fills those
+# four from the two the page already carries rather than putting four more
+# copies of the same sentence through the memory.
+META = re.compile(r'<meta name="description" content="([^"]*)"', re.I)
 SKIP_EXACT = {'Signal Pilot', 'Discord', 'TradingView'}
 
 
@@ -65,6 +72,9 @@ def segments(html):
                     v = m.group(2).strip()
                     if v and HAS_WORDS.search(v) and not v.startswith(('http', '/', '#')):
                         yield ('attr', i, m.group(1), v)
+                m = META.match(seg)
+                if m and HAS_WORDS.search(m.group(1)):
+                    yield ('attr', i, 'description', m.group(1).strip())
             continue
         if protect or notrans:
             continue

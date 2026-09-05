@@ -44,6 +44,9 @@ CJK_BEFORE_TAG = re.compile(r'([%s])[ ]+((?:<[^>]+>)+)(?=[^ A-Za-z])' % _CJK)
 # translation of the node after a link opens with one: "ders 12'in konusudur".
 APOSTROPHE_FIRST = ('&rsquo;', '&#8217;', '&apos;', '\u2019')
 
+# The description meta, which extract.py yields as attr:<i>:description.
+DESC = re.compile(r'(<meta name="description" content=")[^"]*(")', re.I)
+
 
 def _rejoin(seg, v, lang):
     """Put the translation back inside the English node's whitespace."""
@@ -86,6 +89,9 @@ def inject(src_path, lang, tmap, rel):
                     v = tmap.get(key)
                     return f'{m.group(1)}="{v}"' if v else m.group(0)
                 parts[i] = ATTR.sub(repl, seg)
+                d = tmap.get(f'attr:{i}:description')
+                if d:
+                    parts[i] = DESC.sub(lambda m: m.group(1) + d + m.group(2), parts[i])
             continue
         if protect or not seg.strip():
             continue
@@ -127,6 +133,22 @@ def inject(src_path, lang, tmap, rel):
     # address -- the one thing a canonical link is there to contradict.
     out = re.sub(r'(<meta (?:property|name)="(?:og|twitter):url" content=")[^"]*(")',
                  lambda m: m.group(1) + url + m.group(2), out)
+    # og: and twitter: carry copies of the page's own title and description, and
+    # both are attribute values the extractor never yielded, so every locale
+    # page ever built handed a crawler an English title and an English summary
+    # under a canonical link pointing at itself. They are copies: take them from
+    # the page that has just been translated.
+    for prop, src in (('title', re.search(r'<title>(.*?)</title>', out, re.S)),
+                      ('description',
+                       re.search(r'<meta name="description" content="([^"]*)"', out, re.I))):
+        if not src:
+            continue
+        val = src.group(1).strip()
+        if not val:
+            continue
+        out = re.sub(r'(<meta (?:property|name)="(?:og|twitter):%s" content=")[^"]*(")' % prop,
+                     lambda m: m.group(1) + val + m.group(2), out)
+
     if re.search(r'<link rel="canonical"[^>]*>', out):
         out = re.sub(r'<link rel="canonical"[^>]*>', f'<link rel="canonical" href="{url}">', out, count=1)
     else:
