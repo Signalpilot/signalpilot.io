@@ -892,11 +892,9 @@ claim has no numeral to hand over. Nothing is topic-only.
 - `education/free/index.html` links the other five resource directories
   (cheatsheets, guides, indicator-guides, quick-start, support) and has not
   been audited against the rebuilt curriculum.
-- Ledger debts: second-person register per locale, composite trader names,
-  price display on localised commercial pages, seventeen stored Japanese
-  values still using a
-  minority synonym for "net", the word for "exposure" split across two or
-  three variants in German, Japanese, Dutch and Russian, Hungarian split
-  between two words for "trade", and the Italian "pavimento" / Spanish
-  "suelo" rendering of a numerical floor, which is the floor of a room in
-  both languages and is settled across dozens of stored values.
+- Ledger debts: second-person register per locale, composite trader names, and
+  price display on localised commercial pages. Two entries were withdrawn on
+  inspection rather than fixed: Spanish *suelo* is not a calque &mdash; *suelo*
+  and *techo* are the standard pair for a financial floor and ceiling &mdash;
+  and Japanese has no single word for "net", because 純, ネット and 正味 are
+  collocational rather than synonymous.
