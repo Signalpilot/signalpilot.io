@@ -112,7 +112,7 @@ is the only rehearsal that fixes anything. 🔥`,
 ⚫ **Tier 4: Professional** (15 lessons)
 → Portfolio, profession and specialisms
 
-**Total:** 95 comprehensive lessons
+**Total:** 100 comprehensive lessons
 
 📚 [View Full Curriculum](/)
 
@@ -165,7 +165,7 @@ earlier one measured, so the sequence is the argument.
 
             chatbot: `**About This Chatbot:**
 
-I'm a pattern-matching assistant (no AI API needed!) built to help you navigate the 95 lessons.
+I'm a pattern-matching assistant (no AI API needed!) built to help you navigate the 100 lessons.
 
 **I can help with:**
 • Lesson recommendations ("What should I learn first?")
@@ -181,7 +181,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 
 **How I work:**
 • Pattern matching (instant responses)
-• Knowledge base from all 95 lessons
+• Knowledge base from all 100 lessons
 • No data sent to external APIs
 • Conversation history saved locally
 
@@ -231,7 +231,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 trader, no invented track record, no P&L story. If a number is quoted from
 an earlier lesson, that lesson printed it.
 
-**Total:** 95 lessons across 4 tiers, in 11 modules
+**Total:** 100 lessons across 4 tiers, in 11 modules
 
 **What makes them different:**
 ✅ Every claim is falsifiable, and says what would disprove it
@@ -276,7 +276,7 @@ Try asking about:
 
 Type **"help"** to see all available topics!
 
-💡 **Tip:** Use the search bar at the top to search all 95 lessons, or browse by tier on the homepage.
+💡 **Tip:** Use the search bar at the top to search all 100 lessons, or browse by tier on the homepage.
 
 **Quick links:**
 • [Beginner Lessons](/education/beginner.html)
