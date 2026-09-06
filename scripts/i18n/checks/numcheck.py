@@ -177,8 +177,14 @@ def allowed(en):
              'eighty':80,'ninety':90,'hundred':100,'thousand':1000,
              'million':1000000,'billion':1000000000,
              'half':2,'quarter':4,'dozen':12}
+    # A decade word can be pluralised into a count of things -- "three
+    # consecutive twenties" is three runs of twenty bars -- and the boundary
+    # above rejects the plural, so the locale writing 20 reads as invented.
     for w, v in WORDS.items():
         if re.search(r'(?<![A-Za-z])' + w + r'(?![A-Za-z])', en, re.I):
+            a.add(str(v))
+        elif v >= 20 and v <= 90 and v % 10 == 0 and re.search(
+                r'(?<![A-Za-z])' + w[:-1] + r'ies(?![A-Za-z])', en, re.I):
             a.add(str(v))
     a |= spelled(en)
     return a
