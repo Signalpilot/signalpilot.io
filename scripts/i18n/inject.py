@@ -38,6 +38,8 @@ _CJK = '\u3000-\u303f\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uff00-\uffef'
 # one alone.
 CJK_AFTER_TAG = re.compile(r'([^ \nA-Za-z])[ ]*((?:<[^>]+>)+)[ ]+(?=[%s0-9])' % _CJK)
 CJK_BEFORE_TAG = re.compile(r'([%s])[ ]+((?:<[^>]+>)+)(?=[^ A-Za-z])' % _CJK)
+CJK_TAIL_STOP = re.compile(
+    r'([%s](?:</(?:strong|b|em|i|a|code|span|mark|u)>)+)\.(?=\s*<)' % _CJK)
 
 
 # Turkish attaches a case suffix to a number or a name with an apostrophe, so a
@@ -112,6 +114,12 @@ def inject(src_path, lang, tmap, rel):
         if b > 0:
             body = CJK_AFTER_TAG.sub(r'\1\2', out[b:])
             out = out[:b] + CJK_BEFORE_TAG.sub(r'\1\2', body)
+        # A sentence that ends on a bolded phrase leaves its full stop in a
+        # text node of its own -- "." has no two consecutive letters, so the
+        # extractor never offers it for translation and it ships as ASCII.
+        # After Japanese that reads as a stray dot; the lookahead keeps it to
+        # a period that really does close the sentence.
+        out = CJK_TAIL_STOP.sub('\\1。', out)
 
     # In-locale links. The href is rewritten only when the locale actually has
     # that page, so a link to a tier page or the library still resolves.

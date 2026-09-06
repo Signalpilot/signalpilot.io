@@ -40,7 +40,7 @@ OK_DOUBLES = {
            'واحداً واحداً', 'واحدا واحدا', 'اثنتين اثنتين', 'اثنين اثنين', 'ثلاثاً ثلاثاً', 'أربعاً أربعاً', 'شمعة شمعة', 'يوماً يوماً'},
     # Hungarian forms "one X after another" by repeating the noun:
     # "ügylet ügylet után" is trade after trade, not a stutter.
-    'hu': {'ügylet ügylet', 'nap nap', 'évről évre', 'lépés lépés', 'melyik melyik', 'felállás felállás', 'kitörés kitörés',
+    'hu': {'ügylet ügylet', 'nap nap', 'az az', 'évről évre', 'lépés lépés', 'melyik melyik', 'felállás felállás', 'kitörés kitörés',
            # "hatra hatra" is six against six; "a választás választás" is
            # "the choice is a choice", predicate repeating its subject.
            'hatra hatra', 'választás választás'},
@@ -72,6 +72,7 @@ STRADDLE = re.compile(
     r'(?<![\w])([A-Za-zÀ-ÿА-Яа-я\u0600-\u06ff]{2,})'
     r'(\s*(?:</?(?:strong|b|em|i|a|code|span|mark|u)\b[^>]*>\s*){1,4})'
     r'\1(?![\w])', re.I)
+SIBLING = re.compile(r'</[a-zA-Z]')
 
 GLUED = re.compile(r'[a-zA-ZÀ-ÿА-я]\.\d')
 
@@ -104,7 +105,16 @@ def run(slug, report=print):
     # and the first word after it are separate segments, each correct alone.
     # Only the assembled page shows it, so read the built page as well.
     for lang, raw in ctx.built_raw(slug):
+        ok = OK_DOUBLES.get(lang, set())
         for m in STRADDLE.finditer(raw):
+            # A run that closes one element and opens the next spans two
+            # siblings, not one sentence: the previous and next buttons at the
+            # foot of every lesson are "&larr; Curriculum" and "Curriculum
+            # &rarr;", which is a pair of links and not a stutter.
+            if SIBLING.search(m.group(2)):
+                continue
+            if f'{m.group(1)} {m.group(1)}'.lower() in ok:
+                continue
             report(f'  {lang}: doubled word across a tag {m.group(1)!r}\n'
                    f'        ...{" ".join(raw[max(0, m.start() - 70):m.end() + 40].split())}...')
             bad += 1
