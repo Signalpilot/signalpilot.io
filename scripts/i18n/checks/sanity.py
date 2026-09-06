@@ -88,6 +88,17 @@ def run(slug, report=print):
                 if len(re.findall(pat, k)) > len(re.findall(pat, v)):
                     report(f'  {lang}: lost acronym {t} -> {v[:90]}')
                     bad += 1
+    # A stutter can also straddle two strings: the word before a <strong>
+    # and the first word after it are separate segments, each correct alone.
+    # Only the assembled page shows it, so read the built page as well.
+    for lang, txt in ctx.built(slug):
+        ok = OK_DOUBLES.get(lang, set())
+        for m in DOUBLED.finditer(txt):
+            if m.group(0).lower() in ok:
+                continue
+            report(f'  {lang}: doubled word across the page {m.group(0)!r}\n'
+                   f'        ...{" ".join(txt[max(0, m.start() - 60):m.start() + 60].split())}...')
+            bad += 1
     return bad
 
 

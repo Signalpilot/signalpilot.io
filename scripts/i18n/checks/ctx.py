@@ -7,12 +7,18 @@ and the table that maps each of those to its translation. The table is the
 same merge the builder does -- shared memory underneath, the lesson's own file
 on top -- so a check sees exactly what gets injected into the page.
 """
-import json, os, sys, glob
+import json, os, re, sys, glob
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 I18N = os.path.dirname(HERE)
 ROOT = os.path.dirname(os.path.dirname(I18N))
 sys.path.insert(0, I18N)
+
+# Elements that do not break the run of text around them, so a word before
+# one and a word after it really are neighbours in the sentence.
+INLINE = {'a', 'abbr', 'b', 'bdi', 'bdo', 'cite', 'code', 'data', 'del', 'dfn',
+          'em', 'i', 'ins', 'kbd', 'mark', 'q', 's', 'samp', 'small', 'span',
+          'strong', 'sub', 'sup', 'time', 'u', 'var'}
 
 LANGS = ['ar', 'de', 'es', 'fr', 'hu', 'it', 'ja', 'nl', 'pt', 'ru', 'tr']
 
@@ -71,6 +77,28 @@ def pairs(slug):
     ks = keys(slug)
     for lang, table in sorted(tables(slug).items()):
         yield lang, [(k, table[k]) for k in ks if k in table]
+
+def built(slug):
+    """Yield (lang, visible text) for each locale page that has been built.
+
+    A check that only sees string pairs cannot see what happens where two
+    strings meet. The Turkish education index once read "olası olası piyasa
+    senaryolarını" because a bolded word and the segment after it both carried
+    it, and each string on its own was correct.
+
+    Only inline elements let their neighbours fuse. Two table cells reading
+    "never" are not a stutter, so every block boundary gets a bar that no
+    same-line pattern can cross.
+    """
+    from verify import _strip
+    rel = os.path.relpath(lesson_path(slug), os.path.join(ROOT, 'education'))
+    for lang in LANGS:
+        p = os.path.join(ROOT, lang, 'education', rel)
+        if os.path.exists(p):
+            h = re.sub(r'<(/?)([a-zA-Z][\w-]*)([^>]*)>',
+                       lambda m: ('' if m.group(2).lower() in INLINE else '\u2502')
+                                 + m.group(0), open(p, encoding='utf-8').read())
+            yield lang, _strip(h)
 
 
 def slugs():
