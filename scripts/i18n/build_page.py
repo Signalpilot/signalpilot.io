@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from extract import extract
 from inject import inject, LANGS
 from verify import verify
+from overrides import apply as apply_overrides
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -24,6 +25,7 @@ def build(page, langs=None, write=True):
     for lang in (langs or LANGS):
         mem_p = f'{HERE}/memory/{lang}.json'
         mem = json.load(open(mem_p, encoding='utf-8')) if os.path.exists(mem_p) else {}
+        mem = apply_overrides(page, lang, mem)
         missing = [e for e in uniq if e not in mem]
         if missing:
             results.append((lang, 'SKIP', f'{len(missing)} untranslated strings', missing[:3]))
