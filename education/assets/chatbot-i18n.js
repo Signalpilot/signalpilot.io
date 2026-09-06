@@ -15,7 +15,7 @@
  * so a page translated later drops off it and its links start pointing home.
  */
 window.SP_CHATBOT_I18N = {
-  languages: ["de", "es", "fr", "it", "pt"],
+  languages: ["de", "es", "fr", "it", "nl", "pt", "ru"],
   enOnly: {
   "de": [
     "/education/free/index.html",
@@ -179,6 +179,27 @@ window.SP_CHATBOT_I18N = {
     "inputLabel": "Campo del messaggio",
     "footer": "Funziona con il riconoscimento di schemi • SignalPilot Education"
   },
+  "nl": {
+    "title": "Leerassistent",
+    "status": "Online • klaar om te helpen",
+    "openLabel": "Leerassistent openen",
+    "clearTitle": "Gesprek wissen",
+    "greetLead": "<strong>Hoi! 👋</strong> Ik ben je SignalPilot-leerassistent.",
+    "greetBody": "Ik loods je door onze 100 tradinglessen, leg begrippen uit en wijs je de weg door je leerpad.",
+    "greetTry": "<em>Probeer: „Waar begin ik?” of „Leg de RSI per regime uit”</em>",
+    "quickStart": "🚀 Aan de slag",
+    "quickBeginner": "📚 Beginner",
+    "quickRsi": "📊 RSI-mythes",
+    "quickAutomation": "🤖 Automatisering",
+    "quickStartQuery": "Waar begin ik?",
+    "quickBeginnerQuery": "Lessen voor beginners",
+    "quickRsiQuery": "Leg de RSI uit",
+    "quickAutomationQuery": "Automatisering van het traden",
+    "placeholder": "Vraag naar lessen of begrippen…",
+    "sendLabel": "Bericht versturen",
+    "inputLabel": "Berichtveld",
+    "footer": "Werkt op patroonherkenning • SignalPilot Education"
+  },
   "pt": {
     "title": "Assistente de aprendizagem",
     "status": "Online • pronto a ajudar",
@@ -199,6 +220,27 @@ window.SP_CHATBOT_I18N = {
     "sendLabel": "Enviar mensagem",
     "inputLabel": "Campo de mensagem",
     "footer": "Funciona por correspondência de padrões • SignalPilot Education"
+  },
+  "ru": {
+    "title": "Учебный помощник",
+    "status": "На связи • готов помочь",
+    "openLabel": "Открыть учебного помощника",
+    "clearTitle": "Очистить переписку",
+    "greetLead": "<strong>Привет! 👋</strong> Я твой учебный помощник SignalPilot.",
+    "greetBody": "Я проведу тебя по нашим 100 урокам о трейдинге, объясню понятия и подскажу маршрут обучения.",
+    "greetTry": "<em>Попробуй: «С чего начать?» или «Объясни RSI в разных режимах»</em>",
+    "quickStart": "🚀 Первые шаги",
+    "quickBeginner": "📚 Начальный",
+    "quickRsi": "📊 Мифы про RSI",
+    "quickAutomation": "🤖 Автоматизация",
+    "quickStartQuery": "С чего начать?",
+    "quickBeginnerQuery": "Уроки для начинающих",
+    "quickRsiQuery": "Объясни RSI",
+    "quickAutomationQuery": "Автоматизация торговли",
+    "placeholder": "Спроси об уроках или понятиях…",
+    "sendLabel": "Отправить сообщение",
+    "inputLabel": "Поле сообщения",
+    "footer": "Работает на сопоставлении шаблонов • SignalPilot Education"
   }
 },
   kb: {
@@ -382,6 +424,42 @@ window.SP_CHATBOT_I18N = {
     "languages": "**Lingue:**\n\nTutto il programma è gratuito in dodici lingue: inglese, tedesco, spagnolo, francese, italiano, portoghese, olandese, russo, giapponese, turco, ungherese e arabo.\n\nUsa il selettore di lingua nell'intestazione. Ogni lezione, ogni pagina di livello e questo assistente seguono la lingua in cui stai leggendo.\n\n**Non è output automatico:** ogni lezione viene tradotta e poi riletta come prosa, e ogni cifra viene confrontata con l'inglese.",
     "search": "**Trovare una lezione:**\n\n🔍 [Cerca fra le 100 lezioni](/education/search.html) — per argomento, concetto o parola chiave\n🗺 [Percorsi di lettura](/education/paths.html) — nove strade attraverso il corso per tema\n📚 [Programma completo](/education/) — tutte e 100 in ordine di modulo\n📖 [Glossario](/education/glossary.html) — ogni termine che le lezioni definiscono\n\n**Se conta più l'argomento della difficoltà,** parti da un percorso di lettura: rischio, costo, prove, Order Book, indicatori, portafogli, l'attività, le affermazioni e il calendario."
   },
+  "nl": {
+    "beginner": "**Niveau Beginner** (24 lessen) — hoe een markt werkt, wat hij kost, wat risico is\n\n📚 [Alle lessen van het niveau Beginner](/education/beginner.html)\n\n**Wat je leert:**\n• Het Order Book, de spread en de Market Maker, afgeleid uit één probleem\n• Wat een uitvoering is, en de vijf getallen die een candle uit zijn interval bewaart\n• Waarom elke positie in het rood opent, en welke vier lasten er zijn\n• Verwachting, en hoe lang het duurt voordat je eigen overzicht iets beslecht\n• Positiegrootte, waar de stop hoort, en risico op ruïne\n\n**Belangrijke lessen:**\n• Wat een markt oplost (les 1)\n• Elke trade begint negatief (les 10)\n• Verwachting (les 17)\n• Kans op ruïne (les 22)\n\n**Duur:** 6-12 min per les\n**Voor wie:** iedereen die nog geen heen-en-weer heeft beprijsd",
+    "intermediate": "**Niveau Halfgevorderd** (28 lessen) — de veiling lezen, en wanneer die lezing opgaat\n\n📚 [Alle lessen van het niveau Halfgevorderd](/education/intermediate.html)\n\n**Wat je leert:**\n• Waar liquiditeit ligt, en waarom het getoonde boek een advertentie is\n• Absorptie, uitputting, volume op prijs en verborgen omvang\n• Structuur, order blocks en vegen, met de definities opgeschreven\n• Regimes, tijdframes, sessies, volatiliteit, correlatie en de macrocyclus\n• Wat een indicator is, en wat hij weggooit om er een te zijn\n\n**Belangrijke lessen:**\n• Waar liquiditeit ligt (les 25)\n• Marktstructuur (les 32)\n• Markten hebben standen (les 36)\n• Wat een indicator is (les 48)\n\n**Duur:** 8-14 min per les\n**Voor wie:** wie zijn eigen kosten al kan beprijzen",
+    "advanced": "**Niveau Gevorderd** (18 lessen) — wie er nog meer in het boek staat, en een systeem bouwen\n\n📚 [Alle lessen van het niveau Gevorderd](/education/advanced.html)\n\n**Wat je leert:**\n• Waar de spread voor betaalt, en het tarief dat je order routeert\n• Wat een milliseconde waard is, en wat een miljoen aandelen kost\n• Wat er zou moeten gebeuren, en de backtest behandeld als bewijs\n• De prijs van zoeken, de horizon die je vastlegt, de maatstaf die je koos\n• Drawdown, capaciteit, de vertraging die je weghaalt, machinaal leren als filter\n\n**Belangrijke lessen:**\n• Waar de spread voor betaalt (les 53)\n• Backtesting als bewijs (les 63)\n• De prijs van zoeken (les 64)\n• De drawdown waarop je moet rekenen (les 67)\n\n**Duur:** 10-16 min per les\n**Voor wie:** wie iets bouwt dat hij ook echt wil testen",
+    "progress": "**Je voortgang:**\n\nJe voortgang wordt automatisch bijgehouden terwijl je lessen leest.\n\n**Hoe het bijhouden werkt:**\n✅ Voortgang lokaal opgeslagen (geen account nodig)\n✅ Synchronisatie tussen apparaten (binnenkort, via Supabase)\n✅ Voltooiingsbadges per niveau\n✅ Reeksteller voor dagelijkse lessen\n\n**Je voortgang bekijken:**\n• De startpagina toont het totale voltooiingspercentage\n• Elke niveaupagina toont de voltooide lessen\n• Groene vinkjes zijn voltooide lessen\n\n**Tip:** één les per dag, op volgorde, en maak de opgaven. Terughalen is de\nenige herhaling die echt iets vastzet. 🔥",
+    "curriculum": "**Het programma van de SignalPilot Education Hub:**\n\n**Vier opklimmende niveaus:**\n\n🟢 **Niveau 1: Beginner** (24 lessen)\n→ Hoe een markt werkt, wat hij kost, en wat risico is\n\n🟡 **Niveau 2: Halfgevorderd** (28 lessen)\n→ De veiling lezen, en wanneer die lezing opgaat\n\n🔴 **Niveau 3: Gevorderd** (18 lessen)\n→ Wie er nog meer in het boek staat, en een systeem bouwen\n\n⚫ **Niveau 4: Professioneel** (30 lessen)\n→ Portefeuille, beroep en specialismen\n\n**Totaal:** 100 volledige lessen\n\n📚 [Het hele programma bekijken](/)\n\n**Aanbevolen route:** op volgorde, 1 tot 100. Elke les geeft een getal uit dat een\neerdere les mat, dus de volgorde is het argument.\n\n**Tijd:** ongeveer 6-16 min per les",
+    "rsi": "**Oscillatoren en RSI:**\n\n**Hoofdles:** [Les 51: Oscillatoren onder regime](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n\n**Kernpunten:**\n• Een oscillator is een functie van prijzen die je al hebt, dus hij voegt geen informatie toe\n• Dezelfde waarde betekent iets anders in een trend dan in een bereik\n• Wat telt is wat de oscillator weggooit, en hoe lang hij erover doet\n• Een drempel is een instelling, geen meting, en zij moet genoemd worden\n\n**Verwant:** [Les 48: Wat een indicator is](/education/curriculum/intermediate/48-what-an-indicator-is.html), [Les 36: Markten hebben standen](/education/curriculum/intermediate/36-markets-have-modes.html)\n\n**Veelgemaakte fout:** een extreem als signaal lezen zonder eerst het regime te noemen, en zonder ooit te hebben gemeten hoe vaak die waarde gelijk had",
+    "spread": "**De spread:**\n\n**Hoofdles:** [Les 4: De spread is de prijs van onmiddellijkheid](/education/curriculum/beginner/04-the-spread.html)\n\n**Kernpunten:**\n• De spread is wat onmiddellijkheid kost, geen tarief dat iemand je in rekening brengt\n• Hij is een van vier lasten, en les 10 beprijst alle vier op één trade\n• Afgezet tegen wat een instrument op een dag beweegt, loopt de kostenpost van een vijfde procent tot 52 procent\n• Neerleggen in plaats van oversteken verdient de spread, en les 58 beprijst wat dat weggeeft\n\n**Verwant:** [Les 10: Elke trade begint negatief](/education/curriculum/beginner/10-every-trade-starts-negative.html), [Les 53: Waar de spread voor betaalt](/education/curriculum/advanced/53-market-makers-business.html)\n\n**Waar de getallen staan:** les 12 rangschikt instrumenten naar kosten als deel van de dagbeweging",
+    "automation": "**Automatisering en uitvoering:**\n\n**Hoofdles:** [Les 69: De vertraging die je weghaalt](/education/curriculum/advanced/69-automation.html)\n\n**Kernpunten:**\n• Automatisering haalt een vertraging weg; de vraag is wat die vertraging kostte\n• Slippage en kosten horen in de backtest, want ze zitten in het resultaat\n• Een harde daglimiet op verlies bindt eerder dan elke andere grens die je stelt\n• Het tempo waarin je werkelijk handelt is meetbaar, en het is trager dan de meeste plannen aannemen\n\n**Verwant:** [Les 75: Welke limiet het eerst knelt](/education/curriculum/professional/75-institutional-risk-controls.html), [Les 76: Het tempo waarop je echt handelt](/education/curriculum/professional/76-trading-day.html)\n\n**Regel:** zet niets in bedrijf waarvan je het falen niet hebt beprijsd",
+    "chatbot": "**Over deze chatbot:**\n\nIk ben een assistent op patroonherkenning (geen AI-API nodig!), gemaakt om je door de 100 lessen te loodsen.\n\n**Ik kan helpen met:**\n• Lestips („Waar begin ik?”)\n• Begrippen uitleggen („Leg de RSI per regime uit”)\n• Lessen vinden („Lessen over spreadkosten”)\n• Voortgang volgen („Hoe volg ik mijn voortgang?”)\n\n**Wat ik niet kan:**\n• Handelsadvies\n• Marktanalyse in realtime\n• Advies over jouw rekening\n• Orders uitvoeren\n\n**Hoe ik werk:**\n• Patroonherkenning (meteen antwoord)\n• Kennisbank uit alle 100 lessen\n• Geen gegevens naar externe API's\n• Gespreksgeschiedenis alleen lokaal bewaard\n\n**Tip:** stel hele vragen, zoals „Hoe werkt de bied-laatspread als voorlopende indicator?”; dan komt er het meeste uit.",
+    "start": "**Aan de slag:**\n\n**Aanbevolen leerpad:**\n\n**Week 1-4: Beginner** (24 lessen, plaatsen 1-24)\n→ Start: [Les 1: Wat een markt oplost](/education/curriculum/beginner/01-what-a-market-solves.html)\n→ Focus: het mechanisme, wat traden kost, en wat risico werkelijk is\n\n**Week 5-9: Halfgevorderd** (28 lessen, plaatsen 25-52)\n→ [Les 25: Waar liquiditeit ligt](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n→ Focus: de veiling lezen, en de context die bepaalt wanneer een lezing opgaat\n\n**Week 10-13: Gevorderd** (18 lessen, plaatsen 53-70)\n→ [Les 53: Waar de spread voor betaalt](/education/curriculum/advanced/53-market-makers-business.html)\n→ Focus: wie er nog meer in het boek staat, en een systeem bouwen dat het testen overleeft\n\n**Vanaf week 14: Professioneel** (30 lessen, plaatsen 71-100)\n→ [Les 71: Hoeveel weddenschappen je echt draagt](/education/curriculum/professional/71-positions-are-one-position.html)\n→ Focus: portefeuille, de rekensom van het beroep, en vier specialismen\n\n**Tijd:** 6-16 min per les\n**Doel:** één les per dag, op volgorde. Elke les geeft uit wat de vorige mat.\n\n**Snelle acties:**\n• [Alle lessen doorbladeren](/)\n• [Lessen doorzoeken](/education/search.html)",
+    "lessons": "**Over onze lessen:**\n\n**Opbouw:** elke les heeft dezelfde zeven delen, in deze volgorde:\n• De bewering — wat de les vindt, in de eerste 200 woorden, met een getal\n• Voorkennis — wat zij uitgeeft, en welke les het mat\n• Uitwerking — het argument, gebouwd in plaats van beweerd\n• Uitgewerkt voorbeeld — één, met elk getal na te rekenen vanaf de pagina\n• Grenzen — waar de bevinding ophoudt te gelden\n• Opgaven — wat je op je eigen data gaat meten\n• Bronnen — waar de les op leunt, en hoe\n\n**Lengte:** 1.400 tot 5.000 woorden. Lengte is een uitkomst, nooit een doel.\n\n**Stijl:** elk getal op de pagina wordt op de pagina afgeleid. Geen samengestelde\ntrader, geen verzonnen staat van dienst, geen verhaal over winst en verlies.\nWordt een getal uit een eerdere les geciteerd, dan heeft die les het afgedrukt.\n\n**Totaal:** 100 lessen over 4 niveaus, in 14 modules\n\n**Wat ze anders maakt:**\n✅ Elke bewering is weerlegbaar en zegt wat haar zou weerleggen\n✅ Elk getal wordt opnieuw uitgerekend, niet herhaald\n✅ Elke les eindigt met wat de volgende vindt, met het getal erbij\n✅ De grenzen zijn even lang als het argument\n✅ Beschikbaar in 11 talen naast het Engels\n\n📚 [Alle lessen doorbladeren](/)",
+    "help": "**Hier kan ik mee helpen:**\n\n📚 **De cursus** — „programma” | „waar begin ik” | „lessen voor beginners” | „professioneel niveau”\n💸 **Kosten** — „wat kost traden” | „slippage” | „commissie”\n🎲 **Risico** — „positiegrootte” | „risico op ruïne” | „drawdown”\n📏 **Bewijs** — „verwachting” | „hoeveel trades voor ik het weet” | „backtest” | „overfitting”\n📖 **De veiling** — „Order Book” | „Order Flow” | „vegen” | „marktstructuur” | „divergentie”\n🧭 **Context** — „regime” | „tijdframe” | „volatiliteit”\n🔍 **Indicatoren** — „wat is een indicator” | „RSI” | „voortschrijdende gemiddelden” | „repainting”\n📐 **Portefeuille** — „correlatie” | „onafhankelijke weddenschappen” | „positielimieten”\n💼 **Het bedrijf** — „van traden leven” | „opname” | „het boek met regels” | „psychologie”\n📥 **Gratis materiaal** — „werkbladen” | „woordenlijst” | „talen” | „zoeken”\n\n**Vraag bijvoorbeeld:**\n• „Hoeveel trades voordat ik weet of mijn edge echt is?”\n• „Wat kost een heen-en-weer werkelijk?”\n• „Bestaan stopjachten echt?”\n• „Kan ik van traden leven?”\n• „Hebben jullie werkbladen?”\n\nElk antwoord noemt de les waar het vandaan komt, en elk getal erin is in die les gemeten en hier niet beweerd. Typ gewoon je vraag. 💬",
+    "default": "Over die specifieke vraag weet ik het niet zeker.\n\nVraag liever naar:\n📚 **Lessen:** niveaus Beginner, Halfgevorderd, Gevorderd\n🎯 **Begrippen:** RSI, spreads, automatisering, volume, Order Flow\n📊 **Aan de slag:** leerpad, voortgang volgen\n🔧 **Functies:** chatbot, zoeken, programma\n\nTyp **„help”** om alle onderwerpen te zien.\n\n💡 **Tip:** met de zoekbalk bovenaan doorzoek je alle 100 lessen, of blader per niveau vanaf de startpagina.\n\n**Snelle links:**\n• [Lessen voor beginners](/education/beginner.html)\n• [Lessen van het halfgevorderde niveau](/education/intermediate.html)\n• [Lessen van het gevorderde niveau](/education/advanced.html)\n• [Alle lessen doorzoeken](/education/search.html)",
+    "professional": "**Professioneel niveau:**\n\n30 lessen (plaatsen 71-100) over het dragen van meer dan één positie, de rekensom van dit voor de kost doen, vier specialismen, en de vijf lessen die de metingen omdraaien en op de trader richten.\n\n**Wat de cursus meet:**\n• Twee regels op één instrument dragen 1,03 onafhankelijke weddenschappen in plaats van twee, en het totaal loopt niet verder dan 1,06\n• Een loon vraagt 11,40 jaar van dat loon aan kapitaal, terwijl het oordeel over de edge nog 10,07 jaar weg is\n• De vier gewoonten samen laten $4,44 per aandeel over waar hun kosten los opgeteld 1,74 voorspellen\n• Een heen-en-weer van 0,1230 neemt 79,7 procent van een edge van een tiende R en verplaatst een oordeel van 785 trades naar 18.952\n\n**Lessen:**\n• [Les 71: Hoeveel weddenschappen je echt draagt](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Les 79: Jezelf betalen voordat je het weet](/education/curriculum/professional/79-career-paths.html)\n• [Les 90: De vier gewoonten samen](/education/curriculum/professional/90-the-four-habits-together.html)\n• [Les 100: De onderneming op één pagina](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Duur:** 7-12 min per les\n**Voor wie:** iedereen die een heen-en-weer al kan beprijzen en wil weten wat een bedrijf daarop draagt",
+    "cost": "**Wat traden kost:**\n\nVier lasten worden geheven, of de trade nu werkt of niet: de spread, de commissie, de slippage en de financiering. Module 2 beprijst alle vier, en elke latere les trekt ze af.\n\n**Wat de cursus meet:**\n• Elke positie opent in het rood, en de financiering blijft dat verdiepen zolang je aanhoudt\n• Dezelfde order van $30.000 kost $0,30 in het ene instrument en $80,00 in het andere, op hetzelfde moment\n• Een heen-en-weer loopt van 0,2 basispunten op een index-ETF tot 467 op een microcap\n• Een simulator zet dat allemaal op nul: een strategie die +$1.000 over honderd trades meldt, houdt −$700 over\n\n**Lessen:**\n• [Les 10: Elke trade begint negatief](/education/curriculum/beginner/10-every-trade-starts-negative.html)\n• [Les 11: Slippage en impact op retailomvang](/education/curriculum/beginner/11-slippage-and-impact.html)\n• [Les 12: Wat zou je eigenlijk moeten handelen](/education/curriculum/beginner/12-what-should-you-trade.html)\n• [Les 16: Sim tegen live](/education/curriculum/beginner/16-sim-against-live.html)\n\n**Waar de rekensom staat:** les 12 rangschikt instrumenten naar kosten als deel van wat ze op een dag bewegen.",
+    "risk": "**Risico, omvang en ruïne:**\n\nHoeveel je inzet, waar de stop hoort, en de kans dat een verliesreeks de rekening beëindigt. Alle drie worden uitgerekend, niet gevoeld.\n\n**Wat de cursus meet:**\n• Eén winnaar op +2R en twee verliezers op −1R komen in R op nul en kosten de rekening toch geld\n• Ruïne volgt uit drie getallen die je al hebt: de edge, de gerisiceerde fractie, en hoe ver je mag vallen\n• Groter inzetten om te herstellen bij 5 procent per trade brengt je in negen van de honderd loopbanen terug op de top\n• Een echte edge van een tiende R brengt zijn 156 trades door binnen een mediane zwaarste drawdown van 8,82R\n\n**Lessen:**\n• [Les 20: Positiegrootte](/education/curriculum/beginner/20-position-sizing.html)\n• [Les 21: Waar de stop hoort](/education/curriculum/beginner/21-where-the-stop-goes.html)\n• [Les 22: Kans op ruïne](/education/curriculum/beginner/22-risk-of-ruin.html)\n• [Les 67: De drawdown waarop je moet rekenen](/education/curriculum/advanced/67-is-the-edge-gone.html)\n\n**Begin bij:** les 20, waar elk later getal in R vandaan komt.",
+    "expectancy": "**Verwachting en steekproefomvang:**\n\nEen edge is een getal, geen gevoel bij een grafiek, en dat getal komt met een interval eromheen dat de meeste overzichten veel te kort zijn om te sluiten.\n\n**Wat de cursus meet:**\n• E = p·b − (1−p), in eenheden van wat je riskeert\n• Vijftig trades kunnen een methode die 0,35R per trade maakt niet onderscheiden van een methode zonder enige edge\n• Een edge van een tiende R vraagt bruto 785 trades, en 18.952 zodra de heen-en-weer eraf is\n• Hoe een echte edge van binnenuit voelt, is meestal: als niets\n\n**Lessen:**\n• [Les 17: Verwachting](/education/curriculum/beginner/17-expectancy.html)\n• [Les 18: Hoe een edge voelt](/education/curriculum/beginner/18-what-an-edge-feels-like.html)\n• [Les 19: Hoe lang tot je het weet](/education/curriculum/beginner/19-how-long-until-you-know.html)\n• [Les 98: Het Getal Dat Schaal Zegt](/education/curriculum/professional/98-the-number-that-says-scale.html)\n\n**De gewoonte:** reken je eigen steekproefomvang uit voordat je een trefkans noemt.",
+    "orderbook": "**Het Order Book en liquiditeit:**\n\nWat er ligt, waar het ligt, en hoe weinig daarvan de quote werkelijk beschrijft.\n\n**Wat de cursus meet:**\n• Een gewoon boek legt 7.300 aandelen achter een quote die er 900 van beschrijft\n• Liggende omvang kost niets om neer te leggen en niets om terug te trekken, dus een muur is waard wat zijn trefkans waard is\n• Orders stapelen zich op niveaus die je vooraf kunt noemen, en dat opstapelen vraagt geen afstemming\n• Een stop is onzichtbaar tot hij afgaat, dus een poel is zeker toekomstig volume dat niemand kan waarnemen\n\n**Lessen:**\n• [Les 2: Het Order Book](/education/curriculum/beginner/02-the-order-book.html)\n• [Les 25: Waar liquiditeit ligt](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n• [Les 26: Het order book is theater](/education/curriculum/intermediate/26-order-book-is-theater.html)\n• [Les 27: De liquiditeitsleugen](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n\n**De correctie:** les 27 vindt dat bedoeling niet aan de prijs te herkennen is, hoe het patroon ook heet.",
+    "orderflow": "**Order Flow, delta en de tape:**\n\nWat de tape meldt en wat je software afleidt. Drie van de vier feiten naast een print zijn vastgelegd; het vierde, de kant, is een schatting met een bekend foutpercentage.\n\n**Wat de cursus meet:**\n• De afleiding van de agressorkant klopt ongeveer vier van de vijf keer\n• Eén verkeerd ingedeelde print van 900 aandelen laat een minuut omslaan van plus 600 naar min 1.200\n• Een bar die op plus 15 procent delta wordt gemeld, legt het koopaandeel alleen vast tussen 50,0 en 62,5 procent\n• Twee bars kunnen elke grootheid delen die een candle vastlegt en toch delta's van +2.820 en −1.680 dragen\n\n**Lessen:**\n• [Les 7: Time and Sales](/education/curriculum/beginner/07-time-and-sales.html)\n• [Les 8: Volume en delta](/education/curriculum/beginner/08-volume-and-delta.html)\n• [Les 28: Absorptie en uitputting](/education/curriculum/intermediate/28-absorption-and-exhaustion.html)\n• [Les 29: Volume op prijs](/education/curriculum/intermediate/29-volume-at-price.html)\n\n**Lees verder:** les 29 scheidt de telling die geen afleiding nodig heeft van het getal dat iedereen eruit citeert.",
+    "sweep": "**Vegen en stopjachten:**\n\nDe prijs handelt voorbij een niveau en komt terug. Of er überhaupt een was, bepalen drie instellingen en niet de markt.\n\n**Wat de cursus meet:**\n• Gewone waarden van de drie instellingen vinden op dezelfde zestig bars 4 vegen, of 15, of 46\n• Een cascade door liggende stops heeft geen auteur nodig\n• Dezelfde techniek is voor de ene deelnemer tweeënzestigduizend dollar waard en voor de andere vijfentwintig\n• Het gedrag dat in de rechtszaal daadwerkelijk is bewezen, speelt zich af op institutionele schaal tegen andere machines\n\n**Lessen:**\n• [Les 27: De liquiditeitsleugen](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n• [Les 35: Sweeps, voorbij de eerste](/education/curriculum/intermediate/35-sweeps-beyond-the-first.html)\n• [Les 61: Het getal dat je niet kunt opzoeken](/education/curriculum/advanced/61-thinking-adversarially.html)\n\n**De eerlijke versie:** tel eerst de niveaus die je eigen swingregel zichzelf toestaat, en pas daarna de vegen.",
+    "structure": "**Marktstructuur:**\n\nDe opeenvolging van swingtoppen en swingbodems waarin een reeks wordt gelezen. Zij zit niet in de prijzen; zij ontstaat door er een swingdefinitie op toe te passen, en die definitie is een instelling die niemand noemt.\n\n**Wat de cursus meet:**\n• Op dezelfde twintig bars geven gewone instellingen acht structuurgebeurtenissen, of twee, of geen\n• Twee gewone instellingen zijn het op vier van de twaalf bars oneens over wie de leiding heeft\n• Een structuurbreuk voorspelt iets wat je kunt tellen, en daarom verslaat hij grafiekpatronen met een naam\n• Order blocks en verplaatsing delen dezelfde niet-genoemde instelling\n\n**Lessen:**\n• [Les 32: Marktstructuur](/education/curriculum/intermediate/32-market-structure.html)\n• [Les 33: Order blocks en displacement](/education/curriculum/intermediate/33-order-blocks-and-displacement.html)\n• [Les 40: Structuur over meerdere dagen](/education/curriculum/intermediate/40-multi-day-structure.html)\n\n**Voordat je haar gebruikt:** schrijf je swingdefinitie op, en tel dan pas.",
+    "divergence": "**Divergentie:**\n\nDe prijs die het oneens is met een getal dat uit de prijs is gerekend. Omdat de indicator een functie van diezelfde prijzen is, is een divergentie een rekenkundig gevolg van het pad en geen onafhankelijke getuige ervan.\n\n**Wat de cursus meet:**\n• Twee instellingen bepalen of er überhaupt een is: een swingregel en een oscillatorperiode\n• Nog voordat een van beide naar een indicator kijkt, bepaalt de swingregel alleen al of er 33 plekken zijn om te kijken of 5\n• De indicator kan geen informatie toevoegen, want hij is uit de prijzen gerekend\n\n**Lessen:**\n• [Les 34: Divergentie](/education/curriculum/intermediate/34-divergence.html)\n• [Les 48: Wat een indicator is](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n\n**Werkblad:** het telblad voor divergenties op de bronnenpagina draait dit op je eigen reeks.",
+    "regime": "**Regime, context en tijdframe:**\n\nIn welk van twee gedragingen een stuk reeks zich bevindt, gemeten in plaats van benoemd, en wat een tijdframe eigenlijk is zodra je merkt dat het twee instellingen heeft.\n\n**Wat de cursus meet:**\n• De efficiëntieverhouding scheidt een zijwaarts stuk volledig van een opmars, en draagt een venster met zich mee\n• Verander het venster van tien slotkoersen naar dertig en de twee aflezingen zijn het op 22 van de 30 bars oneens\n• Hergroepeer zestig bars vier tegelijk en de swingtelling zakt van 15 naar 2 terwijl top en bodem niet bewegen\n• Verschuif alleen de startbar en dezelfde verhouding loopt van 0,104 tot 0,249 op precies dezelfde tape\n\n**Lessen:**\n• [Les 36: Markten hebben standen](/education/curriculum/intermediate/36-markets-have-modes.html)\n• [Les 37: Een regimeomslag herkennen](/education/curriculum/intermediate/37-detecting-a-regime-change.html)\n• [Les 38: Wat een timeframe is](/education/curriculum/intermediate/38-what-a-timeframe-is.html)\n• [Les 44: Volatiliteit als grootheid](/education/curriculum/intermediate/44-volatility-as-a-quantity.html)\n\n**Wat wachten kost:** les 37 beprijst wat elke bar bevestiging oplevert en kost.",
+    "indicators": "**Indicatoren, eerlijk bekeken:**\n\nEen indicator is een functie van getallen die je al hebt, en alleen uit die zin volgen vier dingen.\n\n**Wat de cursus meet:**\n• Hij kan geen informatie toevoegen: alles wat op de lijn te lezen was, was ook op de prijzen te lezen\n• Hij gooit weg, en het weggegooide is te tellen\n• Hij is te laat met een hoeveelheid die je uitrekent in plaats van raadt — 4,50 bars voor een enkelvoudig gemiddelde over tien perioden\n• Twee standaarduitvoeringen van de RSI drukken op dezelfde zestig slotkoersen dertien waarden boven 70 af en geen enkele\n\n**Lessen:**\n• [Les 48: Wat een indicator is](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n• [Les 49: Hertekenen](/education/curriculum/intermediate/49-repainting.html)\n• [Les 50: Voortschrijdende gemiddelden als steun](/education/curriculum/intermediate/50-moving-averages.html)\n• [Les 51: Oscillatoren onder regime](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n• [Les 52: Bevestigingsdrang, gemeten](/education/curriculum/intermediate/52-confirmation-bias.html)\n\n**De gemeten versie van bevestiging:** twaalf indicatorinstellingen zijn 1,71 onafhankelijke meningen.",
+    "backtest": "**De backtest als bewijs:**\n\nEen regel over voorbije prijzen laten lopen om te zien wat zij zou hebben gedaan, behandeld als bewijs met een sterkte die je kunt uitspreken en niet als een uitkomst.\n\n**Wat de cursus meet:**\n• Een zoektocht over 253 regels levert een winnaar op met $9,84 per aandeel tegen $5,68 voor aanhouden, over 7 trades, t = 3,65\n• Omdat er 253 instellingen zijn doorzocht, ligt de lat op 3,54 en niet op 1,65\n• Doorlopend beoordelen in plaats van op een vaste horizon tilt de slaagkans van een dood systeem van 5,05 procent naar 24,25\n• Walk-forward haalt één manier weg om jezelf voor de gek te houden, en de andere niet\n\n**Lessen:**\n• [Les 62: Wat er zou moeten gebeuren](/education/curriculum/advanced/62-from-observation-to-hypothesis.html)\n• [Les 63: Backtesting als bewijs](/education/curriculum/advanced/63-backtesting.html)\n• [Les 64: De prijs van zoeken](/education/curriculum/advanced/64-overfitting.html)\n• [Les 65: De horizon die je eerst vastlegt](/education/curriculum/advanced/65-forward-testing-and-deployment.html)\n\n**De vier aftrekkingen** tussen een brutogetal en een getal dat te geloven valt staan in les 63.",
+    "overfitting": "**Overfitting en de prijs van zoeken:**\n\nDe instellingen van een regel kiezen op dezelfde data waarmee je haar beoordeelt, zodat het oordeel de zoektocht meet en niet de regel.\n\n**Wat de cursus meet:**\n• Een zoektocht over 15.000 instellingen op 156 trades fabriceert 0,317 R voordat de markt iets doet\n• Dat getal volgt alleen uit de twee tellingen, zonder één prijs erin\n• De lat stijgt met de zoektocht: 3,54 in plaats van 1,65 na 253 instellingen\n• Bij één levende kandidaat op tien brengen twee gewone gewoonten een gedisciplineerde test van 43,2 procent echt naar 6,0\n\n**Lessen:**\n• [Les 64: De prijs van zoeken](/education/curriculum/advanced/64-overfitting.html)\n• [Les 63: Backtesting als bewijs](/education/curriculum/advanced/63-backtesting.html)\n• [Les 84: Het deel dat echt is](/education/curriculum/professional/84-behavioural-finance.html)\n\n**Het verweer:** noem de horizon en de omvang van de zoektocht voordat je kijkt.",
+    "portfolio": "**Portefeuille en correlatie:**\n\nOp hoeveel onafhankelijke weddenschappen een stel posities werkelijk neerkomt, en welke van je grenzen eerder bindt dan de andere.\n\n**Wat de cursus meet:**\n• Twee regels op één instrument dragen bij de gemeten correlatie 1,03 weddenschappen in plaats van twee\n• Hoeveel je er ook bij zet, het totaal loopt niet verder dan 1,06\n• Twintig posities bij gemiddeld 0,3 paarsgewijs dragen het risico van drie onafhankelijke\n• De daglimiet op verlies is de enige kolom die je kunt afdwingen voordat een order de deur uit is\n\n**Lessen:**\n• [Les 71: Hoeveel weddenschappen je echt draagt](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Les 72: De dag waarop elke stop raakt](/education/curriculum/professional/72-portfolio-heat.html)\n• [Les 73: De gewichten die je kunt aanhouden](/education/curriculum/professional/73-allocating-across-strategies.html)\n• [Les 74: Het venster beslist](/education/curriculum/professional/74-where-portfolio-theory-fails.html)\n• [Les 75: Welke limiet het eerst knelt](/education/curriculum/professional/75-institutional-risk-controls.html)\n\n**De bevinding:** de correlatie beweegt tussen twee helften van één overzicht genoeg om het antwoord te veranderen.",
+    "book": "**Een boek met regels:**\n\nWat een heel raster van regels verdient tegenover zijn beste lid, waar het resultaat vandaan kwam, en of elk lid zijn plaats verdient.\n\n**Wat de cursus meet:**\n• Het gelijkgewogen boek van 253 regels verdient $4,16 per aandeel, precies het gemiddelde van de regels erin\n• Drie van de achtentwintig bewegingen van het boek dragen 80,5 procent van het rendement\n• De omloop brengt 4,10 terug naar 3,70 en keert de rangorde binnen het boek om\n• Drie van de vier weglatingen verbeteren het boek\n\n**Lessen:**\n• [Les 91: Wat het hele raster verdient](/education/curriculum/professional/91-what-the-whole-grid-earns.html)\n• [Les 92: Waar het resultaat vandaan kwam](/education/curriculum/professional/92-where-the-result-came-from.html)\n• [Les 93: De regel die het meest handelt](/education/curriculum/professional/93-the-rule-that-trades-the-most.html)\n• [Les 94: De rit die je echt gekocht hebt](/education/curriculum/professional/94-the-ride-you-actually-bought.html)\n• [Les 95: Het boek op &eacute;&eacute;n kaart](/education/curriculum/professional/95-the-book-on-one-card.html)\n\n**De test:** haal elk lid om de beurt weg en reken elke kolom opnieuw uit, niet alleen het rendement.",
+    "business": "**Traden als bedrijf:**\n\nWat het tempo, de kosten, de opname en het overzicht met elkaar doen zodra iemand van het resultaat leeft.\n\n**Wat de cursus meet:**\n• 13 orders in 28 dagen zijn 4,875 afgeronde trades per maand\n• Een echte edge van een tiende R verliest nog altijd 41,3 procent van zijn maanden\n• Een opname van 500 tegen 487,50 verdiend vraagt een saldo van 102.564 om quitte te spelen\n• Vijf regels begeven het in een vaste volgorde, en het bedrijf begeeft het bij de tweede: de kosten\n\n**Lessen:**\n• [Les 96: De maand die verliest](/education/curriculum/professional/96-the-month-that-loses.html)\n• [Les 97: Het geld dat je opneemt](/education/curriculum/professional/97-the-money-you-take-out.html)\n• [Les 98: Het Getal Dat Schaal Zegt](/education/curriculum/professional/98-the-number-that-says-scale.html)\n• [Les 99: Hoe lang het geld meegaat](/education/curriculum/professional/99-how-long-the-money-lasts.html)\n• [Les 100: De onderneming op één pagina](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Het kaartje:** les 100 zet de vijf getallen in de volgorde waarin ze binden.",
+    "psychology": "**De trader, gemeten:**\n\nVier gewoonten beprijsd op dezelfde zeven trades, zodat het gesprek over rekenwerk gaat en niet over discipline.\n\n**Wat de cursus meet:**\n• De winst nemen op de eerste groene slotkoers kost $2,20 per aandeel en laat de trefkans precies waar zij stond\n• Een stop op een kwart R kost $5,90 per aandeel\n• Die optellen voorspelt dat er 1,74 overblijft; beide tegelijk laten lopen laat 4,44 over\n• 26,7 procent van alles wat ooit op het scherm stond, is teruggegeven\n\n**Lessen:**\n• [Les 86: De winst pakken](/education/curriculum/professional/86-taking-the-profit.html)\n• [Les 87: De tweede uitstap](/education/curriculum/professional/87-the-second-exit.html)\n• [Les 88: De omvang van de volgende](/education/curriculum/professional/88-the-size-of-the-next-one.html)\n• [Les 89: Het geld dat op het scherm stond](/education/curriculum/professional/89-the-money-that-was-showing.html)\n• [Les 90: De vier gewoonten samen](/education/curriculum/professional/90-the-four-habits-together.html)\n\n**Waarom de optelling faalt:** twee uitstappen stapelen niet, ze concurreren, en alleen de vroegste gaat ooit af.",
+    "glossary": "**Woordenlijst:**\n\nElke term die de 100 lessen gebruiken, gedefinieerd zoals de les die hem invoert hem definieert, met voor elke term de les erbij.\n\n📖 [Open de woordenlijst](/education/glossary.html)\n\nEen term verdient hier alleen een plaats wanneer een les hem definieert en er iets mee doet, en waar een definitie een getal draagt, is dat getal gemeten in de genoemde les en hier niet aangenomen.\n\n**Tip:** de lemma's volgen de alfabetische volgorde van hun Engelse namen — Ctrl+F, of Cmd+F op de Mac.",
+    "worksheets": "**Werkbladen en sjablonen:**\n\nZeventien gratis downloads, elk een middag rekenwerk op je eigen overzicht in plaats van een samenvatting om te lezen. De rechterkolom draagt wat de les op haar eigen bars mat, zodat jouw antwoord iets heeft om het mee oneens te zijn.\n\n📥 [Werkbladen en sjablonen](/education/resources.html)\n📁 [Alle gratis bronnen](/education/free/index.html)\n\n**Geen e-mail nodig.** Niets hier zit achter een drempel.\n\n**Lees eerst de les.** Een werkblad waarvan je de les niet hebt gelezen levert getallen op die je niet kunt duiden.",
+    "languages": "**Talen:**\n\nHet hele programma is gratis in twaalf talen: Engels, Duits, Spaans, Frans, Italiaans, Portugees, Nederlands, Russisch, Japans, Turks, Hongaars en Arabisch.\n\nGebruik de taalkiezer in de kop. Elke les, elke niveaupagina en deze assistent volgen de taal waarin je leest.\n\n**Geen machinevertaling:** elke les wordt vertaald en daarna als proza teruggelezen, en elk getal wordt tegen het Engels gehouden.",
+    "search": "**Een les vinden:**\n\n🔍 [Alle 100 lessen doorzoeken](/education/search.html) — op onderwerp, begrip of trefwoord\n🗺 [Leesroutes](/education/paths.html) — negen routes door de cursus per onderwerp\n📚 [Volledig programma](/education/) — alle 100 in modulevolgorde\n📖 [Woordenlijst](/education/glossary.html) — elke term die de lessen definiëren\n\n**Als het onderwerp meer telt dan de moeilijkheid,** begin dan met een leesroute: risico, kosten, bewijs, het Order Book, indicatoren, portefeuilles, het bedrijf, de beweringen en de kalender."
+  },
   "pt": {
     "beginner": "**Nível Iniciante** (24 aulas) — como funciona um mercado, quanto custa, o que é o risco\n\n📚 [Ver todas as aulas do nível Iniciante](/education/beginner.html)\n\n**O que vais aprender:**\n• O Order Book, o spread e o Market Maker, deduzidos de um único problema\n• O que é uma execução, e os cinco números que uma vela guarda do seu intervalo\n• Porque é que toda a posição abre em perda, e quais são os quatro encargos\n• A esperança, e quanto falta até o teu próprio registo resolver alguma coisa\n• Tamanho de posição, onde vai o stop, e risco de ruína\n\n**Aulas principais:**\n• O que um mercado resolve (aula 1)\n• Toda a operação começa em negativo (aula 10)\n• Esperança (aula 17)\n• Risco de ruína (aula 22)\n\n**Duração:** 6-12 min por aula\n**Para quem:** qualquer pessoa que ainda não tenha posto preço a uma ida e volta",
     "intermediate": "**Nível Intermédio** (28 aulas) — ler o leilão, e quando essa leitura se aplica\n\n📚 [Ver todas as aulas do nível Intermédio](/education/intermediate.html)\n\n**O que vais aprender:**\n• Onde repousa a liquidez, e porque é que o livro mostrado é um anúncio\n• Absorção, exaustão, volume ao preço e tamanho escondido\n• Estrutura, order blocks e varrimentos, com as definições postas por escrito\n• Regimes, unidades de tempo, sessões, volatilidade, correlação e o ciclo macro\n• O que é um indicador, e o que deita fora para o ser\n\n**Aulas principais:**\n• Onde a liquidez repousa (aula 25)\n• Estrutura de mercado (aula 32)\n• Os mercados têm modos (aula 36)\n• O que é um indicador (aula 48)\n\n**Duração:** 8-14 min por aula\n**Para quem:** quem já sabe pôr preço aos seus próprios custos",
@@ -417,6 +495,42 @@ window.SP_CHATBOT_I18N = {
     "worksheets": "**Folhas de trabalho e modelos:**\n\nDezassete descarregamentos gratuitos, cada um uma tarde de aritmética sobre o teu próprio registo em vez de um resumo para ler. A coluna da direita traz o que a aula mediu nas suas próprias barras, para que a tua resposta tenha com que discordar.\n\n📥 [Folhas de trabalho e modelos](/education/resources.html)\n📁 [Todos os recursos gratuitos](/education/free/index.html)\n\n**Sem e-mail.** Aqui não há nada atrás de uma barreira.\n\n**Lê primeiro a aula.** Uma folha cuja aula não leste produz números que não consegues interpretar.",
     "languages": "**Línguas:**\n\nTodo o programa é gratuito em doze línguas: inglês, alemão, espanhol, francês, italiano, português, neerlandês, russo, japonês, turco, húngaro e árabe.\n\nUsa o seletor de língua no cabeçalho. Cada aula, cada página de nível e este assistente seguem a língua em que estás a ler.\n\n**Não é saída de máquina:** cada aula é traduzida e depois relida como prosa, e cada número é confrontado com o inglês.",
     "search": "**Encontrar uma aula:**\n\n🔍 [Pesquisar nas 100 aulas](/education/search.html) — por tema, conceito ou palavra-chave\n🗺 [Percursos de leitura](/education/paths.html) — nove caminhos pelo curso por assunto\n📚 [Programa completo](/education/) — as 100 por ordem de módulo\n📖 [Glossário](/education/glossary.html) — todos os termos que as aulas definem\n\n**Se o assunto importa mais do que a dificuldade,** começa por um percurso de leitura: risco, custo, provas, o Order Book, indicadores, carteiras, o negócio, as afirmações e o calendário."
+  },
+  "ru": {
+    "beginner": "**Начальная ступень** (24 урока) — как устроен рынок, во что он обходится, что такое риск\n\n📚 [Все уроки начальной ступени](/education/beginner.html)\n\n**Чему ты научишься:**\n• Order Book, спред и Market Maker, выведенные из одной задачи\n• Что такое исполнение и какие пять чисел свеча сохраняет от своего интервала\n• Почему любая позиция открывается в минусе и что это за четыре списания\n• Матожидание и сколько времени пройдёт, прежде чем твоя запись хоть что-то решит\n• Размер позиции, куда ставить стоп и риск разорения\n\n**Ключевые уроки:**\n• Какую задачу решает рынок (урок 1)\n• Каждая сделка начинается в минусе (урок 10)\n• Матожидание (урок 17)\n• Риск разорения (урок 22)\n\n**Длительность:** 6–12 мин на урок\n**Кому:** любому, кто ещё не посчитал стоимость оборота",
+    "intermediate": "**Средняя ступень** (28 уроков) — как читать аукцион и когда это чтение применимо\n\n📚 [Все уроки средней ступени](/education/intermediate.html)\n\n**Чему ты научишься:**\n• Где лежит ликвидность и почему показанный стакан — это объявление\n• Поглощение, истощение, объём на цене и скрытый размер\n• Структура, order blocks и съёмы, с записанными определениями\n• Режимы, таймфреймы, сессии, волатильность, корреляция и макроцикл\n• Что такое индикатор и что он отбрасывает, чтобы им быть\n\n**Ключевые уроки:**\n• Где покоится ликвидность (урок 25)\n• Структура рынка (урок 32)\n• У рынков есть режимы (урок 36)\n• Что такое индикатор (урок 48)\n\n**Длительность:** 8–14 мин на урок\n**Кому:** тем, кто уже умеет считать собственные издержки",
+    "advanced": "**Продвинутая ступень** (18 уроков) — кто ещё есть в стакане и как построить систему\n\n📚 [Все уроки продвинутой ступени](/education/advanced.html)\n\n**Чему ты научишься:**\n• За что платит спред и какая плата направляет твою заявку\n• Сколько стоит миллисекунда и во что обходится миллион акций\n• Что должно было бы случиться и backtest как свидетельство\n• Цена поиска, горизонт, который ты задаёшь, выбранный тобой ориентир\n• Drawdown, ёмкость, задержка, которую ты убираешь, машинное обучение как фильтр\n\n**Ключевые уроки:**\n• За что платит спред (урок 53)\n• Backtesting как доказательство (урок 63)\n• Цена поиска (урок 64)\n• Drawdown, на который тебе стоит рассчитывать (урок 67)\n\n**Длительность:** 10–16 мин на урок\n**Кому:** тем, кто строит то, что действительно собирается проверить",
+    "progress": "**Твой прогресс:**\n\nПрогресс записывается сам, пока ты читаешь уроки.\n\n**Как это устроено:**\n✅ Прогресс хранится локально (учётная запись не нужна)\n✅ Синхронизация между устройствами (скоро, через Supabase)\n✅ Значки за завершение каждой ступени\n✅ Счётчик серий для ежедневных уроков\n\n**Где посмотреть прогресс:**\n• На главной странице — общий процент прохождения\n• На странице каждой ступени — завершённые уроки\n• Зелёные галочки — пройденные уроки\n\n**Совет:** один урок в день, по порядку, и делай задачи. Вспоминание —\nединственное повторение, которое действительно что-то закрепляет. 🔥",
+    "curriculum": "**Программа SignalPilot Education Hub:**\n\n**Четыре нарастающие ступени:**\n\n🟢 **Ступень 1: Начальная** (24 урока)\n→ Как устроен рынок, во что он обходится и что такое риск\n\n🟡 **Ступень 2: Средняя** (28 уроков)\n→ Как читать аукцион и когда это чтение применимо\n\n🔴 **Ступень 3: Продвинутая** (18 уроков)\n→ Кто ещё есть в стакане и как построить систему\n\n⚫ **Ступень 4: Профессиональная** (30 уроков)\n→ Портфель, профессия и специализации\n\n**Всего:** 100 полноценных уроков\n\n📚 [Посмотреть всю программу](/)\n\n**Рекомендованный маршрут:** по порядку, с 1 по 100. Каждый урок тратит число,\nизмеренное более ранним, так что последовательность и есть аргумент.\n\n**Затраты времени:** примерно 6–16 мин на урок",
+    "rsi": "**Осцилляторы и RSI:**\n\n**Основной урок:** [Урок 51: Осцилляторы в режиме](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n\n**Ключевое:**\n• Осциллятор — функция цен, которые у тебя уже есть, поэтому он не добавляет информации\n• Одно и то же значение значит разное в тренде и в диапазоне\n• Важно то, что осциллятор отбрасывает, и сколько времени он на это тратит\n• Порог — это настройка, а не измерение, и его нужно назвать\n\n**Смежное:** [Урок 48: Что такое индикатор](/education/curriculum/intermediate/48-what-an-indicator-is.html), [Урок 36: У рынков есть режимы](/education/curriculum/intermediate/36-markets-have-modes.html)\n\n**Частая ошибка:** читать крайнее значение как сигнал, не назвав сперва режим и ни разу не измерив, как часто это значение оказывалось право",
+    "spread": "**Спред:**\n\n**Основной урок:** [Урок 4: Спред &mdash; это цена немедленности](/education/curriculum/beginner/04-the-spread.html)\n\n**Ключевое:**\n• Спред — это цена немедленности, а не комиссия, которую кто-то с тебя берёт\n• Он один из четырёх списаний, и урок 10 оценивает все четыре на одной сделке\n• В сравнении с тем, сколько инструмент проходит за день, издержка идёт от одной пятой процента до 52 процентов\n• Ставить вместо того, чтобы переходить, зарабатывает спред, и урок 58 оценивает, чем за это платят\n\n**Смежное:** [Урок 10: Каждая сделка начинается в минусе](/education/curriculum/beginner/10-every-trade-starts-negative.html), [Урок 53: За что платит спред](/education/curriculum/advanced/53-market-makers-business.html)\n\n**Где числа:** урок 12 ранжирует инструменты по издержкам как доле дневного движения",
+    "automation": "**Автоматизация и исполнение:**\n\n**Основной урок:** [Урок 69: Задержка, которую ты убираешь](/education/curriculum/advanced/69-automation.html)\n\n**Ключевое:**\n• Автоматизация убирает задержку; вопрос в том, во что эта задержка обходилась\n• Slippage и комиссии относятся к backtest, потому что они уже в результате\n• Жёсткий дневной лимит убытка связывает раньше любого другого ограничения\n• Темп, в котором ты торгуешь на самом деле, измерим, и он медленнее, чем предполагает большинство планов\n\n**Смежное:** [Урок 75: Какой предел связывает первым](/education/curriculum/professional/75-institutional-risk-controls.html), [Урок 76: Темп, в котором ты торгуешь на самом деле](/education/curriculum/professional/76-trading-day.html)\n\n**Правило:** не запускай ничего, чей отказ ты не оценил в деньгах",
+    "chatbot": "**Об этом чат-боте:**\n\nЯ помощник на сопоставлении шаблонов (никакого API с ИИ!), сделанный, чтобы помогать тебе ориентироваться в 100 уроках.\n\n**Я помогу:**\n• Подобрать уроки («С чего начать?»)\n• Объяснить понятия («Объясни RSI в разных режимах»)\n• Найти уроки («Уроки про издержки спреда»)\n• Отследить прогресс («Как следить за прогрессом?»)\n\n**Чего я не могу:**\n• Давать торговые рекомендации\n• Анализировать рынок в реальном времени\n• Советовать по твоему счёту\n• Исполнять заявки\n\n**Как я работаю:**\n• Сопоставление шаблонов (мгновенные ответы)\n• База знаний из всех 100 уроков\n• Никакие данные не уходят во внешние API\n• История переписки хранится только локально\n\n**Совет:** задавай вопросы целиком, вроде «Как спред между бидом и аском работает как опережающий индикатор?» — так ответ будет полнее.",
+    "start": "**Первые шаги:**\n\n**Рекомендованный маршрут обучения:**\n\n**Недели 1–4: Начальная** (24 урока, места 1–24)\n→ Начало: [Урок 1: Какую задачу решает рынок](/education/curriculum/beginner/01-what-a-market-solves.html)\n→ Фокус: механизм, во что обходится торговля и что такое риск на самом деле\n\n**Недели 5–9: Средняя** (28 уроков, места 25–52)\n→ [Урок 25: Где покоится ликвидность](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n→ Фокус: как читать аукцион и какой контекст решает, когда чтение применимо\n\n**Недели 10–13: Продвинутая** (18 уроков, места 53–70)\n→ [Урок 53: За что платит спред](/education/curriculum/advanced/53-market-makers-business.html)\n→ Фокус: кто ещё есть в стакане и как построить систему, которая переживёт проверки\n\n**С 14-й недели: Профессиональная** (30 уроков, места 71–100)\n→ [Урок 71: Сколько ставок ты на самом деле несёшь](/education/curriculum/professional/71-positions-are-one-position.html)\n→ Фокус: портфель, арифметика профессии и четыре специализации\n\n**Затраты времени:** 6–16 мин на урок\n**Цель:** один урок в день, по порядку. Каждый тратит то, что измерил предыдущий.\n\n**Быстрые действия:**\n• [Просмотреть все уроки](/)\n• [Искать уроки](/education/search.html)",
+    "lessons": "**О наших уроках:**\n\n**Устройство:** у каждого урока одни и те же семь частей, в таком порядке:\n• Утверждение — что урок находит, в первых 200 словах, с числом\n• Предпосылки — что он тратит и какой урок это измерил\n• Развитие — аргумент, построенный, а не заявленный\n• Разобранный пример — один, где каждое число пересчитывается со страницы\n• Границы — где найденное перестаёт быть верным\n• Задачи — что пойти и измерить на своих данных\n• Источники — на что урок опирается и как\n\n**Объём:** от 1 400 до 5 000 слов. Объём — это следствие, а не цель.\n\n**Стиль:** каждое число на странице выводится на странице. Никакого\nсобирательного трейдера, никакой выдуманной истории результатов, никаких\nрассказов о прибылях и убытках. Если число цитируется из прежнего урока,\nзначит, тот урок его напечатал.\n\n**Всего:** 100 уроков на 4 ступенях, в 14 модулях\n\n**Чем они отличаются:**\n✅ Каждое утверждение опровержимо и говорит, что бы его опровергло\n✅ Каждое число пересчитывается, а не повторяется\n✅ Каждый урок заканчивается обещанием того, что найдёт следующий, с его числом\n✅ Границы такие же длинные, как и аргумент\n✅ Доступны на 11 языках помимо английского\n\n📚 [Просмотреть все уроки](/)",
+    "help": "**Вот с чем я помогу:**\n\n📚 **Курс** — «программа» | «с чего начать» | «уроки для начинающих» | «профессиональная ступень»\n💸 **Издержки** — «во что обходится торговля» | «slippage» | «комиссия»\n🎲 **Риск** — «размер позиции» | «риск разорения» | «drawdown»\n📏 **Доказательства** — «матожидание» | «сколько сделок, чтобы понять» | «backtest» | «переподгонка»\n📖 **Аукцион** — «Order Book» | «Order Flow» | «съёмы» | «структура рынка» | «дивергенция»\n🧭 **Контекст** — «режим» | «таймфрейм» | «волатильность»\n🔍 **Индикаторы** — «что такое индикатор» | «RSI» | «скользящие средние» | «перерисовка»\n📐 **Портфель** — «корреляция» | «независимые ставки» | «лимиты позиций»\n💼 **Дело** — «жить с трейдинга» | «снятие» | «книга правил» | «психология»\n📥 **Бесплатные материалы** — «рабочие листы» | «глоссарий» | «языки» | «поиск»\n\n**Спроси, например:**\n• «Сколько сделок, чтобы понять, настоящее ли моё преимущество?»\n• «Во что на самом деле обходится оборот?»\n• «Охота за стопами существует на самом деле?»\n• «Можно ли жить с трейдинга?»\n• «Есть ли у вас рабочие листы?»\n\nКаждый ответ называет урок, из которого он взят, и каждое число в нём измерено в этом уроке, а не заявлено здесь. Просто набери свой вопрос. 💬",
+    "default": "Насчёт именно этого вопроса я не уверен.\n\nСпроси лучше про:\n📚 **Уроки:** начальная, средняя и продвинутая ступени\n🎯 **Понятия:** RSI, спреды, автоматизация, объём, Order Flow\n📊 **Первые шаги:** маршрут обучения, отслеживание прогресса\n🔧 **Возможности:** чат-бот, поиск, программа\n\nНабери **«помощь»**, чтобы увидеть все темы.\n\n💡 **Подсказка:** строка поиска сверху ищет по всем 100 урокам, или листай по ступеням с главной страницы.\n\n**Быстрые ссылки:**\n• [Уроки для начинающих](/education/beginner.html)\n• [Уроки средней ступени](/education/intermediate.html)\n• [Уроки продвинутой ступени](/education/advanced.html)\n• [Искать по всем урокам](/education/search.html)",
+    "professional": "**Профессиональная ступень:**\n\n30 уроков (места 71–100) о том, как нести больше одной позиции, об арифметике жизни этим ремеслом, о четырёх специализациях и о пяти уроках, которые разворачивают измерения и наводят их на самого трейдера.\n\n**Что измеряет курс:**\n• Два правила на одном инструменте несут 1,03 независимой ставки вместо двух, и итог упирается в 1,06\n• Зарплата требует 11,40 года этой зарплаты в капитале, при том что вердикт о преимуществе отстоит на 10,07 года\n• Четыре привычки вместе оставляют 4,44 на акцию там, где сложение их издержек по отдельности предсказывает 1,74\n• Оборот в 0,1230 забирает 79,7 процента преимущества в одну десятую R и уводит вердикт с 785 сделок на 18 952\n\n**Уроки:**\n• [Урок 71: Сколько ставок ты на самом деле несёшь](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Урок 79: Платить себе до того, как узнаешь](/education/curriculum/professional/79-career-paths.html)\n• [Урок 90: Четыре привычки вместе](/education/curriculum/professional/90-the-four-habits-together.html)\n• [Урок 100: Бизнес на одной странице](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Длительность:** 7–12 мин на урок\n**Кому:** тем, кто уже умеет считать оборот и хочет знать, какое дело на нём держится",
+    "cost": "**Во что обходится торговля:**\n\nЧетыре списания берутся независимо от того, вышла сделка или нет: спред, комиссия, slippage и финансирование. Модуль 2 оценивает все четыре, и каждый следующий урок их вычитает.\n\n**Что измеряет курс:**\n• Любая позиция открывается в минусе, и финансирование углубляет его всё время, пока ты держишь\n• Одна и та же заявка на 30 000 $ стоит 0,30 $ в одном инструменте и 80,00 $ в другом — в один и тот же миг\n• Оборот идёт от 0,2 базисного пункта на индексном ETF до 467 на микрокапитализации\n• Симулятор обнуляет всё это: стратегия, показывающая +1 000 $ на сотне сделок, даёт чистыми −700 $\n\n**Уроки:**\n• [Урок 10: Каждая сделка начинается в минусе](/education/curriculum/beginner/10-every-trade-starts-negative.html)\n• [Урок 11: Slippage и импакт на розничном объёме](/education/curriculum/beginner/11-slippage-and-impact.html)\n• [Урок 12: Чем тебе вообще стоит торговать](/education/curriculum/beginner/12-what-should-you-trade.html)\n• [Урок 16: Симулятор против реала](/education/curriculum/beginner/16-sim-against-live.html)\n\n**Где арифметика:** урок 12 ранжирует инструменты по издержкам как доле того, что они проходят за день.",
+    "risk": "**Риск, размер и разорение:**\n\nСколько ставить, куда относится стоп и какова вероятность, что серия убытков закончит счёт. Все три считаются, а не чувствуются.\n\n**Что измеряет курс:**\n• Один выигрыш +2R и два убытка −1R дают ноль в R и всё равно стоят счёту денег\n• Разорение следует из трёх чисел, которые у тебя уже есть: преимущества, доли риска и того, насколько глубоко ты можешь упасть\n• Увеличивать размер ради отыгрыша при 5 процентах на сделку возвращает к максимуму в девяти карьерах из ста\n• Настоящее преимущество в одну десятую R проходит свои 156 сделок внутри медианной худшей просадки в 8,82R\n\n**Уроки:**\n• [Урок 20: Размер позиции](/education/curriculum/beginner/20-position-sizing.html)\n• [Урок 21: Где ставить стоп](/education/curriculum/beginner/21-where-the-stop-goes.html)\n• [Урок 22: Риск разорения](/education/curriculum/beginner/22-risk-of-ruin.html)\n• [Урок 67: Drawdown, на который тебе стоит рассчитывать](/education/curriculum/advanced/67-is-the-edge-gone.html)\n\n**Начни с:** урока 20, откуда берётся каждое последующее число в R.",
+    "expectancy": "**Матожидание и размер выборки:**\n\nПреимущество — это число, а не ощущение от графика, и число приходит с интервалом вокруг себя, который большинство записей слишком коротки, чтобы закрыть.\n\n**Что измеряет курс:**\n• E = p·b − (1−p), в единицах того, чем ты рискуешь\n• Пятьдесят сделок не отличат метод, дающий 0,35R на сделку, от метода вовсе без преимущества\n• Преимуществу в одну десятую R нужно 785 сделок вчистую и 18 952 после вычета оборота\n• Как настоящее преимущество ощущается изнутри — по большей части никак\n\n**Уроки:**\n• [Урок 17: Матожидание](/education/curriculum/beginner/17-expectancy.html)\n• [Урок 18: Каково преимущество на ощупь](/education/curriculum/beginner/18-what-an-edge-feels-like.html)\n• [Урок 19: Сколько ждать, чтобы узнать](/education/curriculum/beginner/19-how-long-until-you-know.html)\n• [Урок 98: Число, которое говорит о масштабе](/education/curriculum/professional/98-the-number-that-says-scale.html)\n\n**Привычка:** посчитай собственный размер выборки, прежде чем называть долю прибыльных.",
+    "orderbook": "**Order Book и ликвидность:**\n\nЧто стоит, где стоит и как мало из этого на самом деле описывает котировка.\n\n**Что измеряет курс:**\n• Обычный стакан держит 7 300 акций за котировкой, которая описывает 900 из них\n• Стоящий объём ничего не стоит поставить и ничего снять, поэтому стена стоит ровно столько, сколько стоит частота её удержания\n• Заявки скапливаются на уровнях, которые можно назвать заранее, и этому скоплению не нужен сговор\n• Стоп невидим, пока не сработает, поэтому пул — это заведомо будущий поток, который никто не может увидеть\n\n**Уроки:**\n• [Урок 2: Order Book](/education/curriculum/beginner/02-the-order-book.html)\n• [Урок 25: Где покоится ликвидность](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n• [Урок 26: Order book &mdash; это театр](/education/curriculum/intermediate/26-order-book-is-theater.html)\n• [Урок 27: Ложь о ликвидности](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n\n**Поправка:** урок 27 находит, что намерение по цене не опознаётся, как бы фигуру ни называли.",
+    "orderflow": "**Order Flow, дельта и лента:**\n\nЧто лента сообщает и что твоя программа выводит сама. Три из четырёх фактов рядом с принтом записаны; четвёртый — сторона — это догадка с известной долей ошибок.\n\n**Что измеряет курс:**\n• Вывод о стороне агрессора верен примерно четыре раза из пяти\n• Один неверно отнесённый принт на 900 акций уводит минуту с плюс 600 на минус 1 200\n• Бар, показанный с дельтой плюс 15 процентов, зажимает долю покупок лишь между 50,0 и 62,5 процента\n• Два бара могут совпадать по каждой величине, которую фиксирует свеча, и всё равно нести дельты +2 820 и −1 680\n\n**Уроки:**\n• [Урок 7: Time and Sales](/education/curriculum/beginner/07-time-and-sales.html)\n• [Урок 8: Объём и дельта](/education/curriculum/beginner/08-volume-and-delta.html)\n• [Урок 28: Поглощение и истощение](/education/curriculum/intermediate/28-absorption-and-exhaustion.html)\n• [Урок 29: Объём по цене](/education/curriculum/intermediate/29-volume-at-price.html)\n\n**Читать дальше:** урок 29 отделяет подсчёт, которому не нужен вывод, от числа, которое из него все цитируют.",
+    "sweep": "**Съёмы и охота за стопами:**\n\nЦена уходит за уровень и возвращается. Случилось ли это вообще, решают три настройки, а не рынок.\n\n**Что измеряет курс:**\n• Обычные значения этих трёх находят на одних и тех же шестидесяти барах 4 съёма, или 15, или 46\n• Каскаду по стоящим стопам не нужен автор\n• Один и тот же приём стоит одному участнику шестьдесят две тысячи долларов, а другому двадцать пять\n• Поведение, действительно доказанное в суде, идёт институциональным размером против других машин\n\n**Уроки:**\n• [Урок 27: Ложь о ликвидности](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n• [Урок 35: Свипы, за пределами первого](/education/curriculum/intermediate/35-sweeps-beyond-the-first.html)\n• [Урок 61: Число, которое негде посмотреть](/education/curriculum/advanced/61-thinking-adversarially.html)\n\n**Честная версия:** сначала посчитай уровни, которые твоё же правило свинга себе разрешает, и только потом съёмы.",
+    "structure": "**Структура рынка:**\n\nПоследовательность свинг-максимумов и свинг-минимумов, как которую читают серию. Её нет в ценах; она получается применением к ним определения свинга, а само определение — настройка, которую никто не называет.\n\n**Что измеряет курс:**\n• На одних и тех же двадцати барах обычные настройки дают восемь структурных событий, или два, или ни одного\n• Две обычные настройки расходятся в том, кто управляет, на четырёх барах из двенадцати\n• Пробой структуры предсказывает то, что можно посчитать, и потому он лучше названных графических фигур\n• Order blocks и смещение делят ту же необъявленную настройку\n\n**Уроки:**\n• [Урок 32: Структура рынка](/education/curriculum/intermediate/32-market-structure.html)\n• [Урок 33: Order block и displacement](/education/curriculum/intermediate/33-order-blocks-and-displacement.html)\n• [Урок 40: Структура за несколько дней](/education/curriculum/intermediate/40-multi-day-structure.html)\n\n**Прежде чем пользоваться:** запиши своё определение свинга, а потом считай.",
+    "divergence": "**Дивергенция:**\n\nЦена расходится с числом, посчитанным из цены. Поскольку индикатор есть функция тех же цен, дивергенция — арифметическое следствие пути, а не независимый свидетель о нём.\n\n**Что измеряет курс:**\n• Есть ли она вообще, решают две настройки: правило свинга и период осциллятора\n• Ещё до того, как хоть одна из них посмотрит на индикатор, одно правило свинга решает, есть 33 места для проверки или 5\n• Индикатор не может добавить информации, потому что посчитан из цен\n\n**Уроки:**\n• [Урок 34: Дивергенция](/education/curriculum/intermediate/34-divergence.html)\n• [Урок 48: Что такое индикатор](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n\n**Рабочий лист:** лист подсчёта дивергенций на странице материалов прогоняет это по твоей собственной серии.",
+    "regime": "**Режим, контекст и таймфрейм:**\n\nВ каком из двух поведений находится отрезок серии, измеренно, а не по названию, и что такое таймфрейм на самом деле, как только замечаешь, что у него две настройки.\n\n**Что измеряет курс:**\n• Коэффициент эффективности полностью отделяет боковой отрезок от роста и несёт с собой окно\n• Смени окно с десяти закрытий на тридцать — и два прочтения разойдутся на 22 барах из 30\n• Перегруппируй шестьдесят баров по четыре — и число свингов упадёт с 15 до 2, а максимум и минимум не сдвинутся\n• Сдвинь один только стартовый бар — и тот же коэффициент пойдёт от 0,104 до 0,249 на той же ленте\n\n**Уроки:**\n• [Урок 36: У рынков есть режимы](/education/curriculum/intermediate/36-markets-have-modes.html)\n• [Урок 37: Как заметить смену режима](/education/curriculum/intermediate/37-detecting-a-regime-change.html)\n• [Урок 38: Что такое таймфрейм](/education/curriculum/intermediate/38-what-a-timeframe-is.html)\n• [Урок 44: Волатильность как величина](/education/curriculum/intermediate/44-volatility-as-a-quantity.html)\n\n**Чего стоит ожидание:** урок 37 оценивает, что даёт и во что обходится каждый бар подтверждения.",
+    "indicators": "**Индикаторы, если честно:**\n\nИндикатор — это функция чисел, которые у тебя уже есть, и из одной этой фразы следуют четыре вещи.\n\n**Что измеряет курс:**\n• Он не может добавить информации: всё, что читалось по линии, читалось и по ценам\n• Он отбрасывает, и отброшенное можно посчитать\n• Он опаздывает на величину, которую считают, а не угадывают, — 4,50 бара для простой средней по десяти периодам\n• Две стандартные реализации RSI на одних и тех же шестидесяти закрытиях печатают тринадцать значений выше 70 и ни одного\n\n**Уроки:**\n• [Урок 48: Что такое индикатор](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n• [Урок 49: Перерисовка](/education/curriculum/intermediate/49-repainting.html)\n• [Урок 50: Скользящие средние как поддержка](/education/curriculum/intermediate/50-moving-averages.html)\n• [Урок 51: Осцилляторы в режиме](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n• [Урок 52: Предвзятость подтверждения, измеренная](/education/curriculum/intermediate/52-confirmation-bias.html)\n\n**Измеренная версия подтверждения:** двенадцать конфигураций индикаторов — это 1,71 независимого мнения.",
+    "backtest": "**Backtest как свидетельство:**\n\nПрогон правила по прошлым ценам, чтобы увидеть, что оно сделало бы, — рассматриваемый как свидетельство с силой, которую можно назвать, а не как результат.\n\n**Что измеряет курс:**\n• Перебор 253 правил даёт победителя с 9,84 на акцию против 5,68 за удержание, на 7 сделках, t = 3,65\n• Поскольку перебрано 253 настройки, взять нужно 3,54, а не 1,65\n• Оценивать непрерывно вместо заранее заданного горизонта поднимает долю проходов мёртвой системы с 5,05 процента до 24,25\n• Walk-forward убирает один способ обмануть себя и не убирает остальные\n\n**Уроки:**\n• [Урок 62: Что должно было бы произойти](/education/curriculum/advanced/62-from-observation-to-hypothesis.html)\n• [Урок 63: Backtesting как доказательство](/education/curriculum/advanced/63-backtesting.html)\n• [Урок 64: Цена поиска](/education/curriculum/advanced/64-overfitting.html)\n• [Урок 65: Горизонт, который ты задаёшь первым](/education/curriculum/advanced/65-forward-testing-and-deployment.html)\n\n**Четыре вычитания** между валовой цифрой и цифрой, которой стоит верить, — в уроке 63.",
+    "overfitting": "**Переподгонка и цена поиска:**\n\nПодбирать настройки правила на тех же данных, по которым его судят, из-за чего суждение измеряет перебор, а не правило.\n\n**Что измеряет курс:**\n• Перебор 15 000 конфигураций на 156 сделках изготавливает 0,317 R ещё до того, как рынок что-либо сделает\n• Эта цифра выходит из одних только двух счётчиков, без единой цены внутри\n• Планка растёт вместе с перебором: 3,54 вместо 1,65 после 253 настроек\n• При одном живом кандидате из десяти две обычные привычки уводят дисциплинированную проверку с 43,2 процента настоящего до 6,0\n\n**Уроки:**\n• [Урок 64: Цена поиска](/education/curriculum/advanced/64-overfitting.html)\n• [Урок 63: Backtesting как доказательство](/education/curriculum/advanced/63-backtesting.html)\n• [Урок 84: Доля, которая настоящая](/education/curriculum/professional/84-behavioural-finance.html)\n\n**Защита:** назови горизонт и размер перебора до того, как посмотришь.",
+    "portfolio": "**Портфель и корреляция:**\n\nСкольким независимым ставкам на самом деле равен набор позиций и какое из твоих ограничений связывает раньше остальных.\n\n**Что измеряет курс:**\n• Два правила на одном инструменте при измеренной корреляции несут 1,03 ставки вместо двух\n• Сколько ни добавляй, итог упирается в 1,06\n• Двадцать позиций при средней парной корреляции 0,3 несут риск трёх независимых\n• Дневной лимит убытка — единственный столбец, который можно применить до отправки заявки\n\n**Уроки:**\n• [Урок 71: Сколько ставок ты на самом деле несёшь](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Урок 72: День, когда срабатывает каждый стоп](/education/curriculum/professional/72-portfolio-heat.html)\n• [Урок 73: Веса, которые ты можешь держать](/education/curriculum/professional/73-allocating-across-strategies.html)\n• [Урок 74: Решает окно](/education/curriculum/professional/74-where-portfolio-theory-fails.html)\n• [Урок 75: Какой предел связывает первым](/education/curriculum/professional/75-institutional-risk-controls.html)\n\n**Находка:** корреляция сдвигается между двумя половинами одной записи достаточно, чтобы поменять ответ.",
+    "book": "**Книга правил:**\n\nСколько зарабатывает целая сетка правил против своего лучшего участника, откуда взялся результат и заслуживает ли каждый участник своего места.\n\n**Что измеряет курс:**\n• Равновзвешенная книга из 253 правил зарабатывает 4,16 на акцию — ровно среднее по правилам внутри неё\n• Три из двадцати восьми движений книги несут 80,5 процента её доходности\n• Оборачиваемость уводит 4,10 к 3,70 и переворачивает порядок внутри книги\n• Три удаления из четырёх улучшают книгу\n\n**Уроки:**\n• [Урок 91: Что зарабатывает вся сетка](/education/curriculum/professional/91-what-the-whole-grid-earns.html)\n• [Урок 92: Откуда взялся результат](/education/curriculum/professional/92-where-the-result-came-from.html)\n• [Урок 93: Правило, которое торгует чаще всех](/education/curriculum/professional/93-the-rule-that-trades-the-most.html)\n• [Урок 94: Поездка, которую ты на самом деле купил](/education/curriculum/professional/94-the-ride-you-actually-bought.html)\n• [Урок 95: Книга на одной карточке](/education/curriculum/professional/95-the-book-on-one-card.html)\n\n**Проверка:** убирай по одному участнику и пересчитывай каждый столбец, а не только доходность.",
+    "business": "**Трейдинг как дело:**\n\nЧто темп, издержки, снятие и запись делают друг с другом, как только человек начинает жить на результат.\n\n**Что измеряет курс:**\n• 13 заявок за 28 дней — это 4,875 завершённой сделки в месяц\n• Настоящее преимущество в одну десятую R всё равно теряет 41,3 процента своих месяцев\n• Снятие 500 против заработанных 487,50 требует остатка 102 564, чтобы выйти в ноль\n• Пять строк падают в жёстком порядке, и дело падает на второй: на издержках\n\n**Уроки:**\n• [Урок 96: Месяц, который проигрывает](/education/curriculum/professional/96-the-month-that-loses.html)\n• [Урок 97: Деньги, которые ты забираешь](/education/curriculum/professional/97-the-money-you-take-out.html)\n• [Урок 98: Число, которое говорит о масштабе](/education/curriculum/professional/98-the-number-that-says-scale.html)\n• [Урок 99: Насколько хватит денег](/education/curriculum/professional/99-how-long-the-money-lasts.html)\n• [Урок 100: Бизнес на одной странице](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Карточка:** урок 100 ставит пять чисел в том порядке, в котором они связывают.",
+    "psychology": "**Трейдер, измеренный:**\n\nЧетыре привычки, оценённые на одних и тех же семи сделках, чтобы спор шёл об арифметике, а не о дисциплине.\n\n**Что измеряет курс:**\n• Забрать прибыль на первом зелёном закрытии стоит 2,20 на акцию и оставляет долю прибыльных ровно там, где она была\n• Стоп в четверть R стоит 5,90 на акцию\n• Сложение предсказывает, что останется 1,74; работа обоих сразу оставляет 4,44\n• 26,7 процента всего, что когда-либо было на экране, отдано обратно\n\n**Уроки:**\n• [Урок 86: Забрать прибыль](/education/curriculum/professional/86-taking-the-profit.html)\n• [Урок 87: Второй выход](/education/curriculum/professional/87-the-second-exit.html)\n• [Урок 88: Размер следующей](/education/curriculum/professional/88-the-size-of-the-next-one.html)\n• [Урок 89: Деньги, которые были на экране](/education/curriculum/professional/89-the-money-that-was-showing.html)\n• [Урок 90: Четыре привычки вместе](/education/curriculum/professional/90-the-four-habits-together.html)\n\n**Почему сложение не работает:** два выхода не складываются, они конкурируют, и срабатывает только тот, что раньше.",
+    "glossary": "**Глоссарий:**\n\nКаждый термин, который используют 100 уроков, определённый так, как его определяет вводящий его урок, с указанием этого урока.\n\n📖 [Открыть глоссарий](/education/glossary.html)\n\nТермин получает место, только когда урок его определяет и что-то с ним делает, а там, где в определении стоит число, это число измерено в названном уроке, а не предположено здесь.\n\n**Подсказка:** статьи идут в алфавитном порядке своих английских названий — Ctrl+F, на Mac Cmd+F.",
+    "worksheets": "**Рабочие листы и шаблоны:**\n\nСемнадцать бесплатных загрузок, каждая — вечер арифметики по твоей собственной записи, а не сводка для чтения. В правом столбце стоит то, что урок измерил на своих барах, чтобы твоему ответу было с чем не согласиться.\n\n📥 [Рабочие листы и шаблоны](/education/resources.html)\n📁 [Все бесплатные материалы](/education/free/index.html)\n\n**Почта не нужна.** Здесь ничего не спрятано за формой.\n\n**Сначала прочти урок.** Рабочий лист, урока к которому ты не читал, выдаёт числа, которые нечем истолковать.",
+    "languages": "**Языки:**\n\nВся программа бесплатна на двенадцати языках: английский, немецкий, испанский, французский, итальянский, португальский, нидерландский, русский, японский, турецкий, венгерский и арабский.\n\nПереключатель языка — в шапке. Каждый урок, каждая страница ступени и этот помощник следуют языку, на котором ты читаешь.\n\n**Это не машинный вывод:** каждый урок переводится, потом перечитывается как проза, и каждое число сверяется с английским.",
+    "search": "**Найти урок:**\n\n🔍 [Искать по всем 100 урокам](/education/search.html) — по теме, понятию или ключевому слову\n🗺 [Маршруты чтения](/education/paths.html) — девять путей через курс по темам\n📚 [Полная программа](/education/) — все 100 в порядке модулей\n📖 [Глоссарий](/education/glossary.html) — каждый термин, который определяют уроки\n\n**Если тема важнее сложности,** начни с маршрута чтения: риск, издержки, доказательства, Order Book, индикаторы, портфели, дело, утверждения и календарь."
   }
 },
   keys: {
@@ -1706,6 +1820,266 @@ window.SP_CHATBOT_I18N = {
       "contenuto"
     ]
   },
+  "nl": {
+    "worksheets": [
+      "werkblad",
+      "werkbladen",
+      "sjabloon",
+      "download",
+      "pdf",
+      "afdrukbaar",
+      "werkboek"
+    ],
+    "glossary": [
+      "woordenlijst",
+      "glossarium",
+      "definitie",
+      "definieer",
+      "wat betekent",
+      "terminologie",
+      "vocabulaire"
+    ],
+    "languages": [
+      "taal",
+      "talen",
+      "vertaald",
+      "vertaling",
+      "spaans",
+      "duits",
+      "frans",
+      "japans",
+      "arabisch"
+    ],
+    "business": [
+      "bedrijf",
+      "van traden leven",
+      "voltijds",
+      "fulltime",
+      "opname",
+      "ervan leven",
+      "loon",
+      "salaris"
+    ],
+    "psychology": [
+      "psychologie",
+      "discipline",
+      "emotie",
+      "dispositie-effect",
+      "winst te vroeg",
+      "wraak"
+    ],
+    "book": [
+      "boek met regels",
+      "gelijkgewogen",
+      "raster van regels",
+      "lid weglaten",
+      "leave one out"
+    ],
+    "portfolio": [
+      "portefeuille",
+      "correlatie",
+      "onafhankelijke weddenschappen",
+      "positielimiet",
+      "belasting",
+      "diversif"
+    ],
+    "overfitting": [
+      "overfit",
+      "overpassing",
+      "curve fitting",
+      "prijs van zoeken",
+      "datamining"
+    ],
+    "backtest": [
+      "backtest",
+      "walk forward",
+      "walk-forward",
+      "buiten de steekproef",
+      "bewijs"
+    ],
+    "indicators": [
+      "indicator",
+      "voortschrijdend gemiddelde",
+      "voortschrijdende gemiddelden",
+      "oscillator",
+      "repaint",
+      "bevestigingsbias",
+      "macd"
+    ],
+    "regime": [
+      "regime",
+      "tijdframe",
+      "tijdsbestek",
+      "trend of bereik",
+      "volatiliteit",
+      "context",
+      "sessie"
+    ],
+    "divergence": [
+      "divergentie",
+      "divergenties",
+      "divergerend"
+    ],
+    "structure": [
+      "marktstructuur",
+      "structuurbreuk",
+      "order block",
+      "karakterwissel",
+      "swingtop",
+      "swingbodem"
+    ],
+    "sweep": [
+      "veeg",
+      "vegen",
+      "stopjacht",
+      "liquiditeitsgreep",
+      "liquiditeitsleugen",
+      "stops opvegen"
+    ],
+    "orderflow": [
+      "order flow",
+      "orderstroom",
+      "delta",
+      "footprint",
+      "tape",
+      "time and sales",
+      "cvd",
+      "absorptie",
+      "uitputting"
+    ],
+    "orderbook": [
+      "order book",
+      "orderboek",
+      "marktdiepte",
+      "liquiditeit",
+      "iceberg",
+      "verborgen omvang",
+      "dom"
+    ],
+    "expectancy": [
+      "verwachting",
+      "steekproefomvang",
+      "hoeveel trades",
+      "hoe lang tot",
+      "edge is echt",
+      "statistische significantie"
+    ],
+    "risk": [
+      "risico op ruïne",
+      "positiegrootte",
+      "positieomvang",
+      "stop loss",
+      "stop-loss",
+      "waar de stop",
+      "drawdown",
+      "risicobeheer"
+    ],
+    "cost": [
+      "wat kost",
+      "handelskosten",
+      "tradingkosten",
+      "commissie",
+      "kosten",
+      "financiering",
+      "vier lasten",
+      "heen-en-weer",
+      "slippage"
+    ],
+    "professional": [
+      "professioneel niveau",
+      "professionele lessen",
+      "eindproject",
+      "niveau 4"
+    ],
+    "search": [
+      "les vinden",
+      "zoeken",
+      "zoekopdracht",
+      "leesroute",
+      "welke les",
+      "waar staat de les"
+    ],
+    "help": [
+      "help",
+      "wat kun je",
+      "opdrachten",
+      "menu"
+    ],
+    "chatbot": [
+      "wat ben je",
+      "wie ben je",
+      "over deze bot",
+      "over deze chatbot"
+    ],
+    "rsi": [
+      "rsi",
+      "relatieve sterkte",
+      "overbought",
+      "oversold",
+      "overgekocht",
+      "oververkocht"
+    ],
+    "spread": [
+      "spread",
+      "bied-laat",
+      "bied laat",
+      "market maker",
+      "liquiditeitskosten"
+    ],
+    "automation": [
+      "automatisering",
+      "automatiseren",
+      "noodstop",
+      "papieren rekening",
+      "webhook"
+    ],
+    "progress": [
+      "voortgang",
+      "reeks",
+      "badge",
+      "voltooiing"
+    ],
+    "start": [
+      "waar begin ik",
+      "waar moet ik beginnen",
+      "hoe begin ik",
+      "aan de slag",
+      "leerpad",
+      "studieplan",
+      "eerste les",
+      "waar te beginnen",
+      "ik ben nieuw",
+      "volslagen beginner"
+    ],
+    "curriculum": [
+      "programma",
+      "curriculum",
+      "alle lessen",
+      "lessenlijst",
+      "niveaus",
+      "leerplan"
+    ],
+    "beginner": [
+      "beginner",
+      "beginners",
+      "fundamenten",
+      "basis"
+    ],
+    "intermediate": [
+      "halfgevorderd",
+      "order flow",
+      "microstructuur"
+    ],
+    "advanced": [
+      "gevorderd",
+      "gevorderde"
+    ],
+    "lessons": [
+      "lessen",
+      "cursus",
+      "inhoud"
+    ]
+  },
   "pt": {
     "worksheets": [
       "folha de trabalho",
@@ -1962,6 +2336,268 @@ window.SP_CHATBOT_I18N = {
       "aulas",
       "curso",
       "conteúdo"
+    ]
+  },
+  "ru": {
+    "worksheets": [
+      "рабочий лист",
+      "рабочие листы",
+      "шаблон",
+      "скачать",
+      "pdf",
+      "для печати",
+      "тетрадь"
+    ],
+    "glossary": [
+      "глоссарий",
+      "определение",
+      "определи",
+      "что значит",
+      "терминология",
+      "словарь"
+    ],
+    "languages": [
+      "язык",
+      "языки",
+      "переведён",
+      "перевод",
+      "испанский",
+      "немецкий",
+      "французский",
+      "японский",
+      "арабский"
+    ],
+    "business": [
+      "дело",
+      "жить с трейдинга",
+      "на полную ставку",
+      "полный день",
+      "снятие",
+      "жить на это",
+      "зарплата",
+      "оклад"
+    ],
+    "psychology": [
+      "психология",
+      "дисциплина",
+      "эмоции",
+      "эффект диспозиции",
+      "рано забрать прибыль",
+      "отыграться"
+    ],
+    "book": [
+      "книга правил",
+      "равновзвешенн",
+      "сетка правил",
+      "удаление участника",
+      "leave one out"
+    ],
+    "portfolio": [
+      "портфель",
+      "корреляция",
+      "независимые ставки",
+      "лимит позиций",
+      "нагрузка",
+      "диверсиф"
+    ],
+    "overfitting": [
+      "переподгонка",
+      "переобучение",
+      "подгонка кривой",
+      "цена поиска",
+      "интеллектуальный анализ данных"
+    ],
+    "backtest": [
+      "backtest",
+      "бэктест",
+      "walk forward",
+      "walk-forward",
+      "вне выборки",
+      "свидетельство"
+    ],
+    "indicators": [
+      "индикатор",
+      "скользящая средняя",
+      "скользящие средние",
+      "осциллятор",
+      "перерисов",
+      "склонность к подтверждению",
+      "macd"
+    ],
+    "regime": [
+      "режим",
+      "таймфрейм",
+      "временной масштаб",
+      "тренд или диапазон",
+      "волатильность",
+      "контекст",
+      "сессия"
+    ],
+    "divergence": [
+      "дивергенция",
+      "дивергенции",
+      "расхождение"
+    ],
+    "structure": [
+      "структура рынка",
+      "пробой структуры",
+      "order block",
+      "смена характера",
+      "свинг-максимум",
+      "свинг-минимум"
+    ],
+    "sweep": [
+      "съём",
+      "съёмы",
+      "охота за стопами",
+      "снятие ликвидности",
+      "ложь о ликвидности",
+      "собрать стопы"
+    ],
+    "orderflow": [
+      "order flow",
+      "поток заявок",
+      "дельта",
+      "footprint",
+      "лента",
+      "time and sales",
+      "cvd",
+      "поглощение",
+      "истощение"
+    ],
+    "orderbook": [
+      "order book",
+      "стакан",
+      "глубина рынка",
+      "ликвидность",
+      "айсберг",
+      "скрытый объём",
+      "dom"
+    ],
+    "expectancy": [
+      "матожидание",
+      "математическое ожидание",
+      "размер выборки",
+      "сколько сделок",
+      "сколько времени до",
+      "преимущество настоящее",
+      "статистическая значимость"
+    ],
+    "risk": [
+      "риск разорения",
+      "размер позиции",
+      "определение размера",
+      "стоп-лосс",
+      "стоп лосс",
+      "куда ставить стоп",
+      "drawdown",
+      "просадка",
+      "управление риском"
+    ],
+    "cost": [
+      "во что обходится",
+      "издержки торговли",
+      "стоимость торговли",
+      "комиссия",
+      "комиссии",
+      "финансирование",
+      "четыре списания",
+      "оборот туда и обратно",
+      "slippage"
+    ],
+    "professional": [
+      "профессиональная ступень",
+      "профессиональные уроки",
+      "итоговый проект",
+      "ступень 4"
+    ],
+    "search": [
+      "найти урок",
+      "поиск",
+      "искать",
+      "маршрут чтения",
+      "какой урок",
+      "где урок"
+    ],
+    "help": [
+      "помощь",
+      "что ты умеешь",
+      "команды",
+      "меню"
+    ],
+    "chatbot": [
+      "что ты такое",
+      "кто ты",
+      "об этом боте",
+      "об этом чат-боте"
+    ],
+    "rsi": [
+      "rsi",
+      "относительная сила",
+      "перекупленность",
+      "перепроданность"
+    ],
+    "spread": [
+      "спред",
+      "бид-аск",
+      "бид аск",
+      "market maker",
+      "стоимость ликвидности"
+    ],
+    "automation": [
+      "автоматизация",
+      "автоматизировать",
+      "аварийная кнопка",
+      "демосчёт",
+      "webhook"
+    ],
+    "progress": [
+      "прогресс",
+      "серия",
+      "значок",
+      "завершение"
+    ],
+    "start": [
+      "с чего начать",
+      "с чего начинать",
+      "как начать",
+      "первые шаги",
+      "маршрут обучения",
+      "план обучения",
+      "первый урок",
+      "откуда начать",
+      "я новичок",
+      "совсем новичок"
+    ],
+    "curriculum": [
+      "программа",
+      "учебный план",
+      "все уроки",
+      "список уроков",
+      "ступени",
+      "силлабус"
+    ],
+    "beginner": [
+      "начальный",
+      "начинающих",
+      "новичков",
+      "основы",
+      "база"
+    ],
+    "intermediate": [
+      "средняя ступень",
+      "средний уровень",
+      "order flow",
+      "микроструктура"
+    ],
+    "advanced": [
+      "продвинут",
+      "углублённ"
+    ],
+    "lessons": [
+      "уроки",
+      "курс",
+      "содержание"
     ]
   }
 }
