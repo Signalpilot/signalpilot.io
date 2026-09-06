@@ -614,9 +614,25 @@ Type **"help"** to see all available topics!
         this.scrollToBottom();
     }
 
+    /* A linked lesson in the reader's own tree.
+     *
+     * The answers are written with English paths, and a German reader who
+     * followed one landed on the English lesson even though the German one
+     * exists. Prefix every /education/ link with the reader's language, except
+     * the handful of pages that exist only in English: chatbot_i18n.py checks
+     * the disk on each build and lists those in enOnly, so a page translated
+     * later drops off the list and its links come home on the next build. */
+    localiseLinks(text) {
+        if (this.lang === 'en') return text;
+        const I = window.SP_CHATBOT_I18N;
+        const only = (I && I.enOnly && I.enOnly[this.lang]) || [];
+        return text.replace(/\]\((\/education\/[^)]*)\)/g,
+            (m, url) => only.indexOf(url) >= 0 ? m : '](/' + this.lang + url + ')');
+    }
+
     formatMessage(content) {
         // Convert markdown-like formatting to HTML
-        let formatted = content
+        let formatted = this.localiseLinks(content)
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
             .replace(/`(.*?)`/g, '<code>$1</code>')

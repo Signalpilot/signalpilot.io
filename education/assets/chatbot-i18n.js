@@ -7,9 +7,72 @@
  * should reach each answer in that language: the English regexes in chatbot.js
  * never fire for someone typing German, so without these a translated widget
  * would answer every question with the fallback.
+ *
+ * `enOnly` is the list, per language, of the /education/ paths an answer links
+ * to that do not exist in that reader's tree. Everything else is rewritten to
+ * their own prefix at render time, so a German reader following a lesson link
+ * lands on the German lesson. The list is computed from disk on every build,
+ * so a page translated later drops off it and its links start pointing home.
  */
 window.SP_CHATBOT_I18N = {
   languages: [],
+  enOnly: {
+  "de": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "es": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "fr": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "it": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "pt": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "nl": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "ru": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "ja": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "tr": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "hu": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ],
+  "ar": [
+    "/education/free/index.html",
+    "/education/paths.html",
+    "/education/resources.html"
+  ]
+},
   ui: {
   "en": {
     "title": "Learning Assistant",
