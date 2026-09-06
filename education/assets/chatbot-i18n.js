@@ -15,7 +15,7 @@
  * so a page translated later drops off it and its links start pointing home.
  */
 window.SP_CHATBOT_I18N = {
-  languages: ["de", "es", "fr", "it", "nl", "pt", "ru"],
+  languages: ["de", "es", "fr", "it", "ja", "nl", "pt", "ru", "tr"],
   enOnly: {
   "de": [
     "/education/free/index.html",
@@ -179,6 +179,27 @@ window.SP_CHATBOT_I18N = {
     "inputLabel": "Campo del messaggio",
     "footer": "Funziona con il riconoscimento di schemi • SignalPilot Education"
   },
+  "ja": {
+    "title": "学習アシスタント",
+    "status": "オンライン • お手伝いできます",
+    "openLabel": "学習アシスタントを開く",
+    "clearTitle": "会話を消去する",
+    "greetLead": "<strong>こんにちは！👋</strong> SignalPilotの学習アシスタントです。",
+    "greetBody": "100本のトレードのレッスンを案内し、用語を説明し、学習の道すじをお手伝いします。",
+    "greetTry": "<em>例：「何から始めればいい？」「相場つきごとのRSIを説明して」</em>",
+    "quickStart": "🚀 はじめの一歩",
+    "quickBeginner": "📚 初級",
+    "quickRsi": "📊 RSIの神話",
+    "quickAutomation": "🤖 自動化",
+    "quickStartQuery": "何から始めればいい？",
+    "quickBeginnerQuery": "初級のレッスン",
+    "quickRsiQuery": "RSIを説明して",
+    "quickAutomationQuery": "トレードの自動化",
+    "placeholder": "レッスンや用語について聞いてください…",
+    "sendLabel": "メッセージを送る",
+    "inputLabel": "メッセージ入力",
+    "footer": "パターン照合で動いています • SignalPilot Education"
+  },
   "nl": {
     "title": "Leerassistent",
     "status": "Online • klaar om te helpen",
@@ -241,6 +262,27 @@ window.SP_CHATBOT_I18N = {
     "sendLabel": "Отправить сообщение",
     "inputLabel": "Поле сообщения",
     "footer": "Работает на сопоставлении шаблонов • SignalPilot Education"
+  },
+  "tr": {
+    "title": "Öğrenme asistanı",
+    "status": "Çevrimiçi • yardıma hazır",
+    "openLabel": "Öğrenme asistanını aç",
+    "clearTitle": "Konuşmayı temizle",
+    "greetLead": "<strong>Merhaba! 👋</strong> Ben senin SignalPilot öğrenme asistanınım.",
+    "greetBody": "100 trading dersimizde sana yol gösteririm, kavramları açıklarım ve öğrenme rotanda sana eşlik ederim.",
+    "greetTry": "<em>Şunu dene: «Nereden başlamalıyım?» ya da «RSI'ı rejime göre anlat»</em>",
+    "quickStart": "🚀 İlk adımlar",
+    "quickBeginner": "📚 Başlangıç",
+    "quickRsi": "📊 RSI efsaneleri",
+    "quickAutomation": "🤖 Otomasyon",
+    "quickStartQuery": "Nereden başlamalıyım?",
+    "quickBeginnerQuery": "Başlangıç dersleri",
+    "quickRsiQuery": "RSI'ı anlat",
+    "quickAutomationQuery": "Trading otomasyonu",
+    "placeholder": "Dersleri ya da kavramları sor…",
+    "sendLabel": "Mesajı gönder",
+    "inputLabel": "Mesaj alanı",
+    "footer": "Örüntü eşleştirmeyle çalışır • SignalPilot Education"
   }
 },
   kb: {
@@ -424,6 +466,42 @@ window.SP_CHATBOT_I18N = {
     "languages": "**Lingue:**\n\nTutto il programma è gratuito in dodici lingue: inglese, tedesco, spagnolo, francese, italiano, portoghese, olandese, russo, giapponese, turco, ungherese e arabo.\n\nUsa il selettore di lingua nell'intestazione. Ogni lezione, ogni pagina di livello e questo assistente seguono la lingua in cui stai leggendo.\n\n**Non è output automatico:** ogni lezione viene tradotta e poi riletta come prosa, e ogni cifra viene confrontata con l'inglese.",
     "search": "**Trovare una lezione:**\n\n🔍 [Cerca fra le 100 lezioni](/education/search.html) — per argomento, concetto o parola chiave\n🗺 [Percorsi di lettura](/education/paths.html) — nove strade attraverso il corso per tema\n📚 [Programma completo](/education/) — tutte e 100 in ordine di modulo\n📖 [Glossario](/education/glossary.html) — ogni termine che le lezioni definiscono\n\n**Se conta più l'argomento della difficoltà,** parti da un percorso di lettura: rischio, costo, prove, Order Book, indicatori, portafogli, l'attività, le affermazioni e il calendario."
   },
+  "ja": {
+    "beginner": "**初級レベル**（24レッスン）― 市場はどう動くのか、いくらかかるのか、リスクとは何か\n\n📚 [初級レベルのレッスンをすべて見る](/education/beginner.html)\n\n**学べること：**\n• Order Book、スプレッド、Market Maker。すべて一つの問題から導かれます\n• 約定とは何か、そしてローソク足が区間から残す五つの数字\n• なぜどの建玉も損から始まるのか、そして四つの課金とは何か\n• 期待値と、自分の記録が何かを決着させるまでにかかる時間\n• 建玉の大きさ、ストップの置き場所、そして破産の確率\n\n**主なレッスン：**\n• 市場が解決している問題（レッスン1）\n• どの取引もマイナスから始まる（レッスン10）\n• 期待値（レッスン17）\n• 破産確率（レッスン22）\n\n**所要時間：**1レッスン6〜12分\n**向いている人：**一往復の費用をまだ出したことのない人",
+    "intermediate": "**中級レベル**（28レッスン）― オークションの読み方と、その読みが通用する場面\n\n📚 [中級レベルのレッスンをすべて見る](/education/intermediate.html)\n\n**学べること：**\n• 流動性がどこに置かれているか、そして表示された板がなぜ広告なのか\n• 吸収、枯渇、価格ごとの出来高、隠された数量\n• 構造、order block、スイープ。定義はすべて書き出したうえで\n• 相場つき、時間軸、セッション、ボラティリティ、相関、そしてマクロの循環\n• インジケーターとは何か、そしてそれになるために何を捨てているのか\n\n**主なレッスン：**\n• 流動性はどこに眠るか（レッスン25）\n• マーケットストラクチャー（レッスン32）\n• 市場にはモードがある（レッスン36）\n• 指標とは何か（レッスン48）\n\n**所要時間：**1レッスン8〜14分\n**向いている人：**自分の費用をすでに計算できる人",
+    "advanced": "**上級レベル**（18レッスン）― 板にいるのは他に誰か、そして仕組みを組み立てる\n\n📚 [上級レベルのレッスンをすべて見る](/education/advanced.html)\n\n**学べること：**\n• スプレッドが何の代金なのか、そして注文の行き先を決める手数料\n• 1ミリ秒の値打ちと、百万株を執行するのに要るもの\n• 何が起きなければならないのか、そして証拠として扱うbacktest\n• 探すことの値段、先に決める地平、選んだ基準\n• drawdown、収容力、取り除ける遅れ、フィルターとしての機械学習\n\n**主なレッスン：**\n• スプレッドは何の代金なのか（レッスン53）\n• 証拠としての backtesting（レッスン63）\n• 探すことの代価（レッスン64）\n• 見込んでおくべき drawdown（レッスン67）\n\n**所要時間：**1レッスン10〜16分\n**向いている人：**本当に検証するつもりで何かを組み立てている人",
+    "progress": "**あなたの進み具合：**\n\nレッスンを読むにつれて、進み具合は自動で記録されます。\n\n**記録のしくみ：**\n✅ 進捗はお使いの端末に保存（アカウント不要）\n✅ 端末間の同期（Supabase経由で近日対応）\n✅ レベルごとの修了バッジ\n✅ 毎日のレッスンの連続日数\n\n**進み具合の見かた：**\n• トップページに全体の達成率が出ます\n• 各レベルのページに修了したレッスンが出ます\n• 緑のチェックが修了したレッスンです\n\n**コツ：**一日一レッスン、順番に、そして問題を解いてください。思い出すことだけが、\n本当に何かを定着させる復習です。🔥",
+    "curriculum": "**SignalPilot Education Hubのカリキュラム：**\n\n**四段階の積み上げ式：**\n\n🟢 **レベル1：初級**（24レッスン）\n→ 市場はどう動くのか、いくらかかるのか、リスクとは何か\n\n🟡 **レベル2：中級**（28レッスン）\n→ オークションの読み方と、その読みが通用する場面\n\n🔴 **レベル3：上級**（18レッスン）\n→ 板にいるのは他に誰か、そして仕組みを組み立てる\n\n⚫ **レベル4：プロ**（30レッスン）\n→ ポートフォリオ、職業、そして専門分野\n\n**合計：**充実した100レッスン\n\n📚 [カリキュラム全体を見る](/)\n\n**おすすめの順路：**1から100まで順番に。どのレッスンも前のレッスンが測った数字を\n使うので、この並びそのものが議論です。\n\n**必要な時間：**1レッスンおよそ6〜16分",
+    "rsi": "**オシレーターとRSI：**\n\n**主なレッスン：**[レッスン51：レジームの下のオシレーター](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n\n**要点：**\n• オシレーターはすでに手元にある価格の関数ですから、情報を足しません\n• 同じ値でも、トレンドのときとレンジのときで意味が違います\n• 大事なのはオシレーターが何を捨てるか、そしてそれにどれだけ時間がかかるかです\n• しきい値は測定ではなく設定であり、必ず宣言しなければなりません\n\n**関連：**[レッスン48：指標とは何か](/education/curriculum/intermediate/48-what-an-indicator-is.html)、[レッスン36：市場にはモードがある](/education/curriculum/intermediate/36-markets-have-modes.html)\n\n**よくある間違い：**まず相場つきを言わずに極端な値をシグナルとして読むこと。そしてその値がどれだけの頻度で正しかったかを一度も測らないこと",
+    "spread": "**スプレッド：**\n\n**主なレッスン：**[レッスン4：スプレッドは即時性の価格](/education/curriculum/beginner/04-the-spread.html)\n\n**要点：**\n• スプレッドは即時性の値段であって、誰かがあなたに請求する手数料ではありません\n• 四つの課金のうちの一つで、レッスン10は一回のトレードで四つすべてに値段をつけます\n• 商品が一日に動く幅に対して並べると、費用は0.2パーセントから52パーセントまで開きます\n• 渡らずに置けばスプレッドを受け取れます。レッスン58は、それが何を差し出しているのかに値段をつけます\n\n**関連：**[レッスン10：どの取引もマイナスから始まる](/education/curriculum/beginner/10-every-trade-starts-negative.html)、[レッスン53：スプレッドは何の代金なのか](/education/curriculum/advanced/53-market-makers-business.html)\n\n**数字のありか：**レッスン12は、一日の値動きに対する割合で商品を費用順に並べます",
+    "automation": "**自動化と執行：**\n\n**主なレッスン：**[レッスン69：あなたが取り除く遅れ](/education/curriculum/advanced/69-automation.html)\n\n**要点：**\n• 自動化が取り除くのは遅れです。問うべきは、その遅れがいくらかかっていたかです\n• slippageと手数料はbacktestの中に入ります。結果の中に入っているからです\n• 硬い日次損失上限は、ほかのどの上限よりも先に効きます\n• 実際に売買している速さは測れます。そしてそれは、たいていの計画が想定するより遅いのです\n\n**関連：**[レッスン75：どの上限が先に効くか](/education/curriculum/professional/75-institutional-risk-controls.html)、[レッスン76：実際に取引している速さ](/education/curriculum/professional/76-trading-day.html)\n\n**規則：**壊れたときの費用を出していないものは、動かさないこと",
+    "chatbot": "**このチャットボットについて：**\n\nパターン照合で動くアシスタントです（AIのAPIは不要です）。100本のレッスンを行き来する手助けをします。\n\n**できること：**\n• レッスンのおすすめ（「何から始めればいい？」）\n• 用語の説明（「相場つきごとのRSIを説明して」）\n• レッスン探し（「スプレッドの費用についてのレッスン」）\n• 進み具合（「進捗はどう見るの？」）\n\n**できないこと：**\n• 売買の推奨\n• リアルタイムの相場分析\n• あなたの口座についての助言\n• 注文の執行\n\n**しくみ：**\n• パターン照合（即答）\n• 100レッスンすべてから作った知識ベース\n• 外部APIへのデータ送信なし\n• 会話履歴はお使いの端末にだけ保存\n\n**コツ：**「ビッド・アスク・スプレッドは先行指標としてどう働くのか」のように、文でまるごと聞くと答えがよくなります。",
+    "start": "**はじめの一歩：**\n\n**おすすめの学習の道すじ：**\n\n**1〜4週目：初級**（24レッスン、1〜24番）\n→ 出発点：[レッスン1：市場が解決している問題](/education/curriculum/beginner/01-what-a-market-solves.html)\n→ 焦点：仕組み、トレードの費用、そしてリスクとは実際のところ何か\n\n**5〜9週目：中級**（28レッスン、25〜52番）\n→ [レッスン25：流動性はどこに眠るか](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n→ 焦点：オークションの読み方と、その読みが通用する場面を決める文脈\n\n**10〜13週目：上級**（18レッスン、53〜70番）\n→ [レッスン53：スプレッドは何の代金なのか](/education/curriculum/advanced/53-market-makers-business.html)\n→ 焦点：板にいるのは他に誰か、そして検証に耐える仕組みを組み立てること\n\n**14週目以降：プロ**（30レッスン、71〜100番）\n→ [レッスン71：本当に抱えている賭けの数](/education/curriculum/professional/71-positions-are-one-position.html)\n→ 焦点：ポートフォリオ、職業としての算術、そして四つの専門分野\n\n**必要な時間：**1レッスン6〜16分\n**目標：**一日一レッスン、順番に。どのレッスンも、前のレッスンが測ったものを使います。\n\n**近道：**\n• [全レッスンを見る](/)\n• [レッスンを検索](/education/search.html)",
+    "lessons": "**レッスンについて：**\n\n**構成：**どのレッスンも同じ七つの部分を、この順に持ちます。\n• 主張 ― そのレッスンが見つけたこと。最初の200語のうちに、数字とともに\n• 前提 ― 何を使うのか、そしてそれを測ったのはどのレッスンか\n• 展開 ― 主張ではなく、組み立てられた議論\n• 計算例 ― 一つだけ。どの数字もページ上から計算し直せます\n• 限界 ― その結論が成り立たなくなる場所\n• 問題 ― ご自分のデータで測ってみるべきこと\n• 出典 ― そのレッスンが何に、どう寄りかかっているか\n\n**長さ：**1,400語から5,000語。長さは結果であって、目標ではありません。\n\n**書き方：**ページ上の数字はすべてページ上で導かれます。合成されたトレーダーも、\n作り話の実績も、損益の物語もありません。前のレッスンから数字を引くときは、\nそのレッスンがその数字を印字しています。\n\n**合計：**4レベル、14モジュールにわたる100レッスン\n\n**ほかと違うところ：**\n✅ どの主張も反証可能で、何があれば覆るのかを述べています\n✅ どの数字も繰り返しではなく計算し直しています\n✅ 各レッスンは、次のレッスンが何を見つけるかをその数字とともに予告して終わります\n✅ 限界の記述は議論と同じだけの長さがあります\n✅ 英語のほかに11の言語で読めます\n\n📚 [全レッスンを見る](/)",
+    "help": "**こんなことをお手伝いできます：**\n\n📚 **講座** ―「カリキュラム」｜「何から始めればいい」｜「初級のレッスン」｜「プロのレベル」\n💸 **費用** ―「トレードの費用」｜「slippage」｜「手数料」\n🎲 **リスク** ―「建玉の大きさ」｜「破産の確率」｜「drawdown」\n📏 **証拠** ―「期待値」｜「何トレードで分かるのか」｜「backtest」｜「過剰適合」\n📖 **オークション** ―「Order Book」｜「Order Flow」｜「スイープ」｜「相場の構造」｜「ダイバージェンス」\n🧭 **文脈** ―「相場つき」｜「時間軸」｜「ボラティリティ」\n🔍 **インジケーター** ―「インジケーターとは」｜「RSI」｜「移動平均」｜「リペイント」\n📐 **ポートフォリオ** ―「相関」｜「独立した賭け」｜「建玉の上限」\n💼 **事業** ―「トレードで生活する」｜「引き出し」｜「ルールの束」｜「心理」\n📥 **無料の資料** ―「ワークシート」｜「用語集」｜「言語」｜「検索」\n\n**こんな質問をどうぞ：**\n•「自分のエッジが本物かどうか、何トレードで分かりますか」\n•「一往復は実際いくらかかりますか」\n•「ストップ狩りは本当にあるのですか」\n•「トレードで生活できますか」\n•「ワークシートはありますか」\n\nどの答えも出どころのレッスンを示します。そこにある数字は、ここで主張したものではなく、そのレッスンで測られたものです。質問をそのまま入力してください。💬",
+    "default": "そのご質問については、はっきりお答えできません。\n\nこんなふうに聞いてみてください：\n📚 **レッスン：**初級・中級・上級のレベル\n🎯 **用語：**RSI、スプレッド、自動化、出来高、Order Flow\n📊 **はじめの一歩：**学習の道すじ、進捗の記録\n🔧 **機能：**チャットボット、検索、カリキュラム\n\n**「ヘルプ」**と入力すると、扱える話題が全部出ます。\n\n💡 **ヒント：**上の検索バーで100レッスンを横断して探せます。トップページからレベル別にたどることもできます。\n\n**近道：**\n• [初級のレッスン](/education/beginner.html)\n• [中級のレッスン](/education/intermediate.html)\n• [上級のレッスン](/education/advanced.html)\n• [全レッスンを検索](/education/search.html)",
+    "professional": "**プロレベル：**\n\n30レッスン（71〜100番）。二つ以上の建玉を持つこと、これで生計を立てる算術、四つの専門分野、そして測定の向きを変えてトレーダー自身に当てる五つのレッスンです。\n\n**この講座が測ること：**\n• 同じ商品の上の二つのルールは、二本ではなく1.03本の独立した賭けであり、合計は1.06本で頭打ちです\n• 給料には、その給料の11.40年分の資本が要ります。しかもエッジについての判定は10.07年先です\n• 四つの習慣を同時に走らせると1株あたり4.44が残ります。費用を別々に足すと1.74と予測されるのにです\n• 0.1230の一往復は十分の一Rのエッジの79.7パーセントを取り、判定に必要なトレード数を785から18,952へ動かします\n\n**レッスン：**\n• [レッスン71：本当に抱えている賭けの数](/education/curriculum/professional/71-positions-are-one-position.html)\n• [レッスン79：分かる前に自分へ払う](/education/curriculum/professional/79-career-paths.html)\n• [レッスン90：四つの習慣をまとめて](/education/curriculum/professional/90-the-four-habits-together.html)\n• [レッスン100：一枚に収めた事業](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**所要時間：**1レッスン7〜12分\n**向いている人：**一往復の費用をすでに出せる人で、その上に立つ事業が何を支えられるかを知りたい人",
+    "cost": "**トレードの費用：**\n\nトレードがうまくいってもいかなくても、四つの課金が取られます。スプレッド、手数料、slippage、そして金利です。モジュール2はこの四つすべてに値段をつけ、以後のレッスンはすべてそれを差し引きます。\n\n**この講座が測ること：**\n• どの建玉も損から始まり、持っているあいだ金利がそれを深くし続けます\n• 同じ30,000ドルの注文が、同じ瞬間にある商品では0.30ドル、別の商品では80.00ドルかかります\n• 一往復は、指数ETFの0.2ベーシスポイントから超小型株の467まで幅があります\n• シミュレーターはそれを全部ゼロにします。百トレードで+1,000ドルと報告する戦略が、実際は−700ドルです\n\n**レッスン：**\n• [レッスン10：どの取引もマイナスから始まる](/education/curriculum/beginner/10-every-trade-starts-negative.html)\n• [レッスン11：リテール規模でのslippageとインパクト](/education/curriculum/beginner/11-slippage-and-impact.html)\n• [レッスン12：本当は何を取引すべきか](/education/curriculum/beginner/12-what-should-you-trade.html)\n• [レッスン16：シミュレーターと実弾](/education/curriculum/beginner/16-sim-against-live.html)\n\n**計算のありか：**レッスン12は、一日の値動きに対する割合で商品を費用順に並べます。",
+    "risk": "**リスク、建玉の大きさ、破産：**\n\nいくら張るのか、ストップはどこに置くのか、そして連敗が口座を終わらせる確率。三つとも、感じるものではなく計算するものです。\n\n**この講座が測ること：**\n• +2Rの勝ち一つと−1Rの負け二つはRでは差し引きゼロですが、口座からはお金が出ていきます\n• 破産は、すでに手元にある三つの数字から決まります。エッジ、賭ける割合、そしてどこまで落ちてよいかです\n• 取り返そうと1トレード5パーセントまで張り増すと、百のキャリアのうち九つしか高値に戻れません\n• 十分の一Rの本物のエッジは、156トレードのあいだ中央値で8.82Rの最悪のdrawdownの中を進みます\n\n**レッスン：**\n• [レッスン20：ポジションサイジング](/education/curriculum/beginner/20-position-sizing.html)\n• [レッスン21：ストップをどこに置くか](/education/curriculum/beginner/21-where-the-stop-goes.html)\n• [レッスン22：破産確率](/education/curriculum/beginner/22-risk-of-ruin.html)\n• [レッスン67：見込んでおくべき drawdown](/education/curriculum/advanced/67-is-the-edge-gone.html)\n\n**出発点：**レッスン20。以後Rで表されるすべての数字の出どころです。",
+    "expectancy": "**期待値と標本数：**\n\nエッジはチャートを見た感想ではなく数字であり、その数字には区間がついてきます。たいていの記録は、その区間を閉じるにはあまりに短いのです。\n\n**この講座が測ること：**\n• E = p·b − (1−p)。単位はあなたが賭けているものです\n• 五十トレードでは、1トレード0.35Rの手法とまったくエッジのない手法を見分けられません\n• 十分の一Rのエッジには総額で785トレードが要り、一往復を引くと18,952になります\n• 本物のエッジが内側からどう見えるかというと、ほとんど何も見えません\n\n**レッスン：**\n• [レッスン17：期待値](/education/curriculum/beginner/17-expectancy.html)\n• [レッスン18：エッジはどう感じられるか](/education/curriculum/beginner/18-what-an-edge-feels-like.html)\n• [レッスン19：分かるまでにどれだけかかるか](/education/curriculum/beginner/19-how-long-until-you-know.html)\n• [レッスン98：規模を告げる数字](/education/curriculum/professional/98-the-number-that-says-scale.html)\n\n**習慣：**勝率を口にする前に、自分の標本数を計算すること。",
+    "orderbook": "**Order Bookと流動性：**\n\n何が置かれ、どこに置かれ、そしてそのうちどれほど少ししか気配が語っていないか。\n\n**この講座が測ること：**\n• 普通の板は、900株を説明する気配の裏に7,300株を置いています\n• 置かれた数量は出すのも引くのも無料ですから、壁の値打ちはその壁が保たれる頻度の値打ちです\n• 注文はあらかじめ名指しできる水準に積み上がり、その積み上がりに示し合わせは要りません\n• ストップは執行されるまで見えませんから、プールとは誰も観測できない確実な将来のフローです\n\n**レッスン：**\n• [レッスン2：Order Book](/education/curriculum/beginner/02-the-order-book.html)\n• [レッスン25：流動性はどこに眠るか](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n• [レッスン26：order bookは劇場だ](/education/curriculum/intermediate/26-order-book-is-theater.html)\n• [レッスン27：流動性の嘘](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n\n**訂正：**レッスン27は、その形をどう呼ぼうと、意図は価格から見分けられないと結論します。",
+    "orderflow": "**Order Flow、デルタ、テープ：**\n\nテープが報告することと、あなたのソフトが推定すること。プリントに添えられた四つの事実のうち三つは記録されたもので、四つ目の売買の側は、誤り率の分かっている推測です。\n\n**この講座が測ること：**\n• 攻撃側についての推定は、五回に四回ほど当たります\n• 900株のプリント一つを取り違えると、一分間が+600から−1,200へ振れます\n• デルタが+15パーセントと報告されたバーは、買いの割合を50.0から62.5パーセントの間にしか定めません\n• 二本のバーは、ローソク足が記録するあらゆる量を共有しながら、+2,820と−1,680のデルタを持てます\n\n**レッスン：**\n• [レッスン7：Time and Sales](/education/curriculum/beginner/07-time-and-sales.html)\n• [レッスン8：出来高とデルタ](/education/curriculum/beginner/08-volume-and-delta.html)\n• [レッスン28：吸収と枯渇](/education/curriculum/intermediate/28-absorption-and-exhaustion.html)\n• [レッスン29：価格別出来高](/education/curriculum/intermediate/29-volume-at-price.html)\n\n**次に読む：**レッスン29は、推定の要らない数え上げと、そこから誰もが引用する数字とを切り分けます。",
+    "sweep": "**スイープとストップ狩り：**\n\n価格がある水準を通り越して戻ってくること。そもそも起きたのかどうかは、市場ではなく三つの設定が決めます。\n\n**この講座が測ること：**\n• 三つの設定のごく普通の値は、同じ六十本のバーでスイープを4回、あるいは15回、あるいは46回見つけます\n• 置かれたストップを次々に巻き込む連鎖に作者は要りません\n• 同じ手口が、ある参加者には六万二千ドル、別の参加者には二十五ドルの値打ちしかありません\n• 法廷で実際に立証された行為は、機関投資家の規模で、しかも相手を別の機械として行われています\n\n**レッスン：**\n• [レッスン27：流動性の嘘](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n• [レッスン35：スイープ、一度目の先へ](/education/curriculum/intermediate/35-sweeps-beyond-the-first.html)\n• [レッスン61：調べようのない数字](/education/curriculum/advanced/61-thinking-adversarially.html)\n\n**正直な版：**まず自分のスイングの規則が自分に許している水準の数を数え、それからスイープを数えること。",
+    "structure": "**相場の構造：**\n\nある系列をそう読むところの、スイング高値と安値の並び。価格の中にあるのではなく、価格にスイングの定義を当てて作られるもので、その定義は誰も口にしない設定です。\n\n**この講座が測ること：**\n• 同じ二十本のバーで、ごく普通の設定が八つの構造イベントを生み、あるいは二つ、あるいは一つも生みません\n• ごく普通の二つの設定が、十二本のうち四本で「どちらが主導しているか」について食い違います\n• 構造の破れは数えられるものを予測します。名前のついたチャートパターンに勝つのはそのためです\n• order blockと変位は、同じ宣言されない設定を共有しています\n\n**レッスン：**\n• [レッスン32：マーケットストラクチャー](/education/curriculum/intermediate/32-market-structure.html)\n• [レッスン33：オーダーブロックとディスプレイスメント](/education/curriculum/intermediate/33-order-blocks-and-displacement.html)\n• [レッスン40：複数日にまたがる構造](/education/curriculum/intermediate/40-multi-day-structure.html)\n\n**使う前に：**自分のスイングの定義を書き出し、それから数えること。",
+    "divergence": "**ダイバージェンス：**\n\n価格が、その価格から計算された数字と食い違うこと。インジケーターは同じ価格の関数ですから、ダイバージェンスは経路の算術的な帰結であって、それを裏づける独立した証人ではありません。\n\n**この講座が測ること：**\n• そもそも存在するかどうかは二つの設定が決めます。スイングの定義と、オシレーターの期間です\n• どちらかがインジケーターを見るより前に、スイングの定義だけで、見るべき場所が33か所なのか5か所なのかが決まります\n• インジケーターは情報を足せません。価格から計算されたものだからです\n\n**レッスン：**\n• [レッスン34：ダイバージェンス](/education/curriculum/intermediate/34-divergence.html)\n• [レッスン48：指標とは何か](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n\n**ワークシート：**資料ページのダイバージェンス集計シートで、これをご自分の系列に対して実行できます。",
+    "regime": "**相場つき、文脈、時間軸：**\n\n系列のある区間が二つの振る舞いのどちらにあるのかを、名づけるのではなく測ること。そして、時間軸に設定が二つあると気づいた途端に見えてくる、時間軸の正体。\n\n**この講座が測ること：**\n• 効率比は横ばいの区間と上昇の区間を完全に分け、そして窓を伴います\n• 窓を十本の引けから三十本に変えると、二つの読みは30本のうち22本で食い違います\n• 六十本のバーを四本ずつまとめ直すと、スイングの数は15から2へ落ちるのに、高値と安値は動きません\n• 始点のバーだけをずらすと、まったく同じテープで同じ比が0.104から0.249まで動きます\n\n**レッスン：**\n• [レッスン36：市場にはモードがある](/education/curriculum/intermediate/36-markets-have-modes.html)\n• [レッスン37：レジームの切り替わりを見つける](/education/curriculum/intermediate/37-detecting-a-regime-change.html)\n• [レッスン38：時間軸とは何か](/education/curriculum/intermediate/38-what-a-timeframe-is.html)\n• [レッスン44：量としてのボラティリティ](/education/curriculum/intermediate/44-volatility-as-a-quantity.html)\n\n**待つことの費用：**レッスン37は、確認のための1バーが何をもたらし、何を奪うのかに値段をつけます。",
+    "indicators": "**インジケーターを正直に：**\n\nインジケーターは、すでに手元にある数字の関数です。その一文だけから四つのことが導かれます。\n\n**この講座が測ること：**\n• 情報は足せません。線から読めたものは、価格からも読めていました\n• 捨てており、捨てた分は数えられます\n• 遅れは推測ではなく計算できる量で、十期間の単純平均なら4.50バーです\n• RSIの標準的な実装二つは、同じ六十本の引けに対して、一方は70より上を十三回、もう一方は一度も出しません\n\n**レッスン：**\n• [レッスン48：指標とは何か](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n• [レッスン49：リペイント](/education/curriculum/intermediate/49-repainting.html)\n• [レッスン50：支持線としての移動平均](/education/curriculum/intermediate/50-moving-averages.html)\n• [レッスン51：レジームの下のオシレーター](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n• [レッスン52：確証バイアスを測る](/education/curriculum/intermediate/52-confirmation-bias.html)\n\n**確認を測った版：**十二通りのインジケーター設定は、独立な意見にすると1.71個です。",
+    "backtest": "**証拠としてのbacktest：**\n\n過去の価格の上でルールを走らせ、何をしていたはずかを見ること。結果としてではなく、強さを言葉にできる証拠として扱います。\n\n**この講座が測ること：**\n• 253ルールを探索すると、1株あたり9.84の勝者が出ます。保有は5.68、7トレード、t = 3.65です\n• 253通りの設定を探索したので、越えるべき線は1.65ではなく3.54になります\n• あらかじめ決めた地平ではなく連続で判定すると、死んだ仕組みの合格率が5.05パーセントから24.25へ上がります\n• walk-forwardは自分をだます道を一つ塞ぎ、ほかは塞ぎません\n\n**レッスン：**\n• [レッスン62：何が起きれば否定されるのか](/education/curriculum/advanced/62-from-observation-to-hypothesis.html)\n• [レッスン63：証拠としての backtesting](/education/curriculum/advanced/63-backtesting.html)\n• [レッスン64：探すことの代価](/education/curriculum/advanced/64-overfitting.html)\n• [レッスン65：先に決める期間](/education/curriculum/advanced/65-forward-testing-and-deployment.html)\n\n**総額と信じるに足る数字とのあいだの四つの引き算**はレッスン63にあります。",
+    "overfitting": "**過剰適合と、探すことの値段：**\n\nルールの設定を、そのルールを判定するのと同じデータで選ぶこと。そのため判定は、ルールではなく探索を測ります。\n\n**この講座が測ること：**\n• 156トレードに対して15,000通りの設定を探索すると、市場が何かをする前に0.317Rが製造されます\n• その数字は二つの個数だけから出てきます。価格は一つも入っていません\n• 線は探索とともに上がります。253通りのあとでは1.65ではなく3.54です\n• 生きている候補が十に一つなら、ごく普通の二つの習慣が、規律ある検証を43.2パーセント本物から6.0まで下げます\n\n**レッスン：**\n• [レッスン64：探すことの代価](/education/curriculum/advanced/64-overfitting.html)\n• [レッスン63：証拠としての backtesting](/education/curriculum/advanced/63-backtesting.html)\n• [レッスン84：本物である割合](/education/curriculum/professional/84-behavioural-finance.html)\n\n**防ぎかた：**見る前に、地平と探索の規模を宣言しておくこと。",
+    "portfolio": "**ポートフォリオと相関：**\n\nひと組の建玉が実際には何本の独立した賭けに当たるのか、そしてあなたの上限のうちどれが先に効くのか。\n\n**この講座が測ること：**\n• 同じ商品の上の二つのルールは、実測の相関では二本ではなく1.03本の賭けです\n• いくつ足しても、合計は1.06本で頭打ちになります\n• 平均のペア相関0.3の二十建玉は、独立した三本ぶんのリスクを負っています\n• 日次損失上限は、注文が出る前に強制できる唯一の列です\n\n**レッスン：**\n• [レッスン71：本当に抱えている賭けの数](/education/curriculum/professional/71-positions-are-one-position.html)\n• [レッスン72：すべてのストップが刺さる日](/education/curriculum/professional/72-portfolio-heat.html)\n• [レッスン73：持てるほうの重み](/education/curriculum/professional/73-allocating-across-strategies.html)\n• [レッスン74：窓が決める](/education/curriculum/professional/74-where-portfolio-theory-fails.html)\n• [レッスン75：どの上限が先に効くか](/education/curriculum/professional/75-institutional-risk-controls.html)\n\n**分かったこと：**相関は、一つの記録の前半と後半のあいだで、答えを変えるほど動きます。",
+    "book": "**ルールの束：**\n\nルールの格子全体が、その中で最良の一本に対していくら稼ぐのか、結果はどこから来たのか、そしてどの一本も居場所に値するのか。\n\n**この講座が測ること：**\n• 253ルールの等ウェイトのブックは1株あたり4.16を稼ぎます。中のルールの平均そのものです\n• ブックの二十八回の動きのうち三回が、収益の80.5パーセントを担っています\n• 回転は4.10を3.70に下げ、ブックの中の順位を入れ替えます\n• 四つの削除のうち三つがブックを良くします\n\n**レッスン：**\n• [レッスン91：グリッド全体が稼ぐもの](/education/curriculum/professional/91-what-the-whole-grid-earns.html)\n• [レッスン92：結果はどこから来たか](/education/curriculum/professional/92-where-the-result-came-from.html)\n• [レッスン93：いちばん多く売買するルール](/education/curriculum/professional/93-the-rule-that-trades-the-most.html)\n• [レッスン94：あなたが実際に買った乗り心地](/education/curriculum/professional/94-the-ride-you-actually-bought.html)\n• [レッスン95：一枚のカードに収めたブック](/education/curriculum/professional/95-the-book-on-one-card.html)\n\n**検証のしかた：**一つずつ外し、収益だけでなくすべての列を計算し直すこと。",
+    "business": "**事業としてのトレード：**\n\n結果で生活するようになった途端、速さ、費用、引き出し、記録が互いに何をするのか。\n\n**この講座が測ること：**\n• 28日で13回の注文は、月に4.875回の完結したトレードです\n• 十分の一Rの本物のエッジでも、月の41.3パーセントは負けで終わります\n• 487.50稼ぐのに対して500を引き出すには、収支ゼロに102,564の残高が要ります\n• 五つの行は決まった順に落ち、事業は二つ目で落ちます。費用です\n\n**レッスン：**\n• [レッスン96：負ける月](/education/curriculum/professional/96-the-month-that-loses.html)\n• [レッスン97：あなたが引き出すお金](/education/curriculum/professional/97-the-money-you-take-out.html)\n• [レッスン98：規模を告げる数字](/education/curriculum/professional/98-the-number-that-says-scale.html)\n• [レッスン99：資金がどれだけ持つか](/education/curriculum/professional/99-how-long-the-money-lasts.html)\n• [レッスン100：一枚に収めた事業](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**その一枚：**レッスン100は、五つの数字を効いてくる順に並べます。",
+    "psychology": "**トレーダーを測る：**\n\n同じ七トレードの上で四つの習慣に値段をつけます。議論を規律ではなく算術にするためです。\n\n**この講座が測ること：**\n• 最初の陽線引けで利益を取ると1株あたり2.20かかり、勝率は元の位置から動きません\n• 0.25Rのストップは1株あたり5.90かかります\n• 足し算では1.74残ると予測されますが、両方を同時に走らせると4.44残ります\n• 画面に一度でも出た利益の26.7パーセントが返されています\n\n**レッスン：**\n• [レッスン86：利益を確定する](/education/curriculum/professional/86-taking-the-profit.html)\n• [レッスン87：二つ目のイグジット](/education/curriculum/professional/87-the-second-exit.html)\n• [レッスン88：次のサイズ](/education/curriculum/professional/88-the-size-of-the-next-one.html)\n• [レッスン89：画面に出ていた金](/education/curriculum/professional/89-the-money-that-was-showing.html)\n• [レッスン90：四つの習慣をまとめて](/education/curriculum/professional/90-the-four-habits-together.html)\n\n**なぜ足し算が外れるのか：**二つの出口は積み上がらず競合し、先に来るほうだけが必ず執行されるからです。",
+    "glossary": "**用語集：**\n\n100レッスンが使うすべての用語を、その語を導入するレッスンの定義のとおりに、各項目にそのレッスンを添えて載せています。\n\n📖 [用語集を開く](/education/glossary.html)\n\nある語がここに載るのは、レッスンがそれを定義し、それを使って何かをしたときだけです。定義に数字がある場合、その数字はここで仮定したものではなく、示されたレッスンで測られたものです。\n\n**ヒント：**項目は英語名のアルファベット順です。Ctrl+F、MacならCmd+Fをどうぞ。",
+    "worksheets": "**ワークシートとひな形：**\n\n無料のダウンロードが十七点。どれも読むための要約ではなく、ご自分の記録に対して午後いっぱい計算するためのものです。右の列にはそのレッスンが自分のバーで測った数字が入っているので、あなたの答えには食い違う相手がいます。\n\n📥 [ワークシートとひな形](/education/resources.html)\n📁 [無料の資料すべて](/education/free/index.html)\n\n**メールアドレスは不要です。**ここに囲い込みは一つもありません。\n\n**先にレッスンを読んでください。**レッスンを読んでいないワークシートは、解釈できない数字を生むだけです。",
+    "languages": "**言語：**\n\nカリキュラム全体が十二の言語で無料です。英語、ドイツ語、スペイン語、フランス語、イタリア語、ポルトガル語、オランダ語、ロシア語、日本語、トルコ語、ハンガリー語、アラビア語です。\n\nヘッダーの言語切り替えをお使いください。どのレッスンも、どのレベルのページも、このアシスタントも、あなたが読んでいる言語に従います。\n\n**機械出力ではありません：**各レッスンは翻訳したうえで文章として読み返し、数字はすべて英語版と突き合わせています。",
+    "search": "**レッスンを探す：**\n\n🔍 [100レッスンを検索](/education/search.html) ― 話題、用語、キーワードから\n🗺 [読む道すじ](/education/paths.html) ― テーマ別に講座を貫く九つの道\n📚 [カリキュラム全体](/education/) ― 100本をモジュール順に\n📖 [用語集](/education/glossary.html) ― レッスンが定義するすべての用語\n\n**難易度より話題が大事なら、**読む道すじから始めてください。リスク、費用、証拠、Order Book、インジケーター、ポートフォリオ、事業、主張、そして暦です。"
+  },
   "nl": {
     "beginner": "**Niveau Beginner** (24 lessen) — hoe een markt werkt, wat hij kost, wat risico is\n\n📚 [Alle lessen van het niveau Beginner](/education/beginner.html)\n\n**Wat je leert:**\n• Het Order Book, de spread en de Market Maker, afgeleid uit één probleem\n• Wat een uitvoering is, en de vijf getallen die een candle uit zijn interval bewaart\n• Waarom elke positie in het rood opent, en welke vier lasten er zijn\n• Verwachting, en hoe lang het duurt voordat je eigen overzicht iets beslecht\n• Positiegrootte, waar de stop hoort, en risico op ruïne\n\n**Belangrijke lessen:**\n• Wat een markt oplost (les 1)\n• Elke trade begint negatief (les 10)\n• Verwachting (les 17)\n• Kans op ruïne (les 22)\n\n**Duur:** 6-12 min per les\n**Voor wie:** iedereen die nog geen heen-en-weer heeft beprijsd",
     "intermediate": "**Niveau Halfgevorderd** (28 lessen) — de veiling lezen, en wanneer die lezing opgaat\n\n📚 [Alle lessen van het niveau Halfgevorderd](/education/intermediate.html)\n\n**Wat je leert:**\n• Waar liquiditeit ligt, en waarom het getoonde boek een advertentie is\n• Absorptie, uitputting, volume op prijs en verborgen omvang\n• Structuur, order blocks en vegen, met de definities opgeschreven\n• Regimes, tijdframes, sessies, volatiliteit, correlatie en de macrocyclus\n• Wat een indicator is, en wat hij weggooit om er een te zijn\n\n**Belangrijke lessen:**\n• Waar liquiditeit ligt (les 25)\n• Marktstructuur (les 32)\n• Markten hebben standen (les 36)\n• Wat een indicator is (les 48)\n\n**Duur:** 8-14 min per les\n**Voor wie:** wie zijn eigen kosten al kan beprijzen",
@@ -531,6 +609,42 @@ window.SP_CHATBOT_I18N = {
     "worksheets": "**Рабочие листы и шаблоны:**\n\nСемнадцать бесплатных загрузок, каждая — вечер арифметики по твоей собственной записи, а не сводка для чтения. В правом столбце стоит то, что урок измерил на своих барах, чтобы твоему ответу было с чем не согласиться.\n\n📥 [Рабочие листы и шаблоны](/education/resources.html)\n📁 [Все бесплатные материалы](/education/free/index.html)\n\n**Почта не нужна.** Здесь ничего не спрятано за формой.\n\n**Сначала прочти урок.** Рабочий лист, урока к которому ты не читал, выдаёт числа, которые нечем истолковать.",
     "languages": "**Языки:**\n\nВся программа бесплатна на двенадцати языках: английский, немецкий, испанский, французский, итальянский, португальский, нидерландский, русский, японский, турецкий, венгерский и арабский.\n\nПереключатель языка — в шапке. Каждый урок, каждая страница ступени и этот помощник следуют языку, на котором ты читаешь.\n\n**Это не машинный вывод:** каждый урок переводится, потом перечитывается как проза, и каждое число сверяется с английским.",
     "search": "**Найти урок:**\n\n🔍 [Искать по всем 100 урокам](/education/search.html) — по теме, понятию или ключевому слову\n🗺 [Маршруты чтения](/education/paths.html) — девять путей через курс по темам\n📚 [Полная программа](/education/) — все 100 в порядке модулей\n📖 [Глоссарий](/education/glossary.html) — каждый термин, который определяют уроки\n\n**Если тема важнее сложности,** начни с маршрута чтения: риск, издержки, доказательства, Order Book, индикаторы, портфели, дело, утверждения и календарь."
+  },
+  "tr": {
+    "beginner": "**Başlangıç Seviyesi** (24 ders) — bir piyasa nasıl işler, neye mal olur, risk nedir\n\n📚 [Başlangıç Seviyesinin bütün derslerini gör](/education/beginner.html)\n\n**Neler öğreneceksin:**\n• Order Book, spread ve Market Maker; hepsi tek bir problemden türetilmiş\n• Gerçekleşme nedir, ve bir mumun kendi aralığından tuttuğu beş sayı\n• Neden her pozisyon zararla açılır, ve dört kesinti nedir\n• Beklenti, ve kendi kaydının bir şeyi çözmesine daha ne kadar var\n• Pozisyon büyüklüğü, stopun yeri, ve iflas riski\n\n**Önemli dersler:**\n• Bir piyasa neyi çözer (ders 1)\n• Her işlem eksiden başlar (ders 10)\n• Beklenti değeri (ders 17)\n• İflas riski (ders 22)\n\n**Süre:** ders başına 6-12 dk\n**Kime uygun:** bir gidiş dönüşü henüz fiyatlamamış herkese",
+    "intermediate": "**Orta Seviye** (28 ders) — müzayedeyi okumak, ve bu okumanın ne zaman geçerli olduğu\n\n📚 [Orta Seviyenin bütün derslerini gör](/education/intermediate.html)\n\n**Neler öğreneceksin:**\n• Likidite nerede durur, ve gösterilen defter neden bir ilandır\n• Emilim, tükenme, fiyattaki hacim ve gizli büyüklük\n• Yapı, order block'lar ve süpürmeler; tanımları yazıya dökülmüş olarak\n• Rejimler, zaman dilimleri, seanslar, oynaklık, korelasyon ve makro döngü\n• Gösterge nedir, ve gösterge olmak için neyi atar\n\n**Önemli dersler:**\n• Likidite nerede durur (ders 25)\n• Piyasa yapısı (ders 32)\n• Piyasaların kipleri vardır (ders 36)\n• Gösterge nedir (ders 48)\n\n**Süre:** ders başına 8-14 dk\n**Kime uygun:** kendi maliyetlerini zaten fiyatlayabilenlere",
+    "advanced": "**İleri Seviye** (18 ders) — defterde başka kim var, ve bir sistem kurmak\n\n📚 [İleri Seviyenin bütün derslerini gör](/education/advanced.html)\n\n**Neler öğreneceksin:**\n• Spread neyin karşılığı, ve emrini hangi ücret yönlendiriyor\n• Bir milisaniye ne eder, ve bir milyon hisseyi işlemek neye mal olur\n• Neyin olması gerekirdi, ve kanıt olarak ele alınan backtest\n• Aramanın bedeli, senin sabitlediğin ufuk, seçtiğin ölçüt\n• Drawdown, kapasite, kaldırdığın gecikme, filtre olarak makine öğrenmesi\n\n**Önemli dersler:**\n• Makas neyin bedeli (ders 53)\n• Kanıt olarak backtesting (ders 63)\n• Aramanın bedeli (ders 64)\n• Beklemen gereken drawdown (ders 67)\n\n**Süre:** ders başına 10-16 dk\n**Kime uygun:** gerçekten sınamayı düşündüğü bir şey kuranlara",
+    "progress": "**İlerlemen:**\n\nDersleri okudukça ilerlemen kendiliğinden kaydedilir.\n\n**Kayıt nasıl işler:**\n✅ İlerleme cihazında saklanır (hesap gerekmez)\n✅ Cihazlar arası eşitleme (yakında, Supabase üzerinden)\n✅ Her seviye için tamamlama rozetleri\n✅ Günlük dersler için seri sayacı\n\n**İlerlemeni görmek:**\n• Ana sayfa toplam tamamlanma yüzdesini gösterir\n• Her seviye sayfası tamamlanan dersleri gösterir\n• Yeşil işaretler tamamlanmış derslerdir\n\n**İpucu:** günde bir ders, sırayla, ve problemleri çöz. Hatırlamaya çalışmak,\nbir şeyi gerçekten yerine oturtan tek tekrardır. 🔥",
+    "curriculum": "**SignalPilot Education Hub müfredatı:**\n\n**Dört kademeli sistem:**\n\n🟢 **Seviye 1: Başlangıç** (24 ders)\n→ Bir piyasa nasıl işler, neye mal olur, ve risk nedir\n\n🟡 **Seviye 2: Orta** (28 ders)\n→ Müzayedeyi okumak, ve bu okumanın ne zaman geçerli olduğu\n\n🔴 **Seviye 3: İleri** (18 ders)\n→ Defterde başka kim var, ve bir sistem kurmak\n\n⚫ **Seviye 4: Profesyonel** (30 ders)\n→ Portföy, meslek ve uzmanlıklar\n\n**Toplam:** 100 kapsamlı ders\n\n📚 [Müfredatın tamamını gör](/)\n\n**Önerilen yol:** sırayla, 1'den 100'e. Her ders daha öncekinin ölçtüğü bir sayıyı\nharcar, yani dizilişin kendisi argümandır.\n\n**Ayıracağın süre:** ders başına yaklaşık 6-16 dk",
+    "rsi": "**Osilatörler ve RSI:**\n\n**Ana ders:** [Ders 51: Rejim altında osilatörler](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n\n**Anahtar noktalar:**\n• Bir osilatör, zaten elinde olan fiyatların bir fonksiyonudur, yani bilgi eklemez\n• Aynı okuma trendde ve range'de farklı şeyler demektir\n• Önemli olan osilatörün neyi attığı ve atmasının ne kadar sürdüğüdür\n• Bir eşik ölçüm değil ayardır, ve açıkça söylenmesi gerekir\n\n**İlgili:** [Ders 48: Gösterge nedir](/education/curriculum/intermediate/48-what-an-indicator-is.html), [Ders 36: Piyasaların kipleri vardır](/education/curriculum/intermediate/36-markets-have-modes.html)\n\n**Sık yapılan hata:** önce rejimi söylemeden bir uç değeri sinyal diye okumak, ve o okumanın ne sıklıkla haklı çıktığını hiç ölçmemek",
+    "spread": "**Spread:**\n\n**Ana ders:** [Ders 4: Spread, anındalığın fiyatıdır](/education/curriculum/beginner/04-the-spread.html)\n\n**Anahtar noktalar:**\n• Spread anındalığın bedelidir, birinin senden aldığı bir ücret değil\n• Dört kesintiden biridir, ve ders 10 tek bir işlem üzerinde dördünü de fiyatlar\n• Bir enstrümanın bir günde hareket ettirdiğine oranla, maliyet yüzde beşte birden yüzde 52'ye kadar gider\n• Karşıya geçmek yerine emri koymak spread'i kazandırır, ve ders 58 bunun neyi verdiğini fiyatlar\n\n**İlgili:** [Ders 10: Her işlem eksiden başlar](/education/curriculum/beginner/10-every-trade-starts-negative.html), [Ders 53: Makas neyin bedeli](/education/curriculum/advanced/53-market-makers-business.html)\n\n**Sayıların yeri:** ders 12 enstrümanları günlük harekete oranla maliyete göre sıralar",
+    "automation": "**Otomasyon ve gerçekleştirme:**\n\n**Ana ders:** [Ders 69: Kaldırdığın gecikme](/education/curriculum/advanced/69-automation.html)\n\n**Anahtar noktalar:**\n• Otomasyon bir gecikmeyi kaldırır; soru o gecikmenin neye mal olduğudur\n• Slippage ve komisyonlar backtest'in içine girer, çünkü sonucun içindedirler\n• Katı bir günlük zarar sınırı, koyduğun başka her sınırdan önce sıkıştırır\n• Gerçekte işlem yaptığın tempo ölçülebilir, ve planların çoğunun varsaydığından yavaştır\n\n**İlgili:** [Ders 75: Hangi sınır önce bağlar](/education/curriculum/professional/75-institutional-risk-controls.html), [Ders 76: Gerçekte işlem yaptığın hız](/education/curriculum/professional/76-trading-day.html)\n\n**Kural:** arızasını fiyatlamadığın hiçbir şeyi devreye alma",
+    "chatbot": "**Bu sohbet botu hakkında:**\n\nÖrüntü eşleştiren bir asistanım (yapay zekâ API'si gerekmez!), 100 ders arasında yolunu bulman için yapıldım.\n\n**Şunlarda yardım edebilirim:**\n• Ders önerileri («Nereden başlamalıyım?»)\n• Kavram açıklamaları («RSI'ı rejime göre anlat»)\n• Ders bulma («Spread maliyetleriyle ilgili dersler»)\n• İlerleme takibi («İlerlememi nasıl izlerim?»)\n\n**Yapamayacaklarım:**\n• İşlem tavsiyesi\n• Gerçek zamanlı piyasa analizi\n• Hesabına özel öneri\n• Emir gerçekleştirme\n\n**Nasıl çalışırım:**\n• Örüntü eşleştirme (anında yanıt)\n• 100 dersin tamamından çıkarılmış bilgi tabanı\n• Dış API'lere hiçbir veri gitmez\n• Konuşma geçmişi yalnızca cihazında saklanır\n\n**İpucu:** «Alış-satış spread'i öncü gösterge olarak nasıl çalışır?» gibi tam sorular sor; yanıt böyle daha iyi olur.",
+    "start": "**İlk adımlar:**\n\n**Önerilen öğrenme rotası:**\n\n**1-4. haftalar: Başlangıç** (24 ders, 1-24 sıraları)\n→ Başlangıç: [Ders 1: Bir piyasa neyi çözer](/education/curriculum/beginner/01-what-a-market-solves.html)\n→ Odak: mekanizma, trading'in maliyeti, ve riskin gerçekte ne olduğu\n\n**5-9. haftalar: Orta** (28 ders, 25-52 sıraları)\n→ [Ders 25: Likidite nerede durur](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n→ Odak: müzayedeyi okumak, ve bir okumanın ne zaman geçerli olduğuna karar veren bağlam\n\n**10-13. haftalar: İleri** (18 ders, 53-70 sıraları)\n→ [Ders 53: Makas neyin bedeli](/education/curriculum/advanced/53-market-makers-business.html)\n→ Odak: defterde başka kim var, ve sınamalardan sağ çıkan bir sistem kurmak\n\n**14. haftadan sonra: Profesyonel** (30 ders, 71-100 sıraları)\n→ [Ders 71: Gerçekte kaç bahis taşıyorsun](/education/curriculum/professional/71-positions-are-one-position.html)\n→ Odak: portföy, mesleğin aritmetiği, ve dört uzmanlık alanı\n\n**Ayıracağın süre:** ders başına 6-16 dk\n**Hedef:** günde bir ders, sırayla. Her biri, bir öncekinin ölçtüğünü harcar.\n\n**Hızlı işlemler:**\n• [Bütün derslere göz at](/)\n• [Ders ara](/education/search.html)",
+    "lessons": "**Derslerimiz hakkında:**\n\n**Yapı:** her dersin aynı yedi bölümü, bu sırayla:\n• İddia — dersin ne bulduğu, ilk 200 kelimesinde, bir sayıyla\n• Ön koşullar — neyi harcadığı, ve onu hangi dersin ölçtüğü\n• Geliştirme — iddia edilmiş değil, kurulmuş bir argüman\n• İşlenmiş örnek — bir tane, her sayısı sayfadan yeniden hesaplanabilir\n• Sınırlar — bulgunun doğru olmaktan çıktığı yer\n• Problemler — kendi verinde gidip ölçmen gerekenler\n• Kaynaklar — dersin neye, nasıl yaslandığı\n\n**Uzunluk:** 1.400 ile 5.000 kelime arası. Uzunluk bir çıktıdır, asla bir hedef değil.\n\n**Üslup:** sayfadaki her sayı sayfada türetilir. Bileşik bir işlemci yok,\nuydurma bir sicil yok, kâr-zarar hikâyesi yok. Bir sayı önceki bir dersten\nalıntılanıyorsa, o dersi o sayıyı basmıştır.\n\n**Toplam:** 4 seviyede, 14 modülde 100 ders\n\n**Onları farklı kılan:**\n✅ Her iddia çürütülebilir ve kendisini neyin çürüteceğini söyler\n✅ Her sayı tekrarlanmaz, yeniden hesaplanır\n✅ Her ders, bir sonrakinin ne bulacağını sayısıyla birlikte söz vererek biter\n✅ Sınırlar argüman kadar uzundur\n✅ İngilizcenin yanı sıra 11 dilde mevcut\n\n📚 [Bütün derslere göz at](/)",
+    "help": "**Şunlarda yardım edebilirim:**\n\n📚 **Kurs** — «müfredat» | «nereden başlamalıyım» | «başlangıç dersleri» | «profesyonel seviye»\n💸 **Maliyetler** — «trading neye mal olur» | «slippage» | «komisyon»\n🎲 **Risk** — «pozisyon büyüklüğü» | «iflas riski» | «drawdown»\n📏 **Kanıt** — «beklenti» | «kaç işlemde anlarım» | «backtest» | «aşırı uydurma»\n📖 **Müzayede** — «Order Book» | «Order Flow» | «süpürmeler» | «piyasa yapısı» | «uyumsuzluk»\n🧭 **Bağlam** — «rejim» | «zaman dilimi» | «oynaklık»\n🔍 **Göstergeler** — «gösterge nedir» | «RSI» | «hareketli ortalamalar» | «yeniden çizim»\n📐 **Portföy** — «korelasyon» | «bağımsız bahisler» | «pozisyon sınırları»\n💼 **İş** — «trading'den geçinmek» | «çekim» | «kurallar defteri» | «psikoloji»\n📥 **Ücretsiz malzeme** — «çalışma sayfaları» | «sözlük» | «diller» | «arama»\n\n**Şunları sormayı dene:**\n• «Üstünlüğümün gerçek olduğunu kaç işlemde anlarım?»\n• «Bir gidiş dönüş gerçekte neye mal olur?»\n• «Stop avı gerçekten var mı?»\n• «Trading'den geçinebilir miyim?»\n• «Çalışma sayfanız var mı?»\n\nHer yanıt geldiği dersi anar, ve içindeki her sayı burada iddia edilmiş değil, o derste ölçülmüştür. Sorunu yazman yeterli. 💬",
+    "default": "Tam olarak bu soru konusunda emin değilim.\n\nŞunları sormayı dene:\n📚 **Dersler:** Başlangıç, Orta, İleri seviyeler\n🎯 **Kavramlar:** RSI, spread, otomasyon, hacim, Order Flow\n📊 **İlk adımlar:** öğrenme rotası, ilerleme takibi\n🔧 **Özellikler:** sohbet botu, arama, müfredat\n\nBütün başlıkları görmek için **«yardım»** yaz.\n\n💡 **İpucu:** yukarıdaki arama çubuğu 100 dersin tamamında arar, ya da ana sayfadan seviyeye göre gezinebilirsin.\n\n**Hızlı bağlantılar:**\n• [Başlangıç dersleri](/education/beginner.html)\n• [Orta seviye dersleri](/education/intermediate.html)\n• [İleri seviye dersleri](/education/advanced.html)\n• [Bütün derslerde ara](/education/search.html)",
+    "professional": "**Profesyonel Seviye:**\n\n30 ders (71-100 sıraları): birden çok pozisyon taşımak, bunu geçim olarak yapmanın aritmetiği, dört uzmanlık alanı, ve ölçümleri döndürüp doğrudan işlemcinin kendisine tutan beş ders.\n\n**Kursun ölçtüğü:**\n• Tek bir enstrümandaki iki kural iki değil 1,03 bağımsız bahis taşır, ve toplam 1,06'da tavan yapar\n• Bir maaş, o maaşın 11,40 yılı kadar sermaye ister; üstelik üstünlük hakkındaki hüküm 10,07 yıl uzaktadır\n• Dört alışkanlık birlikte çalıştırılınca hisse başına 4,44 kalır; maliyetlerini ayrı ayrı toplamak 1,74 öngörür\n• 0,1230'luk bir gidiş dönüş, onda bir R'lik üstünlüğün yüzde 79,7'sini alır ve bir hükmü 785 işlemden 18.952'ye taşır\n\n**Dersler:**\n• [Ders 71: Gerçekte kaç bahis taşıyorsun](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Ders 79: Bilmeden önce kendine ödemek](/education/curriculum/professional/79-career-paths.html)\n• [Ders 90: Dört alışkanlık bir arada](/education/curriculum/professional/90-the-four-habits-together.html)\n• [Ders 100: İş, tek sayfada](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Süre:** ders başına 7-12 dk\n**Kime uygun:** bir gidiş dönüşü zaten fiyatlayabilen ve bunun üstüne kurulan bir işin neyi taşıdığını merak edenlere",
+    "cost": "**Trading'in maliyeti:**\n\nİşlem tutsun ya da tutmasın dört kesinti alınır: spread, komisyon, slippage ve finansman. Modül 2 dördünü de fiyatlar, ve sonraki her ders onları çıkarır.\n\n**Kursun ölçtüğü:**\n• Her pozisyon zararla açılır, ve tuttuğun sürece finansman onu derinleştirmeye devam eder\n• Aynı 30.000 $'lık emir bir enstrümanda 0,30 $, başka birinde aynı anda 80,00 $ tutar\n• Bir gidiş dönüş, endeks ETF'inde 0,2 baz puandan mikro ölçekli bir hissede 467'ye kadar gider\n• Simülatör bunların hepsini sıfırlar: yüz işlemde +1.000 $ bildiren bir strateji net −700 $ verir\n\n**Dersler:**\n• [Ders 10: Her işlem eksiden başlar](/education/curriculum/beginner/10-every-trade-starts-negative.html)\n• [Ders 11: Perakende büyüklüğünde slippage ve etki](/education/curriculum/beginner/11-slippage-and-impact.html)\n• [Ders 12: Aslında neyi işlem etmelisin](/education/curriculum/beginner/12-what-should-you-trade.html)\n• [Ders 16: Simülasyona karşı gerçek](/education/curriculum/beginner/16-sim-against-live.html)\n\n**Aritmetiğin yeri:** ders 12 enstrümanları, bir günde hareket ettirdiklerine oranla maliyete göre sıralar.",
+    "risk": "**Risk, büyüklük ve iflas:**\n\nNe kadar koyacağın, stopun nereye ait olduğu, ve bir kayıp serisinin hesabı bitirme ihtimali. Üçü de hesaplanır, hissedilmez.\n\n**Kursun ölçtüğü:**\n• +2R'lik bir kazanan ve −1R'lik iki kaybeden R cinsinden sıfır eder, ve yine de hesaba para kaybettirir\n• İflas, zaten elinde olan üç sayıdan çıkar: üstünlük, riske atılan kesir, ve ne kadar düşebileceğin\n• İşlem başına yüzde 5 ile toparlanmak için büyütmek, yüz kariyerin dokuzunda seni zirveye döndürür\n• Onda bir R'lik gerçek bir üstünlük, 156 işlemini medyanda 8,82R'lik en kötü drawdown'un içinde geçirir\n\n**Dersler:**\n• [Ders 20: Pozisyon büyüklüğü](/education/curriculum/beginner/20-position-sizing.html)\n• [Ders 21: Stop nereye konur](/education/curriculum/beginner/21-where-the-stop-goes.html)\n• [Ders 22: İflas riski](/education/curriculum/beginner/22-risk-of-ruin.html)\n• [Ders 67: Beklemen gereken drawdown](/education/curriculum/advanced/67-is-the-edge-gone.html)\n\n**Başlangıç noktası:** ders 20; R cinsinden sonraki her rakam oradan gelir.",
+    "expectancy": "**Beklenti ve örneklem büyüklüğü:**\n\nÜstünlük bir grafiğe bakınca duyulan his değil bir sayıdır, ve o sayı etrafında bir aralıkla gelir; çoğu kayıt o aralığı kapatmaya fazlasıyla kısadır.\n\n**Kursun ölçtüğü:**\n• E = p·b − (1−p), riske attığın şeyin biriminde\n• Elli işlem, işlem başına 0,35R yapan bir yöntemi hiç üstünlüğü olmayan birinden ayıramaz\n• Onda bir R'lik bir üstünlük brüt 785 işlem ister, gidiş dönüş çıkarılınca 18.952\n• Gerçek bir üstünlük içeriden çoğunlukla hiçbir şeye benzemez\n\n**Dersler:**\n• [Ders 17: Beklenti değeri](/education/curriculum/beginner/17-expectancy.html)\n• [Ders 18: Edge nasıl hissettirir](/education/curriculum/beginner/18-what-an-edge-feels-like.html)\n• [Ders 19: Ne zaman bileceksin](/education/curriculum/beginner/19-how-long-until-you-know.html)\n• [Ders 98: Ölçek Diyen Sayı](/education/curriculum/professional/98-the-number-that-says-scale.html)\n\n**Alışkanlık:** bir kazanma oranı söylemeden önce kendi örneklem büyüklüğünü hesapla.",
+    "orderbook": "**Order Book ve likidite:**\n\nNe duruyor, nerede duruyor, ve kotasyon bunun ne kadar azını gerçekten anlatıyor.\n\n**Kursun ölçtüğü:**\n• Sıradan bir defter, 900'ünü anlatan bir kotasyonun arkasında 7.300 hisse bekletir\n• Bekleyen büyüklüğü koymak da çekmek de bedavadır, yani bir duvar, tutma sıklığı kadar değerlidir\n• Emirler önceden adını koyabileceğin seviyelerde yığılır, ve bu yığılma eşgüdüm gerektirmez\n• Bir stop tetiklenene kadar görünmezdir, yani bir havuz kimsenin gözleyemediği kesin gelecek akıştır\n\n**Dersler:**\n• [Ders 2: Order Book](/education/curriculum/beginner/02-the-order-book.html)\n• [Ders 25: Likidite nerede durur](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n• [Ders 26: Order book bir tiyatrodur](/education/curriculum/intermediate/26-order-book-is-theater.html)\n• [Ders 27: Likidite yalanı](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n\n**Düzeltme:** ders 27, örüntüye ne ad verilirse verilsin niyetin fiyattan teşhis edilemeyeceğini bulur.",
+    "orderflow": "**Order Flow, delta ve şerit:**\n\nŞeridin bildirdiği ile yazılımının çıkarsadığı. Bir baskının yanındaki dört olgunun üçü kayıtlıdır; dördüncüsü, yön, hata payı bilinen bir tahmindir.\n\n**Kursun ölçtüğü:**\n• Saldıran taraf çıkarımı beşte dört kadar doğrudur\n• 900 hisselik yanlış sınıflandırılmış tek bir baskı, bir dakikayı artı 600'den eksi 1.200'e savurur\n• Deltası artı yüzde 15 bildirilen bir bar, alış payını yalnızca yüzde 50,0 ile 62,5 arasına sıkıştırır\n• İki bar, bir mumun kaydettiği her büyüklüğü paylaşıp yine de +2.820 ve −1.680 delta taşıyabilir\n\n**Dersler:**\n• [Ders 7: Time and Sales](/education/curriculum/beginner/07-time-and-sales.html)\n• [Ders 8: Hacim ve delta](/education/curriculum/beginner/08-volume-and-delta.html)\n• [Ders 28: Soğurma ve tükenme](/education/curriculum/intermediate/28-absorption-and-exhaustion.html)\n• [Ders 29: Fiyattaki hacim](/education/curriculum/intermediate/29-volume-at-price.html)\n\n**Sonra oku:** ders 29, hiç çıkarım gerektirmeyen sayımı, herkesin ondan alıntıladığı sayıdan ayırır.",
+    "sweep": "**Süpürmeler ve stop avları:**\n\nFiyatın bir seviyeyi aşıp geri gelmesi. Böyle bir şeyin olup olmadığına piyasa değil üç ayar karar verir.\n\n**Kursun ölçtüğü:**\n• Üç ayarın sıradan değerleri aynı altmış barda 4 süpürme bulur, ya da 15, ya da 46\n• Bekleyen stoplar boyunca ilerleyen bir zincire yazar gerekmez\n• Aynı teknik bir katılımcı için altmış iki bin dolar, bir başkası için yirmi beş dolar eder\n• Mahkemede fiilen kanıtlanmış davranış, kurumsal büyüklükte ve başka makinelere karşı yürür\n\n**Dersler:**\n• [Ders 27: Likidite yalanı](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n• [Ders 35: Süpürmeler, birincisinin ötesinde](/education/curriculum/intermediate/35-sweeps-beyond-the-first.html)\n• [Ders 61: Hiçbir Yerde Bulamayacağınız Sayı](/education/curriculum/advanced/61-thinking-adversarially.html)\n\n**Dürüst hali:** önce kendi salınım kuralının kendisine tanıdığı seviyeleri say, sonra süpürmeleri.",
+    "structure": "**Piyasa yapısı:**\n\nBir serinin okunduğu salınım tepeleri ve dipleri dizisi. Fiyatların içinde değildir; onlara bir salınım tanımı uygulanarak üretilir, ve o tanım kimsenin dile getirmediği bir ayardır.\n\n**Kursun ölçtüğü:**\n• Aynı yirmi barda, sıradan ayarlar sekiz yapı olayı verir, ya da iki, ya da hiç\n• İki sıradan ayar, on iki barın dördünde kimin kontrolde olduğu konusunda anlaşamaz\n• Bir yapı kırılımı sayabileceğin bir şeyi öngörür, ve adlandırılmış grafik biçimlerini bu yüzden yener\n• Order block'lar ve yer değiştirme aynı açıklanmamış ayarı paylaşır\n\n**Dersler:**\n• [Ders 32: Piyasa yapısı](/education/curriculum/intermediate/32-market-structure.html)\n• [Ders 33: Order block ve displacement](/education/curriculum/intermediate/33-order-blocks-and-displacement.html)\n• [Ders 40: Birden fazla güne yayılan yapı](/education/curriculum/intermediate/40-multi-day-structure.html)\n\n**Kullanmadan önce:** salınım tanımını yaz, sonra say.",
+    "divergence": "**Uyumsuzluk:**\n\nFiyatın, fiyattan hesaplanmış bir sayıyla anlaşmazlığa düşmesi. Gösterge aynı fiyatların bir fonksiyonu olduğundan, bir uyumsuzluk yolun aritmetik bir sonucudur; ona bağımsız bir tanık değildir.\n\n**Kursun ölçtüğü:**\n• Böyle bir şeyin olup olmadığına iki ayar karar verir: bir salınım kuralı ve bir osilatör periyodu\n• Daha ikisinden biri göstergeye bakmadan, tek başına salınım kuralı bakılacak yerin 33 mü yoksa 5 mi olduğunu belirler\n• Gösterge bilgi ekleyemez, çünkü fiyatlardan hesaplanmıştır\n\n**Dersler:**\n• [Ders 34: Uyumsuzluk](/education/curriculum/intermediate/34-divergence.html)\n• [Ders 48: Gösterge nedir](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n\n**Çalışma sayfası:** kaynaklar sayfasındaki uyumsuzluk sayım sayfası bunu kendi serin üzerinde çalıştırır.",
+    "regime": "**Rejim, bağlam ve zaman dilimi:**\n\nBir seri kesitinin iki davranıştan hangisinde olduğu, adlandırılmış değil ölçülmüş olarak; ve iki ayarı olduğunu fark ettiğin anda bir zaman diliminin gerçekte ne olduğu.\n\n**Kursun ölçtüğü:**\n• Verim oranı yatay bir kesiti bir yükselişten tamamen ayırır, ve yanında bir pencere taşır\n• Pencereyi on kapanıştan otuza değiştir, iki okuma 30 barın 22'sinde anlaşmaz\n• Altmış barı dörderli yeniden grupla, salınım sayısı 15'ten 2'ye düşerken tepe ve dip kıpırdamaz\n• Yalnızca başlangıç barını kaydır, aynı oran aynı şeritte 0,104'ten 0,249'a gider\n\n**Dersler:**\n• [Ders 36: Piyasaların kipleri vardır](/education/curriculum/intermediate/36-markets-have-modes.html)\n• [Ders 37: Rejim değişimini fark etmek](/education/curriculum/intermediate/37-detecting-a-regime-change.html)\n• [Ders 38: Zaman dilimi nedir](/education/curriculum/intermediate/38-what-a-timeframe-is.html)\n• [Ders 44: Nicelik olarak oynaklık](/education/curriculum/intermediate/44-volatility-as-a-quantity.html)\n\n**Beklemenin bedeli:** ders 37, her onay barının ne getirdiğini ve neye mal olduğunu fiyatlar.",
+    "indicators": "**Göstergeler, dürüstçe:**\n\nBir gösterge, zaten elinde olan sayıların bir fonksiyonudur, ve yalnızca bu cümleden dört sonuç çıkar.\n\n**Kursun ölçtüğü:**\n• Bilgi ekleyemez: çizgide okunabilen her şey zaten fiyatlarda okunabiliyordu\n• Atar, ve attığı şey sayılabilir\n• Tahmin ettiğin değil hesapladığın bir kadar geç kalır — on periyotluk basit ortalamada 4,50 bar\n• RSI'ın iki standart uygulaması, aynı altmış kapanışta biri 70'in üstünde on üç okuma basar, öbürü hiç basmaz\n\n**Dersler:**\n• [Ders 48: Gösterge nedir](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n• [Ders 49: Yeniden çizim](/education/curriculum/intermediate/49-repainting.html)\n• [Ders 50: Destek olarak hareketli ortalamalar](/education/curriculum/intermediate/50-moving-averages.html)\n• [Ders 51: Rejim altında osilatörler](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n• [Ders 52: Doğrulama yanlılığı, ölçüldü](/education/curriculum/intermediate/52-confirmation-bias.html)\n\n**Onayın ölçülmüş hali:** on iki gösterge yapılandırması 1,71 bağımsız görüş eder.",
+    "backtest": "**Kanıt olarak backtest:**\n\nBir kuralı geçmiş fiyatlar üzerinde çalıştırıp ne yapmış olacağını görmek; bir sonuç olarak değil, gücü söylenebilecek bir kanıt olarak ele alınır.\n\n**Kursun ölçtüğü:**\n• 253 kuralı tarayınca hisse başına 9,84 ile bir kazanan çıkar; tutmak 5,68, 7 işlem, t = 3,65\n• 253 ayar tarandığı için aşılması gereken eşik 1,65 değil 3,54'tür\n• Sabit bir ufuk yerine sürekli yargılamak, ölü bir sistemin geçme oranını yüzde 5,05'ten 24,25'e çıkarır\n• Walk-forward kendini kandırmanın bir yolunu kaldırır, ötekilerini kaldırmaz\n\n**Dersler:**\n• [Ders 62: Neyin olması gerekirdi](/education/curriculum/advanced/62-from-observation-to-hypothesis.html)\n• [Ders 63: Kanıt olarak backtesting](/education/curriculum/advanced/63-backtesting.html)\n• [Ders 64: Aramanın bedeli](/education/curriculum/advanced/64-overfitting.html)\n• [Ders 65: Önce sabitlediğin ufuk](/education/curriculum/advanced/65-forward-testing-and-deployment.html)\n\n**Brüt bir rakamla inanmaya değer bir rakam arasındaki dört çıkarma** ders 63'tedir.",
+    "overfitting": "**Aşırı uydurma ve aramanın bedeli:**\n\nBir kuralın ayarlarını, onu yargılamakta kullanılan aynı veriden seçmek; böylece yargı kuralı değil aramayı ölçer.\n\n**Kursun ölçtüğü:**\n• 156 işlem üzerinde 15.000 yapılandırma taramak, piyasa daha bir şey yapmadan 0,317 R imal eder\n• O rakam yalnızca iki sayımdan çıkar; içinde tek bir fiyat yoktur\n• Eşik aramayla birlikte yükselir: 253 ayardan sonra 1,65 değil 3,54\n• On adaydan biri canlıysa, iki sıradan alışkanlık disiplinli bir sınamayı yüzde 43,2 gerçekten 6,0'ya indirir\n\n**Dersler:**\n• [Ders 64: Aramanın bedeli](/education/curriculum/advanced/64-overfitting.html)\n• [Ders 63: Kanıt olarak backtesting](/education/curriculum/advanced/63-backtesting.html)\n• [Ders 84: Gerçek Olan Pay](/education/curriculum/professional/84-behavioural-finance.html)\n\n**Savunma:** bakmadan önce ufku ve aramanın büyüklüğünü açıkla.",
+    "portfolio": "**Portföy ve korelasyon:**\n\nBir pozisyonlar kümesi gerçekte kaç bağımsız bahse denk gelir, ve sınırlarından hangisi ötekilerden önce sıkıştırır.\n\n**Kursun ölçtüğü:**\n• Tek bir enstrümandaki iki kural, ölçülen korelasyonda iki değil 1,03 bahis taşır\n• Kaç tane eklersen ekle, toplam 1,06'da tavan yapar\n• Ortalama ikili korelasyonu 0,3 olan yirmi pozisyon, üç bağımsız pozisyonun riskini taşır\n• Günlük zarar sınırı, bir emir gönderilmeden önce uygulanabilen tek sütundur\n\n**Dersler:**\n• [Ders 71: Gerçekte kaç bahis taşıyorsun](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Ders 72: Her stopun çalıştığı gün](/education/curriculum/professional/72-portfolio-heat.html)\n• [Ders 73: Taşıyabileceğin ağırlıklar](/education/curriculum/professional/73-allocating-across-strategies.html)\n• [Ders 74: Kararı pencere verir](/education/curriculum/professional/74-where-portfolio-theory-fails.html)\n• [Ders 75: Hangi sınır önce bağlar](/education/curriculum/professional/75-institutional-risk-controls.html)\n\n**Bulgu:** korelasyon, tek bir kaydın iki yarısı arasında cevabı değiştirecek kadar oynar.",
+    "book": "**Bir kurallar defteri:**\n\nBütün bir kural ızgarası en iyi üyesine karşı ne kazanır, sonuç nereden geldi, ve her üye yerini hak ediyor mu.\n\n**Kursun ölçtüğü:**\n• 253 kuraldan oluşan eşit ağırlıklı defter hisse başına 4,16 kazanır; tam olarak içindeki kuralların ortalaması\n• Defterin yirmi sekiz hareketinden üçü getirisinin yüzde 80,5'ini taşır\n• Devir 4,10'u 3,70'e indirir ve defterin içindeki sıralamayı ters çevirir\n• Dört çıkarmadan üçü defteri iyileştirir\n\n**Dersler:**\n• [Ders 91: Bütün ızgaranın kazandığı](/education/curriculum/professional/91-what-the-whole-grid-earns.html)\n• [Ders 92: Sonuç nereden geldi](/education/curriculum/professional/92-where-the-result-came-from.html)\n• [Ders 93: En &Ccedil;ok İşlem Yapan Kural](/education/curriculum/professional/93-the-rule-that-trades-the-most.html)\n• [Ders 94: Aslında Satın Aldığın Yolculuk](/education/curriculum/professional/94-the-ride-you-actually-bought.html)\n• [Ders 95: Defter tek bir kartta](/education/curriculum/professional/95-the-book-on-one-card.html)\n\n**Sınama:** her üyeyi sırayla çıkar ve yalnızca getiriyi değil, her sütunu yeniden hesapla.",
+    "business": "**Bir iş olarak trading:**\n\nBir insan sonuçla geçinmeye başladığı anda tempo, maliyet, çekim ve kayıt birbirine ne yapar.\n\n**Kursun ölçtüğü:**\n• 28 günde 13 emir, ayda 4,875 tamamlanmış işlem eder\n• Onda bir R'lik gerçek bir üstünlük bile aylarının yüzde 41,3'ünü kaybeder\n• Kazanılan 487,50'ye karşı 500'lük bir çekim, başabaş olmak için 102.564'lük bir bakiye ister\n• Beş satır sabit bir sırayla düşer, ve iş ikincide düşer: maliyette\n\n**Dersler:**\n• [Ders 96: Kaybeden ay](/education/curriculum/professional/96-the-month-that-loses.html)\n• [Ders 97: Çektiğin para](/education/curriculum/professional/97-the-money-you-take-out.html)\n• [Ders 98: Ölçek Diyen Sayı](/education/curriculum/professional/98-the-number-that-says-scale.html)\n• [Ders 99: Para ne kadar dayanır](/education/curriculum/professional/99-how-long-the-money-lasts.html)\n• [Ders 100: İş, tek sayfada](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Kart:** ders 100 beş sayıyı sıkıştırdıkları sıraya koyar.",
+    "psychology": "**İşlemci, ölçülmüş hali:**\n\nAynı yedi işlem üzerinde fiyatlanmış dört alışkanlık; böylece tartışma disiplin üzerine değil aritmetik üzerine olur.\n\n**Kursun ölçtüğü:**\n• Kârı ilk yeşil kapanışta almak hisse başına 2,20'ye mal olur ve kazanma oranını tam olduğu yerde bırakır\n• Çeyrek R'lik bir stop hisse başına 5,90'a mal olur\n• Bunları toplamak 1,74 kalacağını öngörür; ikisini birden çalıştırmak 4,44 bırakır\n• Ekranda bir kez görünmüş her şeyin yüzde 26,7'si geri verilmiştir\n\n**Dersler:**\n• [Ders 86: Kârı almak](/education/curriculum/professional/86-taking-the-profit.html)\n• [Ders 87: İkinci çıkış](/education/curriculum/professional/87-the-second-exit.html)\n• [Ders 88: Bir sonrakinin büyüklüğü](/education/curriculum/professional/88-the-size-of-the-next-one.html)\n• [Ders 89: Ekranda Duran Para](/education/curriculum/professional/89-the-money-that-was-showing.html)\n• [Ders 90: Dört alışkanlık bir arada](/education/curriculum/professional/90-the-four-habits-together.html)\n\n**Toplama neden tutmaz:** iki çıkış üst üste binmez, yarışır, ve yalnızca önce geleni tetiklenir.",
+    "glossary": "**Sözlük:**\n\n100 dersin kullandığı her terim, onu tanıtan dersin tanımladığı biçimde ve her biri için o ders anılarak.\n\n📖 [Sözlüğü aç](/education/glossary.html)\n\nBir terim buraya ancak bir ders onu tanımladığında ve onunla bir şey yaptığında girer, ve bir tanım bir sayı taşıyorsa o sayı burada varsayılmış değil, anılan derste ölçülmüştür.\n\n**İpucu:** maddeler İngilizce adlarının alfabetik sırasını izler — Ctrl+F, Mac'te Cmd+F.",
+    "worksheets": "**Çalışma sayfaları ve şablonlar:**\n\nOn yedi ücretsiz indirme; her biri okunacak bir özet değil, kendi kaydın üzerinde bir öğleden sonralık aritmetik. Sağdaki sütun, dersin kendi barlarında ölçtüğünü taşır; böylece senin cevabının karşı çıkacağı bir şey olur.\n\n📥 [Çalışma sayfaları ve şablonlar](/education/resources.html)\n📁 [Bütün ücretsiz kaynaklar](/education/free/index.html)\n\n**E-posta istenmez.** Burada hiçbir şey duvarın arkasında değil.\n\n**Önce dersi oku.** Dersini okumadığın bir çalışma sayfası, yorumlayamayacağın sayılar üretir.",
+    "languages": "**Diller:**\n\nMüfredatın tamamı on iki dilde ücretsiz: İngilizce, Almanca, İspanyolca, Fransızca, İtalyanca, Portekizce, Felemenkçe, Rusça, Japonca, Türkçe, Macarca ve Arapça.\n\nÜst kısımdaki dil değiştiriciyi kullan. Her ders, her seviye sayfası ve bu asistan, okuduğun dili izler.\n\n**Makine çıktısı değil:** her ders çevrilir, sonra düzyazı olarak yeniden okunur, ve her sayı İngilizceye karşı tutulur.",
+    "search": "**Bir ders bulmak:**\n\n🔍 [100 dersin tamamında ara](/education/search.html) — konuya, kavrama veya anahtar kelimeye göre\n🗺 [Okuma rotaları](/education/paths.html) — konuya göre kurs boyunca dokuz güzergâh\n📚 [Tam müfredat](/education/) — 100'ü de modül sırasıyla\n📖 [Sözlük](/education/glossary.html) — derslerin tanımladığı her terim\n\n**Konu zorluktan daha önemliyse,** bir okuma rotasıyla başla: risk, maliyet, kanıt, Order Book, göstergeler, portföyler, iş, iddialar ve takvim."
   }
 },
   keys: {
@@ -1820,6 +1934,276 @@ window.SP_CHATBOT_I18N = {
       "contenuto"
     ]
   },
+  "ja": {
+    "worksheets": [
+      "ワークシート",
+      "ひな形",
+      "テンプレート",
+      "ダウンロード",
+      "pdf",
+      "印刷",
+      "問題集"
+    ],
+    "glossary": [
+      "用語集",
+      "用語",
+      "定義",
+      "とは何",
+      "どういう意味",
+      "語彙"
+    ],
+    "languages": [
+      "言語",
+      "何語",
+      "翻訳",
+      "日本語",
+      "スペイン語",
+      "ドイツ語",
+      "フランス語",
+      "アラビア語"
+    ],
+    "business": [
+      "事業",
+      "トレードで生活",
+      "専業",
+      "フルタイム",
+      "引き出し",
+      "これで食べて",
+      "給料",
+      "収入"
+    ],
+    "psychology": [
+      "心理",
+      "規律",
+      "感情",
+      "ディスポジション効果",
+      "利益を早く",
+      "リベンジ"
+    ],
+    "book": [
+      "ルールの束",
+      "等ウェイト",
+      "ルールの格子",
+      "一つ抜き",
+      "leave one out"
+    ],
+    "portfolio": [
+      "ポートフォリオ",
+      "相関",
+      "独立した賭け",
+      "建玉の上限",
+      "総リスク",
+      "分散投資"
+    ],
+    "overfitting": [
+      "過剰適合",
+      "オーバーフィット",
+      "カーブフィット",
+      "探すことの値段",
+      "データマイニング"
+    ],
+    "backtest": [
+      "backtest",
+      "バックテスト",
+      "walk forward",
+      "ウォークフォワード",
+      "アウトオブサンプル",
+      "証拠"
+    ],
+    "indicators": [
+      "インジケーター",
+      "指標",
+      "移動平均",
+      "オシレーター",
+      "リペイント",
+      "確証バイアス",
+      "macd"
+    ],
+    "regime": [
+      "相場つき",
+      "レジーム",
+      "時間軸",
+      "タイムフレーム",
+      "トレンドかレンジ",
+      "ボラティリティ",
+      "文脈",
+      "セッション"
+    ],
+    "divergence": [
+      "ダイバージェンス",
+      "ダイバー",
+      "逆行現象"
+    ],
+    "structure": [
+      "相場の構造",
+      "市場構造",
+      "構造の破れ",
+      "order block",
+      "オーダーブロック",
+      "キャラクターの変化",
+      "スイング高値",
+      "スイング安値"
+    ],
+    "sweep": [
+      "スイープ",
+      "ストップ狩り",
+      "ストップ狩",
+      "流動性狩り",
+      "流動性の嘘",
+      "ストップを刈"
+    ],
+    "orderflow": [
+      "order flow",
+      "オーダーフロー",
+      "デルタ",
+      "footprint",
+      "フットプリント",
+      "テープ",
+      "歩み値",
+      "cvd",
+      "吸収",
+      "枯渇"
+    ],
+    "orderbook": [
+      "order book",
+      "オーダーブック",
+      "板",
+      "板情報",
+      "市場の厚み",
+      "流動性",
+      "アイスバーグ",
+      "隠れ",
+      "dom"
+    ],
+    "expectancy": [
+      "期待値",
+      "標本数",
+      "サンプル数",
+      "何トレード",
+      "どれくらいで分かる",
+      "エッジは本物",
+      "統計的有意"
+    ],
+    "risk": [
+      "破産の確率",
+      "破産確率",
+      "建玉の大きさ",
+      "ポジションサイズ",
+      "ストップロス",
+      "損切り",
+      "ストップはどこ",
+      "drawdown",
+      "ドローダウン",
+      "リスク管理"
+    ],
+    "cost": [
+      "いくらかかる",
+      "トレードの費用",
+      "取引コスト",
+      "手数料",
+      "コミッション",
+      "金利",
+      "四つの課金",
+      "一往復",
+      "往復",
+      "slippage",
+      "スリッページ"
+    ],
+    "professional": [
+      "プロレベル",
+      "プロのレッスン",
+      "総仕上げ",
+      "レベル4"
+    ],
+    "search": [
+      "レッスンを探",
+      "検索",
+      "探し方",
+      "読む道すじ",
+      "どのレッスン",
+      "レッスンはどこ"
+    ],
+    "help": [
+      "ヘルプ",
+      "何ができる",
+      "コマンド",
+      "メニュー"
+    ],
+    "chatbot": [
+      "あなたは何",
+      "あなたは誰",
+      "このボットについて",
+      "このチャットボット"
+    ],
+    "rsi": [
+      "rsi",
+      "相対力指数",
+      "買われすぎ",
+      "売られすぎ"
+    ],
+    "spread": [
+      "スプレッド",
+      "ビッド・アスク",
+      "ビッドアスク",
+      "market maker",
+      "マーケットメイカー",
+      "流動性の費用"
+    ],
+    "automation": [
+      "自動化",
+      "自動売買",
+      "緊急停止",
+      "デモ口座",
+      "webhook",
+      "ウェブフック"
+    ],
+    "progress": [
+      "進捗",
+      "進み具合",
+      "連続",
+      "バッジ",
+      "達成率"
+    ],
+    "start": [
+      "何から始め",
+      "どこから始め",
+      "始め方",
+      "はじめの一歩",
+      "学習の道すじ",
+      "学習計画",
+      "最初のレッスン",
+      "どこから学べ",
+      "初めてです",
+      "まったくの初心者"
+    ],
+    "curriculum": [
+      "カリキュラム",
+      "全レッスン",
+      "レッスン一覧",
+      "レベル構成",
+      "シラバス"
+    ],
+    "beginner": [
+      "初級",
+      "初心者",
+      "基礎",
+      "土台"
+    ],
+    "intermediate": [
+      "中級",
+      "order flow",
+      "マイクロストラクチャー"
+    ],
+    "advanced": [
+      "上級",
+      "応用"
+    ],
+    "lessons": [
+      "レッスン",
+      "講座",
+      "内容"
+    ]
+  },
   "nl": {
     "worksheets": [
       "werkblad",
@@ -2598,6 +2982,262 @@ window.SP_CHATBOT_I18N = {
       "уроки",
       "курс",
       "содержание"
+    ]
+  },
+  "tr": {
+    "worksheets": [
+      "çalışma sayfası",
+      "çalışma sayfaları",
+      "şablon",
+      "indirme",
+      "pdf",
+      "yazdırılabilir",
+      "alıştırma kitabı"
+    ],
+    "glossary": [
+      "sözlük",
+      "tanım",
+      "tanımla",
+      "ne demek",
+      "terminoloji",
+      "kelime dağarı"
+    ],
+    "languages": [
+      "dil",
+      "diller",
+      "çeviri",
+      "çevrilmiş",
+      "ispanyolca",
+      "almanca",
+      "fransızca",
+      "japonca",
+      "arapça"
+    ],
+    "business": [
+      "iş olarak",
+      "trading'den geçinmek",
+      "tam zamanlı",
+      "çekim",
+      "bununla geçinmek",
+      "maaş",
+      "gelir"
+    ],
+    "psychology": [
+      "psikoloji",
+      "disiplin",
+      "duygu",
+      "yatkınlık etkisi",
+      "kârı erken almak",
+      "intikam"
+    ],
+    "book": [
+      "kurallar defteri",
+      "eşit ağırlıklı",
+      "kural ızgarası",
+      "birini çıkarma",
+      "leave one out"
+    ],
+    "portfolio": [
+      "portföy",
+      "korelasyon",
+      "bağımsız bahis",
+      "pozisyon sınırı",
+      "yük",
+      "çeşitlend"
+    ],
+    "overfitting": [
+      "aşırı uydurma",
+      "aşırı uyum",
+      "eğri uydurma",
+      "aramanın bedeli",
+      "veri madenciliği"
+    ],
+    "backtest": [
+      "backtest",
+      "geriye dönük test",
+      "walk forward",
+      "walk-forward",
+      "örneklem dışı",
+      "kanıt"
+    ],
+    "indicators": [
+      "gösterge",
+      "hareketli ortalama",
+      "hareketli ortalamalar",
+      "osilatör",
+      "yeniden çizim",
+      "onay yanlılığı",
+      "macd"
+    ],
+    "regime": [
+      "rejim",
+      "zaman dilimi",
+      "zaman aralığı",
+      "trend mi range mi",
+      "oynaklık",
+      "bağlam",
+      "seans"
+    ],
+    "divergence": [
+      "uyumsuzluk",
+      "uyuşmazlık",
+      "diverjans"
+    ],
+    "structure": [
+      "piyasa yapısı",
+      "yapı kırılımı",
+      "order block",
+      "karakter değişimi",
+      "salınım tepesi",
+      "salınım dibi"
+    ],
+    "sweep": [
+      "süpürme",
+      "süpürmeler",
+      "stop avı",
+      "likidite avı",
+      "likidite yalanı",
+      "stopları toplamak"
+    ],
+    "orderflow": [
+      "order flow",
+      "emir akışı",
+      "delta",
+      "footprint",
+      "şerit",
+      "time and sales",
+      "cvd",
+      "emilim",
+      "tükenme"
+    ],
+    "orderbook": [
+      "order book",
+      "emir defteri",
+      "piyasa derinliği",
+      "likidite",
+      "buzdağı",
+      "gizli büyüklük",
+      "dom"
+    ],
+    "expectancy": [
+      "beklenti",
+      "örneklem büyüklüğü",
+      "kaç işlem",
+      "ne kadar sürede anlarım",
+      "üstünlük gerçek",
+      "istatistiksel anlamlılık"
+    ],
+    "risk": [
+      "iflas riski",
+      "pozisyon büyüklüğü",
+      "pozisyon boyutu",
+      "stop loss",
+      "zarar durdur",
+      "stop nereye",
+      "drawdown",
+      "risk yönetimi"
+    ],
+    "cost": [
+      "neye mal olur",
+      "trading maliyeti",
+      "işlem maliyeti",
+      "komisyon",
+      "ücretler",
+      "finansman",
+      "dört kesinti",
+      "gidiş dönüş",
+      "slippage"
+    ],
+    "professional": [
+      "profesyonel seviye",
+      "profesyonel dersler",
+      "bitirme projesi",
+      "seviye 4"
+    ],
+    "search": [
+      "ders bulmak",
+      "arama",
+      "ara",
+      "okuma rotası",
+      "hangi ders",
+      "ders nerede"
+    ],
+    "help": [
+      "yardım",
+      "neler yapabilirsin",
+      "komutlar",
+      "menü"
+    ],
+    "chatbot": [
+      "sen nesin",
+      "sen kimsin",
+      "bu bot hakkında",
+      "bu sohbet botu"
+    ],
+    "rsi": [
+      "rsi",
+      "göreli güç",
+      "aşırı alım",
+      "aşırı satım"
+    ],
+    "spread": [
+      "spread",
+      "alış-satış",
+      "alış satış",
+      "market maker",
+      "likidite maliyeti"
+    ],
+    "automation": [
+      "otomasyon",
+      "otomatikleştir",
+      "acil durdurma",
+      "demo hesap",
+      "webhook"
+    ],
+    "progress": [
+      "ilerleme",
+      "seri",
+      "rozet",
+      "tamamlama"
+    ],
+    "start": [
+      "nereden başlamalıyım",
+      "nereden başlarım",
+      "nasıl başlarım",
+      "ilk adımlar",
+      "öğrenme rotası",
+      "çalışma planı",
+      "ilk ders",
+      "nereden başlanır",
+      "yeniyim",
+      "sıfırdan başlıyorum"
+    ],
+    "curriculum": [
+      "müfredat",
+      "bütün dersler",
+      "ders listesi",
+      "seviyeler",
+      "izlence"
+    ],
+    "beginner": [
+      "başlangıç",
+      "yeni başlayan",
+      "temeller",
+      "temel bilgi"
+    ],
+    "intermediate": [
+      "orta seviye",
+      "order flow",
+      "mikroyapı"
+    ],
+    "advanced": [
+      "ileri seviye",
+      "ileri düzey"
+    ],
+    "lessons": [
+      "dersler",
+      "kurs",
+      "içerik"
     ]
   }
 }
