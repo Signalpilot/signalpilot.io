@@ -46,12 +46,208 @@ window.SP_CHATBOT_I18N = {
     "chatbot": "**About This Chatbot:**\n\nI'm a pattern-matching assistant (no AI API needed!) built to help you navigate the 100 lessons.\n\n**I can help with:**\n• Lesson recommendations (\"What should I learn first?\")\n• Concept explanations (\"Explain RSI regime interpretation\")\n• Finding lessons (\"Lessons about spread costs\")\n• Progress tracking (\"How do I track progress?\")\n\n**What I can't do:**\n• Trade recommendations\n• Real-time market analysis\n• Account-specific advice\n• Execute trades\n\n**How I work:**\n• Pattern matching (instant responses)\n• Knowledge base from all 100 lessons\n• No data sent to external APIs\n• Conversation history saved locally\n\n**Pro tip:** Try asking full questions like \"How does bid-ask spread work as a leading indicator?\" for best results!",
     "start": "**Getting Started:**\n\n**Recommended Learning Path:**\n\n**Weeks 1-4: Beginner** (24 lessons, slots 1-24)\n→ Start: [Lesson 1: What a Market Solves](/education/curriculum/beginner/01-what-a-market-solves.html)\n→ Focus: the mechanism, what trading costs, and what risk actually is\n\n**Weeks 5-9: Intermediate** (28 lessons, slots 25-52)\n→ [Lesson 25: Where Liquidity Rests](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n→ Focus: reading the auction, and the context that decides when a reading applies\n\n**Weeks 10-13: Advanced** (18 lessons, slots 53-70)\n→ [Lesson 53: What the Spread Is Paying For](/education/curriculum/advanced/53-market-makers-business.html)\n→ Focus: who else is in the book, and building a system that survives testing\n\n**Weeks 14+: Professional** (30 lessons, slots 71-100)\n→ [Lesson 71: How Many Bets You Are Carrying](/education/curriculum/professional/71-positions-are-one-position.html)\n→ Focus: portfolio, the arithmetic of the profession, and four specialisms\n\n**Time commitment:** 6-16 min per lesson\n**Goal:** one lesson a day, in order. Each one spends what the last one measured.\n\n**Quick actions:**\n• [Browse All Lessons](/)\n• [Search Lessons](/education/search.html)",
     "lessons": "**About Our Lessons:**\n\n**Structure:** every lesson has the same seven parts, in this order:\n• The claim - what the lesson finds, in its first 200 words, with a figure\n• Prerequisites - what it spends, and which lesson measured it\n• Development - the argument, built rather than asserted\n• Worked example - one, with every number recomputable from the page\n• Bounds - where the finding stops being true\n• Problems - what to go and measure on your own data\n• Sources - what the lesson leans on, and how\n\n**Length:** 1,400 to 5,000 words. Length is an output, never a target.\n\n**Style:** every figure on the page is derived on the page. No composite\ntrader, no invented track record, no P&L story. If a number is quoted from\nan earlier lesson, that lesson printed it.\n\n**Total:** 100 lessons across 4 tiers, in 14 modules\n\n**What makes them different:**\n✅ Every claim is falsifiable, and says what would disprove it\n✅ Every figure is recomputed, not repeated\n✅ Each lesson ends by promising what the next one finds, with its number\n✅ The bounds are as long as the argument\n✅ Available in 11 languages besides English\n\n📚 [Browse All Lessons](/)",
-    "help": "**I can help you with:**\n\n📚 **Lessons:** \"Beginner lessons\" | \"RSI lessons\" | \"Spread lessons\"\n🎯 **Getting Started:** \"How do I start?\" | \"Learning path\"\n📊 **Concepts:** \"Explain RSI\" | \"What is spread dynamics?\"\n🔧 **Features:** \"Track progress\" | \"How does the chatbot work?\"\n🚀 **Automation:** \"Trading automation\" | \"Kill switches\"\n\n**Try asking:**\n• \"What are the beginner lessons?\"\n• \"Explain RSI regime interpretation\"\n• \"How does bid-ask spread work?\"\n• \"Show me automation lessons\"\n• \"What should I learn first?\"\n• \"How do I track my progress?\"\n\n**Popular topics:**\n• RSI myths (Lesson 5)\n• Spread costs (Lesson 21)\n• Automation (Lesson 57)\n• Volume analysis (Lesson 2)\n\nJust type your question naturally! 💬",
-    "default": "I'm not sure about that specific question.\n\nTry asking about:\n📚 **Lessons:** Beginner, Intermediate, Advanced tiers\n🎯 **Concepts:** RSI, spreads, automation, volume, order flow\n📊 **Getting Started:** Learning path, progress tracking\n🔧 **Features:** Chatbot, search, curriculum\n\nType **\"help\"** to see all available topics!\n\n💡 **Tip:** Use the search bar at the top to search all 100 lessons, or browse by tier on the homepage.\n\n**Quick links:**\n• [Beginner Lessons](/education/beginner.html)\n• [Intermediate Lessons](/education/intermediate.html)\n• [Advanced Lessons](/education/advanced.html)\n• [Search All Lessons](/education/search.html)"
+    "help": "**I can help you with:**\n\n📚 **The course** — \"curriculum\" | \"where do I start\" | \"beginner lessons\" | \"professional tier\"\n💸 **Costs** — \"what does trading cost\" | \"slippage\" | \"commission\"\n🎲 **Risk** — \"position sizing\" | \"risk of ruin\" | \"drawdown\"\n📏 **Evidence** — \"expectancy\" | \"how many trades until I know\" | \"backtesting\" | \"overfitting\"\n📖 **The auction** — \"order book\" | \"order flow\" | \"sweeps\" | \"market structure\" | \"divergence\"\n🧭 **Context** — \"regime\" | \"timeframe\" | \"volatility\"\n🔍 **Indicators** — \"what is an indicator\" | \"RSI\" | \"moving averages\" | \"repainting\"\n📐 **Portfolio** — \"correlation\" | \"independent bets\" | \"position limits\"\n💼 **The business** — \"trading for a living\" | \"withdrawal\" | \"the book of rules\" | \"psychology\"\n📥 **Free material** — \"worksheets\" | \"glossary\" | \"languages\" | \"search\"\n\n**Try asking:**\n• \"How many trades until I know my edge is real?\"\n• \"What does a round trip actually cost?\"\n• \"Are stop hunts real?\"\n• \"Can I trade for a living?\"\n• \"Do you have worksheets?\"\n\nEvery answer names the lesson it came from, and every figure in it is measured in that lesson rather than asserted here. Just type your question. 💬",
+    "default": "I'm not sure about that specific question.\n\nTry asking about:\n📚 **Lessons:** Beginner, Intermediate, Advanced tiers\n🎯 **Concepts:** RSI, spreads, automation, volume, order flow\n📊 **Getting Started:** Learning path, progress tracking\n🔧 **Features:** Chatbot, search, curriculum\n\nType **\"help\"** to see all available topics!\n\n💡 **Tip:** Use the search bar at the top to search all 100 lessons, or browse by tier on the homepage.\n\n**Quick links:**\n• [Beginner Lessons](/education/beginner.html)\n• [Intermediate Lessons](/education/intermediate.html)\n• [Advanced Lessons](/education/advanced.html)\n• [Search All Lessons](/education/search.html)",
+    "professional": "**Professional Tier:**\n\n30 lessons (slots 71-100) on carrying more than one position, the arithmetic of doing this for a living, four specialisms, and the five lessons that turn the measurements round and point them at the trader.\n\n**What the course measures:**\n• Two rules on one instrument carry 1.03 independent bets rather than two, and the total tops out at 1.06\n• A wage requires 11.40 years of that wage in capital, with the verdict on the edge 10.07 years away\n• The four habits run together leave 4.44 a share where adding their costs separately predicts 1.74\n• A round trip of 0.1230 takes 79.7 per cent of a tenth-of-an-R edge, moving a verdict from 785 trades to 18,952\n\n**Lessons:**\n• [Lesson 71: How Many Bets You Are Carrying](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Lesson 79: Paying Yourself Before You Know](/education/curriculum/professional/79-career-paths.html)\n• [Lesson 90: The Four Habits Together](/education/curriculum/professional/90-the-four-habits-together.html)\n• [Lesson 100: The Business on One Page](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Duration:** 7-12 min per lesson\n**Best for:** anyone who can already price a round trip and wants to know what a business built on one supports",
+    "cost": "**What Trading Costs:**\n\nFour charges are taken whether the trade works or not: the spread, the commission, the slippage and the financing. Module 2 prices all four, and every later lesson subtracts them.\n\n**What the course measures:**\n• Every position opens at a loss, and financing keeps deepening it for as long as you hold\n• The same $30,000 order costs $0.30 in one instrument and $80.00 in another at the same instant\n• A round trip runs from 0.2 basis points on an index ETF to 467 on a micro-cap\n• A simulator sets all of it to zero: a strategy reporting +$1,000 over a hundred trades nets −$700\n\n**Lessons:**\n• [Lesson 10: Every Trade Starts Negative](/education/curriculum/beginner/10-every-trade-starts-negative.html)\n• [Lesson 11: Slippage and Impact at Retail Size](/education/curriculum/beginner/11-slippage-and-impact.html)\n• [Lesson 12: What Should You Actually Trade](/education/curriculum/beginner/12-what-should-you-trade.html)\n• [Lesson 16: Sim Against Live](/education/curriculum/beginner/16-sim-against-live.html)\n\n**Where the arithmetic is:** lesson 12 ranks instruments by cost as a share of what they move in a day.",
+    "risk": "**Risk, Sizing and Ruin:**\n\nHow much to put on, where the stop belongs, and the chance a losing run ends the account. All three are computed rather than felt.\n\n**What the course measures:**\n• One winner at +2R and two losers at −1R come to nothing in R and still cost the account money\n• Ruin follows from three numbers you already have: the edge, the fraction risked, and how far you may fall\n• Sizing up to recover at 5 per cent a trade returns you to the high in nine careers out of a hundred\n• A genuine tenth-of-an-R edge spends its 156-trade run inside a median worst drawdown of 8.82R\n\n**Lessons:**\n• [Lesson 20: Position Sizing](/education/curriculum/beginner/20-position-sizing.html)\n• [Lesson 21: Where the Stop Goes](/education/curriculum/beginner/21-where-the-stop-goes.html)\n• [Lesson 22: Risk of Ruin](/education/curriculum/beginner/22-risk-of-ruin.html)\n• [Lesson 67: The Drawdown You Should Expect](/education/curriculum/advanced/67-is-the-edge-gone.html)\n\n**Start at:** lesson 20, which is where every later figure in R comes from.",
+    "expectancy": "**Expectancy and Sample Size:**\n\nAn edge is a number, not a feeling about a chart, and the number arrives with an interval around it that most records are far too short to close.\n\n**What the course measures:**\n• E = p·b − (1−p), in units of what you risk\n• Fifty trades cannot tell a method making 0.35R a trade apart from one with no edge at all\n• An edge of a tenth of an R needs 785 trades gross, and 18,952 once the round trip is subtracted\n• What a real edge feels like from inside is mostly like nothing\n\n**Lessons:**\n• [Lesson 17: Expectancy](/education/curriculum/beginner/17-expectancy.html)\n• [Lesson 18: What an Edge Feels Like](/education/curriculum/beginner/18-what-an-edge-feels-like.html)\n• [Lesson 19: How Long Until You Know](/education/curriculum/beginner/19-how-long-until-you-know.html)\n• [Lesson 98: The Number That Says Scale](/education/curriculum/professional/98-the-number-that-says-scale.html)\n\n**The habit:** work out your own sample size before you quote a win rate.",
+    "orderbook": "**The Order Book and Liquidity:**\n\nWhat is resting, where it rests, and how little of it the quote actually describes.\n\n**What the course measures:**\n• An ordinary book rests 7,300 shares behind a quote that describes 900 of them\n• Resting size costs nothing to place and nothing to withdraw, so a wall is worth what its hit rate is worth\n• Orders pile at levels you can name in advance, and the piling needs no coordination\n• A stop is invisible until it fires, so a pool is certain future flow nobody can observe\n\n**Lessons:**\n• [Lesson 2: The Order Book](/education/curriculum/beginner/02-the-order-book.html)\n• [Lesson 25: Where Liquidity Rests](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n• [Lesson 26: The Order Book Is Theater](/education/curriculum/intermediate/26-order-book-is-theater.html)\n• [Lesson 27: The Liquidity Lie](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n\n**The correction:** lesson 27 finds intent cannot be identified from price, whatever the pattern is called.",
+    "orderflow": "**Order Flow, Delta and the Tape:**\n\nWhat the tape reports and what your software infers. Three of the four facts beside a print are recorded; the fourth, the side, is a guess with a known error rate.\n\n**What the course measures:**\n• The aggressor-side inference is right about four times in five\n• One misclassified print of 900 shares swings a minute from plus 600 to minus 1,200\n• A bar reported at plus 15 per cent delta bounds the buy share only between 50.0 and 62.5 per cent\n• Two bars can share every quantity a candle records and still carry deltas of +2,820 and −1,680\n\n**Lessons:**\n• [Lesson 7: Time and Sales](/education/curriculum/beginner/07-time-and-sales.html)\n• [Lesson 8: Volume and Delta](/education/curriculum/beginner/08-volume-and-delta.html)\n• [Lesson 28: Absorption and Exhaustion](/education/curriculum/intermediate/28-absorption-and-exhaustion.html)\n• [Lesson 29: Volume at Price](/education/curriculum/intermediate/29-volume-at-price.html)\n\n**Read next:** lesson 29 separates the count that needs no inference from the number everyone quotes.",
+    "sweep": "**Sweeps and Stop Hunts:**\n\nPrice trading past a level and coming back. Whether one happened at all is decided by three settings rather than by the market.\n\n**What the course measures:**\n• Ordinary values of the three settings find 4 sweeps on the same sixty bars, or 15, or 46\n• A cascade through resting stops needs no author\n• The same technique is worth sixty-two thousand dollars to one participant and twenty-five to another\n• The conduct actually proved in court runs at institutional size against other machines\n\n**Lessons:**\n• [Lesson 27: The Liquidity Lie](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n• [Lesson 35: Sweeps, Beyond the First](/education/curriculum/intermediate/35-sweeps-beyond-the-first.html)\n• [Lesson 61: The Number You Cannot Look Up](/education/curriculum/advanced/61-thinking-adversarially.html)\n\n**The honest version:** count the levels your own swing rule grants itself before you count the sweeps.",
+    "structure": "**Market Structure:**\n\nThe sequence of swing highs and lows a series is read as. It is not in the prices; it is produced by applying a swing definition to them, and that definition is a setting nobody quotes.\n\n**What the course measures:**\n• On the same twenty bars, ordinary settings give eight structure events, or two, or none\n• Two ordinary settings disagree about who is in control on four bars in twelve\n• A break of structure predicts something you can count, which is why it beats named chart patterns\n• Order blocks and displacement share the same undeclared setting\n\n**Lessons:**\n• [Lesson 32: Market Structure](/education/curriculum/intermediate/32-market-structure.html)\n• [Lesson 33: Order Blocks and Displacement](/education/curriculum/intermediate/33-order-blocks-and-displacement.html)\n• [Lesson 40: Multi-Day Structure](/education/curriculum/intermediate/40-multi-day-structure.html)\n\n**Before you use it:** write your swing definition down, then count.",
+    "divergence": "**Divergence:**\n\nPrice disagreeing with a number computed from price. Because the indicator is a function of the same prices, a divergence is an arithmetic consequence of the path rather than an independent witness to it.\n\n**What the course measures:**\n• Two settings decide whether one exists at all: a swing rule and an oscillator period\n• Before either looks at an indicator, the swing rule alone decides whether there are 33 places to look or 5\n• The indicator cannot add information, because it was computed from the prices\n\n**Lessons:**\n• [Lesson 34: Divergence](/education/curriculum/intermediate/34-divergence.html)\n• [Lesson 48: What an Indicator Is](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n\n**Worksheet:** the divergence count sheet on the resources page runs this on your own series.",
+    "regime": "**Regime, Context and Timeframe:**\n\nWhich of two behaviours a stretch of series is in, measured rather than named, and what a timeframe actually is once you notice it has two settings.\n\n**What the course measures:**\n• The efficiency ratio separates a sideways stretch from a rally completely, and carries a window\n• Change the window from ten closes to thirty and the two readings disagree on 22 of 30 bars\n• Regroup sixty bars four at a time and the swing count falls from 15 to 2 while the high and low do not move\n• Move only the starting bar and the same ratio runs from 0.104 to 0.249 on identical tape\n\n**Lessons:**\n• [Lesson 36: Markets Have Modes](/education/curriculum/intermediate/36-markets-have-modes.html)\n• [Lesson 37: Detecting a Regime Change](/education/curriculum/intermediate/37-detecting-a-regime-change.html)\n• [Lesson 38: What a Timeframe Is](/education/curriculum/intermediate/38-what-a-timeframe-is.html)\n• [Lesson 44: Volatility as a Quantity](/education/curriculum/intermediate/44-volatility-as-a-quantity.html)\n\n**The cost of waiting:** lesson 37 prices what each bar of confirmation buys and costs.",
+    "indicators": "**Indicators, Honestly:**\n\nAn indicator is a function of numbers you already have, and four consequences follow from that sentence alone.\n\n**What the course measures:**\n• It cannot add information: anything readable off the line was readable off the prices\n• It discards, and the discarding can be counted\n• It is late by an amount you compute rather than guess — 4.50 bars for a ten-period simple average\n• Two standard RSI implementations print thirteen readings above 70 and none on the same sixty closes\n\n**Lessons:**\n• [Lesson 48: What an Indicator Is](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n• [Lesson 49: Repainting](/education/curriculum/intermediate/49-repainting.html)\n• [Lesson 50: Moving Averages as Support](/education/curriculum/intermediate/50-moving-averages.html)\n• [Lesson 51: Oscillators Under Regime](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n• [Lesson 52: Confirmation Bias, Measured](/education/curriculum/intermediate/52-confirmation-bias.html)\n\n**The measured version of confirmation:** twelve indicator configurations are 1.71 independent opinions.",
+    "backtest": "**Backtesting as Evidence:**\n\nRunning a rule over past prices to see what it would have done, treated as evidence with a strength you can state rather than as a result.\n\n**What the course measures:**\n• A search of 253 rules turns up a winner at 9.84 a share against 5.68 for holding, on 7 trades, t = 3.65\n• Because 253 settings were searched, the bar it must clear is 3.54 rather than 1.65\n• Judging continuously instead of at a fixed horizon takes a dead system’s pass rate from 5.05 per cent to 24.25\n• Walk-forward removes one way of fooling yourself and not the others\n\n**Lessons:**\n• [Lesson 62: What Would Have to Happen](/education/curriculum/advanced/62-from-observation-to-hypothesis.html)\n• [Lesson 63: Backtesting as Evidence](/education/curriculum/advanced/63-backtesting.html)\n• [Lesson 64: The Price of Looking](/education/curriculum/advanced/64-overfitting.html)\n• [Lesson 65: The Horizon You Fix First](/education/curriculum/advanced/65-forward-testing-and-deployment.html)\n\n**The four subtractions** between a gross figure and one worth believing are in lesson 63.",
+    "overfitting": "**Overfitting and the Price of Looking:**\n\nChoosing a rule’s settings on the same data used to judge it, so the judgement measures the search rather than the rule.\n\n**What the course measures:**\n• A search of 15,000 configurations over 156 trades manufactures 0.317 of an R before the market does anything\n• That figure comes out of the two counts alone, with no prices in it\n• The bar rises with the search: 3.54 rather than 1.65 after 253 settings\n• At one live candidate in ten, two ordinary habits take a disciplined test from 43.2 per cent real to 6.0\n\n**Lessons:**\n• [Lesson 64: The Price of Looking](/education/curriculum/advanced/64-overfitting.html)\n• [Lesson 63: Backtesting as Evidence](/education/curriculum/advanced/63-backtesting.html)\n• [Lesson 84: The Share That Is Real](/education/curriculum/professional/84-behavioural-finance.html)\n\n**The defence:** state the horizon and the search size before you look.",
+    "portfolio": "**Portfolio and Correlation:**\n\nHow many independent bets a set of positions actually amounts to, and which of your limits binds before the others.\n\n**What the course measures:**\n• Two rules on one instrument at the measured correlation carry 1.03 bets rather than two\n• However many you add, the total tops out at 1.06\n• Twenty positions at an average pairwise 0.3 carry the risk of three independent ones\n• The daily-loss limit is the only column that can be enforced before an order is sent\n\n**Lessons:**\n• [Lesson 71: How Many Bets You Are Carrying](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Lesson 72: The Day Every Stop Hits](/education/curriculum/professional/72-portfolio-heat.html)\n• [Lesson 73: The Weights You Can Hold](/education/curriculum/professional/73-allocating-across-strategies.html)\n• [Lesson 74: The Window Decides](/education/curriculum/professional/74-where-portfolio-theory-fails.html)\n• [Lesson 75: Which Limit Binds First](/education/curriculum/professional/75-institutional-risk-controls.html)\n\n**The finding:** correlation moves enough between two halves of one record to change the answer.",
+    "book": "**A Book of Rules:**\n\nWhat a whole grid of rules earns against its best member, where the result came from, and whether every member earns its place.\n\n**What the course measures:**\n• The equal-weight book of 253 rules earns 4.16 a share, exactly the average of the rules inside it\n• Three of the book’s twenty-eight moves carry 80.5 per cent of its return\n• Turnover takes 4.10 to 3.70 and inverts the ranking inside the book\n• Three of four leave-one-out deletions improve the book\n\n**Lessons:**\n• [Lesson 91: What the Whole Grid Earns](/education/curriculum/professional/91-what-the-whole-grid-earns.html)\n• [Lesson 92: Where the Result Came From](/education/curriculum/professional/92-where-the-result-came-from.html)\n• [Lesson 93: The Rule That Trades the Most](/education/curriculum/professional/93-the-rule-that-trades-the-most.html)\n• [Lesson 94: The Ride You Actually Bought](/education/curriculum/professional/94-the-ride-you-actually-bought.html)\n• [Lesson 95: The Book on One Card](/education/curriculum/professional/95-the-book-on-one-card.html)\n\n**The test:** delete each member in turn and recompute every column, not just the return.",
+    "business": "**Trading as a Business:**\n\nWhat the pace, the cost, the withdrawal and the record do to each other once a person is living on the result.\n\n**What the course measures:**\n• 13 orders in 28 days is 4.875 completed trades a month\n• A genuine tenth-of-an-R edge still loses 41.3 per cent of its months\n• A 500 withdrawal against 487.50 earned needs a balance of 102,564 to break even\n• Five rows fail in a fixed order, and the business fails at the second: the cost\n\n**Lessons:**\n• [Lesson 96: The Month That Loses](/education/curriculum/professional/96-the-month-that-loses.html)\n• [Lesson 97: The Money You Take Out](/education/curriculum/professional/97-the-money-you-take-out.html)\n• [Lesson 98: The Number That Says Scale](/education/curriculum/professional/98-the-number-that-says-scale.html)\n• [Lesson 99: How Long the Money Lasts](/education/curriculum/professional/99-how-long-the-money-lasts.html)\n• [Lesson 100: The Business on One Page](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**The card:** lesson 100 puts the five numbers in the order they bind.",
+    "psychology": "**The Trader, Measured:**\n\nFour habits priced on the same seven trades, so the argument is about arithmetic rather than about discipline.\n\n**What the course measures:**\n• Taking the profit at the first green close costs 2.20 a share and leaves the win rate exactly where it was\n• A quarter-R stop costs 5.90 a share\n• Adding those predicts 1.74 left; running both at once leaves 4.44\n• 26.7 per cent of everything that ever showed on screen was given back\n\n**Lessons:**\n• [Lesson 86: Taking the Profit](/education/curriculum/professional/86-taking-the-profit.html)\n• [Lesson 87: The Second Exit](/education/curriculum/professional/87-the-second-exit.html)\n• [Lesson 88: The Size of the Next One](/education/curriculum/professional/88-the-size-of-the-next-one.html)\n• [Lesson 89: The Money That Was Showing](/education/curriculum/professional/89-the-money-that-was-showing.html)\n• [Lesson 90: The Four Habits Together](/education/curriculum/professional/90-the-four-habits-together.html)\n\n**Why the addition fails:** two exits do not stack, they compete, and only the earlier one ever fires.",
+    "glossary": "**Glossary:**\n\nEvery term the 100 lessons use, defined the way the lesson that introduces it defines it, with the lesson named for each.\n\n📖 [Open the glossary](/education/glossary.html)\n\nA term earns a place only when a lesson defines it and does something with it, and where a definition carries a number, that number is measured in the lesson named rather than assumed.\n\n**Tip:** the entries are alphabetical — Ctrl+F, or Cmd+F on a Mac.",
+    "worksheets": "**Worksheets and Templates:**\n\nSeventeen free downloads, each one an afternoon of arithmetic on your own record rather than a summary to read. The right-hand column carries what the lesson measured on its own bars, so your answer has something to disagree with.\n\n📥 [Worksheets and templates](/education/resources.html)\n📁 [All free resources](/education/free/index.html)\n\n**No email required.** Nothing here is gated.\n\n**Read the lesson first.** A worksheet whose lesson you have not read produces numbers you cannot interpret.",
+    "languages": "**Languages:**\n\nThe whole curriculum is free in twelve languages: English, German, Spanish, French, Italian, Portuguese, Dutch, Russian, Japanese, Turkish, Hungarian and Arabic.\n\nUse the language switcher in the header. Every lesson, every tier page and this assistant follow the language you are reading in.\n\n**Not machine output:** each lesson is translated and then read back as prose, and every figure is held against the English.",
+    "search": "**Finding a Lesson:**\n\n🔍 [Search all 100 lessons](/education/search.html) — by topic, concept or keyword\n🗺 [Reading paths](/education/paths.html) — nine routes through the course by subject\n📚 [Full curriculum](/education/) — all 100 in module order\n📖 [Glossary](/education/glossary.html) — every term the lessons define\n\n**If the subject matters more than the difficulty,** start with a reading path: risk, cost, evidence, the order book, indicators, portfolios, the business, the claims and the calendar."
   }
 },
   keys: {
   "en": {
+    "worksheets": [
+      "worksheet",
+      "template",
+      "download",
+      "pdf",
+      "printable",
+      "workbook"
+    ],
+    "glossary": [
+      "glossary",
+      "definition",
+      "define",
+      "what does .* mean",
+      "terminology",
+      "vocabulary"
+    ],
+    "languages": [
+      "language",
+      "translated",
+      "translation",
+      "spanish",
+      "german",
+      "french",
+      "japanese",
+      "arabic"
+    ],
+    "business": [
+      "business",
+      "for a living",
+      "full time",
+      "full-time",
+      "withdrawal",
+      "living on",
+      "wage",
+      "salary"
+    ],
+    "psychology": [
+      "psychology",
+      "discipline",
+      "emotion",
+      "disposition effect",
+      "take profit early",
+      "revenge"
+    ],
+    "book": [
+      "book of rules",
+      "equal weight",
+      "equal-weight",
+      "grid of rules",
+      "leave one out",
+      "leave-one-out"
+    ],
+    "portfolio": [
+      "portfolio",
+      "correlation",
+      "independent bets",
+      "position limit",
+      "heat",
+      "diversif"
+    ],
+    "overfitting": [
+      "overfit",
+      "curve fit",
+      "curve-fit",
+      "price of looking",
+      "data mining",
+      "data-mining"
+    ],
+    "backtest": [
+      "backtest",
+      "walk forward",
+      "walk-forward",
+      "out of sample",
+      "out-of-sample",
+      "evidence"
+    ],
+    "indicators": [
+      "indicator",
+      "moving average",
+      "oscillator",
+      "repaint",
+      "confirmation bias",
+      "macd"
+    ],
+    "regime": [
+      "regime",
+      "timeframe",
+      "time frame",
+      "trending or ranging",
+      "volatility",
+      "context",
+      "session"
+    ],
+    "divergence": [
+      "divergence",
+      "diverging",
+      "divergences"
+    ],
+    "structure": [
+      "market structure",
+      "break of structure",
+      "order block",
+      "change of character",
+      "swing high",
+      "swing low"
+    ],
+    "sweep": [
+      "sweep",
+      "stop hunt",
+      "stop-hunt",
+      "liquidity grab",
+      "liquidity lie",
+      "run the stops"
+    ],
+    "orderflow": [
+      "order flow",
+      "orderflow",
+      "delta",
+      "footprint",
+      "tape",
+      "time and sales",
+      "cvd",
+      "absorption",
+      "exhaustion"
+    ],
+    "orderbook": [
+      "order book",
+      "orderbook",
+      "depth of market",
+      "liquidity",
+      "iceberg",
+      "hidden size",
+      "dom"
+    ],
+    "expectancy": [
+      "expectancy",
+      "sample size",
+      "how many trades",
+      "how long until",
+      "edge is real",
+      "statistical significance"
+    ],
+    "risk": [
+      "risk of ruin",
+      "position sizing",
+      "position size",
+      "stop loss",
+      "stop-loss",
+      "where the stop",
+      "drawdown",
+      "risk management"
+    ],
+    "cost": [
+      "what does it cost",
+      "trading cost",
+      "commission",
+      "fees",
+      "financing",
+      "four charges",
+      "round trip",
+      "slippage"
+    ],
+    "professional": [
+      "professional tier",
+      "professional lessons",
+      "capstone",
+      "tier 4"
+    ],
+    "search": [
+      "find a lesson",
+      "search",
+      "reading path",
+      "which lesson",
+      "where is the lesson"
+    ],
     "help": [
       "help",
       "what can you do",
@@ -94,7 +290,12 @@ window.SP_CHATBOT_I18N = {
       "getting started",
       "learning path",
       "study plan",
-      "first lesson"
+      "first lesson",
+      "what should i learn",
+      "where to begin",
+      "how do i start",
+      "new here",
+      "complete beginner"
     ],
     "curriculum": [
       "curriculum",
