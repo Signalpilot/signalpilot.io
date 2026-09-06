@@ -15,7 +15,7 @@
  * so a page translated later drops off it and its links start pointing home.
  */
 window.SP_CHATBOT_I18N = {
-  languages: ["de"],
+  languages: ["de", "es", "fr"],
   enOnly: {
   "de": [
     "/education/free/index.html",
@@ -115,6 +115,48 @@ window.SP_CHATBOT_I18N = {
     "sendLabel": "Nachricht senden",
     "inputLabel": "Nachrichteneingabe",
     "footer": "Läuft mit Mustererkennung • SignalPilot Education"
+  },
+  "es": {
+    "title": "Asistente de aprendizaje",
+    "status": "En línea • listo para ayudarte",
+    "openLabel": "Abrir el asistente de aprendizaje",
+    "clearTitle": "Borrar la conversación",
+    "greetLead": "<strong>¡Hola! 👋</strong> Soy tu asistente de aprendizaje de SignalPilot.",
+    "greetBody": "Te guío por nuestras 100 lecciones de trading, te explico conceptos y te acompaño en tu ruta de aprendizaje.",
+    "greetTry": "<em>Prueba con: «¿Por dónde empiezo?» o «Explica el RSI según el régimen»</em>",
+    "quickStart": "🚀 Primeros pasos",
+    "quickBeginner": "📚 Principiante",
+    "quickRsi": "📊 Mitos del RSI",
+    "quickAutomation": "🤖 Automatización",
+    "quickStartQuery": "¿Por dónde empiezo?",
+    "quickBeginnerQuery": "Lecciones para principiantes",
+    "quickRsiQuery": "Explica el RSI",
+    "quickAutomationQuery": "Automatización del trading",
+    "placeholder": "Pregunta por lecciones o conceptos…",
+    "sendLabel": "Enviar mensaje",
+    "inputLabel": "Entrada de mensaje",
+    "footer": "Funciona por coincidencia de patrones • SignalPilot Education"
+  },
+  "fr": {
+    "title": "Assistant d’apprentissage",
+    "status": "En ligne • prêt à vous aider",
+    "openLabel": "Ouvrir l’assistant d’apprentissage",
+    "clearTitle": "Effacer la conversation",
+    "greetLead": "<strong>Bonjour ! 👋</strong> Je suis votre assistant d’apprentissage SignalPilot.",
+    "greetBody": "Je vous guide dans nos 100 leçons de trading, j’explique les notions et je vous accompagne sur votre parcours.",
+    "greetTry": "<em>Essayez : « Par où commencer ? » ou « Explique le RSI selon le régime »</em>",
+    "quickStart": "🚀 Premiers pas",
+    "quickBeginner": "📚 Débutant",
+    "quickRsi": "📊 Mythes du RSI",
+    "quickAutomation": "🤖 Automatisation",
+    "quickStartQuery": "Par où commencer ?",
+    "quickBeginnerQuery": "Leçons pour débutants",
+    "quickRsiQuery": "Explique le RSI",
+    "quickAutomationQuery": "Automatisation du trading",
+    "placeholder": "Posez une question sur les leçons ou les notions…",
+    "sendLabel": "Envoyer le message",
+    "inputLabel": "Saisie du message",
+    "footer": "Fonctionne par reconnaissance de motifs • SignalPilot Education"
   }
 },
   kb: {
@@ -189,6 +231,78 @@ window.SP_CHATBOT_I18N = {
     "structure": "**Marktstruktur:**\n\nDie Folge von Swing-Hochs und -Tiefs, als die eine Serie gelesen wird. Sie steckt nicht in den Preisen; sie entsteht, indem man eine Swing-Definition auf sie anwendet, und diese Definition ist eine Einstellung, die niemand nennt.\n\n**Was der Kurs misst:**\n• Auf denselben zwanzig Bars ergeben gewöhnliche Einstellungen acht Strukturereignisse, oder zwei, oder keines\n• Zwei gewöhnliche Einstellungen sind sich auf vier von zwölf Bars uneinig, wer die Kontrolle hat\n• Ein Strukturbruch sagt etwas Zählbares voraus, und deshalb schlägt er benannte Chartmuster\n• Order Blocks und Displacement teilen dieselbe nicht genannte Einstellung\n\n**Lektionen:**\n• [Lektion 32: Marktstruktur](/education/curriculum/intermediate/32-market-structure.html)\n• [Lektion 33: Order Blocks und Displacement](/education/curriculum/intermediate/33-order-blocks-and-displacement.html)\n• [Lektion 40: Struktur über mehrere Tage](/education/curriculum/intermediate/40-multi-day-structure.html)\n\n**Bevor du sie benutzt:** schreib deine Swing-Definition auf, dann zähle.",
     "sweep": "**Sweeps und Stop-Jagden:**\n\nDer Preis läuft über ein Niveau hinaus und kommt zurück. Ob überhaupt einer stattfand, entscheiden drei Einstellungen und nicht der Markt.\n\n**Was der Kurs misst:**\n• Gewöhnliche Werte der drei Einstellungen finden auf denselben sechzig Bars 4 Sweeps, oder 15, oder 46\n• Eine Kaskade durch liegende Stops braucht keinen Urheber\n• Dieselbe Technik ist dem einen Teilnehmer zweiundsechzigtausend Dollar wert und dem anderen fünfundzwanzig\n• Das vor Gericht tatsächlich bewiesene Verhalten läuft in institutioneller Größe gegen andere Maschinen\n\n**Lektionen:**\n• [Lektion 27: Die Liquiditätslüge](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n• [Lektion 35: Sweeps, jenseits des ersten](/education/curriculum/intermediate/35-sweeps-beyond-the-first.html)\n• [Lektion 61: Die Zahl, die man nicht nachschlagen kann](/education/curriculum/advanced/61-thinking-adversarially.html)\n\n**Die ehrliche Fassung:** zähle erst die Niveaus, die deine eigene Swing-Regel sich zugesteht, dann die Sweeps.",
     "worksheets": "**Arbeitsblätter und Vorlagen:**\n\nSiebzehn kostenlose Downloads, jeder davon ein Nachmittag Arithmetik auf deiner eigenen Aufzeichnung statt einer Zusammenfassung zum Lesen. Die rechte Spalte trägt, was die Lektion auf ihren eigenen Bars gemessen hat, damit deine Antwort etwas hat, dem sie widersprechen kann.\n\n📥 [Arbeitsblätter und Vorlagen](/education/resources.html)\n📁 [Alle kostenlosen Ressourcen](/education/free/index.html)\n\n**Keine E-Mail nötig.** Nichts hier ist hinter einer Schranke.\n\n**Lies zuerst die Lektion.** Ein Arbeitsblatt, dessen Lektion du nicht gelesen hast, produziert Zahlen, die du nicht deuten kannst."
+  },
+  "es": {
+    "beginner": "**Nivel Principiante** (24 lecciones): cómo funciona un mercado, qué cuesta, qué es el riesgo\n\n📚 [Ver todas las lecciones del nivel Principiante](/education/beginner.html)\n\n**Qué vas a aprender:**\n• El order book, la horquilla y el market maker, derivados de un solo problema\n• Qué es una ejecución, y los cinco números que una vela guarda de su intervalo\n• Por qué toda posición abre en pérdida, y cuáles son los cuatro cargos\n• La esperanza, y cuánto falta para que tu propio registro resuelva algo\n• Tamaño de posición, dónde va el stop, y riesgo de ruina\n\n**Lecciones clave:**\n• Qué resuelve un mercado (lección 1)\n• Toda operación empieza en negativo (lección 10)\n• Esperanza (lección 17)\n• Riesgo de ruina (lección 22)\n\n**Duración:** 6-12 min por lección\n**Para quién:** cualquiera que aún no haya puesto precio a una ida y vuelta",
+    "intermediate": "**Nivel Intermedio** (28 lecciones): leer la subasta, y cuándo se aplica esa lectura\n\n📚 [Ver todas las lecciones del nivel Intermedio](/education/intermediate.html)\n\n**Qué vas a aprender:**\n• Dónde reposa la liquidez, y por qué el libro que se muestra es un anuncio\n• Absorción, agotamiento, volumen al precio y tamaño oculto\n• Estructura, order blocks y barridos, con las definiciones puestas por escrito\n• Regímenes, temporalidades, sesiones, volatilidad, correlación y el ciclo macro\n• Qué es un indicador, y qué descarta para serlo\n\n**Lecciones clave:**\n• Dónde reposa la liquidez (lección 25)\n• Estructura de mercado (lección 32)\n• Los mercados tienen modos (lección 36)\n• Qué es un indicador (lección 48)\n\n**Duración:** 8-14 min por lección\n**Para quién:** operadores que ya saben poner precio a sus propios costes",
+    "advanced": "**Nivel Avanzado** (18 lecciones): quién más está en el libro, y construir un sistema\n\n📚 [Ver todas las lecciones del nivel Avanzado](/education/advanced.html)\n\n**Qué vas a aprender:**\n• Qué paga la horquilla, y la tarifa que enruta tu orden\n• Cuánto vale un milisegundo, y qué cuesta trabajar un millón de acciones\n• Qué tendría que ocurrir, y el backtest tratado como evidencia\n• El precio de mirar, el horizonte que fijas, la referencia que elegiste\n• Drawdown, capacidad, el retraso que quitas, el aprendizaje automático como filtro\n\n**Lecciones clave:**\n• Qué paga el diferencial (lección 53)\n• Backtesting como prueba (lección 63)\n• El precio de buscar (lección 64)\n• El drawdown que deberías esperar (lección 67)\n\n**Duración:** 10-16 min por lección\n**Para quién:** operadores que construyen algo con intención de probarlo",
+    "progress": "**Tu progreso:**\n\nTu avance se registra automáticamente a medida que lees lecciones.\n\n**Cómo funciona el registro:**\n✅ Progreso guardado en tu equipo (no hace falta cuenta)\n✅ Sincronización entre dispositivos (llegará vía Supabase)\n✅ Insignias de finalización por nivel\n✅ Recuento de rachas para las lecciones diarias\n\n**Ver tu progreso:**\n• La portada muestra el porcentaje completado en total\n• Cada página de nivel muestra las lecciones terminadas\n• Las marcas verdes son lecciones completadas\n\n**Consejo:** una lección al día, en orden, y haz los problemas. Recuperar lo\naprendido es el único repaso que fija algo. 🔥",
+    "curriculum": "**El currículo del SignalPilot Education Hub:**\n\n**Sistema progresivo de 4 niveles:**\n\n🟢 **Nivel 1: Principiante** (24 lecciones)\n→ Cómo funciona un mercado, qué cuesta y qué es el riesgo\n\n🟡 **Nivel 2: Intermedio** (28 lecciones)\n→ Leer la subasta, y cuándo se aplica esa lectura\n\n🔴 **Nivel 3: Avanzado** (18 lecciones)\n→ Quién más está en el libro, y construir un sistema\n\n⚫ **Nivel 4: Profesional** (30 lecciones)\n→ Cartera, profesión y especialidades\n\n**Total:** 100 lecciones completas\n\n📚 [Ver el currículo completo](/)\n\n**Ruta recomendada:** en orden, de la 1 a la 100. Cada lección gasta una cifra\nque midió una anterior, así que la secuencia es el argumento.\n\n**Dedicación:** unos 6-16 min por lección",
+    "rsi": "**Osciladores y RSI:**\n\n**Lección principal:** [Lección 51: Osciladores bajo el régimen](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n\n**Ideas clave:**\n• Un oscilador es una función de precios que ya tienes, así que no añade información\n• La misma lectura significa cosas distintas en una tendencia y en un rango\n• Lo que importa es qué descarta el oscilador, y cuánto tarda en descartarlo\n• Un umbral es un ajuste, no una medición, y hay que enunciarlo\n\n**Relacionadas:** [Lección 48: Qué es un indicador](/education/curriculum/intermediate/48-what-an-indicator-is.html), [Lección 36: Los mercados tienen modos](/education/curriculum/intermediate/36-markets-have-modes.html)\n\n**Error frecuente:** leer un extremo como señal sin enunciar primero el régimen, y sin haber medido nunca con qué frecuencia acertaba esa lectura",
+    "spread": "**La horquilla:**\n\n**Lección principal:** [Lección 4: El spread es el precio de la inmediatez](/education/curriculum/beginner/04-the-spread.html)\n\n**Ideas clave:**\n• La horquilla es lo que cuesta la inmediatez, no una comisión que alguien te cobra\n• Es uno de cuatro cargos, y la lección 10 pone precio a los cuatro sobre una misma operación\n• Medido contra lo que un instrumento mueve en un día, el coste va de una quinta parte del uno por ciento al 52 por ciento\n• Poner en vez de cruzar cobra la horquilla, y la lección 58 pone precio a lo que eso entrega\n\n**Relacionadas:** [Lección 10: Toda operación empieza en negativo](/education/curriculum/beginner/10-every-trade-starts-negative.html), [Lección 53: Qué paga el diferencial](/education/curriculum/advanced/53-market-makers-business.html)\n\n**Dónde están los números:** la lección 12 ordena instrumentos por coste como fracción del movimiento diario",
+    "automation": "**Automatización y ejecución:**\n\n**Lección principal:** [Lección 69: El retraso que quitas](/education/curriculum/advanced/69-automation.html)\n\n**Ideas clave:**\n• La automatización quita un retraso; la pregunta es qué costaba ese retraso\n• El slippage y las comisiones van dentro del backtest, porque están en el resultado\n• Un límite de pérdida diaria en firme aprieta antes que cualquier otro límite que pongas\n• El ritmo al que operas de verdad es medible, y es más lento de lo que suponen casi todos los planes\n\n**Relacionadas:** [Lección 75: Qué límite aprieta primero](/education/curriculum/professional/75-institutional-risk-controls.html), [Lección 76: El ritmo al que operas de verdad](/education/curriculum/professional/76-trading-day.html)\n\n**Regla:** no pongas en marcha nada cuyo fallo no hayas puesto a precio",
+    "chatbot": "**Sobre este chatbot:**\n\nSoy un asistente por coincidencia de patrones (¡sin necesidad de API de IA!) hecho para ayudarte a moverte por las 100 lecciones.\n\n**Puedo ayudarte con:**\n• Recomendaciones de lecciones («¿Por dónde empiezo?»)\n• Explicaciones de conceptos («Explica el RSI según el régimen»)\n• Encontrar lecciones («Lecciones sobre costes de horquilla»)\n• Seguimiento del avance («¿Cómo sigo mi progreso?»)\n\n**Lo que no puedo hacer:**\n• Recomendaciones de operaciones\n• Análisis de mercado en tiempo real\n• Consejos sobre tu cuenta\n• Ejecutar órdenes\n\n**Cómo funciono:**\n• Coincidencia de patrones (respuestas al instante)\n• Base de conocimiento sacada de las 100 lecciones\n• Ningún dato enviado a API externas\n• Historial de conversación guardado solo en tu equipo\n\n**Consejo:** pregunta con frases completas, como «¿Cómo funciona la horquilla de compraventa como indicador adelantado?»; así la respuesta sale mejor.",
+    "start": "**Primeros pasos:**\n\n**Ruta de aprendizaje recomendada:**\n\n**Semanas 1-4: Principiante** (24 lecciones, puestos 1-24)\n→ Empieza en: [Lección 1: Qué resuelve un mercado](/education/curriculum/beginner/01-what-a-market-solves.html)\n→ Foco: el mecanismo, qué cuesta operar, y qué es el riesgo de verdad\n\n**Semanas 5-9: Intermedio** (28 lecciones, puestos 25-52)\n→ [Lección 25: Dónde reposa la liquidez](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n→ Foco: leer la subasta, y el contexto que decide cuándo se aplica una lectura\n\n**Semanas 10-13: Avanzado** (18 lecciones, puestos 53-70)\n→ [Lección 53: Qué paga el diferencial](/education/curriculum/advanced/53-market-makers-business.html)\n→ Foco: quién más está en el libro, y construir un sistema que sobreviva a las pruebas\n\n**Semana 14 en adelante: Profesional** (30 lecciones, puestos 71-100)\n→ [Lección 71: Cuántas apuestas llevas de verdad](/education/curriculum/professional/71-positions-are-one-position.html)\n→ Foco: cartera, la aritmética de la profesión, y cuatro especialidades\n\n**Dedicación:** 6-16 min por lección\n**Meta:** una lección al día, en orden. Cada una gasta lo que midió la anterior.\n\n**Acciones rápidas:**\n• [Ver todas las lecciones](/)\n• [Buscar lecciones](/education/search.html)",
+    "lessons": "**Sobre nuestras lecciones:**\n\n**Estructura:** todas las lecciones tienen las mismas siete partes, en este orden:\n• La afirmación: lo que encuentra la lección, en sus primeras 200 palabras, con una cifra\n• Requisitos previos: qué gasta, y qué lección lo midió\n• Desarrollo: el argumento, construido en vez de afirmado\n• Ejemplo trabajado: uno, con todos los números recalculables desde la página\n• Límites: dónde deja de ser cierto el hallazgo\n• Problemas: qué ir a medir en tus propios datos\n• Fuentes: en qué se apoya la lección, y cómo\n\n**Extensión:** de 1.400 a 5.000 palabras. La extensión es un resultado, nunca un objetivo.\n\n**Estilo:** cada cifra de la página se deriva en la página. Sin operador\ncompuesto, sin historial inventado, sin relato de pérdidas y ganancias. Si se\ncita un número de una lección anterior, esa lección lo imprimió.\n\n**Total:** 100 lecciones en 4 niveles, dentro de 14 módulos\n\n**Qué las distingue:**\n✅ Toda afirmación es refutable y dice qué la refutaría\n✅ Toda cifra se recalcula, no se repite\n✅ Cada lección termina prometiendo qué encuentra la siguiente, con su número\n✅ Los límites son tan largos como el argumento\n✅ Disponibles en 11 idiomas además del inglés\n\n📚 [Ver todas las lecciones](/)",
+    "help": "**Puedo ayudarte con:**\n\n📚 **El curso** — «currículo» | «por dónde empiezo» | «lecciones para principiantes» | «nivel profesional»\n💸 **Costes** — «qué cuesta operar» | «slippage» | «comisión»\n🎲 **Riesgo** — «tamaño de posición» | «riesgo de ruina» | «drawdown»\n📏 **Evidencia** — «esperanza» | «cuántas operaciones hasta saberlo» | «backtest» | «sobreajuste»\n📖 **La subasta** — «order book» | «order flow» | «barridos» | «estructura de mercado» | «divergencia»\n🧭 **Contexto** — «régimen» | «temporalidad» | «volatilidad»\n🔍 **Indicadores** — «qué es un indicador» | «RSI» | «medias móviles» | «repintado»\n📐 **Cartera** — «correlación» | «apuestas independientes» | «límites de posición»\n💼 **El negocio** — «vivir del trading» | «retirada» | «el libro de reglas» | «psicología»\n📥 **Material gratuito** — «hojas de trabajo» | «glosario» | «idiomas» | «búsqueda»\n\n**Prueba a preguntar:**\n• «¿Cuántas operaciones hasta saber si mi ventaja es real?»\n• «¿Qué cuesta de verdad una ida y vuelta?»\n• «¿Existen de verdad las cazas de stops?»\n• «¿Puedo vivir del trading?»\n• «¿Tenéis hojas de trabajo?»\n\nCada respuesta nombra la lección de la que viene, y cada cifra está medida en esa lección y no afirmada aquí. Escribe tu pregunta sin más. 💬",
+    "default": "No estoy seguro de esa pregunta en concreto.\n\nPrueba a preguntar por:\n📚 **Lecciones:** niveles Principiante, Intermedio y Avanzado\n🎯 **Conceptos:** RSI, horquillas, automatización, volumen, order flow\n📊 **Primeros pasos:** ruta de aprendizaje, seguimiento del avance\n🔧 **Funciones:** chatbot, búsqueda, currículo\n\nEscribe **«ayuda»** para ver todos los temas.\n\n💡 **Consejo:** usa la barra de búsqueda de arriba para buscar en las 100 lecciones, o navega por nivel desde la portada.\n\n**Enlaces rápidos:**\n• [Lecciones para principiantes](/education/beginner.html)\n• [Lecciones del nivel intermedio](/education/intermediate.html)\n• [Lecciones del nivel avanzado](/education/advanced.html)\n• [Buscar en todas las lecciones](/education/search.html)",
+    "professional": "**Nivel Profesional:**\n\n30 lecciones (puestos 71-100) sobre llevar más de una posición, la aritmética de hacer esto para vivir, cuatro especialidades, y las cinco lecciones que giran las mediciones y las apuntan al operador.\n\n**Lo que mide el curso:**\n• Dos reglas sobre un instrumento llevan 1,03 apuestas independientes en vez de dos, y el total se detiene en 1,06\n• Un sueldo exige 11,40 años de ese sueldo en capital, con el veredicto sobre la ventaja a 10,07 años de distancia\n• Los cuatro hábitos juntos dejan 4,44 por acción donde sumar sus costes por separado predice 1,74\n• Una ida y vuelta de 0,1230 se lleva el 79,7 por ciento de una ventaja de una décima de R, y mueve un veredicto de 785 operaciones a 18.952\n\n**Lecciones:**\n• [Lección 71: Cuántas apuestas llevas de verdad](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Lección 79: Pagarte antes de saberlo](/education/curriculum/professional/79-career-paths.html)\n• [Lección 90: Los cuatro hábitos juntos](/education/curriculum/professional/90-the-four-habits-together.html)\n• [Lección 100: El negocio en una página](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Duración:** 7-12 min por lección\n**Para quién:** cualquiera que ya sepa poner precio a una ida y vuelta y quiera saber qué negocio se sostiene sobre ella",
+    "cost": "**Lo que cuesta operar:**\n\nSe cobran cuatro cargos, salga bien la operación o no: la horquilla, la comisión, el slippage y la financiación. El módulo 2 pone precio a los cuatro, y cada lección posterior los resta.\n\n**Lo que mide el curso:**\n• Toda posición abre en pérdida, y la financiación la sigue ahondando mientras la mantengas\n• La misma orden de 30.000 $ cuesta 0,30 $ en un instrumento y 80,00 $ en otro, en el mismo instante\n• Una ida y vuelta va de 0,2 puntos básicos en un ETF de índice a 467 en una micro capitalización\n• Un simulador lo pone todo a cero: una estrategia que declara +1.000 $ en cien operaciones deja −700 $ netos\n\n**Lecciones:**\n• [Lección 10: Toda operación empieza en negativo](/education/curriculum/beginner/10-every-trade-starts-negative.html)\n• [Lección 11: Slippage e impacto a tamaño minorista](/education/curriculum/beginner/11-slippage-and-impact.html)\n• [Lección 12: Qué deberías operar en realidad](/education/curriculum/beginner/12-what-should-you-trade.html)\n• [Lección 16: Simulador contra real](/education/curriculum/beginner/16-sim-against-live.html)\n\n**Dónde está la aritmética:** la lección 12 ordena instrumentos por coste como fracción de lo que mueven en un día.",
+    "risk": "**Riesgo, tamaño y ruina:**\n\nCuánto poner, dónde va el stop, y qué probabilidad hay de que una racha perdedora acabe con la cuenta. Los tres se calculan, no se sienten.\n\n**Lo que mide el curso:**\n• Una ganadora de +2R y dos perdedoras de −1R suman cero en R y aun así le cuestan dinero a la cuenta\n• La ruina se sigue de tres números que ya tienes: la ventaja, la fracción arriesgada, y cuánto puedes caer\n• Subir el tamaño para recuperarte al 5 por ciento por operación te devuelve al máximo en nueve carreras de cada cien\n• Una ventaja auténtica de una décima de R pasa sus 156 operaciones dentro de un peor drawdown mediano de 8,82R\n\n**Lecciones:**\n• [Lección 20: Tamaño de posición](/education/curriculum/beginner/20-position-sizing.html)\n• [Lección 21: Dónde va el stop](/education/curriculum/beginner/21-where-the-stop-goes.html)\n• [Lección 22: Riesgo de ruina](/education/curriculum/beginner/22-risk-of-ruin.html)\n• [Lección 67: El drawdown que deberías esperar](/education/curriculum/advanced/67-is-the-edge-gone.html)\n\n**Empieza por:** la lección 20, de donde sale toda cifra posterior en R.",
+    "expectancy": "**Esperanza y tamaño de muestra:**\n\nUna ventaja es un número, no una sensación ante un gráfico, y el número llega con un intervalo alrededor que casi ningún registro es lo bastante largo para cerrar.\n\n**Lo que mide el curso:**\n• E = p·b − (1−p), en unidades de lo que arriesgas\n• Cincuenta operaciones no distinguen un método que hace 0,35R por operación de otro sin ventaja alguna\n• Una ventaja de una décima de R necesita 785 operaciones en bruto, y 18.952 una vez restada la ida y vuelta\n• Lo que se siente por dentro con una ventaja real es, casi siempre, nada\n\n**Lecciones:**\n• [Lección 17: Esperanza](/education/curriculum/beginner/17-expectancy.html)\n• [Lección 18: Cómo se siente un edge](/education/curriculum/beginner/18-what-an-edge-feels-like.html)\n• [Lección 19: Cuánto tardarás en saberlo](/education/curriculum/beginner/19-how-long-until-you-know.html)\n• [Lección 98: El n&uacute;mero que habla de escala](/education/curriculum/professional/98-the-number-that-says-scale.html)\n\n**El hábito:** calcula tu propio tamaño de muestra antes de citar una tasa de acierto.",
+    "orderbook": "**El order book y la liquidez:**\n\nQué hay puesto, dónde está puesto, y qué poco de eso describe realmente la cotización.\n\n**Lo que mide el curso:**\n• Un libro corriente deja 7.300 acciones detrás de una cotización que describe 900\n• El tamaño puesto no cuesta nada colocarlo ni nada retirarlo, así que un muro vale lo que valga su tasa de acierto\n• Las órdenes se amontonan en niveles que puedes nombrar de antemano, y ese amontonamiento no necesita coordinación\n• Un stop es invisible hasta que salta, así que una bolsa es flujo futuro seguro que nadie puede observar\n\n**Lecciones:**\n• [Lección 2: El Order Book](/education/curriculum/beginner/02-the-order-book.html)\n• [Lección 25: Dónde reposa la liquidez](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n• [Lección 26: El order book es teatro](/education/curriculum/intermediate/26-order-book-is-theater.html)\n• [Lección 27: La mentira de la liquidez](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n\n**La corrección:** la lección 27 concluye que la intención no se puede identificar a partir del precio, se llame como se llame el patrón.",
+    "orderflow": "**Order flow, delta y la cinta:**\n\nLo que informa la cinta y lo que infiere tu software. Tres de los cuatro datos que acompañan a una impresión están registrados; el cuarto, el lado, es una conjetura con una tasa de error conocida.\n\n**Lo que mide el curso:**\n• La inferencia del lado agresor acierta unas cuatro veces de cada cinco\n• Una sola impresión mal clasificada de 900 acciones mueve un minuto de más 600 a menos 1.200\n• Una barra declarada con un delta de más el 15 por ciento acota la parte compradora solo entre el 50,0 y el 62,5 por ciento\n• Dos barras pueden compartir todas las magnitudes que registra una vela y aun así llevar deltas de +2.820 y −1.680\n\n**Lecciones:**\n• [Lección 7: Time and Sales](/education/curriculum/beginner/07-time-and-sales.html)\n• [Lección 8: Volumen y delta](/education/curriculum/beginner/08-volume-and-delta.html)\n• [Lección 28: Absorción y agotamiento](/education/curriculum/intermediate/28-absorption-and-exhaustion.html)\n• [Lección 29: Volumen en el precio](/education/curriculum/intermediate/29-volume-at-price.html)\n\n**Sigue por:** la lección 29 separa el recuento que no necesita inferencia del número que todo el mundo cita.",
+    "sweep": "**Barridos y cazas de stops:**\n\nEl precio pasa de largo un nivel y vuelve. Que haya ocurrido siquiera lo deciden tres ajustes y no el mercado.\n\n**Lo que mide el curso:**\n• Valores corrientes de los tres ajustes encuentran 4 barridos sobre las mismas sesenta barras, o 15, o 46\n• Una cascada a través de stops en espera no necesita autor\n• La misma técnica vale sesenta y dos mil dólares para un participante y veinticinco para otro\n• La conducta efectivamente probada en los tribunales se da a tamaño institucional y contra otras máquinas\n\n**Lecciones:**\n• [Lección 27: La mentira de la liquidez](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n• [Lección 35: Barridos, más allá del primero](/education/curriculum/intermediate/35-sweeps-beyond-the-first.html)\n• [Lección 61: El número que no puedes consultar](/education/curriculum/advanced/61-thinking-adversarially.html)\n\n**La versión honesta:** cuenta primero los niveles que tu propia regla de swing se concede, y luego los barridos.",
+    "structure": "**Estructura de mercado:**\n\nLa secuencia de máximos y mínimos de swing como la que se lee una serie. No está en los precios; se produce al aplicarles una definición de swing, y esa definición es un ajuste que nadie enuncia.\n\n**Lo que mide el curso:**\n• Sobre las mismas veinte barras, ajustes corrientes dan ocho eventos de estructura, o dos, o ninguno\n• Dos ajustes corrientes discrepan sobre quién manda en cuatro barras de doce\n• Una rotura de estructura predice algo que puedes contar, y por eso gana a los patrones gráficos con nombre\n• Los order blocks y el desplazamiento comparten el mismo ajuste no declarado\n\n**Lecciones:**\n• [Lección 32: Estructura de mercado](/education/curriculum/intermediate/32-market-structure.html)\n• [Lección 33: Order blocks y displacement](/education/curriculum/intermediate/33-order-blocks-and-displacement.html)\n• [Lección 40: Estructura de varios días](/education/curriculum/intermediate/40-multi-day-structure.html)\n\n**Antes de usarla:** escribe tu definición de swing y luego cuenta.",
+    "divergence": "**Divergencia:**\n\nEl precio discrepando de un número calculado a partir del precio. Como el indicador es una función de esos mismos precios, una divergencia es una consecuencia aritmética del recorrido y no un testigo independiente de él.\n\n**Lo que mide el curso:**\n• Dos ajustes deciden si existe siquiera: una regla de swing y un periodo del oscilador\n• Antes de que ninguno de los dos mire un indicador, la regla de swing por sí sola decide si hay 33 sitios donde mirar o 5\n• El indicador no puede añadir información, porque se calculó a partir de los precios\n\n**Lecciones:**\n• [Lección 34: Divergencia](/education/curriculum/intermediate/34-divergence.html)\n• [Lección 48: Qué es un indicador](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n\n**Hoja de trabajo:** la hoja de recuento de divergencias de la página de recursos hace esto sobre tu propia serie.",
+    "regime": "**Régimen, contexto y temporalidad:**\n\nEn cuál de dos comportamientos está un tramo de serie, medido en vez de nombrado, y qué es en realidad una temporalidad en cuanto notas que tiene dos ajustes.\n\n**Lo que mide el curso:**\n• El ratio de eficiencia separa por completo un tramo lateral de un impulso, y trae consigo una ventana\n• Cambia la ventana de diez cierres a treinta y las dos lecturas discrepan en 22 de 30 barras\n• Reagrupa sesenta barras de cuatro en cuatro y el recuento de swings cae de 15 a 2 mientras el máximo y el mínimo no se mueven\n• Mueve solo la barra inicial y el mismo ratio va de 0,104 a 0,249 sobre la misma cinta\n\n**Lecciones:**\n• [Lección 36: Los mercados tienen modos](/education/curriculum/intermediate/36-markets-have-modes.html)\n• [Lección 37: Detectar un cambio de régimen](/education/curriculum/intermediate/37-detecting-a-regime-change.html)\n• [Lección 38: Qué es un marco temporal](/education/curriculum/intermediate/38-what-a-timeframe-is.html)\n• [Lección 44: La volatilidad como cantidad](/education/curriculum/intermediate/44-volatility-as-a-quantity.html)\n\n**El coste de esperar:** la lección 37 pone precio a lo que aporta y a lo que cuesta cada barra de confirmación.",
+    "indicators": "**Indicadores, con honestidad:**\n\nUn indicador es una función de números que ya tienes, y de esa sola frase se siguen cuatro consecuencias.\n\n**Lo que mide el curso:**\n• No puede añadir información: todo lo legible en la línea era legible en los precios\n• Descarta, y lo descartado se puede contar\n• Llega tarde en una cantidad que calculas en vez de adivinar: 4,50 barras para una media simple de diez periodos\n• Dos implementaciones estándar del RSI imprimen trece lecturas por encima de 70 y ninguna sobre los mismos sesenta cierres\n\n**Lecciones:**\n• [Lección 48: Qué es un indicador](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n• [Lección 49: Repintado](/education/curriculum/intermediate/49-repainting.html)\n• [Lección 50: Las medias móviles como soporte](/education/curriculum/intermediate/50-moving-averages.html)\n• [Lección 51: Osciladores bajo el régimen](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n• [Lección 52: El sesgo de confirmación, medido](/education/curriculum/intermediate/52-confirmation-bias.html)\n\n**La versión medida de la confirmación:** doce configuraciones de indicador son 1,71 opiniones independientes.",
+    "backtest": "**El backtest como evidencia:**\n\nHacer correr una regla sobre precios pasados para ver qué habría hecho, tratado como evidencia con una fuerza que puedes enunciar y no como un resultado.\n\n**Lo que mide el curso:**\n• Una búsqueda entre 253 reglas saca una ganadora con 9,84 por acción frente a 5,68 por mantener, sobre 7 operaciones, t = 3,65\n• Como se buscaron 253 configuraciones, el listón que debe superar es 3,54 y no 1,65\n• Juzgar de continuo en vez de en un horizonte fijo lleva la tasa de aprobado de un sistema muerto del 5,05 por ciento al 24,25\n• El walk-forward quita una manera de engañarte a ti mismo, y no las demás\n\n**Lecciones:**\n• [Lección 62: Qué tendría que pasar](/education/curriculum/advanced/62-from-observation-to-hypothesis.html)\n• [Lección 63: Backtesting como prueba](/education/curriculum/advanced/63-backtesting.html)\n• [Lección 64: El precio de buscar](/education/curriculum/advanced/64-overfitting.html)\n• [Lección 65: El horizonte que fijas primero](/education/curriculum/advanced/65-forward-testing-and-deployment.html)\n\n**Las cuatro restas** entre una cifra bruta y una en la que valga la pena creer están en la lección 63.",
+    "overfitting": "**Sobreajuste y el precio de mirar:**\n\nElegir los ajustes de una regla con los mismos datos que sirven para juzgarla, de modo que el juicio mide la búsqueda y no la regla.\n\n**Lo que mide el curso:**\n• Una búsqueda de 15.000 configuraciones sobre 156 operaciones fabrica 0,317 de una R antes de que el mercado haga nada\n• Esa cifra sale de los dos recuentos solos, sin ningún precio dentro\n• El listón sube con la búsqueda: 3,54 en vez de 1,65 tras 253 configuraciones\n• Con un candidato vivo de cada diez, dos hábitos corrientes llevan una prueba disciplinada del 43,2 por ciento real al 6,0\n\n**Lecciones:**\n• [Lección 64: El precio de buscar](/education/curriculum/advanced/64-overfitting.html)\n• [Lección 63: Backtesting como prueba](/education/curriculum/advanced/63-backtesting.html)\n• [Lección 84: La parte que es real](/education/curriculum/professional/84-behavioural-finance.html)\n\n**La defensa:** enuncia el horizonte y el tamaño de la búsqueda antes de mirar.",
+    "portfolio": "**Cartera y correlación:**\n\nA cuántas apuestas independientes equivale de verdad un conjunto de posiciones, y cuál de tus límites aprieta antes que los demás.\n\n**Lo que mide el curso:**\n• Dos reglas sobre un instrumento, a la correlación medida, llevan 1,03 apuestas en vez de dos\n• Por muchas que añadas, el total se detiene en 1,06\n• Veinte posiciones con una correlación media por pares de 0,3 llevan el riesgo de tres independientes\n• El límite de pérdida diaria es la única columna que se puede imponer antes de enviar una orden\n\n**Lecciones:**\n• [Lección 71: Cuántas apuestas llevas de verdad](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Lección 72: El día en que salta cada stop](/education/curriculum/professional/72-portfolio-heat.html)\n• [Lección 73: Los pesos que puedes sostener](/education/curriculum/professional/73-allocating-across-strategies.html)\n• [Lección 74: La ventana decide](/education/curriculum/professional/74-where-portfolio-theory-fails.html)\n• [Lección 75: Qué límite aprieta primero](/education/curriculum/professional/75-institutional-risk-controls.html)\n\n**El hallazgo:** la correlación se mueve entre dos mitades de un mismo registro lo bastante para cambiar la respuesta.",
+    "book": "**Un libro de reglas:**\n\nCuánto gana una rejilla entera de reglas frente a su mejor miembro, de dónde salió el resultado, y si cada miembro se gana su sitio.\n\n**Lo que mide el curso:**\n• El libro equiponderado de 253 reglas gana 4,16 por acción, exactamente la media de las reglas que contiene\n• Tres de los veintiocho movimientos del libro llevan el 80,5 por ciento de su rendimiento\n• La rotación lleva 4,10 a 3,70 e invierte el orden dentro del libro\n• Tres de cada cuatro supresiones de un miembro mejoran el libro\n\n**Lecciones:**\n• [Lección 91: Lo que gana la parrilla entera](/education/curriculum/professional/91-what-the-whole-grid-earns.html)\n• [Lección 92: De dónde vino el resultado](/education/curriculum/professional/92-where-the-result-came-from.html)\n• [Lección 93: La regla que más opera](/education/curriculum/professional/93-the-rule-that-trades-the-most.html)\n• [Lección 94: El viaje que de verdad compraste](/education/curriculum/professional/94-the-ride-you-actually-bought.html)\n• [Lección 95: El libro en una ficha](/education/curriculum/professional/95-the-book-on-one-card.html)\n\n**La prueba:** quita cada miembro por turno y recalcula todas las columnas, no solo el rendimiento.",
+    "business": "**El trading como negocio:**\n\nQué se hacen entre sí el ritmo, el coste, la retirada y el registro una vez que alguien vive del resultado.\n\n**Lo que mide el curso:**\n• 13 órdenes en 28 días son 4,875 operaciones completas al mes\n• Una ventaja auténtica de una décima de R sigue perdiendo el 41,3 por ciento de sus meses\n• Una retirada de 500 frente a 487,50 ganados exige un saldo de 102.564 para quedar en tablas\n• Cinco filas fallan en un orden fijo, y el negocio falla en la segunda: el coste\n\n**Lecciones:**\n• [Lección 96: El mes que pierde](/education/curriculum/professional/96-the-month-that-loses.html)\n• [Lección 97: El dinero que sacas](/education/curriculum/professional/97-the-money-you-take-out.html)\n• [Lección 98: El n&uacute;mero que habla de escala](/education/curriculum/professional/98-the-number-that-says-scale.html)\n• [Lección 99: Cuánto dura el dinero](/education/curriculum/professional/99-how-long-the-money-lasts.html)\n• [Lección 100: El negocio en una página](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**La ficha:** la lección 100 pone los cinco números en el orden en que aprietan.",
+    "psychology": "**El operador, medido:**\n\nCuatro hábitos puestos a precio sobre las mismas siete operaciones, para que la discusión sea de aritmética y no de disciplina.\n\n**Lo que mide el curso:**\n• Tomar el beneficio en el primer cierre verde cuesta 2,20 por acción y deja la tasa de acierto exactamente donde estaba\n• Un stop de un cuarto de R cuesta 5,90 por acción\n• Sumarlos predice que quedan 1,74; correr los dos a la vez deja 4,44\n• El 26,7 por ciento de todo lo que llegó a verse en pantalla se devolvió\n\n**Lecciones:**\n• [Lección 86: Tomar el beneficio](/education/curriculum/professional/86-taking-the-profit.html)\n• [Lección 87: La segunda salida](/education/curriculum/professional/87-the-second-exit.html)\n• [Lección 88: El tamaño de la siguiente](/education/curriculum/professional/88-the-size-of-the-next-one.html)\n• [Lección 89: El dinero que estaba en pantalla](/education/curriculum/professional/89-the-money-that-was-showing.html)\n• [Lección 90: Los cuatro hábitos juntos](/education/curriculum/professional/90-the-four-habits-together.html)\n\n**Por qué falla la suma:** dos salidas no se acumulan, compiten, y solo salta la primera.",
+    "glossary": "**Glosario:**\n\nTodos los términos que usan las 100 lecciones, definidos como los define la lección que los introduce, con la lección indicada en cada uno.\n\n📖 [Abrir el glosario](/education/glossary.html)\n\nUn término se gana su sitio solo cuando una lección lo define y hace algo con él, y donde una definición lleva un número, ese número está medido en la lección indicada y no supuesto aquí.\n\n**Consejo:** las entradas siguen el orden alfabético de sus nombres en inglés; usa Ctrl+F, o Cmd+F en Mac.",
+    "worksheets": "**Hojas de trabajo y plantillas:**\n\nDiecisiete descargas gratuitas, cada una una tarde de aritmética sobre tu propio registro y no un resumen para leer. La columna de la derecha lleva lo que midió la lección sobre sus propias barras, para que tu respuesta tenga algo con lo que discrepar.\n\n📥 [Hojas de trabajo y plantillas](/education/resources.html)\n📁 [Todos los recursos gratuitos](/education/free/index.html)\n\n**Sin correo electrónico.** Aquí no hay nada tras un muro.\n\n**Lee antes la lección.** Una hoja cuya lección no has leído produce números que no puedes interpretar.",
+    "languages": "**Idiomas:**\n\nTodo el currículo es gratuito en doce idiomas: inglés, alemán, español, francés, italiano, portugués, neerlandés, ruso, japonés, turco, húngaro y árabe.\n\nUsa el selector de idioma de la cabecera. Cada lección, cada página de nivel y este asistente siguen el idioma en el que estás leyendo.\n\n**No es salida de máquina:** cada lección se traduce y luego se relee como prosa, y cada cifra se contrasta con el inglés.",
+    "search": "**Encontrar una lección:**\n\n🔍 [Buscar en las 100 lecciones](/education/search.html) — por tema, concepto o palabra clave\n🗺 [Rutas de lectura](/education/paths.html) — nueve recorridos por el curso según el tema\n📚 [Currículo completo](/education/) — las 100 en orden de módulo\n📖 [Glosario](/education/glossary.html) — todos los términos que definen las lecciones\n\n**Si el tema importa más que la dificultad,** empieza por una ruta de lectura: riesgo, coste, evidencia, el order book, indicadores, carteras, el negocio, las afirmaciones y el calendario."
+  },
+  "fr": {
+    "beginner": "**Niveau Débutant** (24 leçons) — comment fonctionne un marché, ce qu’il coûte, ce qu’est le risque\n\n📚 [Voir toutes les leçons du niveau Débutant](/education/beginner.html)\n\n**Ce que vous allez apprendre :**\n• L’Order Book, le spread et le Market Maker, déduits d’un seul problème\n• Ce qu’est une exécution, et les cinq nombres qu’une bougie garde de son intervalle\n• Pourquoi toute position s’ouvre en perte, et quelles sont les quatre charges\n• L’espérance, et combien de temps avant que votre propre historique règle quoi que ce soit\n• La taille de position, l’endroit où va le stop, et le risque de ruine\n\n**Leçons clés :**\n• Ce que résout un marché (leçon 1)\n• Toute transaction commence en négatif (leçon 10)\n• Espérance (leçon 17)\n• Le risque de ruine (leçon 22)\n\n**Durée :** 6-12 min par leçon\n**Pour qui :** quiconque n’a pas encore chiffré un aller-retour",
+    "intermediate": "**Niveau Intermédiaire** (28 leçons) — lire l’enchère, et quand cette lecture s’applique\n\n📚 [Voir toutes les leçons du niveau Intermédiaire](/education/intermediate.html)\n\n**Ce que vous allez apprendre :**\n• Où repose la liquidité, et pourquoi le carnet affiché est une annonce\n• Absorption, épuisement, volume au prix et taille cachée\n• Structure, order blocks et balayages, avec les définitions écrites\n• Régimes, unités de temps, séances, volatilité, corrélation et cycle macro\n• Ce qu’est un indicateur, et ce qu’il jette pour en être un\n\n**Leçons clés :**\n• Où la liquidité se dépose (leçon 25)\n• Structure de marché (leçon 32)\n• Les marchés ont des états (leçon 36)\n• Ce qu&rsquo;est un indicateur (leçon 48)\n\n**Durée :** 8-14 min par leçon\n**Pour qui :** ceux qui savent déjà chiffrer leurs propres coûts",
+    "advanced": "**Niveau Avancé** (18 leçons) — qui d’autre se trouve dans le carnet, et construire un système\n\n📚 [Voir toutes les leçons du niveau Avancé](/education/advanced.html)\n\n**Ce que vous allez apprendre :**\n• Ce que paie le spread, et le tarif qui achemine votre ordre\n• Ce que vaut une milliseconde, et ce que coûte de travailler un million de titres\n• Ce qu’il faudrait qu’il se passe, et le backtest traité comme une preuve\n• Le prix de chercher, l’horizon que vous fixez, la référence que vous avez choisie\n• Drawdown, capacité, le délai que vous supprimez, l’apprentissage automatique comme filtre\n\n**Leçons clés :**\n• Ce que paie l&rsquo;écart (leçon 53)\n• Le backtesting comme preuve (leçon 63)\n• Le prix de la recherche (leçon 64)\n• Le drawdown auquel il faut vous attendre (leçon 67)\n\n**Durée :** 10-16 min par leçon\n**Pour qui :** ceux qui construisent quelque chose qu’ils comptent tester",
+    "progress": "**Votre progression :**\n\nVotre progression est enregistrée automatiquement à mesure que vous lisez.\n\n**Comment fonctionne le suivi :**\n✅ Progression enregistrée en local (aucun compte nécessaire)\n✅ Synchronisation entre appareils (bientôt, via Supabase)\n✅ Badges d’achèvement par niveau\n✅ Compteur de séries pour les leçons quotidiennes\n\n**Voir votre progression :**\n• La page d’accueil affiche le pourcentage global d’achèvement\n• Chaque page de niveau affiche les leçons terminées\n• Les coches vertes sont les leçons terminées\n\n**Astuce :** une leçon par jour, dans l’ordre, et faites les exercices. Se\nrappeler est la seule répétition qui fixe vraiment quelque chose. 🔥",
+    "curriculum": "**Le programme du SignalPilot Education Hub :**\n\n**Quatre niveaux progressifs :**\n\n🟢 **Niveau 1 : Débutant** (24 leçons)\n→ Comment fonctionne un marché, ce qu’il coûte, et ce qu’est le risque\n\n🟡 **Niveau 2 : Intermédiaire** (28 leçons)\n→ Lire l’enchère, et quand cette lecture s’applique\n\n🔴 **Niveau 3 : Avancé** (18 leçons)\n→ Qui d’autre se trouve dans le carnet, et construire un système\n\n⚫ **Niveau 4 : Professionnel** (30 leçons)\n→ Portefeuille, métier et spécialités\n\n**Total :** 100 leçons complètes\n\n📚 [Voir le programme complet](/)\n\n**Parcours conseillé :** dans l’ordre, de 1 à 100. Chaque leçon dépense un chiffre\nmesuré par une leçon antérieure : la séquence est l’argument.\n\n**Temps à prévoir :** environ 6-16 min par leçon",
+    "rsi": "**Oscillateurs et RSI :**\n\n**Leçon principale :** [Leçon 51&nbsp;: Les oscillateurs sous régime](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n\n**Points clés :**\n• Un oscillateur est une fonction de prix que vous avez déjà, il n’ajoute donc aucune information\n• La même lecture ne veut pas dire la même chose en tendance et en range\n• Ce qui compte, c’est ce que l’oscillateur jette, et le temps qu’il met à le jeter\n• Un seuil est un réglage, pas une mesure, et il doit être énoncé\n\n**En lien :** [Leçon 48&nbsp;: Ce qu&rsquo;est un indicateur](/education/curriculum/intermediate/48-what-an-indicator-is.html), [Leçon 36&nbsp;: Les marchés ont des états](/education/curriculum/intermediate/36-markets-have-modes.html)\n\n**Erreur fréquente :** lire un extrême comme un signal sans énoncer d’abord le régime, et sans avoir jamais mesuré à quelle fréquence cette lecture avait raison",
+    "spread": "**Le spread :**\n\n**Leçon principale :** [Leçon 4&nbsp;: Le spread est le prix de l&rsquo;immédiateté](/education/curriculum/beginner/04-the-spread.html)\n\n**Points clés :**\n• Le spread est le prix de l’immédiateté, pas des frais que quelqu’un vous facture\n• C’est l’une des quatre charges, et la leçon 10 les chiffre toutes les quatre sur un seul trade\n• Rapporté à ce qu’un instrument bouge en une journée, le coût va d’un cinquième de pour cent à 52 pour cent\n• Poser au lieu de traverser encaisse le spread, et la leçon 58 chiffre ce que cela concède\n\n**En lien :** [Leçon 10&nbsp;: Toute transaction commence en négatif](/education/curriculum/beginner/10-every-trade-starts-negative.html), [Leçon 53&nbsp;: Ce que paie l&rsquo;écart](/education/curriculum/advanced/53-market-makers-business.html)\n\n**Où sont les nombres :** la leçon 12 classe les instruments par coût rapporté au mouvement de la journée",
+    "automation": "**Automatisation et exécution :**\n\n**Leçon principale :** [Leçon 69&nbsp;: Le délai que vous supprimez](/education/curriculum/advanced/69-automation.html)\n\n**Points clés :**\n• L’automatisation supprime un délai ; la question est ce que ce délai coûtait\n• Le slippage et les frais appartiennent au backtest, parce qu’ils sont dans le résultat\n• Une limite de perte journalière ferme mord avant toute autre limite que vous posez\n• Le rythme auquel vous tradez réellement est mesurable, et il est plus lent que ce que supposent la plupart des plans\n\n**En lien :** [Leçon 75&nbsp;: Quelle limite serre en premier](/education/curriculum/professional/75-institutional-risk-controls.html), [Leçon 76&nbsp;: Le rythme auquel vous tradez vraiment](/education/curriculum/professional/76-trading-day.html)\n\n**Règle :** ne mettez rien en service dont vous n’avez pas chiffré la panne",
+    "chatbot": "**À propos de ce chatbot :**\n\nJe suis un assistant qui reconnaît des motifs (aucune API d’IA nécessaire !), conçu pour vous aider à circuler dans les 100 leçons.\n\n**Je peux vous aider à :**\n• Choisir des leçons (« Par où commencer ? »)\n• Comprendre des notions (« Explique le RSI selon le régime »)\n• Trouver des leçons (« Leçons sur le coût du spread »)\n• Suivre votre avancement (« Comment suivre ma progression ? »)\n\n**Ce que je ne peux pas faire :**\n• Des recommandations de trades\n• De l’analyse de marché en temps réel\n• Des conseils sur votre compte\n• Passer des ordres\n\n**Comment je fonctionne :**\n• Reconnaissance de motifs (réponses immédiates)\n• Base de connaissances tirée des 100 leçons\n• Aucune donnée envoyée à une API externe\n• Historique de conversation gardé en local\n\n**Astuce :** posez des questions entières, comme « Comment le spread achat-vente fonctionne-t-il comme indicateur avancé ? » ; la réponse sera meilleure.",
+    "start": "**Premiers pas :**\n\n**Parcours d’apprentissage conseillé :**\n\n**Semaines 1-4 : Débutant** (24 leçons, places 1-24)\n→ Départ : [Leçon 1&nbsp;: Ce que résout un marché](/education/curriculum/beginner/01-what-a-market-solves.html)\n→ Objectif : le mécanisme, ce que coûte le trading, et ce qu’est réellement le risque\n\n**Semaines 5-9 : Intermédiaire** (28 leçons, places 25-52)\n→ [Leçon 25&nbsp;: Où la liquidité se dépose](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n→ Objectif : lire l’enchère, et le contexte qui décide quand une lecture s’applique\n\n**Semaines 10-13 : Avancé** (18 leçons, places 53-70)\n→ [Leçon 53&nbsp;: Ce que paie l&rsquo;écart](/education/curriculum/advanced/53-market-makers-business.html)\n→ Objectif : qui d’autre se trouve dans le carnet, et construire un système qui survit aux tests\n\n**À partir de la semaine 14 : Professionnel** (30 leçons, places 71-100)\n→ [Leçon 71&nbsp;: Combien de paris vous portez vraiment](/education/curriculum/professional/71-positions-are-one-position.html)\n→ Objectif : portefeuille, l’arithmétique du métier, et quatre spécialités\n\n**Temps à prévoir :** 6-16 min par leçon\n**But :** une leçon par jour, dans l’ordre. Chacune dépense ce que la précédente a mesuré.\n\n**Actions rapides :**\n• [Parcourir toutes les leçons](/)\n• [Chercher des leçons](/education/search.html)",
+    "lessons": "**À propos de nos leçons :**\n\n**Structure :** chaque leçon a les mêmes sept parties, dans cet ordre :\n• L’affirmation — ce que trouve la leçon, dans ses 200 premiers mots, avec un chiffre\n• Prérequis — ce qu’elle dépense, et quelle leçon l’a mesuré\n• Développement — l’argument, construit plutôt qu’affirmé\n• Exemple travaillé — un seul, avec tous les nombres recalculables depuis la page\n• Limites — là où le résultat cesse d’être vrai\n• Exercices — ce qu’il faut aller mesurer sur vos propres données\n• Sources — ce sur quoi la leçon s’appuie, et comment\n\n**Longueur :** de 1 400 à 5 000 mots. La longueur est un résultat, jamais un objectif.\n\n**Style :** chaque chiffre de la page est dérivé sur la page. Pas de trader\ncomposite, pas d’historique inventé, pas de récit de pertes et profits. Si un\nnombre est cité d’une leçon antérieure, c’est cette leçon qui l’a imprimé.\n\n**Total :** 100 leçons sur 4 niveaux, en 14 modules\n\n**Ce qui les distingue :**\n✅ Chaque affirmation est réfutable et dit ce qui la réfuterait\n✅ Chaque chiffre est recalculé, pas répété\n✅ Chaque leçon finit en annonçant ce que trouve la suivante, avec son nombre\n✅ Les limites sont aussi longues que l’argument\n✅ Disponibles en 11 langues en plus de l’anglais\n\n📚 [Parcourir toutes les leçons](/)",
+    "help": "**Voici ce sur quoi je peux aider :**\n\n📚 **Le cours** — « programme » | « par où commencer » | « leçons pour débutants » | « niveau professionnel »\n💸 **Coûts** — « ce que coûte le trading » | « slippage » | « commission »\n🎲 **Risque** — « taille de position » | « risque de ruine » | « drawdown »\n📏 **Preuves** — « espérance » | « combien de trades avant de savoir » | « backtest » | « surajustement »\n📖 **L’enchère** — « Order Book » | « Order Flow » | « balayages » | « structure de marché » | « divergence »\n🧭 **Contexte** — « régime » | « unité de temps » | « volatilité »\n🔍 **Indicateurs** — « qu’est-ce qu’un indicateur » | « RSI » | « moyennes mobiles » | « repaint »\n📐 **Portefeuille** — « corrélation » | « paris indépendants » | « limites de position »\n💼 **L’entreprise** — « vivre du trading » | « retrait » | « le livre de règles » | « psychologie »\n📥 **Matériel gratuit** — « fiches de travail » | « glossaire » | « langues » | « recherche »\n\n**Essayez de demander :**\n• « Combien de trades avant de savoir si mon avantage est réel ? »\n• « Que coûte vraiment un aller-retour ? »\n• « Les chasses aux stops existent-elles vraiment ? »\n• « Puis-je vivre du trading ? »\n• « Avez-vous des fiches de travail ? »\n\nChaque réponse nomme la leçon dont elle vient, et chaque chiffre y est mesuré dans cette leçon plutôt qu’affirmé ici. Tapez simplement votre question. 💬",
+    "default": "Je ne suis pas sûr pour cette question précise.\n\nEssayez plutôt :\n📚 **Leçons :** niveaux Débutant, Intermédiaire, Avancé\n🎯 **Notions :** RSI, spreads, automatisation, volume, Order Flow\n📊 **Premiers pas :** parcours d’apprentissage, suivi de progression\n🔧 **Fonctions :** chatbot, recherche, programme\n\nTapez **« aide »** pour voir tous les sujets.\n\n💡 **Astuce :** la barre de recherche en haut fouille les 100 leçons, ou bien parcourez par niveau depuis l’accueil.\n\n**Liens rapides :**\n• [Leçons pour débutants](/education/beginner.html)\n• [Leçons du niveau intermédiaire](/education/intermediate.html)\n• [Leçons du niveau avancé](/education/advanced.html)\n• [Chercher dans toutes les leçons](/education/search.html)",
+    "professional": "**Niveau Professionnel :**\n\n30 leçons (places 71-100) sur le fait de porter plus d’une position, l’arithmétique d’en faire son métier, quatre spécialités, et les cinq leçons qui retournent les mesures et les pointent vers le trader.\n\n**Ce que le cours mesure :**\n• Deux règles sur un instrument portent 1,03 pari indépendant au lieu de deux, et le total plafonne à 1,06\n• Un salaire exige 11,40 années de ce salaire en capital, le verdict sur l’avantage étant à 10,07 ans de là\n• Les quatre habitudes menées ensemble laissent 4,44 par action là où additionner leurs coûts séparément prédit 1,74\n• Un aller-retour de 0,1230 prend 79,7 pour cent d’un avantage d’un dixième de R et fait passer un verdict de 785 trades à 18 952\n\n**Leçons :**\n• [Leçon 71&nbsp;: Combien de paris vous portez vraiment](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Leçon 79&nbsp;: Se payer avant de savoir](/education/curriculum/professional/79-career-paths.html)\n• [Leçon 90&nbsp;: Les quatre habitudes ensemble](/education/curriculum/professional/90-the-four-habits-together.html)\n• [Leçon 100&nbsp;: L&rsquo;affaire sur une page](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**Durée :** 7-12 min par leçon\n**Pour qui :** quiconque sait déjà chiffrer un aller-retour et veut savoir ce qu’une entreprise bâtie dessus peut supporter",
+    "cost": "**Ce que coûte le trading :**\n\nQuatre charges sont prélevées, que le trade marche ou non : le spread, la commission, le slippage et le financement. Le module 2 les chiffre toutes les quatre, et chaque leçon suivante les soustrait.\n\n**Ce que le cours mesure :**\n• Toute position s’ouvre en perte, et le financement continue de la creuser tant que vous la gardez\n• Le même ordre de 30 000 $ coûte 0,30 $ sur un instrument et 80,00 $ sur un autre, au même instant\n• Un aller-retour va de 0,2 point de base sur un ETF indiciel à 467 sur une micro-capitalisation\n• Un simulateur met tout cela à zéro : une stratégie annonçant +1 000 $ sur cent trades laisse −700 $ nets\n\n**Leçons :**\n• [Leçon 10&nbsp;: Toute transaction commence en négatif](/education/curriculum/beginner/10-every-trade-starts-negative.html)\n• [Leçon 11&nbsp;: Slippage et impact à taille de particulier](/education/curriculum/beginner/11-slippage-and-impact.html)\n• [Leçon 12&nbsp;: Que devriez-vous trader en réalité](/education/curriculum/beginner/12-what-should-you-trade.html)\n• [Leçon 16&nbsp;: Simulateur contre réel](/education/curriculum/beginner/16-sim-against-live.html)\n\n**Où se trouve l’arithmétique :** la leçon 12 classe les instruments par coût rapporté à ce qu’ils bougent en une journée.",
+    "risk": "**Risque, taille et ruine :**\n\nCombien engager, où va le stop, et la probabilité qu’une série perdante mette fin au compte. Les trois se calculent, ils ne se ressentent pas.\n\n**Ce que le cours mesure :**\n• Un gagnant à +2R et deux perdants à −1R font zéro en R et coûtent tout de même de l’argent au compte\n• La ruine découle de trois nombres que vous avez déjà : l’avantage, la fraction risquée, et jusqu’où vous pouvez tomber\n• Augmenter la taille pour se refaire à 5 pour cent par trade vous ramène au plus haut dans neuf carrières sur cent\n• Un avantage authentique d’un dixième de R passe ses 156 trades à l’intérieur d’un pire drawdown médian de 8,82R\n\n**Leçons :**\n• [Leçon 20&nbsp;: Taille de position](/education/curriculum/beginner/20-position-sizing.html)\n• [Leçon 21&nbsp;: Où placer le stop](/education/curriculum/beginner/21-where-the-stop-goes.html)\n• [Leçon 22&nbsp;: Le risque de ruine](/education/curriculum/beginner/22-risk-of-ruin.html)\n• [Leçon 67&nbsp;: Le drawdown auquel il faut vous attendre](/education/curriculum/advanced/67-is-the-edge-gone.html)\n\n**Commencez par :** la leçon 20, d’où vient chaque chiffre ultérieur exprimé en R.",
+    "expectancy": "**Espérance et taille d’échantillon :**\n\nUn avantage est un nombre, pas une impression devant un graphique, et ce nombre arrive avec un intervalle autour de lui que la plupart des historiques sont bien trop courts pour refermer.\n\n**Ce que le cours mesure :**\n• E = p·b − (1−p), dans l’unité de ce que vous risquez\n• Cinquante trades ne distinguent pas une méthode qui fait 0,35R par trade d’une méthode sans aucun avantage\n• Un avantage d’un dixième de R demande 785 trades bruts, et 18 952 une fois l’aller-retour soustrait\n• Ce qu’un avantage réel donne à ressentir de l’intérieur, c’est le plus souvent rien\n\n**Leçons :**\n• [Leçon 17&nbsp;: Espérance](/education/curriculum/beginner/17-expectancy.html)\n• [Leçon 18&nbsp;: Ce que fait ressentir un edge](/education/curriculum/beginner/18-what-an-edge-feels-like.html)\n• [Leçon 19&nbsp;: Combien de temps avant de le savoir](/education/curriculum/beginner/19-how-long-until-you-know.html)\n• [Leçon 98&nbsp;: Le nombre qui parle d&rsquo;&eacute;chelle](/education/curriculum/professional/98-the-number-that-says-scale.html)\n\n**L’habitude :** calculez votre propre taille d’échantillon avant d’annoncer un taux de réussite.",
+    "orderbook": "**L’Order Book et la liquidité :**\n\nCe qui est posé, où c’est posé, et le peu que la cotation en décrit réellement.\n\n**Ce que le cours mesure :**\n• Un carnet ordinaire pose 7 300 titres derrière une cotation qui en décrit 900\n• Une taille posée ne coûte rien à placer et rien à retirer, donc un mur vaut ce que vaut sa fréquence de tenue\n• Les ordres s’entassent à des niveaux que vous pouvez nommer d’avance, et cet entassement ne demande aucune coordination\n• Un stop est invisible tant qu’il n’a pas été déclenché, donc une poche est un flux futur certain que personne ne peut observer\n\n**Leçons :**\n• [Leçon 2&nbsp;: L&rsquo;Order Book](/education/curriculum/beginner/02-the-order-book.html)\n• [Leçon 25&nbsp;: Où la liquidité se dépose](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n• [Leçon 26&nbsp;: L&rsquo;order book est un théâtre](/education/curriculum/intermediate/26-order-book-is-theater.html)\n• [Leçon 27&nbsp;: Le mensonge de la liquidité](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n\n**La correction :** la leçon 27 trouve que l’intention ne peut pas être identifiée à partir du prix, quel que soit le nom donné à la figure.",
+    "orderflow": "**Order Flow, delta et le ruban :**\n\nCe que le ruban déclare et ce que votre logiciel infère. Trois des quatre faits qui accompagnent une impression sont enregistrés ; le quatrième, le sens, est une estimation dont le taux d’erreur est connu.\n\n**Ce que le cours mesure :**\n• L’inférence du sens agresseur est juste environ quatre fois sur cinq\n• Une seule impression mal classée de 900 titres fait basculer une minute de plus 600 à moins 1 200\n• Une barre annoncée à plus 15 pour cent de delta ne borne la part acheteuse qu’entre 50,0 et 62,5 pour cent\n• Deux barres peuvent partager chaque grandeur qu’enregistre une bougie et porter tout de même des deltas de +2 820 et −1 680\n\n**Leçons :**\n• [Leçon 7&nbsp;: Time and Sales](/education/curriculum/beginner/07-time-and-sales.html)\n• [Leçon 8&nbsp;: Volume et delta](/education/curriculum/beginner/08-volume-and-delta.html)\n• [Leçon 28&nbsp;: Absorption et épuisement](/education/curriculum/intermediate/28-absorption-and-exhaustion.html)\n• [Leçon 29&nbsp;: Volume au prix](/education/curriculum/intermediate/29-volume-at-price.html)\n\n**À lire ensuite :** la leçon 29 sépare le décompte qui ne demande aucune inférence du nombre que tout le monde en cite.",
+    "sweep": "**Balayages et chasses aux stops :**\n\nLe prix dépasse un niveau puis revient. Qu’il s’en soit produit un est décidé par trois réglages et non par le marché.\n\n**Ce que le cours mesure :**\n• Des valeurs ordinaires des trois réglages trouvent 4 balayages sur les mêmes soixante barres, ou 15, ou 46\n• Une cascade à travers des stops en attente n’a besoin d’aucun auteur\n• La même technique vaut soixante-deux mille dollars à un participant et vingt-cinq à un autre\n• La conduite effectivement établie en justice se déroule à taille institutionnelle contre d’autres machines\n\n**Leçons :**\n• [Leçon 27&nbsp;: Le mensonge de la liquidité](/education/curriculum/intermediate/27-the-liquidity-lie.html)\n• [Leçon 35&nbsp;: Les balayages, au-delà du premier](/education/curriculum/intermediate/35-sweeps-beyond-the-first.html)\n• [Leçon 61&nbsp;: Le chiffre que l&rsquo;on ne peut pas chercher](/education/curriculum/advanced/61-thinking-adversarially.html)\n\n**La version honnête :** comptez d’abord les niveaux que votre propre règle de swing s’accorde, puis les balayages.",
+    "structure": "**Structure de marché :**\n\nLa suite de plus hauts et de plus bas de swing comme laquelle une série est lue. Elle n’est pas dans les prix ; elle est produite en leur appliquant une définition de swing, et cette définition est un réglage que personne ne cite.\n\n**Ce que le cours mesure :**\n• Sur les mêmes vingt barres, des réglages ordinaires donnent huit événements de structure, ou deux, ou aucun\n• Deux réglages ordinaires se contredisent sur qui contrôle, sur quatre barres sur douze\n• Une cassure de structure prédit quelque chose de dénombrable, et c’est pour cela qu’elle bat les figures graphiques nommées\n• Les order blocks et le déplacement partagent le même réglage non déclaré\n\n**Leçons :**\n• [Leçon 32&nbsp;: Structure de marché](/education/curriculum/intermediate/32-market-structure.html)\n• [Leçon 33&nbsp;: Order blocks et displacement](/education/curriculum/intermediate/33-order-blocks-and-displacement.html)\n• [Leçon 40&nbsp;: Structure sur plusieurs jours](/education/curriculum/intermediate/40-multi-day-structure.html)\n\n**Avant de vous en servir :** écrivez votre définition de swing, puis comptez.",
+    "divergence": "**Divergence :**\n\nLe prix qui contredit un nombre calculé à partir du prix. Comme l’indicateur est une fonction de ces mêmes prix, une divergence est une conséquence arithmétique du parcours et non un témoin indépendant de celui-ci.\n\n**Ce que le cours mesure :**\n• Deux réglages décident s’il y en a une : une règle de swing et une période d’oscillateur\n• Avant même que l’un des deux regarde un indicateur, la seule règle de swing décide s’il y a 33 endroits à examiner ou 5\n• L’indicateur ne peut ajouter aucune information, puisqu’il a été calculé à partir des prix\n\n**Leçons :**\n• [Leçon 34&nbsp;: Divergence](/education/curriculum/intermediate/34-divergence.html)\n• [Leçon 48&nbsp;: Ce qu&rsquo;est un indicateur](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n\n**Fiche de travail :** la feuille de comptage des divergences, sur la page ressources, fait tourner cela sur votre propre série.",
+    "regime": "**Régime, contexte et unité de temps :**\n\nDans lequel de deux comportements se trouve un tronçon de série, mesuré plutôt que nommé, et ce qu’est réellement une unité de temps dès qu’on remarque qu’elle a deux réglages.\n\n**Ce que le cours mesure :**\n• Le rapport d’efficacité sépare complètement un tronçon plat d’une hausse, et il porte une fenêtre\n• Passez la fenêtre de dix clôtures à trente et les deux lectures se contredisent sur 22 barres sur 30\n• Regroupez soixante barres quatre par quatre et le nombre de swings tombe de 15 à 2 alors que le plus haut et le plus bas ne bougent pas\n• Déplacez seulement la barre de départ et le même rapport va de 0,104 à 0,249 sur un ruban identique\n\n**Leçons :**\n• [Leçon 36&nbsp;: Les marchés ont des états](/education/curriculum/intermediate/36-markets-have-modes.html)\n• [Leçon 37&nbsp;: Repérer un changement de régime](/education/curriculum/intermediate/37-detecting-a-regime-change.html)\n• [Leçon 38&nbsp;: Ce qu&rsquo;est une unité de temps](/education/curriculum/intermediate/38-what-a-timeframe-is.html)\n• [Leçon 44&nbsp;: La volatilité comme quantité](/education/curriculum/intermediate/44-volatility-as-a-quantity.html)\n\n**Ce que coûte l’attente :** la leçon 37 chiffre ce que chaque barre de confirmation apporte et coûte.",
+    "indicators": "**Les indicateurs, honnêtement :**\n\nUn indicateur est une fonction de nombres que vous avez déjà, et quatre conséquences découlent de cette seule phrase.\n\n**Ce que le cours mesure :**\n• Il ne peut pas ajouter d’information : tout ce qui se lisait sur la ligne se lisait déjà sur les prix\n• Il jette, et ce qu’il jette se compte\n• Il est en retard d’une quantité que l’on calcule au lieu de la deviner — 4,50 barres pour une moyenne simple à dix périodes\n• Deux implémentations standard du RSI impriment treize lectures au-dessus de 70 et aucune, sur les mêmes soixante clôtures\n\n**Leçons :**\n• [Leçon 48&nbsp;: Ce qu&rsquo;est un indicateur](/education/curriculum/intermediate/48-what-an-indicator-is.html)\n• [Leçon 49&nbsp;: Redessinage](/education/curriculum/intermediate/49-repainting.html)\n• [Leçon 50&nbsp;: Les moyennes mobiles comme support](/education/curriculum/intermediate/50-moving-averages.html)\n• [Leçon 51&nbsp;: Les oscillateurs sous régime](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n• [Leçon 52&nbsp;: Le biais de confirmation, mesuré](/education/curriculum/intermediate/52-confirmation-bias.html)\n\n**La version mesurée de la confirmation :** douze configurations d’indicateur font 1,71 avis indépendant.",
+    "backtest": "**Le backtest comme preuve :**\n\nFaire tourner une règle sur des prix passés pour voir ce qu’elle aurait fait, traité comme une preuve dont on peut énoncer la force plutôt que comme un résultat.\n\n**Ce que le cours mesure :**\n• Une recherche sur 253 règles sort une gagnante à 9,84 par action contre 5,68 pour la détention, sur 7 trades, t = 3,65\n• Comme 253 réglages ont été passés en revue, la barre à franchir est 3,54 et non 1,65\n• Juger en continu plutôt qu’à un horizon fixé fait passer le taux de réussite d’un système mort de 5,05 pour cent à 24,25\n• Le walk-forward supprime une manière de se tromper soi-même, et pas les autres\n\n**Leçons :**\n• [Leçon 62&nbsp;: Ce qu&rsquo;il faudrait pour que ce soit faux](/education/curriculum/advanced/62-from-observation-to-hypothesis.html)\n• [Leçon 63&nbsp;: Le backtesting comme preuve](/education/curriculum/advanced/63-backtesting.html)\n• [Leçon 64&nbsp;: Le prix de la recherche](/education/curriculum/advanced/64-overfitting.html)\n• [Leçon 65&nbsp;: L&rsquo;horizon que vous fixez d&rsquo;abord](/education/curriculum/advanced/65-forward-testing-and-deployment.html)\n\n**Les quatre soustractions** entre un chiffre brut et un chiffre digne de foi sont dans la leçon 63.",
+    "overfitting": "**Surajustement et prix de chercher :**\n\nChoisir les réglages d’une règle sur les mêmes données que celles qui servent à la juger, si bien que le jugement mesure la recherche et non la règle.\n\n**Ce que le cours mesure :**\n• Une recherche sur 15 000 configurations et 156 trades fabrique 0,317 R avant que le marché ne fasse quoi que ce soit\n• Ce chiffre sort des deux décomptes seuls, sans aucun prix dedans\n• La barre monte avec la recherche : 3,54 au lieu de 1,65 après 253 réglages\n• À un candidat vivant sur dix, deux habitudes ordinaires font passer un test discipliné de 43,2 pour cent de vrai à 6,0\n\n**Leçons :**\n• [Leçon 64&nbsp;: Le prix de la recherche](/education/curriculum/advanced/64-overfitting.html)\n• [Leçon 63&nbsp;: Le backtesting comme preuve](/education/curriculum/advanced/63-backtesting.html)\n• [Leçon 84&nbsp;: La part qui est réelle](/education/curriculum/professional/84-behavioural-finance.html)\n\n**La défense :** énoncez l’horizon et la taille de la recherche avant de regarder.",
+    "portfolio": "**Portefeuille et corrélation :**\n\nÀ combien de paris indépendants un ensemble de positions revient réellement, et laquelle de vos limites mord avant les autres.\n\n**Ce que le cours mesure :**\n• Deux règles sur un instrument, à la corrélation mesurée, portent 1,03 pari au lieu de deux\n• Quel que soit le nombre que vous ajoutez, le total plafonne à 1,06\n• Vingt positions à une corrélation moyenne par paire de 0,3 portent le risque de trois positions indépendantes\n• La limite de perte journalière est la seule colonne que l’on peut faire respecter avant l’envoi d’un ordre\n\n**Leçons :**\n• [Leçon 71&nbsp;: Combien de paris vous portez vraiment](/education/curriculum/professional/71-positions-are-one-position.html)\n• [Leçon 72&nbsp;: Le jour où chaque stop saute](/education/curriculum/professional/72-portfolio-heat.html)\n• [Leçon 73&nbsp;: Les poids que vous pouvez tenir](/education/curriculum/professional/73-allocating-across-strategies.html)\n• [Leçon 74&nbsp;: C&rsquo;est la fenêtre qui décide](/education/curriculum/professional/74-where-portfolio-theory-fails.html)\n• [Leçon 75&nbsp;: Quelle limite serre en premier](/education/curriculum/professional/75-institutional-risk-controls.html)\n\n**Le constat :** la corrélation bouge assez entre deux moitiés d’un même historique pour changer la réponse.",
+    "book": "**Un livre de règles :**\n\nCe que gagne une grille entière de règles face à son meilleur membre, d’où vient le résultat, et si chaque membre mérite sa place.\n\n**Ce que le cours mesure :**\n• Le livre équipondéré de 253 règles gagne 4,16 par action, exactement la moyenne des règles qu’il contient\n• Trois des vingt-huit mouvements du livre portent 80,5 pour cent de son rendement\n• La rotation fait passer 4,10 à 3,70 et inverse le classement à l’intérieur du livre\n• Trois suppressions sur quatre améliorent le livre\n\n**Leçons :**\n• [Leçon 91&nbsp;: Ce que rapporte toute la grille](/education/curriculum/professional/91-what-the-whole-grid-earns.html)\n• [Leçon 92&nbsp;: D&rsquo;où venait le résultat](/education/curriculum/professional/92-where-the-result-came-from.html)\n• [Leçon 93&nbsp;: La règle qui traite le plus](/education/curriculum/professional/93-the-rule-that-trades-the-most.html)\n• [Leçon 94&nbsp;: Le trajet que vous avez vraiment achet&eacute;](/education/curriculum/professional/94-the-ride-you-actually-bought.html)\n• [Leçon 95&nbsp;: Le livre sur une seule fiche](/education/curriculum/professional/95-the-book-on-one-card.html)\n\n**Le test :** retirez chaque membre à tour de rôle et recalculez toutes les colonnes, pas seulement le rendement.",
+    "business": "**Le trading comme entreprise :**\n\nCe que le rythme, le coût, le retrait et l’historique se font les uns aux autres dès qu’une personne vit du résultat.\n\n**Ce que le cours mesure :**\n• 13 ordres en 28 jours font 4,875 trades bouclés par mois\n• Un avantage authentique d’un dixième de R perd tout de même 41,3 pour cent de ses mois\n• Un retrait de 500 contre 487,50 gagnés exige un solde de 102 564 pour être à l’équilibre\n• Cinq lignes tombent dans un ordre fixe, et l’entreprise tombe à la deuxième : le coût\n\n**Leçons :**\n• [Leçon 96&nbsp;: Le mois qui perd](/education/curriculum/professional/96-the-month-that-loses.html)\n• [Leçon 97&nbsp;: L&rsquo;argent que vous retirez](/education/curriculum/professional/97-the-money-you-take-out.html)\n• [Leçon 98&nbsp;: Le nombre qui parle d&rsquo;&eacute;chelle](/education/curriculum/professional/98-the-number-that-says-scale.html)\n• [Leçon 99&nbsp;: Combien de temps l&rsquo;argent tient](/education/curriculum/professional/99-how-long-the-money-lasts.html)\n• [Leçon 100&nbsp;: L&rsquo;affaire sur une page](/education/curriculum/professional/100-the-business-on-one-page.html)\n\n**La carte :** la leçon 100 met les cinq nombres dans l’ordre où ils mordent.",
+    "psychology": "**Le trader, mesuré :**\n\nQuatre habitudes chiffrées sur les mêmes sept trades, pour que le débat porte sur l’arithmétique plutôt que sur la discipline.\n\n**Ce que le cours mesure :**\n• Prendre le profit à la première clôture verte coûte 2,20 par action et laisse le taux de réussite exactement où il était\n• Un stop à un quart de R coûte 5,90 par action\n• Les additionner prédit qu’il reste 1,74 ; les faire tourner ensemble laisse 4,44\n• 26,7 pour cent de tout ce qui s’est jamais affiché à l’écran a été rendu\n\n**Leçons :**\n• [Leçon 86&nbsp;: Prendre le bénéfice](/education/curriculum/professional/86-taking-the-profit.html)\n• [Leçon 87&nbsp;: La deuxième sortie](/education/curriculum/professional/87-the-second-exit.html)\n• [Leçon 88&nbsp;: La taille de la suivante](/education/curriculum/professional/88-the-size-of-the-next-one.html)\n• [Leçon 89&nbsp;: L&rsquo;argent qui s&rsquo;affichait](/education/curriculum/professional/89-the-money-that-was-showing.html)\n• [Leçon 90&nbsp;: Les quatre habitudes ensemble](/education/curriculum/professional/90-the-four-habits-together.html)\n\n**Pourquoi l’addition échoue :** deux sorties ne s’additionnent pas, elles se concurrencent, et seule la plus précoce se déclenche.",
+    "glossary": "**Glossaire :**\n\nChaque terme employé par les 100 leçons, défini comme le définit la leçon qui l’introduit, avec la leçon nommée pour chacun.\n\n📖 [Ouvrir le glossaire](/education/glossary.html)\n\nUn terme ne gagne sa place que lorsqu’une leçon le définit et en fait quelque chose, et là où une définition porte un nombre, ce nombre est mesuré dans la leçon nommée plutôt que supposé ici.\n\n**Astuce :** les entrées suivent l’ordre alphabétique de leurs noms anglais — Ctrl+F, ou Cmd+F sur Mac.",
+    "worksheets": "**Fiches de travail et modèles :**\n\nDix-sept téléchargements gratuits, chacun une après-midi d’arithmétique sur votre propre historique plutôt qu’un résumé à lire. La colonne de droite porte ce que la leçon a mesuré sur ses propres barres, pour que votre réponse ait de quoi être contredite.\n\n📥 [Fiches de travail et modèles](/education/resources.html)\n📁 [Toutes les ressources gratuites](/education/free/index.html)\n\n**Aucun e-mail demandé.** Rien ici n’est derrière une barrière.\n\n**Lisez d’abord la leçon.** Une fiche dont vous n’avez pas lu la leçon produit des nombres que vous ne pouvez pas interpréter.",
+    "languages": "**Langues :**\n\nTout le programme est gratuit en douze langues : anglais, allemand, espagnol, français, italien, portugais, néerlandais, russe, japonais, turc, hongrois et arabe.\n\nUtilisez le sélecteur de langue dans l’en-tête. Chaque leçon, chaque page de niveau et cet assistant suivent la langue dans laquelle vous lisez.\n\n**Ce n’est pas de la sortie machine :** chaque leçon est traduite puis relue comme de la prose, et chaque chiffre est tenu face à l’anglais.",
+    "search": "**Trouver une leçon :**\n\n🔍 [Chercher dans les 100 leçons](/education/search.html) — par sujet, notion ou mot-clé\n🗺 [Parcours de lecture](/education/paths.html) — neuf routes à travers le cours par thème\n📚 [Programme complet](/education/) — les 100 dans l’ordre des modules\n📖 [Glossaire](/education/glossary.html) — chaque terme que les leçons définissent\n\n**Si le sujet compte plus que la difficulté,** commencez par un parcours de lecture : risque, coût, preuves, l’Order Book, les indicateurs, les portefeuilles, l’entreprise, les affirmations et le calendrier."
   }
 },
   keys: {
@@ -703,6 +817,522 @@ window.SP_CHATBOT_I18N = {
       "lektionen",
       "kurs",
       "inhalt"
+    ]
+  },
+  "es": {
+    "worksheets": [
+      "hoja de trabajo",
+      "hojas de trabajo",
+      "plantilla",
+      "descarga",
+      "pdf",
+      "imprimible",
+      "cuaderno"
+    ],
+    "glossary": [
+      "glosario",
+      "definición",
+      "define",
+      "qué significa",
+      "terminología",
+      "vocabulario"
+    ],
+    "languages": [
+      "idioma",
+      "idiomas",
+      "traducido",
+      "traducción",
+      "español",
+      "alemán",
+      "francés",
+      "japonés",
+      "árabe"
+    ],
+    "business": [
+      "negocio",
+      "vivir del trading",
+      "a tiempo completo",
+      "tiempo completo",
+      "retirada",
+      "vivir de esto",
+      "sueldo",
+      "salario"
+    ],
+    "psychology": [
+      "psicología",
+      "disciplina",
+      "emoción",
+      "efecto disposición",
+      "tomar el beneficio pronto",
+      "venganza"
+    ],
+    "book": [
+      "libro de reglas",
+      "equiponderado",
+      "rejilla de reglas",
+      "dejar uno fuera",
+      "quitar un miembro"
+    ],
+    "portfolio": [
+      "cartera",
+      "correlación",
+      "apuestas independientes",
+      "límite de posición",
+      "carga",
+      "diversif"
+    ],
+    "overfitting": [
+      "sobreajuste",
+      "sobreajustar",
+      "curve fitting",
+      "precio de mirar",
+      "minería de datos"
+    ],
+    "backtest": [
+      "backtest",
+      "walk forward",
+      "walk-forward",
+      "fuera de muestra",
+      "evidencia"
+    ],
+    "indicators": [
+      "indicador",
+      "media móvil",
+      "medias móviles",
+      "oscilador",
+      "repint",
+      "sesgo de confirmación",
+      "macd"
+    ],
+    "regime": [
+      "régimen",
+      "temporalidad",
+      "marco temporal",
+      "tendencia o rango",
+      "volatilidad",
+      "contexto",
+      "sesión"
+    ],
+    "divergence": [
+      "divergencia",
+      "divergencias",
+      "divergente"
+    ],
+    "structure": [
+      "estructura de mercado",
+      "rotura de estructura",
+      "order block",
+      "cambio de carácter",
+      "máximo de swing",
+      "mínimo de swing"
+    ],
+    "sweep": [
+      "barrido",
+      "barridos",
+      "caza de stops",
+      "toma de liquidez",
+      "mentira de la liquidez",
+      "barrer los stops"
+    ],
+    "orderflow": [
+      "order flow",
+      "flujo de órdenes",
+      "delta",
+      "footprint",
+      "cinta",
+      "time and sales",
+      "cvd",
+      "absorción",
+      "agotamiento"
+    ],
+    "orderbook": [
+      "order book",
+      "libro de órdenes",
+      "profundidad de mercado",
+      "liquidez",
+      "iceberg",
+      "tamaño oculto",
+      "dom"
+    ],
+    "expectancy": [
+      "esperanza",
+      "tamaño de muestra",
+      "cuántas operaciones",
+      "cuánto falta para",
+      "ventaja es real",
+      "significancia estadística"
+    ],
+    "risk": [
+      "riesgo de ruina",
+      "tamaño de posición",
+      "tamaño de la posición",
+      "stop loss",
+      "stop-loss",
+      "dónde va el stop",
+      "drawdown",
+      "gestión del riesgo"
+    ],
+    "cost": [
+      "qué cuesta",
+      "coste de operar",
+      "costes de operar",
+      "comisión",
+      "comisiones",
+      "financiación",
+      "cuatro cargos",
+      "ida y vuelta",
+      "slippage"
+    ],
+    "professional": [
+      "nivel profesional",
+      "lecciones profesionales",
+      "proyecto final",
+      "nivel 4"
+    ],
+    "search": [
+      "encontrar una lección",
+      "buscar",
+      "búsqueda",
+      "ruta de lectura",
+      "qué lección",
+      "dónde está la lección"
+    ],
+    "help": [
+      "ayuda",
+      "qué puedes hacer",
+      "comandos",
+      "menú"
+    ],
+    "chatbot": [
+      "qué eres",
+      "quién eres",
+      "sobre este bot",
+      "sobre este chatbot"
+    ],
+    "rsi": [
+      "rsi",
+      "fuerza relativa",
+      "sobrecompra",
+      "sobreventa"
+    ],
+    "spread": [
+      "horquilla",
+      "spread",
+      "compraventa",
+      "market maker",
+      "coste de liquidez"
+    ],
+    "automation": [
+      "automatización",
+      "automatizar",
+      "interruptor de corte",
+      "cuenta demo",
+      "webhook"
+    ],
+    "progress": [
+      "progreso",
+      "racha",
+      "insignia",
+      "finalización"
+    ],
+    "start": [
+      "por dónde empiezo",
+      "por donde empiezo",
+      "cómo empiezo",
+      "primeros pasos",
+      "ruta de aprendizaje",
+      "plan de estudio",
+      "primera lección",
+      "por dónde empezar",
+      "soy nuevo",
+      "principiante total"
+    ],
+    "curriculum": [
+      "currículo",
+      "curriculo",
+      "todas las lecciones",
+      "lista de lecciones",
+      "niveles",
+      "temario"
+    ],
+    "beginner": [
+      "principiante",
+      "principiantes",
+      "fundamentos",
+      "básicos"
+    ],
+    "intermediate": [
+      "intermedio",
+      "order flow",
+      "microestructura"
+    ],
+    "advanced": [
+      "avanzado",
+      "avanzadas"
+    ],
+    "lessons": [
+      "lecciones",
+      "curso",
+      "contenido"
+    ]
+  },
+  "fr": {
+    "worksheets": [
+      "fiche de travail",
+      "fiches de travail",
+      "modèle",
+      "téléchargement",
+      "pdf",
+      "imprimable",
+      "cahier"
+    ],
+    "glossary": [
+      "glossaire",
+      "définition",
+      "définir",
+      "que veut dire",
+      "terminologie",
+      "vocabulaire"
+    ],
+    "languages": [
+      "langue",
+      "langues",
+      "traduit",
+      "traduction",
+      "espagnol",
+      "allemand",
+      "français",
+      "japonais",
+      "arabe"
+    ],
+    "business": [
+      "entreprise",
+      "vivre du trading",
+      "à plein temps",
+      "plein temps",
+      "retrait",
+      "en vivre",
+      "salaire",
+      "paie"
+    ],
+    "psychology": [
+      "psychologie",
+      "discipline",
+      "émotion",
+      "effet de disposition",
+      "prendre le profit trop tôt",
+      "revanche"
+    ],
+    "book": [
+      "livre de règles",
+      "équipondéré",
+      "grille de règles",
+      "suppression d’un membre",
+      "leave one out"
+    ],
+    "portfolio": [
+      "portefeuille",
+      "corrélation",
+      "paris indépendants",
+      "limite de position",
+      "charge",
+      "diversif"
+    ],
+    "overfitting": [
+      "surajustement",
+      "surajuster",
+      "curve fitting",
+      "prix de chercher",
+      "data mining",
+      "fouille de données"
+    ],
+    "backtest": [
+      "backtest",
+      "walk forward",
+      "walk-forward",
+      "hors échantillon",
+      "preuve"
+    ],
+    "indicators": [
+      "indicateur",
+      "moyenne mobile",
+      "moyennes mobiles",
+      "oscillateur",
+      "repaint",
+      "biais de confirmation",
+      "macd"
+    ],
+    "regime": [
+      "régime",
+      "unité de temps",
+      "horizon de temps",
+      "tendance ou range",
+      "volatilité",
+      "contexte",
+      "séance"
+    ],
+    "divergence": [
+      "divergence",
+      "divergences",
+      "divergent"
+    ],
+    "structure": [
+      "structure de marché",
+      "cassure de structure",
+      "order block",
+      "changement de caractère",
+      "plus haut de swing",
+      "plus bas de swing"
+    ],
+    "sweep": [
+      "balayage",
+      "balayages",
+      "chasse aux stops",
+      "prise de liquidité",
+      "mensonge de la liquidité",
+      "balayer les stops"
+    ],
+    "orderflow": [
+      "order flow",
+      "flux d’ordres",
+      "delta",
+      "footprint",
+      "ruban",
+      "time and sales",
+      "cvd",
+      "absorption",
+      "épuisement"
+    ],
+    "orderbook": [
+      "order book",
+      "carnet d’ordres",
+      "profondeur de marché",
+      "liquidité",
+      "iceberg",
+      "taille cachée",
+      "dom"
+    ],
+    "expectancy": [
+      "espérance",
+      "taille d’échantillon",
+      "combien de trades",
+      "combien de temps avant",
+      "avantage est réel",
+      "significativité statistique"
+    ],
+    "risk": [
+      "risque de ruine",
+      "taille de position",
+      "dimensionnement",
+      "stop loss",
+      "stop-loss",
+      "où placer le stop",
+      "drawdown",
+      "gestion du risque"
+    ],
+    "cost": [
+      "que coûte",
+      "coût du trading",
+      "coûts de trading",
+      "commission",
+      "frais",
+      "financement",
+      "quatre charges",
+      "aller-retour",
+      "slippage"
+    ],
+    "professional": [
+      "niveau professionnel",
+      "leçons professionnelles",
+      "projet final",
+      "niveau 4"
+    ],
+    "search": [
+      "trouver une leçon",
+      "recherche",
+      "chercher",
+      "parcours de lecture",
+      "quelle leçon",
+      "où est la leçon"
+    ],
+    "help": [
+      "aide",
+      "que peux-tu faire",
+      "commandes",
+      "menu"
+    ],
+    "chatbot": [
+      "qu’es-tu",
+      "qui es-tu",
+      "à propos de ce bot",
+      "à propos de ce chatbot"
+    ],
+    "rsi": [
+      "rsi",
+      "force relative",
+      "suracheté",
+      "survendu"
+    ],
+    "spread": [
+      "spread",
+      "achat-vente",
+      "fourchette",
+      "market maker",
+      "coût de liquidité"
+    ],
+    "automation": [
+      "automatisation",
+      "automatiser",
+      "coupe-circuit",
+      "compte de démonstration",
+      "webhook"
+    ],
+    "progress": [
+      "progression",
+      "série",
+      "badge",
+      "achèvement"
+    ],
+    "start": [
+      "par où commencer",
+      "par ou commencer",
+      "où commencer",
+      "comment commencer",
+      "premiers pas",
+      "parcours d’apprentissage",
+      "plan d’étude",
+      "première leçon",
+      "par quoi commencer",
+      "je débute",
+      "grand débutant"
+    ],
+    "curriculum": [
+      "programme",
+      "toutes les leçons",
+      "liste des leçons",
+      "niveaux",
+      "syllabus"
+    ],
+    "beginner": [
+      "débutant",
+      "débutants",
+      "fondations",
+      "bases"
+    ],
+    "intermediate": [
+      "intermédiaire",
+      "order flow",
+      "microstructure"
+    ],
+    "advanced": [
+      "avancé",
+      "avancée",
+      "avancées"
+    ],
+    "lessons": [
+      "leçons",
+      "cours",
+      "contenu"
     ]
   }
 }
