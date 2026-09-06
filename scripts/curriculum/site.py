@@ -46,6 +46,17 @@ PAGES = sorted(glob.glob('education/*.html')) + sorted(glob.glob('education/free
       + sorted(glob.glob('education/tools/*.html')) + sorted(glob.glob('education/docs/*.html')) \
       + sorted(glob.glob('education/resources/*.html'))
 
+# The marketing pages assert the same two totals the education pages do, and
+# they were the last place to hear that either had moved. total.py could not
+# reach them: it matches a figure next to the lesson noun, and the home page
+# puts the number and the noun in separate elements ("100" over "lessons,
+# beginner to professional") while the FAQ puts an adjective between them
+# ("100 interactive lessons"). Both read as prose and neither is a pattern
+# total.py can safely widen to. So they are checked here instead, against
+# the catalogue rather than against a typed constant.
+CLAIMS = ['index.html', 'faq.html'] + ['%s/index.html' % l for l in
+         ['de', 'es', 'fr', 'it', 'pt', 'nl', 'ru', 'ja', 'tr', 'hu', 'ar']]
+
 F = collections.defaultdict(list)
 def rep(p,k,m): F[p].append((k,m))
 
@@ -103,9 +114,33 @@ for p in PAGES:
         if int(m.group(1)) not in BY_SLOT:
             rep(p, 'noslot', 'names lesson %s, which does not exist' % m.group(1))
 
+# 6. the two totals the marketing pages assert, held to the catalogue
+WORDS_K = sum(r.get('wordCount', 0) for r in CAT) // 1000
+for p in CLAIMS:
+    if not os.path.exists(p):
+        continue
+    s6 = open(p, encoding='utf-8').read()
+    for m in re.finditer(r'(\d{2,4})\s*(?:interactive\s+)?lessons\b', flat(s6)):
+        if int(m.group(1)) != len(CAT):
+            rep(p, 'count', 'claims %s lessons, catalogue has %d'
+                            % (m.group(1), len(CAT)))
+    # the stat block puts the figure and its label in separate elements
+    for m in re.finditer(r'>(\d{2,4})</p>\s*<p[^>]*>\s*lessons\b', s6):
+        if int(m.group(1)) != len(CAT):
+            rep(p, 'count', 'stat block claims %s lessons, catalogue has %d'
+                            % (m.group(1), len(CAT)))
+    for m in re.finditer(r'>(\d{2,4})k</p>\s*<p[^>]*>\s*words\b', s6):
+        if int(m.group(1)) != WORDS_K:
+            rep(p, 'count', 'stat block claims %sk words, catalogue has %dk'
+                            % (m.group(1), WORDS_K))
+    for m in re.finditer(r'([\d,]{5,9})\+?\s*words\b', flat(s6)):
+        if int(m.group(1).replace(',', '')) // 1000 != WORDS_K:
+            rep(p, 'count', 'claims %s words, catalogue has %d,000'
+                            % (m.group(1), WORDS_K))
+
 ORDER = ['dead','dead-src','offcat','wrongnum','wrongtitle','count','register','noslot']
 tot = collections.Counter()
-for p in PAGES:
+for p in PAGES + [c for c in CLAIMS if c not in PAGES]:
     if not F[p]: continue
     seen=set(); rows=[]
     for k,m in sorted(F[p], key=lambda x: ORDER.index(x[0])):
@@ -115,4 +150,5 @@ for p in PAGES:
     for k,m in rows[:14]: print('    [%-10s] %s' % (k,m))
     if len(rows) > 14: print('    ... and %d more' % (len(rows)-14))
 print()
-print('%d pages scanned, %d findings %s' % (len(PAGES), sum(tot.values()), dict(tot)))
+print('%d pages scanned, %d findings %s'
+      % (len(PAGES) + len(CLAIMS), sum(tot.values()), dict(tot)))
