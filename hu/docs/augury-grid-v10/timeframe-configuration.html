@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="index,follow">
+    <title>Augury Grid - Útmutató az idősíkok beállításához - Signal Pilot Docs</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <meta name="theme-color" content="#3b82f6">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.signalpilot.io/hu/docs/augury-grid-v10/timeframe-configuration.html">
+    <meta property="og:title" content="Augury Grid - Útmutató az idősíkok beállításához - Signal Pilot Docs">
+    <meta property="og:description" content="Learn how to configure timeframes correctly to avoid TradingView memory limits. Chart timeframe must equal or be lower than your lowest scanner timeframe.">
+    <meta property="og:image" content="https://www.signalpilot.io/docs/assets/images/preview.png">
+    <meta property="og:site_name" content="Signal Pilot Docs">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.signalpilot.io/hu/docs/augury-grid-v10/timeframe-configuration.html">
+    <meta name="twitter:title" content="Augury Grid - Útmutató az idősíkok beállításához - Signal Pilot Docs">
+    <meta name="twitter:description" content="Learn how to configure timeframes correctly to avoid TradingView memory limits. Chart timeframe must equal or be lower than your lowest scanner timeframe.">
+    <meta name="twitter:image" content="https://www.signalpilot.io/docs/assets/images/preview.png">
+
+    <!-- Material for MkDocs stylesheets -->
+    <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+    <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+
+    <!-- Signal Pilot custom CSS -->
+    <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    <link rel="stylesheet" href="../assets/brand.css">
+    <link rel="stylesheet" href="../assets/aurora.css">
+<!-- Timeframe configuration page custom styles -->
+    <style>
+        /* Limit content width for better readability */
+        .md-content__inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Smaller base font for learning content */
+        .md-typeset {
+            font-size: 0.875rem; /* 14px */
+            line-height: 1.6;
+        }
+
+        .md-typeset h1 {
+            font-size: 1.75em;
+            font-weight: 400;
+        }
+
+        .md-typeset h2 {
+            font-size: 1.35em;
+            font-weight: 400;
+            padding-bottom: 0.3em;
+            border-bottom: 2px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .md-typeset h3 {
+            font-size: 1.15em;
+            font-weight: 400;
+        }
+
+        .md-typeset p {
+            font-size: 1em;
+            margin: 1em 0;
+        }
+
+        /* Hero section with gradient */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            border-radius: 12px;
+            margin: 2rem 0 3rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            color: white !important;
+            font-size: 1.75em !important;
+            margin: 0 0 1rem 0 !important;
+            border: none !important;
+            padding: 0 !important;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.95) !important;
+            font-size: 1em !important;
+            margin: 0 !important;
+        }
+
+        /* Golden rule box */
+        .golden-rule {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%);
+            border: 2px solid #f59e0b;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .golden-rule h3 {
+            color: #f59e0b;
+            margin-top: 0 !important;
+            font-size: 1.3em !important;
+        }
+
+        .golden-rule p {
+            font-size: 1.1em !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* Info callouts */
+        .info-box {
+            background: rgba(6, 182, 212, 0.08);
+            border-left: 4px solid #06b6d4;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .info-box h3 {
+            color: #06b6d4;
+            margin-top: 0 !important;
+        }
+
+        /* Warning boxes */
+        .warning-box {
+            background: rgba(239, 68, 68, 0.08);
+            border-left: 4px solid #ef4444;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h3 {
+            color: #ef4444;
+            margin-top: 0 !important;
+        }
+
+        /* Success boxes */
+        .success-box {
+            background: rgba(34, 197, 94, 0.08);
+            border-left: 4px solid #22c55e;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .success-box h3 {
+            color: #22c55e;
+            margin-top: 0 !important;
+        }
+
+        /* Tables */
+        .md-typeset table:not([class]) {
+            font-size: 0.9em;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+
+        .md-typeset table:not([class]) th {
+            background: rgba(6, 182, 212, 0.15);
+            padding: 0.8rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .md-typeset table:not([class]) td {
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .md-typeset table:not([class]) tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Status badges in tables */
+        .status-ok {
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        .status-crash {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        /* Setup cards */
+        .setup-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .setup-card {
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .setup-card h4 {
+            color: #06b6d4;
+            margin-top: 0 !important;
+            margin-bottom: 1rem !important;
+            font-size: 1.1em;
+        }
+
+        .setup-card ul {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .setup-card li {
+            margin: 0.3rem 0;
+        }
+
+        /* Visual dividers */
+        .visual-divider {
+            text-align: center;
+            margin: 3rem 0;
+            font-size: 2.5rem;
+            opacity: 0.3;
+        }
+
+        /* Back link styling */
+        .back-link {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.8rem 1.5rem;
+            background: rgba(100, 100, 200, 0.1);
+            border: 1px solid #3b82f6;
+            color: #06b6d4;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateX(-4px);
+        }
+
+        /* Quick fix steps */
+        .quick-fix {
+            background: rgba(168, 85, 247, 0.08);
+            border-left: 4px solid #a855f7;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .quick-fix h3 {
+            color: #a855f7;
+            margin-top: 0 !important;
+        }
+
+        /* Footer */
+        .footer-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+
+  <!-- Structured Data - JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.signalpilot.io/docs/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Indicator Suite",
+            "item": "https://www.signalpilot.io/docs/suite-index/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Augury Grid v1.0",
+            "item": "https://www.signalpilot.io/docs/augury-grid-v10/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Timeframe Configuration"
+          }
+        ]
+      },
+      {
+        "@type": "TechArticle",
+        "headline": "Augury Grid - Timeframe Configuration Guide",
+        "description": "",
+        "url": "https://www.signalpilot.io/docs/augury-grid-v10/timeframe-configuration.html",
+        "datePublished": "2025-11-02",
+        "dateModified": "2026-02-14",
+        "author": {
+          "@type": "Organization",
+          "name": "Signal Pilot",
+          "url": "https://www.signalpilot.io/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Signal Pilot",
+          "url": "https://www.signalpilot.io/"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.signalpilot.io/docs/augury-grid-v10/timeframe-configuration.html"
+        },
+        "inLanguage": "en-US"
+      }
+    ]
+  }
+  </script>
+  <link rel="canonical" href="https://www.signalpilot.io/hu/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="en" href="https://www.signalpilot.io/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="de" href="https://www.signalpilot.io/de/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="es" href="https://www.signalpilot.io/es/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="fr" href="https://www.signalpilot.io/fr/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="it" href="https://www.signalpilot.io/it/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="pt" href="https://www.signalpilot.io/pt/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="nl" href="https://www.signalpilot.io/nl/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="ru" href="https://www.signalpilot.io/ru/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="ja" href="https://www.signalpilot.io/ja/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="tr" href="https://www.signalpilot.io/tr/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="hu" href="https://www.signalpilot.io/hu/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="ar" href="https://www.signalpilot.io/ar/docs/augury-grid-v10/timeframe-configuration.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/docs/augury-grid-v10/timeframe-configuration.html">
+</head>
+
+<body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan">
+
+<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+<input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+    <a href="#augury-grid-timeframe-configuration" class="md-skip">Ugrás a tartalomhoz</a>
+</div>
+<div data-md-component="announce"></div>
+
+<!-- Signal Pilot brand bar -->
+<div class="sp-topnav">
+    <div class="sp-topnav__inner">
+        <a href="https://www.signalpilot.io" target="_blank" rel="noopener noreferrer" class="brand">
+            <span>Signal Pilot</span>
+        </a>
+        <nav class="sp-links" aria-label="Signal Pilot">
+            <a href="https://www.signalpilot.io/education/" target="_blank" rel="noopener noreferrer">Oktatás</a>
+            <a aria-current="page" href="https://www.signalpilot.io/docs/">Docs</a>
+            <a href="https://www.signalpilot.io/#faq" target="_blank" rel="noopener noreferrer">GYIK</a>
+        </nav>
+    </div>
+</div>
+
+<header class="md-header md-header--shadow" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="Fejléc">
+        <a href=".." title="Signal Pilot Docs" class="md-header__button md-logo" aria-label="Signal Pilot Docs" data-md-component="logo"></a>
+        <label class="md-header__button md-icon" for="__drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+        </label>
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">Signal Pilot Docs</span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">Az idősíkok beállítása</span>
+                </div>
+            </div>
+        </div>
+
+        <form class="md-header__option" data-md-component="palette">
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan" aria-label="Váltás világos módra" type="radio" name="__palette" id="__palette_0">
+            <label class="md-header__button md-icon" title="Váltás világos módra" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan" aria-label="Váltás sötét módra" type="radio" name="__palette" id="__palette_1">
+            <label class="md-header__button md-icon" title="Váltás sötét módra" for="__palette_0" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+        </form>
+
+        <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+
+        <label class="md-header__button md-icon" for="__search">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+            <label class="md-search__overlay" for="__search"></label>
+            <div class="md-search__inner" role="search">
+                <form class="md-search__form" name="search">
+                    <input type="text" class="md-search__input" name="query" aria-label="Keresés" placeholder="Keresés" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+                    <label class="md-search__icon md-icon" for="__search">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                    </label>
+                    <nav class="md-search__options" aria-label="Keresés">
+                        <button type="reset" class="md-search__icon md-icon" title="Törlés" aria-label="Törlés" tabindex="-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+                        </button>
+                    </nav>
+                    <div class="md-search__suggest" data-md-component="search-suggest"></div>
+                </form>
+                <div class="md-search__output">
+                    <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+                        <div class="md-search-result" data-md-component="search-result">
+                            <div class="md-search-result__meta">A keresés indul</div>
+                            <ol class="md-search-result__list" role="presentation"></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-header__source">
+            <a href="https://github.com/Signalpilot/signalpilot-docs" title="Ugrás a tárolóhoz" class="md-source" data-md-component="source">
+                <div class="md-source__icon md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                </div>
+                <div class="md-source__repository">signalpilot-docs</div>
+            </a>
+        </div>
+    </nav>
+</header>
+
+<div class="md-container" data-md-component="container">
+    <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+            <div class="md-content" data-md-component="content">
+                <article class="md-content__inner md-typeset">
+                    <a href="index.html" class="back-link">&larr; Vissza az Augury Grid dokumentációjához</a>
+
+                    <div class="hero">
+                        <div class="hero-icon">&#9201;</div>
+                        <h1 id="augury-grid-timeframe-configuration">Augury Grid<br/>Az idősíkok beállítása</h1>
+                        <p>Kerüld el a TradingView memóriakorlátját &bull; Állítsd be jól az idősíkokat</p>
+                    </div>
+
+                    <div class="golden-rule">
+                        <h3>&#127775; Az aranyszabály</h3>
+                        <p><strong>A chartod idősíkja EGYENLŐ vagy ALACSONYABB kell legyen, mint a szkenner legalacsonyabb idősíkja (TF 1).</strong></p>
+                        <p style="margin-top: 1rem !important; font-size: 0.9em !important; opacity: 0.8;">Ez a TradingView korlátja, nem hiba. Ha magasabb idősíkú chartról kérsz alacsonyabb idősíkú adatot, a TradingView-nak lényegesen több gyertyát kell betöltenie, és ez túlléphet a memóriakorláton.</p>
+                    </div>
+
+                    <div class="visual-divider">&#128269;</div>
+
+                    <h2>&#128269; Miért történik ez</h2>
+
+                    <div class="info-box">
+                        <p>Az Augury Grid ennyit pásztáz: <strong>7 instrumentum 3 idősíkon = 21 adatlekérés</strong>. Minden egyes lekérés memóriába kerül. Ha magasabb TF-ű chartról kérsz alacsonyabb TF-ű adatot, az adatszorzó exponenciálisan nő:</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>A chart TF-je</th>
+                                    <th>Ezt kéri</th>
+                                    <th>Adatszorzó</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>4H</td>
+                                    <td>30m</td>
+                                    <td>8&times; annyi gyertya</td>
+                                </tr>
+                                <tr>
+                                    <td>4H</td>
+                                    <td>15m</td>
+                                    <td>16&times; annyi gyertya</td>
+                                </tr>
+                                <tr>
+                                    <td>Napi</td>
+                                    <td>1H</td>
+                                    <td>24&times; annyi gyertya</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="margin-bottom: 0;"><strong>Szorozd meg 21 lekéréssel, és eléred a TradingView memóriaplafonját.</strong></p>
+                    </div>
+
+                    <div class="visual-divider">&#9989;</div>
+
+                    <h2>&#9989; Érvényes beállítások</h2>
+
+                    <div class="success-box">
+                        <h3>Ezek a beállítások működnek</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>A chart idősíkja</th>
+                                    <th>TF 1</th>
+                                    <th>TF 2</th>
+                                    <th>TF 3</th>
+                                    <th>Állapot</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>15m</td>
+                                    <td>15m</td>
+                                    <td>4H</td>
+                                    <td>D</td>
+                                    <td class="status-ok">&#10004; Működik</td>
+                                </tr>
+                                <tr>
+                                    <td>15m</td>
+                                    <td>1H</td>
+                                    <td>4H</td>
+                                    <td>D</td>
+                                    <td class="status-ok">&#10004; Működik</td>
+                                </tr>
+                                <tr>
+                                    <td>30m</td>
+                                    <td>30m</td>
+                                    <td>4H</td>
+                                    <td>D</td>
+                                    <td class="status-ok">&#10004; Működik</td>
+                                </tr>
+                                <tr>
+                                    <td>1H</td>
+                                    <td>1H</td>
+                                    <td>4H</td>
+                                    <td>D</td>
+                                    <td class="status-ok">&#10004; Működik</td>
+                                </tr>
+                                <tr>
+                                    <td>4H</td>
+                                    <td>4H</td>
+                                    <td>D</td>
+                                    <td>W</td>
+                                    <td class="status-ok">&#10004; Működik</td>
+                                </tr>
+                                <tr>
+                                    <td>5m</td>
+                                    <td>15m</td>
+                                    <td>1H</td>
+                                    <td>4H</td>
+                                    <td class="status-ok">&#10004; Működik</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-bottom: 0;"><strong>A lényegi minta:</strong> A chart TF-je &le; TF 1 (a szkenner legalacsonyabb idősíkja)</p>
+                    </div>
+
+                    <div class="visual-divider">&#10060;</div>
+
+                    <h2>&#10060; Érvénytelen beállítások (összeomlás a memória miatt)</h2>
+
+                    <div class="warning-box">
+                        <h3>Ezekkel a beállításokkal összeomlik</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>A chart idősíkja</th>
+                                    <th>TF 1</th>
+                                    <th>TF 2</th>
+                                    <th>TF 3</th>
+                                    <th>Állapot</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>4H</td>
+                                    <td>30m</td>
+                                    <td>1H</td>
+                                    <td>8H</td>
+                                    <td class="status-crash">&#10008; Összeomlik</td>
+                                </tr>
+                                <tr>
+                                    <td>4H</td>
+                                    <td>15m</td>
+                                    <td>4H</td>
+                                    <td>D</td>
+                                    <td class="status-crash">&#10008; Összeomlik</td>
+                                </tr>
+                                <tr>
+                                    <td>Napi</td>
+                                    <td>1H</td>
+                                    <td>4H</td>
+                                    <td>D</td>
+                                    <td class="status-crash">&#10008; Összeomlik</td>
+                                </tr>
+                                <tr>
+                                    <td>1H</td>
+                                    <td>15m</td>
+                                    <td>1H</td>
+                                    <td>4H</td>
+                                    <td class="status-crash">&#10008; Összeomlik</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-bottom: 0;"><strong>A gondot okozó minta:</strong> A chart TF-je &gt; TF 1 (alacsonyabb TF adata magasabb TF-ű chartról kérve)</p>
+                    </div>
+
+                    <div class="visual-divider">&#128161;</div>
+
+                    <h2>&#128161; Gyors megoldás</h2>
+
+                    <div class="quick-fix">
+                        <h3>Ha ezt látod: „Memory limits exceeded”</h3>
+
+                        <p><strong>A változat: vidd le a chart idősíkját TF 1-re</strong></p>
+                        <ul>
+                            <li>15 perces pásztázás? Használj 15 perces chartot (vagy alacsonyabbat, például 5 perceset)</li>
+                            <li>30 perces pásztázás? Használj 30 perces chartot (vagy alacsonyabbat)</li>
+                            <li>1 órás pásztázás? Használj 1 órás chartot (vagy alacsonyabbat)</li>
+                        </ul>
+
+                        <p><strong>B változat: emeld a TF 1-et a chartod idősíkjára</strong></p>
+                        <ul>
+                            <li>4 órás charton vagy? Állítsd a TF 1-et 4 órára (vagy magasabbra)</li>
+                            <li>Napi charton vagy? Állítsd a TF 1-et napira (vagy magasabbra)</li>
+                        </ul>
+
+                        <p style="margin-bottom: 0;"><strong>Ne feledd:</strong> A chart TF-je &le; TF 1. Mindig.</p>
+                    </div>
+
+                    <div class="visual-divider">&#127919;</div>
+
+                    <h2>&#127919; Ajánlott beállítások kereskedési stílus szerint</h2>
+
+                    <div class="setup-cards">
+                        <div class="setup-card">
+                            <h4>&#9889; Scalper (alacsony TF-ekre összpontosít)</h4>
+                            <ul>
+                                <li><strong>Chart:</strong> 5 vagy 15 perc</li>
+                                <li><strong>TF 1:</strong> 15m</li>
+                                <li><strong>TF 2:</strong> 1H</li>
+                                <li><strong>TF 3:</strong> 4H</li>
+                            </ul>
+                        </div>
+
+                        <div class="setup-card">
+                            <h4>&#9728; Napon belüli kereskedő</h4>
+                            <ul>
+                                <li><strong>Chart:</strong> 15 vagy 30 perc</li>
+                                <li><strong>TF 1:</strong> 30m</li>
+                                <li><strong>TF 2:</strong> 4H</li>
+                                <li><strong>TF 3:</strong> D</li>
+                            </ul>
+                        </div>
+
+                        <div class="setup-card">
+                            <h4>&#127754; Swing kereskedő</h4>
+                            <ul>
+                                <li><strong>Chart:</strong> 1 vagy 4 óra</li>
+                                <li><strong>TF 1:</strong> 4H</li>
+                                <li><strong>TF 2:</strong> D</li>
+                                <li><strong>TF 3:</strong> W</li>
+                            </ul>
+                        </div>
+
+                        <div class="setup-card">
+                            <h4>&#128202; Pozíciós kereskedő</h4>
+                            <ul>
+                                <li><strong>Chart:</strong> 4 óra vagy napi</li>
+                                <li><strong>TF 1:</strong> D</li>
+                                <li><strong>TF 2:</strong> W</li>
+                                <li><strong>TF 3:</strong> M</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="visual-divider">&#128679;</div>
+
+                    <h2>&#128679; Még mindig összeomlik?</h2>
+
+                    <div class="info-box">
+                        <h3>További lépések a hiba megkeresésére</h3>
+                        <p>Ha betartod az aranyszabályt, és mégis eléred a memóriakorlátot, próbáld ezeket:</p>
+
+                        <ol>
+                            <li><strong>Kevesebb instrumentum</strong> &mdash; Használd az egyéni beállítást kevesebb instrumentummal (7 helyett 5)</li>
+                            <li><strong>Válassz kevésbé heves instrumentumokat</strong> &mdash; A meme coinokban több a tickadat, és ez több memóriát eszik</li>
+                            <li><strong>Kerüld az 1, 3 és 5 percet TF 1-ként</strong> &mdash; Rendkívül adatnehéz idősíkok, és megsokszorozzák a gondot</li>
+                            <li><strong>Töröld a böngésző gyorsítótárát</strong> &mdash; Néha felszabadít erőforrást</li>
+                            <li><strong>Zárd be a többi TradingView-lapot</strong> &mdash; Minden chart fogyaszt memóriát</li>
+                            <li><strong>Indítsd újra a böngészőt</strong> &mdash; A memóriaszivárgások idővel felhalmozódnak</li>
+                        </ol>
+
+                        <p style="margin-bottom: 0;"><em>Ez a TradingView platform korlátja, és minden olyan indikátort érint, amely több idősíkon és több instrumentumon dolgozik &mdash; nem csak az Augury Gridet.</em></p>
+                    </div>
+
+                    <hr />
+
+                    <div class="footer-section">
+                        <p>&#9889; <strong>Kell még segítség?</strong> Nézd meg ezt: <a href="../ref-troubleshooting/index.html">Hibaelhárítási útmutató</a> vagy látogass ide: <a href="../about-support/index.html">Támogatás</a>.</p>
+                        <a href="index.html" class="back-link">&larr; Vissza az Augury Grid dokumentációjához</a>
+                    </div>
+                  <blockquote class="sp-disclaimer"><strong>Kizárólag oktatási célra.</strong> A kereskedés jelentős veszteségkockázattal jár. Ez nem pénzügyi tanácsadás. A múltbeli teljesítmény nem garantálja a jövőbeli eredményeket.</blockquote>
+</article>
+            </div>
+        </div>
+    </main>
+</div>
+  <script src="../js/cross-links.js"></script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js")}</script>
+</body>
+</html>
