@@ -120,9 +120,13 @@ def inject(src_path, lang, tmap, rel):
         local = '%s/education/%s' % (lang, target.split('/education/', 1)[1])
         return m.group(1) + '/' + local + m.group(3) if os.path.exists(local) else m.group(0)
 
-    out = re.sub(r'(href=")(/education/curriculum/[\w./-]+\.html)(")', _localise_href, out)
+    # Every /education/ page, not only the curriculum: a locale page that
+    # linked its own library, search or tier page sent the reader back into
+    # English. The existence test is what keeps that safe -- a page this tree
+    # has not got yet still points at the English one rather than a 404.
+    out = re.sub(r'(href=")(/education/[\w./-]+\.html)(")', _localise_href, out)
     out = out.replace('href="/education/"', f'href="/{lang}/education/"')
-    out = re.sub(r'href="/education/index\.html"', f'href="/{lang}/education/index.html"', out)
+    out = re.sub(r'href="/education/free/"', f'href="/{lang}/education/free/"', out)
 
     out = re.sub(r'<html[^>]*>', f'<html lang="{lang}"' + (' dir="rtl"' if lang in RTL else '') + '>', out, count=1)
     out = re.sub(r'("inLanguage":\s*")[a-z-]+(")', lambda m: m.group(1)+lang+m.group(2), out)

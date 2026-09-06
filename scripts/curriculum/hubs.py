@@ -131,6 +131,24 @@ def strings(lang):
     return LOC[lang]
 
 
+_MEM = {}
+
+
+def mem(lang, en):
+    """The shared translation of one English string, or None.
+
+    The tier headings and blurbs on a locale index are ordinary prose, and
+    scripts/i18n has translated them. Carrying a second copy here meant this
+    file and scripts/i18n/build.py each rewrote the other's wording on every
+    run. The numbers below still belong to this file, because they are counted
+    from the corpus rather than translated.
+    """
+    if lang not in _MEM:
+        f = os.path.join(ROOT, 'scripts/i18n/memory/%s.json' % lang)
+        _MEM[lang] = json.load(open(f, encoding='utf-8')) if os.path.exists(f) else {}
+    v = _MEM[lang].get(en)
+    return v if isinstance(v, str) and v.strip() else None
+
 def render(lang=None):
     by = corpus(lang)
     path = INDEX if not lang else lang + '/' + INDEX
@@ -175,7 +193,8 @@ def render(lang=None):
         words = sum(r['words'] for r in rows)
         hrs = max(1, round(words / 9000))
         if lang:
-            head = f"{DOT[j]} {loc['tiers'][j]}{COLON.get(lang, ': ')}{loc['sub'][j]}"
+            head = (mem(lang, HEAD[tier][0])
+                    or f"{DOT[j]} {loc['tiers'][j]}{COLON.get(lang, ': ')}{loc['sub'][j]}")
             meta = loc['meta'].format(n=len(rows), w=num(words // 1000 * 1000, lang),
                                       a=hrs, b=hrs + 3)
         else:
@@ -187,8 +206,11 @@ def render(lang=None):
 
     # The blurb paragraph under each module header.
     for j, tier in enumerate(TIERS):
-        head = (f"{DOT[j]} {loc['tiers'][j]}{COLON.get(lang, ': ')}{loc['sub'][j]}") if lang else HEAD[tier][0]
-        blurb = loc['blurb'][j] if lang else HEAD[tier][1]
+        head = HEAD[tier][0] if not lang else (
+            mem(lang, HEAD[tier][0])
+            or f"{DOT[j]} {loc['tiers'][j]}{COLON.get(lang, ': ')}{loc['sub'][j]}")
+        blurb = HEAD[tier][1] if not lang else (
+            mem(lang, HEAD[tier][1]) or loc['blurb'][j])
         i = s.find(head)
         if i < 0:
             raise AssertionError(f'{path}: no heading for {tier}')
@@ -269,6 +291,16 @@ def render(lang=None):
     # indicator names. They are now that tier's own modules and lesson titles.
     for tier, m in zip(reversed(TIERS), reversed(_panels(s))):
         s = s[:m[0]] + _panel(by[tier], loc, lang) + s[m[1]:]
+    if lang == 'ja':
+        # Japanese sets no space between words, so the gap this file writes
+        # after a tag ("<strong>#1:</strong> 市場") is one scripts/i18n strips
+        # from every other page. Leaving it here made the two generators
+        # disagree on the index alone. The rule is inject.py's own, imported
+        # rather than restated, so the two cannot drift apart again.
+        sys.path.insert(0, os.path.join(ROOT, 'scripts/i18n'))
+        from inject import CJK_AFTER_TAG, CJK_BEFORE_TAG
+        s = CJK_AFTER_TAG.sub(r'\1\2', s)
+        s = CJK_BEFORE_TAG.sub(r'\1\2', s)
     return _own_tree(s, lang)
 
 

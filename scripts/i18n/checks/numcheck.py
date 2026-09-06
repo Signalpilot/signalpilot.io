@@ -13,8 +13,14 @@ digits elsewhere.
 """
 import re, sys, ctx
 DIGITS=re.compile(r'\d(?:[.,  ]?\d)*')
+# An HTML entity is a character, not a number. The Turkish and Hungarian
+# pages store some of their own letters as numeric references -- &#287; is
+# g-breve -- and every one read as a three-digit figure the English had not
+# licensed. numerals.py has always stripped them; this file had not.
+ENT = re.compile(r'&(?:#\d+|#x[0-9a-fA-F]+|\w+);')
 
 def toks(s):
+    s = ENT.sub(' ', s)
     # Japanese myriad grouping: 1万4,700 == 14700, 3万2,000 == 32000
     # and the next unit up: 5億 == 500000000. Apply 億 first so a compound
     # like 5億2,000万 collapses left to right.

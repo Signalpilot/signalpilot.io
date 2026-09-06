@@ -59,7 +59,7 @@ L['de'] = dict(
           '<strong>Voraussetzungen:</strong> Zuerst die Mittelstufe abschließen (Lektionen 1&ndash;{last})',
           '<strong>Voraussetzungen:</strong> Zuerst die Fortgeschrittenen-Stufe abschließen (Lektionen 1&ndash;{last})'],
   range='Lektionen {lo}&ndash;{hi}', more='und {k} weitere',
-  quiz='Modul-{n}-Quiz')
+  quiz='Quiz zu Modul {n}')
 
 L['es'] = dict(
   tiers=['Principiante', 'Intermedio', 'Avanzado', 'Profesional'],
@@ -290,7 +290,7 @@ L['tr'] = dict(
           '<strong>Ön koşullar:</strong> Önce orta seviyeyi tamamla (ders 1&ndash;{last})',
           '<strong>Ön koşullar:</strong> Önce ileri seviyeyi tamamla (ders 1&ndash;{last})'],
   range='Ders {lo}&ndash;{hi}', more='ve {k} tane daha',
-  quiz='Modül {n} testi')
+  quiz='Modül {n} sınavı')
 
 L['hu'] = dict(
   tiers=['Kezdő', 'Középhaladó', 'Haladó', 'Profi'],
@@ -320,7 +320,7 @@ L['hu'] = dict(
           '<strong>Előfeltételek:</strong> Előbb végezd el a középhaladó szintet (1&ndash;{last}. lecke)',
           '<strong>Előfeltételek:</strong> Előbb végezd el a haladó szintet (1&ndash;{last}. lecke)'],
   range='{lo}&ndash;{hi}. lecke', more='és további {k}',
-  quiz='{n}. modul kvíze')
+  quiz='{n}. modul kvíz')
 
 L['ar'] = dict(
   tiers=['مبتدئ', 'متوسط', 'متقدّم', 'احترافي'],
