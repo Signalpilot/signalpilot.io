@@ -75,8 +75,15 @@ DISCLAIMER = {
 }
 
 
-def inject(src_path, lang, tmap, rel):
-    """rel: path of the lesson under education/, e.g. curriculum/beginner/01-x.html"""
+def inject(src_path, lang, tmap, rel, page=None):
+    """rel: path of the lesson under education/, e.g. curriculum/beginner/01-x.html
+
+    page: repo-relative path of the English page, for anything that does not
+    live under education/ -- a product page, the tools hub, a legal page. The
+    locale copy of such a page sits at <lang>/<page>, and its canonical,
+    hreflang and og: URLs have to say so.
+    """
+    page = page or ('education/' + rel)
     html = open(src_path, encoding='utf-8', errors='replace').read()
     parts = TAG.split(html)
     protect = False
@@ -136,10 +143,34 @@ def inject(src_path, lang, tmap, rel):
     out = out.replace('href="/education/"', f'href="/{lang}/education/"')
     out = re.sub(r'href="/education/free/"', f'href="/{lang}/education/free/"', out)
 
+    # Everything else the site links to, under the same existence test. A
+    # product page links the FAQ, the terms, the other six indicators and the
+    # education hub; without this a reader who opened the German Pentarch page
+    # left German the moment they clicked any of them.
+    def _localise_site(m):
+        target = m.group(2).lstrip('/')
+        # The blog localises the other way round -- blog/<lang>/... -- so its
+        # links are rewritten against that tree, not against /<lang>/blog/.
+        if target == 'blog/' or target.startswith('blog/'):
+            rest = target[len('blog/'):]
+            cand = f'blog/{lang}/{rest}'
+        else:
+            cand = f'{lang}/{target}'
+        probe = cand if cand.endswith('.html') else cand.rstrip('/') + '/index.html'
+        return m.group(1) + '/' + cand + m.group(3) if os.path.exists(probe) else m.group(0)
+
+    out = re.sub(r'(href=")(/(?!education/)[\w./-]*(?:\.html|/))(")', _localise_site, out)
+
+    # The homepage and its in-page anchors: "/", "/#pricing". Neither ends in a
+    # slash-plus-name or an extension, so the rule above cannot see them, and
+    # they are the two links every page in the site carries.
+    if os.path.exists(f'{lang}/index.html'):
+        out = re.sub(r'href="/(#[\w-]*)?"', lambda m: f'href="/{lang}/{m.group(1) or ""}"', out)
+
     out = re.sub(r'<html[^>]*>', f'<html lang="{lang}"' + (' dir="rtl"' if lang in RTL else '') + '>', out, count=1)
     out = re.sub(r'("inLanguage":\s*")[a-z-]+(")', lambda m: m.group(1)+lang+m.group(2), out)
 
-    url = f'https://www.signalpilot.io/{lang}/education/{rel}'
+    url = f'https://www.signalpilot.io/{lang}/{page}'
     # og:url and twitter:url are attribute values the extractor never touches,
     # so without this every locale page tells a crawler it lives at the English
     # address -- the one thing a canonical link is there to contradict.
@@ -171,9 +202,9 @@ def inject(src_path, lang, tmap, rel):
     # there and write exactly one set.
     out = re.sub(r'[ \t]*<link rel="alternate" hreflang="[^"]*"[^>]*>\n?', '', out)
 
-    alts = [f'<link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/{rel}">']
-    alts += [f'<link rel="alternate" hreflang="{l}" href="https://www.signalpilot.io/{l}/education/{rel}">' for l in LANGS]
-    alts.append(f'<link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/{rel}">')
+    alts = [f'<link rel="alternate" hreflang="en" href="https://www.signalpilot.io/{page}">']
+    alts += [f'<link rel="alternate" hreflang="{l}" href="https://www.signalpilot.io/{l}/{page}">' for l in LANGS]
+    alts.append(f'<link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/{page}">')
     out = out.replace('</head>', '  ' + '\n  '.join(alts) + '\n</head>', 1)
 
     lead, rest = DISCLAIMER[lang]
@@ -183,8 +214,13 @@ def inject(src_path, lang, tmap, rel):
     gap = '' if lang == 'ja' else ' '
     block = f'<blockquote class="sp-disclaimer"><strong>{lead}</strong>{gap}{rest}</blockquote>'
     if 'sp-disclaimer' not in out:
-        if '</article>' in out: out = out.replace('</article>', f'  {block}\n</article>', 1)
-        elif '</main>' in out:  out = out.replace('</main>',    f'  {block}\n</main>', 1)
+        # The lesson pipeline adds the disclaimer to every page it writes. A
+        # product or legal page carries its own compliance copy in its own
+        # layout, so adding a second block there would be the pipeline talking
+        # over the page rather than translating it.
+        if page.startswith('education/'):
+            if '</article>' in out: out = out.replace('</article>', f'  {block}\n</article>', 1)
+            elif '</main>' in out:  out = out.replace('</main>',    f'  {block}\n</main>', 1)
     else:
         out = re.sub(r'<blockquote class="sp-disclaimer">.*?</blockquote>', block, out, count=1, flags=re.S)
     return out

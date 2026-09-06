@@ -30,7 +30,8 @@ def _tag_errors(h):
     p = P(); p.feed(h); return p.err, len(p.st)
 
 
-def verify(src_html, out_html, lang, rel):
+def verify(src_html, out_html, lang, rel, page=None):
+    page = page or ('education/' + rel)
     errs = []
     s_txt, o_txt = _strip(src_html), _strip(out_html)
 
@@ -76,13 +77,23 @@ def verify(src_html, out_html, lang, rel):
 
     if f'<html lang="{lang}"' not in out_html:
         errs.append('html lang not set')
-    if f'/{lang}/education/{rel}' not in out_html:
+    if f'/{lang}/{page}' not in out_html:
         errs.append('canonical missing or wrong')
     n_alt = out_html.count('rel="alternate" hreflang')
     if n_alt != 13:
         errs.append(f'hreflang count {n_alt} != 13')
-    if 'sp-disclaimer' not in out_html:
-        errs.append('disclaimer missing')
+    # Only the pages this pipeline adds the disclaimer to must carry one. It is
+    # appended inside the page's own article or main, so a page with neither --
+    # the password form, the printable plan template -- has nowhere to put it
+    # and is not failed for that. A product or legal page carries its own
+    # compliance copy and is checked against the source instead: whatever block
+    # it came with must survive.
+    can_host = '</article>' in src_html or '</main>' in src_html
+    if page.startswith('education/') and can_host:
+        if 'sp-disclaimer' not in out_html:
+            errs.append('disclaimer missing')
+    elif 'sp-disclaimer' in src_html and 'sp-disclaimer' not in out_html:
+        errs.append('disclaimer lost')
 
     for b in re.findall(r'<script type="application/ld\+json">([\s\S]*?)</script>', out_html):
         try: json.loads(b)

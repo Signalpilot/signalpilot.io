@@ -23,6 +23,12 @@ def run(slug, report=print):
         for k, v in ps:
             if '%' not in v and '％' not in v:
                 continue
+            # An escaped code sample is not prose. The tools page ships an
+            # iframe snippet for anyone who wants to embed the calculators,
+            # and width="100%" is markup: putting the locale's space in front
+            # of the sign there breaks the embed for the reader who copies it.
+            if '&lt;' in v and '&gt;' in v:
+                continue
             want = numfmt.set_percent(v, lang)
             if want != v:
                 i = 0
