@@ -59,6 +59,16 @@ def check_english(en):
             if hi - lo + 1 != TIER.get(tier, 0):
                 bad.append('%s: %s slots %d-%d span %d, catalogue has %d'
                            % (key, tier, lo, hi, hi - lo + 1, TIER.get(tier)))
+    total = len(CAT)
+    for key, text in en['kb'].items():
+        for m in re.finditer(r'in order, 1 to (\d+)', text):
+            if int(m.group(1)) != total:
+                bad.append('%s: recommends 1 to %s, the course has %d lessons'
+                           % (key, m.group(1), total))
+        for m in re.finditer(r'\*\*Total:\*\* (\d+) ', text):
+            if int(m.group(1)) != total:
+                bad.append('%s: totals %s lessons, catalogue has %d'
+                           % (key, m.group(1), total))
     for key, text in en['kb'].items():
         for u in re.findall(r'\]\((/education/[^)]*)\)', text):
             if not os.path.exists('.' + u):
