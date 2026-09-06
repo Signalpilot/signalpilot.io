@@ -154,6 +154,11 @@ def inject(src_path, lang, tmap, rel):
     else:
         out = out.replace('</head>', f'  <link rel="canonical" href="{url}">\n</head>', 1)
 
+    # A source page may already carry its own alternate set (education/index.html
+    # does). Appending to it would leave the output with two, so drop whatever is
+    # there and write exactly one set.
+    out = re.sub(r'[ \t]*<link rel="alternate" hreflang="[^"]*"[^>]*>\n?', '', out)
+
     alts = [f'<link rel="alternate" hreflang="en" href="https://www.signalpilot.io/education/{rel}">']
     alts += [f'<link rel="alternate" hreflang="{l}" href="https://www.signalpilot.io/{l}/education/{rel}">' for l in LANGS]
     alts.append(f'<link rel="alternate" hreflang="x-default" href="https://www.signalpilot.io/education/{rel}">')
