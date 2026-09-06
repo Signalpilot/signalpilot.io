@@ -9,14 +9,45 @@ class SignalPilotChatbot {
     constructor() {
         this.isOpen = false;
         this.messageHistory = [];
+        this.lang = this.detectLanguage();
         this.knowledgeBase = this.initKnowledgeBase();
         this.patterns = this.initPatterns();
 
         this.init();
     }
 
+    /* The reader's language, from the page rather than from the browser.
+     *
+     * Every built locale page carries lang="de" on <html> and lives under
+     * /de/, and the two always agree because inject.py writes both. Read the
+     * attribute and fall back to the path, because the English pages set
+     * lang="en" and have no prefix, which is the same answer by both routes.
+     * Anything we hold no translation for falls back to English rather than
+     * showing a half-translated widget. */
+    detectLanguage() {
+        const known = (window.SP_CHATBOT_I18N && window.SP_CHATBOT_I18N.languages) || [];
+        const attr = (document.documentElement.getAttribute('lang') || '').slice(0, 2).toLowerCase();
+        if (known.indexOf(attr) >= 0) return attr;
+        const seg = (location.pathname.split('/')[1] || '').toLowerCase();
+        if (known.indexOf(seg) >= 0) return seg;
+        return 'en';
+    }
+
+    /* One string in the reader's language, falling back to English. */
+    t(key) {
+        const I = window.SP_CHATBOT_I18N;
+        const ui = I && I.ui && I.ui[this.lang];
+        if (ui && typeof ui[key] === 'string') return ui[key];
+        return (I && I.ui && I.ui.en && I.ui.en[key]) || '';
+    }
+
     initKnowledgeBase() {
-        return {
+        /* The answers, in the reader's language where we have them. A locale
+         * that is missing a key falls through to the English one, so a partly
+         * translated table degrades key by key rather than all at once. */
+        const I = window.SP_CHATBOT_I18N;
+        const local = (I && I.kb && I.kb[this.lang]) || {};
+        return Object.assign({
             // Lesson tiers
             beginner: `**Beginner Tier** (24 lessons) - How a market works, what it costs, what risk is
 
@@ -283,7 +314,7 @@ Type **"help"** to see all available topics!
 • [Intermediate Lessons](/education/intermediate.html)
 • [Advanced Lessons](/education/advanced.html)
 • [Search All Lessons](/education/search.html)`
-        };
+        }, local);
     }
 
     initPatterns() {
@@ -291,7 +322,30 @@ Type **"help"** to see all available topics!
         // before the broad tier patterns, and no broad pattern may contain a
         // word that a specific one owns. Short codes and common substrings are
         // bounded so they cannot match inside an unrelated word.
-        return [
+        //
+        // The patterns below are English. A German reader types "Was kostet
+        // der Spread" and none of them fire, so before the English list runs,
+        // try the reader's own keywords: SP_CHATBOT_I18N.keys[lang] maps a
+        // knowledge-base key to the words that should reach it in that
+        // language. They are matched in the same order and with the same
+        // first-hit-wins rule, and the English list stays underneath as the
+        // fallback, which also means a reader who types an English term on a
+        // German page still gets an answer.
+        const I = window.SP_CHATBOT_I18N;
+        const localKeys = (I && I.keys && I.keys[this.lang]) || null;
+        const localised = [];
+        if (localKeys) {
+            for (const key of Object.keys(localKeys)) {
+                const words = localKeys[key];
+                if (!words || !words.length) continue;
+                const alt = words
+                    .map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+                    .join('|');
+                localised.push({ regex: new RegExp('(' + alt + ')', 'i'), key });
+            }
+        }
+
+        return localised.concat([
             // Help / meta. "about" alone is far too broad: it swallowed every
             // "tell me about X" question, so ask for an explicit self-reference.
             { regex: /^(help|what can you do|commands|menu)$/i, key: 'help' },
@@ -317,7 +371,7 @@ Type **"help"** to see all available topics!
 
             // Fallback
             { regex: /.*/, key: 'default' }
-        ];
+        ]);
     }
 
     init() {
@@ -330,7 +384,7 @@ Type **"help"** to see all available topics!
         const chatbotHTML = `
             <div id="sp-chatbot-container" class="sp-chatbot-container sp-chatbot-closed">
                 <!-- Chat Toggle Button -->
-                <button id="sp-chatbot-toggle" class="sp-chatbot-toggle" aria-label="Open Learning Assistant">
+                <button id="sp-chatbot-toggle" class="sp-chatbot-toggle" aria-label="${this.t('openLabel')}">
                     <svg class="sp-chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
                     </svg>
@@ -350,12 +404,12 @@ Type **"help"** to see all available topics!
                                 </svg>
                             </div>
                             <div class="sp-chatbot-title">
-                                <h3>Learning Assistant</h3>
-                                <p class="sp-chatbot-status">Online • Ready to help</p>
+                                <h3>${this.t('title')}</h3>
+                                <p class="sp-chatbot-status">${this.t('status')}</p>
                             </div>
                         </div>
                         <div class="sp-chatbot-actions">
-                            <button class="sp-chatbot-action-btn" id="sp-chatbot-clear" title="Clear conversation">
+                            <button class="sp-chatbot-action-btn" id="sp-chatbot-clear" title="${this.t('clearTitle')}">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
                                 </svg>
@@ -372,26 +426,26 @@ Type **"help"** to see all available topics!
                                 </svg>
                             </div>
                             <div class="sp-chatbot-message-content">
-                                <p><strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.</p>
-                                <p>I can help you navigate our 100 trading lessons, explain concepts, and guide your learning path!</p>
-                                <p><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em></p>
+                                <p>${this.t('greetLead')}</p>
+                                <p>${this.t('greetBody')}</p>
+                                <p>${this.t('greetTry')}</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Quick Actions -->
                     <div class="sp-chatbot-quick-actions" id="sp-chatbot-quick-actions">
-                        <button class="sp-chatbot-quick-btn" data-query="What should I learn first?">
-                            🚀 Getting Started
+                        <button class="sp-chatbot-quick-btn" data-query="${this.t('quickStartQuery')}">
+                            ${this.t('quickStart')}
                         </button>
-                        <button class="sp-chatbot-quick-btn" data-query="Beginner lessons">
-                            📚 Beginner
+                        <button class="sp-chatbot-quick-btn" data-query="${this.t('quickBeginnerQuery')}">
+                            ${this.t('quickBeginner')}
                         </button>
-                        <button class="sp-chatbot-quick-btn" data-query="Explain RSI">
-                            📊 RSI Myths
+                        <button class="sp-chatbot-quick-btn" data-query="${this.t('quickRsiQuery')}">
+                            ${this.t('quickRsi')}
                         </button>
-                        <button class="sp-chatbot-quick-btn" data-query="Trading automation">
-                            🤖 Automation
+                        <button class="sp-chatbot-quick-btn" data-query="${this.t('quickAutomationQuery')}">
+                            ${this.t('quickAutomation')}
                         </button>
                     </div>
 
@@ -401,18 +455,18 @@ Type **"help"** to see all available topics!
                             <textarea
                                 id="sp-chatbot-input"
                                 class="sp-chatbot-input"
-                                placeholder="Ask about lessons or concepts..."
+                                placeholder="${this.t('placeholder')}"
                                 rows="1"
-                                aria-label="Message input"
+                                aria-label="${this.t('inputLabel')}"
                             ></textarea>
-                            <button id="sp-chatbot-send" class="sp-chatbot-send-btn" aria-label="Send message">
+                            <button id="sp-chatbot-send" class="sp-chatbot-send-btn" aria-label="${this.t('sendLabel')}">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                                 </svg>
                             </button>
                         </div>
                         <div class="sp-chatbot-footer-text">
-                            Powered by pattern matching • SignalPilot Education
+                            ${this.t('footer')}
                         </div>
                     </div>
                 </div>

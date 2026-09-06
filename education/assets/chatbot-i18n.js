@@ -1,0 +1,121 @@
+/* Translations for the education chatbot.
+ *
+ * chatbot.js reads the reader's language off <html lang> and looks the answer
+ * up here, falling back to English key by key. `keys` holds the words that
+ * should reach each answer in that language: the English regexes in
+ * chatbot.js never fire for a reader typing German, so without these a
+ * translated widget would answer every question with the fallback.
+ *
+ * Generated and maintained alongside education/assets/chatbot.js.
+ */
+window.SP_CHATBOT_I18N = {
+  languages: ['de','es','fr','it','pt','nl','ru','ja','tr','hu','ar'],
+  ui: { en: {
+    "title": "Learning Assistant",
+    "status": "Online • Ready to help",
+    "openLabel": "Open Learning Assistant",
+    "clearTitle": "Clear conversation",
+    "greetLead": "<strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.",
+    "greetBody": "I can help you navigate our 100 trading lessons, explain concepts, and guide your learning path!",
+    "greetTry": "<em>Try: \"What should I learn first?\" or \"Explain RSI regime interpretation\"</em>",
+    "quickStart": "🚀 Getting Started",
+    "quickBeginner": "📚 Beginner",
+    "quickRsi": "📊 RSI Myths",
+    "quickAutomation": "🤖 Automation",
+    "quickStartQuery": "What should I learn first?",
+    "quickBeginnerQuery": "Beginner lessons",
+    "quickRsiQuery": "Explain RSI",
+    "quickAutomationQuery": "Trading automation",
+    "placeholder": "Ask about lessons or concepts...",
+    "sendLabel": "Send message",
+    "inputLabel": "Message input",
+    "footer": "Powered by pattern matching • SignalPilot Education"
+} },
+  kb: { en: {
+    "beginner": "**Beginner Tier** (24 lessons) - How a market works, what it costs, what risk is\n\n📚 [View All Beginner Lessons](/education/beginner.html)\n\n**What you'll learn:**\n• The order book, the spread and the market maker, derived from one problem\n• What a fill is, and the five numbers a candle keeps out of its interval\n• Why every position opens at a loss, and what the four charges are\n• Expectancy, and how long before your own record can settle anything\n• Position sizing, where the stop goes, and risk of ruin\n\n**Key Lessons:**\n• Lesson 1: What a Market Solves\n• Lesson 10: Every Trade Starts Negative\n• Lesson 17: Expectancy\n• Lesson 22: Risk of Ruin\n\n**Duration:** 6-12 min per lesson\n**Best for:** Anyone who has not yet priced a round trip",
+    "intermediate": "**Intermediate Tier** (28 lessons) - Reading the auction, and when the reading applies\n\n📚 [View All Intermediate Lessons](/education/intermediate.html)\n\n**What you'll learn:**\n• Where liquidity rests, and why the displayed book is an advertisement\n• Absorption, exhaustion, volume at price and hidden size\n• Structure, order blocks and sweeps, with the definitions written down\n• Regimes, timeframes, sessions, volatility, correlation and the macro cycle\n• What an indicator is, and what it discards to be one\n\n**Key Lessons:**\n• Lesson 25: Where Liquidity Rests\n• Lesson 32: Market Structure\n• Lesson 36: Markets Have Modes\n• Lesson 48: What an Indicator Is\n\n**Duration:** 8-14 min per lesson\n**Best for:** Traders who can already price their own costs",
+    "advanced": "**Advanced Tier** (18 lessons) - Who else is in the book, and building a system\n\n📚 [View All Advanced Lessons](/education/advanced.html)\n\n**What you'll learn:**\n• What the spread pays for, and the fee that routes your order\n• What a millisecond is worth, and what a million shares takes\n• What would have to happen, and backtesting treated as evidence\n• The price of looking, the horizon you fix, the benchmark you chose\n• Drawdown, capacity, the delay you remove, machine learning as a filter\n\n**Key Lessons:**\n• Lesson 53: What the Spread Is Paying For\n• Lesson 63: Backtesting as Evidence\n• Lesson 64: The Price of Looking\n• Lesson 67: The Drawdown You Should Expect\n\n**Duration:** 10-16 min per lesson\n**Best for:** Traders building something they intend to test",
+    "progress": "**Your Progress:**\n\nYour learning progress is automatically tracked as you read lessons!\n\n**How tracking works:**\n✅ Progress saved locally (no account needed)\n✅ Syncs across devices (coming soon via Supabase)\n✅ Completion badges unlocked per tier\n✅ Streak tracking for daily lessons\n\n**View your progress:**\n• Home page shows overall completion %\n• Each tier page shows lessons completed\n• Green checkmarks = completed lessons\n\n**Pro tip:** Work one lesson a day, in order, and do the problems. Retrieval\nis the only rehearsal that fixes anything. 🔥",
+    "curriculum": "**SignalPilot Education Hub Curriculum:**\n\n**4-Tier Progressive System:**\n\n🟢 **Tier 1: Beginner** (24 lessons)\n→ How a market works, what it costs, and what risk is\n\n🟡 **Tier 2: Intermediate** (28 lessons)\n→ Reading the auction, and when the reading applies\n\n🔴 **Tier 3: Advanced** (18 lessons)\n→ Who else is in the book, and building a system\n\n⚫ **Tier 4: Professional** (15 lessons)\n→ Portfolio, profession and specialisms\n\n**Total:** 100 comprehensive lessons\n\n📚 [View Full Curriculum](/)\n\n**Recommended path:** in order, 1 to 85. Each lesson spends a figure an\nearlier one measured, so the sequence is the argument.\n\n**Time commitment:** ~6-16 min per lesson",
+    "rsi": "**Oscillators and RSI:**\n\n**Main Lesson:** [Lesson 51: Oscillators Under Regime](/education/curriculum/intermediate/51-oscillators-under-regime.html)\n\n**Key Concepts:**\n• An oscillator is a function of prices you already have, so it adds no information\n• The same reading means different things in a trend and in a range\n• What matters is what the oscillator discards, and how long it takes to discard it\n• A threshold is a setting, not a measurement, and it has to be stated\n\n**Related:** [Lesson 48: What an Indicator Is](/education/curriculum/intermediate/48-what-an-indicator-is.html), [Lesson 36: Markets Have Modes](/education/curriculum/intermediate/36-markets-have-modes.html)\n\n**Common mistake:** Reading an extreme as a signal without first stating the regime, and without ever measuring how often the reading was right",
+    "spread": "**The Spread:**\n\n**Main Lesson:** [Lesson 4: The Spread Is the Price of Immediacy](/education/curriculum/beginner/04-the-spread.html)\n\n**Key Concepts:**\n• The spread is what immediacy costs, not a fee somebody charges you\n• It is one of four charges, and lesson 10 prices all four on one trade\n• Ranked against what an instrument moves in a day, the cost runs from a fifth of one per cent to 52 per cent\n• Posting instead of crossing earns the spread, and lesson 58 prices what that gives away\n\n**Related:** [Lesson 10: Every Trade Starts Negative](/education/curriculum/beginner/10-every-trade-starts-negative.html), [Lesson 53: What the Spread Is Paying For](/education/curriculum/advanced/53-market-makers-business.html)\n\n**Where the numbers are:** Lesson 12 ranks instruments by cost as a share of daily movement",
+    "automation": "**Automation and Execution:**\n\n**Main Lesson:** [Lesson 69: The Delay You Remove](/education/curriculum/advanced/69-automation.html)\n\n**Key Concepts:**\n• Automation removes a delay; the question is what that delay was costing\n• Slippage and fees belong in the backtest, because they are in the result\n• A hard daily-loss limit binds before any other limit you set\n• The pace you actually trade at is measurable, and it is slower than most plans assume\n\n**Related:** [Lesson 75: Which Limit Binds First](/education/curriculum/professional/75-institutional-risk-controls.html), [Lesson 76: The Pace You Actually Trade At](/education/curriculum/professional/76-trading-day.html)\n\n**Rule:** Deploy nothing whose failure you have not priced",
+    "chatbot": "**About This Chatbot:**\n\nI'm a pattern-matching assistant (no AI API needed!) built to help you navigate the 100 lessons.\n\n**I can help with:**\n• Lesson recommendations (\"What should I learn first?\")\n• Concept explanations (\"Explain RSI regime interpretation\")\n• Finding lessons (\"Lessons about spread costs\")\n• Progress tracking (\"How do I track progress?\")\n\n**What I can't do:**\n• Trade recommendations\n• Real-time market analysis\n• Account-specific advice\n• Execute trades\n\n**How I work:**\n• Pattern matching (instant responses)\n• Knowledge base from all 100 lessons\n• No data sent to external APIs\n• Conversation history saved locally\n\n**Pro tip:** Try asking full questions like \"How does bid-ask spread work as a leading indicator?\" for best results!",
+    "start": "**Getting Started:**\n\n**Recommended Learning Path:**\n\n**Weeks 1-4: Beginner** (24 lessons, slots 1-24)\n→ Start: [Lesson 1: What a Market Solves](/education/curriculum/beginner/01-what-a-market-solves.html)\n→ Focus: the mechanism, what trading costs, and what risk actually is\n\n**Weeks 5-9: Intermediate** (28 lessons, slots 25-52)\n→ [Lesson 25: Where Liquidity Rests](/education/curriculum/intermediate/25-where-liquidity-rests.html)\n→ Focus: reading the auction, and the context that decides when a reading applies\n\n**Weeks 10-13: Advanced** (18 lessons, slots 53-70)\n→ [Lesson 53: What the Spread Is Paying For](/education/curriculum/advanced/53-market-makers-business.html)\n→ Focus: who else is in the book, and building a system that survives testing\n\n**Weeks 14+: Professional** (15 lessons, slots 71-85)\n→ [Lesson 71: How Many Bets You Are Carrying](/education/curriculum/professional/71-positions-are-one-position.html)\n→ Focus: portfolio, the arithmetic of the profession, and four specialisms\n\n**Time commitment:** 6-16 min per lesson\n**Goal:** one lesson a day, in order. Each one spends what the last one measured.\n\n**Quick actions:**\n• [Browse All Lessons](/)\n• [Search Lessons](/education/search.html)",
+    "lessons": "**About Our Lessons:**\n\n**Structure:** every lesson has the same seven parts, in this order:\n• The claim - what the lesson finds, in its first 200 words, with a figure\n• Prerequisites - what it spends, and which lesson measured it\n• Development - the argument, built rather than asserted\n• Worked example - one, with every number recomputable from the page\n• Bounds - where the finding stops being true\n• Problems - what to go and measure on your own data\n• Sources - what the lesson leans on, and how\n\n**Length:** 1,400 to 5,000 words. Length is an output, never a target.\n\n**Style:** every figure on the page is derived on the page. No composite\ntrader, no invented track record, no P&L story. If a number is quoted from\nan earlier lesson, that lesson printed it.\n\n**Total:** 100 lessons across 4 tiers, in 14 modules\n\n**What makes them different:**\n✅ Every claim is falsifiable, and says what would disprove it\n✅ Every figure is recomputed, not repeated\n✅ Each lesson ends by promising what the next one finds, with its number\n✅ The bounds are as long as the argument\n✅ Available in 11 languages besides English\n\n📚 [Browse All Lessons](/)",
+    "help": "**I can help you with:**\n\n📚 **Lessons:** \"Beginner lessons\" | \"RSI lessons\" | \"Spread lessons\"\n🎯 **Getting Started:** \"How do I start?\" | \"Learning path\"\n📊 **Concepts:** \"Explain RSI\" | \"What is spread dynamics?\"\n🔧 **Features:** \"Track progress\" | \"How does the chatbot work?\"\n🚀 **Automation:** \"Trading automation\" | \"Kill switches\"\n\n**Try asking:**\n• \"What are the beginner lessons?\"\n• \"Explain RSI regime interpretation\"\n• \"How does bid-ask spread work?\"\n• \"Show me automation lessons\"\n• \"What should I learn first?\"\n• \"How do I track my progress?\"\n\n**Popular topics:**\n• RSI myths (Lesson 5)\n• Spread costs (Lesson 21)\n• Automation (Lesson 57)\n• Volume analysis (Lesson 2)\n\nJust type your question naturally! 💬",
+    "default": "I'm not sure about that specific question.\n\nTry asking about:\n📚 **Lessons:** Beginner, Intermediate, Advanced tiers\n🎯 **Concepts:** RSI, spreads, automation, volume, order flow\n📊 **Getting Started:** Learning path, progress tracking\n🔧 **Features:** Chatbot, search, curriculum\n\nType **\"help\"** to see all available topics!\n\n💡 **Tip:** Use the search bar at the top to search all 100 lessons, or browse by tier on the homepage.\n\n**Quick links:**\n• [Beginner Lessons](/education/beginner.html)\n• [Intermediate Lessons](/education/intermediate.html)\n• [Advanced Lessons](/education/advanced.html)\n• [Search All Lessons](/education/search.html)"
+} },
+  keys: { en: {
+    "help": [
+        "help",
+        "what can you do",
+        "commands",
+        "menu"
+    ],
+    "chatbot": [
+        "what are you",
+        "who are you",
+        "about this bot"
+    ],
+    "rsi": [
+        "rsi",
+        "relative strength",
+        "overbought",
+        "oversold"
+    ],
+    "spread": [
+        "spread",
+        "bid ask",
+        "market maker",
+        "liquidity cost"
+    ],
+    "automation": [
+        "automation",
+        "automate",
+        "kill switch",
+        "paper trading",
+        "backtest",
+        "webhook"
+    ],
+    "progress": [
+        "progress",
+        "streak",
+        "badge",
+        "completion"
+    ],
+    "start": [
+        "where do i start",
+        "getting started",
+        "learning path",
+        "study plan",
+        "first lesson"
+    ],
+    "curriculum": [
+        "curriculum",
+        "all lessons",
+        "lesson list",
+        "tiers",
+        "syllabus"
+    ],
+    "beginner": [
+        "beginner",
+        "foundation",
+        "basics"
+    ],
+    "intermediate": [
+        "intermediate",
+        "order flow",
+        "microstructure"
+    ],
+    "advanced": [
+        "advanced",
+        "professional"
+    ],
+    "lessons": [
+        "lessons",
+        "course",
+        "content"
+    ]
+} }
+};
