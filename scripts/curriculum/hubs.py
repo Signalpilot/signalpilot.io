@@ -269,7 +269,29 @@ def render(lang=None):
     # indicator names. They are now that tier's own modules and lesson titles.
     for tier, m in zip(reversed(TIERS), reversed(_panels(s))):
         s = s[:m[0]] + _panel(by[tier], loc, lang) + s[m[1]:]
-    return s
+    return _own_tree(s, lang)
+
+
+def _own_tree(s, lang):
+    """Keep a locale index inside its own language.
+
+    inject.py does this for the lesson pages, and it was the largest defect
+    the locale audit ever found there. The index had the same hole and kept
+    it longer, because the pages it links to -- the four tier pages, the
+    glossary, the calculators, the learning path -- did not exist in any
+    locale, so there was nothing to point at. They exist now, and a link is
+    rewritten only when the file is really there, so a locale index still
+    falls back to English for the pages that tree has not got yet."""
+    if not lang:
+        return s
+
+    def swap(m):
+        u = m.group(1)
+        return m.group(0) if not os.path.exists(
+            os.path.join(ROOT, lang + u)) else m.group(0).replace(
+            u, '/' + lang + u, 1)
+
+    return re.sub(r'href="(/education/[^"#?]*\.html)"', swap, s)
 
 
 def _nouns(meta):
