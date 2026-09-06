@@ -61,6 +61,18 @@ PASSTHROUGH = ['ChoCH', 'BOS', 'OTE',
 # A sentence-ending period glued straight onto a digit ("gelir.100 $") is a
 # lost space, not punctuation -- three of these survived every other check
 # because they invent no number, lose no term and are not English.
+
+# A doubled word that straddles an inline tag is never deliberate: the article
+# before a <strong> and the article the bold itself carries are separate
+# segments, each correct alone ("muestran la" + "<strong>la calidad</strong>").
+# Reduplication a language actually uses -- "via via", "je je" -- is written
+# inside one segment, so restricting the match to a tag boundary needs no
+# whitelist and admits words of any length.
+STRADDLE = re.compile(
+    r'(?<![\w])([A-Za-zÀ-ÿА-Яа-я\u0600-\u06ff]{2,})'
+    r'(\s*(?:</?(?:strong|b|em|i|a|code|span|mark|u)\b[^>]*>\s*){1,4})'
+    r'\1(?![\w])', re.I)
+
 GLUED = re.compile(r'[a-zA-ZÀ-ÿА-я]\.\d')
 
 
@@ -91,6 +103,11 @@ def run(slug, report=print):
     # A stutter can also straddle two strings: the word before a <strong>
     # and the first word after it are separate segments, each correct alone.
     # Only the assembled page shows it, so read the built page as well.
+    for lang, raw in ctx.built_raw(slug):
+        for m in STRADDLE.finditer(raw):
+            report(f'  {lang}: doubled word across a tag {m.group(1)!r}\n'
+                   f'        ...{" ".join(raw[max(0, m.start() - 70):m.end() + 40].split())}...')
+            bad += 1
     for lang, txt in ctx.built(slug):
         ok = OK_DOUBLES.get(lang, set())
         for m in DOUBLED.finditer(txt):

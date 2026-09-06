@@ -78,6 +78,15 @@ def pairs(slug):
     for lang, table in sorted(tables(slug).items()):
         yield lang, [(k, table[k]) for k in ks if k in table]
 
+def built_raw(slug):
+    """Yield (lang, raw HTML) for each locale page that has been built."""
+    rel = os.path.relpath(lesson_path(slug), os.path.join(ROOT, 'education'))
+    for lang in LANGS:
+        p = os.path.join(ROOT, lang, 'education', rel)
+        if os.path.exists(p):
+            yield lang, open(p, encoding='utf-8').read()
+
+
 def built(slug):
     """Yield (lang, visible text) for each locale page that has been built.
 
