@@ -18,6 +18,10 @@ import os, re, sys, json, glob, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.chdir(ROOT)
+sys.path.insert(0, os.path.join(ROOT, 'scripts/i18n'))
+sys.path.insert(0, os.path.join(ROOT, 'scripts/i18n/checks'))
+from chatbot_refs import expand
+import numerals as numcheck
 SRC = 'scripts/i18n/chatbot'
 OUT = 'education/assets/chatbot-i18n.js'
 CAT = json.load(open('education/curriculum/index.json', encoding='utf-8'))
@@ -122,6 +126,95 @@ def en_only(tables):
     return out
 
 
+def figures(text, lang=None):
+    """The measurements in one answer, with every locale's separators removed.
+
+    Deliberately stricter than checks/numerals.py, which also accepts a figure
+    written to less precision because a lesson may legitimately round. An
+    answer here quotes the lesson's own number, so 9.84 and 9.64 must not
+    compare equal -- and under the looser rule they do, because both carry the
+    form "9". Only the flattened token counts: English 18,952 and German
+    18.952 are one figure, and 9.64 is not 9.84.
+    """
+    text = numcheck.ENT.sub(' ', text)
+    if lang == 'ja':
+        text = numcheck._ja_myriad(text)
+    out = collections.Counter()
+    for m in numcheck.NUM.finditer(text):
+        tok = m.group(0)
+        if numcheck.measured(tok):
+            out[re.sub('[.,\u00a0\u202f ]', '', tok)] += 1
+    return out
+
+
+def check_locale(lang, en_kb, kb):
+    """Every figure in an English answer must survive into its translation.
+
+    The answers are almost entirely measurements, and the one defect a reader
+    of translated prose cannot catch is a figure that drifted: 9.84 typed as
+    9.64, a 253 that became 235.
+    """
+    bad = []
+    for key, text in sorted(kb.items()):
+        if key not in en_kb:
+            bad.append('%s: %s is not an English answer' % (lang, key))
+            continue
+        want, got = figures(en_kb[key]), figures(text, lang)
+        miss = want - got
+        if miss:
+            bad.append('%s %s: missing %s'
+                       % (lang, key, sorted(miss.elements())))
+    return bad
+
+
+QUICK = {'quickStartQuery': 'start', 'quickBeginnerQuery': 'beginner',
+         'quickRsiQuery': 'rsi', 'quickAutomationQuery': 'automation'}
+
+
+def route(keys, text):
+    """Which answer a typed question reaches, replaying the widget's own rule.
+
+    chatbot.js builds one case-insensitive alternation per key and takes the
+    first hit in insertion order, so the order of the table is part of the
+    localisation and not decoration.
+    """
+    for key, words in keys.items():
+        if not words:
+            continue
+        alt = '|'.join(re.escape(w) for w in words)
+        if re.search('(' + alt + ')', text, re.I):
+            return key
+    return None
+
+
+def check_keys(lang, en_keys, d):
+    """The trigger table must keep the English order, and the four buttons
+    must still reach the answers they are labelled with."""
+    bad = []
+    keys = d.get('keys', {})
+    if list(keys) != list(en_keys):
+        extra = [k for k in keys if k not in en_keys]
+        short = [k for k in en_keys if k not in keys]
+        if extra:
+            bad.append('%s: keys has %s, which English does not' % (lang, extra))
+        if short:
+            bad.append('%s: keys is missing %s' % (lang, short))
+        if not extra and not short:
+            bad.append('%s: keys are in a different order from English; the '
+                       'widget takes the first hit, so the order is the '
+                       'routing' % lang)
+    ui = d.get('ui', {})
+    for field, want in QUICK.items():
+        q = ui.get(field)
+        if not q:
+            continue
+        got = route(keys, q)
+        if got != want:
+            bad.append('%s: the %s button types %r, which reaches %s, not %s'
+                       % (lang, field, q, got, want))
+    return bad
+
+
 def build():
     en = load('en')
     if en is None:
@@ -132,7 +225,8 @@ def build():
             print('  ' + b)
         raise SystemExit('%d English findings; fix them before building' % len(bad))
 
-    langs, ui, kb, keys = [], {'en': en['ui']}, {'en': en['kb']}, {'en': en['keys']}
+    langs, ui, keys = [], {'en': en['ui']}, {'en': en['keys']}
+    kb = {'en': {k: expand('en', v) for k, v in en['kb'].items()}}
     for p in sorted(glob.glob(os.path.join(SRC, '*.json'))):
         lang = os.path.basename(p)[:-5]
         if lang == 'en':
@@ -140,8 +234,17 @@ def build():
         d = json.load(open(p, encoding='utf-8'))
         langs.append(lang)
         ui[lang] = d.get('ui', {})
-        kb[lang] = d.get('kb', {})
+        # A translated answer cites lessons as {L69} and gets the locale's own
+        # title, word for "Lesson" and href spliced in here, so an answer can
+        # never disagree with the page it links to.
+        kb[lang] = {k: expand(lang, v) for k, v in d.get('kb', {}).items()}
         keys[lang] = d.get('keys', {})
+        bad.extend(check_locale(lang, kb['en'], kb[lang]))
+        bad.extend(check_keys(lang, en['keys'], d))
+    if bad:
+        for b in bad:
+            print('  ' + b)
+        raise SystemExit('%d findings; fix them before building' % len(bad))
 
     j = lambda o: json.dumps(o, ensure_ascii=False, indent=2)
     return (HEAD + 'window.SP_CHATBOT_I18N = {\n'
