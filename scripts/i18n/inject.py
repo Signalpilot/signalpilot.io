@@ -40,6 +40,36 @@ CJK_AFTER_TAG = re.compile(r'([^ \nA-Za-z])[ ]*((?:<[^>]+>)+)[ ]+(?=[%s0-9])' % 
 CJK_BEFORE_TAG = re.compile(r'([%s])[ ]+((?:<[^>]+>)+)(?=[^ A-Za-z])' % _CJK)
 CJK_TAIL_STOP = re.compile(
     r'([%s](?:</(?:strong|b|em|i|a|code|span|mark|u)>)+)\.(?=\s*<)' % _CJK)
+# A source line wrapped mid-sentence puts a newline and its indentation
+# between two Japanese characters, and HTML renders that run as one space.
+# Japanese sets no space there, so the wrap shows up as a gap after a full
+# stop or in front of a bolded phrase. Only a run that stays inside one
+# sentence is closed up: a run carrying both a closing and an opening tag is
+# the boundary between two siblings -- two footer links, a label and its
+# badge -- where the space is the layout, not a wrap.
+_CJK_INL = r'(?:</?(?:a|strong|b|em|i|code|span|mark|u)\b[^>]*>)*'
+CJK_WRAP = re.compile(r'([%s])(%s)\n[ \t]+(%s)(?=[%s])'
+                      % (_CJK, _CJK_INL, _CJK_INL, _CJK))
+CJK_SIBLING = re.compile(r'<[a-zA-Z]')
+# Inside a pre the newline is the content, so those blocks are left whole.
+PRE = re.compile(r'<pre\b[\s\S]*?</pre>', re.I)
+
+
+def _close_wrap(m):
+    run = m.group(2) + m.group(3)
+    if '</' in run and CJK_SIBLING.search(run):
+        return m.group(0)
+    return m.group(1) + m.group(2) + m.group(3)
+
+
+def _close_wraps(body):
+    out, i = [], 0
+    for pre in PRE.finditer(body):
+        out.append(CJK_WRAP.sub(_close_wrap, body[i:pre.start()]))
+        out.append(pre.group(0))
+        i = pre.end()
+    out.append(CJK_WRAP.sub(_close_wrap, body[i:]))
+    return ''.join(out)
 
 
 # Turkish attaches a case suffix to a number or a name with an apostrophe, so a
@@ -127,6 +157,8 @@ def inject(src_path, lang, tmap, rel, page=None):
         # After Japanese that reads as a stray dot; the lookahead keeps it to
         # a period that really does close the sentence.
         out = CJK_TAIL_STOP.sub('\\1。', out)
+        if b > 0:
+            out = out[:b] + _close_wraps(out[b:])
 
     # In-locale links. The href is rewritten only when the locale actually has
     # that page, so a link to a tier page or the library still resolves.
