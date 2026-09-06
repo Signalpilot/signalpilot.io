@@ -231,7 +231,7 @@ I'm a pattern-matching assistant (no AI API needed!) built to help you navigate 
 trader, no invented track record, no P&L story. If a number is quoted from
 an earlier lesson, that lesson printed it.
 
-**Total:** 100 lessons across 4 tiers, in 11 modules
+**Total:** 100 lessons across 4 tiers, in 14 modules
 
 **What makes them different:**
 ✅ Every claim is falsifiable, and says what would disprove it
@@ -373,7 +373,7 @@ Type **"help"** to see all available topics!
                             </div>
                             <div class="sp-chatbot-message-content">
                                 <p><strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.</p>
-                                <p>I can help you navigate our 85 trading lessons, explain concepts, and guide your learning path!</p>
+                                <p>I can help you navigate our 100 trading lessons, explain concepts, and guide your learning path!</p>
                                 <p><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em></p>
                             </div>
                         </div>
@@ -626,7 +626,7 @@ Type **"help"** to see all available topics!
 
             // Re-add welcome message
             this.addMessage(
-                `<strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.<br><br>I can help you navigate our 85 trading lessons, explain concepts, and guide your learning path!<br><br><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em>`,
+                `<strong>Hi! 👋</strong> I'm your SignalPilot Learning Assistant.<br><br>I can help you navigate our 100 trading lessons, explain concepts, and guide your learning path!<br><br><em>Try: "What should I learn first?" or "Explain RSI regime interpretation"</em>`,
                 'bot'
             );
         }
