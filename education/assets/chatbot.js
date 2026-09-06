@@ -722,11 +722,36 @@ Type **"help"** to see all available topics!
     }
 }
 
-// Auto-initialize when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        window.signalpilotChatbot = new SignalPilotChatbot();
-    });
-} else {
+/* Load the reader's own translation table, then start.
+ *
+ * One bundle carrying all twelve languages was half a megabyte on every page,
+ * and a German reader downloaded eleven tables they would never see. There is
+ * a file per language now, and this fetches exactly one: the language on
+ * <html lang>, falling back to English if that file is not there. The widget
+ * starts either way, because the English answers live in this file and a
+ * missing table costs a translation, not the assistant. */
+function spChatbotStart() {
     window.signalpilotChatbot = new SignalPilotChatbot();
+}
+
+function spChatbotBoot() {
+    const attr = (document.documentElement.getAttribute('lang') || '').slice(0, 2).toLowerCase();
+    const load = (lang, onFail) => {
+        const s = document.createElement('script');
+        s.src = '/education/assets/chatbot-i18n-' + lang + '.js';
+        s.onload = spChatbotStart;
+        s.onerror = onFail;
+        document.head.appendChild(s);
+    };
+    if (/^[a-z]{2}$/.test(attr) && attr !== 'en') {
+        load(attr, () => load('en', spChatbotStart));
+    } else {
+        load('en', spChatbotStart);
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', spChatbotBoot);
+} else {
+    spChatbotBoot();
 }
